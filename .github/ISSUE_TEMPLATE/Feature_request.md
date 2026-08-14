@@ -1,11 +1,11 @@
 ---
 name: Feature request
-about: Use this template for suggesting a Dawn enhancement
+about: Use this template for suggesting a Lemoon enhancement
 labels: enhancement
 ---
 
 ## Describe the enhancement you'd like
-<!-- A clear and concise description of what you want added to Dawn. Add any considered drawbacks. -->
+<!-- A clear and concise description of what you want added to Lemoon. Add any considered drawbacks. -->
 
 
 ## Describe alternatives you've considered

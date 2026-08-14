@@ -10,9 +10,9 @@ labels: bug
 ## Describe the expected behavior
 
 
-## Version information (Dawn, browsers and operating systems)
+## Version information (Lemoon, browsers and operating systems)
 
-- Dawn Version: 7.0.1
+- Lemoon Version: 7.0.1
 - Chrome Version 108.0.5359.124
 - macOS Version 13.1
 

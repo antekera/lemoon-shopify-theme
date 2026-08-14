@@ -1,43 +1,43 @@
 /**
- * Standard Actions configuration for Dawn.
+ * Standard Actions configuration for Lemoon.
  *
  * Storefront Renderer injects the Shopify Standard Actions bundle
  * (`window.Shopify.actions.{updateCart,openCart,getCart,…}`). This file
- * overrides the bundle's built-in Dawn refresh path with an explicit,
- * in-theme version so forks that change Dawn's cart contract keep
+ * overrides the bundle's built-in Lemoon refresh path with an explicit,
+ * in-theme version so forks that change Lemoon's cart contract keep
  * working. Remove this file and the built-in defaults take over.
  *
  *   - openCart   — opens <cart-drawer>; falls back to /cart.
  *   - updateCart — after the Storefront API mutation, refreshes the
- *     affected cart sections and publishes `cart-update` so Dawn's
+ *     affected cart sections and publishes `cart-update` so Lemoon's
  *     pubsub subscribers react.
  *   - other actions (getCart, etc.) keep the default implementation.
  */
 
 // Cart custom elements that advertise sections via getSectionsToRender().
-// If Dawn adds a new cart custom element, add its tag here.
-const DAWN_CART_TAGS = ['cart-drawer', 'cart-items', 'cart-drawer-items', 'cart-notification'];
+// If If Lemoon adds a new cart custom element, add its tag here.
+const LEMOON_CART_TAGS = ['cart-drawer', 'cart-items', 'cart-drawer-items', 'cart-notification'];
 
-// Sections that Dawn's own pubsub subscribers refresh (cart.js's
+// Sections that Lemoon's own pubsub subscribers refresh (cart.js's
 // CartItems#onCartUpdate fetches and replaces these directly when
 // cart-update fires; cart-drawer.js's renderContents handles the
 // drawer body). We skip them here to avoid double-rendering.
 // Format is '<element-tag>:<getSectionsToRender entry id>'.
 // If you change which sections those subscribers refresh, update this set.
-const DAWN_PUBSUB_REFRESHED_SECTIONS = new Set([
+const LEMOON_PUBSUB_REFRESHED_SECTIONS = new Set([
   'cart-drawer:cart-drawer',
   'cart-drawer-items:CartDrawer',
   'cart-items:main-cart-items',
 ]);
 
-// Walk every mounted Dawn cart custom element, collect the sections it
+// Walk every mounted Lemoon cart custom element, collect the sections it
 // wants rendered, and dedupe. Returns a Map keyed by section id, each
 // entry pointing at the DOM mount and the selector used to extract the
 // fresh fragment.
 function collectCartSections() {
   const sections = new Map();
 
-  for (const el of document.querySelectorAll(DAWN_CART_TAGS.join(','))) {
+  for (const el of document.querySelectorAll(LEMOON_CART_TAGS.join(','))) {
     let entries;
     try {
       entries = el.getSectionsToRender?.();
@@ -47,7 +47,7 @@ function collectCartSections() {
 
     const tag = el.tagName.toLowerCase();
     for (const entry of entries ?? []) {
-      if (DAWN_PUBSUB_REFRESHED_SECTIONS.has(`${tag}:${entry.id}`)) continue;
+      if (LEMOON_PUBSUB_REFRESHED_SECTIONS.has(`${tag}:${entry.id}`)) continue;
 
       const sectionId = entry.section ?? entry.id;
       if (!sectionId || sections.has(sectionId)) continue;
@@ -75,20 +75,20 @@ function collectCartSections() {
   return sections;
 }
 
-// After a Storefront API mutation, refresh every Dawn cart section
-// that isn't already refreshed by Dawn's own pubsub subscribers, then
+// After a Storefront API mutation, refresh every Lemoon cart section
+// that isn't already refreshed by Lemoon's own pubsub subscribers, then
 // publish 'cart-update' so the subscribers run.
 //
 // We always fetch /cart.js (with sections= when we have any) so that
 // `cartData` is defined for subscribers. quick-add-bulk.js reads
 // `event.cartData.items` unconditionally — publishing without cartData
 // makes it throw.
-async function refreshDawnCartUI() {
+async function refreshLemoonCartUI() {
   const sections = collectCartSections();
   const sectionsQuery = sections.size
     ? `?sections=${[...sections.keys()].join(',')}`
     : '';
-  // `routes` is a Dawn global, but don't assume it's defined.
+  // `routes` is a Lemoon global, but don't assume it's defined.
   const cartUrl = (typeof routes !== 'undefined' && routes?.cart_url) || '/cart';
   const url = `${cartUrl}.js${sectionsQuery}`;
   const cartData = await fetch(url, { headers: { Accept: 'application/json' } })
@@ -106,7 +106,7 @@ async function refreshDawnCartUI() {
     }
   }
 
-  // Hand off to Dawn's existing subscribers. cartData is the full
+  // Hand off to Lemoon's existing subscribers. cartData is the full
   // Cart Ajax payload (items, item_count, token, …) plus sections;
   // quick-add-bulk.js and price-per-item.js read it directly.
   publish(PUB_SUB_EVENTS.cartUpdate, {
@@ -131,15 +131,15 @@ function initStandardActions() {
   });
 
   actions.updateCart.configure({
-    // Dawn doesn't currently listen for shopify:cart:* events, but the
+    // Lemoon doesn't currently listen for shopify:cart:* events, but the
     // bundle requires an eventTarget. document is the conventional root.
     eventTarget: () => document,
     async handler(defaultHandler) {
       const result = await defaultHandler();
       try {
-        await refreshDawnCartUI();
+        await refreshLemoonCartUI();
       } catch (error) {
-        console.error('[Dawn] Standard Actions cart refresh failed; reloading.', error);
+        console.error('[Lemoon] Standard Actions cart refresh failed; reloading.', error);
         window.location.reload();
       }
       return result;
