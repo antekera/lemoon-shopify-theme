@@ -13,7 +13,7 @@ A Shopify theme for Lemoon, built on top of Dawn (Shopify's reference theme). Us
 shopify theme dev
 
 # Start dev server with explicit store
-shopify theme dev --store=lemoon-9h7kgkjb.myshopify.com
+shopify theme dev --store=lemoon-8277.myshopify.com
 
 # Push all local changes to the active theme in Shopify
 shopify theme push
@@ -66,11 +66,12 @@ locales/        # Translation strings (es.json, en.json, etc.)
 Copy `.env.example` to `.env` (gitignored) and set:
 
 ```
-SHOPIFY_FLAG_STORE=lemoon-9h7kgkjb.myshopify.com
+SHOPIFY_FLAG_STORE=lemoon-8277.myshopify.com
 ```
 
 ## Store
 
-- Development store: `lemoon-9h7kgkjb.myshopify.com`
+- Development store: `lemoon-8277.myshopify.com`
 - Theme is based on Dawn — Shopify's reference theme
 - Currency: CLP — Chile
+
