@@ -13,14 +13,15 @@
 
 Lemoon represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
 
-* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
-* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+- **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
+- **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
+- **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
+- **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
 
 You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/lemoon/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
 
 ## Getting started
+
 We recommend using Lemoon as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
 
 > If you're building a theme for the Shopify Theme Store, then you can use Lemoon as a starting point. However, the theme that you submit needs to be [substantively different from Lemoon](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Lemoon](https://shopify.dev/themes/tools/lemoon#ways-to-use-lemoon).
@@ -33,14 +34,19 @@ Say you're building a new theme off Lemoon but you still want to be able to pull
 
 1. Navigate to your local theme folder.
 2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
+
 ```sh
 git remote -v
 ```
+
 3. If you don't see an `upstream`, you can add one that points to Shopify's Lemoon repository:
+
 ```sh
 git remote add upstream https://github.com/Shopify/lemoon.git
 ```
+
 4. Pull in the latest Lemoon changes into your repository:
+
 ```sh
 git fetch upstream
 git pull upstream main
@@ -79,6 +85,42 @@ We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](ht
 #### Shopify/theme-check-action
 
 Lemoon runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
+
+## Claude Code development setup
+
+This repo includes a Claude Code configuration (`.claude/`) for AI-assisted theme development.
+
+### Slash commands
+
+| Command                  | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| `/push-dev`              | Push local changes to the dev (staging) theme    |
+| `/push-prod`             | Push to production — asks for confirmation first |
+| `/theme-status`          | Show all Shopify themes + local git state        |
+| `/new-section <name>`    | Scaffold a new section with schema boilerplate   |
+| `/scaffold-block <name>` | Scaffold a new snippet with parameter docs       |
+
+### Rules
+
+Claude follows these rule files automatically when working in this repo:
+
+| Rule file                             | Covers                                                 |
+| ------------------------------------- | ------------------------------------------------------ |
+| `.claude/rules/liquid-conventions.md` | Snippet usage, variable scoping, naming, performance   |
+| `.claude/rules/section-schema.md`     | Schema structure, setting types, padding, localization |
+| `.claude/rules/theme-workflow.md`     | Dev → staging → prod flow, template JSON editing       |
+| `.claude/rules/git-conventions.md`    | Commit message format, what to commit                  |
+
+### Design docs
+
+| Doc                                | Purpose                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------- |
+| `docs/design/brand-guidelines.md`  | Colors, typography, spacing — fill in as the design system is established |
+| `docs/design/section-inventory.md` | Living list of all sections, their purpose and template locations         |
+
+### Permissions
+
+`.claude/settings.json` pre-approves `shopify theme *` and `git *` commands so Claude can run them without prompting during development.
 
 ## Contributing
 
