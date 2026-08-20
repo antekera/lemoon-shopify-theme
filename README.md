@@ -92,15 +92,24 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 ### Slash commands
 
+#### Git flow commands
+
+No direct pushes to `main` — every change goes through a feature branch and a PR.
+
+| Command                 | Description                                 |
+| ----------------------- | ------------------------------------------- |
+| `/start-feature <name>` | Create a feature branch from latest main    |
+| `/open-pr`              | Push branch and open a PR to main on GitHub |
+
 #### Workflow commands
 
-| Command                  | Description                                      |
-| ------------------------ | ------------------------------------------------ |
-| `/push-dev`              | Push local changes to the dev (staging) theme    |
-| `/push-prod`             | Push to production — asks for confirmation first |
-| `/theme-status`          | Show all Shopify themes + local git state        |
-| `/new-section <name>`    | Scaffold a new section with schema boilerplate   |
-| `/scaffold-block <name>` | Scaffold a new snippet with parameter docs       |
+| Command                  | Description                                            |
+| ------------------------ | ------------------------------------------------------ |
+| `/push-dev`              | Push current branch changes to the dev (staging) theme |
+| `/push-prod`             | Push to production — asks for confirmation first       |
+| `/theme-status`          | Show all Shopify themes + local git state              |
+| `/new-section <name>`    | Scaffold a new section with schema boilerplate         |
+| `/scaffold-block <name>` | Scaffold a new snippet with parameter docs             |
 
 #### Agent commands
 
@@ -118,9 +127,12 @@ These commands spawn isolated sub-agents for specialized tasks. Each agent reads
 **Recommended flow:**
 
 ```
-/design-interpreter  →  review spec  →  /section-builder
-    →  /theme-reviewer  →  /push-dev  →  verify in preview
-    →  /code-reviewer   →  PR to main  →  publish from Shopify admin
+/start-feature <name>
+    →  /design-interpreter  →  review spec
+    →  /section-builder     →  /theme-reviewer
+    →  /push-dev            →  verify in preview
+    →  /code-reviewer       →  /open-pr
+    →  merge PR on GitHub   →  publish from Shopify admin
 ```
 
 ### Rules

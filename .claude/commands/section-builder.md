@@ -33,4 +33,8 @@ Then:
 4. Update `docs/design/section-inventory.md` — move the section from "planned" to "custom Lemoon sections"
 5. Tell the user which template JSON to update if they want this section on a specific page
 
-Do not push to any theme. Do not modify any existing sections unless explicitly asked.
+Before building:
+
+- Run `git branch --show-current` — if on `main`, stop and tell the user to run `/start-feature <section-name>` first.
+
+Do not push to any theme. Do not push to any remote branch. Do not modify any existing sections unless explicitly asked.
