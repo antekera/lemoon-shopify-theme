@@ -92,6 +92,8 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 ### Slash commands
 
+#### Workflow commands
+
 | Command                  | Description                                      |
 | ------------------------ | ------------------------------------------------ |
 | `/push-dev`              | Push local changes to the dev (staging) theme    |
@@ -99,6 +101,27 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 | `/theme-status`          | Show all Shopify themes + local git state        |
 | `/new-section <name>`    | Scaffold a new section with schema boilerplate   |
 | `/scaffold-block <name>` | Scaffold a new snippet with parameter docs       |
+
+#### Agent commands
+
+These commands spawn isolated sub-agents for specialized tasks. Each agent reads the relevant project docs and rules before acting.
+
+| Command               | When to use                                          | Runs as    |
+| --------------------- | ---------------------------------------------------- | ---------- |
+| `/design-interpreter` | Upload a mockup image → get a structured spec first  | Sub-agent  |
+| `/section-builder`    | Build a section from an approved spec or description | Sub-agent  |
+| `/theme-reviewer`     | Check conventions before pushing to dev theme        | Background |
+| `/code-reviewer`      | Review quality and best practices before opening PR  | Background |
+| `/token-sync`         | Verify design tokens match brand-guidelines.md       | Sub-agent  |
+| `/translator`         | Translate new en.json keys to es-CL                  | Background |
+
+**Recommended flow:**
+
+```
+/design-interpreter  →  review spec  →  /section-builder
+    →  /theme-reviewer  →  /push-dev  →  verify in preview
+    →  /code-reviewer   →  PR to main  →  publish from Shopify admin
+```
 
 ### Rules
 

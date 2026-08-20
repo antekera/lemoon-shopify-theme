@@ -75,3 +75,10 @@ SHOPIFY_FLAG_STORE=lemoon-8277.myshopify.com
 - Theme is based on Dawn — Shopify's reference theme
 - Currency: CLP — Chile
 
+## Design system
+
+When making any visual or styling decisions, read these files first:
+
+- `docs/design/brand-guidelines.md` — colors, typography, spacing tokens
+- `docs/design/design-plan.md` — page inventory, component checklist, and implementation notes
+- `docs/design/design-prompt.md` — AI image generation prompts per page/section
