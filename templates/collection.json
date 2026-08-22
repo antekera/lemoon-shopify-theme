@@ -12,11 +12,11 @@
       "type": "frame-shape-filter-strip",
       "blocks": {
         "all": { "type": "shape", "settings": { "label": "Todos", "link": "/collections/all" } },
-        "rectangular": { "type": "shape", "settings": { "label": "Rectangulares", "link": "/collections/all" } },
-        "round": { "type": "shape", "settings": { "label": "Redondos", "link": "/collections/all" } },
-        "cat_eye": { "type": "shape", "settings": { "label": "Cat-Eye", "link": "/collections/all" } },
-        "aviator": { "type": "shape", "settings": { "label": "Aviador", "link": "/collections/all" } },
-        "oversized": { "type": "shape", "settings": { "label": "Oversized", "link": "/collections/all" } }
+        "rectangular": { "type": "shape", "settings": { "label": "Rectangulares", "filter_value": "Rectangular" } },
+        "round": { "type": "shape", "settings": { "label": "Redondos", "filter_value": "Redondo" } },
+        "cat_eye": { "type": "shape", "settings": { "label": "Cat-Eye", "filter_value": "Cat-Eye" } },
+        "aviator": { "type": "shape", "settings": { "label": "Aviador", "filter_value": "Aviador" } },
+        "oversized": { "type": "shape", "settings": { "label": "Oversized", "filter_value": "Oversized" } }
       },
       "block_order": ["all", "rectangular", "round", "cat_eye", "aviator", "oversized"],
       "settings": { "aria_label": "Filtrar por forma de armazón" }

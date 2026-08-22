@@ -23,6 +23,7 @@
       "settings": { "aria_label": "Beneficios de comprar en Lemoon" }
     },
     "featured_collection": {
+      "disabled": true,
       "type": "featured-collection",
       "settings": {
         "title": "Armazones favoritos",
@@ -61,6 +62,7 @@
     },
 
     "image_with_text_1": {
+      "disabled": true,
       "type": "image-with-text",
       "blocks": {
         "heading": {
@@ -98,6 +100,7 @@
       }
     },
     "featured_product_1": {
+      "disabled": true,
       "type": "featured-product",
       "blocks": {
         "title": { "type": "title" },
@@ -122,6 +125,7 @@
       }
     },
     "rich_text_1": {
+      "disabled": true,
       "type": "rich-text",
       "blocks": {
         "heading": {
@@ -157,6 +161,7 @@
       }
     },
     "multicolumn_1": {
+      "disabled": true,
       "type": "multicolumn",
       "blocks": {
         "col1": {
@@ -246,6 +251,7 @@
       "settings": { "heading": "Elige según tu estilo" }
     },
     "collage_1": {
+      "disabled": true,
       "type": "collage",
       "blocks": {
         "product1": {
@@ -279,6 +285,7 @@
       }
     },
     "collection_list_1": {
+      "disabled": true,
       "type": "collection-list",
       "blocks": {
         "coll1": {
@@ -309,6 +316,7 @@
       }
     },
     "video_1": {
+      "disabled": true,
       "type": "video",
       "settings": {
         "heading": "Mira mejor. Siéntete tú.",
@@ -322,6 +330,7 @@
       }
     },
     "featured_blog_1": {
+      "disabled": true,
       "type": "featured-blog",
       "settings": {
         "heading": "Guía para tu mirada",

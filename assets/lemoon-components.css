@@ -474,26 +474,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   font-weight: var(--lemoon-weight-medium);
 }
 
-/* Legacy starter sections are retained in the JSON template so merchants can
- * re-enable them from the editor, but aren't part of the Figma home journey. */
-[id$='__image_with_text_1'],
-[id$='__featured_product_1'],
-[id$='__rich_text_1'],
-[id$='__multicolumn_1'],
-[id$='__collage_1'],
-[id$='__video_1'],
-[id$='__featured_blog_1'] {
-  display: none;
-}
-
-[id$='__featured_collection'] {
-  display: none;
-}
-
-[id$='__collection_list_1'] {
-  display: none;
-}
-
 .featured-collection .title,
 .featured-collection .collection__description,
 .newsletter .newsletter__wrapper h2,
@@ -847,10 +827,18 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 .lemoon-cart-upsell__link {
   padding: 0 var(--lemoon-space-4) var(--lemoon-space-4);
+  border: 0;
+  background: transparent;
   color: var(--lemoon-text-brand);
+  cursor: pointer;
   font-family: var(--lemoon-font-heading);
   font-size: var(--lemoon-type-label-size);
   font-weight: var(--lemoon-weight-semibold);
+  text-align: left;
+}
+
+.lemoon-cart-upsell__form {
+  margin: 0;
 }
 
 .customer input[type='checkbox'],

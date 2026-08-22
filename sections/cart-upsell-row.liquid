@@ -19,7 +19,15 @@
             {%- endif -%}
           </div>
           {%- if product != blank -%}
-            <a href="{{ product.url }}" class="lemoon-cart-upsell__link">{{ 'products.product.add_to_cart' | t }}</a>
+            {%- assign upsell_variant = product.selected_or_first_available_variant -%}
+            {%- if upsell_variant != blank and upsell_variant.available -%}
+              {% form 'product', product, class: 'lemoon-cart-upsell__form' %}
+                <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                <button type="submit" class="lemoon-cart-upsell__link">{{ 'products.product.add_to_cart' | t }}</button>
+              {% endform %}
+            {%- else -%}
+              <a href="{{ product.url }}" class="lemoon-cart-upsell__link">Ver producto</a>
+            {%- endif -%}
           {%- endif -%}
         </article>
       {%- endfor -%}

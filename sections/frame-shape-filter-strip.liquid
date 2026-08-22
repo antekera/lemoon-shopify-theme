@@ -1,9 +1,24 @@
 <nav class="lemoon-shape-filters" aria-label="{{ section.settings.aria_label | escape }}">
   <div class="lemoon-shape-filters__inner page-width">
     {%- for block in section.blocks -%}
+      {%- assign shape_url = block.settings.link | default: collection.url -%}
+      {%- assign shape_filter_value = block.settings.filter_value -%}
+      {%- if shape_filter_value == blank -%}
+        {%- assign shape_handle = block.settings.label | handleize -%}
+        {%- case shape_handle -%}
+          {%- when 'rectangulares' -%}{%- assign shape_filter_value = 'Rectangular' -%}
+          {%- when 'redondos' -%}{%- assign shape_filter_value = 'Redondo' -%}
+          {%- when 'cat-eye' -%}{%- assign shape_filter_value = 'Cat-Eye' -%}
+          {%- when 'aviador' -%}{%- assign shape_filter_value = 'Aviador' -%}
+          {%- when 'oversized' -%}{%- assign shape_filter_value = 'Oversized' -%}
+        {%- endcase -%}
+      {%- endif -%}
+      {%- if shape_filter_value != blank -%}
+        {%- capture shape_url -%}{{ collection.url }}?filter.p.tag={{ shape_filter_value | url_encode }}{%- endcapture -%}
+      {%- endif -%}
       <a
         class="lemoon-shape-filters__item{% if forloop.first %} is-active{% endif %}"
-        href="{{ block.settings.link | default: collection.url }}"
+        href="{{ shape_url }}"
         {{ block.shopify_attributes }}
       >
         {{- block.settings.label | escape -}}
@@ -27,7 +42,8 @@
       "name": "Forma",
       "settings": [
         { "type": "text", "id": "label", "label": "Etiqueta", "default": "Todos" },
-        { "type": "url", "id": "link", "label": "Enlace" }
+        { "type": "url", "id": "link", "label": "Enlace" },
+        { "type": "text", "id": "filter_value", "label": "Valor de etiqueta para filtrar", "info": "Se usa si no defines un enlace. Debe coincidir con una etiqueta de producto." }
       ]
     }
   ],
