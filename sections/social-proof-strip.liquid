@@ -1,0 +1,20 @@
+<div class="lemoon-social-proof">
+  <div class="lemoon-social-proof__inner page-width">
+    <span class="lemoon-social-proof__stars" aria-label="{{ section.settings.rating | escape }}">★★★★★</span>
+    <p>{{ section.settings.text | escape }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prueba social",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "rating", "label": "Valoración accesible", "default": "5 de 5 estrellas" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Elegidos por miles de miradas en Chile." }
+  ],
+  "presets": [{ "name": "Prueba social" }]
+}
+{% endschema %}

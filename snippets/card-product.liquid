@@ -39,6 +39,15 @@
     if ratio == 0 or ratio == null
       assign ratio = 1
     endif
+
+    assign color_option = blank
+    for option in card_product.options_with_values
+      assign option_name = option.name | downcase
+      if option_name contains 'color' or option_name contains 'colour'
+        assign color_option = option
+        break
+      endif
+    endfor
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
@@ -106,6 +115,41 @@
                   >
                 {%- endif -%}
               </div>
+              <a
+                class="lemoon-product-card__wishlist"
+                href="{{ card_product.url }}"
+                aria-label="{{ 'products.product.view_full_details' | t: product_name: card_product.title | escape }}"
+              >
+                {% render 'lemoon-icon', icon: 'heart', size: 24 %}
+              </a>
+              <a class="lemoon-product-card__try-on" href="{{ card_product.url }}">
+                {{- 'products.product.try_on' | t -}}
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          {%- else -%}
+            <div class="card__media">
+              <div class="media media--transparent">
+                <img
+                  src="{{ 'lemoon-product-fallback.png' | asset_url }}"
+                  alt="{{ card_product.title | escape }}"
+                  class="motion-reduce"
+                  loading="lazy"
+                  width="1024"
+                  height="1024"
+                >
+              </div>
+              <a
+                class="lemoon-product-card__wishlist"
+                href="{{ card_product.url }}"
+                aria-label="{{ 'products.product.view_full_details' | t: product_name: card_product.title | escape }}"
+              >
+                {% render 'lemoon-icon', icon: 'heart', size: 24 %}
+              </a>
+              <a class="lemoon-product-card__try-on" href="{{ card_product.url }}">
+                {{- 'products.product.try_on' | t -}}
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           {%- endif -%}
           <div class="card__content">
@@ -207,6 +251,24 @@
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- if card_product.description != blank -%}
+                <p class="lemoon-product-card__description">
+                  {{- card_product.description | strip_html | truncate: 64 -}}
+                </p>
+              {%- endif -%}
+              {%- if color_option != blank -%}
+                <div class="lemoon-product-card__swatches" aria-label="{{ color_option.name | escape }}">
+                  {%- for value in color_option.values limit: 4 -%}
+                    <a
+                      class="lemoon-product-card__swatch{% if forloop.first %} is-selected{% endif %}"
+                      href="{{ card_product.url }}"
+                      aria-label="{{ value.name | escape }}"
+                    >
+                      {% render 'swatch', swatch: value.swatch %}
+                    </a>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid

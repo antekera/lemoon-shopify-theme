@@ -31,10 +31,21 @@
         "subtotal",
         "buttons"
       ]
+    },
+    "upsell": {
+      "type": "cart-upsell-row",
+      "blocks": {
+        "case": { "type": "product", "settings": { "placeholder_title": "Estuche", "placeholder_price": "$9.990" } },
+        "cloth": { "type": "product", "settings": { "placeholder_title": "Paño de limpieza", "placeholder_price": "$9.990" } },
+        "cord": { "type": "product", "settings": { "placeholder_title": "Cordón", "placeholder_price": "$9.990" } }
+      },
+      "block_order": ["case", "cloth", "cord"],
+      "settings": { "heading": "Completa tu pedido" }
     }
   },
   "order": [
     "cart-items",
-    "cart-footer"
+    "cart-footer",
+    "upsell"
   ]
 }

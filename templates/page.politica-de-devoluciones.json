@@ -1,0 +1,3 @@
+{
+  "sections": { "main": { "type": "lemoon-legal-page", "settings": { "intro": "Conoce las condiciones y pasos para solicitar una devolución." } } }, "order": ["main"]
+}

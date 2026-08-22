@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "main": {
+      "type": "lens-configurator",
+      "blocks": {
+        "frame_only": {
+          "type": "option",
+          "settings": {
+            "title": "Solo armazón",
+            "text": "Ideal si ya tienes tus lentes."
+          }
+        },
+        "prescription": {
+          "type": "option",
+          "settings": {
+            "title": "Lentes con receta",
+            "text": "Sube tu receta o ingrésala más adelante."
+          }
+        },
+        "sun": {
+          "type": "option",
+          "settings": {
+            "title": "Lentes de sol",
+            "text": "Protección UV y opciones polarizadas."
+          }
+        }
+      },
+      "block_order": ["frame_only", "prescription", "sun"],
+      "settings": {
+        "preview_label": "ARMAZÓN SELECCIONADO",
+        "product_name": "",
+        "product_subtitle": "Configura tus cristales"
+      }
+    }
+  },
+  "order": ["main"]
+}

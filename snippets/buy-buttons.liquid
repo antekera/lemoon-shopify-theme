@@ -99,6 +99,16 @@
         </div>
       {%- endform -%}
     </product-form>
+    <a
+      class="lemoon-lens-config-cta button button--full-width"
+      href="{{ product.url }}?view=configurador"
+    >
+      {{- 'products.product.configure_lenses' | t -}}
+      <span aria-hidden="true">→</span>
+    </a>
+    <p class="lemoon-product-trust">
+      {{- 'products.product.purchase_trust' | t -}}
+    </p>
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">

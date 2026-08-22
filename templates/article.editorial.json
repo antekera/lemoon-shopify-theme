@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "main": { "type": "main-article", "settings": { "show_image": true, "show_date": true, "show_author": true, "show_share_buttons": true } },
+    "newsletter": { "type": "newsletter", "blocks": { "heading": { "type": "heading", "settings": { "heading": "Sigue explorando", "heading_size": "h2" } }, "paragraph": { "type": "paragraph", "settings": { "text": "<p>Recibe nuevas historias y consejos de Lemoon.</p>" } }, "email_form": { "type": "email_form" } }, "block_order": ["heading", "paragraph", "email_form"], "settings": { "color_scheme": "scheme-1", "full_width": true, "padding_top": 40, "padding_bottom": 48 } }
+  },
+  "order": ["main", "newsletter"]
+}

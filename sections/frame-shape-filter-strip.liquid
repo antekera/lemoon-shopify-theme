@@ -1,0 +1,37 @@
+<nav class="lemoon-shape-filters" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="lemoon-shape-filters__inner page-width">
+    {%- for block in section.blocks -%}
+      <a
+        class="lemoon-shape-filters__item{% if forloop.first %} is-active{% endif %}"
+        href="{{ block.settings.link | default: collection.url }}"
+        {{ block.shopify_attributes }}
+      >
+        {{- block.settings.label | escape -}}
+      </a>
+    {%- endfor -%}
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Filtro de formas",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Etiqueta accesible", "default": "Filtrar por forma de armazón" }
+  ],
+  "blocks": [
+    {
+      "type": "shape",
+      "name": "Forma",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Etiqueta", "default": "Todos" },
+        { "type": "url", "id": "link", "label": "Enlace" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Filtro de formas", "blocks": [{ "type": "shape" }, { "type": "shape", "settings": { "label": "Rectangulares" } }, { "type": "shape", "settings": { "label": "Redondos" } }, { "type": "shape", "settings": { "label": "Cat-Eye" } }, { "type": "shape", "settings": { "label": "Aviador" } }, { "type": "shape", "settings": { "label": "Oversized" } }] }]
+}
+{% endschema %}

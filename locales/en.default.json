@@ -107,6 +107,9 @@
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
+      "try_on": "Try on",
+      "configure_lenses": "Configure with lenses",
+      "purchase_trust": "Free shipping · 30-day returns · Guarantee",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "description": "Description",

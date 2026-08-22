@@ -1,0 +1,78 @@
+{%- liquid
+  assign configurator_product = product
+  assign configurator_name = section.settings.product_name
+  assign configurator_subtitle = section.settings.product_subtitle
+  assign configurator_image = section.settings.image
+
+  if configurator_product != blank
+    assign configurator_name = configurator_product.title
+    assign configurator_subtitle = configurator_product.vendor | default: 'Configura tus cristales'
+    if configurator_product.featured_image != blank
+      assign configurator_image = configurator_product.featured_image
+    endif
+  endif
+-%}
+
+<section class="lemoon-configurator" data-lens-configurator>
+  <div class="lemoon-configurator__preview">
+    {%- if configurator_image != blank -%}
+      {{ configurator_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: configurator_name }}
+    {%- else -%}
+      <span>{{ section.settings.preview_label | escape }}</span>
+    {%- endif -%}
+  </div>
+  <form class="lemoon-configurator__panel" data-configurator-form>
+    <p class="lemoon-configurator__product">{{ configurator_name | escape }} · {{ configurator_subtitle | escape }}</p>
+    <ol class="lemoon-configurator__steps" aria-label="Progreso del configurador">
+      {%- for i in (1..5) -%}<li{% if i == 1 %} class="is-active"{% endif %}>{{ i }}</li>{%- endfor -%}
+    </ol>
+
+    <div class="lemoon-configurator__step is-active" data-step="1">
+      <p class="lemoon-configurator__eyebrow">PASO 1 DE 5</p>
+      <h1>¿Qué necesitas?</h1>
+      <p>Elige la opción que mejor describe tu compra.</p>
+      <fieldset class="lemoon-configurator__choices">
+        <legend class="visually-hidden">Tipo de lentes</legend>
+        {%- for block in section.blocks -%}
+          <label class="lemoon-configurator__choice{% if forloop.index == 2 %} is-selected{% endif %}" {{ block.shopify_attributes }}>
+            <input type="radio" name="lens_type" value="{{ block.settings.title | handleize }}"{% if forloop.index == 2 %} checked{% endif %}>
+            <span><strong>{{ block.settings.title | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
+          </label>
+        {%- endfor -%}
+      </fieldset>
+    </div>
+
+    <div class="lemoon-configurator__step" data-step="2" hidden>
+      <p class="lemoon-configurator__eyebrow">PASO 2 DE 5</p><h1>Elige el índice</h1><p>Selecciona el grosor que mejor se adapta a tu receta.</p>
+      <div class="lemoon-configurator__choices lemoon-configurator__choices--compact">
+        <label class="lemoon-configurator__choice is-selected"><input type="radio" name="index" value="1.50" checked><span><strong>Estándar 1.50</strong><small>Para recetas bajas.</small></span></label>
+        <label class="lemoon-configurator__choice"><input type="radio" name="index" value="1.67"><span><strong>Ultra 1.67</strong><small>Más delgado y ligero.</small></span></label>
+      </div>
+    </div>
+
+    <div class="lemoon-configurator__step" data-step="3" hidden>
+      <p class="lemoon-configurator__eyebrow">PASO 3 DE 5</p><h1>Personaliza tus cristales</h1><p>Agrega tratamientos para tu forma de ver.</p>
+      <div class="lemoon-configurator__checks">
+        <label><input type="checkbox" name="treatment" value="antirreflejo"> Antirreflejo</label><label><input type="checkbox" name="treatment" value="blue"> Filtro azul</label><label><input type="checkbox" name="treatment" value="photochromic"> Fotocromático</label>
+      </div>
+    </div>
+
+    <div class="lemoon-configurator__step" data-step="4" hidden>
+      <p class="lemoon-configurator__eyebrow">PASO 4 DE 5</p><h1>Tu receta</h1><p>Ingresa los datos ahora o podrás enviarlos después.</p>
+      <div class="lemoon-configurator__prescription"><label>OD<input type="text" name="od" placeholder="Esfera"></label><label>OI<input type="text" name="oi" placeholder="Esfera"></label><label>D.P.<input type="text" name="pd" placeholder="mm"></label></div>
+    </div>
+
+    <div class="lemoon-configurator__step" data-step="5" hidden>
+      <p class="lemoon-configurator__eyebrow">PASO 5 DE 5</p><h1>Revisa tu configuración</h1><p>Podrás confirmar todos los detalles antes de agregarla al carrito.</p>
+      <div class="lemoon-configurator__summary" data-configurator-summary></div>
+    </div>
+
+    <div class="lemoon-configurator__actions"><button type="button" class="button button--secondary" data-configurator-back hidden>Volver</button><button type="button" class="button" data-configurator-next>Continuar <span aria-hidden="true">→</span></button></div>
+    <p class="lemoon-configurator__note">Podrás revisar la configuración antes de pagar.</p>
+  </form>
+</section>
+<script src="{{ 'lens-configurator.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{"name":"Configurador de lentes","tag":"section","class":"section","settings":[{"type":"image_picker","id":"image","label":"Imagen del armazón"},{"type":"text","id":"preview_label","label":"Etiqueta de imagen","default":"ARMAZÓN SELECCIONADO"},{"type":"text","id":"product_name","label":"Nombre del producto","default":"Dalton"},{"type":"text","id":"product_subtitle","label":"Subtítulo","default":"Configura tus cristales"}],"blocks":[{"type":"option","name":"Opción","settings":[{"type":"text","id":"title","label":"Título","default":"Solo armazón"},{"type":"text","id":"text","label":"Descripción","default":"Ideal si ya tienes tus lentes."}]}],"max_blocks":3,"presets":[{"name":"Configurador de lentes","blocks":[{"type":"option"},{"type":"option","settings":{"title":"Lentes con receta","text":"Sube tu receta o ingrésala más adelante."}},{"type":"option","settings":{"title":"Lentes de sol","text":"Protección UV y opciones polarizadas."}}]}]}
+{% endschema %}

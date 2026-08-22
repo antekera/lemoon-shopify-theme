@@ -1,0 +1,36 @@
+{%- assign featured_collection = collections[section.settings.collection] -%}
+
+{%- if featured_collection != blank and featured_collection.products_count > 0 -%}
+  <section class="lemoon-featured-products page-width">
+    <div class="lemoon-featured-products__heading">
+      <div>
+        <p class="lemoon-featured-products__eyebrow">SELECCIÓN LEMOON</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link">{{ section.settings.link_label | escape }} <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list">
+      {%- for card_product in featured_collection.products limit: section.settings.products_to_show -%}
+        <li class="grid__item">
+          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: forloop.index > 2, skip_styles: forloop.index != 1, section_id: section.id %}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Destacados Lemoon",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Armazones favoritos" },
+    { "type": "text", "id": "link_label", "label": "Etiqueta de enlace", "default": "Ver todos" },
+    { "type": "range", "id": "products_to_show", "label": "Productos", "min": 4, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Destacados Lemoon" }]
+}
+{% endschema %}

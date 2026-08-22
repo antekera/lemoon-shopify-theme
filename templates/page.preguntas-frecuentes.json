@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-faq",
+      "blocks": {
+        "fit": { "type": "question", "settings": { "question": "¿Cómo sé qué armazón elegir?", "answer": "<p>Explora las formas y usa nuestra guía de estilo para encontrar una opción que se sienta como tú.</p>" } },
+        "shipping": { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Te mostraremos las alternativas y plazos disponibles al momento de finalizar tu compra.</p>" } },
+        "returns": { "type": "question", "settings": { "question": "¿Puedo devolver mi compra?", "answer": "<p>Revisa nuestra política de devoluciones para conocer las condiciones vigentes.</p>" } }
+      },
+      "block_order": ["fit", "shipping", "returns"],
+      "settings": {}
+    }
+  },
+
+  "order": ["main"]
+}

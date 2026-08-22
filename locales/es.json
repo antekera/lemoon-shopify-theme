@@ -108,6 +108,9 @@
   "products": {
     "product": {
       "add_to_cart": "Agregar al carrito",
+      "try_on": "Probar",
+      "configure_lenses": "Configurar con cristales",
+      "purchase_trust": "Envío gratis · Devolución 30 días · Garantía",
       "description": "Descripción",
       "on_sale": "Oferta",
       "quantity": {

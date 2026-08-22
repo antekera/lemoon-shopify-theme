@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-design-system",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

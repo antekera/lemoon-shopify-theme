@@ -1,0 +1,29 @@
+{{ 'lemoon-legal-pages.css' | asset_url | stylesheet_tag }}
+
+<section class="lemoon-faq">
+  <div class="page-width">
+    <header class="lemoon-faq__header">
+      <p class="lemoon-faq__eyebrow">LEMOON · AYUDA</p>
+      <h1>{{ page.title | default: 'Preguntas frecuentes' | escape }}</h1>
+      <p class="lemoon-faq__intro">Respuestas simples para elegir, comprar y cuidar tus lentes.</p>
+    </header>
+    <div class="lemoon-faq__list">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}>
+          <summary>{{ block.settings.question | escape }}</summary>
+          <div class="lemoon-faq__answer rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ Lemoon",
+  "tag": "section",
+  "class": "section",
+  "blocks": [{ "type": "question", "name": "Pregunta", "settings": [{ "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cómo sé qué armazón elegir?" }, { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Explora las formas y usa nuestra guía de estilo para encontrar una opción que se sienta como tú.</p>" }] }],
+  "presets": [{ "name": "FAQ Lemoon", "blocks": [{ "type": "question" }, { "type": "question", "settings": { "question": "¿Cuánto tarda el envío?", "answer": "<p>Te mostraremos las alternativas y plazos disponibles al momento de finalizar tu compra.</p>" } }, { "type": "question", "settings": { "question": "¿Puedo devolver mi compra?", "answer": "<p>Revisa nuestra política de devoluciones para conocer las condiciones vigentes.</p>" } }] }]
+}
+{% endschema %}
