@@ -154,11 +154,6 @@
   </header>
 </sticky-header>
 
-{%- if settings.cart_type == 'notification' -%}
-  {%- render 'cart-notification' -%}
-  <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
 {% javascript %}
   if (!customElements.get('sticky-header')) {
     class StickyHeader extends HTMLElement {

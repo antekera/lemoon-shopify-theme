@@ -1,9 +1,9 @@
 .lemoon-header-wrapper {
-  --lemoon-header-background: #ffffff;
-  --lemoon-header-text: #0b1f3a;
-  --lemoon-header-accent: #f7e600;
-  --lemoon-header-border: #e0ddd8;
-  --lemoon-header-height: 72px;
+  --lemoon-header-background: var(--lemoon-surface-page, #ffffff);
+  --lemoon-header-text: var(--lemoon-text-brand, #0b1f3a);
+  --lemoon-header-accent: var(--lemoon-action-accent, #f7e600);
+  --lemoon-header-border: var(--lemoon-border-default, #e0ddd8);
+  --lemoon-header-height: var(--lemoon-header-height-desktop, 72px);
   --lemoon-header-padding: 40px;
   --lemoon-header-nav-gap: 32px;
   background: var(--lemoon-header-background);

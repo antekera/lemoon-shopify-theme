@@ -141,7 +141,7 @@
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "text": "Recibe novedades, lanzamientos y descuentos exclusivos."
+            "text": "<p>Recibe novedades, lanzamientos y descuentos exclusivos.</p>"
           }
         },
         "email_form": { "type": "email_form" }

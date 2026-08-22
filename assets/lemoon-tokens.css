@@ -1,0 +1,266 @@
+/* =============================================================
+   LEMOON DESIGN TOKENS
+   Source: Figma > Lemoon Ecommerce > Foundations > Variables
+   Collections: Primitives · Color · Layout · Typography
+
+   Load order: this file must appear AFTER theme.liquid's
+   inline {% style %} block so it wins the CSS cascade for
+   any Dawn variable overrides at the bottom of this file.
+   ============================================================= */
+
+:root {
+  /* -----------------------------------------------------------
+     PRIMITIVES — raw color values
+     Do NOT use these directly in components; use semantic tokens.
+  ----------------------------------------------------------- */
+
+  --lemoon-primitive-white: #ffffff;
+  --lemoon-primitive-carbon: #1a1a1a;
+  --lemoon-primitive-success: #2d8c4e;
+  --lemoon-primitive-error: #c0392b;
+
+  --lemoon-primitive-navy-night: #0b1f3a;
+  --lemoon-primitive-navy-muted: #1a3560;
+  --lemoon-primitive-navy-alt: #0e1a29;
+
+  --lemoon-primitive-lemon-citrico: #f7e600;
+  --lemoon-primitive-lemon-deep: #e6d600;
+  --lemoon-primitive-lemon-alt: #ffdd00;
+
+  --lemoon-primitive-beige-claro: #f7f4ee;
+
+  --lemoon-primitive-grey-mid: #6b6b6b;
+  --lemoon-primitive-grey-line: #e0ddd8;
+
+  /* -----------------------------------------------------------
+     SEMANTIC COLORS — use these in components
+  ----------------------------------------------------------- */
+
+  /* surface */
+  --lemoon-surface-page: #ffffff;
+  --lemoon-surface-warm: #f7f4ee;
+  --lemoon-surface-inverse: #0b1f3a;
+  --lemoon-surface-disabled: #e0ddd8;
+
+  /* text */
+  --lemoon-text-primary: #1a1a1a;
+  --lemoon-text-secondary: #6b6b6b;
+  --lemoon-text-inverse: #ffffff;
+  --lemoon-text-brand: #0b1f3a;
+  --lemoon-text-error: #c0392b;
+
+  /* border */
+  --lemoon-border-default: #e0ddd8;
+  --lemoon-border-strong: #0b1f3a;
+  --lemoon-border-error: #c0392b;
+  --lemoon-border-warm: #f7f4ee;
+
+  /* action */
+  --lemoon-action-primary: #0b1f3a;
+  --lemoon-action-primary-hover: #1a3560;
+  --lemoon-action-accent: #f7e600;
+  --lemoon-action-accent-hover: #e6d600;
+  --lemoon-action-primary-alt: #0e1a29;
+  --lemoon-action-accent-alt: #ffdd00;
+
+  /* status */
+  --lemoon-status-success: #2d8c4e;
+  --lemoon-status-error: #c0392b;
+
+  /* -----------------------------------------------------------
+     TYPOGRAPHY
+  ----------------------------------------------------------- */
+
+  --lemoon-font-heading: 'Urbanist', sans-serif;
+  --lemoon-font-body: 'Urbanist', sans-serif;
+
+  --lemoon-weight-light: 300;
+  --lemoon-weight-regular: 400;
+  --lemoon-weight-medium: 500;
+  --lemoon-weight-semibold: 600;
+  --lemoon-weight-bold: 700;
+
+  /* font-size scale (px → rem at 10px base) */
+  --lemoon-fs-11: 0.6875rem;
+  --lemoon-fs-12: 0.75rem;
+  --lemoon-fs-13: 0.8125rem;
+  --lemoon-fs-14: 0.875rem;
+  --lemoon-fs-15: 0.9375rem;
+  --lemoon-fs-16: 1rem;
+  --lemoon-fs-18: 1.125rem;
+  --lemoon-fs-20: 1.25rem;
+  --lemoon-fs-28: 1.75rem;
+  --lemoon-fs-40: 2.5rem;
+  --lemoon-fs-56: 3.5rem;
+  --lemoon-fs-72: 4.5rem;
+
+  /* role-based type tokens */
+  --lemoon-type-display-size: var(--lemoon-fs-72);
+  --lemoon-type-display-weight: var(--lemoon-weight-light);
+  --lemoon-type-display-leading: 1.05;
+  --lemoon-type-display-tracking: -0.03em;
+
+  --lemoon-type-h1-size: var(--lemoon-fs-40);
+  --lemoon-type-h1-weight: var(--lemoon-weight-semibold);
+  --lemoon-type-h1-leading: 1.1;
+  --lemoon-type-h1-tracking: -0.03em;
+
+  --lemoon-type-h2-size: var(--lemoon-fs-28);
+  --lemoon-type-h2-weight: var(--lemoon-weight-semibold);
+  --lemoon-type-h2-leading: 1.2;
+  --lemoon-type-h2-tracking: -0.02em;
+
+  --lemoon-type-h3-size: var(--lemoon-fs-20);
+  --lemoon-type-h3-weight: var(--lemoon-weight-medium);
+  --lemoon-type-h3-leading: 1.3;
+  --lemoon-type-h3-tracking: 0em;
+
+  --lemoon-type-body-size: var(--lemoon-fs-16);
+  --lemoon-type-body-weight: var(--lemoon-weight-regular);
+  --lemoon-type-body-leading: 1.55;
+  --lemoon-type-body-tracking: 0em;
+
+  --lemoon-type-body-sm-size: var(--lemoon-fs-14);
+  --lemoon-type-body-sm-weight: var(--lemoon-weight-regular);
+  --lemoon-type-body-sm-leading: 1.5;
+  --lemoon-type-body-sm-tracking: 0em;
+
+  --lemoon-type-caption-size: var(--lemoon-fs-12);
+  --lemoon-type-caption-weight: var(--lemoon-weight-regular);
+  --lemoon-type-caption-leading: 1.4;
+  --lemoon-type-caption-tracking: 0em;
+
+  --lemoon-type-label-size: var(--lemoon-fs-13);
+  --lemoon-type-label-weight: var(--lemoon-weight-regular);
+  --lemoon-type-label-leading: 1.4;
+  --lemoon-type-label-tracking: 0em;
+
+  --lemoon-type-cta-size: var(--lemoon-fs-14);
+  --lemoon-type-cta-weight: var(--lemoon-weight-semibold);
+  --lemoon-type-cta-leading: 1;
+  --lemoon-type-cta-tracking: 0.06em;
+  --lemoon-type-cta-transform: uppercase;
+
+  /* -----------------------------------------------------------
+     SPACING — base unit 4px
+  ----------------------------------------------------------- */
+
+  --lemoon-space-1: 0.25rem; /*  4px */
+  --lemoon-space-2: 0.5rem; /*  8px */
+  --lemoon-space-3: 0.75rem; /* 12px */
+  --lemoon-space-4: 1rem; /* 16px */
+  --lemoon-space-5: 1.25rem; /* 20px */
+  --lemoon-space-6: 1.5rem; /* 24px */
+  --lemoon-space-8: 2rem; /* 32px */
+  --lemoon-space-10: 2.5rem; /* 40px */
+  --lemoon-space-12: 3rem; /* 48px */
+  --lemoon-space-16: 4rem; /* 64px */
+  --lemoon-space-20: 5rem; /* 80px */
+
+  /* semantic spacing aliases */
+  --lemoon-section-padding: var(--lemoon-space-16); /* 64px desktop */
+  --lemoon-section-padding-mobile: var(--lemoon-space-10); /* 40px mobile */
+  --lemoon-card-padding: var(--lemoon-space-5); /* 20px */
+  --lemoon-grid-gap-desktop: var(--lemoon-space-6); /* 24px */
+  --lemoon-grid-gap-mobile: var(--lemoon-space-4); /* 16px */
+
+  /* -----------------------------------------------------------
+     BORDER RADIUS
+  ----------------------------------------------------------- */
+
+  --lemoon-radius-none: 0px;
+  --lemoon-radius-control: 3px; /* small UI controls (not buttons) */
+  --lemoon-radius-sm: 4px; /* buttons, small elements */
+  --lemoon-radius-md: 8px; /* product cards, thumbnails, toasts */
+  --lemoon-radius-lg: 20px; /* chips, lens-config tags */
+  --lemoon-radius-search: 24px; /* search input — pill */
+  --lemoon-radius-modal: 32px; /* modals, drawers */
+  --lemoon-radius-full: 9999px; /* full-pill, swatches */
+
+  /* -----------------------------------------------------------
+     COMPONENT SIZES
+  ----------------------------------------------------------- */
+
+  --lemoon-size-control: 48px; /* button & input height */
+  --lemoon-size-touch: 44px; /* minimum touch target */
+  --lemoon-size-search: 40px; /* search input height */
+  --lemoon-size-checkbox: 16px; /* checkbox / radio */
+
+  /* -----------------------------------------------------------
+     LAYOUT
+  ----------------------------------------------------------- */
+
+  --lemoon-max-width: 1280px;
+  --lemoon-gutter-desktop: 24px;
+  --lemoon-gutter-mobile: 16px;
+  --lemoon-header-height: 72px;
+  --lemoon-header-height-desktop: 72px;
+  --lemoon-header-height-mobile: 56px;
+
+  /* -----------------------------------------------------------
+     MOTION
+  ----------------------------------------------------------- */
+
+  --lemoon-motion-fast: 150ms ease;
+  --lemoon-motion-base: 250ms ease;
+  --lemoon-motion-slow: 400ms ease;
+
+  /* -----------------------------------------------------------
+     Z-INDEX
+  ----------------------------------------------------------- */
+
+  --lemoon-z-dropdown: 100;
+  --lemoon-z-sticky: 200;
+  --lemoon-z-overlay: 300;
+  --lemoon-z-modal: 400;
+  --lemoon-z-toast: 500;
+
+  /* -----------------------------------------------------------
+     DAWN VARIABLE OVERRIDES
+     This file loads after theme.liquid's inline <style> block,
+     so these declarations win the cascade for :root.
+  ----------------------------------------------------------- */
+
+  /* fonts — override Dawn's Shopify font-picker values */
+  --font-heading-family: var(--lemoon-font-heading);
+  --font-body-family: var(--lemoon-font-body);
+
+  /* buttons */
+  --buttons-radius: var(--lemoon-radius-sm); /* 4px */
+  --buttons-radius-outset: 0px;
+  --buttons-border-width: 1px;
+
+  /* inputs */
+  --inputs-radius: var(--lemoon-radius-sm); /* 4px */
+  --inputs-radius-outset: 0px;
+  --inputs-border-width: 1px;
+  --inputs-border-opacity: 0.55;
+
+  /* variant pills — keep pill shape */
+  --variant-pills-radius: var(--lemoon-radius-full);
+
+  /* product / collection / blog cards */
+  --product-card-corner-radius: 0.5rem; /* 8px = radius/md */
+  --collection-card-corner-radius: 0.5rem;
+  --blog-card-corner-radius: 0.5rem;
+
+  /* badges — editorial style = square corners */
+  --badge-corner-radius: 0px;
+
+  /* page max-width */
+  --page-width: 80rem; /* 1280px at 16px base */
+}
+
+/* -----------------------------------------------------------
+   MOBILE TYPE SCALE OVERRIDES
+----------------------------------------------------------- */
+
+@media screen and (max-width: 749px) {
+  :root {
+    --lemoon-type-display-size: var(--lemoon-fs-40); /* 40px */
+    --lemoon-type-h1-size: 2rem; /* 32px */
+    --lemoon-type-h2-size: var(--lemoon-fs-20); /* 20px → was 28px */
+    --lemoon-type-h3-size: var(--lemoon-fs-18); /* 18px */
+    --lemoon-section-padding: var(--lemoon-section-padding-mobile);
+  }
+}
