@@ -1,6 +1,6 @@
 Build a Shopify Liquid section from an approved spec or description.
 
-The user will provide either a spec file path (from /design-interpreter output) or a direct description of the section to build.
+The user will provide either a spec file path (from /lemoon-design-interpreter output) or a direct description of the section to build.
 
 Spawn a sub-agent with the following instructions:
 
@@ -35,6 +35,6 @@ Then:
 
 Before building:
 
-- Run `git branch --show-current` — if on `main`, stop and tell the user to run `/start-feature <section-name>` first.
+- Run `git branch --show-current` — if on `main`, stop and tell the user to run `/lemoon-start-feature <section-name>` first.
 
 Do not push to any theme. Do not push to any remote branch. Do not modify any existing sections unless explicitly asked.
