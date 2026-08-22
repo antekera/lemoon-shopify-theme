@@ -13,7 +13,9 @@ Primary inspiration: **Warby Parker** — clean, generous whitespace, confident 
 | `--color-primary`        | Navy Night    | `#0B1F3A` | CTAs, headers, active nav, primary buttons       |
 | `--color-primary-light`  | Navy Muted    | `#1A3560` | Hover states, secondary nav, borders active      |
 | `--color-secondary`      | Lemon Cítrico | `#F7E600` | Accent badges, highlights, nav hover indicator   |
-| `--color-secondary-dark` | Lemon Deep    | `#D4C700` | Hover state of accent elements                   |
+| `--color-secondary-dark` | Lemon Deep    | `#E6D600` | Hover state of accent elements                   |
+| `--color-primary-alt`    | Navy Alt      | `#0E1A29` | Experimental alternative for controlled tests    |
+| `--color-secondary-alt`  | Lemon Alt     | `#FFDD00` | Experimental alternative for controlled tests    |
 | `--color-surface-warm`   | Beige Claro   | `#F7F4EE` | Alternating section backgrounds, soft card fills |
 | `--color-background`     | White         | `#FFFFFF` | Default page background                          |
 | `--color-text`           | Carbon        | `#1A1A1A` | Body copy, headings                              |
@@ -33,7 +35,7 @@ In the theme, colors are set via `config/settings_data.json` and accessed via CS
 
 ## Typography
 
-Primary font: **Urbanist** (Google Fonts) — geometric sans-serif, clean and spacious, closest match to Warby Parker's aesthetic. Used for everything: headings, body, CTAs, logo wordmark.
+Display font: **Urbanist** (Google Fonts) — geometric, clean, and spacious; used for headings, CTAs, and the logo wordmark. Body font: **Source Sans 3** (Google Fonts) — a humanist sans with clearer long-form readability, used for body copy, labels, and captions.
 
 | Role         | Family   | Weight | Size (desktop) | Notes                                 |
 | ------------ | -------- | ------ | -------------- | ------------------------------------- |
@@ -41,18 +43,20 @@ Primary font: **Urbanist** (Google Fonts) — geometric sans-serif, clean and sp
 | Heading H1   | Urbanist | 600    | 40–48px        | Page titles                           |
 | Heading H2   | Urbanist | 600    | 28–36px        | Section titles                        |
 | Heading H3   | Urbanist | 500    | 20–24px        | Card titles, subsections              |
-| Body         | Urbanist | 400    | 16px           | Body copy, descriptions               |
-| Body small   | Urbanist | 400    | 14px           | Labels, specs, metadata               |
-| Caption      | Urbanist | 400    | 12px           | Image captions, fine print            |
-| CTA / Button | Urbanist | 600    | 14–16px        | Uppercase, 0.05–0.08em letter-spacing |
+| Body         | Source Sans 3 | 400    | 16px           | Body copy, descriptions               |
+| Body small   | Source Sans 3 | 400    | 14px           | Labels, specs, metadata               |
+| Caption      | Source Sans 3 | 400    | 12px           | Image captions, fine print            |
+| CTA / Button | Urbanist | 600    | 14–16px        | Uppercase, subtle letter-spacing (0.02em) |
 
 Google Fonts import:
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 ```
 
-CSS custom properties: `--font-heading-family`, `--font-body-family` (both set to `'Urbanist', sans-serif`)
+CSS custom properties: `--font-heading-family: 'Urbanist', sans-serif`; `--font-body-family: 'Source Sans 3', sans-serif`.
+
+Field outline: use `--lemoon-border-warm` (`#F7F4EE`) for default and disabled input/select outlines with a white fill. Preserve Navy for focus and red for error. Field text aligns left; Input supports `Icon=None`, `Icon=Leading`, and `Icon=Trailing` variants. Field icons use 24px sizing.
 
 ## Border radius
 
@@ -60,13 +64,13 @@ CSS custom properties: `--font-heading-family`, `--font-body-family` (both set t
 | ------------------------------------ | ------ | -------------------------------------------------- |
 | Buttons (primary, secondary, accent) | `24px` | Pill-like, warm, approachable — Warby Parker style |
 | Inputs, selects, textareas           | `24px` | Consistent with buttons, friendly feel             |
-| Product cards                        | `8px`  | Subtle softness, not pill-shaped                   |
+| Product cards                        | `12px` | Matches the product image; soft, not pill-shaped   |
 | Modals / drawers                     | `16px` | Soft container, not clinical                       |
 | Badges — "NUEVO", "EDICIÓN LIMITADA" | `0px`  | Sharp-cornered intentionally — editorial signal    |
 | Badges — discount, sale              | `4px`  | Slightly softer than editorial, still compact      |
 | Chips / lens config tags             | `20px` | Pill shape — readable inline                       |
 | Swatches (color circles)             | `50%`  | Full circle                                        |
-| Thumbnails / product images          | `8px`  | Matches card radius                                |
+| Thumbnails / product images          | `12px` | Matches card radius                                |
 | Tooltips, toasts                     | `8px`  | Compact UI feedback                                |
 
 **Design intent:** Rounded inputs and buttons communicate approachable, warm, human-scale design — aligned with Warby Parker's DTC personality. Square corners are reserved for editorial badges only (Ace & Tate influence), creating deliberate contrast.
@@ -109,5 +113,6 @@ CSS custom properties: `--font-heading-family`, `--font-body-family` (both set t
 TBD — file location, usage rules, minimum size, clearspace.
 
 - Likely: horizontal lockup (wordmark only) for header
+- Wordmark accent: the second “o” in `lemoon` is Lemon Yellow `#F7E600` in every approved header treatment. All remaining letters are Navy on light or Warm Beige surfaces and white on Navy surfaces.
 - Favicon: isolated mark or initial
 - Min size: TBD

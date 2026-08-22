@@ -71,7 +71,7 @@ SHOPIFY_FLAG_STORE=lemoon-8277.myshopify.com
 
 ## Store
 
-- Development store: `lemoon-8277.myshopify.com`
+- Store: `lemoon-8277.myshopify.com` (custom domain: `lemoon.cl`)
 - Theme is based on Dawn — Shopify's reference theme
 - Currency: CLP — Chile
 

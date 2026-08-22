@@ -33,8 +33,8 @@ gh pr create --title "feat: trust-bar section" --body "..."
 # 5. Publish theme from Shopify admin
 ```
 
-Use `/start-feature <name>` to create a branch automatically.
-Use `/open-pr` to push the branch and open the PR.
+Use `/lemoon-start-feature <name>` to create a branch automatically.
+Use `/lemoon-open-pr` to push the branch and open the PR.
 
 ## Branch naming
 

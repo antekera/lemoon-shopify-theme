@@ -65,6 +65,17 @@
                       <a class="lemoon-header__submenu-link" href="{{ childlink.url }}"{% if childlink.current %} aria-current="page"{% endif %}>
                         {{ childlink.title | escape }}
                       </a>
+                      {%- if childlink.links != blank -%}
+                        <ul class="lemoon-header__submenu-third" role="list">
+                          {%- for grandchild in childlink.links -%}
+                            <li>
+                              <a class="lemoon-header__submenu-link lemoon-header__submenu-link--third" href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>
+                                {{ grandchild.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
                     </li>
                   {%- endfor -%}
                 </ul>
@@ -130,7 +141,7 @@
         </a>
         <div class="lemoon-header__mobile-actions">
           {% render 'header-search', input_id: 'Lemoon-Header-Search-Mobile' %}
-          <a class="lemoon-header__cart" href="{{ routes.cart_url }}" aria-label="{{ 'templates.cart.cart' | t }}">
+          <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble-mobile" aria-label="{{ 'templates.cart.cart' | t }}">
             {% render 'lemoon-icon', icon: 'shopping-bag', size: 24 %}
             {%- if cart.item_count > 0 -%}
               <span class="lemoon-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
@@ -181,6 +192,27 @@
       }
     }
     customElements.define('sticky-header', StickyHeader);
+  }
+
+  // Sync mobile cart count with desktop, and delegate drawer clicks
+  const desktopCart = document.getElementById('cart-icon-bubble');
+  const mobileCart = document.getElementById('cart-icon-bubble-mobile');
+  if (desktopCart && mobileCart) {
+    mobileCart.addEventListener('click', (e) => {
+      if (window.getComputedStyle(desktopCart).display === 'none') {
+        e.preventDefault();
+        desktopCart.click();
+      }
+    });
+    new MutationObserver(() => {
+      const badge = desktopCart.querySelector('.lemoon-header__cart-count');
+      const mobileBadge = mobileCart.querySelector('.lemoon-header__cart-count');
+      if (badge) {
+        if (mobileBadge) mobileBadge.textContent = badge.textContent;
+      } else if (mobileBadge) {
+        mobileBadge.remove();
+      }
+    }).observe(desktopCart, { childList: true, subtree: true });
   }
 {% endjavascript %}
 

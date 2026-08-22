@@ -96,43 +96,43 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 No direct pushes to `main` — every change goes through a feature branch and a PR.
 
-| Command                 | Description                                 |
-| ----------------------- | ------------------------------------------- |
-| `/start-feature <name>` | Create a feature branch from latest main    |
-| `/open-pr`              | Push branch and open a PR to main on GitHub |
+| Command                        | Description                                 |
+| ------------------------------ | ------------------------------------------- |
+| `/lemoon-start-feature <name>` | Create a feature branch from latest main    |
+| `/lemoon-open-pr`              | Push branch and open a PR to main on GitHub |
 
 #### Workflow commands
 
-| Command                  | Description                                            |
-| ------------------------ | ------------------------------------------------------ |
-| `/push-dev`              | Push current branch changes to the dev (staging) theme |
-| `/push-prod`             | Push to production — asks for confirmation first       |
-| `/theme-status`          | Show all Shopify themes + local git state              |
-| `/new-section <name>`    | Scaffold a new section with schema boilerplate         |
-| `/scaffold-block <name>` | Scaffold a new snippet with parameter docs             |
+| Command                         | Description                                            |
+| ------------------------------- | ------------------------------------------------------ |
+| `/lemoon-push-dev`              | Push current branch changes to the dev (staging) theme |
+| `/lemoon-push-prod`             | Push to production — asks for confirmation first       |
+| `/lemoon-theme-status`          | Show all Shopify themes + local git state              |
+| `/lemoon-new-section <name>`    | Scaffold a new section with schema boilerplate         |
+| `/lemoon-scaffold-block <name>` | Scaffold a new snippet with parameter docs             |
 
 #### Agent commands
 
 These commands spawn isolated sub-agents for specialized tasks. Each agent reads the relevant project docs and rules before acting.
 
-| Command               | When to use                                          | Runs as    |
-| --------------------- | ---------------------------------------------------- | ---------- |
-| `/design-interpreter` | Upload a mockup image → get a structured spec first  | Sub-agent  |
-| `/section-builder`    | Build a section from an approved spec or description | Sub-agent  |
-| `/theme-reviewer`     | Check conventions before pushing to dev theme        | Background |
-| `/code-reviewer`      | Review quality and best practices before opening PR  | Background |
-| `/token-sync`         | Verify design tokens match brand-guidelines.md       | Sub-agent  |
-| `/translator`         | Translate new en.json keys to es-CL                  | Background |
+| Command                      | When to use                                          | Runs as    |
+| ---------------------------- | ---------------------------------------------------- | ---------- |
+| `/lemoon-design-interpreter` | Upload a mockup image → get a structured spec first  | Sub-agent  |
+| `/lemoon-section-builder`    | Build a section from an approved spec or description | Sub-agent  |
+| `/lemoon-theme-reviewer`     | Check conventions before pushing to dev theme        | Background |
+| `/lemoon-code-reviewer`      | Review quality and best practices before opening PR  | Background |
+| `/lemoon-token-sync`         | Verify design tokens match brand-guidelines.md       | Sub-agent  |
+| `/lemoon-translator`         | Translate new en.json keys to es-CL                  | Background |
 
 **Recommended flow:**
 
 ```
-/start-feature <name>
-    →  /design-interpreter  →  review spec
-    →  /section-builder     →  /theme-reviewer
-    →  /push-dev            →  verify in preview
-    →  /code-reviewer       →  /open-pr
-    →  merge PR on GitHub   →  publish from Shopify admin
+/lemoon-start-feature <name>
+    →  /lemoon-design-interpreter  →  review spec
+    →  /lemoon-section-builder     →  /lemoon-theme-reviewer
+    →  /lemoon-push-dev            →  verify in preview
+    →  /lemoon-code-reviewer       →  /lemoon-open-pr
+    →  merge PR on GitHub          →  publish from Shopify admin
 ```
 
 ### Rules

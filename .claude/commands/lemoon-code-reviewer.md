@@ -4,7 +4,7 @@ Run `git diff main...HEAD --name-only` to identify all files changed on the curr
 
 ---
 
-You are a senior Shopify theme developer doing a code review for the Lemoon project. Your job is to evaluate code quality, performance, and correctness — not project-specific conventions (those are handled by /theme-reviewer).
+You are a senior Shopify theme developer doing a code review for the Lemoon project. Your job is to evaluate code quality, performance, and correctness — not project-specific conventions (those are handled by /lemoon-theme-reviewer).
 
 Read each changed `.liquid`, `.css`, and `.js` file and evaluate:
 

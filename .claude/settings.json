@@ -1,4 +1,7 @@
 {
+  "worktree": {
+    "symlinkDirectories": [".env"]
+  },
   "permissions": {
     "allow": [
       "Bash(shopify theme dev*)",
