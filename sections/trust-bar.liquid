@@ -1,0 +1,57 @@
+<div class="lemoon-trust-bar" aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="lemoon-trust-bar__inner page-width">
+    {%- for block in section.blocks -%}
+      <p class="lemoon-trust-bar__item" {{ block.shopify_attributes }}>
+        {{- block.settings.text | escape -}}
+      </p>
+      {%- unless forloop.last -%}
+        <span class="lemoon-trust-bar__separator" aria-hidden="true">·</span>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de confianza",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Etiqueta accesible",
+      "default": "Beneficios de comprar en Lemoon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Envío gratis sobre $70.000"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Barra de confianza",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit", "settings": { "text": "Devolución en 30 días" } },
+        { "type": "benefit", "settings": { "text": "Garantía de ajuste" } },
+        { "type": "benefit", "settings": { "text": "Atención por WhatsApp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

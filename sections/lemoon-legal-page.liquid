@@ -1,0 +1,21 @@
+{{ 'lemoon-legal-pages.css' | asset_url | stylesheet_tag }}
+
+<section class="lemoon-legal-page">
+  <div class="page-width">
+    <header class="lemoon-legal-page__header">
+      <p class="lemoon-legal-page__eyebrow">LEMOON · INFORMACIÓN LEGAL</p>
+      <h1>{{ page.title | escape }}</h1>
+      {%- if section.settings.intro != blank -%}<p class="lemoon-legal-page__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    </header>
+    <div class="lemoon-legal-page__content rte">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página legal Lemoon",
+  "tag": "section",
+  "class": "section",
+  "settings": [{ "type": "text", "id": "intro", "label": "Introducción", "default": "Información clara para que puedas comprar con tranquilidad." }]
+}
+{% endschema %}

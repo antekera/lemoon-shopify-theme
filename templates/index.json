@@ -1,59 +1,37 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Lentes que se sienten como tú",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Ver ópticos",
-            "button_link_1": "shopify://collections/opticos",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": ["heading", "button"],
+    "lemoon_hero": {
+      "type": "lemoon-hero",
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "heading": "Lentes que te definen.",
+        "text": "Armazones de calidad con envío a todo Chile.",
+        "primary_label": "Ver colección",
+        "primary_link": "/collections/all",
+        "secondary_label": "Guía de estilo",
+        "secondary_link": "/pages/guia-de-estilo"
       }
     },
+    "trust_bar": {
+      "type": "trust-bar",
+      "blocks": {
+        "shipping": { "type": "benefit", "settings": { "text": "Envío gratis sobre $70.000" } },
+        "returns": { "type": "benefit", "settings": { "text": "Devolución en 30 días" } },
+        "guarantee": { "type": "benefit", "settings": { "text": "Garantía de ajuste" } },
+        "whatsapp": { "type": "benefit", "settings": { "text": "Atención por WhatsApp" } }
+      },
+      "block_order": ["shipping", "returns", "guarantee", "whatsapp"],
+      "settings": { "aria_label": "Beneficios de comprar en Lemoon" }
+    },
     "featured_collection": {
+      "disabled": true,
       "type": "featured-collection",
       "settings": {
-        "title": "Lo nuevo",
+        "title": "Armazones favoritos",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "lo-nuevo",
+        "collection": "opticos",
         "products_to_show": 8,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
@@ -69,32 +47,43 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
+    "lemoon_featured_products": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "opticos",
+        "heading": "Armazones favoritos",
+        "link_label": "Ver todos",
+        "products_to_show": 4
+      }
+    },
+
     "image_with_text_1": {
+      "disabled": true,
       "type": "image-with-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Título de sección",
+            "heading": "Encuentra el armazón que habla de ti",
             "heading_size": "h2"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Usa este espacio para compartir información sobre tu marca con tus clientes.</p>",
+            "text": "<p>Diseñamos lentes para acompañar tu ritmo, tu mirada y tu forma de estar en el mundo.</p>",
             "text_style": "body"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Ver más",
-            "button_link": ""
+            "button_label": "Conoce Lemoon",
+            "button_link": "/pages/nosotros"
           }
         }
       },
@@ -106,11 +95,12 @@
         "height": "adapt",
         "desktop_image_width": "medium",
         "image_behavior": "none",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "featured_product_1": {
+      "disabled": true,
       "type": "featured-product",
       "blocks": {
         "title": { "type": "title" },
@@ -130,31 +120,32 @@
         "media_size": "medium",
         "hide_variants": false,
         "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "rich_text_1": {
+      "disabled": true,
       "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Habla sobre tu marca",
+            "heading": "Lentes simples. Miradas únicas.",
             "heading_size": "h1"
           }
         },
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Comparte información sobre tu marca con tus clientes. Describe un producto, haz anuncios o bienvenida a los clientes a tu tienda.</p>"
+            "text": "<p>Armazones que se sienten cómodos, se ven bien y llegan listos para ser parte de tu día.</p>"
           }
         },
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Ver tienda",
-            "button_link": "",
+            "button_label": "Explorar armazones",
+            "button_link": "/collections/all",
             "button_style_secondary": false
           }
         }
@@ -165,18 +156,19 @@
         "content_alignment": "center",
         "color_scheme": "scheme-1",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "multicolumn_1": {
+      "disabled": true,
       "type": "multicolumn",
       "blocks": {
         "col1": {
           "type": "column",
           "settings": {
-            "title": "Columna 1",
-            "text": "<p>Empareja texto con una imagen o video para dar enfoque al producto, colección o publicación de blog elegida.</p>",
+            "title": "Elige tu armazón",
+            "text": "<p>Encuentra formas y colores que se sienten naturalmente tuyos.</p>",
             "link_label": "",
             "link": ""
           }
@@ -184,8 +176,8 @@
         "col2": {
           "type": "column",
           "settings": {
-            "title": "Columna 2",
-            "text": "<p>Empareja texto con una imagen o video para dar enfoque al producto, colección o publicación de blog elegida.</p>",
+            "title": "Configura tus lentes",
+            "text": "<p>Agrega cristales para tu receta y el uso que les darás cada día.</p>",
             "link_label": "",
             "link": ""
           }
@@ -193,8 +185,8 @@
         "col3": {
           "type": "column",
           "settings": {
-            "title": "Columna 3",
-            "text": "<p>Empareja texto con una imagen o video para dar enfoque al producto, colección o publicación de blog elegida.</p>",
+            "title": "Recíbelos en casa",
+            "text": "<p>Despachamos a todo Chile para que veas mejor, sin complicarte.</p>",
             "link_label": "",
             "link": ""
           }
@@ -214,11 +206,52 @@
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
+    "how_it_works": {
+      "type": "how-it-works",
+      "blocks": {
+        "choose": {
+          "type": "step",
+          "settings": {
+            "heading": "Elige tu armazón",
+            "text": "Encuentra una forma y un color que se sientan naturalmente tuyos."
+          }
+        },
+        "configure": {
+          "type": "step",
+          "settings": {
+            "heading": "Configura tus lentes",
+            "text": "Agrega cristales para tu receta y para la forma en que ves el mundo."
+          }
+        },
+        "receive": {
+          "type": "step",
+          "settings": {
+            "heading": "Recíbelos en casa",
+            "text": "Despachamos a todo Chile para que tu nueva mirada llegue sin vueltas."
+          }
+        }
+      },
+      "block_order": ["choose", "configure", "receive"],
+      "settings": { "heading": "Lentes simples, desde el primer clic." }
+    },
+    "lifestyle_moods": {
+      "type": "lifestyle-mood-grid",
+      "blocks": {
+        "minimal": { "type": "mood", "settings": { "heading": "Minimalista", "link": "/collections/all" } },
+        "executive": { "type": "mood", "settings": { "heading": "Ejecutivo", "link": "/collections/all" } },
+        "retro": { "type": "mood", "settings": { "heading": "Retro", "link": "/collections/all" } },
+        "casual": { "type": "mood", "settings": { "heading": "Casual", "link": "/collections/all" } },
+        "sun": { "type": "mood", "settings": { "heading": "Sol", "link": "/collections/all" } }
+      },
+      "block_order": ["minimal", "executive", "retro", "casual", "sun"],
+      "settings": { "heading": "Elige según tu estilo" }
+    },
     "collage_1": {
+      "disabled": true,
       "type": "collage",
       "blocks": {
         "product1": {
@@ -243,15 +276,16 @@
       },
       "block_order": ["product1", "collection1", "video1"],
       "settings": {
-        "heading": "Mirá esto",
+        "heading": "Para cada forma de mirar",
         "heading_size": "h2",
         "desktop_layout": "left",
         "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "collection_list_1": {
+      "disabled": true,
       "type": "collection-list",
       "blocks": {
         "coll1": {
@@ -269,7 +303,7 @@
       },
       "block_order": ["coll1", "coll2", "coll3"],
       "settings": {
-        "title": "Colecciones",
+        "title": "Elige tu estilo",
         "heading_size": "h2",
         "image_ratio": "square",
         "columns_desktop": 3,
@@ -277,27 +311,29 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "video_1": {
+      "disabled": true,
       "type": "video",
       "settings": {
-        "heading": "Mira nuestro video",
+        "heading": "Mira mejor. Siéntete tú.",
         "heading_size": "h2",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "full_width": false,
         "color_scheme": "scheme-3",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "featured_blog_1": {
+      "disabled": true,
       "type": "featured-blog",
       "settings": {
-        "heading": "Blog",
+        "heading": "Guía para tu mirada",
         "heading_size": "h2",
         "blog": "",
         "post_limit": 3,
@@ -305,8 +341,15 @@
         "color_scheme": "scheme-1",
         "show_image": true,
         "show_view_all": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "social_proof": {
+      "type": "social-proof-strip",
+      "settings": {
+        "rating": "5 de 5 estrellas",
+        "text": "Elegidos por miles de miradas en Chile."
       }
     },
     "newsletter_1": {
@@ -315,14 +358,14 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Suscríbete a nuestro newsletter",
+            "heading": "Ideas, lanzamientos y lentes nuevos",
             "heading_size": "h1"
           }
         },
         "paragraph": {
           "type": "paragraph",
           "settings": {
-            "text": "<p>Recibe novedades, lanzamientos y descuentos exclusivos.</p>"
+            "text": "<p>Recibe novedades de Lemoon y beneficios pensados para tus ojos.</p>"
           }
         },
         "email_form": { "type": "email_form" }
@@ -331,22 +374,27 @@
       "settings": {
         "color_scheme": "scheme-2",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
-    "image_banner",
+    "lemoon_hero",
+    "trust_bar",
+    "collection_list_1",
+    "how_it_works",
+    "lifestyle_moods",
+    "lemoon_featured_products",
     "featured_collection",
     "image_with_text_1",
     "featured_product_1",
     "rich_text_1",
     "multicolumn_1",
     "collage_1",
-    "collection_list_1",
     "video_1",
     "featured_blog_1",
+    "social_proof",
     "newsletter_1"
   ]
 }

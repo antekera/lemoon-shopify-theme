@@ -1,0 +1,22 @@
+.lemoon-legal-page { padding: 6.4rem 0 10rem; background: var(--lemoon-surface-page); }
+.lemoon-legal-page__header { max-width: 76rem; padding-bottom: 4rem; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-legal-page__eyebrow { margin: 0 0 1.2rem; color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+.lemoon-legal-page h1 { margin: 0; color: var(--lemoon-text-brand); font-size: 4.8rem; font-weight: var(--lemoon-weight-light); letter-spacing: -.05rem; line-height: 1.1; }
+.lemoon-legal-page__intro { max-width: 66rem; margin: 1.6rem 0 0; color: var(--lemoon-text-secondary); font-size: 1.8rem; line-height: 1.5; }
+.lemoon-legal-page__content { max-width: 76rem; padding-top: 4rem; color: var(--lemoon-text-primary); font-size: 1.6rem; line-height: 1.65; }
+.lemoon-legal-page__content h2 { margin: 4rem 0 1.2rem; color: var(--lemoon-text-brand); font-size: 2.8rem; }
+.lemoon-legal-page__content a { color: var(--lemoon-text-brand); text-decoration-color: var(--lemoon-action-accent-hover); text-underline-offset: .3rem; }
+.lemoon-faq { padding: 6.4rem 0 10rem; background: var(--lemoon-surface-page); }
+.lemoon-faq__header { max-width: 72rem; margin-bottom: 4rem; }
+.lemoon-faq__eyebrow { margin: 0 0 1.2rem; color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+.lemoon-faq h1 { margin: 0; color: var(--lemoon-text-brand); font-size: 4.8rem; font-weight: var(--lemoon-weight-light); letter-spacing: -.05rem; line-height: 1.1; }
+.lemoon-faq__intro { margin: 1.6rem 0 0; color: var(--lemoon-text-secondary); font-size: 1.8rem; line-height: 1.5; }
+.lemoon-faq__list { max-width: 86rem; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-faq details { border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2.4rem 0; color: var(--lemoon-text-brand); cursor: pointer; font-family: var(--lemoon-font-heading); font-size: 2rem; font-weight: var(--lemoon-weight-semibold); list-style: none; }
+.lemoon-faq summary::-webkit-details-marker { display: none; }
+.lemoon-faq summary::after { content: '+'; color: var(--lemoon-action-accent-hover); font-size: 2.8rem; font-weight: var(--lemoon-weight-light); }
+.lemoon-faq details[open] summary::after { content: '−'; }
+.lemoon-faq__answer { max-width: 70rem; padding: 0 0 2.4rem; color: var(--lemoon-text-secondary); font-size: 1.6rem; line-height: 1.6; }
+.lemoon-faq__answer > *:first-child { margin-top: 0; }
+@media screen and (max-width: 749px) { .lemoon-legal-page, .lemoon-faq { padding: 4rem 0 7.2rem; } .lemoon-legal-page h1, .lemoon-faq h1 { font-size: 4rem; } .lemoon-faq summary { font-size: 1.8rem; } }

@@ -1,0 +1,53 @@
+.lemoon-design-system { padding: 8rem 0 12rem; background: var(--lemoon-surface-page); }
+.lemoon-design-system__intro { max-width: 72rem; padding: 4rem 0 6.4rem; }
+.lemoon-design-system__eyebrow, .lemoon-design-system__section-heading > p, .lemoon-design-system__actions > div > span, .lemoon-design-system__type-list span { margin: 0; color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+.lemoon-design-system__intro h1 { margin: 1.2rem 0 2rem; font-size: 5.6rem; font-weight: var(--lemoon-weight-light); letter-spacing: -.05rem; line-height: 1.1; }
+.lemoon-design-system__intro > p { max-width: 58rem; margin: 0; color: var(--lemoon-text-secondary); font-size: 1.8rem; line-height: 1.5; }
+.lemoon-design-system__nav { display: flex; flex-wrap: wrap; gap: 1.2rem 2.4rem; padding: 2rem 0; border-top: 1px solid var(--lemoon-border-default); border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-design-system__nav a, .lemoon-design-system__product-card h3, .lemoon-design-system__trust h3 { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-weight: var(--lemoon-weight-semibold); text-decoration: none; }
+.lemoon-design-system__section { padding: 6.4rem 0; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-design-system__section-heading { display: flex; align-items: baseline; gap: 1.6rem; margin-bottom: 3.2rem; }
+.lemoon-design-system__section-heading > p { color: var(--lemoon-action-accent-hover); }
+.lemoon-design-system__section-heading h2 { margin: 0; }
+.lemoon-design-system__swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.6rem; }
+.lemoon-design-system__swatch { display: grid; gap: .8rem; }
+.lemoon-design-system__swatch > span { display: block; aspect-ratio: 1 / .8; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); background: var(--lemoon-swatch); }
+.lemoon-design-system__swatch strong { font-family: var(--lemoon-font-heading); font-size: 1.6rem; }
+.lemoon-design-system__swatch small, .lemoon-design-system__product-card small { color: var(--lemoon-text-secondary); font-size: 1.3rem; }
+.lemoon-design-system__type-list { display: grid; gap: 2.4rem; }
+.lemoon-design-system__type-list > div { padding-bottom: 2.4rem; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-design-system__type-list p { margin: 1.2rem 0 0; color: var(--lemoon-text-brand); }
+.lemoon-design-system__display { font-family: var(--lemoon-font-heading); font-size: 5.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.142857; letter-spacing: -.05rem; }
+.lemoon-design-system__h1 { font-family: var(--lemoon-font-heading); font-size: 4rem; font-weight: var(--lemoon-weight-semibold); line-height: 1.2; }
+.lemoon-design-system__h2 { font-family: var(--lemoon-font-heading); font-size: 2.8rem; font-weight: var(--lemoon-weight-semibold); line-height: 1.285714; }
+.lemoon-design-system__body { max-width: 62rem; font-size: 1.6rem; line-height: 1.5; }
+.lemoon-design-system__actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2.4rem; }
+.lemoon-design-system__actions > div { display: grid; align-content: start; gap: 1.2rem; }
+.lemoon-design-system__actions .button { width: 100%; padding: 0 1.6rem; white-space: nowrap; }
+.lemoon-design-system__button-accent { border-color: var(--lemoon-action-accent); background: var(--lemoon-action-accent); color: var(--lemoon-text-brand); }
+.lemoon-design-system__fields { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 2.4rem; align-items: center; }
+.lemoon-design-system__choice { display: flex; min-height: 8.8rem; align-items: center; gap: 1.2rem; padding: 1.6rem 2rem; border: 2px solid var(--lemoon-border-strong); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); }
+.lemoon-design-system__choice input { width: 1.6rem; height: 1.6rem; accent-color: var(--lemoon-action-primary); }
+.lemoon-design-system__choice strong, .lemoon-design-system__choice small { display: block; }
+.lemoon-design-system__choice strong { font-family: var(--lemoon-font-heading); font-size: 1.6rem; }
+.lemoon-design-system__choice small { color: var(--lemoon-text-secondary); font-size: 1.4rem; }
+.lemoon-design-system__badges { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 2.4rem; }
+.lemoon-design-system__success { padding: .4rem .8rem; border-radius: var(--lemoon-radius-sm); background: #e4f4e8; color: var(--lemoon-status-success); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); }
+.lemoon-design-system__commerce { display: grid; grid-template-columns: minmax(0, 48rem) minmax(0, 1fr); gap: 4.8rem; align-items: stretch; }
+.lemoon-design-system__product-card { overflow: hidden; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-page); }
+.lemoon-design-system__product-image { position: relative; aspect-ratio: 4 / 3; background: #f2f2f2; }
+.lemoon-design-system__product-image img { width: 100%; height: 100%; object-fit: cover; }
+.lemoon-design-system__product-image > span, .lemoon-design-system__product-image > small { position: absolute; z-index: 1; display: grid; place-items: center; background: var(--lemoon-surface-page); color: var(--lemoon-text-brand); }
+.lemoon-design-system__product-image > span { top: 1.6rem; left: 1.6rem; width: 4rem; height: 4rem; border-radius: 999px; font-size: 2.4rem; }
+.lemoon-design-system__product-image > small { right: 1.6rem; bottom: 1.6rem; padding: .8rem 1.2rem; border-radius: 999px; font-family: var(--lemoon-font-heading); font-size: 1.3rem; }
+.lemoon-design-system__product-card > div:last-child { padding: 2rem; }
+.lemoon-design-system__product-card h3, .lemoon-design-system__product-card p { margin: 0; }
+.lemoon-design-system__product-card h3 { font-size: 2rem; }
+.lemoon-design-system__product-card p { margin-top: .8rem; font-family: var(--lemoon-font-heading); font-size: 1.8rem; font-weight: var(--lemoon-weight-semibold); }
+.lemoon-design-system__product-card small { display: block; margin-top: .8rem; }
+.lemoon-design-system__trust { padding: 4rem; border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); }
+.lemoon-design-system__trust > p { margin: 0; color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+.lemoon-design-system__trust h3 { margin: 1.2rem 0 2.4rem; font-size: 2.8rem; }
+.lemoon-design-system__trust ul { display: grid; gap: 1.2rem; margin: 0; padding: 0; color: var(--lemoon-text-secondary); font-size: 1.6rem; list-style: none; }
+.lemoon-design-system__trust li::before { color: var(--lemoon-action-accent-hover); content: '✓'; margin-right: .8rem; }
+@media screen and (max-width: 749px) { .lemoon-design-system { padding: 4rem 0 8rem; } .lemoon-design-system__intro { padding: 3.2rem 0 4rem; } .lemoon-design-system__intro h1 { font-size: 4rem; } .lemoon-design-system__swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lemoon-design-system__actions, .lemoon-design-system__fields, .lemoon-design-system__commerce { grid-template-columns: 1fr; } .lemoon-design-system__display { font-size: 4rem; } .lemoon-design-system__h1 { font-size: 3.2rem; } .lemoon-design-system__section { padding: 4rem 0; } .lemoon-design-system__trust { padding: 2.4rem; } }

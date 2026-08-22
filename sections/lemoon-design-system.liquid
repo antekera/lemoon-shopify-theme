@@ -1,0 +1,77 @@
+{{ 'lemoon-design-system.css' | asset_url | stylesheet_tag }}
+
+<section class="lemoon-design-system">
+  <div class="page-width">
+    <header class="lemoon-design-system__intro">
+      <p class="lemoon-design-system__eyebrow">LEMOON · FASE 1</p>
+      <h1>Sistema de diseño</h1>
+      <p>La referencia viva de los tokens y componentes que componen la experiencia Lemoon.</p>
+    </header>
+
+    <nav class="lemoon-design-system__nav" aria-label="Secciones del sistema de diseño">
+      <a href="#color">Color</a><a href="#tipo">Tipografía</a><a href="#acciones">Acciones</a><a href="#formularios">Formularios</a><a href="#commerce">Commerce</a>
+    </nav>
+
+    <section id="color" class="lemoon-design-system__section" aria-labelledby="color-title">
+      <div class="lemoon-design-system__section-heading"><p>01</p><h2 id="color-title">Color</h2></div>
+      <div class="lemoon-design-system__swatches">
+        <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-surface-inverse)"></span><strong>Navy</strong><small>#0B1F3A · Brand</small></article>
+        <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-action-accent)"></span><strong>Lemon</strong><small>#F7E600 · Accent</small></article>
+        <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-surface-warm)"></span><strong>Warm</strong><small>#F7F4EE · Surface</small></article>
+        <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-text-primary)"></span><strong>Carbon</strong><small>#1A1A1A · Text</small></article>
+        <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-border-default)"></span><strong>Line</strong><small>#E0DDD8 · Border</small></article>
+      </div>
+    </section>
+
+    <section id="tipo" class="lemoon-design-system__section" aria-labelledby="type-title">
+      <div class="lemoon-design-system__section-heading"><p>02</p><h2 id="type-title">Tipografía</h2></div>
+      <div class="lemoon-design-system__type-list">
+        <div><span>Display · Urbanist 300 · 56/64</span><p class="lemoon-design-system__display">Lentes que te definen.</p></div>
+        <div><span>Heading 1 · Urbanist 600 · 40/48</span><p class="lemoon-design-system__h1">Una mirada, muchas formas.</p></div>
+        <div><span>Heading 2 · Urbanist 600 · 28/36</span><p class="lemoon-design-system__h2">Encuentra tu armazón</p></div>
+        <div><span>Body · Source Sans 3 · 16/24</span><p class="lemoon-design-system__body">Armazones de calidad para acompañarte todos los días, con una experiencia simple de principio a fin.</p></div>
+      </div>
+    </section>
+
+    <section id="acciones" class="lemoon-design-system__section" aria-labelledby="actions-title">
+      <div class="lemoon-design-system__section-heading"><p>03</p><h2 id="actions-title">Botones y estados</h2></div>
+      <div class="lemoon-design-system__actions">
+        <div><span>Primary</span><button class="button" type="button">Ver colección <span aria-hidden="true">→</span></button></div>
+        <div><span>Secondary</span><button class="button button--secondary" type="button">Guía de estilo</button></div>
+        <div><span>Accent</span><button class="button lemoon-design-system__button-accent" type="button">Configurar lentes <span aria-hidden="true">→</span></button></div>
+        <div><span>Disabled</span><button class="button" type="button" disabled>Agotado</button></div>
+      </div>
+    </section>
+
+    <section id="formularios" class="lemoon-design-system__section" aria-labelledby="fields-title">
+      <div class="lemoon-design-system__section-heading"><p>04</p><h2 id="fields-title">Campos y selección</h2></div>
+      <div class="lemoon-design-system__fields">
+        <div class="field"><input class="field__input" id="ds-email" type="email" placeholder=" " value="hola@lemoon.cl"><label class="field__label" for="ds-email">Correo electrónico</label></div>
+        <div class="select"><select class="select__select" aria-label="Forma de armazón"><option>Elige una forma</option><option>Rectangular</option><option>Redondo</option></select><span class="svg-wrapper">⌄</span></div>
+        <label class="lemoon-design-system__choice"><input type="radio" name="design-system-choice" checked><span><strong>Opción seleccionada</strong><small>Radio 4px, contenedor 12px.</small></span></label>
+      </div>
+      <div class="lemoon-design-system__badges"><span class="badge">Nuevo</span><span class="badge color-scheme-2">Oferta</span><span class="lemoon-design-system__success">Disponible</span></div>
+    </section>
+
+    <section id="commerce" class="lemoon-design-system__section" aria-labelledby="commerce-title">
+      <div class="lemoon-design-system__section-heading"><p>05</p><h2 id="commerce-title">Producto y confianza</h2></div>
+      <div class="lemoon-design-system__commerce">
+        <article class="lemoon-design-system__product-card">
+          <div class="lemoon-design-system__product-image"><img src="{{ 'lemoon-product-fallback.png' | asset_url }}" alt="Armazón óptico azul" width="1024" height="1024"><span aria-hidden="true">♡</span><small>Probar →</small></div>
+          <div><h3>Armazón Lemoon</h3><p>$39.900 CLP</p><small>Ligero, cómodo y listo para tu receta.</small></div>
+        </article>
+        <aside class="lemoon-design-system__trust"><p>ENVÍO Y GARANTÍA</p><h3>Comprar con calma.</h3><ul><li>Envío gratis a todo Chile</li><li>Devolución en 30 días</li><li>Garantía de ajuste</li></ul></aside>
+      </div>
+    </section>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sistema Lemoon",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "presets": [{ "name": "Sistema Lemoon" }]
+}
+{% endschema %}

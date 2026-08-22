@@ -103,6 +103,18 @@
                             height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
                           >
                         </div>
+                      {% else %}
+                        <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                        <div class="cart-item__image-container gradient">
+                          <img
+                            src="{{ 'lemoon-product-fallback.png' | asset_url }}"
+                            class="cart-item__image"
+                            alt="{{ item.product.title | escape }}"
+                            loading="lazy"
+                            width="150"
+                            height="150"
+                          >
+                        </div>
                       {% endif %}
                     </td>
 

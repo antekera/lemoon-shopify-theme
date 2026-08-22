@@ -61,6 +61,20 @@
       class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile"
       role="list"
     >
+      {%- if media_count == 0 -%}
+        <li class="product__media-item grid__item slider__slide is-active product__media-item--single">
+          <div class="lemoon-product-media-fallback">
+            <img
+              src="{{ 'lemoon-product-fallback.png' | asset_url }}"
+              alt="{{ product.title | escape }}"
+              width="1024"
+              height="1024"
+              loading="eager"
+              fetchpriority="high"
+            >
+          </div>
+        </li>
+      {%- endif -%}
       {%- if product.selected_or_first_available_variant.featured_media != null -%}
         {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
         <li
