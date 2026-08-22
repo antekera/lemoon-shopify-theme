@@ -10,7 +10,7 @@ Run in parallel:
 
 - `git status` — collect modified and untracked files
 - `git branch --show-current` — if on `main`, stop and tell the user to run `/lemoon-start-feature` first
-- `shopify theme check --store=lemoon-8277.myshopify.com 2>&1` — validate Liquid files
+- `shopify theme check 2>&1` — validate Liquid files
 
 If `shopify theme check` reports any **errors** (not warnings), stop and show them. Do not commit until resolved.
 
