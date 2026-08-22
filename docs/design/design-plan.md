@@ -23,7 +23,7 @@
 | `--color-primary`        | Navy Night    | `#0D1B3E`      | Headers, CTAs principales, texto destacado    |
 | `--color-primary-light`  | Navy Muted    | `#1E3A6E`      | Hover states, bordes activos                  |
 | `--color-secondary`      | Lemon Cítrico | `#D4E44B`      | Acento, badges, highlights, hover en nav      |
-| `--color-secondary-dark` | Lemon Deep    | `#B8CC2E`      | Hover del acento                              |
+| `--color-secondary-dark` | Lemon Deep    | `#E6D600`      | Hover del acento                              |
 | `--color-surface-warm`   | Beige Claro   | `#F7F4EE`      | Fondos de secciones alternas, tarjetas suaves |
 | `--color-background`     | Blanco        | `#FFFFFF`      | Fondo general de página                       |
 | `--color-text`           | Carbon        | `#1A1A1A`      | Cuerpo de texto                               |
@@ -31,21 +31,23 @@
 | `--color-border`         | Gris Línea    | `#E0DDD8`      | Separadores, bordes de inputs                 |
 | `--color-success`        | Verde         | `#2D8C4E`      | Confirmaciones, disponibilidad                |
 | `--color-error`          | Rojo          | `#C0392B`      | Errores de formulario                         |
+| `--color-primary-alt`    | Navy Alt      | `#0E1A29`      | Variante experimental para pruebas de diseño   |
+| `--color-secondary-alt`  | Lemon Alt     | `#FFDD00`      | Variante experimental para pruebas de diseño   |
 
-> Variantes a explorar: sección hero con fondo navy + texto en lemon, secciones de contenido alternas en beige, CTAs en navy con texto blanco.
+> Variantes a explorar: sección hero con fondo navy + texto en lemon, secciones de contenido alternas en beige, CTAs en navy con texto blanco. Los tokens `primary-alt` y `secondary-alt` se reservan para pruebas controladas y no sustituyen la paleta aprobada.
 
 ### Tipografía
 
-Fuente única: **Urbanist** (Google Fonts) — geométrica, espaciosa, la más cercana al estilo Warby Parker de la lista evaluada.
+Tipografía dual: **Urbanist** (Google Fonts) para display, headings, CTAs y wordmark; **Source Sans 3** (Google Fonts) para cuerpo, labels y captions, por su legibilidad humanista en UI.
 
 | Rol             | Familia  | Peso | Notas                                 |
 | --------------- | -------- | ---- | ------------------------------------- |
 | Display / Hero  | Urbanist | 300  | Headlines grandes y ligeros           |
 | Heading H1–H2   | Urbanist | 600  | Títulos de página y sección           |
 | Heading H3      | Urbanist | 500  | Subtítulos y tarjetas                 |
-| Body            | Urbanist | 400  | Cuerpo de texto y descripciones       |
-| CTA / Button    | Urbanist | 600  | Uppercase, letter-spacing 0.05–0.08em |
-| Caption / Label | Urbanist | 400  | Tamaño reducido, texto secundario     |
+| Body            | Source Sans 3 | 400  | Cuerpo de texto y descripciones       |
+| CTA / Button    | Urbanist | 600  | Uppercase, subtle letter-spacing (0.02em) |
+| Caption / Label | Source Sans 3 | 400  | Tamaño reducido, texto secundario     |
 
 ### Espaciado y grid
 
@@ -65,38 +67,38 @@ Fuente única: **Urbanist** (Google Fonts) — geométrica, espaciosa, la más c
 
 **Secciones en orden vertical — alineadas con LEM-86:**
 
-- `[ ]` **Announcement bar** — franja dismissible Navy con texto promo rotativo + flechas de navegación
-- `[ ]` **Header** — logo izquierda, nav centro, iconos búsqueda/cuenta/carrito derecha; mega menu en "Armazones"
-- `[ ]` **Hero** — split 45/55: texto editorial izquierda (headline Urbanist 300 68px navy, CTA navy + outline) / imagen lifestyle derecha; mobile: imagen arriba, texto abajo
-- `[ ]` **Trust bar** — 4 íconos + texto: Envío, Devolución, Garantía, WhatsApp; fondo Beige #F7F4EE
-- `[ ]` **Featured collections** — 4 tiles portrait con overlay gradient: Hombre, Mujer, Unisex, Sol
-- `[ ]` **How it works** — 3 pasos sobre Beige: números 01/02/03 en Lemon 64px + ícono + título + descripción
-- `[ ]` **Lifestyle mood grid** — 5 tarjetas editoriales scrollables: Minimalista, Ejecutivo, Retro, Casual, Sol
-- `[ ]` **Featured products carousel** — "Más vendidos", 4 tarjetas con partial 5th peeking
-- `[ ]` **Social proof strip** — banda Navy con estrellas + "4.8 · 840 reseñas" + "3.000 clientes en Chile"
-- `[ ]` **Email signup** — "¿Primero en enterarte?" sobre imagen beige/producto, input + botón navy
-- `[ ]` **Footer**
+- `[x]` **Announcement bar** — componente compacto Navy de 32px: promo rotativa a la izquierda; Ayuda, Envíos, Instagram, TikTok y cierre a la derecha
+- `[x]` **Header** — componentes desktop y mobile; versión Light implementada en Liquid. Shopify expone sólo logo, navegación y enlace de WhatsApp; el resto responde al código de diseño
+- `[x]` **Hero** — desktop y mobile con placeholder editorial pendiente de fotografía final
+- `[x]` **Trust bar** — señales de Envío, Devolución, Garantía y WhatsApp
+- `[x]` **Featured collections** — tiles Hombre, Mujer, Unisex y Sol
+- `[x]` **How it works** — 3 pasos sobre Beige
+- `[x]` **Lifestyle mood grid** — tarjetas editoriales de mood
+- `[x]` **Featured products carousel** — grilla de productos reutilizando Product Card
+- `[x]` **Social proof strip** — banda Navy con reseñas y clientes
+- `[x]` **Email signup** — bloque de captura de correo
+- `[x]` **Footer** — variantes desktop y mobile
 
 ### 2.2 Catálogo / Colección (collection)
 
-- `[ ]` **Collection hero** — 280px fondo Navy, headline Urbanist 300 56px blanco, partial lifestyle image derecha
-- `[ ]` **Frame shape filter strip** — 48px, pills horizontales scrollables: formas de armazón + "Todos"
-- `[ ]` **Filter sidebar** (desktop 240px) / **Filter drawer** (mobile) — acordeones: Género, Forma, Material, Color, Precio
-- `[ ]` **Sort bar** — "Ordenar por" dropdown derecha + contador de resultados
-- `[ ]` **Product grid** — 3 col desktop / 2 col mobile; cards con badge editorial, swatch, "Probar →" persistente
-- `[ ]` **Pagination** — "Ver más" botón o prev/next
+- `[x]` **Collection hero** — Navy editorial con placeholder de imagen
+- `[x]` **Frame shape filter strip** — filtros de forma
+- `[x]` **Filter sidebar** — acordeones desktop
+- `[x]` **Sort bar** — orden y contador de resultados
+- `[x]` **Product grid** — 3 columnas desktop con Product Card
+- `[x]` **Pagination** — CTA “Ver más armazones”
 
 ### 2.3 Detalle de producto — PDP (product)
 
 **La página más crítica para conversión — ver LEM-46.**
 
 - `[ ]` **Breadcrumb** — "Inicio › Armazones › Rectangulares", Urbanist 13px Mid Grey
-- `[ ]` **Media gallery** — 60% ancho: imagen principal 680px + 4 thumbnails; zoom desktop; swipe mobile
-- `[ ]` **Product info panel** — 40% ancho: marca label, H1 36px Navy, estrellas, precio con IVA
-- `[ ]` **Swatch selector** — círculos 24px, ring 2px Navy en seleccionado, label "Color: nombre"
-- `[ ]` **Frame specs mini-grid** — Forma, Material, Lente mm, Puente mm, Varilla mm + link "Guía de talla ›"
-- `[ ]` **Size guide diagram** — inline en acordeón: ilustración técnica con cotas del armazón
-- `[ ]` **Buy buttons** — "Agregar al carrito" (Navy) + "Configurar con cristales →" (Lemon) — ambos full-width
+- `[x]` **Media gallery** — galería desktop y media PDP mobile
+- `[x]` **Product info panel** — marca, nombre, reseñas, precio y colores
+- `[x]` **Swatch selector** — selector visual sin nombre de color en Product Card
+- `[x]` **Frame specs mini-grid** — especificaciones y talla
+- `[x]` **Size guide diagram** — diálogo de medidas técnicas
+- `[x]` **Buy buttons** — carrito y configuración de cristales
 - `[ ]` **Prescription intent CTA** — "¿Necesitas cristales?" → WhatsApp deeplink (LEM-42)
 - `[ ]` **WhatsApp help link** — "¿Tienes dudas? Consulta por WhatsApp" — Mid Grey 13px
 - `[ ]` **Trust icons row** — Envío · Devolución · Garantía en línea horizontal bajo los botones
@@ -161,13 +163,13 @@ Tipo          Material       (multi-select)   (opcional)   + precio
 
 | Componente              | Descripción                                                              | Estado |
 | ----------------------- | ------------------------------------------------------------------------ | ------ |
-| Header — desktop        | Logo izq, nav centro, íconos der; sticky con bg blanco on scroll         | `[ ]`  |
-| Header — mobile         | Hamburger izq, logo centro, búsqueda+cart der; drawer nav                | `[ ]`  |
-| Mega menu               | Dropdown full-width: columnas por género/forma/material + card editorial | `[ ]`  |
-| Announcement bar        | Franja Navy dismissible, texto rotativo, flechas Lemon                   | `[ ]`  |
-| Footer — desktop        | 4 columnas sobre Navy; links, newsletter, RRSS, métodos de pago          | `[ ]`  |
-| Footer — mobile         | Acordeones colapsables + newsletter + íconos sociales                    | `[ ]`  |
-| Cart drawer             | Panel 420px desde derecha; items + resumen + barra envío gratis          | `[ ]`  |
+| Header — desktop        | Componente 1440×72px: logo izq, nav centro, WhatsApp y búsqueda/cuenta/carrito der. La versión Light está implementada en Liquid; el editor expone sólo logo, menú y enlace de WhatsApp. Wordmark fallback, colores, espaciado, iconos y sticky viven en código. La segunda “o” usa Lemon `#F7E600`; hover y current se señalan con subrayado Lemon de 2px. | `[x]`  |
+| Header — mobile         | Hamburger izq, logo centro, búsqueda+cart der; drawer nav                | `[x]`  |
+| Mega menu               | Dropdown full-width: columnas por género/forma/material + card editorial | `[x]`  |
+| Announcement bar        | Componente 1440×32px Navy: promo editable izquierda; Ayuda, Envíos, Instagram, TikTok y cierre blanco a la derecha | `[x]`  |
+| Footer — desktop        | 4 columnas sobre Navy; links, newsletter, RRSS, métodos de pago          | `[x]`  |
+| Footer — mobile         | Acordeones colapsables + newsletter + íconos sociales                    | `[x]`  |
+| Cart drawer             | Panel 420px desde derecha; items + resumen + barra envío gratis          | `[x]`  |
 | Cart notification toast | Toast flotante al agregar producto                                       | `[ ]`  |
 | Predictive search       | Dropdown con resultados + imágenes en tiempo real                        | `[ ]`  |
 | WhatsApp float button   | Botón fijo bottom-right, visible en todas las páginas                    | `[ ]`  |
@@ -186,11 +188,11 @@ Tipo          Material       (multi-select)   (opcional)   + precio
 
 | Componente              | Descripción                                                                     | Estado |
 | ----------------------- | ------------------------------------------------------------------------------- | ------ |
-| Product card — default  | Grid tile: imagen, nombre, color, swatches, precio                              | `[ ]`  |
-| Product card — hover    | Segunda imagen fade-in + "Vista rápida" pill + "Probar →" visible               | `[ ]`  |
-| Product card — on sale  | Badge "−20%" Lemon + precio tachado                                             | `[ ]`  |
+| Product card — default  | Tile de 400×430px, card e imagen con radius 12px (placeholder gris claro de 400×300px), 3 por fila: fila izquierda con nombre+precio, descripción corta sin color y 4 swatches seleccionables de 20px | `[x]`  |
+| Product card — hover    | Segunda imagen fade-in + pills blancos de alto contraste para "Vista rápida" y "Probar →" | `[x]`  |
+| Product card — on sale  | Badge "−20%" Lemon + precio actual y precio tachado en la misma primera fila    | `[x]`  |
 | Badge "NUEVO"           | Sharp-cornered, 0px border-radius, 1px Navy border, sin fill — estilo editorial | `[ ]`  |
-| Swatch                  | Círculo 24px con ring 2px Navy en seleccionado                                  | `[ ]`  |
+| Swatch                  | Todos de 20px: inactivo con outline Beige Claro; seleccionado con outline Navy de 2px, sin aumentar tamaño | `[ ]`  |
 | Price                   | Normal / tachado+descuento / "incluye lentes" label                             | `[ ]`  |
 | "Probar →" pill         | Persistente en imagen del card (no solo hover); face+glasses icon               | `[ ]`  |
 | Media gallery           | Imagen principal + 4 thumbnails; zoom desktop; swipe mobile                     | `[ ]`  |
@@ -218,8 +220,8 @@ Tipo          Material       (multi-select)   (opcional)   + precio
 | Button — secondary   | Outline 1px Navy, Navy text, blanco fill; hover: Navy fill         | `[ ]`  |
 | Button — accent      | Lemon fill, Carbon text (no blanco — mejor contraste sobre Lemon)  | `[ ]`  |
 | Button — ghost       | Sin borde ni fill; solo texto Navy con subrayado; para navegación  | `[ ]`  |
-| Input / Textarea     | 48px, 1px Line Grey border, 4px radius; focus: 2px Navy border     | `[ ]`  |
-| Select               | Mismo estilo que input + chevron ▾ Carbon derecha                  | `[ ]`  |
+| Input / Textarea     | 48px, fondo blanco y outline Beige Claro (#F7F4EE), 4px radius, contenido alineado a la izquierda; focus: 2px Navy border; variantes sin, con icono izquierdo y con icono derecho (íconos 24px) | `[ ]`  |
+| Select               | Mismo estilo que input + chevron ▾ Carbon derecha y outline Beige Claro | `[ ]`  |
 | Checkbox / Radio     | 16px, 3px radius; Navy fill con ✓ blanco cuando seleccionado       | `[ ]`  |
 | Accordion            | Row 48px tap target, chevron animado, contenido colapsable         | `[ ]`  |
 | Modal                | Overlay 50% Navy; contenido blanco, 32px border-radius             | `[ ]`  |

@@ -1,8 +1,42 @@
-# Lemoon — Design Prompts for AI Image Generation
+# Lemoon — Design Prompts for Figma / Codex
 
-> Use these prompts in Midjourney, DALL-E, Adobe Firefly, Figma AI, or any AI design tool.
-> Always include the **Brand DNA block** first, then add the specific **module prompt**.
-> For Midjourney append `--ar 16:9 --style raw` (desktop) or `--ar 390:844 --style raw` (mobile).
+> Use these prompts in Figma AI, Codex Desktop, or any AI design tool.
+> Always include the **Brand DNA block** first, then add the specific module prompt.
+> Work through phases in order — each phase depends on the previous one.
+
+---
+
+## EXECUTION ORDER (top to bottom)
+
+| #   | ID  | Screen                                  | Phase        |
+| --- | --- | --------------------------------------- | ------------ |
+| 1   | 7C  | Design System — Full Component Overview | Foundation   |
+| 2   | 7A  | Button System                           | Foundation   |
+| 3   | 7D  | Form Elements                           | Foundation   |
+| 4   | 7B  | Product Card States                     | Foundation   |
+| 5   | 1A  | Announcement Bar                        | Global Shell |
+| 6   | 1B  | Header — Desktop                        | Global Shell |
+| 7   | 1C  | Header — Mobile                         | Global Shell |
+| 8   | 1D  | Mega Menu — Desktop                     | Global Shell |
+| 9   | 1E  | Footer — Desktop                        | Global Shell |
+| 10  | 1F  | Footer — Mobile                         | Global Shell |
+| 11  | 1G  | Cart Drawer                             | Global Shell |
+| 12  | 2A  | Hero — Desktop                          | Homepage     |
+| 13  | 2B  | Hero — Mobile                           | Homepage     |
+| 14  | 2C  | Trust Bar                               | Homepage     |
+| 15  | 2D  | Featured Collections Grid               | Homepage     |
+| 16  | 2E  | How It Works                            | Homepage     |
+| 17  | 2F  | Lifestyle Mood Categories               | Homepage     |
+| 18  | 2G  | Featured Products Carousel              | Homepage     |
+| 19  | 2H  | Social Proof Strip                      | Homepage     |
+| 20  | 2I  | Email Signup Banner                     | Homepage     |
+| 21  | 3A  | Collection Page — Desktop               | Catalog      |
+| 22  | 4A  | PDP — Desktop                           | Product      |
+| 23  | 4B  | PDP — Size Guide                        | Product      |
+| 24  | 4C  | PDP — Mobile                            | Product      |
+| 25  | 5A  | Configurator — Step 1                   | Configurator |
+| 26  | 5B  | Configurator — Step 4 (Prescription)    | Configurator |
+| 27  | 6A  | Cart Page — Desktop                     | Cart         |
 
 ---
 
@@ -21,6 +55,7 @@ Color system (exact values):
 - Navy Night #0B1F3A — primary: headers, nav, CTA buttons, strong text moments
 - Navy Muted #1A3560 — hover states, secondary elements
 - Lemon Cítrico #F7E600 — accent only: badges, hover indicators, one CTA variant; never as a large fill
+- Navy Alt #0E1A29 and Lemon Alt #FFDD00 — experimental alternatives for future controlled design testing; do not replace the approved palette by default
 - Beige Claro #F7F4EE — alternating section backgrounds, soft surfaces
 - White #FFFFFF — default page background
 - Carbon #1A1A1A — body text
@@ -28,11 +63,12 @@ Color system (exact values):
 - Line Grey #E0DDD8 — borders, dividers, input strokes
 
 Typography:
-- Font: Urbanist (geometric sans-serif, Google Fonts)
+- Display and UI font: Urbanist (geometric sans-serif, Google Fonts)
+- Body font: Source Sans 3 (humanist sans-serif, Google Fonts; used for readable paragraphs, labels, captions, inputs, and supporting UI text)
 - Display/Hero headlines: Urbanist weight 300, very large (56–72px), slightly negative letter-spacing (-0.5px)
 - Section headings: Urbanist weight 600, 28–40px, letter-spacing -0.3px
-- Body text: Urbanist weight 400, 16px, normal letter-spacing
-- CTAs/Buttons: Urbanist weight 600, 14px, uppercase, letter-spacing 0.08em
+- Body text: Source Sans 3 weight 400, 16px, normal letter-spacing
+- CTAs/Buttons: Urbanist weight 600, 14px, uppercase, subtle letter-spacing (0.02em)
 - The negative letter-spacing on headings is a key sophistication signal — headlines feel compressed and contemporary, not traditional.
 
 Layout principles:
@@ -49,19 +85,203 @@ Photography style: high-quality lifestyle and product shots, natural light, clea
 
 ---
 
-## 1. GLOBAL COMPONENTS
+## PHASE 1 — FOUNDATION
+
+> Create these first in Figma. They define the tokens and components that all pages reference.
+
+### 7C. DESIGN SYSTEM — FULL COMPONENT OVERVIEW
+
+> Primary foundation prompt. Generates the component library with all base blocks.
+
+```
+[BRAND DNA BLOCK]
+
+Design a comprehensive design system component sheet for Lemoon eyewear e-commerce. Display all components organized in labeled sections on a white background, as a professional component library reference page.
+
+---
+
+SECTION 1 — COLOR PALETTE
+Show 8 color swatches in a horizontal row, each 80×80px with rounded corners (8px), color name below in Urbanist 12px Carbon, hex value in Mid Grey 11px:
+Navy Night #0B1F3A · Navy Muted #1A3560 · Lemon #F7E600 · Lemon Deep #E6D600 · Beige #F7F4EE · White #FFFFFF (with 1px border) · Carbon #1A1A1A · Mid Grey #6B6B6B · Line Grey #E0DDD8
+
+---
+
+SECTION 2 — TYPOGRAPHY SCALE
+Show the Lemoon type scale on white background, each style on its own row. Use Urbanist for display, headings, and CTAs; use Source Sans 3 for readable body styles:
+- Display / Hero: "Lentes que te definen." — weight 300, 56px, Navy, letter-spacing -0.5px
+- H1: "Armazones de calidad" — weight 600, 40px, Navy, letter-spacing -0.3px
+- H2: "Más vendidos" — weight 600, 28px, Navy, letter-spacing -0.3px
+- H3: "Dalton — Tortoise" — weight 500, 20px, Carbon
+- Body: "Diseñados para adaptarse a tu estilo y a tu receta. Enviamos a todo Chile." — Source Sans 3 weight 400, 16px, Carbon
+- Body small: "Color: Tortoise Brown · Material: Acetato" — Source Sans 3 weight 400, 14px, Mid Grey
+- Caption: "IVA incluido · Despacho estimado 5–7 días hábiles" — Source Sans 3 weight 400, 12px, Mid Grey
+- CTA label: "VER COLECCIÓN →" — weight 600, 14px, Navy, subtle letter-spacing (0.02em), uppercase
+
+---
+
+SECTION 3 — BUTTONS (all 5 variants, shown default + hover side by side)
+Row of button pairs:
+1. PRIMARY: Navy #0B1F3A fill, white Urbanist 600 14px uppercase, 48px tall, 4px radius | Hover: #1A3560
+2. SECONDARY: 1px Navy border, Navy text, white fill | Hover: Navy fill, white text
+3. ACCENT: Lemon #F7E600 fill, Carbon text, 48px tall | Hover: #E6D600 fill
+4. GHOST: Navy underlined text, no border, no fill | Hover: darker underline
+5. INLINE/DESTRUCTIVE: "Eliminar" — Mid Grey 12px text only, underline, no shape
+
+---
+
+SECTION 4 — FORM ELEMENTS (vertical stack, left-aligned)
+- Text input DEFAULT: 48px, 1px Beige Claro (#F7F4EE) outline, 4px radius, left-aligned placeholder "Tu correo electrónico" in Mid Grey
+- Text input FOCUS: 2px Navy border, active text "miguel@lemoon.cl"
+- Text input ERROR: 2px Red #C0392B border, error message below "Este campo es requerido."
+- Select dropdown: same as input + "▾" chevron right side; default outline uses Beige Claro (#F7F4EE)
+- Checkbox unchecked / checked (Navy fill + white checkmark) with label
+- Radio button unchecked / selected (Navy fill) with label
+
+---
+
+SECTION 5 — PRODUCT CARD (3 cards per row, each 400×430px)
+State 1 DEFAULT: 1px Beige Claro outline and matching 12px radius on the card and 400×300px light-grey image placeholder, then a left-aligned content block: name and current price on the first line, a short non-color description below, and 4 color swatches. Do not show color-name text. Every swatch is 20px; the selected one is identified solely by a 2px Navy outline, while inactive swatches use a Beige Claro outline. In the sale state, the original price appears struck through beside the current price. Heart icon sits inside a 40px white floating button with a safe 20px inset. "Probar →" is a white outlined pill bottom-right of image.
+State 2 HOVER: lifestyle photo visible, with a white outlined "Vista rápida" pill centered over the image for contrast.
+State 3 NUEVO: sharp-cornered badge "NUEVO" top-left (0px radius, 1px Navy border, white fill).
+State 4 SALE: "−20%" badge in Lemon + "$71.990" bold + "$89.990" strikethrough.
+
+---
+
+SECTION 6 — BADGES & TAGS (horizontal row)
+- "NUEVO" — sharp rectangle 0px radius, 1px Navy border, Navy text, white fill, 11px uppercase
+- "−20%" — Lemon #F7E600 fill, Carbon text, 0px radius
+- "MÁS VENDIDO" — Beige fill, Carbon text, 4px radius, 1px Line Grey border
+- "AGOTADO" — Line Grey fill, Mid Grey text, 4px radius
+- Lens config chip "Progresivo · 1.67 · Antirreflejo" — Lemon #F7E600 bg, Carbon 11px, 20px radius
+
+---
+
+SECTION 7 — NAVIGATION ELEMENTS
+- Active nav link: "Armazones" Urbanist 500 15px Carbon + 2px Lemon #F7E600 underline below
+- Breadcrumb: "Inicio › Armazones › Rectangulares" 13px Mid Grey with › separators
+- Pagination: ← 1 [2] 3 4 → where active page has Navy fill, white number, 4px radius
+- Search input pill: full-width input, magnifying glass icon left, 40px tall, 1px Line Grey border, 24px border-radius
+
+---
+
+SECTION 8 — ICONS (2-row grid, 24px each, 1.5px stroke, Carbon #1A1A1A)
+Shopping bag (cart) · Magnifying glass (search) · Person (account) · Heart (wishlist) · × (close) · ← arrow · → arrow · › chevron · ✓ checkmark · Shield (guarantee) · Package (shipping) · Return arrow · WhatsApp logo · Instagram logo · Star (rating) · Ruler (size guide) · Info circle · Eye/glasses frame
+
+All icons consistent thin-line style, same visual weight.
+
+---
+
+SECTION 9 — MICRO-COMPONENTS (horizontal row)
+- Star rating: ★★★★★ in Lemon + "4.8 (127 reseñas)" in Mid Grey 13px
+- Price display: "$89.990" Navy 600 18px + "Solo armazón" Mid Grey 13px same line
+- Price with discount: "$71.990" Navy 600 18px + "$89.990" strikethrough Mid Grey 16px
+- Product-card swatch row: inactive circles 20px with Beige Claro outline; selected circle 28px with a 3px Navy ring
+- Free shipping progress bar: thin track Line Grey, Lemon fill at 70%, label "Te faltan $15.000" below
+- Trust icons row: 🚚 "Envío" · ↩ "Devolución" · ✓ "Garantía" — 14px icons, 13px Mid Grey text
+
+---
+
+Layout: organized sections with bold section labels in Urbanist 600 11px uppercase Mid Grey as headers, 32px gap between sections, 40px internal padding on a white canvas. Professional, clean, documentation-quality design system sheet.
+```
+
+---
+
+### 7A. BUTTON SYSTEM
+
+```
+[BRAND DNA BLOCK]
+
+Design a comprehensive button system for Lemoon, displayed as a component sheet on white background.
+
+Show 5 button variants in a 2-column grid:
+
+1. PRIMARY — "Agregar al carrito": Navy #0B1F3A fill, white text, Urbanist 600 14px uppercase, subtle letter-spacing (0.02em), 48px tall, 20px horizontal padding, 24px border-radius. Hover: Navy Muted #1A3560. Disabled: 40% opacity.
+
+2. SECONDARY / OUTLINE — "Ver colección": 1px Navy border, Navy text, white fill. Same size. Hover: Navy fill, white text.
+
+3. ACCENT — "Configurar con cristales": Lemon #F7E600 fill, Carbon #1A1A1A text (not white — Lemon is light, Carbon is more readable). Hover: Lemon Deep #E6D600.
+
+4. GHOST — "← Volver": no border, no fill. Just Navy underlined text with arrow. Minimal, for navigation CTAs.
+
+5. DESTRUCTIVE / WARNING — "Eliminar": small, 12px, Mid Grey text only, underline. No button shape. Appears inline in cart.
+
+Show each button in: default state, hover state (side by side), and mobile touch target (44px minimum height).
+Below each: label with specs (height, font, border-radius, padding).
+
+Flat design, clean, white background, professional component documentation style.
+```
+
+---
+
+### 7D. FORM ELEMENTS
+
+```
+[BRAND DNA BLOCK]
+
+Design a form component set for Lemoon, displayed as a clean component sheet.
+
+Show these elements:
+
+1. TEXT INPUT — Default: 1px Beige Claro (#F7F4EE) outline, 24px border-radius, 48px tall, Source Sans 3 400 16px Carbon text, left-aligned placeholder in Mid Grey. Label above: Source Sans 3 500 14px Carbon.
+
+2. TEXT INPUT — Focus state: 2px Navy border, same height. Active text.
+
+3. TEXT INPUT — Error state: 2px Red #C0392B border, error message below input in Urbanist 12px Red "Este campo es requerido."
+
+4. TEXT INPUT — Disabled: white background, Mid Grey text, 1px Beige Claro (#F7F4EE) outline.
+
+5. SELECT DROPDOWN — Same styling as input, with "▾" chevron right-aligned in Carbon and Beige Claro default outline.
+
+Input icon variants: None, Leading (e.g. search / email), and Trailing (e.g. action / reveal). Icons are 24px for clear visual proportion inside the 48px field controls; all variants preserve left-aligned field text.
+
+6. CHECKBOX — Unchecked: 1px Line Grey border, 16×16px, 3px border-radius. Checked: Navy fill, white checkmark. Label right of checkbox, Urbanist 400 14px Carbon.
+
+7. RADIO BUTTON — Same radius as checkbox but round. Navy fill when selected.
+
+8. PRICE INPUT (for prescription range) — input with unit label inside right side: "mm" or "°" in Mid Grey.
+
+All elements on white background, clean, professional.
+```
+
+---
+
+### 7B. PRODUCT CARD STATES
+
+```
+[BRAND DNA BLOCK]
+
+Design a product card component in 4 states, displayed side by side:
+
+Card dimensions: 400×430px, with a 400×300px light-grey image placeholder. Display the component variants in a 3-column grid. Eyeglasses product: "Dalton · $89.990"
+
+State 1 — DEFAULT: card with 1px Beige Claro outline, white background, and 12px corner radius matching the product image. Use a 300px-high light-grey placeholder for product imagery. Under it, align content left: product name and current price on the first line; short description "Armazón cuadrado de acetato." below; then four selectable swatches. Do not show a color-name text label. All swatches are 20px; the selected swatch has only a 2px Navy outline and inactive swatches have a Beige Claro outline. It changes the Color variant and its corresponding product image. Heart icon lives inside a 40px white floating button with 20px inset. "Probar →" is a white outlined pill bottom-right of image.
+
+State 2 — HOVER: same card but image shows a second lifestyle photo (person wearing glasses) fading in. "Probar →" pill becomes slightly more visible. A subtle "Vista rápida" pill appears center of image (white fill, Carbon text, Urbanist 12px, 8px border-radius, semi-transparent bg).
+
+State 3 — WITH BADGE "NUEVO": same as default + a "NUEVO" badge top-left of image. Badge style: sharp-cornered rectangle (0px border-radius), 1px Navy border, Navy text, white fill, Urbanist 600 11px uppercase. Editorial, no color fill.
+
+State 4 — ON SALE: badge "−20%" top-left in Lemon fill, Carbon text. First content row shows "$71.990" in Navy bold + "$89.990" strikethrough in Mid Grey beside it.
+
+Show all 4 cards in a row at 280×380px each on white background.
+```
+
+---
+
+## PHASE 2 — GLOBAL SHELL
+
+> Elements that appear on every page. Create after foundation components.
 
 ### 1A. ANNOUNCEMENT BAR
 
 ```
 [BRAND DNA BLOCK]
 
-Design a slim announcement bar (40px tall) for the very top of the page.
+Design a compact announcement bar (32px tall) for the very top of the page.
 Full-width, background color Navy Night #0B1F3A.
 Content: centered white text "Envío gratis a todo Chile en pedidos sobre $70.000" in Urbanist 13px weight 400.
-Left side: a small left arrow icon "←" in Lemon #F7E600 for cycling previous message.
-Right side: a small right arrow icon "→" in Lemon #F7E600 for next message + an "×" close icon in white, far right.
-The bar is dismissible. Ultra-minimal, no decoration. Just a confident dark strip with white text.
+Left side: rotating promotional text, aligned left; no navigation arrows.
+Right side: useful links "Ayuda" and "Envíos", Instagram and TikTok icons, plus an "×" close icon in white at the far right.
+The bar is dismissible. Ultra-minimal, no decoration. Just a compact confident dark strip with white text.
 ```
 
 ---
@@ -72,12 +292,12 @@ The bar is dismissible. Ultra-minimal, no decoration. Just a confident dark stri
 [BRAND DNA BLOCK]
 
 Design the main site header for desktop (1440px wide viewport, header height 72px).
-Background: pure white #FFFFFF with a very subtle 1px bottom border in Line Grey #E0DDD8.
+Base treatment: pure white #FFFFFF with a very subtle 1px bottom border in Line Grey #E0DDD8. Keep two desktop comparison masters in Components: Navy Night #0B1F3A with inverse white content, and Warm Beige #F7F4EE with Navy content.
 
 Layout left to right:
-- LEFT (25% width): Logo wordmark "lemoon" in Urbanist weight 700, 22px, Navy Night #0B1F3A, all-lowercase. Clean horizontal wordmark, no icon.
-- CENTER (50% width): Horizontal navigation links — "Armazones", "Sol", "Progresivos", "Marcas", "Sobre nosotros". Urbanist 15px weight 500, Carbon #1A1A1A. On hover: a 2px Lemon #F7E600 underline appears under the link — not color change, just the yellow underline accent. Generous spacing between links (32px).
-- RIGHT (25% width): Three icons right-aligned — magnifying glass (search), person (account), shopping bag (cart) — thin 1.5px stroke line icons in Carbon #1A1A1A. Cart icon has a small circular badge in Navy #0B1F3A with white number "2" inside. A "WhatsApp" text link in small Urbanist 13px with a WhatsApp icon in Mid Grey, before the icons.
+- LEFT (25% width): Logo wordmark "lemoon" in Urbanist weight 700, 22px, all-lowercase. The second “o” is always Lemon #F7E600; the remaining letters are Navy Night #0B1F3A on light/warm treatments and white on the Navy inverse treatment. Clean horizontal wordmark, no icon.
+- CENTER (50% width): Horizontal navigation links — "Armazones", "Sol", "Progresivos", "Marcas", "Sobre nosotros". Urbanist 15px weight 500, Carbon #1A1A1A (white on the Navy inverse treatment). **Hover:** a transient 2px Lemon #F7E600 underline appears under the link. **Current:** the same 2px Lemon underline remains persistent under the active link. Neither state changes the text color; the underline is the only state signal. Generous spacing between links (32px).
+- RIGHT (25% width): Three icons right-aligned — magnifying glass (search), person (account), shopping bag (cart) — thin 1.5px stroke line icons in Carbon #1A1A1A. Cart icon has a small circular badge in Navy #0B1F3A with white number "2" inside. A "WhatsApp" text link in small Urbanist 13px with a WhatsApp icon in Mid Grey, before the icons. On Navy inverse, all utility text and icon strokes are white and the cart badge becomes Lemon with a Navy number.
 
 The header sits directly below the announcement bar. Together they form a two-tier top element.
 Desktop UI mockup, photorealistic, high fidelity.
@@ -249,7 +469,7 @@ Desktop UI, photorealistic high-fidelity mockup.
 
 ---
 
-## 2. HOMEPAGE SECTIONS
+## PHASE 3 — HOMEPAGE
 
 ### 2A. HERO — DESKTOP
 
@@ -265,7 +485,7 @@ LEFT PANEL (white background, content vertically centered, 80px left padding):
 - Main headline (2 lines): "Lentes que te definen." — Urbanist weight 300 (ultra-light), 68px, Navy Night #0B1F3A, letter-spacing -0.5px, line-height 1.1. The large and light weight creates elegant editorial impact.
 - Subheadline below: "Armazones de calidad con envío a todo Chile." — Urbanist 400, 18px, Mid Grey #6B6B6B, margin-top 20px
 - CTA row below (margin-top 40px):
-  * Primary button "Ver colección →" — Navy #0B1F3A fill, white Urbanist 600 14px uppercase, letter-spacing 0.08em, 48px tall, 24px horizontal padding, 24px border-radius
+  * Primary button "Ver colección →" — Navy #0B1F3A fill, white Urbanist 600 14px uppercase, subtle letter-spacing (0.02em), 48px tall, 24px horizontal padding, 24px border-radius
   * Secondary button "Guía de estilo" — outline style, 1px Navy border, Navy text, same size, 20px left margin
 - Small trust line below buttons (margin-top 24px): "✓ Envío gratis sobre $70.000  ·  ✓ Devolución en 30 días" — Urbanist 13px weight 400, Mid Grey
 
@@ -426,9 +646,9 @@ Each product card (aspect ratio: portrait, ~280×380px):
 - TOP: product image (square or slightly portrait) — eyeglasses flat-lay on white/off-white background, front-view, centered. Image takes 65% of card height. Background: very light grey #F7F4EE.
 - BOTTOM section (white, 16px padding):
   - Frame name: "Dalton" — Urbanist 500, 15px, Carbon
-  - Color descriptor: "Tortoise Brown" — Urbanist 400, 13px, Mid Grey
-  - Color swatch dots row: 3–4 small circles (10px diameter), each the actual color. Selected swatch has a 2px outer ring in Navy.
-  - Price row: "$89.990" — Urbanist 600, 16px, Navy. If on sale: strikethrough grey original price + bold Navy sale price.
+  - First content row: frame name "Dalton" — Urbanist 500, 16px, Carbon, followed by "$89.990" — Urbanist 600, 16px, Navy. If on sale: strikethrough grey original price beside bold Navy sale price.
+  - Short description: "Armazón cuadrado de acetato." — Source Sans 3 14px, Mid Grey; do not include a color descriptor.
+  - Color swatch row: 4 selectable 20px circles. The selected swatch retains the same size and gains only a 2px Navy outline; inactive swatches use a Beige Claro outline and update the product media.
   - "Edición limitada" badge (if applicable): small sharp-cornered rectangle, 1px Navy border, Navy text "NUEVO", white fill — editorial, no color fill, Ace & Tate style.
 
 Card has no shadow, just a 1px Line Grey border on all sides. No border-radius or very subtle (4px).
@@ -480,7 +700,7 @@ Section padding: 80px top/bottom. Elegant, editorial, not a typical newsletter C
 
 ---
 
-## 3. COLLECTION / CATALOG PAGE
+## PHASE 4 — CATALOG
 
 ### 3A. COLLECTION PAGE — DESKTOP
 
@@ -518,7 +738,7 @@ Desktop UI, photorealistic.
 
 ---
 
-## 4. PRODUCT DETAIL PAGE (PDP)
+## PHASE 5 — PRODUCT DETAIL
 
 ### 4A. PDP — DESKTOP (above the fold)
 
@@ -621,7 +841,7 @@ Mobile UI, iPhone 14 Pro frame, photorealistic.
 
 ---
 
-## 5. LENS CONFIGURATOR
+## PHASE 6 — CONFIGURATOR
 
 ### 5A. CONFIGURATOR — STEP 1 (Tipo de lente)
 
@@ -698,7 +918,7 @@ Bottom: "← Paso anterior" ghost button left + "Continuar →" Navy button righ
 
 ---
 
-## 6. CART PAGE
+## PHASE 7 — CART
 
 ### 6A. CART PAGE — DESKTOP
 
@@ -745,187 +965,9 @@ UPSELL ROW below cart items (Beige #F7F4EE background strip, full-width, 80px pa
 
 ---
 
-## 7. UI COMPONENTS
-
-### 7A. BUTTON SYSTEM
-
-```
-[BRAND DNA BLOCK]
-
-Design a comprehensive button system for Lemoon, displayed as a component sheet on white background.
-
-Show 5 button variants in a 2-column grid:
-
-1. PRIMARY — "Agregar al carrito": Navy #0B1F3A fill, white text, Urbanist 600 14px uppercase, letter-spacing 0.08em, 48px tall, 20px horizontal padding, 24px border-radius. Hover: Navy Muted #1A3560. Disabled: 40% opacity.
-
-2. SECONDARY / OUTLINE — "Ver colección": 1px Navy border, Navy text, white fill. Same size. Hover: Navy fill, white text.
-
-3. ACCENT — "Configurar con cristales": Lemon #F7E600 fill, Carbon #1A1A1A text (not white — Lemon is light, Carbon is more readable). Hover: Lemon Deep #D4C700.
-
-4. GHOST — "← Volver": no border, no fill. Just Navy underlined text with arrow. Minimal, for navigation CTAs.
-
-5. DESTRUCTIVE / WARNING — "Eliminar": small, 12px, Mid Grey text only, underline. No button shape. Appears inline in cart.
-
-Show each button in: default state, hover state (side by side), and mobile touch target (44px minimum height).
-Below each: label with specs (height, font, border-radius, padding).
-
-Flat design, clean, white background, professional component documentation style.
-```
-
----
-
-### 7B. PRODUCT CARD STATES
-
-```
-[BRAND DNA BLOCK]
-
-Design a product card component in 4 states, displayed side by side:
-
-Card dimensions: 280×380px. Eyeglasses product: "Dalton — Tortoise Brown · $89.990"
-
-State 1 — DEFAULT: card with 1px Line Grey border, white background. Product image (eyeglasses on light grey bg, 65% of card), name + color + swatches + price below. Heart icon outline top-left. "Probar →" pill bottom-right of image.
-
-State 2 — HOVER: same card but image shows a second lifestyle photo (person wearing glasses) fading in. "Probar →" pill becomes slightly more visible. A subtle "Vista rápida" pill appears center of image (white fill, Carbon text, Urbanist 12px, 8px border-radius, semi-transparent bg).
-
-State 3 — WITH BADGE "NUEVO": same as default + a "NUEVO" badge top-left of image. Badge style: sharp-cornered rectangle (0px border-radius), 1px Navy border, Navy text, white fill, Urbanist 600 11px uppercase. Editorial, no color fill.
-
-State 4 — ON SALE: badge "−20%" top-left in Lemon fill, Carbon text. Price row shows "$71.990" in Navy bold + "$89.990" strikethrough in Mid Grey next to it.
-
-Show all 4 cards in a row at 280×380px each on white background.
-```
-
----
-
-### 7C. DESIGN SYSTEM — FULL COMPONENT OVERVIEW
-
-> Este es el prompt principal para Google Stitch. Genera una pantalla tipo "component library" con todos los bloques base del sistema en un solo canvas.
-
-```
-[BRAND DNA BLOCK]
-
-Design a comprehensive design system component sheet for Lemoon eyewear e-commerce. Display all components organized in labeled sections on a white background, as a professional component library reference page.
-
----
-
-SECTION 1 — COLOR PALETTE
-Show 8 color swatches in a horizontal row, each 80×80px with rounded corners (8px), color name below in Urbanist 12px Carbon, hex value in Mid Grey 11px:
-Navy Night #0B1F3A · Navy Muted #1A3560 · Lemon #F7E600 · Lemon Deep #D4C700 · Beige #F7F4EE · White #FFFFFF (with 1px border) · Carbon #1A1A1A · Mid Grey #6B6B6B · Line Grey #E0DDD8
-
----
-
-SECTION 2 — TYPOGRAPHY SCALE
-Show the Urbanist type scale on white background, each style on its own row:
-- Display / Hero: "Lentes que te definen." — weight 300, 56px, Navy, letter-spacing -0.5px
-- H1: "Armazones de calidad" — weight 600, 40px, Navy, letter-spacing -0.3px
-- H2: "Más vendidos" — weight 600, 28px, Navy, letter-spacing -0.3px
-- H3: "Dalton — Tortoise" — weight 500, 20px, Carbon
-- Body: "Diseñados para adaptarse a tu estilo y a tu receta. Enviamos a todo Chile." — weight 400, 16px, Carbon
-- Body small: "Color: Tortoise Brown · Material: Acetato" — weight 400, 14px, Mid Grey
-- Caption: "IVA incluido · Despacho estimado 5–7 días hábiles" — weight 400, 12px, Mid Grey
-- CTA label: "VER COLECCIÓN →" — weight 600, 14px, Navy, letter-spacing 0.08em, uppercase
-
----
-
-SECTION 3 — BUTTONS (all 5 variants, shown default + hover side by side)
-Row of button pairs:
-1. PRIMARY: Navy #0B1F3A fill, white Urbanist 600 14px uppercase, 48px tall, 4px radius | Hover: #1A3560
-2. SECONDARY: 1px Navy border, Navy text, white fill | Hover: Navy fill, white text
-3. ACCENT: Lemon #F7E600 fill, Carbon text, 48px tall | Hover: #D4C700 fill
-4. GHOST: Navy underlined text, no border, no fill | Hover: darker underline
-5. INLINE/DESTRUCTIVE: "Eliminar" — Mid Grey 12px text only, underline, no shape
-
----
-
-SECTION 4 — FORM ELEMENTS (vertical stack, left-aligned)
-- Text input DEFAULT: 48px, 1px Line Grey border, 4px radius, placeholder "Tu correo electrónico" in Mid Grey
-- Text input FOCUS: 2px Navy border, active text "miguel@lemoon.cl"
-- Text input ERROR: 2px Red #C0392B border, error message below "Este campo es requerido."
-- Select dropdown: same as input + "▾" chevron right side
-- Checkbox unchecked / checked (Navy fill + white checkmark) with label
-- Radio button unchecked / selected (Navy fill) with label
-
----
-
-SECTION 5 — PRODUCT CARD (4 states in a row, each 220×300px)
-State 1 DEFAULT: 1px Line Grey border, product image (glasses on light grey bg), name "Dalton", color "Tortoise Brown", 3 color swatches, price "$89.990". Heart icon top-left. "Probar →" pill bottom-right of image.
-State 2 HOVER: lifestyle photo visible, "Vista rápida" pill center of image.
-State 3 NUEVO: sharp-cornered badge "NUEVO" top-left (0px radius, 1px Navy border, white fill).
-State 4 SALE: "−20%" badge in Lemon + "$71.990" bold + "$89.990" strikethrough.
-
----
-
-SECTION 6 — BADGES & TAGS (horizontal row)
-- "NUEVO" — sharp rectangle 0px radius, 1px Navy border, Navy text, white fill, 11px uppercase
-- "−20%" — Lemon #F7E600 fill, Carbon text, 0px radius
-- "MÁS VENDIDO" — Beige fill, Carbon text, 4px radius, 1px Line Grey border
-- "AGOTADO" — Line Grey fill, Mid Grey text, 4px radius
-- Lens config chip "Progresivo · 1.67 · Antirreflejo" — Lemon #F7E600 bg, Carbon 11px, 20px radius
-
----
-
-SECTION 7 — NAVIGATION ELEMENTS
-- Active nav link: "Armazones" Urbanist 500 15px Carbon + 2px Lemon #F7E600 underline below
-- Breadcrumb: "Inicio › Armazones › Rectangulares" 13px Mid Grey with › separators
-- Pagination: ← 1 [2] 3 4 → where active page has Navy fill, white number, 4px radius
-- Search input pill: full-width input, magnifying glass icon left, 40px tall, 1px Line Grey border, 24px border-radius
-
----
-
-SECTION 8 — ICONS (2-row grid, 24px each, 1.5px stroke, Carbon #1A1A1A)
-Shopping bag (cart) · Magnifying glass (search) · Person (account) · Heart (wishlist) · × (close) · ← arrow · → arrow · › chevron · ✓ checkmark · Shield (guarantee) · Package (shipping) · Return arrow · WhatsApp logo · Instagram logo · Star (rating) · Ruler (size guide) · Info circle · Eye/glasses frame
-
-All icons consistent thin-line style, same visual weight.
-
----
-
-SECTION 9 — MICRO-COMPONENTS (horizontal row)
-- Star rating: ★★★★★ in Lemon + "4.8 (127 reseñas)" in Mid Grey 13px
-- Price display: "$89.990" Navy 600 18px + "Solo armazón" Mid Grey 13px same line
-- Price with discount: "$71.990" Navy 600 18px + "$89.990" strikethrough Mid Grey 16px
-- Color swatch row: 4 circles 24px, selected has 2px Navy outer ring
-- Free shipping progress bar: thin track Line Grey, Lemon fill at 70%, label "Te faltan $15.000" below
-- Trust icons row: 🚚 "Envío" · ↩ "Devolución" · ✓ "Garantía" — 14px icons, 13px Mid Grey text
-
----
-
-Layout: organized sections with bold section labels in Urbanist 600 11px uppercase Mid Grey as headers, 32px gap between sections, 40px internal padding on a white canvas. Professional, clean, documentation-quality design system sheet.
-```
-
----
-
-### 7D. FORM ELEMENTS
-
-```
-[BRAND DNA BLOCK]
-
-Design a form component set for Lemoon, displayed as a clean component sheet.
-
-Show these elements:
-
-1. TEXT INPUT — Default: 1px Line Grey border, 24px border-radius, 48px tall, Urbanist 400 16px Carbon text, placeholder in Mid Grey. Label above: Urbanist 500 14px Carbon.
-
-2. TEXT INPUT — Focus state: 2px Navy border, same height. Active text.
-
-3. TEXT INPUT — Error state: 2px Red #C0392B border, error message below input in Urbanist 12px Red "Este campo es requerido."
-
-4. TEXT INPUT — Disabled: light grey background, Mid Grey text, no border.
-
-5. SELECT DROPDOWN — Same styling as input, with "▾" chevron right-aligned in Carbon.
-
-6. CHECKBOX — Unchecked: 1px Line Grey border, 16×16px, 3px border-radius. Checked: Navy fill, white checkmark. Label right of checkbox, Urbanist 400 14px Carbon.
-
-7. RADIO BUTTON — Same radius as checkbox but round. Navy fill when selected.
-
-8. PRICE INPUT (for prescription range) — input with unit label inside right side: "mm" or "°" in Mid Grey.
-
-All elements on white background, clean, professional.
-```
-
----
-
 ## QUICK REFERENCE — ULTRA-SHORT PROMPT
 
-For fast iteration, use this compressed version:
+For fast iteration:
 
 ```
 Lemoon eyewear e-commerce UI, inspired by Warby Parker + Ace & Tate.
@@ -937,16 +979,3 @@ Photography and lifestyle images carry the emotion; UI stays restrained.
 Approachable-premium Latin American brand, Spanish language (Chile).
 [DESCRIBE THE SPECIFIC COMPONENT OR PAGE HERE]
 ```
-
----
-
-## TIPS BY TOOL
-
-| Tool                   | Notes                                                                                        |
-| ---------------------- | -------------------------------------------------------------------------------------------- |
-| **Midjourney**         | Append `--ar 16:9 --style raw --v 6.1` for desktop; `--ar 9:19.5 --style raw` for mobile     |
-| **DALL-E / ChatGPT**   | Paste Brand DNA + module. Follow up with "now show me mobile version"                        |
-| **Adobe Firefly**      | Use module prompt as "Generative Fill" description with reference image                      |
-| **Figma AI / Galileo** | Paste module prompt as screen description; use Brand DNA as style reference                  |
-| **Google Stitch**      | Use `brand-guidelines.md` as the design.md file; paste module prompts as screen descriptions |
-| **Relume**             | Use module layout descriptions to generate wireframe structure, then apply Lemoon design     |

@@ -6,9 +6,9 @@ description: Development workflow rules for the Lemoon Shopify theme
 
 ## Store
 
-- Store: `lemoon-8277.myshopify.com`
-- Dev theme ID: `155307016360` (unpublished — safe to push to freely)
-- Production theme: the published theme in the store (check with `shopify theme list`)
+- Store: `lemoon-8277.myshopify.com` (custom domain: `lemoon.cl`)
+- Live theme ID: `155307737256` — production, handle with care
+- Dev theme ID: `155307016360` (development — for local preview, safe to push freely)
 
 ## Local development loop
 
@@ -19,9 +19,8 @@ description: Development workflow rules for the Lemoon Shopify theme
 
 ## Pushing changes
 
-- **Dev theme** (staging): `shopify theme push --theme=155307016360`
-- **Production**: `shopify theme push --theme=<published-theme-id>` — always confirm before doing this
-- Never push directly to production without first verifying on the dev theme preview
+- **Preview local** (dev theme): `shopify theme push --theme=155307016360`
+- **Production** (live theme): `shopify theme push --theme=155307737256` — always confirm before doing this
 
 ## Pulling changes
 
