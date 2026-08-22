@@ -30,7 +30,6 @@ jobs:
         uses: shopify/lighthouse-ci-action@v1
         with:
           store: ${{ secrets.SHOPIFY_STORE }}
-          password: ${{ secrets.SHOPIFY_STORE_PASSWORD }}
           access_token: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
           collection_handle: opticos
           product_handle: lemoon-dama
