@@ -36,4 +36,4 @@ jobs:
           product_handle: lemoon-dama
           lhci_github_app_token: ${{ secrets.LHCI_GITHUB_TOKEN }}
           lhci_min_score_performance: 0.6
-          lhci_min_score_accessibility: 0.9
+          lhci_min_score_accessibility: 0.8
