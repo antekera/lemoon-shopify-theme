@@ -31,8 +31,8 @@ jobs:
         with:
           store: ${{ secrets.SHOPIFY_STORE }}
           access_token: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
-          collection_handle: ${{ secrets.SHOPIFY_COLLECTION_HANDLE }}
-          product_handle: ${{ secrets.SHOPIFY_PRODUCT_HANDLE }}
+          collection_handle: opticos
+          product_handle: lemoon-dama
           lhci_github_app_token: ${{ secrets.LHCI_GITHUB_TOKEN }}
           lhci_min_score_performance: 0.6
           lhci_min_score_accessibility: 0.9
