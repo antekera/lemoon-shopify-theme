@@ -162,8 +162,8 @@ function buildProductInput(modelName: string, lensGids: string[]) {
     metafields,
     variants: [
       {
-        price: (price / 100).toFixed(2),
-        ...(compareAtPrice ? { compareAtPrice: (compareAtPrice / 100).toFixed(2) } : {}),
+        price: price.toFixed(2),
+        ...(compareAtPrice ? { compareAtPrice: compareAtPrice.toFixed(2) } : {}),
       },
     ],
   };

@@ -50,7 +50,7 @@ async function fetchProducts() {
         id
         title
         tags
-        variants(first: 1) {
+        variants(first: 50) {
           nodes {
             inventoryItem { id }
           }
@@ -68,7 +68,7 @@ async function fetchProducts() {
 }
 
 async function addTags(productId: string, tags: string[]) {
-  await shopify(
+  const data = await shopify(
     `mutation($id: ID!, $tags: [String!]!) {
       tagsAdd(id: $id, tags: $tags) {
         node { id }
@@ -77,6 +77,8 @@ async function addTags(productId: string, tags: string[]) {
     }`,
     { id: productId, tags },
   );
+  const errors = (data.tagsAdd as { userErrors: { message: string }[] }).userErrors;
+  if (errors.length > 0) throw new Error(errors.map((e) => e.message).join(', '));
 }
 
 async function addToCollection(productIds: string[]) {
@@ -93,7 +95,7 @@ async function addToCollection(productIds: string[]) {
 }
 
 async function enableTracking(inventoryItemId: string) {
-  await shopify(
+  const data = await shopify(
     `mutation($id: ID!, $input: InventoryItemInput!) {
       inventoryItemUpdate(id: $id, input: $input) {
         inventoryItem { id tracked }
@@ -102,10 +104,12 @@ async function enableTracking(inventoryItemId: string) {
     }`,
     { id: inventoryItemId, input: { tracked: true } },
   );
+  const errors = (data.inventoryItemUpdate as { userErrors: { message: string }[] }).userErrors;
+  if (errors.length > 0) throw new Error(errors.map((e) => e.message).join(', '));
 }
 
 async function setInventory(setQuantities: { inventoryItemId: string; locationId: string; quantity: number }[]) {
-  await shopify(
+  const data = await shopify(
     `mutation($input: InventorySetOnHandQuantitiesInput!) {
       inventorySetOnHandQuantities(input: $input) {
         inventoryAdjustmentGroup { id }
@@ -114,6 +118,8 @@ async function setInventory(setQuantities: { inventoryItemId: string; locationId
     }`,
     { input: { reason: 'correction', setQuantities } },
   );
+  const errors = (data.inventorySetOnHandQuantities as { userErrors: { message: string }[] }).userErrors;
+  if (errors.length > 0) throw new Error(errors.map((e) => e.message).join(', '));
 }
 
 function sleep(ms: number) {
