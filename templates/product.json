@@ -10,12 +10,8 @@
             "text_style": "uppercase"
           }
         },
-        "title": {
-          "type": "title"
-        },
-        "price": {
-          "type": "price"
-        },
+        "title": { "type": "title" },
+        "price": { "type": "price" },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -23,9 +19,7 @@
             "swatch_shape": "circle"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector"
-        },
+        "quantity_selector": { "type": "quantity_selector" },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -33,14 +27,10 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description"
-        },
+        "description": { "type": "description" },
         "share": {
           "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
+          "settings": { "share_label": "Share" }
         }
       },
       "block_order": [
@@ -79,12 +69,12 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "También te puede gustar",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "image_ratio": "square",
+        "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
@@ -93,11 +83,119 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "image-with-text-1": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nuestra historia",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Usa este espacio para compartir información sobre tu marca con tus clientes.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Ver más",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image_position": "right",
+        "layout": "text_first",
+        "color_scheme": "scheme-2",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "image_behavior": "none",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn-1": {
+      "type": "multicolumn",
+      "blocks": {
+        "col1": {
+          "type": "column",
+          "settings": {
+            "title": "Calidad",
+            "text": "<p>Materiales seleccionados para durabilidad y comodidad.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col2": {
+          "type": "column",
+          "settings": {
+            "title": "Diseño",
+            "text": "<p>Cada detalle pensado para lucir y sentirse bien.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "col3": {
+          "type": "column",
+          "settings": {
+            "title": "Garantía",
+            "text": "<p>Respaldamos cada producto que vendemos.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["col1", "col2", "col3"],
+      "settings": {
+        "title": "¿Por qué elegirnos?",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "newsletter-1": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Suscríbete a nuestro newsletter",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "paragraph": "Recibe novedades, lanzamientos y descuentos exclusivos."
+          }
+        },
+        "email_form": { "type": "email_form" }
+      },
+      "block_order": ["heading", "paragraph", "email_form"],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
-  "order": [
-    "main",
-    "disclosures",
-    "related-products"
-  ]
+  "order": ["main", "disclosures", "related-products", "image-with-text-1", "multicolumn-1", "newsletter-1"]
 }
