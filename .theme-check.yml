@@ -1,4 +1,22 @@
 MatchingTranslations:
   enabled: false
+
 TemplateLength:
+  enabled: false
+
+# Google Fonts are intentional — not served via CDN
+RemoteAsset:
+  enabled: false
+
+# Dawn uses camelCase in some legacy sections
+VariableName:
+  enabled: false
+
+# Dawn uses `continue` as a pagination offset and `scheme_classes` as an
+# accumulator variable — both are false positives in Theme Check
+UndefinedObject:
+  enabled: false
+
+# Snippets rendered conditionally via JS or referenced only from app blocks
+OrphanedSnippet:
   enabled: false

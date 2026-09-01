@@ -1,0 +1,3 @@
+#!/bin/sh
+# Runs Theme Check before every commit — blocks on errors, allows warnings.
+shopify theme check --path . --fail-level error
