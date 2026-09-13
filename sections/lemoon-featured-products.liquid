@@ -12,7 +12,7 @@
     <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list">
       {%- for card_product in featured_collection.products limit: section.settings.products_to_show -%}
         <li class="grid__item">
-          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: forloop.index > 2, skip_styles: forloop.index != 1, section_id: section.id %}
+          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: forloop.index, skip_styles: forloop.index, section_id: section.id %}
         </li>
       {%- endfor -%}
     </ul>
@@ -34,3 +34,18 @@
   "presets": [{ "name": "Destacados Lemoon" }]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'card-product', card_product: card_product, media_aspect_ratio:
+    'square', show_secondary_image: true, show_vendor: false, show_rating: false,
+    lazy_load: forloop.index > 2, skip_styles: forloop.index != 1, section_id: section.id
+    %}"
+  to: "{% render 'card-product', card_product: card_product, media_aspect_ratio: 'square',
+    show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load:
+    forloop.index, skip_styles: forloop.index, section_id: section.id %}"
+  position: 840..1071
+{% endcomment %}
