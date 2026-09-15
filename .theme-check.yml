@@ -1,4 +1,17 @@
 MatchingTranslations:
   enabled: false
+
 TemplateLength:
+  enabled: false
+
+# Google Fonts are intentional — not served via CDN
+RemoteAsset:
+  enabled: false
+
+# Dawn uses camelCase in some legacy sections
+VariableName:
+  enabled: false
+
+# Snippets rendered conditionally via JS or referenced only from app blocks
+OrphanedSnippet:
   enabled: false

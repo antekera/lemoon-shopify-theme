@@ -29,7 +29,20 @@ shopify theme list
 
 # Check Shopify CLI version
 shopify version
+
+# Run Theme Check manually (also runs automatically on git commit)
+shopify theme check
 ```
+
+## First-time setup
+
+After cloning, activate the Theme Check pre-commit hook:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The hook runs `shopify theme check --fail-level error` before each commit — blocks on errors, allows warnings.
 
 ## Project structure
 
