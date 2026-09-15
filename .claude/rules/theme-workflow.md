@@ -8,7 +8,7 @@ description: Development workflow rules for the Lemoon Shopify theme
 
 - Store: `lemoon-8277.myshopify.com` (custom domain: `lemoon.cl`)
 - Live theme ID: `155307737256` — production, handle with care
-- Dev theme ID: `155307016360` (development — for local preview, safe to push freely)
+- Dev theme ID: `155925381288` (development — for local preview, safe to push freely)
 
 ## Local development loop
 
@@ -19,7 +19,7 @@ description: Development workflow rules for the Lemoon Shopify theme
 
 ## Pushing changes
 
-- **Preview local** (dev theme): `shopify theme push --theme=155307016360`
+- **Preview local** (dev theme): `shopify theme push --theme=155925381288`
 - **Production** (live theme): `shopify theme push --theme=155307737256` — always confirm before doing this
 
 ## Pulling changes
@@ -27,7 +27,7 @@ description: Development workflow rules for the Lemoon Shopify theme
 If theme editor changes were made in Shopify admin and need to come back locally:
 
 ```bash
-shopify theme pull --theme=155307016360
+shopify theme pull --theme=155925381288
 ```
 
 Always commit before pulling to avoid losing local work.
