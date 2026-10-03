@@ -11,4 +11,7 @@ test('shows desktop controls and pauses announcement autoplay for reduced motion
   await expect(page.locator('.slider-button--prev')).toBeVisible();
   await expect(page.locator('.slider-button--next')).toBeVisible();
   await expect(page.locator('#Slider-fixture')).toHaveAttribute('aria-live', 'polite');
+
+  await page.locator('.slider-button--next').click();
+  await expect(page.locator('#Slide-fixture-2')).toHaveAttribute('aria-hidden', 'false');
 });

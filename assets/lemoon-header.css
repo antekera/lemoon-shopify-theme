@@ -472,7 +472,7 @@
   display: none;
 }
 
-.lemoon-mobile-nav__details[open] .lemoon-icon {
+.lemoon-mobile-nav__details[open] > .lemoon-mobile-nav__summary .lemoon-icon {
   transform: rotate(180deg);
 }
 
