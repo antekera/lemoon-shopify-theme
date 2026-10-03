@@ -42,7 +42,11 @@
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "mobile_search_trending_product_1": "lemoon-arica",
+        "mobile_search_trending_product_2": "lemoon-biobio",
+        "mobile_search_trending_product_3": "lemoon-wabi",
+        "mobile_search_trending_product_4": "lemoon-colca"
       }
     }
   },

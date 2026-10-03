@@ -270,6 +270,29 @@
     }
   },
   "sections": {
+    "mobile_search": {
+      "title": "Search products",
+      "open": "Open search",
+      "close": "Close search",
+      "search_label": "Search products",
+      "placeholder": "Search",
+      "submit": "Search",
+      "show_all": "Show all search results",
+      "suggested_products": "Suggested products",
+      "loading": "Searching products…",
+      "no_results": "No products found for “{{ terms }}”.",
+      "error": "We couldn't load suggestions. You can view all search results.",
+      "results_count": "Products found: {{ count }}",
+      "information": "Information",
+      "shipping_returns": "Shipping and returns",
+      "faq": "Frequently asked questions",
+      "find_style": "Find my style",
+      "trends": "Trends",
+      "banner_alt": "Discover Lemoon trends",
+      "previous_product": "Previous product",
+      "next_product": "Next product",
+      "slide_label": "View product {{ index }} of {{ total }}"
+    },
     "announcements": {
       "previous_announcement": "Previous announcement",
       "next_announcement": "Next announcement",
