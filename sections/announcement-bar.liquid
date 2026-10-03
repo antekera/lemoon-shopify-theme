@@ -1,5 +1,6 @@
 {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'lemoon-announcement-bar.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
   assign social_icons = true
@@ -19,7 +20,7 @@
 {% endif %}
 
 <div
-  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  class="utility-bar gradient lemoon-announcement-bar{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
@@ -74,8 +75,8 @@
             id="Slider-{{ section.id }}"
             aria-live="polite"
             aria-atomic="true"
-            data-autoplay="{{ section.settings.auto_rotate }}"
-            data-speed="{{ section.settings.change_slides_speed }}"
+            data-autoplay="true"
+            data-speed="3"
           >
             {%- for block in section.blocks -%}
               <div
@@ -165,34 +166,12 @@
 {% schema %}
 {
   "name": "t:sections.announcement-bar.name",
-  "max_blocks": 12,
+  "max_blocks": 3,
   "class": "announcement-bar-section",
   "enabled_on": {
     "groups": ["header"]
   },
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "auto_rotate",
-      "label": "t:sections.announcement-bar.settings.auto_rotate.label",
-      "default": false
-    },
-    {
-      "type": "range",
-      "id": "change_slides_speed",
-      "min": 3,
-      "max": 10,
-      "step": 1,
-      "unit": "s",
-      "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
-      "default": 5
-    },    
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-4"
-    },  
     {
       "type": "checkbox",
       "id": "show_line_separator",

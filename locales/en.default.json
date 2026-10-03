@@ -281,6 +281,7 @@
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
+      "quick_categories": "Featured categories",
       "cart_count": {
         "one": "{{ count }} item",
         "other": "{{ count }} items"

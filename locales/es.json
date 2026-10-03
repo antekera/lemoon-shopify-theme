@@ -282,6 +282,7 @@
     "header": {
       "announcement": "Anuncio",
       "menu": "Menú",
+      "quick_categories": "Categorías destacadas",
       "cart_count": {
         "one": "{{ count }} artículo",
         "other": "{{ count }} artículos",

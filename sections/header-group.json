@@ -11,15 +11,28 @@
             "text": "Envío gratis a todo Chile en compras sobre $70.000",
             "link": ""
           }
+        },
+        "announcement-bar-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Descubre la colección Lemoon",
+            "link": ""
+          }
+        },
+        "announcement-bar-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Encuentra tu próximo par favorito",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement-bar-1",
+        "announcement-bar-2"
       ],
       "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,

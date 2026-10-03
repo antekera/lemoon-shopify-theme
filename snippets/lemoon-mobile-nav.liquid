@@ -53,7 +53,7 @@
   (function () {
     var nav = document.getElementById('lemoon-mobile-nav');
     var overlay = document.getElementById('lemoon-nav-overlay');
-    var openBtn = document.getElementById('lemoon-nav-open');
+    var openButtons = document.querySelectorAll('[data-lemoon-nav-open]');
     var closeBtn = document.getElementById('lemoon-nav-close');
 
     function open() {
@@ -70,7 +70,9 @@
       document.body.style.overflow = '';
     }
 
-    if (openBtn) openBtn.addEventListener('click', open);
+    openButtons.forEach(function (button) {
+      button.addEventListener('click', open);
+    });
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (overlay) overlay.addEventListener('click', close);
     document.addEventListener('keydown', function (e) {
