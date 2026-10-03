@@ -43,6 +43,9 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
+        "mobile_search_shipping_page": "shopify://pages/envios-y-entregas",
+        "mobile_search_faq_page": "shopify://pages/pre",
+        "mobile_search_style_page": "shopify://pages/buscar-mi-estilo",
         "mobile_search_trending_product_1": "lemoon-arica",
         "mobile_search_trending_product_2": "lemoon-biobio",
         "mobile_search_trending_product_3": "lemoon-wabi",
