@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fixture de búsqueda mobile</title>
+    <link rel="stylesheet" href="/assets/base.css">
+    <link rel="stylesheet" href="/assets/component-search.css">
+    <script src="/assets/global.js" defer></script>
+    <script src="/assets/search-form.js" defer></script>
+  </head>
+  <body>
+    <!-- Tasks 3–5 add the panel markup and real mobile-search module here. -->
+    <main>
+      <h1>Fixture de búsqueda mobile</h1>
+      <search-form>
+        <form action="/search" method="get" role="search">
+          <label for="fixture-search">Buscar</label>
+          <input id="fixture-search" type="search" name="q">
+          <button type="reset" class="hidden">Borrar</button>
+          <button type="submit">Buscar</button>
+        </form>
+      </search-form>
+    </main>
+    <script type="application/json" id="fixture-products">
+      [
+        { "id": "fixture-1", "title": "Lentes de prueba Uno", "url": "/products/fixture-1", "image": null },
+        { "id": "fixture-2", "title": "Lentes de prueba Dos", "url": "/products/fixture-2", "image": null }
+      ]
+    </script>
+  </body>
+</html>
