@@ -47,6 +47,19 @@
   assign sort_by = search.sort_by | default: search.default_sort_by
   assign terms = search.terms | escape
   assign search_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  assign show_all_products = false
+  assign search_results = search.results
+  assign has_results = false
+
+  if search.terms == blank
+    assign show_all_products = true
+    assign search_results = collections.all.products
+    if collections.all.products_count > 0
+      assign has_results = true
+    endif
+  elsif search.performed and search.results_count > 0
+    assign has_results = true
+  endif
 -%}
 
 {%- style -%}
@@ -63,8 +76,8 @@
   }
 {%- endstyle -%}
 
-{% paginate search.results by 24 %}
-  <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+{% paginate search_results by 24 %}
+  <div class="template-search{% unless has_results %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <h1 class="h2 center">
         {%- if search.performed -%}
@@ -132,7 +145,7 @@
           </predictive-search>
         {%- endif -%}
       </div>
-      {%- if search.performed -%}
+      {%- if search.performed and show_all_products == false -%}
         {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
           {%- if search.results_count > 0 -%}
             <p role="status">
@@ -145,8 +158,9 @@
         {%- endif -%}
       {%- endif -%}
     </div>
-    {%- if search.performed -%}
-      {%- if section.settings.enable_sorting
+    {%- if search.performed or show_all_products -%}
+      {%- if show_all_products == false
+        and section.settings.enable_sorting
         and section.settings.filter_type == 'vertical'
         and search.filters != empty
       -%}
@@ -208,7 +222,7 @@
           class="facets-vertical page-width"
         {% endif %}
       >
-        {%- if search.filters != empty -%}
+        {%- if show_all_products == false and search.filters != empty -%}
           {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
             <aside
               aria-labelledby="verticalTitle"
@@ -227,7 +241,15 @@
           {%- endif -%}
         {%- endif -%}
         <div class="product-grid-container" id="ProductGridContainer">
-          {%- if search.results.size == 0 and search.filters != empty -%}
+          {%- liquid
+            assign show_empty_collection = false
+            if search_results.size == 0
+              if show_all_products or search.filters != empty
+                assign show_empty_collection = true
+              endif
+            endif
+          -%}
+          {%- if show_empty_collection -%}
             <div
               class="template-search__results collection collection--empty{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
               id="product-grid"
@@ -237,11 +259,13 @@
               <div class="title-wrapper center">
                 <h2 class="title title--primary">
                   {{ 'sections.collection_template.empty' | t -}}
-                  <br>
-                  {{
-                    'sections.collection_template.use_fewer_filters_html'
-                    | t: link: search_url, class: 'underlined-link link'
-                  }}
+                  {%- unless show_all_products -%}
+                    <br>
+                    {{
+                      'sections.collection_template.use_fewer_filters_html'
+                      | t: link: search_url, class: 'underlined-link link'
+                    }}
+                  {%- endunless -%}
                 </h2>
               </div>
             </div>
@@ -257,7 +281,7 @@
                 role="list"
               >
                 {%- assign skip_card_product_styles = false -%}
-                {%- for item in search.results -%}
+                {%- for item in search_results -%}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
@@ -269,7 +293,13 @@
                       data-cascade
                     {% endif %}
                   >
-                    {%- case item.object_type -%}
+                    {%- liquid
+                      assign item_type = 'product'
+                      unless show_all_products
+                        assign item_type = item.object_type
+                      endunless
+                    -%}
+                    {%- case item_type -%}
                       {%- when 'product' -%}
                         {%- capture product_settings -%}{%- if section.settings.product_show_vendor -%}vendor,{%- endif -%}title,price{%- endcapture -%}
                         {% render 'card-product',
