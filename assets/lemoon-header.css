@@ -32,9 +32,10 @@
   align-items: center;
   display: grid;
   gap: 16px;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr 1fr;
   min-height: var(--lemoon-header-height);
   padding: 0 var(--lemoon-header-padding);
+  position: relative;
 }
 
 .lemoon-header__leading-actions {
@@ -50,13 +51,15 @@
   align-self: center;
   color: var(--lemoon-header-text);
   display: inline-flex;
-  justify-self: start;
+  left: 50%;
   min-height: 44px;
+  position: absolute;
   text-decoration: none;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .lemoon-header__desktop .lemoon-header__brand {
-  justify-self: center;
   padding-left: 0;
 }
 
@@ -258,13 +261,13 @@
     align-items: center;
     display: grid;
     gap: 0;
-    grid-template-columns: minmax(44px, 1fr) auto minmax(44px, 1fr);
+    grid-template-columns: 1fr 1fr;
     min-height: var(--lemoon-header-mobile-height, 56px);
     padding: 0 8px;
+    position: relative;
   }
 
   .lemoon-header__mobile .lemoon-header__brand {
-    justify-self: center;
     padding-left: 0;
   }
 
