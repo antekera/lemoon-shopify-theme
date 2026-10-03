@@ -105,9 +105,8 @@
     <li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image>{{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}</span><span data-product-title></span>{% render 'lemoon-icon', icon: 'arrow-right', size: 18 %}</a></li>
   </template>
   <script type="application/json" data-lemoon-search-products>
-    {%- assign available_products = collections.all.products | where: 'available', true -%}
     [
-      {%- for initial_product in available_products limit: 50 -%}
+      {%- for initial_product in collections.all.products limit: 50 -%}
         {%- unless forloop.first -%},{%- endunless -%}
         {"id":{{ initial_product.id | json }},"url":{{ initial_product.url | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }},"title":{{ initial_product.title | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }},"image":{% if initial_product.featured_image != blank %}{{ initial_product.featured_image | image_url: width: 240 | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }}{% else %}null{% endif %}}
       {%- endfor -%}

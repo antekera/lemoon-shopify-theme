@@ -24,7 +24,23 @@
                 <ul class="lemoon-mobile-nav__sublist" role="list">
                   <li><a class="lemoon-mobile-nav__sublink" href="{{ link.url }}">Ver todo</a></li>
                   {%- for childlink in link.links -%}
-                    <li><a class="lemoon-mobile-nav__sublink" href="{{ childlink.url }}"{% if childlink.current %} aria-current="page"{% endif %}>{{ childlink.title | escape }}</a></li>
+                    <li>
+                      {%- if childlink.links == blank -%}
+                        <a class="lemoon-mobile-nav__sublink" href="{{ childlink.url }}"{% if childlink.current %} aria-current="page"{% endif %}>{{ childlink.title | escape }}</a>
+                      {%- else -%}
+                        <details class="lemoon-mobile-nav__details lemoon-mobile-nav__nested-details">
+                          <summary class="lemoon-mobile-nav__sublink lemoon-mobile-nav__summary">
+                            <span>{{ childlink.title | escape }}</span>
+                            {% render 'lemoon-icon', icon: 'chevron-down', size: 16 %}
+                          </summary>
+                          <ul class="lemoon-mobile-nav__sublist lemoon-mobile-nav__nested-sublist" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li><a class="lemoon-mobile-nav__sublink" href="{{ grandchildlink.url }}"{% if grandchildlink.current %} aria-current="page"{% endif %}>{{ grandchildlink.title | escape }}</a></li>
+                            {%- endfor -%}
+                          </ul>
+                        </details>
+                      {%- endif -%}
+                    </li>
                   {%- endfor -%}
                 </ul>
               </details>

@@ -69,3 +69,9 @@
     height: 3.6rem;
   }
 }
+
+@media screen and (min-width: 990px) and (prefers-reduced-motion: reduce) {
+  .lemoon-announcement-bar .announcement-bar-slider .slider-button {
+    display: flex;
+  }
+}

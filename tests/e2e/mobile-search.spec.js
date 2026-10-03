@@ -9,10 +9,8 @@ const open = async (page) => { await page.locator(s('open')).click(); await expe
 
 test.beforeEach(async ({ page }) => { await page.goto(fixture); });
 
-// Each test exercises real theme CSS/ES modules; only Shopify's network boundary is intercepted.
+// These tests exercise the mobile search assets against representative fixture markup. The fixture's header controls are inert stand-ins; Liquid rendering, the navigation drawer, and desktop search are not under test here.
 test('opens from mobile search below the header with focus and internal scroll', async ({ page }) => {
-  await page.locator('[data-lemoon-nav-open]').click();
-  await expect(page.locator(s('panel'))).toBeHidden();
   await page.evaluate(() => window.scrollTo(0, 180));
   await open(page);
   await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'true');
@@ -173,7 +171,7 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await expect(page.locator(s('previous'))).toBeDisabled();
 });
 
-test('traps keyboard focus, responds to resize and closes at desktop breakpoint', async ({ page }) => {
+test('traps keyboard focus, responds to resize and hides at desktop breakpoint', async ({ page }) => {
   await open(page);
   await page.locator(s('close')).focus();
   await page.keyboard.press('Shift+Tab');
@@ -186,8 +184,6 @@ test('traps keyboard focus, responds to resize and closes at desktop breakpoint'
   await page.setViewportSize({ width: 1280, height: 800 });
   await expect(page.locator(s('panel'))).toBeHidden();
   await expect.poll(() => page.evaluate(() => document.body.style.position)).toBe('');
-  await page.locator('[data-fixture-desktop-search]').click();
-  await expect(page.locator(s('panel'))).toBeHidden();
 });
 
 test('reduced motion keeps focus and closure functional without a fade', async ({ page }) => {

@@ -495,3 +495,22 @@
 .lemoon-mobile-nav__sublink[aria-current='page'] {
   font-weight: 600;
 }
+
+.lemoon-mobile-nav__nested-details {
+  background: #f7f6f4;
+}
+
+.lemoon-mobile-nav__nested-details > .lemoon-mobile-nav__summary {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 32px;
+}
+
+.lemoon-mobile-nav__nested-sublist {
+  background: #eeece9;
+}
+
+.lemoon-mobile-nav__nested-sublist .lemoon-mobile-nav__sublink {
+  padding-left: 40px;
+}

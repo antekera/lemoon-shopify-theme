@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
-const fixtureRoute = '/tests/fixtures/mobile-search.html';
+const fixtureRoutes = new Set(['/tests/fixtures/mobile-search.html', '/tests/fixtures/announcement-bar.html']);
 const contentTypes = {
   css: 'text/css; charset=utf-8',
   js: 'text/javascript; charset=utf-8',
@@ -34,8 +34,8 @@ const server = createServer(async (request, response) => {
 
   let file;
   let contentType;
-  if (pathname === fixtureRoute || pathname === '/') {
-    file = resolve(root, 'tests/fixtures/mobile-search.html');
+  if (fixtureRoutes.has(pathname) || pathname === '/') {
+    file = resolve(root, pathname === '/tests/fixtures/announcement-bar.html' ? 'tests/fixtures/announcement-bar.html' : 'tests/fixtures/mobile-search.html');
     contentType = 'text/html; charset=utf-8';
   } else if (/^\/assets\/[\w.-]+$/.test(pathname)) {
     file = resolve(root, pathname.slice(1));
@@ -55,7 +55,7 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(4173, '127.0.0.1', () => {
-  console.log(`Fixture ready at http://127.0.0.1:4173${fixtureRoute}`);
+  console.log('Fixture ready at http://127.0.0.1:4173');
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {
