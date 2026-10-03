@@ -100,12 +100,16 @@ Los cinco productos que aparecen al abrir son aleatorios desde los productos pub
 9. El panel queda debajo del header, cubre el ancho mobile y permite scroll interno.
 10. Cerrar con el chevrón, Escape o el overlay restaura el scroll y el foco.
 11. La búsqueda y el layout actuales de desktop siguen funcionando.
+12. Los scripts npm ejecutan las pruebas unitarias y E2E; el CI las corre junto a Theme Check y publica diagnósticos cuando fallan.
 
 ## Verificación prevista
 
 - Revisar las rutas de las páginas configuradas en Shopify y que la nueva página esté publicada.
 - Ejecutar la validación obligatoria de sintaxis Liquid y esquema de Shopify para todos los archivos de tema modificados.
-- No se añadirán ni ejecutarán pruebas automatizadas como parte de esta entrega.
+- Añadir pruebas unitarias para la lógica de búsqueda que se pueda aislar y pruebas E2E del flujo del panel en Chromium con Playwright.
+- Exponer comandos npm para ejecutar las pruebas unitarias, las E2E y la suite completa localmente.
+- Ejecutar unitarias y E2E en GitHub Actions para pushes a `main` y pull requests dirigidos a `main`, junto al CI de tema existente.
+- Mantener las E2E independientes de credenciales Shopify mediante una página fixture local y respuestas predictivas controladas.
 
 ## Riesgos y límites
 

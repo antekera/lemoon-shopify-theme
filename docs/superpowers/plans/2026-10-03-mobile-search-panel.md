@@ -4,9 +4,9 @@
 
 **Goal:** Implementar el panel de búsqueda mobile aprobado, sus ajustes configurables en Shopify, una grilla de búsqueda vacía con todos los productos y la página publicada «Buscar mi estilo».
 
-**Architecture:** El header conservará el botón y flujo actuales de hamburguesa y búsqueda desktop. Un snippet, una hoja CSS y un archivo JS propios implementarán el panel mobile: sugerencias iniciales aleatorias, búsqueda predictiva, enlaces de información y carrusel de tendencias. `main-search.liquid` añadirá una rama paginada para consultas vacías y Shopify Admin recibirá la nueva página sin cuerpo.
+**Architecture:** El header conservará el botón y flujo actuales de hamburguesa y búsqueda desktop. Un snippet, una hoja CSS y módulos JS propios implementarán el panel mobile: sugerencias iniciales aleatorias, búsqueda predictiva, enlaces de información y carrusel de tendencias. Vitest cubrirá la lógica pura de búsqueda y Playwright recorrerá el panel en Chromium contra un fixture local que carga los assets reales y simula las respuestas de Shopify. `main-search.liquid` añadirá una rama paginada para consultas vacías y Shopify Admin recibirá la nueva página sin cuerpo.
 
-**Tech Stack:** Shopify Liquid, JSON de secciones Shopify, CSS, JavaScript del tema, Shopify Predictive Search, Shopify Admin GraphQL.
+**Tech Stack:** Shopify Liquid, JSON de secciones Shopify, CSS, JavaScript del tema, Shopify Predictive Search, Shopify Admin GraphQL, Node.js/npm, Vitest, Playwright Test, GitHub Actions.
 
 **Spec:** `docs/superpowers/specs/2026-10-03-mobile-search-panel-design.md`
 
@@ -20,16 +20,19 @@
 - Las sugerencias iniciales se limitan a productos publicados expuestos por `collections.all`; al abrir, JavaScript mezcla la lista y muestra hasta cinco.
 - Las predicciones comienzan con tres caracteres y muestran hasta cinco productos. Con cero, uno o dos caracteres se conservan las sugerencias iniciales.
 - Una búsqueda vacía debe llevar a `/search` y mostrar productos de `collections.all` con paginación.
-- No añadir ni ejecutar pruebas automatizadas. Antes de cerrar, ejecutar el validador Liquid/tema requerido por la skill Shopify.
+- Añadir scripts npm para pruebas unitarias, E2E y la suite completa. Ejecutar ambas suites en CI junto a las verificaciones actuales.
+- Las E2E usan Chromium y un fixture local; no requieren credenciales ni cambios en una tienda Shopify.
+- Antes de cerrar, ejecutar las suites y el validador Liquid/tema requerido por la skill Shopify.
 - La plantilla estándar de la nueva página Shopify tendrá el título «Buscar mi estilo», handle `buscar-mi-estilo`, estado publicado y cuerpo vacío.
 
 ## Review Focus
 
-- El disparador mobile debe ser exclusivamente la lupa, sin sustituir ni interceptar la hamburguesa o el modal desktop. Revisar en tareas 1 y 2.
-- El overlay y el panel deben comenzar bajo el header visible, dejarlo por encima, bloquear/restaurar el scroll y no exceder el viewport. Revisar en tarea 2.
-- Las respuestas predictivas antiguas no deben reemplazar resultados de un término más nuevo ni actualizar el panel cerrado; respetar el umbral de tres caracteres. Revisar en tarea 3.
+- El disparador mobile debe ser exclusivamente la lupa, sin sustituir ni interceptar la hamburguesa o el modal desktop. Revisar en tareas 1 y 3, y cubrir en tarea 5.
+- El overlay y el panel deben comenzar bajo el header visible, dejarlo por encima, bloquear/restaurar el scroll y no exceder el viewport. Revisar en tarea 3 y cubrir en tarea 5.
+- Las respuestas predictivas antiguas no deben reemplazar resultados de un término más nuevo ni actualizar el panel cerrado; respetar el umbral de tres caracteres. Cubrir la lógica en tarea 3 y el flujo en tarea 4.
 - `/search` sin término debe renderizar todos los productos mediante la grilla de tarjetas normal y paginación, mientras las consultas escritas conservan el comportamiento actual. Revisar en tarea 4.
-- El schema debe seguir siendo válido, conservar el único `link_list`, y cada ajuste de página/producto debe aceptar una selección vacía; revisar en tareas 1, 5 y 6.
+- El schema debe seguir siendo válido, conservar el único `link_list`, y cada ajuste de página/producto debe aceptar una selección vacía; revisar en tareas 1, 7 y 8.
+- npm debe reproducir las dependencias desde el lockfile; los comandos local y CI deben correr unitarias y E2E, y la página fixture debe cargar los assets de producción; revisar en tareas 2, 4, 5 y 8.
 
 ---
 
@@ -40,9 +43,15 @@
 - `snippets/lemoon-mobile-search.liquid` — diálogo, barra de búsqueda, sugerencias, estados vacíos/errores, información y tendencias.
 - `assets/lemoon-mobile-search.css` — layout mobile, overlay, foco, estados, accesibilidad de movimiento y tarjetas.
 - `assets/lemoon-mobile-search.js` — apertura/cierre/foco, mezcla de sugerencias, búsqueda predictiva y carrusel.
+- `assets/lemoon-mobile-search-logic.js` — funciones puras compartidas para umbral, selección de sugerencias y construcción/normalización de búsquedas.
 - `sections/main-search.liquid` — rama de consulta vacía con la grilla habitual de producto y paginación.
 - `snippets/lemoon-icon.liquid` — añadir iconos consistentes de envíos, ayuda y estilo si aún no existen.
 - `locales/es.json`, `locales/en.default.json` — textos accesibles y estados de la nueva interfaz.
+- `package.json`, `package-lock.json` — dependencias y scripts repetibles de pruebas.
+- `vitest.config.js`, `playwright.config.js` — configuración de unitarias y navegador.
+- `tests/unit/mobile-search-logic.test.js` — cobertura de funciones puras.
+- `tests/fixtures/mobile-search.html`, `tests/e2e/fixture-server.mjs`, `tests/e2e/mobile-search.spec.js` — fixture servido localmente y recorridos E2E con predicciones simuladas.
+- `.github/workflows/ci.yml` — agregar un job de pruebas que se ejecute en pull requests junto con los jobs existentes.
 - Shopify Admin — crear/publicar la página vacía «Buscar mi estilo» si no existe ya con ese handle.
 
 ## Tasks
@@ -60,7 +69,21 @@
 
 **Commit:** `feat: add mobile search theme settings`
 
-### Task 2: Estructura y presentación del panel mobile
+### Task 2: Infraestructura npm para pruebas
+
+**Files:** `package.json`, `package-lock.json`, `vitest.config.js`, `playwright.config.js`, `tests/fixtures/mobile-search.html`, `tests/e2e/fixture-server.mjs`
+
+- [ ] Añadir un `package.json` mínimo para este tema, fijar una versión LTS de Node compatible y generar `package-lock.json` para instalación reproducible con `npm ci`.
+- [ ] Añadir Vitest y Playwright Test como dependencias de desarrollo; usar Vitest en entorno Node para lógica pura, sin añadir un emulador DOM innecesario.
+- [ ] Configurar scripts `test:unit`, `test:e2e` y `test` (suite completa); `test` debe correr unitarias y luego E2E.
+- [ ] Preparar un fixture HTML pequeño que represente el markup Liquid del panel, cargue la hoja CSS y los módulos JS reales desde `assets/` y ofrezca URLs/datos de prueba locales.
+- [ ] Servir el fixture con un servidor mínimo de Node, sin framework de aplicación ni conexión a Shopify.
+- [ ] Configurar Playwright para Chromium, base URL local y `webServer` administrado por el runner; habilitar trace al reintentar y reporte legible en CI.
+- [ ] Confirmar que `npm ci` y los tres scripts están configurados; incorporar las pruebas ejecutables en tareas 3 y 4.
+
+**Commit:** `test: set up unit and browser test tooling`
+
+### Task 3: Estructura y presentación del panel mobile
 
 **Files:** `sections/header.liquid`, `snippets/lemoon-mobile-search.liquid`, `assets/lemoon-mobile-search.css`
 
@@ -76,23 +99,39 @@
 
 **Commit:** `feat: add mobile search panel markup and styles`
 
-### Task 3: Interacción, predictivo y carrusel
+### Task 4: Interacción, predictivo y carrusel
 
-**Files:** `assets/lemoon-mobile-search.js`, `snippets/lemoon-mobile-search.liquid`
+**Files:** `assets/lemoon-mobile-search.js`, `assets/lemoon-mobile-search-logic.js`, `snippets/lemoon-mobile-search.liquid`, `tests/unit/mobile-search-logic.test.js`
 
 - [ ] Al abrir desde la lupa, activar el diálogo, medir el header, bloquear scroll del documento y enfocar el campo tras el fade inicial.
 - [ ] Mezclar la lista inicial en cada apertura y mostrar hasta cinco tarjetas; al tener entre uno y dos caracteres, conservar esa lista sin consultar el endpoint.
 - [ ] Desde tres caracteres, esperar un debounce corto y solicitar a Shopify hasta cinco recursos `product`; representar imagen/título/enlace en el markup mobile propio.
 - [ ] Cancelar o invalidar solicitudes anteriores y evitar que una respuesta tardía cambie una consulta más nueva o un panel ya cerrado.
+- [ ] Extraer al módulo `mobile-search-logic.js` la lógica pura compartida entre componente y tests; mantener integración DOM, eventos y renderizado en `mobile-search.js`.
+- [ ] Cubrir con Vitest: umbral de tres caracteres, selección de hasta cinco sugerencias sin duplicados, construcción/encoding de URL para búsqueda vacía y con término, y prioridad de la consulta más reciente ante respuestas fuera de orden.
 - [ ] Anunciar carga, resultados y estado sin coincidencias; en caso de fallo conservar el término y dejar disponible el envío al resultado completo.
 - [ ] Hacer que el botón amarillo y «Mostrar todos los resultados de búsqueda» envíen el término actual a `/search`; con campo vacío, enviar `/search` sin parámetro de consulta.
 - [ ] Implementar swipe, flechas y puntos del carrusel manteniendo el índice activo actualizado; desactivar cada flecha al llegar al extremo correspondiente.
 - [ ] Cerrar mediante chevrón, Escape y toque fuera; restaurar scroll y devolver el foco a la lupa. Ignorar Escape cuando el panel ya esté cerrado.
-- [ ] Revisar teclado, foco visible, toque, resize y preferencia de movimiento reducido.
+- [ ] Ejecutar `npm run test:unit` y revisar teclado, foco visible, toque, resize y preferencia de movimiento reducido.
 
 **Commit:** `feat: add mobile search interactions`
 
-### Task 4: Página de búsqueda sin término
+### Task 5: Pruebas E2E del panel y su búsqueda
+
+**Files:** `tests/e2e/mobile-search.spec.js`, `tests/fixtures/mobile-search.html`, `playwright.config.js`
+
+- [ ] Usar Playwright para abrir el fixture con los assets reales del tema; simular el endpoint predictivo y las rutas `/search` mediante interceptación de red.
+- [ ] Cubrir en viewport mobile: la lupa abre y enfoca el campo; hamburger no abre el panel; overlay/chevrón/Escape cierran y restauran foco/scroll.
+- [ ] Confirmar con contador de solicitudes que con uno o dos caracteres no hay fetch y al tercero llega una consulta predictiva que reemplaza las sugerencias iniciales.
+- [ ] Cubrir cero resultados y error de red sin bloquear el envío de búsqueda completa; verificar submit con término y `/search` sin query para campo vacío.
+- [ ] Recorrer el carrusel por flecha, punto y swipe; verificar límites y estado del indicador.
+- [ ] En viewport desktop, comprobar que el panel mobile no se abre y que el control desktop no se sustituye.
+- [ ] Ejecutar `npm run test:e2e` localmente y guardar trace/reporte al fallar para facilitar diagnóstico.
+
+**Commit:** `test: cover mobile search panel end to end`
+
+### Task 6: Página de búsqueda sin término
 
 **Files:** `sections/main-search.liquid`
 
@@ -104,7 +143,7 @@
 
 **Commit:** `feat: show all products for empty search`
 
-### Task 5: Destino Shopify «Buscar mi estilo»
+### Task 7: Destino Shopify «Buscar mi estilo»
 
 **External resource:** Shopify Admin Page; `sections/header-group.json` y editor de tema.
 
@@ -116,17 +155,19 @@
 
 **Commit:** `chore: configure mobile search destinations`
 
-### Task 6: Revisión final y entrega
+### Task 8: CI, revisión final y entrega
 
-**Files:** todos los archivos de tema indicados arriba.
+**Files:** `.github/workflows/ci.yml` y todos los archivos indicados arriba.
 
-- [ ] Ejecutar la validación obligatoria Shopify Liquid/esquema para todos los archivos de tema modificados y corregir diagnósticos.
+- [ ] Añadir job npm a `ci.yml` para pull requests a `main` y pushes a `main`: checkout, setup Node LTS fijado, `npm ci`, `npx playwright install --with-deps chromium`, `npm test`.
+- [ ] Subir el reporte/trace de Playwright como artifact cuando la suite falle, y conservar los jobs existentes de Theme Check y Lighthouse.
+- [ ] Confirmar que el job no necesita secretos Shopify: usa el servidor local y predicciones interceptadas.
+- [ ] Ejecutar `npm test` y la validación obligatoria Shopify Liquid/esquema para todos los archivos de tema modificados; corregir diagnósticos.
 - [ ] Revisar el diff completo contra la especificación y cubrir cada punto de Review Focus leyendo el markup, estilos, JS y configuración resultantes.
-- [ ] Confirmar que no se agregaron ni ejecutaron pruebas automatizadas.
 - [ ] Revisar `git diff --check`, estado del árbol y commits resultantes.
 - [ ] Actualizar el PR draft existente #9 con los commits y resumen de los cambios; no crear un PR duplicado.
 
-**Commit final:** `feat: implement mobile search discovery panel`
+**Commit final:** `feat: implement mobile search discovery panel with tests`
 
 ## Implementation Notes
 
