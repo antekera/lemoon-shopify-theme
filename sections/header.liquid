@@ -7,7 +7,6 @@
 {%- endif -%}
 
 {%- liquid
-  assign header_logo = section.settings.logo | default: settings.logo
   assign show_account = shop.customer_accounts_enabled
 -%}
 
@@ -30,23 +29,14 @@
   <header class="lemoon-header" role="banner">
     <div class="lemoon-header__desktop">
       <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-        {%- if header_logo != blank -%}
-          {%- assign logo_alt = header_logo.alt | default: shop.name | escape -%}
-          {{
-            header_logo
-            | image_url: width: 600
-            | image_tag:
-              class: 'lemoon-header__logo-image',
-              widths: '100, 150, 200, 300, 400, 600',
-              width: 100,
-              alt: logo_alt,
-              preload: true
-          }}
-        {%- else -%}
-          <span class="lemoon-header__wordmark" aria-label="{{ shop.name | escape }}">
-            <span>lemo</span><span class="lemoon-header__wordmark-accent">o</span><span>n</span>
-          </span>
-        {%- endif -%}
+        <img
+          src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}"
+          alt="{{ shop.name | escape }}"
+          class="lemoon-header__logo-image"
+          width="120"
+          height="28"
+          loading="eager"
+        >
       </a>
 
       <nav class="lemoon-header__navigation" aria-label="Navegación principal">
@@ -118,26 +108,19 @@
     <div class="lemoon-header__mobile">
       <div class="lemoon-header__mobile-inner">
         <div class="lemoon-header__mobile-drawer">
-          {%- if section.settings.menu != blank -%}
-            {% render 'header-drawer', show_country_selector: false, show_language_selector: false, show_social_links: false %}
-          {%- endif -%}
+          <button class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" aria-label="{{ 'sections.header.menu' | t }}">
+            {% render 'lemoon-icon', icon: 'menu', size: 24 %}
+          </button>
         </div>
         <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-          {%- if header_logo != blank -%}
-            {{
-              header_logo
-              | image_url: width: 400
-              | image_tag:
-                class: 'lemoon-header__logo-image',
-                widths: '100, 150, 200, 300, 400',
-              width: 100,
-                alt: logo_alt
-            }}
-          {%- else -%}
-            <span class="lemoon-header__wordmark" aria-label="{{ shop.name | escape }}">
-              <span>lemo</span><span class="lemoon-header__wordmark-accent">o</span><span>n</span>
-            </span>
-          {%- endif -%}
+          <img
+            src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            class="lemoon-header__logo-image"
+            width="120"
+            height="28"
+            loading="eager"
+          >
         </a>
         <div class="lemoon-header__mobile-actions">
           {% render 'header-search', input_id: 'Lemoon-Header-Search-Mobile' %}
@@ -152,6 +135,7 @@
       </div>
     </div>
   </header>
+  {% render 'lemoon-mobile-nav' %}
 </sticky-header>
 
 {% javascript %}
@@ -222,7 +206,6 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo", "info": "Si queda vacío, se utiliza el logo global o el wordmark Lemoon." },
     { "type": "link_list", "id": "menu", "label": "Menú principal", "default": "main-menu" },
     { "type": "url", "id": "whatsapp_url", "label": "Enlace de WhatsApp", "info": "Déjalo vacío para ocultarlo." }
   ],

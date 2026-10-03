@@ -1,0 +1,80 @@
+<div class="lemoon-mobile-nav__overlay" id="lemoon-nav-overlay"></div>
+
+<div class="lemoon-mobile-nav" id="lemoon-mobile-nav" aria-hidden="true" aria-label="{{ 'sections.header.menu' | t }}">
+  <div class="lemoon-mobile-nav__header">
+    <a href="{{ routes.root_url }}">
+      <img src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}" alt="{{ shop.name | escape }}" class="lemoon-mobile-nav__logo" width="100" height="24" loading="eager">
+    </a>
+    <button class="lemoon-mobile-nav__close" id="lemoon-nav-close" aria-label="Cerrar menú">
+      {% render 'lemoon-icon', icon: 'x', size: 20 %}
+    </button>
+  </div>
+
+  <div class="lemoon-mobile-nav__body">
+    {%- if section.settings.menu.links != blank -%}
+      <ul class="lemoon-mobile-nav__list" role="list">
+        {%- for link in section.settings.menu.links -%}
+          <li class="lemoon-mobile-nav__item">
+            {%- if link.links != blank -%}
+              <details class="lemoon-mobile-nav__details">
+                <summary class="lemoon-mobile-nav__link lemoon-mobile-nav__summary">
+                  <span>{{ link.title | escape }}</span>
+                  {% render 'lemoon-icon', icon: 'chevron-down', size: 16 %}
+                </summary>
+                <ul class="lemoon-mobile-nav__sublist" role="list">
+                  <li><a class="lemoon-mobile-nav__sublink" href="{{ link.url }}">Ver todo</a></li>
+                  {%- for childlink in link.links -%}
+                    <li><a class="lemoon-mobile-nav__sublink" href="{{ childlink.url }}"{% if childlink.current %} aria-current="page"{% endif %}>{{ childlink.title | escape }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              </details>
+            {%- else -%}
+              <a class="lemoon-mobile-nav__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <p class="lemoon-mobile-nav__section-label">Categorías</p>
+    <ul class="lemoon-mobile-nav__list" role="list">
+      {%- for collection in collections -%}
+        {%- unless collection.handle == 'all' -%}
+          <li class="lemoon-mobile-nav__item">
+            <a class="lemoon-mobile-nav__link" href="{{ collection.url }}">{{ collection.title | escape }}</a>
+          </li>
+        {%- endunless -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var nav = document.getElementById('lemoon-mobile-nav');
+    var overlay = document.getElementById('lemoon-nav-overlay');
+    var openBtn = document.getElementById('lemoon-nav-open');
+    var closeBtn = document.getElementById('lemoon-nav-close');
+
+    function open() {
+      nav.classList.add('is-open');
+      overlay.classList.add('is-open');
+      nav.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      nav.classList.remove('is-open');
+      overlay.classList.remove('is-open');
+      nav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (overlay) overlay.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+  })();
+</script>
