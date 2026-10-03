@@ -23,12 +23,8 @@
     max-width: 68rem;
   }
 
-  .lemoon-announcement-bar .slider-button--prev {
-    margin-left: 0;
-  }
-
-  .lemoon-announcement-bar .slider-button--next {
-    margin-right: 0;
+  .lemoon-announcement-bar .announcement-bar-slider .slider-button {
+    display: none;
   }
 }
 
