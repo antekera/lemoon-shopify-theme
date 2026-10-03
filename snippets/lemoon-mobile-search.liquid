@@ -4,6 +4,7 @@
   @example
   {% render 'lemoon-mobile-search', section: section %}
 {% enddoc %}
+<script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
   assign information_keys = 'shipping_returns,faq,find_style' | split: ','

@@ -44,8 +44,9 @@
   box-sizing: border-box;
 }
 
-.lemoon-mobile-search__overlay {
+.lemoon-mobile-search .lemoon-mobile-search__overlay {
   background: rgba(11, 31, 58, 0.4);
+  display: block;
   inset: 0;
   position: absolute;
 }
