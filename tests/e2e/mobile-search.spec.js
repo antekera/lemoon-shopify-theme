@@ -226,11 +226,16 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await open(page);
   await expect(page.locator(s('previous'))).toBeDisabled();
   await page.locator(s('next')).click();
-  await expect(page.locator(s('slide')).nth(1)).toBeVisible();
+  await expect(page.locator(s('slide')).nth(1)).toHaveAttribute('aria-hidden', 'false');
   await page.locator(s('dot')).nth(4).click();
   await expect(page.locator(s('next'))).toBeDisabled();
   await expect(page.locator(s('dot')).nth(4)).toHaveAttribute('aria-current', 'true');
   await page.locator(s('carousel')).scrollIntoViewIfNeeded();
+  const carouselBox = await page.locator(s('carousel')).boundingBox();
+  await expect.poll(async () => {
+    const box = await page.locator(s('slide')).nth(4).boundingBox();
+    return Math.abs(box.x - carouselBox.x);
+  }).toBeLessThanOrEqual(1);
   const box = await page.locator(s('slide')).nth(4).boundingBox();
   const session = await page.context().newCDPSession(page);
   const x = box.x + 40;
@@ -240,7 +245,7 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 140, y: y + 5 }] });
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await session.detach();
-  await expect(page.locator(s('slide')).nth(3)).toBeVisible();
+  await expect(page.locator(s('slide')).nth(3)).toHaveAttribute('aria-hidden', 'false');
   await page.locator(s('dot')).first().click();
   await expect(page.locator(s('previous'))).toBeDisabled();
 });
@@ -253,6 +258,22 @@ test('puts the banner first and uses PLP product cards in the trends carousel', 
   await expect(slides.nth(1).locator('.product-card-wrapper')).toHaveCount(1);
   await expect(slides.nth(4).locator('.product-card-wrapper')).toHaveCount(1);
   await expect(page.locator(s('dot'))).toHaveCount(5);
+});
+
+test('peeks the next carousel item and advances the PLP card with add to cart', async ({ page }) => {
+  await open(page);
+  const carousel = await page.locator(s('carousel')).boundingBox();
+  const firstProduct = page.locator(s('slide')).nth(1);
+  const firstProductBox = await firstProduct.boundingBox();
+  expect(firstProductBox.x).toBeGreaterThan(carousel.x);
+  expect(firstProductBox.x).toBeLessThan(carousel.x + carousel.width);
+  await page.locator(s('next')).click();
+  await expect(firstProduct).toHaveAttribute('aria-hidden', 'false');
+  await expect.poll(async () => {
+    const box = await firstProduct.boundingBox();
+    return Math.abs(box.x - carousel.x);
+  }).toBeLessThanOrEqual(1);
+  await expect(firstProduct.locator('.quick-add__submit')).toBeVisible();
 });
 
 test('traps keyboard focus, responds to resize and hides at desktop breakpoint', async ({ page }) => {

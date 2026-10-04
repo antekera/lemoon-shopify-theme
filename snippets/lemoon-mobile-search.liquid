@@ -6,6 +6,9 @@
 {% enddoc %}
 <script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
   assign trend_products = section.settings.mobile_search_trending_products
@@ -60,7 +63,7 @@
       {%- assign carousel_slide_count = trend_count | plus: 1 -%}
       <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
         <div data-lemoon-search-slides>
-          <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="0">
+          <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="0" aria-hidden="false">
             {%- if section.settings.mobile_search_banner_image != blank -%}
               {%- assign banner_alt = section.settings.mobile_search_banner_image.alt -%}
               {%- if banner_alt == blank -%}{%- assign banner_alt = 'sections.mobile_search.banner_alt' | t -%}{%- endif -%}
@@ -77,8 +80,8 @@
           {%- assign skip_card_product_styles = false -%}
           {%- for trend_product in trend_products limit: 4 -%}
             {%- if trend_product != blank -%}
-              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}"{% if slide_index > 0 %} hidden{% endif %}>
-                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, quick_add: 'none', product_view_context: 'collection' %}
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}" aria-hidden="true" inert>
+                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, quick_add: 'standard', quick_add_id_prefix: 'QuickAdd-MobileSearch-', product_view_context: 'collection' %}
               </div>
               {%- assign skip_card_product_styles = true -%}
               {%- assign slide_index = slide_index | plus: 1 -%}

@@ -154,7 +154,10 @@
 .lemoon-mobile-search__banner { background: #f7f6f4; border-radius: 12px; display: block; overflow: hidden; }
 .lemoon-mobile-search__banner img { display: block; height: auto; width: 100%; }
 .lemoon-mobile-search__slide .product-card-wrapper { width: 100%; }
-.lemoon-mobile-search__carousel { touch-action: pan-y; }
+.lemoon-mobile-search__carousel { overflow: hidden; touch-action: pan-y; }
+.lemoon-mobile-search [data-lemoon-search-slides] { display: flex; gap: 12px; transition: transform 280ms ease; will-change: transform; }
+.lemoon-mobile-search__slide { flex: 0 0 calc(100% - 36px); min-width: 0; }
+.lemoon-mobile-search__slide[aria-hidden='true'] { pointer-events: none; }
 .lemoon-mobile-search__carousel-controls { align-items: center; display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
 .lemoon-mobile-search__carousel-controls button { background: transparent; border-radius: 50%; }
 .lemoon-mobile-search__dots { display: flex; }
@@ -168,5 +171,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lemoon-mobile-search { transition: none; }
+  .lemoon-mobile-search,
+  .lemoon-mobile-search [data-lemoon-search-slides] { transition: none; }
 }

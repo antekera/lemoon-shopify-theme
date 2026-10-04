@@ -37,6 +37,7 @@ class MobileSearch {
     this.announcement = this.section?.parentElement.querySelector('.announcement-bar-section');
     this.triggers = [...document.querySelectorAll(selector('open'))].filter((button) => button.getAttribute('aria-controls') === this.panel.id);
     this.slides = [...root.querySelectorAll(selector('slide'))];
+    this.slideTrack = root.querySelector(selector('slides'));
     this.dots = [...root.querySelectorAll(selector('dot'))];
     this.previous = root.querySelector(selector('previous'));
     this.next = root.querySelector(selector('next'));
@@ -255,7 +256,15 @@ class MobileSearch {
   showSlide(index) {
     if (!this.slides.length) return;
     this.index = Math.max(0, Math.min(index, this.slides.length - 1));
-    this.slides.forEach((slide, position) => { slide.hidden = position !== this.index; });
+    this.slides.forEach((slide, position) => {
+      const active = position === this.index;
+      slide.setAttribute('aria-hidden', String(!active));
+      slide.inert = !active;
+    });
+    if (this.slideTrack) {
+      const offset = this.slides[this.index].offsetLeft - this.slides[0].offsetLeft;
+      this.slideTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
+    }
     this.dots.forEach((dot, position) => dot.setAttribute('aria-current', String(position === this.index)));
     if (this.previous) this.previous.disabled = this.index === 0;
     if (this.next) this.next.disabled = this.index === this.slides.length - 1;
@@ -279,7 +288,10 @@ class MobileSearch {
 
   onResize() {
     if (!mobile.matches) this.close(true);
-    else this.measure();
+    else {
+      this.measure();
+      this.showSlide(this.index);
+    }
   }
 
   disconnect() {
