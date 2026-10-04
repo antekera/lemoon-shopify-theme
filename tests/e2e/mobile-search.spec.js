@@ -63,6 +63,7 @@ test('opens desktop search in two columns with products and results on the left'
   await openTrigger(page).click();
   await expect(page.locator(s('input'))).toBeFocused();
   await expect(page.locator(s('panel'))).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Preguntas frecuentes' })).toHaveAttribute('href', '/pages/preguntas-frecuentes');
   const columns = page.locator('.lemoon-mobile-search__columns');
   await expect(columns).toHaveCSS('display', 'grid');
   expect((await columns.evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' '))).length).toBe(2);
