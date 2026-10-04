@@ -22,6 +22,11 @@ test('opens from mobile search below the header with focus and internal scroll',
   expect(panel.width).toBe(390);
   await page.locator(s('panel')).evaluate((el) => { el.scrollTop = 400; });
   await expect.poll(() => page.locator(s('panel')).evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+  await expect.poll(async () => {
+    const panel = await page.locator(s('panel')).boundingBox();
+    const input = await page.locator(s('input')).boundingBox();
+    return input.y - panel.y;
+  }).toBeGreaterThanOrEqual(0);
   await page.mouse.wheel(0, 300);
   expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
 });
