@@ -33,7 +33,10 @@ class MobileSearch {
     this.template = root.querySelector(selector('product-template'));
     this.header = root.closest('sticky-header')?.querySelector('[data-lemoon-search-header]');
     this.section = root.closest('.section-header');
-    this.announcement = this.section?.parentElement.querySelector('.announcement-bar-section');
+    this.sticky = root.closest('sticky-header');
+    // Keep the dialog outside the sticky header's containing block. WebKit can
+    // scroll or zoom focused inputs when they live under fixed/sticky ancestors.
+    document.body.append(root);
     this.triggers = [...document.querySelectorAll(selector('open'))].filter((button) => button.getAttribute('aria-controls') === this.panel.id);
     this.slides = [...root.querySelectorAll(selector('slide'))];
     this.slideTrack = root.querySelector(selector('slides'));
@@ -62,6 +65,12 @@ class MobileSearch {
     });
     this.listen(this.all, 'click', () => this.updateLink());
     this.listen(document, 'keydown', (event) => this.onKeydown(event));
+    this.listen(document, 'touchmove', (event) => {
+      if (this.isOpen && !this.panel.contains(event.target)) event.preventDefault();
+    }, { passive: false });
+    this.listen(document, 'wheel', (event) => {
+      if (this.isOpen && !this.panel.contains(event.target)) event.preventDefault();
+    }, { passive: false });
     this.listen(window, 'resize', () => this.onResize());
     this.listen(window.visualViewport, 'resize', () => this.measure());
     this.listen(window.visualViewport, 'scroll', () => this.measure());
@@ -103,7 +112,9 @@ class MobileSearch {
   measure() {
     if (!this.isOpen) return;
     const viewport = window.visualViewport;
-    this.root.style.setProperty('--lemoon-search-top', `${Math.max(0, this.header?.getBoundingClientRect().bottom || 0)}px`);
+    const headerOffset = Math.max(0, this.header?.getBoundingClientRect().bottom || 0);
+    this.root.style.setProperty('--lemoon-search-top', `${window.scrollY + headerOffset}px`);
+    this.root.style.setProperty('--lemoon-search-header-offset', `${headerOffset}px`);
     this.root.style.setProperty('--lemoon-search-viewport-height', `${viewport ? viewport.height + viewport.offsetTop : window.innerHeight}px`);
   }
 
@@ -115,26 +126,7 @@ class MobileSearch {
     this.isOpen = true;
     this.cancelRequest();
     this.scroll = { x: window.scrollX, y: window.scrollY };
-    this.restoreBody = saveStyles(document.body, ['position', 'top', 'left', 'width', 'overflow']);
-    this.restoreHtml = saveStyles(document.documentElement, ['overflow', 'scroll-behavior']);
-    if (this.section) {
-      const announcementRect = this.announcement?.getBoundingClientRect();
-      const headerTop = announcementRect?.height && announcementRect.bottom > 0 ? announcementRect.bottom : 0;
-      this.restoreHeader = saveStyles(this.section, ['position', 'top', 'left', 'width', 'transform', 'transition']);
-      this.headerClasses = ['shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate'].map((name) => [name, this.section.classList.contains(name)]);
-      this.section.style.setProperty('position', 'fixed', 'important');
-      this.section.style.setProperty('top', `${headerTop}px`, 'important');
-      this.section.style.setProperty('left', '0px', 'important');
-      this.section.style.setProperty('width', '100%', 'important');
-      this.section.style.setProperty('transform', 'none', 'important');
-      this.section.style.setProperty('transition', 'none', 'important');
-    }
-    document.body.style.position = 'fixed';
-    document.body.style.top = `${-this.scroll.y}px`;
-    document.body.style.left = `${-this.scroll.x}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
+    this.restoreHtml = saveStyles(document.documentElement, ['scroll-behavior']);
     this.background = [];
     // Inert siblings at each ancestor preserve the dialog while excluding the rest of the page.
     for (let current = this.root; current && current !== document.body; current = current.parentElement) {
@@ -174,14 +166,10 @@ class MobileSearch {
     this.root.inert = true;
     this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
     this.background.forEach(([element, wasInert]) => { element.inert = wasInert; });
-    this.restoreBody();
     document.documentElement.style.setProperty('scroll-behavior', 'auto', 'important');
-    this.restoreHeader?.();
-    this.headerClasses?.forEach(([name, present]) => this.section.classList.toggle(name, present));
     window.scrollTo(this.scroll.x, this.scroll.y);
     this.restoreHtml();
-    const sticky = this.root.closest('sticky-header');
-    if (sticky) sticky.currentScrollTop = this.scroll.y;
+    if (this.sticky) this.sticky.currentScrollTop = this.scroll.y;
     if (restoreFocus) this.opener?.focus({ preventScroll: true });
     const hide = () => { if (!this.isOpen) this.root.hidden = true; };
     if (immediate) hide();
@@ -316,6 +304,7 @@ class MobileSearch {
     this.close(true);
     clearTimeout(this.hideTimer);
     this.events.abort();
+    this.root.remove();
   }
 }
 
@@ -329,6 +318,6 @@ initialize();
 document.addEventListener('shopify:section:load', initialize);
 document.addEventListener('shopify:section:unload', (event) => {
   for (const [root, controller] of controllers) {
-    if (event.target.contains(root)) { controller.disconnect(); controllers.delete(root); }
+    if (event.target === controller.section || event.target.contains(controller.section)) { controller.disconnect(); controllers.delete(root); }
   }
 });

@@ -54,7 +54,8 @@ test('opens from mobile search below the header with focus and internal scroll',
   }).toBeCloseTo(0, 0);
   await expect(page.locator('.lemoon-mobile-search__sticky-header')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await page.mouse.wheel(0, 300);
-  expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
+  expect(await page.evaluate(() => document.body.style.position)).toBe('');
+  expect(await page.evaluate(() => document.body.style.overflow)).toBe('');
 });
 
 test('opens desktop search in two columns with products and results on the left', async ({ page }) => {
@@ -75,6 +76,14 @@ test('opens desktop search in two columns with products and results on the left'
   expect(information.x).toBeCloseTo(trends.x, 0);
   expect(await page.locator(s('results') + ' a').count()).toBe(3);
   expect(await openTrigger(page).getAttribute('aria-expanded')).toBe('true');
+});
+
+test('keeps the focused mobile search outside the sticky header positioning context', async ({ page }) => {
+  await open(page);
+  const root = page.locator('[data-lemoon-search]');
+  expect(await root.evaluate((element) => element.parentElement === document.body)).toBe(true);
+  await expect(root).toHaveCSS('position', 'absolute');
+  await expect(page.locator('body')).not.toHaveCSS('position', 'fixed');
 });
 
 test('keeps focused text inputs at 16px on mobile to prevent automatic zoom', async ({ page }) => {
@@ -359,7 +368,7 @@ test('allows keyboard navigation through the header and keeps search open on res
   await expect.poll(async () => { const box = await page.locator(s('panel')).boundingBox(); return box.y + box.height; }).toBe(544);
   await page.setViewportSize({ width: 1280, height: 800 });
   await expect(page.locator(s('panel'))).toBeVisible();
-  await expect.poll(() => page.evaluate(() => document.body.style.position)).toBe('fixed');
+  await expect.poll(() => page.evaluate(() => document.body.style.overflow)).toBe('');
 });
 
 test('reduced motion keeps focus and closure functional without a fade', async ({ page }) => {

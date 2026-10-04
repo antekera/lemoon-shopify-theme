@@ -23,16 +23,17 @@
 
 .lemoon-mobile-search {
   --lemoon-search-top: var(--header-height, 108px);
+  --lemoon-search-header-offset: var(--header-height, 108px);
   --lemoon-search-viewport-height: 100dvh;
   bottom: auto;
   color: #0b1f3a;
   font-family: var(--font-body-family, sans-serif);
   font-size: 14px;
-  height: max(0px, calc(var(--lemoon-search-viewport-height) - var(--lemoon-search-top)));
+  height: max(0px, calc(var(--lemoon-search-viewport-height) - var(--lemoon-search-header-offset)));
   left: 0;
   opacity: 0;
   pointer-events: none;
-  position: fixed;
+  position: absolute;
   top: var(--lemoon-search-top);
   transition: opacity 180ms ease;
   width: 100%;
@@ -59,6 +60,7 @@
   display: block;
   inset: 0;
   position: absolute;
+  touch-action: none;
 }
 
 .lemoon-mobile-search__panel {
@@ -71,6 +73,7 @@
   padding: 0 20px 24px;
   position: relative;
   scrollbar-gutter: stable;
+  touch-action: pan-y;
   width: 100%;
 }
 
