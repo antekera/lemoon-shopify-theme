@@ -103,9 +103,9 @@
 .lemoon-mobile-search__sticky-header {
   background: #fff;
   margin: -12px -20px 0;
-  padding: 12px 20px 8px;
+  padding: 12px 20px 0;
   position: sticky;
-  top: 0;
+  top: -24px;
   z-index: 2;
 }
 
