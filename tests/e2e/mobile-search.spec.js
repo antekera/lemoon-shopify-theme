@@ -86,6 +86,7 @@ test('uses the product fallback image when suggestions have no image', async ({ 
   const initialImage = page.locator(`${s('results')} img`).first();
   await expect(initialImage).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');
   await expect(initialImage).toHaveJSProperty('naturalWidth', 1254);
+  await expect(initialImage).toHaveCSS('object-fit', 'cover');
   await page.locator(s('input')).fill('zara');
   const predictedImage = page.locator(`${s('results')} img`).first();
   await expect(predictedImage).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');

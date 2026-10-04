@@ -151,8 +151,9 @@
 .lemoon-mobile-search__product > img,
 .lemoon-mobile-search__product > .lemoon-mobile-search__placeholder { background: #f7f6f4; border-radius: 8px; flex-shrink: 0; height: 72px; overflow: hidden; width: 96px; }
 .lemoon-mobile-search__product-image img,
-.lemoon-mobile-search__product-image svg { display: block; height: 100%; object-fit: contain; width: 100%; }
-.lemoon-mobile-search__product > img { object-fit: contain; }
+.lemoon-mobile-search__product-image svg { display: block; height: 100%; width: 100%; }
+.lemoon-mobile-search__product-image img,
+.lemoon-mobile-search__product > img { object-fit: cover; }
 .lemoon-mobile-search__placeholder { display: block; fill: #647080; }
 .lemoon-mobile-search__information-links a { align-items: center; display: flex; gap: 12px; min-height: 48px; }
 .lemoon-mobile-search__information-links span { flex: 1; }
