@@ -5,7 +5,7 @@
   {% render 'lemoon-mobile-nav', section: section %}
 {% enddoc %}
 {{ 'lemoon-mobile-nav.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'lemoon-mobile-nav.js' | asset_url }}" defer="defer"></script>
+<script type="module" src="{{ 'lemoon-mobile-nav.js' | asset_url }}"></script>
 <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
 <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>
   <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
@@ -65,34 +65,8 @@
             {%- endfor -%}
           </ul>
         </nav>
-        {%- capture shape_links -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'shape' -%}
-              {% render 'lemoon-mobile-nav-link', block: block %}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endcapture -%}
-        {%- assign shape_links = shape_links | strip -%}
-        {%- if shape_links != blank -%}
-          <nav class="lemoon-mobile-nav__subgroup" aria-label="{{ section.settings.shape_heading | escape }}">
-            <h3>{{ section.settings.shape_heading | escape }}</h3>
-            <ul class="lemoon-mobile-nav__sublist" role="list">{{ shape_links }}</ul>
-          </nav>
-        {%- endif -%}
-        {%- capture color_links -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'color' -%}
-              {% render 'lemoon-mobile-nav-link', block: block %}
-            {%- endif -%}
-          {%- endfor -%}
-        {%- endcapture -%}
-        {%- assign color_links = color_links | strip -%}
-        {%- if color_links != blank -%}
-          <nav class="lemoon-mobile-nav__subgroup" aria-label="{{ section.settings.color_heading | escape }}">
-            <h3>{{ section.settings.color_heading | escape }}</h3>
-            <ul class="lemoon-mobile-nav__sublist" role="list">{{ color_links }}</ul>
-          </nav>
-        {%- endif -%}
+        {% render 'lemoon-mobile-nav-filter-group', section: section, primary: primary, group: 'shape', heading: section.settings.shape_heading %}
+        {% render 'lemoon-mobile-nav-filter-group', section: section, primary: primary, group: 'color', heading: section.settings.color_heading %}
       </div>
     {%- endif -%}
   {%- endfor -%}

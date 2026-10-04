@@ -1,0 +1,14 @@
+{%- capture filter_links -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == group -%}
+      {% render 'lemoon-mobile-nav-link', block: block %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign filter_links = filter_links | strip -%}
+{%- if filter_links != blank -%}
+  <nav class="lemoon-mobile-nav__subgroup" aria-label="{{ heading | escape }}">
+    <h3>{{ heading | escape }}</h3>
+    <ul class="lemoon-mobile-nav__sublist" role="list">{{ filter_links }}</ul>
+  </nav>
+{%- endif -%}

@@ -116,7 +116,7 @@
             "slot": "vendidos",
             "title": "Más vendidos",
             "link": "/collections/mejor-vendidos",
-            "icon": "star",
+            "icon": "tag",
             "has_submenu": false
           }
         },
@@ -136,7 +136,7 @@
             "slot": "accesorios",
             "title": "Accesorios",
             "link": "/collections/accesorios",
-            "icon": "heart",
+            "icon": "shopping-bag",
             "has_submenu": false
           }
         },

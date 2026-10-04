@@ -1,3 +1,5 @@
+import { getToggleAction } from './lemoon-mobile-nav-logic.js';
+
 (() => {
   const drawer = document.querySelector('[data-lemoon-nav]');
   const overlay = document.querySelector('[data-lemoon-nav-overlay]');
@@ -83,9 +85,10 @@
 
   triggers.forEach((trigger) => {
     trigger.addEventListener('click', () => {
-      if (level === 'closed') open(trigger);
-      else if (level === 'sub') showRoot();
-      else close();
+      const action = getToggleAction(level);
+      if (action === 'open') open(trigger);
+      else if (action === 'back') showRoot();
+      else if (action === 'close') close();
     });
   });
   drawer.addEventListener('click', (event) => {
