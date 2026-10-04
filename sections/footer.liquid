@@ -75,7 +75,7 @@
         <p class="lemoon-footer__help-copy"><span class="lemoon-footer__help-copy--desktop">{{ section.settings.help_text | escape }}</span><span class="lemoon-footer__help-copy--mobile">{{ section.settings.help_text_mobile | escape }}</span></p>
         <div class="lemoon-footer__contact-list">
           {%- if footer_phone != blank -%}<a class="lemoon-footer__contact" href="https://wa.me/{{ footer_phone }}" target="_blank" rel="noopener" aria-label="{{ section.settings.whatsapp_label | escape }}">{%- else -%}<span class="lemoon-footer__contact" aria-label="{{ section.settings.whatsapp_label | escape }}">{%- endif -%}<span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-whatsapp.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.whatsapp_label | escape }}</span>{%- if footer_phone != blank -%}</a>{%- else -%}</span>{%- endif -%}
-          {%- if section.settings.contact_link != blank -%}<a class="lemoon-footer__contact" href="{{ section.settings.contact_link }}"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-contact.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.contact_link_label | escape }}</span></a>{%- endif -%}
+          {%- if section.settings.contact_link != blank -%}<a class="lemoon-footer__contact" href="{{ section.settings.contact_link }}"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-message.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.contact_link_label | escape }}</span></a>{%- endif -%}
           {%- if section.settings.contact_email != blank -%}<a class="lemoon-footer__contact" href="mailto:{{ section.settings.contact_email | escape }}"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-email.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.email_label | escape }}</span></a>{%- endif -%}
         </div>
       </section>
@@ -175,7 +175,7 @@
     { "type": "text", "id": "contact_email", "label": "Correo de contacto", "default": "hola@lemoon.cl" },
     { "type": "text", "id": "email_label", "label": "Enlace de correo", "default": "hola@lemoon.cl" },
     { "type": "url", "id": "contact_link", "label": "Enlace a contáctanos" },
-    { "type": "text", "id": "contact_link_label", "label": "Texto del enlace a contáctanos", "default": "Contáctanos" },
+    { "type": "text", "id": "contact_link_label", "label": "Texto del enlace de contacto", "default": "Escríbenos un mensaje" },
     { "type": "text", "id": "navigation_label", "label": "Etiqueta accesible para los menús", "default": "Navegación del footer" },
     { "type": "header", "content": "Redes y medios de pago" },
     { "type": "text", "id": "follow_heading", "label": "Título de redes sociales", "default": "Síguenos" },

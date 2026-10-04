@@ -134,11 +134,11 @@ test('shows the contact form link directly above the email link', async ({ page 
   await page.goto('/tests/fixtures/footer-accordion.html');
 
   const contacts = page.locator('.lemoon-footer__contact-list');
-  const contactLink = contacts.getByRole('link', { name: 'Contáctanos', exact: true });
+  const contactLink = contacts.getByRole('link', { name: 'Escríbenos un mensaje', exact: true });
   const emailLink = contacts.getByRole('link', { name: 'hola@lemoon.cl' });
   await expect(contactLink).toHaveAttribute('href', '/pages/contact');
   const contactIcon = contactLink.locator('.lemoon-footer__contact-icon img');
-  await expect(contactIcon).toHaveAttribute('src', '/assets/lemoon-icon-contact.svg');
+  await expect(contactIcon).toHaveAttribute('src', '/assets/lemoon-icon-message.svg');
   await expect(contactIcon).toBeVisible();
   await expect(contactIcon).toHaveAttribute('width', '20');
   await expect(contactIcon).toHaveAttribute('height', '20');
