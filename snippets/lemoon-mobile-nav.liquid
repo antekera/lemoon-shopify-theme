@@ -14,11 +14,18 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'drawer_primary' and block.settings.title != blank -%}
             <li {{ block.shopify_attributes }}>
-              <button type="button" class="lemoon-mobile-nav__primary-button" data-lemoon-nav-target="{{ block.settings.slot | escape }}">
-                {%- if block.settings.icon != 'none' -%}{% render 'lemoon-icon', icon: block.settings.icon, size: 23 %}{%- endif -%}
-                <span>{{ block.settings.title | escape }}</span>
-                {% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}
-              </button>
+              {%- if block.settings.has_submenu == false and block.settings.link != blank -%}
+                <a class="lemoon-mobile-nav__primary-button" href="{{ block.settings.link }}">
+                  {%- if block.settings.icon != 'none' -%}{% render 'lemoon-icon', icon: block.settings.icon, size: 23 %}{%- endif -%}
+                  <span>{{ block.settings.title | escape }}</span>
+                </a>
+              {%- else -%}
+                <button type="button" class="lemoon-mobile-nav__primary-button" data-lemoon-nav-target="{{ block.settings.slot | escape }}">
+                  {%- if block.settings.icon != 'none' -%}{% render 'lemoon-icon', icon: block.settings.icon, size: 23 %}{%- endif -%}
+                  <span>{{ block.settings.title | escape }}</span>
+                  {% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}
+                </button>
+              {%- endif -%}
             </li>
           {%- endif -%}
         {%- endfor -%}
@@ -45,7 +52,7 @@
     </div>
   </div>
   {%- for primary in section.blocks -%}
-    {%- if primary.type == 'drawer_primary' and primary.settings.title != blank -%}
+    {%- if primary.type == 'drawer_primary' and primary.settings.title != blank and primary.settings.has_submenu -%}
       <div class="lemoon-mobile-nav__panel" data-lemoon-nav-panel="{{ primary.settings.slot | escape }}" aria-hidden="true" tabindex="-1" hidden>
         <h2 class="lemoon-mobile-nav__subheading">{{ primary.settings.title | escape }}</h2>
         <nav aria-label="{{ primary.settings.title | escape }}">
@@ -53,51 +60,37 @@
             {%- if primary.settings.link != blank -%}<li><a href="{{ primary.settings.link }}">{{ section.settings.view_all_label | escape }}</a></li>{%- endif -%}
             {%- for block in section.blocks -%}
               {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'featured' and block.settings.title != blank and block.settings.link != blank -%}
-                <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">{{ block.settings.title | escape }}</a></li>
+                {% render 'lemoon-mobile-nav-link', block: block %}
               {%- endif -%}
             {%- endfor -%}
           </ul>
         </nav>
-        {%- assign shape_count = 0 -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'shape' and block.settings.title != blank and block.settings.link != blank -%}{%- assign shape_count = shape_count | plus: 1 -%}{%- endif -%}
-        {%- endfor -%}
-        {%- if shape_count > 0 -%}
+        {%- capture shape_links -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'shape' -%}
+              {% render 'lemoon-mobile-nav-link', block: block %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign shape_links = shape_links | strip -%}
+        {%- if shape_links != blank -%}
           <nav class="lemoon-mobile-nav__subgroup" aria-label="{{ section.settings.shape_heading | escape }}">
             <h3>{{ section.settings.shape_heading | escape }}</h3>
-            <ul class="lemoon-mobile-nav__sublist" role="list">
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'shape' and block.settings.title != blank and block.settings.link != blank -%}
-                  <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">
-                    {%- if block.settings.shape != 'none' -%}{% render 'lemoon-frame-shape', shape: block.settings.shape %}{%- endif -%}
-                    <span>{{ block.settings.title | escape }}</span>
-                  </a></li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
+            <ul class="lemoon-mobile-nav__sublist" role="list">{{ shape_links }}</ul>
           </nav>
         {%- endif -%}
-        {%- assign color_count = 0 -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'color' and block.settings.title != blank and block.settings.link != blank -%}{%- assign color_count = color_count | plus: 1 -%}{%- endif -%}
-        {%- endfor -%}
-        {%- if color_count > 0 -%}
+        {%- capture color_links -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'color' -%}
+              {% render 'lemoon-mobile-nav-link', block: block %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- assign color_links = color_links | strip -%}
+        {%- if color_links != blank -%}
           <nav class="lemoon-mobile-nav__subgroup" aria-label="{{ section.settings.color_heading | escape }}">
             <h3>{{ section.settings.color_heading | escape }}</h3>
-            <ul class="lemoon-mobile-nav__sublist" role="list">
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'drawer_subitem' and block.settings.parent == primary.settings.slot and block.settings.group == 'color' and block.settings.title != blank and block.settings.link != blank -%}
-                  <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">
-                    {%- if block.settings.swatch_image != blank -%}
-                      <span class="lemoon-mobile-nav__swatch" aria-hidden="true">{{ block.settings.swatch_image | image_url: width: 48, height: 48 | image_tag: loading: 'lazy', alt: '' }}</span>
-                    {%- else -%}
-                      <span class="lemoon-mobile-nav__swatch" style="--swatch-color: {{ block.settings.swatch_color }}" aria-hidden="true"></span>
-                    {%- endif -%}
-                    <span>{{ block.settings.title | escape }}</span>
-                  </a></li>
-                {%- endif -%}
-              {%- endfor -%}
-            </ul>
+            <ul class="lemoon-mobile-nav__sublist" role="list">{{ color_links }}</ul>
           </nav>
         {%- endif -%}
       </div>

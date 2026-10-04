@@ -76,7 +76,8 @@
             "slot": "opticos",
             "title": "Lentes ópticos",
             "link": "/collections/opticos",
-            "icon": "glasses"
+            "icon": "glasses",
+            "has_submenu": true
           }
         },
         "sol": {
@@ -84,8 +85,9 @@
           "settings": {
             "slot": "sol",
             "title": "Lentes de sol",
-            "link": "/pages/lentes-de-sol",
-            "icon": "sun"
+            "link": "/collections/lentes-de-sol",
+            "icon": "sun",
+            "has_submenu": true
           }
         },
         "cristales": {
@@ -93,8 +95,9 @@
           "settings": {
             "slot": "cristales",
             "title": "Cristales",
-            "link": "/pages/cristales",
-            "icon": "lens"
+            "link": "/collections/cristales",
+            "icon": "lens",
+            "has_submenu": true
           }
         },
         "guia": {
@@ -103,7 +106,8 @@
             "slot": "guia",
             "title": "Encuentra tu lente ideal",
             "link": "/pages/buscar-mi-estilo",
-            "icon": "sparkles"
+            "icon": "sparkles",
+            "has_submenu": false
           }
         },
         "vendidos": {
@@ -112,7 +116,8 @@
             "slot": "vendidos",
             "title": "Más vendidos",
             "link": "/collections/mejor-vendidos",
-            "icon": "star"
+            "icon": "star",
+            "has_submenu": false
           }
         },
         "nueva": {
@@ -121,7 +126,8 @@
             "slot": "nueva",
             "title": "Nueva colección",
             "link": "/collections/lo-nuevo",
-            "icon": "gift"
+            "icon": "gift",
+            "has_submenu": false
           }
         },
         "accesorios": {
@@ -130,7 +136,8 @@
             "slot": "accesorios",
             "title": "Accesorios",
             "link": "/collections/accesorios",
-            "icon": "heart"
+            "icon": "heart",
+            "has_submenu": false
           }
         },
         "envios": {
@@ -310,6 +317,215 @@
             "link": "/collections/opticos/plateado",
             "swatch_color": "#b7bdc5"
           }
+        },
+        "sol_mujer": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "featured",
+            "title": "Mujer",
+            "link": "/collections/lentes-de-sol/mujer",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "mujer"
+          }
+        },
+        "sol_hombre": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "featured",
+            "title": "Hombre",
+            "link": "/collections/lentes-de-sol/hombre",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "hombre"
+          }
+        },
+        "sol_mas_vendidos": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "featured",
+            "title": "Más vendidos",
+            "link": "/collections/lentes-de-sol/mas-vendidos",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "mas-vendidos"
+          }
+        },
+        "sol_nueva_coleccion": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "featured",
+            "title": "Nueva colección",
+            "link": "/collections/lentes-de-sol/nueva-coleccion",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "nueva-coleccion"
+          }
+        },
+        "sol_ojo_gato": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Ojo de gato",
+            "link": "/collections/lentes-de-sol/ojo-de-gato",
+            "shape": "cat_eye",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "ojo de gato"
+          }
+        },
+        "sol_cuadrado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Cuadrado",
+            "link": "/collections/lentes-de-sol/cuadrado",
+            "shape": "square",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "cuadrado"
+          }
+        },
+        "sol_ovalado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Ovalado",
+            "link": "/collections/lentes-de-sol/ovalado",
+            "shape": "oval",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "ovalado"
+          }
+        },
+        "sol_geometrico": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Geométrico",
+            "link": "/collections/lentes-de-sol/geometrico",
+            "shape": "geometric",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "geometrico"
+          }
+        },
+        "sol_aviador": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Aviador",
+            "link": "/collections/lentes-de-sol/aviador",
+            "shape": "aviator",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "aviador"
+          }
+        },
+        "sol_browline": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Browline",
+            "link": "/collections/lentes-de-sol/browline",
+            "shape": "browline",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "browline"
+          }
+        },
+        "sol_negro": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "color",
+            "title": "Negro",
+            "link": "/collections/lentes-de-sol/negro",
+            "swatch_color": "#111111",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "negro"
+          }
+        },
+        "sol_carey": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "color",
+            "title": "Carey",
+            "link": "/collections/lentes-de-sol/carey",
+            "swatch_color": "#8b4c24",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "carey"
+          }
+        },
+        "sol_transparente": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "color",
+            "title": "Transparente",
+            "link": "/collections/lentes-de-sol/transparente",
+            "swatch_color": "#ece8df",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "transparente"
+          }
+        },
+        "sol_dorado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "color",
+            "title": "Dorado",
+            "link": "/collections/lentes-de-sol/dorado",
+            "swatch_color": "#c49b4a",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "dorado"
+          }
+        },
+        "sol_plateado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "color",
+            "title": "Plateado",
+            "link": "/collections/lentes-de-sol/plateado",
+            "swatch_color": "#b7bdc5",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "plateado"
+          }
+        },
+        "cristales_lectura": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "cristales",
+            "group": "featured",
+            "title": "De lectura",
+            "link": "/collections/cristales/lectura",
+            "catalog_collection": "cristales",
+            "availability_tag": "lectura"
+          }
+        },
+        "cristales_pantallas": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "cristales",
+            "group": "featured",
+            "title": "Para pantallas",
+            "link": "/collections/cristales/pantallas",
+            "catalog_collection": "cristales",
+            "availability_tag": "pantallas"
+          }
+        },
+        "cristales_monofocal": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "cristales",
+            "group": "featured",
+            "title": "Monofocal",
+            "link": "/collections/cristales/monofocal",
+            "catalog_collection": "cristales",
+            "availability_tag": "monofocal"
+          }
         }
       },
       "block_order": [
@@ -338,7 +554,25 @@
         "carey",
         "transparente",
         "dorado",
-        "plateado"
+        "plateado",
+        "sol_mujer",
+        "sol_hombre",
+        "sol_mas_vendidos",
+        "sol_nueva_coleccion",
+        "sol_ojo_gato",
+        "sol_cuadrado",
+        "sol_ovalado",
+        "sol_geometrico",
+        "sol_aviador",
+        "sol_browline",
+        "sol_negro",
+        "sol_carey",
+        "sol_transparente",
+        "sol_dorado",
+        "sol_plateado",
+        "cristales_lectura",
+        "cristales_pantallas",
+        "cristales_monofocal"
       ]
     }
   },

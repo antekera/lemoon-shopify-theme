@@ -79,8 +79,8 @@ div.lemoon-mobile-nav__overlay {
 .lemoon-mobile-nav__account-login { background: var(--lemoon-action-primary, #0b1f3a); color: #fff !important; }
 .lemoon-mobile-nav__account-register { background: #fff; }
 .lemoon-mobile-nav__subheading { margin: 0; padding: 24px 20px 12px; font-family: var(--font-heading-family), sans-serif; font-size: 2.1rem; font-weight: 700; }
-.lemoon-mobile-nav__sublist a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 20px; font-size: 1.55rem; line-height: 1.25; }
-.lemoon-mobile-nav__sublist a:hover, .lemoon-mobile-nav__utility a:hover { background: var(--lemoon-surface-warm, #f7f4ee); }
+.lemoon-mobile-nav__sublist a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 20px; font-size: 1.55rem; line-height: 1.25; text-decoration: underline; text-underline-offset: 4px; }
+.lemoon-mobile-nav__utility a:hover { background: var(--lemoon-surface-warm, #f7f4ee); }
 .lemoon-mobile-nav__subgroup { border-top: 1px solid var(--lemoon-border-default, #e0ddd8); margin-top: 16px; padding-top: 14px; }
 .lemoon-mobile-nav__subgroup h3 { margin: 0; padding: 0 20px 8px; font-family: var(--font-heading-family), sans-serif; font-size: 1.25rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
 .lemoon-frame-shape { flex: none; width: 30px; height: 20px; }
