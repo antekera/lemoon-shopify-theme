@@ -115,6 +115,14 @@ test('underlines show-all results text without a decorative arrow', async ({ pag
   await expect(showAll.locator('.lemoon-icon')).toHaveCount(0);
 });
 
+test('places the close chevron left of the search input', async ({ page }) => {
+  await open(page);
+  const close = await page.locator(s('close')).boundingBox();
+  const input = await page.locator(s('input')).boundingBox();
+  expect(close.x + close.width).toBeLessThan(input.x);
+  expect(Math.abs(close.y + close.height / 2 - input.y - input.height / 2)).toBeLessThanOrEqual(1);
+});
+
 test('preserves suggestions for one or two characters and debounces predictions from three', async ({ page }) => {
   const requests = [];
   await page.route('**/search/suggest.json?**', async (route) => { requests.push(new URL(route.request().url())); await route.fulfill({ json: payload(products()) }); });

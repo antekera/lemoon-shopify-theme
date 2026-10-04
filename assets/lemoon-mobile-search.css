@@ -97,7 +97,7 @@
   padding: 0;
 }
 
-.lemoon-mobile-search__close { background: transparent; margin-left: -12px; }
+.lemoon-mobile-search__close { background: transparent; }
 .lemoon-mobile-search__close .lemoon-icon { transform: rotate(180deg); }
 
 .lemoon-mobile-search__sticky-header {
@@ -110,6 +110,7 @@
 }
 
 .lemoon-mobile-search__form {
+  align-items: center;
   display: flex;
   gap: 8px;
 }
