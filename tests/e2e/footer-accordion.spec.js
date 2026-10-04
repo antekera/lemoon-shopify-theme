@@ -5,7 +5,11 @@ test.use({ viewport: { width: 390, height: 844 } });
 test('slides the footer accordion open and closed on mobile', async ({ page }) => {
   await page.goto('/tests/fixtures/footer-accordion.html');
 
-  const menu = page.locator('.lemoon-footer__menu').first();
+  const menus = page.locator('.lemoon-footer__menu:visible');
+  await expect(menus).toHaveCount(4);
+  for (const item of await menus.all()) await expect(item).not.toHaveAttribute('open', '');
+
+  const menu = menus.first();
   const summary = menu.locator('summary');
   const content = menu.locator('.lemoon-footer__menu-content');
 
@@ -37,7 +41,7 @@ test('shows four open footer link columns on desktop', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/tests/fixtures/footer-accordion.html');
 
-  const menus = page.locator('.lemoon-footer__menu');
+  const menus = page.locator('.lemoon-footer__menu:visible');
   const columnCount = await page.locator('.lemoon-footer__menus').evaluate((element) =>
     getComputedStyle(element).gridTemplateColumns.split(' ').length
   );
@@ -50,4 +54,48 @@ test('shows four open footer link columns on desktop', async ({ page }) => {
     await menu.locator('summary').click();
     await expect(menu).toHaveAttribute('open', '');
   }
+});
+
+test('shows the current newsletter copy and an arrow-free subscribe button', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  await expect(page.locator('.lemoon-newsletter__copy h2')).toHaveText('El camino para ver bien y verte bien comienza aquí.');
+  const button = page.locator('.lemoon-newsletter__button');
+  await expect(button).toHaveText('SUSCRIBIRME');
+  await expect(button.locator('svg, [aria-hidden="true"]')).toHaveCount(0);
+});
+
+test('keeps Síguenos and its social icons aligned and white on mobile', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  const heading = page.locator('.lemoon-footer__follow h2');
+  const socials = page.locator('.lemoon-footer__social');
+  const headingBox = await heading.boundingBox();
+  const socialsBox = await socials.boundingBox();
+  const headingColor = await heading.evaluate((element) => getComputedStyle(element).color);
+  const socialColor = await socials.locator('a').first().evaluate((element) => getComputedStyle(element).color);
+
+  expect(headingBox).not.toBeNull();
+  expect(socialsBox).not.toBeNull();
+  expect(Math.abs((headingBox.y + headingBox.height / 2) - (socialsBox.y + socialsBox.height / 2))).toBeLessThanOrEqual(1);
+  expect(headingColor).toBe('rgb(255, 255, 255)');
+  expect(socialColor).toBe('rgb(255, 255, 255)');
+  await expect(socials.getByRole('link', { name: 'TikTok' })).toBeVisible();
+});
+
+test('places common help links, including FAQ, in the mobile information accordion', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  const info = page.locator('.lemoon-footer__menu:visible').filter({ hasText: 'Información' });
+  await info.locator('summary').click();
+  await expect(info.locator('a', { hasText: 'Preguntas frecuentes' })).toBeVisible();
+  await expect(info.locator('a', { hasText: 'Contáctanos' })).toBeVisible();
+});
+
+test('keeps the secure payment heading white on mobile', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  const paymentHeading = page.locator('.lemoon-footer__payments h2');
+  await expect(paymentHeading).toHaveText('PAGA SEGURO CON');
+  await expect(paymentHeading).toHaveCSS('color', 'rgb(255, 255, 255)');
 });

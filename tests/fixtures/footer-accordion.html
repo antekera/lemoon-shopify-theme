@@ -3,33 +3,72 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Footer Lemoon test fixture</title>
     <link rel="stylesheet" href="/assets/section-lemoon-footer.css">
   </head>
   <body>
-    <footer class="lemoon-footer" data-lemoon-footer>
-      <nav class="lemoon-footer__menus" aria-label="Footer">
-        <details class="lemoon-footer__menu" data-mobile-open="false">
-          <summary class="lemoon-footer__menu-heading">Información<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
-          <div class="lemoon-footer__menu-content">
-            <ul class="lemoon-footer__menu-links" role="list">
-              <li><a href="/pages/faq">Preguntas frecuentes</a></li>
-              <li><a href="/pages/contacto">Contáctanos</a></li>
-            </ul>
-          </div>
-        </details>
-        <details class="lemoon-footer__menu" data-mobile-open="false">
-          <summary class="lemoon-footer__menu-heading">Productos<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
-          <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/collections/opticos">Lentes ópticos</a></li></ul></div>
-        </details>
-        <details class="lemoon-footer__menu" data-mobile-open="false">
-          <summary class="lemoon-footer__menu-heading">Cómo comprar<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
-          <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/buscar-mi-estilo">Encuentra tus lentes perfectos</a></li></ul></div>
-        </details>
-        <details class="lemoon-footer__menu" data-mobile-open="false">
-          <summary class="lemoon-footer__menu-heading">Servicios<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
-          <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/operativos-oftalmologicos">Operativos oftalmológicos</a></li></ul></div>
-        </details>
-      </nav>
+    <section class="lemoon-newsletter">
+      <div class="lemoon-footer__container lemoon-newsletter__inner">
+        <div class="lemoon-newsletter__copy">
+          <h2>El camino para ver bien y verte bien comienza aquí.</h2>
+          <p><span class="lemoon-newsletter__text--desktop">Recibe novedades, guías y promociones exclusivas en tu correo.</span><span class="lemoon-newsletter__text--mobile">Novedades, guías y promociones exclusivas en tu correo.</span></p>
+        </div>
+        <div class="lemoon-newsletter__form-wrap">
+          <form class="lemoon-newsletter__form">
+            <label class="visually-hidden" for="newsletter-email">Tu correo electrónico</label>
+            <input class="lemoon-newsletter__input" id="newsletter-email" type="email" placeholder="Tu correo electrónico">
+            <button class="lemoon-newsletter__button" type="submit">SUSCRIBIRME</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <footer class="lemoon-footer" data-lemoon-footer style="--footer-padding-top: 3.2rem; --footer-padding-bottom: 0">
+      <div class="lemoon-footer__container">
+        <div class="lemoon-footer__main">
+          <nav class="lemoon-footer__menus" aria-label="Navegación del footer">
+            <details class="lemoon-footer__menu" data-mobile-open="false">
+              <summary class="lemoon-footer__menu-heading">Productos<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
+              <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/collections/opticos">Ópticos</a></li><li><a href="/collections/sol">Sol</a></li></ul></div>
+            </details>
+            <details class="lemoon-footer__menu" data-mobile-open="false">
+              <summary class="lemoon-footer__menu-heading">Cómo comprar<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
+              <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/buscar-mi-estilo">Encuentra tu lente ideal</a></li><li><a href="/pages/como-ordenar">Cómo ordenar</a></li></ul></div>
+            </details>
+            <details class="lemoon-footer__menu lemoon-footer__menu--desktop-only" data-mobile-open="false">
+              <summary class="lemoon-footer__menu-heading">Servicios<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
+              <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/operativo">Operativo</a></li><li><a href="/pages/reembolsos">Reembolsos</a></li></ul></div>
+            </details>
+            <details class="lemoon-footer__menu lemoon-footer__menu--mobile-only" data-mobile-open="false">
+              <summary class="lemoon-footer__menu-heading">Servicios<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
+              <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/operativo">Operativo</a></li><li><a href="/pages/reembolsos">Reembolsos</a></li></ul></div>
+            </details>
+            <details class="lemoon-footer__menu" data-mobile-open="false">
+              <summary class="lemoon-footer__menu-heading">Información<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
+              <div class="lemoon-footer__menu-content"><ul class="lemoon-footer__menu-links" role="list"><li><a href="/pages/preguntas-frecuentes">Preguntas frecuentes</a></li><li><a href="/pages/envios-y-devoluciones">Envíos y devoluciones</a></li><li><a href="/pages/contact">Contáctanos</a></li></ul></div>
+            </details>
+          </nav>
+          <section class="lemoon-footer__help" aria-labelledby="help-heading">
+            <h2 id="help-heading">¿Necesitas ayuda?</h2>
+            <p class="lemoon-footer__help-copy"><span class="lemoon-footer__help-copy--desktop">Estamos aquí para acompañarte en tu compra.</span><span class="lemoon-footer__help-copy--mobile">Estamos aquí para ayudarte a elegir.</span></p>
+            <div class="lemoon-footer__contact-list">
+              <a class="lemoon-footer__contact" href="https://wa.me/56912345678" aria-label="Contáctanos por WhatsApp"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="/assets/lemoon-icon-whatsapp.svg" alt="" width="20" height="20"></span><span>Contáctanos por WhatsApp</span></a>
+              <a class="lemoon-footer__contact" href="mailto:hola@lemon.cl"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="/assets/lemoon-icon-email.svg" alt="" width="20" height="20"></span><span>Escríbenos por correo</span></a>
+            </div>
+            <a class="lemoon-footer__faq lemoon-footer__faq--contact" href="/pages/contact">Contáctanos <span aria-hidden="true">↗</span></a>
+          </section>
+        </div>
+        <div class="lemoon-footer__follow">
+          <h2>Síguenos</h2>
+          <ul class="lemoon-footer__social" role="list" aria-label="Síguenos">
+            <li><a href="https://facebook.com/lemoon" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.4 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.2v3.2H10V21h3.4Z"/></svg></a></li>
+            <li><a href="https://instagram.com/lemoon" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
+            <li><a href="https://tiktok.com/@lemoon" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.4 3h-3.2v12.2a2.7 2.7 0 1 1-2.7-2.7c.4 0 .7.1 1 .2V9.4a6 6 0 1 0 4.9 5.9V9.1a8.2 8.2 0 0 0 4.8 1.6V7.5A5 5 0 0 1 15.4 3Z"/></svg></a></li>
+          </ul>
+        </div>
+        <div class="lemoon-footer__payments"><h2>PAGA SEGURO CON</h2><ul class="lemoon-footer__payment-list" role="list"><li class="lemoon-footer__payment-badge">Webpay</li><li class="lemoon-footer__payment-badge">VISA</li></ul></div>
+        <div class="lemoon-footer__legal"><ul class="lemoon-footer__legal-links" role="list"><li><a href="/policies/privacy-policy">Privacidad</a></li><li><a href="/policies/terms-of-service">Términos y condiciones</a></li><li><a href="/sitemap.xml">Sitemap</a></li></ul><p class="lemoon-footer__copyright">© 2026 Lemoon · Servigoptic SpA</p></div>
+        <div class="lemoon-footer__art"><img class="lemoon-footer__art-image" src="/assets/footer-abstract-transparent.png" alt="Ilustración abstracta de un horizonte de limones." width="2172" height="724"></div>
+      </div>
     </footer>
     <script src="/assets/section-lemoon-footer.js"></script>
   </body>
