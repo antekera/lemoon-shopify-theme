@@ -267,6 +267,9 @@ test('peeks the next carousel item and advances the PLP card with add to cart', 
   const firstProductBox = await firstProduct.boundingBox();
   expect(firstProductBox.x).toBeGreaterThan(carousel.x);
   expect(firstProductBox.x).toBeLessThan(carousel.x + carousel.width);
+  const visiblePeek = (carousel.x + carousel.width - firstProductBox.x) / firstProductBox.width;
+  expect(visiblePeek).toBeGreaterThan(0.35);
+  expect(visiblePeek).toBeLessThan(0.45);
   await page.locator(s('next')).click();
   await expect(firstProduct).toHaveAttribute('aria-hidden', 'false');
   await expect.poll(async () => {
