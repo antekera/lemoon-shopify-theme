@@ -137,6 +137,11 @@ test('shows the contact form link directly above the email link', async ({ page 
   const contactLink = contacts.getByRole('link', { name: 'Contáctanos', exact: true });
   const emailLink = contacts.getByRole('link', { name: 'hola@lemoon.cl' });
   await expect(contactLink).toHaveAttribute('href', '/pages/contact');
+  const contactIcon = contactLink.locator('.lemoon-footer__contact-icon img');
+  await expect(contactIcon).toHaveAttribute('src', '/assets/lemoon-icon-contact.svg');
+  await expect(contactIcon).toBeVisible();
+  await expect(contactIcon).toHaveAttribute('width', '20');
+  await expect(contactIcon).toHaveAttribute('height', '20');
   expect(await contactLink.evaluate((element) => element.compareDocumentPosition(document.querySelector('.lemoon-footer__contact[href^="mailto:"]')) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
   await expect(emailLink).toBeVisible();
 });
