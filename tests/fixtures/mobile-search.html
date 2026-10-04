@@ -10,12 +10,13 @@
   <script type="module" src="/assets/lemoon-mobile-search.js"></script>
   <style>
     :root { --font-body-family: Arial; --font-heading-family: Arial; --color-foreground: 11,31,58; --color-background: 255,255,255; }
-    body { margin: 0; } .section-header { position: sticky; top: 0; z-index: 4; }
+    body { margin: 0; } .announcement-bar-section { background: #0b1f3a; height: 36px; position: relative; z-index: 5; } .section-header { position: sticky; top: 0; z-index: 4; }
     main { min-height: 180vh; padding: 24px; }
     .lemoon-header-wrapper { display: block; --lemoon-header-height: 88px; --lemoon-header-mobile-height: 56px; --lemoon-header-padding: 24px; }
   </style>
 </head>
 <body>
+<div class="announcement-bar-section" aria-label="Barra informativa">Envío gratis a todo Chile</div>
 <div class="section-header shopify-section-group-header-group">
   <sticky-header class="lemoon-header-wrapper">
     <header class="lemoon-header" role="banner" data-lemoon-search-header>

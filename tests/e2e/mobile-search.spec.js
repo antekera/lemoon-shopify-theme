@@ -48,6 +48,15 @@ test('opens from mobile search below the header with focus and internal scroll',
   expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
 });
 
+test('keeps the visible announcement bar above the header and search panel', async ({ page }) => {
+  const announcement = await page.locator('.announcement-bar-section').boundingBox();
+  await open(page);
+  const header = await page.locator('.section-header').boundingBox();
+  const panel = await page.locator(s('panel')).boundingBox();
+  expect(header.y).toBeCloseTo(announcement.y + announcement.height, 0);
+  expect(Math.abs(panel.y - header.y - header.height)).toBeLessThanOrEqual(1);
+});
+
 for (const method of ['close', 'Escape', 'overlay']) {
   test(`closes by ${method} and restores scroll and focus`, async ({ page }) => {
     await page.evaluate(() => window.scrollTo(0, 140));

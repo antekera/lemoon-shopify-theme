@@ -34,6 +34,7 @@ class MobileSearch {
     this.template = root.querySelector(selector('product-template'));
     this.header = root.closest('sticky-header')?.querySelector('[data-lemoon-search-header]');
     this.section = root.closest('.section-header');
+    this.announcement = this.section?.parentElement.querySelector('.announcement-bar-section');
     this.triggers = [...document.querySelectorAll(selector('open'))].filter((button) => button.getAttribute('aria-controls') === this.panel.id);
     this.slides = [...root.querySelectorAll(selector('slide'))];
     this.dots = [...root.querySelectorAll(selector('dot'))];
@@ -112,10 +113,12 @@ class MobileSearch {
     this.restoreBody = saveStyles(document.body, ['position', 'top', 'left', 'width', 'overflow']);
     this.restoreHtml = saveStyles(document.documentElement, ['overflow', 'scroll-behavior']);
     if (this.section) {
+      const announcementRect = this.announcement?.getBoundingClientRect();
+      const headerTop = announcementRect?.height && announcementRect.bottom > 0 ? announcementRect.bottom : 0;
       this.restoreHeader = saveStyles(this.section, ['position', 'top', 'left', 'width', 'transform', 'transition']);
       this.headerClasses = ['shopify-section-header-hidden', 'shopify-section-header-sticky', 'animate'].map((name) => [name, this.section.classList.contains(name)]);
       this.section.style.setProperty('position', 'fixed', 'important');
-      this.section.style.setProperty('top', '0px', 'important');
+      this.section.style.setProperty('top', `${headerTop}px`, 'important');
       this.section.style.setProperty('left', '0px', 'important');
       this.section.style.setProperty('width', '100%', 'important');
       this.section.style.setProperty('transform', 'none', 'important');
