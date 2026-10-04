@@ -19,6 +19,7 @@ test('opens from mobile search below the header with focus and internal scroll',
   await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
   await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
+  await expect(page.locator(s('input'))).toHaveCSS('box-shadow', 'none');
   const header = await page.locator('[data-lemoon-search-header]').boundingBox();
   const panel = await page.locator(s('panel')).boundingBox();
   const initialStickyHeader = await page.locator('.lemoon-mobile-search__sticky-header').boundingBox();
