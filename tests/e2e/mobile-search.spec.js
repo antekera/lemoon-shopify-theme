@@ -14,8 +14,9 @@ test('opens from mobile search below the header with focus and internal scroll',
   await page.evaluate(() => window.scrollTo(0, 180));
   await open(page);
   await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'solid');
-  await expect(page.locator(s('input'))).toHaveCSS('outline-width', '1px');
+  await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+  await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
+  await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
   const header = await page.locator('[data-lemoon-search-header]').boundingBox();
   const panel = await page.locator(s('panel')).boundingBox();
   expect(panel.y).toBeCloseTo(header.y + header.height, 0);

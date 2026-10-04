@@ -125,7 +125,7 @@
 }
 
 .lemoon-mobile-search__input::placeholder { color: #596575; opacity: 1; }
-.lemoon-mobile-search__input:focus { border-color: #0b1f3a; outline: 1px solid #0b1f3a; }
+.lemoon-mobile-search__input:focus { border-color: #0b1f3a; outline: none; }
 .lemoon-mobile-search__submit { background: #f7e600; border-radius: 12px; width: 48px; }
 .lemoon-mobile-search a { color: inherit; text-decoration: none; }
 .lemoon-search-open:focus-visible,
