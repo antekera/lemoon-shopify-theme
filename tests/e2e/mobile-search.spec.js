@@ -19,7 +19,9 @@ test('opens from mobile search below the header with focus and internal scroll',
   await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
   const header = await page.locator('[data-lemoon-search-header]').boundingBox();
   const panel = await page.locator(s('panel')).boundingBox();
+  const initialHeading = await page.locator('.lemoon-mobile-search__heading').boundingBox();
   expect(panel.y).toBeCloseTo(header.y + header.height, 0);
+  expect(initialHeading.y).toBeCloseTo(panel.y, 0);
   expect(panel.width).toBe(390);
   await page.locator(s('panel')).evaluate((el) => { el.scrollTop = 400; });
   await expect.poll(() => page.locator(s('panel')).evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
