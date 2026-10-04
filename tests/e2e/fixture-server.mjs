@@ -8,6 +8,7 @@ const fixtureFiles = new Map([
   ['/tests/fixtures/mobile-search.html', 'tests/fixtures/mobile-search.html'],
   ['/tests/fixtures/mobile-menu.html', 'tests/fixtures/mobile-menu.html'],
   ['/tests/fixtures/announcement-bar.html', 'tests/fixtures/announcement-bar.html'],
+  ['/tests/fixtures/footer-accordion.html', 'tests/fixtures/footer-accordion.html'],
 ]);
 const contentTypes = {
   css: 'text/css; charset=utf-8',

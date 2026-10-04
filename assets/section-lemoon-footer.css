@@ -1,0 +1,643 @@
+.lemoon-footer__container {
+  width: min(100% - 4.8rem, 128rem);
+  margin-inline: auto;
+}
+
+.lemoon-newsletter {
+  background: #f7f4ee;
+  color: #0b1f3a;
+  padding: 6.4rem 0;
+}
+
+.lemoon-newsletter__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.4rem;
+  max-width: 62rem;
+  margin-left: max(calc((100% - 128rem) / 2), 2.4rem);
+  margin-right: auto;
+}
+
+.lemoon-newsletter__copy h2 {
+  max-width: 62rem;
+  margin: 0 0 1.2rem;
+  color: #0b1f3a;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 3vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.lemoon-newsletter__copy p {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.lemoon-newsletter__text--mobile {
+  display: none;
+}
+
+.lemoon-newsletter__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+.lemoon-newsletter__form-wrap {
+  width: 100%;
+}
+
+.lemoon-newsletter__input {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 5.2rem;
+  padding: 1.4rem 1.6rem;
+  border: 1px solid #e0ddd8;
+  border-radius: 0.8rem;
+  background: #fff;
+  color: #1a1a1a;
+  font: inherit;
+}
+
+.lemoon-newsletter__input::placeholder {
+  color: #6b6b6b;
+  opacity: 1;
+}
+
+.lemoon-newsletter__input:focus-visible,
+.lemoon-newsletter__button:focus-visible,
+.lemoon-footer a:focus-visible,
+.lemoon-footer summary:focus-visible {
+  outline: 2px solid #f7e600;
+  outline-offset: 3px;
+}
+
+.lemoon-newsletter__button {
+  display: inline-flex;
+  min-height: 5.2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.2rem 1.6rem;
+  border: 0;
+  border-radius: 0.8rem;
+  background: #0b1f3a;
+  color: #fff;
+  cursor: pointer;
+  font-family: var(--font-heading-family);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.lemoon-newsletter__button:hover {
+  background: #1a3560;
+}
+
+.lemoon-newsletter__message {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #0b1f3a;
+  font-size: 1.4rem;
+}
+
+.lemoon-footer {
+  overflow: hidden;
+  background: #0b1f3a;
+  color: #fff;
+  padding: var(--footer-padding-top, 6.4rem) 0 var(--footer-padding-bottom, 0);
+}
+
+.lemoon-footer__main {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(22rem, 1fr);
+  gap: 4.8rem;
+  padding-bottom: 4.8rem;
+}
+
+.lemoon-footer__help h2,
+.lemoon-footer__follow h2,
+.lemoon-footer__payments h2 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.lemoon-footer__help-copy {
+  margin: 1rem 0 1.6rem;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+.lemoon-footer__help-copy--mobile {
+  display: none;
+}
+
+.lemoon-footer__contact-list {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.lemoon-footer__contact {
+  display: flex;
+  min-height: 3.6rem;
+  align-items: center;
+  gap: 1.2rem;
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.lemoon-footer__contact:hover,
+.lemoon-footer__faq:hover,
+.lemoon-footer__menu-links a:hover,
+.lemoon-footer__legal a:hover {
+  color: #f7e600;
+}
+
+.lemoon-footer__contact-icon {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 2rem;
+  place-items: center;
+}
+
+.lemoon-footer__contact-icon img {
+  display: block;
+}
+
+.lemoon-footer__faq {
+  display: flex;
+  width: fit-content;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.lemoon-footer__faq--contact {
+  margin-top: 1.2rem;
+}
+
+.lemoon-footer__menus {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 3.2rem;
+}
+
+.lemoon-footer__menu--mobile-only {
+  display: none;
+}
+
+.lemoon-footer__menu--desktop-only {
+  display: block;
+}
+
+.lemoon-footer__menu {
+  min-width: 0;
+}
+
+.lemoon-footer__menu-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f7e600;
+  cursor: default;
+  font-family: var(--font-heading-family);
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.lemoon-footer__menu-heading::-webkit-details-marker {
+  display: none;
+}
+
+.lemoon-footer__menu-toggle {
+  display: none;
+}
+
+.lemoon-footer__menu-links {
+  display: grid;
+  gap: 1.2rem;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lemoon-footer__menu-links a {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.5rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.lemoon-footer__follow,
+.lemoon-footer__payments,
+.lemoon-footer__legal {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lemoon-footer__secondary-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem 2.4rem;
+  margin: -2.4rem 0 2.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.lemoon-footer__secondary-links a {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.lemoon-footer__follow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 2.4rem 0 0;
+}
+
+.lemoon-footer__follow h2,
+.lemoon-footer__payments h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.4rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.lemoon-footer__social {
+  display: flex;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lemoon-footer__social a,
+.lemoon-footer__social span {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  color: #fff;
+}
+
+.lemoon-footer__social .list-social__link:hover {
+  color: #f7e600;
+}
+
+.lemoon-footer__social svg {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.lemoon-footer__payments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.4rem 0;
+}
+
+.lemoon-footer__payment-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lemoon-footer__payment-list li {
+  display: flex;
+  align-items: center;
+}
+
+.lemoon-footer__payment-badge {
+  min-width: 6.2rem;
+  min-height: 3.2rem;
+  justify-content: center;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.4rem;
+  background: #fff;
+  color: #0b1f3a;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.lemoon-footer__payment-icon {
+  display: block;
+  width: 4.2rem;
+  height: auto;
+}
+
+.lemoon-footer__custom-payment img {
+  display: block;
+  width: auto;
+  max-width: 7rem;
+  max-height: 2.8rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.4rem;
+  background: #fff;
+  object-fit: contain;
+}
+
+.lemoon-footer__legal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+  padding: 2.4rem 0;
+}
+
+.lemoon-footer__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1 1 50%;
+  justify-content: center;
+  gap: 1.2rem 2.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lemoon-footer__legal a,
+.lemoon-footer__copyright {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.lemoon-footer__copyright {
+  flex: 0 0 auto;
+  order: -1;
+  margin: 0;
+  text-align: left;
+}
+
+.lemoon-footer__art {
+  margin: 1.2rem calc((min(100vw, 100%) - 100vw) / 2) 0;
+}
+
+.lemoon-footer__art-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 750px) {
+  .lemoon-footer__menu > .lemoon-footer__menu-heading {
+    cursor: default;
+  }
+}
+
+@media screen and (max-width: 989px) {
+  .lemoon-footer__main {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3.2rem;
+  }
+
+  .lemoon-footer__menus {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .lemoon-footer__container {
+    width: min(100% - 4.8rem, 60rem);
+  }
+
+  .lemoon-newsletter {
+    padding: 3.2rem 0;
+  }
+
+  .lemoon-newsletter__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+
+  .lemoon-newsletter__copy h2 {
+    margin-bottom: 1.2rem;
+    font-size: 2.8rem;
+    line-height: 1.12;
+  }
+
+  .lemoon-newsletter__copy p {
+    font-size: 1.5rem;
+  }
+
+  .lemoon-newsletter__text--desktop {
+    display: none;
+  }
+
+  .lemoon-newsletter__text--mobile {
+    display: inline;
+  }
+
+  .lemoon-newsletter__form {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.2rem;
+  }
+
+  .lemoon-newsletter__input,
+  .lemoon-newsletter__button {
+    width: 100%;
+    min-height: 5.2rem;
+  }
+
+  .lemoon-footer {
+    padding-top: 3.2rem;
+  }
+
+  .lemoon-footer__main {
+    gap: 2.8rem;
+    padding-bottom: 0;
+  }
+
+  .lemoon-footer__help {
+    order: -1;
+  }
+
+  .lemoon-footer__help h2 {
+    font-size: 2.2rem;
+  }
+
+  .lemoon-footer__menus {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .lemoon-footer__help-copy--desktop {
+    display: none;
+  }
+
+  .lemoon-footer__help-copy--mobile {
+    display: inline;
+  }
+
+  .lemoon-footer__menu {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .lemoon-footer__menu:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .lemoon-footer__menus > .lemoon-footer__menu:last-child {
+    border-bottom: 0;
+  }
+
+  .lemoon-footer__menu--mobile-only {
+    display: block;
+  }
+
+  .lemoon-footer__menu--desktop-only,
+  .lemoon-footer__faq--contact {
+    display: none;
+  }
+
+  .lemoon-footer__menu-heading {
+    min-height: 5.2rem;
+    font-size: 1.6rem;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: pointer;
+  }
+
+  .lemoon-footer__menu-toggle {
+    position: relative;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 2rem;
+    color: #f7e600;
+  }
+
+  .lemoon-footer__menu-toggle::before,
+  .lemoon-footer__menu-toggle::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.4rem;
+    height: 1px;
+    background: currentColor;
+    content: '';
+    transform: translate(-50%, -50%);
+  }
+
+  .lemoon-footer__menu-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+    transition: transform 180ms ease;
+  }
+
+  .lemoon-footer__menu[open] .lemoon-footer__menu-toggle::after {
+    transform: translate(-50%, -50%);
+  }
+
+  .lemoon-footer__menu-links {
+    gap: 1rem;
+    margin: 0;
+    padding: 0 0 1.6rem;
+  }
+
+  .lemoon-footer__menu-links a {
+    display: inline-block;
+    padding: 0.3rem 0;
+    font-size: 1.5rem;
+  }
+
+  .lemoon-footer__follow,
+  .lemoon-footer__payments {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.2rem;
+    padding: 2rem 0;
+  }
+
+  .lemoon-footer__follow {
+    align-items: center;
+    flex-direction: row;
+    gap: 1.2rem;
+    padding-top: 1.6rem;
+  }
+
+  .lemoon-footer__social {
+    gap: 0.8rem;
+  }
+
+  .lemoon-footer__secondary-links {
+    display: none;
+  }
+
+  .lemoon-footer__payments {
+    gap: 1.6rem;
+  }
+
+  .lemoon-footer__payment-list {
+    justify-content: flex-start;
+  }
+
+  .lemoon-footer__art {
+    margin-top: 0.4rem;
+  }
+
+  .lemoon-footer__art-image {
+    width: 100%;
+    height: 26rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .lemoon-footer__legal {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.6rem;
+    padding: 2rem 0 0;
+  }
+
+  .lemoon-footer__legal-links {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    gap: 1rem 1.8rem;
+  }
+
+  .lemoon-footer__copyright {
+    order: 0;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lemoon-footer__menu-toggle::after {
+    transition: none;
+  }
+}

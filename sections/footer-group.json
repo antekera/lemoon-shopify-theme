@@ -1,28 +1,102 @@
 {
-  "name": "t:sections.footer.name",
+  "name": "Footer Lemoon",
   "type": "footer",
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "products": {
+          "type": "navigation_column",
+          "settings": {
+            "heading": "Productos",
+            "menu": "footer-products",
+            "open_mobile": false,
+            "mobile_only": false,
+            "desktop_only": false
+          }
+        },
+        "buy": {
+          "type": "navigation_column",
+          "settings": {
+            "heading": "Cómo comprar",
+            "menu": "footer-how-to",
+            "open_mobile": false,
+            "mobile_only": false,
+            "desktop_only": false
+          }
+        },
+        "services": {
+          "type": "navigation_column",
+          "settings": {
+            "heading": "Servicios",
+            "menu": "footer-services",
+            "open_mobile": false,
+            "mobile_only": false,
+            "desktop_only": true
+          }
+        },
+        "services_mobile": {
+          "type": "navigation_column",
+          "settings": {
+            "heading": "Servicios",
+            "menu": "footer-services-mobile",
+            "open_mobile": false,
+            "mobile_only": true,
+            "desktop_only": false
+          }
+        },
+        "information": {
+          "type": "navigation_column",
+          "settings": {
+            "heading": "Información",
+            "menu": "footer-information",
+            "open_mobile": false,
+            "mobile_only": false,
+            "desktop_only": false
+          }
+        },
+        "quick_links": {
+          "type": "legal_links",
+          "settings": {
+            "menu": "footer-quick-links"
+          }
+        }
+      },
+      "block_order": ["products", "buy", "services", "services_mobile", "information", "quick_links"],
       "settings": {
-        "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Recibe novedades Lemoon",
-        "enable_follow_on_shop": true,
-        "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
+        "newsletter_heading": "El camino para ver bien y verte bien comienza aquí.",
+        "newsletter_text": "Recibe novedades, guías y promociones exclusivas en tu correo.",
+        "newsletter_text_mobile": "Novedades, guías y promociones exclusivas en tu correo.",
+        "newsletter_placeholder": "Tu correo electrónico",
+        "newsletter_button": "SUSCRIBIRME",
+        "newsletter_success": "Gracias por suscribirte.",
+        "help_heading": "¿Necesitas ayuda?",
+        "help_text": "Estamos aquí para acompañarte en tu compra.",
+        "help_text_mobile": "Estamos aquí para ayudarte a elegir.",
+        "whatsapp_number": "",
+        "whatsapp_label": "Contáctanos por WhatsApp",
+        "contact_email": "hola@lemoon.cl",
+        "email_label": "hola@lemoon.cl",
+        "contact_link": "/pages/contact",
+        "contact_link_label": "Escríbenos un mensaje",
+        "navigation_label": "Navegación del footer",
+        "follow_heading": "Síguenos",
         "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "payment_heading": "PAGA SEGURO CON",
+        "payment_webpay": true,
+        "payment_webpay_label": "Webpay",
+        "payment_visa": true,
+        "payment_visa_label": "VISA",
+        "payment_mastercard": true,
+        "payment_mastercard_label": "Mastercard",
+        "sitemap_enable": true,
+        "company_name": "Servigoptic SpA",
+        "footer_art_alt": "Ilustración abstracta de un horizonte de limones.",
+        "padding_top": 64,
+        "padding_bottom": 0
       }
     }
   },
-  "order": [
-    "footer"
-  ]
+  "order": ["footer"]
 }
