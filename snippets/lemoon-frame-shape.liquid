@@ -1,0 +1,17 @@
+{% doc %}
+  Renders a decorative eyewear silhouette for a navigation shape filter.
+  @param {string} shape - Shape selected in the header editor.
+  @example
+  {% render 'lemoon-frame-shape', shape: 'aviator' %}
+{% enddoc %}
+<svg class="lemoon-frame-shape" width="28" height="18" viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {%- case shape -%}
+    {%- when 'cat_eye' -%}<path d="M2 7 19 11 21 16c0 6-4 9-10 9C4 25 2 20 2 7Zm44 0-17 4-2 5c0 6 4 9 10 9 7 0 9-5 9-18ZM21 14q3-3 6 0"/>
+    {%- when 'square' -%}<rect x="2" y="6" width="19" height="17" rx="3"/><rect x="27" y="6" width="19" height="17" rx="3"/><path d="M21 12q3-3 6 0"/>
+    {%- when 'oval' -%}<ellipse cx="11.5" cy="14" rx="9.5" ry="11"/><ellipse cx="36.5" cy="14" rx="9.5" ry="11"/><path d="M21 12q3-3 6 0"/>
+    {%- when 'geometric' -%}<path d="M7 4h10l5 8-4 12H7L2 13 7 4Zm24 0h10l5 9-5 11H30l-4-12 5-8ZM22 12q2-3 4 0"/>
+    {%- when 'aviator' -%}<path d="M2 7h19l-2 11c-1 5-4 8-9 8-6 0-9-5-8-12V7Zm44 0H27l2 11c1 5 4 8 9 8 6 0 9-5 8-12V7ZM21 10q3-4 6 0"/>
+    {%- when 'browline' -%}<path d="M2 6q9-4 19 0v10c0 6-4 9-10 9S2 21 2 15V6Zm44 0q-9-4-19 0v10c0 6 4 9 10 9s9-4 9-10V6ZM21 12q3-3 6 0"/>
+    {%- when 'round' -%}<circle cx="11.5" cy="14" r="9.5"/><circle cx="36.5" cy="14" r="9.5"/><path d="M21 12q3-3 6 0"/>
+  {%- endcase -%}
+</svg>

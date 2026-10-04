@@ -60,8 +60,286 @@
           "gid://shopify/Product/9581569114280",
           "gid://shopify/Product/9581568884904",
           "gid://shopify/Product/9581569179816"
-        ]
-      }
+        ],
+        "view_all_label": "Ver todo",
+        "shape_heading": "Por forma",
+        "color_heading": "Por color",
+        "utility_heading": "Ayuda y cuenta",
+        "account_message": "Inicia sesión o crea una cuenta para ver órdenes, administrar tus recetas y más.",
+        "login_label": "Iniciar sesión",
+        "register_label": "Crear cuenta"
+      },
+      "blocks": {
+        "opticos": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "opticos",
+            "title": "Lentes ópticos",
+            "link": "/collections/opticos",
+            "icon": "glasses"
+          }
+        },
+        "sol": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "sol",
+            "title": "Lentes de sol",
+            "link": "/pages/lentes-de-sol",
+            "icon": "sun"
+          }
+        },
+        "cristales": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "cristales",
+            "title": "Cristales",
+            "link": "/pages/cristales",
+            "icon": "lens"
+          }
+        },
+        "guia": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "guia",
+            "title": "Encuentra tu lente ideal",
+            "link": "/pages/buscar-mi-estilo",
+            "icon": "sparkles"
+          }
+        },
+        "vendidos": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "vendidos",
+            "title": "Más vendidos",
+            "link": "/collections/mejor-vendidos",
+            "icon": "star"
+          }
+        },
+        "nueva": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "nueva",
+            "title": "Nueva colección",
+            "link": "/collections/lo-nuevo",
+            "icon": "gift"
+          }
+        },
+        "accesorios": {
+          "type": "drawer_primary",
+          "settings": {
+            "slot": "accesorios",
+            "title": "Accesorios",
+            "link": "/collections/accesorios",
+            "icon": "heart"
+          }
+        },
+        "envios": {
+          "type": "drawer_utility",
+          "settings": {
+            "title": "Envíos y retornos",
+            "link": "/pages/envios-y-entregas",
+            "icon": "truck"
+          }
+        },
+        "faq": {
+          "type": "drawer_utility",
+          "settings": {
+            "title": "Preguntas frecuentes",
+            "link": "/pages/preguntas-frecuentes",
+            "icon": "circle-help"
+          }
+        },
+        "nosotros": {
+          "type": "drawer_utility",
+          "settings": {
+            "title": "Sobre nosotros",
+            "link": "/pages/nosotros",
+            "icon": "info"
+          }
+        },
+        "cuenta": {
+          "type": "drawer_utility",
+          "settings": {
+            "title": "Mi cuenta",
+            "link": "/account",
+            "icon": "user-round"
+          }
+        },
+        "mujer": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "featured",
+            "title": "Mujer",
+            "link": "/collections/opticos-mujer"
+          }
+        },
+        "hombre": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "featured",
+            "title": "Hombre",
+            "link": "/collections/opticos-hombre"
+          }
+        },
+        "mas_vendidos": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "featured",
+            "title": "Más vendidos",
+            "link": "/collections/mejor-vendidos"
+          }
+        },
+        "nueva_coleccion": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "featured",
+            "title": "Nueva colección",
+            "link": "/collections/lo-nuevo"
+          }
+        },
+        "ojo_gato": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Ojo de gato",
+            "link": "/collections/opticos/ojo-de-gato",
+            "shape": "cat_eye"
+          }
+        },
+        "cuadrado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Cuadrado",
+            "link": "/collections/opticos/cuadrado",
+            "shape": "square"
+          }
+        },
+        "ovalado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Ovalado",
+            "link": "/collections/opticos/ovalado",
+            "shape": "oval"
+          }
+        },
+        "geometrico": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Geométrico",
+            "link": "/collections/opticos/geometrico",
+            "shape": "geometric"
+          }
+        },
+        "aviador": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Aviador",
+            "link": "/collections/opticos/aviador",
+            "shape": "aviator"
+          }
+        },
+        "browline": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Browline",
+            "link": "/collections/opticos/browline",
+            "shape": "browline"
+          }
+        },
+        "negro": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "color",
+            "title": "Negro",
+            "link": "/collections/opticos/negro",
+            "swatch_color": "#111111"
+          }
+        },
+        "carey": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "color",
+            "title": "Carey",
+            "link": "/collections/opticos/carey",
+            "swatch_color": "#8b4c24"
+          }
+        },
+        "transparente": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "color",
+            "title": "Transparente",
+            "link": "/collections/opticos/transparente",
+            "swatch_color": "#ece8df"
+          }
+        },
+        "dorado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "color",
+            "title": "Dorado",
+            "link": "/collections/opticos/dorado",
+            "swatch_color": "#c49b4a"
+          }
+        },
+        "plateado": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "color",
+            "title": "Plateado",
+            "link": "/collections/opticos/plateado",
+            "swatch_color": "#b7bdc5"
+          }
+        }
+      },
+      "block_order": [
+        "opticos",
+        "sol",
+        "cristales",
+        "guia",
+        "vendidos",
+        "nueva",
+        "accesorios",
+        "envios",
+        "faq",
+        "nosotros",
+        "cuenta",
+        "mujer",
+        "hombre",
+        "mas_vendidos",
+        "nueva_coleccion",
+        "ojo_gato",
+        "cuadrado",
+        "ovalado",
+        "geometrico",
+        "aviador",
+        "browline",
+        "negro",
+        "carey",
+        "transparente",
+        "dorado",
+        "plateado"
+      ]
     }
   },
   "order": [

@@ -304,7 +304,7 @@
       "information": "Información",
       "shipping_returns": "Envíos y retornos",
       "faq": "Preguntas frecuentes",
-      "find_style": "Buscar mi estilo",
+      "find_style": "Encuentra tu lente ideal",
       "trends": "Tendencias",
       "banner_alt": "Descubre las tendencias de Lemoon",
       "previous_product": "Producto anterior",
@@ -314,6 +314,8 @@
     "header": {
       "announcement": "Anuncio",
       "menu": "Menú",
+      "close_menu": "Cerrar menú",
+      "back_to_menu": "Volver al menú principal",
       "quick_categories": "Categorías destacadas",
       "cart_count": {
         "one": "{{ count }} artículo",

@@ -295,7 +295,7 @@
       "information": "Information",
       "shipping_returns": "Shipping and returns",
       "faq": "Frequently asked questions",
-      "find_style": "Find my style",
+      "find_style": "Find your ideal glasses",
       "trends": "Trends",
       "banner_alt": "Discover Lemoon trends",
       "previous_product": "Previous product",
@@ -313,6 +313,8 @@
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
+      "close_menu": "Close menu",
+      "back_to_menu": "Back to main menu",
       "quick_categories": "Featured categories",
       "cart_count": {
         "one": "{{ count }} item",

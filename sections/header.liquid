@@ -29,8 +29,10 @@
   <header class="lemoon-header" role="banner" data-lemoon-search-header>
     <div class="lemoon-header__desktop">
       <div class="lemoon-header__leading-actions">
-        <button class="lemoon-header__menu-btn" id="lemoon-nav-open-desktop" data-lemoon-nav-open aria-label="{{ 'sections.header.menu' | t }}">
-          {% render 'lemoon-icon', icon: 'menu', size: 24 %}
+        <button type="button" class="lemoon-header__menu-btn" id="lemoon-nav-open-desktop" data-lemoon-nav-open data-nav-open-label="{{ 'sections.header.menu' | t | escape }}" data-nav-close-label="{{ 'sections.header.close_menu' | t | escape }}" data-nav-back-label="{{ 'sections.header.back_to_menu' | t | escape }}" aria-label="{{ 'sections.header.menu' | t }}" aria-controls="lemoon-mobile-nav" aria-expanded="false">
+          <span data-nav-icon="menu">{% render 'lemoon-icon', icon: 'menu', size: 24 %}</span>
+          <span data-nav-icon="close">{% render 'lemoon-icon', icon: 'x', size: 24 %}</span>
+          <span data-nav-icon="back">{% render 'lemoon-icon', icon: 'chevron-left', size: 24 %}</span>
         </button>
         <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
           {% render 'lemoon-icon', icon: 'search', size: 24 %}
@@ -69,8 +71,10 @@
     <div class="lemoon-header__mobile">
       <div class="lemoon-header__mobile-inner">
         <div class="lemoon-header__mobile-drawer">
-          <button class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" data-lemoon-nav-open aria-label="{{ 'sections.header.menu' | t }}">
-            {% render 'lemoon-icon', icon: 'menu', size: 24 %}
+          <button type="button" class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" data-lemoon-nav-open data-nav-open-label="{{ 'sections.header.menu' | t | escape }}" data-nav-close-label="{{ 'sections.header.close_menu' | t | escape }}" data-nav-back-label="{{ 'sections.header.back_to_menu' | t | escape }}" aria-label="{{ 'sections.header.menu' | t }}" aria-controls="lemoon-mobile-nav" aria-expanded="false">
+            <span data-nav-icon="menu">{% render 'lemoon-icon', icon: 'menu', size: 24 %}</span>
+            <span data-nav-icon="close">{% render 'lemoon-icon', icon: 'x', size: 24 %}</span>
+            <span data-nav-icon="back">{% render 'lemoon-icon', icon: 'chevron-left', size: 24 %}</span>
           </button>
           <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
             {% render 'lemoon-icon', icon: 'search', size: 24 %}
@@ -113,7 +117,7 @@
       </nav>
     {%- endif -%}
   </header>
-  {% render 'lemoon-mobile-nav' %}
+  {% render 'lemoon-mobile-nav', section: section %}
   {% render 'lemoon-mobile-search', section: section %}
 </sticky-header>
 
@@ -183,20 +187,414 @@
 {
   "name": "Lemoon header",
   "class": "section-header",
-  "max_blocks": 3,
+  "max_blocks": 50,
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menú principal", "info": "Se muestran hasta cuatro enlaces destacados en desktop y mobile.", "default": "main-menu" },
-    { "type": "header", "content": "Búsqueda móvil: información" },
-    { "type": "page", "id": "mobile_search_shipping_page", "label": "Envíos y retornos" },
-    { "type": "url", "id": "mobile_search_faq_page", "label": "Preguntas frecuentes" },
-    { "type": "url", "id": "mobile_search_style_page", "label": "Buscar mi estilo" },
-    { "type": "header", "content": "Búsqueda móvil: tendencias" },
-    { "type": "image_picker", "id": "mobile_search_banner_image", "label": "Imagen del banner" },
-    { "type": "url", "id": "mobile_search_banner_url", "label": "Enlace del banner" },
-    { "type": "product_list", "id": "mobile_search_trending_products", "label": "Productos de tendencias", "limit": 4 }
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú principal",
+      "info": "Se muestran hasta cuatro enlaces destacados en desktop y mobile.",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Búsqueda móvil: información"
+    },
+    {
+      "type": "page",
+      "id": "mobile_search_shipping_page",
+      "label": "Envíos y retornos"
+    },
+    {
+      "type": "url",
+      "id": "mobile_search_faq_page",
+      "label": "Preguntas frecuentes"
+    },
+    {
+      "type": "url",
+      "id": "mobile_search_style_page",
+      "label": "Encuentra tu lente ideal"
+    },
+    {
+      "type": "header",
+      "content": "Búsqueda móvil: tendencias"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_search_banner_image",
+      "label": "Imagen del banner"
+    },
+    {
+      "type": "url",
+      "id": "mobile_search_banner_url",
+      "label": "Enlace del banner"
+    },
+    {
+      "type": "product_list",
+      "id": "mobile_search_trending_products",
+      "label": "Productos de tendencias",
+      "limit": 4
+    },
+    {
+      "type": "header",
+      "content": "Menú lateral"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "Texto de ver todo",
+      "default": "Ver todo"
+    },
+    {
+      "type": "text",
+      "id": "shape_heading",
+      "label": "Título de formas",
+      "default": "Por forma"
+    },
+    {
+      "type": "text",
+      "id": "color_heading",
+      "label": "Título de colores",
+      "default": "Por color"
+    },
+    {
+      "type": "text",
+      "id": "utility_heading",
+      "label": "Nombre accesible de enlaces de ayuda",
+      "default": "Ayuda y cuenta"
+    },
+    {
+      "type": "textarea",
+      "id": "account_message",
+      "label": "Mensaje de cuenta",
+      "default": "Inicia sesión o crea una cuenta para ver órdenes, administrar tus recetas y más."
+    },
+    {
+      "type": "text",
+      "id": "login_label",
+      "label": "Botón de inicio de sesión",
+      "default": "Iniciar sesión"
+    },
+    {
+      "type": "text",
+      "id": "register_label",
+      "label": "Botón de crear cuenta",
+      "default": "Crear cuenta"
+    }
   ],
   "blocks": [
-    { "type": "@app" }
+    {
+      "type": "@app"
+    },
+    {
+      "type": "drawer_primary",
+      "name": "Menú principal",
+      "limit": 7,
+      "settings": [
+        {
+          "type": "select",
+          "id": "slot",
+          "label": "Categoría para asociar el segundo nivel",
+          "options": [
+            {
+              "value": "opticos",
+              "label": "Lentes ópticos"
+            },
+            {
+              "value": "sol",
+              "label": "Lentes de sol"
+            },
+            {
+              "value": "cristales",
+              "label": "Cristales"
+            },
+            {
+              "value": "guia",
+              "label": "Encuentra tu lente ideal"
+            },
+            {
+              "value": "vendidos",
+              "label": "Más vendidos"
+            },
+            {
+              "value": "nueva",
+              "label": "Nueva colección"
+            },
+            {
+              "value": "accesorios",
+              "label": "Accesorios"
+            }
+          ],
+          "default": "opticos"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Texto",
+          "default": "Nueva categoría"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Destino de Ver todo"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            {
+              "value": "none",
+              "label": "Sin icono"
+            },
+            {
+              "value": "glasses",
+              "label": "Anteojos"
+            },
+            {
+              "value": "sun",
+              "label": "Sol"
+            },
+            {
+              "value": "lens",
+              "label": "Cristal"
+            },
+            {
+              "value": "sparkles",
+              "label": "Destellos"
+            },
+            {
+              "value": "star",
+              "label": "Estrella"
+            },
+            {
+              "value": "gift",
+              "label": "Regalo"
+            },
+            {
+              "value": "heart",
+              "label": "Corazón"
+            },
+            {
+              "value": "truck",
+              "label": "Envío"
+            },
+            {
+              "value": "circle-help",
+              "label": "Ayuda"
+            },
+            {
+              "value": "info",
+              "label": "Información"
+            },
+            {
+              "value": "user-round",
+              "label": "Cuenta"
+            }
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "type": "drawer_utility",
+      "name": "Enlace de ayuda",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Texto",
+          "default": "Enlace"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Destino"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icono",
+          "options": [
+            {
+              "value": "none",
+              "label": "Sin icono"
+            },
+            {
+              "value": "glasses",
+              "label": "Anteojos"
+            },
+            {
+              "value": "sun",
+              "label": "Sol"
+            },
+            {
+              "value": "lens",
+              "label": "Cristal"
+            },
+            {
+              "value": "sparkles",
+              "label": "Destellos"
+            },
+            {
+              "value": "star",
+              "label": "Estrella"
+            },
+            {
+              "value": "gift",
+              "label": "Regalo"
+            },
+            {
+              "value": "heart",
+              "label": "Corazón"
+            },
+            {
+              "value": "truck",
+              "label": "Envío"
+            },
+            {
+              "value": "circle-help",
+              "label": "Ayuda"
+            },
+            {
+              "value": "info",
+              "label": "Información"
+            },
+            {
+              "value": "user-round",
+              "label": "Cuenta"
+            }
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "type": "drawer_subitem",
+      "name": "Enlace de segundo nivel",
+      "limit": 35,
+      "settings": [
+        {
+          "type": "select",
+          "id": "parent",
+          "label": "Categoría principal",
+          "options": [
+            {
+              "value": "opticos",
+              "label": "Lentes ópticos"
+            },
+            {
+              "value": "sol",
+              "label": "Lentes de sol"
+            },
+            {
+              "value": "cristales",
+              "label": "Cristales"
+            },
+            {
+              "value": "guia",
+              "label": "Encuentra tu lente ideal"
+            },
+            {
+              "value": "vendidos",
+              "label": "Más vendidos"
+            },
+            {
+              "value": "nueva",
+              "label": "Nueva colección"
+            },
+            {
+              "value": "accesorios",
+              "label": "Accesorios"
+            }
+          ],
+          "default": "opticos"
+        },
+        {
+          "type": "select",
+          "id": "group",
+          "label": "Grupo",
+          "options": [
+            {
+              "value": "featured",
+              "label": "Destacados"
+            },
+            {
+              "value": "shape",
+              "label": "Por forma"
+            },
+            {
+              "value": "color",
+              "label": "Por color"
+            }
+          ],
+          "default": "featured"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Texto",
+          "default": "Nuevo enlace"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Destino o URL de filtro"
+        },
+        {
+          "type": "select",
+          "id": "shape",
+          "label": "Icono de forma",
+          "options": [
+            {
+              "value": "none",
+              "label": "Sin forma"
+            },
+            {
+              "value": "cat_eye",
+              "label": "Ojo de gato"
+            },
+            {
+              "value": "square",
+              "label": "Cuadrado"
+            },
+            {
+              "value": "oval",
+              "label": "Ovalado"
+            },
+            {
+              "value": "geometric",
+              "label": "Geométrico"
+            },
+            {
+              "value": "aviator",
+              "label": "Aviador"
+            },
+            {
+              "value": "browline",
+              "label": "Browline"
+            },
+            {
+              "value": "round",
+              "label": "Redondo"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "color",
+          "id": "swatch_color",
+          "label": "Color de muestra",
+          "default": "#000000"
+        },
+        {
+          "type": "image_picker",
+          "id": "swatch_image",
+          "label": "Imagen de muestra de color"
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
