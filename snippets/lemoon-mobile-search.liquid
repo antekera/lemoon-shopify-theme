@@ -22,11 +22,8 @@
   data-error="{{ 'sections.mobile_search.error' | t | escape }}"
   data-results-count="{{ 'sections.mobile_search.results_count' | t: count: '__COUNT__' | escape }}">
   <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
-  <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="true" aria-labelledby="{{ panel_id }}-Title" tabindex="-1">
+  <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="true" aria-label="{{ 'sections.mobile_search.title' | t | escape }}" tabindex="-1">
     <div class="lemoon-mobile-search__sticky-header">
-      <div class="lemoon-mobile-search__heading">
-        <h2 id="{{ panel_id }}-Title">{{ 'sections.mobile_search.title' | t }}</h2>
-      </div>
       <form action="{{ routes.search_url }}" method="get" role="search" class="lemoon-mobile-search__form" data-lemoon-search-form>
         <button type="button" class="lemoon-mobile-search__close" data-lemoon-search-close aria-label="{{ 'sections.mobile_search.close' | t }}">
           {% render 'lemoon-icon', icon: 'chevron-right', size: 24 %}

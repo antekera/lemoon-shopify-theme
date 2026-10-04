@@ -64,14 +64,6 @@
   width: 100%;
 }
 
-.lemoon-mobile-search__heading {
-  align-items: center;
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.lemoon-mobile-search h2,
 .lemoon-mobile-search h3 {
   color: inherit;
   font-family: var(--font-heading-family, sans-serif);
@@ -81,7 +73,6 @@
   margin: 0;
 }
 
-.lemoon-mobile-search h2 { font-size: 18px; }
 .lemoon-mobile-search h3 { font-size: 16px; margin-bottom: 12px; }
 
 .lemoon-mobile-search button {

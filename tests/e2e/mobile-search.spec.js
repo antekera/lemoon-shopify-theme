@@ -13,15 +13,17 @@ test.beforeEach(async ({ page }) => { await page.goto(fixture); });
 test('opens from mobile search below the header with focus and internal scroll', async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, 180));
   await open(page);
+  await expect(page.locator('.lemoon-mobile-search__heading')).toHaveCount(0);
+  await expect(page.getByRole('dialog', { name: 'Buscar productos' })).toBeVisible();
   await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
   await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
   const header = await page.locator('[data-lemoon-search-header]').boundingBox();
   const panel = await page.locator(s('panel')).boundingBox();
-  const initialHeading = await page.locator('.lemoon-mobile-search__heading').boundingBox();
+  const initialStickyHeader = await page.locator('.lemoon-mobile-search__sticky-header').boundingBox();
   expect(panel.y).toBeCloseTo(header.y + header.height, 0);
-  expect(initialHeading.y).toBeCloseTo(panel.y, 0);
+  expect(initialStickyHeader.y).toBeCloseTo(panel.y, 0);
   expect(panel.width).toBe(390);
   await page.locator(s('panel')).evaluate((el) => { el.scrollTop = 400; });
   await expect.poll(() => page.locator(s('panel')).evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
@@ -35,8 +37,8 @@ test('opens from mobile search below the header with focus and internal scroll',
   }).toBeGreaterThanOrEqual(0);
   await expect.poll(async () => {
     const panel = await page.locator(s('panel')).boundingBox();
-    const heading = await page.locator('.lemoon-mobile-search__heading').boundingBox();
-    return heading.y - panel.y;
+    const sticky = await page.locator('.lemoon-mobile-search__sticky-header').boundingBox();
+    return sticky.y - panel.y;
   }).toBeCloseTo(0, 0);
   await expect.poll(async () => {
     const sticky = await page.locator('.lemoon-mobile-search__sticky-header').boundingBox();
