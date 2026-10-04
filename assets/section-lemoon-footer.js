@@ -44,6 +44,7 @@
       if (animations.get(menu) !== animation) return;
       menu.open = open;
       content.style.removeProperty('overflow');
+      animation.cancel();
       animations.delete(menu);
       targetStates.delete(menu);
     };

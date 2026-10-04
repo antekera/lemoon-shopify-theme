@@ -37,6 +37,28 @@ test('slides the footer accordion open and closed on mobile', async ({ page }) =
   await expect(menu).not.toHaveAttribute('open', '');
 });
 
+test('restores closed mobile accordion content when resized to desktop', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  const menu = page.locator('.lemoon-footer__menu:visible').first();
+  const content = menu.locator('.lemoon-footer__menu-content');
+  const waitForAnimation = () => content.evaluate(async (element) => {
+    const animations = element.getAnimations().filter((animation) => animation.playState === 'running');
+    await Promise.all(animations.map((animation) => animation.finished));
+  });
+  await menu.locator('summary').click();
+  await waitForAnimation();
+  await menu.locator('summary').click();
+  await waitForAnimation();
+  const animationCount = await content.evaluate((element) => element.getAnimations().length);
+
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect(menu).toHaveAttribute('open', '');
+  await expect(content.locator('a').first()).toBeVisible();
+  await expect(content).not.toHaveCSS('height', '0px');
+  expect(animationCount).toBe(0);
+});
+
 test('shows four open footer link columns on desktop', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/tests/fixtures/footer-accordion.html');
