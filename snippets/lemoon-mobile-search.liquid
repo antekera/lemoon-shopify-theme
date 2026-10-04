@@ -37,7 +37,7 @@
         <button type="submit" class="lemoon-mobile-search__submit" aria-label="{{ 'sections.mobile_search.submit' | t }}">{% render 'lemoon-icon', icon: 'search', size: 24 %}</button>
       </form>
     </div>
-    <a class="lemoon-mobile-search__show-all" href="{{ routes.search_url }}?type=product" data-lemoon-search-all>{{ 'sections.mobile_search.show_all' | t }} {% render 'lemoon-icon', icon: 'arrow-right', size: 18 %}</a>
+    <a class="lemoon-mobile-search__show-all" href="{{ routes.search_url }}?type=product" data-lemoon-search-all>{{ 'sections.mobile_search.show_all' | t }}</a>
     <section class="lemoon-mobile-search__suggestions" aria-labelledby="{{ panel_id }}-Suggested">
       <h3 id="{{ panel_id }}-Suggested">{{ 'sections.mobile_search.suggested_products' | t }}</h3>
       <p class="lemoon-mobile-search__status" role="status" aria-live="polite" aria-atomic="true" data-lemoon-search-status></p>

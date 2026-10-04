@@ -108,6 +108,13 @@ test('keeps product cards free of decorative right arrows', async ({ page }) => 
   await expect(page.locator(`${s('slide')} .lemoon-mobile-search__product > .lemoon-icon`)).toHaveCount(0);
 });
 
+test('underlines show-all results text without a decorative arrow', async ({ page }) => {
+  await open(page);
+  const showAll = page.locator(s('all'));
+  await expect(showAll).toHaveCSS('text-decoration-line', 'underline');
+  await expect(showAll.locator('.lemoon-icon')).toHaveCount(0);
+});
+
 test('preserves suggestions for one or two characters and debounces predictions from three', async ({ page }) => {
   const requests = [];
   await page.route('**/search/suggest.json?**', async (route) => { requests.push(new URL(route.request().url())); await route.fulfill({ json: payload(products()) }); });
