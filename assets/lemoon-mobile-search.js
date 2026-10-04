@@ -62,10 +62,11 @@ class MobileSearch {
     this.listen(window, 'resize', () => this.onResize());
     this.listen(window.visualViewport, 'resize', () => this.measure());
     this.listen(window.visualViewport, 'scroll', () => this.measure());
-    this.listen(this.previous, 'click', () => this.showSlide(this.index - 1));
-    this.listen(this.next, 'click', () => this.showSlide(this.index + 1));
-    this.dots.forEach((dot) => this.listen(dot, 'click', () => this.showSlide(Number(dot.dataset.slideIndex))));
+    this.listen(this.previous, 'click', () => this.showSlide(this.index - 1, true));
+    this.listen(this.next, 'click', () => this.showSlide(this.index + 1, true));
+    this.dots.forEach((dot) => this.listen(dot, 'click', () => this.showSlide(Number(dot.dataset.slideIndex), true)));
     const carousel = root.querySelector(selector('carousel'));
+    this.listen(carousel, 'pointerdown', () => this.stopAutoplay(), { passive: true });
     this.listen(carousel, 'touchstart', (event) => {
       this.touch = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
     }, { passive: true });
@@ -74,7 +75,7 @@ class MobileSearch {
       if (this.touch && end) {
         const dx = end.clientX - this.touch.x;
         const dy = end.clientY - this.touch.y;
-        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) this.showSlide(this.index + (dx < 0 ? 1 : -1));
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) this.showSlide(this.index + (dx < 0 ? 1 : -1), true);
       }
       this.touch = null;
     }, { passive: true });
@@ -156,12 +157,14 @@ class MobileSearch {
     this.root.getBoundingClientRect();
     this.root.classList.add('is-open');
     this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
+    this.startAutoplay();
     this.focusTimer = setTimeout(() => { if (this.isOpen) this.input.focus({ preventScroll: true }); }, this.duration());
   }
 
   close(immediate = false) {
     if (!this.isOpen) return;
     this.isOpen = false;
+    this.stopAutoplay();
     this.cancelRequest();
     clearTimeout(this.focusTimer);
     this.root.classList.remove('is-open');
@@ -253,8 +256,27 @@ class MobileSearch {
     return count;
   }
 
-  showSlide(index) {
+  startAutoplay() {
+    this.stopAutoplay();
+    if (this.slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    this.autoplayTimer = window.setInterval(() => {
+      if (!this.isOpen || this.index >= this.slides.length - 1) {
+        this.stopAutoplay();
+        return;
+      }
+      this.showSlide(this.index + 1);
+      if (this.index >= this.slides.length - 1) this.stopAutoplay();
+    }, 3000);
+  }
+
+  stopAutoplay() {
+    clearInterval(this.autoplayTimer);
+    this.autoplayTimer = null;
+  }
+
+  showSlide(index, manual = false) {
     if (!this.slides.length) return;
+    if (manual) this.stopAutoplay();
     this.index = Math.max(0, Math.min(index, this.slides.length - 1));
     this.slides.forEach((slide, position) => {
       const active = position === this.index;
@@ -262,7 +284,11 @@ class MobileSearch {
       slide.inert = !active;
     });
     if (this.slideTrack) {
-      const offset = this.slides[this.index].offsetLeft - this.slides[0].offsetLeft;
+      const isLastSlide = this.index === this.slides.length - 1;
+      const viewport = this.slideTrack.parentElement;
+      const offset = isLastSlide && viewport
+        ? Math.max(0, this.slideTrack.scrollWidth - viewport.clientWidth)
+        : this.slides[this.index].offsetLeft - this.slides[0].offsetLeft;
       this.slideTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
     }
     this.dots.forEach((dot, position) => dot.setAttribute('aria-current', String(position === this.index)));

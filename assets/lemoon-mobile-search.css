@@ -158,6 +158,7 @@
 .lemoon-mobile-search [data-lemoon-search-slides] { display: flex; gap: 12px; transition: transform 280ms ease; will-change: transform; }
 .lemoon-mobile-search__slide { flex: 0 0 70%; min-width: 0; }
 .lemoon-mobile-search__slide[aria-hidden='true'] { pointer-events: none; }
+.lemoon-mobile-search .product-card-wrapper .card { border: 0; }
 .lemoon-mobile-search__carousel-controls { align-items: center; display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
 .lemoon-mobile-search__carousel-controls button { background: transparent; border-radius: 50%; }
 .lemoon-mobile-search__dots { display: flex; }

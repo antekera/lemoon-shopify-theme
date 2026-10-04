@@ -230,11 +230,20 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await page.locator(s('dot')).nth(4).click();
   await expect(page.locator(s('next'))).toBeDisabled();
   await expect(page.locator(s('dot')).nth(4)).toHaveAttribute('aria-current', 'true');
-  await page.locator(s('carousel')).scrollIntoViewIfNeeded();
   const carouselBox = await page.locator(s('carousel')).boundingBox();
   await expect.poll(async () => {
     const box = await page.locator(s('slide')).nth(4).boundingBox();
-    return Math.abs(box.x - carouselBox.x);
+    return Math.abs(box.x + box.width - carouselBox.x - carouselBox.width);
+  }).toBeLessThanOrEqual(1);
+  const lastSlideBox = await page.locator(s('slide')).nth(4).boundingBox();
+  const previousSlideBox = await page.locator(s('slide')).nth(3).boundingBox();
+  expect(Math.abs(lastSlideBox.x + lastSlideBox.width - carouselBox.x - carouselBox.width)).toBeLessThanOrEqual(1);
+  expect(previousSlideBox.x).toBeLessThan(carouselBox.x);
+  expect(previousSlideBox.x + previousSlideBox.width).toBeGreaterThan(carouselBox.x);
+  await page.locator(s('carousel')).scrollIntoViewIfNeeded();
+  await expect.poll(async () => {
+    const box = await page.locator(s('slide')).nth(4).boundingBox();
+    return Math.abs(box.x + box.width - carouselBox.x - carouselBox.width);
   }).toBeLessThanOrEqual(1);
   const box = await page.locator(s('slide')).nth(4).boundingBox();
   const session = await page.context().newCDPSession(page);
@@ -276,7 +285,20 @@ test('peeks the next carousel item and advances the PLP card with add to cart', 
     const box = await firstProduct.boundingBox();
     return Math.abs(box.x - carousel.x);
   }).toBeLessThanOrEqual(1);
+  await expect(firstProduct.locator('.card')).toHaveCSS('border-top-width', '0px');
   await expect(firstProduct.locator('.quick-add__submit')).toBeVisible();
+});
+
+test('automatically advances the carousel after three seconds without interaction', async ({ page }) => {
+  await open(page);
+  await expect(page.locator(s('dot')).first()).toHaveAttribute('aria-current', 'true');
+  await page.waitForTimeout(3100);
+  await expect(page.locator(s('dot')).nth(1)).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator(s('slide')).nth(1)).toHaveAttribute('aria-hidden', 'false');
+  await page.locator(s('next')).click();
+  await expect(page.locator(s('dot')).nth(2)).toHaveAttribute('aria-current', 'true');
+  await page.waitForTimeout(3100);
+  await expect(page.locator(s('dot')).nth(2)).toHaveAttribute('aria-current', 'true');
 });
 
 test('traps keyboard focus, responds to resize and hides at desktop breakpoint', async ({ page }) => {
