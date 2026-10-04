@@ -97,6 +97,16 @@ test('keeps the focused desktop search form inside the viewport', async ({ page 
   }
 });
 
+test('compensates the focused search font size when the page is zoomed out', async ({ page }) => {
+  await page.evaluate(() => {
+    Object.defineProperty(window.visualViewport, 'scale', { configurable: true, value: 0.4 });
+  });
+  await open(page);
+  await expect(page.locator(s('input'))).toHaveCSS('font-size', '45px');
+  await page.locator(s('close')).click();
+  await expect(page.locator(s('input'))).toHaveCSS('font-size', '18px');
+});
+
 test('keeps the focused mobile search outside the sticky header positioning context', async ({ page }) => {
   await open(page);
   const root = page.locator('[data-lemoon-search]');

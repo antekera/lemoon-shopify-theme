@@ -118,6 +118,16 @@ class MobileSearch {
     this.root.style.setProperty('--lemoon-search-viewport-height', `${viewport ? viewport.height + viewport.offsetTop : window.innerHeight}px`);
   }
 
+  prepareInputForFocus() {
+    // Safari can auto-zoom a focused field when the page is pinched out, even
+    // when its CSS font size is normally above the 16px threshold. Compensate
+    // for the current visual scale before calling focus so the text stays at
+    // least as large on screen as it is at the default page scale.
+    const scale = window.visualViewport?.scale;
+    const visualScale = Number.isFinite(scale) && scale > 0 ? scale : 1;
+    this.input.style.fontSize = `${Math.max(18, 18 / visualScale)}px`;
+  }
+
   open(button) {
     if (this.isOpen) return;
     clearTimeout(this.hideTimer);
@@ -138,6 +148,7 @@ class MobileSearch {
       }
     }
     this.input.value = '';
+    this.restoreInputStyles = saveStyles(this.input, ['font-size']);
     this.panel.scrollTop = 0;
     const suggestions = selectSuggestions(this.products);
     if (suggestions.length > 1 && suggestions.map((product) => product.id).join(',') === this.initial?.map((product) => product.id).join(',')) suggestions.push(suggestions.shift());
@@ -153,7 +164,11 @@ class MobileSearch {
     this.root.classList.add('is-open');
     this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
     this.startAutoplay();
-    this.focusTimer = setTimeout(() => { if (this.isOpen) this.input.focus({ preventScroll: true }); }, this.duration());
+    this.focusTimer = setTimeout(() => {
+      if (!this.isOpen) return;
+      this.prepareInputForFocus();
+      this.input.focus({ preventScroll: true });
+    }, this.duration());
   }
 
   close(immediate = false, restoreFocus = true) {
@@ -166,6 +181,8 @@ class MobileSearch {
     this.root.inert = true;
     this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
     this.background.forEach(([element, wasInert]) => { element.inert = wasInert; });
+    this.restoreInputStyles?.();
+    this.restoreInputStyles = null;
     document.documentElement.style.setProperty('scroll-behavior', 'auto', 'important');
     window.scrollTo(this.scroll.x, this.scroll.y);
     this.restoreHtml();
