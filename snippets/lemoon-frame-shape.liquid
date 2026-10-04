@@ -6,12 +6,14 @@
 {% enddoc %}
 <svg class="lemoon-frame-shape" width="28" height="18" viewBox="0 0 48 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true" focusable="false">
   {%- case shape -%}
-    {%- when 'cat_eye' -%}<path d="M2 7 19 11 21 16c0 6-4 9-10 9C4 25 2 20 2 7Zm44 0-17 4-2 5c0 6 4 9 10 9 7 0 9-5 9-18ZM21 14q3-3 6 0"/>
-    {%- when 'square' -%}<rect x="2" y="6" width="19" height="17" rx="3"/><rect x="27" y="6" width="19" height="17" rx="3"/><path d="M21 12q3-3 6 0"/>
-    {%- when 'oval' -%}<ellipse cx="11.5" cy="14" rx="9.5" ry="11"/><ellipse cx="36.5" cy="14" rx="9.5" ry="11"/><path d="M21 12q3-3 6 0"/>
-    {%- when 'geometric' -%}<path d="M7 4h10l5 8-4 12H7L2 13 7 4Zm24 0h10l5 9-5 11H30l-4-12 5-8ZM22 12q2-3 4 0"/>
-    {%- when 'aviator' -%}<path d="M2 7h19l-2 11c-1 5-4 8-9 8-6 0-9-5-8-12V7Zm44 0H27l2 11c1 5 4 8 9 8 6 0 9-5 8-12V7ZM21 10q3-4 6 0"/>
-    {%- when 'browline' -%}<path d="M2 6q9-4 19 0v10c0 6-4 9-10 9S2 21 2 15V6Zm44 0q-9-4-19 0v10c0 6 4 9 10 9s9-4 9-10V6ZM21 12q3-3 6 0"/>
-    {%- when 'round' -%}<circle cx="11.5" cy="14" r="9.5"/><circle cx="36.5" cy="14" r="9.5"/><path d="M21 12q3-3 6 0"/>
+    {%- when 'cat_eye' -%}<path d="M2 5q11-1 20 6l-2 7c-1 5-4 8-9 8C5 26 2 21 2 15V5Zm44 0q-11-1-20 6l2 7c1 5 4 8 9 8 6 0 9-5 9-11V5ZM22 12q2-3 4 0"/><path fill="currentColor" stroke="none" d="M2 5q11-1 20 6l-1 3Q12 7 2 9Zm44 0q-11-1-20 6l1 3q9-7 19-5Z"/>
+    {%- when 'rectangle' -%}<path d="M3 8q9-1 18 0v9c0 5-2 7-9 7s-9-2-9-7V8Zm42 0q-9-1-18 0v9c0 5 2 7 9 7s9-2 9-7V8ZM21 11q3-2 6 0M3 10H1m44 0h2"/>
+    {%- when 'square' -%}<path d="M3 6q9-1 18 0v12c0 5-2 7-9 7s-9-2-9-7V6Zm42 0q-9-1-18 0v12c0 5 2 7 9 7s9-2 9-7V6ZM21 10q3-2 6 0M3 9H1m44 0h2"/>
+    {%- when 'round' -%}<circle cx="12" cy="14" r="10"/><circle cx="36" cy="14" r="10"/><path d="M22 12q2-3 4 0M2 12H0m46 0h2"/>
+    {%- when 'oval' -%}<ellipse cx="12" cy="14" rx="10" ry="8"/><ellipse cx="36" cy="14" rx="10" ry="8"/><path d="M22 12q2-2 4 0M2 12H0m46 0h2"/>
+    {%- when 'browline' -%}<path d="M3 8q9-3 18 1v8c0 5-3 8-9 8S3 21 3 16V8Zm42 0q-9-3-18 1v8c0 5 3 8 9 8s9-4 9-9V8ZM21 11q3-2 6 0"/><path fill="currentColor" stroke="none" d="M2 7q10-5 20 1v4Q12 7 4 11L3 16H2Zm44 0q-10-5-20 1v4q10-5 18-1l1 5h1Z"/>
+    {%- when 'geometric' -%}<path d="M5 5h13l5 7-3 11-8 4-10-5-1-9 4-8Zm38 0H30l-5 7 3 11 8 4 10-5 1-9-4-8ZM23 12q1-2 2 0"/>
+    {%- when 'butterfly' -%}<path d="M2 5q11-3 20 5l-2 10c-1 5-4 7-10 7-5 0-7-4-8-10V5Zm44 0q-11-3-20 5l2 10c1 5 4 7 10 7 5 0 7-4 8-10V5ZM22 11q2-3 4 0"/><path fill="currentColor" stroke="none" d="M2 5q11-3 20 5l-1 4Q11 6 4 10l-1 8H2Zm44 0q-11-3-20 5l1 4q10-8 17-4l1 8h1Z"/>
+    {%- when 'aviator' -%}<path d="M2 8q9-3 19 0l-1 9c-1 6-4 10-10 10S2 22 2 16V8Zm44 0q-9-3-19 0l1 9c1 6 4 10 10 10s8-5 8-11V8ZM21 10q3-3 6 0M3 7q21-5 42 0"/>
   {%- endcase -%}
 </svg>

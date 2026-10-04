@@ -86,7 +86,7 @@
             "slot": "sol",
             "title": "Lentes de sol",
             "link": "/collections/lentes-de-sol",
-            "icon": "sun",
+            "icon": "sunglasses",
             "has_submenu": true
           }
         },
@@ -263,7 +263,7 @@
           "settings": {
             "parent": "opticos",
             "group": "shape",
-            "title": "Browline",
+            "title": "Línea de cejas",
             "link": "/collections/opticos/browline",
             "shape": "browline"
           }
@@ -427,7 +427,7 @@
           "settings": {
             "parent": "sol",
             "group": "shape",
-            "title": "Browline",
+            "title": "Línea de cejas",
             "link": "/collections/lentes-de-sol/browline",
             "shape": "browline",
             "catalog_collection": "lentes-de-sol",
@@ -526,6 +526,78 @@
             "catalog_collection": "cristales",
             "availability_tag": "monofocal"
           }
+        },
+        "rectangular": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Rectangular",
+            "link": "/collections/opticos/rectangular",
+            "shape": "rectangle",
+            "catalog_collection": "opticos",
+            "availability_tag": "rectangular"
+          }
+        },
+        "sol_rectangular": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Rectangular",
+            "link": "/collections/lentes-de-sol/rectangular",
+            "shape": "rectangle",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "rectangular"
+          }
+        },
+        "redondo": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Redondo",
+            "link": "/collections/opticos/redondo",
+            "shape": "round",
+            "catalog_collection": "opticos",
+            "availability_tag": "redondo"
+          }
+        },
+        "sol_redondo": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Redondo",
+            "link": "/collections/lentes-de-sol/redondo",
+            "shape": "round",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "redondo"
+          }
+        },
+        "mariposa": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "opticos",
+            "group": "shape",
+            "title": "Mariposa",
+            "link": "/collections/opticos/mariposa",
+            "shape": "butterfly",
+            "catalog_collection": "opticos",
+            "availability_tag": "mariposa"
+          }
+        },
+        "sol_mariposa": {
+          "type": "drawer_subitem",
+          "settings": {
+            "parent": "sol",
+            "group": "shape",
+            "title": "Mariposa",
+            "link": "/collections/lentes-de-sol/mariposa",
+            "shape": "butterfly",
+            "catalog_collection": "lentes-de-sol",
+            "availability_tag": "mariposa"
+          }
         }
       },
       "block_order": [
@@ -545,11 +617,14 @@
         "mas_vendidos",
         "nueva_coleccion",
         "ojo_gato",
+        "rectangular",
         "cuadrado",
+        "redondo",
         "ovalado",
-        "geometrico",
-        "aviador",
         "browline",
+        "geometrico",
+        "mariposa",
+        "aviador",
         "negro",
         "carey",
         "transparente",
@@ -560,11 +635,14 @@
         "sol_mas_vendidos",
         "sol_nueva_coleccion",
         "sol_ojo_gato",
+        "sol_rectangular",
         "sol_cuadrado",
+        "sol_redondo",
         "sol_ovalado",
-        "sol_geometrico",
-        "sol_aviador",
         "sol_browline",
+        "sol_geometrico",
+        "sol_mariposa",
+        "sol_aviador",
         "sol_negro",
         "sol_carey",
         "sol_transparente",
