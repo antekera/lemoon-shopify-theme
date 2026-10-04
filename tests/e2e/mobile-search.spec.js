@@ -61,6 +61,12 @@ test('opens desktop search in two columns with products and results on the left'
   await openTrigger(page).click();
   await expect(page.locator(s('input'))).toBeFocused();
   await expect(page.locator(s('panel'))).toBeVisible();
+  const columns = page.locator('.lemoon-mobile-search__columns');
+  await expect(columns).toHaveCSS('display', 'grid');
+  expect((await columns.evaluate((element) => getComputedStyle(element).gridTemplateColumns.split(' '))).length).toBe(2);
+  const left = await page.locator('.lemoon-mobile-search__left-column').boundingBox();
+  const right = await page.locator('.lemoon-mobile-search__right-column').boundingBox();
+  expect(left.x + left.width).toBeLessThanOrEqual(right.x + 1);
   const suggestions = await page.locator('.lemoon-mobile-search__suggestions').boundingBox();
   const information = await page.locator('.lemoon-mobile-search__information').boundingBox();
   const trends = await page.locator('.lemoon-mobile-search__trends').boundingBox();

@@ -44,21 +44,25 @@
         <button type="submit" class="lemoon-mobile-search__submit" aria-label="{{ 'sections.mobile_search.submit' | t }}">{% render 'lemoon-icon', icon: 'search', size: 24 %}</button>
       </form>
     </div>
-    <section class="lemoon-mobile-search__suggestions" aria-labelledby="{{ panel_id }}-Suggested">
+    <div class="lemoon-mobile-search__columns">
+      <div class="lemoon-mobile-search__left-column">
+        <section class="lemoon-mobile-search__suggestions" aria-labelledby="{{ panel_id }}-Suggested">
       <h3 id="{{ panel_id }}-Suggested">{{ 'sections.mobile_search.suggested_products' | t }}</h3>
       <p class="lemoon-mobile-search__status" role="status" aria-live="polite" aria-atomic="true" data-lemoon-search-status></p>
       <ul id="{{ panel_id }}-Results" class="lemoon-mobile-search__results" data-lemoon-search-results aria-busy="false" role="list"></ul>
       <a class="lemoon-mobile-search__show-all" href="{{ routes.search_url }}?type=product" data-lemoon-search-all>{{ 'sections.mobile_search.show_all' | t }}</a>
-    </section>
-    <section class="lemoon-mobile-search__information" aria-labelledby="{{ panel_id }}-Information">
+        </section>
+      </div>
+      <div class="lemoon-mobile-search__right-column">
+        <section class="lemoon-mobile-search__information" aria-labelledby="{{ panel_id }}-Information">
       <h3 id="{{ panel_id }}-Information">{{ 'sections.mobile_search.information' | t }}</h3>
       <ul class="lemoon-mobile-search__information-links" role="list">
         <li><a href="{{ shipping_url | escape }}">{% render 'lemoon-icon', icon: 'truck', size: 22 %}<span>{{ 'sections.mobile_search.shipping_returns' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ faq_url | escape }}">{% render 'lemoon-icon', icon: 'circle-help', size: 22 %}<span>{{ 'sections.mobile_search.faq' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ style_url | escape }}">{% render 'lemoon-icon', icon: 'sparkles', size: 22 %}<span>{{ 'sections.mobile_search.find_style' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
       </ul>
-    </section>
-    <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
+        </section>
+        <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
       <h3 id="{{ panel_id }}-Trends">{{ 'sections.mobile_search.trends' | t }}</h3>
       {%- assign carousel_slide_count = trend_count | plus: 1 -%}
       <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
@@ -98,7 +102,9 @@
           <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
         </div>
       </div>
-    </section>
+        </section>
+      </div>
+    </div>
   </div>
   <template data-lemoon-search-product-template>
     <li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image>{{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}</span><span data-product-title></span></a></li>
