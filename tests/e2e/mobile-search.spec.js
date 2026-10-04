@@ -76,6 +76,18 @@ test('opens desktop search in two columns with products and results on the left'
   expect(await openTrigger(page).getAttribute('aria-expanded')).toBe('true');
 });
 
+test('keeps focused text inputs at 16px on mobile to prevent automatic zoom', async ({ page }) => {
+  const input = await page.evaluateHandle(() => {
+    const element = document.createElement('input');
+    element.type = 'text';
+    element.style.fontSize = '12px';
+    document.body.append(element);
+    return element;
+  });
+  await input.evaluate((element) => element.focus());
+  await expect(page.locator('input[type="text"]').last()).toHaveCSS('font-size', '16px');
+});
+
 test('keeps the visible announcement bar above the header and search panel', async ({ page }) => {
   const announcement = await page.locator('.announcement-bar-section').boundingBox();
   await open(page);
