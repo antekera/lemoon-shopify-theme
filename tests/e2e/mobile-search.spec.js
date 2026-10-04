@@ -118,6 +118,7 @@ test('underlines show-all results text without a decorative arrow', async ({ pag
   await open(page);
   const showAll = page.locator(s('all'));
   await expect(showAll).toHaveCSS('text-decoration-line', 'underline');
+  await expect(showAll).toHaveCSS('justify-content', 'flex-end');
   await expect(showAll.locator('.lemoon-icon')).toHaveCount(0);
 });
 
