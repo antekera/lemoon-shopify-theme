@@ -75,9 +75,9 @@
         <p class="lemoon-footer__help-copy"><span class="lemoon-footer__help-copy--desktop">{{ section.settings.help_text | escape }}</span><span class="lemoon-footer__help-copy--mobile">{{ section.settings.help_text_mobile | escape }}</span></p>
         <div class="lemoon-footer__contact-list">
           {%- if footer_phone != blank -%}<a class="lemoon-footer__contact" href="https://wa.me/{{ footer_phone }}" target="_blank" rel="noopener" aria-label="{{ section.settings.whatsapp_label | escape }}">{%- else -%}<span class="lemoon-footer__contact" aria-label="{{ section.settings.whatsapp_label | escape }}">{%- endif -%}<span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-whatsapp.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.whatsapp_label | escape }}</span>{%- if footer_phone != blank -%}</a>{%- else -%}</span>{%- endif -%}
+          {%- if section.settings.contact_link != blank -%}<a class="lemoon-footer__contact" href="{{ section.settings.contact_link }}">{{ section.settings.contact_link_label | escape }}</a>{%- endif -%}
           {%- if section.settings.contact_email != blank -%}<a class="lemoon-footer__contact" href="mailto:{{ section.settings.contact_email | escape }}"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-email.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ section.settings.email_label | escape }}</span></a>{%- endif -%}
         </div>
-        {%- if section.settings.contact_link != blank -%}<a class="lemoon-footer__faq lemoon-footer__faq--contact" href="{{ section.settings.contact_link }}">{{ section.settings.contact_link_label | escape }} <span aria-hidden="true">↗</span></a>{%- endif -%}
       </section>
     </div>
 
@@ -173,7 +173,7 @@
     { "type": "text", "id": "whatsapp_number", "label": "WhatsApp: teléfono con código de país", "info": "Ingresa sólo el número, por ejemplo 56912345678." },
     { "type": "text", "id": "whatsapp_label", "label": "Enlace de WhatsApp", "default": "Contáctanos por WhatsApp" },
     { "type": "text", "id": "contact_email", "label": "Correo de contacto", "default": "hola@lemoon.cl" },
-    { "type": "text", "id": "email_label", "label": "Enlace de correo", "default": "Escríbenos por correo" },
+    { "type": "text", "id": "email_label", "label": "Enlace de correo", "default": "hola@lemoon.cl" },
     { "type": "url", "id": "contact_link", "label": "Enlace a contáctanos" },
     { "type": "text", "id": "contact_link_label", "label": "Texto del enlace a contáctanos", "default": "Contáctanos" },
     { "type": "text", "id": "navigation_label", "label": "Etiqueta accesible para los menús", "default": "Navegación del footer" },

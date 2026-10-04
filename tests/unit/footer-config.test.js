@@ -29,5 +29,21 @@ test('keeps the approved newsletter copy and footer social settings in the secti
   expect(settings.follow_heading).toBe('Síguenos');
   expect(settings.payment_heading).toBe('PAGA SEGURO CON');
   expect(settings.contact_email).toBe('hola@lemoon.cl');
+  expect(settings.email_label).toBe('hola@lemoon.cl');
+  expect(settings.contact_link).toBe('/pages/contact');
+  expect(settings.contact_link_label).toBe('Contáctanos');
   expect(settings.company_name).toBe('Servigoptic SpA');
+});
+
+test('puts the configurable contact page link before email and targets the contact form page', async () => {
+  const source = await readFile(themeFile('sections/footer.liquid'), 'utf8');
+  const group = JSON.parse(await readFile(themeFile('sections/footer-group.json'), 'utf8'));
+  const contactLinks = source.match(/<div class="lemoon-footer__contact-list">([\s\S]*?)<\/div>/)?.[1];
+  const contactTemplate = JSON.parse(await readFile(themeFile('templates/page.contact.json'), 'utf8'));
+
+  expect(contactLinks).toBeDefined();
+  expect(contactLinks.indexOf('contact_link_label')).toBeLessThan(contactLinks.indexOf('email_label'));
+  expect(source).toMatch(/"id": "contact_link", "label": "Enlace a contáctanos"/);
+  expect(group.sections.footer.settings.contact_link).toBe('/pages/contact');
+  expect(contactTemplate.sections.form.type).toBe('contact-form');
 });

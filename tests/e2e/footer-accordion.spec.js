@@ -125,5 +125,18 @@ test('keeps the secure payment heading white on mobile', async ({ page }) => {
 test('links footer email contact to the configured Lemoon address', async ({ page }) => {
   await page.goto('/tests/fixtures/footer-accordion.html');
 
-  await expect(page.locator('.lemoon-footer__contact[href^="mailto:"]')).toHaveAttribute('href', 'mailto:hola@lemoon.cl');
+  const emailLink = page.locator('.lemoon-footer__contact[href^="mailto:"]');
+  await expect(emailLink).toHaveAttribute('href', 'mailto:hola@lemoon.cl');
+  await expect(emailLink).toHaveText('hola@lemoon.cl');
+});
+
+test('shows the contact form link directly above the email link', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  const contacts = page.locator('.lemoon-footer__contact-list');
+  const contactLink = contacts.getByRole('link', { name: 'Contáctanos', exact: true });
+  const emailLink = contacts.getByRole('link', { name: 'hola@lemoon.cl' });
+  await expect(contactLink).toHaveAttribute('href', '/pages/contact');
+  expect(await contactLink.evaluate((element) => element.compareDocumentPosition(document.querySelector('.lemoon-footer__contact[href^="mailto:"]')) & Node.DOCUMENT_POSITION_FOLLOWING)).toBeTruthy();
+  await expect(emailLink).toBeVisible();
 });
