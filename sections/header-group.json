@@ -44,13 +44,13 @@
       "settings": {
         "menu": "main-menu",
         "mobile_search_shipping_page": "shopify://pages/envios-y-entregas",
-        "mobile_search_faq_page": "/pages/pre",
+        "mobile_search_faq_page": "/pages/preguntas-frecuentes",
         "mobile_search_style_page": "/pages/buscar-mi-estilo",
         "mobile_search_trending_products": [
-          "lemoon-arica",
-          "lemoon-biobio",
-          "lemoon-wabi",
-          "lemoon-colca"
+          "gid://shopify/Product/9581569081512",
+          "gid://shopify/Product/9581569114280",
+          "gid://shopify/Product/9581568884904",
+          "gid://shopify/Product/9581569179816"
         ]
       }
     }

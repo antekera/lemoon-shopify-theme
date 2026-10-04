@@ -7,11 +7,17 @@
 <script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
-  assign information_keys = 'shipping_returns,faq,find_style' | split: ','
-  assign information_settings = 'mobile_search_shipping_page,mobile_search_faq_page,mobile_search_style_page' | split: ','
-  assign information_icons = 'truck,circle-help,sparkles' | split: ','
   assign trend_products = section.settings.mobile_search_trending_products
-  assign trend_count = trend_products.size
+  assign trend_count = trend_products.size | at_most: 4
+  if trend_products == blank
+    assign trend_products = collections['opticos'].products
+    assign trend_count = trend_products.size | at_most: 4
+  endif
+  assign shipping_page = section.settings.mobile_search_shipping_page
+  assign shipping_url = shipping_page.url | default: shipping_page | default: '/pages/envios-y-entregas'
+  assign faq_url = section.settings.mobile_search_faq_page | default: '/pages/preguntas-frecuentes'
+  assign style_url = section.settings.mobile_search_style_page | default: '/pages/buscar-mi-estilo'
+  assign banner_url = section.settings.mobile_search_banner_url | default: '/collections/opticos'
 -%}
 <div class="lemoon-mobile-search" data-lemoon-search hidden
   data-search-url="{{ routes.search_url | escape }}"
@@ -43,30 +49,29 @@
     <section class="lemoon-mobile-search__information" aria-labelledby="{{ panel_id }}-Information">
       <h3 id="{{ panel_id }}-Information">{{ 'sections.mobile_search.information' | t }}</h3>
       <ul class="lemoon-mobile-search__information-links" role="list">
-        {%- for setting_id in information_settings -%}
-          {%- assign information_page = section.settings[setting_id] -%}
-          {%- if information_page != blank -%}
-            {%- assign information_url = information_page.url | default: information_page -%}
-            {%- assign translation_key = 'sections.mobile_search.' | append: information_keys[forloop.index0] -%}
-            <li><a href="{{ information_url | escape }}">{% render 'lemoon-icon', icon: information_icons[forloop.index0], size: 22 %}<span>{{ translation_key | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
-          {%- endif -%}
-        {%- endfor -%}
+        <li><a href="{{ shipping_url | escape }}">{% render 'lemoon-icon', icon: 'truck', size: 22 %}<span>{{ 'sections.mobile_search.shipping_returns' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+        <li><a href="{{ faq_url | escape }}">{% render 'lemoon-icon', icon: 'circle-help', size: 22 %}<span>{{ 'sections.mobile_search.faq' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+        <li><a href="{{ style_url | escape }}">{% render 'lemoon-icon', icon: 'sparkles', size: 22 %}<span>{{ 'sections.mobile_search.find_style' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
       </ul>
     </section>
     <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
       <h3 id="{{ panel_id }}-Trends">{{ 'sections.mobile_search.trends' | t }}</h3>
-      {%- if section.settings.mobile_search_banner_image != blank and section.settings.mobile_search_banner_url != blank -%}
-        {%- assign banner_alt = section.settings.mobile_search_banner_image.alt | default: '' -%}
+      {%- if section.settings.mobile_search_banner_image != blank -%}
+        {%- assign banner_alt = section.settings.mobile_search_banner_image.alt -%}
         {%- if banner_alt == blank -%}{%- assign banner_alt = 'sections.mobile_search.banner_alt' | t -%}{%- endif -%}
-        <a class="lemoon-mobile-search__banner" href="{{ section.settings.mobile_search_banner_url | escape }}">
+        <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
           {{ section.settings.mobile_search_banner_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '320, 480, 750, 1000', sizes: '(max-width: 989px) 100vw, 480px', alt: banner_alt }}
+        </a>
+      {%- else -%}
+        <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
+          <img src="{{ 'lemoon-hero-editorial.png' | asset_url }}" alt="{{ 'sections.mobile_search.banner_alt' | t | escape }}" width="1200" height="800" loading="lazy">
         </a>
       {%- endif -%}
       {%- if trend_count > 0 -%}
         <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
           <div data-lemoon-search-slides>
             {%- assign slide_index = 0 -%}
-            {%- for trend_product in trend_products -%}
+            {%- for trend_product in trend_products limit: 4 -%}
               {%- if trend_product != blank -%}
                 <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}"{% if slide_index > 0 %} hidden{% endif %}>
                   <a class="lemoon-mobile-search__product" href="{{ trend_product.url | escape }}">

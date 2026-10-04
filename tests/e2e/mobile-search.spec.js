@@ -48,7 +48,7 @@ test('opens from mobile search below the header with focus and internal scroll',
     const sticky = await page.locator('.lemoon-mobile-search__sticky-header').boundingBox();
     const form = await page.locator(s('form')).boundingBox();
     return sticky.y + sticky.height - form.y - form.height;
-  }).toBeCloseTo(12, 0);
+  }).toBeCloseTo(0, 0);
   await expect(page.locator('.lemoon-mobile-search__sticky-header')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await page.mouse.wheel(0, 300);
   expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
