@@ -121,3 +121,9 @@ test('keeps the secure payment heading white on mobile', async ({ page }) => {
   await expect(paymentHeading).toHaveText('PAGA SEGURO CON');
   await expect(paymentHeading).toHaveCSS('color', 'rgb(255, 255, 255)');
 });
+
+test('links footer email contact to the configured Lemoon address', async ({ page }) => {
+  await page.goto('/tests/fixtures/footer-accordion.html');
+
+  await expect(page.locator('.lemoon-footer__contact[href^="mailto:"]')).toHaveAttribute('href', 'mailto:hola@lemoon.cl');
+});

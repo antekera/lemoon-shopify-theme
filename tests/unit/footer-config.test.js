@@ -28,6 +28,6 @@ test('keeps the approved newsletter copy and footer social settings in the secti
   expect(settings.newsletter_button).toBe('SUSCRIBIRME');
   expect(settings.follow_heading).toBe('Síguenos');
   expect(settings.payment_heading).toBe('PAGA SEGURO CON');
-  expect(settings.contact_email).toBe('hola@lemon.cl');
+  expect(settings.contact_email).toBe('hola@lemoon.cl');
   expect(settings.company_name).toBe('Servigoptic SpA');
 });
