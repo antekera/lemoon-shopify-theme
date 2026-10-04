@@ -10,13 +10,8 @@
   assign information_keys = 'shipping_returns,faq,find_style' | split: ','
   assign information_settings = 'mobile_search_shipping_page,mobile_search_faq_page,mobile_search_style_page' | split: ','
   assign information_icons = 'truck,circle-help,sparkles' | split: ','
-  assign trend_count = 0
-  for index in (1..4)
-    assign setting_id = 'mobile_search_trending_product_' | append: index
-    if section.settings[setting_id] != blank
-      assign trend_count = trend_count | plus: 1
-    endif
-  endfor
+  assign trend_products = section.settings.mobile_search_trending_products
+  assign trend_count = trend_products.size
 -%}
 <div class="lemoon-mobile-search" data-lemoon-search hidden
   data-search-url="{{ routes.search_url | escape }}"
@@ -71,9 +66,7 @@
         <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
           <div data-lemoon-search-slides>
             {%- assign slide_index = 0 -%}
-            {%- for index in (1..4) -%}
-              {%- assign setting_id = 'mobile_search_trending_product_' | append: index -%}
-              {%- assign trend_product = section.settings[setting_id] -%}
+            {%- for trend_product in trend_products -%}
               {%- if trend_product != blank -%}
                 <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}"{% if slide_index > 0 %} hidden{% endif %}>
                   <a class="lemoon-mobile-search__product" href="{{ trend_product.url | escape }}">
