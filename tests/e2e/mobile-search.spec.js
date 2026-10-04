@@ -279,6 +279,11 @@ for (const method of ['submit', 'all']) {
 
 test('carousel supports arrows, dots and horizontal swipe without wrapping', async ({ page }) => {
   await open(page);
+  const previousArrow = page.locator(`${s('previous')} .lemoon-icon`);
+  await expect(previousArrow).toHaveAttribute('width', '24');
+  await expect(previousArrow).toHaveClass(/arrow-left-filled/);
+  await expect(previousArrow.locator('path')).toHaveCSS('fill', 'rgb(11, 31, 58)');
+  await expect(previousArrow.locator('path')).toHaveCSS('stroke', 'none');
   await expect(page.locator(s('previous'))).toBeDisabled();
   await page.locator(s('next')).click();
   await expect(page.locator(s('slide')).nth(1)).toHaveAttribute('aria-hidden', 'false');

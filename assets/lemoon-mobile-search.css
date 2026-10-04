@@ -179,6 +179,7 @@
 .lemoon-mobile-search .product-card-wrapper .card { border: 0; }
 .lemoon-mobile-search__carousel-controls { align-items: center; display: flex; gap: 12px; justify-content: center; margin-top: 8px; }
 .lemoon-mobile-search__carousel-controls button { background: transparent; border-radius: 50%; }
+.lemoon-mobile-search__carousel-controls .lemoon-icon { height: 24px; width: 24px; }
 .lemoon-mobile-search__dots { display: flex; }
 .lemoon-mobile-search__dots button { min-width: 32px; }
 .lemoon-mobile-search__dots span { background: #bec3ca; border-radius: 50%; height: 7px; width: 7px; }

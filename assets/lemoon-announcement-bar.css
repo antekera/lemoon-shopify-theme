@@ -13,16 +13,7 @@
 }
 
 .lemoon-announcement-bar .announcement-bar-slider {
-  column-gap: clamp(0.75rem, 2vw, 1.25rem);
   width: 100%;
-}
-
-.lemoon-announcement-bar .announcement-bar .slider-button--prev {
-  margin-left: 0;
-}
-
-.lemoon-announcement-bar .announcement-bar .slider-button--next {
-  margin-right: 0;
 }
 
 @media screen and (min-width: 990px) {
@@ -38,18 +29,13 @@
 }
 
 .lemoon-announcement-bar .slider-button {
-  border: 1px solid currentColor;
-  border-radius: 50%;
   color: var(--lemoon-text-inverse, #ffffff);
-  flex: 0 0 44px;
-  height: 44px;
-  min-width: 44px;
-  width: 44px;
+  flex: 0 0 4.4rem;
 }
 
 .lemoon-announcement-bar .slider-button .icon {
-  height: clamp(1.65rem, 1.7vw, 1.9rem);
-  width: clamp(1.65rem, 1.7vw, 1.9rem);
+  height: clamp(1.2rem, 1.4vw, 1.6rem);
+  width: clamp(1.2rem, 1.4vw, 1.6rem);
 }
 
 .lemoon-announcement-bar .slider-button:focus-visible {
@@ -80,7 +66,7 @@
   }
 
   .lemoon-announcement-bar .slider-button {
-    height: 44px;
+    height: 3.6rem;
   }
 }
 

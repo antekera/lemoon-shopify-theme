@@ -93,13 +93,13 @@
           {%- endfor -%}
         </div>
         <div class="lemoon-mobile-search__carousel-controls"{% if carousel_slide_count < 2 %} hidden{% endif %}>
-          <button type="button" data-lemoon-search-previous aria-label="{{ 'sections.mobile_search.previous_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}</button>
+          <button type="button" data-lemoon-search-previous aria-label="{{ 'sections.mobile_search.previous_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-left-filled', size: 24 %}</button>
           <div class="lemoon-mobile-search__dots">
             {%- for index in (1..carousel_slide_count) -%}
               <button type="button" data-lemoon-search-dot data-slide-index="{{ forloop.index0 }}" aria-label="{{ 'sections.mobile_search.slide_label' | t: index: index, total: carousel_slide_count }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>
             {%- endfor -%}
           </div>
-          <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
+          <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right-filled', size: 24 %}</button>
         </div>
       </div>
         </section>
