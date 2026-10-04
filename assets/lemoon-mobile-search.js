@@ -1,7 +1,6 @@
 import { shouldPredict, selectSuggestions, buildSearchUrl, buildPredictiveUrl, createRequestGate } from './lemoon-mobile-search-logic.js';
 
 const selector = (name) => `[data-lemoon-search-${name}]`;
-const mobile = window.matchMedia('(max-width: 989px)');
 
 // Restrict externally supplied destinations to web URLs before assigning DOM attributes.
 function safeUrl(value) {
@@ -109,7 +108,7 @@ class MobileSearch {
   }
 
   open(button) {
-    if (!mobile.matches || this.isOpen) return;
+    if (this.isOpen) return;
     clearTimeout(this.hideTimer);
     clearTimeout(this.focusTimer);
     this.opener = button;
@@ -309,11 +308,8 @@ class MobileSearch {
   }
 
   onResize() {
-    if (!mobile.matches) this.close(true);
-    else {
-      this.measure();
-      this.showSlide(this.index);
-    }
+    this.measure();
+    this.showSlide(this.index);
   }
 
   disconnect() {

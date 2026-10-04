@@ -28,7 +28,9 @@
         <button class="lemoon-header__menu-btn" id="lemoon-nav-open-desktop" data-lemoon-nav-open aria-label="{{ 'sections.header.menu' | t }}">
           {% render 'lemoon-icon', icon: 'menu', size: 24 %}
         </button>
-        {% render 'header-search', input_id: 'Lemoon-Header-Search-Desktop' %}
+        <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
+          {% render 'lemoon-icon', icon: 'search', size: 24 %}
+        </button>
       </div>
       <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
         <img

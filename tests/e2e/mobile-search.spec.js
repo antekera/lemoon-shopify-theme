@@ -5,18 +5,19 @@ const fixture = '/tests/fixtures/mobile-search.html';
 const s = (name) => `[data-lemoon-search-${name}]`;
 const products = (title = 'Producto predictivo') => Array.from({ length: 6 }, (_, i) => ({ id: 100 + i, title: `${title} ${i}`, url: `/products/predictive-${i}`, image: '/assets/lemoon-logo-refined-navy.svg', featured_image: { url: '/assets/lemoon-logo-refined-navy.svg', alt: title } }));
 const payload = (items) => ({ resources: { results: { products: items, collections: [], pages: [], articles: [], queries: [] } } });
-const open = async (page) => { await page.locator(s('open')).click(); await expect(page.locator(s('input'))).toBeFocused(); };
+const openTrigger = (page) => page.locator(s('open')).filter({ visible: true });
+const open = async (page) => { await openTrigger(page).click(); await expect(page.locator(s('input'))).toBeFocused(); };
 
 test.beforeEach(async ({ page }) => { await page.goto(fixture); });
 
-// These tests exercise the mobile search assets against representative fixture markup. The fixture's header controls are inert stand-ins; Liquid rendering, the navigation drawer, and desktop search are not under test here.
+// These tests exercise responsive search behavior against representative fixture markup. Liquid rendering and the navigation drawer are not under test here.
 test('opens from mobile search below the header with focus and internal scroll', async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, 180));
   await open(page);
   await expect(page.locator('.lemoon-mobile-search__heading')).toHaveCount(0);
   await expect(page.getByRole('dialog', { name: 'Buscar productos' })).toBeVisible();
   await expect(page.locator(s('panel'))).toHaveAttribute('aria-modal', 'false');
-  await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'true');
+  await expect(openTrigger(page)).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
   await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
@@ -55,6 +56,20 @@ test('opens from mobile search below the header with focus and internal scroll',
   expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
 });
 
+test('opens desktop search in two columns with products and results on the left', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await openTrigger(page).click();
+  await expect(page.locator(s('input'))).toBeFocused();
+  await expect(page.locator(s('panel'))).toBeVisible();
+  const suggestions = await page.locator('.lemoon-mobile-search__suggestions').boundingBox();
+  const information = await page.locator('.lemoon-mobile-search__information').boundingBox();
+  const trends = await page.locator('.lemoon-mobile-search__trends').boundingBox();
+  expect(suggestions.x + suggestions.width).toBeLessThanOrEqual(information.x + 1);
+  expect(information.x).toBeCloseTo(trends.x, 0);
+  expect(await page.locator(s('results') + ' a').count()).toBe(3);
+  expect(await openTrigger(page).getAttribute('aria-expanded')).toBe('true');
+});
+
 test('keeps the visible announcement bar above the header and search panel', async ({ page }) => {
   const announcement = await page.locator('.announcement-bar-section').boundingBox();
   await open(page);
@@ -71,7 +86,7 @@ test('keeps header buttons clickable while the search panel is open', async ({ p
   await page.locator('[data-lemoon-nav-open]').click();
   await expect.poll(() => page.evaluate(() => window.headerActionCount)).toBe(1);
   await expect(page.locator(s('panel'))).toBeHidden();
-  await page.locator(s('open')).click();
+  await openTrigger(page).click();
   await expect(page.locator(s('panel'))).toBeVisible();
 });
 
@@ -86,12 +101,12 @@ for (const method of ['close', 'Escape', 'overlay']) {
     }
     else await page.locator(s('close')).click();
     await expect(page.locator(s('panel'))).toBeHidden();
-    await expect(page.locator(s('open'))).toBeFocused();
-    await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'false');
+    await expect(openTrigger(page)).toBeFocused();
+    await expect(openTrigger(page)).toHaveAttribute('aria-expanded', 'false');
     expect(await page.evaluate(() => window.scrollY)).toBe(140);
     expect(await page.evaluate(() => document.body.style.position)).toBe('');
     await page.keyboard.press('Escape');
-    await expect(page.locator(s('open'))).toBeFocused();
+    await expect(openTrigger(page)).toBeFocused();
   });
 }
 
@@ -313,7 +328,7 @@ test('automatically advances the carousel after three seconds without interactio
   await expect(page.locator(s('dot')).nth(2)).toHaveAttribute('aria-current', 'true');
 });
 
-test('allows keyboard navigation through the header and responds to resize', async ({ page }) => {
+test('allows keyboard navigation through the header and keeps search open on resize', async ({ page }) => {
   await open(page);
   await page.locator(s('close')).focus();
   await page.keyboard.press('Shift+Tab');
@@ -324,8 +339,8 @@ test('allows keyboard navigation through the header and responds to resize', asy
   await expect.poll(async () => (await page.locator(s('panel')).boundingBox()).width).toBe(320);
   await expect.poll(async () => { const box = await page.locator(s('panel')).boundingBox(); return box.y + box.height; }).toBe(544);
   await page.setViewportSize({ width: 1280, height: 800 });
-  await expect(page.locator(s('panel'))).toBeHidden();
-  await expect.poll(() => page.evaluate(() => document.body.style.position)).toBe('');
+  await expect(page.locator(s('panel'))).toBeVisible();
+  await expect.poll(() => page.evaluate(() => document.body.style.position)).toBe('fixed');
 });
 
 test('reduced motion keeps focus and closure functional without a fade', async ({ page }) => {
@@ -333,7 +348,7 @@ test('reduced motion keeps focus and closure functional without a fade', async (
   await open(page);
   expect(await page.locator('[data-lemoon-search]').evaluate((el) => getComputedStyle(el).transitionDuration)).toBe('0s');
   await page.keyboard.press('Escape');
-  await expect(page.locator(s('open'))).toBeFocused();
+  await expect(openTrigger(page)).toBeFocused();
 });
 
 test('closed fading content cannot reclaim focus and reopening cancels the pending hide', async ({ page }) => {
@@ -342,7 +357,7 @@ test('closed fading content cannot reclaim focus and reopening cancels the pendi
     document.querySelector('[data-lemoon-search-close]').click();
     document.querySelector('[data-lemoon-search-input]').focus();
   });
-  await expect(page.locator(s('open'))).toBeFocused();
+  await expect(openTrigger(page)).toBeFocused();
   await open(page);
   await page.waitForTimeout(200);
   await expect(page.locator(s('panel'))).toBeVisible();
