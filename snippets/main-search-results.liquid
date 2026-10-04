@@ -228,7 +228,9 @@ Renders the search page inside its pagination context.
                     lazy_load: lazy_load,
                     skip_card_product_styles: skip_card_product_styles
                   %}
-                  {%- assign skip_card_product_styles = true -%}
+                  {%- if item.object_type == 'product' -%}
+                    {%- assign skip_card_product_styles = true -%}
+                  {%- endif -%}
                 {%- endfor -%}
               </ul>
               {%- if paginate.pages > 1 -%}

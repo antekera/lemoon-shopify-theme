@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{%- liquid
+  assign show_account = shop.customer_accounts_enabled
+-%}
+
 <sticky-header
   data-sticky-type="always"
   class="lemoon-header-wrapper"
@@ -51,9 +55,11 @@
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           {%- endif -%}
         </a>
-        <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
-          {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
-        </a>
+        {%- if show_account -%}
+          <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+          </a>
+        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
         {%- endfor -%}
@@ -88,9 +94,11 @@
               <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
             {%- endif -%}
           </a>
-          <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
-            {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
-          </a>
+          {%- if show_account -%}
+            <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+              {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+            </a>
+          {%- endif -%}
         </div>
       </div>
     </div>
