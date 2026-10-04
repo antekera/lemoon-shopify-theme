@@ -28,6 +28,7 @@ class MobileSearch {
     this.input = root.querySelector(selector('input'));
     this.results = root.querySelector(selector('results'));
     this.status = root.querySelector(selector('status'));
+    this.fallbackImage = safeUrl(root.dataset.fallbackImage);
     this.all = root.querySelector(selector('all'));
     this.form = root.querySelector(selector('form'));
     this.template = root.querySelector(selector('product-template'));
@@ -231,7 +232,7 @@ class MobileSearch {
       const card = this.template.content.cloneNode(true);
       card.querySelector('[data-product-link]').href = url;
       card.querySelector('[data-product-title]').textContent = String(product.title || '');
-      const imageUrl = safeUrl(product.image || product.featured_image?.url);
+      const imageUrl = safeUrl(product.image || product.featured_image?.url) || this.fallbackImage;
       if (imageUrl) {
         const image = document.createElement('img');
         image.src = imageUrl;

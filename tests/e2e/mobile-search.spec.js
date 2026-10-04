@@ -80,6 +80,18 @@ test('selects five distinct suggestions again on every opening', async ({ page }
   expect(second).not.toEqual(first);
 });
 
+test('uses the product fallback image when suggestions have no image', async ({ page }) => {
+  await page.route('**/search/suggest.json?**', (route) => route.fulfill({ json: payload([{ id: 999, title: 'Lemoon Zara', url: '/products/lemoon-zara', image: null }]) }));
+  await open(page);
+  const initialImage = page.locator(`${s('results')} img`).first();
+  await expect(initialImage).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');
+  await expect(initialImage).toHaveJSProperty('naturalWidth', 1254);
+  await page.locator(s('input')).fill('zara');
+  const predictedImage = page.locator(`${s('results')} img`).first();
+  await expect(predictedImage).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');
+  await expect(predictedImage).toHaveJSProperty('naturalWidth', 1254);
+});
+
 test('preserves suggestions for one or two characters and debounces predictions from three', async ({ page }) => {
   const requests = [];
   await page.route('**/search/suggest.json?**', async (route) => { requests.push(new URL(route.request().url())); await route.fulfill({ json: payload(products()) }); });

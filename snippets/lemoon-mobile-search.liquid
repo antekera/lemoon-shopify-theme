@@ -16,6 +16,7 @@
 <div class="lemoon-mobile-search" data-lemoon-search hidden
   data-search-url="{{ routes.search_url | escape }}"
   data-predictive-url="{{ routes.predictive_search_url | escape }}"
+  data-fallback-image="{{ 'lemoon-product-fallback.png' | asset_url | escape }}"
   data-loading="{{ 'sections.mobile_search.loading' | t | escape }}"
   data-no-results="{{ 'sections.mobile_search.no_results' | t: terms: '__TERMS__' | escape }}"
   data-error="{{ 'sections.mobile_search.error' | t | escape }}"
@@ -75,7 +76,7 @@
                     {%- if trend_product.featured_image != blank -%}
                       {{ trend_product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 240', sizes: '96px', alt: trend_product.title }}
                     {%- else -%}
-                      {{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}
+                      <img src="{{ 'lemoon-product-fallback.png' | asset_url }}" alt="{{ trend_product.title | escape }}" width="96" height="72" loading="lazy">
                     {%- endif -%}
                     <span>{{ trend_product.title | escape }}</span>{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}
                   </a>
