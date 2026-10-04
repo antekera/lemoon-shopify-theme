@@ -130,12 +130,16 @@
   border-radius: 12px;
   box-shadow: none;
   color: inherit;
+  flex: 1 1 0;
   font: inherit;
   font-size: 18px;
+  max-width: 100%;
   min-height: 48px;
   min-width: 0;
   padding: 10px 14px;
-  width: 100%;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  width: 0;
 }
 
 .lemoon-mobile-search__input::placeholder { color: #596575; opacity: 1; }

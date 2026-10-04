@@ -79,6 +79,24 @@ test('opens desktop search in two columns with products and results on the left'
   expect(await openTrigger(page).getAttribute('aria-expanded')).toBe('true');
 });
 
+test('keeps the focused desktop search form inside the viewport', async ({ page }) => {
+  for (const width of [320, 390, 990, 1024, 1280]) {
+    await page.setViewportSize({ width, height: 768 });
+    await openTrigger(page).click();
+    await expect(page.locator(s('input'))).toBeFocused();
+    const bounds = await page.evaluate(() => {
+      const input = document.querySelector('[data-lemoon-search-input]').getBoundingClientRect();
+      const submit = document.querySelector('[data-lemoon-search-form] [type="submit"]').getBoundingClientRect();
+      const panel = document.querySelector('[data-lemoon-search-panel]').getBoundingClientRect();
+      return { viewport: document.documentElement.clientWidth, inputRight: input.right, submitRight: submit.right, panelRight: panel.right };
+    });
+    expect(bounds.inputRight, `input at ${width}px`).toBeLessThanOrEqual(bounds.viewport);
+    expect(bounds.submitRight, `submit at ${width}px`).toBeLessThanOrEqual(bounds.viewport);
+    expect(bounds.panelRight, `panel at ${width}px`).toBeLessThanOrEqual(bounds.viewport);
+    await page.keyboard.press('Escape');
+  }
+});
+
 test('keeps the focused mobile search outside the sticky header positioning context', async ({ page }) => {
   await open(page);
   const root = page.locator('[data-lemoon-search]');
