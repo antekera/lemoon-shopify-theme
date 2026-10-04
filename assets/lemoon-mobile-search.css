@@ -100,15 +100,18 @@
 .lemoon-mobile-search__close { background: transparent; margin-left: -12px; }
 .lemoon-mobile-search__close .lemoon-icon { transform: rotate(180deg); }
 
-.lemoon-mobile-search__form {
+.lemoon-mobile-search__sticky-header {
   background: #fff;
-  display: flex;
-  gap: 8px;
-  margin: 0 -20px;
-  padding: 0 20px 8px;
+  margin: -12px -20px 0;
+  padding: 12px 20px 8px;
   position: sticky;
   top: 0;
   z-index: 2;
+}
+
+.lemoon-mobile-search__form {
+  display: flex;
+  gap: 8px;
 }
 .lemoon-mobile-search__input {
   appearance: none;

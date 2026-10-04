@@ -28,6 +28,12 @@ test('opens from mobile search below the header with focus and internal scroll',
     const input = await page.locator(s('input')).boundingBox();
     return input.y - panel.y;
   }).toBeGreaterThanOrEqual(0);
+  await expect.poll(async () => {
+    const panel = await page.locator(s('panel')).boundingBox();
+    const heading = await page.locator('.lemoon-mobile-search__heading').boundingBox();
+    return heading.y - panel.y;
+  }).toBeGreaterThanOrEqual(0);
+  await expect(page.locator('.lemoon-mobile-search__sticky-header')).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await page.mouse.wheel(0, 300);
   expect(await page.evaluate(() => document.body.style.position)).toBe('fixed');
 });
