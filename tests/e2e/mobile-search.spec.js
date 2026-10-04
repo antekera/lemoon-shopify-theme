@@ -141,13 +141,13 @@ test('keeps product cards free of decorative right arrows', async ({ page }) => 
   await expect(page.locator(`${s('slide')} .lemoon-mobile-search__product > .lemoon-icon`)).toHaveCount(0);
 });
 
-test('underlines show-all results text without a decorative arrow', async ({ page }) => {
+test('aligns the underlined show-all results link to the left without a decorative arrow', async ({ page }) => {
   await open(page);
   const showAll = page.locator(s('all'));
   const results = page.locator(s('results'));
   expect(await showAll.evaluate((link, list) => list.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING, await results.elementHandle())).toBeTruthy();
   await expect(showAll).toHaveCSS('text-decoration-line', 'underline');
-  await expect(showAll).toHaveCSS('justify-content', 'flex-end');
+  await expect(showAll).toHaveCSS('justify-content', 'flex-start');
   await expect(showAll.locator('.lemoon-icon')).toHaveCount(0);
 });
 
