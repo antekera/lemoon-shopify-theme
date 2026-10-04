@@ -5,6 +5,7 @@
   {% render 'lemoon-mobile-search', section: section %}
 {% enddoc %}
 <script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
   assign trend_products = section.settings.mobile_search_trending_products
@@ -56,48 +57,44 @@
     </section>
     <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
       <h3 id="{{ panel_id }}-Trends">{{ 'sections.mobile_search.trends' | t }}</h3>
-      {%- if section.settings.mobile_search_banner_image != blank -%}
-        {%- assign banner_alt = section.settings.mobile_search_banner_image.alt -%}
-        {%- if banner_alt == blank -%}{%- assign banner_alt = 'sections.mobile_search.banner_alt' | t -%}{%- endif -%}
-        <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
-          {{ section.settings.mobile_search_banner_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '320, 480, 750, 1000', sizes: '(max-width: 989px) 100vw, 480px', alt: banner_alt }}
-        </a>
-      {%- else -%}
-        <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
-          <img src="{{ 'lemoon-hero-editorial.png' | asset_url }}" alt="{{ 'sections.mobile_search.banner_alt' | t | escape }}" width="1200" height="800" loading="lazy">
-        </a>
-      {%- endif -%}
-      {%- if trend_count > 0 -%}
-        <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
-          <div data-lemoon-search-slides>
-            {%- assign slide_index = 0 -%}
-            {%- for trend_product in trend_products limit: 4 -%}
-              {%- if trend_product != blank -%}
-                <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}"{% if slide_index > 0 %} hidden{% endif %}>
-                  <a class="lemoon-mobile-search__product" href="{{ trend_product.url | escape }}">
-                    {%- if trend_product.featured_image != blank -%}
-                      {{ trend_product.featured_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 240', sizes: '96px', alt: trend_product.title }}
-                    {%- else -%}
-                      <img src="{{ 'lemoon-product-fallback.png' | asset_url }}" alt="{{ trend_product.title | escape }}" width="96" height="72" loading="lazy">
-                    {%- endif -%}
-                    <span>{{ trend_product.title | escape }}</span>
-                  </a>
-                </div>
-                {%- assign slide_index = slide_index | plus: 1 -%}
-              {%- endif -%}
+      {%- assign carousel_slide_count = trend_count | plus: 1 -%}
+      <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
+        <div data-lemoon-search-slides>
+          <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="0">
+            {%- if section.settings.mobile_search_banner_image != blank -%}
+              {%- assign banner_alt = section.settings.mobile_search_banner_image.alt -%}
+              {%- if banner_alt == blank -%}{%- assign banner_alt = 'sections.mobile_search.banner_alt' | t -%}{%- endif -%}
+              <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
+                {{ section.settings.mobile_search_banner_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '320, 480, 750, 1000', sizes: '(max-width: 989px) 100vw, 480px', alt: banner_alt }}
+              </a>
+            {%- else -%}
+              <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
+                <img src="{{ 'lemoon-hero-editorial.png' | asset_url }}" alt="{{ 'sections.mobile_search.banner_alt' | t | escape }}" width="1200" height="800" loading="lazy">
+              </a>
+            {%- endif -%}
+          </div>
+          {%- assign slide_index = 1 -%}
+          {%- assign skip_card_product_styles = false -%}
+          {%- for trend_product in trend_products limit: 4 -%}
+            {%- if trend_product != blank -%}
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}"{% if slide_index > 0 %} hidden{% endif %}>
+                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, quick_add: 'none', product_view_context: 'collection' %}
+              </div>
+              {%- assign skip_card_product_styles = true -%}
+              {%- assign slide_index = slide_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="lemoon-mobile-search__carousel-controls"{% if carousel_slide_count < 2 %} hidden{% endif %}>
+          <button type="button" data-lemoon-search-previous aria-label="{{ 'sections.mobile_search.previous_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}</button>
+          <div class="lemoon-mobile-search__dots">
+            {%- for index in (1..carousel_slide_count) -%}
+              <button type="button" data-lemoon-search-dot data-slide-index="{{ forloop.index0 }}" aria-label="{{ 'sections.mobile_search.slide_label' | t: index: index, total: carousel_slide_count }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>
             {%- endfor -%}
           </div>
-          <div class="lemoon-mobile-search__carousel-controls"{% if trend_count < 2 %} hidden{% endif %}>
-            <button type="button" data-lemoon-search-previous aria-label="{{ 'sections.mobile_search.previous_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}</button>
-            <div class="lemoon-mobile-search__dots">
-              {%- for index in (1..trend_count) -%}
-                <button type="button" data-lemoon-search-dot data-slide-index="{{ forloop.index0 }}" aria-label="{{ 'sections.mobile_search.slide_label' | t: index: index, total: trend_count }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>
-              {%- endfor -%}
-            </div>
-            <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
-          </div>
+          <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
         </div>
-      {%- endif -%}
+      </div>
     </section>
   </div>
   <template data-lemoon-search-product-template>

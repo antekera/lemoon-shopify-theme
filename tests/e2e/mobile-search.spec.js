@@ -227,11 +227,11 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await expect(page.locator(s('previous'))).toBeDisabled();
   await page.locator(s('next')).click();
   await expect(page.locator(s('slide')).nth(1)).toBeVisible();
-  await page.locator(s('dot')).nth(3).click();
+  await page.locator(s('dot')).nth(4).click();
   await expect(page.locator(s('next'))).toBeDisabled();
-  await expect(page.locator(s('dot')).nth(3)).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator(s('dot')).nth(4)).toHaveAttribute('aria-current', 'true');
   await page.locator(s('carousel')).scrollIntoViewIfNeeded();
-  const box = await page.locator(s('slide')).nth(3).boundingBox();
+  const box = await page.locator(s('slide')).nth(4).boundingBox();
   const session = await page.context().newCDPSession(page);
   const x = box.x + 40;
   const y = box.y + box.height / 2;
@@ -240,9 +240,19 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 140, y: y + 5 }] });
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await session.detach();
-  await expect(page.locator(s('slide')).nth(2)).toBeVisible();
+  await expect(page.locator(s('slide')).nth(3)).toBeVisible();
   await page.locator(s('dot')).first().click();
   await expect(page.locator(s('previous'))).toBeDisabled();
+});
+
+test('puts the banner first and uses PLP product cards in the trends carousel', async ({ page }) => {
+  await open(page);
+  const slides = page.locator(s('slide'));
+  await expect(slides).toHaveCount(5);
+  await expect(slides.first().locator('.lemoon-mobile-search__banner')).toBeVisible();
+  await expect(slides.nth(1).locator('.product-card-wrapper')).toHaveCount(1);
+  await expect(slides.nth(4).locator('.product-card-wrapper')).toHaveCount(1);
+  await expect(page.locator(s('dot'))).toHaveCount(5);
 });
 
 test('traps keyboard focus, responds to resize and hides at desktop breakpoint', async ({ page }) => {
