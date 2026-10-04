@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fixture de búsqueda mobile</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/base.css">
+  <link rel="stylesheet" href="/assets/lemoon-header.css">
+  <link rel="stylesheet" href="/assets/lemoon-mobile-search.css">
+  <script type="module" src="/assets/lemoon-mobile-search.js"></script>
+  <style>
+    :root { --font-body-family: Arial; --font-heading-family: Arial; --color-foreground: 11,31,58; --color-background: 255,255,255; }
+    body { margin: 0; } .announcement-bar-section { background: #0b1f3a; height: 36px; position: relative; z-index: 5; } .section-header { position: sticky; top: 0; z-index: 4; } .product-card-wrapper .card { border: 1px solid #0b1f3a; }
+    main { min-height: 180vh; padding: 24px; }
+    .lemoon-header-wrapper { display: block; --lemoon-header-height: 88px; --lemoon-header-mobile-height: 56px; --lemoon-header-padding: 24px; }
+  </style>
+</head>
+<body>
+<div class="announcement-bar-section" aria-label="Barra informativa">Envío gratis a todo Chile</div>
+<div class="section-header shopify-section-group-header-group">
+  <sticky-header class="lemoon-header-wrapper">
+    <header class="lemoon-header" role="banner" data-lemoon-search-header>
+      <div class="lemoon-header__desktop"><button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="Buscar productos" aria-controls="Lemoon-Mobile-Search-fixture" aria-expanded="false" aria-haspopup="dialog"><svg class="lemoon-icon lemoon-icon--search" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></button><a href="/" class="lemoon-header__brand">lemoon</a></div>
+      <div class="lemoon-header__mobile">
+        <div class="lemoon-header__mobile-inner">
+          <div class="lemoon-header__mobile-drawer">
+            <button type="button" class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" data-lemoon-nav-open aria-label="Menú"><svg class="lemoon-icon lemoon-icon--menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="Abrir búsqueda" aria-controls="Lemoon-Mobile-Search-fixture" aria-expanded="false" aria-haspopup="dialog"><svg class="lemoon-icon lemoon-icon--search" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></button>
+          </div>
+          <a class="lemoon-header__brand" href="/" aria-label="Lemoon">lemoon</a>
+          <div class="lemoon-header__mobile-actions"><a href="/cart" aria-label="Carrito">0</a></div>
+        </div>
+      </div>
+      <nav class="lemoon-header__quick-nav" aria-label="Categorías"><a class="lemoon-header__quick-link" href="/collections/0">Mujer</a><a class="lemoon-header__quick-link" href="/collections/1">Hombre</a><a class="lemoon-header__quick-link" href="/collections/2">Sport</a><a class="lemoon-header__quick-link" href="/collections/3">Todos</a></nav>
+    </header>
+    <div class="lemoon-mobile-search" data-lemoon-search hidden data-search-url="/search" data-predictive-url="/search/suggest" data-fallback-image="/assets/lemoon-product-fallback.png" data-loading="Buscando productos…" data-no-results="No encontramos productos para “__TERMS__”." data-error="No pudimos cargar las sugerencias. Puedes ver todos los resultados de búsqueda." data-results-count="Productos encontrados: __COUNT__">
+      <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
+      <div id="Lemoon-Mobile-Search-fixture" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="false" aria-label="Buscar productos" tabindex="-1">
+        <div class="lemoon-mobile-search__sticky-header"><form action="/search" method="get" role="search" class="lemoon-mobile-search__form" data-lemoon-search-form><button type="button" class="lemoon-mobile-search__close" data-lemoon-search-close aria-label="Cerrar búsqueda"><svg class="lemoon-icon lemoon-icon--chevron-right" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></button>
+          <label class="visually-hidden" for="Lemoon-Mobile-Search-fixture-Input">Buscar productos</label>
+          <input id="Lemoon-Mobile-Search-fixture-Input" class="lemoon-mobile-search__input" data-lemoon-search-input type="search" name="q" placeholder="Buscar" autocomplete="off" aria-controls="Lemoon-Mobile-Search-fixture-Results">
+          <input type="hidden" name="type" value="product"><button type="submit" class="lemoon-mobile-search__submit" aria-label="Buscar"><svg class="lemoon-icon lemoon-icon--search" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg></button>
+        </form></div>
+        <div class="lemoon-mobile-search__columns"><div class="lemoon-mobile-search__left-column">
+        <section class="lemoon-mobile-search__suggestions" aria-labelledby="Lemoon-Mobile-Search-fixture-Suggested">
+          <h3 id="Lemoon-Mobile-Search-fixture-Suggested">Productos sugeridos</h3><p class="lemoon-mobile-search__status" role="status" aria-live="polite" aria-atomic="true" data-lemoon-search-status></p>
+          <ul id="Lemoon-Mobile-Search-fixture-Results" class="lemoon-mobile-search__results" data-lemoon-search-results aria-busy="false" role="list"></ul>
+          <a class="lemoon-mobile-search__show-all" href="/search?type=product" data-lemoon-search-all>Mostrar todos los resultados de búsqueda </a>
+        </section></div><div class="lemoon-mobile-search__right-column">
+        <section class="lemoon-mobile-search__information" aria-labelledby="Lemoon-Mobile-Search-fixture-Information"><h3 id="Lemoon-Mobile-Search-fixture-Information">Información</h3><ul class="lemoon-mobile-search__information-links" role="list"><li><a href="/pages/shipping"><svg class="lemoon-icon lemoon-icon--truck" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M1 3h14v13H1z"/><path d="M15 8h4l3 4v4h-7"/><circle cx="5.5" cy="18" r="2.5"/><circle cx="18.5" cy="18" r="2.5"/></svg><span>Envíos y retornos</span><svg class="lemoon-icon lemoon-icon--chevron-right" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></a></li><li><a href="/pages/preguntas-frecuentes"><svg class="lemoon-icon lemoon-icon--circle-help" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 0 1 6 0c0 2-3 2-3 4"/><path d="M12 17h.01"/></svg><span>Preguntas frecuentes</span><svg class="lemoon-icon lemoon-icon--chevron-right" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></a></li><li><a href="/pages/style"><svg class="lemoon-icon lemoon-icon--sparkles" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></svg><span>Buscar mi estilo</span><svg class="lemoon-icon lemoon-icon--chevron-right" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg></a></li></ul></section>
+        <section class="lemoon-mobile-search__trends" aria-labelledby="Lemoon-Mobile-Search-fixture-Trends">
+          <h3 id="Lemoon-Mobile-Search-fixture-Trends">Tendencias</h3>
+          <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
+            <div data-lemoon-search-slides>
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="0" aria-hidden="false"><a class="lemoon-mobile-search__banner" href="/collections/fixture-trends"><img src="/assets/lemoon-logo-refined-navy.svg" width="480" height="120" loading="lazy" alt="Descubre las tendencias de Lemoon"></a></div>
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="1" aria-hidden="true" inert><div class="card-wrapper product-card-wrapper"><div class="card"><h3>Lemoon Arica</h3><button class="quick-add__submit">Agregar al carrito</button></div></div></div>
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="2" aria-hidden="true" inert><div class="card-wrapper product-card-wrapper"><div class="card"><h3>Lemoon Biobio</h3><button class="quick-add__submit">Agregar al carrito</button></div></div></div>
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="3" aria-hidden="true" inert><div class="card-wrapper product-card-wrapper"><div class="card"><h3>Lemoon Wabi</h3><button class="quick-add__submit">Agregar al carrito</button></div></div></div>
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="4" aria-hidden="true" inert><div class="card-wrapper product-card-wrapper"><div class="card"><h3>Lemoon Colca</h3><button class="quick-add__submit">Agregar al carrito</button></div></div></div>
+            </div>
+            <div class="lemoon-mobile-search__carousel-controls"><button type="button" data-lemoon-search-previous aria-label="Producto anterior"><svg class="lemoon-icon lemoon-icon--arrow-left-filled" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path fill="currentColor" stroke="none" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></button><div class="lemoon-mobile-search__dots"><button type="button" data-lemoon-search-dot data-slide-index="0" aria-label="Ver slide 1 de 5" aria-current="true"><span></span></button><button type="button" data-lemoon-search-dot data-slide-index="1" aria-label="Ver slide 2 de 5" aria-current="false"><span></span></button><button type="button" data-lemoon-search-dot data-slide-index="2" aria-label="Ver slide 3 de 5" aria-current="false"><span></span></button><button type="button" data-lemoon-search-dot data-slide-index="3" aria-label="Ver slide 4 de 5" aria-current="false"><span></span></button><button type="button" data-lemoon-search-dot data-slide-index="4" aria-label="Ver slide 5 de 5" aria-current="false"><span></span></button></div><button type="button" data-lemoon-search-next aria-label="Producto siguiente"><svg class="lemoon-icon lemoon-icon--arrow-right-filled" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path fill="currentColor" stroke="none" d="M4 11h12.17l-5.59-5.59L12 4l8 8-8 8-1.41-1.41L16.17 13H4v-2Z"/></svg></button></div>
+          </div>
+        </section></div></div>
+      </div>
+      <template data-lemoon-search-product-template><li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image><svg class="lemoon-mobile-search__placeholder" viewBox="0 0 120 90" aria-hidden="true"><path d="M22 30h29l7 8h4l7-8h29v27H69l-7-12h-4l-7 12H22z"/></svg></span><span data-product-title></span></a></li></template>
+      <script type="application/json" data-lemoon-search-products>[{"id": 1, "title": "Lemoon Arica", "url": "/products/fixture-1", "image": null}, {"id": 2, "title": "Lemoon Biobio", "url": "/products/fixture-2", "image": null}, {"id": 3, "title": "Lemoon Wabi", "url": "/products/fixture-3", "image": null}, {"id": 4, "title": "Lemoon Colca", "url": "/products/fixture-4", "image": null}, {"id": 5, "title": "Lemoon Uno", "url": "/products/fixture-5", "image": null}, {"id": 6, "title": "Lemoon Dos", "url": "/products/fixture-6", "image": null}, {"id": 7, "title": "Lemoon Tres", "url": "/products/fixture-7", "image": null}]</script>
+    </div>
+  </sticky-header>
+</div>
+<main><h1>Fixture de búsqueda mobile</h1><p>Contenido de tienda para comprobar el scroll de fondo.</p></main>
+</body>
+</html>

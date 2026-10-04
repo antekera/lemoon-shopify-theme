@@ -1,4 +1,5 @@
 {{ 'lemoon-header.css' | asset_url | stylesheet_tag }}
+{{ 'lemoon-mobile-search.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -11,23 +12,30 @@
 -%}
 
 <sticky-header
-  data-sticky-type="on-scroll-up"
+  data-sticky-type="always"
   class="lemoon-header-wrapper"
   style="
     --lemoon-header-background: #FFFFFF;
     --lemoon-header-text: #0B1F3A;
     --lemoon-header-accent: #F7E600;
     --lemoon-header-border: #E0DDD8;
-    --lemoon-header-height: 72px;
+    --lemoon-header-height: 88px;
     --lemoon-header-mobile-height: 56px;
     --lemoon-header-padding: 40px;
-    --lemoon-header-nav-gap: 32px;
     --lemoon-header-nav-size: 15px;
-    --lemoon-header-max-width: 1440px;
+    --lemoon-header-max-width: 1280px;
   "
 >
-  <header class="lemoon-header" role="banner">
+  <header class="lemoon-header" role="banner" data-lemoon-search-header>
     <div class="lemoon-header__desktop">
+      <div class="lemoon-header__leading-actions">
+        <button class="lemoon-header__menu-btn" id="lemoon-nav-open-desktop" data-lemoon-nav-open aria-label="{{ 'sections.header.menu' | t }}">
+          {% render 'lemoon-icon', icon: 'menu', size: 24 %}
+        </button>
+        <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
+          {% render 'lemoon-icon', icon: 'search', size: 24 %}
+        </button>
+      </div>
       <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
         <img
           src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}"
@@ -39,66 +47,19 @@
         >
       </a>
 
-      <nav class="lemoon-header__navigation" aria-label="Navegación principal">
-        {%- for link in section.settings.menu.links -%}
-          <div class="lemoon-header__menu-item">
-            {%- if link.links != blank -%}
-              <details class="lemoon-header__menu-disclosure">
-                <summary class="lemoon-header__menu-summary{% if link.current or link.child_active %} is-current{% endif %}">
-                  {{ link.title | escape }}
-                  {% render 'lemoon-icon', icon: 'chevron-down', size: 14 %}
-                </summary>
-                <ul class="lemoon-header__submenu" role="list">
-                  <li><a class="lemoon-header__submenu-link" href="{{ link.url }}">Ver todo {{ link.title | escape }}</a></li>
-                  {%- for childlink in link.links -%}
-                    <li>
-                      <a class="lemoon-header__submenu-link" href="{{ childlink.url }}"{% if childlink.current %} aria-current="page"{% endif %}>
-                        {{ childlink.title | escape }}
-                      </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="lemoon-header__submenu-third" role="list">
-                          {%- for grandchild in childlink.links -%}
-                            <li>
-                              <a class="lemoon-header__submenu-link lemoon-header__submenu-link--third" href="{{ grandchild.url }}"{% if grandchild.current %} aria-current="page"{% endif %}>
-                                {{ grandchild.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </details>
-            {%- else -%}
-              <a class="lemoon-header__nav-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
-                {{ link.title | escape }}
-              </a>
-            {%- endif -%}
-          </div>
-        {%- endfor -%}
-      </nav>
-
       <div class="lemoon-header__actions">
-        {%- if section.settings.whatsapp_url != blank -%}
-          <a class="lemoon-header__whatsapp" href="{{ section.settings.whatsapp_url }}" target="_blank" rel="noopener">
-            {% render 'lemoon-icon', icon: 'message-circle', size: 16 %}
-            <span>WhatsApp</span>
-          </a>
-        {%- endif -%}
-        {% render 'header-search', input_id: 'Lemoon-Header-Search-Desktop' %}
-        {%- if show_account -%}
-          <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="Cuenta">
-            {% render 'lemoon-icon', icon: 'user', size: 24 %}
-          </a>
-        {%- endif -%}
         <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" aria-label="{{ 'templates.cart.cart' | t }}">
-          {% render 'lemoon-icon', icon: 'shopping-bag', size: 24 %}
+          {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
           {%- if cart.item_count > 0 -%}
             <span class="lemoon-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           {%- endif -%}
         </a>
+        {%- if show_account -%}
+          <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+          </a>
+        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
         {%- endfor -%}
@@ -108,8 +69,11 @@
     <div class="lemoon-header__mobile">
       <div class="lemoon-header__mobile-inner">
         <div class="lemoon-header__mobile-drawer">
-          <button class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" aria-label="{{ 'sections.header.menu' | t }}">
+          <button class="lemoon-header__mobile-menu-btn" id="lemoon-nav-open" data-lemoon-nav-open aria-label="{{ 'sections.header.menu' | t }}">
             {% render 'lemoon-icon', icon: 'menu', size: 24 %}
+          </button>
+          <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
+            {% render 'lemoon-icon', icon: 'search', size: 24 %}
           </button>
         </div>
         <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
@@ -123,19 +87,34 @@
           >
         </a>
         <div class="lemoon-header__mobile-actions">
-          {% render 'header-search', input_id: 'Lemoon-Header-Search-Mobile' %}
           <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble-mobile" aria-label="{{ 'templates.cart.cart' | t }}">
-            {% render 'lemoon-icon', icon: 'shopping-bag', size: 24 %}
+            {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
             {%- if cart.item_count > 0 -%}
               <span class="lemoon-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
               <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
             {%- endif -%}
           </a>
+          {%- if show_account -%}
+            <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+              {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+            </a>
+          {%- endif -%}
         </div>
       </div>
     </div>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="lemoon-header__quick-nav" aria-label="{{ 'sections.header.quick_categories' | t }}">
+        {%- for link in section.settings.menu.links limit: 4 -%}
+          <a class="lemoon-header__quick-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
+            {{ link.title | escape }}
+          </a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
   </header>
   {% render 'lemoon-mobile-nav' %}
+  {% render 'lemoon-mobile-search', section: section %}
 </sticky-header>
 
 {% javascript %}
@@ -206,8 +185,15 @@
   "class": "section-header",
   "max_blocks": 3,
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menú principal", "default": "main-menu" },
-    { "type": "url", "id": "whatsapp_url", "label": "Enlace de WhatsApp", "info": "Déjalo vacío para ocultarlo." }
+    { "type": "link_list", "id": "menu", "label": "Menú principal", "info": "Se muestran hasta cuatro enlaces destacados en desktop y mobile.", "default": "main-menu" },
+    { "type": "header", "content": "Búsqueda móvil: información" },
+    { "type": "page", "id": "mobile_search_shipping_page", "label": "Envíos y retornos" },
+    { "type": "url", "id": "mobile_search_faq_page", "label": "Preguntas frecuentes" },
+    { "type": "url", "id": "mobile_search_style_page", "label": "Buscar mi estilo" },
+    { "type": "header", "content": "Búsqueda móvil: tendencias" },
+    { "type": "image_picker", "id": "mobile_search_banner_image", "label": "Imagen del banner" },
+    { "type": "url", "id": "mobile_search_banner_url", "label": "Enlace del banner" },
+    { "type": "product_list", "id": "mobile_search_trending_products", "label": "Productos de tendencias", "limit": 4 }
   ],
   "blocks": [
     { "type": "@app" }

@@ -2326,6 +2326,7 @@ input[type='checkbox'] {
 
 /* section-header */
 .section-header.shopify-section-group-header-group {
+  background: #fff;
   z-index: 3;
 }
 
@@ -3633,5 +3634,13 @@ details-disclosure > details {
   }
   100% {
     transform: translateX(100%) scaleX(0);
+  }
+}
+
+@media screen and (max-width: 989px) {
+  input:not(.lemoon-mobile-search__input):not([type='button']):not([type='submit']):not([type='reset']):not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']):not([type='file']):not([type='hidden']),
+  select,
+  textarea {
+    font-size: max(16px, 1em) !important;
   }
 }

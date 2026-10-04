@@ -1,0 +1,69 @@
+{% doc %}
+Renders one product, article, or page from the search results.
+@param {object} item - The search result to render.
+@param {object} section - The main search section.
+@param {boolean} show_all_products - Whether the result comes from all products.
+@param {boolean} lazy_load - Whether to lazy load the card image.
+@param {boolean} skip_card_product_styles - Whether card styles were already rendered.
+{% enddoc %}
+
+<li
+  class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+  {% if settings.animations_reveal_on_scroll %}
+    data-cascade
+  {% endif %}
+>
+  {%- liquid
+    assign item_type = 'product'
+    unless show_all_products
+      assign item_type = item.object_type
+    endunless
+  -%}
+  {%- case item_type -%}
+    {%- when 'product' -%}
+      {% render 'card-product',
+        card_product: item,
+        media_aspect_ratio: section.settings.image_ratio,
+        image_shape: section.settings.image_shape,
+        show_secondary_image: section.settings.show_secondary_image,
+        show_vendor: section.settings.show_vendor,
+        show_rating: section.settings.show_rating,
+        lazy_load: lazy_load,
+        skip_styles: skip_card_product_styles,
+        product_view_context: 'search'
+      %}
+      {%- assign skip_card_product_styles = true -%}
+    {%- when 'article' -%}
+      {% render 'article-card',
+        article: item,
+        show_image: true,
+        show_date: section.settings.article_show_date,
+        show_author: section.settings.article_show_author,
+        show_badge: true,
+        media_aspect_ratio: 1,
+        lazy_load: lazy_load
+      %}
+    {%- when 'page' -%}
+      <div class="article-card-wrapper card-wrapper underline-links-hover">
+        <div
+          class="card card--card card--text ratio color-{{ settings.blog_card_color_scheme }}"
+          style="--ratio-percent: 100%;"
+        >
+          <div class="card__content">
+            <div class="card__information">
+              <h3 class="card__heading">
+                <a href="{{ item.url }}" class="full-unstyled-link">
+                  {{ item.title | truncate: 50 | escape }}
+                </a>
+              </h3>
+            </div>
+            <div class="card__badge {{ settings.badge_position }}">
+              <span class="badge color-{{ settings.color_schemes | first }}">
+                {{- 'templates.search.page' | t -}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+  {%- endcase -%}
+</li>

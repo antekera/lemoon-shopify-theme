@@ -11,15 +11,28 @@
             "text": "Envío gratis a todo Chile en compras sobre $70.000",
             "link": ""
           }
+        },
+        "announcement-bar-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Descubre la colección Lemoon",
+            "link": ""
+          }
+        },
+        "announcement-bar-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Encuentra tu próximo par favorito",
+            "link": ""
+          }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "announcement-bar-0",
+        "announcement-bar-1",
+        "announcement-bar-2"
       ],
       "settings": {
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
         "show_line_separator": true,
         "show_social": false,
         "enable_country_selector": false,
@@ -29,7 +42,16 @@
     "header": {
       "type": "header",
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "mobile_search_shipping_page": "shopify://pages/envios-y-entregas",
+        "mobile_search_faq_page": "/pages/preguntas-frecuentes",
+        "mobile_search_style_page": "/pages/buscar-mi-estilo",
+        "mobile_search_trending_products": [
+          "gid://shopify/Product/9581569081512",
+          "gid://shopify/Product/9581569114280",
+          "gid://shopify/Product/9581568884904",
+          "gid://shopify/Product/9581569179816"
+        ]
       }
     }
   },

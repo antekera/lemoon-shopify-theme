@@ -1,0 +1,120 @@
+{% doc %}
+  Renders the mobile product search panel and its initial product data.
+  @param {section} section - Header section containing the content settings.
+  @example
+  {% render 'lemoon-mobile-search', section: section %}
+{% enddoc %}
+<script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'quick-add.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
+  assign trend_products = section.settings.mobile_search_trending_products
+  assign trend_count = trend_products.size | at_most: 4
+  if trend_products == blank
+    assign trend_products = collections['opticos'].products
+    assign trend_count = trend_products.size | at_most: 4
+  endif
+  assign shipping_page = section.settings.mobile_search_shipping_page
+  assign shipping_url = shipping_page.url | default: shipping_page | default: '/pages/envios-y-entregas'
+  assign faq_url = section.settings.mobile_search_faq_page | default: '/pages/preguntas-frecuentes'
+  assign style_url = section.settings.mobile_search_style_page | default: '/pages/buscar-mi-estilo'
+  assign banner_url = section.settings.mobile_search_banner_url | default: '/collections/opticos'
+-%}
+<div class="lemoon-mobile-search" data-lemoon-search hidden
+  data-search-url="{{ routes.search_url | escape }}"
+  data-predictive-url="{{ routes.predictive_search_url | escape }}"
+  data-fallback-image="{{ 'lemoon-product-fallback.png' | asset_url | escape }}"
+  data-loading="{{ 'sections.mobile_search.loading' | t | escape }}"
+  data-no-results="{{ 'sections.mobile_search.no_results' | t: terms: '__TERMS__' | escape }}"
+  data-error="{{ 'sections.mobile_search.error' | t | escape }}"
+  data-results-count="{{ 'sections.mobile_search.results_count' | t: count: '__COUNT__' | escape }}">
+  <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
+  <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="false" aria-label="{{ 'sections.mobile_search.title' | t | escape }}" tabindex="-1">
+    <div class="lemoon-mobile-search__sticky-header">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="lemoon-mobile-search__form" data-lemoon-search-form>
+        <button type="button" class="lemoon-mobile-search__close" data-lemoon-search-close aria-label="{{ 'sections.mobile_search.close' | t }}">
+          {% render 'lemoon-icon', icon: 'chevron-right', size: 24 %}
+        </button>
+        <label class="visually-hidden" for="{{ panel_id }}-Input">{{ 'sections.mobile_search.search_label' | t }}</label>
+        <input id="{{ panel_id }}-Input" class="lemoon-mobile-search__input" data-lemoon-search-input type="search" name="q" placeholder="{{ 'sections.mobile_search.placeholder' | t }}" autocomplete="off" aria-controls="{{ panel_id }}-Results">
+        <input type="hidden" name="type" value="product">
+        <button type="submit" class="lemoon-mobile-search__submit" aria-label="{{ 'sections.mobile_search.submit' | t }}">{% render 'lemoon-icon', icon: 'search', size: 24 %}</button>
+      </form>
+    </div>
+    <div class="lemoon-mobile-search__columns">
+      <div class="lemoon-mobile-search__left-column">
+        <section class="lemoon-mobile-search__suggestions" aria-labelledby="{{ panel_id }}-Suggested">
+      <h3 id="{{ panel_id }}-Suggested">{{ 'sections.mobile_search.suggested_products' | t }}</h3>
+      <p class="lemoon-mobile-search__status" role="status" aria-live="polite" aria-atomic="true" data-lemoon-search-status></p>
+      <ul id="{{ panel_id }}-Results" class="lemoon-mobile-search__results" data-lemoon-search-results aria-busy="false" role="list"></ul>
+      <a class="lemoon-mobile-search__show-all" href="{{ routes.search_url }}?type=product" data-lemoon-search-all>{{ 'sections.mobile_search.show_all' | t }}</a>
+        </section>
+      </div>
+      <div class="lemoon-mobile-search__right-column">
+        <section class="lemoon-mobile-search__information" aria-labelledby="{{ panel_id }}-Information">
+      <h3 id="{{ panel_id }}-Information">{{ 'sections.mobile_search.information' | t }}</h3>
+      <ul class="lemoon-mobile-search__information-links" role="list">
+        <li><a href="{{ shipping_url | escape }}">{% render 'lemoon-icon', icon: 'truck', size: 22 %}<span>{{ 'sections.mobile_search.shipping_returns' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+        <li><a href="{{ faq_url | escape }}">{% render 'lemoon-icon', icon: 'circle-help', size: 22 %}<span>{{ 'sections.mobile_search.faq' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+        <li><a href="{{ style_url | escape }}">{% render 'lemoon-icon', icon: 'sparkles', size: 22 %}<span>{{ 'sections.mobile_search.find_style' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+      </ul>
+        </section>
+        <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
+      <h3 id="{{ panel_id }}-Trends">{{ 'sections.mobile_search.trends' | t }}</h3>
+      {%- assign carousel_slide_count = trend_count | plus: 1 -%}
+      <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
+        <div data-lemoon-search-slides>
+          <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="0" aria-hidden="false">
+            {%- if section.settings.mobile_search_banner_image != blank -%}
+              {%- assign banner_alt = section.settings.mobile_search_banner_image.alt -%}
+              {%- if banner_alt == blank -%}{%- assign banner_alt = 'sections.mobile_search.banner_alt' | t -%}{%- endif -%}
+              <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
+                {{ section.settings.mobile_search_banner_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '320, 480, 750, 1000', sizes: '(max-width: 989px) 100vw, 480px', alt: banner_alt }}
+              </a>
+            {%- else -%}
+              <a class="lemoon-mobile-search__banner" href="{{ banner_url | escape }}">
+                <img src="{{ 'lemoon-hero-editorial.png' | asset_url }}" alt="{{ 'sections.mobile_search.banner_alt' | t | escape }}" width="1200" height="800" loading="lazy">
+              </a>
+            {%- endif -%}
+          </div>
+          {%- assign slide_index = 1 -%}
+          {%- assign skip_card_product_styles = false -%}
+          {%- for trend_product in trend_products limit: 4 -%}
+            {%- if trend_product != blank -%}
+              <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}" aria-hidden="true" inert>
+                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, quick_add: 'standard', quick_add_id_prefix: 'QuickAdd-MobileSearch-', product_view_context: 'collection' %}
+              </div>
+              {%- assign skip_card_product_styles = true -%}
+              {%- assign slide_index = slide_index | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <div class="lemoon-mobile-search__carousel-controls"{% if carousel_slide_count < 2 %} hidden{% endif %}>
+          <button type="button" data-lemoon-search-previous aria-label="{{ 'sections.mobile_search.previous_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-left-filled', size: 24 %}</button>
+          <div class="lemoon-mobile-search__dots">
+            {%- for index in (1..carousel_slide_count) -%}
+              <button type="button" data-lemoon-search-dot data-slide-index="{{ forloop.index0 }}" aria-label="{{ 'sections.mobile_search.slide_label' | t: index: index, total: carousel_slide_count }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"><span></span></button>
+            {%- endfor -%}
+          </div>
+          <button type="button" data-lemoon-search-next aria-label="{{ 'sections.mobile_search.next_product' | t }}">{% render 'lemoon-icon', icon: 'arrow-right-filled', size: 24 %}</button>
+        </div>
+      </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <template data-lemoon-search-product-template>
+    <li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image>{{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}</span><span data-product-title></span></a></li>
+  </template>
+  <script type="application/json" data-lemoon-search-products>
+    [
+      {%- for initial_product in collections.all.products limit: 50 -%}
+        {%- unless forloop.first -%},{%- endunless -%}
+        {"id":{{ initial_product.id | json }},"url":{{ initial_product.url | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }},"title":{{ initial_product.title | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }},"image":{% if initial_product.featured_image != blank %}{{ initial_product.featured_image | image_url: width: 240 | json | replace: '<', '\u003c' | replace: '>', '\u003e' | replace: '&', '\u0026' }}{% else %}null{% endif %}}
+      {%- endfor -%}
+    ]
+  </script>
+</div>

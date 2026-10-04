@@ -7,6 +7,34 @@ on:
     branches: [main]
 
 jobs:
+  mobile-search-tests:
+    name: Mobile Search Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run mobile search tests
+        run: |
+          unset NO_COLOR FORCE_COLOR
+          npm test
+      - name: Upload Playwright diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-search-playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+
   theme-check:
     name: Theme Check
     runs-on: ubuntu-latest

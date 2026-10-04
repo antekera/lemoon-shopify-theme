@@ -5,7 +5,6 @@
   --lemoon-header-border: var(--lemoon-border-default, #e0ddd8);
   --lemoon-header-height: var(--lemoon-header-height-desktop, 72px);
   --lemoon-header-padding: 40px;
-  --lemoon-header-nav-gap: 32px;
   background: var(--lemoon-header-background);
   border-bottom: 1px solid var(--lemoon-header-border);
   color: var(--lemoon-header-text);
@@ -18,6 +17,11 @@
   box-sizing: border-box;
 }
 
+.lemoon-header {
+  margin: 0 auto;
+  max-width: var(--lemoon-header-max-width, 1280px);
+}
+
 .lemoon-header__desktop,
 .lemoon-header__mobile {
   margin: 0 auto;
@@ -27,21 +31,36 @@
 .lemoon-header__desktop {
   align-items: center;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
   min-height: var(--lemoon-header-height);
+  padding: 0 var(--lemoon-header-padding);
+  position: relative;
+}
+
+.lemoon-header__leading-actions {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  gap: 0;
+  justify-self: start;
 }
 
 .lemoon-header__brand {
   align-items: center;
+  align-self: center;
   color: var(--lemoon-header-text);
   display: inline-flex;
-  justify-self: start;
+  left: 50%;
   min-height: 44px;
+  position: absolute;
   text-decoration: none;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .lemoon-header__desktop .lemoon-header__brand {
-  padding-left: var(--lemoon-header-padding);
+  padding-left: 0;
 }
 
 .lemoon-header__wordmark {
@@ -59,134 +78,92 @@
 .lemoon-header__logo-image {
   display: block;
   height: auto;
-  max-height: 28px;
+  max-height: 36px;
   object-fit: contain;
+  transform: translateY(-1px);
   width: auto;
 }
 
-.lemoon-header__navigation {
-  align-items: stretch;
-  display: flex;
-  gap: var(--lemoon-header-nav-gap);
-  height: var(--lemoon-header-height);
-  justify-content: center;
-}
-
-.lemoon-header__menu-item,
-.lemoon-header__menu-disclosure {
-  align-items: stretch;
-  display: flex;
-  position: relative;
-}
-
-.lemoon-header__nav-link,
-.lemoon-header__menu-summary {
+.lemoon-header__menu-btn,
+.lemoon-header__mobile-menu-btn {
   align-items: center;
+  background: none;
+  border: none;
   color: var(--lemoon-header-text);
   cursor: pointer;
-  display: inline-flex;
-  font-family: var(--font-heading-family), sans-serif;
-  font-size: var(--lemoon-header-nav-size, 15px);
-  font-weight: 500;
-  gap: 4px;
-  line-height: 1;
-  min-height: 44px;
-  position: relative;
-  text-decoration: none;
-  white-space: nowrap;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  width: 44px;
 }
 
-.lemoon-header__menu-summary {
-  list-style: none;
+.lemoon-header__menu-btn .lemoon-icon,
+.lemoon-header__mobile-menu-btn .lemoon-icon {
+  height: 26px;
+  transform: translateX(-2px);
+  width: 26px;
 }
 
-.lemoon-header__menu-summary::-webkit-details-marker {
-  display: none;
+.lemoon-header__action > .lemoon-icon,
+.lemoon-header__cart > .lemoon-icon,
+.lemoon-header details-modal .header__icon .lemoon-icon {
+  height: 26px;
+  width: 26px;
 }
 
-.lemoon-header__nav-link::after,
-.lemoon-header__menu-summary::after {
-  background: var(--lemoon-header-accent);
-  border-radius: 1px;
-  bottom: 16px;
-  content: '';
-  height: 2px;
-  left: 0;
-  position: absolute;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 160ms ease;
-  width: calc(100% - 0.15em);
-}
-
-.lemoon-header__nav-link:hover::after,
-.lemoon-header__nav-link:focus-visible::after,
-.lemoon-header__nav-link[aria-current='page']::after,
-.lemoon-header__menu-summary:hover::after,
-.lemoon-header__menu-summary:focus-visible::after,
-.lemoon-header__menu-disclosure[open] .lemoon-header__menu-summary::after {
-  transform: scaleX(1);
-}
-
-.lemoon-header__nav-link:focus-visible,
-.lemoon-header__menu-summary:focus-visible,
 .lemoon-header__brand:focus-visible,
-.lemoon-header__action:focus-visible {
+.lemoon-header__action:focus-visible,
+.lemoon-header__menu-btn:focus-visible,
+.lemoon-header__mobile-menu-btn:focus-visible,
+.lemoon-header__quick-link:focus-visible {
   outline: 2px solid var(--lemoon-header-accent);
   outline-offset: 3px;
 }
 
-.lemoon-header__menu-summary .lemoon-icon {
-  height: 14px;
-  transition: transform 160ms ease;
-  width: 14px;
+.lemoon-header__quick-nav {
+  align-items: stretch;
+  border-top: 1px solid var(--lemoon-header-border);
+  display: flex;
+  gap: clamp(4rem, 8vw, 12rem);
+  justify-content: center;
+  margin: 0 auto;
+  max-width: var(--lemoon-header-max-width, 1440px);
+  min-height: 68px;
+  padding: 0 var(--lemoon-header-padding);
 }
 
-.lemoon-header__menu-disclosure[open] .lemoon-header__menu-summary .lemoon-icon {
-  transform: rotate(180deg);
-}
-
-.lemoon-header__submenu {
-  background: var(--lemoon-header-background);
-  border: 1px solid var(--lemoon-header-border);
-  box-shadow: 0 12px 24px rgba(11, 31, 58, 0.12);
-  left: 50%;
-  list-style: none;
-  margin: 0;
-  min-width: 210px;
-  padding: 12px;
-  position: absolute;
-  top: calc(100% - 4px);
-  transform: translateX(-50%);
-  z-index: 8;
-}
-
-.lemoon-header__submenu-link {
+.lemoon-header__quick-link {
+  align-items: center;
   color: var(--lemoon-header-text);
-  display: block;
-  font-family: var(--font-body-family), sans-serif;
-  font-size: 14px;
-  line-height: 1.3;
-  padding: 10px 12px;
+  display: flex;
+  font-family: var(--font-heading-family), sans-serif;
+  font-size: var(--lemoon-header-nav-size, 15px);
+  font-weight: 500;
+  justify-content: center;
+  line-height: 1.2;
   text-decoration: none;
+  white-space: nowrap;
 }
 
-.lemoon-header__submenu-link:hover,
-.lemoon-header__submenu-link:focus-visible,
-.lemoon-header__submenu-link[aria-current='page'] {
-  background: color-mix(in srgb, var(--lemoon-header-accent) 24%, transparent);
+.lemoon-header__quick-link:hover,
+.lemoon-header__quick-link[aria-current='page'] {
+  text-decoration: underline;
+  text-decoration-color: var(--lemoon-header-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .lemoon-header__actions {
   align-items: center;
+  align-self: center;
   display: flex;
-  gap: 20px;
+  gap: 8px;
   justify-content: flex-end;
   min-height: var(--lemoon-header-height);
-  padding-right: var(--lemoon-header-padding);
+  padding-right: 0;
 }
 
-.lemoon-header__whatsapp,
 .lemoon-header__action,
 .lemoon-header__cart {
   align-items: center;
@@ -195,19 +172,6 @@
   flex: none;
   justify-content: center;
   text-decoration: none;
-}
-
-.lemoon-header__whatsapp {
-  font-family: var(--font-body-family), sans-serif;
-  font-size: 13px;
-  gap: 4px;
-  line-height: 1;
-  min-height: 32px;
-}
-
-.lemoon-header__whatsapp .lemoon-icon {
-  height: 16px;
-  width: 16px;
 }
 
 .lemoon-header__action,
@@ -221,9 +185,10 @@
 
 .lemoon-header__action .lemoon-icon,
 .lemoon-header__cart > .lemoon-icon,
+.lemoon-header details-modal .header__icon .lemoon-icon,
 .lemoon-header details-modal .header__icon .icon {
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 26px;
 }
 
 .lemoon-header__cart {
@@ -295,13 +260,15 @@
   .lemoon-header__mobile-inner {
     align-items: center;
     display: grid;
-    grid-template-columns: 44px 1fr auto;
+    gap: 0;
+    grid-template-columns: 1fr 1fr;
     min-height: var(--lemoon-header-mobile-height, 56px);
-    padding: 0 16px;
+    padding: 0 8px;
+    position: relative;
   }
 
   .lemoon-header__mobile .lemoon-header__brand {
-    justify-self: center;
+    padding-left: 0;
   }
 
   .lemoon-header__mobile .lemoon-header__wordmark {
@@ -312,12 +279,39 @@
     max-height: 22px;
   }
 
+  .lemoon-header__mobile-menu-btn .lemoon-icon,
+  .lemoon-header__mobile-actions .lemoon-header__action > .lemoon-icon,
+  .lemoon-header__mobile-actions .lemoon-header__cart > .lemoon-icon,
+  .lemoon-header__mobile-actions details-modal .header__icon .lemoon-icon {
+    height: 24px;
+    width: 24px;
+  }
+
   .lemoon-header__mobile-drawer {
     align-items: center;
+    align-self: center;
     display: flex;
+    gap: 0;
     height: 44px;
     justify-content: flex-start;
-    width: 44px;
+    width: auto;
+  }
+
+  .lemoon-header__quick-nav {
+    display: grid;
+    gap: 0;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 52px;
+    padding: 0 4px;
+  }
+
+  .lemoon-header__quick-link {
+    font-size: 1.2rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding: 4px 2px 8px;
+    text-align: center;
+    white-space: normal;
   }
 
   .lemoon-header__mobile .header__icon--menu,
@@ -333,8 +327,10 @@
 
   .lemoon-header__mobile-actions {
     align-items: center;
+    align-self: center;
     display: flex;
-    gap: 12px;
+    gap: 8px;
+    justify-self: end;
   }
 
   .lemoon-header__mobile .lemoon-header__cart-count {
@@ -349,38 +345,11 @@
 
 @media screen and (max-width: 420px) {
   .lemoon-header__mobile-inner {
-    padding: 0 12px;
+    padding: 0 8px;
   }
 
   .lemoon-header__mobile-actions {
     gap: 8px;
-  }
-
-  .lemoon-header__mobile .lemoon-header__action {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lemoon-header__nav-link::after,
-  .lemoon-header__menu-summary::after,
-  .lemoon-header__menu-summary .lemoon-icon {
-    transition: none;
-  }
-}
-
-@media screen and (max-width: 989px) {
-  .lemoon-header__mobile-menu-btn {
-    align-items: center;
-    background: none;
-    border: none;
-    color: var(--lemoon-header-text);
-    cursor: pointer;
-    display: flex;
-    height: 44px;
-    justify-content: center;
-    padding: 0;
-    width: 44px;
   }
 }
 
@@ -503,7 +472,7 @@
   display: none;
 }
 
-.lemoon-mobile-nav__details[open] .lemoon-icon {
+.lemoon-mobile-nav__details[open] > .lemoon-mobile-nav__summary .lemoon-icon {
   transform: rotate(180deg);
 }
 
@@ -525,4 +494,23 @@
 
 .lemoon-mobile-nav__sublink[aria-current='page'] {
   font-weight: 600;
+}
+
+.lemoon-mobile-nav__nested-details {
+  background: #f7f6f4;
+}
+
+.lemoon-mobile-nav__nested-details > .lemoon-mobile-nav__summary {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 32px;
+}
+
+.lemoon-mobile-nav__nested-sublist {
+  background: #eeece9;
+}
+
+.lemoon-mobile-nav__nested-sublist .lemoon-mobile-nav__sublink {
+  padding-left: 40px;
 }
