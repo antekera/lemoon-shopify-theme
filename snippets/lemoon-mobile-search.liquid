@@ -51,8 +51,9 @@
         {%- for setting_id in information_settings -%}
           {%- assign information_page = section.settings[setting_id] -%}
           {%- if information_page != blank -%}
+            {%- assign information_url = information_page.url | default: information_page -%}
             {%- assign translation_key = 'sections.mobile_search.' | append: information_keys[forloop.index0] -%}
-            <li><a href="{{ information_page.url | escape }}">{% render 'lemoon-icon', icon: information_icons[forloop.index0], size: 22 %}<span>{{ translation_key | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+            <li><a href="{{ information_url | escape }}">{% render 'lemoon-icon', icon: information_icons[forloop.index0], size: 22 %}<span>{{ translation_key | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
           {%- endif -%}
         {%- endfor -%}
       </ul>
