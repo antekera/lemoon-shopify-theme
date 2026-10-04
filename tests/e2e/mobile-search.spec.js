@@ -23,6 +23,8 @@ test('opens from mobile search below the header with focus and internal scroll',
   expect(panel.width).toBe(390);
   await page.locator(s('panel')).evaluate((el) => { el.scrollTop = 400; });
   await expect.poll(() => page.locator(s('panel')).evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+  const headerAfterScroll = await page.locator('[data-lemoon-search-header]').boundingBox();
+  expect(headerAfterScroll.y).toBeCloseTo(header.y, 0);
   await expect.poll(async () => {
     const panel = await page.locator(s('panel')).boundingBox();
     const input = await page.locator(s('input')).boundingBox();
