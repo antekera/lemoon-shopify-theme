@@ -15,6 +15,7 @@ test('opens from mobile search below the header with focus and internal scroll',
   await open(page);
   await expect(page.locator('.lemoon-mobile-search__heading')).toHaveCount(0);
   await expect(page.getByRole('dialog', { name: 'Buscar productos' })).toBeVisible();
+  await expect(page.locator(s('panel'))).toHaveAttribute('aria-modal', 'false');
   await expect(page.locator(s('open'))).toHaveAttribute('aria-expanded', 'true');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
   await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
@@ -61,6 +62,17 @@ test('keeps the visible announcement bar above the header and search panel', asy
   const panel = await page.locator(s('panel')).boundingBox();
   expect(header.y).toBeCloseTo(announcement.y + announcement.height, 0);
   expect(Math.abs(panel.y - header.y - header.height)).toBeLessThanOrEqual(1);
+});
+
+test('keeps header buttons clickable while the search panel is open', async ({ page }) => {
+  await page.evaluate(() => { window.headerActionCount = 0; });
+  await page.locator('[data-lemoon-nav-open]').evaluate((button) => button.addEventListener('click', () => { window.headerActionCount += 1; }));
+  await open(page);
+  await page.locator('[data-lemoon-nav-open]').click();
+  await expect.poll(() => page.evaluate(() => window.headerActionCount)).toBe(1);
+  await expect(page.locator(s('panel'))).toBeHidden();
+  await page.locator(s('open')).click();
+  await expect(page.locator(s('panel'))).toBeVisible();
 });
 
 for (const method of ['close', 'Escape', 'overlay']) {
@@ -301,11 +313,11 @@ test('automatically advances the carousel after three seconds without interactio
   await expect(page.locator(s('dot')).nth(2)).toHaveAttribute('aria-current', 'true');
 });
 
-test('traps keyboard focus, responds to resize and hides at desktop breakpoint', async ({ page }) => {
+test('allows keyboard navigation through the header and responds to resize', async ({ page }) => {
   await open(page);
   await page.locator(s('close')).focus();
   await page.keyboard.press('Shift+Tab');
-  await expect(page.locator(s('next'))).toBeFocused();
+  await expect(page.locator('.lemoon-header__quick-link').last()).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.locator(s('close'))).toBeFocused();
   await page.setViewportSize({ width: 320, height: 568 });

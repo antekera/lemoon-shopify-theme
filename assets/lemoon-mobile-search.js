@@ -50,6 +50,10 @@ class MobileSearch {
       if (!Array.isArray(this.products)) this.products = [];
     } catch { this.products = []; }
     this.triggers.forEach((button) => this.listen(button, 'click', () => this.open(button)));
+    this.listen(this.header, 'click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (this.isOpen && !target?.closest(selector('open'))) this.close(true, false);
+    }, { capture: true });
     this.listen(root.querySelector(selector('close')), 'click', () => this.close());
     this.listen(root.querySelector(selector('overlay')), 'click', () => this.close());
     this.listen(this.input, 'input', () => this.onInput());
@@ -136,7 +140,7 @@ class MobileSearch {
     // Inert siblings at each ancestor preserve the dialog while excluding the rest of the page.
     for (let current = this.root; current && current !== document.body; current = current.parentElement) {
       for (const sibling of current.parentElement.children) {
-        if (sibling !== current && sibling instanceof HTMLElement) {
+        if (sibling !== current && sibling instanceof HTMLElement && !sibling.contains(this.header)) {
           this.background.push([sibling, sibling.inert]);
           sibling.inert = true;
         }
@@ -161,7 +165,7 @@ class MobileSearch {
     this.focusTimer = setTimeout(() => { if (this.isOpen) this.input.focus({ preventScroll: true }); }, this.duration());
   }
 
-  close(immediate = false) {
+  close(immediate = false, restoreFocus = true) {
     if (!this.isOpen) return;
     this.isOpen = false;
     this.stopAutoplay();
@@ -179,7 +183,7 @@ class MobileSearch {
     this.restoreHtml();
     const sticky = this.root.closest('sticky-header');
     if (sticky) sticky.currentScrollTop = this.scroll.y;
-    this.opener?.focus({ preventScroll: true });
+    if (restoreFocus) this.opener?.focus({ preventScroll: true });
     const hide = () => { if (!this.isOpen) this.root.hidden = true; };
     if (immediate) hide();
     else this.hideTimer = setTimeout(hide, this.duration());
@@ -301,14 +305,6 @@ class MobileSearch {
     if (event.key === 'Escape') {
       event.preventDefault();
       this.close();
-    } else if (event.key === 'Tab') {
-      const focusable = [...this.panel.querySelectorAll('a[href], button:not([disabled]), input:not([type=hidden])')].filter((element) => element.getClientRects().length);
-      const first = focusable[0];
-      const last = focusable.at(-1);
-      if ((event.shiftKey && document.activeElement === first) || (!event.shiftKey && document.activeElement === last) || !this.panel.contains(document.activeElement)) {
-        event.preventDefault();
-        (event.shiftKey ? last : first)?.focus();
-      }
     }
   }
 
