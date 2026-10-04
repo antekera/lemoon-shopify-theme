@@ -125,7 +125,7 @@ class MobileSearch {
     // least as large on screen as it is at the default page scale.
     const scale = window.visualViewport?.scale;
     const visualScale = Number.isFinite(scale) && scale > 0 ? scale : 1;
-    this.input.style.fontSize = `${Math.max(18, 18 / visualScale)}px`;
+    this.input.style.fontSize = `${Math.max(18, 16 / visualScale)}px`;
   }
 
   open(button) {

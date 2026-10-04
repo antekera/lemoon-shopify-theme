@@ -102,7 +102,8 @@ test('compensates the focused search font size when the page is zoomed out', asy
     Object.defineProperty(window.visualViewport, 'scale', { configurable: true, value: 0.4 });
   });
   await open(page);
-  await expect(page.locator(s('input'))).toHaveCSS('font-size', '45px');
+  await expect(page.locator(s('input'))).toHaveCSS('font-size', '40px');
+  expect((await page.locator(s('input')).boundingBox()).height).toBe((await page.locator(`${s('form')} [type=submit]`).boundingBox()).height);
   await page.locator(s('close')).click();
   await expect(page.locator(s('input'))).toHaveCSS('font-size', '18px');
 });

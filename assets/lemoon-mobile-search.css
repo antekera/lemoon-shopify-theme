@@ -133,10 +133,12 @@
   flex: 1 1 0;
   font: inherit;
   font-size: 18px;
+  height: 48px;
+  line-height: 1;
   max-width: 100%;
   min-height: 48px;
   min-width: 0;
-  padding: 10px 14px;
+  padding: 0 14px;
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   width: 0;
