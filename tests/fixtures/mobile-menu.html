@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fixture del menú mobile</title>
+  <link rel="stylesheet" href="/assets/lemoon-mobile-nav.css">
+  <script type="module" src="/assets/lemoon-mobile-nav.js"></script>
+  <style>
+    :root { --font-heading-family: Arial; --font-body-family: Arial; }
+    body { margin: 0; }
+    .announcement-bar { height: 36px; background: #0b1f3a; }
+    .lemoon-header { position: relative; }
+    .lemoon-header__desktop,
+    .lemoon-header__mobile-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px; }
+    .lemoon-header__desktop { height: 64px; }
+    .lemoon-header__mobile-inner { height: 44px; }
+    .lemoon-header__quick-nav { display: flex; gap: 20px; padding: 12px; }
+    .lemoon-header__mobile-inner button,
+    .lemoon-header__desktop button { min-width: 44px; min-height: 44px; }
+    @media (max-width: 989px) {
+      .lemoon-header__desktop { display: none; }
+      .lemoon-header__mobile-inner { display: flex; }
+      .lemoon-header__quick-nav { display: none; }
+    }
+    @media (min-width: 990px) {
+      .lemoon-header__desktop { display: flex; }
+      .lemoon-header__mobile-inner { display: none; }
+    }
+    main { min-height: 150vh; padding: 24px; }
+  </style>
+</head>
+<body>
+  <div class="announcement-bar" aria-label="Barra promocional"></div>
+  <header class="lemoon-header" id="fixture-header" role="banner">
+    <div class="lemoon-header__desktop">
+      <button type="button" data-lemoon-nav-open aria-label="Menú" data-nav-open-label="Menú" data-nav-close-label="Cerrar menú" data-nav-back-label="Volver atrás" aria-controls="lemoon-mobile-nav" aria-expanded="false">Menú</button>
+      <span>Logo</span>
+      <a href="/cart">Carrito</a>
+    </div>
+    <div class="lemoon-header__mobile-inner">
+      <button type="button" data-lemoon-nav-open aria-label="Menú" data-nav-open-label="Menú" data-nav-close-label="Cerrar menú" data-nav-back-label="Volver atrás" aria-controls="lemoon-mobile-nav" aria-expanded="false">Menú</button>
+      <span>Logo</span>
+      <a href="/cart">Carrito</a>
+    </div>
+    <nav class="lemoon-header__quick-nav" aria-label="Enlaces rápidos">
+      <a href="/collections/mujer">Mujer</a>
+      <a href="/collections/hombre">Hombre</a>
+    </nav>
+  </header>
+
+  <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
+  <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="fixture-header" role="dialog" aria-label="Menú" aria-hidden="true" tabindex="-1" inert>
+    <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
+      <nav aria-label="Menú">
+        <ul class="lemoon-mobile-nav__primary" role="list">
+          <li><button type="button" class="lemoon-mobile-nav__primary-button" data-lemoon-nav-target="opticos"><span>Lentes ópticos</span><span aria-hidden="true">›</span></button></li>
+          <li><button type="button" class="lemoon-mobile-nav__primary-button" data-lemoon-nav-target="sol"><span>Lentes de sol</span><span aria-hidden="true">›</span></button></li>
+          <li><a class="lemoon-mobile-nav__primary-button" href="/pages/encuentra-tu-lente"><span>Encuentra tu lente ideal</span></a></li>
+          <li><a class="lemoon-mobile-nav__primary-button" href="/collections/mejor-vendidos"><span>Más vendidos</span></a></li>
+          <li><a class="lemoon-mobile-nav__primary-button" href="/collections/lo-nuevo"><span>Nueva colección</span></a></li>
+          <li><a class="lemoon-mobile-nav__primary-button" href="/collections/accesorios"><span>Accesorios</span></a></li>
+        </ul>
+      </nav>
+      <nav class="lemoon-mobile-nav__utility" aria-label="Ayuda y cuenta">
+        <ul role="list">
+          <li><a href="/pages/envios-y-entregas"><span>Envíos y retornos</span></a></li>
+          <li><a href="/pages/preguntas-frecuentes"><span>Preguntas frecuentes</span></a></li>
+        </ul>
+      </nav>
+      <div class="lemoon-mobile-nav__account">
+        <p>Inicia sesión o crea una cuenta para ver órdenes, administrar tus recetas y más.</p>
+        <div class="lemoon-mobile-nav__account-actions">
+          <a class="lemoon-mobile-nav__account-login" href="/account/login">Iniciar sesión</a>
+          <a class="lemoon-mobile-nav__account-register" href="/account/register">Crear cuenta</a>
+        </div>
+      </div>
+    </div>
+    <div class="lemoon-mobile-nav__panel" data-lemoon-nav-panel="opticos" aria-hidden="true" tabindex="-1" hidden>
+      <h2 class="lemoon-mobile-nav__subheading">Lentes ópticos</h2>
+      <nav aria-label="Lentes ópticos">
+        <ul class="lemoon-mobile-nav__sublist" role="list">
+          <li><a href="/collections/opticos">Ver todo</a></li>
+          <li><a href="/collections/opticos/mujer">Mujer</a></li>
+          <li><a href="/collections/opticos/hombre">Hombre</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="lemoon-mobile-nav__panel" data-lemoon-nav-panel="sol" aria-hidden="true" tabindex="-1" hidden>
+      <h2 class="lemoon-mobile-nav__subheading">Lentes de sol</h2>
+      <nav aria-label="Lentes de sol">
+        <ul class="lemoon-mobile-nav__sublist" role="list"><li><a href="/collections/lentes-de-sol">Ver todo</a></li></ul>
+      </nav>
+    </div>
+  </div>
+  <main><h1>Fixture del menú</h1></main>
+</body>
+</html>

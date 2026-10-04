@@ -13,8 +13,9 @@
           {%- when 'oversized' -%}{%- assign shape_filter_value = 'Oversized' -%}
         {%- endcase -%}
       {%- endif -%}
-      {%- if shape_filter_value != blank -%}
-        {%- capture shape_url -%}{{ collection.url }}?filter.p.tag={{ shape_filter_value | url_encode }}{%- endcapture -%}
+      {%- if block.settings.link == blank and shape_filter_value != blank -%}
+        {%- assign shape_handle = shape_filter_value | handleize -%}
+        {%- assign shape_url = collection.url | append: '/' | append: shape_handle -%}
       {%- endif -%}
       <a
         class="lemoon-shape-filters__item{% if forloop.first %} is-active{% endif %}"

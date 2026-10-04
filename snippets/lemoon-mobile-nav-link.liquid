@@ -1,0 +1,30 @@
+{%- liquid
+  assign show_link = true
+  assign catalog_collection = block.settings.catalog_collection
+  assign availability_tag = block.settings.availability_tag | strip
+  if catalog_collection == blank and availability_tag != blank
+    assign show_link = false
+  elsif catalog_collection != blank
+    if catalog_collection.products_count == 0
+      assign show_link = false
+    elsif availability_tag != blank
+      unless catalog_collection.all_tags contains availability_tag
+        assign show_link = false
+      endunless
+    endif
+  endif
+-%}
+{%- if show_link and block.settings.title != blank and block.settings.link != blank -%}
+  <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">
+    {%- if block.settings.group == 'shape' and block.settings.shape != 'none' -%}
+      {% render 'lemoon-frame-shape', shape: block.settings.shape %}
+    {%- elsif block.settings.group == 'color' -%}
+      {%- if block.settings.swatch_image != blank -%}
+        <span class="lemoon-mobile-nav__swatch" aria-hidden="true">{{ block.settings.swatch_image | image_url: width: 48, height: 48 | image_tag: loading: 'lazy', alt: '' }}</span>
+      {%- else -%}
+        <span class="lemoon-mobile-nav__swatch" style="--swatch-color: {{ block.settings.swatch_color }}" aria-hidden="true"></span>
+      {%- endif -%}
+    {%- endif -%}
+    <span>{{ block.settings.title | escape }}</span>
+  </a></li>
+{%- endif -%}

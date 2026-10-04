@@ -1,0 +1,100 @@
+.lemoon-mobile-nav__overlay,
+.lemoon-mobile-nav {
+  position: fixed;
+  top: var(--lemoon-nav-top, 0px);
+  bottom: 0;
+}
+div.lemoon-mobile-nav__overlay {
+  display: block;
+  inset-inline: 0;
+  background: rgba(0, 0, 0, .78);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease;
+  z-index: 110;
+}
+.lemoon-mobile-nav__overlay.is-open { opacity: 1; pointer-events: auto; }
+.lemoon-mobile-nav {
+  left: 0;
+  width: 95vw;
+  max-width: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--lemoon-surface-page, #fff);
+  color: var(--lemoon-text-brand, #0b1f3a);
+  transform: translateX(-101%);
+  visibility: hidden;
+  transition: transform 280ms ease, visibility 280ms;
+  z-index: 111;
+}
+.lemoon-mobile-nav.is-open { transform: translateX(0); visibility: visible; }
+.lemoon-mobile-nav__panel { display: flex; flex-direction: column; min-height: 100%; }
+.lemoon-mobile-nav__panel[hidden] { display: none; }
+.lemoon-mobile-nav a { color: inherit; text-decoration: none; }
+.lemoon-mobile-nav ul { list-style: none; margin: 0; padding: 0; }
+.lemoon-mobile-nav__primary { padding: 14px 12px 18px !important; background: var(--lemoon-surface-warm, #f7f4ee); }
+.lemoon-mobile-nav__primary li + li { margin-top: 8px; }
+.lemoon-mobile-nav__primary-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .65);
+  color: var(--lemoon-text-brand, #0b1f3a);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-heading-family), sans-serif;
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.lemoon-mobile-nav__primary-button > span { flex: 1; }
+.lemoon-mobile-nav__primary-button > .lemoon-icon:first-child { flex: none; }
+.lemoon-mobile-nav__primary-button:hover { background: #fff; }
+.lemoon-mobile-nav__utility { padding: 14px 22px 12px; }
+.lemoon-mobile-nav__utility a { display: flex; align-items: center; gap: 12px; min-height: 45px; font-size: 1.45rem; }
+.lemoon-mobile-nav__utility .lemoon-icon { flex: none; }
+.lemoon-mobile-nav__account { margin-top: auto; padding: 22px 18px max(24px, env(safe-area-inset-bottom)); border-top: 1px solid var(--lemoon-border-default, #e0ddd8); }
+.lemoon-mobile-nav__account p { margin: 0 0 16px; font-size: 1.35rem; line-height: 1.45; }
+.lemoon-mobile-nav__account-actions { display: flex; gap: 8px; }
+.lemoon-mobile-nav__account-actions a {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 7px 10px;
+  border: 1.5px solid var(--lemoon-action-primary, #0b1f3a);
+  border-radius: 999px;
+  font-family: var(--font-heading-family), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+.lemoon-mobile-nav__account-login { background: var(--lemoon-action-primary, #0b1f3a); color: #fff !important; }
+.lemoon-mobile-nav__account-register { background: #fff; }
+.lemoon-mobile-nav__subheading { margin: 0; padding: 24px 20px 12px; font-family: var(--font-heading-family), sans-serif; font-size: 2.1rem; font-weight: 700; }
+.lemoon-mobile-nav__sublist a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 10px 20px; font-size: 1.55rem; line-height: 1.25; text-decoration: underline; text-underline-offset: 4px; }
+.lemoon-mobile-nav__utility a:hover,
+.lemoon-mobile-nav__utility a:focus-visible {
+  background: transparent;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lemoon-mobile-nav__subgroup { border-top: 1px solid var(--lemoon-border-default, #e0ddd8); margin-top: 16px; padding-top: 14px; }
+.lemoon-mobile-nav__subgroup h3 { margin: 0; padding: 0 20px 8px; font-family: var(--font-heading-family), sans-serif; font-size: 1.25rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+.lemoon-frame-shape { flex: none; width: 42px; height: 25px; }
+.lemoon-mobile-nav__swatch { display: inline-flex; flex: none; width: 20px; height: 20px; overflow: hidden; border: 1px solid #b7b3ab; border-radius: 50%; background: var(--swatch-color, #fff); }
+.lemoon-mobile-nav__swatch img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lemoon-mobile-nav :focus-visible { outline: 2px solid var(--lemoon-action-primary, #0b1f3a); outline-offset: -3px; }
+@media (min-width: 990px) {
+  .lemoon-mobile-nav { width: min(95vw, 300px); max-width: 300px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lemoon-mobile-nav, .lemoon-mobile-nav__overlay { transition-duration: 0.01ms; }
+}

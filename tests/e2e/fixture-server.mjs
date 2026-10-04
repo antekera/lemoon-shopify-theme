@@ -4,7 +4,11 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
-const fixtureRoutes = new Set(['/tests/fixtures/mobile-search.html', '/tests/fixtures/announcement-bar.html']);
+const fixtureFiles = new Map([
+  ['/tests/fixtures/mobile-search.html', 'tests/fixtures/mobile-search.html'],
+  ['/tests/fixtures/mobile-menu.html', 'tests/fixtures/mobile-menu.html'],
+  ['/tests/fixtures/announcement-bar.html', 'tests/fixtures/announcement-bar.html'],
+]);
 const contentTypes = {
   css: 'text/css; charset=utf-8',
   js: 'text/javascript; charset=utf-8',
@@ -34,8 +38,8 @@ const server = createServer(async (request, response) => {
 
   let file;
   let contentType;
-  if (fixtureRoutes.has(pathname) || pathname === '/') {
-    file = resolve(root, pathname === '/tests/fixtures/announcement-bar.html' ? 'tests/fixtures/announcement-bar.html' : 'tests/fixtures/mobile-search.html');
+  if (fixtureFiles.has(pathname) || pathname === '/') {
+    file = resolve(root, fixtureFiles.get(pathname) || fixtureFiles.get('/tests/fixtures/mobile-search.html'));
     contentType = 'text/html; charset=utf-8';
   } else if (/^\/assets\/[\w.-]+$/.test(pathname)) {
     file = resolve(root, pathname.slice(1));

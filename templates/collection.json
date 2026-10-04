@@ -11,12 +11,12 @@
     "shape-filter": {
       "type": "frame-shape-filter-strip",
       "blocks": {
-        "all": { "type": "shape", "settings": { "label": "Todos", "link": "/collections/all" } },
+        "all": { "type": "shape", "settings": { "label": "Todos" } },
         "rectangular": { "type": "shape", "settings": { "label": "Rectangulares", "filter_value": "Rectangular" } },
         "round": { "type": "shape", "settings": { "label": "Redondos", "filter_value": "Redondo" } },
-        "cat_eye": { "type": "shape", "settings": { "label": "Cat-Eye", "filter_value": "Cat-Eye" } },
+        "cat_eye": { "type": "shape", "settings": { "label": "Ojo de gato", "filter_value": "ojo de gato" } },
         "aviator": { "type": "shape", "settings": { "label": "Aviador", "filter_value": "Aviador" } },
-        "oversized": { "type": "shape", "settings": { "label": "Oversized", "filter_value": "Oversized" } }
+        "oversized": { "type": "shape", "settings": { "label": "Ovalados", "filter_value": "ovalado" } }
       },
       "block_order": ["all", "rectangular", "round", "cat_eye", "aviator", "oversized"],
       "settings": { "aria_label": "Filtrar por forma de armazón" }
