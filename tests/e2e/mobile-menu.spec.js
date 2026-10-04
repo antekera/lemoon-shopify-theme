@@ -71,3 +71,31 @@ test('keeps utility-link hover transparent and underlines the text', async ({ pa
   await expect(utilityLink).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
   await expect(utilityLink).toHaveCSS('text-decoration-line', 'underline');
 });
+
+test('reinitializes after the header section reloads in the theme editor', async ({ page }) => {
+  await page.evaluate(() => {
+    const header = document.querySelector('.lemoon-header');
+    const overlay = document.querySelector('[data-lemoon-nav-overlay]');
+    const drawer = document.querySelector('[data-lemoon-nav]');
+    const sectionMarkup = [header.outerHTML, overlay.outerHTML, drawer.outerHTML];
+
+    document.dispatchEvent(new CustomEvent('shopify:section:unload', {
+      detail: { sectionId: 'fixture-header' },
+    }));
+    header.remove();
+
+    const replacement = document.createElement('section');
+    replacement.id = 'shopify-section-fixture-header';
+    replacement.innerHTML = sectionMarkup.join('');
+    document.body.append(replacement);
+    replacement.dispatchEvent(new CustomEvent('shopify:section:load', { bubbles: true }));
+  });
+
+  await expect(page.locator('[data-lemoon-nav]')).toHaveCount(1);
+  await expect(page.locator(menu)).toHaveCSS('visibility', 'hidden');
+  const newMenuButton = page.locator(trigger).first();
+  await newMenuButton.click();
+  await expect(page.locator(menu)).toHaveClass(/is-open/);
+  await expect(page.locator(menu)).toHaveAttribute('aria-hidden', 'false');
+  await expect(newMenuButton).toHaveAttribute('aria-expanded', 'true');
+});

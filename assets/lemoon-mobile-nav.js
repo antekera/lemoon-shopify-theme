@@ -1,19 +1,46 @@
 import { getToggleAction } from './lemoon-mobile-nav-logic.js';
 
-(() => {
-  const drawer = document.querySelector('[data-lemoon-nav]');
-  const overlay = document.querySelector('[data-lemoon-nav-overlay]');
-  const triggers = [...document.querySelectorAll('[data-lemoon-nav-open]')];
-  const root = drawer?.querySelector('[data-lemoon-nav-root]');
-  const panels = [...(drawer?.querySelectorAll('[data-lemoon-nav-panel]') || [])];
-  const header = document.querySelector('.lemoon-header');
-  if (!drawer || !overlay || !root || !header || !triggers.length) return;
-  document.body.append(overlay, drawer);
+let controller = null;
 
+function find(scope, selector) {
+  if (scope.matches?.(selector)) return scope;
+  return scope.querySelector(selector);
+}
+
+function destroy() {
+  if (!controller) return;
+  controller.abort.abort();
+  if (controller.drawer.classList.contains('is-open')) {
+    document.body.style.overflow = controller.previousOverflow;
+  }
+  controller.overlay.remove();
+  controller.drawer.remove();
+  controller = null;
+}
+
+function initialize(scope = document) {
+  const drawer = find(scope, '[data-lemoon-nav]');
+  const overlay = find(scope, '[data-lemoon-nav-overlay]');
+  const header = find(scope, '.lemoon-header');
+  if (!drawer || !overlay || !header) return;
+  if (controller?.drawer === drawer) return;
+  destroy();
+
+  const triggers = [...header.querySelectorAll('[data-lemoon-nav-open]')];
+  const root = drawer.querySelector('[data-lemoon-nav-root]');
+  const panels = [...drawer.querySelectorAll('[data-lemoon-nav-panel]')];
+  if (!root || !triggers.length) return;
+
+  document.body.append(overlay, drawer);
+  const abort = new AbortController();
+  const { signal } = abort;
+  const sectionId = drawer.dataset.lemoonNavSection;
   let level = 'closed';
   let lastTrigger = null;
   let previousOverflow = '';
   const focusable = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  controller = { abort, drawer, overlay, header, sectionId, get previousOverflow() { return previousOverflow; } };
 
   function measure() {
     const main = header.querySelector(
@@ -89,15 +116,15 @@ import { getToggleAction } from './lemoon-mobile-nav-logic.js';
       if (action === 'open') open(trigger);
       else if (action === 'back') showRoot();
       else if (action === 'close') close();
-    });
+    }, { signal });
   });
   drawer.addEventListener('click', (event) => {
     const target = event.target.closest('[data-lemoon-nav-target]');
     if (target) showPanel(target.dataset.lemoonNavTarget);
-  });
-  overlay.addEventListener('click', close);
-  window.addEventListener('resize', () => { if (level !== 'closed') measure(); });
-  window.addEventListener('scroll', () => { if (level !== 'closed') measure(); }, { passive: true });
+  }, { signal });
+  overlay.addEventListener('click', close, { signal });
+  window.addEventListener('resize', () => { if (level !== 'closed') measure(); }, { signal });
+  window.addEventListener('scroll', () => { if (level !== 'closed') measure(); }, { passive: true, signal });
   document.addEventListener('keydown', (event) => {
     if (level === 'closed') return;
     if (event.key === 'Escape') { close(); return; }
@@ -113,9 +140,17 @@ import { getToggleAction } from './lemoon-mobile-nav-logic.js';
       event.preventDefault();
       items[0].focus();
     }
-  });
+  }, { signal });
   document.addEventListener('click', (event) => {
     if (level !== 'closed' && event.target.closest('[data-lemoon-search-open]')) close();
-  }, { capture: true });
+  }, { capture: true, signal });
   updateTriggers();
-})();
+}
+
+initialize();
+document.addEventListener('shopify:section:load', (event) => initialize(event.target));
+document.addEventListener('shopify:section:unload', (event) => {
+  if (!controller) return;
+  const sectionId = event.detail?.sectionId;
+  if ((sectionId && sectionId === controller.sectionId) || event.target === controller.header || event.target.contains?.(controller.header)) destroy();
+});

@@ -32,7 +32,7 @@
 </head>
 <body>
   <div class="announcement-bar" aria-label="Barra promocional"></div>
-  <header class="lemoon-header" role="banner">
+  <header class="lemoon-header" id="fixture-header" role="banner">
     <div class="lemoon-header__desktop">
       <button type="button" data-lemoon-nav-open aria-label="Menú" data-nav-open-label="Menú" data-nav-close-label="Cerrar menú" data-nav-back-label="Volver atrás" aria-controls="lemoon-mobile-nav" aria-expanded="false">Menú</button>
       <span>Logo</span>
@@ -50,7 +50,7 @@
   </header>
 
   <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
-  <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav role="dialog" aria-label="Menú" aria-hidden="true" tabindex="-1" inert>
+  <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="fixture-header" role="dialog" aria-label="Menú" aria-hidden="true" tabindex="-1" inert>
     <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
       <nav aria-label="Menú">
         <ul class="lemoon-mobile-nav__primary" role="list">

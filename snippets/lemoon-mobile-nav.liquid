@@ -7,7 +7,7 @@
 {{ 'lemoon-mobile-nav.css' | asset_url | stylesheet_tag }}
 <script type="module" src="{{ 'lemoon-mobile-nav.js' | asset_url }}"></script>
 <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
-<div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>
+<div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="{{ section.id }}" role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>
   <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
     <nav aria-label="{{ 'sections.header.menu' | t }}">
       <ul class="lemoon-mobile-nav__primary" role="list">
@@ -43,13 +43,15 @@
         {%- endfor -%}
       </ul>
     </nav>
-    <div class="lemoon-mobile-nav__account">
-      <p>{{ section.settings.account_message | escape }}</p>
-      <div class="lemoon-mobile-nav__account-actions">
-        <a class="lemoon-mobile-nav__account-login" href="{{ routes.account_login_url }}">{{ section.settings.login_label | escape }}</a>
-        <a class="lemoon-mobile-nav__account-register" href="{{ routes.account_register_url }}">{{ section.settings.register_label | escape }}</a>
+    {%- if shop.customer_accounts_enabled -%}
+      <div class="lemoon-mobile-nav__account">
+        <p>{{ section.settings.account_message | escape }}</p>
+        <div class="lemoon-mobile-nav__account-actions">
+          <a class="lemoon-mobile-nav__account-login" href="{{ routes.account_login_url }}">{{ section.settings.login_label | escape }}</a>
+          <a class="lemoon-mobile-nav__account-register" href="{{ routes.account_register_url }}">{{ section.settings.register_label | escape }}</a>
+        </div>
       </div>
-    </div>
+    {%- endif -%}
   </div>
   {%- for primary in section.blocks -%}
     {%- if primary.type == 'drawer_primary' and primary.settings.title != blank and primary.settings.has_submenu -%}
