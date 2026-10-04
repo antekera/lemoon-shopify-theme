@@ -8,7 +8,7 @@ export function selectSuggestions(products, random = Math.random) {
     const other = Math.floor(random() * (index + 1));
     [unique[index], unique[other]] = [unique[other], unique[index]];
   }
-  return unique.slice(0, 5);
+  return unique.slice(0, 3);
 }
 
 export function buildSearchUrl(route, term) {

@@ -9,12 +9,12 @@ describe('mobile search rules', () => {
     expect(shouldPredict(term)).toBe(expected);
   });
 
-  // Catches duplicate suggestions, mutation of catalog data, or exceeding five cards.
-  test('selects five unique shuffled products without changing the catalog', async () => {
+  // Catches duplicate suggestions, mutation of catalog data, or exceeding three cards.
+  test('selects three unique shuffled products without changing the catalog', async () => {
     const { selectSuggestions } = await logic();
     const products = Array.from({ length: 7 }, (_, i) => ({ id: i + 1 }));
     const result = selectSuggestions([...products, products[0]], () => 0);
-    expect(result.map(({ id }) => id)).toEqual([2, 3, 4, 5, 6]);
+    expect(result.map(({ id }) => id)).toEqual([2, 3, 4]);
     expect(products.map(({ id }) => id)).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
   test('handles an empty or small suggestion catalog', async () => {

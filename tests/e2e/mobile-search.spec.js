@@ -83,15 +83,15 @@ for (const method of ['close', 'Escape', 'overlay']) {
   });
 }
 
-test('selects five distinct suggestions again on every opening', async ({ page }) => {
+test('selects three distinct suggestions again on every opening', async ({ page }) => {
   await open(page);
   const first = await page.locator(`${s('results')} a`).allTextContents();
-  expect(first).toHaveLength(5);
-  expect(new Set(first).size).toBe(5);
+  expect(first).toHaveLength(3);
+  expect(new Set(first).size).toBe(3);
   await page.locator(s('close')).click();
   await open(page);
   const second = await page.locator(`${s('results')} a`).allTextContents();
-  expect(second).toHaveLength(5);
+  expect(second).toHaveLength(3);
   expect(second).not.toEqual(first);
 });
 
@@ -117,6 +117,8 @@ test('keeps product cards free of decorative right arrows', async ({ page }) => 
 test('underlines show-all results text without a decorative arrow', async ({ page }) => {
   await open(page);
   const showAll = page.locator(s('all'));
+  const results = page.locator(s('results'));
+  expect(await showAll.evaluate((link, list) => list.compareDocumentPosition(link) & Node.DOCUMENT_POSITION_FOLLOWING, await results.elementHandle())).toBeTruthy();
   await expect(showAll).toHaveCSS('text-decoration-line', 'underline');
   await expect(showAll).toHaveCSS('justify-content', 'flex-end');
   await expect(showAll.locator('.lemoon-icon')).toHaveCount(0);
