@@ -78,7 +78,7 @@
                     {%- else -%}
                       <img src="{{ 'lemoon-product-fallback.png' | asset_url }}" alt="{{ trend_product.title | escape }}" width="96" height="72" loading="lazy">
                     {%- endif -%}
-                    <span>{{ trend_product.title | escape }}</span>{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}
+                    <span>{{ trend_product.title | escape }}</span>
                   </a>
                 </div>
                 {%- assign slide_index = slide_index | plus: 1 -%}
@@ -99,7 +99,7 @@
     </section>
   </div>
   <template data-lemoon-search-product-template>
-    <li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image>{{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}</span><span data-product-title></span>{% render 'lemoon-icon', icon: 'arrow-right', size: 18 %}</a></li>
+    <li><a class="lemoon-mobile-search__product" data-product-link><span class="lemoon-mobile-search__product-image" data-product-image>{{ 'product-1' | placeholder_svg_tag: 'lemoon-mobile-search__placeholder' }}</span><span data-product-title></span></a></li>
   </template>
   <script type="application/json" data-lemoon-search-products>
     [

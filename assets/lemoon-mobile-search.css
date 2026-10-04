@@ -146,7 +146,6 @@
 .lemoon-mobile-search__results li + li { border-top: 1px solid #f0eeeb; }
 .lemoon-mobile-search__product { align-items: center; display: flex; gap: 16px; min-height: 84px; padding: 8px 0; }
 .lemoon-mobile-search__product > span:not(.lemoon-mobile-search__product-image) { flex: 1; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
-.lemoon-mobile-search__product > .lemoon-icon { flex-shrink: 0; }
 .lemoon-mobile-search__product-image,
 .lemoon-mobile-search__product > img,
 .lemoon-mobile-search__product > .lemoon-mobile-search__placeholder { background: #f7f6f4; border-radius: 8px; flex-shrink: 0; height: 72px; overflow: hidden; width: 96px; }
