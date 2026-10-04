@@ -100,7 +100,12 @@ class MobileSearch {
   }
 
   duration() {
-    return Math.max(...getComputedStyle(this.root).transitionDuration.split(',').map((duration) => parseFloat(duration) * (duration.trim().endsWith('ms') ? 1 : 1000)));
+    const durations = getComputedStyle(this.root).transitionDuration.split(',');
+    const milliseconds = durations.map((duration) => {
+      const value = parseFloat(duration);
+      return duration.trim().endsWith('ms') ? value : value * 1000;
+    });
+    return Math.max(...milliseconds);
   }
 
   destination() {
@@ -151,7 +156,13 @@ class MobileSearch {
     this.restoreInputStyles = saveStyles(this.input, ['font-size']);
     this.panel.scrollTop = 0;
     const suggestions = selectSuggestions(this.products);
-    if (suggestions.length > 1 && suggestions.map((product) => product.id).join(',') === this.initial?.map((product) => product.id).join(',')) suggestions.push(suggestions.shift());
+    const previousIds = this.initial?.map((product) => product.id);
+    const repeatedSuggestions = suggestions.length > 1
+      && suggestions.every((product, index) => product.id === previousIds?.[index]);
+    if (repeatedSuggestions) {
+      const firstSuggestion = suggestions.shift();
+      suggestions.push(firstSuggestion);
+    }
     this.initial = suggestions;
     this.render(suggestions);
     this.status.textContent = '';

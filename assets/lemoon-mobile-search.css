@@ -85,13 +85,12 @@
 .lemoon-mobile-search h3 {
   color: inherit;
   font-family: var(--font-heading-family, sans-serif);
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: normal;
   line-height: 1.3;
-  margin: 0;
+  margin: 0 0 12px;
 }
-
-.lemoon-mobile-search h3 { font-size: 16px; margin-bottom: 12px; }
 
 .lemoon-mobile-search button {
   align-items: center;
@@ -136,7 +135,6 @@
   height: 48px;
   line-height: 1;
   max-width: 100%;
-  min-height: 48px;
   min-width: 0;
   padding: 0 14px;
   text-size-adjust: 100%;
@@ -147,7 +145,7 @@
 .lemoon-mobile-search__input::placeholder { color: #596575; opacity: 1; }
 .lemoon-mobile-search__input:focus,
 .lemoon-mobile-search__input:focus-visible { border-color: #0b1f3a; box-shadow: none; outline: none; }
-.lemoon-mobile-search__submit { background: #f7e600; border-radius: 12px; height: 48px; min-height: 48px; width: 48px; }
+.lemoon-mobile-search__submit { background: #f7e600; border-radius: 12px; height: 48px; width: 48px; }
 .lemoon-mobile-search a { color: inherit; text-decoration: none; }
 .lemoon-search-open:focus-visible,
 .lemoon-mobile-search button:focus-visible,
