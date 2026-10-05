@@ -378,6 +378,10 @@
     "video": {
       "load_video": "Load video: {{ description }}"
     },
+    "lemoon_hero": {
+      "label": "Homepage hero",
+      "placeholder_alt": "People wearing eyeglasses outdoors"
+    },
     "slideshow": {
       "load_slide": "Load slide",
       "previous_slideshow": "Previous slide",

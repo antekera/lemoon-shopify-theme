@@ -114,9 +114,8 @@
         {%- assign terms_page = pages['terminos-y-condiciones'] -%}
         {%- if shop.privacy_policy != blank -%}<li><a href="{{ shop.privacy_policy.url }}">Privacidad</a></li>{%- endif -%}
         {%- if shop.terms_of_service != blank -%}<li><a href="{{ shop.terms_of_service.url }}">Términos y condiciones</a></li>{%- elsif terms_page != blank -%}<li><a href="{{ terms_page.url }}">Términos y condiciones</a></li>{%- endif -%}
-        {%- if section.settings.sitemap_enable -%}<li><a href="{{ routes.root_url }}sitemap.xml">Sitemap</a></li>{%- endif -%}
       </ul>
-      <p class="lemoon-footer__copyright">© {{ 'now' | date: '%Y' }} Lemoon · {{ section.settings.company_name | escape }}</p>
+      <p class="lemoon-footer__copyright">© {{ 'now' | date: '%Y' }} Lemoon · <span class="lemoon-footer__company">{{ section.settings.company_name | escape }}<svg class="lemoon-footer__flag" viewBox="0 0 24 16" aria-hidden="true" focusable="false"><rect width="24" height="16" fill="#d52b1e"/><rect width="24" height="8" fill="#fff"/><rect width="8" height="8" fill="#0039a6"/><path d="m4 1.35.62 1.9h2l-1.62 1.18.62 1.9L4 5.15 2.38 6.33 3 4.43 1.38 3.25h2L4 1.35Z" fill="#fff"/></svg></span></p>
     </div>
 
     <div class="lemoon-footer__art">
@@ -188,8 +187,7 @@
     { "type": "checkbox", "id": "payment_mastercard", "label": "Mostrar Mastercard", "default": true },
     { "type": "text", "id": "payment_mastercard_label", "label": "Texto Mastercard", "default": "Mastercard" },
     { "type": "header", "content": "Información legal" },
-    { "type": "checkbox", "id": "sitemap_enable", "label": "Mostrar sitemap", "default": true },
-    { "type": "text", "id": "company_name", "label": "Razón social", "default": "Servigoptic SpA" },
+    { "type": "text", "id": "company_name", "label": "Razón social", "default": "Servioptic SPA" },
     { "type": "header", "content": "Ilustración del footer" },
     { "type": "image_picker", "id": "footer_art", "label": "Ilustración (opcional, usa la ilustración Lemoon si se deja vacío)" },
     { "type": "text", "id": "footer_art_alt", "label": "Texto alternativo de la ilustración", "default": "Ilustración abstracta de un horizonte de limones." },

@@ -90,8 +90,7 @@
         "payment_visa_label": "VISA",
         "payment_mastercard": true,
         "payment_mastercard_label": "Mastercard",
-        "sitemap_enable": true,
-        "company_name": "Servigoptic SpA",
+        "company_name": "Servioptic SPA",
         "footer_art_alt": "Ilustración abstracta de un horizonte de limones.",
         "padding_top": 64,
         "padding_bottom": 0

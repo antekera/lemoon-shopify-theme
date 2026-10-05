@@ -114,6 +114,19 @@
   padding: var(--footer-padding-top, 6.4rem) 0 var(--footer-padding-bottom, 0);
 }
 
+.lemoon-footer__company {
+  white-space: nowrap;
+}
+
+.lemoon-footer__flag {
+  display: inline-block;
+  width: 1.2em;
+  height: 0.8em;
+  margin-left: 0.35em;
+  border-radius: 0.08em;
+  vertical-align: 0.02em;
+}
+
 .lemoon-footer__main {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(22rem, 1fr);
@@ -216,7 +229,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #f7e600;
+  color: #fff;
   cursor: default;
   font-family: var(--font-heading-family);
   font-size: 1.4rem;
@@ -538,7 +551,7 @@
     width: 2rem;
     height: 2rem;
     flex: 0 0 2rem;
-    color: #f7e600;
+    color: #fff;
   }
 
   .lemoon-footer__menu-toggle::before,

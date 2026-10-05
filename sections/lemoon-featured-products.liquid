@@ -4,26 +4,30 @@
   <section class="lemoon-featured-products page-width">
     <div class="lemoon-featured-products__heading">
       <div>
-        <p class="lemoon-featured-products__eyebrow">SELECCIÓN LEMOON</p>
+        {%- if section.settings.eyebrow != blank -%}<p class="lemoon-featured-products__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
         <h2>{{ section.settings.heading | escape }}</h2>
       </div>
-      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link">{{ section.settings.link_label | escape }} <span aria-hidden="true">→</span></a>
+      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link">{{ section.settings.link_label | escape }}</a>
     </div>
-    <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list">
-      {%- for card_product in featured_collection.products limit: section.settings.products_to_show -%}
+    <ul class="lemoon-featured-products__track" role="list" aria-label="{{ section.settings.heading | escape }}">
+      {%- assign displayed_count = 0 -%}
+      {%- for card_product in featured_collection.products -%}
+        {%- if card_product.price == 0 -%}{%- continue -%}{%- endif -%}
         {%- liquid
           assign lazy_load = false
-          if forloop.index > 2
+          if displayed_count > 1
             assign lazy_load = true
           endif
           assign skip_styles = true
-          if forloop.index == 1
+          if displayed_count == 0
             assign skip_styles = false
           endif
         -%}
-        <li class="grid__item">
+        <li class="lemoon-featured-products__item">
           {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: lazy_load, skip_styles: skip_styles, section_id: section.id %}
         </li>
+        {%- assign displayed_count = displayed_count | plus: 1 -%}
+        {%- if displayed_count >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
       {%- endfor -%}
     </ul>
   </section>
@@ -37,9 +41,10 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
     { "type": "collection", "id": "collection", "label": "Colección" },
+    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Armazones favoritos" },
     { "type": "text", "id": "link_label", "label": "Etiqueta de enlace", "default": "Ver todos" },
-    { "type": "range", "id": "products_to_show", "label": "Productos", "min": 4, "max": 8, "step": 1, "default": 4 }
+    { "type": "range", "id": "products_to_show", "label": "Productos", "min": 2, "max": 12, "step": 1, "default": 8 }
   ],
   "presets": [{ "name": "Destacados Lemoon" }]
 }

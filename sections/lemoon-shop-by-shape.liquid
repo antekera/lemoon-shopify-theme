@@ -1,0 +1,67 @@
+<section class="lemoon-shapes page-width" aria-labelledby="lemoon-shapes-title-{{ section.id }}">
+  <div class="lemoon-shapes__heading">
+    <h2 id="lemoon-shapes-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    <p>{{ section.settings.description | escape }}</p>
+  </div>
+  <ul class="lemoon-shapes__list" role="list">
+    {%- for block in section.blocks -%}
+      <li {{ block.shopify_attributes }}>
+        <a href="{{ block.settings.link | default: routes.all_products_collection_url }}" class="lemoon-shapes__item">
+          <span class="lemoon-shapes__icon" aria-hidden="true">
+            {% render 'lemoon-frame-shape', shape: block.settings.shape %}
+          </span>
+          <span>{{ block.settings.label | escape }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+  {%- if section.settings.button_label != blank -%}
+    <a class="lemoon-shapes__more" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }}</a>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Comprar por forma",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Compra por forma" },
+    { "type": "text", "id": "description", "label": "Descripción", "default": "Descubre armazones versátiles para cada look, ánimo y momento." },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver todo" },
+    { "type": "url", "id": "button_link", "label": "Enlace del botón" }
+  ],
+  "blocks": [{
+    "type": "shape",
+    "name": "Forma",
+    "settings": [
+      { "type": "text", "id": "label", "label": "Nombre", "default": "Redondos" },
+      { "type": "select", "id": "shape", "label": "Ícono", "options": [
+        { "value": "round", "label": "Redondos" },
+        { "value": "rectangle", "label": "Rectangulares" },
+        { "value": "cat_eye", "label": "Ojo de gato" },
+        { "value": "aviator", "label": "Aviador" },
+        { "value": "square", "label": "Cuadrados" },
+        { "value": "oval", "label": "Ovalados" },
+        { "value": "geometric", "label": "Geométricos" },
+        { "value": "browline", "label": "Línea de cejas" },
+        { "value": "butterfly", "label": "Mariposa" }
+      ], "default": "round" },
+      { "type": "url", "id": "link", "label": "Colección o enlace" }
+    ]
+  }],
+  "max_blocks": 9,
+  "presets": [{ "name": "Comprar por forma", "blocks": [
+    { "type": "shape" },
+    { "type": "shape", "settings": { "label": "Ojo de gato", "shape": "cat_eye" } },
+    { "type": "shape", "settings": { "label": "Aviador", "shape": "aviator" } },
+    { "type": "shape", "settings": { "label": "Cuadrados", "shape": "square" } },
+    { "type": "shape", "settings": { "label": "Ovalados", "shape": "oval" } },
+    { "type": "shape", "settings": { "label": "Geométricos", "shape": "geometric" } },
+    { "type": "shape", "settings": { "label": "Rectangulares", "shape": "rectangle" } },
+    { "type": "shape", "settings": { "label": "Línea de cejas", "shape": "browline" } },
+    { "type": "shape", "settings": { "label": "Mariposa", "shape": "butterfly" } }
+  ] }]
+}
+{% endschema %}
