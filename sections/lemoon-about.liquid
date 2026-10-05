@@ -1,0 +1,20 @@
+<section class="lemoon-about" aria-labelledby="lemoon-about-title-{{ section.id }}">
+  <div class="lemoon-about__inner page-width">
+    <h2 id="lemoon-about-title-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    <div class="lemoon-about__text">{{ section.settings.text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sobre Lemoon",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Tu mirada, tu estilo" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>En Lemoon creemos que los lentes son el detalle que completa tu look y expresa quién eres. Creamos armazones de calidad, con estilo y al alcance de todos, para que lleves tu mirada con confianza y comodidad.</p><p>Queremos que tus lentes sean ese accesorio esencial que te acompaña en cada momento. Descubre lentes ópticos y de sol pensados para tu día a día, con formas y estilos para sentirte tú.</p>" }
+  ],
+  "presets": [{ "name": "Sobre Lemoon" }]
+}
+{% endschema %}

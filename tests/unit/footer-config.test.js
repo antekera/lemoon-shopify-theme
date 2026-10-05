@@ -32,7 +32,7 @@ test('keeps the approved newsletter copy and footer social settings in the secti
   expect(settings.email_label).toBe('hola@lemoon.cl');
   expect(settings.contact_link).toBe('/pages/contact');
   expect(settings.contact_link_label).toBe('Escríbenos un mensaje');
-  expect(settings.company_name).toBe('Servigoptic SpA');
+  expect(settings.company_name).toBe('Servioptic SPA');
 });
 
 test('puts the configurable contact page link before email and targets the contact form page', async () => {

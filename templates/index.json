@@ -2,24 +2,49 @@
   "sections": {
     "lemoon_hero": {
       "type": "lemoon-hero",
-      "settings": {
-        "heading": "Lentes que te definen.",
-        "text": "Armazones de calidad con envío a todo Chile.",
-        "primary_label": "Ver colección",
-        "primary_link": "/collections/all",
-        "secondary_label": "Encuentra tu lente ideal",
-        "secondary_link": "/pages/buscar-mi-estilo"
-      }
+      "blocks": {
+        "main_slide": {
+          "type": "slide",
+          "settings": {
+            "button_1_text": "Ver todo hombre",
+            "button_1_link": "/collections/opticos-hombre",
+            "button_2_text": "Ver todo mujer",
+            "button_2_link": "/collections/opticos-mujer"
+          }
+        },
+        "editorial_slide": {
+          "type": "slide",
+          "settings": {
+            "desktop_asset": "lemoon-hero-slide-2-desktop.jpg",
+            "mobile_asset": "lemoon-hero-slide-2-mobile.jpg",
+            "button_1_text": "Ver todo hombre",
+            "button_1_link": "/collections/opticos-hombre",
+            "button_2_text": "Ver todo mujer",
+            "button_2_link": "/collections/opticos-mujer"
+          }
+        },
+        "youth_slide": {
+          "type": "slide",
+          "settings": {
+            "desktop_asset": "lemoon-hero-youth-desktop.jpg",
+            "mobile_asset": "lemoon-hero-youth-mobile.jpg",
+            "button_1_text": "Ver todo hombre",
+            "button_1_link": "/collections/opticos-hombre",
+            "button_2_text": "Ver todo mujer",
+            "button_2_link": "/collections/opticos-mujer"
+          }
+        }
+      },
+      "block_order": ["editorial_slide", "youth_slide", "main_slide"],
+      "settings": { "autoplay_seconds": 4 }
     },
     "trust_bar": {
       "type": "trust-bar",
       "blocks": {
-        "shipping": { "type": "benefit", "settings": { "text": "Envío gratis sobre $70.000" } },
-        "returns": { "type": "benefit", "settings": { "text": "Devolución en 30 días" } },
-        "guarantee": { "type": "benefit", "settings": { "text": "Garantía de ajuste" } },
-        "whatsapp": { "type": "benefit", "settings": { "text": "Atención por WhatsApp" } }
+        "guarantee": { "type": "benefit", "settings": { "icon": "shield", "text": "300 días de garantía", "text_second_line": "para tus lentes" } },
+        "returns": { "type": "benefit", "settings": { "icon": "return", "text": "Cambios y devoluciones", "text_second_line": "antes de los 30 días" } }
       },
-      "block_order": ["shipping", "returns", "guarantee", "whatsapp"],
+      "block_order": ["guarantee", "returns"],
       "settings": { "aria_label": "Beneficios de comprar en Lemoon" }
     },
     "featured_collection": {
@@ -54,10 +79,54 @@
     "lemoon_featured_products": {
       "type": "lemoon-featured-products",
       "settings": {
-        "collection": "opticos",
-        "heading": "Armazones favoritos",
+        "collection": "lo-nuevo",
+        "eyebrow": "",
+        "heading": "Lo nuevo",
         "link_label": "Ver todos",
-        "products_to_show": 4
+        "products_to_show": 8
+      }
+    },
+    "lemoon_best_sellers": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "mejor-vendidos",
+        "eyebrow": "",
+        "heading": "Más vendidos",
+        "link_label": "Ver todos",
+        "products_to_show": 8
+      }
+    },
+    "lemoon_reading": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "de-lectura",
+        "eyebrow": "",
+        "heading": "Lentes de lectura",
+        "link_label": "Ver todos",
+        "products_to_show": 8
+      }
+    },
+    "lemoon_shapes": {
+      "type": "lemoon-shop-by-shape",
+      "blocks": {
+        "round": { "type": "shape", "settings": { "label": "Redondos", "shape": "round", "link": "/collections/opticos/redondo" } },
+        "rectangle": { "type": "shape", "settings": { "label": "Rectangulares", "shape": "rectangle", "link": "/collections/opticos/rectangular" } },
+        "cat_eye": { "type": "shape", "settings": { "label": "Ojo de gato", "shape": "cat_eye", "link": "/collections/opticos/ojo-de-gato" } },
+        "aviator": { "type": "shape", "settings": { "label": "Aviador", "shape": "aviator", "link": "/collections/opticos/aviador" } },
+        "square": { "type": "shape", "settings": { "label": "Cuadrados", "shape": "square", "link": "/collections/opticos/cuadrado" } },
+        "oval": { "type": "shape", "settings": { "label": "Ovalados", "shape": "oval", "link": "/collections/opticos/ovalado" } },
+        "geometric": { "type": "shape", "settings": { "label": "Geométricos", "shape": "geometric", "link": "/collections/opticos/geometrico" } },
+        "browline": { "type": "shape", "settings": { "label": "Línea de cejas", "shape": "browline", "link": "/collections/opticos/browline" } },
+        "butterfly": { "type": "shape", "settings": { "label": "Mariposa", "shape": "butterfly", "link": "/collections/opticos/mariposa" } }
+      },
+      "block_order": ["round", "rectangle", "square", "cat_eye", "oval", "browline", "geometric", "butterfly", "aviator"],
+      "settings": { "heading": "Compra por forma", "description": "Descubre armazones versátiles para cada look, ánimo y momento.", "button_label": "Ver todo", "button_link": "/collections/all" }
+    },
+    "lemoon_about": {
+      "type": "lemoon-about",
+      "settings": {
+        "heading": "Tu mirada, tu estilo",
+        "text": "<p>En Lemoon creemos que los lentes son el detalle que completa tu look y expresa quién eres. Creamos armazones de calidad, con estilo y al alcance de todos, para que lleves tu mirada con confianza y comodidad.</p><p>Queremos que tus lentes sean ese accesorio esencial que te acompaña en cada momento. Descubre lentes ópticos y de sol pensados para tu día a día, con formas y estilos para sentirte tú.</p>"
       }
     },
 
@@ -217,21 +286,21 @@
           "type": "step",
           "settings": {
             "heading": "Elige tu armazón",
-            "text": "Encuentra una forma y un color que se sientan naturalmente tuyos."
+            "text": "Encuentra el armazón que va contigo."
           }
         },
         "configure": {
           "type": "step",
           "settings": {
             "heading": "Configura tus lentes",
-            "text": "Agrega cristales para tu receta y para la forma en que ves el mundo."
+            "text": "Elige los cristales que necesitas."
           }
         },
         "receive": {
           "type": "step",
           "settings": {
             "heading": "Recíbelos en casa",
-            "text": "Despachamos a todo Chile para que tu nueva mirada llegue sin vueltas."
+            "text": "Te los enviamos a cualquier lugar de Chile."
           }
         }
       },
@@ -241,14 +310,12 @@
     "lifestyle_moods": {
       "type": "lifestyle-mood-grid",
       "blocks": {
-        "minimal": { "type": "mood", "settings": { "heading": "Minimalista", "link": "/collections/all" } },
-        "executive": { "type": "mood", "settings": { "heading": "Ejecutivo", "link": "/collections/all" } },
-        "retro": { "type": "mood", "settings": { "heading": "Retro", "link": "/collections/all" } },
-        "casual": { "type": "mood", "settings": { "heading": "Casual", "link": "/collections/all" } },
-        "sun": { "type": "mood", "settings": { "heading": "Sol", "link": "/collections/all" } }
+        "optical": { "type": "mood", "settings": { "heading": "Lentes ópticos", "link": "/collections/opticos" } },
+        "sun": { "type": "mood", "settings": { "heading": "Lentes de sol", "link": "/collections/lentes-de-sol" } },
+        "accessories": { "type": "mood", "settings": { "heading": "Accesorios", "link": "/collections/accesorios" } }
       },
-      "block_order": ["minimal", "executive", "retro", "casual", "sun"],
-      "settings": { "heading": "Elige según tu estilo" }
+      "block_order": ["optical", "sun", "accessories"],
+      "settings": { "heading": "Compra por categoría", "description": "" }
     },
     "collage_1": {
       "disabled": true,
@@ -344,48 +411,18 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
-    },
-    "social_proof": {
-      "type": "social-proof-strip",
-      "settings": {
-        "rating": "5 de 5 estrellas",
-        "text": "Elegidos por miles de miradas en Chile."
-      }
-    },
-    "newsletter_1": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Ideas, lanzamientos y lentes nuevos",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Recibe novedades de Lemoon y beneficios pensados para tus ojos.</p>"
-          }
-        },
-        "email_form": { "type": "email_form" }
-      },
-      "block_order": ["heading", "paragraph", "email_form"],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
     }
   },
   "order": [
     "lemoon_hero",
     "trust_bar",
-    "collection_list_1",
-    "how_it_works",
-    "lifestyle_moods",
     "lemoon_featured_products",
+    "lemoon_shapes",
+    "lifestyle_moods",
+    "how_it_works",
+    "lemoon_best_sellers",
+    "lemoon_reading",
+    "collection_list_1",
     "featured_collection",
     "image_with_text_1",
     "featured_product_1",
@@ -394,7 +431,6 @@
     "collage_1",
     "video_1",
     "featured_blog_1",
-    "social_proof",
-    "newsletter_1"
+    "lemoon_about"
   ]
 }

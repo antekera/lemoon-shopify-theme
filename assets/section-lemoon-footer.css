@@ -114,6 +114,19 @@
   padding: var(--footer-padding-top, 6.4rem) 0 var(--footer-padding-bottom, 0);
 }
 
+.lemoon-footer__company {
+  white-space: nowrap;
+}
+
+.lemoon-footer__flag {
+  display: inline-block;
+  width: 1.2em;
+  height: 0.8em;
+  margin-left: 0.35em;
+  border-radius: 0.08em;
+  vertical-align: 0.02em;
+}
+
 .lemoon-footer__main {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(22rem, 1fr);
@@ -137,10 +150,6 @@
   color: rgba(255, 255, 255, 0.84);
   font-size: 1.5rem;
   line-height: 1.4;
-}
-
-.lemoon-footer__help-copy--mobile {
-  display: none;
 }
 
 .lemoon-footer__contact-list {
@@ -216,7 +225,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #f7e600;
+  color: #fff;
   cursor: default;
   font-family: var(--font-heading-family);
   font-size: 1.4rem;
@@ -495,14 +504,6 @@
     gap: 0;
   }
 
-  .lemoon-footer__help-copy--desktop {
-    display: none;
-  }
-
-  .lemoon-footer__help-copy--mobile {
-    display: inline;
-  }
-
   .lemoon-footer__menu {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
@@ -538,7 +539,7 @@
     width: 2rem;
     height: 2rem;
     flex: 0 0 2rem;
-    color: #f7e600;
+    color: #fff;
   }
 
   .lemoon-footer__menu-toggle::before,

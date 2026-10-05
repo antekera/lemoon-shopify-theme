@@ -54,15 +54,9 @@
             "mobile_only": false,
             "desktop_only": false
           }
-        },
-        "quick_links": {
-          "type": "legal_links",
-          "settings": {
-            "menu": "footer-quick-links"
-          }
         }
       },
-      "block_order": ["products", "buy", "services", "services_mobile", "information", "quick_links"],
+      "block_order": ["products", "buy", "services", "services_mobile", "information"],
       "settings": {
         "newsletter_enable": true,
         "newsletter_heading": "El camino para ver bien y verte bien comienza aquí.",
@@ -73,7 +67,6 @@
         "newsletter_success": "Gracias por suscribirte.",
         "help_heading": "¿Necesitas ayuda?",
         "help_text": "Estamos aquí para acompañarte en tu compra.",
-        "help_text_mobile": "Estamos aquí para ayudarte a elegir.",
         "whatsapp_number": "",
         "whatsapp_label": "Contáctanos por WhatsApp",
         "contact_email": "hola@lemoon.cl",
@@ -90,8 +83,7 @@
         "payment_visa_label": "VISA",
         "payment_mastercard": true,
         "payment_mastercard_label": "Mastercard",
-        "sitemap_enable": true,
-        "company_name": "Servigoptic SpA",
+        "company_name": "Servioptic SPA",
         "footer_art_alt": "Ilustración abstracta de un horizonte de limones.",
         "padding_top": 64,
         "padding_bottom": 0
