@@ -9,6 +9,14 @@
         assign mobile_image = block.settings.mobile_image
         assign desktop_asset = block.settings.desktop_asset | strip
         assign mobile_asset = block.settings.mobile_asset | strip
+        case block.id
+          when 'editorial_slide'
+            assign desktop_asset = desktop_asset | default: 'lemoon-hero-slide-2-desktop.jpg'
+            assign mobile_asset = mobile_asset | default: 'lemoon-hero-slide-2-mobile.jpg'
+          when 'youth_slide'
+            assign desktop_asset = desktop_asset | default: 'lemoon-hero-youth-desktop.jpg'
+            assign mobile_asset = mobile_asset | default: 'lemoon-hero-youth-mobile.jpg'
+        endcase
         assign desktop_alt = desktop_image.alt | default: shop.name
         assign mobile_alt = mobile_image.alt | default: desktop_alt
         if forloop.first
