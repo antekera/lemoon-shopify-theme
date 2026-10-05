@@ -152,10 +152,6 @@
   line-height: 1.4;
 }
 
-.lemoon-footer__help-copy--mobile {
-  display: none;
-}
-
 .lemoon-footer__contact-list {
   display: grid;
   gap: 1.2rem;
@@ -506,14 +502,6 @@
   .lemoon-footer__menus {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-  }
-
-  .lemoon-footer__help-copy--desktop {
-    display: none;
-  }
-
-  .lemoon-footer__help-copy--mobile {
-    display: inline;
   }
 
   .lemoon-footer__menu {
