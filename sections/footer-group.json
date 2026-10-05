@@ -54,15 +54,9 @@
             "mobile_only": false,
             "desktop_only": false
           }
-        },
-        "quick_links": {
-          "type": "legal_links",
-          "settings": {
-            "menu": "footer-quick-links"
-          }
         }
       },
-      "block_order": ["products", "buy", "services", "services_mobile", "information", "quick_links"],
+      "block_order": ["products", "buy", "services", "services_mobile", "information"],
       "settings": {
         "newsletter_enable": true,
         "newsletter_heading": "El camino para ver bien y verte bien comienza aquí.",
