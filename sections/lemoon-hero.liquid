@@ -7,6 +7,8 @@
       {%- liquid
         assign desktop_image = block.settings.desktop_image
         assign mobile_image = block.settings.mobile_image
+        assign desktop_asset = block.settings.desktop_asset | strip
+        assign mobile_asset = block.settings.mobile_asset | strip
         assign desktop_alt = desktop_image.alt | default: shop.name
         assign mobile_alt = mobile_image.alt | default: desktop_alt
         if forloop.first
@@ -17,15 +19,19 @@
           assign image_priority = 'auto'
         endif
       -%}
-      <div class="lemoon-hero__slide" id="LemoonHeroSlide-{{ block.id }}" role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}" {{ block.shopify_attributes }}>
+      <div class="lemoon-hero__slide" id="LemoonHeroSlide-{{ block.id }}" role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"{% unless forloop.first %} inert aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
         <picture class="lemoon-hero__picture">
           {%- if mobile_image != blank -%}
             <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w, {{ mobile_image | image_url: width: 1500 }} 1500w" sizes="100vw">
-          {%- elsif desktop_image == blank -%}
+          {%- elsif mobile_asset != blank -%}
+            <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_url }}">
+          {%- elsif desktop_image == blank and desktop_asset == blank -%}
             <source media="(max-width: 749px)" srcset="{{ 'lemoon-hero-mobile-placeholder.jpg' | asset_url }}">
           {%- endif -%}
           {%- if desktop_image != blank -%}
             {{ desktop_image | image_url: width: 2400 | image_tag: class: 'lemoon-hero__image', loading: image_loading, fetchpriority: image_priority, widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', alt: desktop_alt }}
+          {%- elsif desktop_asset != blank -%}
+            <img class="lemoon-hero__image" src="{{ desktop_asset | asset_url }}" alt="{{ desktop_alt | escape }}" width="1672" height="941" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
           {%- elsif mobile_image != blank -%}
             {{ mobile_image | image_url: width: 1500 | image_tag: class: 'lemoon-hero__image', loading: image_loading, fetchpriority: image_priority, widths: '750, 1100, 1500', sizes: '100vw', alt: mobile_alt }}
           {%- else -%}
@@ -75,6 +81,8 @@
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Imagen desktop" },
         { "type": "image_picker", "id": "mobile_image", "label": "Imagen mobile" },
+        { "type": "text", "id": "desktop_asset", "label": "Archivo desktop del tema (opcional)" },
+        { "type": "text", "id": "mobile_asset", "label": "Archivo mobile del tema (opcional)" },
         { "type": "text", "id": "button_1_text", "label": "Botón 1: texto", "default": "Ver todo hombre" },
         { "type": "url", "id": "button_1_link", "label": "Botón 1: enlace" },
         { "type": "text", "id": "button_2_text", "label": "Botón 2: texto", "default": "Ver todo mujer" },

@@ -78,6 +78,12 @@ if (!customElements.get('lemoon-hero')) {
         this.track.scrollLeft = 0;
       }
       this.currentIndex = Math.min(this.slides.length - 1, Math.max(0, Math.round(this.track.scrollLeft / this.track.clientWidth)));
+      this.slides.forEach((slide, index) => {
+        const inactive = index !== this.currentIndex;
+        slide.inert = inactive;
+        if (inactive) slide.setAttribute('aria-hidden', 'true');
+        else slide.removeAttribute('aria-hidden');
+      });
       this.dots.forEach((dot, index) => {
         dot.classList.toggle('is-active', index === this.currentIndex);
         if (index === this.currentIndex) dot.setAttribute('aria-current', 'true');

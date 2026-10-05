@@ -15,8 +15,8 @@
         "editorial_slide": {
           "type": "slide",
           "settings": {
-            "desktop_image": "shopify://shop_images/lemoon-hero-slide-2-desktop.jpg",
-            "mobile_image": "shopify://shop_images/lemoon-hero-slide-2-mobile.jpg",
+            "desktop_asset": "lemoon-hero-slide-2-desktop.jpg",
+            "mobile_asset": "lemoon-hero-slide-2-mobile.jpg",
             "button_1_text": "Ver todo hombre",
             "button_1_link": "/collections/opticos-hombre",
             "button_2_text": "Ver todo mujer",
@@ -26,8 +26,8 @@
         "youth_slide": {
           "type": "slide",
           "settings": {
-            "desktop_image": "shopify://shop_images/lemoon-hero-youth-desktop.jpg",
-            "mobile_image": "shopify://shop_images/lemoon-hero-youth-mobile.jpg",
+            "desktop_asset": "lemoon-hero-youth-desktop.jpg",
+            "mobile_asset": "lemoon-hero-youth-mobile.jpg",
             "button_1_text": "Ver todo hombre",
             "button_1_link": "/collections/opticos-hombre",
             "button_2_text": "Ver todo mujer",
