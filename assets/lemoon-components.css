@@ -900,7 +900,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--lemoon-space-4);
+  gap: 8rem;
 }
 
 .lemoon-trust-bar__item {
@@ -1101,7 +1101,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   .lemoon-trust-bar__inner {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.4rem;
+    gap: 6rem;
   }
 
   .lemoon-trust-bar__item { flex-direction: column; gap: .6rem; font-size: 1.1rem; line-height: 1.25; }
