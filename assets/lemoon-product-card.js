@@ -3,6 +3,7 @@
   window.lemoonProductCardReady = true;
 
   const galleryStates = new WeakMap();
+  const galleryTransitionFinishes = new WeakMap();
   const suppressedClicks = new WeakSet();
   const galleryObserver = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries, observer) => {
@@ -51,7 +52,8 @@
     secondary.dataset.loadedSrc = src;
   };
 
-  const setGalleryIndex = (card, index, wasDragged = false) => {
+  const setGalleryIndex = (card, index, slideDirection = 0) => {
+    galleryTransitionFinishes.get(card)?.();
     const state = galleryStates.get(card);
     if (!state?.images.length) return;
     state.index = ((index % state.images.length) + state.images.length) % state.images.length;
@@ -59,9 +61,60 @@
     const media = card.querySelector('.card__media .media');
     const primary = media?.querySelector('img:first-child');
     if (!primary) return;
-    media.classList.toggle('lemoon-product-card__gallery-active', wasDragged);
-
     const current = state.images[state.index];
+    if (slideDirection && (primary.currentSrc || primary.src) !== current.src) {
+      media.classList.add('lemoon-product-card__gallery-active', 'lemoon-product-card__gallery-sliding');
+      card.dataset.gallerySliding = 'true';
+
+      const incoming = document.createElement('img');
+      incoming.className = 'lemoon-product-card__slide-layer';
+      incoming.alt = '';
+      incoming.setAttribute('aria-hidden', 'true');
+      incoming.src = current.src;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = reducedMotion ? 0 : 260;
+      const transition = `transform ${duration}ms cubic-bezier(.2, .7, .2, 1)`;
+      const enterFrom = `translateX(${slideDirection < 0 ? '100%' : '-100%'})`;
+      const exitTo = `translateX(${slideDirection < 0 ? '-100%' : '100%'})`;
+      incoming.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;opacity:1;pointer-events:none;will-change:transform';
+      incoming.style.setProperty('transition', transition, 'important');
+      incoming.style.setProperty('transform', enterFrom, 'important');
+      primary.style.setProperty('transition', transition, 'important');
+      primary.style.setProperty('transform', 'translateX(0)', 'important');
+      media.append(incoming);
+
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        primary.srcset = '';
+        primary.src = current.src;
+        primary.alt = current.alt;
+        incoming.remove();
+        media.classList.remove('lemoon-product-card__gallery-sliding');
+        primary.style.removeProperty('transition');
+        primary.style.removeProperty('transform');
+        delete card.dataset.gallerySliding;
+        if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
+      };
+      galleryTransitionFinishes.set(card, finish);
+
+      if (reducedMotion) {
+        finish();
+        return;
+      }
+
+      requestAnimationFrame(() => {
+        incoming.getBoundingClientRect();
+        primary.style.setProperty('transform', exitTo, 'important');
+        incoming.style.setProperty('transform', 'translateX(0)', 'important');
+      });
+      incoming.addEventListener('transitionend', finish, { once: true });
+      window.setTimeout(finish, duration + 80);
+      return;
+    }
+
+    media.classList.remove('lemoon-product-card__gallery-active');
     primary.srcset = '';
     primary.src = current.src;
     primary.alt = current.alt;
@@ -119,6 +172,7 @@
     if (!card.hasAttribute('data-enable-gallery-swipe')) return;
 
     gestureTarget.addEventListener('pointerdown', (event) => {
+      if (card.dataset.gallerySliding) return;
       const bounds = media.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
       if (event.button !== 0 && event.pointerType === 'mouse') return;
@@ -135,7 +189,7 @@
       start = null;
       if (!cardState || Math.abs(deltaX) < 36 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
       event.preventDefault();
-      setGalleryIndex(card, cardState.index + (deltaX < 0 ? 1 : -1), true);
+      setGalleryIndex(card, cardState.index + (deltaX < 0 ? 1 : -1), deltaX < 0 ? -1 : 1);
       suppressedClicks.add(card);
       window.setTimeout(() => suppressedClicks.delete(card), 0);
     });

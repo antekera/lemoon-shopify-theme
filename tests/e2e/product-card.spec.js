@@ -68,6 +68,9 @@ test('loads the second photo near the viewport and toggles back to the first on 
     await page.mouse.up();
   };
   await swipeLeft();
+  const media = page.locator('.card__media .media');
+  await expect(media).toHaveClass(/lemoon-product-card__gallery-sliding/);
+  await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-duration', '0.26s');
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
   await swipeLeft();
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
