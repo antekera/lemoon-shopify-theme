@@ -1,0 +1,46 @@
+{%- liquid
+  assign rendered_label_count = 0
+  assign max_label_count = 3
+  assign rendered_label_styles = '|'
+  if card_product.available == false
+    assign max_label_count = 2
+  endif
+-%}
+<div class="lemoon-product-card__labels" aria-label="{{ 'products.product.product_labels' | t }}">
+  {%- for label_tag in card_product.tags -%}
+    {%- liquid
+      assign label_key = blank
+      assign label_style = blank
+      assign normalized_label = label_tag | handleize
+      case normalized_label
+        when 'flash-sale'
+          assign label_key = 'products.product.card_label_flash_sale'
+          assign label_style = 'flash-sale'
+        when 'nuevo', 'novedad', 'new'
+          assign label_key = 'products.product.card_label_new'
+          assign label_style = 'new'
+        when 'mas-vendidos', 'mas-vendido', 'best-seller'
+          assign label_key = 'products.product.card_label_best_seller'
+          assign label_style = 'best-seller'
+        when 'bestseller'
+          assign label_key = 'products.product.card_label_bestseller'
+          assign label_style = 'bestseller'
+      endcase
+    -%}
+    {%- assign label_signature = '|' | append: label_style | append: '|' -%}
+    {%- unless rendered_label_styles contains label_signature -%}
+    {%- if label_key != blank and rendered_label_count < max_label_count -%}
+      <span class="lemoon-product-card__label lemoon-product-card__label--{{ label_style }}">
+        {{- label_key | t -}}
+      </span>
+      {%- assign rendered_label_count = rendered_label_count | plus: 1 -%}
+      {%- assign rendered_label_styles = rendered_label_styles | append: label_style | append: '|' -%}
+    {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+  {%- if card_product.available == false -%}
+    <span id="Badge-{{ section_id }}-{{ card_product.id }}" class="lemoon-product-card__label lemoon-product-card__label--sold-out">
+      {{- 'products.product.sold_out' | t -}}
+    </span>
+  {%- endif -%}
+</div>

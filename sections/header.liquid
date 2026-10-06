@@ -58,7 +58,7 @@
           {%- endif -%}
         </a>
         {%- if show_account -%}
-          <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+          <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
             {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
           </a>
         {%- endif -%}
@@ -99,7 +99,7 @@
             {%- endif -%}
           </a>
           {%- if show_account -%}
-            <a class="lemoon-header__action" href="{{ routes.account_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
               {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
             </a>
           {%- endif -%}
@@ -201,6 +201,13 @@
       "content": "Búsqueda móvil: información"
     },
     {
+      "type": "checkbox",
+      "id": "mobile_search_show_wishlist",
+      "label": "Mostrar enlace a favoritos",
+      "info": "Actívalo cuando Wishlist by Square esté activa.",
+      "default": true
+    },
+    {
       "type": "page",
       "id": "mobile_search_shipping_page",
       "label": "Envíos y retornos"
@@ -230,10 +237,9 @@
       "label": "Enlace del banner"
     },
     {
-      "type": "product_list",
-      "id": "mobile_search_trending_products",
-      "label": "Productos de tendencias",
-      "limit": 4
+      "type": "collection",
+      "id": "mobile_search_trending_collection",
+      "label": "Colección de productos del carrusel"
     },
     {
       "type": "header",

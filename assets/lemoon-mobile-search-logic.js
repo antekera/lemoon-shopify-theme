@@ -11,6 +11,17 @@ export function selectSuggestions(products, random = Math.random) {
   return unique.slice(0, 3);
 }
 
+export function upsertRecentlyViewed(products, product, limit = 20) {
+  if (!product?.id || !product?.url || !product?.title) return products.slice(0, limit);
+  const id = String(product.id);
+  return [product, ...products.filter((item) => String(item?.id) !== id)].slice(0, limit);
+}
+
+export function getRecentlyViewed(products, limit = 3) {
+  if (!Array.isArray(products)) return [];
+  return products.filter((item) => item?.id && item?.title && item?.url).slice(0, limit);
+}
+
 export function buildSearchUrl(route, term) {
   const query = term.trim();
   return query ? `${route}?${new URLSearchParams({ q: query, type: 'product' })}` : route;

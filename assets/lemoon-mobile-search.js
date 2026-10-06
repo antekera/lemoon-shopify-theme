@@ -1,6 +1,7 @@
-import { shouldPredict, selectSuggestions, buildSearchUrl, buildPredictiveUrl, createRequestGate } from './lemoon-mobile-search-logic.js';
+import { shouldPredict, selectSuggestions, buildSearchUrl, buildPredictiveUrl, createRequestGate, upsertRecentlyViewed, getRecentlyViewed } from './lemoon-mobile-search-logic.js';
 
 const selector = (name) => `[data-lemoon-search-${name}]`;
+const RECENT_PRODUCTS_KEY = 'lemoon:recently-viewed-products';
 
 // Restrict externally supplied destinations to web URLs before assigning DOM attributes.
 function safeUrl(value) {
@@ -27,6 +28,7 @@ class MobileSearch {
     this.input = root.querySelector(selector('input'));
     this.results = root.querySelector(selector('results'));
     this.status = root.querySelector(selector('status'));
+    this.suggestionsHeading = root.querySelector('[data-lemoon-search-suggestions-heading]');
     this.fallbackImage = safeUrl(root.dataset.fallbackImage);
     this.all = root.querySelector(selector('all'));
     this.form = root.querySelector(selector('form'));
@@ -51,6 +53,7 @@ class MobileSearch {
       this.products = JSON.parse(root.querySelector(selector('products'))?.textContent || '[]');
       if (!Array.isArray(this.products)) this.products = [];
     } catch { this.products = []; }
+    this.recordCurrentProduct();
     this.triggers.forEach((button) => this.listen(button, 'click', () => this.open(button)));
     this.listen(this.header, 'click', (event) => {
       const target = event.target instanceof Element ? event.target : null;
@@ -114,6 +117,34 @@ class MobileSearch {
 
   updateLink() { this.all.href = this.destination(); }
 
+  recordCurrentProduct() {
+    const id = this.root.dataset.currentProductId;
+    const url = safeUrl(this.root.dataset.currentProductUrl);
+    if (!id || !url) return;
+    const current = {
+      id: String(id),
+      title: this.root.dataset.currentProductTitle || '',
+      url,
+      image: safeUrl(this.root.dataset.currentProductImage),
+    };
+    try {
+      const stored = JSON.parse(window.localStorage.getItem(RECENT_PRODUCTS_KEY) || '[]');
+      const previous = Array.isArray(stored) ? stored : [];
+      window.localStorage.setItem(RECENT_PRODUCTS_KEY, JSON.stringify(upsertRecentlyViewed(previous, current)));
+    } catch { /* Search remains usable when storage is unavailable. */ }
+  }
+
+  recentProducts() {
+    try {
+      const stored = JSON.parse(window.localStorage.getItem(RECENT_PRODUCTS_KEY) || '[]');
+      return getRecentlyViewed(stored).filter((item) => safeUrl(item.url)).map((item) => ({
+        ...item,
+        url: safeUrl(item.url),
+        image: safeUrl(item.image),
+      }));
+    } catch { return []; }
+  }
+
   measure() {
     if (!this.isOpen) return;
     const viewport = window.visualViewport;
@@ -155,7 +186,14 @@ class MobileSearch {
     this.input.value = '';
     this.restoreInputStyles = saveStyles(this.input, ['font-size']);
     this.panel.scrollTop = 0;
-    const suggestions = selectSuggestions(this.products);
+    const suggestions = this.recentProducts();
+    const hasRecentProducts = suggestions.length > 0;
+    if (!hasRecentProducts) suggestions.push(...selectSuggestions(this.products));
+    if (this.suggestionsHeading) {
+      this.suggestionsHeading.textContent = hasRecentProducts
+        ? this.root.dataset.recentlyViewedLabel
+        : this.root.dataset.suggestedProductsLabel;
+    }
     const previousIds = this.initial?.map((product) => product.id);
     const repeatedSuggestions = suggestions.length > 1
       && suggestions.every((product, index) => product.id === previousIds?.[index]);
