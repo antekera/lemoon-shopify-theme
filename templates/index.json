@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "lemoon_hero": {
@@ -35,43 +44,66 @@
           }
         }
       },
-      "block_order": ["editorial_slide", "youth_slide", "main_slide"],
-      "settings": { "autoplay_seconds": 4 }
+      "block_order": [
+        "editorial_slide",
+        "youth_slide",
+        "main_slide"
+      ],
+      "settings": {
+        "autoplay_seconds": 4
+      }
     },
     "trust_bar": {
       "type": "trust-bar",
       "blocks": {
-        "guarantee": { "type": "benefit", "settings": { "icon": "shield", "text": "300 días de garantía", "text_second_line": "para tus lentes" } },
-        "returns": { "type": "benefit", "settings": { "icon": "return", "text": "Cambios y devoluciones", "text_second_line": "antes de los 30 días" } }
+        "guarantee": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "text": "300 días de garantía",
+            "text_second_line": "para tus lentes"
+          }
+        },
+        "returns": {
+          "type": "benefit",
+          "settings": {
+            "icon": "return",
+            "text": "Cambios y devoluciones",
+            "text_second_line": "antes de los 30 días"
+          }
+        }
       },
-      "block_order": ["guarantee", "returns"],
-      "settings": { "aria_label": "Beneficios de comprar en Lemoon" }
+      "block_order": [
+        "guarantee",
+        "returns"
+      ],
+      "settings": {
+        "aria_label": "Beneficios de comprar en Lemoon"
+      }
     },
     "featured_collection": {
-      "disabled": true,
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
+        "collection": "opticos",
+        "products_to_show": 8,
         "title": "Armazones favoritos",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "opticos",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
-        "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -109,18 +141,96 @@
     "lemoon_shapes": {
       "type": "lemoon-shop-by-shape",
       "blocks": {
-        "round": { "type": "shape", "settings": { "label": "Redondos", "shape": "round", "link": "/collections/opticos/redondo" } },
-        "rectangle": { "type": "shape", "settings": { "label": "Rectangulares", "shape": "rectangle", "link": "/collections/opticos/rectangular" } },
-        "cat_eye": { "type": "shape", "settings": { "label": "Ojo de gato", "shape": "cat_eye", "link": "/collections/opticos/ojo-de-gato" } },
-        "aviator": { "type": "shape", "settings": { "label": "Aviador", "shape": "aviator", "link": "/collections/opticos/aviador" } },
-        "square": { "type": "shape", "settings": { "label": "Cuadrados", "shape": "square", "link": "/collections/opticos/cuadrado" } },
-        "oval": { "type": "shape", "settings": { "label": "Ovalados", "shape": "oval", "link": "/collections/opticos/ovalado" } },
-        "geometric": { "type": "shape", "settings": { "label": "Geométricos", "shape": "geometric", "link": "/collections/opticos/geometrico" } },
-        "browline": { "type": "shape", "settings": { "label": "Línea de cejas", "shape": "browline", "link": "/collections/opticos/browline" } },
-        "butterfly": { "type": "shape", "settings": { "label": "Mariposa", "shape": "butterfly", "link": "/collections/opticos/mariposa" } }
+        "round": {
+          "type": "shape",
+          "settings": {
+            "label": "Redondos",
+            "shape": "round",
+            "link": "/collections/opticos/redondo"
+          }
+        },
+        "rectangle": {
+          "type": "shape",
+          "settings": {
+            "label": "Rectangulares",
+            "shape": "rectangle",
+            "link": "/collections/opticos/rectangular"
+          }
+        },
+        "cat_eye": {
+          "type": "shape",
+          "settings": {
+            "label": "Ojo de gato",
+            "shape": "cat_eye",
+            "link": "/collections/opticos/ojo-de-gato"
+          }
+        },
+        "aviator": {
+          "type": "shape",
+          "settings": {
+            "label": "Aviador",
+            "shape": "aviator",
+            "link": "/collections/opticos/aviador"
+          }
+        },
+        "square": {
+          "type": "shape",
+          "settings": {
+            "label": "Cuadrados",
+            "shape": "square",
+            "link": "/collections/opticos/cuadrado"
+          }
+        },
+        "oval": {
+          "type": "shape",
+          "settings": {
+            "label": "Ovalados",
+            "shape": "oval",
+            "link": "/collections/opticos/ovalado"
+          }
+        },
+        "geometric": {
+          "type": "shape",
+          "settings": {
+            "label": "Geométricos",
+            "shape": "geometric",
+            "link": "/collections/opticos/geometrico"
+          }
+        },
+        "browline": {
+          "type": "shape",
+          "settings": {
+            "label": "Línea de cejas",
+            "shape": "browline",
+            "link": "/collections/opticos/browline"
+          }
+        },
+        "butterfly": {
+          "type": "shape",
+          "settings": {
+            "label": "Mariposa",
+            "shape": "butterfly",
+            "link": "/collections/opticos/mariposa"
+          }
+        }
       },
-      "block_order": ["round", "rectangle", "square", "cat_eye", "oval", "browline", "geometric", "butterfly", "aviator"],
-      "settings": { "heading": "Compra por forma", "description": "Descubre armazones versátiles para cada look, ánimo y momento.", "button_label": "Ver todo", "button_link": "/collections/all" }
+      "block_order": [
+        "round",
+        "rectangle",
+        "square",
+        "cat_eye",
+        "oval",
+        "browline",
+        "geometric",
+        "butterfly",
+        "aviator"
+      ],
+      "settings": {
+        "heading": "Compra por forma",
+        "description": "Descubre armazones versátiles para cada look, ánimo y momento.",
+        "button_label": "Ver todo",
+        "button_link": "/collections/all"
+      }
     },
     "lemoon_about": {
       "type": "lemoon-about",
@@ -129,9 +239,7 @@
         "text": "<p>En Lemoon creemos que los lentes son el detalle que completa tu look y expresa quién eres. Creamos armazones de calidad, con estilo y al alcance de todos, para que lleves tu mirada con confianza y comodidad.</p><p>Queremos que tus lentes sean ese accesorio esencial que te acompaña en cada momento. Descubre lentes ópticos y de sol pensados para tu día a día, con formas y estilos para sentirte tú.</p>"
       }
     },
-
     "image_with_text_1": {
-      "disabled": true,
       "type": "image-with-text",
       "blocks": {
         "heading": {
@@ -156,37 +264,55 @@
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "disabled": true,
       "settings": {
-        "image_position": "left",
-        "layout": "text_first",
-        "color_scheme": "scheme-1",
         "height": "adapt",
         "desktop_image_width": "medium",
+        "layout": "text_first",
         "image_behavior": "none",
+        "color_scheme": "scheme-1",
         "padding_top": 64,
         "padding_bottom": 64
       }
     },
     "featured_product_1": {
-      "disabled": true,
       "type": "featured-product",
       "blocks": {
-        "title": { "type": "title" },
-        "price": { "type": "price" },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true
           }
         },
-        "share": { "type": "share" }
+        "share": {
+          "type": "share",
+          "settings": {}
+        }
       },
-      "block_order": ["title", "price", "buy_buttons", "share"],
+      "block_order": [
+        "title",
+        "price",
+        "buy_buttons",
+        "share"
+      ],
+      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
-        "media_position": "left",
         "media_size": "medium",
+        "media_position": "left",
         "hide_variants": false,
         "enable_video_looping": false,
         "padding_top": 64,
@@ -194,7 +320,6 @@
       }
     },
     "rich_text_1": {
-      "disabled": true,
       "type": "rich-text",
       "blocks": {
         "heading": {
@@ -219,7 +344,12 @@
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -230,7 +360,6 @@
       }
     },
     "multicolumn_1": {
-      "disabled": true,
       "type": "multicolumn",
       "blocks": {
         "col1": {
@@ -261,17 +390,22 @@
           }
         }
       },
-      "block_order": ["col1", "col2", "col3"],
+      "block_order": [
+        "col1",
+        "col2",
+        "col3"
+      ],
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
-        "button_label": "",
-        "button_link": "",
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
@@ -304,21 +438,51 @@
           }
         }
       },
-      "block_order": ["choose", "configure", "receive"],
-      "settings": { "heading": "Lentes simples, desde el primer clic." }
+      "block_order": [
+        "choose",
+        "configure",
+        "receive"
+      ],
+      "settings": {
+        "heading": "Lentes simples, desde el primer clic."
+      }
     },
     "lifestyle_moods": {
       "type": "lifestyle-mood-grid",
       "blocks": {
-        "optical": { "type": "mood", "settings": { "heading": "Lentes ópticos", "link": "/collections/opticos" } },
-        "sun": { "type": "mood", "settings": { "heading": "Lentes de sol", "link": "/collections/lentes-de-sol" } },
-        "accessories": { "type": "mood", "settings": { "heading": "Accesorios", "link": "/collections/accesorios" } }
+        "optical": {
+          "type": "mood",
+          "settings": {
+            "heading": "Lentes ópticos",
+            "link": "/collections/opticos"
+          }
+        },
+        "sun": {
+          "type": "mood",
+          "settings": {
+            "heading": "Lentes de sol",
+            "link": "/collections/lentes-de-sol"
+          }
+        },
+        "accessories": {
+          "type": "mood",
+          "settings": {
+            "heading": "Accesorios",
+            "link": "/collections/accesorios"
+          }
+        }
       },
-      "block_order": ["optical", "sun", "accessories"],
-      "settings": { "heading": "Compra por categoría", "description": "" }
+      "block_order": [
+        "optical",
+        "sun",
+        "accessories"
+      ],
+      "settings": {
+        "heading": "Compra por categoría",
+        "description": ""
+      }
     },
     "collage_1": {
-      "disabled": true,
       "type": "collage",
       "blocks": {
         "product1": {
@@ -341,7 +505,12 @@
           }
         }
       },
-      "block_order": ["product1", "collection1", "video1"],
+      "block_order": [
+        "product1",
+        "collection1",
+        "video1"
+      ],
+      "disabled": true,
       "settings": {
         "heading": "Para cada forma de mirar",
         "heading_size": "h2",
@@ -352,23 +521,33 @@
       }
     },
     "collection_list_1": {
-      "disabled": true,
       "type": "collection-list",
       "blocks": {
         "coll1": {
           "type": "featured_collection",
-          "settings": { "collection": "" }
+          "settings": {
+            "collection": ""
+          }
         },
         "coll2": {
           "type": "featured_collection",
-          "settings": { "collection": "" }
+          "settings": {
+            "collection": ""
+          }
         },
         "coll3": {
           "type": "featured_collection",
-          "settings": { "collection": "" }
+          "settings": {
+            "collection": ""
+          }
         }
       },
-      "block_order": ["coll1", "coll2", "coll3"],
+      "block_order": [
+        "coll1",
+        "coll2",
+        "coll3"
+      ],
+      "disabled": true,
       "settings": {
         "title": "Elige tu estilo",
         "heading_size": "h2",
@@ -383,8 +562,8 @@
       }
     },
     "video_1": {
-      "disabled": true,
       "type": "video",
+      "disabled": true,
       "settings": {
         "heading": "Mira mejor. Siéntete tú.",
         "heading_size": "h2",
@@ -397,17 +576,17 @@
       }
     },
     "featured_blog_1": {
-      "disabled": true,
       "type": "featured-blog",
+      "disabled": true,
       "settings": {
-        "heading": "Guía para tu mirada",
-        "heading_size": "h2",
         "blog": "",
         "post_limit": 3,
+        "heading": "Guía para tu mirada",
+        "heading_size": "h2",
         "columns_desktop": 3,
-        "color_scheme": "scheme-1",
-        "show_image": true,
         "show_view_all": true,
+        "show_image": true,
+        "color_scheme": "scheme-1",
         "padding_top": 64,
         "padding_bottom": 64
       }
