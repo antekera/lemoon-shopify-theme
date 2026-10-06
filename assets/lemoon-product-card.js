@@ -72,7 +72,7 @@
       incoming.setAttribute('aria-hidden', 'true');
       incoming.src = current.src;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const duration = reducedMotion ? 0 : 260;
+      const duration = reducedMotion ? 0 : 500;
       const transition = `opacity ${duration}ms ease`;
       incoming.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;opacity:0;pointer-events:none;will-change:opacity';
       incoming.style.setProperty('transition', transition, 'important');
@@ -81,18 +81,29 @@
       media.append(incoming);
 
       let finished = false;
+      let finalizing = false;
       const finish = () => {
-        if (finished) return;
-        finished = true;
+        if (finished || finalizing) return;
+        finalizing = true;
         primary.srcset = '';
         primary.src = current.src;
         primary.alt = current.alt;
-        incoming.remove();
-        media.classList.remove('lemoon-product-card__gallery-fading');
-        primary.style.removeProperty('transition');
-        primary.style.removeProperty('opacity');
-        delete card.dataset.gallerySliding;
-        if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
+        const revealPrimary = () => {
+          if (finished) return;
+          finished = true;
+          incoming.remove();
+          media.classList.remove('lemoon-product-card__gallery-fading');
+          primary.style.removeProperty('transition');
+          primary.style.removeProperty('opacity');
+          delete card.dataset.gallerySliding;
+          if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
+        };
+        if (typeof primary.decode === 'function') primary.decode().then(revealPrimary, revealPrimary);
+        else if (primary.complete && primary.naturalWidth > 0) revealPrimary();
+        else {
+          primary.addEventListener('load', revealPrimary, { once: true });
+          primary.addEventListener('error', revealPrimary, { once: true });
+        }
       };
       galleryTransitionFinishes.set(card, finish);
 

@@ -75,7 +75,7 @@ test('loads the second photo near the viewport and toggles back to the first on 
   const media = page.locator('.card__media .media');
   await expect(media).toHaveClass(/lemoon-product-card__gallery-fading/);
   await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-property', 'opacity');
-  await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-duration', '0.26s');
+  await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-duration', '0.5s');
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
   await swipeLeft();
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
