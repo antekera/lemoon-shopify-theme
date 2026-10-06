@@ -103,6 +103,7 @@
   const bindGallery = (card) => {
     const media = card.querySelector('.card__media .media');
     if (!media || media.dataset.galleryBound) return;
+    const gestureTarget = media.closest('.card__media') || media;
     media.dataset.galleryBound = 'true';
     let start = null;
 
@@ -115,14 +116,15 @@
       media.addEventListener('pointerenter', () => hydrateSecondImage(card), { once: true });
     }
 
-    media.addEventListener('pointerdown', (event) => {
+    gestureTarget.addEventListener('pointerdown', (event) => {
       if (event.button !== 0 && event.pointerType === 'mouse') return;
       start = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
-      if (media.setPointerCapture) media.setPointerCapture(event.pointerId);
+      if (gestureTarget.setPointerCapture) gestureTarget.setPointerCapture(event.pointerId);
     });
 
-    media.addEventListener('pointerup', (event) => {
+    gestureTarget.addEventListener('pointerup', (event) => {
       if (!start) return;
+      if (event.pointerId !== start.pointerId) return;
       const deltaX = event.clientX - start.x;
       const deltaY = event.clientY - start.y;
       const cardState = galleryStates.get(card);
@@ -134,7 +136,7 @@
       window.setTimeout(() => suppressedClicks.delete(card), 0);
     });
 
-    media.addEventListener('pointercancel', () => { start = null; });
+    gestureTarget.addEventListener('pointercancel', () => { start = null; });
   };
 
   const initialize = (root = document) => {

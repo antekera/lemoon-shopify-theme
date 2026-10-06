@@ -343,6 +343,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   position: absolute;
   z-index: 1;
   inset: 0;
+  pointer-events: none;
 }
 
 .lemoon-product-card__image-link:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: -4px; }
@@ -456,6 +457,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   display: none;
 }
 
+.product-card-wrapper .card__media,
 .product-card-wrapper .card__media .media {
   touch-action: pan-y;
   user-select: none;

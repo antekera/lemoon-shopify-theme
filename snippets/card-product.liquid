@@ -249,6 +249,7 @@
                     {%- liquid
                       assign swatch_variant = value.variant
                       assign swatch_primary = swatch_variant.featured_media | default: card_product.featured_media
+                      assign swatch_primary_image = swatch_primary.preview_image | default: swatch_primary
                       assign swatch_secondary = blank
                       assign secondary_marker = 'card-diagonal:' | append: value.name | downcase
                       for media in card_product.media
@@ -273,7 +274,7 @@
                       if swatch_product_url contains '?'
                         assign variant_separator = '&'
                       endif
-                      if swatch_secondary == blank and swatch_primary.id == card_product.featured_media.id
+                      if swatch_secondary == blank
                         assign secondary_marker = 'card-model:' | append: value.name | downcase
                         for media in card_product.media
                           assign media_alt = media.alt | downcase
@@ -283,6 +284,7 @@
                           endif
                         endfor
                       endif
+                      assign swatch_secondary_image = swatch_secondary.preview_image | default: swatch_secondary
                       assign swatch_color = '#D9D4CB'
                       assign color_name = value.name | downcase
                       if color_name contains 'azul'
@@ -308,10 +310,10 @@
                       type="button"
                       aria-label="{{ value.name | escape }}"
                       aria-pressed="{% if value.selected %}true{% else %}false{% endif %}"
-                      data-primary-src="{% if swatch_primary %}{{ swatch_primary | image_url: width: 720 }}{% endif %}"
+                      data-primary-src="{% if swatch_primary_image %}{{ swatch_primary_image | image_url: width: 720 }}{% endif %}"
                       data-primary-alt="{{ card_product.title | escape }} — {{ value.name | escape }} — vista frontal"
-                      data-secondary-src="{% if swatch_secondary %}{{ swatch_secondary | image_url: width: 720 }}{% endif %}"
-                      data-secondary-srcset="{% if swatch_secondary %}{% if swatch_secondary.width >= 360 %}{{ swatch_secondary | image_url: width: 360 }} 360w,{% endif %}{% if swatch_secondary.width >= 533 %}{{ swatch_secondary | image_url: width: 533 }} 533w,{% endif %}{{ swatch_secondary | image_url: width: 720 }} 720w{% endif %}"
+                      data-secondary-src="{% if swatch_secondary_image %}{{ swatch_secondary_image | image_url: width: 720 }}{% endif %}"
+                      data-secondary-srcset="{% if swatch_secondary_image %}{% if swatch_secondary_image.width >= 360 %}{{ swatch_secondary_image | image_url: width: 360 }} 360w,{% endif %}{% if swatch_secondary_image.width >= 533 %}{{ swatch_secondary_image | image_url: width: 533 }} 533w,{% endif %}{{ swatch_secondary_image | image_url: width: 720 }} 720w{% endif %}"
                       data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
                       data-color-key="{{ value.name | downcase | escape }}"
                       data-variant-url="{{ swatch_product_url }}{{ variant_separator }}variant={{ swatch_variant.id }}"

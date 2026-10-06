@@ -51,6 +51,17 @@ test('uses color-specific gallery images first and preserves query params in var
   expect(genericMarker).toBeGreaterThan(colorSpecificMarker);
   expect(template).toMatch(/assign swatch_product_url = value\.product_url \| default: card_product\.url[\s\S]*?if swatch_product_url contains '\?'[\s\S]*?assign variant_separator = '&'/);
   expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
+  expect(template).toMatch(/if swatch_secondary == blank\s+assign secondary_marker = 'card-model:' \| append: value\.name/);
+  expect(template).not.toMatch(/if swatch_secondary == blank and swatch_primary\.id == card_product\.featured_media\.id/);
+});
+
+test('renders each variant media preview as a valid Shopify image URL', async () => {
+  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+
+  expect(template).toMatch(/assign swatch_secondary_image = swatch_secondary\.preview_image \| default: swatch_secondary/);
+  expect(template).toMatch(/data-secondary-src="\{% if swatch_secondary_image %\}\{\{ swatch_secondary_image \| image_url: width: 720 \}\}/);
+  expect(template).toMatch(/swatch_secondary_image \| image_url: width: 360/);
+  expect(template).not.toMatch(/swatch_secondary \| image_url/);
 });
 
 test('defers the second product card image until near the viewport and removes quick-add markup', async () => {
