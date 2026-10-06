@@ -23,6 +23,23 @@ describe('mobile search rules', () => {
     expect(selectSuggestions([{ id: 1 }, { id: 1 }])).toEqual([{ id: 1 }]);
   });
 
+  // Covers newest-first ordering, deduplication, capacity and the three-card display limit.
+  test('stores and selects recently viewed products in visit order', async () => {
+    const { upsertRecentlyViewed, getRecentlyViewed } = await logic();
+    const prior = [1, 2, 3].map((id) => ({ id, title: `Product ${id}`, url: `/products/${id}` }));
+    const updated = upsertRecentlyViewed(prior, { id: 2, title: 'Product 2', url: '/products/2' });
+    expect(updated.map(({ id }) => id)).toEqual([2, 1, 3]);
+    expect(getRecentlyViewed(updated).map(({ id }) => id)).toEqual([2, 1, 3]);
+    expect(getRecentlyViewed([...updated, { id: 4, title: 'Product 4', url: '/products/4' }])).toHaveLength(3);
+    expect(upsertRecentlyViewed(updated, { id: 5, title: 'Product 5', url: '/products/5' }, 3)).toHaveLength(3);
+  });
+
+  test('ignores incomplete history records and invalid current products', async () => {
+    const { upsertRecentlyViewed, getRecentlyViewed } = await logic();
+    expect(getRecentlyViewed([{ id: 1, title: 'Missing URL' }, null])).toEqual([]);
+    expect(upsertRecentlyViewed([], { id: 1, url: '/products/1' })).toEqual([]);
+  });
+
   // Catches a hardcoded locale, broken encoding, or an invented query on empty submit.
   test.each([
     ['/search', '', '/search'],

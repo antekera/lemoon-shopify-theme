@@ -1,0 +1,17 @@
+{% doc %}
+  Formats a Shopify price using the store's money settings. The shop's HTML
+  formats are configured for Chilean pesos as $1.234 without decimals.
+
+  @param {number} amount - Price in Shopify's monetary units.
+  @param {boolean} [show_currency_code] - Use Shopify's HTML with currency format.
+
+  @example
+  {% render 'lemoon-money', amount: product.price %}
+{% enddoc %}
+{%- if amount != nil -%}
+  {%- if show_currency_code -%}
+    {{- amount | money_with_currency -}}
+  {%- else -%}
+    {{- amount | money -}}
+  {%- endif -%}
+{%- endif -%}

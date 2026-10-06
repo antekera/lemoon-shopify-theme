@@ -6,17 +6,13 @@
 {% enddoc %}
 <script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'quick-add.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
-  assign trend_products = section.settings.mobile_search_trending_products
-  assign trend_count = trend_products.size | at_most: 4
-  if trend_products == blank
-    assign trend_products = collections['opticos'].products
-    assign trend_count = trend_products.size | at_most: 4
+  assign trend_collection = section.settings.mobile_search_trending_collection
+  if trend_collection == blank
+    assign trend_collection = collections['opticos']
   endif
+  assign trend_count = trend_collection.products_count | at_most: 3
   assign shipping_page = section.settings.mobile_search_shipping_page
   assign shipping_url = shipping_page.url | default: shipping_page | default: '/pages/envios-y-entregas'
   assign faq_url = section.settings.mobile_search_faq_page | default: '/pages/preguntas-frecuentes'
@@ -30,7 +26,8 @@
   data-loading="{{ 'sections.mobile_search.loading' | t | escape }}"
   data-no-results="{{ 'sections.mobile_search.no_results' | t: terms: '__TERMS__' | escape }}"
   data-error="{{ 'sections.mobile_search.error' | t | escape }}"
-  data-results-count="{{ 'sections.mobile_search.results_count' | t: count: '__COUNT__' | escape }}">
+  data-results-count="{{ 'sections.mobile_search.results_count' | t: count: '__COUNT__' | escape }}"
+  {% if product != blank %}data-current-product-id="{{ product.id | escape }}" data-current-product-title="{{ product.title | escape }}" data-current-product-url="{{ product.url | escape }}" data-current-product-image="{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 240 | escape }}{% endif %}"{% endif %}>
   <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
   <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="false" aria-label="{{ 'sections.mobile_search.title' | t | escape }}" tabindex="-1">
     <div class="lemoon-mobile-search__sticky-header">
@@ -54,16 +51,17 @@
         </section>
       </div>
       <div class="lemoon-mobile-search__right-column">
-        <section class="lemoon-mobile-search__information" aria-labelledby="{{ panel_id }}-Information">
-      <h3 id="{{ panel_id }}-Information">{{ 'sections.mobile_search.information' | t }}</h3>
+        <section class="lemoon-mobile-search__information" aria-label="{{ 'sections.mobile_search.information' | t }}">
       <ul class="lemoon-mobile-search__information-links" role="list">
+        {%- if section.settings.mobile_search_show_wishlist -%}
+          <li><a href="/apps/page/wishlist">{% render 'lemoon-icon', icon: 'heart', size: 22 %}<span>{{ 'sections.mobile_search.wishlist' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
+        {%- endif -%}
         <li><a href="{{ shipping_url | escape }}">{% render 'lemoon-icon', icon: 'truck', size: 22 %}<span>{{ 'sections.mobile_search.shipping_returns' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ faq_url | escape }}">{% render 'lemoon-icon', icon: 'circle-help', size: 22 %}<span>{{ 'sections.mobile_search.faq' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ style_url | escape }}">{% render 'lemoon-icon', icon: 'sparkles', size: 22 %}<span>{{ 'sections.mobile_search.find_style' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
       </ul>
         </section>
-        <section class="lemoon-mobile-search__trends" aria-labelledby="{{ panel_id }}-Trends">
-      <h3 id="{{ panel_id }}-Trends">{{ 'sections.mobile_search.trends' | t }}</h3>
+        <section class="lemoon-mobile-search__trends" aria-label="{{ 'sections.mobile_search.trends' | t | escape }}">
       {%- assign carousel_slide_count = trend_count | plus: 1 -%}
       <div class="lemoon-mobile-search__carousel" data-lemoon-search-carousel>
         <div data-lemoon-search-slides>
@@ -82,10 +80,10 @@
           </div>
           {%- assign slide_index = 1 -%}
           {%- assign skip_card_product_styles = false -%}
-          {%- for trend_product in trend_products limit: 4 -%}
+          {%- for trend_product in trend_collection.products limit: 3 -%}
             {%- if trend_product != blank -%}
               <div class="lemoon-mobile-search__slide" data-lemoon-search-slide data-slide-index="{{ slide_index }}" aria-hidden="true" inert>
-                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'square', image_shape: 'default', show_secondary_image: false, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, quick_add: 'standard', quick_add_id_prefix: 'QuickAdd-MobileSearch-', product_view_context: 'collection' %}
+                {% render 'card-product', card_product: trend_product, media_aspect_ratio: 'adapt', image_shape: 'default', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: skip_card_product_styles, section_id: section.id, product_view_context: 'collection' %}
               </div>
               {%- assign skip_card_product_styles = true -%}
               {%- assign slide_index = slide_index | plus: 1 -%}

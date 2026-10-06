@@ -16,5 +16,5 @@ test('renders account links only when customer accounts are enabled', async () =
 
   expect(source).toMatch(/assign show_account = shop\.customer_accounts_enabled/);
   expect(accountBlocks).toHaveLength(2);
-  expect(accountBlocks.every(([, block]) => block.includes('routes.account_url'))).toBe(true);
+  expect(accountBlocks.every(([, block]) => block.includes('routes.account_profile_url'))).toBe(true);
 });

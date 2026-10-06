@@ -180,6 +180,21 @@ test('selects three distinct suggestions again on every opening', async ({ page 
   expect(second).not.toEqual(first);
 });
 
+test('shows the three most recently viewed products with their images', async ({ page }) => {
+  await page.evaluate(() => localStorage.setItem('lemoon:recently-viewed-products', JSON.stringify([
+    { id: '3', title: 'Lemoon Wabi', url: '/products/wabi', image: '/assets/lemoon-logo-refined-navy.svg' },
+    { id: '2', title: 'Lemoon Biobio', url: '/products/biobio', image: '/assets/lemoon-logo-refined-navy.svg' },
+    { id: '1', title: 'Lemoon Arica', url: '/products/arica', image: '/assets/lemoon-logo-refined-navy.svg' },
+    { id: '4', title: 'Lemoon Colca', url: '/products/colca', image: '/assets/lemoon-logo-refined-navy.svg' },
+  ])));
+  await open(page);
+  await expect(page.locator('#Lemoon-Mobile-Search-fixture-Suggested')).toHaveText('Visto recién');
+  await expect(page.locator(`${s('results')} a`)).toHaveCount(3);
+  await expect(page.locator(`${s('results')} a`).first()).toContainText('Lemoon Wabi');
+  await expect(page.locator(`${s('results')} img`)).toHaveCount(3);
+  await expect(page.locator(`${s('results')} img`).first()).toHaveJSProperty('naturalWidth', 824);
+});
+
 test('uses the product fallback image when suggestions have no image', async ({ page }) => {
   await page.route('**/search/suggest.json?**', (route) => route.fulfill({ json: payload([{ id: 999, title: 'Lemoon Zara', url: '/products/lemoon-zara', image: null }]) }));
   await open(page);
@@ -317,25 +332,25 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await expect(page.locator(s('previous'))).toBeDisabled();
   await page.locator(s('next')).click();
   await expect(page.locator(s('slide')).nth(1)).toHaveAttribute('aria-hidden', 'false');
-  await page.locator(s('dot')).nth(4).click();
+  await page.locator(s('dot')).nth(3).click();
   await expect(page.locator(s('next'))).toBeDisabled();
-  await expect(page.locator(s('dot')).nth(4)).toHaveAttribute('aria-current', 'true');
+  await expect(page.locator(s('dot')).nth(3)).toHaveAttribute('aria-current', 'true');
   const carouselBox = await page.locator(s('carousel')).boundingBox();
   await expect.poll(async () => {
-    const box = await page.locator(s('slide')).nth(4).boundingBox();
+    const box = await page.locator(s('slide')).nth(3).boundingBox();
     return Math.abs(box.x + box.width - carouselBox.x - carouselBox.width);
   }).toBeLessThanOrEqual(1);
-  const lastSlideBox = await page.locator(s('slide')).nth(4).boundingBox();
-  const previousSlideBox = await page.locator(s('slide')).nth(3).boundingBox();
+  const lastSlideBox = await page.locator(s('slide')).nth(3).boundingBox();
+  const previousSlideBox = await page.locator(s('slide')).nth(2).boundingBox();
   expect(Math.abs(lastSlideBox.x + lastSlideBox.width - carouselBox.x - carouselBox.width)).toBeLessThanOrEqual(1);
   expect(previousSlideBox.x).toBeLessThan(carouselBox.x);
   expect(previousSlideBox.x + previousSlideBox.width).toBeGreaterThan(carouselBox.x);
   await page.locator(s('carousel')).scrollIntoViewIfNeeded();
   await expect.poll(async () => {
-    const box = await page.locator(s('slide')).nth(4).boundingBox();
+    const box = await page.locator(s('slide')).nth(3).boundingBox();
     return Math.abs(box.x + box.width - carouselBox.x - carouselBox.width);
   }).toBeLessThanOrEqual(1);
-  const box = await page.locator(s('slide')).nth(4).boundingBox();
+  const box = await page.locator(s('slide')).nth(3).boundingBox();
   const session = await page.context().newCDPSession(page);
   const x = box.x + 40;
   const y = box.y + box.height / 2;
@@ -344,7 +359,7 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
   await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 140, y: y + 5 }] });
   await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await session.detach();
-  await expect(page.locator(s('slide')).nth(3)).toHaveAttribute('aria-hidden', 'false');
+  await expect(page.locator(s('slide')).nth(2)).toHaveAttribute('aria-hidden', 'false');
   await page.locator(s('dot')).first().click();
   await expect(page.locator(s('previous'))).toBeDisabled();
 });
@@ -352,14 +367,14 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
 test('puts the banner first and uses PLP product cards in the trends carousel', async ({ page }) => {
   await open(page);
   const slides = page.locator(s('slide'));
-  await expect(slides).toHaveCount(5);
+  await expect(slides).toHaveCount(4);
   await expect(slides.first().locator('.lemoon-mobile-search__banner')).toBeVisible();
   await expect(slides.nth(1).locator('.product-card-wrapper')).toHaveCount(1);
-  await expect(slides.nth(4).locator('.product-card-wrapper')).toHaveCount(1);
-  await expect(page.locator(s('dot'))).toHaveCount(5);
+  await expect(slides.nth(3).locator('.product-card-wrapper')).toHaveCount(1);
+  await expect(page.locator(s('dot'))).toHaveCount(4);
 });
 
-test('peeks the next carousel item and advances the PLP card with add to cart', async ({ page }) => {
+test('peeks the next carousel item and uses the PLP card without quick add', async ({ page }) => {
   await open(page);
   const carousel = await page.locator(s('carousel')).boundingBox();
   const firstProduct = page.locator(s('slide')).nth(1);
@@ -376,7 +391,7 @@ test('peeks the next carousel item and advances the PLP card with add to cart', 
     return Math.abs(box.x - carousel.x);
   }).toBeLessThanOrEqual(1);
   await expect(firstProduct.locator('.card')).toHaveCSS('border-top-width', '0px');
-  await expect(firstProduct.locator('.quick-add__submit')).toBeVisible();
+  await expect(firstProduct.locator('.quick-add__submit')).toHaveCount(0);
 });
 
 test('automatically advances the carousel after three seconds without interaction', async ({ page }) => {

@@ -216,64 +216,185 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 .product-card-wrapper .card {
-  overflow: hidden;
-  border: 1px solid var(--lemoon-border-warm);
-  border-radius: var(--lemoon-radius-md);
-  background: var(--lemoon-surface-page);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .product-card-wrapper .card__inner {
   overflow: hidden;
+  border: 0;
+  border-radius: var(--lemoon-radius-md);
+  --ratio-percent: 96% !important;
 }
+
+.product-card-wrapper .card--card:after,
+.product-card-wrapper .card--standard .card__inner:after { display: none; }
+
+.product-card-wrapper .card__information {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: .45rem;
+  padding: .8rem 0 0;
+}
+
+.product-card-wrapper .card__heading {
+  grid-column: 1;
+  grid-row: 1;
+  padding-right: 3.6rem;
+  color: var(--lemoon-text-secondary);
+  font-family: var(--lemoon-font-body);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+}
+
+.product-card-wrapper .card__heading a { color: inherit; }
+.product-card-wrapper .card-information { display: contents; }
+.product-card-wrapper .card-information .price {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  color: var(--lemoon-text-primary);
+  text-align: left;
+}
+
+.product-card-wrapper .card-information .price__container {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: .65rem;
+  white-space: nowrap;
+}
+
+.product-card-wrapper .card-information .price__sale {
+  flex-direction: row-reverse;
+}
+
+.product-card-wrapper .card-information .price--on-sale .price__sale {
+  display: flex;
+  align-items: baseline;
+  gap: .65rem;
+}
+
+.product-card-wrapper .card-information .price .unit-price {
+  display: block;
+  flex-basis: 100%;
+  white-space: normal;
+}
+
+.product-card-wrapper .card-information .price-item--sale,
+.product-card-wrapper .card-information .price__regular .price-item--regular {
+  color: var(--lemoon-text-primary);
+  font-family: var(--lemoon-font-heading);
+  font-size: 1.8rem;
+  font-weight: var(--lemoon-weight-semibold);
+  line-height: 2.2rem;
+}
+
+.product-card-wrapper .card__heading a::after { display: none; }
+
+.product-card-wrapper .price--on-sale .price__sale .price-item--regular,
+.product-card-wrapper .price__sale s.price-item--regular {
+  color: var(--lemoon-text-secondary);
+  font-family: var(--lemoon-font-body);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.8rem;
+}
+
+.lemoon-product-card__labels {
+  position: absolute;
+  z-index: 3;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  max-width: calc(100% - 2rem);
+  flex-wrap: wrap;
+  gap: .5rem;
+  pointer-events: none;
+}
+
+.lemoon-product-card__label {
+  display: inline-flex;
+  width: max-content;
+  max-width: 100%;
+  align-items: center;
+  padding: .25rem .65rem;
+  border-radius: var(--lemoon-radius-full);
+  font-family: var(--lemoon-font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1.4rem;
+}
+
+.lemoon-product-card__label--flash-sale { background: #F7E600; color: #0B1F3A; }
+.lemoon-product-card__label--new { background: #0B1F3A; color: #FFFFFF; }
+.lemoon-product-card__label--best-seller { background: #316653; color: #FFFFFF; }
+.lemoon-product-card__label--bestseller { background: #F3D4C4; color: #0B1F3A; }
+.lemoon-product-card__label--sold-out { background: #686868; color: #FFFFFF; }
+
+.lemoon-product-card__image-link {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+}
+
+.lemoon-product-card__image-link:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: -4px; }
 
 .product-card-wrapper .card__media,
 .product-card-wrapper .card__media .media {
-  background: #f2f2f2;
+  background: transparent;
+  border-radius: var(--lemoon-radius-md) !important;
+}
+
+.product-card-wrapper .card__inner {
+  z-index: 1;
 }
 
 .product-card-wrapper .card__media .media > img {
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: opacity var(--lemoon-motion-base);
 }
 
-.lemoon-product-card__wishlist,
+.product-card-wrapper .media.lemoon-product-card__gallery-active > img:first-child:not(:only-child) {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.product-card-wrapper .media.lemoon-product-card__gallery-active > img + img {
+  opacity: 0 !important;
+  transform: none !important;
+}
+
 .lemoon-product-card__try-on {
   position: absolute;
-  z-index: 2;
-  display: inline-flex;
+  top: .6rem;
+  right: 0;
+  z-index: 3;
+  display: none;
+  width: 2.8rem;
+  height: 2.4rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--lemoon-border-warm);
-  background: var(--lemoon-surface-page);
   color: var(--lemoon-text-primary);
-  text-decoration: none;
+  pointer-events: none;
 }
 
-.lemoon-product-card__wishlist {
-  top: var(--lemoon-space-5);
-  left: var(--lemoon-space-5);
-  width: 40px;
-  height: 40px;
-  border-radius: var(--lemoon-radius-full);
-}
-
-.lemoon-product-card__try-on {
-  right: var(--lemoon-space-5);
-  bottom: var(--lemoon-space-5);
-  gap: var(--lemoon-space-1);
-  padding: var(--lemoon-space-2) var(--lemoon-space-3);
-  border-radius: var(--lemoon-radius-full);
-  font-family: var(--lemoon-font-body);
-  font-size: var(--lemoon-type-body-sm-size);
-  line-height: var(--lemoon-type-body-sm-leading);
-}
-
-.lemoon-product-card__wishlist:hover,
-.lemoon-product-card__wishlist:focus-visible,
-.lemoon-product-card__try-on:hover,
-.lemoon-product-card__try-on:focus-visible {
-  border-color: var(--lemoon-border-strong);
-  outline: none;
+.product-card-wrapper .card__information .caption-with-letter-spacing,
+.product-card-wrapper .card__information .rating,
+.product-card-wrapper .card__information .rating-text,
+.product-card-wrapper .card__information .rating-count,
+.product-card-wrapper .card__information .card__information-volume-pricing-note {
+  display: none;
 }
 
 .lemoon-product-card__description {
@@ -290,27 +411,60 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 .lemoon-product-card__swatches {
   display: flex;
-  gap: var(--lemoon-space-2);
-  margin-top: var(--lemoon-space-2);
+  flex-wrap: wrap;
+  grid-column: 1;
+  grid-row: 3;
+  gap: .8rem;
+  margin-top: .15rem;
 }
 
 .lemoon-product-card__swatch {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid var(--lemoon-border-warm);
   border-radius: var(--lemoon-radius-full);
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
+.lemoon-product-card__swatch:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 3px; }
+
 .lemoon-product-card__swatch .swatch {
-  --swatch-input--size: 16px;
+  --swatch-input--size: 1.6rem;
   border: 0;
 }
 
+.lemoon-product-card__swatch-color {
+  display: block;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+}
+
 .lemoon-product-card__swatch.is-selected {
-  border: 2px solid var(--lemoon-border-strong);
+  border: 1px solid #5F6368;
+  box-shadow: none;
+}
+
+.lemoon-product-card__gallery-source {
+  display: none;
+}
+
+.product-card-wrapper .card__media .media {
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.product-card-wrapper .card-information,
+.product-card-wrapper .price,
+.product-card-wrapper .card__heading {
+  cursor: pointer;
 }
 
 .lemoon-trust-bar {
@@ -1057,6 +1211,18 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 @media screen and (max-width: 749px) {
+  .lemoon-product-card__swatch {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .lemoon-product-card__swatch .swatch,
+  .lemoon-product-card__swatch-color {
+    --swatch-input--size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
   .lemoon-featured-products {
     padding-top: var(--lemoon-section-padding-mobile);
     padding-bottom: var(--lemoon-space-4);
