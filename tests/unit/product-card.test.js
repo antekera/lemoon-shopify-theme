@@ -67,12 +67,16 @@ test('renders each variant media preview as a valid Shopify image URL', async ()
 test('defers the second product card image until near the viewport and removes quick-add markup', async () => {
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-product-card.js'), 'utf8');
+  const collection = await readFile(themeFile('sections/main-collection-product-grid.liquid'), 'utf8');
 
   expect(template).toMatch(/data-lazy-srcset=/);
   expect(template).toMatch(/data-lazy-src=/);
   expect(template.match(/draggable="false"/g)).toHaveLength(3);
   expect(template).not.toMatch(/data-gallery-src=/);
   expect(script).toMatch(/IntersectionObserver/);
+  expect(collection).toMatch(/enable_gallery_swipe:\s*true/);
+  expect(template).toMatch(/if enable_gallery_swipe %\} data-enable-gallery-swipe/);
+  expect(script).toMatch(/if \(!card\.hasAttribute\('data-enable-gallery-swipe'\)\) return/);
   expect(script).toMatch(/rootMargin: '240px 0px'/);
   expect(script).toMatch(/pointerdown/);
   expect(script).toMatch(/pointerup/);

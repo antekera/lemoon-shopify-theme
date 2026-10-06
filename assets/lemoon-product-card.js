@@ -116,6 +116,8 @@
       media.addEventListener('pointerenter', () => hydrateSecondImage(card), { once: true });
     }
 
+    if (!card.hasAttribute('data-enable-gallery-swipe')) return;
+
     gestureTarget.addEventListener('pointerdown', (event) => {
       const bounds = media.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;

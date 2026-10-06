@@ -49,7 +49,7 @@
   -%}
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}">
-    <div class="card-wrapper product-card-wrapper underline-links-hover" data-product-id="{{ card_product.id }}">
+    <div class="card-wrapper product-card-wrapper underline-links-hover" data-product-id="{{ card_product.id }}"{% if enable_gallery_swipe %} data-enable-gallery-swipe{% endif %}>
       <div
         class="
           card card--{{ settings.card_style }}

@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test';
 const cardScript = resolve(process.cwd(), 'assets/lemoon-product-card.js');
 const cardStyles = resolve(process.cwd(), 'assets/lemoon-components.css');
 
-async function openCard(page, { offscreen = false } = {}) {
+async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
   await page.goto('/tests/fixtures/mobile-search.html');
   await page.setContent(`
     <style>
@@ -17,7 +17,7 @@ async function openCard(page, { offscreen = false } = {}) {
       .lemoon-product-card__image-link { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
     </style>
     <product-component>
-      <div class="product-card-wrapper" data-product-id="42">
+      <div class="product-card-wrapper" data-product-id="42" ${swipeEnabled ? 'data-enable-gallery-swipe' : ''}>
         <div class="card__inner">
           <div class="card__media">
             <div class="media media--hover-effect">
@@ -85,6 +85,23 @@ test('loads the selected variant second photo on demand', async ({ page }) => {
   await page.mouse.move(bounds.x + 35, bounds.y + bounds.height / 2, { steps: 4 });
   await page.mouse.up();
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Black diagonal');
+});
+
+test('does not enable image swiping in product carousels', async ({ page }) => {
+  await openCard(page, { swipeEnabled: false });
+  const image = page.locator('.card__media .media img').first();
+  await expect(image).toHaveAttribute('alt', 'Amber front');
+  const bounds = await page.locator('.card__media .media').boundingBox();
+  await page.locator('.product-card-wrapper').dispatchEvent('pointerdown', {
+    pointerId: 1, pointerType: 'touch', button: 0,
+    clientX: bounds.x + bounds.width - 30, clientY: bounds.y + bounds.height / 2,
+  });
+  await page.locator('.product-card-wrapper').dispatchEvent('pointerup', {
+    pointerId: 1, pointerType: 'touch', button: 0,
+    clientX: bounds.x + 35, clientY: bounds.y + bounds.height / 2,
+  });
+  await expect(image).toHaveAttribute('alt', 'Amber front');
+  await expect(page).toHaveURL(/mobile-search\.html$/);
 });
 
 test('selecting a color updates the gallery, selected state, price and product variant URL', async ({ page }) => {

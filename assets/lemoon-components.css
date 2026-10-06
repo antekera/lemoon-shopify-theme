@@ -457,8 +457,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   display: none;
 }
 
-.product-card-wrapper .card__media,
-.product-card-wrapper .card__media .media {
+.product-card-wrapper[data-enable-gallery-swipe] .card__media,
+.product-card-wrapper[data-enable-gallery-swipe] .card__media .media {
   touch-action: pan-y;
   user-select: none;
 }
