@@ -52,6 +52,17 @@
     secondary.dataset.loadedSrc = src;
   };
 
+  const whenImageReady = (image, onReady, onError = onReady) => {
+    if (typeof image.decode === 'function') {
+      image.decode().then(onReady, onError);
+    } else if (image.complete) {
+      (image.naturalWidth > 0 ? onReady : onError)();
+    } else {
+      image.addEventListener('load', onReady, { once: true });
+      image.addEventListener('error', onError, { once: true });
+    }
+  };
+
   const setGalleryIndex = (card, index, slideDirection = 0) => {
     galleryTransitionFinishes.get(card)?.();
     const state = galleryStates.get(card);
@@ -64,7 +75,6 @@
     const current = state.images[state.index];
     if (slideDirection && (primary.currentSrc || primary.src) !== current.src) {
       media.classList.add('lemoon-product-card__gallery-active');
-      card.dataset.gallerySliding = 'true';
 
       const incoming = document.createElement('img');
       incoming.className = 'lemoon-product-card__slide-layer';
@@ -102,26 +112,18 @@
           secondary.dataset.loadedSrc = outgoingSrc;
         }
 
-        media.classList.remove('lemoon-product-card__gallery-fading');
         media.classList.add('lemoon-product-card__gallery-active');
-        delete card.dataset.gallerySliding;
         if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
       };
       galleryTransitionFinishes.set(card, finish);
 
       if (reducedMotion) {
-        if (typeof incoming.decode === 'function') incoming.decode().then(finish, finish);
-        else if (incoming.complete) finish();
-        else {
-          incoming.addEventListener('load', finish, { once: true });
-          incoming.addEventListener('error', finish, { once: true });
-        }
+        whenImageReady(incoming, finish);
         return;
       }
 
       const startTransition = () => {
         if (finished) return;
-        media.classList.add('lemoon-product-card__gallery-fading');
         requestAnimationFrame(() => {
           incoming.getBoundingClientRect();
           primary.style.setProperty('opacity', '0', 'important');
@@ -131,10 +133,7 @@
       };
 
       incoming.addEventListener('transitionend', finish, { once: true });
-      incoming.addEventListener('error', finish, { once: true });
-      if (typeof incoming.decode === 'function') incoming.decode().then(startTransition, finish);
-      else if (incoming.complete && incoming.naturalWidth > 0) startTransition();
-      else incoming.addEventListener('load', startTransition, { once: true });
+      whenImageReady(incoming, startTransition, finish);
       return;
     }
 
@@ -196,7 +195,7 @@
     if (!card.hasAttribute('data-enable-gallery-swipe')) return;
 
     gestureTarget.addEventListener('pointerdown', (event) => {
-      if (card.dataset.gallerySliding) return;
+      if (galleryTransitionFinishes.has(card)) return;
       const bounds = media.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
       if (event.button !== 0 && event.pointerType === 'mouse') return;
