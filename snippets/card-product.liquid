@@ -99,6 +99,7 @@
               <div class="media media--transparent media--hover-effect">
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
                 <img
+                  draggable="false"
                   srcset="
                     {%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
                     {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
@@ -122,6 +123,7 @@
 
                 {%- if card_secondary_media != null and show_secondary_image -%}
                   <img
+                    draggable="false"
                     data-lazy-srcset="
                       {%- if card_secondary_media.width >= 165 -%}{{ card_secondary_media | image_url: width: 165 }} 165w,{%- endif -%}
                       {%- if card_secondary_media.width >= 360 -%}{{ card_secondary_media | image_url: width: 360 }} 360w,{%- endif -%}
@@ -148,6 +150,7 @@
             <div class="card__media">
               <div class="media media--transparent">
                 <img
+                  draggable="false"
                   src="{{ 'lemoon-product-fallback.png' | asset_url }}"
                   alt=""
                   class="motion-reduce"

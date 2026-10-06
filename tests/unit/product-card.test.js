@@ -70,6 +70,7 @@ test('defers the second product card image until near the viewport and removes q
 
   expect(template).toMatch(/data-lazy-srcset=/);
   expect(template).toMatch(/data-lazy-src=/);
+  expect(template.match(/draggable="false"/g)).toHaveLength(3);
   expect(template).not.toMatch(/data-gallery-src=/);
   expect(script).toMatch(/IntersectionObserver/);
   expect(script).toMatch(/rootMargin: '240px 0px'/);

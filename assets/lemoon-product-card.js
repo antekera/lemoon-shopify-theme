@@ -103,7 +103,7 @@
   const bindGallery = (card) => {
     const media = card.querySelector('.card__media .media');
     if (!media || media.dataset.galleryBound) return;
-    const gestureTarget = media.closest('.card__media') || media;
+    const gestureTarget = card;
     media.dataset.galleryBound = 'true';
     let start = null;
 
@@ -117,6 +117,8 @@
     }
 
     gestureTarget.addEventListener('pointerdown', (event) => {
+      const bounds = media.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
       if (event.button !== 0 && event.pointerType === 'mouse') return;
       start = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
       if (gestureTarget.setPointerCapture) gestureTarget.setPointerCapture(event.pointerId);

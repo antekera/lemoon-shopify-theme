@@ -13,7 +13,7 @@ async function openCard(page, { offscreen = false } = {}) {
       .card__media { position: relative; width: 320px; height: 320px; }
       .media { position: relative; width: 100%; height: 100%; }
       .card__inner { position: relative; transform: perspective(1000px); }
-      .card__media img { width: 100%; height: 100%; pointer-events: none; }
+      .card__media img { width: 100%; height: 100%; }
       .lemoon-product-card__image-link { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
     </style>
     <product-component>
@@ -21,8 +21,8 @@ async function openCard(page, { offscreen = false } = {}) {
         <div class="card__inner">
           <div class="card__media">
             <div class="media media--hover-effect">
-              <img src="https://cdn.example/front.jpg" alt="Front">
-              <img data-lazy-src="https://cdn.example/diagonal.jpg" data-lazy-srcset="https://cdn.example/diagonal-360.jpg 360w, https://cdn.example/diagonal.jpg 720w" alt="Diagonal" loading="lazy">
+              <img draggable="false" src="https://cdn.example/front.jpg" alt="Front">
+              <img draggable="false" data-lazy-src="https://cdn.example/diagonal.jpg" data-lazy-srcset="https://cdn.example/diagonal-360.jpg 360w, https://cdn.example/diagonal.jpg 720w" alt="Diagonal" loading="lazy">
             </div>
             <a class="lemoon-product-card__image-link" href="/products/demo"></a>
           </div>
@@ -52,6 +52,7 @@ async function openCard(page, { offscreen = false } = {}) {
 
 test('loads the second photo near the viewport and toggles back to the first on the next swipe', async ({ page }) => {
   await openCard(page, { offscreen: true });
+  await page.addStyleTag({ content: '.card__content { position: absolute; inset: 0 auto auto 0; width: 320px; height: 320px; z-index: 2; }' });
   const card = page.locator('.product-card-wrapper');
   const second = page.locator('.card__media .media img').nth(1);
   await expect(second).not.toHaveAttribute('src', /.+/);
