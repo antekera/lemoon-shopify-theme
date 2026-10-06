@@ -73,14 +73,11 @@
       incoming.src = current.src;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const duration = reducedMotion ? 0 : 260;
-      const transition = `transform ${duration}ms cubic-bezier(.2, .7, .2, 1)`;
-      const enterFrom = `translateX(${slideDirection < 0 ? '100%' : '-100%'})`;
-      const exitTo = `translateX(${slideDirection < 0 ? '-100%' : '100%'})`;
-      incoming.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;opacity:1;pointer-events:none;will-change:transform';
+      const transition = `opacity ${duration}ms ease`;
+      incoming.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;opacity:0;pointer-events:none;will-change:opacity';
       incoming.style.setProperty('transition', transition, 'important');
-      incoming.style.setProperty('transform', enterFrom, 'important');
       primary.style.setProperty('transition', transition, 'important');
-      primary.style.setProperty('transform', 'translateX(0)', 'important');
+      primary.style.setProperty('opacity', '1', 'important');
       media.append(incoming);
 
       let finished = false;
@@ -91,9 +88,9 @@
         primary.src = current.src;
         primary.alt = current.alt;
         incoming.remove();
-        media.classList.remove('lemoon-product-card__gallery-sliding');
+        media.classList.remove('lemoon-product-card__gallery-fading');
         primary.style.removeProperty('transition');
-        primary.style.removeProperty('transform');
+        primary.style.removeProperty('opacity');
         delete card.dataset.gallerySliding;
         if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
       };
@@ -106,11 +103,11 @@
 
       const startTransition = () => {
         if (finished) return;
-        media.classList.add('lemoon-product-card__gallery-sliding');
+        media.classList.add('lemoon-product-card__gallery-fading');
         requestAnimationFrame(() => {
           incoming.getBoundingClientRect();
-          primary.style.setProperty('transform', exitTo, 'important');
-          incoming.style.setProperty('transform', 'translateX(0)', 'important');
+          primary.style.setProperty('opacity', '0', 'important');
+          incoming.style.setProperty('opacity', '1', 'important');
         });
         window.setTimeout(finish, duration + 80);
       };
