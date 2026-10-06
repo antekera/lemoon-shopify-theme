@@ -27,6 +27,8 @@
   data-no-results="{{ 'sections.mobile_search.no_results' | t: terms: '__TERMS__' | escape }}"
   data-error="{{ 'sections.mobile_search.error' | t | escape }}"
   data-results-count="{{ 'sections.mobile_search.results_count' | t: count: '__COUNT__' | escape }}"
+  data-recently-viewed-label="{{ 'sections.mobile_search.recently_viewed' | t | escape }}"
+  data-suggested-products-label="{{ 'sections.mobile_search.suggested_products' | t | escape }}"
   {% if product != blank %}data-current-product-id="{{ product.id | escape }}" data-current-product-title="{{ product.title | escape }}" data-current-product-url="{{ product.url | escape }}" data-current-product-image="{% if product.featured_image != blank %}{{ product.featured_image | image_url: width: 240 | escape }}{% endif %}"{% endif %}>
   <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
   <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="false" aria-label="{{ 'sections.mobile_search.title' | t | escape }}" tabindex="-1">
@@ -44,7 +46,7 @@
     <div class="lemoon-mobile-search__columns">
       <div class="lemoon-mobile-search__left-column">
         <section class="lemoon-mobile-search__suggestions" aria-labelledby="{{ panel_id }}-Suggested">
-      <h3 id="{{ panel_id }}-Suggested">{{ 'sections.mobile_search.suggested_products' | t }}</h3>
+      <h3 id="{{ panel_id }}-Suggested" data-lemoon-search-suggestions-heading>{{ 'sections.mobile_search.suggested_products' | t }}</h3>
       <p class="lemoon-mobile-search__status" role="status" aria-live="polite" aria-atomic="true" data-lemoon-search-status></p>
       <ul id="{{ panel_id }}-Results" class="lemoon-mobile-search__results" data-lemoon-search-results aria-busy="false" role="list"></ul>
       <a class="lemoon-mobile-search__show-all" href="{{ routes.search_url }}?type=product" data-lemoon-search-all>{{ 'sections.mobile_search.show_all' | t }}</a>

@@ -170,6 +170,7 @@ for (const method of ['close', 'Escape', 'overlay']) {
 
 test('selects three distinct suggestions again on every opening', async ({ page }) => {
   await open(page);
+  await expect(page.locator('#Lemoon-Mobile-Search-fixture-Suggested')).toHaveText('Productos sugeridos');
   const first = await page.locator(`${s('results')} a`).allTextContents();
   expect(first).toHaveLength(3);
   expect(new Set(first).size).toBe(3);

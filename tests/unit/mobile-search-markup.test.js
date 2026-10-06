@@ -34,9 +34,11 @@ test('labels suggestions as recently viewed and exposes the current product for 
   const spanish = await readFile(themeFile('locales/es.json'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-mobile-search.js'), 'utf8');
 
-  expect(spanish).toMatch(/"suggested_products": "Visto recién"/);
+  expect(spanish).toMatch(/"recently_viewed": "Visto recién"/);
   expect(snippet).toMatch(/data-current-product-id="\{\{ product\.id \| escape \}\}"/);
   expect(snippet).toMatch(/data-current-product-image=/);
+  expect(snippet).toMatch(/data-recently-viewed-label="\{\{ 'sections\.mobile_search\.recently_viewed' \| t \| escape \}\}"/);
+  expect(snippet).toMatch(/data-suggested-products-label="\{\{ 'sections\.mobile_search\.suggested_products' \| t \| escape \}\}"/);
   expect(script).toMatch(/lemoon:recently-viewed-products/);
   expect(script).toMatch(/this\.recentProducts\(\)/);
 });

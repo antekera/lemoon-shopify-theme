@@ -42,6 +42,17 @@ test('keeps sale prices single, shows unit prices, and outlines selected dark sw
   expect(styles).toMatch(/\.product-card-wrapper \.card__media \.media > img\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*object-fit:\s*cover/);
 });
 
+test('uses color-specific gallery images first and preserves query params in variant links', async () => {
+  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+  const colorSpecificMarker = template.indexOf("assign secondary_marker = 'card-diagonal:' | append: value.name");
+  const genericMarker = template.indexOf("assign secondary_marker = 'card-view:diagonal'");
+
+  expect(colorSpecificMarker).toBeGreaterThanOrEqual(0);
+  expect(genericMarker).toBeGreaterThan(colorSpecificMarker);
+  expect(template).toMatch(/assign swatch_product_url = value\.product_url \| default: card_product\.url[\s\S]*?if swatch_product_url contains '\?'[\s\S]*?assign variant_separator = '&'/);
+  expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
+});
+
 test('defers product gallery images after the first two and removes quick-add markup', async () => {
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-product-card.js'), 'utf8');

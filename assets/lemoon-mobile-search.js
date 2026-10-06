@@ -28,6 +28,7 @@ class MobileSearch {
     this.input = root.querySelector(selector('input'));
     this.results = root.querySelector(selector('results'));
     this.status = root.querySelector(selector('status'));
+    this.suggestionsHeading = root.querySelector('[data-lemoon-search-suggestions-heading]');
     this.fallbackImage = safeUrl(root.dataset.fallbackImage);
     this.all = root.querySelector(selector('all'));
     this.form = root.querySelector(selector('form'));
@@ -186,7 +187,13 @@ class MobileSearch {
     this.restoreInputStyles = saveStyles(this.input, ['font-size']);
     this.panel.scrollTop = 0;
     const suggestions = this.recentProducts();
-    if (!suggestions.length) suggestions.push(...selectSuggestions(this.products));
+    const hasRecentProducts = suggestions.length > 0;
+    if (!hasRecentProducts) suggestions.push(...selectSuggestions(this.products));
+    if (this.suggestionsHeading) {
+      this.suggestionsHeading.textContent = hasRecentProducts
+        ? this.root.dataset.recentlyViewedLabel
+        : this.root.dataset.suggestedProductsLabel;
+    }
     const previousIds = this.initial?.map((product) => product.id);
     const repeatedSuggestions = suggestions.length > 1
       && suggestions.every((product, index) => product.id === previousIds?.[index]);

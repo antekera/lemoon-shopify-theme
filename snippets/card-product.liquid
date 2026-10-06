@@ -258,7 +258,7 @@
                       assign swatch_variant = value.variant
                       assign swatch_primary = swatch_variant.featured_media | default: card_product.featured_media
                       assign swatch_secondary = blank
-                      assign secondary_marker = 'card-view:diagonal'
+                      assign secondary_marker = 'card-diagonal:' | append: value.name | downcase
                       for media in card_product.media
                         assign media_alt = media.alt | downcase
                         if media_alt contains secondary_marker
@@ -267,7 +267,7 @@
                         endif
                       endfor
                       if swatch_secondary == blank
-                        assign secondary_marker = 'card-diagonal:' | append: value.name | downcase
+                        assign secondary_marker = 'card-view:diagonal'
                         for media in card_product.media
                           assign media_alt = media.alt | downcase
                           if media_alt contains secondary_marker
@@ -275,6 +275,11 @@
                             break
                           endif
                         endfor
+                      endif
+                      assign swatch_product_url = value.product_url | default: card_product.url
+                      assign variant_separator = '?'
+                      if swatch_product_url contains '?'
+                        assign variant_separator = '&'
                       endif
                       if swatch_secondary == blank and swatch_primary.id == card_product.featured_media.id
                         assign secondary_marker = 'card-model:' | append: value.name | downcase
@@ -316,7 +321,7 @@
                       data-secondary-src="{% if swatch_secondary %}{{ swatch_secondary | image_url: width: 720 }}{% endif %}"
                       data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
                       data-color-key="{{ value.name | downcase | escape }}"
-                      data-variant-url="{{ value.product_url | default: card_product.url }}?variant={{ swatch_variant.id }}"
+                      data-variant-url="{{ swatch_product_url }}{{ variant_separator }}variant={{ swatch_variant.id }}"
                       data-price="{{ swatch_price | escape }}"
                       data-compare-price="{% if swatch_variant.compare_at_price > swatch_variant.price %}{{ swatch_compare_price | escape }}{% endif %}"
                     >
