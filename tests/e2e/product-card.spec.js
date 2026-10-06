@@ -74,10 +74,15 @@ test('loads the second photo near the viewport and toggles back to the first on 
   await swipeLeft();
   const media = page.locator('.card__media .media');
   await expect(media).toHaveClass(/lemoon-product-card__gallery-fading/);
-  await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-property', 'opacity');
-  await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCSS('transition-duration', '0.5s');
+  const incoming = media.locator('.lemoon-product-card__slide-layer');
+  await expect(incoming).toHaveCSS('transition-property', 'opacity');
+  await expect(incoming).toHaveCSS('transition-duration', '0.5s');
+  const incomingElement = await incoming.elementHandle();
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
+  expect(await incomingElement.evaluate((element) => element === document.querySelector('.card__media .media img:first-child'))).toBe(true);
+  await expect(card).not.toHaveAttribute('data-gallery-sliding');
   await swipeLeft();
+  await expect(media).toHaveClass(/lemoon-product-card__gallery-fading/);
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
   await expect(page.locator('.card__media .media img')).toHaveCount(2);
   await expect(page).toHaveURL(/mobile-search\.html$/);

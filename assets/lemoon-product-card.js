@@ -69,6 +69,7 @@
       const incoming = document.createElement('img');
       incoming.className = 'lemoon-product-card__slide-layer';
       incoming.alt = '';
+      incoming.draggable = false;
       incoming.setAttribute('aria-hidden', 'true');
       incoming.src = current.src;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -81,34 +82,40 @@
       media.append(incoming);
 
       let finished = false;
-      let finalizing = false;
       const finish = () => {
-        if (finished || finalizing) return;
-        finalizing = true;
-        primary.srcset = '';
-        primary.src = current.src;
-        primary.alt = current.alt;
-        const revealPrimary = () => {
-          if (finished) return;
-          finished = true;
-          incoming.remove();
-          media.classList.remove('lemoon-product-card__gallery-fading');
-          primary.style.removeProperty('transition');
-          primary.style.removeProperty('opacity');
-          delete card.dataset.gallerySliding;
-          if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
-        };
-        if (typeof primary.decode === 'function') primary.decode().then(revealPrimary, revealPrimary);
-        else if (primary.complete && primary.naturalWidth > 0) revealPrimary();
-        else {
-          primary.addEventListener('load', revealPrimary, { once: true });
-          primary.addEventListener('error', revealPrimary, { once: true });
+        if (finished) return;
+        finished = true;
+
+        const outgoingSrc = primary.currentSrc || primary.src;
+        const outgoingAlt = primary.alt;
+        incoming.className = primary.className;
+        incoming.alt = current.alt;
+        incoming.style.cssText = '';
+        incoming.removeAttribute('aria-hidden');
+        media.replaceChild(incoming, primary);
+
+        const secondary = media.querySelector('img:nth-child(2)');
+        if (secondary) {
+          secondary.srcset = '';
+          secondary.src = outgoingSrc;
+          secondary.alt = outgoingAlt;
+          secondary.dataset.loadedSrc = outgoingSrc;
         }
+
+        media.classList.remove('lemoon-product-card__gallery-fading');
+        media.classList.add('lemoon-product-card__gallery-active');
+        delete card.dataset.gallerySliding;
+        if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
       };
       galleryTransitionFinishes.set(card, finish);
 
       if (reducedMotion) {
-        finish();
+        if (typeof incoming.decode === 'function') incoming.decode().then(finish, finish);
+        else if (incoming.complete) finish();
+        else {
+          incoming.addEventListener('load', finish, { once: true });
+          incoming.addEventListener('error', finish, { once: true });
+        }
         return;
       }
 
