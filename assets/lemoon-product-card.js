@@ -4,9 +4,17 @@
 
   const galleryStates = new WeakMap();
   const suppressedClicks = new WeakSet();
+  const galleryObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        hydrateSecondImage(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '240px 0px' })
+    : null;
 
   const getGallery = (card, swatch = null) => {
-    const colorKey = (swatch?.dataset.colorKey || '').toLocaleLowerCase();
     const images = [];
     const addImage = (src, alt) => {
       if (!src || images.some((image) => image.src === src)) return;
@@ -20,22 +28,33 @@
       const media = card.querySelector('.card__media .media');
       const primary = media?.querySelector('img:first-child');
       const secondary = media?.querySelector('img:nth-child(2)');
-      addImage(primary?.currentSrc || primary?.src, primary?.alt);
-      addImage(secondary?.currentSrc || secondary?.src, secondary?.alt);
+      addImage(primary?.currentSrc || primary?.getAttribute('src'), primary?.alt);
+      addImage(secondary?.dataset.lazySrc || secondary?.currentSrc || secondary?.getAttribute('src'), secondary?.alt);
     }
 
-    [...card.querySelectorAll('[data-gallery-src]')]
-      .filter((source) => !swatch || !source.dataset.galleryColor || source.dataset.galleryColor.toLocaleLowerCase() === colorKey)
-      .sort((a, b) => Number(a.dataset.galleryOrder || a.dataset.galleryIndex) - Number(b.dataset.galleryOrder || b.dataset.galleryIndex))
-      .forEach((source) => addImage(source.dataset.gallerySrc, source.dataset.galleryAlt));
+    return images.slice(0, 2);
+  };
 
-    return images;
+  const hydrateSecondImage = (card, swatch = null) => {
+    const secondary = card.querySelector('.card__media .media img:nth-child(2)');
+    if (!secondary) return;
+    const selectedSwatch = swatch || card.querySelector('.lemoon-product-card__swatch.is-selected');
+    const src = selectedSwatch?.dataset.secondarySrc || secondary.dataset.lazySrc;
+    if (!src || secondary.dataset.loadedSrc === src) return;
+    const srcset = selectedSwatch?.dataset.secondarySrcset || secondary.dataset.lazySrcset;
+    secondary.removeAttribute('srcset');
+    if (srcset) secondary.srcset = srcset;
+    const sizes = selectedSwatch?.dataset.secondarySizes || secondary.dataset.lazySizes;
+    if (sizes) secondary.sizes = sizes;
+    secondary.src = src;
+    secondary.alt = selectedSwatch?.dataset.secondaryAlt || secondary.alt;
+    secondary.dataset.loadedSrc = src;
   };
 
   const setGalleryIndex = (card, index, wasDragged = false) => {
     const state = galleryStates.get(card);
     if (!state?.images.length) return;
-    state.index = Math.max(0, Math.min(index, state.images.length - 1));
+    state.index = ((index % state.images.length) + state.images.length) % state.images.length;
 
     const media = card.querySelector('.card__media .media');
     const primary = media?.querySelector('img:first-child');
@@ -47,22 +66,6 @@
     primary.src = current.src;
     primary.alt = current.alt;
 
-    let secondary = media.querySelector('img:nth-child(2)');
-    const next = state.images[state.index + 1];
-    if (next) {
-      if (!secondary) {
-        secondary = document.createElement('img');
-        secondary.className = 'motion-reduce';
-        secondary.loading = 'lazy';
-        media.insertBefore(secondary, media.querySelector('[data-gallery-src]'));
-      }
-      secondary.srcset = '';
-      secondary.src = next.src;
-      secondary.alt = next.alt;
-      secondary.hidden = false;
-    } else if (secondary) {
-      secondary.hidden = true;
-    }
   };
 
   const updatePrice = (card, swatch) => {
@@ -78,7 +81,7 @@
     if (previous) previous.textContent = comparePrice || '';
   };
 
-  const selectSwatch = (card, swatch) => {
+  const selectSwatch = (card, swatch, loadImage = false) => {
     card.querySelectorAll('.lemoon-product-card__swatch').forEach((button) => {
       const selected = button === swatch;
       button.classList.toggle('is-selected', selected);
@@ -87,6 +90,7 @@
 
     galleryStates.set(card, { images: getGallery(card, swatch), index: 0 });
     setGalleryIndex(card, 0);
+    if (loadImage) hydrateSecondImage(card, swatch);
     updatePrice(card, swatch);
 
     if (swatch.dataset.variantUrl) {
@@ -101,6 +105,15 @@
     if (!media || media.dataset.galleryBound) return;
     media.dataset.galleryBound = 'true';
     let start = null;
+
+    if (galleryObserver) {
+      if (!card.dataset.galleryObserved) {
+        card.dataset.galleryObserved = 'true';
+        galleryObserver.observe(card);
+      }
+    } else {
+      media.addEventListener('pointerenter', () => hydrateSecondImage(card), { once: true });
+    }
 
     media.addEventListener('pointerdown', (event) => {
       if (event.button !== 0 && event.pointerType === 'mouse') return;
@@ -147,7 +160,7 @@
 
     const swatch = event.target.closest('.lemoon-product-card__swatch');
     if (swatch) {
-      selectSwatch(swatch.closest('.product-card-wrapper'), swatch);
+      selectSwatch(swatch.closest('.product-card-wrapper'), swatch, true);
       return;
     }
 

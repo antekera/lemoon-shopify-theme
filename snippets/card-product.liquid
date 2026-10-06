@@ -68,6 +68,24 @@
         >
           {%- if card_product.featured_media -%}
             {%- assign card_secondary_media = blank -%}
+            {%- assign selected_color_key = blank -%}
+            {%- for value in color_option.values -%}
+              {%- if value.selected -%}
+                {%- assign selected_color_key = value.name | downcase -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if selected_color_key != blank -%}
+              {%- assign secondary_marker = 'card-diagonal:' | append: selected_color_key -%}
+              {%- for media in card_product.media -%}
+                {%- assign media_alt_lower = media.alt | downcase -%}
+                {%- if media_alt_lower contains secondary_marker -%}
+                  {%- assign card_secondary_media = media -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+            {%- if card_secondary_media == blank -%}
             {%- for media in card_product.media -%}
               {%- assign media_alt_lower = media.alt | downcase -%}
               {%- if media_alt_lower contains 'card-view:diagonal' -%}
@@ -75,6 +93,7 @@
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}
+            {%- endif -%}
             {%- if card_secondary_media == blank -%}{%- assign card_secondary_media = card_product.media[1] -%}{%- endif -%}
             <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
               <div class="media media--transparent media--hover-effect">
@@ -103,7 +122,7 @@
 
                 {%- if card_secondary_media != null and show_secondary_image -%}
                   <img
-                    srcset="
+                    data-lazy-srcset="
                       {%- if card_secondary_media.width >= 165 -%}{{ card_secondary_media | image_url: width: 165 }} 165w,{%- endif -%}
                       {%- if card_secondary_media.width >= 360 -%}{{ card_secondary_media | image_url: width: 360 }} 360w,{%- endif -%}
                       {%- if card_secondary_media.width >= 533 -%}{{ card_secondary_media | image_url: width: 533 }} 533w,{%- endif -%}
@@ -112,8 +131,8 @@
                       {%- if card_secondary_media.width >= 1066 -%}{{ card_secondary_media | image_url: width: 1066 }} 1066w,{%- endif -%}
                       {{ card_secondary_media | image_url }} {{ card_secondary_media.width }}w
                     "
-                    src="{{ card_secondary_media | image_url: width: 533 }}"
-                    sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                    data-lazy-src="{{ card_secondary_media | image_url: width: 533 }}"
+                    data-lazy-sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
                     alt="{{ card_product.title | escape }} — vista diagonal"
                     class="motion-reduce"
                     loading="lazy"
@@ -121,33 +140,6 @@
                     height="{{ card_secondary_media.height }}"
                   >
                 {%- endif -%}
-                {%- for media in card_product.media -%}
-                  {%- assign gallery_color_key = blank -%}
-                  {%- assign gallery_alt_lower = media.alt | downcase -%}
-                  {%- for value in color_option.values -%}
-                    {%- assign gallery_color_marker = 'card-color:' | append: value.name | downcase -%}
-                    {%- assign gallery_front_marker = 'card-front:' | append: value.name | downcase -%}
-                    {%- assign gallery_model_marker = 'card-model:' | append: value.name | downcase -%}
-                    {%- if gallery_alt_lower contains gallery_color_marker or gallery_alt_lower contains gallery_front_marker or gallery_alt_lower contains gallery_model_marker -%}
-                      {%- assign gallery_color_key = value.name | downcase -%}
-                      {%- break -%}
-                    {%- endif -%}
-                  {%- endfor -%}
-                  {%- assign gallery_order = 99 -%}
-                  {%- if gallery_alt_lower contains 'card-view:diagonal' -%}{%- assign gallery_order = 2 -%}
-                  {%- elsif gallery_alt_lower contains 'card-view:side' -%}{%- assign gallery_order = 3 -%}
-                  {%- elsif gallery_alt_lower contains 'card-view:back' -%}{%- assign gallery_order = 4 -%}
-                  {%- elsif gallery_alt_lower contains 'card-model:' -%}{%- assign gallery_order = 5 -%}
-                  {%- elsif gallery_alt_lower contains 'card-front:' -%}{%- assign gallery_order = 1 -%}{%- endif -%}
-                  <span
-                    class="lemoon-product-card__gallery-source"
-                    data-gallery-src="{{ media.preview_image | image_url: width: 720 }}"
-                    data-gallery-alt="{{ media.alt | default: card_product.title | escape }}"
-                    data-gallery-color="{{ gallery_color_key | escape }}"
-                    data-gallery-index="{{ forloop.index0 }}"
-                    data-gallery-order="{{ gallery_order }}"
-                  ></span>
-                {%- endfor -%}
               </div>
               {% render 'lemoon-product-card-labels', card_product: card_product %}
               <a class="lemoon-product-card__image-link" href="{{ card_product.url }}" aria-label="{{ 'products.product.view_full_details' | t: product_name: card_product.title | escape }}"></a>
@@ -319,6 +311,7 @@
                       data-primary-src="{% if swatch_primary %}{{ swatch_primary | image_url: width: 720 }}{% endif %}"
                       data-primary-alt="{{ card_product.title | escape }} — {{ value.name | escape }} — vista frontal"
                       data-secondary-src="{% if swatch_secondary %}{{ swatch_secondary | image_url: width: 720 }}{% endif %}"
+                      data-secondary-srcset="{% if swatch_secondary %}{% if swatch_secondary.width >= 360 %}{{ swatch_secondary | image_url: width: 360 }} 360w,{% endif %}{% if swatch_secondary.width >= 533 %}{{ swatch_secondary | image_url: width: 533 }} 533w,{% endif %}{{ swatch_secondary | image_url: width: 720 }} 720w{% endif %}"
                       data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
                       data-color-key="{{ value.name | downcase | escape }}"
                       data-variant-url="{{ swatch_product_url }}{{ variant_separator }}variant={{ swatch_variant.id }}"

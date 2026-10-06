@@ -53,15 +53,17 @@ test('uses color-specific gallery images first and preserves query params in var
   expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
 });
 
-test('defers product gallery images after the first two and removes quick-add markup', async () => {
+test('defers the second product card image until near the viewport and removes quick-add markup', async () => {
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-product-card.js'), 'utf8');
 
-  expect(template).toMatch(/data-gallery-src=/);
-  expect(template).toMatch(/data-gallery-index=/);
+  expect(template).toMatch(/data-lazy-srcset=/);
+  expect(template).toMatch(/data-lazy-src=/);
+  expect(template).not.toMatch(/data-gallery-src=/);
+  expect(script).toMatch(/IntersectionObserver/);
+  expect(script).toMatch(/rootMargin: '240px 0px'/);
   expect(script).toMatch(/pointerdown/);
   expect(script).toMatch(/pointerup/);
-  expect(script).toMatch(/data-gallery-src/);
   expect(template).not.toMatch(/quick-add-modal|modal-opener|quick-add__submit/);
   expect(template).not.toMatch(/quick_add|quantity-popover|quick-order-list/);
   expect(template).not.toMatch(/lemoon-product-card__wishlist/);

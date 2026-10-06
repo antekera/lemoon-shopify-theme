@@ -5,10 +5,11 @@ import { test, expect } from '@playwright/test';
 const cardScript = resolve(process.cwd(), 'assets/lemoon-product-card.js');
 const cardStyles = resolve(process.cwd(), 'assets/lemoon-components.css');
 
-async function openCard(page) {
+async function openCard(page, { offscreen = false } = {}) {
   await page.goto('/tests/fixtures/mobile-search.html');
   await page.setContent(`
     <style>
+      .product-card-wrapper { margin-top: ${offscreen ? '1200px' : '0'} !important; }
       .card__media { position: relative; width: 320px; height: 320px; }
       .media { position: relative; width: 100%; height: 100%; }
       .card__inner { position: relative; transform: perspective(1000px); }
@@ -21,9 +22,7 @@ async function openCard(page) {
           <div class="card__media">
             <div class="media media--hover-effect">
               <img src="https://cdn.example/front.jpg" alt="Front">
-              <img src="https://cdn.example/diagonal.jpg" alt="Diagonal" loading="lazy">
-              <span data-gallery-src="https://cdn.example/side.jpg" data-gallery-alt="Side" data-gallery-color="amber" data-gallery-index="2"></span>
-              <span data-gallery-src="https://cdn.example/back.jpg" data-gallery-alt="Back" data-gallery-color="amber" data-gallery-index="3"></span>
+              <img data-lazy-src="https://cdn.example/diagonal.jpg" data-lazy-srcset="https://cdn.example/diagonal-360.jpg 360w, https://cdn.example/diagonal.jpg 720w" alt="Diagonal" loading="lazy">
             </div>
             <a class="lemoon-product-card__image-link" href="/products/demo"></a>
           </div>
@@ -51,18 +50,40 @@ async function openCard(page) {
   await page.addScriptTag({ path: cardScript });
 }
 
-test('swiping the image reveals later gallery photos without navigating away', async ({ page }) => {
+test('loads the second photo near the viewport and toggles back to the first on the next swipe', async ({ page }) => {
+  await openCard(page, { offscreen: true });
+  const card = page.locator('.product-card-wrapper');
+  const second = page.locator('.card__media .media img').nth(1);
+  await expect(second).not.toHaveAttribute('src', /.+/);
+  await expect(second).toHaveAttribute('data-lazy-src', 'https://cdn.example/diagonal.jpg');
+  await card.scrollIntoViewIfNeeded();
+  await expect(second).toHaveAttribute('src', 'https://cdn.example/diagonal.jpg');
+
+  const swipeLeft = async () => {
+    const bounds = await page.locator('.card__media .media').boundingBox();
+    await page.mouse.move(bounds.x + bounds.width - 30, bounds.y + bounds.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(bounds.x + 35, bounds.y + bounds.height / 2, { steps: 4 });
+    await page.mouse.up();
+  };
+  await swipeLeft();
+  await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
+  await swipeLeft();
+  await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
+  await expect(page.locator('.card__media .media img')).toHaveCount(2);
+  await expect(page).toHaveURL(/mobile-search\.html$/);
+});
+
+test('loads the selected variant second photo on demand', async ({ page }) => {
   await openCard(page);
+  await page.locator('.lemoon-product-card__swatch').nth(1).click();
   const media = page.locator('.card__media .media');
   const bounds = await media.boundingBox();
   await page.mouse.move(bounds.x + bounds.width - 30, bounds.y + bounds.height / 2);
   await page.mouse.down();
   await page.mouse.move(bounds.x + 35, bounds.y + bounds.height / 2, { steps: 4 });
   await page.mouse.up();
-
-  await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
-  await expect(page.locator('.card__media .media img').nth(1)).toHaveAttribute('alt', 'Side');
-  await expect(page).toHaveURL(/mobile-search\.html$/);
+  await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Black diagonal');
 });
 
 test('selecting a color updates the gallery, selected state, price and product variant URL', async ({ page }) => {
