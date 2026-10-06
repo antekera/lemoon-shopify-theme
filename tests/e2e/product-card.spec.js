@@ -7,6 +7,10 @@ const cardStyles = resolve(process.cwd(), 'assets/lemoon-components.css');
 
 async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
   await page.goto('/tests/fixtures/mobile-search.html');
+  await page.route('https://cdn.example/**', (route) => route.fulfill({
+    contentType: 'image/svg+xml',
+    body: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><rect width="32" height="32" fill="#172B4D"/></svg>',
+  }));
   await page.setContent(`
     <style>
       .product-card-wrapper { margin-top: ${offscreen ? '1200px' : '0'} !important; }

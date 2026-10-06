@@ -63,7 +63,7 @@
     if (!primary) return;
     const current = state.images[state.index];
     if (slideDirection && (primary.currentSrc || primary.src) !== current.src) {
-      media.classList.add('lemoon-product-card__gallery-active', 'lemoon-product-card__gallery-sliding');
+      media.classList.add('lemoon-product-card__gallery-active');
       card.dataset.gallerySliding = 'true';
 
       const incoming = document.createElement('img');
@@ -104,13 +104,22 @@
         return;
       }
 
-      requestAnimationFrame(() => {
-        incoming.getBoundingClientRect();
-        primary.style.setProperty('transform', exitTo, 'important');
-        incoming.style.setProperty('transform', 'translateX(0)', 'important');
-      });
+      const startTransition = () => {
+        if (finished) return;
+        media.classList.add('lemoon-product-card__gallery-sliding');
+        requestAnimationFrame(() => {
+          incoming.getBoundingClientRect();
+          primary.style.setProperty('transform', exitTo, 'important');
+          incoming.style.setProperty('transform', 'translateX(0)', 'important');
+        });
+        window.setTimeout(finish, duration + 80);
+      };
+
       incoming.addEventListener('transitionend', finish, { once: true });
-      window.setTimeout(finish, duration + 80);
+      incoming.addEventListener('error', finish, { once: true });
+      if (typeof incoming.decode === 'function') incoming.decode().then(startTransition, finish);
+      else if (incoming.complete && incoming.naturalWidth > 0) startTransition();
+      else incoming.addEventListener('load', startTransition, { once: true });
       return;
     }
 

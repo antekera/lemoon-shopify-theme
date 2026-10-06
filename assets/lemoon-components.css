@@ -366,6 +366,10 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   transition: opacity var(--lemoon-motion-base);
 }
 
+.product-card-wrapper .card__media .media {
+  overflow: hidden;
+}
+
 .product-card-wrapper .media.lemoon-product-card__gallery-active > img:first-child:not(:only-child) {
   opacity: 1 !important;
   transform: none !important;
