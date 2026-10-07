@@ -51,7 +51,7 @@
           "type": "benefit",
           "settings": {
             "icon": "shield",
-            "text": "300 días de garantía",
+            "text": "365 días de garantía",
             "text_second_line": "para tus lentes"
           }
         },
@@ -59,7 +59,7 @@
           "type": "benefit",
           "settings": {
             "icon": "return",
-            "text": "Cambios y devoluciones",
+            "text": "Cambios y devoluciones gratis",
             "text_second_line": "antes de los 30 días"
           }
         }
