@@ -6,6 +6,12 @@
   background: #0b1f3a;
 }
 
+@media (min-width: 990px) {
+  .lemoon-hero {
+    height: min(680px, max(0px, calc(100svh - var(--hero-top-offset, 106px) - var(--hero-bottom-reserve, 80px))));
+  }
+}
+
 .lemoon-hero__track {
   position: relative;
   display: flex;
@@ -87,18 +93,23 @@
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
-  transition: background-color .2s ease, color .2s ease;
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
 }
 
 .lemoon-hero__button:hover {
-  background: #fff;
-  border-color: #fff;
+  background: #dfcf00;
+  border-color: #dfcf00;
   color: #0b1f3a;
 }
 
 .lemoon-hero__button--secondary {
   border-color: #fff;
   background: #fff;
+}
+
+.lemoon-hero__button--secondary:hover {
+  border-color: #e6e6e6;
+  background: #e6e6e6;
 }
 
 .lemoon-hero__button:focus-visible,

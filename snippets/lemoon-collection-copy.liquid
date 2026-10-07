@@ -1,0 +1,34 @@
+{% doc %}
+  Sample editorial copy for collection previews. Merchant content takes precedence.
+  @param {collection} collection - Collection being displayed.
+  @param {string} mode - intro or seo.
+{% enddoc %}
+{%- liquid
+  assign copy_group = 'default'
+  case collection.handle
+    when 'lentes-de-sol'
+      assign copy_group = 'sun'
+    when 'accesorios'
+      assign copy_group = 'accessories'
+    when 'cristales'
+      assign copy_group = 'lenses'
+    when 'de-lectura'
+      assign copy_group = 'reading'
+    when 'para-pantallas'
+      assign copy_group = 'screens'
+    when 'opticos-ninos'
+      assign copy_group = 'kids'
+    when 'lo-nuevo'
+      assign copy_group = 'new'
+    when 'mejor-vendidos'
+      assign copy_group = 'popular'
+  endcase
+  assign intro_key = 'lemoon.collection.copy.' | append: copy_group | append: '.intro'
+  assign seo_key = 'lemoon.collection.copy.' | append: copy_group | append: '.seo'
+-%}
+{%- if mode == 'seo' -%}
+  <h2>{{ 'lemoon.collection.about_category' | t: title: collection.title | escape }}</h2>
+  <p>{{ seo_key | t | escape }}</p>
+{%- else -%}
+  <p>{{ intro_key | t | escape }}</p>
+{%- endif -%}

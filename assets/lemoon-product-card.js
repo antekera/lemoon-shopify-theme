@@ -42,6 +42,8 @@
     const selectedSwatch = swatch || card.querySelector('.lemoon-product-card__swatch.is-selected');
     const src = selectedSwatch?.dataset.secondarySrc || secondary.dataset.lazySrc;
     if (!src || secondary.dataset.loadedSrc === src) return;
+    const media = secondary.parentElement;
+    media.classList.remove('lemoon-product-card__secondary-ready');
     const srcset = selectedSwatch?.dataset.secondarySrcset || secondary.dataset.lazySrcset;
     secondary.removeAttribute('srcset');
     if (srcset) secondary.srcset = srcset;
@@ -50,6 +52,11 @@
     secondary.src = src;
     secondary.alt = selectedSwatch?.dataset.secondaryAlt || secondary.alt;
     secondary.dataset.loadedSrc = src;
+    whenImageReady(secondary, () => {
+      if (secondary.dataset.loadedSrc === src && secondary.naturalWidth > 0) {
+        media.classList.add('lemoon-product-card__secondary-ready');
+      }
+    }, () => {});
   };
 
   const whenImageReady = (image, onReady, onError = onReady) => {
@@ -96,6 +103,13 @@
         if (finished) return;
         finished = true;
 
+        if (!incoming.complete || incoming.naturalWidth === 0) {
+          incoming.remove();
+          primary.style.setProperty('opacity', '1', 'important');
+          if (galleryTransitionFinishes.get(card) === finish) galleryTransitionFinishes.delete(card);
+          return;
+        }
+
         const outgoingSrc = primary.currentSrc || primary.src;
         const outgoingAlt = primary.alt;
         incoming.className = primary.className;
@@ -138,9 +152,17 @@
     }
 
     media.classList.remove('lemoon-product-card__gallery-active');
-    primary.srcset = '';
-    primary.src = current.src;
-    primary.alt = current.alt;
+    // Preserve the rendered image while a different color image is loading.
+    primary.dataset.pendingSrc = current.src;
+    if ((primary.currentSrc || primary.src) === new URL(current.src, document.baseURI).href) return;
+    const replacement = new Image();
+    replacement.src = current.src;
+    whenImageReady(replacement, () => {
+      if (primary.dataset.pendingSrc !== current.src || media.querySelector('img:first-child') !== primary) return;
+      primary.srcset = '';
+      primary.src = current.src;
+      primary.alt = current.alt;
+    }, () => {});
 
   };
 
@@ -165,8 +187,12 @@
     });
 
     galleryStates.set(card, { images: getGallery(card, swatch), index: 0 });
-    setGalleryIndex(card, 0);
-    if (loadImage) hydrateSecondImage(card, swatch);
+    // Initial markup already contains the selected color's responsive image.
+    // Only replace it when the customer actually selects another swatch.
+    if (loadImage) {
+      setGalleryIndex(card, 0);
+      hydrateSecondImage(card, swatch);
+    }
     updatePrice(card, swatch);
 
     if (swatch.dataset.variantUrl) {
@@ -228,7 +254,6 @@
       if (selected) selectSwatch(card, selected);
       else {
         galleryStates.set(card, { images: getGallery(card), index: 0 });
-        setGalleryIndex(card, 0);
       }
     });
   };
@@ -255,4 +280,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => initialize());
   else initialize();
   document.addEventListener('shopify:section:load', (event) => initialize(event.target));
+  document.addEventListener('lemoon:facets-updated', () => initialize());
 })();

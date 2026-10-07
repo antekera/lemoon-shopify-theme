@@ -1,6 +1,10 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-facets.css' | asset_url | stylesheet_tag }}
+{{ 'lemoon-collection-plp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'lemoon-collection-plp.js' | asset_url }}" defer="defer"></script>
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -11,177 +15,161 @@
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
-
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: 0;
+    }
+    .section-{{ section.id }}-padding .lemoon-plp-main,
+    .section-{{ section.id }}-padding .lemoon-plp-sidebar-body {
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 {%- endstyle -%}
 
-<collection-component
-  view-event-payload="{{ collection | standard_event_data: 'view' | escape }}"
-  data-collection-id="{{ collection.id }}"
->
+{%- liquid
+  assign desktop_columns = section.settings.columns_desktop | at_most: 3
+  assign legacy_shape = blank
+  if current_tags.size == 1
+    assign legacy_tag = current_tags | first | handleize
+    case legacy_tag
+      when 'ojo-de-gato'
+        assign legacy_shape = 'ojo de gato'
+      when 'geometrico'
+        assign legacy_shape = 'geométrico'
+      when 'redondo', 'rectangular', 'aviador', 'cuadrado', 'ovalado', 'browline', 'mariposa'
+        assign legacy_shape = legacy_tag
+    endcase
+  endif
+-%}
+
+<collection-component view-event-payload="{{ collection | standard_event_data: 'view' | escape }}" data-collection-id="{{ collection.id }}">
   <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
     {%- paginate collection.products by section.settings.products_per_page -%}
-      {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-      {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
-        <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
-          <form class="facets-vertical-form" id="FacetSortForm">
-            <div class="facet-filters sorting caption">
-              <div class="facet-filters__field">
-                <h2 class="facet-filters__label caption-large text-body">
-                  <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
-                </h2>
-                <div class="select">
-                  {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-                  <select
-                    name="sort_by"
-                    class="facet-filters__sort select__select caption-large"
-                    id="SortBy"
-                    aria-describedby="a11y-refresh-page-message"
-                  >
-                    {%- for option in collection.sort_options -%}
-                      <option
-                        value="{{ option.value | escape }}"
-                        {% if option.value == sort_by %}
-                          selected="selected"
-                        {% endif %}
-                      >
-                        {{ option.name | escape }}
-                      </option>
-                    {%- endfor -%}
-                  </select>
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
-                </div>
+      {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+      {% assign initial_product_count = collection.products_count | default: 0 %}
+      <div class="lemoon-plp page-width" data-collection-url="{{ collection.url }}"{% if legacy_shape != blank %} data-legacy-shape="{{ legacy_shape | escape }}"{% endif %} data-sort-prefix="{{ 'lemoon.collection.sort_prefix' | t | escape }}" data-default-columns="{{ section.settings.columns_mobile }}" style="--plp-desktop-columns: {{ desktop_columns }}; --plp-mobile-columns: {{ section.settings.columns_mobile }};">
+        <div class="lemoon-plp-layout facets-vertical{% unless section.settings.enable_filtering and collection.filters != empty %} lemoon-plp-layout--no-filters{% endunless %}">
+          {%- if section.settings.enable_filtering -%}
+            <aside aria-labelledby="verticalTitle" class="facets-wrapper" id="main-collection-filters" data-id="{{ section.id }}">
+              <div class="lemoon-plp-sidebar-header">
+                {% render 'lemoon-breadcrumb', collection: collection %}
+                <h2 class="facets__heading facets__heading--vertical" id="verticalTitle" tabindex="-1">{{ 'lemoon.collection.filters_title' | t }}</h2>
               </div>
-            </div>
-
-            <div class="product-count-vertical light" role="status">
-              <h2 class="product-count__text text-body">
-                <span id="ProductCountDesktop">
-                  {%- if collection.results_count -%}
-                    {{
-                      'templates.search.results_with_count'
-                      | t: terms: collection.terms, count: collection.results_count
-                    }}
-                  {%- elsif collection.products_count == collection.all_products_count -%}
-                    {{ 'products.facets.product_count_simple' | t: count: collection.products_count }}
-                  {%- else -%}
-                    {{
-                      'products.facets.product_count'
-                      | t: product_count: collection.products_count, count: collection.all_products_count
-                    }}
-                  {%- endif -%}
-                </span>
-              </h2>
-              {%- render 'loading-spinner' -%}
-            </div>
-          </form>
-        </facet-filters-form>
-      {%- endif -%}
-
-      <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
-        {{ 'component-facets.css' | asset_url | stylesheet_tag }}
-        <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-        {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
-          <aside
-            aria-labelledby="verticalTitle"
-            class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-            id="main-collection-filters"
-            data-id="{{ section.id }}"
-          >
-            {% render 'facets',
-              results: collection,
-              enable_filtering: section.settings.enable_filtering,
-              enable_sorting: section.settings.enable_sorting,
-              filter_type: section.settings.filter_type,
-              paginate: paginate
-            %}
-          </aside>
-        {%- endif -%}
-
-        <div
-          class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          id="ProductGridContainer"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-          {% endif %}
-        >
-          {%- if collection.products.size == 0 -%}
-            <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
-              <div class="loading-overlay gradient"></div>
-              <div class="title-wrapper center">
-                <h2 class="title title--primary">
-                  {{ 'sections.collection_template.empty' | t -}}
-                  <br>
-                  {{
-                    'sections.collection_template.use_fewer_filters_html'
-                    | t: link: collection.url, class: 'underlined-link link'
-                  }}
-                </h2>
+              <div class="lemoon-plp-sidebar-body">
+                {% render 'facets', results: collection, enable_filtering: true, enable_sorting: false, filter_type: 'vertical', paginate: paginate, lemoon_plp: true %}
               </div>
-            </div>
+            </aside>
           {%- else -%}
-            <div
-              class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
-            >
-              <div class="loading-overlay gradient"></div>
-              <ul
-                id="product-grid"
-                data-id="{{ section.id }}"
-                class="
-                  grid product-grid grid--{{ section.settings.columns_mobile }}-col-tablet-down
-                  grid--{{ section.settings.columns_desktop }}-col-desktop
-                "
-              >
-                {% assign skip_card_product_styles = false %}
-                {%- for product in collection.products -%}
-                  {% assign lazy_load = false %}
-                  {%- if forloop.index > 2 -%}
-                    {%- assign lazy_load = true -%}
-                  {%- endif -%}
-                  <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                    {% if settings.animations_reveal_on_scroll %}
-                      data-cascade
-                      style="--animation-order: {{ forloop.index }};"
-                    {% endif %}
-                  >
-                    {% render 'card-product',
-                      card_product: product,
-                      media_aspect_ratio: section.settings.image_ratio,
-                      image_shape: section.settings.image_shape,
-                      show_secondary_image: true,
-                      show_vendor: section.settings.show_vendor,
-                      show_rating: section.settings.show_rating,
-                      lazy_load: lazy_load,
-                      skip_styles: skip_card_product_styles,
-                      section_id: section.id,
-                      product_view_context: 'collection',
-                      enable_gallery_swipe: true
-                    %}
-                  </li>
-                  {%- assign skip_card_product_styles = true -%}
-                {%- endfor -%}
-              </ul>
-
-              {%- if paginate.pages > 1 -%}
-                {% render 'pagination', paginate: paginate, anchor: '' %}
-              {%- endif -%}
-            </div>
+            <div hidden>{% render 'facets', results: collection, enable_filtering: false, enable_sorting: false, filter_type: 'vertical', paginate: paginate, lemoon_plp: true %}</div>
           {%- endif -%}
+
+          <div class="lemoon-plp-main">
+            {%- if collection.metafields.custom.plp_promo_banner.value != blank -%}
+              <div class="lemoon-plp-promo-item">
+                {% render 'lemoon-collection-promo', collection: collection %}
+              </div>
+            {%- endif -%}
+            {% render 'lemoon-collection-intro', collection: collection, show_description: section.settings.show_collection_description, show_demo_content: section.settings.show_demo_content %}
+        <div class="lemoon-plp-toolbar" role="group" aria-label="{{ 'lemoon.collection.toolbar' | t }}">
+          <div class="lemoon-plp-toolbar__leading">
+            {%- if section.settings.enable_filtering and collection.filters != empty -%}
+              <button type="button" class="lemoon-plp-filter-toggle" data-filter-toggle aria-expanded="true" aria-controls="main-collection-filters" data-label-hide="{{ 'lemoon.collection.hide_filters' | t | escape }}" data-label-show="{{ 'lemoon.collection.show_filters' | t | escape }}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16m7-11-3 3 3 3"/></svg><span>{{ 'lemoon.collection.hide_filters' | t }}</span>
+              </button>
+            {%- endif -%}
+          <div class="lemoon-plp-toolbar__count product-count" role="status">
+            <span id="ProductCount" data-product-count="{{ initial_product_count }}" data-total-count="{{ collection.all_products_count | default: initial_product_count }}">
+              {{ 'lemoon.collection.products_count' | t: count: collection.products_count }}
+            </span>
+          </div>
+
+          </div>
+
+          {%- if section.settings.enable_filtering and collection.filters != empty -%}
+            <div class="lemoon-plp-drawer-slot"></div>
+          {%- endif -%}
+
+          {%- if section.settings.enable_sorting -%}
+            <facet-filters-form class="lemoon-plp-sort">
+              <form id="FacetSortForm" class="lemoon-plp-sort__form">
+                <div class="lemoon-plp-sort-controls sorting">
+
+                <div class="select">
+                  <select name="sort_by" id="SortBy" aria-label="{{ 'products.facets.sort_by_label' | t }}" class="select__select" aria-describedby="a11y-refresh-page-message">
+                    {%- assign relevance_option = collection.sort_options | where: 'value', 'most-relevant' | first -%}
+                    {%- assign relevance_value = relevance_option.value | default: 'manual' -%}
+                    {%- assign preferred_sorts = 'relevance,created-descending,best-selling,price-ascending,price-descending' | split: ',' -%}
+                    {%- for sort_value in preferred_sorts -%}
+                      {%- if sort_value == 'relevance' -%}
+                        {%- assign native_value = relevance_value -%}
+                        {%- assign sort_label = 'lemoon.collection.sort_relevance' | t -%}
+                      {%- else -%}
+                        {%- assign native_value = sort_value -%}
+                        {%- case sort_value -%}
+                          {%- when 'created-descending' -%}{%- assign sort_label = 'lemoon.collection.sort_newest' | t -%}
+                          {%- when 'best-selling' -%}{%- assign sort_label = 'lemoon.collection.sort_best_selling' | t -%}
+                          {%- when 'price-ascending' -%}{%- assign sort_label = 'lemoon.collection.sort_price_ascending' | t -%}
+                          {%- when 'price-descending' -%}{%- assign sort_label = 'lemoon.collection.sort_price_descending' | t -%}
+                        {%- endcase -%}
+                      {%- endif -%}
+                      {%- assign native_option = collection.sort_options | where: 'value', native_value | first -%}
+                      {%- if native_option -%}
+                        <option value="{{ native_value | escape }}" {% if native_value == current_sort %}selected{% endif %}>{{ sort_label }}</option>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    {%- unless current_sort == relevance_value or preferred_sorts contains current_sort -%}
+                      {%- assign current_option = collection.sort_options | where: 'value', current_sort | first -%}
+                      {%- if current_option -%}<option value="{{ current_sort | escape }}" selected>{{ current_option.name | escape }}</option>{%- endif -%}
+                    {%- endunless -%}
+                  </select>
+                  <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                </div>
+                <details class="lemoon-sort-menu" data-sort-menu>
+                  <summary role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="SortOptions-{{ section.id }}"><span data-sort-label></span><span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span></summary>
+                  <div id="SortOptions-{{ section.id }}" class="lemoon-sort-menu__options" role="listbox" aria-label="{{ 'products.facets.sort_by_label' | t }}" data-sort-options></div>
+                </details>
+                </div>
+                <noscript><button type="submit">{{ 'products.facets.apply' | t }}</button></noscript>
+              </form>
+            </facet-filters-form>
+          {%- endif -%}
+
+          <div class="lemoon-plp-view-toggle">
+            <button type="button" class="lemoon-plp-view-toggle__button" data-grid-toggle data-label-one="{{ 'lemoon.collection.one_column' | t | escape }}" data-label-two="{{ 'lemoon.collection.two_columns' | t | escape }}" aria-label="{{ 'lemoon.collection.one_column' | t }}" aria-pressed="false">
+              <svg class="lemoon-plp-view-toggle__single" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="8" rx="1"/><rect x="4" y="13" width="16" height="8" rx="1"/></svg>
+              <svg class="lemoon-plp-view-toggle__double" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
+            </button>
+          </div>
+        </div>
+
+          <p class="lemoon-plp-mobile-results" data-mobile-results data-label="{{ 'lemoon.collection.showing_results' | t: count: '__COUNT__' | escape }}">{{ 'lemoon.collection.showing_results' | t: count: collection.products_count }}</p>
+          <div class="product-grid-container" id="ProductGridContainer">
+            {% render 'lemoon-active-filters', collection: collection, sort_by: current_sort %}
+            {% render 'lemoon-plp-product-page', collection: collection, paginate: paginate, desktop_columns: desktop_columns, page_size: section.settings.products_per_page %}
+          </div>
+
+        {%- assign seo_copy = collection.metafields.custom.plp_seo_copy -%}
+        {%- if seo_copy.value != blank -%}
+          <section class="lemoon-plp-seo rte" aria-label="{{ 'lemoon.collection.seo_description' | t }}">
+            {{ seo_copy | metafield_tag }}
+          </section>
+        {%- elsif section.settings.show_demo_content -%}
+          <section class="lemoon-plp-seo rte" aria-label="{{ 'lemoon.collection.seo_description' | t }}">
+            {% render 'lemoon-collection-copy', collection: collection, mode: 'seo' %}
+          </section>
+        {%- endif -%}
+          </div>
         </div>
       </div>
     {%- endpaginate -%}
-    {% if section.settings.image_shape == 'arch' %}
-      {{ 'mask-arch.svg' | inline_asset_content }}
-    {%- endif -%}
+    {% if section.settings.image_shape == 'arch' %}{{ 'mask-arch.svg' | inline_asset_content }}{%- endif -%}
   </div>
+  {%- paginate collection.products by section.settings.products_per_page_mobile -%}
+    <template data-plp-mobile-grid>
+      {% render 'lemoon-plp-product-page', collection: collection, paginate: paginate, desktop_columns: desktop_columns, page_size: section.settings.products_per_page_mobile %}
+    </template>
+  {%- endpaginate -%}
 </collection-component>
 
 {% schema %}
@@ -189,22 +177,33 @@
   "name": "t:sections.main-collection-product-grid.name",
   "class": "section",
   "settings": [
+    {"type": "checkbox", "id": "show_collection_description", "default": true, "label": "Mostrar descripción de la colección"},
+    {"type": "checkbox", "id": "show_demo_content", "default": false, "label": "t:lemoon.collection.demo_content"},
     {
       "type": "range",
       "id": "products_per_page",
-      "min": 8,
-      "max": 36,
-      "step": 4,
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 15,
+      "label": "Productos por página — desktop y tablet"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page_mobile",
+      "min": 4,
+      "max": 50,
+      "step": 1,
       "default": 16,
-      "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+      "label": "Productos por página — mobile"
     },
     {
       "type": "range",
       "id": "columns_desktop",
       "min": 1,
-      "max": 6,
+      "max": 3,
       "step": 1,
-      "default": 4,
+      "default": 3,
       "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
     },
     {
@@ -317,26 +316,6 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
       "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
-    },
-    {
-      "type": "select",
-      "id": "filter_type",
-      "options": [
-        {
-          "value": "horizontal",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__1.label"
-        },
-        {
-          "value": "vertical",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
-        },
-        {
-          "value": "drawer",
-          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
-        }
-      ],
-      "default": "horizontal",
-      "label": "t:sections.main-collection-product-grid.settings.filter_type.label"
     },
     {
       "type": "checkbox",

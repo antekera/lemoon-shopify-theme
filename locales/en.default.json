@@ -319,7 +319,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -580,5 +579,142 @@
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
     }
+  },
+  "lemoon": {
+    "breadcrumb": {
+      "home": "Home",
+      "label": "Breadcrumb"
+    },
+    "collection": {
+      "filters_title": "Filters",
+      "hide_filters": "Hide filters",
+      "show_filters": "Show filters",
+      "sort_prefix": "Sort by",
+      "applied_filters": "Applied filters",
+      "reset": "Clear filters",
+      "apply_filters": "Apply filters",
+      "view_results": "View {{ count }} glasses",
+      "filters": "Filters",
+      "showing_results": "Showing {{ count }} results",
+      "toolbar": "Collection tools",
+      "sort_relevance": "Relevance",
+      "sort_newest": "Newest",
+      "sort_best_selling": "Best selling",
+      "sort_price_ascending": "Price: low to high",
+      "sort_price_descending": "Price: high to low",
+      "grid_view": "Product grid view",
+      "one_column": "One product per row",
+      "two_columns": "Two products per row",
+      "seo_description": "Category description",
+      "filter_trigger": "Filter",
+      "products_count": {
+        "one": "{{ count }} frame",
+        "other": "{{ count }} frames"
+      },
+      "about_category": "Explore {{ title }}",
+      "copy": {
+        "default": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "sun": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "accessories": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "lenses": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "reading": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "screens": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "kids": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "new": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        },
+        "popular": {
+          "intro": "Explore shapes, colours and materials to find eyewear for your everyday style.",
+          "seo": "Explore the Lemoon collection and compare the shapes, colours, materials and frame measurements. Use the filters to narrow your selection and check each product for available lens options and prescription compatibility."
+        }
+      },
+      "filter_price": "Price",
+      "filter_availability": "Availability"
+    }
+  },
+  "lemoon_pdp": {
+    "zoom": "Enlarge image",
+    "save": "Save this frame on this device",
+    "gallery": "Frame views",
+    "view_image": "View image {{ number }}",
+    "gallery_hint": "Every detail, from every angle.",
+    "try_on": "Virtual try-on",
+    "review_count": "{{ count }} reviews",
+    "price_note": "Total price of your selected configuration.",
+    "configuration": "Configuration",
+    "size_guide": "Size guide",
+    "prescription": "Your prescription",
+    "prescription_note": "Copy your prescription values or send it after purchase.",
+    "recipe_mode": "How you will provide your prescription",
+    "later": "I will send my prescription later",
+    "manual": "Enter prescription now",
+    "your_selection": "Your selection",
+    "configure": "Add lenses",
+    "frame_only": "Frame only",
+    "help": "Need help choosing?",
+    "made_for_you": "Designed for your everyday",
+    "details": "Meet your frame",
+    "shape": "Shape",
+    "material": "Material",
+    "fit": "Fit",
+    "weight": "Weight",
+    "description": "Description",
+    "lens_details": "Lens guide",
+    "shipping_returns": "Shipping and returns",
+    "shipping_note": "Shipping costs and options are calculated at checkout.",
+    "care": "Caring for your glasses",
+    "care_note": "Clean with a microfiber cloth and water. Avoid abrasive products and keep your glasses in a case when not in use.",
+    "reviews": "Frame reviews",
+    "no_reviews": "This frame does not have reviews yet.",
+    "size_note": "Compare these measurements with a comfortable frame. Prototype measurements are illustrative.",
+    "recipe_error": "Check your prescription: both spheres and PD are required; cylinder needs axis, and progressives need addition. Use 0.25 prescription increments.",
+    "cart_error": "We could not add your selection. Please try again.",
+    "storage_error": "We could not save this frame on your device.",
+    "right_eye": "Right eye (OD)",
+    "left_eye": "Left eye (OS)",
+    "sphere": "Sphere (SPH)",
+    "cylinder": "Cylinder (CYL)",
+    "axis": "Axis (0–180°)",
+    "addition": "Addition (ADD)",
+    "pd": "Total pupillary distance (mm)",
+    "rx_note": "PD between 40 and 80 mm. Prescription saved for review before production. If it exceeds this form, choose to send it later.",
+    "frame_diagram": "Front view frame measurement diagram",
+    "units": "Measurement unit",
+    "millimeters": "Millimeters",
+    "inches": "Inches",
+    "frame_width": "Frame width",
+    "lens_width": "Lens width",
+    "bridge": "Bridge",
+    "lens_height": "Lens height",
+    "temple": "Temple length",
+    "upload": "Upload prescription (PDF or image)",
+    "upload_note": "PDF, JPG or PNG, up to 10 MB. The file is attached to your item and can be viewed in the cart.",
+    "upload_error": "Select a PDF, JPG or PNG file up to 10 MB.",
+    "buy_frame": "Buy frame only",
+    "back_to_frame": "Back to frame",
+    "lens_step": "Choose your lenses",
+    "lens_step_note": "Choose your lenses and how to provide your prescription."
   }
 }

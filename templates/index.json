@@ -109,18 +109,18 @@
     "lemoon_shapes": {
       "type": "lemoon-shop-by-shape",
       "blocks": {
-        "round": { "type": "shape", "settings": { "label": "Redondos", "shape": "round", "link": "/collections/opticos/redondo" } },
-        "rectangle": { "type": "shape", "settings": { "label": "Rectangulares", "shape": "rectangle", "link": "/collections/opticos/rectangular" } },
-        "cat_eye": { "type": "shape", "settings": { "label": "Ojo de gato", "shape": "cat_eye", "link": "/collections/opticos/ojo-de-gato" } },
-        "aviator": { "type": "shape", "settings": { "label": "Aviador", "shape": "aviator", "link": "/collections/opticos/aviador" } },
-        "square": { "type": "shape", "settings": { "label": "Cuadrados", "shape": "square", "link": "/collections/opticos/cuadrado" } },
-        "oval": { "type": "shape", "settings": { "label": "Ovalados", "shape": "oval", "link": "/collections/opticos/ovalado" } },
-        "geometric": { "type": "shape", "settings": { "label": "Geométricos", "shape": "geometric", "link": "/collections/opticos/geometrico" } },
-        "browline": { "type": "shape", "settings": { "label": "Línea de cejas", "shape": "browline", "link": "/collections/opticos/browline" } },
-        "butterfly": { "type": "shape", "settings": { "label": "Mariposa", "shape": "butterfly", "link": "/collections/opticos/mariposa" } }
+        "round": { "type": "shape", "settings": { "label": "Redondos", "shape": "round", "link": "/collections/opticos?filter.p.m.custom.frame_shape=redondo" } },
+        "rectangle": { "type": "shape", "settings": { "label": "Rectangulares", "shape": "rectangle", "link": "/collections/opticos?filter.p.m.custom.frame_shape=rectangular" } },
+        "cat_eye": { "type": "shape", "settings": { "label": "Ojo de gato", "shape": "cat_eye", "link": "/collections/opticos?filter.p.m.custom.frame_shape=ojo+de+gato" } },
+        "aviator": { "type": "shape", "settings": { "label": "Aviador", "shape": "aviator", "link": "/collections/opticos?filter.p.m.custom.frame_shape=aviador" } },
+        "square": { "type": "shape", "settings": { "label": "Cuadrados", "shape": "square", "link": "/collections/opticos?filter.p.m.custom.frame_shape=cuadrado" } },
+        "oval": { "type": "shape", "settings": { "label": "Ovalados", "shape": "oval", "link": "/collections/opticos?filter.p.m.custom.frame_shape=ovalado" } },
+        "geometric": { "type": "shape", "settings": { "label": "Geométricos", "shape": "geometric", "link": "/collections/opticos?filter.p.m.custom.frame_shape=geom%C3%A9trico" } },
+        "browline": { "type": "shape", "settings": { "label": "Línea de cejas", "shape": "browline", "link": "/collections/opticos?filter.p.m.custom.frame_shape=browline" } },
+        "butterfly": { "type": "shape", "settings": { "label": "Mariposa", "shape": "butterfly", "link": "/collections/opticos?filter.p.m.custom.frame_shape=mariposa" } }
       },
       "block_order": ["round", "rectangle", "square", "cat_eye", "oval", "browline", "geometric", "butterfly", "aviator"],
-      "settings": { "heading": "Compra por forma", "description": "Descubre armazones versátiles para cada look, ánimo y momento.", "button_label": "Ver todo", "button_link": "/collections/all" }
+      "settings": { "heading": "Elige tu estilo", "description": "Descubre armazones versátiles para cada look, ánimo y momento.", "button_label": "Ver todo", "button_link": "/collections/all" }
     },
     "lemoon_about": {
       "type": "lemoon-about",
@@ -286,21 +286,21 @@
           "type": "step",
           "settings": {
             "heading": "Elige tu armazón",
-            "text": "Encuentra el armazón que va contigo."
+            "text": "Explora formas, colores y medidas para encontrar un armazón que se sienta bien en tu rostro.", "icon": "frame", "detail": "Forma · Color · Ajuste"
           }
         },
         "configure": {
           "type": "step",
           "settings": {
             "heading": "Configura tus lentes",
-            "text": "Elige los cristales que necesitas."
+            "text": "Elige los cristales según tu receta y el uso que les darás: lectura, pantallas o todos los días.", "icon": "prescription", "detail": "Tu receta, tu día a día"
           }
         },
         "receive": {
           "type": "step",
           "settings": {
             "heading": "Recíbelos en casa",
-            "text": "Te los enviamos a cualquier lugar de Chile."
+            "text": "Completa tu pedido y selecciona la dirección donde quieres recibir tus nuevos lentes.", "icon": "delivery", "detail": "Despachos a todo Chile"
           }
         }
       },
@@ -315,7 +315,7 @@
         "accessories": { "type": "mood", "settings": { "heading": "Accesorios", "link": "/collections/accesorios" } }
       },
       "block_order": ["optical", "sun", "accessories"],
-      "settings": { "heading": "Compra por categoría", "description": "" }
+      "settings": { "heading": "Categorías", "description": "" }
     },
     "collage_1": {
       "disabled": true,

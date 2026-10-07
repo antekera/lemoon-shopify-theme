@@ -7,6 +7,7 @@
   - enable_sorting: {Boolean} Show sorting when true
   - filter_type: {String} Type of filter
   - paginate: {Object}
+  - lemoon_plp: {Boolean} Collection toolbar supplies count and sorting
 
   Usage:
   {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, filter_type: 'vertical', paginate: paginate %}
@@ -20,8 +21,28 @@
   assign sort_by = results.sort_by | default: results.default_sort_by
   assign total_active_values = 0
   assign default_presentation = 'text'
+  assign render_filters = results.filters
+  if lemoon_plp
+    assign gender_filters = results.filters | where: 'param_name', 'filter.p.m.custom.gender'
+    assign price_filters = results.filters | where: 'type', 'price_range'
+    assign render_filters = gender_filters | concat: price_filters
+    assign ordered_params = 'filter.p.m.custom.frame_shape,filter.v.option.color,filter.p.m.custom.prescription_type,filter.p.m.custom.frame_material,filter.p.m.custom.frame_size' | split: ','
+    for filter_param in ordered_params
+      assign matching_filters = results.filters | where: 'param_name', filter_param
+      assign render_filters = render_filters | concat: matching_filters
+    endfor
+    for remaining_filter in results.filters
+      unless remaining_filter.param_name == 'filter.p.m.custom.gender' or remaining_filter.type == 'price_range' or remaining_filter.param_name == 'filter.v.availability' or ordered_params contains remaining_filter.param_name
+        assign remaining_filters = results.filters | where: 'param_name', remaining_filter.param_name
+        assign render_filters = render_filters | concat: remaining_filters
+      endunless
+    endfor
+  endif
   if results.url
     assign results_url = results.url
+    if lemoon_plp
+      assign results_url = results_url | append: '?sort_by=' | append: sort_by
+    endif
   else
     assign terms = results.terms | escape
     assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
@@ -55,20 +76,20 @@
           >
             {%- if filter_type == 'horizontal' and results.filters != empty -%}
               <h2 class="facets__heading caption-large text-body" id="verticalTitle" tabindex="-1">
-                {{ 'products.facets.filter_by_label' | t }}
+                {% if lemoon_plp %}{{ 'lemoon.collection.filters_title' | t }}{% else %}{{ 'products.facets.filter_by_label' | t }}{% endif %}
               </h2>
             {%- endif -%}
             {% comment %} Pills are right below the title for filter type vertical {% endcomment %}
             {%- if filter_type == 'vertical' -%}
               <div class="active-facets active-facets-desktop">
                 <div class="active-facets-vertical-filter">
-                  {%- unless results.filters == empty -%}
+                  {%- unless results.filters == empty or lemoon_plp -%}
                     <h2
                       class="facets__heading facets__heading--vertical caption-large text-body"
                       id="verticalTitle"
                       tabindex="-1"
                     >
-                      {{ 'products.facets.filter_by_label' | t }}
+                      {% if lemoon_plp %}{{ 'lemoon.collection.filters_title' | t }}{% else %}{{ 'products.facets.filter_by_label' | t }}{% endif %}
                     </h2>
                   {%- endunless -%}
                   <facet-remove class="active-facets__button-wrapper">
@@ -77,12 +98,22 @@
                     </a>
                   </facet-remove>
                 </div>
-                {%- for filter in results.filters -%}
+                {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
                   {%- for value in filter.active_values -%}
                     <facet-remove>
                       <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
                         <span class="active-facets__button-inner button button--tertiary">
-                          {{ filter.label | escape }}: {{ value.label | escape }}
+                          {{ filter_label | escape }}: {{ value.label | escape }}
                           <span class="svg-wrapper">
                             {{- 'icon-close-small.svg' | inline_asset_content -}}
                           </span>
@@ -114,10 +145,23 @@
 
             <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
             {% comment %} Filters for both horizontal and vertical filter {% endcomment %}
-            {%- for filter in results.filters -%}
+            {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
               {% liquid
                 assign total_active_values = total_active_values | plus: filter.active_values.size
                 assign presentation = filter.presentation | default: default_presentation
+                    if lemoon_plp
+                      assign presentation = 'text'
+                    endif
 
                 if presentation == 'image'
                   assign show_more_number = 12
@@ -134,17 +178,17 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {% if filter_type == 'vertical' and forloop.index == 1 %}
+                    {% if lemoon_plp or filter_type == 'vertical' and forloop.index == 1 %}
                       open
                     {% endif %}
                   >
                     <summary
                       class="facets__summary caption-large focus-offset"
-                      aria-label="{{ filter.label | escape }} ({{ 'products.facets.filters_selected.one' | t: count: filter.active_values.size }})"
+                      aria-label="{{ filter_label | escape }} ({{ 'products.facets.filters_selected.one' | t: count: filter.active_values.size }})"
                     >
                       <div>
                         <span class="facets__summary-label">
-                          {{- filter.label | escape }}
+                          {{- filter_label | escape }}
                           {%- if filter_type == 'vertical' -%}
                             <span class="facets__selected{% if filter.active_values.size == 0 %} hidden{% endif %}">
                               ({{ filter.active_values.size }})</span
@@ -183,7 +227,7 @@
                         </div>
                       {%- endif -%}
                       <fieldset class="facets-wrap parent-wrap {% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}">
-                        <legend class="visually-hidden">{{ filter.label | escape }}</legend>
+                        <legend class="visually-hidden">{{ filter_label | escape }}</legend>
                         {%- liquid
                           assign sorted_values = filter.values
                           # Keep the selected values grouped together when operator is AND
@@ -211,7 +255,7 @@
 
                             {%- capture text_value -%}
                               <span class="facet-checkbox__text" aria-hidden="true">
-                                <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
+                                <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> <span class="lemoon-facet-count">({{- value.count -}})</span>
                               </span>
                               <span class="visually-hidden">
                                 {{- value.label | escape }} (
@@ -275,6 +319,7 @@
                                     </div>
                                   {%- endif -%}
 
+                                  {% if lemoon_plp %}{% render 'lemoon-facet-visual', filter: filter, value: value %}{% endif %}
                                   {{ text_value }}
                                 </label>
                               {%- endif -%}
@@ -305,13 +350,13 @@
                     id="Details-{{ filter.param_name | escape }}-{{ section.id }}"
                     class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter"
                     data-index="{{ forloop.index }}"
-                    {% if filter_type == 'vertical' and forloop.index == 1 %}
+                    {% if lemoon_plp or filter_type == 'vertical' and forloop.index == 1 %}
                       open
                     {% endif %}
                   >
                     <summary class="facets__summary caption-large focus-offset">
                       <div>
-                        <span>{{ filter.label | escape }}</span>
+                        <span>{{ filter_label | escape }}</span>
                         {{- 'icon-caret.svg' | inline_asset_content -}}
                       </div>
                     </summary>
@@ -319,21 +364,21 @@
                       id="Facet-{{ forloop.index }}-{{ section.id }}"
                       class="{% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}"
                     >
-                      <div class="{% if filter_type == 'horizontal' %}facets__header{% else %}facets__header-vertical{% endif %}">
-                        {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
-                        <span class="facets__selected">
-                          {{- 'products.facets.max_price' | t: price: max_price_amount -}}
-                        </span>
-                        {%- if filter_type != 'vertical' -%}
+                      {%- if filter_type != 'vertical' -%}
+                      <div class="facets__header">
                           <facet-remove>
                             <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
                               {{ 'products.facets.reset' | t }}
                             </a>
                           </facet-remove>
-                        {%- endif -%}
                       </div>
-                      <price-range class="facets__price">
+                      {%- endif -%}
+                      <price-range class="facets__price{% if lemoon_plp %} lemoon-price-slider{% endif %}"{% if lemoon_plp %} data-price-slider data-currency="{{ cart.currency.iso_code }}"{% endif %}>
+                        {% if lemoon_plp %}
+                          {% render 'lemoon-price-slider', filter: filter, id_prefix: 'Filter-' %}
+                        {% else %}
                         {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type %}
+                        {% endif %}
                       </price-range>
                     </div>
                   </details>
@@ -343,12 +388,22 @@
           {% comment %} Pills after filtes on filter type horizontal {% endcomment %}
           {%- if filter_type == 'horizontal' -%}
             <div class="active-facets active-facets-desktop">
-              {%- for filter in results.filters -%}
+              {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
                 {%- for value in filter.active_values -%}
                   <facet-remove>
                     <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
                       <span class="active-facets__button-inner button button--tertiary">
-                        {{ filter.label | escape }}: {{ value.label | escape }}
+                        {{ filter_label | escape }}: {{ value.label | escape }}
                         <span class="svg-wrapper">
                           {{- 'icon-close-small.svg' | inline_asset_content -}}
                         </span>
@@ -449,13 +504,15 @@
     data-breakpoint="mobile"
   >
     <details class="mobile-facets__disclosure disclosure-has-popup">
-      <summary class="mobile-facets__open-wrapper focus-offset">
+      <summary class="mobile-facets__open-wrapper focus-offset"{% if lemoon_plp %} role="button" aria-expanded="false" aria-controls="FacetFiltersFormMobile" aria-label="{{ 'products.facets.filter_button' | t | escape }}"{% endif %}>
         <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} medium-hide large-up-hide{% endif %}">
           <span class="svg-wrapper">
             {{- 'icon-filter.svg' | inline_asset_content -}}
           </span>
           <span class="mobile-facets__open-label button-label medium-hide large-up-hide">
-            {%- if enable_filtering and enable_sorting -%}
+            {%- if lemoon_plp -%}
+              {{ 'lemoon.collection.filters' | t }}
+            {%- elsif enable_filtering and enable_sorting -%}
               {{ 'products.facets.filter_and_sort' | t }}
             {%- elsif enable_filtering -%}
               {{ 'products.facets.filter_button' | t }}
@@ -468,6 +525,7 @@
               {{ 'products.facets.filter_button' | t }}
             {%- endif -%}
           </span>
+          {% if lemoon_plp %}<span class="lemoon-filter-count" data-applied-filter-count hidden></span>{% endif %}
         </span>
         <span tabindex="0" class="mobile-facets__close">
           <span class="svg-wrapper">
@@ -477,6 +535,7 @@
       </summary>
       <facet-filters-form>
         <form id="FacetFiltersFormMobile" class="mobile-facets">
+          {% if lemoon_plp %}<input type="hidden" name="sort_by" value="{{ sort_by }}">{% endif %}
           <div class="mobile-facets__inner gradient">
             <div class="mobile-facets__header">
               <div class="mobile-facets__header-inner">
@@ -494,6 +553,7 @@
                     {{ 'products.facets.filter_button' | t }}
                   {%- endif -%}
                 </h2>
+                {% unless lemoon_plp %}
                 <p class="mobile-facets__count">
                   {%- if results.results_count -%}
                     {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
@@ -506,16 +566,30 @@
                     }}
                   {%- endif -%}
                 </p>
+                {% endunless %}
               </div>
             </div>
             <div
               id="FacetsWrapperMobile"
-              class="mobile-facets__main has-submenu gradient"
+              class="mobile-facets__main{% unless lemoon_plp %} has-submenu{% endunless %} gradient"
             >
               {%- if enable_filtering -%}
-                {%- for filter in results.filters -%}
+                {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
                   {% liquid
                     assign presentation = filter.presentation | default: default_presentation
+                    if lemoon_plp
+                      assign presentation = 'text'
+                    endif
                     if presentation == 'image'
                       assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
                     else
@@ -528,33 +602,40 @@
                       <details
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
                         class="mobile-facets__details js-filter"
+                        {% if lemoon_plp %}data-facet-accordion open{% endif %}
                         data-index="mobile-{{ forloop.index }}"
                       >
                         <summary class="mobile-facets__summary focus-inset">
                           <div>
-                            <span>{{ filter.label | escape }}</span>
+                            <span>{{ filter_label | escape }}</span>
                             <span class="mobile-facets__arrow">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% if lemoon_plp %}
+                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                              {% else %}
+                                {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% endif %}
                             </span>
                           </div>
                         </summary>
                         <div
                           id="FacetMobile-{{ forloop.index }}-{{ section.id }}"
-                          class="mobile-facets__submenu gradient"
+                          class="{% if lemoon_plp %}lemoon-plp-accordion-content{% else %}mobile-facets__submenu gradient{% endif %}"
                         >
+                          {% unless lemoon_plp %}
                           <button
                             class="mobile-facets__close-button link link--text focus-inset"
                             aria-expanded="true"
                             type="button"
                           >
                             {{- 'icon-arrow.svg' | inline_asset_content -}}
-                            <span>{{ filter.label | escape }}</span>
+                            <span>{{ filter_label | escape }}</span>
                             {%- if filter.operator == 'AND' -%}
                               <span class="facets__and-helptext">
                                 {{ 'products.facets.filter_and_operator_subtitle' | t }}
                               </span>
                             {%- endif -%}
                           </button>
+                          {% endunless %}
                           <ul class="{{ visual_layout_class }} mobile-facets__list list-unstyled" role="list">
                             {%- liquid
                               assign sorted_values = filter.values
@@ -580,7 +661,7 @@
 
                               {%- capture text_value -%}
                                 <span class="facet-checkbox__text" aria-hidden="true">
-                                  <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> ({{- value.count -}})
+                                  <span class="facet-checkbox__text-label">{{- value.label | escape }}</span> <span class="lemoon-facet-count">({{- value.count -}})</span>
                                 </span>
                                 <span class="visually-hidden">
                                   {{- value.label | escape }} (
@@ -643,6 +724,7 @@
                                       {{- 'icon-checkmark.svg' | inline_asset_content -}}
                                     {%- endif %}
 
+                                    {% if lemoon_plp %}{% render 'lemoon-facet-visual', filter: filter, value: value %}{% endif %}
                                     {{ text_value }}
                                   </label>
                                 {% endif %}
@@ -650,6 +732,7 @@
                             {%- endfor -%}
                           </ul>
 
+                          {% unless lemoon_plp %}
                           <div class="mobile-facets__footer gradient">
                             <facet-remove class="mobile-facets__clear-wrapper">
                               <a href="{{ filter.url_to_remove }}" class="mobile-facets__clear underlined-link">
@@ -664,43 +747,51 @@
                               {{ 'products.facets.apply' | t }}
                             </button>
                           </div>
+                          {% endunless %}
                         </div>
                       </details>
                     {% when 'price_range' %}
                       <details
                         id="Details-Mobile-{{ filter.param_name | escape }}-{{ section.id }}"
                         class="mobile-facets__details js-filter"
+                        {% if lemoon_plp %}data-facet-accordion open{% endif %}
                         data-index="mobile-{{ forloop.index }}"
                       >
                         <summary class="mobile-facets__summary focus-inset">
                           <div>
-                            <span>{{ filter.label | escape }}</span>
+                            <span>{{ filter_label | escape }}</span>
                             <span class="mobile-facets__arrow">
-                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% if lemoon_plp %}
+                                {{- 'icon-caret.svg' | inline_asset_content -}}
+                              {% else %}
+                                {{- 'icon-arrow.svg' | inline_asset_content -}}
+                              {% endif %}
                             </span>
                           </div>
                         </summary>
                         <div
                           id="FacetMobile-{{ forloop.index }}-{{ section.id }}"
-                          class="mobile-facets__submenu gradient"
+                          class="{% if lemoon_plp %}lemoon-plp-accordion-content{% else %}mobile-facets__submenu gradient{% endif %}"
                         >
+                          {% unless lemoon_plp %}
                           <button
                             class="mobile-facets__close-button link link--text focus-inset"
                             aria-expanded="true"
                             type="button"
                           >
                             {{- 'icon-arrow.svg' | inline_asset_content -}}
-                            {{ filter.label | escape }}
+                            {{ filter_label | escape }}
                           </button>
+                          {% endunless %}
 
-                          {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
-                          <p class="mobile-facets__info">
-                            {{ 'products.facets.max_price' | t: price: max_price_amount }}
-                          </p>
-
-                          <price-range class="facets__price">
+                          <price-range class="facets__price{% if lemoon_plp %} lemoon-price-slider{% endif %}"{% if lemoon_plp %} data-price-slider data-currency="{{ cart.currency.iso_code }}"{% endif %}>
+                            {% if lemoon_plp %}
+                              {% render 'lemoon-price-slider', filter: filter, id_prefix: 'Mobile-Filter-' %}
+                            {% else %}
                             {% render 'price-facet', filter: filter, id_prefix: 'Mobile-Filter-' %}
+                            {% endif %}
                           </price-range>
+                          {% unless lemoon_plp %}
                           <div class="mobile-facets__footer">
                             <facet-remove class="mobile-facets__clear-wrapper">
                               <a href="{{ filter.url_to_remove }}" class="mobile-facets__clear underlined-link">
@@ -715,6 +806,7 @@
                               {{ 'products.facets.apply' | t }}
                             </button>
                           </div>
+                          {% endunless %}
                         </div>
                       </details>
                   {% endcase %}
@@ -759,16 +851,12 @@
 
               <div class="mobile-facets__footer">
                 <facet-remove class="mobile-facets__clear-wrapper">
-                  <a href="{{ results_url }}" class="mobile-facets__clear underlined-link">
-                    {{- 'products.facets.clear_all' | t -}}
+                  <a href="{{ results_url }}" class="{% if lemoon_plp %}button button--secondary{% else %}mobile-facets__clear underlined-link{% endif %}">
+                    {% if lemoon_plp %}{{ 'lemoon.collection.reset' | t }}{% else %}{{ 'products.facets.clear_all' | t }}{% endif %}
                   </a>
                 </facet-remove>
-                <button
-                  type="button"
-                  class="button button--primary"
-                  onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
-                >
-                  {{ 'products.facets.apply' | t }}
+                <button type="button" class="button button--primary" {% if lemoon_plp %}data-view-results data-label="{{ 'lemoon.collection.view_results' | t: count: '__COUNT__' | escape }}"{% endif %} onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+                  {% if lemoon_plp %}{{ 'lemoon.collection.view_results' | t: count: results.products_count }}{% else %}{{ 'products.facets.apply' | t }}{% endif %}
                 </button>
               </div>
             </div>
@@ -788,12 +876,22 @@
   </menu-drawer>
 
   <div class="active-facets active-facets-mobile medium-hide large-up-hide">
-    {%- for filter in results.filters -%}
+    {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
       {%- for value in filter.active_values -%}
         <facet-remove>
           <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
             <span class="active-facets__button-inner button button--tertiary">
-              {{ filter.label | escape }}: {{ value.label | escape }}
+              {{ filter_label | escape }}: {{ value.label | escape }}
               <span class="svg-wrapper">
                 {{- 'icon-close-small.svg' | inline_asset_content -}}
               </span>
@@ -873,6 +971,7 @@
       </form>
     </facet-filters-form>
   {%- endif -%}
+  {% unless lemoon_plp %}
   <div
     class="product-count light{% if filter_type == 'vertical' or filter_type == 'horizontal' %} medium-hide large-up-hide{% endif %}"
     role="status"
@@ -897,16 +996,27 @@
     </h2>
     {%- render 'loading-spinner' -%}
   </div>
+  {% endunless %}
   {%- if filter_type == 'drawer' -%}
     <facet-filters-form class="facets facets-pill small-hide">
       <form id="FacetFiltersPillsForm" class="facets__form">
         <div class="active-facets active-facets-desktop">
-          {%- for filter in results.filters -%}
+          {%- for filter in render_filters -%}
+                  {%- liquid
+                    assign filter_label = filter.label
+                    if lemoon_plp
+                      if filter.type == 'price_range'
+                        assign filter_label = 'lemoon.collection.filter_price' | t
+                      elsif filter.param_name == 'filter.v.availability'
+                        assign filter_label = 'lemoon.collection.filter_availability' | t
+                      endif
+                    endif
+                  -%}
             {%- for value in filter.active_values -%}
               <facet-remove>
                 <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
                   <span class="active-facets__button-inner button button--tertiary">
-                    {{ filter.label | escape }}: {{ value.label | escape }}
+                    {{ filter_label | escape }}: {{ value.label | escape }}
                     <span class="svg-wrapper">
                       {{- 'icon-close-small.svg' | inline_asset_content -}}
                     </span>

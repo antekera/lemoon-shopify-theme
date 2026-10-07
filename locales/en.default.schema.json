@@ -3397,5 +3397,6 @@
         }
       }
     }
-  }
+  },
+  "lemoon": { "collection": { "demo_content": "Show sample content when merchant content is empty" } }
 }

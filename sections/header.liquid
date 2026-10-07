@@ -1,4 +1,5 @@
 {{ 'lemoon-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lemoon-header-nav.js' | asset_url }}" defer="defer"></script>
 {{ 'lemoon-mobile-search.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -11,33 +12,33 @@
   assign show_account = shop.customer_accounts_enabled
 -%}
 
+    {%- capture quick_links -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'drawer_primary' and block.settings.link != blank -%}
+          {%- if block.settings.slot == 'opticos' or block.settings.slot == 'sol' or block.settings.slot == 'cristales' or block.settings.slot == 'accesorios' -%}
+            <a class="lemoon-header__quick-link" href="{{ block.settings.link }}"{% if request.path == block.settings.link %} aria-current="page"{% endif %}>{{ block.settings.title | escape }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
 <sticky-header
   data-sticky-type="always"
-  class="lemoon-header-wrapper"
+  class="lemoon-header-wrapper{% if request.page_type == 'index' %} lemoon-header-wrapper--home{% else %} lemoon-header-wrapper--divider{% endif %}"
   style="
     --lemoon-header-background: #FFFFFF;
     --lemoon-header-text: #0B1F3A;
     --lemoon-header-accent: #F7E600;
     --lemoon-header-border: #E0DDD8;
-    --lemoon-header-height: 88px;
+    --lemoon-header-height: 72px;
     --lemoon-header-mobile-height: 56px;
-    --lemoon-header-padding: 40px;
+    --lemoon-header-padding: 32px;
     --lemoon-header-nav-size: 15px;
-    --lemoon-header-max-width: 1280px;
+    --lemoon-header-max-width: 2200px;
   "
 >
   <header class="lemoon-header" role="banner" data-lemoon-search-header>
     <div class="lemoon-header__desktop">
-      <div class="lemoon-header__leading-actions">
-        <button type="button" class="lemoon-header__menu-btn" id="lemoon-nav-open-desktop" data-lemoon-nav-open data-nav-open-label="{{ 'sections.header.menu' | t | escape }}" data-nav-close-label="{{ 'sections.header.close_menu' | t | escape }}" data-nav-back-label="{{ 'sections.header.back_to_menu' | t | escape }}" aria-label="{{ 'sections.header.menu' | t }}" aria-controls="lemoon-mobile-nav" aria-expanded="false">
-          <span data-nav-icon="menu">{% render 'lemoon-icon', icon: 'menu', size: 24 %}</span>
-          <span data-nav-icon="close">{% render 'lemoon-icon', icon: 'x', size: 24 %}</span>
-          <span data-nav-icon="back">{% render 'lemoon-icon', icon: 'chevron-left', size: 24 %}</span>
-        </button>
-        <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
-          {% render 'lemoon-icon', icon: 'search', size: 24 %}
-        </button>
-      </div>
       <a class="lemoon-header__brand" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
         <img
           src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}"
@@ -49,7 +50,27 @@
         >
       </a>
 
+      {%- if quick_links != blank or section.settings.menu != blank -%}
+      <nav class="lemoon-header__quick-nav lemoon-header__quick-nav--desktop" aria-label="{{ 'sections.header.quick_categories' | t }}">
+        {%- if quick_links != blank -%}
+          {{ quick_links }}
+        {%- else -%}
+          {%- for link in section.settings.menu.links limit: 4 -%}
+            <a class="lemoon-header__quick-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </nav>
+      {%- endif -%}
+
       <div class="lemoon-header__actions">
+        <button type="button" class="lemoon-search-open" data-lemoon-search-open aria-label="{{ 'sections.mobile_search.open' | t }}" aria-controls="Lemoon-Mobile-Search-{{ section.id }}" aria-expanded="false" aria-haspopup="dialog">
+          {% render 'lemoon-icon', icon: 'search', size: 24 %}
+        </button>
+        {%- if show_account -%}
+          <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
+            {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+          </a>
+        {%- endif -%}
         <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" aria-label="{{ 'templates.cart.cart' | t }}">
           {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
           {%- if cart.item_count > 0 -%}
@@ -57,11 +78,6 @@
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           {%- endif -%}
         </a>
-        {%- if show_account -%}
-          <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
-            {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
-          </a>
-        {%- endif -%}
         {%- for block in section.blocks -%}
           {%- if block.type == '@app' -%}{% render block %}{%- endif -%}
         {%- endfor -%}
@@ -91,6 +107,11 @@
           >
         </a>
         <div class="lemoon-header__mobile-actions">
+          {%- if show_account -%}
+            <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
+              {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
+            </a>
+          {%- endif -%}
           <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble-mobile" aria-label="{{ 'templates.cart.cart' | t }}">
             {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
             {%- if cart.item_count > 0 -%}
@@ -98,22 +119,19 @@
               <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
             {%- endif -%}
           </a>
-          {%- if show_account -%}
-            <a class="lemoon-header__action" href="{{ routes.account_profile_url }}" aria-label="{{ 'customer.account.title' | t }}">
-              {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
-            </a>
-          {%- endif -%}
         </div>
       </div>
     </div>
 
-    {%- if section.settings.menu != blank -%}
-      <nav class="lemoon-header__quick-nav" aria-label="{{ 'sections.header.quick_categories' | t }}">
-        {%- for link in section.settings.menu.links limit: 4 -%}
-          <a class="lemoon-header__quick-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>
-            {{ link.title | escape }}
-          </a>
-        {%- endfor -%}
+    {%- if quick_links != blank or section.settings.menu != blank -%}
+      <nav class="lemoon-header__quick-nav lemoon-header__quick-nav--mobile" aria-label="{{ 'sections.header.quick_categories' | t }}">
+        {%- if quick_links != blank -%}
+          {{ quick_links }}
+        {%- else -%}
+          {%- for link in section.settings.menu.links limit: 4 -%}
+            <a class="lemoon-header__quick-link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- endif -%}
       </nav>
     {%- endif -%}
   </header>
@@ -131,6 +149,11 @@
         this.setHeaderHeight = this.setHeaderHeight.bind(this);
         this.onScroll = this.onScroll.bind(this);
         this.setHeaderHeight();
+        if (this.classList.contains('lemoon-header-wrapper--home')) {
+          this.syncHomeDivider = () => this.classList.toggle('lemoon-header-wrapper--scrolled', window.scrollY > 0);
+          this.syncHomeDivider();
+          window.addEventListener('scroll', this.syncHomeDivider, { passive: true });
+        }
         window.addEventListener('resize', this.setHeaderHeight);
         if (this.stickyType === 'always') {
           this.section.classList.add('shopify-section-header-sticky');
@@ -141,6 +164,7 @@
       disconnectedCallback() {
         window.removeEventListener('resize', this.setHeaderHeight);
         window.removeEventListener('scroll', this.onScroll);
+        if (this.syncHomeDivider) window.removeEventListener('scroll', this.syncHomeDivider);
       }
       setHeaderHeight() {
         document.documentElement.style.setProperty('--header-height', String(this.offsetHeight) + 'px');

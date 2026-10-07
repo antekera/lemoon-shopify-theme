@@ -38,16 +38,16 @@
 
 ### Tipografía
 
-Tipografía dual: **Urbanist** (Google Fonts) para display, headings, CTAs y wordmark; **Source Sans 3** (Google Fonts) para cuerpo, labels y captions, por su legibilidad humanista en UI.
+Tipografía dual: **Urbanist** (Google Fonts) para display, headings, CTAs y wordmark; **Hanken Grotesk** (Google Fonts) para cuerpo, labels y captions, por su carácter grotesco neutro y su legibilidad en UI.
 
 | Rol             | Familia  | Peso | Notas                                 |
 | --------------- | -------- | ---- | ------------------------------------- |
 | Display / Hero  | Urbanist | 300  | Headlines grandes y ligeros           |
 | Heading H1–H2   | Urbanist | 600  | Títulos de página y sección           |
 | Heading H3      | Urbanist | 500  | Subtítulos y tarjetas                 |
-| Body            | Source Sans 3 | 400  | Cuerpo de texto y descripciones       |
+| Body            | Hanken Grotesk | 400  | Cuerpo de texto y descripciones       |
 | CTA / Button    | Urbanist | 600  | Uppercase, subtle letter-spacing (0.02em) |
-| Caption / Label | Source Sans 3 | 400  | Tamaño reducido, texto secundario     |
+| Caption / Label | Hanken Grotesk | 400  | Tamaño reducido, texto secundario     |
 
 ### Espaciado y grid
 

@@ -142,7 +142,7 @@
   width: 0;
 }
 
-.lemoon-mobile-search__input::placeholder { color: #596575; opacity: 1; }
+.lemoon-mobile-search__input::placeholder { color: var(--lemoon-text-secondary); opacity: 1; }
 .lemoon-mobile-search__input:focus,
 .lemoon-mobile-search__input:focus-visible { border-color: #0b1f3a; box-shadow: none; outline: none; }
 .lemoon-mobile-search__submit { background: #f7e600; border-radius: 12px; height: 48px; width: 48px; }
@@ -218,6 +218,17 @@
   .lemoon-mobile-search__left-column,
   .lemoon-mobile-search__right-column {
     min-width: 0;
+  }
+
+  .lemoon-mobile-search__slide {
+    flex-basis: clamp(180px, 18vw, 220px);
+  }
+
+  .lemoon-mobile-search__suggestions,
+  .lemoon-mobile-search__information,
+  .lemoon-mobile-search__trends {
+    border-top: 0;
+    padding-top: 0;
   }
 
   .lemoon-mobile-search__suggestions,

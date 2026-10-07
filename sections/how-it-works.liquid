@@ -6,9 +6,17 @@
     <div class="lemoon-how-it-works__steps">
       {%- for block in section.blocks -%}
         <article class="lemoon-how-it-works__step" {{ block.shopify_attributes }}>
-          <span class="lemoon-how-it-works__number" aria-hidden="true">0{{ forloop.index }}</span>
-          <h3>{{ block.settings.heading | escape }}</h3>
-          <p>{{ block.settings.text | escape }}</p>
+          <div class="lemoon-how-it-works__visual" aria-hidden="true">
+            <span class="lemoon-how-it-works__number">0{{ forloop.index }}</span>
+            {% assign step_icon = block.settings.icon %}
+            {% if step_icon == blank or step_icon == 'auto' %}{% case forloop.index %}{% when 1 %}{% assign step_icon = 'frame' %}{% when 2 %}{% assign step_icon = 'prescription' %}{% else %}{% assign step_icon = 'delivery' %}{% endcase %}{% endif %}
+            {% render 'lemoon-purchase-step-icon', icon: step_icon %}
+          </div>
+          <div class="lemoon-how-it-works__copy">
+            <h3>{{ block.settings.heading | escape }}</h3>
+            <p>{{ block.settings.text | escape }}</p>
+            {% if block.settings.detail != blank %}<span class="lemoon-how-it-works__detail">{{ block.settings.detail | escape }}</span>{% endif %}
+          </div>
         </article>
       {%- endfor -%}
     </div>
@@ -36,6 +44,8 @@
       "type": "step",
       "name": "Paso",
       "settings": [
+        { "type": "select", "id": "icon", "label": "Ilustración", "options": [{ "value": "auto", "label": "Según el paso" }, { "value": "frame", "label": "Armazón" }, { "value": "prescription", "label": "Receta y cristales" }, { "value": "delivery", "label": "Envío" }], "default": "auto" },
+        { "type": "text", "id": "detail", "label": "Detalle breve" },
         {
           "type": "text",
           "id": "heading",
@@ -61,6 +71,8 @@
           "type": "step",
           "settings": {
             "heading": "Configura tus lentes",
+            "icon": "prescription",
+            "detail": "Tu receta, tu día a día",
             "text": "Agrega cristales para tu receta y para la forma en que ves el mundo."
           }
         },
@@ -68,6 +80,8 @@
           "type": "step",
           "settings": {
             "heading": "Recíbelos en casa",
+            "icon": "delivery",
+            "detail": "Despachos a todo Chile",
             "text": "Despachamos a todo Chile para que tu nueva mirada llegue sin vueltas."
           }
         }

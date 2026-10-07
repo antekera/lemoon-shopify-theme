@@ -1,0 +1,17 @@
+{% doc %}
+  Prescription fields saved as Shopify line item properties.
+  @param {string} section_id - Unique form namespace.
+{% enddoc %}
+<div class="lemoon-pdp__rx-grid">
+  {% assign eyes = 'od,oi' | split: ',' %}
+  {% for eye in eyes %}
+    <fieldset><legend>{% if eye == 'od' %}{{ 'lemoon_pdp.right_eye' | t }}{% else %}{{ 'lemoon_pdp.left_eye' | t }}{% endif %}</legend>
+      <label for="{{ section_id }}-{{ eye }}-sph">{{ 'lemoon_pdp.sphere' | t }}<input id="{{ section_id }}-{{ eye }}-sph" type="number" inputmode="decimal" min="-20" max="10" step="0.25" data-rx="{{ eye }}_sph" name="properties[{{ eye | upcase }} Esfera]" disabled></label>
+      <label for="{{ section_id }}-{{ eye }}-cyl">{{ 'lemoon_pdp.cylinder' | t }}<input id="{{ section_id }}-{{ eye }}-cyl" type="number" inputmode="decimal" min="-6" max="6" step="0.25" data-rx="{{ eye }}_cyl" name="properties[{{ eye | upcase }} Cilindro]" disabled></label>
+      <label for="{{ section_id }}-{{ eye }}-axis">{{ 'lemoon_pdp.axis' | t }}<input id="{{ section_id }}-{{ eye }}-axis" type="number" inputmode="numeric" min="0" max="180" step="1" data-rx="{{ eye }}_axis" name="properties[{{ eye | upcase }} Eje]" disabled></label>
+      <label for="{{ section_id }}-{{ eye }}-add" data-addition hidden>{{ 'lemoon_pdp.addition' | t }}<input id="{{ section_id }}-{{ eye }}-add" type="number" inputmode="decimal" min="0.25" max="4" step="0.25" data-rx="{{ eye }}_add" name="properties[{{ eye | upcase }} Adición]" disabled></label>
+    </fieldset>
+  {% endfor %}
+</div>
+<label class="lemoon-pdp__pd" for="{{ section_id }}-pd">{{ 'lemoon_pdp.pd' | t }}<input id="{{ section_id }}-pd" type="number" inputmode="decimal" min="40" max="80" step="0.5" data-rx="pd" name="properties[Distancia pupilar (mm)]" disabled></label>
+<p class="lemoon-pdp__muted">{{ 'lemoon_pdp.rx_note' | t }}</p>

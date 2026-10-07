@@ -82,7 +82,7 @@ h3,
 button.shopify-payment-button__button--unbranded {
   min-height: var(--lemoon-size-control);
   padding: 0 var(--lemoon-space-5);
-  border-radius: var(--lemoon-radius-sm);
+  border-radius: var(--lemoon-radius-button);
   background: var(--lemoon-action-primary);
   color: var(--lemoon-text-inverse);
   font-family: var(--lemoon-font-heading);
@@ -233,6 +233,27 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .product-card-wrapper .card--card:after,
 .product-card-wrapper .card--standard .card__inner:after { display: none; }
 
+@media (min-width: 990px) {
+  .product-card-wrapper .card__inner {
+    aspect-ratio: 100 / 96;
+    max-height: 280px;
+  }
+  .product-card-wrapper .card__inner.ratio::before { padding-bottom: 0; }
+
+  .card-wrapper.product-card-wrapper:hover .card .media.media--hover-effect > img {
+    transform: none !important;
+    transition: opacity var(--lemoon-motion-base);
+  }
+}
+
+/* Keep the front image visible until the deferred hover image has loaded. */
+.card-wrapper.product-card-wrapper .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img:first-child {
+  opacity: 1;
+}
+.card-wrapper.product-card-wrapper .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img + img {
+  opacity: 0;
+}
+
 .product-card-wrapper .card__information {
   position: relative;
   display: grid;
@@ -343,7 +364,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   position: absolute;
   z-index: 1;
   inset: 0;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .lemoon-product-card__image-link:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: -4px; }
@@ -351,11 +373,18 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .product-card-wrapper .card__media,
 .product-card-wrapper .card__media .media {
   background: transparent;
+  cursor: pointer;
   border-radius: var(--lemoon-radius-md) !important;
 }
 
 .product-card-wrapper .card__inner {
   z-index: 1;
+  cursor: pointer;
+}
+
+/* Dawn's content layer covers the media, so it must use the link cursor too. */
+.product-card-wrapper .card__inner > .card__content {
+  cursor: pointer;
 }
 
 .product-card-wrapper .card__media .media > img {
@@ -429,8 +458,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   border: 1px solid var(--lemoon-border-warm);
   border-radius: var(--lemoon-radius-full);
   padding: 0;
@@ -482,7 +511,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 .lemoon-mood-grid {
-  padding-top: var(--lemoon-section-padding);
+  padding-top: 1.6rem;
   padding-bottom: var(--lemoon-section-padding);
 }
 
@@ -493,7 +522,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 .lemoon-mood-grid__items {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--lemoon-grid-gap-desktop);
   margin-top: var(--lemoon-space-8);
 }
@@ -501,15 +529,11 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-mood-grid__item {
   position: relative;
   display: flex;
-  min-height: 280px;
   align-items: end;
   overflow: hidden;
-  padding: var(--lemoon-space-6);
-  border-radius: var(--lemoon-radius-md);
   background: var(--lemoon-surface-warm);
   color: var(--lemoon-text-inverse);
   font-family: var(--lemoon-font-heading);
-  font-size: var(--lemoon-fs-20);
   font-weight: var(--lemoon-weight-semibold);
   text-decoration: none;
 }
@@ -517,7 +541,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-mood-grid__item::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(11, 31, 58, 0.52));
   content: '';
 }
 
@@ -604,56 +627,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   font-size: var(--lemoon-type-cta-size);
   font-weight: var(--lemoon-weight-semibold);
   text-decoration: none;
-}
-
-.lemoon-collection-hero {
-  min-height: 280px;
-  background: var(--lemoon-surface-inverse);
-  color: var(--lemoon-text-inverse);
-}
-
-.lemoon-collection-hero .collection-hero__inner {
-  display: flex;
-  min-height: 280px;
-  align-items: center;
-  padding-top: var(--lemoon-space-12);
-  padding-bottom: var(--lemoon-space-12);
-}
-
-.lemoon-collection-hero .collection-hero__text-wrapper {
-  max-width: 720px;
-}
-
-.lemoon-collection-hero__eyebrow {
-  margin: 0 0 var(--lemoon-space-3);
-  color: var(--lemoon-action-accent);
-  font-family: var(--lemoon-font-heading);
-  font-size: var(--lemoon-type-label-size);
-  font-weight: var(--lemoon-weight-medium);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.lemoon-collection-hero .collection-hero__title {
-  color: var(--lemoon-text-inverse);
-  font-size: 5.2rem;
-  font-weight: var(--lemoon-weight-light);
-  letter-spacing: -0.05rem;
-  line-height: 1.1;
-}
-
-.lemoon-collection-hero .collection-hero__description {
-  max-width: 520px;
-  color: var(--lemoon-text-inverse);
-  font-family: var(--lemoon-font-body);
-  font-size: var(--lemoon-type-body-size);
-}
-
-.lemoon-collection-hero .collection-hero__image-container {
-  align-self: stretch;
-  width: 360px;
-  margin: calc(var(--lemoon-space-12) * -1) 0 calc(var(--lemoon-space-12) * -1) auto;
-  background: var(--lemoon-surface-warm);
 }
 
 .lemoon-shape-filters {
@@ -1110,15 +1083,17 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-featured-products__item .card-wrapper { height: 100%; }
 
 .lemoon-shapes { padding-top: var(--lemoon-section-padding); padding-bottom: var(--lemoon-section-padding); }
-.lemoon-shapes__heading h2, .lemoon-shapes__heading p { margin: 0; }
-.lemoon-shapes__heading p { max-width: 58rem; margin-top: 1rem; color: var(--lemoon-text-secondary); }
-.lemoon-shapes__list { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: clamp(1.8rem, 2.5vw, 3.6rem); margin: 3.2rem 0; padding: 0; list-style: none; }
+.lemoon-shapes__heading { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.lemoon-shapes__heading h2 { margin: 0; }
+.lemoon-shapes__description { max-width: 58rem; margin: 1rem 0 0; color: var(--lemoon-text-secondary); }
+.lemoon-shapes__list { display: flex; flex-wrap: wrap; justify-content: center; --shape-columns: 9; --shape-gap: clamp(1.8rem, 2.5vw, 3.6rem); gap: var(--shape-gap); margin: 3.2rem 0; padding: 0; list-style: none; }
+.lemoon-shapes__list > li { flex: 0 0 calc((100% - (var(--shape-columns) - 1) * var(--shape-gap)) / var(--shape-columns)); min-width: 0; }
 .lemoon-shapes__item { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; color: var(--lemoon-text-brand); font-weight: 600; text-align: center; text-decoration: none; }
 .lemoon-shapes__icon { display: grid; width: min(100%, 9rem); aspect-ratio: 1; place-items: center; border-radius: 50%; background: #edece9; transition: background .2s ease; }
 .lemoon-shapes__item:hover .lemoon-shapes__icon { background: #deddd9; }
 .lemoon-shapes__icon .lemoon-frame-shape { width: 64%; height: auto; color: #41464c; }
-.lemoon-shapes__more { display: grid; width: 100%; min-height: 5rem; place-items: center; border: 1px solid var(--lemoon-text-brand); border-radius: 999px; color: var(--lemoon-text-brand); font-weight: 600; text-decoration: none; }
-.lemoon-shapes__more:hover { background: var(--lemoon-text-brand); color: #fff; }
+.lemoon-shapes__more { flex-shrink: 0; color: var(--lemoon-text-brand); font-weight: 600; }
+.lemoon-shapes__more:hover { color: var(--lemoon-text-secondary); }
 .lemoon-shapes a:focus-visible { outline: 3px solid var(--lemoon-action-accent); outline-offset: 3px; }
 
 .lemoon-mood-grid__description { margin: 1rem 0 0; color: var(--lemoon-text-secondary); }
@@ -1127,8 +1102,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-mood-grid__item::after { background: linear-gradient(180deg, transparent 54%, rgb(11 31 58 / 68%)); }
 .lemoon-mood-grid__item:first-child > img { object-position: center 20%; }
 
-.lemoon-about { margin: 1.6rem clamp(2.4rem, 6vw, 9rem) 5rem; padding: clamp(3.2rem, 4vw, 5.6rem) 0 clamp(5rem, 6vw, 8rem); border-radius: 2.4rem; background: #dfe9de; color: var(--lemoon-text-brand); }
-.lemoon-about__inner { display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); align-items: start; gap: clamp(3rem, 6vw, 10rem); }
+.lemoon-about { margin: 1.6rem auto 5rem; color: var(--lemoon-text-brand); }
+.lemoon-about__inner { padding: clamp(3.2rem, 4vw, 5.6rem) clamp(2.4rem, 4vw, 5.6rem) clamp(5rem, 6vw, 8rem); border-radius: 2.4rem; background: #dfe9de; display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); align-items: start; gap: clamp(3rem, 6vw, 10rem); }
 .lemoon-about h2 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--font-heading-family); font-size: clamp(2.8rem, 3vw, 3.6rem); font-weight: 600; line-height: 1.1; letter-spacing: normal; }
 .lemoon-about__text { max-width: 68rem; font-size: clamp(1.7rem, 1.7vw, 2.1rem); line-height: 1.55; }
 .lemoon-about__text p { margin: 0 0 1.8rem; }
@@ -1151,51 +1126,81 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-how-it-works__steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 4rem;
-  overflow: hidden;
-  border: 1px solid var(--lemoon-border-warm);
-  border-radius: 1.8rem;
-  background: #fff;
+  gap: 4rem;
+  margin-top: 3.6rem;
 }
-
-.lemoon-how-it-works__step {
-  display: grid;
-  align-content: start;
-  gap: 1.4rem;
-  min-height: 21rem;
-  padding: clamp(2.4rem, 3vw, 4rem);
+.lemoon-how-it-works__step { min-width: 0; }
+.lemoon-how-it-works__visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 21rem;
+  isolation: isolate;
+  border-bottom: 1px solid var(--lemoon-border-warm);
+  margin-bottom: 2.4rem;
+  color: var(--lemoon-text-brand);
 }
-.lemoon-how-it-works__step + .lemoon-how-it-works__step { border-left: 1px solid var(--lemoon-border-warm); }
-
-.lemoon-how-it-works__number {
-  display: grid;
-  width: 4.8rem;
-  height: 4.8rem;
-  place-items: center;
+.lemoon-how-it-works__visual::before,
+.lemoon-how-it-works__visual::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: -1;
+}
+.lemoon-how-it-works__visual::before {
+  width: 15rem;
+  height: 15rem;
   border-radius: 50%;
+  background: #e3e5d9;
+  transform: translate(2rem, -.8rem);
+}
+.lemoon-how-it-works__visual::after {
+  width: 5.4rem;
+  height: 5.4rem;
+  border-radius: 50% 50% 0 50%;
   background: var(--lemoon-action-accent);
+  right: 12%;
+  bottom: 2.6rem;
+  transform: rotate(-20deg);
+}
+.lemoon-how-it-works__step:nth-child(2) .lemoon-how-it-works__visual::before {
+  border-radius: 8rem 8rem 1.2rem 1.2rem;
+  background: #e5dfd3;
+  transform: translate(2rem, -.8rem) rotate(-9deg);
+}
+.lemoon-how-it-works__step:nth-child(2) .lemoon-how-it-works__visual::after {
+  border-radius: 50%;
+  background: #b7c8aa;
+  right: 14%;
+}
+.lemoon-how-it-works__step:nth-child(3) .lemoon-how-it-works__visual::before {
+  border-radius: 2rem 7rem 2rem 7rem;
+  background: #e8e1ca;
+  transform: translate(2rem, -.8rem) rotate(9deg);
+}
+.lemoon-how-it-works__step:nth-child(3) .lemoon-how-it-works__visual::after {
+  border-radius: 50% 0 50% 50%;
+  background: #b7c8aa;
+}
+.lemoon-purchase-step-icon { width: 18rem; height: 12.4rem; margin-left: 4rem; }
+.lemoon-how-it-works__number {
+  position: absolute;
+  left: 0;
+  top: 1rem;
   color: var(--lemoon-text-brand);
   font-family: var(--lemoon-font-heading);
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: var(--lemoon-type-display-tracking);
+  font-size: 4.8rem;
   line-height: 1;
+  font-weight: 600;
+  letter-spacing: -.04em;
 }
-
-.lemoon-how-it-works__step h3,
-.lemoon-how-it-works__step p {
-  margin: 0;
-}
-.lemoon-how-it-works__step h3 { color: var(--lemoon-text-brand); font-size: 2.2rem; }
-
-.lemoon-how-it-works__step p {
-  max-width: 31rem;
-  color: var(--lemoon-text-secondary);
-}
+.lemoon-how-it-works__copy h3 { margin: 0 0 1rem; font-size: 2.4rem; color: var(--lemoon-text-brand); }
+.lemoon-how-it-works__copy p { margin: 0; max-width: 34rem; line-height: 1.6; color: var(--lemoon-text-secondary); }
+.lemoon-how-it-works__detail { display: inline-block; margin-top: 1.8rem; font-size: 1.2rem; font-weight: 600; color: var(--lemoon-text-brand); }
 
 @media screen and (min-width: 750px) and (max-width: 1099px) {
-  .lemoon-shapes__list { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .lemoon-shapes__list { --shape-columns: 5; }
 }
 
 .badge {
@@ -1218,8 +1223,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 @media screen and (max-width: 749px) {
   .lemoon-product-card__swatch {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
 
   .lemoon-product-card__swatch .swatch,
@@ -1247,15 +1252,12 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   .lemoon-featured-products__item { flex-basis: 60%; }
 
   .lemoon-shapes { padding-top: var(--lemoon-section-padding-mobile); padding-bottom: var(--lemoon-section-padding-mobile); }
-  .lemoon-shapes__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.8rem 1.4rem; margin: 2.8rem 0; }
+  .lemoon-shapes__list { --shape-columns: 3; --shape-gap: 1.4rem; row-gap: 2.8rem; margin: 2.8rem 0; }
   .lemoon-shapes__icon { width: min(100%, 8rem); }
   .lemoon-shapes__item { font-size: 1.3rem; }
 
-  .lemoon-mood-grid__items { grid-template-columns: 1fr; }
-  .lemoon-mood-grid__item { min-height: 0; }
-
-  .lemoon-about { margin: 1.2rem 2.4rem 3.2rem; border-radius: 1.8rem; }
-  .lemoon-about__inner { display: block; }
+  .lemoon-about { margin: 1.2rem auto 3.2rem; }
+  .lemoon-about__inner { display: block; border-radius: 1.8rem; }
   .lemoon-about h2 { margin-bottom: 2.8rem; font-size: 2.8rem; }
 
   .button,
@@ -1293,14 +1295,24 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
     margin-top: 3rem;
   }
 
-  .lemoon-how-it-works__step { grid-template-columns: 4.8rem 1fr; gap: .4rem 1.6rem; min-height: 0; padding: 2.4rem 2rem; }
-  .lemoon-how-it-works__number { grid-row: span 2; }
-  .lemoon-how-it-works__step + .lemoon-how-it-works__step { border-left: 0; border-top: 1px solid var(--lemoon-border-warm); }
-  .lemoon-how-it-works__step h3 { align-self: end; font-size: 2rem; }
-  .lemoon-how-it-works__step p { align-self: start; }
+  .lemoon-how-it-works__steps { gap: 0; }
+  .lemoon-how-it-works__step { display: grid; grid-template-columns: 8rem 1fr; gap: 2rem; padding: 2.4rem 0; }
+  .lemoon-how-it-works__step + .lemoon-how-it-works__step { border-top: 1px solid var(--lemoon-border-warm); }
+  .lemoon-how-it-works__visual { height: 10rem; border: 0; margin: 0; }
+  .lemoon-purchase-step-icon { width: 8rem; height: 7rem; margin-left: 0; }
+  .lemoon-how-it-works__visual::before { width: 7rem; height: 7rem; }
+  .lemoon-how-it-works__visual::after { width: 2.5rem; height: 2.5rem; right: 0; bottom: .8rem; }
+  .lemoon-how-it-works__visual::before,
+  .lemoon-how-it-works__step:nth-child(2) .lemoon-how-it-works__visual::before,
+  .lemoon-how-it-works__step:nth-child(3) .lemoon-how-it-works__visual::before { transform: none; }
+  .lemoon-how-it-works__step:nth-child(2) .lemoon-how-it-works__visual::after { right: 0; }
+  .lemoon-how-it-works__number { top: -1rem; left: -.5rem; font-size: 2.8rem; }
+  .lemoon-how-it-works__copy h3 { font-size: 2rem; }
+  .lemoon-how-it-works__copy p { font-size: 1.4rem; }
+  .lemoon-how-it-works__detail { margin-top: 1.2rem; }
 
   .lemoon-mood-grid {
-    padding-top: var(--lemoon-section-padding-mobile);
+    padding-top: 1.2rem;
     padding-bottom: var(--lemoon-section-padding-mobile);
   }
 
@@ -1321,25 +1333,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
     padding-top: var(--lemoon-space-4);
     padding-bottom: var(--lemoon-space-4);
     text-align: center;
-  }
-
-  .lemoon-collection-hero,
-  .lemoon-collection-hero .collection-hero__inner {
-    min-height: 240px;
-  }
-
-  .lemoon-collection-hero .collection-hero__inner {
-    display: block;
-    padding-top: var(--lemoon-section-padding-mobile);
-    padding-bottom: var(--lemoon-section-padding-mobile);
-  }
-
-  .lemoon-collection-hero .collection-hero__title {
-    font-size: var(--lemoon-type-h1-size);
-  }
-
-  .lemoon-collection-hero .collection-hero__image-container {
-    display: none;
   }
 
   .lemoon-product-media-fallback {
@@ -1395,4 +1388,39 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   .lemoon-configurator__panel { padding: var(--lemoon-section-padding-mobile) var(--lemoon-gutter-mobile); }
   .lemoon-configurator__step h1 { font-size: var(--lemoon-type-h1-size); }
   .lemoon-configurator__prescription { grid-template-columns: 1fr; }
+}
+
+.lemoon-breadcrumb { margin: 20px 0; color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-body); font-size: 12px; line-height: 1.5; }
+.lemoon-breadcrumb ol { display: flex; flex-wrap: wrap; gap: 6px 8px; list-style: none; padding: 0; margin: 0; }
+.lemoon-breadcrumb li { display: inline-flex; align-items: baseline; gap: 8px; }
+.lemoon-breadcrumb li + li::before { content: '/'; color: var(--lemoon-text-secondary); }
+.lemoon-breadcrumb a { color: inherit; text-decoration: none; }
+.lemoon-breadcrumb a:hover { text-decoration: underline; }
+.lemoon-breadcrumb [aria-current] { color: var(--lemoon-text-brand); }
+.lemoon-breadcrumb a:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 3px; }
+
+/* One global radius for buttons, including controls rendered by sections. */
+button,
+.button,
+[role='button'],
+.shopify-challenge__button,
+.lemoon-hero__button,
+.pagination__item,
+.mobile-facets__open {
+  border-radius: var(--lemoon-radius-button) !important;
+}
+button::before,
+button::after,
+.button::before,
+.button::after {
+  border-radius: inherit;
+}
+
+/* Default variant for text actions. */
+.lemoon-text-link,
+.underlined-link,
+a.link:not(.button):not(.pagination__item) {
+  text-decoration: underline;
+  text-underline-offset: .25em;
+  text-decoration-thickness: 1px;
 }

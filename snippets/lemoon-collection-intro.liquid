@@ -1,0 +1,9 @@
+<div class="lemoon-plp-intro">
+  <div class="lemoon-plp-mobile-breadcrumb">{% render 'lemoon-breadcrumb', collection: collection %}</div>
+  <h1>{{ collection.title | escape }}</h1>
+  {% if show_description %}
+    <div class="lemoon-plp-intro__description rte">
+      {% if collection.description != blank %}{{ collection.description }}{% elsif show_demo_content %}{% render 'lemoon-collection-copy', collection: collection, mode: 'intro' %}{% endif %}
+    </div>
+  {% endif %}
+</div>

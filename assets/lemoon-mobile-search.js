@@ -54,7 +54,10 @@ class MobileSearch {
       if (!Array.isArray(this.products)) this.products = [];
     } catch { this.products = []; }
     this.recordCurrentProduct();
-    this.triggers.forEach((button) => this.listen(button, 'click', () => this.open(button)));
+    this.triggers.forEach((button) => this.listen(button, 'click', () => {
+      if (this.isOpen) this.close();
+      else this.open(button);
+    }));
     this.listen(this.header, 'click', (event) => {
       const target = event.target instanceof Element ? event.target : null;
       if (this.isOpen && !target?.closest(selector('open'))) this.close(true, false);
@@ -137,7 +140,8 @@ class MobileSearch {
   recentProducts() {
     try {
       const stored = JSON.parse(window.localStorage.getItem(RECENT_PRODUCTS_KEY) || '[]');
-      return getRecentlyViewed(stored).filter((item) => safeUrl(item.url)).map((item) => ({
+      const limit = window.matchMedia('(min-width: 990px)').matches ? 7 : 3;
+      return getRecentlyViewed(stored, limit).filter((item) => safeUrl(item.url)).map((item) => ({
         ...item,
         url: safeUrl(item.url),
         image: safeUrl(item.image),
@@ -213,11 +217,8 @@ class MobileSearch {
     this.root.classList.add('is-open');
     this.triggers.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
     this.startAutoplay();
-    this.focusTimer = setTimeout(() => {
-      if (!this.isOpen) return;
-      this.prepareInputForFocus();
-      this.input.focus({ preventScroll: true });
-    }, this.duration());
+    this.prepareInputForFocus();
+    this.input.focus({ preventScroll: true });
   }
 
   close(immediate = false, restoreFocus = true) {
@@ -317,12 +318,11 @@ class MobileSearch {
     this.stopAutoplay();
     if (this.slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     this.autoplayTimer = window.setInterval(() => {
-      if (!this.isOpen || this.index >= this.slides.length - 1) {
+      if (!this.isOpen) {
         this.stopAutoplay();
         return;
       }
       this.showSlide(this.index + 1);
-      if (this.index >= this.slides.length - 1) this.stopAutoplay();
     }, 3000);
   }
 
@@ -334,7 +334,7 @@ class MobileSearch {
   showSlide(index, manual = false) {
     if (!this.slides.length) return;
     if (manual) this.stopAutoplay();
-    this.index = Math.max(0, Math.min(index, this.slides.length - 1));
+    this.index = ((index % this.slides.length) + this.slides.length) % this.slides.length;
     this.slides.forEach((slide, position) => {
       const active = position === this.index;
       slide.setAttribute('aria-hidden', String(!active));
@@ -349,8 +349,8 @@ class MobileSearch {
       this.slideTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
     }
     this.dots.forEach((dot, position) => dot.setAttribute('aria-current', String(position === this.index)));
-    if (this.previous) this.previous.disabled = this.index === 0;
-    if (this.next) this.next.disabled = this.index === this.slides.length - 1;
+    if (this.previous) this.previous.disabled = false;
+    if (this.next) this.next.disabled = false;
   }
 
   onKeydown(event) {

@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
+  ['/tests/fixtures/eyewear-product.html', 'tests/fixtures/eyewear-product.html'],
   ['/tests/fixtures/mobile-search.html', 'tests/fixtures/mobile-search.html'],
   ['/tests/fixtures/mobile-menu.html', 'tests/fixtures/mobile-menu.html'],
   ['/tests/fixtures/announcement-bar.html', 'tests/fixtures/announcement-bar.html'],

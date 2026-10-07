@@ -1,0 +1,17 @@
+{% doc %}
+  Collection promotion shared by the mobile header and desktop product grid.
+  @param {collection} collection - Current collection.
+{% enddoc %}
+{% assign promo_image = collection.metafields.custom.plp_promo_banner.value %}
+{% if promo_image != blank %}
+  {% assign promo_alt = promo_image.alt | default: collection.title %}
+  <div class="lemoon-collection-promo" aria-label="{{ collection.title | escape }}">
+    {{ promo_image | image_url: width: 2400 | image_tag:
+      widths: '375, 550, 750, 1100, 1500, 2000, 2400',
+      sizes: '100vw',
+      loading: 'eager',
+      fetchpriority: 'high',
+      alt: promo_alt
+    }}
+  </div>
+{% endif %}
