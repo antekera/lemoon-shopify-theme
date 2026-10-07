@@ -47,7 +47,6 @@ Priority: `MVP` · `POST-MVP`.
 | `trust-bar.liquid`                | Horizontal strip: 4–5 trust signals (shipping, returns, warranty, WA)  | MVP      | `[ ]`  |
 | `how-it-works.liquid`             | 3-step process: elige → configura → recibe                             | MVP      | `[ ]`  |
 | `lifestyle-mood-grid.liquid`      | Editorial style tribe tiles: "Minimalista", "Ejecutivo", "Retro", etc. | MVP      | `[ ]`  |
-| `frame-shape-filter-strip.liquid` | Horizontal scrollable pills: frame shapes + quick filters              | MVP      | `[ ]`  |
 | `social-proof-strip.liquid`       | Dark band with star rating, review count, and customer milestone       | MVP      | `[ ]`  |
 | `lens-configurator.liquid`        | Multi-step lens configuration flow (5 steps, custom JS)                | MVP      | `[ ]`  |
 | `whatsapp-float.liquid`           | Fixed floating WhatsApp CTA button, bottom-right corner                | MVP      | `[ ]`  |
