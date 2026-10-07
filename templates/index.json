@@ -62,11 +62,20 @@
             "text": "Cambios y devoluciones gratis",
             "text_second_line": "antes de los 30 días"
           }
+        },
+        "shipping": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "text": "Envíos",
+            "text_second_line": "a todo Chile"
+          }
         }
       },
       "block_order": [
         "guarantee",
-        "returns"
+        "returns",
+        "shipping"
       ],
       "settings": {
         "aria_label": "Beneficios de comprar en Lemoon"

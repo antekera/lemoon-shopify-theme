@@ -6,6 +6,8 @@
           <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3 27 7v8c0 7-4.5 11.5-11 14C9.5 26.5 5 22 5 15V7l11-4Z"/><path d="m11 16 3.5 3.5L21 12"/></svg>
         {%- elsif block.settings.icon == 'return' -%}
           <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M6 12a11 11 0 1 1-1 8"/><path d="M6 4v8h8"/><path d="M12 17h8m-3-3 3 3-3 3"/></svg>
+        {%- elsif block.settings.icon == 'shipping' -%}
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 7h16v16H3V7Zm16 6h5l5 6v4h-3m-7 0h1M6 23H3"/><circle cx="9" cy="24" r="3"/><circle cx="23" cy="24" r="3"/><path d="M19 19h10"/></svg>
         {%- endif -%}
         <span>{{ block.settings.text | escape }}{% if block.settings.text_second_line != blank %} <span class="lemoon-trust-bar__second-line">{{ block.settings.text_second_line | escape }}</span>{% endif %}</span>
       </p>
@@ -34,7 +36,7 @@
       "type": "benefit",
       "name": "Beneficio",
       "settings": [
-        { "type": "select", "id": "icon", "label": "Ícono", "options": [{ "value": "shield", "label": "Escudo" }, { "value": "return", "label": "Devolución" }, { "value": "none", "label": "Sin ícono" }], "default": "shield" },
+        { "type": "select", "id": "icon", "label": "Ícono", "options": [{ "value": "shield", "label": "Escudo" }, { "value": "return", "label": "Devolución" }, { "value": "shipping", "label": "Envíos" }, { "value": "none", "label": "Sin ícono" }], "default": "shield" },
         {
           "type": "text",
           "id": "text",
