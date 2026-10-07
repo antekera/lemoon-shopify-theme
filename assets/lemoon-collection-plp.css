@@ -594,6 +594,11 @@
     background: rgb(var(--color-background));
   }
   .lemoon-plp-sidebar-header .lemoon-breadcrumb { margin: 0 0 26px; }
+  .lemoon-plp-sidebar-header::after,
+  .lemoon-plp-layout > .facets-wrapper::after {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  }
   .lemoon-plp-sidebar-header::after {
     content: '';
     position: absolute;
