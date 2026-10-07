@@ -26,11 +26,6 @@
   border-bottom: .1rem solid rgba(var(--color-foreground), .12);
 }
 
-/* Keep collection pages broad on desktop while capping ultra-wide layouts. */
-.lemoon-plp.page-width {
-  max-width: 160rem;
-}
-
 .lemoon-plp-toolbar__count {
   color: var(--lemoon-text-secondary, rgba(var(--color-foreground), .72));
 }
