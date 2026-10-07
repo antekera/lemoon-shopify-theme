@@ -641,43 +641,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   text-decoration: none;
 }
 
-.lemoon-shape-filters {
-  padding: var(--lemoon-space-10) 0;
-}
-
-.lemoon-shape-filters__inner {
-  display: flex;
-  min-height: 56px;
-  align-items: center;
-  overflow-x: auto;
-  padding-top: 0;
-  padding-bottom: 0;
-  border: 1px solid var(--lemoon-border-default);
-  border-radius: var(--lemoon-radius-md);
-  scrollbar-width: thin;
-}
-
-.lemoon-shape-filters__item {
-  flex: 0 0 170px;
-  padding: var(--lemoon-space-4) var(--lemoon-space-6);
-  color: var(--lemoon-text-secondary);
-  font-family: var(--lemoon-font-heading);
-  font-size: var(--lemoon-type-body-sm-size);
-  text-align: center;
-  text-decoration: none;
-}
-
-.lemoon-shape-filters__item + .lemoon-shape-filters__item {
-  border-left: 1px solid var(--lemoon-border-warm);
-}
-
-.lemoon-shape-filters__item.is-active,
-.lemoon-shape-filters__item:hover,
-.lemoon-shape-filters__item:focus-visible {
-  color: var(--lemoon-text-brand);
-  font-weight: var(--lemoon-weight-semibold);
-}
-
 .facets-vertical {
   gap: var(--lemoon-space-10);
 }
@@ -1349,23 +1312,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
   .lemoon-product-media-fallback {
     min-height: 360px;
-  }
-
-  .lemoon-shape-filters {
-    padding: var(--lemoon-space-6) 0;
-  }
-
-  .lemoon-shape-filters__inner {
-    margin-right: var(--lemoon-gutter-mobile);
-    margin-left: var(--lemoon-gutter-mobile);
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .lemoon-shape-filters__item {
-    flex-basis: auto;
-    padding-right: var(--lemoon-space-5);
-    padding-left: var(--lemoon-space-5);
   }
 
   .facets-wrapper {
