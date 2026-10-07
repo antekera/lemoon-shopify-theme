@@ -21,6 +21,10 @@ body {
   padding-left: var(--lemoon-gutter-mobile);
 }
 
+.page-width-desktop {
+  max-width: var(--lemoon-max-width);
+}
+
 @media screen and (min-width: 750px) {
   .page-width,
   .page-width-desktop {
