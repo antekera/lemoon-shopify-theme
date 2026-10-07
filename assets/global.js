@@ -427,6 +427,8 @@ class MenuDrawer extends HTMLElement {
 
     this.addEventListener('keyup', this.onKeyUp.bind(this));
     this.addEventListener('focusout', this.onFocusOut.bind(this));
+    this.onSummaryClick = this.onSummaryClick.bind(this);
+    this.onCloseButtonClick = this.onCloseButtonClick.bind(this);
     this.bindEvents();
   }
 
@@ -437,11 +439,11 @@ class MenuDrawer extends HTMLElement {
         summary.setAttribute('aria-expanded', String(summary.parentElement.open));
         summary.setAttribute('aria-controls', summary.nextElementSibling.id);
       }
-      summary.addEventListener('click', this.onSummaryClick.bind(this));
+      summary.addEventListener('click', this.onSummaryClick);
     });
     this.querySelectorAll(
       'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button)'
-    ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
+    ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick));
   }
 
   onKeyUp(event) {

@@ -130,6 +130,10 @@ test('mobile drawer accordions, clear and view results preserve live filtering',
   await expect(first).toHaveJSProperty('open', true);
   await drawer.locator('input[name="filter.p.m.custom.gender"][value="niños"]').check();
   await expect(drawer.locator('[data-view-results]')).toHaveText('Ver 2 lentes');
+  await first.locator('summary').click();
+  await expect(first).toHaveJSProperty('open', false);
+  await first.locator('summary').click();
+  await expect(first).toHaveJSProperty('open', true);
   await drawer.locator('.mobile-facets__clear-wrapper a').click();
   await expect(page.locator('.lemoon-filter-pill')).toHaveCount(0);
   await drawer.locator('[data-view-results]').click();
