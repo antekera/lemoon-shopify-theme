@@ -405,7 +405,7 @@
 
 .lemoon-footer__copyright {
   flex: 0 0 auto;
-  order: -1;
+  order: 0;
   margin: 0;
   text-align: left;
 }
@@ -640,5 +640,48 @@
 @media (prefers-reduced-motion: reduce) {
   .lemoon-footer__menu-toggle::after {
     transition: none;
+  }
+}
+
+.lemoon-footer__social-payments { display: contents; }
+@media screen and (min-width: 990px) {
+  .lemoon-footer__social-payments {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 48px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .lemoon-footer__social-payments .lemoon-footer__follow,
+  .lemoon-footer__social-payments .lemoon-footer__payments {
+    justify-content: flex-start;
+    padding: 0;
+    border-top: 0;
+  }
+  .lemoon-footer__payment-list { justify-content: flex-start; }
+  .lemoon-footer__legal { justify-content: flex-start; }
+  .lemoon-footer__legal-links { flex: 0 1 auto; justify-content: flex-start; }
+}
+
+@media screen and (min-width: 990px) {
+  .lemoon-footer {
+    position: relative;
+    padding-bottom: calc(min(460px, 100vw / var(--footer-art-ratio, 3)) + var(--footer-padding-bottom, 0px));
+  }
+
+  .lemoon-footer__art {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  .lemoon-footer__art-image {
+    height: min(460px, calc(100vw / var(--footer-art-ratio, 3)));
+    object-fit: cover;
+    object-position: center bottom;
   }
 }

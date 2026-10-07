@@ -1,0 +1,20 @@
+{%- capture pills -%}
+  {%- for filter in collection.filters -%}
+    {%- unless filter.param_name == 'filter.v.availability' -%}
+      {%- for value in filter.active_values -%}
+        <facet-remove><a href="{{ value.url_to_remove }}" class="lemoon-filter-pill"><span>{{ filter.label | escape }}: {{ value.label | escape }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
+      {%- endfor -%}
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value != blank or filter.max_value.value != blank -%}
+          <facet-remove><a href="{{ filter.url_to_remove }}" class="lemoon-filter-pill"><span>{{ filter.label | escape }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{% if pills != blank %}
+  <div class="lemoon-applied-filters" aria-label="{{ 'lemoon.collection.applied_filters' | t }}">
+    {{ pills }}
+    <facet-remove class="lemoon-filter-reset"><a href="{{ collection.url }}?sort_by={{ sort_by | url_encode }}">{{ 'lemoon.collection.reset' | t }}</a></facet-remove>
+  </div>
+{% endif %}

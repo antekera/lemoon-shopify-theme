@@ -7,7 +7,7 @@
         {%- if section.settings.eyebrow != blank -%}<p class="lemoon-featured-products__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
         <h2>{{ section.settings.heading | escape }}</h2>
       </div>
-      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link">{{ section.settings.link_label | escape }}</a>
+      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link lemoon-text-link">{{ section.settings.link_label | escape }}</a>
     </div>
     <ul class="lemoon-featured-products__track" role="list" aria-label="{{ section.settings.heading | escape }}">
       {%- assign displayed_count = 0 -%}

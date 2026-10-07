@@ -209,7 +209,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Ojo de gato",
-            "link": "/collections/opticos/ojo-de-gato",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=ojo+de+gato",
             "shape": "cat_eye"
           }
         },
@@ -219,7 +219,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Cuadrado",
-            "link": "/collections/opticos/cuadrado",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=cuadrado",
             "shape": "square"
           }
         },
@@ -229,7 +229,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Ovalado",
-            "link": "/collections/opticos/ovalado",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=ovalado",
             "shape": "oval"
           }
         },
@@ -239,7 +239,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Geométrico",
-            "link": "/collections/opticos/geometrico",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=geom%C3%A9trico",
             "shape": "geometric"
           }
         },
@@ -249,7 +249,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Aviador",
-            "link": "/collections/opticos/aviador",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=aviador",
             "shape": "aviator"
           }
         },
@@ -259,7 +259,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Línea de cejas",
-            "link": "/collections/opticos/browline",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=browline",
             "shape": "browline"
           }
         },
@@ -363,7 +363,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Ojo de gato",
-            "link": "/collections/lentes-de-sol/ojo-de-gato",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=ojo+de+gato",
             "shape": "cat_eye",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "ojo de gato"
@@ -375,7 +375,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Cuadrado",
-            "link": "/collections/lentes-de-sol/cuadrado",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=cuadrado",
             "shape": "square",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "cuadrado"
@@ -387,7 +387,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Ovalado",
-            "link": "/collections/lentes-de-sol/ovalado",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=ovalado",
             "shape": "oval",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "ovalado"
@@ -399,7 +399,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Geométrico",
-            "link": "/collections/lentes-de-sol/geometrico",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=geom%C3%A9trico",
             "shape": "geometric",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "geometrico"
@@ -411,7 +411,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Aviador",
-            "link": "/collections/lentes-de-sol/aviador",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=aviador",
             "shape": "aviator",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "aviador"
@@ -423,7 +423,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Línea de cejas",
-            "link": "/collections/lentes-de-sol/browline",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=browline",
             "shape": "browline",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "browline"
@@ -528,7 +528,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Rectangular",
-            "link": "/collections/opticos/rectangular",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=rectangular",
             "shape": "rectangle",
             "catalog_collection": "opticos",
             "availability_tag": "rectangular"
@@ -540,7 +540,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Rectangular",
-            "link": "/collections/lentes-de-sol/rectangular",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=rectangular",
             "shape": "rectangle",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "rectangular"
@@ -552,7 +552,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Redondo",
-            "link": "/collections/opticos/redondo",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=redondo",
             "shape": "round",
             "catalog_collection": "opticos",
             "availability_tag": "redondo"
@@ -564,7 +564,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Redondo",
-            "link": "/collections/lentes-de-sol/redondo",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=redondo",
             "shape": "round",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "redondo"
@@ -576,7 +576,7 @@
             "parent": "opticos",
             "group": "shape",
             "title": "Mariposa",
-            "link": "/collections/opticos/mariposa",
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=mariposa",
             "shape": "butterfly",
             "catalog_collection": "opticos",
             "availability_tag": "mariposa"
@@ -588,7 +588,7 @@
             "parent": "sol",
             "group": "shape",
             "title": "Mariposa",
-            "link": "/collections/lentes-de-sol/mariposa",
+            "link": "/collections/lentes-de-sol?filter.p.m.custom.frame_shape=mariposa",
             "shape": "butterfly",
             "catalog_collection": "lentes-de-sol",
             "availability_tag": "mariposa"

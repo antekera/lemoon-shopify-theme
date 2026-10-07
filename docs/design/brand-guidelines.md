@@ -35,7 +35,7 @@ In the theme, colors are set via `config/settings_data.json` and accessed via CS
 
 ## Typography
 
-Display font: **Urbanist** (Google Fonts) — geometric, clean, and spacious; used for headings, CTAs, and the logo wordmark. Body font: **Source Sans 3** (Google Fonts) — a humanist sans with clearer long-form readability, used for body copy, labels, and captions.
+Display font: **Urbanist** (Google Fonts) — geometric, clean, and spacious; used for headings, CTAs, and the logo wordmark. Body font: **Hanken Grotesk** (Google Fonts) — a neutral grotesque sans with a restrained editorial character, used for body copy, labels, and captions.
 
 | Role         | Family   | Weight | Size (desktop) | Notes                                 |
 | ------------ | -------- | ------ | -------------- | ------------------------------------- |
@@ -43,18 +43,18 @@ Display font: **Urbanist** (Google Fonts) — geometric, clean, and spacious; us
 | Heading H1   | Urbanist | 600    | 40–48px        | Page titles                           |
 | Heading H2   | Urbanist | 600    | 28–36px        | Section titles                        |
 | Heading H3   | Urbanist | 500    | 20–24px        | Card titles, subsections              |
-| Body         | Source Sans 3 | 400    | 16px           | Body copy, descriptions               |
-| Body small   | Source Sans 3 | 400    | 14px           | Labels, specs, metadata               |
-| Caption      | Source Sans 3 | 400    | 12px           | Image captions, fine print            |
+| Body         | Hanken Grotesk | 400    | 16px           | Body copy, descriptions               |
+| Body small   | Hanken Grotesk | 400    | 14px           | Labels, specs, metadata               |
+| Caption      | Hanken Grotesk | 400    | 12px           | Image captions, fine print            |
 | CTA / Button | Urbanist | 600    | 14–16px        | Uppercase, subtle letter-spacing (0.02em) |
 
 Google Fonts import:
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 ```
 
-CSS custom properties: `--font-heading-family: 'Urbanist', sans-serif`; `--font-body-family: 'Source Sans 3', sans-serif`.
+CSS custom properties: `--font-heading-family: 'Urbanist', sans-serif`; `--font-body-family: 'Hanken Grotesk', sans-serif`.
 
 Field outline: use `--lemoon-border-warm` (`#F7F4EE`) for default and disabled input/select outlines with a white fill. Preserve Navy for focus and red for error. Field text aligns left; Input supports `Icon=None`, `Icon=Leading`, and `Icon=Trailing` variants. Field icons use 24px sizing.
 

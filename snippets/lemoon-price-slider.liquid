@@ -1,0 +1,19 @@
+{%- liquid
+  assign maximum = filter.range_max | divided_by: 100.0
+  assign maximum = maximum | divided_by: 1000.0 | ceil | times: 1000
+  assign lower = filter.min_value.value | default: 0 | divided_by: 100.0
+  assign upper = maximum
+  if filter.max_value.value
+    assign upper = filter.max_value.value | divided_by: 100.0
+  endif
+-%}
+<div class="lemoon-price-slider__values">
+  <div><label class="visually-hidden" for="{{ id_prefix }}Price-Min">{{ 'products.facets.from' | t }}</label><output data-price-output="min">{{ lower | times: 100 | money }}</output></div>
+  <div><label class="visually-hidden" for="{{ id_prefix }}Price-Max">{{ 'products.facets.to' | t }}</label><output data-price-output="max">{{ upper | times: 100 | money }}</output></div>
+</div>
+<div class="lemoon-price-slider__track"{% if maximum > 0 %} style="--price-start: {{ lower | divided_by: maximum | times: 100 }}%; --price-end: {{ upper | divided_by: maximum | times: 100 }}%;"{% endif %}>
+  <input id="{{ id_prefix }}Price-Min" data-price-handle="min" type="range" min="0" max="{{ maximum }}" step="1000" value="{{ lower }}"{% if maximum == 0 %} disabled{% endif %}>
+  <input id="{{ id_prefix }}Price-Max" data-price-handle="max" type="range" min="0" max="{{ maximum }}" step="1000" value="{{ upper }}"{% if maximum == 0 %} disabled{% endif %}>
+</div>
+<input type="hidden" data-price-param="min" name="{{ filter.min_value.param_name }}" value="{% if filter.min_value.value %}{{ lower }}{% endif %}">
+<input type="hidden" data-price-param="max" name="{{ filter.max_value.param_name }}" value="{% if filter.max_value.value %}{{ upper }}{% endif %}">

@@ -15,33 +15,39 @@ if (!customElements.get('lemoon-hero')) {
         this.track.append(this.loopClone);
       }
       this.currentIndex = 0;
-      this.updateHeight = this.updateHeight.bind(this);
-      this.updateCurrent = this.updateCurrent.bind(this);
-      this.onBlockSelect = this.onBlockSelect.bind(this);
-      this.syncAutoplay = this.syncAutoplay.bind(this);
+      this.updateHeight ||= this.updateHeight.bind(this);
+      this.updateCurrent ||= this.updateCurrent.bind(this);
+      this.onBlockSelect ||= this.onBlockSelect.bind(this);
+      this.syncAutoplay ||= this.syncAutoplay.bind(this);
+      this.onNavigationClick ||= this.onNavigationClick.bind(this);
       this.motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
       this.updateHeight();
+      this.heightObserver = new ResizeObserver(this.updateHeight);
+      const header = document.querySelector('.section-header');
+      const trustBar = this.closest('.shopify-section')?.nextElementSibling?.querySelector('.lemoon-trust-bar');
+      if (header) this.heightObserver.observe(header);
+      if (trustBar) this.heightObserver.observe(trustBar);
       window.addEventListener('resize', this.updateHeight);
       window.addEventListener('load', this.updateHeight);
       window.visualViewport?.addEventListener('resize', this.updateHeight);
       document.addEventListener('visibilitychange', this.syncAutoplay);
       this.motionPreference.addEventListener('change', this.syncAutoplay);
       this.track.addEventListener('scroll', this.updateCurrent, { passive: true });
+      this.addEventListener('click', this.onNavigationClick);
       this.addEventListener('shopify:block:select', this.onBlockSelect);
-      this.querySelector('[data-hero-previous]')?.addEventListener('click', () => this.goTo(this.currentIndex - 1));
-      this.querySelector('[data-hero-next]')?.addEventListener('click', () => this.goTo(this.currentIndex + 1));
-      this.dots.forEach((dot, index) => dot.addEventListener('click', () => this.goTo(index)));
       this.syncAutoplay();
     }
 
     disconnectedCallback() {
       clearInterval(this.autoplayTimer);
+      this.heightObserver?.disconnect();
       window.removeEventListener('resize', this.updateHeight);
       window.removeEventListener('load', this.updateHeight);
       window.visualViewport?.removeEventListener('resize', this.updateHeight);
       document.removeEventListener('visibilitychange', this.syncAutoplay);
       this.motionPreference?.removeEventListener('change', this.syncAutoplay);
       this.track?.removeEventListener('scroll', this.updateCurrent);
+      this.removeEventListener('click', this.onNavigationClick);
       this.removeEventListener('shopify:block:select', this.onBlockSelect);
       this.loopClone?.remove();
       this.loopClone = null;
@@ -59,6 +65,10 @@ if (!customElements.get('lemoon-hero')) {
       const rect = this.getBoundingClientRect();
       const offset = rect.top + window.scrollY;
       this.style.setProperty('--hero-top-offset', `${Math.max(0, Math.ceil(offset))}px`);
+
+      const trustBar = this.closest('.shopify-section')?.nextElementSibling?.querySelector('.lemoon-trust-bar');
+      const reserve = window.matchMedia('(min-width: 990px)').matches ? trustBar?.getBoundingClientRect().height || 0 : 0;
+      this.style.setProperty('--hero-bottom-reserve', `${Math.ceil(reserve)}px`);
 
       if (!window.matchMedia('(max-width: 749px)').matches) return;
       const viewport = window.visualViewport;
@@ -103,6 +113,14 @@ if (!customElements.get('lemoon-hero')) {
       });
       this.currentIndex = nextIndex;
       this.updateCurrent();
+    }
+
+    onNavigationClick(event) {
+      const control = event.target.closest('[data-hero-previous], [data-hero-next], [data-hero-index]');
+      if (!control || !this.contains(control)) return;
+      if (control.hasAttribute('data-hero-previous')) this.goTo(this.currentIndex - 1);
+      else if (control.hasAttribute('data-hero-next')) this.goTo(this.currentIndex + 1);
+      else this.goTo(Number(control.dataset.heroIndex));
     }
 
     onBlockSelect(event) {

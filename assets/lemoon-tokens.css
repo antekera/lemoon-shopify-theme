@@ -29,7 +29,7 @@
 
   --lemoon-primitive-beige-claro: #f7f4ee;
 
-  --lemoon-primitive-grey-mid: #6b6b6b;
+  --lemoon-primitive-grey-mid: #51575e;
   --lemoon-primitive-grey-line: #e0ddd8;
 
   /* -----------------------------------------------------------
@@ -39,12 +39,13 @@
   /* surface */
   --lemoon-surface-page: #ffffff;
   --lemoon-surface-warm: #f7f4ee;
+  --lemoon-surface-warm-hover: #e8e2d8;
   --lemoon-surface-inverse: #0b1f3a;
   --lemoon-surface-disabled: #e0ddd8;
 
   /* text */
   --lemoon-text-primary: #1a1a1a;
-  --lemoon-text-secondary: #6b6b6b;
+  --lemoon-text-secondary: #51575e;
   --lemoon-text-inverse: #ffffff;
   --lemoon-text-brand: #0b1f3a;
   --lemoon-text-error: #c0392b;
@@ -72,7 +73,7 @@
   ----------------------------------------------------------- */
 
   --lemoon-font-heading: 'Urbanist', sans-serif;
-  --lemoon-font-body: 'Source Sans 3', sans-serif;
+  --lemoon-font-body: 'Hanken Grotesk', sans-serif;
 
   --lemoon-weight-light: 300;
   --lemoon-weight-regular: 400;
@@ -176,6 +177,7 @@
   --lemoon-radius-search: 24px; /* search input — pill */
   --lemoon-radius-modal: 16px; /* modals, drawers */
   --lemoon-radius-full: 9999px; /* full-pill, swatches */
+  --lemoon-radius-button: var(--lemoon-radius-full); /* global rounded buttons */
 
   /* -----------------------------------------------------------
      COMPONENT SIZES
@@ -226,8 +228,8 @@
   --font-body-family: var(--lemoon-font-body);
 
   /* buttons */
-  --buttons-radius: var(--lemoon-radius-sm); /* 4px */
-  --buttons-radius-outset: 0px;
+  --buttons-radius: var(--lemoon-radius-button);
+  --buttons-radius-outset: var(--lemoon-radius-button);
   --buttons-border-width: 1px;
 
   /* inputs */

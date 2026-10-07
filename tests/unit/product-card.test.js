@@ -33,11 +33,11 @@ test('keeps sale prices single, shows unit prices, and outlines selected dark sw
 
   expect(price).toMatch(/unit_price_measurement[\s\S]*?render 'unit-price'/);
   expect(styles).toMatch(/\.product-card-wrapper \.card-information \.price--on-sale \.price__sale\s*\{[^}]*display:\s*flex/);
-  expect(styles).toMatch(/\.lemoon-product-card__swatch\s*\{[^}]*width:\s*2rem;[^}]*height:\s*2rem/);
+  expect(styles).toMatch(/\.lemoon-product-card__swatch\s*\{[^}]*width:\s*2\.2rem;[^}]*height:\s*2\.2rem/);
   expect(styles).toMatch(/\.lemoon-product-card__swatch-color\s*\{[^}]*width:\s*1\.6rem;[^}]*height:\s*1\.6rem/);
   expect(styles).toMatch(/\.lemoon-product-card__swatch\.is-selected\s*\{[^}]*border:\s*1px solid #5F6368;[^}]*box-shadow:\s*none/);
   expect(styles).toMatch(/\.product-card-wrapper \.card__inner\s*\{[^}]*z-index:\s*1/);
-  expect(styles).toMatch(/@media screen and \(max-width: 749px\)\s*\{[^}]*\.lemoon-product-card__swatch\s*\{[^}]*width:\s*1\.6rem;[^}]*height:\s*1\.6rem/);
+  expect(styles).toMatch(/@media screen and \(max-width: 749px\)\s*\{[^}]*\.lemoon-product-card__swatch\s*\{[^}]*width:\s*1\.8rem;[^}]*height:\s*1\.8rem/);
   expect(styles).toMatch(/--ratio-percent:\s*96% !important/);
   expect(styles).toMatch(/\.product-card-wrapper \.card__media \.media > img\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*object-fit:\s*cover/);
 });
@@ -67,7 +67,7 @@ test('renders each variant media preview as a valid Shopify image URL', async ()
 test('defers the second product card image until near the viewport and removes quick-add markup', async () => {
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-product-card.js'), 'utf8');
-  const collection = await readFile(themeFile('sections/main-collection-product-grid.liquid'), 'utf8');
+  const collection = await readFile(themeFile('snippets/lemoon-plp-product-page.liquid'), 'utf8');
 
   expect(template).toMatch(/data-lazy-srcset=/);
   expect(template).toMatch(/data-lazy-src=/);

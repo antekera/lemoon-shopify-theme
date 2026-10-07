@@ -427,16 +427,23 @@ class MenuDrawer extends HTMLElement {
 
     this.addEventListener('keyup', this.onKeyUp.bind(this));
     this.addEventListener('focusout', this.onFocusOut.bind(this));
+    this.onSummaryClick = this.onSummaryClick.bind(this);
+    this.onCloseButtonClick = this.onCloseButtonClick.bind(this);
     this.bindEvents();
   }
 
   bindEvents() {
-    this.querySelectorAll('summary').forEach((summary) =>
-      summary.addEventListener('click', this.onSummaryClick.bind(this))
-    );
+    this.querySelectorAll('summary').forEach((summary) => {
+      if (summary.parentElement.hasAttribute('data-facet-accordion')) {
+        summary.setAttribute('role', 'button');
+        summary.setAttribute('aria-expanded', String(summary.parentElement.open));
+        summary.setAttribute('aria-controls', summary.nextElementSibling.id);
+      }
+      summary.addEventListener('click', this.onSummaryClick);
+    });
     this.querySelectorAll(
       'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button)'
-    ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
+    ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick));
   }
 
   onKeyUp(event) {
@@ -444,6 +451,15 @@ class MenuDrawer extends HTMLElement {
 
     const openDetailsElement = event.target.closest('details[open]');
     if (!openDetailsElement) return;
+
+    if (openDetailsElement.hasAttribute('data-facet-accordion')) {
+      openDetailsElement.removeAttribute('open');
+      const summary = openDetailsElement.querySelector('summary');
+      summary.setAttribute('aria-expanded', false);
+      summary.focus();
+      event.stopPropagation();
+      return;
+    }
 
     openDetailsElement === this.mainDetailsToggle
       ? this.closeMenuDrawer(event, this.mainDetailsToggle.querySelector('summary'))
@@ -455,6 +471,30 @@ class MenuDrawer extends HTMLElement {
     const detailsElement = summaryElement.parentNode;
     const parentMenuElement = detailsElement.closest('.has-submenu');
     const isOpen = detailsElement.hasAttribute('open');
+    if (detailsElement.hasAttribute('data-facet-accordion')) {
+      const opening = detailsElement.lemoonAccordionAnimation ? !detailsElement.lemoonAccordionTarget : !isOpen;
+      summaryElement.setAttribute('aria-expanded', String(opening));
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      event.preventDefault();
+      const content = summaryElement.nextElementSibling;
+      const startHeight = isOpen ? content.getBoundingClientRect().height : 0;
+      detailsElement.lemoonAccordionAnimation?.cancel();
+      detailsElement.open = true;
+      detailsElement.lemoonAccordionTarget = opening;
+      content.style.overflow = 'hidden';
+      const animation = content.animate(
+        [{ height: `${startHeight}px` }, { height: opening ? `${content.scrollHeight}px` : '0px' }],
+        { duration: 220, easing: 'ease', fill: 'both' }
+      );
+      detailsElement.lemoonAccordionAnimation = animation;
+      animation.onfinish = () => {
+        detailsElement.open = opening;
+        animation.cancel();
+        content.style.removeProperty('overflow');
+        detailsElement.lemoonAccordionAnimation = null;
+      };
+      return;
+    }
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function addTrapFocus() {

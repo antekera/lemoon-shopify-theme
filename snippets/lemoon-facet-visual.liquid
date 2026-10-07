@@ -1,0 +1,79 @@
+{% doc %}
+  Decorative visual for a collection filter option. The checkbox label supplies its accessible name.
+  @param {object} filter - Shopify storefront filter.
+  @param {object} value - Shopify filter value.
+{% enddoc %}
+{%- liquid
+  assign option_label = value.label | downcase
+  assign shape = blank
+  if filter.param_name == 'filter.p.m.custom.frame_shape'
+    case option_label
+      when 'redondo', 'round'
+        assign shape = 'round'
+      when 'cuadrado', 'square'
+        assign shape = 'square'
+      when 'rectangular', 'rectangle'
+        assign shape = 'rectangle'
+      when 'aviador', 'aviator'
+        assign shape = 'aviator'
+      when 'geométrico', 'geometrico', 'geometric'
+        assign shape = 'geometric'
+      when 'ovalado', 'oval'
+        assign shape = 'oval'
+      when 'browline'
+        assign shape = 'browline'
+      when 'pantóstico', 'pantoscopico', 'panto'
+        assign shape = 'panto'
+      when 'ojo de gato', 'cat eye', 'cat-eye'
+        assign shape = 'cat_eye'
+      when 'mariposa', 'butterfly'
+        assign shape = 'butterfly'
+    endcase
+  elsif filter.param_name == 'filter.v.option.color'
+    assign swatch_color = '#ddd9d2'
+    assign swatch_pattern = blank
+    case option_label
+      when 'negro', 'black'
+        assign swatch_color = '#202329'
+      when 'azul', 'blue'
+        assign swatch_color = '#365573'
+      when 'carey', 'tortoise', 'tortoiseshell'
+        assign swatch_color = '#8b5c30'
+        assign swatch_pattern = 'tortoise'
+      when 'transparente', 'clear', 'transparent'
+        assign swatch_color = '#f6f8f8'
+        assign swatch_pattern = 'clear'
+      when 'dorado', 'gold'
+        assign swatch_color = '#c8a65b'
+        assign swatch_pattern = 'metal'
+      when 'plateado', 'silver'
+        assign swatch_color = '#b9bec4'
+        assign swatch_pattern = 'metal'
+      when 'blanco', 'white'
+        assign swatch_color = '#ffffff'
+      when 'rojo', 'red'
+        assign swatch_color = '#b74742'
+      when 'verde', 'green'
+        assign swatch_color = '#506552'
+      when 'rosa', 'pink'
+        assign swatch_color = '#d79aab'
+      when 'morado', 'purple'
+        assign swatch_color = '#78608c'
+      when 'marrón', 'marron', 'brown'
+        assign swatch_color = '#76513e'
+      when 'gris', 'gray', 'grey'
+        assign swatch_color = '#898c90'
+    endcase
+  endif
+-%}
+{%- if shape != blank -%}
+  <span class="lemoon-facet-visual lemoon-facet-visual--shape" aria-hidden="true">{% render 'lemoon-frame-shape', shape: shape %}</span>
+{%- elsif filter.param_name == 'filter.v.option.color' -%}
+  <span class="lemoon-facet-visual lemoon-facet-visual--color{% if swatch_pattern != blank %} lemoon-facet-visual--{{ swatch_pattern }}{% endif %}" style="--facet-swatch-color: {{ swatch_color }}" aria-hidden="true">
+    {%- if value.swatch.image -%}
+      {{ value.swatch.image | image_url: width: 48 | image_tag: alt: '', loading: 'lazy' }}
+    {%- elsif value.swatch.color -%}
+      <span style="background: {{ value.swatch.color }}"></span>
+    {%- endif -%}
+  </span>
+{%- endif -%}

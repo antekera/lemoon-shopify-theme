@@ -591,5 +591,142 @@
       "expanded": "Formulario del destinatario de la tarjeta de regalo expandido",
       "collapsed": "Formulario del destinatario de tarjeta de regalo contraído"
     }
+  },
+  "lemoon": {
+    "breadcrumb": {
+      "home": "Inicio",
+      "label": "Ruta de navegación"
+    },
+    "collection": {
+      "filters_title": "Filtros",
+      "hide_filters": "Ocultar filtros",
+      "show_filters": "Mostrar filtros",
+      "sort_prefix": "Ordenar por",
+      "applied_filters": "Filtros aplicados",
+      "reset": "Eliminar filtros",
+      "apply_filters": "Aplicar filtros",
+      "view_results": "Ver {{ count }} lentes",
+      "filters": "Filtros",
+      "showing_results": "Mostrando {{ count }} resultados",
+      "toolbar": "Herramientas de colección",
+      "sort_relevance": "Relevancia",
+      "sort_newest": "Más recientes",
+      "sort_best_selling": "Más vendidos",
+      "sort_price_ascending": "Precio: menor a mayor",
+      "sort_price_descending": "Precio: mayor a menor",
+      "grid_view": "Vista de productos",
+      "one_column": "Un producto por fila",
+      "two_columns": "Dos productos por fila",
+      "seo_description": "Descripción de la categoría",
+      "filter_trigger": "Filtrar",
+      "products_count": {
+        "one": "{{ count }} lente",
+        "other": "{{ count }} lentes"
+      },
+      "about_category": "Descubre {{ title }}",
+      "copy": {
+        "default": {
+          "intro": "Encuentra lentes que acompañan tu estilo y tu día a día. Explora formas, colores y materiales para elegir tu próxima mirada.",
+          "seo": "Elegir tus lentes comienza con encontrar un armazón que te guste y se sienta cómodo. Explora la colección Lemoon y compara sus formas, colores, materiales y medidas. Usa los filtros para acotar tu búsqueda y revisa la información de cada modelo para conocer sus opciones y compatibilidad con tu receta."
+        },
+        "sun": {
+          "intro": "Una nueva forma de mirar los días de sol. Descubre siluetas y colores para acompañar cada plan.",
+          "seo": "Los lentes de sol son un accesorio para todas las estaciones. Encuentra diseños clásicos y contemporáneos, desde formas redondas hasta armazones de mayor tamaño. Antes de elegir, revisa la protección indicada, las medidas y las opciones de cristales de cada producto para encontrar el modelo que se adapte a tu uso."
+        },
+        "accessories": {
+          "intro": "Los pequeños detalles que cuidan tus lentes. Descubre accesorios para acompañarlos todos los días.",
+          "seo": "Completa el cuidado de tus lentes con accesorios para guardarlos, limpiarlos y transportarlos. Revisa las características de cada artículo y su compatibilidad con tus armazones. Una rutina de cuidado adecuada ayuda a mantener tus lentes listos para acompañarte en el día a día."
+        },
+        "lenses": {
+          "intro": "Explora opciones de cristales y encuentra las características que necesitas para tu visión.",
+          "seo": "Los cristales se eligen según tu receta y tus actividades. Compara las opciones disponibles y revisa los tratamientos y compatibilidades indicados en cada producto. Si necesitas orientación para escoger, contacta al equipo Lemoon antes de completar tu pedido."
+        },
+        "reading": {
+          "intro": "Lentes para acompañar tus momentos de lectura. Encuentra un diseño cómodo y acorde a tu estilo.",
+          "seo": "Descubre armazones para tus momentos de lectura y trabajo de cerca. Compara medidas, materiales y opciones de cristales para elegir con más información. Revisa la compatibilidad con tu receta en la ficha de cada modelo y consulta al equipo si tienes dudas."
+        },
+        "screens": {
+          "intro": "Tu estilo también frente a la pantalla. Explora armazones y sus opciones de cristales compatibles.",
+          "seo": "Encuentra armazones para acompañarte durante tus actividades frente a pantallas. Revisa las opciones de cristales y tratamientos disponibles para cada modelo, junto con su compatibilidad con tu receta. Las medidas y el ajuste del armazón también son importantes para tu comodidad diaria."
+        },
+        "kids": {
+          "intro": "Diseños para pequeñas grandes miradas. Explora armazones y medidas pensados para niños.",
+          "seo": "Elegir lentes para niños requiere prestar atención a las medidas, el ajuste y la comodidad. Explora los diseños de esta colección y revisa los materiales y características de cada modelo. Antes de comprar, confirma que el armazón sea adecuado para la receta y las necesidades del niño."
+        },
+        "new": {
+          "intro": "Nuevas formas, nuevos colores, nuevas miradas. Conoce las últimas incorporaciones a Lemoon.",
+          "seo": "Explora las novedades del catálogo Lemoon y descubre nuevas formas y combinaciones de color. Compara los modelos con los filtros y revisa sus medidas y materiales para elegir un diseño que acompañe tu estilo y tus actividades."
+        },
+        "popular": {
+          "intro": "Descubre los modelos favoritos y encuentra el que va contigo.",
+          "seo": "Explora una selección de modelos populares de Lemoon. Compara sus diseños, colores y materiales, y revisa las medidas del armazón y las opciones de cristales antes de elegir. Un modelo favorito puede ser el punto de partida para encontrar tus próximos lentes."
+        }
+      },
+      "filter_price": "Precio",
+      "filter_availability": "Disponibilidad"
+    }
+  },
+  "lemoon_pdp": {
+    "zoom": "Ampliar imagen",
+    "save": "Guardar este armazón en este dispositivo",
+    "gallery": "Vistas del armazón",
+    "view_image": "Ver imagen {{ number }}",
+    "gallery_hint": "Cada detalle, desde todos los ángulos.",
+    "try_on": "Probador virtual",
+    "review_count": "{{ count }} reseñas",
+    "price_note": "Precio total de la configuración seleccionada.",
+    "configuration": "Configuración",
+    "size_guide": "Guía de medidas",
+    "prescription": "Tu receta",
+    "prescription_note": "Copia los valores de tu receta o envíala después de comprar.",
+    "recipe_mode": "Cómo entregarás tu receta",
+    "later": "Enviaré mi receta después",
+    "manual": "Ingresar receta ahora",
+    "your_selection": "Tu selección",
+    "configure": "Agregar lentes",
+    "frame_only": "Solo armazón",
+    "help": "¿Necesitas ayuda para elegir?",
+    "made_for_you": "Diseñado para tu día a día",
+    "details": "Conoce tu armazón",
+    "shape": "Forma",
+    "material": "Material",
+    "fit": "Ajuste",
+    "weight": "Peso",
+    "description": "Descripción",
+    "lens_details": "Guía de cristales",
+    "shipping_returns": "Envíos y devoluciones",
+    "shipping_note": "El costo y las opciones de envío se calculan al finalizar tu compra.",
+    "care": "Cuidado de tus lentes",
+    "care_note": "Limpia con un paño de microfibra y agua. Evita productos abrasivos y guarda tus lentes en un estuche cuando no los uses.",
+    "reviews": "Opiniones de este armazón",
+    "no_reviews": "Este armazón aún no tiene reseñas.",
+    "size_note": "Compara estas medidas con un armazón que te quede cómodo. Las medidas del prototipo son ilustrativas.",
+    "recipe_error": "Revisa tu receta: completa esfera de ambos ojos y D.P.; cilindro necesita eje, y progresivos necesitan adición. Usa incrementos de 0,25 en la graduación.",
+    "cart_error": "No pudimos agregar tu selección. Intenta nuevamente.",
+    "storage_error": "No pudimos guardar este armazón en tu dispositivo.",
+    "right_eye": "Ojo derecho (OD)",
+    "left_eye": "Ojo izquierdo (OI)",
+    "sphere": "Esfera (SPH)",
+    "cylinder": "Cilindro (CYL)",
+    "axis": "Eje (0–180°)",
+    "addition": "Adición (ADD)",
+    "pd": "Distancia pupilar total (mm)",
+    "rx_note": "D.P. entre 40 y 80 mm. Se guarda la receta para revisión antes de fabricar. Si tu receta queda fuera del formulario, elige enviarla después.",
+    "frame_diagram": "Diagrama de medidas del armazón, vista frontal",
+    "units": "Unidad de medida",
+    "millimeters": "Milímetros",
+    "inches": "Pulgadas",
+    "frame_width": "Ancho total",
+    "lens_width": "Ancho del cristal",
+    "bridge": "Puente",
+    "lens_height": "Alto del cristal",
+    "temple": "Largo de patilla",
+    "upload": "Subir receta (PDF o imagen)",
+    "upload_note": "PDF, JPG o PNG, hasta 10 MB. El archivo se adjunta a tu producto y podrás verlo en el carrito.",
+    "upload_error": "Selecciona un archivo PDF, JPG o PNG de hasta 10 MB.",
+    "buy_frame": "Comprar solo armazón",
+    "back_to_frame": "Volver al armazón",
+    "lens_step": "Elige tus lentes",
+    "lens_step_note": "Selecciona tus cristales y cómo entregarás tu receta."
   }
 }

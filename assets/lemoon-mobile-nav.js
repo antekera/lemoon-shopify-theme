@@ -44,7 +44,7 @@ function initialize(scope = document) {
 
   function measure() {
     const main = header.querySelector(
-      window.matchMedia('(max-width: 989px)').matches ? '.lemoon-header__mobile-inner' : '.lemoon-header__desktop'
+      window.matchMedia('(max-width: 749px)').matches ? '.lemoon-header__mobile-inner' : '.lemoon-header__desktop'
     );
     const top = Math.max(0, main.getBoundingClientRect().bottom);
     drawer.style.setProperty('--lemoon-nav-top', `${top}px`);

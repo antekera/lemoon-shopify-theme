@@ -1,0 +1,116 @@
+.lemoon-pdp { display: block; padding-top: 24px; padding-bottom: 56px; color: var(--lemoon-text-primary); }
+.lemoon-pdp [hidden] { display: none !important; }
+.lemoon-pdp__grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 64px; margin-top: 28px; align-items: start; }
+.lemoon-pdp__gallery { position: sticky; top: 100px; }
+.lemoon-pdp__stage { position: relative; overflow: hidden; background: var(--lemoon-surface-warm); border-radius: 12px; }
+.lemoon-pdp__stage img, .lemoon-pdp__stage video, .lemoon-pdp__stage iframe, .lemoon-pdp__stage model-viewer { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; display: block; }
+.lemoon-pdp__image-button { display: block; width: 100%; padding: 0; background: transparent; border: 0; cursor: zoom-in; color: var(--lemoon-text-brand); }
+.lemoon-pdp__zoom-label { position: absolute; bottom: 16px; left: 20px; padding: 6px 12px; background: #ffffffda; font-size: 12px; border-radius: 20px; }
+.lemoon-pdp__save { position: absolute; top: 16px; right: 16px; width: 44px; height: 44px; border: 1px solid var(--lemoon-border-default); background: white; border-radius: 50%; font-size: 28px; color: var(--lemoon-text-brand); cursor: pointer; }
+.lemoon-pdp__save[aria-pressed=true] { background: var(--lemoon-primitive-lemon-citrico); }
+.lemoon-pdp__thumbnails { display: flex; gap: 12px; overflow-x: auto; padding: 14px 2px 4px; }
+.lemoon-pdp__thumbnails button { flex: 0 0 76px; height: 76px; padding: 0; border: 1px solid var(--lemoon-border-default); border-radius: 12px; overflow: hidden; cursor: pointer; background: var(--lemoon-surface-warm); }
+.lemoon-pdp__thumbnails img { width: 100%; height: 100%; object-fit: cover; }
+.lemoon-pdp__thumbnails [aria-pressed=true] { outline: 2px solid var(--lemoon-border-strong); outline-offset: 1px; }
+.lemoon-pdp__gallery-footer { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--lemoon-text-secondary); margin-top: 14px; }
+.lemoon-pdp a { color: var(--lemoon-text-brand); text-underline-offset: 4px; }
+.lemoon-pdp__eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin: 0 0 10px; color: var(--lemoon-text-secondary); }
+.lemoon-pdp h1 { font-size: 28px; line-height: 1.2; letter-spacing: -.4px; margin: 0 0 12px; color: var(--lemoon-text-brand); }
+.lemoon-pdp__subtitle { margin: 0 0 12px; color: var(--lemoon-text-secondary); font-size: 15px; }
+.lemoon-pdp__rating { font-size: 14px; }
+.lemoon-pdp__price { display: flex; align-items: center; gap: 14px; margin-top: 16px; font-size: 20px; color: var(--lemoon-text-brand); }
+.lemoon-pdp__price strong { font-weight: 500; }
+.lemoon-pdp__price s { font-size: 14px; color: var(--lemoon-text-secondary); }
+.lemoon-pdp__muted { font-size: 12px; color: var(--lemoon-text-secondary); margin: 6px 0 20px; line-height: 1.5; }
+.lemoon-pdp__options { border: 0; padding: 0; margin: 0 0 22px; min-width: 0; }
+.lemoon-pdp__options legend { font-size: 14px; font-weight: 600; margin-bottom: 12px; padding: 0; }
+.lemoon-pdp__options legend span { color: var(--lemoon-text-secondary); font-weight: 400; margin-left: 10px; }
+.lemoon-pdp__choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.lemoon-pdp__choice { position: relative; cursor: pointer; }
+.lemoon-pdp__choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.lemoon-pdp__choice span { min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 12px 10px; border: 1px solid var(--lemoon-border-default); border-radius: 24px; text-align: center; font-size: 13px; }
+.lemoon-pdp__choice strong { font-weight: 500; }
+.lemoon-pdp__choice input:checked + span { border-color: var(--lemoon-border-strong); background: var(--lemoon-surface-warm); box-shadow: inset 0 0 0 1px var(--lemoon-border-strong); }
+.lemoon-pdp__choice input:focus-visible + span, .lemoon-pdp button:focus-visible, .lemoon-pdp summary:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 4px; }
+.lemoon-pdp__choice input:disabled + span, .lemoon-pdp__choice.is-sold-out span { opacity: .5; text-decoration: line-through; }
+.lemoon-pdp__options--color .lemoon-pdp__choices { display: flex; flex-wrap: wrap; }
+.lemoon-pdp__options--color .lemoon-pdp__choice span { flex-direction: column; width: 92px; padding: 6px; border-radius: 12px; }
+.lemoon-pdp__options--color img { width: 72px; height: 58px; object-fit: cover; border-radius: 8px; }
+.lemoon-pdp__size-row { display: flex; justify-content: space-between; gap: 12px; align-items: center; border-top: 1px solid var(--lemoon-border-default); padding: 16px 0; font-size: 13px; }
+.lemoon-pdp__text-button { border: 0; color: var(--lemoon-text-brand); background: none; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; padding: 10px 0; }
+.lemoon-pdp__prescription { border: 1px solid var(--lemoon-border-default); background: var(--lemoon-surface-warm); padding: 20px; border-radius: 16px; margin-bottom: 18px; }
+.lemoon-pdp__prescription h2 { font-size: 22px; margin: 0; }
+.lemoon-pdp__prescription p { font-size: 13px; line-height: 1.5; }
+.lemoon-pdp__recipe-modes { display: flex; flex-direction: column; gap: 8px; border: 0; padding: 0; margin: 12px 0 20px; font-size: 14px; }
+.lemoon-pdp__recipe-modes label { display: flex; align-items: center; gap: 10px; min-height: 32px; }
+.lemoon-pdp [data-recipe-file] { display: block; width: 100%; max-width: 100%; font-size: 13px; margin-top: 12px; }
+.lemoon-pdp [data-recipe-file]::file-selector-button { border: 1px solid var(--lemoon-border-default); border-radius: 24px; min-height: 44px; padding: 8px 14px; margin-right: 8px; background: white; color: var(--lemoon-text-brand); cursor: pointer; }
+.lemoon-pdp input { accent-color: var(--lemoon-action-primary); }
+.lemoon-pdp__rx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.lemoon-pdp__rx-grid fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.lemoon-pdp__rx-grid legend { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+.lemoon-pdp__rx-grid label, .lemoon-pdp__pd { display: block; font-size: 12px; margin-bottom: 10px; }
+.lemoon-pdp__rx-grid input, .lemoon-pdp__pd input, .lemoon-pdp select { width: 100%; border: 1px solid var(--lemoon-border-default); background: white; border-radius: 24px; min-height: 44px; padding: 10px 14px; font: inherit; color: var(--lemoon-text-primary); }
+.lemoon-pdp__pd { max-width: 240px; margin-top: 12px; }
+.lemoon-pdp input[aria-invalid=true] { border-color: var(--lemoon-border-error); }
+.lemoon-pdp__summary { border-left: 3px solid var(--lemoon-primitive-lemon-citrico); padding: 4px 0 4px 14px; margin: 4px 0 20px; }
+.lemoon-pdp__summary span { font-size: 12px; color: var(--lemoon-text-secondary); }
+.lemoon-pdp__summary p { font-size: 14px; margin: 4px 0; }
+.lemoon-pdp__form > .button { border-radius: 24px; min-height: 52px; color: white; background: var(--lemoon-action-primary); font-size: 14px; }
+.lemoon-pdp__form > .button::after, .lemoon-pdp__form > .button::before { display: none; }
+.lemoon-pdp__form > .lemoon-pdp__configure { margin-top: 10px; background: transparent; color: var(--lemoon-text-brand); border: 1px solid var(--lemoon-border-strong); }
+.lemoon-pdp__configure:hover { background: var(--lemoon-surface-warm); }
+.lemoon-pdp__flow-heading { margin-bottom: 24px; }
+.lemoon-pdp__flow-heading h2 { font-size: 22px; margin: 12px 0 8px; }
+.lemoon-pdp__flow-heading p { font-size: 14px; color: var(--lemoon-text-secondary); line-height: 1.5; }
+.lemoon-pdp__benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 20px 0; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-pdp__benefits span { display: flex; align-items: center; flex-direction: column; gap: 8px; text-align: center; font-size: 12px; line-height: 1.4; }
+.lemoon-pdp__help { display: block; text-align: center; font-size: 13px; margin-top: 12px; }
+.lemoon-pdp__details { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 72px; padding-top: 48px; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-pdp h2 { color: var(--lemoon-text-brand); }
+.lemoon-pdp__details h2 { font-size: 24px; margin: 0 0 24px; }
+.lemoon-pdp__specs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.lemoon-pdp__specs dt, .lemoon-pdp__dimensions dt { font-size: 12px; color: var(--lemoon-text-secondary); }
+.lemoon-pdp__specs dd, .lemoon-pdp__dimensions dd { font-size: 14px; margin: 4px 0 0; }
+.lemoon-pdp__dimensions { background: var(--lemoon-surface-warm); border-radius: 16px; padding: 20px; margin-top: 24px; }
+.lemoon-pdp__dimensions svg { color: var(--lemoon-text-brand); width: 100%; height: auto; }
+.lemoon-pdp__dimensions dl { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; }
+.lemoon-pdp__unit-label { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+.lemoon-pdp__unit-label select { width: auto; }
+.lemoon-pdp__accordions details { border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-pdp__accordions summary { position: relative; list-style: none; padding: 22px 28px 22px 0; cursor: pointer; color: var(--lemoon-text-brand); font-size: 16px; font-weight: 500; }
+.lemoon-pdp__accordions summary::-webkit-details-marker { display: none; }
+.lemoon-pdp__accordions summary::after { content: '+'; position: absolute; right: 4px; font-size: 22px; top: 17px; }
+.lemoon-pdp__accordions details[open] summary::after { content: '−'; }
+.lemoon-pdp__accordions .rte, .lemoon-pdp__accordions details > p { font-size: 14px; line-height: 1.75; margin: 0 0 22px; color: var(--lemoon-text-secondary); }
+.lemoon-pdp__lens-guide h3 { font-size: 15px; margin: 0 0 6px; }
+.lemoon-pdp__lens-guide p { font-size: 13px; margin: 0 0 22px; }
+.lemoon-pdp__reviews { margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-pdp__reviews h2 { font-size: 24px; }
+.lemoon-pdp__reviews p { color: var(--lemoon-text-secondary); font-size: 14px; }
+.lemoon-pdp__dialog { border: 0; border-radius: 16px; padding: 40px 28px 28px; width: min(600px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; color: var(--lemoon-text-primary); }
+.lemoon-pdp__dialog::backdrop { background: #0b1f3a99; }
+.lemoon-pdp__dialog h2 { margin-top: 8px; font-size: 26px; }
+.lemoon-pdp__dialog p { font-size: 14px; }
+.lemoon-pdp__close { position: absolute; top: 8px; right: 8px; border: 0; background: white; width: 44px; height: 44px; border-radius: 50%; font-size: 26px; cursor: pointer; color: var(--lemoon-text-brand); }
+.lemoon-pdp__dialog--zoom { width: min(1000px, calc(100vw - 32px)); padding: 0; }
+.lemoon-pdp__dialog--zoom img { display: block; width: 100%; height: auto; }
+.lemoon-pdp__error { color: var(--lemoon-text-error); font-size: 14px; }
+@media (max-width: 989px) {
+  .lemoon-pdp__grid { gap: 32px; grid-template-columns: 1fr 1fr; }
+  .lemoon-pdp__details { gap: 32px; }
+  .lemoon-pdp h1 { font-size: 26px; }
+}
+@media (max-width: 749px) {
+  .lemoon-pdp { padding-top: 16px; padding-bottom: 32px; }
+  .lemoon-pdp__grid, .lemoon-pdp__details { grid-template-columns: 1fr; gap: 28px; }
+  .lemoon-pdp__gallery { position: static; }
+  .lemoon-pdp__grid { margin-top: 18px; }
+  .lemoon-pdp__info h1 { font-size: 26px; }
+  .lemoon-pdp__details { margin-top: 40px; padding-top: 32px; }
+  .lemoon-pdp__thumbnails button { flex-basis: 64px; height: 64px; }
+  .lemoon-pdp__dialog { padding: 40px 20px 24px; }
+  .lemoon-pdp__dialog--zoom { padding: 0; }
+  .lemoon-pdp__choices { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .lemoon-pdp * { scroll-behavior: auto !important; } }

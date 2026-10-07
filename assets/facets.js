@@ -130,16 +130,18 @@ class FacetFiltersForm extends HTMLElement {
   }
 
   static renderSection(html, event, updateEvent) {
-    FacetFiltersForm.renderFilters(html, event);
-    FacetFiltersForm.renderProductGridContainer(html);
-    FacetFiltersForm.renderProductCount(html, updateEvent);
-    if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(html.innerHTML);
+    const section = new DOMParser().parseFromString(html, 'text/html');
+    FacetFiltersForm.renderFilters(section, event);
+    FacetFiltersForm.renderProductGridContainer(section);
+    FacetFiltersForm.renderProductCount(section, updateEvent);
+    if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(section.documentElement.innerHTML);
   }
 
-  static renderProductGridContainer(html) {
-    document.getElementById('ProductGridContainer').innerHTML = new DOMParser()
-      .parseFromString(html, 'text/html')
-      .getElementById('ProductGridContainer').innerHTML;
+  static renderProductGridContainer(parsedHtml) {
+    const container = document.getElementById('ProductGridContainer');
+    container.innerHTML = parsedHtml.getElementById('ProductGridContainer').innerHTML;
+    const mobilePage = parsedHtml.querySelector('[data-plp-mobile-grid]');
+    if (mobilePage && window.lemoonSelectProductPage) window.lemoonSelectProductPage(container, mobilePage.innerHTML);
 
     document
       .getElementById('ProductGridContainer')
@@ -149,8 +151,7 @@ class FacetFiltersForm extends HTMLElement {
       });
   }
 
-  static renderProductCount(html, updateEvent) {
-    const parsedHtml = new DOMParser().parseFromString(html, 'text/html');
+  static renderProductCount(parsedHtml, updateEvent) {
     const sourceCount = parsedHtml.getElementById('ProductCount');
     const count = sourceCount.innerHTML;
     const container = document.getElementById('ProductCount');
@@ -169,10 +170,10 @@ class FacetFiltersForm extends HTMLElement {
     loadingSpinners.forEach((spinner) => spinner.classList.add('hidden'));
 
     updateEvent?.resolve(parseInt(sourceCount.dataset.productCount) || 0);
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
   }
 
-  static renderFilters(html, event) {
-    const parsedHTML = new DOMParser().parseFromString(html, 'text/html');
+  static renderFilters(parsedHTML, event) {
     const facetDetailsElementsFromFetch = parsedHTML.querySelectorAll(
       '#FacetFiltersForm .js-filter, #FacetFiltersFormMobile .js-filter, #FacetFiltersPillsForm .js-filter',
     );
@@ -242,7 +243,9 @@ class FacetFiltersForm extends HTMLElement {
             matchingInput.focus();
           } else {
             // Fallback to summary/close button if the checkbox can't be found
-            const fallbackSelector = newFacetDetailsElement.classList.contains('mobile-facets__details')
+            const fallbackSelector = newFacetDetailsElement.hasAttribute('data-facet-accordion')
+              ? '.mobile-facets__summary'
+              : newFacetDetailsElement.classList.contains('mobile-facets__details')
               ? `.mobile-facets__close-button`
               : `.facets__summary`;
             const fallbackElement = newFacetDetailsElement.querySelector(fallbackSelector);
@@ -379,11 +382,43 @@ FacetFiltersForm.setListeners();
 class PriceRange extends HTMLElement {
   constructor() {
     super();
+    if (this.hasAttribute('data-price-slider')) {
+      this.querySelectorAll('[data-price-handle]').forEach((input) => {
+        input.addEventListener('input', (event) => this.updateSlider(event.currentTarget));
+      });
+      this.updateSlider();
+      return;
+    }
     this.querySelectorAll('input').forEach((element) => {
       element.addEventListener('change', this.onRangeChange.bind(this));
       element.addEventListener('keydown', this.onKeyDown.bind(this));
     });
     this.setMinAndMaxValues();
+  }
+
+  updateSlider(changed) {
+    const lower = this.querySelector('[data-price-handle="min"]');
+    const upper = this.querySelector('[data-price-handle="max"]');
+    if (Number(lower.value) > Number(upper.value)) {
+      if (changed === lower) lower.value = upper.value;
+      else upper.value = lower.value;
+    }
+    const maximum = Number(upper.max);
+    const formatter = new Intl.NumberFormat(document.documentElement.lang || 'es-CL', {
+      style: 'currency', currency: this.dataset.currency || 'CLP', maximumFractionDigits: 0,
+    });
+    [lower, upper].forEach((input) => {
+      const key = input.dataset.priceHandle;
+      const value = Number(input.value);
+      const formatted = formatter.format(value);
+      this.querySelector(`[data-price-output="${key}"]`).textContent = formatted;
+      input.setAttribute('aria-valuetext', formatted);
+      this.querySelector(`[data-price-param="${key}"]`).value =
+        (key === 'min' && value === 0) || (key === 'max' && value === maximum) ? '' : input.value;
+    });
+    const track = this.querySelector('.lemoon-price-slider__track');
+    track.style.setProperty('--price-start', `${maximum ? Number(lower.value) / maximum * 100 : 0}%`);
+    track.style.setProperty('--price-end', `${maximum ? Number(upper.value) / maximum * 100 : 100}%`);
   }
 
   onRangeChange(event) {

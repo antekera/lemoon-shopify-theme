@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "lemoon_hero": {
@@ -82,28 +73,30 @@
       }
     },
     "featured_collection": {
-      "type": "featured-collection",
       "disabled": true,
+      "type": "featured-collection",
       "settings": {
-        "collection": "opticos",
-        "products_to_show": 8,
         "title": "Armazones favoritos",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
+        "collection": "opticos",
+        "products_to_show": 8,
         "columns_desktop": 4,
-        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
         "image_ratio": "adapt",
         "image_shape": "default",
+        "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
+        "quick_add": "none",
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -146,7 +139,7 @@
           "settings": {
             "label": "Redondos",
             "shape": "round",
-            "link": "/collections/opticos/redondo"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=redondo"
           }
         },
         "rectangle": {
@@ -154,7 +147,7 @@
           "settings": {
             "label": "Rectangulares",
             "shape": "rectangle",
-            "link": "/collections/opticos/rectangular"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=rectangular"
           }
         },
         "cat_eye": {
@@ -162,7 +155,7 @@
           "settings": {
             "label": "Ojo de gato",
             "shape": "cat_eye",
-            "link": "/collections/opticos/ojo-de-gato"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=ojo+de+gato"
           }
         },
         "aviator": {
@@ -170,7 +163,7 @@
           "settings": {
             "label": "Aviador",
             "shape": "aviator",
-            "link": "/collections/opticos/aviador"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=aviador"
           }
         },
         "square": {
@@ -178,7 +171,7 @@
           "settings": {
             "label": "Cuadrados",
             "shape": "square",
-            "link": "/collections/opticos/cuadrado"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=cuadrado"
           }
         },
         "oval": {
@@ -186,7 +179,7 @@
           "settings": {
             "label": "Ovalados",
             "shape": "oval",
-            "link": "/collections/opticos/ovalado"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=ovalado"
           }
         },
         "geometric": {
@@ -194,7 +187,7 @@
           "settings": {
             "label": "Geométricos",
             "shape": "geometric",
-            "link": "/collections/opticos/geometrico"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=geom%C3%A9trico"
           }
         },
         "browline": {
@@ -202,7 +195,7 @@
           "settings": {
             "label": "Línea de cejas",
             "shape": "browline",
-            "link": "/collections/opticos/browline"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=browline"
           }
         },
         "butterfly": {
@@ -210,7 +203,7 @@
           "settings": {
             "label": "Mariposa",
             "shape": "butterfly",
-            "link": "/collections/opticos/mariposa"
+            "link": "/collections/opticos?filter.p.m.custom.frame_shape=mariposa"
           }
         }
       },
@@ -226,7 +219,7 @@
         "aviator"
       ],
       "settings": {
-        "heading": "Compra por forma",
+        "heading": "Elige tu estilo",
         "description": "Descubre armazones versátiles para cada look, ánimo y momento.",
         "button_label": "Ver todo",
         "button_link": "/collections/all"
@@ -240,6 +233,7 @@
       }
     },
     "image_with_text_1": {
+      "disabled": true,
       "type": "image-with-text",
       "blocks": {
         "heading": {
@@ -269,27 +263,26 @@
         "text",
         "button"
       ],
-      "disabled": true,
       "settings": {
+        "image_position": "left",
+        "layout": "text_first",
+        "color_scheme": "scheme-1",
         "height": "adapt",
         "desktop_image_width": "medium",
-        "layout": "text_first",
         "image_behavior": "none",
-        "color_scheme": "scheme-1",
         "padding_top": 64,
         "padding_bottom": 64
       }
     },
     "featured_product_1": {
+      "disabled": true,
       "type": "featured-product",
       "blocks": {
         "title": {
-          "type": "title",
-          "settings": {}
+          "type": "title"
         },
         "price": {
-          "type": "price",
-          "settings": {}
+          "type": "price"
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -298,8 +291,7 @@
           }
         },
         "share": {
-          "type": "share",
-          "settings": {}
+          "type": "share"
         }
       },
       "block_order": [
@@ -308,11 +300,10 @@
         "buy_buttons",
         "share"
       ],
-      "disabled": true,
       "settings": {
         "color_scheme": "scheme-2",
-        "media_size": "medium",
         "media_position": "left",
+        "media_size": "medium",
         "hide_variants": false,
         "enable_video_looping": false,
         "padding_top": 64,
@@ -320,6 +311,7 @@
       }
     },
     "rich_text_1": {
+      "disabled": true,
       "type": "rich-text",
       "blocks": {
         "heading": {
@@ -349,7 +341,6 @@
         "text",
         "button"
       ],
-      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -360,6 +351,7 @@
       }
     },
     "multicolumn_1": {
+      "disabled": true,
       "type": "multicolumn",
       "blocks": {
         "col1": {
@@ -395,17 +387,16 @@
         "col2",
         "col3"
       ],
-      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h2",
         "image_width": "full",
         "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
+        "button_label": "",
+        "button_link": "",
         "color_scheme": "scheme-1",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
@@ -420,21 +411,27 @@
           "type": "step",
           "settings": {
             "heading": "Elige tu armazón",
-            "text": "Encuentra el armazón que va contigo."
+            "text": "Explora formas, colores y medidas para encontrar un armazón que se sienta bien en tu rostro.",
+            "icon": "frame",
+            "detail": "Forma · Color · Ajuste"
           }
         },
         "configure": {
           "type": "step",
           "settings": {
             "heading": "Configura tus lentes",
-            "text": "Elige los cristales que necesitas."
+            "text": "Elige los cristales según tu receta y el uso que les darás: lectura, pantallas o todos los días.",
+            "icon": "prescription",
+            "detail": "Tu receta, tu día a día"
           }
         },
         "receive": {
           "type": "step",
           "settings": {
             "heading": "Recíbelos en casa",
-            "text": "Te los enviamos a cualquier lugar de Chile."
+            "text": "Completa tu pedido y selecciona la dirección donde quieres recibir tus nuevos lentes.",
+            "icon": "delivery",
+            "detail": "Despachos a todo Chile"
           }
         }
       },
@@ -478,11 +475,12 @@
         "accessories"
       ],
       "settings": {
-        "heading": "Compra por categoría",
+        "heading": "Categorías",
         "description": ""
       }
     },
     "collage_1": {
+      "disabled": true,
       "type": "collage",
       "blocks": {
         "product1": {
@@ -510,7 +508,6 @@
         "collection1",
         "video1"
       ],
-      "disabled": true,
       "settings": {
         "heading": "Para cada forma de mirar",
         "heading_size": "h2",
@@ -521,6 +518,7 @@
       }
     },
     "collection_list_1": {
+      "disabled": true,
       "type": "collection-list",
       "blocks": {
         "coll1": {
@@ -547,7 +545,6 @@
         "coll2",
         "coll3"
       ],
-      "disabled": true,
       "settings": {
         "title": "Elige tu estilo",
         "heading_size": "h2",
@@ -562,8 +559,8 @@
       }
     },
     "video_1": {
-      "type": "video",
       "disabled": true,
+      "type": "video",
       "settings": {
         "heading": "Mira mejor. Siéntete tú.",
         "heading_size": "h2",
@@ -576,17 +573,17 @@
       }
     },
     "featured_blog_1": {
-      "type": "featured-blog",
       "disabled": true,
+      "type": "featured-blog",
       "settings": {
-        "blog": "",
-        "post_limit": 3,
         "heading": "Guía para tu mirada",
         "heading_size": "h2",
+        "blog": "",
+        "post_limit": 3,
         "columns_desktop": 3,
-        "show_view_all": true,
-        "show_image": true,
         "color_scheme": "scheme-1",
+        "show_image": true,
+        "show_view_all": true,
         "padding_top": 64,
         "padding_bottom": 64
       }

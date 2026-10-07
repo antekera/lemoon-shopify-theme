@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-eyewear-product",
+      "blocks": {
+        "secure": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield-check",
+            "text": "Pago seguro con Shopify"
+          }
+        },
+        "case": {
+          "type": "benefit",
+          "settings": {
+            "icon": "glasses",
+            "text": "Estuche y paño incluidos"
+          }
+        },
+        "delivery": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "text": "Envío calculado al pagar"
+          }
+        },
+        "mono": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Monofocal",
+            "text": "Una graduación para una distancia. El paquete incluye antirreflejo."
+          }
+        },
+        "blue": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Monofocal + filtro azul",
+            "text": "Cristales monofocales con filtro azul y antirreflejo."
+          }
+        },
+        "photo": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Monofocal fotocromático",
+            "text": "Cristales que cambian de tono según la luz. Incluyen antirreflejo."
+          }
+        },
+        "progressive": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Progresivo",
+            "text": "Zonas para visión cercana, intermedia y lejana. Necesita receta con adición y revisión del ajuste."
+          }
+        },
+        "sun": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Solar sin receta",
+            "text": "Cristales solares sin graduación para uso exterior."
+          }
+        },
+        "index": {
+          "type": "lens_info",
+          "settings": {
+            "title": "Índice 1.50 o 1.67",
+            "text": "El índice define el material del cristal. El adicional de 1.67 está incluido en el total de la variante."
+          }
+        }
+      },
+      "block_order": [
+        "secure",
+        "case",
+        "delivery",
+        "mono",
+        "blue",
+        "photo",
+        "progressive",
+        "sun",
+        "index"
+      ],
+      "settings": {
+        "help_page": "contact"
+      }
+    },
+    "related": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "opticos",
+        "eyebrow": "SELECCIÓN LEMOON",
+        "heading": "También te puede gustar",
+        "link_label": "Ver todos los armazones",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

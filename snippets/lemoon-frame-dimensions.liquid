@@ -1,0 +1,13 @@
+{% doc %}
+  Frame measurements from a merchant-owned JSON product metafield.
+  @param {object} dimensions - Measurements in millimeters.
+  @param {boolean} [dialog] - Render unit selector in the size dialog.
+{% enddoc %}
+<div class="lemoon-pdp__dimensions">
+  <svg viewBox="0 0 420 150" role="img" aria-label="{{ 'lemoon_pdp.frame_diagram' | t }}"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M35 45 Q95 25 166 45 L158 101 Q98 128 45 101 Z M254 45 Q325 25 385 45 L375 101 Q322 128 262 101 Z M166 49 Q210 28 254 49 M35 45 L20 42 M385 45 L400 42"/><path stroke-width="1" d="M20 15 H400 M20 9 V21 M400 9 V21 M45 139 H158 M45 133 V145 M158 133 V145 M175 80 H245 M175 74 V86 M245 74 V86"/></g></svg>
+  {% if dialog %}<label class="lemoon-pdp__unit-label">{{ 'lemoon_pdp.units' | t }}<select data-units><option value="mm">{{ 'lemoon_pdp.millimeters' | t }}</option><option value="in">{{ 'lemoon_pdp.inches' | t }}</option></select></label>{% endif %}
+  <dl>
+    {% assign keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ',' %}
+    {% for key in keys %}{% if dimensions[key] != blank %}{% assign label_key = 'lemoon_pdp.' | append: key %}<div><dt>{{ label_key | t }}</dt><dd data-mm="{{ dimensions[key] }}">{{ dimensions[key] }} mm</dd></div>{% endif %}{% endfor %}
+  </dl>
+</div>

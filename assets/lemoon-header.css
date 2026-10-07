@@ -6,10 +6,15 @@
   --lemoon-header-height: var(--lemoon-header-height-desktop, 72px);
   --lemoon-header-padding: 40px;
   background: var(--lemoon-header-background);
-  border-bottom: 1px solid var(--lemoon-header-border);
+  display: block;
+  border-bottom: 0;
   color: var(--lemoon-header-text);
   position: relative;
   z-index: 4;
+}
+
+.lemoon-header-wrapper--divider {
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .lemoon-header,
@@ -131,11 +136,11 @@
   align-items: stretch;
   border-top: 1px solid var(--lemoon-header-border);
   display: flex;
-  gap: clamp(4rem, 8vw, 12rem);
+  gap: clamp(2rem, 4vw, 5.6rem);
   justify-content: center;
   margin: 0 auto;
   max-width: var(--lemoon-header-max-width, 1440px);
-  min-height: 68px;
+  min-height: 48px;
   padding: 0 var(--lemoon-header-padding);
 }
 
@@ -155,7 +160,7 @@
 .lemoon-header__quick-link:hover,
 .lemoon-header__quick-link[aria-current='page'] {
   text-decoration: underline;
-  text-decoration-color: var(--lemoon-header-accent);
+  text-decoration-color: var(--lemoon-header-text);
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
@@ -254,7 +259,7 @@
   display: none;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 749px) {
   .lemoon-header__desktop {
     display: none;
   }
@@ -307,7 +312,7 @@
     display: grid;
     gap: 0;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    min-height: 52px;
+    min-height: 44px;
     padding: 0 4px;
   }
 
@@ -357,4 +362,136 @@
   .lemoon-header__mobile-actions {
     gap: 8px;
   }
+}
+
+/* Quiet category navigation, using the same navy and warm surfaces as the PLP. */
+.lemoon-header__quick-nav { background: var(--lemoon-surface-warm); border-top-color: rgba(11,31,58,.08); }
+.lemoon-header__quick-link { position: relative; font-size: 1.4rem; font-weight: 500; color: var(--lemoon-text-brand); }
+.lemoon-header__quick-link:hover,
+.lemoon-header__quick-link[aria-current='page'] { text-decoration: none; }
+.lemoon-header__quick-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: currentColor; transform: scaleX(0); transition: transform 160ms ease; }
+.lemoon-header__quick-link:hover::after,
+.lemoon-header__quick-link[aria-current='page']::after { transform: scaleX(1); }
+.lemoon-header__quick-link:focus-visible { outline-color: var(--lemoon-text-brand); outline-offset: -4px; }
+@media (max-width: 749px) {
+  .lemoon-header__quick-nav--mobile { background: transparent; }
+  .lemoon-header__quick-link { font-size: 1.2rem; line-height: 1.25; padding: 6px 4px; }
+  .lemoon-header__quick-link::after { left: 12px; right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .lemoon-header__quick-link::after { transition: none; } }
+
+/* Desktop: compact logo, category links and utility actions in one row. */
+@media (min-width: 750px) {
+  .lemoon-header__desktop {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: clamp(24px, 3vw, 48px);
+    align-items: center;
+  }
+  .lemoon-header__desktop .lemoon-header__brand {
+    position: static;
+    transform: none;
+    justify-self: start;
+    height: 44px;
+    line-height: 1;
+  }
+  .lemoon-header__desktop .lemoon-header__logo-image {
+    width: 112px;
+    max-height: 27px;
+    transform: none;
+  }
+  .lemoon-header__desktop .lemoon-header__actions {
+    align-items: center;
+    align-self: center;
+    gap: 12px;
+    min-height: 44px;
+  }
+  .lemoon-header__desktop .lemoon-header__actions > .lemoon-search-open,
+  .lemoon-header__desktop .lemoon-header__actions > .lemoon-header__action,
+  .lemoon-header__desktop .lemoon-header__actions > .lemoon-header__cart {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+  .lemoon-header__desktop .lemoon-header__actions .lemoon-icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+  }
+  .lemoon-header__quick-nav--desktop {
+    align-items: stretch;
+    align-self: stretch;
+    justify-content: flex-start;
+    gap: clamp(20px, 2.2vw, 36px);
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: transparent;
+  }
+  .lemoon-header__quick-nav--desktop .lemoon-header__quick-link {
+    font-family: var(--lemoon-font-body);
+    font-size: 14px;
+    min-height: 44px;
+    padding: 12px 0 0;
+    margin: 0;
+    transform: none;
+    transition: color 160ms ease;
+  }
+  .lemoon-header__desktop .lemoon-header__brand:hover,
+  .lemoon-header__quick-nav--desktop .lemoon-header__quick-link:hover {
+    transform: none;
+  }
+  .lemoon-header__quick-nav--desktop .lemoon-header__quick-link::after {
+    bottom: 0;
+  }
+  .lemoon-header__quick-nav--desktop.lemoon-header__quick-nav--sliding {
+    position: relative;
+  }
+  .lemoon-header__quick-nav--sliding .lemoon-header__quick-link::after {
+    content: none;
+  }
+  .lemoon-header__quick-nav--desktop.lemoon-header__quick-nav--sliding::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: var(--nav-indicator-width, 0px);
+    background: currentColor;
+    transform: translateX(var(--nav-indicator-left, 0px));
+    opacity: var(--nav-indicator-opacity, 0);
+    pointer-events: none;
+    transition: transform 220ms ease, width 220ms ease, opacity 160ms ease;
+  }
+  .lemoon-header__quick-nav--mobile { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lemoon-header__quick-nav--desktop.lemoon-header__quick-nav--sliding::after {
+    transition: none;
+  }
+}
+@media (min-width: 750px) and (max-width: 989px) {
+  .lemoon-header__desktop { padding-left: 24px; padding-right: 24px; gap: 20px; }
+  .lemoon-header__quick-nav--desktop { gap: 18px; }
+  .lemoon-header__desktop .lemoon-header__actions { gap: 4px; }
+  .lemoon-header__quick-nav--desktop .lemoon-header__quick-link { font-size: 13px; }
+}
+
+/* Keep the home hero seamless at the top without changing the sticky header height. */
+.lemoon-header-wrapper--home {
+  box-shadow: inset 0 -1px 0 transparent;
+  transition: box-shadow 180ms ease;
+}
+.lemoon-header-wrapper--home.lemoon-header-wrapper--scrolled {
+  box-shadow: inset 0 -1px 0 var(--lemoon-header-border);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lemoon-header-wrapper--home { transition: none; }
 }

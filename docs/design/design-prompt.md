@@ -64,10 +64,10 @@ Color system (exact values):
 
 Typography:
 - Display and UI font: Urbanist (geometric sans-serif, Google Fonts)
-- Body font: Source Sans 3 (humanist sans-serif, Google Fonts; used for readable paragraphs, labels, captions, inputs, and supporting UI text)
+- Body font: Hanken Grotesk (neutral grotesque sans-serif, Google Fonts; used for readable paragraphs, labels, captions, inputs, and supporting UI text)
 - Display/Hero headlines: Urbanist weight 300, very large (56–72px), slightly negative letter-spacing (-0.5px)
 - Section headings: Urbanist weight 600, 28–40px, letter-spacing -0.3px
-- Body text: Source Sans 3 weight 400, 16px, normal letter-spacing
+- Body text: Hanken Grotesk weight 400, 16px, normal letter-spacing
 - CTAs/Buttons: Urbanist weight 600, 14px, uppercase, subtle letter-spacing (0.02em)
 - The negative letter-spacing on headings is a key sophistication signal — headlines feel compressed and contemporary, not traditional.
 
@@ -107,14 +107,14 @@ Navy Night #0B1F3A · Navy Muted #1A3560 · Lemon #F7E600 · Lemon Deep #E6D600 
 ---
 
 SECTION 2 — TYPOGRAPHY SCALE
-Show the Lemoon type scale on white background, each style on its own row. Use Urbanist for display, headings, and CTAs; use Source Sans 3 for readable body styles:
+Show the Lemoon type scale on white background, each style on its own row. Use Urbanist for display, headings, and CTAs; use Hanken Grotesk for readable body styles:
 - Display / Hero: "Lentes que te definen." — weight 300, 56px, Navy, letter-spacing -0.5px
 - H1: "Armazones de calidad" — weight 600, 40px, Navy, letter-spacing -0.3px
 - H2: "Más vendidos" — weight 600, 28px, Navy, letter-spacing -0.3px
 - H3: "Dalton — Tortoise" — weight 500, 20px, Carbon
-- Body: "Diseñados para adaptarse a tu estilo y a tu receta. Enviamos a todo Chile." — Source Sans 3 weight 400, 16px, Carbon
-- Body small: "Color: Tortoise Brown · Material: Acetato" — Source Sans 3 weight 400, 14px, Mid Grey
-- Caption: "IVA incluido · Despacho estimado 5–7 días hábiles" — Source Sans 3 weight 400, 12px, Mid Grey
+- Body: "Diseñados para adaptarse a tu estilo y a tu receta. Enviamos a todo Chile." — Hanken Grotesk weight 400, 16px, Carbon
+- Body small: "Color: Tortoise Brown · Material: Acetato" — Hanken Grotesk weight 400, 14px, Mid Grey
+- Caption: "IVA incluido · Despacho estimado 5–7 días hábiles" — Hanken Grotesk weight 400, 12px, Mid Grey
 - CTA label: "VER COLECCIÓN →" — weight 600, 14px, Navy, subtle letter-spacing (0.02em), uppercase
 
 ---
@@ -222,7 +222,7 @@ Design a form component set for Lemoon, displayed as a clean component sheet.
 
 Show these elements:
 
-1. TEXT INPUT — Default: 1px Beige Claro (#F7F4EE) outline, 24px border-radius, 48px tall, Source Sans 3 400 16px Carbon text, left-aligned placeholder in Mid Grey. Label above: Source Sans 3 500 14px Carbon.
+1. TEXT INPUT — Default: 1px Beige Claro (#F7F4EE) outline, 24px border-radius, 48px tall, Hanken Grotesk 400 16px Carbon text, left-aligned placeholder in Mid Grey. Label above: Hanken Grotesk 500 14px Carbon.
 
 2. TEXT INPUT — Focus state: 2px Navy border, same height. Active text.
 
@@ -647,7 +647,7 @@ Each product card (aspect ratio: portrait, ~280×380px):
 - BOTTOM section (white, 16px padding):
   - Frame name: "Dalton" — Urbanist 500, 15px, Carbon
   - First content row: frame name "Dalton" — Urbanist 500, 16px, Carbon, followed by "$89.990" — Urbanist 600, 16px, Navy. If on sale: strikethrough grey original price beside bold Navy sale price.
-  - Short description: "Armazón cuadrado de acetato." — Source Sans 3 14px, Mid Grey; do not include a color descriptor.
+  - Short description: "Armazón cuadrado de acetato." — Hanken Grotesk 14px, Mid Grey; do not include a color descriptor.
   - Color swatch row: 4 selectable 20px circles. The selected swatch retains the same size and gains only a 2px Navy outline; inactive swatches use a Beige Claro outline and update the product media.
   - "Edición limitada" badge (if applicable): small sharp-cornered rectangle, 1px Navy border, Navy text "NUEVO", white fill — editorial, no color fill, Ace & Tate style.
 

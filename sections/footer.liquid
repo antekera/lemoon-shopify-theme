@@ -48,7 +48,7 @@
   </section>
 {%- endif -%}
 
-<footer class="lemoon-footer" data-lemoon-footer style="--footer-padding-top: {{ section.settings.padding_top }}px; --footer-padding-bottom: {{ section.settings.padding_bottom }}px;">
+<footer class="lemoon-footer" data-lemoon-footer style="--footer-padding-top: {{ section.settings.padding_top }}px; --footer-padding-bottom: {{ section.settings.padding_bottom }}px; --footer-art-ratio: {{ section.settings.footer_art.aspect_ratio | default: 3 }};">
   <div class="lemoon-footer__container">
     <div class="lemoon-footer__main">
       <nav class="lemoon-footer__menus" aria-label="{{ section.settings.navigation_label | escape }}">
@@ -89,6 +89,7 @@
       {%- endif -%}
     {%- endfor -%}
 
+    <div class="lemoon-footer__social-payments">
     <div class="lemoon-footer__follow">
       <h2>{{ section.settings.follow_heading | escape }}</h2>
       <ul class="lemoon-footer__social" role="list" aria-label="{{ section.settings.follow_heading | escape }}">
@@ -108,6 +109,8 @@
         </ul>
       </div>
     {%- endif -%}
+
+    </div>
 
     <div class="lemoon-footer__legal">
       <ul class="lemoon-footer__legal-links" role="list">

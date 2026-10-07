@@ -1,0 +1,20 @@
+{%- liquid
+  assign breadcrumb_collection = collection
+  if request.page_type == 'product' and breadcrumb_collection == blank
+    for candidate in product.collections
+      if candidate.handle != 'frontpage'
+        assign breadcrumb_collection = candidate
+        break
+      endif
+    endfor
+  endif
+-%}
+<nav class="lemoon-breadcrumb" aria-label="{{ 'lemoon.breadcrumb.label' | t }}">
+  <ol>
+    <li><a href="{{ routes.root_url }}">{{ 'lemoon.breadcrumb.home' | t }}</a></li>
+    {% if breadcrumb_collection != blank %}
+      <li>{% if request.page_type == 'product' %}<a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title | escape }}</a>{% else %}<span aria-current="page">{{ breadcrumb_collection.title | escape }}</span>{% endif %}</li>
+    {% endif %}
+    {% if request.page_type == 'product' %}<li><span aria-current="page">{{ product.title | escape }}</span></li>{% endif %}
+  </ol>
+</nav>
