@@ -29,6 +29,14 @@ body {
   }
 }
 
+@media screen and (min-width: 1280px) {
+  :root { --lemoon-gutter-desktop: 42px; }
+  body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
+    padding-right: 42px;
+    padding-left: 42px;
+  }
+}
+
 h1,
 h2,
 h3,
