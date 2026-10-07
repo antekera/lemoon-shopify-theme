@@ -5,6 +5,19 @@ import { test, expect } from '@playwright/test';
 const cardScript = resolve(process.cwd(), 'assets/lemoon-product-card.js');
 const cardStyles = resolve(process.cwd(), 'assets/lemoon-components.css');
 
+test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
+
+async function swipeLeft(page, bounds) {
+  const session = await page.context().newCDPSession(page);
+  const x = bounds.x + bounds.width - 30;
+  const y = bounds.y + bounds.height / 2;
+  await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+  await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x - 70, y }] });
+  await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x - 140, y }] });
+  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await session.detach();
+}
+
 async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
   await page.goto('/tests/fixtures/mobile-search.html');
   await page.route('https://cdn.example/**', (route) => route.fulfill({
@@ -25,7 +38,7 @@ async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
         <div class="card__inner">
           <div class="card__media">
             <div class="media media--hover-effect">
-              <img draggable="false" src="https://cdn.example/front.jpg" alt="Front">
+              <img draggable="false" src="https://cdn.example/front.jpg" alt="Amber front">
               <img draggable="false" data-lazy-src="https://cdn.example/diagonal.jpg" data-lazy-srcset="https://cdn.example/diagonal-360.jpg 360w, https://cdn.example/diagonal.jpg 720w" alt="Diagonal" loading="lazy">
             </div>
             <a class="lemoon-product-card__image-link" href="/products/demo"></a>
@@ -64,14 +77,7 @@ test('loads the second photo near the viewport and toggles back to the first on 
   await card.scrollIntoViewIfNeeded();
   await expect(second).toHaveAttribute('src', 'https://cdn.example/diagonal.jpg');
 
-  const swipeLeft = async () => {
-    const bounds = await page.locator('.card__media .media').boundingBox();
-    await page.mouse.move(bounds.x + bounds.width - 30, bounds.y + bounds.height / 2);
-    await page.mouse.down();
-    await page.mouse.move(bounds.x + 35, bounds.y + bounds.height / 2, { steps: 4 });
-    await page.mouse.up();
-  };
-  await swipeLeft();
+  await swipeLeft(page, await page.locator('.card__media .media').boundingBox());
   const media = page.locator('.card__media .media');
   const incoming = media.locator('.lemoon-product-card__slide-layer');
   await expect(incoming).toHaveCSS('transition-property', 'opacity');
@@ -80,7 +86,7 @@ test('loads the second photo near the viewport and toggles back to the first on 
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
   expect(await incomingElement.evaluate((element) => element === document.querySelector('.card__media .media img:first-child'))).toBe(true);
   await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCount(0);
-  await swipeLeft();
+  await swipeLeft(page, await media.boundingBox());
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
   await expect(page.locator('.card__media .media img')).toHaveCount(2);
   await expect(page).toHaveURL(/mobile-search\.html$/);
@@ -91,10 +97,7 @@ test('loads the selected variant second photo on demand', async ({ page }) => {
   await page.locator('.lemoon-product-card__swatch').nth(1).click();
   const media = page.locator('.card__media .media');
   const bounds = await media.boundingBox();
-  await page.mouse.move(bounds.x + bounds.width - 30, bounds.y + bounds.height / 2);
-  await page.mouse.down();
-  await page.mouse.move(bounds.x + 35, bounds.y + bounds.height / 2, { steps: 4 });
-  await page.mouse.up();
+  await swipeLeft(page, bounds);
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Black diagonal');
 });
 

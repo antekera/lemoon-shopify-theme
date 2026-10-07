@@ -334,7 +334,7 @@ class MobileSearch {
   showSlide(index, manual = false) {
     if (!this.slides.length) return;
     if (manual) this.stopAutoplay();
-    this.index = ((index % this.slides.length) + this.slides.length) % this.slides.length;
+    this.index = Math.max(0, Math.min(index, this.slides.length - 1));
     this.slides.forEach((slide, position) => {
       const active = position === this.index;
       slide.setAttribute('aria-hidden', String(!active));
@@ -349,8 +349,8 @@ class MobileSearch {
       this.slideTrack.style.transform = `translate3d(${-offset}px, 0, 0)`;
     }
     this.dots.forEach((dot, position) => dot.setAttribute('aria-current', String(position === this.index)));
-    if (this.previous) this.previous.disabled = false;
-    if (this.next) this.next.disabled = false;
+    if (this.previous) this.previous.disabled = this.index === 0;
+    if (this.next) this.next.disabled = this.index === this.slides.length - 1;
   }
 
   onKeydown(event) {

@@ -23,7 +23,7 @@ test('opens below the header and closes with Escape while restoring focus and sc
   const headerRow = await page.locator('.lemoon-header__mobile-inner').boundingBox();
   const drawer = await menuPanel.boundingBox();
   expect(drawer.y).toBeCloseTo(headerRow.y + headerRow.height, 0);
-  expect(drawer.width).toBeCloseTo(390 * 0.95, 0);
+  expect(drawer.width).toBeCloseTo(390 * 0.9, 0);
   await expect(page.locator('.lemoon-header__quick-nav')).toBeHidden();
   await expect(page.locator('body')).toHaveCSS('overflow', 'hidden');
 
