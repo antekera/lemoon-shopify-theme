@@ -25,6 +25,12 @@
   margin-right: auto;
 }
 
+@media screen and (min-width: 1280px) {
+  .lemoon-newsletter__inner {
+    margin-left: max(calc((100% - 200rem) / 2), 4.2rem);
+  }
+}
+
 .lemoon-newsletter__copy h2 {
   max-width: 62rem;
   margin: 0 0 1.2rem;

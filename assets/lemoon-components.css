@@ -35,7 +35,7 @@ body {
 
 @media screen and (min-width: 1280px) {
   :root { --lemoon-gutter-desktop: 42px; }
-  body:has(.section-header .header:not(.drawer-menu)) .utility-bar .page-width {
+  body:has(.section-header .lemoon-header) .utility-bar .page-width {
     padding-right: 42px;
     padding-left: 42px;
   }
