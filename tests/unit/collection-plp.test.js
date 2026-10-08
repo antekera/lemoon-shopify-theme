@@ -34,14 +34,15 @@ test('price slider rounds the available ceiling and keeps steps at one thousand'
 });
 
 test('mobile filter drawer keeps its title, filter groups and distinct clear and close actions', async () => {
-  const [facets, styles] = await Promise.all([
+  const [facets, styles, mobileFilters] = await Promise.all([
     source('snippets/facets.liquid'),
     source('assets/lemoon-collection-plp.css'),
+    source('snippets/facets-filter-mobile.liquid'),
   ]);
 
   expect(facets).toContain('data-view-results');
   expect(facets).toContain('data-applied-filter-count');
-  expect(facets).toMatch(/data-facet-accordion open/);
+  expect(mobileFilters).toMatch(/data-facet-accordion open/);
   expect(facets).toMatch(/mobile-facets__clear-wrapper/);
   expect(facets).toMatch(/'lemoon\.collection\.view_results'/);
   expect(styles).toMatch(/\.lemoon-plp \.mobile-facets__inner \{\s*max-width:\s*320px/);
@@ -61,4 +62,23 @@ test('responsive toolbar retains filter count, sort, grid toggle and result coun
   expect(script).toContain('lemoon-plp-mobile-columns');
   expect(script).toContain('window.lemoonSelectProductPage');
   expect(script).toContain('lemoon:facets-updated');
+});
+
+
+test('filter snippets preserve the outer group index independently of option indices', async () => {
+  const [facets, desktop, mobile, active] = await Promise.all([
+    source('snippets/facets.liquid'),
+    source('snippets/facets-filter-desktop.liquid'),
+    source('snippets/facets-filter-mobile.liquid'),
+    source('snippets/facets-active-values.liquid'),
+  ]);
+  expect(facets).toContain("render 'facets-filter-desktop'");
+  expect(facets).toContain("render 'facets-filter-mobile'");
+  expect(facets.match(/render 'facets-active-values'/g)).toHaveLength(4);
+  expect(desktop).toContain('data-index="{{ filter_index }}"');
+  expect(mobile).toContain('data-index="mobile-{{ filter_index }}"');
+  expect(desktop).toContain('for value in sorted_values');
+  expect(mobile).toContain('for value in sorted_values');
+  expect(active).toContain('value.url_to_remove');
+  expect(active).toContain('filter.url_to_remove');
 });
