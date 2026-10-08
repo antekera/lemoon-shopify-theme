@@ -59,3 +59,19 @@ test('navigation indicator is shared across hover and focus instead of drawing p
   expect(styles).toMatch(/\.lemoon-header__quick-nav--desktop\.lemoon-header__quick-nav--sliding::after[\s\S]*?transform:\s*translateX\(var\(--nav-indicator-left/);
   expect(styles).toMatch(/\.lemoon-header__quick-nav--sliding \.lemoon-header__quick-link::after\s*\{\s*content:\s*none/);
 });
+
+
+test('hero asset fallbacks come from block settings rather than literal block IDs', async () => {
+  const [hero, home] = await Promise.all([
+    source('sections/lemoon-hero.liquid'),
+    source('templates/index.json'),
+  ]);
+  expect(hero).not.toMatch(/case block\.id/);
+  expect(hero).toContain('block.settings.desktop_asset');
+  expect(hero).toContain('block.settings.mobile_asset');
+  const configuredHero = Object.values(JSON.parse(home).sections).find(({ type }) => type === 'lemoon-hero').blocks;
+  for (const id of ['editorial_slide', 'youth_slide']) {
+    expect(configuredHero[id].settings.desktop_asset).toMatch(/\.jpg$/);
+    expect(configuredHero[id].settings.mobile_asset).toMatch(/\.jpg$/);
+  }
+});

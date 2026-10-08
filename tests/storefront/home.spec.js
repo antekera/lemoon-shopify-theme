@@ -33,6 +33,36 @@ test('both hero buttons darken on hover without changing to white', async ({ pag
   }
 });
 
+test('hero controls select immediately and slide to the latest target', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.reload();
+  const hero = page.locator('lemoon-hero');
+  const startingPosition = await hero.evaluate((element) => {
+    clearInterval(element.autoplayTimer);
+    element.querySelector('[data-hero-index="2"]').click();
+    return element.track.scrollLeft / element.track.clientWidth;
+  });
+  expect(startingPosition).toBeLessThan(2);
+  await expect.poll(() => hero.evaluate((element) => element.track.scrollLeft / element.track.clientWidth)).toBeGreaterThan(0);
+  const positions = await hero.evaluate((hero) => {
+    clearInterval(hero.autoplayTimer);
+    hero.goTo(1);
+    const expected = [2, 0, 2, 1];
+    const controls = [
+      '[data-hero-index="2"]',
+      '[data-hero-next]',
+      '[data-hero-previous]',
+      '[data-hero-index="1"]',
+    ];
+    return controls.map((selector, index) => {
+      hero.querySelector(selector).click();
+      return { expected: expected[index], actual: hero.currentIndex };
+    });
+  });
+  for (const { actual, expected } of positions) expect(actual).toBeCloseTo(expected, 2);
+  await expect.poll(() => hero.evaluate((element) => Math.abs(element.track.scrollLeft / element.track.clientWidth - 1))).toBeLessThan(0.01);
+});
+
 test('shape links open the native collection filter and can be cleared', async ({ page }) => {
   const shape = page.locator('.lemoon-shapes__item').first();
   const destination = await shape.getAttribute('href');

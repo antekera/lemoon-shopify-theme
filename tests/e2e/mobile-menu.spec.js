@@ -50,6 +50,17 @@ test('opens a category second level and returns with the menu control', async ({
   await expect(menuButton).toHaveAttribute('aria-label', 'Cerrar menú');
 });
 
+test('underlines second-level links only while hovered', async ({ page }) => {
+  await page.locator(trigger).click();
+  await page.locator('[data-lemoon-nav-target="opticos"]').click();
+  const link = page.getByRole('link', { name: 'Ver todo' });
+  await expect(link).toHaveCSS('text-decoration-line', 'none');
+  await link.hover();
+  await expect(link).toHaveCSS('text-decoration-line', 'underline');
+  await page.locator(trigger).hover();
+  await expect(link).toHaveCSS('text-decoration-line', 'none');
+});
+
 test('keeps direct links out of the second-level interaction', async ({ page }) => {
   await page.locator(trigger).click();
   const bestSellers = page.getByRole('link', { name: 'Más vendidos' });
@@ -62,6 +73,20 @@ test('limits the desktop drawer to 300 pixels', async ({ page }) => {
   await page.locator(trigger).click();
   const drawer = await page.locator(menu).boundingBox();
   expect(drawer.width).toBe(300);
+});
+
+test('keeps primary button and link hover transparent and underlines only their text', async ({ page }) => {
+  await page.locator(trigger).click();
+  for (const item of [
+    page.locator('[data-lemoon-nav-target="opticos"]'),
+    page.getByRole('link', { name: 'Más vendidos' }),
+  ]) {
+    await item.hover();
+    await expect(item).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    await expect(item.locator('span:not([aria-hidden])')).toHaveCSS('text-decoration-line', 'underline');
+    await item.focus();
+    await expect(item.locator('span:not([aria-hidden])')).toHaveCSS('text-decoration-line', 'underline');
+  }
 });
 
 test('keeps utility-link hover transparent and underlines the text', async ({ page }) => {

@@ -1,6 +1,12 @@
 .lemoon-footer__container {
-  width: min(100% - 4.8rem, 128rem);
+  width: min(100% - 4.8rem, 200rem);
   margin-inline: auto;
+}
+
+@media screen and (min-width: 1280px) {
+  .lemoon-footer__container {
+    width: min(100% - 8.4rem, 200rem);
+  }
 }
 
 .lemoon-newsletter {
@@ -17,6 +23,12 @@
   max-width: 62rem;
   margin-left: max(calc((100% - 128rem) / 2), 2.4rem);
   margin-right: auto;
+}
+
+@media screen and (min-width: 1280px) {
+  .lemoon-newsletter__inner {
+    margin-left: max(calc((100% - 200rem) / 2), 4.2rem);
+  }
 }
 
 .lemoon-newsletter__copy h2 {

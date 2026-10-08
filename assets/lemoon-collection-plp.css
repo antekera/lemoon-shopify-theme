@@ -474,7 +474,7 @@
 .lemoon-plp .lemoon-plp-accordion-content .facets__price.lemoon-price-slider { margin: 0 25px; width: calc(100% - 50px); max-width: calc(100% - 50px); min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .lemoon-plp .mobile-facets__info { font-size: 13px; }
 @media (min-width: 990px) {
-  body:has(.lemoon-plp) .lemoon-header-wrapper { --lemoon-header-max-width: 2200px !important; --lemoon-header-padding: 32px; }
+  body:has(.lemoon-plp) .lemoon-header-wrapper { --lemoon-header-max-width: 2200px !important; }
   .lemoon-plp-layout.facets-vertical { grid-template-columns: 236px minmax(0, 1fr); padding-top: 22px; }
   .lemoon-plp-toolbar { min-height: 48px; }
   .lemoon-plp-layout .product-grid { column-gap: 22px; row-gap: 30px; }
@@ -594,6 +594,11 @@
     background: rgb(var(--color-background));
   }
   .lemoon-plp-sidebar-header .lemoon-breadcrumb { margin: 0 0 26px; }
+  .lemoon-plp-sidebar-header::after,
+  .lemoon-plp-layout > .facets-wrapper::after {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+  }
   .lemoon-plp-sidebar-header::after {
     content: '';
     position: absolute;
