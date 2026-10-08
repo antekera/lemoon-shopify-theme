@@ -17,6 +17,7 @@ if (!customElements.get('lemoon-hero')) {
       this.currentIndex = 0;
       this.updateHeight ||= this.updateHeight.bind(this);
       this.updateCurrent ||= this.updateCurrent.bind(this);
+      this.onScrollEnd ||= this.onScrollEnd.bind(this);
       this.onBlockSelect ||= this.onBlockSelect.bind(this);
       this.syncAutoplay ||= this.syncAutoplay.bind(this);
       this.onNavigationClick ||= this.onNavigationClick.bind(this);
@@ -33,6 +34,7 @@ if (!customElements.get('lemoon-hero')) {
       document.addEventListener('visibilitychange', this.syncAutoplay);
       this.motionPreference.addEventListener('change', this.syncAutoplay);
       this.track.addEventListener('scroll', this.updateCurrent, { passive: true });
+      this.track.addEventListener('scrollend', this.onScrollEnd);
       this.addEventListener('click', this.onNavigationClick);
       this.addEventListener('shopify:block:select', this.onBlockSelect);
       this.syncAutoplay();
@@ -47,6 +49,7 @@ if (!customElements.get('lemoon-hero')) {
       document.removeEventListener('visibilitychange', this.syncAutoplay);
       this.motionPreference?.removeEventListener('change', this.syncAutoplay);
       this.track?.removeEventListener('scroll', this.updateCurrent);
+      this.track?.removeEventListener('scrollend', this.onScrollEnd);
       this.removeEventListener('click', this.onNavigationClick);
       this.removeEventListener('shopify:block:select', this.onBlockSelect);
       this.loopClone?.remove();
@@ -84,10 +87,23 @@ if (!customElements.get('lemoon-hero')) {
 
     updateCurrent() {
       if (!this.slides.length || !this.track.clientWidth) return;
+      if (this.targetOffset !== null && this.targetOffset !== undefined) {
+        if (Math.abs(this.track.scrollLeft - this.targetOffset) > 1) return;
+        this.targetOffset = null;
+      }
       if (this.loopClone && this.track.scrollLeft >= this.slides.length * this.track.clientWidth - 1) {
         this.track.scrollLeft = 0;
       }
       this.currentIndex = Math.min(this.slides.length - 1, Math.max(0, Math.round(this.track.scrollLeft / this.track.clientWidth)));
+      this.updateSlideState();
+    }
+
+    onScrollEnd() {
+      this.targetOffset = null;
+      this.updateCurrent();
+    }
+
+    updateSlideState() {
       this.slides.forEach((slide, index) => {
         const inactive = index !== this.currentIndex;
         slide.inert = inactive;
@@ -101,26 +117,28 @@ if (!customElements.get('lemoon-hero')) {
       });
     }
 
-    goTo(index, immediate = false) {
+    goTo(index, useLoop = true) {
       if (!this.slides.length) return;
       const nextIndex = (index + this.slides.length) % this.slides.length;
-      const scrollIndex = !immediate && this.loopClone && this.currentIndex === this.slides.length - 1 && nextIndex === 0
+      const scrollIndex = useLoop && this.loopClone && this.currentIndex === this.slides.length - 1 && nextIndex === 0
         ? this.slides.length
         : nextIndex;
-      this.track.scrollTo({
-        left: scrollIndex * this.track.clientWidth,
-        behavior: immediate || this.motionPreference.matches ? 'instant' : 'smooth'
-      });
+      this.targetOffset = scrollIndex * this.track.clientWidth;
       this.currentIndex = nextIndex;
+      this.updateSlideState();
+      this.track.scrollTo({
+        left: this.targetOffset,
+        behavior: this.motionPreference.matches ? 'instant' : 'smooth'
+      });
       this.updateCurrent();
     }
 
     onNavigationClick(event) {
       const control = event.target.closest('[data-hero-previous], [data-hero-next], [data-hero-index]');
       if (!control || !this.contains(control)) return;
-      if (control.hasAttribute('data-hero-previous')) this.goTo(this.currentIndex - 1, true);
-      else if (control.hasAttribute('data-hero-next')) this.goTo(this.currentIndex + 1, true);
-      else this.goTo(Number(control.dataset.heroIndex), true);
+      if (control.hasAttribute('data-hero-previous')) this.goTo(this.currentIndex - 1, false);
+      else if (control.hasAttribute('data-hero-next')) this.goTo(this.currentIndex + 1, false);
+      else this.goTo(Number(control.dataset.heroIndex), false);
       this.syncAutoplay();
     }
 
