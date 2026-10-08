@@ -33,6 +33,27 @@ test('both hero buttons darken on hover without changing to white', async ({ pag
   }
 });
 
+test('hero controls move immediately even during animated autoplay', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.reload();
+  const positions = await page.locator('lemoon-hero').evaluate((hero) => {
+    clearInterval(hero.autoplayTimer);
+    hero.goTo(1);
+    const expected = [2, 0, 2, 1];
+    const controls = [
+      '[data-hero-index="2"]',
+      '[data-hero-next]',
+      '[data-hero-previous]',
+      '[data-hero-index="1"]',
+    ];
+    return controls.map((selector, index) => {
+      hero.querySelector(selector).click();
+      return { expected: expected[index], actual: hero.track.scrollLeft / hero.track.clientWidth };
+    });
+  });
+  for (const { actual, expected } of positions) expect(actual).toBeCloseTo(expected, 2);
+});
+
 test('shape links open the native collection filter and can be cleared', async ({ page }) => {
   const shape = page.locator('.lemoon-shapes__item').first();
   const destination = await shape.getAttribute('href');

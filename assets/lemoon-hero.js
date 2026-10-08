@@ -101,15 +101,15 @@ if (!customElements.get('lemoon-hero')) {
       });
     }
 
-    goTo(index) {
+    goTo(index, immediate = false) {
       if (!this.slides.length) return;
       const nextIndex = (index + this.slides.length) % this.slides.length;
-      const scrollIndex = this.loopClone && this.currentIndex === this.slides.length - 1 && nextIndex === 0
+      const scrollIndex = !immediate && this.loopClone && this.currentIndex === this.slides.length - 1 && nextIndex === 0
         ? this.slides.length
         : nextIndex;
       this.track.scrollTo({
         left: scrollIndex * this.track.clientWidth,
-        behavior: this.motionPreference.matches ? 'auto' : 'smooth'
+        behavior: immediate || this.motionPreference.matches ? 'instant' : 'smooth'
       });
       this.currentIndex = nextIndex;
       this.updateCurrent();
@@ -118,9 +118,10 @@ if (!customElements.get('lemoon-hero')) {
     onNavigationClick(event) {
       const control = event.target.closest('[data-hero-previous], [data-hero-next], [data-hero-index]');
       if (!control || !this.contains(control)) return;
-      if (control.hasAttribute('data-hero-previous')) this.goTo(this.currentIndex - 1);
-      else if (control.hasAttribute('data-hero-next')) this.goTo(this.currentIndex + 1);
-      else this.goTo(Number(control.dataset.heroIndex));
+      if (control.hasAttribute('data-hero-previous')) this.goTo(this.currentIndex - 1, true);
+      else if (control.hasAttribute('data-hero-next')) this.goTo(this.currentIndex + 1, true);
+      else this.goTo(Number(control.dataset.heroIndex), true);
+      this.syncAutoplay();
     }
 
     onBlockSelect(event) {
