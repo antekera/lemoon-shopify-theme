@@ -182,12 +182,16 @@ principal, no de una revisión visual ni de pruebas e2e de interacción.
 
 ## Evidencia de entregas locales
 
-Validación de código más reciente: 175 pruebas unitarias en 35 archivos y 127
-pruebas e2e de componentes. Una corrida storefront anterior registró 42 casos de
+Validación de código más reciente: 175 pruebas unitarias en 35 archivos y 128
+pruebas e2e Chromium; además, 256/256 casos de componentes en WebKit y Firefox.
+Las pruebas de gestos distinguen mouse real y TouchEvents sintéticos; no prueban
+dispositivos táctiles físicos. Una corrida storefront anterior registró 42 casos de
 colecciones y configurador aprobados; no demuestra el estado autenticado actual. La validación anterior registró 153 casos storefront aprobados
 entre corridas y repeticiones, con escritorio, tablet y móvil.
-Theme Check más reciente inspeccionó 252 archivos, cero errores y dos warnings
-por la variable nativa locale_direction de notificaciones. Código y convenciones revisados y aprobados. Los casos storefront
+Theme Check más reciente, con CLI 4.8.5 y `--fail-level warning`, inspeccionó
+252 archivos sin infracciones. Las excepciones para `locale_direction` se limitan
+a las dos líneas de notificaciones que requieren el contexto nativo. Código y
+convenciones revisados y aprobados. Los casos storefront
 usan variantes, precios, carrito y rutas reales de Shopify; la receta manual y
 el PDF adjunto usan exclusivamente datos sintéticos. No prueban un cobro,
 autenticación de cliente ni recepción de formularios. El artículo requiere una

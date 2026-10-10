@@ -35,7 +35,7 @@ no significan que ya se asignó permanentemente a la página CMS.
 | 404 | [Recuperación](http://127.0.0.1:9292/pages/lemoon-revision-ruta-inexistente) |
 | Checkout y cuentas | [Perfil borrador de branding](https://admin.shopify.com/store/lemoon-8277/settings/checkout/editor/profiles/7112229032?page=checkout&context=branding) |
 
-La última suite de código registrada pasó 175 pruebas unitarias y 127 e2e de
+La última suite de código registrada pasó 175 pruebas unitarias y 128 e2e de
 componentes. Theme Check inspeccionó 252 archivos, sin errores ni advertencias. Los resultados siguientes describen corridas
 anteriores; el registro al final incluye las comprobaciones más recientes.
 Una corrida anterior de colecciones y configurador pasó 42 casos storefront en
@@ -744,3 +744,42 @@ Theme Check con CLI 4.8.5 inspeccionó 252 archivos sin infracciones.
 `git diff --check` pasó. No se aplicaron asignaciones CMS ni se publicó contenido.
 La aprobación solicitada para abrir el PR y activar el push temporal de Lighthouse
 sigue pendiente; la tarea general continúa activa.
+
+### PR abierto y validación entre motores completada — 10 de octubre
+
+El usuario autorizó abrir el PR y ejecutar el workflow existente con su tema
+transitorio de desarrollo. El [PR #24](https://github.com/antekera/lemoon-shopify-theme/pull/24)
+está abierto como borrador desde `feat/remaining-storefront-pages` hacia `main`.
+La [corrida inicial de CI](https://github.com/antekera/lemoon-shopify-theme/actions/runs/38086173181)
+terminó aprobada en sus tres jobs: tests, Theme Check y Lighthouse. Corresponde
+al commit `b0fd34e5`; las actualizaciones siguientes necesitan su propia corrida.
+
+Los permisos de portapapeles incompatibles se retiraron de Firefox y WebKit.
+La tarjeta ahora verifica la copia mediante Enter y el pegado real mediante
+Control/Command+V en un textarea de prueba, sin sustituir la API de escritura.
+El primer caso en Firefox copió correctamente, pero falló porque el botón perdió
+el foco al desactivarse durante la escritura. La corrección recupera el foco
+solo si estaba en ese botón y terminó en el body; conserva otro control que el
+usuario haya elegido durante la espera. Las pruebas cubren copia real en cuatro
+anchos, permiso rechazado y el traslado de foco mientras la copia está pendiente.
+
+Las galerías de producto mantienen el gesto táctil por CDP en Chromium. Firefox
+y WebKit usan arrastre real con mouse, que ejercita PointerEvents y captura del
+puntero, conservando las aserciones de imágenes, transición y navegación. Para
+el carrusel de búsqueda, esos dos motores despachan TouchEvents sintéticos según
+la [documentación de Playwright](https://playwright.dev/docs/touch-events): prueba
+el handler, pero no reproduce `isTrusted` ni el gesto de un dispositivo físico.
+Los pasos del test identifican esa diferencia. No se eliminaron casos ni se
+introdujeron skips, clicks forzados o relajaciones de aserciones.
+
+Resultados nuevos: **256/256** casos WebKit/Firefox en 54,0 s; `npm test` con
+**175 unitarias** en 35 archivos y **128 e2e Chromium** en 19,4 s. Theme Check,
+CLI 4.8.5 y `--fail-level warning`, inspeccionó **252 archivos sin infracciones**.
+`git diff --check` pasó. Esta evidencia es local de componentes; la suite HTTPS
+completa y los gestos táctiles en dispositivos físicos siguen sin certificarse.
+
+Se mantiene la revisión del usuario por página, los tickets In Progress y las
+14 asignaciones CMS pendientes. Los borradores de checkout, artículo, producto
+gift card y notificaciones conservan su estado de revisión. Pedidos/pagos,
+recepción real de formularios, emisión/canje de saldo y persistencia/aislamiento
+de cuentas requieren las verificaciones operativas registradas anteriormente.

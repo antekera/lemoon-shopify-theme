@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 const route = '/tests/fixtures/gift-card.html';
 
 for (const width of [320, 390, 820, 1440]) {
-  test(`gift card at ${width}px keeps the code and actions within the viewport`, async ({ page, context }) => {
+  test(`gift card at ${width}px keeps the code and actions within the viewport`, async ({ page, context, browserName }) => {
     await page.setViewportSize({ width, height: 900 });
-    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    if (browserName === 'chromium') await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto(route);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Tu tarjeta de regalo');
     await expect(page.locator('.gift-card__price')).toHaveText('$100');
@@ -12,10 +12,19 @@ for (const width of [320, 390, 820, 1440]) {
     await copy.focus();
     await copy.press('Enter');
     await expect(page.getByRole('status')).toHaveText('El código se copió correctamente');
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('A1B23C4D5E6F7G8H');
     await expect(copy).toBeFocused();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await expect(page.getByRole('link', { name: 'Visitar la tienda online' })).toHaveAttribute('href', 'https://lemoon.cl');
+    // Paste through a trusted keyboard gesture; clipboard permission names differ by engine.
+    await page.evaluate(() => {
+      const textarea = document.createElement('textarea');
+      textarea.id = 'clipboard-verification';
+      document.body.append(textarea);
+    });
+    const pasted = page.locator('#clipboard-verification');
+    await pasted.focus();
+    await pasted.press('ControlOrMeta+V');
+    await expect(pasted).toHaveValue('A1B23C4D5E6F7G8H');
   });
 }
 
@@ -24,10 +33,30 @@ test('denied clipboard access displays a manual-copy message and keeps the code 
     value: { writeText: async () => { throw new DOMException('Denied', 'NotAllowedError'); } },
   }));
   await page.goto(route);
-  await page.getByRole('button', { name: 'Copiar el código de la tarjeta de regalo' }).click();
+  const copy = page.getByRole('button', { name: 'Copiar el código de la tarjeta de regalo' });
+  await copy.focus();
+  await copy.press('Enter');
   await expect(page.getByRole('status')).toHaveText('No pudimos copiarlo. Selecciona el código para copiarlo.');
   await expect(page.locator('#gift-card-code')).toHaveText('A1B2 3C4D 5E6F 7G8H');
-  await expect(page.getByRole('button', { name: 'Copiar el código de la tarjeta de regalo' })).toBeEnabled();
+  await expect(copy).toBeEnabled();
+  await expect(copy).toBeFocused();
+});
+
+test('finishing a pending copy does not steal focus from another action', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, 'clipboard', {
+    value: { writeText: () => new Promise(resolve => { window.finishCopy = resolve; }) },
+  }));
+  await page.goto(route);
+  const copy = page.getByRole('button', { name: 'Copiar el código de la tarjeta de regalo' });
+  await copy.focus();
+  await copy.press('Enter');
+  await expect(copy).toBeDisabled();
+  const print = page.getByRole('button', { name: 'Imprimir tarjeta' });
+  await print.focus();
+  await page.evaluate(() => window.finishCopy());
+  await expect(page.getByRole('status')).toHaveText('El código se copió correctamente');
+  await expect(copy).toBeEnabled();
+  await expect(print).toBeFocused();
 });
 
 test('printing keeps balance and code while hiding interactive actions', async ({ page }) => {

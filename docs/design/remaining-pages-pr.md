@@ -43,8 +43,10 @@ Cambian carrito, búsqueda, blog, artículo, página genérica, 404 y tarjeta em
 
 - **Antes:** el test de recarga de sección del configurador fallaba porque los paneles quedaban ocultos. **Después:** pasa, conserva la selección tras una segunda carga y avanza una sola vez; también se verificó la recarga en el editor nativo.
 - **Antes:** Theme Check con `--fail-level warning` fallaba por dos objetos del contexto de notificaciones. **Después:** la excepción se limita a esas dos líneas; el comando exacto de CI con Shopify CLI 4.8.5 inspecciona 252 archivos sin infracciones y el render RTL sigue pasando.
-- `npm test`: 175 unitarias y 127 pruebas de navegador Chromium aprobadas.
-- `npm run test:e2e:cross-browser`: 240 de 254 casos aprobados en WebKit/Firefox; 14 fallan por permisos de portapapeles o sesiones CDP exclusivos de Chromium. Se corrigieron ocho fallos de fixture/interacción sin modificar el código del tema; la validación completa entre motores sigue pendiente.
+- `npm test`: 175 unitarias y 128 pruebas de navegador Chromium aprobadas.
+- `npm run test:e2e:cross-browser`: 256 de 256 casos aprobados en WebKit/Firefox. Copia y pegado reales por teclado; galerías con mouse real. El carrusel usa TouchEvents sintéticos en estos motores y conserva el toque por CDP en Chromium; falta la prueba táctil en dispositivos físicos.
+- Firefox reveló pérdida de foco al desactivar el botón de copia: se recupera al terminar y una prueba adicional comprueba que no se roba el foco a otro control.
+- La primera corrida de CI del PR pasó tests, Theme Check y Lighthouse; cada actualización de la rama requiere una corrida nueva.
 - La corrida HTTPS registrada de guías, contacto y soporte pasó 51 casos en escritorio, tablet y móvil. Otras suites conservan evidencia por página; la corrida completa de todo el storefront no está aprobada. Las últimas peticiones de carrito/contenido recibieron HTTP 429 de Cloudflare y se detuvieron.
 - Pendiente: revisión del usuario por página, recepción real de contacto, persistencia y aislamiento de cuentas, detalle con pedido real, pago, emisión/canje de gift card y publicación de contenido aprobado.
 
@@ -61,7 +63,7 @@ Cambian carrito, búsqueda, blog, artículo, página genérica, 404 y tarjeta em
 - [x] Theme Check con el gate de advertencias de CI
 - [x] Pruebas locales en varios anchos y pruebas HTTPS por página registradas
 - [ ] Revisión visual del usuario por página
-- [ ] Verificación en varios navegadores
+- [x] Suite local en Chromium, WebKit y Firefox; límites táctiles documentados
 - [ ] Pruebas de operaciones reales y publicación aprobada
 
 ## Merge Danger

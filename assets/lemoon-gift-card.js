@@ -9,6 +9,7 @@
       copy.hidden = false;
       copy.addEventListener('click', async () => {
         if (copy.disabled) return;
+        const wasFocused = document.activeElement === copy;
         copy.disabled = true;
         status.textContent = '';
         try {
@@ -22,6 +23,7 @@
           status.dataset.state = 'error';
         } finally {
           copy.disabled = false;
+          if (wasFocused && document.activeElement === document.body) copy.focus({ preventScroll: true });
         }
       });
     }

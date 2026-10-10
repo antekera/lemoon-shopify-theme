@@ -90,7 +90,8 @@ emisión, entrega y redención reales pendientes. No se emitió saldo.
 
 ## Evidencia y pendientes de validación
 
-La última suite pasó 175 unitarias y 127 pruebas de componentes. Seis e2e
+La última suite pasó 175 unitarias y 128 pruebas de componentes Chromium;
+WebKit y Firefox pasaron 256/256 casos. Seis e2e
 del acceso público a cuentas y privacidad pasaron en escritorio, tablet y móvil.
 La corrida storefront anterior de tarjeta emitida pasó seis casos. Theme Check
 pasó con 252 archivos, sin errores ni advertencias, usando la versión 4.8.5
@@ -340,7 +341,7 @@ el editor quedó sin cambios pendientes. Sin overflow a 1048 y 375 px.
 
 La revisión general de código y la de convenciones terminaron sin hallazgos
 pendientes. `npm test`: 175 unitarias y 127 e2e de componentes pasan. Theme Check:
-252 archivos, cero errores y dos advertencias conocidas de notificaciones.
+252 archivos sin infracciones, incluidas las notificaciones.
 Las pruebas de pedidos/pagos reales y las asignaciones CMS siguen pendientes.
 
 
@@ -348,8 +349,17 @@ Las pruebas de pedidos/pagos reales y las asignaciones CMS siguen pendientes.
 
 La configuración opcional `playwright.cross-browser.config.js` permite repetir
 las pruebas locales en WebKit y Firefox con `npm run test:e2e:cross-browser`.
-La última corrida completa pasó 240 de 254 casos; los 14 fallos restantes dependen
-de permisos de portapapeles y sesiones CDP exclusivos de Chromium. La validación
-completa entre motores sigue pendiente. La suite estándar conserva 175 unitarias
-y 127 e2e Chromium aprobadas; el registro detalla los ocho fallos de pruebas
-corregidos sin modificar el código del tema.
+La última corrida completa pasó **256 de 256 casos** (54,0 s). La tarjeta verifica
+copia y pegado real mediante teclado en ambos motores. Firefox reveló pérdida de
+foco al desactivar temporalmente el botón de copia; se corrige sin mover el foco
+si el usuario ya eligió otro control.
+
+Las galerías de producto se arrastran con el puntero real del mouse en estos
+motores. El carrusel de búsqueda usa TouchEvents sintéticos para probar su
+handler; esto no verifica gestos táctiles de un dispositivo físico. Chromium
+conserva la inyección táctil original por CDP. El registro detalla la evidencia
+y las operaciones reales aún pendientes.
+
+El [PR #24](https://github.com/antekera/lemoon-shopify-theme/pull/24) está abierto
+como borrador. Su primera corrida de CI pasó tests, Theme Check y Lighthouse.
+Los tickets permanecen In Progress para la revisión por página.

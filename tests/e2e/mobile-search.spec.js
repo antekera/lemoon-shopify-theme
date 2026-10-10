@@ -323,7 +323,7 @@ for (const method of ['submit', 'all']) {
   }
 }
 
-test('carousel supports arrows, dots and horizontal swipe without wrapping', async ({ page }) => {
+test('carousel supports arrows, dots and horizontal swipe without wrapping', async ({ page, browserName }) => {
   await open(page);
   const previousArrow = page.locator(`${s('previous')} .lemoon-icon`);
   await expect(previousArrow).toHaveAttribute('width', '24');
@@ -352,14 +352,30 @@ test('carousel supports arrows, dots and horizontal swipe without wrapping', asy
     return Math.abs(box.x + box.width - carouselBox.x - carouselBox.width);
   }).toBeLessThanOrEqual(1);
   const box = await page.locator(s('slide')).nth(3).boundingBox();
-  const session = await page.context().newCDPSession(page);
   const x = box.x + 40;
   const y = box.y + box.height / 2;
-  await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
-  await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 70, y }] });
-  await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 140, y: y + 5 }] });
-  await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-  await session.detach();
+  if (browserName === 'chromium') {
+    await test.step('swipe with native Chromium touch input', async () => {
+      const session = await page.context().newCDPSession(page);
+      await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
+      await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 70, y }] });
+      await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x + 140, y: y + 5 }] });
+      await session.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await session.detach();
+    });
+  } else {
+    // Cross-engine component proof; dispatchEvent does not reproduce trusted device touch.
+    await test.step('exercise the carousel handler with synthetic TouchEvents', async () => {
+      const carousel = page.locator(s('carousel'));
+      const touch = (clientX, clientY) => ({ identifier: 0, clientX, clientY });
+      const start = [touch(x, y)];
+      await carousel.dispatchEvent('touchstart', { touches: start, changedTouches: start, targetTouches: start });
+      for (const point of [touch(x + 70, y), touch(x + 140, y + 5)]) {
+        await carousel.dispatchEvent('touchmove', { touches: [point], changedTouches: [point], targetTouches: [point] });
+      }
+      await carousel.dispatchEvent('touchend', { touches: [], targetTouches: [], changedTouches: [touch(x + 140, y + 5)] });
+    });
+  }
   await expect(page.locator(s('slide')).nth(2)).toHaveAttribute('aria-hidden', 'false');
   await page.locator(s('dot')).first().click();
   await expect(page.locator(s('previous'))).toBeDisabled();
