@@ -1,7 +1,7 @@
 # Port of Lemoon Claude workflows to Codex
 
-**Date:** 2026-10-10  
-**Status:** Implementation plan pending review
+**Date:** 2026-10-10
+**Status:** Approved and implemented on PR #22
 **Scope:** Add Codex-native repository guidance and reusable workflows while preserving the existing Claude Code setup.
 
 ## Problem
@@ -53,7 +53,7 @@ The six agent definitions preserve the specialized role prompts currently embedd
 - Identify the project as a Shopify Liquid theme based on Dawn.
 - Read relevant brand, Liquid, section-schema, Git, and publishing guidance before making changes.
 - Use feature branches and PRs; never commit or push directly to `main`.
-- Keep user-facing theme text localized in `locales/en.json` and `locales/es.json`.
+- Keep user-facing theme text localized in `locales/en.default.json` and `locales/es.json`.
 - Use Shopify-safe Liquid/snippet conventions and preserve theme-editor schema requirements.
 - Protect production publishing: inspect the currently published theme and require explicit user confirmation immediately before a production push.
 - Never stage credentials, `.env`, or `config/settings_data.json`.

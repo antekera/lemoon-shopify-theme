@@ -72,7 +72,7 @@
 - [ ] Run `python3 scripts/test_codex_workflows.py translator`; expect failure because this skill and agent are absent.
 - [ ] Give the skill valid metadata and trigger it for missing or requested locale translations.
 - [ ] Preserve the Chilean voice rules, prohibited regional terms, and instructions to inspect existing locale context.
-- [ ] Limit edits to missing `locales/es.json` keys sourced from `locales/en.json`; preserve product/brand names and JSON nesting.
+- [ ] Limit edits to missing `locales/es.json` keys sourced from `locales/en.default.json`; preserve product/brand names and JSON nesting.
 - [ ] Define the agent with required TOML metadata and workspace-write scope; prohibit edits outside the locale file and prohibit retranslation of existing keys unless explicitly requested.
 - [ ] Compare the skill and agent against `.claude/commands/lemoon-translator.md`; validate both locale JSON files parse after a representative check or fixture-based test.
 - [ ] Run `python3 scripts/test_codex_workflows.py translator`; expect PASS.
