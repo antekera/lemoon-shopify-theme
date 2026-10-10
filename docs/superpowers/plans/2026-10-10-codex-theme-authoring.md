@@ -37,6 +37,7 @@
 - `.agents/skills/build-theme-section/SKILL.md` — implement an approved section specification.
 - `.codex/agents/design-interpreter.toml` — specialized design analysis instructions.
 - `.codex/agents/section-builder.toml` — scoped Shopify section implementation instructions.
+- `scripts/test_codex_workflows.py` — shared standard-library validation for this plan's skill metadata and agent TOML.
 
 ## Tasks
 
@@ -44,41 +45,47 @@
 
 **Files:** Create `.agents/skills/design-interpreter/SKILL.md` and `.codex/agents/design-interpreter.toml`.
 
+- [ ] Run `python3 scripts/test_codex_workflows.py design`; expect failure because this skill and agent are absent.
 - [ ] Give the skill unique valid frontmatter and trigger it for user-provided mockups or page design references.
 - [ ] Preserve the existing design output sections: layout, ordered sections, components, tokens, and open questions.
 - [ ] Require reading brand guidelines, section inventory, and schema guidance where available; record missing references as a limitation rather than inventing them.
 - [ ] Save the artifact to `docs/specs/YYYY-MM-DD-<page-name>-spec.md` and ask for approval before implementation.
 - [ ] Define agent `name`, `description`, and `developer_instructions` in TOML; give it bounded instructions and workspace-write access only to produce the requested spec.
 - [ ] Compare the skill and agent with `.claude/commands/lemoon-design-interpreter.md` and parse the TOML with Python `tomllib`.
+- [ ] Run `python3 scripts/test_codex_workflows.py design`; expect PASS.
 - [ ] Commit as `feat: add Codex design interpreter workflow`.
 
 ### Task 2: Port section and snippet scaffolding
 
 **Files:** Create `.agents/skills/new-theme-section/SKILL.md` and `.agents/skills/scaffold-theme-snippet/SKILL.md`.
 
+- [ ] Run `python3 scripts/test_codex_workflows.py scaffold`; expect failure because both scaffolding skills are absent.
 - [ ] Give each skill unique frontmatter and explicit trigger descriptions.
 - [ ] Preserve the section workflow: inspect 1–2 similar sections, use a semantic wrapper, apply section padding, add block Shopify attributes, schema, preset, and translations.
 - [ ] Preserve the snippet workflow: inspect similar snippets, use semantic markup, accept explicit parameters, and report a complete `{% render %}` call.
 - [ ] Require confirming branch is not `main` before creating a section and keep changes scoped to the requested artifact.
 - [ ] Compare each skill against its source Claude command and both Liquid/schema rule documents; check frontmatter fields and file references.
+- [ ] Run `python3 scripts/test_codex_workflows.py scaffold`; expect PASS.
 - [ ] Commit as `feat: add Codex section scaffolding skills`.
 
 ### Task 3: Port approved section building
 
 **Files:** Create `.agents/skills/build-theme-section/SKILL.md` and `.codex/agents/section-builder.toml`.
 
+- [ ] Run `python3 scripts/test_codex_workflows.py builder`; expect failure because this skill and agent are absent.
 - [ ] Require a spec or clear user description and confirm the current branch is not `main` before modifying files.
 - [ ] Preserve the existing steps for similar-section inspection, Liquid implementation, localization, inventory update, and schema conventions.
 - [ ] Bound implementation to the requested section and necessary translations/inventory; prohibit Shopify push or unrelated section edits.
 - [ ] Define the custom agent with required TOML fields and workspace-write scope; instruct it to follow only the approved spec and report files/tests.
 - [ ] Compare the result against `.claude/commands/lemoon-section-builder.md` and referenced rule files; parse the TOML.
+- [ ] Run `python3 scripts/test_codex_workflows.py builder`; expect PASS.
 - [ ] Commit as `feat: add Codex section builder workflow`.
 
 ### Task 4: Validate selector and role boundaries
 
 **Files:** All files created in Tasks 1–3.
 
-- [ ] Validate exactly four skill directories, unique matching names, non-empty descriptions, and valid skill Markdown frontmatter.
+- [ ] Run `python3 scripts/test_codex_workflows.py authoring`; expect PASS for this plan's four skills and two agents.
 - [ ] Parse both agent files with `python3` `tomllib` and assert `name`, `description`, and `developer_instructions` are present.
 - [ ] Confirm `$design-interpreter` is discoverable in Codex and that invoking it requests or analyzes a design and produces a spec; reload Codex once if automatic discovery has not refreshed, and do not start implementation during this check.
 - [ ] Confirm `.claude/` is unchanged, no storefront runtime files changed, and no skill can publish to Shopify.

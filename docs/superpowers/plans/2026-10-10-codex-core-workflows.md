@@ -39,17 +39,21 @@
 - `.agents/skills/push-theme-production/SKILL.md` — inspect the live theme and require direct confirmation before publishing.
 - `.agents/skills/start-theme-feature/SKILL.md` — create an appropriately named branch without losing work.
 - `.agents/skills/theme-status/SKILL.md` — read-only local Git and Shopify theme status.
+- `scripts/test_codex_workflows.py` — standard-library validator for skill frontmatter, agent TOML, and required safety wording, grouped so each implementation task can be checked independently.
 
 ## Tasks
 
 ### Task 1: Add concise repository instructions
 
-**Files:** Create `AGENTS.md`.
+**Files:** Create `AGENTS.md` and `scripts/test_codex_workflows.py`.
 
+- [ ] Write the validator for the `core` group; require concise repo identity and assertions for main-branch protection, sensitive-file exclusions, production confirmation, and Theme Check.
+- [ ] Run `python3 scripts/test_codex_workflows.py core`; expect failure because `AGENTS.md` and the validator's required guidance are absent.
 - [ ] Read the current `CLAUDE.md`, `.claude/rules/*.md`, and relevant design references before writing the Codex instructions.
 - [ ] Write project identity and point Codex to the existing Liquid, section-schema, Git, theme-workflow, and design guidance; do not copy their full checklists.
 - [ ] State branch protection, sensitive-file exclusions, localization, Shopify Theme Check, and explicit production-push confirmation.
 - [ ] Keep the file concise and free of Claude-only settings, secrets, credentials, or machine-specific paths.
+- [ ] Run `python3 scripts/test_codex_workflows.py core`; expect PASS with all required guidance present.
 - [ ] Verify every referenced path exists and inspect that the file says never to commit/push directly to `main`.
 - [ ] Commit as `docs: add Codex repository guidance`.
 
@@ -57,29 +61,33 @@
 
 **Files:** Create `theme-commit`, `open-theme-pr`, `start-theme-feature`, and `theme-status` skill directories and `SKILL.md` files.
 
+- [ ] Run `python3 scripts/test_codex_workflows.py git`; expect failure because the four Git skills are absent.
 - [ ] Give each `SKILL.md` valid YAML frontmatter with a unique `name` matching its directory and a concise trigger-focused `description`.
 - [ ] Preserve the source workflow: check branch and worktree state, follow commit conventions, stage only intended files, and run Theme Check before committing.
 - [ ] Make PR creation report changed scope and real validation; preserve the repository PR template and never imply that a Shopify theme was published.
 - [ ] Make feature start refuse a dirty worktree and use existing branch prefixes; make status inspection read-only.
 - [ ] Check each skill's contents against its corresponding `.claude/commands/lemoon-*.md` and `.claude/rules/git-conventions.md`.
+- [ ] Run `python3 scripts/test_codex_workflows.py git`; expect PASS.
 - [ ] Commit as `feat: add Codex Git workflow skills`.
 
 ### Task 3: Add Shopify publishing skills
 
 **Files:** Create `push-theme-dev` and `push-theme-production` skill directories and `SKILL.md` files.
 
+- [ ] Run `python3 scripts/test_codex_workflows.py shopify`; expect failure because the two publishing skills are absent.
 - [ ] Give both skills valid, unique frontmatter and explicit scope in their descriptions.
 - [ ] Set dev publishing to theme ID `155925381288`; require reporting changed files and preview verification instructions.
 - [ ] For production, run `shopify theme list`, identify the current live ID, show it to the user, and ask for explicit confirmation before the push.
 - [ ] Ensure the production skill does not treat inspection, preparation, or preview requests as confirmation and warns that the live store is affected.
 - [ ] Compare both workflows to `.claude/rules/theme-workflow.md` and `.claude/commands/lemoon-push-*.md`.
+- [ ] Run `python3 scripts/test_codex_workflows.py shopify`; expect PASS.
 - [ ] Commit as `feat: add Codex Shopify publishing skills`.
 
 ### Task 4: Validate discovery and safety
 
 **Files:** All files created in Tasks 1–3.
 
-- [ ] Run a local metadata check confirming exactly six skills in this plan, non-empty frontmatter `name`/`description`, and name-directory matches.
+- [ ] Run `python3 scripts/test_codex_workflows.py core && python3 scripts/test_codex_workflows.py git && python3 scripts/test_codex_workflows.py shopify`; expect PASS for this plan's six skills, repository guidance, and Shopify publishing safety assertions. The `all` group remains for final validation after the other plans.
 - [ ] Confirm Codex sees these skills in the repository skill selector and explicitly invokes `$theme-status` from a no-change status request; reload Codex once if automatic skill discovery has not refreshed.
 - [ ] Review safety scenarios in Review Focus; ensure production push is blocked pending confirmation and dev push targets only its fixed dev theme.
 - [ ] Run `git diff --check`; verify no `.claude/` files or Shopify runtime files changed and no sensitive/local files are staged.
