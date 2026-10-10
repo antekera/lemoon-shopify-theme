@@ -16,7 +16,7 @@ for (const width of [390, 1280]) {
     await page.goto('/tests/fixtures/announcement-bar.html', { waitUntil: 'commit' });
     await expect(page.locator('main')).toBeVisible();
     const initialTop = await page.locator('main').evaluate(el => el.getBoundingClientRect().top);
-    expect(initialTop).toBeGreaterThanOrEqual(44);
+    expect(initialTop).toBeGreaterThanOrEqual(width < 750 ? 32 : 36);
     releaseScript();
     await page.waitForLoadState('load');
     expect(await page.locator('main').evaluate(el => el.getBoundingClientRect().top)).toBe(initialTop);

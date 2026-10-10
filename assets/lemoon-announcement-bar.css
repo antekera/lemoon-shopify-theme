@@ -51,12 +51,12 @@
   font-weight: 400;
   letter-spacing: 0.02em;
   line-height: 1.3;
-  min-height: 44px;
+  min-height: 36px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .8rem 0;
+  padding: 4px 0;
 }
 
 .lemoon-announcement-bar .announcement-bar__link {
@@ -65,12 +65,20 @@
 
 @media screen and (max-width: 749px) {
   .lemoon-announcement-bar .announcement-bar__message {
-    font-size: 1.3rem;
-    padding: 0.4rem 0;
+    font-size: 11px;
+    line-height: 1.2;
+    min-height: 32px;
+    padding: 3px 0;
   }
 
   .lemoon-announcement-bar .slider-button {
-    height: 3.6rem;
+    height: 32px;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .lemoon-announcement-bar .announcement-bar-slider .slider-button {
+    height: 36px;
   }
 }
 
