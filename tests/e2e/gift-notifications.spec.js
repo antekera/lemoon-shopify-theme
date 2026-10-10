@@ -15,7 +15,8 @@ test('personal message is plain text and cannot create a malicious image',async(
   await page.setViewportSize({width:320,height:1000});
   await page.goto('/tests/fixtures/gift-card-email.html?scenario=unsafe-message');
   await expect(page.getByText('<img src=x onerror=alert(1)>'.repeat(7),{exact:true})).toBeVisible();
-  await expect(page.locator('img')).toHaveCount(0);
+  await expect(page.locator('img[src="x"], img[onerror]')).toHaveCount(0);
+  await expect(page.getByRole('img', { name: 'Lemoon', exact: true })).toHaveCount(1);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('buyer receipt distinguishes scheduled delivery from completed delivery',async({page})=>{

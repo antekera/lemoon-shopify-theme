@@ -33,10 +33,14 @@ test('expiration and wallet appear only when actually provided by Shopify', () =
   expect(html).toContain('Válida hasta el 10/10/2027'); expect(html).toContain('href="https://example.test/wallet"');
   expect(renderNotification('gift-card-created')).not.toContain('Agregar a Apple Wallet');
 });
-test('configured logo is optional and uses actual shop branding', () => {
-  const ctx=notificationContext();ctx.shop.email_logo_url='https://example.test/logo.png';
-  expect(renderNotification('gift-card-created',ctx)).toContain('src="https://example.test/logo.png"');
-  expect(renderNotification('gift-card-created')).toContain('Lemoon');
+test('both gift emails use the approved Lemoon image even without a global notification logo', () => {
+  const ctx=notificationContext();ctx.shop.email_logo_url='https://example.test/old-logo.png';
+  for (const name of ['gift-card-created','gift-card-receipt']) {
+    const html=renderNotification(name,ctx);
+    expect(html).toContain('/files/lemoon-checkout-logo.png');
+    expect(html).not.toContain('src="https://example.test/old-logo.png"');
+    expect(renderNotification(name)).toContain('/files/lemoon-checkout-logo.png');
+  }
 });
 test('RTL layout preserves a left-to-right redemption code', () => {
   const ctx=notificationContext();ctx.locale_direction='rtl';

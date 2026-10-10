@@ -30,11 +30,7 @@
     <tr><td align="center" style="padding:32px 12px;">
       <table role="presentation" class="email-container" width="600" style="width:100%;max-width:600px;background-color:#FFFFFF;">
         <tr><td class="email-content" style="padding:40px 40px 24px;">
-          {% if shop.email_logo_url %}
-            <img src="{{ shop.email_logo_url | escape }}" alt="{{ shop.name | escape }}" width="{{ shop.email_logo_width | default: 160 }}" height="38" style="display:block;max-width:100%;height:auto;border:0;">
-          {% else %}
-            <p style="margin:0;color:#0B1F3A;font-family:Georgia,serif;font-size:34px;line-height:1.1;">{{ shop.name | escape }}</p>
-          {% endif %}
+          <img src="https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-checkout-logo.png?v=1791611013" alt="{{ shop.name | escape }}" width="160" height="38" style="display:block;max-width:100%;height:auto;border:0;">
         </td></tr>
         <tr><td class="email-content" style="padding:12px 40px 28px;">
           <h1 class="email-heading" style="margin:0 0 16px;color:#0B1F3A;font-family:Arial,Helvetica,sans-serif;font-size:36px;font-weight:400;line-height:1.15;">{{ email_title }}</h1>

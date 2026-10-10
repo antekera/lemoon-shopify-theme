@@ -2,8 +2,9 @@
 
 Plantillas de revisión para la tienda Lemoon, en español. No forman parte del
 bundle del tema: Shopify administra las notificaciones de clientes por separado.
-`shop.email_logo_url`, `shop.name` y `shop.email` usan la configuración real.
-Sin logo configurado se muestra el nombre de la tienda. Las fuentes seguras para
+`shop.name` y `shop.email` usan la configuración real. Ambos correos usan el
+logo PNG de Lemoon ya cargado en Archivos (`lemoon-checkout-logo.png`), con ancho
+de 160px; no dependen del logo global de notificaciones. Las fuentes seguras para
 correo evitan depender de tipografías externas. El azul y el fondo cálido replican
 los colores de la marca; estos valores deben estar inline para los clientes de
 correo y no pueden usar las variables CSS del storefront.
@@ -15,8 +16,10 @@ correo y no pueden usar las variables CSS del storefront.
 | `es/gift-card-receipt.liquid` | Recibo de tarjeta de regalo, cuerpo HTML |
 | `es/gift-card-receipt.subject.liquid` | Recibo de tarjeta de regalo, asunto |
 
-Ambas se probaron con **Previsualizar plantilla con contenido**, sin guardar ni
-enviar una prueba. La muestra nativa de Shopify usa $100 y un código ficticio;
+Ambas se guardaron en Shopify el 10-10-2026 a petición del usuario, después de
+revisar **Previsualizar plantilla con contenido**. El recibo recupera el diseño
+preparado y Nueva tarjeta de regalo conserva su diseño con el logo corregido.
+No se enviaron correos de prueba. La muestra nativa de Shopify usa $100 y un código ficticio;
 no es una tarjeta emitida. LEM-9 permanece In Progress hasta revisión.
 
 ## Aplicación después de revisar

@@ -874,3 +874,25 @@ el desafío en `/cart/clear.js`. La corrida se detuvo: **2 aprobados, 1 fallido,
 endpoints, no se resolvió el desafío y no se modificó la protección del sitio.
 Esta evidencia no confirma el caso de rechazo ni el carrito completo en los
 tres tamaños. La suite HTTPS completa continúa pendiente.
+
+
+### Correos de gift card guardados — 10-10-2026
+
+A petición del usuario, se restauró y guardó el diseño de Recibo de tarjeta de
+regalo (`gift_card_confirmation`) y se corrigió el logo de Nueva tarjeta de
+regalo (`gift_card_notification`), conservando el contenido de esta última.
+Ambos usan el PNG de Lemoon existente en Archivos, a 160px de ancho.
+Los originales y asuntos se respaldaron en `/tmp/lemoon-gift-email-backup-20261010`.
+
+La recarga del editor y sus previews nativos confirmaron la persistencia de
+ambas plantillas. El primer intento del recibo no persistió; se reintrodujo
+mediante pegado nativo del editor y se verificó nuevamente después de guardar.
+Capturas `/tmp/lemoon-gift-confirmation-saved.jpg` y
+`/tmp/lemoon-gift-notification-saved.jpg`. Muestras de Shopify con datos sintéticos.
+No se enviaron correos de prueba ni se emitió saldo. Estas notificaciones sí
+aplican a futuros envíos de la tienda; no forman parte del tema de desarrollo.
+
+Validación: 9 unitarias, 7 e2e de notificaciones y Theme Check (252 archivos,
+cero incidencias). La prueba de inyección conserva la prohibición de imágenes
+con `src=x` o `onerror`, permitiendo la imagen legítima del logo. LEM-9 continúa
+In Progress: entrega real, canje y revisión del usuario siguen pendientes.
