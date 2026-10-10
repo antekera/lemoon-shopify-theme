@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const route = '/pages/buscar-mi-estilo?view=buscar-mi-estilo';
 async function openQuiz(page) {
-  const response = await page.goto(route);
+  const response = await openStorefrontPage(page, route);
   expect(response.status()).toBe(200);
   await expect(page).not.toHaveURL(/\/password/);
   const quiz = page.locator('[data-style-quiz]');

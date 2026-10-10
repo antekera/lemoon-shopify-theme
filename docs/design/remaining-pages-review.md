@@ -783,3 +783,94 @@ Se mantiene la revisión del usuario por página, los tickets In Progress y las
 gift card y notificaciones conservan su estado de revisión. Pedidos/pagos,
 recepción real de formularios, emisión/canje de saldo y persistencia/aislamiento
 de cuentas requieren las verificaciones operativas registradas anteriormente.
+
+### Perfil nativo — guardado, recarga y restauración verificados
+
+LEM-123 sigue In Progress, confirmado mediante consulta directa a Linear.
+La cuenta autenticada autorizada tenía ambos nombres vacíos y ninguna dirección.
+Desde su formulario nativo se guardaron «Prueba Lemoon» y «Validación». Al
+cerrarse el formulario, el encabezado mostró los nombres. Una recarga completa
+conservó ese encabezado y, al reabrir Editar perfil, ambos inputs recuperaron
+los valores guardados.
+
+Se restablecieron los dos valores originales desde el mismo formulario. Tras
+guardar, recargar y reabrir el formulario, ambos inputs coincidieron con el estado
+inicial. No se editó el correo, no se agregaron direcciones y marketing permaneció
+desactivado. El regreso a Mis pedidos se verificó mediante Enter; no se creó
+pedido, saldo ni transacción. La captura de evidencia contiene exclusivamente
+el encabezado del formulario y los nombres ficticios, sin correo ni tokens.
+
+Esta prueba manual acredita persistencia y restauración de nombres en la cuenta
+real; no acredita direcciones ni aislamiento entre dos clientes. El checkout y
+el branding de cuentas siguen en borrador. Los tickets de páginas consultados
+en Linear conservan In Progress para la revisión del usuario.
+
+### CI — variación de CPU en Lighthouse
+
+En el commit `c01913c0`, los tests y Theme Check pasaron. Lighthouse completó
+nueve mediciones y falló únicamente el mínimo de rendimiento del home: mejor
+valor 0,59 frente a 0,60 requerido (tres valores: 0,51 / 0,59 / 0,56). El tema
+transitorio `188961521832` se eliminó; la confirmación de borrado consta en el log.
+
+La comparación de los informes medianos del home muestra 0,75 en la corrida
+inicial y 0,56 en la segunda; LCP 4237 → 5865 ms y TBT 277 → 737 ms. Ambos usan
+Lighthouse 11.4.0, perfil móvil y CPU slowdown 4. El benchmark de CPU del runner
+cambia de 4348 a 2448. Los scripts de Lemoon cargados en el home son los mismos;
+la corrección de gift card no se carga en esa página. En ambos informes se
+descargan cinco scripts de Google Tag Manager con tres IDs distintos (dos
+duplicados), unos 850 KB transferidos. Estos datos identifican carga externa y
+variación del entorno; no prueban una regresión causada por la corrección de foco.
+
+La única repetición del job fallido con el mismo commit terminó aprobada:
+[Lighthouse, intento 2](https://github.com/antekera/lemoon-shopify-theme/actions/runs/38086634746/job/114316318673).
+El gate 0,60 no se redujo y los scripts de aplicaciones no se alteraron. El log
+confirma el borrado del segundo tema transitorio. Los informes medianos muestran:
+
+| Página | Rendimiento | Accesibilidad | Benchmark CPU | LCP | TBT |
+| --- | --- | --- | --- | --- | --- |
+| Home | 0,60 | 0,99 | 3373,5 | 6144 ms | 395 ms |
+| PDP | 0,59 | 0,96 | 3376 | 4884 ms | 592 ms |
+| PLP | 0,60 | 0,95 | 3193,5 | 4855 ms | 610 ms |
+
+El gate existente agrega las tres mediciones de forma optimista; los informes
+publicados son medianos, por eso el PDP mediano puede quedar bajo 0,60 aunque el
+job pase. El resultado apoya la hipótesis de variación entre runners; no acredita
+una mejora de rendimiento del código. Se conserva el primer fallo en el registro.
+
+### Recomendador — corrida HTTPS completa aprobada
+
+La primera corrida HTTPS de los nueve casos pasó los seis de escritorio/tablet.
+En móvil, el primer caso agotó 45 s al seleccionar el radio Redondo: el banner
+nativo de cookies y la barra de preview cubrían los controles. Quedaron dos
+casos sin ejecutar. La captura confirmó ambos elementos; no era una redirección
+a contraseña ni un rechazo HTTP de Cloudflare.
+
+`openQuiz` reutiliza ahora `openStorefrontPage`, como las otras páginas de
+contenido. Este helper establece un rechazo real de las tres finalidades
+opcionales mediante la interfaz existente y añade la opción oficial `pb=0`.
+No oculta overlays con CSS, no intercepta redes y no usa clicks forzados. La
+selección con `check`, la prueba del foco al fallar la validación y las aserciones
+de ranking, presupuesto, producto y catálogo se mantienen. Los contextos sin
+JavaScript conservan su propio recorrido y su estado autorizado del preview.
+
+El caso móvil focalizado pasó. La repetición completa posterior pasó **9/9**
+en **36,3 s** con escritorio 1440×900, tablet 820×1180 y móvil 390×844. También
+pasaron las **8 unitarias** del recomendador y Theme Check CLI 4.8.5 con
+`--fail-level warning`: **252 archivos sin infracciones**. No hubo compra,
+envío de formularios ni cambios de asignaciones CMS.
+
+### Carrito — bloqueo HTTPS confirmado nuevamente
+
+Después de aprobar la suite HTTPS del recomendador, se comprobó la suite de
+quince casos de carrito con `--max-failures=1`. Pasaron dos casos desktop:
+carrito vacío y edición de cantidades, con totales reales, conservación de
+propiedades, eliminación completa y foco en el enlace de catálogo.
+
+El tercero, destinado al rechazo de actualización, recibió HTTP 429 con
+`cf-mitigated: challenge` al consultar `/products/lemoon-colca.js`, antes de
+agregar su producto o simular el rechazo. El cleanup de ese caso también recibió
+el desafío en `/cart/clear.js`. La corrida se detuvo: **2 aprobados, 1 fallido,
+12 sin ejecutar** en **18,4 s**, más el error de cleanup. No se reintentaron esos
+endpoints, no se resolvió el desafío y no se modificó la protección del sitio.
+Esta evidencia no confirma el caso de rechazo ni el carrito completo en los
+tres tamaños. La suite HTTPS completa continúa pendiente.

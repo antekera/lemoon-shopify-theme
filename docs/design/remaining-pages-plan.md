@@ -88,11 +88,11 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-120 | Checkout | Basic; branding nativo | Borrador guardado y revisado desktop/mobile; no publicado; In Progress |
 | LEM-121 | Confirmación y estado | Superficie nativa con branding de borrador | Preview simulado inspeccionado; compra real pendiente; In Progress |
 | LEM-122 | Acceso a cuenta | NEW_CUSTOMER_ACCOUNTS, cuenta.lemoon.cl | Acceso real por correo/código verificado; cuenta opcional y compra como invitado confirmadas; In Progress |
-| LEM-123 | Perfil y direcciones | Cuentas nuevas nativas, branding compartido | Formularios y cancelación revisados con sesión real en tres tamaños; persistencia pendiente; In Progress |
+| LEM-123 | Perfil y direcciones | Cuentas nuevas nativas, branding compartido | Formularios y cancelación revisados en tres tamaños; guardado, recarga y restauración de nombres verificados con sesión real; direcciones e aislamiento pendientes; In Progress |
 | LEM-124 | Mis pedidos | Cuentas nuevas nativas, branding compartido | Estado vacío revisado con sesión real en tres tamaños; aislamiento entre clientes pendiente; In Progress |
 | LEM-125 | Detalle del pedido | Estado nativo del pedido, branding compartido | Menú de ayuda guardado en borrador; detalle simulado y teclado móvil verificados; tablet, pedido real y aislamiento pendientes; In Progress |
 | LEM-126 | 404 | `404.json`; respuesta HTTP real | Implementado localmente; pruebas y revisiones aprobadas; In Progress |
-| LEM-11 | Encuentra tu lente ideal | Quiz en `/pages/buscar-mi-estilo`, catálogo real, M9 | Implementado y revisado; 8 unitarias; recorrido y destinos HTTPS verificados; e2e local 3 pasan/6 fallan al destino por contraseña; In Progress; asignación CMS pendiente |
+| LEM-11 | Encuentra tu lente ideal | Quiz en `/pages/buscar-mi-estilo`, catálogo real, M9 | Implementado y revisado; 8 unitarias y 9 e2e HTTPS pasan en escritorio/tablet/móvil, incluidos destinos y navegación sin JavaScript; In Progress; asignación CMS pendiente |
 | LEM-23 | Configurador de cristales | Flujo refinado aprobado; catálogo/laboratorio posteriores | Frontend y pruebas implementados; In Progress; prerrequisitos operativos pendientes |
 | LEM-102 | Cristales | Colección nativa y flujo de selección | Guía editorial integrada bajo el catálogo; configurador refinado y enlace de variante; catálogo definitivo pendiente; In Progress |
 | Sin ticket por página localizado | Password / lanzamiento | Lanzamiento editorial con consentimiento y autenticación nativa | Implementado y revisado; pruebas live aprobadas |
@@ -131,7 +131,7 @@ página. Nunca declarar completada la totalidad por pasar una suite parcial.
   de 365 días, incluyendo condiciones.
 - Confirmar tarifas/plazos, identificación legal e historia del negocio antes
   de publicar contenido definitivo.
-- Plan, cuentas y configuración nativa inspeccionados; faltan publicación y pruebas reales de acceso/pago.
+- Plan, cuentas y configuración nativa inspeccionados; acceso real y persistencia de nombres verificados. Faltan publicación, pago, pedidos reales, direcciones e aislamiento entre clientes.
 - Aprobación del plan recibida; continuar implementación por página.
 - Toda publicación en Shopify requiere autorización de publicación; producción
   exige inspeccionar el ID vigente y confirmación inmediatamente antes del push.

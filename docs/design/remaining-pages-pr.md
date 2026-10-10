@@ -47,8 +47,11 @@ Cambian carrito, búsqueda, blog, artículo, página genérica, 404 y tarjeta em
 - `npm run test:e2e:cross-browser`: 256 de 256 casos aprobados en WebKit/Firefox. Copia y pegado reales por teclado; galerías con mouse real. El carrusel usa TouchEvents sintéticos en estos motores y conserva el toque por CDP en Chromium; falta la prueba táctil en dispositivos físicos.
 - Firefox reveló pérdida de foco al desactivar el botón de copia: se recupera al terminar y una prueba adicional comprueba que no se roba el foco a otro control.
 - La primera corrida de CI del PR pasó tests, Theme Check y Lighthouse; cada actualización de la rama requiere una corrida nueva.
-- La corrida HTTPS registrada de guías, contacto y soporte pasó 51 casos en escritorio, tablet y móvil. Otras suites conservan evidencia por página; la corrida completa de todo el storefront no está aprobada. Las últimas peticiones de carrito/contenido recibieron HTTP 429 de Cloudflare y se detuvieron.
-- Pendiente: revisión del usuario por página, recepción real de contacto, persistencia y aislamiento de cuentas, detalle con pedido real, pago, emisión/canje de gift card y publicación de contenido aprobado.
+- En `c01913c0`, tests y Theme Check pasaron; Lighthouse falló inicialmente en el home (0,59 frente al gate 0,60). Una única repetición con el mismo código pasó. Los informes muestran variación del benchmark CPU del runner: 4348 → 2448 → 3373,5. El umbral y la agregación existentes permanecen iguales; el primer fallo y los informes medianos están registrados.
+- Perfil nativo con sesión real: nombres ficticios guardados y recuperados tras recargar; valores originales restaurados y verificados tras una segunda recarga. Correo, direcciones y marketing conservan su estado.
+- Recomendador: 8 unitarias y 9 e2e HTTPS aprobados en escritorio, tablet y móvil; incluyen validación, ranking, presupuesto y destinos reales con/sin JavaScript. Se reutiliza el helper de elección real de privacidad y `pb=0`; se conservan radios y aserciones.
+- La corrida HTTPS registrada de guías, contacto y soporte pasó 51 casos en escritorio, tablet y móvil. La nueva corrida de carrito pasó 2 casos desktop y se detuvo por HTTP 429 de Cloudflare en el tercero, con 12 sin ejecutar y un error de cleanup. Otras suites conservan evidencia por página; la corrida completa de todo el storefront no está aprobada.
+- Pendiente: revisión del usuario por página, recepción real de contacto, persistencia de direcciones y aislamiento entre clientes, detalle con pedido real, pago, emisión/canje de gift card y publicación de contenido aprobado.
 
 ### Demo links
 

@@ -78,7 +78,7 @@ recomendadas que ya estaban seleccionadas.
 | Checkout | LEM-120 | Branding guardado en borrador del perfil `7112229032`; revisar desde [Configuración de checkout](https://admin.shopify.com/store/lemoon-8277/settings/checkout). No publicado. |
 | Confirmación y estado | LEM-121 | Preview nativo simulado inspeccionado; pedido real pendiente. |
 | Acceso a cuenta | LEM-122 | [Cuenta Lemoon](https://cuenta.lemoon.cl/profile); seis e2e públicos pasan y acceso real por correo/código verificado; compra como invitado confirmada en Admin. |
-| Perfil y direcciones | LEM-123 | Formularios y cancelación revisados con sesión real en tres tamaños; persistencia pendiente. |
+| Perfil y direcciones | LEM-123 | Formularios y cancelación revisados en tres tamaños; nombres guardados, recargados y restaurados con sesión real. Direcciones e aislamiento pendientes. |
 | Mis pedidos | LEM-124 | Estado vacío revisado con sesión real en tres tamaños; aislamiento entre clientes pendiente. |
 | Detalle del pedido | LEM-125 | Preview simulado inspeccionado; pedido real pendiente. |
 | Tarjeta de regalo | LEM-9 | [Muestra nativa en el editor](https://admin.shopify.com/store/lemoon-8277/themes/188783886504/editor?previewPath=%2Fgift_cards%2F123456%2Fpreview). Vista emitida verificada; compra preparada con producto nativo en borrador. Correos preparados y renderizados como preview sin guardar; operación pendiente. |
@@ -363,3 +363,27 @@ y las operaciones reales aún pendientes.
 El [PR #24](https://github.com/antekera/lemoon-shopify-theme/pull/24) está abierto
 como borrador. Su primera corrida de CI pasó tests, Theme Check y Lighthouse.
 Los tickets permanecen In Progress para la revisión por página.
+
+### Perfil — persistencia verificada con sesión real
+
+Se guardaron los nombres ficticios «Prueba Lemoon» y «Validación», se recargó
+la página y el formulario recuperó ambos valores. Después se guardaron los
+valores originales, se volvió a recargar y el formulario confirmó la restauración.
+El correo, las direcciones y las preferencias de marketing conservaron su estado.
+La prueba no confirma persistencia de direcciones ni aislamiento entre clientes;
+LEM-123 continúa In Progress.
+
+### Recomendador — nueve casos HTTPS aprobados
+
+La corrida completa pasó nueve casos en escritorio, tablet y móvil (36,3 s):
+validación, conservación de respuestas al volver, recomendaciones con variantes
+reales, reinicio, presupuesto nativo y destinos de producto/catálogo. El recorrido
+sin JavaScript también pasó. El inicio de los casos interactivos ahora registra
+un rechazo real de cookies mediante el helper de páginas y usa la opción oficial
+`pb=0`; conserva todas las aserciones y los radios sin clicks forzados. Las ocho
+unitarias del recomendador pasan. Su asignación CMS sigue pendiente de revisión.
+
+La nueva corrida de carrito pasó dos casos desktop y se detuvo al volver a
+recibir el desafío HTTP 429 en el tercero; doce casos quedaron sin ejecutar.
+El recomendador aprobado no demuestra que los endpoints de carrito estén libres
+del bloqueo. El registro conserva los resultados y el error de cleanup.
