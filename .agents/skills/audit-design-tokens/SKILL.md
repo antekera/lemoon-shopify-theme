@@ -10,7 +10,7 @@ Use the `design-token-auditor` agent when available. Read `docs/design/brand-gui
 Check:
 
 - **Colors:** each documented color has a CSS custom property; identify contradictory/duplicate hardcoded hex values in base CSS; compare theme color-scheme settings with the palette.
-- **Typography:** `--font-heading-family` and `--font-body-family` use `'Urbanist', sans-serif`; CSS weights follow 300, 400, 500, 600; no undocumented font families are introduced.
+- **Typography:** `--font-heading-family` uses `'Urbanist', sans-serif` and `--font-body-family` uses `'Hanken Grotesk', sans-serif`; CSS weights follow 300, 400, 500, 600; no undocumented font families are introduced.
 - **Spacing:** section padding defaults match 64px desktop / 40px mobile; spacing respects the 4px base unit.
 - **Grid:** maximum content width matches 1280px.
 

@@ -79,7 +79,7 @@ def validate_agent(name: str) -> None:
 
 
 def validate_group(group: str) -> None:
-    if group == "core":
+    if group in {"core", "all"}:
         path = ROOT / "AGENTS.md"
         require(path.is_file(), "missing root AGENTS.md")
         content = path.read_text(encoding="utf-8").lower()
@@ -96,7 +96,7 @@ def validate_group(group: str) -> None:
     for name in sorted(agent_names):
         validate_agent(name)
 
-    if group == "shopify":
+    if group in {"shopify", "all"}:
         dev = (ROOT / ".agents/skills/push-theme-dev/SKILL.md").read_text(encoding="utf-8")
         prod = (ROOT / ".agents/skills/push-theme-production/SKILL.md").read_text(encoding="utf-8").lower()
         require("155925381288" in dev, "dev publishing skill must target theme 155925381288")
@@ -104,11 +104,23 @@ def validate_group(group: str) -> None:
         confirmation_index = prod.find("only after confirmation")
         allow_live_index = prod.find("--allow-live")
         require(confirmation_index >= 0 and allow_live_index >= 0 and confirmation_index < allow_live_index, "production publishing must add --allow-live only after confirmation")
+        require("git status --short" in prod and "working tree" in prod and "commit" in prod, "production publishing must stop when the working tree has uncommitted changes")
 
     if group == "git":
         commit = (ROOT / ".agents/skills/theme-commit/SKILL.md").read_text(encoding="utf-8")
         for path in ("AGENTS.md", ".agents/skills/", ".codex/agents/"):
             require(path in commit, f"commit workflow must allow selected Codex files: {path}")
+
+    if group in {"builder", "all"}:
+        builder = (ROOT / ".agents/skills/build-theme-section/SKILL.md").read_text(encoding="utf-8")
+        require("section-builder" in builder and "agent" in builder.lower(), "section workflow must delegate to the section-builder agent")
+
+    if group in {"tokens", "all"}:
+        token_skill = (ROOT / ".agents/skills/audit-design-tokens/SKILL.md").read_text(encoding="utf-8")
+        token_agent = (ROOT / ".codex/agents/design-token-auditor.toml").read_text(encoding="utf-8")
+        require("--font-heading-family" in token_skill and "'Urbanist', sans-serif" in token_skill, "token skill must audit the documented heading font")
+        require("--font-body-family" in token_skill and "'Hanken Grotesk', sans-serif" in token_skill, "token skill must audit the documented body font")
+        require("--font-body-family" in token_agent and "'Hanken Grotesk', sans-serif" in token_agent, "token auditor agent must audit the documented body font")
 
     if group == "all":
         require(sum(map(len, SKILLS.values())) == 14, "workflow map must contain exactly 14 skills")
