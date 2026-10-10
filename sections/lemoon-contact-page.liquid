@@ -1,0 +1,294 @@
+{%- assign contact_form_id = 'LemoonContact-' | append: section.id -%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-contact {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    color: var(--lemoon-text-primary);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__layout {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: var(--lemoon-space-16);
+    align-items: start;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__title {
+    margin: 0;
+    color: var(--lemoon-text-brand);
+    font-family: var(--lemoon-font-heading);
+    font-size: var(--lemoon-type-h1-size);
+    font-weight: var(--lemoon-type-h1-weight);
+    line-height: var(--lemoon-type-h1-leading);
+    letter-spacing: var(--lemoon-type-h1-tracking);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__intro {
+    max-width: 40rem;
+    margin: var(--lemoon-space-5) 0 var(--lemoon-space-8);
+    color: var(--lemoon-text-secondary);
+    font-size: 1.6rem;
+    line-height: 1.6;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__channels {
+    display: grid;
+    gap: var(--lemoon-space-5);
+    margin: var(--lemoon-space-8) 0;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__channels dt,
+  #shopify-section-{{ section.id }} .lemoon-contact__faq-title {
+    margin: 0 0 var(--lemoon-space-2);
+    font-family: var(--lemoon-font-heading);
+    font-size: 1.8rem;
+    font-weight: var(--lemoon-weight-semibold);
+    color: var(--lemoon-text-brand);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__channels dd { margin: 0; }
+  #shopify-section-{{ section.id }} .lemoon-contact__copy a {
+    display: inline-block;
+    padding: var(--lemoon-space-2) 0;
+    color: var(--lemoon-text-brand);
+    text-underline-offset: .4rem;
+    overflow-wrap: anywhere;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__faq {
+    max-width: 40rem;
+    padding-top: var(--lemoon-space-6);
+    border-top: 1px solid var(--lemoon-border-default);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__faq p {
+    margin: 0 0 var(--lemoon-space-2);
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--lemoon-text-secondary);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__panel {
+    min-width: 0;
+    padding: var(--lemoon-space-10);
+    border-radius: var(--lemoon-radius-modal);
+    background: var(--lemoon-surface-warm);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__form-title {
+    margin: 0 0 var(--lemoon-space-3);
+    font-family: var(--lemoon-font-heading);
+    font-size: var(--lemoon-type-h2-size);
+    font-weight: var(--lemoon-type-h2-weight);
+    color: var(--lemoon-text-brand);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__required {
+    margin: 0 0 var(--lemoon-space-6);
+    color: var(--lemoon-text-secondary);
+    font-size: 1.3rem;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__fields { display: grid; gap: var(--lemoon-space-5); }
+  #shopify-section-{{ section.id }} .lemoon-contact__field label {
+    display: block;
+    margin-bottom: var(--lemoon-space-2);
+    font-size: 1.4rem;
+    font-weight: var(--lemoon-weight-medium);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__field :is(input, textarea) {
+    width: 100%;
+    min-height: 4.8rem;
+    padding: var(--lemoon-space-3) var(--lemoon-space-5);
+    border: 1px solid var(--lemoon-border-warm);
+    border-radius: var(--lemoon-radius-search);
+    background: var(--lemoon-surface-page);
+    color: var(--lemoon-text-primary);
+    font: inherit;
+    font-size: 1.6rem;
+    text-align: left;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__field textarea { display: block; resize: vertical; min-height: 16rem; }
+  #shopify-section-{{ section.id }} .lemoon-contact__field [aria-invalid="true"] { border-color: var(--lemoon-status-error); }
+  #shopify-section-{{ section.id }} .lemoon-contact__hint {
+    margin: var(--lemoon-space-2) 0 0;
+    color: var(--lemoon-text-secondary);
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__submit {
+    min-height: 4.8rem;
+    margin-top: var(--lemoon-space-6);
+    padding: var(--lemoon-space-3) var(--lemoon-space-6);
+    border: 1px solid var(--lemoon-action-primary);
+    border-radius: var(--lemoon-radius-button);
+    background: var(--lemoon-action-primary);
+    color: var(--lemoon-text-inverse);
+    font-family: var(--lemoon-font-heading);
+    font-size: 1.4rem;
+    font-weight: var(--lemoon-weight-semibold);
+    cursor: pointer;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__submit:hover { background: var(--lemoon-action-primary-hover); }
+  #shopify-section-{{ section.id }} .lemoon-contact__status {
+    margin: 0 0 var(--lemoon-space-6);
+    padding: var(--lemoon-space-4);
+    border: 1px solid currentColor;
+    border-radius: var(--lemoon-radius-md);
+    background: var(--lemoon-surface-page);
+    font-size: 1.4rem;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__status--success { color: var(--lemoon-text-primary); border-color: var(--lemoon-status-success); }
+  #shopify-section-{{ section.id }} .lemoon-contact__status--error,
+  #shopify-section-{{ section.id }} .lemoon-contact__error { color: var(--lemoon-status-error); }
+  #shopify-section-{{ section.id }} .lemoon-contact__status p { margin: 0; }
+  #shopify-section-{{ section.id }} .lemoon-contact__error { display: block; margin-top: var(--lemoon-space-2); }
+  #shopify-section-{{ section.id }} .lemoon-contact :is(a, input, textarea, button):focus-visible {
+    outline: 2px solid var(--lemoon-border-strong);
+    outline-offset: 4px;
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-contact__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-contact__panel { padding: var(--lemoon-space-6); }
+    #shopify-section-{{ section.id }} .lemoon-contact__submit { width: 100%; }
+  }
+{%- endstyle -%}
+
+<div class="lemoon-contact page-width">
+  <div class="lemoon-contact__layout">
+    <div class="lemoon-contact__copy">
+      <h1 class="lemoon-contact__title">{{ 'sections.lemoon_contact_page.title' | t }}</h1>
+      <p class="lemoon-contact__intro">{{ 'sections.lemoon_contact_page.intro' | t }}</p>
+      {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
+      {%- if section.settings.contact_email != blank or section.settings.whatsapp_url != blank or section.settings.contact_hours != blank -%}
+      <dl class="lemoon-contact__channels">
+        {%- if section.settings.contact_email != blank -%}
+          <div>
+            <dt>{{ 'sections.lemoon_contact_page.email_channel' | t }}</dt>
+            <dd><a href="mailto:{{ section.settings.contact_email | strip | escape }}">{{ section.settings.contact_email | escape }}</a></dd>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.whatsapp_url != blank -%}
+          <div>
+            <dt>{{ 'sections.lemoon_contact_page.whatsapp_channel' | t }}</dt>
+            <dd><a href="{{ section.settings.whatsapp_url | escape }}">{{ 'sections.lemoon_contact_page.whatsapp_link' | t }}</a></dd>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.contact_hours != blank -%}
+          <div>
+            <dt>{{ 'sections.lemoon_contact_page.hours_channel' | t }}</dt>
+            <dd>{{ section.settings.contact_hours | escape | newline_to_br }}</dd>
+          </div>
+        {%- endif -%}
+      </dl>
+      {%- endif -%}
+      <div class="lemoon-contact__faq">
+        <h2 class="lemoon-contact__faq-title">{{ 'sections.lemoon_contact_page.faq_title' | t }}</h2>
+        <p>{{ 'sections.lemoon_contact_page.faq_description' | t }}</p>
+        <a href="{{ routes.root_url | append: '/pages/preguntas-frecuentes' | replace: '//', '/' }}">{{ 'sections.lemoon_contact_page.faq_link' | t }}</a>
+      </div>
+    </div>
+    <div class="lemoon-contact__panel">
+      <h2 class="lemoon-contact__form-title">{{ 'sections.lemoon_contact_page.form_title' | t }}</h2>
+      <p class="lemoon-contact__required">{{ 'sections.lemoon_contact_page.required_hint' | t }}</p>
+      {%- form 'contact', id: contact_form_id, class: 'lemoon-contact__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="lemoon-contact__status lemoon-contact__status--success" role="status" aria-live="polite" tabindex="-1" autofocus>{{ 'sections.lemoon_contact_page.success' | t }}</p>
+        {%- elsif form.errors -%}
+          <div class="lemoon-contact__status lemoon-contact__status--error" role="alert" aria-live="assertive" tabindex="-1" autofocus>
+            <p>{{ 'sections.lemoon_contact_page.error_heading' | t }}</p>
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+        <div class="lemoon-contact__fields">
+          <div class="lemoon-contact__field">
+            <label for="{{ contact_form_id }}-name">{{ 'sections.lemoon_contact_page.name' | t }}</label>
+            <input id="{{ contact_form_id }}-name" type="text" name="contact[name]" autocomplete="name" value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}" required>
+          </div>
+          <div class="lemoon-contact__field">
+            <label for="{{ contact_form_id }}-email">{{ 'sections.lemoon_contact_page.email' | t }}</label>
+            <input id="{{ contact_form_id }}-email" type="email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="{{ contact_form_id }}-email-error"{% endif %} required>
+            {%- if form.errors contains 'email' -%}
+              <small class="lemoon-contact__error" id="{{ contact_form_id }}-email-error">{{ form.errors.translated_fields.email | capitalize | escape }} {{ form.errors.messages.email | escape }}</small>
+            {%- endif -%}
+          </div>
+          <div class="lemoon-contact__field">
+            <label for="{{ contact_form_id }}-phone">{{ 'sections.lemoon_contact_page.phone' | t }}</label>
+            <input id="{{ contact_form_id }}-phone" type="tel" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone | escape }}{% elsif customer %}{{ customer.phone | escape }}{% endif %}">
+          </div>
+          <div class="lemoon-contact__field">
+            <label for="{{ contact_form_id }}-body">{{ 'sections.lemoon_contact_page.message' | t }}</label>
+            <textarea id="{{ contact_form_id }}-body" name="contact[body]" rows="6" aria-describedby="{{ contact_form_id }}-body-hint" required>{{ form.body | escape }}</textarea>
+            <p class="lemoon-contact__hint" id="{{ contact_form_id }}-body-hint">{{ 'sections.lemoon_contact_page.message_hint' | t }}</p>
+          </div>
+        </div>
+        <button class="lemoon-contact__submit" type="submit">{{ 'sections.lemoon_contact_page.send' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{%- comment -%}Commercial preview copy is explicitly opt-in; disable demo_data to restore normal content.{%- endcomment -%}
+{% schema %}
+{
+  "name": "t:sections.lemoon_contact_page.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "demo_data",
+      "default": false,
+      "label": "t:sections.lemoon_demo.enabled_label",
+      "info": "t:sections.lemoon_demo.enabled_info"
+    },
+    {
+      "type": "richtext",
+      "id": "demo_content",
+      "label": "t:sections.lemoon_demo.content_label",
+      "info": "t:sections.lemoon_demo.content_info"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "t:sections.lemoon_contact_page.settings.contact_email.label",
+      "info": "t:sections.lemoon_contact_page.settings.contact_email.info"
+    },
+    {
+      "type": "url",
+      "id": "whatsapp_url",
+      "label": "t:sections.lemoon_contact_page.settings.whatsapp_url.label",
+      "info": "t:sections.lemoon_contact_page.settings.whatsapp_url.info"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_hours",
+      "label": "t:sections.lemoon_contact_page.settings.contact_hours.label",
+      "info": "t:sections.lemoon_contact_page.settings.contact_hours.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lemoon_contact_page.name"
+    }
+  ]
+}
+{% endschema %}

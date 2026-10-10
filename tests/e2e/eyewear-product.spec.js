@@ -1,8 +1,66 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { Liquid } from 'liquidjs';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/tests/fixtures/eyewear-product.html');
   await expect(page.locator('[data-add]')).toBeEnabled();
+});
+
+test('a color and size product stays on the PDP despite having a configurator URL', async ({ page }) => {
+  await page.route('**/tests/fixtures/eyewear-product.html', async route => {
+    const response = await route.fetch();
+    let html = await response.text();
+    html = html.replace('data-cart-url="/cart"', 'data-cart-url="/cart" data-configurator-url="/products/size-only"');
+    html = html.replace('data-option-name="Lentes"', 'data-option-name="Tamaño"');
+    html = html.replace('value="Solo armazón" checked', 'value="Solo armazón"');
+    html = html.replace('value="Monofocal">', 'value="Monofocal" checked>');
+    html = html.replaceAll('Monofocal', 'M');
+    await route.fulfill({ response, body: html });
+  });
+  await page.goto('/tests/fixtures/eyewear-product.html');
+  await expect(page.locator('lemoon-eyewear')).toHaveJSProperty('ready', true);
+  await expect(page.locator('lemoon-eyewear')).toHaveJSProperty('inLensFlow', false);
+  await expect(page.locator('[name="id"]').first()).toHaveValue('67616399425704');
+  await expect(page).toHaveURL(/\/tests\/fixtures\/eyewear-product\.html$/);
+});
+
+test('returning from a deep lens variant stays on the PDP and can reopen the refined flow', async ({page}) => {
+  const fixturePath='/tests/fixtures/eyewear-product.html';
+  const variants=JSON.parse(await page.locator('[data-variants]').textContent());
+  const variant=variants.find(item=>item.available && item.options[1]==='Monofocal');
+  expect(variant).toBeTruthy();
+  const source=readFileSync('sections/lens-configurator.liquid','utf8');
+  const returnAnchor=source.match(/<a href="[^\"]+">\{\{ 'lemoon_lens_flow.back_product' \| t \}\}<\/a>/)?.[0];
+  expect(returnAnchor).toBeTruthy();
+  const engine=new Liquid({strictFilters:true});
+  engine.registerFilter('t',()=> 'Volver al armazón');
+  const link=engine.parseAndRenderSync(returnAnchor,{product:{url:fixturePath},selected_variant:variant});
+  await page.route('**/tests/fixtures/eyewear-product.html*',async route=>{
+    const url=new URL(route.request().url());
+    if(url.searchParams.get('view')==='configurador') {
+      await route.fulfill({contentType:'text/html; charset=utf-8',body:`<!doctype html><meta charset="utf-8"><main><h1>Configura tus lentes</h1>${link}</main>`});
+      return;
+    }
+    const response=await route.fetch();
+    let html=await response.text();
+    html=html.replace('data-cart-url="/cart"',`data-cart-url="/cart" data-configurator-url="${fixturePath}"`)
+      .replace('value="Solo armazón" checked','value="Solo armazón"')
+      .replace('value="Monofocal">','value="Monofocal" checked>');
+    await route.fulfill({response,body:html});
+  });
+  await page.goto(`${fixturePath}?variant=${variant.id}`);
+  await expect(page).toHaveURL(/view=configurador/);
+  await page.getByRole('link',{name:'Volver al armazón',exact:true}).press('Enter');
+  await expect(page.locator('lemoon-eyewear')).toBeVisible();
+  expect(new URL(page.url()).searchParams.has('view')).toBe(false);
+  await expect(page.locator('lemoon-eyewear')).toHaveJSProperty('inLensFlow',false);
+  await expect(page.locator('[name="id"]').first()).toHaveValue(String(variant.id));
+  await expect(page.locator('[data-prescription]')).toBeHidden();
+  await expect(page.locator('[data-configure]')).toBeVisible();
+  await page.locator('[data-configure]').click();
+  await expect(page).toHaveURL(/view=configurador/);
+  expect(new URL(page.url()).searchParams.has('lens_flow')).toBe(false);
 });
 
 test('selects native variant prices and resets the index for solar and frame-only', async ({ page }) => {

@@ -1,0 +1,14 @@
+{%- comment -%}
+  Sample business copy for review. Inputs: enabled (boolean), content (trusted
+  editor richtext), section_id (scope). Does not change operational settings.
+{%- endcomment -%}
+{%- if enabled -%}
+  {%- style -%}
+    #shopify-section-{{ section_id }} .lemoon-commercial-demo { margin: var(--lemoon-space-6) 0; overflow-wrap: anywhere; }
+    #shopify-section-{{ section_id }} .lemoon-commercial-demo__notice { padding: var(--lemoon-space-4); border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); color: var(--lemoon-text-brand); font-size: 1.4rem; line-height: 1.5; }
+  {%- endstyle -%}
+  <div class="lemoon-commercial-demo">
+    <p class="lemoon-commercial-demo__notice">{{ 'sections.lemoon_demo.notice' | t }}</p>
+    {%- if content != blank -%}<div class="lemoon-commercial-demo__content rte">{{ content }}</div>{%- endif -%}
+  </div>
+{%- endif -%}

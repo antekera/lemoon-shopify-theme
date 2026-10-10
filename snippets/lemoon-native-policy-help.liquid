@@ -1,0 +1,10 @@
+<div class="lemoon-native-policy__help">
+  <h2>{{ 'sections.lemoon_legal_page.help_title' | t }}</h2>
+  <p>{{ 'sections.lemoon_legal_page.help_description' | t }}</p>
+  <a href="{{ contact_url | escape }}">{{ 'sections.lemoon_legal_page.contact' | t }}</a>
+  <p>{{ 'sections.lemoon_footer_privacy.intro' | t }}</p>
+  <div data-cookie-preferences-control>
+    <button type="button" class="lemoon-native-policy__preferences" data-cookie-preferences aria-haspopup="dialog" hidden>{{ 'sections.lemoon_footer_privacy.preferences' | t }}</button>
+    <span data-cookie-preferences-status data-unavailable="{{ 'sections.lemoon_footer_privacy.unavailable' | t | escape }}" role="status"></span>
+  </div>
+</div>

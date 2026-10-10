@@ -375,32 +375,79 @@
     }
   },
   "sections": {
+    "lemoon_gift_card_purchase": {
+      "name": "Gift card purchase",
+      "product_label": "Gift card product",
+      "product_info": "Only native Shopify gift card products are accepted. On a gift card product template, the current product takes precedence.",
+      "intro_label": "Introduction",
+      "intro_default": "<p>Let them choose their next pair. Select an amount and add a personal message if you like.</p>",
+      "contact_label": "Contact link"
+    },
     "lemoon_featured_products": {
       "name": "Lemoon featured products",
       "settings": {
-        "collection": { "label": "Collection" },
+        "collection": {
+          "label": "Collection"
+        },
         "collection_source": {
           "label": "Product source",
-          "options": { "fixed": { "label": "Selected collection" }, "product_category": { "label": "Product category" } }
+          "options": {
+            "fixed": {
+              "label": "Selected collection"
+            },
+            "product_category": {
+              "label": "Product category"
+            }
+          }
         },
-        "optical_collection": { "label": "Optical collection" },
-        "sun_collection": { "label": "Sunglasses collection" },
-        "randomize": { "label": "Show random products" },
-        "defer_load": { "label": "Load products when the carousel is near the viewport" },
-        "show_quick_add": { "label": "Show add to cart button" },
-        "initial_products": { "label": "Initial products" },
-        "eyebrow": { "label": "Eyebrow", "default": "LEMOON SELECTION" },
-        "heading": { "label": "Heading", "default": "Favorite frames" },
-        "link_label": { "label": "Link label", "default": "View all" },
-        "products_to_show": { "label": "Visible products" },
-        "max_products_to_load": { "label": "Maximum products to load" }
+        "optical_collection": {
+          "label": "Optical collection"
+        },
+        "sun_collection": {
+          "label": "Sunglasses collection"
+        },
+        "randomize": {
+          "label": "Show random products"
+        },
+        "defer_load": {
+          "label": "Load products when the carousel is near the viewport"
+        },
+        "show_quick_add": {
+          "label": "Show add to cart button"
+        },
+        "initial_products": {
+          "label": "Initial products"
+        },
+        "eyebrow": {
+          "label": "Eyebrow",
+          "default": "LEMOON SELECTION"
+        },
+        "heading": {
+          "label": "Heading",
+          "default": "Favorite frames"
+        },
+        "link_label": {
+          "label": "Link label",
+          "default": "View all"
+        },
+        "products_to_show": {
+          "label": "Visible products"
+        },
+        "max_products_to_load": {
+          "label": "Maximum products to load"
+        }
       }
     },
     "lemoon_trust_bar": {
       "name": "Trust bar",
       "settings": {
-        "aria_label": { "label": "Accessible label", "default": "Benefits of shopping with Lemoon" },
-        "benefits": { "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP." }
+        "aria_label": {
+          "label": "Accessible label",
+          "default": "Benefits of shopping with Lemoon"
+        },
+        "benefits": {
+          "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP."
+        }
       }
     },
     "all": {
@@ -488,11 +535,11 @@
           "label": "Change every"
         },
         "heading_utilities": {
-         "content": "Utilities"
+          "content": "Utilities"
         },
         "paragraph": {
           "content": "Appear only on large screens"
-        },                     
+        },
         "show_social": {
           "label": "Social media icons",
           "info": "[Manage social accounts](/editor?context=theme&category=social%20media)"
@@ -556,7 +603,7 @@
         },
         "header_layout": {
           "content": "Layout"
-        },            
+        },
         "desktop_layout": {
           "label": "Layout",
           "options__1": {
@@ -647,9 +694,9 @@
           "default": "Collections",
           "label": "Heading"
         },
-         "header_layout": {
-        "content": "Layout"
-        },        
+        "header_layout": {
+          "content": "Layout"
+        },
         "image_ratio": {
           "label": "Image ratio",
           "options__1": {
@@ -731,17 +778,17 @@
           "label": "Heading"
         },
         "layout_header": {
-        "content": "Layout"
+          "content": "Layout"
         },
         "text_header": {
-        "content": "Text"
-        },        
+          "content": "Text"
+        },
         "blog": {
           "label": "Blog"
         },
         "post_limit": {
           "label": "Post count"
-        }, 
+        },
         "columns_desktop": {
           "label": "Columns"
         },
@@ -767,7 +814,7 @@
       "name": "Featured collection",
       "settings": {
         "header_text": {
-        "content": "Text"
+          "content": "Text"
         },
         "title": {
           "label": "Heading",
@@ -795,8 +842,8 @@
           "content": "Collection layout"
         },
         "header_mobile": {
-        "content": "Mobile layout"
-        },                 
+          "content": "Mobile layout"
+        },
         "collection": {
           "label": "Collection"
         },
@@ -1215,7 +1262,7 @@
           "options__4": {
             "label": "Large"
           }
-          },
+        },
         "content": {
           "content": "Content"
         },
@@ -1320,9 +1367,9 @@
         "buttons": {
           "name": "Buttons",
           "settings": {
-          "header_1":{
-          "content": "Button 1"
-          },
+            "header_1": {
+              "content": "Button 1"
+            },
             "button_label_1": {
               "label": "Label",
               "info": "Leave blank to hide",
@@ -1334,7 +1381,7 @@
             "button_style_secondary_1": {
               "label": "Outline style"
             },
-            "header_2":{
+            "header_2": {
               "content": "Button 2"
             },
             "button_label_2": {
@@ -1358,12 +1405,12 @@
     "image-with-text": {
       "name": "Image with text",
       "settings": {
-      "header": {
-      "content": "Content"
-      },
-      "header_colors": {
-      "content": "Colors" 
-      },
+        "header": {
+          "content": "Content"
+        },
+        "header_colors": {
+          "content": "Colors"
+        },
         "image": {
           "label": "Image"
         },
@@ -1534,15 +1581,15 @@
         "image": {
           "label": "Image"
         },
-        "header":{
-        "content": "Image"
+        "header": {
+          "content": "Image"
         },
-        "header_2":{
-        "content": "Content"
+        "header_2": {
+          "content": "Content"
         },
-        "header_3":{
-        "content": "Colors"
-        },        
+        "header_3": {
+          "content": "Colors"
+        },
         "image_height": {
           "options__1": {
             "label": "Adapt to image"
@@ -2315,7 +2362,7 @@
             },
             "pairing_2": {
               "label": "Pairing 2"
-            },            
+            },
             "icon_2": {
               "label": "Icon"
             },
@@ -2327,8 +2374,8 @@
               "default": "Heading"
             },
             "pairing_3": {
-            "label": "Pairing 3"
-            },             
+              "label": "Pairing 3"
+            },
             "icon_3": {
               "label": "Icon"
             },
@@ -2443,7 +2490,7 @@
           "options__2": {
             "label": "2"
           }
-        },        
+        },
         "image_ratio": {
           "label": "Image ratio",
           "options__1": {
@@ -2495,10 +2542,10 @@
         },
         "header_layout": {
           "content": "Layout"
-        },                            
+        },
         "header_button": {
           "content": "Button"
-        }, 
+        },
         "image_width": {
           "label": "Width",
           "options__1": {
@@ -2705,7 +2752,7 @@
         },
         "content_header": {
           "content": "Content"
-        },        
+        },
         "desktop_content_alignment": {
           "options__1": {
             "label": "Left"
@@ -2937,8 +2984,8 @@
           "name": "Buttons",
           "settings": {
             "header_button1": {
-            "content": "Button 1"
-            }, 
+              "content": "Button 1"
+            },
             "button_label_1": {
               "label": "Label",
               "info": "Leave blank to hide",
@@ -2952,7 +2999,7 @@
             },
             "header_button2": {
               "content": "Button 2"
-            },             
+            },
             "button_label_2": {
               "label": "Label",
               "info": "Leave label blank to hide"
@@ -3092,7 +3139,7 @@
               "default": "Tell your brand's story through images"
             },
             "header_button": {
-            "content": "Button"      
+              "content": "Button"
             },
             "button_label": {
               "label": "Label",
@@ -3106,7 +3153,7 @@
               "label": "Outline style"
             },
             "box_align": {
-              "label": "Content position",              
+              "label": "Content position",
               "options__1": {
                 "label": "Top left"
               },
@@ -3136,7 +3183,7 @@
               }
             },
             "header_layout": {
-            "content": "Layout"                 
+              "content": "Layout"
             },
             "show_text_box": {
               "label": "Container"
@@ -3157,11 +3204,11 @@
               "label": "Overlay opacity"
             },
             "header_text": {
-            "content": "Text"      
+              "content": "Text"
             },
             "header_colors": {
-            "content": "Colors"                 
-            },            
+              "content": "Colors"
+            },
             "text_alignment_mobile": {
               "label": "Mobile content alignment",
               "options__1": {
@@ -3222,8 +3269,8 @@
           "label": "Container color scheme"
         },
         "section_color_scheme": {
-        "label": "Section color scheme"
-        },        
+          "label": "Section color scheme"
+        },
         "open_first_collapsible_row": {
           "label": "Open first row"
         },
@@ -3424,7 +3471,202 @@
           "label": "Open by default"
         }
       }
+    },
+    "cart_upsell": {
+      "name": "Complete your order",
+      "presets": {
+        "name": "Complete your order"
+      },
+      "settings": {
+        "heading": {
+          "label": "Heading",
+          "default": "Complete your order"
+        }
+      },
+      "blocks": {
+        "product": {
+          "name": "Accessory",
+          "settings": {
+            "product": {
+              "label": "Product"
+            }
+          }
+        }
+      }
+    },
+    "main_404": {
+      "name": "Page not found"
+    },
+    "lemoon_contact_page": {
+      "name": "Lemoon contact page",
+      "settings": {
+        "contact_email": {
+          "label": "Contact email",
+          "info": "Use the confirmed business email. Leave blank to hide."
+        },
+        "whatsapp_url": {
+          "label": "WhatsApp link",
+          "info": "Use the confirmed business WhatsApp link. Leave blank to hide."
+        },
+        "contact_hours": {
+          "label": "Contact hours",
+          "info": "Use confirmed business hours. Leave blank to hide."
+        }
+      }
+    },
+    "lemoon_journal": {
+      "name": "Lemoon journal",
+      "newsletter_label": "Show newsletter signup"
+    },
+    "lemoon_lens_flow": {
+      "name": "Lens configuration"
+    },
+    "lemoon_article": {
+      "name": "Lemoon article"
+    },
+    "lemoon_guide": {
+      "name": "Lemoon guide",
+      "kind_label": "Guide content",
+      "measurements": "Find your fit.",
+      "face": "Your style has more than one shape.",
+      "order": "Choose. Review. Place your order.",
+      "try_on": "See how it could look.",
+      "prescription": "Handle your prescription with care."
+    },
+    "lemoon_faq_page": {
+      "name": "Lemoon FAQ page",
+      "question_block": "Question",
+      "group_label": "Question group",
+      "question_label": "Question",
+      "answer_label": "Answer",
+      "link_label": "Optional link",
+      "link_text_label": "Link text",
+      "question_default": "How can I ask for help?",
+      "answer_default": "<p>Use the contact form to ask about a product or order.</p>",
+      "choosing": "Choosing your frame",
+      "lenses": "Lenses and prescriptions",
+      "ordering": "Orders, account and help",
+      "policies": "Shipping and conditions",
+      "editor_info": "Custom questions replace the reference answers in their group. Groups without complete custom questions show the translated references."
+    },
+    "lemoon_legal_page": {
+      "name": "Lemoon legal page",
+      "settings": {
+        "kind": {
+          "label": "Information type",
+          "general": "General",
+          "shipping": "Shipping",
+          "returns": "Returns",
+          "terms": "Terms",
+          "privacy": "Privacy",
+          "warranty": "Warranties"
+        },
+        "intro": {
+          "label": "Introduction",
+          "info": "Leave blank to use the translated introduction for this information type."
+        },
+        "contact_url": {
+          "label": "Contact page"
+        },
+        "shipping_url": {
+          "label": "Shipping link"
+        },
+        "returns_url": {
+          "label": "Returns link"
+        },
+        "warranty_url": {
+          "label": "Warranty link"
+        },
+        "terms_url": {
+          "label": "Terms link"
+        },
+        "privacy_url": {
+          "label": "Privacy link"
+        },
+        "links_heading": "Related information links"
+      }
+    },
+    "lemoon_about_page": {
+      "name": "About Lemoon page",
+      "image_label": "Brand image",
+      "image_info": "Use a real, approved brand image. Without an image, a decorative abstract composition is shown.",
+      "story_label": "Verified brand story",
+      "story_info": "Optional. Add only confirmed details about the brand."
+    },
+    "lemoon_launch_page": {
+      "name": "Lemoon launch page",
+      "headline_label": "Heading",
+      "intro_label": "Introduction",
+      "image_label": "Optional image",
+      "fallback_info": "Leave blank to use the translated text."
+    },
+    "lemoon_service_page": {
+      "name": "Lemoon services",
+      "settings": {
+        "kind": {
+          "label": "Information type",
+          "operations": "Eye care events",
+          "benefits": "Isapres and Fonasa"
+        },
+        "verified_details": {
+          "label": "Verified information",
+          "info": "Add only availability or conditions confirmed by the business. Leave blank if not yet confirmed."
+        },
+        "image": {
+          "label": "Real image",
+          "info": "Use an image from the business. A frame illustration appears when no image is selected."
+        }
+      }
+    },
+    "lemoon_demo": {
+      "enabled_label": "Show sample business data",
+      "enabled_info": "Use sample content to review this page. Disable after final content is confirmed.",
+      "content_label": "Sample business content",
+      "content_info": "Editable sample text. Does not configure shipping rates, payments or data retention."
+    },
+    "lemoon_crystal_guide": {
+      "name": "Lens guide",
+      "settings": {
+        "configurator_product": {
+          "label": "Product to configure",
+          "info": "Optional. The link appears only if the product has an option named Lentes and variants in the catalogue."
+        }
+      }
+    },
+    "lemoon_style_quiz": {
+      "name": "Frame selection",
+      "collection": "Catalogue collection",
+      "collection_info": "The link uses only a price filter supported by this collection.",
+      "budget_low": "First maximum budget (CLP)",
+      "budget_high": "Second maximum budget (CLP)",
+      "product": "Editorial frame",
+      "face": "Face preference",
+      "style": "Style preference",
+      "use": "Preferred use",
+      "product_info": "Choose an available product. Categories are editorial curation and do not guarantee fit or protection.",
+      "face_options": {
+        "round": "Round",
+        "square": "Square",
+        "oval": "Oval",
+        "heart": "Heart",
+        "unsure": "Not sure"
+      },
+      "style_options": {
+        "minimal": "Minimal",
+        "colorpop": "Colourful",
+        "retro": "Retro",
+        "easy": "Effortless"
+      },
+      "use_options": {
+        "work": "For work",
+        "everyday": "Every day",
+        "outdoors": "Outdoors"
+      }
     }
   },
-  "lemoon": { "collection": { "demo_content": "Show sample content when merchant content is empty" } }
+  "lemoon": {
+    "collection": {
+      "demo_content": "Show sample content when merchant content is empty"
+    }
+  }
 }

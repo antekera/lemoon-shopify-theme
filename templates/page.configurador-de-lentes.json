@@ -1,1 +1,14 @@
-{"sections":{"main":{"type":"lens-configurator","settings":{"preview_label":"ARMAZÓN SELECCIONADO","product_name":"Dalton","product_subtitle":"Configura tus cristales"}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "lens-configurator",
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
+    {%- if request.page_type == 'search' -%}
+      <meta name="robots" content="noindex, follow">
+    {%- endif -%}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -286,6 +289,12 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'lemoon-components.css' | asset_url | stylesheet_tag }}
+    {%- if request.page_type == 'policy' -%}
+      {{ 'lemoon-native-policies.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+    {%- if request.page_type == 'cart' -%}
+      {{ 'lemoon-cart-page.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     {{ 'component-slider.css' | asset_url | stylesheet_tag }}
     {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
     {{ 'lemoon-announcement-bar.css' | asset_url | stylesheet_tag }}
@@ -350,12 +359,21 @@
 
     <main
       id="MainContent"
-      class="content-for-layout focus-none"
+      class="content-for-layout focus-none{% if request.page_type == 'policy' %} lemoon-policy-page{% endif %}"
       role="main"
       tabindex="-1"
       data-template="{{ template.name }}"
     >
-      {{ content_for_layout }}
+      {%- if request.page_type == 'policy' -%}
+        <div class="lemoon-native-policy page-width">
+          <p class="lemoon-native-policy__eyebrow">{{ 'sections.lemoon_legal_page.eyebrow' | t }}</p>
+          {{ content_for_layout }}
+          {%- assign policy_contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/' -%}
+          {% render 'lemoon-native-policy-help', contact_url: policy_contact_url %}
+        </div>
+      {%- else -%}
+        {{ content_for_layout }}
+      {%- endif -%}
     </main>
 
     {% sections 'footer-group' %}
@@ -378,6 +396,9 @@
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,
         quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+        quantityInvalid: {{ 'sections.cart.quantity_invalid' | t | json }},
+        itemCountOne: {{ 'sections.cart.item_count.one' | t: count: '[count]' | json }},
+        itemCountOther: {{ 'sections.cart.item_count.other' | t: count: '[count]' | json }},
       };
 
       window.variantStrings = {

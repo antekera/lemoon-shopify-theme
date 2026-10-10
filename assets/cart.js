@@ -78,11 +78,13 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   validateQuantity(event) {
-    const inputValue = parseInt(event.target.value);
+    const inputValue = Number(event.target.value);
     const index = event.target.dataset.index;
     let message = '';
 
-    if (inputValue < event.target.dataset.min) {
+    if (!event.target.value.trim() || !Number.isSafeInteger(inputValue)) {
+      message = window.cartStrings.quantityInvalid;
+    } else if (inputValue < event.target.dataset.min) {
       message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
     } else if (inputValue > parseInt(event.target.max)) {
       message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
@@ -106,6 +108,7 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   onChange(event) {
+    if (!event.target.matches('.quantity__input')) return;
     this.validateQuantity(event);
   }
 
@@ -210,15 +213,20 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
           if (parsedState.errors) {
             quantityElement.value = quantityElement.getAttribute('value');
             this.updateLiveRegions(line, parsedState.errors);
+            quantityElement.focus();
             return;
           }
 
           this.classList.toggle('is-empty', parsedState.item_count === 0);
           const cartDrawerWrapper = document.querySelector('cart-drawer');
+          const activeCartDrawer = this.tagName === 'CART-DRAWER-ITEMS' ? cartDrawerWrapper : null;
           const cartFooter = document.getElementById('main-cart-footer');
 
           if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
           if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+          document.querySelectorAll('[data-cart-upsell-section]').forEach((section) => {
+            section.hidden = parsedState.item_count === 0;
+          });
 
           sectionsToRender.forEach((section) => {
             const elementToReplace =
@@ -229,6 +237,11 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
               section.selector
             );
           });
+          this.querySelector('[data-cart-count]')?.replaceChildren(
+            document.createTextNode(parsedState.item_count === 1
+              ? window.cartStrings.itemCountOne.replace('[count]', parsedState.item_count)
+              : window.cartStrings.itemCountOther.replace('[count]', parsedState.item_count))
+          );
           const updatedValue = parsedState.items[line - 1] ? parsedState.items[line - 1].quantity : undefined;
           let message = '';
           if (items.length === parsedState.items.length && updatedValue !== parseInt(quantityElement.value)) {
@@ -243,13 +256,18 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
           const lineItem =
             document.getElementById(`CartItem-${line}`) || document.getElementById(`CartDrawer-Item-${line}`);
           if (lineItem && lineItem.querySelector(`[name="${name}"]`)) {
-            cartDrawerWrapper
-              ? trapFocus(cartDrawerWrapper, lineItem.querySelector(`[name="${name}"]`))
+            activeCartDrawer
+              ? trapFocus(activeCartDrawer, lineItem.querySelector(`[name="${name}"]`))
               : lineItem.querySelector(`[name="${name}"]`).focus();
-          } else if (parsedState.item_count === 0 && cartDrawerWrapper?.querySelector('.drawer__inner-empty')) {
-            trapFocus(cartDrawerWrapper.querySelector('.drawer__inner-empty'), cartDrawerWrapper.querySelector('a'));
-          } else if (document.querySelector('.cart-item') && cartDrawerWrapper) {
-            trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'));
+          } else if (parsedState.item_count === 0 && activeCartDrawer?.querySelector('.drawer__inner-empty')) {
+            trapFocus(activeCartDrawer.querySelector('.drawer__inner-empty'), activeCartDrawer.querySelector('a'));
+          } else if (this.querySelector('.cart-item') && activeCartDrawer) {
+            trapFocus(activeCartDrawer, this.querySelector('.cart-item__name'));
+          } else if (!activeCartDrawer) {
+            const nextTarget = parsedState.item_count === 0
+              ? this.querySelector('.cart__warnings a.button')
+              : this.querySelector('.quantity__input');
+            nextTarget?.focus();
           }
         });
 
@@ -259,6 +277,11 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
         this.querySelectorAll('.loading__spinner').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
         if (errors) errors.textContent = window.cartStrings.error;
+        const quantityInput = this.querySelector(`#Quantity-${line}`) || this.querySelector(`#Drawer-quantity-${line}`);
+        if (quantityInput) {
+          quantityInput.value = quantityInput.getAttribute('value');
+          quantityInput.focus();
+        }
         this.dispatchCartErrorEvent(window.cartStrings.error, 'SERVICE_UNAVAILABLE');
         linesUpdateDeferred?.reject(e);
       })

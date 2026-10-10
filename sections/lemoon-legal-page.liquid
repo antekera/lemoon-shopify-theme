@@ -1,21 +1,237 @@
 {{ 'lemoon-legal-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign shipping_url = section.settings.shipping_url | default: shop.shipping_policy.url
+  assign returns_url = section.settings.returns_url | default: shop.refund_policy.url
+  assign terms_url = section.settings.terms_url | default: shop.terms_of_service.url
+  assign privacy_url = section.settings.privacy_url | default: shop.privacy_policy.url
+  assign warranty_url = section.settings.warranty_url
+-%}
+{%- style -%}
+/* Editorial legal shell. CMS policy text remains authoritative. */
+#shopify-section-{{ section.id }} .lemoon-legal-page { background: var(--lemoon-surface-page); color: var(--lemoon-text-primary); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__header { max-width: 90rem; padding-bottom: var(--lemoon-space-8); border-bottom: 1px solid var(--lemoon-border-default); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__eyebrow { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+#shopify-section-{{ section.id }} .lemoon-legal-page h1 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); letter-spacing: var(--lemoon-type-display-tracking); line-height: 1.15; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__intro { max-width: 66rem; margin: var(--lemoon-space-5) 0 0; color: var(--lemoon-text-secondary); font-size: 1.8rem; line-height: 1.6; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__layout { display: grid; grid-template-columns: minmax(0, 66rem) minmax(0, 24rem); gap: var(--lemoon-space-16); align-items: start; padding-top: var(--lemoon-space-10); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__layout > div { min-width: 0; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content { max-width: 66rem; color: var(--lemoon-text-primary); font-family: var(--lemoon-font-body); font-size: 1.8rem; line-height: 1.75; overflow-wrap: anywhere; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content > :first-child { margin-top: 0; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content :is(h2,h3,h4) { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); line-height: 1.3; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content h2 { margin: var(--lemoon-space-10) 0 var(--lemoon-space-4); font-size: 2.8rem; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content h3 { margin: var(--lemoon-space-8) 0 var(--lemoon-space-3); font-size: 2.2rem; }
+#shopify-section-{{ section.id }} .lemoon-legal-page a { color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
+#shopify-section-{{ section.id }} .lemoon-legal-page :is(a,button):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__navigation { padding: var(--lemoon-space-5); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__navigation-title { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: 1.6rem; font-weight: var(--lemoon-weight-semibold); color: var(--lemoon-text-brand); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__navigation ul { list-style: none; padding: 0; margin: 0; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__navigation a { display: inline-flex; align-items: center; min-height: 4.4rem; padding: var(--lemoon-space-2) 0; font-size: 1.4rem; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__navigation [aria-current=page] { font-weight: var(--lemoon-weight-semibold); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__help { max-width: 66rem; margin-top: var(--lemoon-space-10); padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__help h2 { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 2.2rem; font-weight: var(--lemoon-weight-medium); }
+#shopify-section-{{ section.id }} .lemoon-legal-page__help p { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-secondary); font-size: 1.4rem; line-height: 1.6; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__help a { display: inline-flex; align-items: center; min-height: 4.4rem; font-size: 1.4rem; }
+@media screen and (max-width: 749px) {
+ #shopify-section-{{ section.id }} .lemoon-legal-page h1 { font-size: 3.4rem; }
+ #shopify-section-{{ section.id }} .lemoon-legal-page__layout { grid-template-columns: minmax(0,1fr); gap: var(--lemoon-space-8); padding-top: var(--lemoon-space-8); }
+ #shopify-section-{{ section.id }} .lemoon-legal-page__intro { font-size: 1.6rem; }
+ #shopify-section-{{ section.id }} .lemoon-legal-page__content h2 { font-size: 2.4rem; }
+}
 
-<section class="lemoon-legal-page">
-  <div class="page-width">
-    <header class="lemoon-legal-page__header">
-      <p class="lemoon-legal-page__eyebrow">LEMOON · INFORMACIÓN LEGAL</p>
-      <h1>{{ page.title | escape }}</h1>
-      {%- if section.settings.intro != blank -%}<p class="lemoon-legal-page__intro">{{ section.settings.intro }}</p>{%- endif -%}
-    </header>
-    <div class="lemoon-legal-page__content rte">{{ page.content }}</div>
+  #shopify-section-{{ section.id }} .lemoon-legal-page {
+    padding-top: {{ section.settings.padding_top | times: 0.625 | round }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round }}px;
+  }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .lemoon-legal-page {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+<div class="lemoon-legal-page page-width">
+  <header class="lemoon-legal-page__header">
+    <p class="lemoon-legal-page__eyebrow">{{ 'sections.lemoon_legal_page.eyebrow' | t }}</p>
+    <h1>{% if section.settings.demo_data and section.settings.kind == 'privacy' %}{{ 'sections.lemoon_legal_page.privacy' | t }}{% else %}{{ page.title | escape }}{% endif %}</h1>
+    <p class="lemoon-legal-page__intro">
+      {%- if section.settings.intro != blank -%}
+        {{ section.settings.intro | escape }}
+      {%- else -%}
+        {%- case section.settings.kind -%}
+          {%- when 'shipping' -%}{{ 'sections.lemoon_legal_page.intro_shipping' | t }}
+          {%- when 'returns' -%}{{ 'sections.lemoon_legal_page.intro_returns' | t }}
+          {%- when 'terms' -%}{{ 'sections.lemoon_legal_page.intro_terms' | t }}
+          {%- when 'privacy' -%}{{ 'sections.lemoon_legal_page.intro_privacy' | t }}
+          {%- when 'warranty' -%}{{ 'sections.lemoon_legal_page.intro_warranty' | t }}
+          {%- else -%}{{ 'sections.lemoon_legal_page.intro_general' | t }}
+        {%- endcase -%}
+      {%- endif -%}
+    </p>
+  </header>
+  <div class="lemoon-legal-page__layout">
+    <div>
+      <div class="lemoon-legal-page__content rte">
+        {%- if section.settings.demo_data -%}
+          {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
+        {%- elsif page.content != blank -%}
+          {{ page.content }}
+        {%- elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank -%}
+          {{ shop.privacy_policy.body }}
+        {%- else -%}
+          <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
+        {%- endif -%}
+      </div>
+      <div class="lemoon-legal-page__help">
+        <h2>{{ 'sections.lemoon_legal_page.help_title' | t }}</h2>
+        <p>{{ 'sections.lemoon_legal_page.help_description' | t }}</p>
+        {%- if section.settings.contact_url != blank -%}
+          <a href="{{ section.settings.contact_url | escape }}">{{ 'sections.lemoon_legal_page.contact' | t }}</a>
+        {%- else -%}
+          <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'sections.lemoon_legal_page.contact' | t }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+    {%- if shipping_url != blank or returns_url != blank or terms_url != blank or privacy_url != blank or warranty_url != blank -%}
+      <nav class="lemoon-legal-page__navigation" aria-label="{{ 'sections.lemoon_legal_page.navigation' | t | escape }}">
+        <p class="lemoon-legal-page__navigation-title">{{ 'sections.lemoon_legal_page.navigation' | t }}</p>
+        <ul role="list">
+          {%- if shipping_url != blank -%}<li><a href="{{ shipping_url | escape }}"{% if page.url == shipping_url %} aria-current="page"{% endif %}>{{ 'sections.lemoon_legal_page.shipping' | t }}</a></li>{%- endif -%}
+          {%- if returns_url != blank -%}<li><a href="{{ returns_url | escape }}"{% if page.url == returns_url %} aria-current="page"{% endif %}>{{ 'sections.lemoon_legal_page.returns' | t }}</a></li>{%- endif -%}
+          {%- if warranty_url != blank -%}<li><a href="{{ warranty_url | escape }}"{% if page.url == warranty_url %} aria-current="page"{% endif %}>{{ 'sections.lemoon_legal_page.warranty' | t }}</a></li>{%- endif -%}
+          {%- if terms_url != blank -%}<li><a href="{{ terms_url | escape }}"{% if page.url == terms_url %} aria-current="page"{% endif %}>{{ 'sections.lemoon_legal_page.terms' | t }}</a></li>{%- endif -%}
+          {%- if privacy_url != blank -%}<li><a href="{{ privacy_url | escape }}"{% if page.url == privacy_url %} aria-current="page"{% endif %}>{{ 'sections.lemoon_legal_page.privacy' | t }}</a></li>{%- endif -%}
+        </ul>
+      </nav>
+    {%- endif -%}
   </div>
-</section>
-
+</div>
+{%- comment -%}Commercial preview copy is explicitly opt-in; disable demo_data to restore normal content.{%- endcomment -%}
 {% schema %}
 {
-  "name": "Página legal Lemoon",
+  "name": "t:sections.lemoon_legal_page.name",
   "tag": "section",
   "class": "section",
-  "settings": [{ "type": "text", "id": "intro", "label": "Introducción", "default": "Información clara para que puedas comprar con tranquilidad." }]
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "demo_data",
+      "default": false,
+      "label": "t:sections.lemoon_demo.enabled_label",
+      "info": "t:sections.lemoon_demo.enabled_info"
+    },
+    {
+      "type": "richtext",
+      "id": "demo_content",
+      "label": "t:sections.lemoon_demo.content_label",
+      "info": "t:sections.lemoon_demo.content_info"
+    },
+    {
+      "type": "select",
+      "id": "kind",
+      "label": "t:sections.lemoon_legal_page.settings.kind.label",
+      "default": "general",
+      "options": [
+        {
+          "value": "general",
+          "label": "t:sections.lemoon_legal_page.settings.kind.general"
+        },
+        {
+          "value": "shipping",
+          "label": "t:sections.lemoon_legal_page.settings.kind.shipping"
+        },
+        {
+          "value": "returns",
+          "label": "t:sections.lemoon_legal_page.settings.kind.returns"
+        },
+        {
+          "value": "terms",
+          "label": "t:sections.lemoon_legal_page.settings.kind.terms"
+        },
+        {
+          "value": "privacy",
+          "label": "t:sections.lemoon_legal_page.settings.kind.privacy"
+        },
+        {
+          "value": "warranty",
+          "label": "t:sections.lemoon_legal_page.settings.kind.warranty"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "t:sections.lemoon_legal_page.settings.intro.label",
+      "info": "t:sections.lemoon_legal_page.settings.intro.info"
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "t:sections.lemoon_legal_page.settings.contact_url.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.lemoon_legal_page.settings.links_heading"
+    },
+    {
+      "type": "url",
+      "id": "shipping_url",
+      "label": "t:sections.lemoon_legal_page.settings.shipping_url.label"
+    },
+    {
+      "type": "url",
+      "id": "returns_url",
+      "label": "t:sections.lemoon_legal_page.settings.returns_url.label"
+    },
+    {
+      "type": "url",
+      "id": "warranty_url",
+      "label": "t:sections.lemoon_legal_page.settings.warranty_url.label"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "t:sections.lemoon_legal_page.settings.terms_url.label"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "t:sections.lemoon_legal_page.settings.privacy_url.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lemoon_legal_page.name"
+    }
+  ]
 }
 {% endschema %}

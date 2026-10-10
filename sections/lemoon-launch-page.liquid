@@ -1,0 +1,89 @@
+{%- assign launch_form_id = 'LemoonLaunch-' | append: section.id -%}
+{%- style -%}
+  #shopify-section-{{ section.id }} { background: var(--lemoon-surface-page, #fff); overflow: visible; }
+  #shopify-section-{{ section.id }} .lemoon-launch { max-width: 128rem; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
+  #shopify-section-{{ section.id }} .lemoon-launch__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: var(--lemoon-space-16); }
+  #shopify-section-{{ section.id }} .lemoon-launch__title { margin: 0; max-width: 56rem; font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; letter-spacing: var(--lemoon-type-h1-tracking); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-launch__intro { max-width: 50rem; margin: var(--lemoon-space-6) 0 var(--lemoon-space-8); font-size: var(--lemoon-fs-18); line-height: 1.6; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-launch__form { max-width: 50rem; }
+  #shopify-section-{{ section.id }} .lemoon-launch__label { display: block; margin-bottom: var(--lemoon-space-3); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-medium); }
+  #shopify-section-{{ section.id }} .lemoon-launch__email { display: block; width: 100%; min-height: 5.2rem; padding: var(--lemoon-space-3) var(--lemoon-space-5); border: 1px solid var(--lemoon-border-warm); border-radius: var(--lemoon-radius-search); background: var(--lemoon-surface-page); color: var(--lemoon-text-primary); font: inherit; font-size: var(--lemoon-fs-16); }
+  #shopify-section-{{ section.id }} .lemoon-launch__email[aria-invalid="true"] { border-color: var(--lemoon-border-error); }
+  #shopify-section-{{ section.id }} .lemoon-launch__consent { display: flex; align-items: flex-start; gap: var(--lemoon-space-3); margin-top: var(--lemoon-space-5); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+  #shopify-section-{{ section.id }} .lemoon-launch__consent input { width: 2rem; height: 2rem; flex: 0 0 2rem; margin: .2rem 0 0; accent-color: var(--lemoon-action-primary); }
+  #shopify-section-{{ section.id }} .lemoon-launch__consent label { cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-launch__submit { min-height: 4.8rem; margin-top: var(--lemoon-space-6); padding: var(--lemoon-space-3) var(--lemoon-space-6); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-launch__submit:hover { background: var(--lemoon-action-primary-hover); }
+  #shopify-section-{{ section.id }} .lemoon-launch__visual { display: grid; place-items: center; min-height: 40rem; padding: var(--lemoon-space-10); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); overflow: hidden; }
+  #shopify-section-{{ section.id }} .lemoon-launch__visual svg { display: block; width: 100%; height: auto; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-launch__visual img { display: block; width: 100%; height: auto; border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-launch__status { margin: var(--lemoon-space-5) 0 0; padding: var(--lemoon-space-4); border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+  #shopify-section-{{ section.id }} .lemoon-launch__status--error { color: var(--lemoon-text-error); border-color: var(--lemoon-border-error); }
+  #shopify-section-{{ section.id }} .lemoon-launch__status--success { color: var(--lemoon-text-primary); border-color: var(--lemoon-status-success); }
+  #shopify-section-{{ section.id }} .lemoon-launch :is(input, button):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .lemoon-launch__layout { gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-launch__visual { min-height: 32rem; padding: var(--lemoon-space-6); }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-launch { padding-top: {{ section.settings.padding_top | times: 0.625 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round: 0 }}px; }
+    #shopify-section-{{ section.id }} .lemoon-launch__layout { grid-template-columns: minmax(0, 1fr); }
+    #shopify-section-{{ section.id }} .lemoon-launch__title { font-size: 3.4rem; }
+    #shopify-section-{{ section.id }} .lemoon-launch__intro { font-size: var(--lemoon-fs-16); }
+    #shopify-section-{{ section.id }} .lemoon-launch__visual { min-height: 22rem; }
+    #shopify-section-{{ section.id }} .lemoon-launch__submit { width: 100%; }
+  }
+{%- endstyle -%}
+<div class="lemoon-launch page-width">
+  <div class="lemoon-launch__layout">
+    <div>
+      <h1 class="lemoon-launch__title">{%- if section.settings.headline != blank -%}{{ section.settings.headline | escape }}{%- else -%}{{ 'sections.lemoon_launch_page.title' | t }}{%- endif -%}</h1>
+      <p class="lemoon-launch__intro">{%- if section.settings.intro != blank -%}{{ section.settings.intro | escape }}{%- else -%}{{ 'sections.lemoon_launch_page.intro' | t }}{%- endif -%}</p>
+      {%- form 'customer', id: launch_form_id, class: 'lemoon-launch__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="lemoon-launch__label" for="{{ launch_form_id }}-email">{{ 'sections.lemoon_launch_page.email' | t }}</label>
+        <input class="lemoon-launch__email" id="{{ launch_form_id }}-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" autocapitalize="off" autocorrect="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ launch_form_id }}-error" autofocus{% endif %}>
+        <div class="lemoon-launch__consent">
+          <input id="{{ launch_form_id }}-consent" type="checkbox" name="contact[accepts_marketing]" value="true" required>
+          <label for="{{ launch_form_id }}-consent">{{ 'sections.lemoon_launch_page.consent' | t }}</label>
+        </div>
+        <button class="lemoon-launch__submit" type="submit" name="commit">{{ 'sections.lemoon_launch_page.submit' | t }}</button>
+        {%- if form.errors -%}
+          <div class="lemoon-launch__status lemoon-launch__status--error" id="{{ launch_form_id }}-error" role="alert">
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+        {%- if form.posted_successfully? -%}
+          <p class="lemoon-launch__status lemoon-launch__status--success" id="{{ launch_form_id }}-success" role="status" tabindex="-1" autofocus>{{ 'sections.lemoon_launch_page.success' | t }}</p>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+    <div class="lemoon-launch__visual">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 960 }}" srcset="{{ section.settings.image | image_url: width: 480 }} 480w, {{ section.settings.image | image_url: width: 960 }} 960w" sizes="(min-width: 750px) 50vw, 100vw" alt="{{ section.settings.image.alt | escape }}" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}" loading="lazy">
+      {%- else -%}
+        <svg viewBox="0 0 480 260" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 92c37-8 119-15 161-3l12 61c-2 36-27 56-66 56-50 0-79-18-86-51L40 104m440-12c-37-8-119-15-161-3l-12 61c2 36 27 56 66 56 50 0 79-18 86-51l13-51M205 108c16-13 35-13 50 0M12 86l30 5m396 0 30-5" transform="translate(-16 -12)"/>
+          <path d="M77 55c64-28 157-31 228-16" stroke-dasharray="3 8" opacity=".45"/>
+        </svg>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_launch_page.name",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["password"] },
+  "settings": [
+    { "type": "text", "id": "headline", "label": "t:sections.lemoon_launch_page.headline_label", "info": "t:sections.lemoon_launch_page.fallback_info" },
+    { "type": "textarea", "id": "intro", "label": "t:sections.lemoon_launch_page.intro_label", "info": "t:sections.lemoon_launch_page.fallback_info" },
+    { "type": "image_picker", "id": "image", "label": "t:sections.lemoon_launch_page.image_label" },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 64 }
+  ],
+  "presets": [{ "name": "t:sections.lemoon_launch_page.name" }]
+}
+{% endschema %}

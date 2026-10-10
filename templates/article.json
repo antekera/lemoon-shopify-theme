@@ -18,20 +18,22 @@
         },
         "share": {
           "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
+          "settings": {}
         },
         "content": {
           "type": "content"
         }
       },
       "block_order": [
-        "featured_image",
         "title",
-        "share",
-        "content"
-      ]
+        "featured_image",
+        "content",
+        "share"
+      ],
+      "settings": {
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [

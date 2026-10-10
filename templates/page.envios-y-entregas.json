@@ -1,3 +1,17 @@
 {
-  "sections": { "main": { "type": "lemoon-legal-page", "settings": { "intro": "Información sobre cobertura, preparación y entrega de tus lentes." } } }, "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Preparación de tu pedido</h2><p>En este escenario de prueba, los armazones disponibles se preparan en 1 a 2 días hábiles. Los lentes con receta requieren 7 a 10 días hábiles de preparación, contados desde la revisión de la receta y confirmación de la configuración.</p><h2>Tarifas y tiempos de transporte</h2><ul><li>Región Metropolitana: $3.990 y 2 a 4 días hábiles de transporte.</li><li>Otras regiones de Chile continental: $5.990 y 4 a 7 días hábiles de transporte.</li><li>Envío de muestra sin costo en compras sobre $70.000.</li></ul><p>Preparación y transporte son plazos separados. Los días hábiles excluyen sábados, domingos y festivos. El costo definitivo y la estimación de entrega se revisan antes del pago. Estas tarifas no configuran el checkout.</p><h2>Seguimiento e incidencias</h2><p>El escenario contempla un correo con seguimiento cuando el pedido se despacha. Si la entrega se retrasa o llega dañada, solicita revisión indicando el número de pedido y fotografías del embalaje.</p><h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p>",
+        "kind": "shipping",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

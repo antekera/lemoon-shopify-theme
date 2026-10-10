@@ -7,29 +7,33 @@ Renders the search page inside its pagination context.
 @param {string} search_url - URL used by the clear-filters link.
 {% enddoc %}
 
-  <div class="template-search{% unless has_results %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+{%- liquid
+  assign escaped_search_terms = search.terms | escape
+  assign show_native_toolbar = false
+  if show_all_products == false and search.filters != empty
+    if section.settings.enable_filtering or section.settings.enable_sorting
+      assign show_native_toolbar = true
+    endif
+  endif
+-%}
+
+  <div class="lemoon-search template-search{% unless has_results %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      <h1 class="h2 center">
-        {%- if search.performed -%}
-          {{- 'templates.search.title' | t -}}
-        {%- else -%}
-          {{- 'general.search.search' | t -}}
-        {%- endif -%}
-      </h1>
+      <h1 class="lemoon-search__title">{{ 'sections.lemoon_search_page.title' | t }}</h1>
       <div class="template-search__search">
         {%- if settings.predictive_search_enabled -%}
           <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
         {%- endif -%}
         <main-search>
-          <form action="{{ routes.search_url }}" method="get" role="search" class="search">
-            <div class="field">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search lemoon-search__form">
+            <div class="field lemoon-search__field">
               <input
                 class="search__input field__input"
-                id="Search-In-Template"
+                id="Search-In-Template-{{ section.id }}"
                 type="search"
                 name="q"
                 value="{{ search.terms | escape }}"
-                placeholder="{{ 'general.search.search' | t }}"
+                placeholder="{{ 'sections.lemoon_search_page.placeholder' | t | escape }}"
                 {%- if settings.predictive_search_enabled -%}
                   role="combobox"
                   aria-expanded="false"
@@ -43,8 +47,9 @@ Renders the search page inside its pagination context.
                   spellcheck="false"
                 {%- endif -%}
               >
-              <label class="field__label" for="Search-In-Template">{{ 'general.search.search' | t }}</label>
+              <label class="visually-hidden" for="Search-In-Template-{{ section.id }}">{{ 'sections.lemoon_search_page.search_label' | t }}</label>
               <input name="options[prefix]" type="hidden" value="last">
+              <input type="hidden" name="type" value="product">
 
               {%- if settings.predictive_search_enabled -%}
                 <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
@@ -63,30 +68,23 @@ Renders the search page inside its pagination context.
                   {{- 'icon-reset.svg' | inline_asset_content -}}
                 </span>
               </button>
-              <button type="submit" class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                <span class="svg-wrapper">
-                  {{- 'icon-search.svg' | inline_asset_content -}}
-                </span>
-              </button>
             </div>
+            <button type="submit" class="lemoon-search__submit">{{ 'sections.lemoon_search_page.submit' | t }}</button>
           </form>
         </main-search>
         {%- if settings.predictive_search_enabled -%}
           </predictive-search>
         {%- endif -%}
       </div>
-      {%- if search.performed and show_all_products == false -%}
-        {%- unless section.settings.enable_filtering or section.settings.enable_sorting -%}
-          {%- if search.results_count > 0 -%}
-            <p role="status">
-              {{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}
-            </p>
+      {%- unless show_native_toolbar -%}
+        <p class="lemoon-search__count" role="status">
+          {%- if show_all_products -%}
+            {{ 'products.facets.product_count_simple' | t: count: collections.all.products_count }}
+          {%- elsif search.performed -%}
+            {{ 'templates.search.results_with_count_and_term' | t: terms: escaped_search_terms, count: search.results_count }}
           {%- endif -%}
-        {%- endunless -%}
-        {%- if search.results_count == 0 and search.filters == empty -%}
-          <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
-        {%- endif -%}
-      {%- endif -%}
+        </p>
+      {%- endunless -%}
     </div>
     {%- if search.performed or show_all_products -%}
       {%- if show_all_products == false
@@ -131,7 +129,7 @@ Renders the search page inside its pagination context.
               <h2 class="product-count__text text-body">
                 <span id="ProductCountDesktop">
                   {%- if search.results_count -%}
-                    {{ 'templates.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+                    {{ 'templates.search.results_with_count' | t: terms: escaped_search_terms, count: search.results_count }}
                   {%- elsif search.products_count == search.all_products_count -%}
                     {{ 'products.facets.product_count_simple' | t: count: search.products_count }}
                   {%- else -%}
@@ -241,4 +239,17 @@ Renders the search page inside its pagination context.
         </div>
       </div>
     {%- endif -%}
+    <div class="page-width">
+      <div class="lemoon-search__recovery">
+        <div>
+          <h2>{{ 'sections.lemoon_search_page.recovery_title' | t }}</h2>
+          <ul role="list">
+            <li>{{ 'sections.lemoon_search_page.tip_model' | t }}</li>
+            <li>{{ 'sections.lemoon_search_page.tip_attributes' | t }}</li>
+            <li>{{ 'sections.lemoon_search_page.tip_spelling' | t }}</li>
+          </ul>
+        </div>
+        <a class="lemoon-search__catalogue" href="{{ routes.all_products_collection_url }}">{{ 'sections.lemoon_search_page.catalogue' | t }}</a>
+      </div>
+    </div>
   </div>

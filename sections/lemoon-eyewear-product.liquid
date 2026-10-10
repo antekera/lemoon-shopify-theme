@@ -10,7 +10,7 @@
   assign secondary_media = product.media | where: 'media_type', 'image' | reject: 'id', current_media.id | first
   assign dimensions = product.metafields.custom.frame_dimensions.value
 -%}
-<lemoon-eyewear class="lemoon-pdp page-width" data-product-id="{{ product.id }}" data-cart-url="{{ routes.cart_url }}">
+<lemoon-eyewear class="lemoon-pdp page-width" data-product-id="{{ product.id }}" data-cart-url="{{ routes.cart_url }}" data-configurator-url="{{ product.url | escape }}">
   <div class="lemoon-pdp__grid">
     <div class="lemoon-pdp__gallery">
       <div class="lemoon-pdp__stage">
@@ -92,7 +92,7 @@
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             {%- assign option_index = forloop.index0 -%}
-            <fieldset class="lemoon-pdp__options{% if forloop.first %} lemoon-pdp__options--color{% endif %}" data-option-group="{{ option_index }}"{% if option_index == 1 %} data-lens-panel{% endif %}{% if option_index > 0 %} hidden{% endif %}>
+            <fieldset class="lemoon-pdp__options{% if forloop.first %} lemoon-pdp__options--color{% endif %}" data-option-group="{{ option_index }}" data-option-name="{{ option.name | escape }}"{% if option_index == 1 %} data-lens-panel{% endif %}{% if option_index > 0 %} hidden{% endif %}>
               <legend>{{ option.name | escape }} <span data-selected-label>{{ current_variant.options[option_index] | escape }}</span></legend>
               <div class="lemoon-pdp__choices">
                 {%- for value in option.values -%}

@@ -1,5 +1,28 @@
 import { expect, test } from 'vitest';
-import { findEyewearVariant, validatePrescription } from '../../assets/lemoon-eyewear-product.js';
+import { findEyewearVariant, validatePrescription, lensConfiguratorUrl, hasSelectedLensPackage } from '../../assets/lemoon-eyewear-product.js';
+
+test('only enters the lens flow for an explicitly named selected lens option', () => {
+  expect(hasSelectedLensPackage(['Color', 'Tamaño'], ['Carey', 'M'])).toBe(false);
+  expect(hasSelectedLensPackage(['Color'], ['Carey'])).toBe(false);
+  expect(hasSelectedLensPackage(['Color', 'Lentes'], ['Carey', 'Solo armazón'])).toBe(false);
+  expect(hasSelectedLensPackage(['Color', 'Lentes'], ['Carey', undefined])).toBe(false);
+  expect(hasSelectedLensPackage(['Color', 'Lentes'], ['Carey', 'Monofocal'])).toBe(true);
+  expect(hasSelectedLensPackage(['Lentes', 'Color'], ['Monofocal', 'Carey'])).toBe(true);
+});
+
+test('lens flow entry preserves the selected variant and localized product route', () => {
+  const url = new URL(lensConfiguratorUrl('/es/products/modelo?variant=old', 123, 'https://lemoon.cl'));
+  expect(url.pathname).toBe('/es/products/modelo');
+  expect(url.searchParams.get('variant')).toBe('123');
+  expect(url.searchParams.get('view')).toBe('configurador');
+});
+
+test('re-entering configuration clears the explicit return-to-product marker', () => {
+  const url = new URL(lensConfiguratorUrl('/es/products/modelo?lens_flow=return', 123, 'https://lemoon.cl'));
+  expect(url.searchParams.get('variant')).toBe('123');
+  expect(url.searchParams.get('view')).toBe('configurador');
+  expect(url.searchParams.has('lens_flow')).toBe(false);
+});
 
 test('charges the exact combination and does not substitute an unavailable combination', () => {
   const variants = [{ id: 1, options: ['Carey', 'Solo armazón', 'Estándar 1.50'], available: true }, { id: 2, options: ['Carey', 'Monofocal', 'Delgado 1.67'], available: false }];

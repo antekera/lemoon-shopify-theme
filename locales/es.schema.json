@@ -375,32 +375,79 @@
     }
   },
   "sections": {
+    "lemoon_gift_card_purchase": {
+      "name": "Compra tarjeta regalo",
+      "product_label": "Producto de tarjeta regalo",
+      "product_info": "Solo se aceptan tarjetas de regalo nativas de Shopify. En un template de producto de regalo, se usa primero el producto actual.",
+      "intro_label": "Introducción",
+      "intro_default": "<p>Que elija sus próximos lentes. Escoge un monto y, si quieres, agrega un mensaje personal.</p>",
+      "contact_label": "Enlace de contacto"
+    },
     "lemoon_featured_products": {
       "name": "Destacados Lemoon",
       "settings": {
-        "collection": { "label": "Colección" },
+        "collection": {
+          "label": "Colección"
+        },
         "collection_source": {
           "label": "Origen de productos",
-          "options": { "fixed": { "label": "Colección seleccionada" }, "product_category": { "label": "Categoría del producto" } }
+          "options": {
+            "fixed": {
+              "label": "Colección seleccionada"
+            },
+            "product_category": {
+              "label": "Categoría del producto"
+            }
+          }
         },
-        "optical_collection": { "label": "Colección de ópticos" },
-        "sun_collection": { "label": "Colección de sol" },
-        "randomize": { "label": "Mostrar productos al azar" },
-        "defer_load": { "label": "Cargar productos al acercarse al carrusel" },
-        "show_quick_add": { "label": "Mostrar botón para agregar al carrito" },
-        "initial_products": { "label": "Productos iniciales" },
-        "eyebrow": { "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
-        "heading": { "label": "Título", "default": "Armazones favoritos" },
-        "link_label": { "label": "Etiqueta de enlace", "default": "Ver todos" },
-        "products_to_show": { "label": "Productos visibles" },
-        "max_products_to_load": { "label": "Máximo de productos a cargar" }
+        "optical_collection": {
+          "label": "Colección de ópticos"
+        },
+        "sun_collection": {
+          "label": "Colección de sol"
+        },
+        "randomize": {
+          "label": "Mostrar productos al azar"
+        },
+        "defer_load": {
+          "label": "Cargar productos al acercarse al carrusel"
+        },
+        "show_quick_add": {
+          "label": "Mostrar botón para agregar al carrito"
+        },
+        "initial_products": {
+          "label": "Productos iniciales"
+        },
+        "eyebrow": {
+          "label": "Texto superior",
+          "default": "SELECCIÓN LEMOON"
+        },
+        "heading": {
+          "label": "Título",
+          "default": "Armazones favoritos"
+        },
+        "link_label": {
+          "label": "Etiqueta de enlace",
+          "default": "Ver todos"
+        },
+        "products_to_show": {
+          "label": "Productos visibles"
+        },
+        "max_products_to_load": {
+          "label": "Máximo de productos a cargar"
+        }
       }
     },
     "lemoon_trust_bar": {
       "name": "Barra de confianza",
       "settings": {
-        "aria_label": { "label": "Etiqueta accesible", "default": "Beneficios de comprar en Lemoon" },
-        "benefits": { "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP." }
+        "aria_label": {
+          "label": "Etiqueta accesible",
+          "default": "Beneficios de comprar en Lemoon"
+        },
+        "benefits": {
+          "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP."
+        }
       }
     },
     "all": {
@@ -3423,6 +3470,197 @@
         "open_by_default": {
           "label": "Abrir de forma predeterminada"
         }
+      }
+    },
+    "cart_upsell": {
+      "name": "Completa tu pedido",
+      "presets": {
+        "name": "Completa tu pedido"
+      },
+      "settings": {
+        "heading": {
+          "label": "Título",
+          "default": "Completa tu pedido"
+        }
+      },
+      "blocks": {
+        "product": {
+          "name": "Accesorio",
+          "settings": {
+            "product": {
+              "label": "Producto"
+            }
+          }
+        }
+      }
+    },
+    "main_404": {
+      "name": "Página no encontrada"
+    },
+    "lemoon_contact_page": {
+      "name": "Contacto Lemoon",
+      "settings": {
+        "contact_email": {
+          "label": "Correo de contacto",
+          "info": "Usa el correo confirmado del negocio. Déjalo vacío para ocultarlo."
+        },
+        "whatsapp_url": {
+          "label": "Enlace de WhatsApp",
+          "info": "Usa el enlace de WhatsApp confirmado del negocio. Déjalo vacío para ocultarlo."
+        },
+        "contact_hours": {
+          "label": "Horario de atención",
+          "info": "Usa los horarios confirmados del negocio. Déjalo vacío para ocultarlo."
+        }
+      }
+    },
+    "lemoon_journal": {
+      "name": "Journal Lemoon",
+      "newsletter_label": "Mostrar suscripción al newsletter"
+    },
+    "lemoon_lens_flow": {
+      "name": "Configuración de lentes"
+    },
+    "lemoon_article": {
+      "name": "Artículo Lemoon"
+    },
+    "lemoon_guide": {
+      "name": "Guía Lemoon",
+      "kind_label": "Contenido de la guía",
+      "measurements": "Encuentra tu medida.",
+      "face": "Tu estilo no tiene una sola forma.",
+      "order": "Elige. Revisa. Haz tu pedido.",
+      "try_on": "Mira cómo podría verse.",
+      "prescription": "Tu receta, con cuidado."
+    },
+    "lemoon_faq_page": {
+      "name": "Preguntas frecuentes Lemoon",
+      "question_block": "Pregunta",
+      "group_label": "Grupo de preguntas",
+      "question_label": "Pregunta",
+      "answer_label": "Respuesta",
+      "link_label": "Enlace opcional",
+      "link_text_label": "Texto del enlace",
+      "question_default": "¿Cómo puedo pedir ayuda?",
+      "answer_default": "<p>Usa el formulario de contacto para consultar sobre un producto o pedido.</p>",
+      "choosing": "Elegir tu armazón",
+      "lenses": "Lentes y receta",
+      "ordering": "Pedido, cuenta y ayuda",
+      "policies": "Envíos y condiciones",
+      "editor_info": "Las preguntas personalizadas reemplazan las respuestas de referencia de su grupo. Si el grupo no tiene preguntas personalizadas completas, se muestran las referencias traducidas."
+    },
+    "lemoon_legal_page": {
+      "name": "Página legal Lemoon",
+      "settings": {
+        "kind": {
+          "label": "Tipo de información",
+          "general": "General",
+          "shipping": "Envíos",
+          "returns": "Devoluciones",
+          "terms": "Términos",
+          "privacy": "Privacidad",
+          "warranty": "Garantías"
+        },
+        "intro": {
+          "label": "Introducción",
+          "info": "Déjala vacía para usar la introducción traducida según el tipo de información."
+        },
+        "contact_url": {
+          "label": "Página de contacto"
+        },
+        "shipping_url": {
+          "label": "Enlace de envíos"
+        },
+        "returns_url": {
+          "label": "Enlace de devoluciones"
+        },
+        "warranty_url": {
+          "label": "Enlace de garantías"
+        },
+        "terms_url": {
+          "label": "Enlace de términos"
+        },
+        "privacy_url": {
+          "label": "Enlace de privacidad"
+        },
+        "links_heading": "Enlaces de información relacionada"
+      }
+    },
+    "lemoon_about_page": {
+      "name": "Página Sobre Lemoon",
+      "image_label": "Imagen de marca",
+      "image_info": "Usa una imagen real y aprobada de la marca. Sin imagen se muestra una composición abstracta decorativa.",
+      "story_label": "Historia verificada de la marca",
+      "story_info": "Opcional. Agrega solo información confirmada sobre la marca."
+    },
+    "lemoon_launch_page": {
+      "name": "Lanzamiento Lemoon",
+      "headline_label": "Título",
+      "intro_label": "Introducción",
+      "image_label": "Imagen opcional",
+      "fallback_info": "Déjalo vacío para usar el texto traducido."
+    },
+    "lemoon_service_page": {
+      "name": "Servicios Lemoon",
+      "settings": {
+        "kind": {
+          "label": "Tipo de información",
+          "operations": "Operativos oftalmológicos",
+          "benefits": "Isapres y Fonasa"
+        },
+        "verified_details": {
+          "label": "Información confirmada",
+          "info": "Agrega sólo detalles de disponibilidad o condiciones verificados por el negocio. Déjalo vacío si aún no están confirmados."
+        },
+        "image": {
+          "label": "Imagen real",
+          "info": "Usa una imagen propia del negocio. Si no hay imagen, se muestra una ilustración de armazón."
+        }
+      }
+    },
+    "lemoon_demo": {
+      "enabled_label": "Mostrar datos comerciales de prueba",
+      "enabled_info": "Usa el contenido de muestra para revisar esta página. Desactiva esta opción cuando el contenido definitivo esté confirmado.",
+      "content_label": "Contenido comercial de prueba",
+      "content_info": "Texto editable de muestra. No configura tarifas, pagos ni conservación de datos."
+    },
+    "lemoon_crystal_guide": {
+      "name": "Guía de cristales",
+      "settings": {
+        "configurator_product": {
+          "label": "Producto para configurar",
+          "info": "Opcional. El enlace aparece solo si el producto tiene una opción llamada Lentes y variantes en el catálogo."
+        }
+      }
+    },
+    "lemoon_style_quiz": {
+      "name": "Selección de armazones",
+      "collection": "Colección del catálogo",
+      "collection_info": "El enlace usa solo el filtro de precio que esta colección tenga disponible.",
+      "budget_low": "Primer presupuesto máximo (CLP)",
+      "budget_high": "Segundo presupuesto máximo (CLP)",
+      "product": "Armazón editorial",
+      "face": "Preferencia de rostro",
+      "style": "Preferencia de estilo",
+      "use": "Uso preferido",
+      "product_info": "Selecciona un producto disponible. Las categorías son una curaduría editorial; no garantizan ajuste ni protección.",
+      "face_options": {
+        "round": "Redondo",
+        "square": "Cuadrado",
+        "oval": "Ovalado",
+        "heart": "Corazón",
+        "unsure": "No estoy seguro/a"
+      },
+      "style_options": {
+        "minimal": "Minimal",
+        "colorpop": "Con color",
+        "retro": "Retro",
+        "easy": "Sin esfuerzo"
+      },
+      "use_options": {
+        "work": "Para trabajar",
+        "everyday": "Todos los días",
+        "outdoors": "Al aire libre"
       }
     }
   },

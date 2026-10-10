@@ -1,0 +1,86 @@
+{%- if collection.handle == 'cristales' -%}
+  {%- liquid
+    assign configurator_product = section.settings.configurator_product
+    assign has_lens_options = false
+    if configurator_product != blank and configurator_product.variants.size > 0
+      for option in configurator_product.options_with_values
+        if option.name == 'Lentes'
+          assign has_lens_options = true
+        endif
+      endfor
+    endif
+  -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide { max-width: 1280px; padding-top: {{ section.settings.padding_top | times: 0.625 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round }}px; color: var(--lemoon-text-brand); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide h2 { margin: 0 0 var(--lemoon-space-4); font-family: var(--lemoon-font-heading); font-size: 2.8rem; font-weight: var(--lemoon-weight-semibold); line-height: 1.2; letter-spacing: var(--lemoon-type-display-tracking); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide p { margin: 0; font-size: 1.6rem; line-height: 1.6; color: var(--lemoon-text-secondary); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__intro { max-width: 72rem; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__grid { display: grid; gap: var(--lemoon-space-4); margin: var(--lemoon-space-8) 0; padding: 0; list-style: none; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__tile { padding: var(--lemoon-space-6); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__tile svg { display: block; width: 4.8rem; height: 4.8rem; margin-bottom: var(--lemoon-space-6); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide h3 { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: 2.2rem; font-weight: var(--lemoon-weight-medium); line-height: 1.25; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__notes { display: grid; gap: var(--lemoon-space-6); max-width: 82rem; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__notes h3 { font-size: 1.8rem; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__links { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-6); align-items: center; margin-top: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide a { min-height: var(--lemoon-size-touch); display: inline-flex; align-items: center; color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide a.lemoon-crystal-guide__primary { justify-content: center; padding: var(--lemoon-space-3) var(--lemoon-space-6); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-weight: var(--lemoon-weight-semibold); text-decoration: none; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide a.lemoon-crystal-guide__primary:hover { background: var(--lemoon-action-primary-hover); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__product { margin-top: var(--lemoon-space-8); padding-top: var(--lemoon-space-6); border-top: 1px solid var(--lemoon-border-default); }
+    #shopify-section-{{ section.id }} .lemoon-crystal-guide__product p { font-size: 1.4rem; margin-top: var(--lemoon-space-2); }
+    @media (min-width: 750px) {
+      #shopify-section-{{ section.id }} .lemoon-crystal-guide { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+      #shopify-section-{{ section.id }} .lemoon-crystal-guide h2 { font-size: 3.4rem; }
+      #shopify-section-{{ section.id }} .lemoon-crystal-guide__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--lemoon-space-6); }
+      #shopify-section-{{ section.id }} .lemoon-crystal-guide__notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  {%- endstyle -%}
+  <div class="lemoon-crystal-guide page-width" aria-labelledby="CrystalGuide-{{ section.id }}">
+    <h2 id="CrystalGuide-{{ section.id }}">{{ 'sections.lemoon_crystal_guide.title' | t }}</h2>
+    <p class="lemoon-crystal-guide__intro">{{ 'sections.lemoon_crystal_guide.intro' | t }}</p>
+    <ul class="lemoon-crystal-guide__grid" role="list">
+      <li class="lemoon-crystal-guide__tile">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.5"/><path d="m16 31 15-15m-9 16 10-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>{{ 'sections.lemoon_crystal_guide.clear_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.clear_text' | t }}</p>
+      </li>
+      <li class="lemoon-crystal-guide__tile">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.5"/><path d="M24 7a17 17 0 0 1 0 34V7Z" fill="currentColor" opacity=".12"/><path d="M24 7v34" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3>{{ 'sections.lemoon_crystal_guide.photo_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.photo_text' | t }}</p>
+      </li>
+      <li class="lemoon-crystal-guide__tile">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M24 3v5m0 32v5M3 24h5m32 0h5M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3>{{ 'sections.lemoon_crystal_guide.sun_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.sun_text' | t }}</p>
+      </li>
+    </ul>
+    <div class="lemoon-crystal-guide__notes">
+      <div><h3>{{ 'sections.lemoon_crystal_guide.thickness_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.thickness_text' | t }}</p></div>
+      <div><h3>{{ 'sections.lemoon_crystal_guide.prescription_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.prescription_text' | t }}</p></div>
+    </div>
+    <div class="lemoon-crystal-guide__links">
+      <a class="lemoon-crystal-guide__primary" href="{{ routes.root_url | append: '/collections/opticos' | replace: '//', '/' }}">{{ 'sections.lemoon_crystal_guide.frames_cta' | t }}</a>
+      <a href="{{ routes.root_url | append: '/pages/como-enviar-prescripcion' | replace: '//', '/' }}">{{ 'sections.lemoon_crystal_guide.prescription_cta' | t }}</a>
+    </div>
+    {%- if has_lens_options -%}
+      <div class="lemoon-crystal-guide__product">
+        <a href="{{ configurator_product.url }}?view=configurador">{{ 'sections.lemoon_crystal_guide.configure_cta' | t: product: configurator_product.title | escape }}</a>
+        <p>{{ 'sections.lemoon_crystal_guide.configure_note' | t }}</p>
+        {%- if configurator_product.title contains 'Prototipo' -%}<p>{{ 'lemoon_lens_flow.prototype' | t }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "t:sections.lemoon_crystal_guide.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "product", "id": "configurator_product", "label": "t:sections.lemoon_crystal_guide.settings.configurator_product.label", "info": "t:sections.lemoon_crystal_guide.settings.configurator_product.info" },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 64 }
+  ],
+  "presets": [{ "name": "t:sections.lemoon_crystal_guide.name" }]
+}
+{% endschema %}

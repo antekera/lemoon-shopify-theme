@@ -1,3 +1,17 @@
 {
-  "sections": { "main": { "type": "lemoon-legal-page", "settings": { "intro": "Conoce las condiciones y pasos para solicitar una devolución." } } }, "order": ["main"]
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Devolución voluntaria de muestra: 30 días</h2><p>El escenario de prueba contempla solicitar una devolución de armazones sin uso dentro de 30 días corridos desde la recepción, con sus accesorios y embalaje. Incluye una etiqueta de retorno dentro de Chile continental. La evaluación de lentes personalizados se realiza por separado; no se excluyen automáticamente los derechos legales.</p><h2>Cómo solicitarla</h2><p>Indica el número de pedido y el motivo de la solicitud. Una vez coordinado el retorno, el producto se revisa dentro de 3 días hábiles desde su recepción. El escenario contempla tramitar el reembolso al medio de pago original en 5 a 10 días hábiles desde la aprobación; el abono depende del proveedor de pago.</p><h2>Tus derechos</h2><p>Esta propuesta voluntaria no limita el retracto legal de 10 días cuando corresponda ni la garantía legal. Cualquier excepción al retracto requiere revisión e información previa para el producto concreto.</p><h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p>",
+        "kind": "returns",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
 }

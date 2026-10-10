@@ -1,0 +1,263 @@
+{%- assign faq_groups = 'choosing,lenses,ordering,policies' | split: ',' -%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-faq-page { max-width: 128rem; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__header { max-width: 72rem; margin-bottom: var(--lemoon-space-16); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__title { margin: 0; font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; letter-spacing: var(--lemoon-type-h1-tracking); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__intro { margin: var(--lemoon-space-6) 0 0; font-size: var(--lemoon-fs-18); line-height: 1.6; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__layout { display: grid; grid-template-columns: minmax(0, .55fr) minmax(0, 1.45fr); gap: var(--lemoon-space-16); align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__nav { position: sticky; top: 12rem; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__nav-title { margin: 0 0 var(--lemoon-space-3); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__nav ul { margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page a { color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__nav a { display: inline-flex; align-items: center; min-height: 4.4rem; font-size: var(--lemoon-fs-16); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__group { margin-bottom: var(--lemoon-space-12); scroll-margin-top: 14rem; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__group h2 { margin: 0 0 var(--lemoon-space-5); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); line-height: 1.25; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question { border-top: 1px solid var(--lemoon-border-default); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question:last-child { border-bottom: 1px solid var(--lemoon-border-default); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary { display: flex; align-items: center; justify-content: space-between; gap: var(--lemoon-space-5); min-height: 6.4rem; padding: var(--lemoon-space-5) 0; list-style: none; cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary::-webkit-details-marker { display: none; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary h3 { margin: 0; font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-18); font-weight: var(--lemoon-weight-medium); line-height: 1.4; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary svg { flex: 0 0 2rem; width: 2rem; height: 2rem; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question[open] .lemoon-faq-page__plus-vertical { display: none; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__answer { padding: 0 var(--lemoon-space-8) var(--lemoon-space-6) 0; font-size: var(--lemoon-fs-16); line-height: 1.7; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__answer p { margin: 0 0 var(--lemoon-space-3); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__answer a { display: inline-block; padding: var(--lemoon-space-2) 0; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__help { padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__help h2 { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__help p { margin: 0 0 var(--lemoon-space-5); line-height: 1.6; font-size: var(--lemoon-fs-16); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__help a { display: inline-flex; align-items: center; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-6); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); text-decoration: none; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__help a:hover { background: var(--lemoon-action-primary-hover); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page :is(summary, a):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .lemoon-faq-page__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__nav { position: static; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__nav ul { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-2) var(--lemoon-space-6); }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-faq-page { padding-top: {{ section.settings.padding_top | times: 0.625 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round: 0 }}px; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__title { font-size: 3.4rem; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__header { margin-bottom: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__intro { font-size: var(--lemoon-fs-16); }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__group h2, #shopify-section-{{ section.id }} .lemoon-faq-page__help h2 { font-size: 2.4rem; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__help { padding: var(--lemoon-space-6); }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__answer { padding-right: 0; }
+  }
+{%- endstyle -%}
+<div class="lemoon-faq-page page-width">
+  <header class="lemoon-faq-page__header">
+    <h1 class="lemoon-faq-page__title">{{ 'sections.lemoon_faq_page.title' | t }}</h1>
+    <p class="lemoon-faq-page__intro">{{ 'sections.lemoon_faq_page.intro' | t }}</p>
+  </header>
+  <div class="lemoon-faq-page__layout">
+    <nav class="lemoon-faq-page__nav" aria-label="{{ 'sections.lemoon_faq_page.index' | t | escape }}">
+      <p class="lemoon-faq-page__nav-title">{{ 'sections.lemoon_faq_page.index' | t }}</p>
+      <ul>
+        {%- for group in faq_groups -%}
+          {%- assign group_title_key = 'sections.lemoon_faq_page.' | append: group | append: '.title' -%}
+          <li><a href="#FaqGroup-{{ section.id }}-{{ group }}">{{ group_title_key | t }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div>
+      {%- for group in faq_groups -%}
+        {%- liquid
+          assign group_title_key = 'sections.lemoon_faq_page.' | append: group | append: '.title'
+          assign custom_question_count = 0
+          for block in section.blocks
+            if block.settings.group == group and block.settings.question != blank and block.settings.answer != blank
+              assign custom_question_count = custom_question_count | plus: 1
+            endif
+          endfor
+          assign question_count = 3
+          if group == 'lenses'
+            assign question_count = 2
+          endif
+        -%}
+        <section class="lemoon-faq-page__group" id="FaqGroup-{{ section.id }}-{{ group }}" aria-labelledby="FaqTitle-{{ section.id }}-{{ group }}">
+          <h2 id="FaqTitle-{{ section.id }}-{{ group }}">{{ group_title_key | t }}</h2>
+          {%- if custom_question_count == 0 -%}
+          {%- for question in (1..question_count) -%}
+            {%- liquid
+              assign question_key = 'sections.lemoon_faq_page.' | append: group | append: '.question_' | append: question
+              assign question_title_key = question_key | append: '.question'
+              assign question_answer_key = question_key | append: '.answer'
+              assign question_link_key = question_key | append: '.link'
+              assign question_url = routes.all_products_collection_url
+              case group
+                when 'choosing'
+                  case question
+                    when 1
+                      assign guide_handle = 'como-medir-tus-lentes'
+                    when 2
+                      assign guide_handle = 'como-hacer-tu-pedido'
+                    when 3
+                      assign guide_handle = 'como-usar-probador-virtual'
+                  endcase
+                  assign question_url = routes.root_url | append: '/pages/' | append: guide_handle | replace: '//', '/'
+                when 'lenses'
+                  if question == 1
+                    assign question_url = routes.root_url | append: '/pages/como-enviar-prescripcion' | replace: '//', '/'
+                  endif
+                when 'policies'
+                  case question
+                    when 1
+                      assign policy_handle = 'envios-y-entregas'
+                    when 2
+                      assign policy_handle = 'po'
+                    when 3
+                      assign policy_handle = 'garantias'
+                  endcase
+                  assign question_url = routes.root_url | append: '/pages/' | append: policy_handle | replace: '//', '/'
+                when 'ordering'
+                  case question
+                    when 1
+                      assign question_url = routes.root_url | append: '/pages/como-hacer-tu-pedido' | replace: '//', '/'
+                    when 2
+                      assign question_url = routes.account_login_url
+                    when 3
+                      assign question_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+                  endcase
+              endcase
+            -%}
+            <details class="lemoon-faq-page__question" id="FaqQuestion-{{ section.id }}-{{ group }}-{{ question }}">
+              <summary>
+                <h3>{{ question_title_key | t }}</h3>
+                <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14"/><path class="lemoon-faq-page__plus-vertical" d="M10 3v14"/></svg>
+              </summary>
+              <div class="lemoon-faq-page__answer">
+                <p>{{ question_answer_key | t }}</p>
+                <a href="{{ question_url }}">{{ question_link_key | t }}</a>
+              </div>
+            </details>
+          {%- endfor -%}
+          {%- else -%}
+            {%- for block in section.blocks -%}
+              {%- if block.settings.group == group and block.settings.question != blank and block.settings.answer != blank -%}
+                <details class="lemoon-faq-page__question" id="FaqBlock-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
+                  <summary>
+                    <h3>{{ block.settings.question | escape }}</h3>
+                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14"/><path class="lemoon-faq-page__plus-vertical" d="M10 3v14"/></svg>
+                  </summary>
+                  <div class="lemoon-faq-page__answer rte">
+                    {{ block.settings.answer }}
+                    {%- if block.settings.link != blank and block.settings.link_label != blank -%}
+                      <a href="{{ block.settings.link | escape }}">{{ block.settings.link_label | escape }}</a>
+                    {%- endif -%}
+                  </div>
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </section>
+      {%- endfor -%}
+      <aside class="lemoon-faq-page__help" aria-labelledby="FaqHelp-{{ section.id }}">
+        <h2 id="FaqHelp-{{ section.id }}">{{ 'sections.lemoon_faq_page.help_title' | t }}</h2>
+        <p>{{ 'sections.lemoon_faq_page.help_body' | t }}</p>
+        <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'sections.lemoon_faq_page.contact' | t }}</a>
+      </aside>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_faq_page.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.lemoon_faq_page.editor_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lemoon_faq_page.name"
+    }
+  ],
+  "max_blocks": 32,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "t:sections.lemoon_faq_page.question_block",
+      "settings": [
+        {
+          "type": "select",
+          "id": "group",
+          "label": "t:sections.lemoon_faq_page.group_label",
+          "default": "choosing",
+          "options": [
+            {
+              "value": "choosing",
+              "label": "t:sections.lemoon_faq_page.choosing"
+            },
+            {
+              "value": "lenses",
+              "label": "t:sections.lemoon_faq_page.lenses"
+            },
+            {
+              "value": "ordering",
+              "label": "t:sections.lemoon_faq_page.ordering"
+            },
+            {
+              "value": "policies",
+              "label": "t:sections.lemoon_faq_page.policies"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "t:sections.lemoon_faq_page.question_label",
+          "default": "t:sections.lemoon_faq_page.question_default"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "t:sections.lemoon_faq_page.answer_label",
+          "default": "t:sections.lemoon_faq_page.answer_default"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.lemoon_faq_page.link_label"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "t:sections.lemoon_faq_page.link_text_label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

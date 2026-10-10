@@ -2,6 +2,19 @@ export function findEyewearVariant(variants, options) {
   return variants.find((variant) => variant.options.every((value, index) => value === options[index]));
 }
 
+export function lensConfiguratorUrl(productUrl, variantId, origin) {
+  const url = new URL(productUrl, origin);
+  url.searchParams.set('variant', String(variantId));
+  url.searchParams.set('view', 'configurador');
+  url.searchParams.delete('lens_flow');
+  return url.href;
+}
+
+export function hasSelectedLensPackage(optionNames, options) {
+  const index = optionNames.indexOf('Lentes');
+  return index >= 0 && Boolean(options[index]) && options[index] !== 'Solo armazón';
+}
+
 export function validatePrescription(values, progressive) {
   const errors = [];
   const number = (key, min, max, step, required = false) => {
@@ -32,7 +45,16 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       this.submit = this.querySelector('[data-add]');
       this.error = this.querySelector('[data-error]');
       this.panels = [...this.querySelectorAll('[data-media-panel]')];
-      this.inLensFlow = !['Solo armazón', undefined].includes(this.selectedOptions()[1]);
+      const optionNames = [...this.querySelectorAll('[data-option-group]')].map(group => group.dataset.optionName);
+      const returningToProduct = new URLSearchParams(window.location.search).get('lens_flow') === 'return';
+      this.inLensFlow = !returningToProduct && hasSelectedLensPackage(optionNames, this.selectedOptions());
+      if (this.dataset.configuratorUrl && this.inLensFlow) {
+        const selected = findEyewearVariant(this.variants, this.selectedOptions());
+        if (selected) {
+          window.location.replace(lensConfiguratorUrl(this.dataset.configuratorUrl, selected.id, window.location.origin));
+          return;
+        }
+      }
       this.addEventListener('change', (event) => {
         if (event.target.matches('[data-option]')) this.updateVariant();
         if (event.target.matches('[data-recipe-mode]')) this.updatePrescription();
@@ -55,6 +77,10 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
           this.querySelector('[data-configure]').focus();
         }
         if (event.target.closest('[data-configure]')) {
+          if (this.dataset.configuratorUrl && this.variant?.available) {
+            window.location.assign(lensConfiguratorUrl(this.dataset.configuratorUrl, this.variant.id, window.location.origin));
+            return;
+          }
           this.inLensFlow = true;
           const options = this.querySelectorAll('[data-option-group="1"] input');
           const lens = [...options].find((input) => input.value !== 'Solo armazón' && !input.disabled);
@@ -174,7 +200,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
 
     updatePrescription() {
       const lens = this.selectedOptions()[1] || '';
-      const needsPrescription = lens.includes('Monofocal') || lens.includes('Progresivo');
+      const needsPrescription = this.inLensFlow && (lens.includes('Monofocal') || lens.includes('Progresivo'));
       const progressive = lens.includes('Progresivo');
       const recipe = this.querySelector('[data-prescription]');
       recipe.hidden = !needsPrescription;

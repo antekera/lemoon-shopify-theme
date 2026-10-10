@@ -1,0 +1,81 @@
+{%- assign email_title = 'Tu tarjeta de regalo' -%}
+{%- assign email_direction = 'ltr' -%}
+{%- # Shopify supplies locale_direction in the notification context. -%}
+{%- # theme-check-disable-next-line UndefinedObject -%}
+{%- if locale_direction == 'rtl' -%}{%- assign email_direction = 'rtl' -%}{%- endif -%}
+{%- if gift_card.recipient -%}
+  {%- assign recipient_name = gift_card.recipient.nickname | default: gift_card.recipient.name | default: gift_card.recipient.email -%}
+  {%- assign sender_name = gift_card.customer.name | default: gift_card.customer.email | default: gift_card.customer.phone | default: shop.name -%}
+{%- endif -%}
+<!doctype html>
+<html lang="es" dir="{{ email_direction }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ email_title | escape }} · {{ shop.name | escape }}</title>
+  <style>
+    body { margin: 0 !important; padding: 0 !important; }
+    table { border-collapse: collapse; }
+    a { color: #0B1F3A; }
+    @media only screen and (max-width: 620px) {
+      .email-container { width: 100% !important; }
+      .email-content { padding: 28px 20px !important; }
+      .email-heading { font-size: 30px !important; }
+      .gift-value { font-size: 38px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#F7F4EE;color:#1A1A1A;font-family:Arial,Helvetica,sans-serif;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Una tarjeta para elegir tus próximos lentes en {{ shop.name | escape }}.</div>
+  <table role="presentation" width="100%" style="width:100%;background-color:#F7F4EE;" dir="{{ email_direction }}">
+    <tr><td align="center" style="padding:32px 12px;">
+      <table role="presentation" class="email-container" width="600" style="width:100%;max-width:600px;background-color:#FFFFFF;">
+        <tr><td class="email-content" style="padding:40px 40px 24px;">
+          {% if shop.email_logo_url %}
+            <img src="{{ shop.email_logo_url | escape }}" alt="{{ shop.name | escape }}" width="{{ shop.email_logo_width | default: 160 }}" height="38" style="display:block;max-width:100%;height:auto;border:0;">
+          {% else %}
+            <p style="margin:0;color:#0B1F3A;font-family:Georgia,serif;font-size:34px;line-height:1.1;">{{ shop.name | escape }}</p>
+          {% endif %}
+        </td></tr>
+        <tr><td class="email-content" style="padding:12px 40px 28px;">
+          <h1 class="email-heading" style="margin:0 0 16px;color:#0B1F3A;font-family:Arial,Helvetica,sans-serif;font-size:36px;font-weight:400;line-height:1.15;">{{ email_title }}</h1>
+          {% if gift_card.recipient %}
+            <p style="font-family:Arial,Helvetica,sans-serif;margin:0;font-size:17px;line-height:1.6;">Hola <span dir="auto">{{ recipient_name | escape }}</span>, recibiste una tarjeta de regalo de <span dir="auto">{{ sender_name | escape }}</span>.</p>
+          {% else %}
+            <p style="font-family:Arial,Helvetica,sans-serif;margin:0;font-size:17px;line-height:1.6;">Un regalo para elegir tus próximos lentes. Tu tarjeta está lista para usar en la tienda online.</p>
+          {% endif %}
+          {% if gift_card.recipient and gift_card.message != blank %}
+            <table role="presentation" width="100%" style="margin-top:24px;"><tr><td style="padding:20px;background-color:#F7F4EE;border-left:3px solid #0B1F3A;">
+              <p dir="auto" style="font-family:Arial,Helvetica,sans-serif;margin:0;font-size:16px;line-height:1.7;overflow-wrap:anywhere;">{{ gift_card.message | escape | newline_to_br }}</p>
+            </td></tr></table>
+          {% endif %}
+        </td></tr>
+        <tr><td class="email-content" style="padding:0 40px 28px;">
+          <table role="presentation" width="100%" style="background-color:#0B1F3A;border-radius:16px;"><tr><td style="padding:28px;color:#FFFFFF;">
+            <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 32px;font-size:13px;letter-spacing:1px;">TARJETA DE REGALO</p>
+            <p class="gift-value" style="font-family:Arial,Helvetica,sans-serif;margin:0;font-size:44px;line-height:1.2;font-weight:400;" dir="auto">{{ gift_card.initial_value | money_with_currency }}</p>
+            <p style="font-family:Arial,Helvetica,sans-serif;margin:12px 0 0;font-size:15px;">{{ shop.name | escape }}</p>
+          </td></tr></table>
+          {% if gift_card.expires_on %}<p style="font-family:Arial,Helvetica,sans-serif;margin:16px 0 0;font-size:14px;line-height:1.5;">Válida hasta el {{ gift_card.expires_on | date: '%d/%m/%Y' }}.</p>{% endif %}
+        </td></tr>
+        <tr><td class="email-content" style="padding:0 40px 36px;">
+          <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 12px;font-size:14px;color:#6B6B6B;">Tu código</p>
+          <p dir="ltr" style="margin:0 0 24px;font-family:Consolas,monospace;font-size:22px;line-height:1.5;letter-spacing:2px;overflow-wrap:anywhere;">{{ gift_card.code | format_code | escape }}</p>
+          <p style="font-family:Arial,Helvetica,sans-serif;margin:0 0 24px;font-size:16px;line-height:1.6;">Ingresa este código al pagar. Puedes abrir la tarjeta para consultar su saldo disponible.</p>
+          <table role="presentation" width="100%"><tr><td align="center" bgcolor="#0B1F3A" style="background-color:#0B1F3A;border-radius:28px;mso-padding-alt:16px 24px;">
+            <a href="{{ gift_card.url | escape }}" style="font-family:Arial,Helvetica,sans-serif;display:block;padding:16px 24px;color:#FFFFFF;text-decoration:none;font-size:16px;font-weight:600;line-height:1.4;">Abrir mi tarjeta</a>
+          </td></tr></table>
+          <p style="font-family:Arial,Helvetica,sans-serif;margin:20px 0 0;font-size:15px;line-height:1.6;"><a href="{{ shop.url | escape }}" style="font-family:Arial,Helvetica,sans-serif;color:#0B1F3A;text-decoration:underline;">Explorar la tienda</a></p>
+          {% if gift_card.pass_url %}
+            <p style="font-family:Arial,Helvetica,sans-serif;margin:24px 0 0;"><a href="{{ gift_card.pass_url | escape }}"><img src="{{ 'gift-card/add-to-apple-wallet.png' | shopify_asset_url }}" alt="Agregar a Apple Wallet" width="120" height="40" style="border:0;"></a></p>
+          {% endif %}
+        </td></tr>
+        <tr><td class="email-content" style="padding:24px 40px;border-top:1px solid #E0DDD8;">
+          <p style="font-family:Arial,Helvetica,sans-serif;margin:0;font-size:13px;color:#6B6B6B;line-height:1.7;">¿Necesitas ayuda? Responde a este correo{% if shop.email != blank %} o escríbenos a <a href="mailto:{{ shop.email | escape }}" style="font-family:Arial,Helvetica,sans-serif;color:#0B1F3A;">{{ shop.email | escape }}</a>{% endif %}.</p>
+          <!-- shopify-shop-marketplace-footer -->
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

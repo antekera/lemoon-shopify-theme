@@ -1,51 +1,109 @@
 {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
+  #shopify-section-{{ section.id }} .lemoon-journal { padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px; color: var(--lemoon-text-brand); max-width: 1280px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__intro { display: grid; gap: 32px; align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-journal__eyebrow { font-size: var(--lemoon-fs-12); letter-spacing: .08em; text-transform: uppercase; }
+  #shopify-section-{{ section.id }} h1 { font-size: 3.4rem; font-weight: var(--lemoon-weight-light); line-height: 1.12; margin: 16px 0; max-width: 550px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__intro p { max-width: 430px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__description { color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-18); }
+  #shopify-section-{{ section.id }} .lemoon-journal__feature { background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); padding: 24px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__feature img { display: block; width: 100%; height: auto; aspect-ratio: 1.9; object-fit: cover; border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-journal__feature h2 { font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-light); }
+  #shopify-section-{{ section.id }} a { color: inherit; }
+  #shopify-section-{{ section.id }} .lemoon-journal__empty .button { color: var(--lemoon-text-inverse); }
+  #shopify-section-{{ section.id }} a:focus-visible, #shopify-section-{{ section.id }} input:focus-visible, #shopify-section-{{ section.id }} button:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__tags { display: flex; flex-wrap: wrap; gap: 12px; margin: 40px 0; }
+  #shopify-section-{{ section.id }} .lemoon-journal__tag { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); padding: 8px 20px; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-lg); text-decoration: none; font-size: var(--lemoon-fs-14); }
+  #shopify-section-{{ section.id }} .lemoon-journal__tag[aria-current], #shopify-section-{{ section.id }} .lemoon-journal__tag:hover { background: var(--lemoon-action-accent); border-color: var(--lemoon-action-accent); }
+  #shopify-section-{{ section.id }} .lemoon-journal__list-title { font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-light); margin: 40px 0 24px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__story { min-width: 0; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-modal); padding: 12px; }
+  #shopify-section-{{ section.id }} .article-card { border: 0; border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-page); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .article-card__image-wrapper { border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .card__heading { font-size: var(--lemoon-fs-20); }
+  #shopify-section-{{ section.id }} .article-card__excerpt { font-size: var(--lemoon-fs-16); color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-journal__empty { background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); padding: 32px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__newsletter { margin-top: 48px; padding: 28px; border-radius: var(--lemoon-radius-lg); background: var(--lemoon-surface-inverse); color: var(--lemoon-text-inverse); display: grid; gap: 24px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__newsletter h2 { color: inherit; font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-light); margin-top: 0; }
+  #shopify-section-{{ section.id }} .lemoon-journal__email-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+  #shopify-section-{{ section.id }} .lemoon-journal__email { min-width: 0; flex: 1 1 180px; min-height: var(--lemoon-size-control); border: 1px solid var(--lemoon-border-warm); border-radius: var(--lemoon-radius-button); padding: 12px 20px; color: var(--lemoon-text-primary); background: var(--lemoon-surface-page); font: inherit; }
+  #shopify-section-{{ section.id }} .lemoon-journal__subscribe { border: 0; border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-accent); color: var(--lemoon-text-brand); min-height: var(--lemoon-size-control); padding: 12px 20px; font: inherit; cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-journal__consent { display: flex; align-items: start; gap: 10px; margin-top: 16px; font-size: var(--lemoon-fs-14); }
+  #shopify-section-{{ section.id }} .lemoon-journal__consent input { flex-shrink: 0; margin-top: 5px; accent-color: var(--lemoon-action-accent); }
+  #shopify-section-{{ section.id }} .lemoon-journal__newsletter :focus-visible { outline-color: var(--lemoon-action-accent); }
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+    #shopify-section-{{ section.id }} .lemoon-journal { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+    #shopify-section-{{ section.id }} h1 { font-size: 4.6rem; }
+    #shopify-section-{{ section.id }} .lemoon-journal__intro { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+    #shopify-section-{{ section.id }} .lemoon-journal__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #shopify-section-{{ section.id }} .lemoon-journal__newsletter { grid-template-columns: 1fr 1fr; align-items: center; }
   }
+  @media screen and (min-width: 990px) { #shopify-section-{{ section.id }} .lemoon-journal__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 {%- endstyle -%}
 
 {%- paginate blog.articles by 6 -%}
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ blog.title | escape }}
-    </h1>
-
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
-        <div
-          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {%- render 'article-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true
-          -%}
-        </div>
-      {%- endfor -%}
+  <div class="lemoon-journal page-width">
+    <div class="lemoon-journal__intro">
+      <header>
+        <span class="lemoon-journal__eyebrow">{{ 'sections.lemoon_journal.eyebrow' | t }}</span>
+        <h1>{{ 'sections.lemoon_journal.title' | t }}</h1>
+        <p class="lemoon-journal__description">{{ 'sections.lemoon_journal.description' | t }}</p>
+      </header>
+      {%- if section.settings.layout == 'collage' and paginate.current_page == 1 and blog.articles.size > 0 -%}
+        {%- assign feature = blog.articles.first -%}
+        <article class="lemoon-journal__feature" aria-labelledby="Journal-feature-{{ section.id }}">
+          {%- if section.settings.show_image and feature.image != blank -%}
+            {{ feature.image | image_url: width: 1000 | image_tag: widths: '375, 550, 750, 1000', sizes: '(min-width: 1280px) 540px, (min-width: 750px) 45vw, 90vw', loading: 'eager' }}
+          {%- endif -%}
+          <h2 id="Journal-feature-{{ section.id }}"><a href="{{ feature.url }}">{{ feature.title | escape }}</a></h2>
+          {%- if section.settings.show_date -%}{{ feature.published_at | time_tag: format: 'date' }}{%- endif -%}
+          {%- if section.settings.show_author -%}<p>{{ feature.author | escape }}</p>{%- endif -%}
+        </article>
+      {%- endif -%}
     </div>
-
-    {%- if paginate.pages > 1 -%}
-      {%- render 'pagination', paginate: paginate -%}
+    {%- if blog.all_tags.size > 0 -%}
+      <nav class="lemoon-journal__tags" aria-label="{{ 'sections.lemoon_journal.tags_label' | t | escape }}">
+        <a class="lemoon-journal__tag" href="{{ blog.url }}"{% if current_tags == blank %} aria-current="page"{% endif %}>{{ 'sections.lemoon_journal.all' | t }}</a>
+        {%- for tag in blog.all_tags -%}
+          <a class="lemoon-journal__tag" href="{{ blog.url }}/tagged/{{ tag | handleize }}"{% if current_tags contains tag %} aria-current="page"{% endif %}>{{ tag | escape }}</a>
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+    <h2 class="lemoon-journal__list-title">{{ 'sections.lemoon_journal.latest' | t }}</h2>
+    <p>{{ 'sections.lemoon_journal.count' | t: count: paginate.items }}</p>
+    {%- if blog.articles.size > 0 -%}
+      <div class="lemoon-journal__grid">
+        {%- for article in blog.articles -%}
+          <div class="lemoon-journal__story">
+            {%- render 'article-card', blog: blog, article: article, media_height: section.settings.image_height, media_aspect_ratio: article.image.aspect_ratio, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, show_excerpt: true, image_sizes: '(min-width: 1280px) 370px, (min-width: 990px) calc((100vw - 150px) / 3), (min-width: 750px) calc((100vw - 130px) / 2), calc(100vw - 56px)' -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="lemoon-journal__empty">
+        <p>{{ 'sections.lemoon_journal.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'sections.lemoon_journal.catalogue' | t }}</a>
+      </div>
+    {%- endif -%}
+    {%- if paginate.pages > 1 -%}{%- render 'pagination', paginate: paginate -%}{%- endif -%}
+    {%- if section.settings.show_newsletter -%}
+      <aside class="lemoon-journal__newsletter" aria-labelledby="Journal-newsletter-{{ section.id }}">
+        <div><h2 id="Journal-newsletter-{{ section.id }}">{{ 'sections.lemoon_journal.newsletter_title' | t }}</h2><p>{{ 'sections.lemoon_journal.newsletter_description' | t }}</p></div>
+        {%- assign newsletter_id = 'JournalSubscribe-' | append: section.id -%}
+        {%- form 'customer', id: newsletter_id -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label for="{{ newsletter_id }}-email">{{ 'newsletter.label' | t }}</label>
+          <div class="lemoon-journal__email-row">
+            <input class="lemoon-journal__email" id="{{ newsletter_id }}-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" autocapitalize="off" required{% if form.errors %} aria-invalid="true" aria-describedby="{{ newsletter_id }}-error"{% endif %}>
+            <button class="lemoon-journal__subscribe" type="submit">{{ 'sections.lemoon_journal.subscribe' | t }}</button>
+          </div>
+          <label class="lemoon-journal__consent" for="{{ newsletter_id }}-consent"><input id="{{ newsletter_id }}-consent" type="checkbox" name="contact[accepts_marketing]" value="true" required><span>{{ 'sections.lemoon_journal.consent' | t }}</span></label>
+          {%- if form.errors -%}<div id="{{ newsletter_id }}-error" role="alert" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>{%- endif -%}
+          {%- if form.posted_successfully? -%}<p role="status" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</p>{%- endif -%}
+        {%- endform -%}
+      </aside>
     {%- endif -%}
   </div>
 {%- endpaginate -%}
@@ -115,6 +173,12 @@
       "label": "t:sections.main-blog.settings.show_author.label"
     },
     {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "default": true,
+      "label": "t:sections.lemoon_journal.newsletter_label"
+    },
+    {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
     },
@@ -137,6 +201,17 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "presets": [
+    {
+      "name": "t:sections.lemoon_journal.name"
     }
   ]
 }

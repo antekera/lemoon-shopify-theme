@@ -8,6 +8,14 @@
         "color_scheme": "scheme-1"
       }
     },
+    "crystal-guide": {
+      "type": "lemoon-crystal-guide",
+      "settings": {
+        "configurator_product": "lemoon-dalton-prototipo",
+        "padding_top": 48,
+        "padding_bottom": 64
+      }
+    },
     "product-grid": {
       "type": "main-collection-product-grid",
       "settings": {
@@ -33,6 +41,7 @@
   },
   "order": [
     "banner",
-    "product-grid"
+    "product-grid",
+    "crystal-guide"
   ]
 }

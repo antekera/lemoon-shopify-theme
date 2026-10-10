@@ -1,0 +1,122 @@
+{%- liquid
+  assign gift_product = section.settings.gift_card_product
+  if request.page_type == 'product'
+    assign gift_product = product
+  endif
+  assign valid_gift_product = false
+  if gift_product != blank and gift_product.gift_card? and gift_product.variants.size > 0
+    assign valid_gift_product = true
+  endif
+  assign chosen_variant = gift_product.selected_or_first_available_variant
+  unless chosen_variant.available
+    assign chosen_variant = nil
+    for variant in gift_product.variants
+      if variant.available
+        assign chosen_variant = variant
+        break
+      endif
+    endfor
+  endunless
+  assign form_id = 'GiftPurchase-' | append: section.id
+  assign contact_url = section.settings.contact_url
+  if contact_url == blank
+    assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+  endif
+-%}
+<script src="{{ 'lemoon-gift-card-purchase.js' | asset_url }}" type="module"></script>
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase { padding-top: {{ section.settings.padding_top | times: 0.625 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round }}px; color: var(--lemoon-text-primary); font-family: var(--lemoon-font-body); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--lemoon-space-16); align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__visual { display: grid; place-items: center; min-height: 48rem; padding: var(--lemoon-space-10); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__card { width: 100%; max-width: 40rem; aspect-ratio: 1.6; display: flex; flex-direction: column; justify-content: space-between; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-inverse); color: var(--lemoon-text-inverse); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__logo { align-self: flex-start; padding: var(--lemoon-space-3) var(--lemoon-space-4); background: var(--lemoon-surface-page); border-radius: var(--lemoon-radius-sm); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__logo img { display: block; width: 12rem; max-width: 100%; height: auto; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__card p { margin: 0; font-size: 1.4rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__card [data-gift-price] { display: block; margin-top: var(--lemoon-space-2); font-family: var(--lemoon-font-heading); font-size: 3.2rem; font-weight: var(--lemoon-weight-light); overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase h1 { margin: 0 0 var(--lemoon-space-5); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; letter-spacing: var(--lemoon-type-display-tracking); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__intro { margin-bottom: var(--lemoon-space-8); font-size: 1.8rem; line-height: 1.6; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__intro p { margin: 0; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase fieldset { min-width: 0; padding: 0; margin: 0 0 var(--lemoon-space-6); border: 0; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase legend { margin-bottom: var(--lemoon-space-3); font-size: 1.6rem; font-weight: var(--lemoon-weight-semibold); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__amounts { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-3); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__amount { display: flex; align-items: center; gap: var(--lemoon-space-2); min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-4); border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-lg); cursor: pointer; font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__amount:has(input:checked) { border-color: var(--lemoon-border-strong); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__amount:has(input:disabled) { color: var(--lemoon-text-secondary); cursor: default; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase input[type=radio], #shopify-section-{{ section.id }} .lemoon-gift-purchase input[type=checkbox] { accent-color: var(--lemoon-action-primary); width: 1.8rem; height: 1.8rem; flex-shrink: 0; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__toggle label { display: flex; gap: var(--lemoon-space-3); align-items: center; min-height: 4.4rem; cursor: pointer; font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__field { display: grid; gap: var(--lemoon-space-2); margin-bottom: var(--lemoon-space-4); font-size: 1.4rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__field input, #shopify-section-{{ section.id }} .lemoon-gift-purchase__field textarea { width: 100%; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-5); border: 2px solid var(--lemoon-border-warm); border-radius: var(--lemoon-radius-search); background: var(--lemoon-surface-page); color: var(--lemoon-text-primary); font: inherit; font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__field textarea { resize: vertical; min-height: 10rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__note { margin: var(--lemoon-space-3) 0 var(--lemoon-space-5); color: var(--lemoon-text-secondary); font-size: 1.4rem; line-height: 1.6; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__summary { display: flex; justify-content: space-between; gap: var(--lemoon-space-3); margin: var(--lemoon-space-6) 0; padding-top: var(--lemoon-space-5); border-top: 1px solid var(--lemoon-border-default); font-size: 1.8rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__submit { width: 100%; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-6); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-size: 1.6rem; font-weight: var(--lemoon-weight-semibold); cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__submit:hover:enabled { background: var(--lemoon-action-primary-hover); }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__submit:disabled { background: var(--lemoon-surface-disabled); color: var(--lemoon-text-secondary); border-color: var(--lemoon-border-default); cursor: default; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase a { color: var(--lemoon-text-brand); text-underline-offset: .3rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase :is(input, textarea, button, a):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase__error { color: var(--lemoon-text-error); font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .lemoon-gift-purchase [hidden] { display: none !important; }
+  @media (min-width: 750px) { #shopify-section-{{ section.id }} .lemoon-gift-purchase { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; } }
+  @media (max-width: 989px) { #shopify-section-{{ section.id }} .lemoon-gift-purchase__layout { gap: var(--lemoon-space-8); } #shopify-section-{{ section.id }} .lemoon-gift-purchase__visual { padding: var(--lemoon-space-6); min-height: 36rem; } }
+  @media (max-width: 749px) { #shopify-section-{{ section.id }} .lemoon-gift-purchase__layout { grid-template-columns: minmax(0, 1fr); } #shopify-section-{{ section.id }} .lemoon-gift-purchase__visual { min-height: 28rem; } #shopify-section-{{ section.id }} .lemoon-gift-purchase h1 { font-size: 3.4rem; } #shopify-section-{{ section.id }} .lemoon-gift-purchase__intro { font-size: 1.6rem; } #shopify-section-{{ section.id }} .lemoon-gift-purchase__amount { flex: 1 1 auto; justify-content: center; } }
+{%- endstyle -%}
+<div class="lemoon-gift-purchase page-width" data-gift-purchase data-error-message="{{ 'sections.lemoon_gift_card_purchase.error' | t | escape }}" data-cart-url="{{ routes.cart_url | escape }}" data-cart-add-url="{{ routes.cart_add_url | append: '.js' | escape }}">
+  <div class="lemoon-gift-purchase__layout">
+    <div class="lemoon-gift-purchase__visual" aria-hidden="true">
+      <div class="lemoon-gift-purchase__card">
+        <div class="lemoon-gift-purchase__logo"><img src="{{ 'lemoon-logo-refined-navy.svg' | asset_url }}" width="824" height="194" alt="" loading="lazy"></div>
+        <p>{{ 'sections.lemoon_gift_card_purchase.card_label' | t }}{% if valid_gift_product and chosen_variant != nil %}<span data-gift-price hidden>{{ chosen_variant.price | money_with_currency }}</span>{% endif %}</p>
+      </div>
+    </div>
+    <div>
+      <h1>{{ 'sections.lemoon_gift_card_purchase.title' | t }}</h1>
+      <div class="lemoon-gift-purchase__intro rte">{% if section.settings.intro != blank %}{{ section.settings.intro }}{% else %}<p>{{ 'sections.lemoon_gift_card_purchase.intro' | t }}</p>{% endif %}</div>
+      {%- if valid_gift_product -%}
+        {%- form 'product', gift_product, id: form_id, data-gift-form: '' -%}
+          {%- if form.errors -%}<div class="lemoon-gift-purchase__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <input type="hidden" name="quantity" value="1">
+          <fieldset><legend>{{ 'sections.lemoon_gift_card_purchase.amount' | t }}</legend>
+            <div class="lemoon-gift-purchase__amounts">
+              {%- for variant in gift_product.variants -%}
+                <label class="lemoon-gift-purchase__amount"><input type="radio" name="id" value="{{ variant.id }}" data-gift-variant data-formatted-price="{{ variant.price | money_with_currency | escape }}"{% if variant.id == chosen_variant.id %} checked{% endif %}{% unless variant.available %} disabled{% endunless %} required><span>{{ variant.price | money_with_currency }}{% unless variant.available %}<span class="visually-hidden"> — {{ 'sections.lemoon_gift_card_purchase.sold_out' | t }}</span>{% endunless %}</span></label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+          <div class="lemoon-gift-purchase__toggle" data-recipient-toggle hidden><label for="GiftRecipientToggle-{{ section.id }}"><input type="checkbox" id="GiftRecipientToggle-{{ section.id }}" data-recipient-checkbox>{{ 'sections.lemoon_gift_card_purchase.recipient_toggle' | t }}</label></div>
+          <fieldset data-recipient-fields><legend>{{ 'sections.lemoon_gift_card_purchase.recipient_legend' | t }}</legend>
+            <input type="hidden" name="properties[__shopify_send_gift_card_to_recipient]" value="if_present" data-recipient-control>
+            <div class="lemoon-gift-purchase__field"><label for="GiftEmail-{{ section.id }}">{{ 'sections.lemoon_gift_card_purchase.recipient_email' | t }}</label><input type="email" id="GiftEmail-{{ section.id }}" name="properties[Recipient email]" autocomplete="off" maxlength="255" data-recipient-email></div>
+            <div class="lemoon-gift-purchase__field"><label for="GiftName-{{ section.id }}">{{ 'sections.lemoon_gift_card_purchase.recipient_name' | t }}</label><input type="text" id="GiftName-{{ section.id }}" name="properties[Recipient name]" maxlength="255" autocomplete="off"></div>
+            <div class="lemoon-gift-purchase__field"><label for="GiftMessage-{{ section.id }}">{{ 'sections.lemoon_gift_card_purchase.message' | t }}</label><textarea id="GiftMessage-{{ section.id }}" name="properties[Message]" maxlength="200" rows="3"></textarea></div>
+          </fieldset>
+          <p class="lemoon-gift-purchase__note">{{ 'sections.lemoon_gift_card_purchase.delivery_note' | t }}</p>
+          {%- if gift_product.published_at == blank -%}<p class="lemoon-gift-purchase__note">{{ 'sections.lemoon_gift_card_purchase.draft' | t }}</p>{%- endif -%}
+          <p class="lemoon-gift-purchase__summary" data-gift-summary hidden><span>{{ 'sections.lemoon_gift_card_purchase.total' | t }}</span><strong data-gift-price>{% if chosen_variant != nil %}{{ chosen_variant.price | money_with_currency }}{% else %}{{ 'sections.lemoon_gift_card_purchase.sold_out' | t }}{% endif %}</strong></p>
+          <p class="lemoon-gift-purchase__error" data-gift-error role="alert" hidden></p>
+          <button class="lemoon-gift-purchase__submit" type="submit" data-gift-submit data-loading-label="{{ 'sections.lemoon_gift_card_purchase.loading' | t | escape }}"{% if gift_product.published_at == blank or chosen_variant == nil %} disabled{% endif %}>{% if chosen_variant == nil %}{{ 'sections.lemoon_gift_card_purchase.sold_out' | t }}{% else %}{{ 'sections.lemoon_gift_card_purchase.submit' | t }}{% endif %}</button>
+        {%- endform -%}
+      {%- else -%}
+        <p class="lemoon-gift-purchase__note">{{ 'sections.lemoon_gift_card_purchase.unavailable' | t }}</p>
+        {% if request.design_mode %}<p class="lemoon-gift-purchase__note">{{ 'sections.lemoon_gift_card_purchase.merchant_help' | t }}</p>{% endif %}
+      {%- endif -%}
+      <p class="lemoon-gift-purchase__note"><a href="{{ contact_url | escape }}">{{ 'sections.lemoon_gift_card_purchase.other_amount' | t }}</a></p>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_gift_card_purchase.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "product", "id": "gift_card_product", "label": "t:sections.lemoon_gift_card_purchase.product_label", "info": "t:sections.lemoon_gift_card_purchase.product_info" },
+    { "type": "richtext", "id": "intro", "label": "t:sections.lemoon_gift_card_purchase.intro_label", "default": "t:sections.lemoon_gift_card_purchase.intro_default" },
+    { "type": "url", "id": "contact_url", "label": "t:sections.lemoon_gift_card_purchase.contact_label" },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 36, "label": "t:sections.all.padding.padding_top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 36, "label": "t:sections.all.padding.padding_bottom" }
+  ],
+  "presets": [{ "name": "t:sections.lemoon_gift_card_purchase.name" }]
+}
+{% endschema %}
