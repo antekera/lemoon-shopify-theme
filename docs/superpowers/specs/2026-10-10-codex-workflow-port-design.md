@@ -1,7 +1,7 @@
 # Port of Lemoon Claude workflows to Codex
 
 **Date:** 2026-10-10  
-**Status:** Draft for review  
+**Status:** Implementation plan pending review
 **Scope:** Add Codex-native repository guidance and reusable workflows while preserving the existing Claude Code setup.
 
 ## Problem
@@ -10,7 +10,7 @@ The repository has a useful set of Claude Code instructions in `CLAUDE.md` and `
 
 ## Approved direction
 
-Add native Codex equivalents on a separate branch and in a separate PR from the PDP unit-test work. Keep all current Claude files working and unchanged in this migration. Do not copy Claude's local permission configuration into Codex configuration.
+Add native Codex equivalents on the existing PR #22 branch, keeping this work separate from the PDP unit-test PR. Keep all current Claude files working and unchanged in this migration. Do not copy Claude's local permission configuration into Codex configuration.
 
 The repository will use these Codex entry points:
 
@@ -18,6 +18,8 @@ The repository will use these Codex entry points:
 - `.agents/skills/<skill-name>/SKILL.md` for the 14 reusable Lemoon workflows listed below.
 - `.codex/agents/<agent-name>.toml` for six specialized roles used by workflows that currently delegate review or interpretation work.
 - Existing project documents under `docs/` as the detailed source references for brand, Liquid, schema, Git, and theme-publishing conventions.
+
+Skills should be explicitly invocable with `$<skill-name>` and discoverable in Codex's enabled-skill selector (including the `/` picker in the desktop app). The migration does not promise Claude's exact custom `/lemoon-…` command syntax; skill names and descriptions will be optimized for Codex's selector and invocation model.
 
 Codex-specific configuration is additive. Claude Code continues to use `CLAUDE.md`, `.claude/commands/`, and `.claude/rules/` as before.
 
@@ -95,7 +97,7 @@ The implementation plan should:
 3. Create the six agent definitions using Codex's supported repository-level agent format and preserve the intended read-only or artifact-producing scope of each role.
 4. Confirm `.claude/` and `CLAUDE.md` have no migration-induced changes and confirm no credentials or local settings entered the diff.
 5. Validate the file layout and metadata for all 14 skills and six agents; inspect that production push retains a confirmation gate and that commit/push skills protect `main` and sensitive files.
-6. Run repository checks appropriate to instruction/configuration changes, inspect the final diff, then prepare a dedicated PR unrelated to PDP tests.
+6. Run repository checks appropriate to instruction/configuration changes, inspect the final diff, then update PR #22. Do not create a duplicate migration PR or include PDP test commits.
 
 The migration is documentation and agent-configuration work; it should not add theme runtime tests or modify Shopify storefront assets. A PR should be opened only after the user reviews and approves the implementation plan and the implementation passes its checks.
 
@@ -103,11 +105,12 @@ The migration is documentation and agent-configuration work; it should not add t
 
 - Codex can discover project-wide guidance through root `AGENTS.md`.
 - All 14 workflows have a discoverable skill and retain their current user-facing purpose.
+- Skills appear in Codex's skill selector and can be explicitly invoked by their `$<skill-name>` names.
 - All six specialist roles have native Codex agent definitions and are invoked only by relevant workflows.
 - Safety rules for branch protection, sensitive files, production publishing, and bounded scope are explicit and testable by inspection.
 - Existing Claude instructions remain available and unchanged.
 - No storefront/theme runtime files or PDP test PR commits are included.
-- The changes are prepared for review on a dedicated branch and PR.
+- The changes are prepared for review in PR #22, separately from PDP test PR #21.
 
 ## Questions resolved by the approved direction
 
