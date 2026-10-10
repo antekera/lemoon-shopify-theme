@@ -1,4 +1,4 @@
-{{ 'lemoon-hero.css' | asset_url | stylesheet_tag }}
+<style>{{ 'lemoon-hero.css' | inline_asset_content }}</style>
 <script src="{{ 'lemoon-hero.js' | asset_url }}" defer="defer"></script>
 
 <lemoon-hero class="lemoon-hero" data-autoplay-seconds="{{ section.settings.autoplay_seconds }}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ 'sections.lemoon_hero.label' | t }}">

@@ -1,8 +1,49 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
+import { Liquid } from 'liquidjs';
 
 const source = (path) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const schemaOf = (liquid) => JSON.parse(liquid.match(/\{% schema %\}([\s\S]*?)\{% endschema %\}/)[1]);
+
+test('hero renders its critical styles before the first image without a CSS network dependency', async () => {
+  const [hero, styles] = await Promise.all([
+    source('sections/lemoon-hero.liquid'),
+    source('assets/lemoon-hero.css'),
+  ]);
+  // Shopify only permits inline assets smaller than 15 KB.
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', (name) => {
+    expect(name).toBe('lemoon-hero.css');
+    return styles;
+  });
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('t', (key) => key);
+  const html = await engine.parseAndRender(hero.split('{% schema %}')[0], {
+    shop: { name: 'Lemoon' },
+    section: { id: 'hero', settings: { autoplay_seconds: 4 }, blocks: [
+      { id: 'first', settings: { desktop_asset: 'desktop.jpg', mobile_asset: 'mobile.jpg' } },
+      { id: 'second', settings: { desktop_asset: 'second.jpg' } },
+    ] },
+  });
+  expect(html).toContain(`<style>${styles}</style>`);
+  expect(html.indexOf('</style>')).toBeLessThan(html.indexOf('<picture'));
+  expect(html).not.toContain('href="/assets/lemoon-hero.css"');
+  expect(html).toMatch(/src="\/assets\/desktop.jpg"[^>]*loading="eager"[^>]*fetchpriority="high"/);
+  expect(html).toMatch(/src="\/assets\/second.jpg"[^>]*loading="lazy"/);
+  expect(html).toContain('srcset="/assets/mobile.jpg"');
+});
+
+test('home benefits retain their shared layout without importing product-page styles', async () => {
+  const [bar, sharedStyles, productStyles] = await Promise.all([
+    source('sections/trust-bar.liquid'),
+    source('assets/lemoon-components.css'),
+    source('assets/lemoon-pdp-layout.css'),
+  ]);
+  expect(bar).not.toContain('lemoon-pdp-layout.css');
+  expect(sharedStyles).toMatch(/\.lemoon-shared-benefits\s*\{\s*display:\s*contents;/);
+  expect(productStyles).toMatch(/\.lemoon-shared-benefits--product\s*\{\s*display:\s*grid;/);
+});
 
 test('about copy shares the same page-width container as featured product carousels', async () => {
   const [about, featured, styles] = await Promise.all([
