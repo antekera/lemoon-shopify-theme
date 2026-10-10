@@ -43,7 +43,8 @@ Cambian carrito, búsqueda, blog, artículo, página genérica, 404 y tarjeta em
 
 - **Antes:** el test de recarga de sección del configurador fallaba porque los paneles quedaban ocultos. **Después:** pasa, conserva la selección tras una segunda carga y avanza una sola vez; también se verificó la recarga en el editor nativo.
 - **Antes:** Theme Check con `--fail-level warning` fallaba por dos objetos del contexto de notificaciones. **Después:** la excepción se limita a esas dos líneas; el comando exacto de CI con Shopify CLI 4.8.5 inspecciona 252 archivos sin infracciones y el render RTL sigue pasando.
-- `npm test`: 175 unitarias y 127 pruebas de navegador locales aprobadas.
+- `npm test`: 175 unitarias y 127 pruebas de navegador Chromium aprobadas.
+- `npm run test:e2e:cross-browser`: 240 de 254 casos aprobados en WebKit/Firefox; 14 fallan por permisos de portapapeles o sesiones CDP exclusivos de Chromium. Se corrigieron ocho fallos de fixture/interacción sin modificar el código del tema; la validación completa entre motores sigue pendiente.
 - La corrida HTTPS registrada de guías, contacto y soporte pasó 51 casos en escritorio, tablet y móvil. Otras suites conservan evidencia por página; la corrida completa de todo el storefront no está aprobada. Las últimas peticiones de carrito/contenido recibieron HTTP 429 de Cloudflare y se detuvieron.
 - Pendiente: revisión del usuario por página, recepción real de contacto, persistencia y aislamiento de cuentas, detalle con pedido real, pago, emisión/canje de gift card y publicación de contenido aprobado.
 

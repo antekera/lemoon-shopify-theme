@@ -342,3 +342,14 @@ La revisión general de código y la de convenciones terminaron sin hallazgos
 pendientes. `npm test`: 175 unitarias y 127 e2e de componentes pasan. Theme Check:
 252 archivos, cero errores y dos advertencias conocidas de notificaciones.
 Las pruebas de pedidos/pagos reales y las asignaciones CMS siguen pendientes.
+
+
+### Pruebas en otros motores
+
+La configuración opcional `playwright.cross-browser.config.js` permite repetir
+las pruebas locales en WebKit y Firefox con `npm run test:e2e:cross-browser`.
+La última corrida completa pasó 240 de 254 casos; los 14 fallos restantes dependen
+de permisos de portapapeles y sesiones CDP exclusivos de Chromium. La validación
+completa entre motores sigue pendiente. La suite estándar conserva 175 unitarias
+y 127 e2e Chromium aprobadas; el registro detalla los ocho fallos de pruebas
+corregidos sin modificar el código del tema.

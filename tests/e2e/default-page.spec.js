@@ -17,13 +17,14 @@ test('empty CMS page keeps its real title and an honest localized state',async({
  await expect(page.getByText('Esta página está en preparación.',{exact:true})).toBeVisible();
  await expect(page.locator('a')).toHaveCount(0);
 });
-test('native content link is keyboard accessible without JavaScript',async({browser,baseURL})=>{
+test('native content link is keyboard accessible without JavaScript',async({browser,browserName,baseURL})=>{
  const context=await browser.newContext({baseURL,javaScriptEnabled:false});
  try {
   const page=await context.newPage();
   await page.route('**/pages/contact',r=>r.fulfill({contentType:'text/html',body:'<h1>Contacto de muestra</h1>'}));
   await page.goto('/tests/fixtures/default-page.html');
-  await page.keyboard.press('Tab');
+  // WebKit on macOS uses Option+Tab to include links in keyboard navigation.
+  await page.keyboard.press(browserName==='webkit' && process.platform==='darwin'?'Alt+Tab':'Tab');
   await expect(page.getByRole('link',{name:'Contactar al equipo'})).toBeFocused();
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/pages\/contact$/);

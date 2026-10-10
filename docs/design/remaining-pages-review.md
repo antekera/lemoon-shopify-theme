@@ -703,3 +703,44 @@ activa el workflow existente de Lighthouse, que sube un tema de desarrollo
 transitorio a Shopify y lo elimina al terminar. No se crea el PR hasta que el
 usuario autorice ese push de CI, conforme a AGENTS.md. No hay publicación de
 producción, asignaciones CMS, artículo publicado ni notificaciones aplicadas.
+
+
+### Validación adicional en WebKit y Firefox — 10 de octubre
+
+La primera corrida completa con Playwright 1.63.0, WebKit 26.6 y Firefox 155.0
+terminó con 232 casos aprobados y 22 fallidos. Se conservaron todos los casos;
+no se introdujeron skips ni clicks forzados. Se corrigieron ocho fallos de pruebas:
+
+- Selección de grosor, color y modalidad: pulsar la etiqueta visible y comprobar
+  el radio seleccionado evita intentar pulsar inputs de 1 px. Los precios, SKU,
+  disponibilidad y regreso al armazón conservan sus aserciones.
+- Envío del configurador: esperar la petición interceptada antes de inspeccionar
+  sus propiedades; Firefox reveló que el click puede terminar antes del fetch.
+- Teclado: WebKit en macOS requiere Option+Tab para incluir enlaces, descrito en
+  [WebKit](https://bugs.webkit.org/show_bug.cgi?id=161394). El test usa esa tecla
+  en esa combinación de motor/plataforma y mantiene las aserciones de foco y
+  navegación sin JavaScript. En Chromium y Firefox se conserva Tab.
+- Imágenes diferidas: la fixture introducía `loading="eager"` en todas las fotos,
+  mientras `snippets/lemoon-pdp-image.liquid` entrega `lazy` dentro del template.
+  El diagnóstico de Firefox mostró peticiones de las fotos 3–5 con sus nodos aún
+  dentro de templates inertes. Reproducir el atributo real conservó únicamente
+  las peticiones 1–2 al inicio y cargó la tercera tras seleccionarla. Se mantuvo
+  la comprobación de que la cuarta no se descarga. No se cambió código del tema.
+
+La configuración permanente `playwright.cross-browser.config.js` hereda fixtures,
+servidor y opciones de la suite local. El comando separado es
+`npm run test:e2e:cross-browser`; requiere `npx playwright install webkit firefox`.
+No modifica el gate de Chromium ni los workflows de CI.
+
+La última corrida completa pasó **240 de 254 casos** (1,1 min), con **14 fallos**:
+ocho por permisos de portapapeles que esos motores no admiten mediante
+`grantPermissions`, y seis por gestos que usan `newCDPSession`, disponible solo
+en Chromium. La suite entre motores sigue pendiente de adaptar esas pruebas;
+no certifica la totalidad del storefront. Los diez casos focalizados de compra,
+stock, sticky y configurador, y los cuatro de teclado, pasaron en ambos motores.
+
+Después de los cambios, `npm test` pasó 175 unitarias y 127 e2e Chromium (25,4 s).
+Theme Check con CLI 4.8.5 inspeccionó 252 archivos sin infracciones.
+`git diff --check` pasó. No se aplicaron asignaciones CMS ni se publicó contenido.
+La aprobación solicitada para abrir el PR y activar el push temporal de Lighthouse
+sigue pendiente; la tarea general continúa activa.

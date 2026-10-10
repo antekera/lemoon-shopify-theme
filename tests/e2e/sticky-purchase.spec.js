@@ -30,7 +30,9 @@ for (const viewport of [{ width: 1280, height: 720 }, { width: 390, height: 844 
     await sticky.locator('[data-sticky-configure]').click();
     await expect(page.locator('[data-flow-title]')).toBeFocused();
     await expect(page.locator('[data-lens-panel]')).toBeVisible();
-    await page.getByLabel('Delgado 1.67', { exact: true }).check();
+    const thickness = page.getByLabel('Delgado 1.67', { exact: true });
+    await page.locator('label.lemoon-pdp__choice').filter({ has: thickness }).click();
+    await expect(thickness).toBeChecked();
     await page.getByLabel('Ingresar receta ahora', { exact: true }).check();
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await expect(sticky).toBeVisible();

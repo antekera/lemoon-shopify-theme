@@ -58,7 +58,7 @@ test('manual recipe validates before progressing and an exact index price reache
   await expect(page.locator('[data-flow-price]')).toHaveText('$84.900');
   await expect(page.locator('[name="id"]')).toHaveValue('3');
   await next(page);
-  expect(requests).toHaveLength(1);
+  await expect.poll(() => requests.length).toBe(1);
   expect(requests[0]).toContain('name="properties[OD Esfera]"');
   expect(requests[0]).toContain('-1.25');
   expect(requests[0]).not.toContain('properties[OD Adición]');

@@ -407,12 +407,14 @@ test('automatically advances the carousel after three seconds without interactio
   await expect(page.locator(s('dot')).nth(2)).toHaveAttribute('aria-current', 'true');
 });
 
-test('allows keyboard navigation through the header and keeps search open on resize', async ({ page }) => {
+test('allows keyboard navigation through the header and keeps search open on resize', async ({ page, browserName }) => {
+  // WebKit on macOS uses Option+Tab to include links in keyboard navigation.
+  const tabKey = browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab';
   await open(page);
   await page.locator(s('close')).focus();
-  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press(`Shift+${tabKey}`);
   await expect(page.locator('.lemoon-header__quick-link').last()).toBeFocused();
-  await page.keyboard.press('Tab');
+  await page.keyboard.press(tabKey);
   await expect(page.locator(s('close'))).toBeFocused();
   await page.setViewportSize({ width: 320, height: 568 });
   await expect.poll(async () => (await page.locator(s('panel')).boundingBox()).width).toBe(320);

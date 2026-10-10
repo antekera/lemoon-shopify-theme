@@ -8,7 +8,9 @@ for (const width of [1280, 390]) {
     let imageIndex = 0;
     html = html.replace(/(<div data-media-panel="[^"]+"[^>]*><button[^>]*>)([\s\S]*?)(<\/button><\/div>)/g, (match, before, image, after) => {
       imageIndex++;
-      const tag = image.replace(/src="[^"]*"/, `src="/assets/lemoon-product-fallback.png?gallery=${imageIndex}"`).replace(/srcset="[^"]*"/g, '').replace(/loading="[^"]*"/, 'loading="eager"');
+      // Match lemoon-pdp-image: deferred templates stay lazy until the element loads them.
+      const loading = imageIndex <= 2 ? 'eager' : 'lazy';
+      const tag = image.replace(/src="[^"]*"/, `src="/assets/lemoon-product-fallback.png?gallery=${imageIndex}"`).replace(/srcset="[^"]*"/g, '').replace(/loading="[^"]*"/, `loading="${loading}"`);
       return before + (imageIndex <= 2 ? tag : `<lemoon-deferred-image><template>${tag}</template></lemoon-deferred-image>`) + after;
     });
     const requested = new Set();

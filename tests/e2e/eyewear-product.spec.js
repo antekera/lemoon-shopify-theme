@@ -64,13 +64,18 @@ test('returning from a deep lens variant stays on the PDP and can reopen the ref
 });
 
 test('selects native variant prices and resets the index for solar and frame-only', async ({ page }) => {
+  const selectChoice = async (name) => {
+    const input = page.getByLabel(name, { exact: true });
+    await page.locator('label.lemoon-pdp__choice').filter({ has: input }).click();
+    await expect(input).toBeChecked();
+  };
   await page.getByRole('button', { name: 'Seleccionar lentes y comprar', exact: true }).click();
-  await page.getByLabel('Monofocal', { exact: true }).check();
-  await page.getByLabel('Delgado 1.67', { exact: true }).check();
+  await selectChoice('Monofocal');
+  await selectChoice('Delgado 1.67');
   await expect(page.locator('[data-price]')).toHaveText('$84.900');
   await expect(page.locator('[data-heading-sku]')).toHaveText('LM-DALTON-DEMO-122');
   await expect(page.locator('[name="id"]').first()).toHaveValue('67616399458472');
-  await page.getByLabel('Solar sin receta', { exact: true }).check();
+  await selectChoice('Solar sin receta');
   await expect(page.locator('[data-price]')).toHaveText('$59.900');
   await expect(page.locator('[data-heading-sku]')).toHaveText('LM-DALTON-DEMO-161');
   await expect(page.locator('[data-prescription]')).toBeHidden();
