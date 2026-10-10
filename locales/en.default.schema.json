@@ -392,7 +392,8 @@
         "eyebrow": { "label": "Eyebrow", "default": "LEMOON SELECTION" },
         "heading": { "label": "Heading", "default": "Favorite frames" },
         "link_label": { "label": "Link label", "default": "View all" },
-        "products_to_show": { "label": "Products" }
+        "products_to_show": { "label": "Visible products" },
+        "max_products_to_load": { "label": "Maximum products to load" }
       }
     },
     "lemoon_trust_bar": {

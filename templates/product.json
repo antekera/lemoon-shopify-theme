@@ -81,7 +81,8 @@
         "eyebrow": "",
         "heading": "También te puede gustar",
         "link_label": "",
-        "products_to_show": 15
+        "products_to_show": 12,
+        "max_products_to_load": 15
       }
     },
     "related-accessories": {
@@ -96,7 +97,8 @@
         "eyebrow": "",
         "heading": "Accesorios para ti",
         "link_label": "",
-        "products_to_show": 15
+        "products_to_show": 12,
+        "max_products_to_load": 15
       }
     }
   },

@@ -392,7 +392,8 @@
         "eyebrow": { "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
         "heading": { "label": "Título", "default": "Armazones favoritos" },
         "link_label": { "label": "Etiqueta de enlace", "default": "Ver todos" },
-        "products_to_show": { "label": "Productos" }
+        "products_to_show": { "label": "Productos visibles" },
+        "max_products_to_load": { "label": "Máximo de productos a cargar" }
       }
     },
     "lemoon_trust_bar": {
