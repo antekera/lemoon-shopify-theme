@@ -63,3 +63,55 @@ test('mobile sticky bar slides in and meets the footer without a gap', async ({ 
   await expect(sticky).toBeHidden();
   await expect.poll(() => sticky.evaluate(el => el.getBoundingClientRect().top)).toBeGreaterThanOrEqual(844);
 });
+
+test('sticky lens action mirrors the current unavailable variant label', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto('/tests/fixtures/eyewear-product.html');
+  const sticky = page.locator('lemoon-sticky-purchase');
+  await page.locator('lemoon-eyewear').evaluate((host) => {
+    const content = document.createElement('div');
+    content.style.height = '1500px';
+    host.append(content);
+  });
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect(sticky).toBeVisible();
+  const source = page.locator('[data-configure]');
+  await source.evaluate((button) => {
+    button.disabled = true;
+    button.textContent = 'Agotado';
+  });
+  await expect(sticky.locator('[data-sticky-configure]')).toHaveText('Agotado');
+  await expect(sticky.locator('[data-sticky-configure]')).toBeDisabled();
+  await source.evaluate((button) => {
+    button.disabled = false;
+    button.textContent = 'Seleccionar lentes y comprar';
+  });
+  await expect(sticky.locator('[data-sticky-configure]')).toHaveText('Seleccionar lentes y comprar');
+  await expect(sticky.locator('[data-sticky-configure]')).toBeEnabled();
+});
+
+test('frame-only native form restores its product-specific label when a variant becomes available', async ({ page }) => {
+  await page.goto('/tests/fixtures/eyewear-product.html');
+  await page.evaluate(() => {
+    window.variantStrings = { addToCart: 'Agregar al carrito' };
+    document.body.insertAdjacentHTML('beforeend', `
+      <product-form>
+        <form><input type="hidden" name="id" value="1">
+          <button type="submit" data-frame-only-label="Agregar solo marco" disabled>
+            <span>Agotado</span><span class="loading__spinner hidden"></span>
+          </button>
+        </form>
+      </product-form>
+    `);
+  });
+  await page.addScriptTag({ path: 'assets/product-form.js' });
+  const purchase = page.locator('product-form');
+  const button = purchase.locator('button[type="submit"]');
+  await expect(button).toBeDisabled();
+  await button.evaluate((element) => element.closest('product-form').toggleSubmitButton(false));
+  await expect(button).toBeEnabled();
+  await expect(button).toHaveText('Agregar solo marco');
+  await button.evaluate((element) => element.closest('product-form').toggleSubmitButton(true, 'Agotado'));
+  await expect(button).toBeDisabled();
+  await expect(button).toHaveText('Agotado');
+});

@@ -270,8 +270,8 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-sticky-purchase
         const actionsBottom = Math.max(rect.bottom, configVisible ? configure.getBoundingClientRect().bottom : 0);
         const shouldHide = (!rect.height && !configVisible) || actionsBottom > top;
         this.setVisible(!shouldHide);
-        const configureLabel = this.configure.dataset.label;
-        if (configureLabel && this.configure.textContent !== configureLabel) this.configure.textContent = configureLabel;
+        const configureLabel = configure?.textContent.trim();
+        if (configureLabel && this.configure.textContent.trim() !== configureLabel) this.configure.textContent = configureLabel;
         if (this.configure.hidden !== !configure) this.configure.hidden = !configure;
         const configDisabled = !configure || Boolean(configure.disabled) || configure.getAttribute('aria-disabled') === 'true';
         if (this.configure.disabled !== configDisabled) this.configure.disabled = configDisabled;
