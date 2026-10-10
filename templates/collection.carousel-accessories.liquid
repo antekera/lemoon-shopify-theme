@@ -1,0 +1,12 @@
+{% layout none %}
+{%- paginate collection.products by 10 -%}
+  <ul class="lemoon-featured-products__results" data-next-page="{{ paginate.next.url | escape }}">
+    {%- for card_product in collection.products -%}
+      {%- if card_product.price > 0 and card_product.available -%}
+        <li class="lemoon-featured-products__item" data-product-id="{{ card_product.id }}" data-product-tags="{{ card_product.tags | json | escape }}">
+          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: true, section_id: 'accessory-carousel', show_quick_add: true %}
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{%- endpaginate -%}

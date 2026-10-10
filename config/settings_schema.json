@@ -360,5 +360,68 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "Beneficios y oferta Lemoon",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Estos mensajes se comparten entre el home y las fichas de producto."
+      },
+      {
+        "type": "text",
+        "id": "lemoon_guarantee",
+        "label": "Garantía",
+        "default": "365 días de garantía"
+      },
+      {
+        "type": "text",
+        "id": "lemoon_guarantee_detail",
+        "label": "Detalle de garantía",
+        "default": "para tus lentes"
+      },
+      {
+        "type": "text",
+        "id": "lemoon_returns",
+        "label": "Cambios y devoluciones",
+        "default": "Cambios y devoluciones gratis"
+      },
+      {
+        "type": "text",
+        "id": "lemoon_returns_detail",
+        "label": "Detalle de cambios",
+        "default": "antes de los 30 días"
+      },
+      {
+        "type": "text",
+        "id": "lemoon_shipping",
+        "label": "Envío",
+        "default": "Envíos"
+      },
+      {
+        "type": "text",
+        "id": "lemoon_shipping_detail",
+        "label": "Detalle de envío",
+        "default": "a todo Chile"
+      },
+      {
+        "type": "page",
+        "id": "lemoon_size_guide_page",
+        "label": "Página de guía de tallas",
+        "info": "Su contenido se muestra en el modal de todos los productos."
+      },
+      {
+        "type": "checkbox",
+        "id": "lemoon_sticky_purchase",
+        "label": "Mostrar barra de compra al hacer scroll",
+        "default": true
+      },
+      {
+        "type": "richtext",
+        "id": "lemoon_size_guide_placeholder",
+        "label": "Contenido provisional de guía de tallas",
+        "default": "<p>Estamos preparando nuestra guía de tallas.</p><p>Pronto encontrarás aquí cómo medir tu armazón y elegir el ajuste ideal para ti.</p>"
+      }
+    ]
   }
 ]

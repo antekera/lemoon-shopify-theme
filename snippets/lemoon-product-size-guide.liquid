@@ -1,0 +1,17 @@
+{% doc %}
+  Renders the native size guide drawer.
+  @param {product} product - Current Shopify product.
+  @param {string} section_id - Unique section identifier.
+{% enddoc %}
+{%- assign drawer_instance_id = section_id | append: '-drawer' -%}
+<lemoon-product-tools>
+  <div class="lemoon-pdp__size-row">
+    <div><span>{{ 'lemoon_pdp.size_label' | t }}</span>{% if product.metafields.custom.frame_size.value != blank %}<strong>{{ product.metafields.custom.frame_size.value | capitalize | escape }}</strong>{% endif %}</div>
+    <button type="button" class="lemoon-pdp__text-button" data-size-open>{{ 'lemoon_pdp.size_guide' | t }}</button>
+  </div>
+  <dialog class="lemoon-pdp__dialog lemoon-size-drawer" aria-labelledby="FrameSize-{{ section_id }}">
+    <button type="button" data-size-close class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button>
+    <h2 id="FrameSize-{{ section_id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2>
+    {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id %}
+  </dialog>
+</lemoon-product-tools>

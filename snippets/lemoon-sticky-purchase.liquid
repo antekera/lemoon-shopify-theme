@@ -1,0 +1,22 @@
+{% doc %}
+  Renders a sticky purchase bar that reuses the main product actions.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+{% if settings.lemoon_sticky_purchase %}
+  {% assign sticky_variant = product.selected_or_first_available_variant %}
+  {% assign sticky_image = sticky_variant.featured_image | default: product.featured_image %}
+  {% assign sticky_button_disabled = false %}
+  {% unless sticky_variant.available %}{% assign sticky_button_disabled = true %}{% endunless %}
+  <lemoon-sticky-purchase class="lemoon-sticky-purchase" hidden>
+    <div class="lemoon-sticky-purchase__inner page-width">
+      <div class="lemoon-sticky-purchase__product">
+        {% if sticky_image != blank %}{{ sticky_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', class: 'lemoon-sticky-purchase__image' }}{% endif %}
+        <span class="lemoon-sticky-purchase__title">{{ product.title | escape }}</span>
+      </div>
+      <strong class="lemoon-sticky-purchase__price" data-sticky-price>{{ sticky_variant.price | money }}</strong>
+      <div class="lemoon-sticky-purchase__actions">
+        {% render 'lemoon-select-lenses-button', context: 'sticky', disabled: sticky_button_disabled %}
+      </div>
+    </div>
+  </lemoon-sticky-purchase>
+{% endif %}

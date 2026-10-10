@@ -12,13 +12,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -34,10 +27,6 @@
             "swatch_shape": "circle"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -48,23 +37,14 @@
         "description": {
           "type": "description",
           "settings": {}
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
-        "quantity_selector",
         "buy_buttons",
-        "description",
-        "share"
+        "description"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -72,13 +52,13 @@
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "gallery_layout": "thumbnail_slider",
         "mobile_thumbnails": "hide",
         "media_position": "left",
         "image_zoom": "lightbox",
-        "hide_variants": true,
+        "hide_variants": false,
         "enable_video_looping": false,
-        "padding_top": 64,
+        "padding_top": 24,
         "padding_bottom": 64
       }
     },
@@ -90,146 +70,35 @@
       }
     },
     "related-products": {
-      "type": "related-products",
+      "type": "lemoon-featured-products",
       "settings": {
+        "collection_source": "product_category",
+        "optical_collection": "opticos",
+        "sun_collection": "lentes-de-sol",
+        "randomize": true,
+        "defer_load": true,
+        "initial_products": 5,
+        "eyebrow": "",
         "heading": "También te puede gustar",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
+        "link_label": "",
+        "products_to_show": 12,
+        "max_products_to_load": 15
       }
     },
-    "image-with-text-1": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Nuestra historia",
-            "heading_size": "h2"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Usa este espacio para compartir información sobre tu marca con tus clientes.</p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Ver más",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+    "related-accessories": {
+      "type": "lemoon-featured-products",
       "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "image_behavior": "none",
-        "color_scheme": "scheme-2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn-1": {
-      "type": "multicolumn",
-      "blocks": {
-        "col1": {
-          "type": "column",
-          "settings": {
-            "title": "Calidad",
-            "text": "<p>Materiales seleccionados para durabilidad y comodidad.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "col2": {
-          "type": "column",
-          "settings": {
-            "title": "Diseño",
-            "text": "<p>Cada detalle pensado para lucir y sentirse bien.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "col3": {
-          "type": "column",
-          "settings": {
-            "title": "Garantía",
-            "text": "<p>Respaldamos cada producto que vendemos.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "col1",
-        "col2",
-        "col3"
-      ],
-      "settings": {
-        "title": "¿Por qué elegirnos?",
-        "heading_size": "h2",
-        "image_width": "full",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "newsletter-1": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Suscríbete a nuestro newsletter",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Recibe novedades, lanzamientos y descuentos exclusivos.</p>"
-          }
-        },
-        "email_form": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email_form"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
+        "collection": "accesorios",
+        "collection_source": "fixed",
+        "show_quick_add": true,
+        "randomize": false,
+        "defer_load": true,
+        "initial_products": 5,
+        "eyebrow": "",
+        "heading": "Accesorios para ti",
+        "link_label": "",
+        "products_to_show": 12,
+        "max_products_to_load": 15
       }
     }
   },
@@ -237,8 +106,6 @@
     "main",
     "disclosures",
     "related-products",
-    "image-with-text-1",
-    "multicolumn-1",
-    "newsletter-1"
+    "related-accessories"
   ]
 }

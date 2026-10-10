@@ -92,7 +92,7 @@
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const duration = reducedMotion ? 0 : 500;
       const transition = `opacity ${duration}ms ease`;
-      incoming.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:2;opacity:0;pointer-events:none;will-change:opacity';
+      incoming.style.cssText = 'z-index:2;opacity:0;pointer-events:none;will-change:opacity';
       incoming.style.setProperty('transition', transition, 'important');
       primary.style.setProperty('transition', transition, 'important');
       primary.style.setProperty('opacity', '1', 'important');
@@ -199,6 +199,11 @@
       card.querySelectorAll('.card__heading a, .lemoon-product-card__image-link').forEach((link) => {
         link.href = swatch.dataset.variantUrl;
       });
+      const variantId = new URL(swatch.dataset.variantUrl, window.location.href).searchParams.get('variant');
+      const quickAddVariant = card.querySelector('[data-card-quick-add-variant]');
+      const quickAddButton = card.querySelector('.lemoon-product-card__quick-add button[type="submit"]');
+      if (variantId && quickAddVariant) quickAddVariant.value = variantId;
+      if (quickAddButton) quickAddButton.disabled = swatch.dataset.variantAvailable !== 'true';
     }
   };
 
@@ -281,4 +286,5 @@
   else initialize();
   document.addEventListener('shopify:section:load', (event) => initialize(event.target));
   document.addEventListener('lemoon:facets-updated', () => initialize());
+  document.addEventListener('lemoon:featured-products-updated', (event) => initialize(event.detail.root));
 })();

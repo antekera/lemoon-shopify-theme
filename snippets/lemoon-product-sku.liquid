@@ -1,0 +1,7 @@
+{% doc %}
+  Renders the current variant SKU after the product description.
+  @param {product} product - Current product.
+{% enddoc %}
+  <p class="lemoon-product-sku" data-heading-sku-row{% if product.selected_or_first_available_variant.sku == blank %} hidden{% endif %}>
+    {{ 'products.product.sku' | t }}: <span data-heading-sku>{{ product.selected_or_first_available_variant.sku | escape }}</span>
+  </p>

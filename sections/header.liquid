@@ -1,6 +1,4 @@
-{{ 'lemoon-header.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'lemoon-header-nav.js' | asset_url }}" defer="defer"></script>
-{{ 'lemoon-mobile-search.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -71,11 +69,11 @@
             {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
           </a>
         {%- endif -%}
-        <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" aria-label="{{ 'templates.cart.cart' | t }}">
+        <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" aria-label="{{ 'templates.cart.cart' | t }}" data-cart-count-label="{{ 'sections.header.cart_count' | t: count: '[count]' | escape }}">
           {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
           {%- if cart.item_count > 0 -%}
             <span class="lemoon-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            <span class="visually-hidden" data-cart-count-accessible>{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           {%- endif -%}
         </a>
         {%- for block in section.blocks -%}
@@ -112,11 +110,11 @@
               {% render 'lemoon-icon', icon: 'user-round', size: 24 %}
             </a>
           {%- endif -%}
-          <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble-mobile" aria-label="{{ 'templates.cart.cart' | t }}">
+          <a class="lemoon-header__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble-mobile" aria-label="{{ 'templates.cart.cart' | t }}" data-cart-count-label="{{ 'sections.header.cart_count' | t: count: '[count]' | escape }}">
             {% render 'lemoon-icon', icon: 'shopping-cart', size: 24 %}
             {%- if cart.item_count > 0 -%}
               <span class="lemoon-header__cart-count" aria-hidden="true">{{ cart.item_count }}</span>
-              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+              <span class="visually-hidden" data-cart-count-accessible>{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
             {%- endif -%}
           </a>
         </div>

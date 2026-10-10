@@ -1,13 +1,16 @@
+{{ 'component-swatch.css' | asset_url | stylesheet_tag }}
 {{ 'lemoon-eyewear-product.css' | asset_url | stylesheet_tag }}
+{{ 'lemoon-pdp-layout.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lemoon-pdp-tools.js' | asset_url }}" type="module"></script>
 <script src="{{ 'lemoon-eyewear-product.js' | asset_url }}" type="module"></script>
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
   assign form_id = 'EyewearForm-' | append: section.id
   assign current_media = current_variant.featured_media | default: product.featured_media
+  assign secondary_media = product.media | where: 'media_type', 'image' | reject: 'id', current_media.id | first
   assign dimensions = product.metafields.custom.frame_dimensions.value
 -%}
 <lemoon-eyewear class="lemoon-pdp page-width" data-product-id="{{ product.id }}" data-cart-url="{{ routes.cart_url }}">
-  {% render 'lemoon-breadcrumb', collection: collection, product: product %}
   <div class="lemoon-pdp__grid">
     <div class="lemoon-pdp__gallery">
       <div class="lemoon-pdp__stage">
@@ -15,8 +18,17 @@
           <div data-media-panel="{{ media.id }}"{% unless media.id == current_media.id %} hidden{% endunless %}>
             {%- if media.media_type == 'image' -%}
               <button type="button" class="lemoon-pdp__image-button" data-open-dialog="zoom-{{ media.id }}" aria-label="{{ 'lemoon_pdp.zoom' | t }}">
-                {{ media | image_url: width: 1400 | image_tag: widths: '480, 750, 1100, 1400', sizes: '(min-width: 990px) 55vw, 100vw', loading: 'eager', alt: media.alt }}
-                <span class="lemoon-pdp__zoom-label">{{ 'lemoon_pdp.zoom' | t }} ↗</span>
+                {%- liquid
+                  assign deferred_image = true
+                  assign primary_image = false
+                  if media.id == current_media.id
+                    assign deferred_image = false
+                    assign primary_image = true
+                  elsif media.id == secondary_media.id
+                    assign deferred_image = false
+                  endif
+                -%}
+                {% render 'lemoon-pdp-image', image: media.preview_image, sizes: '(min-width: 990px) 65vw, 100vw', deferred: deferred_image, primary: primary_image %}
               </button>
             {%- elsif media.media_type == 'video' -%}
               {{ media | video_tag: controls: true, preload: 'metadata', image_size: '1100x' }}
@@ -27,16 +39,21 @@
         {%- else -%}
           {{ 'product-1' | placeholder_svg_tag: 'lemoon-pdp__placeholder' }}
         {%- endfor -%}
-        <button type="button" class="lemoon-pdp__save" data-save aria-pressed="false" aria-label="{{ 'lemoon_pdp.save' | t }}">♡</button>
+
       </div>
+      <p class="lemoon-mobile-gallery-count" aria-live="polite"><span data-gallery-current>1</span><span aria-hidden="true"> / </span><span class="visually-hidden">{{ 'general.slider.of' | t }}</span><span>{{ product.media.size }}</span></p>
       {%- if product.media.size > 1 -%}
+        <lemoon-thumbnail-rail>
+          {% render 'lemoon-thumbnail-arrow', direction: 'up' %}
         <div class="lemoon-pdp__thumbnails" role="group" aria-label="{{ 'lemoon_pdp.gallery' | t }}">
           {%- for media in product.media -%}
             <button type="button" data-media-target="{{ media.id }}" aria-pressed="{% if media.id == current_media.id %}true{% else %}false{% endif %}" aria-label="{{ 'lemoon_pdp.view_image' | t: number: forloop.index }}">
-              {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: media.alt }}
+              {{ media.preview_image | image_url: width: 160 | image_tag: widths: '64, 108, 160', sizes: '54px', loading: 'lazy', alt: media.alt }}
             </button>
           {%- endfor -%}
         </div>
+          {% render 'lemoon-thumbnail-arrow', direction: 'down' %}
+        </lemoon-thumbnail-rail>
       {%- endif -%}
       <div class="lemoon-pdp__gallery-footer">
         <span>{{ 'lemoon_pdp.gallery_hint' | t }}</span>
@@ -47,14 +64,14 @@
     </div>
 
     <div class="lemoon-pdp__info">
-      <p class="lemoon-pdp__eyebrow">{{ product.vendor | escape }}</p>
-      <h1>{{ product.title | escape }}</h1>
+      {% render 'lemoon-breadcrumb', collection: collection, product: product %}
+      {% render 'lemoon-product-heading', product: product %}
       <p class="lemoon-pdp__subtitle">{{ product.metafields.custom.frame_shape.value | capitalize | escape }} · {{ product.metafields.custom.frame_material.value | capitalize | escape }}</p>
       {%- if product.metafields.reviews.rating.value != blank -%}
         <a href="#EyewearReviews-{{ section.id }}" class="lemoon-pdp__rating">★ {{ product.metafields.reviews.rating.value.rating }} / {{ product.metafields.reviews.rating.value.scale_max }} · {{ 'lemoon_pdp.review_count' | t: count: product.metafields.reviews.rating_count.value }}</a>
       {%- endif -%}
       <div class="lemoon-pdp__price" aria-live="polite"><strong data-price>{{ current_variant.price | money }}</strong><s data-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{% if current_variant.compare_at_price > current_variant.price %}{{ current_variant.compare_at_price | money }}{% endif %}</s></div>
-      <p class="lemoon-pdp__muted">{{ 'lemoon_pdp.price_note' | t }}</p>
+      {% if cart.taxes_included %}<p class="lemoon-pdp__tax">{{ 'products.product.taxes_included' | t }}</p>{% endif %}
       {%- form 'product', product, id: form_id, data-purchase: '', novalidate: 'novalidate', class: 'lemoon-pdp__form' -%}
         {{ form.errors | default_errors }}
         <input type="hidden" name="id" value="{{ current_variant.id }}" disabled>
@@ -71,6 +88,7 @@
             {%- for variant in product.variants -%}<option value="{{ variant.id }}"{% if variant.id == current_variant.id %} selected{% endif %}{% unless variant.available %} disabled{% endunless %}>{{ variant.title | escape }} — {{ variant.price | money }}</option>{%- endfor -%}
           </select>
         </noscript>
+        <div class="lemoon-pdp__frame-options">
         {%- unless product.has_only_default_variant -%}
           {%- for option in product.options_with_values -%}
             {%- assign option_index = forloop.index0 -%}
@@ -78,27 +96,20 @@
               <legend>{{ option.name | escape }} <span data-selected-label>{{ current_variant.options[option_index] | escape }}</span></legend>
               <div class="lemoon-pdp__choices">
                 {%- for value in option.values -%}
-                  {%- liquid
-                    assign swatch_image = blank
-                    if option_index == 0
-                      for variant in product.variants
-                        if variant.options[0] == value and variant.featured_image != blank
-                          assign swatch_image = variant.featured_image
-                          break
-                        endif
-                      endfor
-                    endif
-                  -%}
-                  <label class="lemoon-pdp__choice">
-                    <input type="radio" data-option name="option-{{ option_index }}" value="{{ value | escape }}"{% if current_variant.options[option_index] == value %} checked{% endif %}>
-                    <span>{%- if swatch_image != blank -%}{{ swatch_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}<strong>{{ value | escape }}</strong></span>
+                  <label class="lemoon-pdp__choice{% if option_index == 0 %} lemoon-pdp-color-swatch{% endif %}"{% if option_index == 0 %} data-color-name="{{ value | escape }}"{% endif %}>
+                    <input type="radio" data-option name="option-{{ option_index }}"{% if option_index == 0 %} aria-label="{{ value | escape }}"{% endif %} value="{{ value | escape }}"{% if current_variant.options[option_index] == value %} checked{% endif %}>
+                    {% if option_index == 0 %}
+                      <span class="lemoon-pdp-color-swatch__icon" aria-hidden="true">{% render 'lemoon-color-swatch', value: value %}</span>
+                      <strong class="visually-hidden">{{ value | escape }}</strong>
+                    {% else %}<span><strong>{{ value | escape }}</strong></span>{% endif %}
                   </label>
                 {%- endfor -%}
               </div>
             </fieldset>
           {%- endfor -%}
         {%- endunless -%}
-        <div class="lemoon-pdp__size-row" data-frame-size><span>{{ product.metafields.custom.frame_size.value | capitalize | escape }}</span>{% if dimensions != blank %}<button type="button" class="lemoon-pdp__text-button" data-open-dialog="size">{{ 'lemoon_pdp.size_guide' | t }} ↗</button>{% endif %}</div>
+        <div class="lemoon-pdp__size-row" data-frame-size><div><span>{{ 'lemoon_pdp.size_label' | t }}</span><strong>{{ product.metafields.custom.frame_size.value | capitalize | escape }}</strong></div><button type="button" class="lemoon-pdp__text-button" data-open-dialog="size">{{ 'lemoon_pdp.size_guide' | t }}</button></div>
+        </div>
 
         <div class="lemoon-pdp__prescription" data-prescription hidden>
           <h2>{{ 'lemoon_pdp.prescription' | t }}</h2>
@@ -120,12 +131,17 @@
         </div>
         <div class="lemoon-pdp__summary" data-flow-summary hidden><span>{{ 'lemoon_pdp.your_selection' | t }}</span><p data-selection>{{ current_variant.title | escape }}</p></div>
         <p data-error class="lemoon-pdp__error" role="alert" hidden></p>
-        <button type="submit" data-add class="button button--full-width"{% unless current_variant.available %} disabled{% endunless %}>{% if current_variant.available %}{{ 'lemoon_pdp.buy_frame' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</button>
-        <button type="button" data-configure class="button button--full-width lemoon-pdp__configure">{{ 'lemoon_pdp.configure' | t }} →</button>
+        <button type="submit" data-add hidden class="button button--full-width"{% unless current_variant.available %} disabled{% endunless %}><span data-add-label>{% if current_variant.available %}{{ 'lemoon_pdp.buy_frame' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>{%- render 'loading-spinner' -%}</button>
+        {% assign frame_button_disabled = false %}
+        {% unless current_variant.available %}{% assign frame_button_disabled = true %}{% endunless %}
+        {% render 'lemoon-select-lenses-button', context: 'eyewear', disabled: frame_button_disabled %}
+        {% render 'lemoon-frame-only-button', context: 'eyewear', disabled: frame_button_disabled %}
       {%- endform -%}
-      <div class="lemoon-pdp__benefits">
-        {%- for block in section.blocks -%}{%- if block.type == 'benefit' -%}<span {{ block.shopify_attributes }}>{% render 'lemoon-icon', icon: block.settings.icon %}{{ block.settings.text | escape }}</span>{%- endif -%}{%- endfor -%}
-      </div>
+      {%- if product.description != blank -%}
+        <div class="product__description rte">{{ product.description }}</div>
+      {%- endif -%}
+      {% render 'lemoon-product-sku', product: product %}
+      {% render 'lemoon-shared-benefits', context: 'product' %}
       {% if section.settings.help_page != blank %}<a class="lemoon-pdp__help" href="{{ section.settings.help_page.url }}">{{ 'lemoon_pdp.help' | t }} ↗</a>{% endif %}
     </div>
   </div>
@@ -143,7 +159,6 @@
       {% if dimensions != blank %}{% render 'lemoon-frame-dimensions', dimensions: dimensions %}{% endif %}
     </div>
     <div class="lemoon-pdp__accordions">
-      <details open><summary>{{ 'lemoon_pdp.description' | t }}</summary><div class="rte">{{ product.description }}</div></details>
       <details><summary>{{ 'lemoon_pdp.lens_details' | t }}</summary><div class="lemoon-pdp__lens-guide">
         {% for block in section.blocks %}{% if block.type == 'lens_info' %}<div {{ block.shopify_attributes }}><h3>{{ block.settings.title | escape }}</h3><p>{{ block.settings.text | escape }}</p></div>{% endif %}{% endfor %}
       </div></details>
@@ -161,24 +176,56 @@
     {% unless has_review_app %}<p>{{ 'lemoon_pdp.no_reviews' | t }}</p>{% endunless %}
   </div>
 
-  {% if dimensions != blank %}<dialog class="lemoon-pdp__dialog" data-dialog="size" aria-labelledby="SizeTitle-{{ section.id }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button><h2 id="SizeTitle-{{ section.id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2><p>{{ 'lemoon_pdp.size_note' | t }}</p>{% render 'lemoon-frame-dimensions', dimensions: dimensions, dialog: true %}</dialog>{% endif %}
+  {% assign frame_information_id = section.id | append: '-inline' %}
+  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
+  {% assign drawer_instance_id = section.id | append: '-drawer' %}
+  <dialog class="lemoon-pdp__dialog lemoon-size-drawer" data-dialog="size" aria-labelledby="SizeTitle-{{ section.id }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button><h2 id="SizeTitle-{{ section.id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2>{% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id %}</dialog>
   {% for media in product.media %}{% if media.media_type == 'image' %}<dialog class="lemoon-pdp__dialog lemoon-pdp__dialog--zoom" data-dialog="zoom-{{ media.id }}" aria-label="{{ 'lemoon_pdp.zoom' | t }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button>{{ media | image_url: width: 2000 | image_tag: loading: 'lazy', alt: media.alt }}</dialog>{% endif %}{% endfor %}
   <script type="application/json" data-variants>[
     {% for variant in product.variants %}{"id":{{ variant.id | json }},"options":{{ variant.options | json }},"available":{{ variant.available | json }},"price":{{ variant.price | json }},"formattedPrice":{{ variant.price | money | json }},"formattedCompare":{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}null{% endif %},"sku":{{ variant.sku | json }},"mediaId":{{ variant.featured_media.id | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}
   ]</script>
-  <script type="application/json" data-copy>{"buyFrame":{{ 'lemoon_pdp.buy_frame' | t | json }},"add":{{ 'products.product.add_to_cart' | t | json }},"soldOut":{{ 'products.product.sold_out' | t | json }},"unavailable":{{ 'products.product.unavailable' | t | json }},"manual":{{ 'lemoon_pdp.manual' | t | json }},"upload":{{ 'lemoon_pdp.upload' | t | json }},"uploadError":{{ 'lemoon_pdp.upload_error' | t | json }},"later":{{ 'lemoon_pdp.later' | t | json }},"recipeError":{{ 'lemoon_pdp.recipe_error' | t | json }},"cartError":{{ 'lemoon_pdp.cart_error' | t | json }},"storageError":{{ 'lemoon_pdp.storage_error' | t | json }}}</script>
+  <script type="application/json" data-copy>{"configure":{{ 'products.product.configure_lenses' | t | json }},"buyFrame":{{ 'lemoon_pdp.buy_frame' | t | json }},"add":{{ 'products.product.add_to_cart' | t | json }},"soldOut":{{ 'products.product.sold_out' | t | json }},"unavailable":{{ 'products.product.unavailable' | t | json }},"manual":{{ 'lemoon_pdp.manual' | t | json }},"upload":{{ 'lemoon_pdp.upload' | t | json }},"uploadError":{{ 'lemoon_pdp.upload_error' | t | json }},"later":{{ 'lemoon_pdp.later' | t | json }},"recipeError":{{ 'lemoon_pdp.recipe_error' | t | json }},"cartError":{{ 'lemoon_pdp.cart_error' | t | json }},"storageError":{{ 'lemoon_pdp.storage_error' | t | json }}}</script>
+  {% render 'lemoon-sticky-purchase', product: product %}
 </lemoon-eyewear>
 <script type="application/ld+json">{{ product | structured_data }}</script>
 {% schema %}
 {
   "name": "Ficha óptica Lemoon",
   "tag": "section",
-  "settings": [{ "type": "page", "id": "help_page", "label": "Página de ayuda" }],
-  "blocks": [
-    { "type": "@app" },
-    { "type": "benefit", "name": "Beneficio", "settings": [{ "type": "select", "id": "icon", "label": "Icono", "options": [{ "value": "truck", "label": "Envío" }, { "value": "shield-check", "label": "Protección" }, { "value": "glasses", "label": "Armazón" }], "default": "glasses" }, { "type": "text", "id": "text", "label": "Texto", "default": "Pago seguro" }] },
-    { "type": "lens_info", "name": "Información de cristales", "settings": [{ "type": "text", "id": "title", "label": "Nombre", "default": "Monofocal" }, { "type": "textarea", "id": "text", "label": "Descripción", "default": "Una graduación para tu distancia de uso." }] }
+  "settings": [
+    {
+      "type": "page",
+      "id": "help_page",
+      "label": "Página de ayuda"
+    }
   ],
-  "presets": [{ "name": "Ficha óptica Lemoon" }]
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "lens_info",
+      "name": "Información de cristales",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre",
+          "default": "Monofocal"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Descripción",
+          "default": "Una graduación para tu distancia de uso."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ficha óptica Lemoon"
+    }
+  ]
 }
 {% endschema %}

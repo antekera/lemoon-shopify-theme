@@ -1,20 +1,69 @@
-{%- assign featured_collection = collections[section.settings.collection] -%}
+{%- liquid
+  assign featured_collection = section.settings.collection
+  assign match_product_tags = false
+
+  if section.settings.collection_source == 'product_category' and product != blank
+    assign featured_collection = blank
+    assign optical_collection = section.settings.optical_collection
+    assign sun_collection = section.settings.sun_collection
+
+    for product_collection in product.collections
+      if sun_collection != blank and product_collection.id == sun_collection.id
+        assign featured_collection = sun_collection
+        break
+      endif
+      if optical_collection != blank and product_collection.id == optical_collection.id
+        assign featured_collection = optical_collection
+      endif
+    endfor
+
+    assign match_product_tags = true
+  endif
+
+  assign candidate_limit = section.settings.products_to_show
+  if section.settings.randomize and featured_collection != blank
+    assign candidate_limit = featured_collection.products.size
+  endif
+  assign defer_products = false
+  if section.settings.defer_load and product != blank
+    assign defer_products = true
+  endif
+-%}
 
 {%- if featured_collection != blank and featured_collection.products_count > 0 -%}
-  <section class="lemoon-featured-products page-width">
-    <div class="lemoon-featured-products__heading">
+  <script src="{{ 'lemoon-featured-products.js' | asset_url }}" defer="defer"></script>
+  {%- if section.settings.show_quick_add -%}<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+  {%- if defer_products -%}
+    {{ 'component-card.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'lemoon-product-card.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+  <section class="lemoon-featured-products page-width{% if section.settings.show_quick_add %} lemoon-featured-products--quick-add{% endif %}"{% if section.settings.randomize %} data-randomize data-visible-count="{{ section.settings.products_to_show }}"{% endif %}{% if defer_products %} data-deferred data-collection-url="{{ featured_collection.url }}" data-carousel-view="{% if section.settings.show_quick_add %}carousel-accessories{% else %}carousel{% endif %}" data-collection-count="{{ featured_collection.products_count }}" data-current-product-id="{{ product.id }}" data-product-tags="{{ product.tags | json | escape }}" data-initial-items="{{ section.settings.initial_products }}" data-max-items="{{ section.settings.max_products_to_load }}"{% endif %}>
+    {%- capture carousel_id -%}LemoonFeaturedProducts-{{ section.id }}{%- endcapture -%}
+    <div class="lemoon-featured-products__heading{% if section.settings.link_label == blank %} lemoon-featured-products__heading--centered{% endif %}">
       <div>
         {%- if section.settings.eyebrow != blank -%}<p class="lemoon-featured-products__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
         <h2>{{ section.settings.heading | escape }}</h2>
       </div>
-      <a href="{{ featured_collection.url }}" class="lemoon-featured-products__link lemoon-text-link">{{ section.settings.link_label | escape }}</a>
+      <div class="lemoon-featured-products__actions">
+        {%- if section.settings.link_label != blank -%}<a href="{{ featured_collection.url }}" class="lemoon-featured-products__link lemoon-text-link">{{ section.settings.link_label | escape }}</a>{%- endif -%}
+        {% render 'lemoon-carousel-controls', carousel_id: carousel_id %}
+      </div>
     </div>
-    <ul class="lemoon-featured-products__track" role="list" aria-label="{{ section.settings.heading | escape }}">
+    <ul id="{{ carousel_id }}" class="lemoon-featured-products__track" role="list" aria-label="{{ section.settings.heading | escape }}"{% if defer_products %} aria-busy="true"{% endif %}>
+      {%- unless defer_products -%}
       {%- assign displayed_count = 0 -%}
       {%- for card_product in featured_collection.products -%}
-        {%- if card_product.price == 0 -%}{%- continue -%}{%- endif -%}
+        {%- if card_product.price == 0 or card_product.id == product.id or card_product.available == false -%}{%- continue -%}{%- endif -%}
         {%- liquid
-          assign lazy_load = false
+          assign related_score = 0
+          if match_product_tags
+            for related_tag in card_product.tags
+              if product.tags contains related_tag
+                assign related_score = related_score | plus: 1
+              endif
+            endfor
+          endif
+          assign lazy_load = section.settings.randomize
           if displayed_count > 1
             assign lazy_load = true
           endif
@@ -23,29 +72,38 @@
             assign skip_styles = false
           endif
         -%}
-        <li class="lemoon-featured-products__item">
-          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: lazy_load, skip_styles: skip_styles, section_id: section.id %}
+        <li class="lemoon-featured-products__item"{% if section.settings.randomize %} data-related-score="{{ related_score }}"{% if displayed_count >= section.settings.products_to_show %} hidden{% endif %}{% endif %}>
+          {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: lazy_load, skip_styles: skip_styles, section_id: section.id, show_quick_add: section.settings.show_quick_add %}
         </li>
         {%- assign displayed_count = displayed_count | plus: 1 -%}
-        {%- if displayed_count >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
+        {%- if displayed_count >= candidate_limit -%}{%- break -%}{%- endif -%}
       {%- endfor -%}
+      {%- endunless -%}
     </ul>
   </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "Destacados Lemoon",
+  "name": "t:sections.lemoon_featured_products.name",
   "tag": "section",
   "class": "section",
   "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
-    { "type": "collection", "id": "collection", "label": "Colección" },
-    { "type": "text", "id": "eyebrow", "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
-    { "type": "text", "id": "heading", "label": "Título", "default": "Armazones favoritos" },
-    { "type": "text", "id": "link_label", "label": "Etiqueta de enlace", "default": "Ver todos" },
-    { "type": "range", "id": "products_to_show", "label": "Productos", "min": 2, "max": 12, "step": 1, "default": 8 }
+    { "type": "collection", "id": "collection", "label": "t:sections.lemoon_featured_products.settings.collection.label" },
+    { "type": "select", "id": "collection_source", "label": "t:sections.lemoon_featured_products.settings.collection_source.label", "options": [{ "value": "fixed", "label": "t:sections.lemoon_featured_products.settings.collection_source.options.fixed" }, { "value": "product_category", "label": "t:sections.lemoon_featured_products.settings.collection_source.options.product_category" }], "default": "fixed" },
+    { "type": "collection", "id": "optical_collection", "label": "t:sections.lemoon_featured_products.settings.optical_collection.label" },
+    { "type": "collection", "id": "sun_collection", "label": "t:sections.lemoon_featured_products.settings.sun_collection.label" },
+    { "type": "checkbox", "id": "randomize", "label": "t:sections.lemoon_featured_products.settings.randomize.label", "default": false },
+    { "type": "checkbox", "id": "defer_load", "label": "t:sections.lemoon_featured_products.settings.defer_load.label", "default": false },
+    { "type": "checkbox", "id": "show_quick_add", "label": "t:sections.lemoon_featured_products.settings.show_quick_add.label", "default": false },
+    { "type": "range", "id": "initial_products", "label": "t:sections.lemoon_featured_products.settings.initial_products.label", "min": 1, "max": 5, "step": 1, "default": 5 },
+    { "type": "text", "id": "eyebrow", "label": "t:sections.lemoon_featured_products.settings.eyebrow.label", "default": "t:sections.lemoon_featured_products.settings.eyebrow.default" },
+    { "type": "text", "id": "heading", "label": "t:sections.lemoon_featured_products.settings.heading.label", "default": "t:sections.lemoon_featured_products.settings.heading.default" },
+    { "type": "text", "id": "link_label", "label": "t:sections.lemoon_featured_products.settings.link_label.label", "default": "t:sections.lemoon_featured_products.settings.link_label.default" },
+    { "type": "range", "id": "products_to_show", "label": "t:sections.lemoon_featured_products.settings.products_to_show.label", "min": 2, "max": 12, "step": 1, "default": 8 },
+    { "type": "range", "id": "max_products_to_load", "label": "t:sections.lemoon_featured_products.settings.max_products_to_load.label", "min": 5, "max": 15, "step": 1, "default": 15 }
   ],
-  "presets": [{ "name": "Destacados Lemoon" }]
+  "presets": [{ "name": "t:sections.lemoon_featured_products.name" }]
 }
 {% endschema %}

@@ -38,6 +38,8 @@ function initialize(scope = document) {
   let level = 'closed';
   let lastTrigger = null;
   let previousOverflow = '';
+  let activePanel = root;
+  let panelAnimations = [];
   const focusable = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
   controller = { abort, drawer, overlay, header, sectionId, get previousOverflow() { return previousOverflow; } };
@@ -59,31 +61,55 @@ function initialize(scope = document) {
     });
   }
 
-  function showRoot(focus = true) {
-    level = 'root';
-    root.hidden = false;
-    root.setAttribute('aria-hidden', 'false');
-    panels.forEach((panel) => {
-      panel.hidden = true;
-      panel.setAttribute('aria-hidden', 'true');
+  function finishPanelTransition() {
+    panelAnimations.forEach(animation => animation.cancel());
+    panelAnimations = [];
+    [root, ...panels].forEach(panel => {
+      panel.classList.remove('is-leaving');
+      panel.hidden = panel !== activePanel;
     });
+  }
+
+  function switchPanel(next, direction, animate) {
+    finishPanelTransition();
+    const previous = activePanel;
+    activePanel = next;
+    drawer.scrollTop = 0;
+    [root, ...panels].forEach(panel => {
+      panel.hidden = panel !== next;
+      panel.inert = panel !== next;
+      panel.setAttribute('aria-hidden', String(panel !== next));
+    });
+    if (!animate || previous === next || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    previous.hidden = false;
+    previous.classList.add('is-leaving');
+    const options = { duration: 280, easing: 'ease', fill: 'both' };
+    const animations = [
+      next.animate([{ transform: `translateX(${direction === 'forward' ? '100%' : '-20%'})`, opacity: 0 }, { transform: 'translateX(0)', opacity: 1 }], options),
+      previous.animate([{ transform: 'translateX(0)', opacity: 1 }, { transform: `translateX(${direction === 'forward' ? '-20%' : '100%'})`, opacity: 0 }], options),
+    ];
+    panelAnimations = animations;
+    Promise.all(animations.map(animation => animation.finished)).then(() => {
+      if (panelAnimations === animations) finishPanelTransition();
+    }).catch(() => {});
+  }
+  signal.addEventListener('abort', finishPanelTransition, { once: true });
+
+  function showRoot(focus = true) {
+    const animate = level === 'sub';
+    level = 'root';
+    switchPanel(root, 'back', animate);
     updateTriggers();
-    if (focus) root.querySelector(focusable)?.focus();
+    if (focus) root.querySelector(focusable)?.focus({ preventScroll: true });
   }
 
   function showPanel(slot) {
     const panel = panels.find((item) => item.dataset.lemoonNavPanel === slot);
     if (!panel) return;
     level = 'sub';
-    root.hidden = true;
-    root.setAttribute('aria-hidden', 'true');
-    panels.forEach((item) => {
-      item.hidden = item !== panel;
-      item.setAttribute('aria-hidden', String(item !== panel));
-    });
-    drawer.scrollTop = 0;
+    switchPanel(panel, 'forward', true);
     updateTriggers();
-    (panel.querySelector(focusable) || panel).focus();
+    (panel.querySelector(focusable) || panel).focus({ preventScroll: true });
   }
 
   function open(trigger) {
@@ -93,6 +119,7 @@ function initialize(scope = document) {
     document.body.style.overflow = 'hidden';
     drawer.inert = false;
     drawer.setAttribute('aria-hidden', 'false');
+    drawer.getBoundingClientRect();
     drawer.classList.add('is-open');
     overlay.classList.add('is-open');
     showRoot();
@@ -101,6 +128,7 @@ function initialize(scope = document) {
   function close() {
     if (level === 'closed') return;
     level = 'closed';
+    finishPanelTransition();
     drawer.classList.remove('is-open');
     overlay.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
@@ -130,7 +158,7 @@ function initialize(scope = document) {
     if (event.key === 'Escape') { close(); return; }
     if (event.key !== 'Tab') return;
     const activeTrigger = triggers.find((trigger) => trigger.getClientRects().length > 0);
-    const currentPanel = level === 'root' ? root : panels.find((panel) => !panel.hidden);
+    const currentPanel = activePanel;
     const items = [activeTrigger, ...currentPanel.querySelectorAll(focusable)].filter(Boolean);
     const index = items.indexOf(document.activeElement);
     if (event.shiftKey && index <= 0) {

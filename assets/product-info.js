@@ -186,6 +186,29 @@ if (!customElements.get('product-info')) {
           this.updateURL(productUrl, variant?.id);
           this.updateVariantInputs(variant?.id);
 
+          const lensButton = this.querySelector('.lemoon-lens-config-cta');
+          const sourceLensButton = html.querySelector('.lemoon-lens-config-cta');
+          if (lensButton && sourceLensButton) {
+            lensButton.innerHTML = sourceLensButton.innerHTML;
+            ['href', 'aria-disabled', 'tabindex', 'role'].forEach((attribute) => {
+              if (sourceLensButton.hasAttribute(attribute)) lensButton.setAttribute(attribute, sourceLensButton.getAttribute(attribute));
+              else lensButton.removeAttribute(attribute);
+            });
+          }
+
+          const headingSku = this.querySelector('[data-heading-sku]');
+          if (headingSku) {
+            headingSku.textContent = variant?.sku || '';
+            headingSku.closest('[data-heading-sku-row]').hidden = !variant?.sku;
+          }
+
+          const productStatus = this.querySelector('[data-pdp-status]');
+          const sourceStatus = html.querySelector('[data-pdp-status]');
+          if (productStatus && sourceStatus) {
+            productStatus.innerHTML = sourceStatus.innerHTML;
+            productStatus.hidden = !variant || sourceStatus.hidden;
+          }
+
           if (!variant) {
             this.setUnavailable();
             return;

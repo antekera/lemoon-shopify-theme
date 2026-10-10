@@ -237,6 +237,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 .product-card-wrapper .card__inner {
   overflow: hidden;
+  background: var(--lemoon-surface-warm);
   border: 0;
   border-radius: var(--lemoon-radius-md);
   --ratio-percent: 96% !important;
@@ -368,7 +369,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 
 .lemoon-product-card__label--flash-sale { background: #F7E600; color: #0B1F3A; }
 .lemoon-product-card__label--new { background: #0B1F3A; color: #FFFFFF; }
-.lemoon-product-card__label--best-seller { background: #316653; color: #FFFFFF; }
+.lemoon-product-card__label--best-seller { background: var(--lemoon-surface-green-deep); color: var(--lemoon-text-inverse); }
 .lemoon-product-card__label--bestseller { background: #F3D4C4; color: #0B1F3A; }
 .lemoon-product-card__label--sold-out { background: #686868; color: #FFFFFF; }
 
@@ -377,7 +378,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   z-index: 1;
   inset: 0;
   cursor: pointer;
-  pointer-events: auto;
+  pointer-events: none;
 }
 
 .lemoon-product-card__image-link:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: -4px; }
@@ -400,15 +401,27 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 .product-card-wrapper .card__media .media > img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center center;
+  mix-blend-mode: multiply;
   transition: opacity var(--lemoon-motion-base);
 }
 
 .product-card-wrapper .card__media .media {
   overflow: hidden;
+}
+
+/* Blend the whole media layer across Dawn's nested stacking contexts. */
+.product-card-wrapper .card__media {
+  mix-blend-mode: multiply;
 }
 
 .product-card-wrapper .media.lemoon-product-card__gallery-active > img:first-child:not(:only-child) {
@@ -497,6 +510,47 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   border: 1px solid #5F6368;
   box-shadow: none;
 }
+
+.lemoon-product-card__quick-add {
+  display: block;
+  margin: 0 var(--lemoon-space-4) var(--lemoon-space-4);
+}
+.lemoon-featured-products--quick-add .lemoon-featured-products__item > product-component {
+  display: flex;
+  height: 100%;
+}
+.lemoon-featured-products--quick-add .product-card-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+.lemoon-featured-products--quick-add .product-card-wrapper > .card {
+  flex: 1 0 auto;
+  height: auto;
+}
+.lemoon-featured-products--quick-add .lemoon-product-card__quick-add {
+  margin-top: auto;
+}
+.lemoon-product-card__quick-add .form { margin: 0; }
+.lemoon-product-card__quick-add .button {
+  min-height: 4rem;
+  padding: .8rem 1.2rem;
+  background: transparent;
+  color: var(--lemoon-text-brand);
+  font-size: var(--lemoon-type-cta-size);
+  text-transform: uppercase;
+  transition: background-color var(--lemoon-motion-fast), color var(--lemoon-motion-fast);
+}
+.lemoon-product-card__quick-add .button:not([disabled]):hover {
+  background: var(--lemoon-surface-warm);
+  color: var(--lemoon-text-brand);
+}
+.lemoon-product-card__quick-add .button.loading > .loading__spinner .path {
+  stroke: var(--lemoon-text-brand);
+}
+.lemoon-product-card__quick-add .button::before,
+.lemoon-product-card__quick-add .button::after { display: none; }
+.lemoon-product-card__quick-add .button:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 3px; }
 
 .lemoon-product-card__gallery-source {
   display: none;
@@ -622,6 +676,17 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   margin-bottom: var(--lemoon-space-8);
 }
 
+.lemoon-featured-products__heading--centered {
+  position: relative;
+  justify-content: center;
+}
+.lemoon-featured-products__heading--centered > div:first-child { text-align: center; }
+.lemoon-featured-products__heading--centered .lemoon-featured-products__actions {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
 .lemoon-featured-products__eyebrow {
   margin: 0 0 var(--lemoon-space-2);
   color: var(--lemoon-text-secondary);
@@ -631,7 +696,16 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   letter-spacing: .08em;
 }
 
-.lemoon-featured-products__heading h2 { margin: 0; }
+.lemoon-featured-products__heading h2 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+.lemoon-featured-products__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
 
 .lemoon-featured-products__link {
   color: var(--lemoon-text-brand);
@@ -639,6 +713,41 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   font-size: var(--lemoon-type-cta-size);
   font-weight: var(--lemoon-weight-semibold);
   text-decoration: none;
+}
+
+.lemoon-carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+
+.lemoon-carousel-controls[hidden] { display: none; }
+
+.lemoon-carousel-controls__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  border: 1px solid var(--lemoon-border-default, #d8d4cd);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lemoon-text-brand, #0b1f3a);
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.lemoon-carousel-controls__button .svg-wrapper { display: flex; width: 1.8rem; height: 1.8rem; }
+.lemoon-carousel-controls__button svg { width: 100%; height: 100%; }
+.lemoon-carousel-controls__button[data-lemoon-carousel-prev] svg { transform: rotate(90deg); }
+.lemoon-carousel-controls__button[data-lemoon-carousel-next] svg { transform: rotate(-90deg); }
+.lemoon-carousel-controls__button:not(:disabled):hover { border-color: var(--lemoon-action-primary); background: var(--lemoon-action-primary); color: #fff; }
+.lemoon-carousel-controls__button:disabled { opacity: .38; cursor: not-allowed; }
+.lemoon-carousel-controls__button:focus-visible { outline: 2px solid var(--lemoon-action-primary); outline-offset: 3px; }
+
+@media (max-width: 749px) {
+  .lemoon-carousel-controls { display: none; }
 }
 
 .facets-vertical {
@@ -971,10 +1080,155 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   color: var(--lemoon-text-primary);
 }
 
-.cart-notification__heading,
 .cart-notification-product__name {
   color: var(--lemoon-text-brand);
   font-family: var(--lemoon-font-heading);
+}
+
+/* Compact cart confirmation toast. */
+cart-notification {
+  display: block;
+  position: fixed;
+  z-index: 120;
+  top: calc(var(--header-height, 7.2rem) + 1.2rem);
+  right: clamp(1.2rem, 2.4vw, 2.4rem);
+  width: min(34rem, calc(100vw - 2.4rem));
+  pointer-events: none;
+}
+
+cart-notification .cart-notification {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 5.6rem;
+  margin: 0;
+  padding: 1.2rem 4rem 1.2rem 1.4rem;
+  border: 1px solid var(--lemoon-border-default);
+  border-radius: var(--lemoon-radius-md, 1.2rem);
+  background: var(--lemoon-surface-page, #fff);
+  box-shadow: 0 0.8rem 2.4rem rgba(11, 31, 58, 0.16);
+  color: var(--lemoon-text-brand, #0b1f3a);
+  opacity: 0;
+  pointer-events: auto;
+  transform: translateY(-0.8rem);
+  transition: opacity 200ms ease, transform 200ms ease, visibility 0s linear 200ms;
+  visibility: hidden;
+}
+
+cart-notification .cart-notification.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+  visibility: visible;
+}
+
+cart-notification .cart-notification__icon {
+  display: grid;
+  flex: 0 0 1.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  color: var(--lemoon-text-brand, #0b1f3a);
+}
+
+cart-notification .cart-notification__icon svg {
+  display: block;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+cart-notification .cart-notification__message {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  color: var(--lemoon-text-primary, #202a35);
+  font-size: 1.3rem;
+  line-height: 1.4;
+}
+
+cart-notification .cart-notification-product__name {
+  color: var(--lemoon-text-brand, #0b1f3a);
+  font-weight: 600;
+}
+
+cart-notification .cart-notification__checkout {
+  flex: 0 0 auto;
+  color: var(--lemoon-text-brand, #0b1f3a);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-underline-offset: 0.2rem;
+  white-space: nowrap;
+}
+
+cart-notification .cart-notification__close {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 0.6rem;
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  min-height: 3.2rem;
+  margin: 0;
+  padding: 0.6rem;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--lemoon-text-brand, #0b1f3a);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+cart-notification .cart-notification__close svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+@media (max-width: 749px) {
+  cart-notification {
+    top: calc(var(--header-height, 11rem) + 0.8rem);
+    right: 1.2rem;
+    width: calc(100vw - 2.4rem);
+  }
+
+  cart-notification .cart-notification {
+    gap: 0.7rem;
+    min-height: 5.2rem;
+    padding: 1rem 3.8rem 1rem 1.2rem;
+  }
+
+  cart-notification .cart-notification__message,
+  cart-notification .cart-notification__checkout {
+    font-size: 1.2rem;
+  }
+}
+
+.lemoon-header__cart-count.is-popping {
+  animation: lemoon-cart-count-pop 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes lemoon-cart-count-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lemoon-header__cart-count.is-popping {
+    animation: none;
+  }
+}
+
+.lemoon-pdp__form .button.loading {
+  color: transparent;
+}
+
+.lemoon-pdp__form .button.loading > .loading__spinner .path,
+.lemoon-frame-only-add.button.loading > .loading__spinner .path {
+  stroke: var(--lemoon-text-brand, #0b1f3a);
 }
 
 .lemoon-configurator { display: grid; grid-template-columns: minmax(36rem, 43%) 1fr; min-height: 640px; background: var(--lemoon-surface-page); }
@@ -1055,6 +1309,8 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 .lemoon-featured-products__track::-webkit-scrollbar { display: none; }
+.lemoon-featured-products[data-deferred]:not([data-ready]) .lemoon-featured-products__track { display: flex; min-height: 38rem; }
+.lemoon-featured-products__item[hidden] { display: none; }
 .lemoon-featured-products__item { flex: 0 0 calc((100% - 4.8rem) / 4); min-width: 0; scroll-snap-align: start; }
 .lemoon-featured-products__item .card-wrapper { height: 100%; }
 
@@ -1079,7 +1335,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 .lemoon-mood-grid__item:first-child > img { object-position: center 20%; }
 
 .lemoon-about { margin: 1.6rem auto 5rem; color: var(--lemoon-text-brand); }
-.lemoon-about__inner { padding: clamp(3.2rem, 4vw, 5.6rem) clamp(2.4rem, 4vw, 5.6rem) clamp(5rem, 6vw, 8rem); border-radius: 2.4rem; background: #dfe9de; display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); align-items: start; gap: clamp(3rem, 6vw, 10rem); }
+.lemoon-about__inner { padding: clamp(3.2rem, 4vw, 5.6rem) clamp(2.4rem, 4vw, 5.6rem) clamp(5rem, 6vw, 8rem); border-radius: 2.4rem; background: var(--lemoon-surface-tertiary-green); display: grid; grid-template-columns: minmax(0, 44%) minmax(0, 1fr); align-items: start; gap: clamp(3rem, 6vw, 10rem); }
 .lemoon-about h2 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--font-heading-family); font-size: clamp(2.8rem, 3vw, 3.6rem); font-weight: 600; line-height: 1.1; letter-spacing: normal; }
 .lemoon-about__text { max-width: 68rem; font-size: clamp(1.7rem, 1.7vw, 2.1rem); line-height: 1.55; }
 .lemoon-about__text p { margin: 0 0 1.8rem; }
@@ -1222,7 +1478,6 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
     margin-bottom: var(--lemoon-space-6);
   }
 
-  .lemoon-featured-products__heading h2 { font-size: 2.6rem; }
   .lemoon-featured-products__link { flex-shrink: 0; font-size: 1.3rem; }
   .lemoon-featured-products__track { gap: 1.2rem; }
   .lemoon-featured-products__item { flex-basis: 60%; }

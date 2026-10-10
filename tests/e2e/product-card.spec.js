@@ -18,11 +18,11 @@ async function swipeLeft(page, bounds) {
   await session.detach();
 }
 
-async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
+async function openCard(page, { offscreen = false, swipeEnabled = true, portrait = false } = {}) {
   await page.goto('/tests/fixtures/mobile-search.html');
   await page.route('https://cdn.example/**', (route) => route.fulfill({
     contentType: 'image/svg+xml',
-    body: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><rect width="32" height="32" fill="#172B4D"/></svg>',
+    body: portrait ? '<svg xmlns="http://www.w3.org/2000/svg" width="960" height="1280"><rect width="960" height="1280" fill="white"/><rect x="50" y="440" width="860" height="400" fill="#172B4D"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><rect width="32" height="32" fill="#172B4D"/></svg>',
   }));
   await page.setContent(`
     <style>
@@ -67,10 +67,24 @@ async function openCard(page, { offscreen = false, swipeEnabled = true } = {}) {
   await page.addScriptTag({ path: cardScript });
 }
 
+test('portrait product photos use the card width and stay vertically centered', async ({ page }) => {
+  await openCard(page, { portrait: true });
+  const image = page.locator('.card__media .media img').first();
+  await expect.poll(() => image.evaluate(el => el.naturalWidth)).toBe(960);
+  const media = await page.locator('.card__media .media').boundingBox();
+  const photo = await image.boundingBox();
+  expect(photo.width).toBeCloseTo(media.width, 0);
+  expect(photo.width / photo.height).toBeCloseTo(960 / 1280, 2);
+  expect(photo.y + photo.height / 2).toBeCloseTo(media.y + media.height / 2, 0);
+  await expect(image).toHaveCSS('mix-blend-mode', 'multiply');
+});
+
 test('loads the second photo near the viewport and toggles back to the first on the next swipe', async ({ page }) => {
   await openCard(page, { offscreen: true });
   await page.addStyleTag({ content: '.card__content { position: absolute; inset: 0 auto auto 0; width: 320px; height: 320px; z-index: 2; }' });
   const card = page.locator('.product-card-wrapper');
+  await expect(page.locator('.card__media .media img').first()).toHaveCSS('object-fit', 'contain');
+  await expect(page.locator('.card__media .media img').first()).toHaveCSS('mix-blend-mode', 'multiply');
   const second = page.locator('.card__media .media img').nth(1);
   await expect(second).not.toHaveAttribute('src', /.+/);
   await expect(second).toHaveAttribute('data-lazy-src', 'https://cdn.example/diagonal.jpg');
@@ -82,6 +96,8 @@ test('loads the second photo near the viewport and toggles back to the first on 
   const incoming = media.locator('.lemoon-product-card__slide-layer');
   await expect(incoming).toHaveCSS('transition-property', 'opacity');
   await expect(incoming).toHaveCSS('transition-duration', '0.5s');
+  await expect(incoming).toHaveCSS('object-fit', 'contain');
+  await expect(incoming).toHaveCSS('mix-blend-mode', 'multiply');
   const incomingElement = await incoming.elementHandle();
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
   expect(await incomingElement.evaluate((element) => element === document.querySelector('.card__media .media img:first-child'))).toBe(true);

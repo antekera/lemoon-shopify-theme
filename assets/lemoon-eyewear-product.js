@@ -61,15 +61,43 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
           if (lens) { lens.checked = true; this.updateVariant(); }
           this.querySelector('[data-flow-title]').focus();
         }
-        if (event.target.closest('[data-save]')) this.toggleSaved();
+        if (event.target.closest('[data-frame-only-add]')) {
+          const frameOnlyButton = event.target.closest('[data-frame-only-add]');
+          const selection = this.getFrameOnlySelection();
+          if (!selection?.variant?.available) return;
+          this.inLensFlow = false;
+          selection.input.checked = true;
+          this.updateVariant();
+          this.pendingButton = frameOnlyButton;
+          this.form.requestSubmit();
+        }
       });
       this.querySelectorAll('dialog').forEach((dialog) => {
         dialog.addEventListener('close', () => this.dialogOpener?.focus());
-        dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+        dialog.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close(); });
       });
       this.form.addEventListener('submit', (event) => this.addToCart(event));
+      this.stage = this.querySelector('.lemoon-pdp__stage');
+      this.mobileGallery = window.matchMedia('(max-width: 989px)');
+      this.stage.addEventListener('scroll', () => {
+        if (!this.mobileGallery.matches || this.galleryFrame) return;
+        this.galleryFrame = requestAnimationFrame(() => {
+          this.galleryFrame = null;
+          const index = Math.min(this.panels.length - 1, Math.max(0, Math.round(this.stage.scrollLeft / this.stage.clientWidth)));
+          if (this.panels[index]) this.showMedia(this.panels[index].dataset.mediaPanel, false);
+        });
+      }, { passive: true });
+      this.mobileGallery.addEventListener('change', () => {
+        if (this.mobileGallery.matches && this.stage.scrollLeft > 0) {
+          const index = Math.min(this.panels.length - 1, Math.round(this.stage.scrollLeft / this.stage.clientWidth));
+          if (this.panels[index]) this.showMedia(this.panels[index].dataset.mediaPanel, false);
+          return;
+        }
+        const current = this.panels.find((panel) => !panel.hidden);
+        if (current) this.showMedia(current.dataset.mediaPanel);
+      });
       this.updateVariant(false);
-      this.restoreSaved();
+
     }
 
     selectedOptions() {
@@ -92,12 +120,26 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       this.querySelector('[name="id"]').value = this.variant?.id || '';
       this.querySelector('[name="id"]').disabled = !this.variant;
       this.submit.disabled = !this.variant?.available;
-      this.submit.textContent = this.variant ? (this.variant.available ? (this.inLensFlow ? this.copy.add : this.copy.buyFrame) : this.copy.soldOut) : this.copy.unavailable;
+      const addLabel = this.submit.querySelector('[data-add-label]');
+      if (addLabel) addLabel.textContent = this.variant ? (this.variant.available ? (this.inLensFlow ? this.copy.add : this.copy.buyFrame) : this.copy.soldOut) : this.copy.unavailable;
       this.querySelector('[data-price]').textContent = this.variant?.formattedPrice || this.copy.unavailable;
       const compare = this.querySelector('[data-compare]');
       compare.textContent = this.variant?.formattedCompare || '';
       compare.hidden = !this.variant?.formattedCompare;
+      const status = this.querySelector('[data-pdp-status]');
+      if (status) {
+        const soldOut = Boolean(this.variant && !this.variant.available);
+        const onSale = Boolean(this.variant?.available && this.variant.formattedCompare);
+        status.hidden = !soldOut && !onSale;
+        status.querySelector('[data-status-sale]').hidden = !onSale;
+        status.querySelector('[data-status-sold-out]').hidden = !soldOut;
+      }
       this.querySelector('[data-sku]').textContent = this.variant?.sku || '—';
+      const headingSku = this.querySelector('[data-heading-sku]');
+      if (headingSku) {
+        headingSku.textContent = this.variant?.sku || '';
+        headingSku.closest('[data-heading-sku-row]').hidden = !this.variant?.sku;
+      }
       this.querySelector('[data-selection]').textContent = options.filter(Boolean).join(' · ');
       this.querySelectorAll('[data-option-group]').forEach((group, index) => {
         if (index !== 2) group.hidden = index === 0 ? this.inLensFlow : !this.inLensFlow;
@@ -120,6 +162,13 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       this.querySelector('[data-flow-summary]').hidden = !this.inLensFlow;
       this.querySelector('[data-frame-size]').hidden = this.inLensFlow;
       this.querySelector('[data-configure]').hidden = this.inLensFlow;
+      this.querySelector('[data-configure]').disabled = !this.variant?.available;
+      this.querySelector('[data-configure]').textContent = this.variant?.available ? this.copy.configure : this.copy.soldOut;
+      this.submit.hidden = !this.inLensFlow;
+      const frameOnlyButton = this.querySelector('[data-frame-only-add]');
+      const frameOnlySelection = this.getFrameOnlySelection();
+      frameOnlyButton.hidden = this.inLensFlow || !frameOnlySelection?.input;
+      frameOnlyButton.disabled = !frameOnlySelection?.variant?.available;
       this.updatePrescription();
     }
 
@@ -145,17 +194,36 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
     }
 
     chooseFrameOnly() {
-      const input = [...this.querySelectorAll('[data-option-group="1"] input')].find((item) => item.value === 'Solo armazón');
-      if (input) { input.checked = true; this.updateVariant(); }
+      const selection = this.getFrameOnlySelection();
+      if (selection?.input) { selection.input.checked = true; this.updateVariant(); }
     }
 
-    showMedia(id) {
+    getFrameOnlySelection(options = this.selectedOptions()) {
+      const inputs = [...this.querySelectorAll('[data-option-group="1"] input')].filter((input) => ['Solo armazón', 'Solar sin receta'].includes(input.value));
+      const indexOptions = this.querySelector('[data-option-group="2"]');
+      for (const input of inputs) {
+        const candidate = [...options];
+        candidate[1] = input.value;
+        if (indexOptions) candidate[2] = indexOptions.querySelector('input')?.value;
+        const variant = findEyewearVariant(this.variants, candidate);
+        if (variant?.available) return { input, variant };
+      }
+      return inputs.length ? { input: inputs[0], variant: undefined } : undefined;
+    }
+
+    showMedia(id, scroll = true) {
       if (!this.panels.some((panel) => panel.dataset.mediaPanel === id)) return;
       this.panels.forEach((panel) => {
         panel.hidden = panel.dataset.mediaPanel !== id;
         if (panel.hidden) panel.querySelectorAll('video').forEach((video) => video.pause());
       });
       this.querySelectorAll('[data-media-target]').forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.mediaTarget === id)));
+      const index = this.panels.findIndex((panel) => panel.dataset.mediaPanel === id);
+      const counter = this.querySelector('[data-gallery-current]');
+      if (counter) counter.textContent = String(index + 1);
+      if (scroll && this.mobileGallery?.matches) {
+        this.stage.scrollTo({ left: index * this.stage.clientWidth, behavior: 'instant' });
+      }
     }
 
     updateUnits(unit) {
@@ -164,26 +232,13 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       });
     }
 
-    restoreSaved() {
-      try {
-        const saved = JSON.parse(localStorage.getItem('lemoon-saved-products') || '[]');
-        this.querySelector('[data-save]').setAttribute('aria-pressed', String(saved.includes(this.dataset.productId)));
-      } catch { this.querySelector('[data-save]').hidden = true; }
-    }
-
-    toggleSaved() {
-      try {
-        const saved = JSON.parse(localStorage.getItem('lemoon-saved-products') || '[]');
-        const next = saved.includes(this.dataset.productId) ? saved.filter((id) => id !== this.dataset.productId) : [...saved, this.dataset.productId];
-        localStorage.setItem('lemoon-saved-products', JSON.stringify(next)); this.restoreSaved();
-      } catch { this.showError(this.copy.storageError); }
-    }
-
     showError(message) { this.error.textContent = message; this.error.hidden = false; }
 
     async addToCart(event) {
       event.preventDefault();
       if (this.busy || !this.variant?.available) return;
+      const actionButton = this.pendingButton || event.submitter || this.submit;
+      this.pendingButton = null;
       this.error.hidden = true;
       const fields = [...this.querySelectorAll('[data-rx]:not(:disabled)')];
       if (fields.length) {
@@ -204,7 +259,12 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         HTMLFormElement.prototype.submit.call(this.form);
         return;
       }
-      this.busy = true; this.submit.disabled = true; this.submit.setAttribute('aria-busy', 'true');
+      this.busy = true;
+      this.submit.disabled = true;
+      actionButton.disabled = true;
+      actionButton.classList.add('loading');
+      actionButton.setAttribute('aria-busy', 'true');
+      actionButton.querySelector('.loading__spinner')?.classList.remove('hidden');
       const data = new FormData(this.form);
       for (const [key, value] of [...data.entries()]) if (key.startsWith('properties[') && !String(value).trim()) data.delete(key);
       const cart = document.querySelector('cart-drawer') || document.querySelector('cart-notification');
@@ -218,10 +278,19 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         const result = await response.json();
         if (!response.ok || result.status) throw new Error(result.description || this.copy.cartError);
         if (cart?.renderContents && result.sections) {
-          cart.classList.remove('is-empty'); cart.renderContents(result);
+          cart.classList.remove('is-empty'); await cart.renderContents(result);
         } else location.assign(this.dataset.cartUrl);
       } catch (error) { this.showError(error.message || this.copy.cartError); }
-      finally { this.busy = false; this.submit.disabled = !this.variant?.available; this.submit.removeAttribute('aria-busy'); }
+      finally {
+        this.busy = false;
+        this.submit.disabled = !this.variant?.available;
+        actionButton.disabled = actionButton.matches('[data-frame-only-add]')
+          ? !this.getFrameOnlySelection()?.variant?.available
+          : !this.variant?.available;
+        actionButton.classList.remove('loading');
+        actionButton.removeAttribute('aria-busy');
+        actionButton.querySelector('.loading__spinner')?.classList.add('hidden');
+      }
     }
   }
   customElements.define('lemoon-eyewear', LemoonEyewear);

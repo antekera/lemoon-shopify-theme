@@ -1,6 +1,6 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="lemoon-standard-pdp section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -10,6 +10,9 @@
   {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'lemoon-eyewear-product.css' | asset_url | stylesheet_tag }}
+  {{ 'lemoon-pdp-layout.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'lemoon-pdp-tools.js' | asset_url }}" type="module"></script>
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -35,6 +38,12 @@
       .section-{{ section.id }}-padding {
         padding-top: {{ section.settings.padding_top }}px;
         padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+
+    @media screen and (min-width: 990px) {
+      .section-{{ section.id }}-padding .product__media-wrapper {
+        margin-top: calc(-1 * ({{ section.settings.padding_top }}px + 3rem));
       }
     }
   {%- endstyle -%}
@@ -75,7 +84,6 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
-      {% render 'lemoon-breadcrumb', collection: collection, product: product %}
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
         <div class="grid__item product__media-wrapper">
           {% render 'product-media-gallery', variant_images: variant_images %}
@@ -85,6 +93,7 @@
             id="ProductInfo-{{ section.id }}"
             class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
           >
+            {% render 'lemoon-breadcrumb', collection: collection, product: product %}
             {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
             {%- for block in section.blocks -%}
@@ -100,19 +109,14 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1>{{ product.title | escape }}</h1>
-                    <a href="{{ product.url }}" class="product__title">
-                      <h2 class="h1">
-                        {{ product.title | escape }}
-                      </h2>
-                    </a>
+                    {% render 'lemoon-product-heading', product: product %}
                   </div>
                 {%- when 'price' -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
-                      show_badges: true,
+                      show_badges: false,
                       price_class: 'price--large'
                     -%}
                   </div>
@@ -194,10 +198,12 @@
                     {%- endif -%}
                   </p>
                 {%- when 'description' -%}
-                  {%- if product.description != blank -%}
+                  {%- assign purchase_blocks = section.blocks | where: 'type', 'buy_buttons' -%}
+                  {%- if purchase_blocks.size == 0 and product.description != blank -%}
                     <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                       {{ product.description }}
                     </div>
+                    {% render 'lemoon-product-sku', product: product %}
                   {%- endif -%}
                 {%- when 'sku' -%}
                   <p
@@ -487,12 +493,19 @@
                     surface: 'product_page'
                   -%}
                 {%- when 'variant_picker' -%}
+                  <div class="lemoon-pdp__frame-options">
                   {% render 'product-variant-picker',
                     product: product,
                     block: block,
                     product_form_id: product_form_id
                   %}
+                    {% render 'lemoon-product-size-guide', product: product, section_id: section.id %}
+                  </div>
                 {%- when 'buy_buttons' -%}
+                  {% assign variant_picker_blocks = section.blocks | where: 'type', 'variant_picker' %}
+                  {% if variant_picker_blocks.size == 0 %}
+                    {% render 'lemoon-product-size-guide', product: product, section_id: section.id %}
+                  {% endif %}
                   {%- render 'buy-buttons',
                     block: block,
                     product: product,
@@ -500,6 +513,14 @@
                     section_id: section.id,
                     show_pickup_availability: true
                   -%}
+                  {%- assign description_block = section.blocks | where: 'type', 'description' | first -%}
+                  {%- if description_block and product.description != blank -%}
+                    <div class="product__description rte quick-add-hidden" {{ description_block.shopify_attributes }}>
+                      {{ product.description }}
+                    </div>
+                  {%- endif -%}
+                  {% render 'lemoon-product-sku', product: product %}
+                  {% render 'lemoon-shared-benefits', context: 'product' %}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -745,6 +766,9 @@
       </script>
     </div>
   </product-component>
+  {% assign frame_information_id = section.id | append: '-inline' %}
+  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
+  {% render 'lemoon-sticky-purchase', product: product %}
 </product-info>
 
 {% schema %}

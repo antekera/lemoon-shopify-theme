@@ -25,12 +25,13 @@ div.lemoon-mobile-nav__overlay {
   color: var(--lemoon-text-brand, #0b1f3a);
   transform: translateX(-101%);
   visibility: hidden;
-  transition: transform 280ms ease, visibility 280ms;
+  transition: transform 320ms ease, visibility 0s linear 320ms;
   z-index: 111;
 }
-.lemoon-mobile-nav.is-open { transform: translateX(0); visibility: visible; }
+.lemoon-mobile-nav.is-open { transform: translateX(0); visibility: visible; transition-delay: 0s; }
 .lemoon-mobile-nav__panel { display: flex; flex-direction: column; min-height: 100%; }
 .lemoon-mobile-nav__panel[hidden] { display: none; }
+.lemoon-mobile-nav__panel.is-leaving { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; }
 .lemoon-mobile-nav a { color: inherit; text-decoration: none; }
 .lemoon-mobile-nav ul { list-style: none; margin: 0; padding: 0; }
 .lemoon-mobile-nav__primary { padding: 14px 12px 18px !important; background: var(--lemoon-surface-page, #fff); }
@@ -104,4 +105,10 @@ div.lemoon-mobile-nav__overlay {
 }
 @media (prefers-reduced-motion: reduce) {
   .lemoon-mobile-nav, .lemoon-mobile-nav__overlay { transition-duration: 0.01ms; }
+}
+
+@media (max-width: 749px) {
+  .lemoon-mobile-nav .lemoon-icon { width: 20px; height: 20px; }
+  .lemoon-mobile-nav .lemoon-frame-shape { width: 36px; height: 22px; }
+  .lemoon-mobile-nav__swatch { width: 18px; height: 18px; }
 }

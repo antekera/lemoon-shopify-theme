@@ -1,0 +1,25 @@
+{% doc %}
+@param {image} image - Shopify image
+@param {string} sizes - Responsive display sizes
+@param {string} [image_class] - Image class
+@param {boolean} [deferred] - Wait until the media is visible
+@param {boolean} [primary] - Prioritize the initially selected image
+{% enddoc %}
+{%- liquid
+  assign image_loading = 'eager'
+  assign image_priority = 'auto'
+  if primary
+    assign image_priority = 'high'
+  endif
+  if deferred
+    assign image_loading = 'lazy'
+  endif
+-%}
+{%- capture image_markup -%}
+  {{ image | image_url: width: 1946 | image_tag: class: image_class, loading: image_loading, fetchpriority: image_priority, decoding: 'async', sizes: sizes, widths: '320, 480, 640, 750, 990, 1100, 1400, 1646, 1946' }}
+{%- endcapture -%}
+{% if deferred %}
+  <lemoon-deferred-image><template>{{ image_markup }}</template><noscript>{{ image_markup }}</noscript></lemoon-deferred-image>
+{% else %}
+  {{ image_markup }}
+{% endif %}

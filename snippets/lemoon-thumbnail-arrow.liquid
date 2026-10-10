@@ -1,0 +1,7 @@
+{% doc %}
+  Renders a vertical thumbnail navigation button.
+  @param {string} direction - up or down.
+{% enddoc %}
+<button type="button" class="lemoon-thumbnail-arrow" data-rail-direction="{{ direction }}" aria-label="{% if direction == 'up' %}{{ 'lemoon_pdp.previous_photos' | t }}{% else %}{{ 'lemoon_pdp.next_photos' | t }}{% endif %}" disabled aria-hidden="true">
+  <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+</button>

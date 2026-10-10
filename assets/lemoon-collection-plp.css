@@ -543,8 +543,8 @@
 .lemoon-plp .facets-wrapper .active-facets__button-wrapper { display: none !important; }
 .lemoon-applied-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 12px 0 0; }
 .lemoon-applied-filters > facet-remove { display: flex; line-height: 1; }
-.lemoon-filter-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px 3px 11px; min-height: 24px; border-radius: 999px; background: var(--lemoon-surface-warm); color: var(--lemoon-text-primary); font-size: 12px; line-height: 1; text-decoration: none; }
-.lemoon-filter-pill:hover { background: var(--lemoon-surface-warm-hover); color: var(--lemoon-text-primary); }
+.lemoon-filter-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px 3px 11px; min-height: 24px; border-radius: 999px; background: var(--lemoon-action-primary); color: #fff; font-size: 12px; line-height: 1; text-decoration: none; }
+.lemoon-filter-pill:hover { background: var(--lemoon-action-primary-hover); color: #fff; }
 .lemoon-filter-pill svg { flex: none; width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .lemoon-filter-reset { margin-left: 0; }
 .lemoon-filter-reset a { display: inline-flex; align-items: center; justify-content: center; min-height: 24px; padding: 3px 8px; border: 1px solid var(--lemoon-border-default); border-radius: 999px; color: #0b1f3a; font-size: 12px; line-height: 1; text-decoration: none; }
@@ -668,6 +668,24 @@
 @media (max-width: 749px) {
   .lemoon-plp-sidebar-header { display: none; }
   .lemoon-plp-toolbar:has(menu-drawer > details[open]) { z-index: 5; }
+  .lemoon-plp .mobile-facets {
+    background-color: rgba(11, 31, 58, 0);
+    transition: background-color 280ms ease;
+  }
+  .lemoon-plp .mobile-facets__disclosure.menu-opening .mobile-facets {
+    background-color: rgba(11, 31, 58, .38);
+  }
+  .lemoon-plp .mobile-facets__inner {
+    transition: transform 320ms ease, visibility 0s linear 320ms;
+  }
+  .js .lemoon-plp .mobile-facets__disclosure:not(.menu-opening) .mobile-facets__inner {
+    transform: translateX(101%);
+    visibility: hidden;
+  }
+  .lemoon-plp .mobile-facets__disclosure.menu-opening .mobile-facets__inner {
+    visibility: visible;
+    transition-delay: 0s;
+  }
   .lemoon-plp-filter-toggle { display: none; }
   .lemoon-plp-intro { padding: 20px 16px; }
   .lemoon-plp-intro h1 { font-size: 28px; }
@@ -679,6 +697,8 @@
   .lemoon-sort-menu__options { width: min(250px, 85vw); }
 }
 @media (prefers-reduced-motion: reduce) {
+  .lemoon-plp .mobile-facets,
+  .lemoon-plp .mobile-facets__inner { transition: none; }
   .lemoon-plp-sidebar-header::after,
   .lemoon-plp-layout > .facets-wrapper::after,
   .lemoon-plp-layout .pagination__item,

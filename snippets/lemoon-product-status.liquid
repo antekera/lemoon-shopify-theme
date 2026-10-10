@@ -1,0 +1,15 @@
+{% doc %}
+  Shows the selected Shopify variant's sale or sold-out status above the PDP title.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+{%- liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign on_sale = false
+  if selected_variant.available and selected_variant.compare_at_price > selected_variant.price
+    assign on_sale = true
+  endif
+-%}
+<div class="lemoon-product-status" data-pdp-status{% if selected_variant.available and on_sale == false %} hidden{% endif %}>
+  <span class="lemoon-product-status__badge lemoon-product-status__badge--sale" data-status-sale{% unless on_sale %} hidden{% endunless %}>{{ 'products.product.on_sale' | t }}</span>
+  <span class="lemoon-product-status__badge lemoon-product-status__badge--sold-out" data-status-sold-out{% if selected_variant.available %} hidden{% endif %}>{{ 'products.product.sold_out' | t }}</span>
+</div>

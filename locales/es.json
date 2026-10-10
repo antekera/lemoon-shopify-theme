@@ -49,8 +49,8 @@
       "reset": "Borrar término de búsqueda"
     },
     "cart": {
-      "view": "Ver carrito ({{ count }})",
-      "item_added": "Artículo agregado a tu carrito",
+      "view": "Ir al carrito",
+      "item_added": "¡Artículo agregado a tu carrito!",
       "view_empty_cart": "Ver carrito"
     },
     "share": {
@@ -126,7 +126,7 @@
       "card_label_bestseller": "Bestseller",
       "add_to_favorites": "Guardar {{ product_name }} en favoritos",
       "remove_from_favorites": "Quitar {{ product_name }} de favoritos",
-      "configure_lenses": "Configurar con cristales",
+      "configure_lenses": "Seleccionar lentes y comprar",
       "purchase_trust": "Envío gratis · Devolución 30 días · Garantía",
       "description": "Descripción",
       "on_sale": "Oferta",
@@ -198,7 +198,7 @@
         "price_at_each_html": "a {{ price }} por unidad"
       },
       "product_variants": "Variantes de producto",
-      "taxes_included": "Impuestos incluidos.",
+      "taxes_included": "IVA incluido.",
       "duties_included": "Aranceles incluidos.",
       "duties_and_taxes_included": "Aranceles e impuestos incluidos."
     },
@@ -296,6 +296,37 @@
     }
   },
   "sections": {
+    "lemoon_featured_products": {
+      "name": "Destacados Lemoon",
+      "settings": {
+        "collection": { "label": "Colección" },
+        "collection_source": {
+          "label": "Origen de productos",
+          "options": { "fixed": "Colección seleccionada", "product_category": "Categoría del producto" }
+        },
+        "optical_collection": { "label": "Colección de ópticos" },
+        "sun_collection": { "label": "Colección de sol" },
+        "randomize": { "label": "Mostrar productos al azar" },
+        "defer_load": { "label": "Cargar productos al acercarse al carrusel" },
+        "show_quick_add": { "label": "Mostrar botón para agregar al carrito" },
+        "initial_products": { "label": "Productos iniciales" },
+        "eyebrow": { "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
+        "heading": { "label": "Título", "default": "Armazones favoritos" },
+        "link_label": { "label": "Etiqueta de enlace", "default": "Ver todos" },
+        "products_to_show": { "label": "Productos" }
+      }
+    },
+    "lemoon_trust_bar": {
+      "name": "Barra de confianza",
+      "settings": {
+        "aria_label": { "label": "Etiqueta accesible", "default": "Beneficios de comprar en Lemoon" },
+        "benefits": { "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP." }
+      }
+    },
+    "cart_notification": {
+      "added": "ha sido agregado al carrito.",
+      "checkout": "Hacer pedido"
+    },
     "mobile_search": {
       "title": "Buscar productos",
       "open": "Abrir búsqueda",
@@ -605,7 +636,10 @@
       "applied_filters": "Filtros aplicados",
       "reset": "Eliminar filtros",
       "apply_filters": "Aplicar filtros",
-      "view_results": "Ver {{ count }} lentes",
+      "view_results": {
+        "one": "Ver {{ count }} lente",
+        "other": "Ver {{ count }} lentes"
+      },
       "filters": "Filtros",
       "showing_results": "Mostrando {{ count }} resultados",
       "toolbar": "Herramientas de colección",
@@ -667,6 +701,9 @@
     }
   },
   "lemoon_pdp": {
+    "previous_photos": "Ver fotos anteriores",
+    "next_photos": "Ver más fotos",
+    "size_label": "Talla",
     "zoom": "Ampliar imagen",
     "save": "Guardar este armazón en este dispositivo",
     "gallery": "Vistas del armazón",
@@ -674,7 +711,6 @@
     "gallery_hint": "Cada detalle, desde todos los ángulos.",
     "try_on": "Probador virtual",
     "review_count": "{{ count }} reseñas",
-    "price_note": "Precio total de la configuración seleccionada.",
     "configuration": "Configuración",
     "size_guide": "Guía de medidas",
     "prescription": "Tu receta",
@@ -700,7 +736,7 @@
     "care_note": "Limpia con un paño de microfibra y agua. Evita productos abrasivos y guarda tus lentes en un estuche cuando no los uses.",
     "reviews": "Opiniones de este armazón",
     "no_reviews": "Este armazón aún no tiene reseñas.",
-    "size_note": "Compara estas medidas con un armazón que te quede cómodo. Las medidas del prototipo son ilustrativas.",
+    "size_note": "Compara la talla con un armazón que te quede cómodo. Los números de la patilla indican el ancho del cristal, el puente y el largo de la patilla, en milímetros.",
     "recipe_error": "Revisa tu receta: completa esfera de ambos ojos y D.P.; cilindro necesita eje, y progresivos necesitan adición. Usa incrementos de 0,25 en la graduación.",
     "cart_error": "No pudimos agregar tu selección. Intenta nuevamente.",
     "storage_error": "No pudimos guardar este armazón en tu dispositivo.",
@@ -713,6 +749,17 @@
     "pd": "Distancia pupilar total (mm)",
     "rx_note": "D.P. entre 40 y 80 mm. Se guarda la receta para revisión antes de fabricar. Si tu receta queda fuera del formulario, elige enviarla después.",
     "frame_diagram": "Diagrama de medidas del armazón, vista frontal",
+    "size_guide_tabs": "Información del armazón",
+    "measurements_tab": "Medidas",
+    "frame_tab": "Características",
+    "fit_tab": "Talla y rostro",
+    "measurements_unavailable": "Las medidas de este armazón aún no están disponibles.",
+    "frame_specs_unavailable": "Las características de este armazón aún no están disponibles.",
+    "fit_unavailable": "La recomendación de talla y rostro aún no está disponible para este armazón.",
+    "fit_recommendation": "Referencias para orientarte sobre el calce de este armazón:",
+    "fit_note": "El calce es orientativo. Si puedes, compara estas referencias con un armazón que te quede cómodo.",
+    "suggested_face_shapes": "Tipos de rostro sugeridos",
+    "gender": "Público",
     "units": "Unidad de medida",
     "millimeters": "Milímetros",
     "inches": "Pulgadas",
@@ -720,11 +767,11 @@
     "lens_width": "Ancho del cristal",
     "bridge": "Puente",
     "lens_height": "Alto del cristal",
-    "temple": "Largo de patilla",
+    "temple": "Largo de varillas",
     "upload": "Subir receta (PDF o imagen)",
     "upload_note": "PDF, JPG o PNG, hasta 10 MB. El archivo se adjunta a tu producto y podrás verlo en el carrito.",
     "upload_error": "Selecciona un archivo PDF, JPG o PNG de hasta 10 MB.",
-    "buy_frame": "Comprar solo armazón",
+    "buy_frame": "Agregar solo marco",
     "back_to_frame": "Volver al armazón",
     "lens_step": "Elige tus lentes",
     "lens_step_note": "Selecciona tus cristales y cómo entregarás tu receta."

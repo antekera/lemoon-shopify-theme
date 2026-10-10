@@ -49,7 +49,7 @@
       "reset": "Clear search term"
     },
     "cart": {
-      "view": "View cart ({{ count }})",
+      "view": "Go to cart",
       "view_empty_cart": "View cart",
       "item_added": "Item added to your cart"
     },
@@ -125,7 +125,7 @@
       "card_label_bestseller": "Bestseller",
       "add_to_favorites": "Save {{ product_name }} to favorites",
       "remove_from_favorites": "Remove {{ product_name }} from favorites",
-      "configure_lenses": "Configure with lenses",
+      "configure_lenses": "Select lenses and buy",
       "purchase_trust": "Free shipping · 30-day returns · Guarantee",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
@@ -196,7 +196,7 @@
       "view_full_details": "View full details",
       "xr_button": "View in your space",
       "xr_button_label": "View in your space, loads item in augmented reality window",
-      "taxes_included": "Taxes included.",
+      "taxes_included": "VAT included.",
       "duties_included": "Duties included.",
       "duties_and_taxes_included": "Duties and taxes included.",
       "shipping_policy_html": "<a href=\"{{ link }}\">Shipping</a> calculated at checkout."
@@ -287,6 +287,37 @@
     }
   },
   "sections": {
+    "lemoon_featured_products": {
+      "name": "Lemoon featured products",
+      "settings": {
+        "collection": { "label": "Collection" },
+        "collection_source": {
+          "label": "Product source",
+          "options": { "fixed": "Selected collection", "product_category": "Product category" }
+        },
+        "optical_collection": { "label": "Optical collection" },
+        "sun_collection": { "label": "Sunglasses collection" },
+        "randomize": { "label": "Show random products" },
+        "defer_load": { "label": "Load products when the carousel is near the viewport" },
+        "show_quick_add": { "label": "Show add to cart button" },
+        "initial_products": { "label": "Initial products" },
+        "eyebrow": { "label": "Eyebrow", "default": "LEMOON SELECTION" },
+        "heading": { "label": "Heading", "default": "Favorite frames" },
+        "link_label": { "label": "Link label", "default": "View all" },
+        "products_to_show": { "label": "Products" }
+      }
+    },
+    "lemoon_trust_bar": {
+      "name": "Trust bar",
+      "settings": {
+        "aria_label": { "label": "Accessible label", "default": "Benefits of shopping with Lemoon" },
+        "benefits": { "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP." }
+      }
+    },
+    "cart_notification": {
+      "added": "has been added to your cart.",
+      "checkout": "Place order"
+    },
     "mobile_search": {
       "title": "Search products",
       "open": "Open search",
@@ -593,7 +624,10 @@
       "applied_filters": "Applied filters",
       "reset": "Clear filters",
       "apply_filters": "Apply filters",
-      "view_results": "View {{ count }} glasses",
+      "view_results": {
+        "one": "View {{ count }} pair of glasses",
+        "other": "View {{ count }} pairs of glasses"
+      },
       "filters": "Filters",
       "showing_results": "Showing {{ count }} results",
       "toolbar": "Collection tools",
@@ -655,6 +689,9 @@
     }
   },
   "lemoon_pdp": {
+    "previous_photos": "View previous photos",
+    "next_photos": "View more photos",
+    "size_label": "Size",
     "zoom": "Enlarge image",
     "save": "Save this frame on this device",
     "gallery": "Frame views",
@@ -662,7 +699,6 @@
     "gallery_hint": "Every detail, from every angle.",
     "try_on": "Virtual try-on",
     "review_count": "{{ count }} reviews",
-    "price_note": "Total price of your selected configuration.",
     "configuration": "Configuration",
     "size_guide": "Size guide",
     "prescription": "Your prescription",
@@ -688,7 +724,7 @@
     "care_note": "Clean with a microfiber cloth and water. Avoid abrasive products and keep your glasses in a case when not in use.",
     "reviews": "Frame reviews",
     "no_reviews": "This frame does not have reviews yet.",
-    "size_note": "Compare these measurements with a comfortable frame. Prototype measurements are illustrative.",
+    "size_note": "Compare the size with a comfortable frame. The numbers inside the temple indicate lens width, bridge width and temple length in millimeters.",
     "recipe_error": "Check your prescription: both spheres and PD are required; cylinder needs axis, and progressives need addition. Use 0.25 prescription increments.",
     "cart_error": "We could not add your selection. Please try again.",
     "storage_error": "We could not save this frame on your device.",
@@ -701,6 +737,17 @@
     "pd": "Total pupillary distance (mm)",
     "rx_note": "PD between 40 and 80 mm. Prescription saved for review before production. If it exceeds this form, choose to send it later.",
     "frame_diagram": "Front view frame measurement diagram",
+    "size_guide_tabs": "Frame information",
+    "measurements_tab": "Measurements",
+    "frame_tab": "Frame details",
+    "fit_tab": "Size and face shape",
+    "measurements_unavailable": "Measurements for this frame are not available yet.",
+    "frame_specs_unavailable": "Details for this frame are not available yet.",
+    "fit_unavailable": "Size and face-shape guidance is not available for this frame yet.",
+    "fit_recommendation": "Use these details as a guide to the fit of this frame:",
+    "fit_note": "Fit guidance is approximate. If possible, compare these details with a frame that feels comfortable.",
+    "suggested_face_shapes": "Suggested face shapes",
+    "gender": "Audience",
     "units": "Measurement unit",
     "millimeters": "Millimeters",
     "inches": "Inches",
@@ -712,7 +759,7 @@
     "upload": "Upload prescription (PDF or image)",
     "upload_note": "PDF, JPG or PNG, up to 10 MB. The file is attached to your item and can be viewed in the cart.",
     "upload_error": "Select a PDF, JPG or PNG file up to 10 MB.",
-    "buy_frame": "Buy frame only",
+    "buy_frame": "Add frame only",
     "back_to_frame": "Back to frame",
     "lens_step": "Choose your lenses",
     "lens_step_note": "Choose your lenses and how to provide your prescription."

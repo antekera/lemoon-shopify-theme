@@ -50,6 +50,38 @@ test('opens a category second level and returns with the menu control', async ({
   await expect(menuButton).toHaveAttribute('aria-label', 'Cerrar menú');
 });
 
+test('animates entering and returning between levels without leaving inactive links accessible', async ({ page }) => {
+  await page.locator(trigger).click();
+  const forward = await page.locator('[data-lemoon-nav-target="opticos"]').evaluate(button => {
+    button.click();
+    const panel = document.querySelector('[data-lemoon-nav-panel="opticos"]');
+    const root = document.querySelector('[data-lemoon-nav-root]');
+    return { incoming: panel.getAnimations().length, outgoing: root.getAnimations().length, outgoingInert: root.inert };
+  });
+  expect(forward).toEqual({ incoming: 1, outgoing: 1, outgoingInert: true });
+  // Return during the transition to verify that interrupted animations clean up.
+  const back = await page.locator(trigger).evaluate(button => {
+    button.click();
+    const panel = document.querySelector('[data-lemoon-nav-panel="opticos"]');
+    const root = document.querySelector('[data-lemoon-nav-root]');
+    return { incoming: root.getAnimations().length, outgoing: panel.getAnimations().length, outgoingInert: panel.inert };
+  });
+  expect(back).toEqual({ incoming: 1, outgoing: 1, outgoingInert: true });
+  await expect(page.locator('[data-lemoon-nav-panel="opticos"]')).toBeHidden();
+  await expect(page.locator('[data-lemoon-nav-root]')).toBeVisible();
+  await expect(page.locator('.is-leaving')).toHaveCount(0);
+});
+
+test('switches levels immediately when reduced motion is requested', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.locator(trigger).click();
+  await page.locator('[data-lemoon-nav-target="opticos"]').click();
+  expect(await page.locator('[data-lemoon-nav-panel="opticos"]').evaluate(panel => panel.getAnimations().length)).toBe(0);
+  await expect(page.locator('[data-lemoon-nav-root]')).toBeHidden();
+  await page.locator(trigger).click();
+  await expect(page.locator('[data-lemoon-nav-panel="opticos"]')).toBeHidden();
+});
+
 test('underlines second-level links only while hovered', async ({ page }) => {
   await page.locator(trigger).click();
   await page.locator('[data-lemoon-nav-target="opticos"]').click();
@@ -123,4 +155,18 @@ test('reinitializes after the header section reloads in the theme editor', async
   await expect(page.locator(menu)).toHaveClass(/is-open/);
   await expect(page.locator(menu)).toHaveAttribute('aria-hidden', 'false');
   await expect(newMenuButton).toHaveAttribute('aria-expanded', 'true');
+});
+
+
+test('slides into view instead of appearing instantly', async ({ page }) => {
+  const sampled = await page.locator(trigger).evaluate(async (button) => {
+    button.click();
+    await new Promise(requestAnimationFrame);
+    await new Promise(requestAnimationFrame);
+    const drawer = document.querySelector('[data-lemoon-nav]');
+    return { left: drawer.getBoundingClientRect().left, moving: drawer.getAnimations().some(animation => animation.playState === 'running') };
+  });
+  expect(sampled.moving).toBe(true);
+  expect(sampled.left).toBeLessThan(0);
+  await expect(page.locator(menu)).toHaveCSS('transform', 'matrix(1, 0, 0, 1, 0, 0)');
 });

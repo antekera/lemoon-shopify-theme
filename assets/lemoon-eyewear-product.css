@@ -56,10 +56,12 @@
 .lemoon-pdp__summary { border-left: 3px solid var(--lemoon-primitive-lemon-citrico); padding: 4px 0 4px 14px; margin: 4px 0 20px; }
 .lemoon-pdp__summary span { font-size: 12px; color: var(--lemoon-text-secondary); }
 .lemoon-pdp__summary p { font-size: 14px; margin: 4px 0; }
-.lemoon-pdp__form > .button { border-radius: 24px; min-height: 52px; color: white; background: var(--lemoon-action-primary); font-size: 14px; }
+.lemoon-pdp__form > .button { border-radius: 24px; min-height: 52px; color: white; background: var(--lemoon-action-primary); font-size: 14px; text-transform: uppercase; letter-spacing: .04em; }
 .lemoon-pdp__form > .button::after, .lemoon-pdp__form > .button::before { display: none; }
 .lemoon-pdp__form > .lemoon-pdp__configure { margin-top: 10px; background: transparent; color: var(--lemoon-text-brand); border: 1px solid var(--lemoon-border-strong); }
 .lemoon-pdp__configure:hover { background: var(--lemoon-surface-warm); }
+.lemoon-pdp__form > .lemoon-pdp__frame-only-add { margin-top: 10px; background: transparent; color: var(--lemoon-text-brand); border: 1px solid var(--lemoon-border-strong); }
+.lemoon-pdp__frame-only-add:hover { background: var(--lemoon-surface-warm); }
 .lemoon-pdp__flow-heading { margin-bottom: 24px; }
 .lemoon-pdp__flow-heading h2 { font-size: 22px; margin: 12px 0 8px; }
 .lemoon-pdp__flow-heading p { font-size: 14px; color: var(--lemoon-text-secondary); line-height: 1.5; }

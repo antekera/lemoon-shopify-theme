@@ -58,7 +58,11 @@ Se reutilizan las definiciones existentes del namespace compartido `custom`. Las
 {"frame_width":140,"lens_width":54,"bridge":17,"lens_height":42,"temple":145}
 ```
 
-La guía muestra milímetros y permite convertir a pulgadas. Galería y colores usan medios y fotos de variantes de Shopify.
+La guía de medidas abre el drawer de la ficha con tres pestañas: **Medidas**, **Características** y **Talla y rostro**. Las medidas leen el JSON por producto, muestran ancho total, ancho del cristal, puente, alto del cristal y largo de varillas, y permiten convertir milímetros a pulgadas. Características reutiliza forma, material, peso y público; Talla y rostro combina talla, ajuste y formas compatibles para dar una referencia de calce. Los productos sin un valor muestran que ese dato no está disponible.
+
+Los productos de prueba creados con `scripts/seed-products.ts` reciben medidas ilustrativas coherentes con su talla y un peso de ejemplo. Reemplázalos por las medidas verificadas del fabricante antes de publicarlos como productos comerciales. La presentación toma como referencia la tabla de especificaciones de [ZEELOOL](https://www.zeelool.com/goods-detail/ZOX078897-01) y el resumen de características de [Ace & Tate](https://www.aceandtate.com/es/jude-medium-americano), adaptados al drawer y al diseño Lemoon.
+
+Galería y colores usan medios y fotos de variantes de Shopify.
 
 ## Receta y carrito
 

@@ -375,6 +375,34 @@
     }
   },
   "sections": {
+    "lemoon_featured_products": {
+      "name": "Lemoon featured products",
+      "settings": {
+        "collection": { "label": "Collection" },
+        "collection_source": {
+          "label": "Product source",
+          "options": { "fixed": { "label": "Selected collection" }, "product_category": { "label": "Product category" } }
+        },
+        "optical_collection": { "label": "Optical collection" },
+        "sun_collection": { "label": "Sunglasses collection" },
+        "randomize": { "label": "Show random products" },
+        "defer_load": { "label": "Load products when the carousel is near the viewport" },
+        "show_quick_add": { "label": "Show add to cart button" },
+        "initial_products": { "label": "Initial products" },
+        "eyebrow": { "label": "Eyebrow", "default": "LEMOON SELECTION" },
+        "heading": { "label": "Heading", "default": "Favorite frames" },
+        "link_label": { "label": "Link label", "default": "View all" },
+        "products_to_show": { "label": "Visible products" },
+        "max_products_to_load": { "label": "Maximum products to load" }
+      }
+    },
+    "lemoon_trust_bar": {
+      "name": "Trust bar",
+      "settings": {
+        "aria_label": { "label": "Accessible label", "default": "Benefits of shopping with Lemoon" },
+        "benefits": { "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP." }
+      }
+    },
     "all": {
       "animation": {
         "content": "Animations",

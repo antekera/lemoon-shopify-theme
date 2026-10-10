@@ -368,7 +368,7 @@
                     {% if lemoon_plp %}{{ 'lemoon.collection.reset' | t }}{% else %}{{ 'products.facets.clear_all' | t }}{% endif %}
                   </a>
                 </facet-remove>
-                <button type="button" class="button button--primary" {% if lemoon_plp %}data-view-results data-label="{{ 'lemoon.collection.view_results' | t: count: '__COUNT__' | escape }}"{% endif %} onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
+                <button type="button" class="button button--primary" {% if lemoon_plp %}data-view-results data-label="{{ 'lemoon.collection.view_results' | t: count: '__COUNT__' | escape }}" data-label-one="{{ 'lemoon.collection.view_results' | t: count: 1 | escape }}"{% endif %} onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()">
                   {% if lemoon_plp %}{{ 'lemoon.collection.view_results' | t: count: results.products_count }}{% else %}{{ 'products.facets.apply' | t }}{% endif %}
                 </button>
               </div>
