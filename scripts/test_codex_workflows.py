@@ -101,6 +101,14 @@ def validate_group(group: str) -> None:
         prod = (ROOT / ".agents/skills/push-theme-production/SKILL.md").read_text(encoding="utf-8").lower()
         require("155925381288" in dev, "dev publishing skill must target theme 155925381288")
         require("shopify theme list" in prod and "confirm" in prod, "production publishing must inspect the live theme and require confirmation")
+        confirmation_index = prod.find("only after confirmation")
+        allow_live_index = prod.find("--allow-live")
+        require(confirmation_index >= 0 and allow_live_index >= 0 and confirmation_index < allow_live_index, "production publishing must add --allow-live only after confirmation")
+
+    if group == "git":
+        commit = (ROOT / ".agents/skills/theme-commit/SKILL.md").read_text(encoding="utf-8")
+        for path in ("AGENTS.md", ".agents/skills/", ".codex/agents/"):
+            require(path in commit, f"commit workflow must allow selected Codex files: {path}")
 
     if group == "all":
         require(sum(map(len, SKILLS.values())) == 14, "workflow map must contain exactly 14 skills")

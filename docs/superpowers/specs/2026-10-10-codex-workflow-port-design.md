@@ -65,6 +65,7 @@ Detailed rule content remains in the current `.claude/rules/` documents during t
 
 - Preserve the current Git branch naming and commit conventions.
 - Commit and PR workflows must inspect status and branch, protect `main`, exclude secrets and generated/live theme data, and validate before committing.
+- The Codex commit workflow's explicit-path allowlist includes root `AGENTS.md`, `.agents/skills/**`, and `.codex/agents/**` so future Codex workflow updates can be committed alongside the existing theme, Claude, and documentation paths.
 - PR creation must summarize scope and validation, and must not claim that a Shopify theme was published.
 - Development-theme publishing keeps the existing development theme target and reports the result.
 - Production publishing keeps the explicit confirmation gate. Codex must not infer approval from a request to inspect, prepare, or preview a production push.
