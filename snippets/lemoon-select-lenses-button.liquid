@@ -1,0 +1,23 @@
+{% doc %}
+  Renders the shared configure-lenses action in the product and sticky purchase areas.
+  @param {string} context - Button context: link, eyewear, or sticky.
+  @param {product} [product] - Product used to build the lens configurator URL.
+  @param {boolean} [disabled] - Whether the action is unavailable.
+{% enddoc %}
+{%- assign configure_label = 'products.product.configure_lenses' | t -%}
+{%- if disabled -%}{%- assign configure_label = 'products.product.sold_out' | t -%}{%- endif -%}
+{%- case context -%}
+  {%- when 'eyewear' -%}
+    <button type="button" data-configure class="button button--full-width lemoon-pdp__configure lemoon-select-lenses-button"{% if disabled %} disabled{% endif %}>{{ configure_label }}</button>
+  {%- when 'sticky' -%}
+    <button type="button" data-sticky-configure data-label="{{ configure_label | escape }}" class="button lemoon-sticky-purchase__configure lemoon-select-lenses-button"{% if disabled %} disabled{% endif %}>{{ configure_label }}</button>
+  {%- else -%}
+    <a
+      class="lemoon-lens-config-cta lemoon-select-lenses-button button button--full-width"
+      {% if disabled %}
+        role="button" aria-disabled="true" tabindex="-1"
+      {% else %}
+        href="{{ product.url }}?variant={{ product.selected_or_first_available_variant.id }}&view=configurador"
+      {% endif %}
+    >{{ configure_label }}</a>
+{%- endcase -%}

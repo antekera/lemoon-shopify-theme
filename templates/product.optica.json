@@ -3,27 +3,6 @@
     "main": {
       "type": "lemoon-eyewear-product",
       "blocks": {
-        "secure": {
-          "type": "benefit",
-          "settings": {
-            "icon": "shield-check",
-            "text": "Pago seguro con Shopify"
-          }
-        },
-        "case": {
-          "type": "benefit",
-          "settings": {
-            "icon": "glasses",
-            "text": "Estuche y paño incluidos"
-          }
-        },
-        "delivery": {
-          "type": "benefit",
-          "settings": {
-            "icon": "truck",
-            "text": "Envío calculado al pagar"
-          }
-        },
         "mono": {
           "type": "lens_info",
           "settings": {
@@ -68,9 +47,6 @@
         }
       },
       "block_order": [
-        "secure",
-        "case",
-        "delivery",
         "mono",
         "blue",
         "photo",
@@ -85,16 +61,37 @@
     "related": {
       "type": "lemoon-featured-products",
       "settings": {
-        "collection": "opticos",
-        "eyebrow": "SELECCIÓN LEMOON",
+        "collection_source": "product_category",
+        "optical_collection": "opticos",
+        "sun_collection": "lentes-de-sol",
+        "randomize": true,
+        "defer_load": true,
+        "initial_products": 5,
+        "eyebrow": "",
         "heading": "También te puede gustar",
-        "link_label": "Ver todos los armazones",
-        "products_to_show": 4
+        "link_label": "",
+        "products_to_show": 15
+      }
+    },
+    "accessories": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "accesorios",
+        "collection_source": "fixed",
+        "show_quick_add": true,
+        "randomize": false,
+        "defer_load": true,
+        "initial_products": 5,
+        "eyebrow": "",
+        "heading": "Accesorios para ti",
+        "link_label": "",
+        "products_to_show": 15
       }
     }
   },
   "order": [
     "main",
-    "related"
+    "related",
+    "accessories"
   ]
 }

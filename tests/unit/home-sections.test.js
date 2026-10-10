@@ -13,7 +13,7 @@ test('about copy shares the same page-width container as featured product carous
 
   expect(about).toMatch(/class="lemoon-about page-width"/);
   expect(about).toMatch(/class="lemoon-about__inner"/);
-  expect(featured).toMatch(/class="lemoon-featured-products page-width"/);
+  expect(featured).toMatch(/class="lemoon-featured-products page-width/);
   expect(styles).toMatch(/\.lemoon-about\s*\{[^}]*margin:\s*1\.6rem auto 5rem/);
 });
 

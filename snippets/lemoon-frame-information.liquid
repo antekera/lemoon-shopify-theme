@@ -1,0 +1,10 @@
+{% doc %}
+  Renders product-specific frame measurements, characteristics, and fit tabs inline on a product page.
+  @param {product} product - Current Shopify product.
+  @param {string} instance_id - Unique ID prefix for the inline tab panel.
+{% enddoc %}
+<section class="lemoon-frame-information" aria-label="{{ 'lemoon_pdp.size_guide_tabs' | t }}">
+  <div class="lemoon-frame-information__inner">
+    {% render 'lemoon-size-guide-content', product: product, instance_id: instance_id %}
+  </div>
+</section>

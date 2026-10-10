@@ -1,0 +1,30 @@
+{% doc %}
+  Renders eligible promotion tags from the shop metafield synchronized by Shopify Flow.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+{%- assign promotions = shop.metafields.lemoon.pdp_promotions.value -%}
+{%- assign current_time = 'now' | date: '%s' | plus: 0 -%}
+{%- capture promotion_tags -%}
+  {%- for promotion in promotions -%}
+    {%- unless promotion.status == 'ACTIVE' -%}{%- continue -%}{%- endunless -%}
+    {%- assign starts_at = promotion.starts_at | date: '%s' | plus: 0 -%}
+    {%- if starts_at > current_time -%}{%- continue -%}{%- endif -%}
+    {%- if promotion.ends_at != blank -%}
+      {%- assign ends_at = promotion.ends_at | date: '%s' | plus: 0 -%}
+      {%- if ends_at <= current_time -%}{%- continue -%}{%- endif -%}
+    {%- endif -%}
+    {%- if promotion.first_purchase_only and customer.orders_count > 0 -%}{%- continue -%}{%- endif -%}
+    {%- assign eligible = false -%}
+    {%- for product_collection in product.collections -%}
+      {%- assign collection_id = product_collection.id | append: '' -%}
+      {%- if promotion.collection_ids contains collection_id -%}
+        {%- assign eligible = true -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if eligible and promotion.title != blank -%}
+      <span class="lemoon-pdp__promotion-tag" data-promotion-id="{{ promotion.id | escape }}">{{ promotion.title | escape }}</span>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if promotion_tags != blank -%}<div class="lemoon-pdp__promotions">{{ promotion_tags }}</div>{%- endif -%}

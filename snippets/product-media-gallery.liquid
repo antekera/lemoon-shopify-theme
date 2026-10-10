@@ -117,7 +117,7 @@
             {%- liquid
               assign media_position = media_position | default: 0 | plus: 1
               assign lazy_load = false
-              if media_position > 1
+              if media_position > 2
                 assign lazy_load = true
               endif
             -%}
@@ -211,13 +211,14 @@
           {{- 'icon-caret.svg' | inline_asset_content -}}
         </span>
       </button>
+      <lemoon-thumbnail-rail>
+        {% render 'lemoon-thumbnail-arrow', direction: 'up' %}
       <ul
         id="Slider-Thumbnails-{{ section.id }}"
         class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}"
       >
         {%- capture sizes -%}
-          (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),
-          (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4),
+          (min-width: 990px) 54px,
           (min-width: 750px) calc((100vw - 15rem) / 8),
           calc((100vw - 8rem) / 3)
         {%- endcapture -%}
@@ -329,6 +330,8 @@
           {%- endunless -%}
         {%- endfor -%}
       </ul>
+        {% render 'lemoon-thumbnail-arrow', direction: 'down' %}
+      </lemoon-thumbnail-rail>
       <button
         type="button"
         class="slider-button slider-button--next{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}"

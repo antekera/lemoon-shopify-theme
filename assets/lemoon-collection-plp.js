@@ -96,7 +96,10 @@
     const results = root.querySelector('[data-mobile-results]');
     if (results) results.textContent = results.dataset.label.replace('__COUNT__', root.querySelector('#ProductCount')?.dataset.productCount || '0');
     const viewResults = root.querySelector('[data-view-results]');
-    if (viewResults) viewResults.textContent = viewResults.dataset.label.replace('__COUNT__', root.querySelector('#ProductCount')?.dataset.productCount || '0');
+    if (viewResults) {
+      const count = root.querySelector('#ProductCount')?.dataset.productCount || '0';
+      viewResults.textContent = count === '1' ? viewResults.dataset.labelOne : viewResults.dataset.label.replace('__COUNT__', count);
+    }
     const mobileSort = root.querySelector('#FacetFiltersFormMobile input[name="sort_by"]');
     if (mobileSort) mobileSort.value = root.querySelector('#SortBy')?.value || mobileSort.value;
   };

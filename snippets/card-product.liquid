@@ -12,6 +12,7 @@
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
   - skip_styles: {Boolean} Don't include component styles. Useful when rendering multiple product cards in a loop. Default: false (optional)
   - section_id: {String} The ID of the section that contains this card.
+  - show_quick_add: {Boolean} Show a Shopify product form for direct add to cart. Default: false.
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
 
@@ -288,21 +289,6 @@
                         endfor
                       endif
                       assign swatch_secondary_image = swatch_secondary.preview_image | default: swatch_secondary
-                      assign swatch_color = '#D9D4CB'
-                      assign color_name = value.name | downcase
-                      if color_name contains 'azul'
-                        assign swatch_color = '#172B4D'
-                      elsif color_name contains 'carey'
-                        assign swatch_color = '#9B612F'
-                      elsif color_name contains 'negro'
-                        assign swatch_color = '#222222'
-                      elsif color_name contains 'dorado'
-                        assign swatch_color = '#C6A15B'
-                      elsif color_name contains 'plateado'
-                        assign swatch_color = '#A8ADB1'
-                      elsif color_name contains 'transparente'
-                        assign swatch_color = '#E9E6E0'
-                      endif
                     -%}
                     {%- capture swatch_price -%}{%- render 'lemoon-money', amount: swatch_variant.price, show_currency_code: settings.currency_code_enabled -%}{%- endcapture -%}
                     {%- capture swatch_compare_price -%}{%- render 'lemoon-money', amount: swatch_variant.compare_at_price, show_currency_code: settings.currency_code_enabled -%}{%- endcapture -%}
@@ -320,14 +306,11 @@
                       data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
                       data-color-key="{{ value.name | downcase | escape }}"
                       data-variant-url="{{ swatch_product_url }}{{ variant_separator }}variant={{ swatch_variant.id }}"
+                      data-variant-available="{{ swatch_variant.available }}"
                       data-price="{{ swatch_price | escape }}"
                       data-compare-price="{% if swatch_variant.compare_at_price > swatch_variant.price %}{{ swatch_compare_price | escape }}{% endif %}"
                     >
-                      {% if value.swatch %}
-                        {% render 'swatch', swatch: value.swatch %}
-                      {% else %}
-                        <span class="lemoon-product-card__swatch-color" style="background-color: {{ swatch_color }}"></span>
-                      {% endif %}
+                      {% render 'lemoon-color-swatch', value: value %}
                     </button>
                   {%- endfor -%}
                 </div>
@@ -337,6 +320,20 @@
           </div>
         </div>
       </div>
+      {%- if show_quick_add and card_product.available -%}
+        {%- assign quick_add_variant = card_product.selected_or_first_available_variant -%}
+        {%- assign quick_add_form_id = 'CardQuickAdd-' | append: section_id | append: '-' | append: card_product.id -%}
+        <product-form class="lemoon-product-card__quick-add" data-hide-errors="true">
+          {%- form 'product', card_product, id: quick_add_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            <input type="hidden" name="id" value="{{ quick_add_variant.id }}" data-card-quick-add-variant>
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" name="add" class="button button--secondary button--full-width"{% unless quick_add_variant.available %} disabled{% endunless %}>
+              <span>{{ 'products.product.add_to_cart' | t }}</span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          {%- endform -%}
+        </product-form>
+      {%- endif -%}
     </div>
   </product-component>
 {%- else -%}

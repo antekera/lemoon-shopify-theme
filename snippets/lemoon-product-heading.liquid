@@ -1,0 +1,12 @@
+{% doc %}
+  Renders the product heading, Shopify promotions, SKU and favourite action.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+<lemoon-product-tools data-product-id="{{ product.id }}">
+  {% render 'lemoon-product-status', product: product %}
+  <div class="lemoon-product-heading">
+    <h1>{{ product.title | escape }}</h1>
+    <button type="button" data-favourite aria-pressed="false" aria-label="{{ 'lemoon_pdp.save' | t }}">{% render 'lemoon-icon', icon: 'heart' %}</button>
+  </div>
+  {% render 'lemoon-product-promotions', product: product %}
+</lemoon-product-tools>

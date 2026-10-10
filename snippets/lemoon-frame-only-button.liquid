@@ -1,0 +1,19 @@
+{% doc %}
+  Renders the frame-only purchase action for the standard PDP or optical PDP.
+  @param {string} context - Button context: form or eyewear.
+  @param {boolean} [disabled] - Whether the product action is unavailable.
+  @param {string} [section_id] - Section ID used to form the native submit button ID.
+  @param {string} [button_class] - Additional classes for the native product form button.
+{% enddoc %}
+{%- liquid
+  assign frame_button_label = 'lemoon_pdp.buy_frame' | t
+  if disabled
+    assign frame_button_label = 'products.product.sold_out' | t
+  endif
+-%}
+{%- case context -%}
+  {%- when 'eyewear' -%}
+    <button type="button" data-frame-only-add class="button button--full-width lemoon-pdp__frame-only-add"{% if disabled %} disabled{% endif %}><span>{{ frame_button_label }}</span>{%- render 'loading-spinner' -%}</button>
+  {%- else -%}
+    <button id="ProductSubmitButton-{{ section_id }}" type="submit" name="add" class="product-form__submit button button--full-width lemoon-frame-only-add {{ button_class }}"{% if disabled %} disabled{% endif %}><span>{{ frame_button_label }}</span>{%- render 'loading-spinner' -%}</button>
+{%- endcase -%}

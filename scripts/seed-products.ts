@@ -30,6 +30,11 @@ const FRAME_MATERIALS = ['acetato', 'metal', 'titanio', 'TR-90', 'madera', 'mixt
 const FRAME_SIZES = ['pequeño (49-16-142)', 'mediano (54-17-145)', 'grande (58-18-145)'];
 const FRAME_WIDTHS = ['estrecho', 'estándar', 'ancho'];
 const FACE_SHAPES = ['ovalado', 'redondo', 'cuadrado', 'corazón', 'triángulo', 'diamante'];
+const SIZE_DIMENSIONS: Record<string, { frame_width: number; lens_width: number; bridge: number; lens_height: number; temple: number }> = {
+  'pequeño (49-16-142)': { frame_width: 126, lens_width: 49, bridge: 16, lens_height: 40, temple: 142 },
+  'mediano (54-17-145)': { frame_width: 140, lens_width: 54, bridge: 17, lens_height: 42, temple: 145 },
+  'grande (58-18-145)': { frame_width: 146, lens_width: 58, bridge: 18, lens_height: 46, temple: 145 },
+};
 
 const MODEL_NAMES = [
   'Artico',
@@ -124,6 +129,8 @@ function buildProductInput(modelName: string, lensGids: string[]) {
   const size = pick(FRAME_SIZES);
   const width = pick(FRAME_WIDTHS);
   const faceShape = pick(FACE_SHAPES);
+  const dimensions = SIZE_DIMENSIONS[size];
+  const weight = (18 + Math.random() * 8).toFixed(1);
   const price = pick(PRICES_CLP);
   const hasDiscount = Math.random() > 0.55;
   const compareAtPrice = hasDiscount ? Math.round(price * (1.15 + Math.random() * 0.2)) : undefined;
@@ -140,6 +147,8 @@ function buildProductInput(modelName: string, lensGids: string[]) {
     { namespace: 'custom', key: 'frame_size', value: size, type: 'single_line_text_field' },
     { namespace: 'custom', key: 'frame_width', value: width, type: 'single_line_text_field' },
     { namespace: 'custom', key: 'face_shapes_compatible', value: faceShape, type: 'single_line_text_field' },
+    { namespace: 'custom', key: 'frame_dimensions', value: JSON.stringify(dimensions), type: 'json' },
+    { namespace: 'custom', key: 'frame_weight', value: weight, type: 'number_decimal' },
     ...(selectedLensGids.length > 0
       ? [
           {

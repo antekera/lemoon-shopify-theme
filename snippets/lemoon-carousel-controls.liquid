@@ -1,0 +1,28 @@
+{%- liquid
+  assign previous_label = 'general.slider.previous_slide' | t
+  assign next_label = 'general.slider.next_slide' | t
+-%}
+<div class="lemoon-carousel-controls" data-lemoon-carousel-controls hidden>
+  <button
+    class="lemoon-carousel-controls__button"
+    type="button"
+    data-lemoon-carousel-prev
+    aria-label="{{ previous_label | escape }}"
+    aria-controls="{{ carousel_id }}"
+    disabled
+  >
+    <span class="visually-hidden">{{ previous_label | escape }}</span>
+    <span class="svg-wrapper" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+  </button>
+  <button
+    class="lemoon-carousel-controls__button"
+    type="button"
+    data-lemoon-carousel-next
+    aria-label="{{ next_label | escape }}"
+    aria-controls="{{ carousel_id }}"
+    disabled
+  >
+    <span class="visually-hidden">{{ next_label | escape }}</span>
+    <span class="svg-wrapper" aria-hidden="true">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+  </button>
+</div>

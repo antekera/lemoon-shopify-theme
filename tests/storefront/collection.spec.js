@@ -49,18 +49,18 @@ test('sort, filter, clear and browser back refresh the catalogue', async ({ page
   await expect(page.locator('.lemoon-filter-pill')).toHaveCount(1);
   await expect(page).toHaveURL(/filter\.p\.m\.custom\.gender=/);
   if (testInfo.project.name === 'mobile') {
-    await expect(page.locator('[data-view-results]')).toContainText(/Ver \d+ lentes/);
+    await expect(page.locator('[data-view-results]')).toHaveText('Ver 1 lente');
     await page.locator('[data-view-results]').click();
     await expect(page.locator('.mobile-facets__inner')).toBeHidden();
     await expect(page.locator('[data-applied-filter-count]')).toHaveText('1');
   }
-  await expect(page.locator(cardItems)).toHaveCount(2);
+  await expect(page.locator(cardItems)).toHaveCount(1);
   await page.locator('.lemoon-filter-reset a').click();
   await expect(page.locator('.lemoon-filter-pill')).toHaveCount(0);
   await expect(page).toHaveURL(/sort_by=price-ascending/);
   await page.goBack();
   await expect(page.locator('.lemoon-filter-pill')).toHaveCount(1);
-  await expect(page.locator(cardItems)).toHaveCount(2);
+  await expect(page.locator(cardItems)).toHaveCount(1);
 });
 
 test('price sliders step by 1000, stay inside their container and update the filter', async ({ page }, testInfo) => {
@@ -129,7 +129,7 @@ test('mobile drawer accordions, clear and view results preserve live filtering',
   await first.locator('summary').click();
   await expect(first).toHaveJSProperty('open', true);
   await drawer.locator('input[name="filter.p.m.custom.gender"][value="niños"]').check();
-  await expect(drawer.locator('[data-view-results]')).toHaveText('Ver 2 lentes');
+  await expect(drawer.locator('[data-view-results]')).toHaveText('Ver 1 lente');
   await first.locator('summary').click();
   await expect(first).toHaveJSProperty('open', false);
   await first.locator('summary').click();

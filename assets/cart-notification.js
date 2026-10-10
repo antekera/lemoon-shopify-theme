@@ -2,106 +2,123 @@ class CartNotification extends HTMLElement {
   constructor() {
     super();
 
-    this.notification = document.getElementById('cart-notification');
+    this.notification = this.querySelector('#cart-notification');
+    this.productName = this.querySelector('#cart-notification-product');
+    this.dismissTimer = null;
     this.header = document.querySelector('sticky-header');
-    this.onBodyClick = this.handleBodyClick.bind(this);
 
-    this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
-    this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
-      closeButton.addEventListener('click', this.close.bind(this))
-    );
+    this.querySelectorAll('.cart-notification__close').forEach((button) => {
+      button.addEventListener('click', () => this.close());
+    });
   }
 
   open() {
-    this.notification.classList.add('animate', 'active');
+    if (!this.notification) return;
 
-    this.notification.addEventListener(
-      'transitionend',
-      () => {
-        this.notification.focus();
-        trapFocus(this.notification);
-      },
-      { once: true }
-    );
-
-    document.body.addEventListener('click', this.onBodyClick);
-
-    this.dispatchCartViewEvent();
-  }
-
-  // The notification's outer element is server-rendered once at page load, so
-  // its `cart` Liquid object reflects the pre-add state. The morphed children
-  // (inserted from the /cart/add.js sections response in renderContents) are
-  // post-add, but they don't expose the full cart shape we need for the event
-  // payload. So we keep an explicit /cart.json fetch on open. Migrating to the
-  // factory + filter would require re-rendering the notification element
-  // itself in sections, which is out of scope for this PR.
-  async dispatchCartViewEvent() {
-    const { CartViewEvent } = window.StandardEvents || {};
-    if (!CartViewEvent) return;
-
-    try {
-      const response = await fetch(`${routes.cart_url}.json`);
-      const cart = await response.json();
-      if (!cart?.currency) return;
-
-      this.dispatchEvent(
-        new CartViewEvent({
-          context: 'dialog',
-          cart: CartViewEvent.createCartFromAjaxResponse(cart),
-        })
-      );
-    } catch (e) {
-      // cart:view is informational; swallow fetch errors
-    }
+    window.clearTimeout(this.dismissTimer);
+    this.notification.setAttribute('aria-hidden', 'false');
+    this.notification.getBoundingClientRect();
+    this.notification.classList.add('active');
+    this.dismissTimer = window.setTimeout(() => this.close(), 4500);
   }
 
   close() {
-    this.notification.classList.remove('active');
-    document.body.removeEventListener('click', this.onBodyClick);
+    if (!this.notification) return;
 
-    removeTrapFocus(this.activeElement);
+    window.clearTimeout(this.dismissTimer);
+    this.notification.classList.remove('active');
+    this.notification.setAttribute('aria-hidden', 'true');
+  }
+
+  // Keep the cart count in sync while leaving the custom header markup intact.
+  dispatchCartViewEvent(cart) {
+    const { CartViewEvent } = window.StandardEvents || {};
+    if (!CartViewEvent || !cart?.currency) return;
+
+    this.dispatchEvent(
+      new CartViewEvent({
+        context: 'dialog',
+        cart: CartViewEvent.createCartFromAjaxResponse(cart),
+      })
+    );
   }
 
   renderContents(parsedState) {
-    this.cartItemKey = parsedState.key;
-    this.getSectionsToRender().forEach((section) => {
-      document.getElementById(section.id).innerHTML = this.getSectionInnerHTML(
-        parsedState.sections[section.id],
-        section.selector
-      );
-    });
+    this.renderProductName(parsedState);
 
-    if (this.header) this.header.reveal();
+    const cartPromise = this.updateCartCount();
+    if (typeof this.header?.reveal === 'function') this.header.reveal();
     this.open();
+    cartPromise.then((cart) => this.dispatchCartViewEvent(cart));
+  }
+
+  renderProductName(parsedState) {
+    if (!this.productName) return;
+
+    const sectionHtml = parsedState.sections?.['cart-notification-product'];
+    if (!sectionHtml) return;
+
+    const section = new DOMParser()
+      .parseFromString(sectionHtml, 'text/html')
+      .querySelector('[data-cart-item-key="' + CSS.escape(String(parsedState.key)) + '"]');
+    const name = section?.querySelector('.cart-notification-product__name')?.textContent?.trim();
+
+    if (name) this.productName.textContent = name;
+  }
+
+  async updateCartCount() {
+    try {
+      const root = window.Shopify?.routes?.root || '/';
+      const response = await fetch(`${root}cart.js`, {
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) return null;
+
+      const cart = await response.json();
+      this.updateCartBadge(cart.item_count);
+      return cart;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  updateCartBadge(itemCount) {
+    ['cart-icon-bubble', 'cart-icon-bubble-mobile'].forEach((id) => {
+      const cartLink = document.getElementById(id);
+      if (!cartLink) return;
+
+      let badge = cartLink.querySelector('.lemoon-header__cart-count');
+      let accessibleCount = cartLink.querySelector('[data-cart-count-accessible]');
+      if (itemCount > 0) {
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'lemoon-header__cart-count';
+          badge.setAttribute('aria-hidden', 'true');
+          cartLink.append(badge);
+        }
+        badge.textContent = itemCount;
+        badge.classList.remove('is-popping');
+        void badge.offsetWidth;
+        badge.classList.add('is-popping');
+        badge.addEventListener('animationend', () => badge.classList.remove('is-popping'), { once: true });
+
+        if (!accessibleCount) {
+          accessibleCount = document.createElement('span');
+          accessibleCount.className = 'visually-hidden';
+          accessibleCount.dataset.cartCountAccessible = '';
+          cartLink.append(accessibleCount);
+        }
+        accessibleCount.textContent = (cartLink.dataset.cartCountLabel || '[count] items')
+          .replace('[count]', itemCount);
+      } else {
+        badge?.remove();
+        accessibleCount?.remove();
+      }
+    });
   }
 
   getSectionsToRender() {
-    return [
-      {
-        id: 'cart-notification-product',
-        selector: `[id="cart-notification-product-${this.cartItemKey}"]`,
-      },
-      {
-        id: 'cart-notification-button',
-      },
-      {
-        id: 'cart-icon-bubble',
-      },
-    ];
-  }
-
-  getSectionInnerHTML(html, selector = '.shopify-section') {
-    return new DOMParser().parseFromString(html, 'text/html').querySelector(selector).innerHTML;
-  }
-
-  handleBodyClick(evt) {
-    const target = evt.target;
-    if (target !== this.notification && !target.closest('cart-notification')) {
-      const disclosure = target.closest('details-disclosure, header-menu');
-      this.activeElement = disclosure ? disclosure.querySelector('summary') : null;
-      this.close();
-    }
+    return [{ id: 'cart-notification-product' }];
   }
 
   setActiveElement(element) {

@@ -7,13 +7,15 @@ test('renders up to three compact product labels while preserving label color va
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const labels = await readFile(themeFile('snippets/lemoon-product-card-labels.liquid'), 'utf8');
   const styles = await readFile(themeFile('assets/lemoon-components.css'), 'utf8');
+  const tokens = await readFile(themeFile('assets/lemoon-tokens.css'), 'utf8');
 
   expect(labels).toMatch(/for label_tag in card_product\.tags[\s\S]*?rendered_label_styles contains label_signature[\s\S]*?rendered_label_count < max_label_count[\s\S]*?lemoon-product-card__label/);
   expect(labels).toMatch(/card_product\.available == false[\s\S]*?max_label_count = 2[\s\S]*?label--sold-out/);
   expect(styles).toMatch(/\.lemoon-product-card__label\s*\{[^}]*border-radius:\s*var\(--lemoon-radius-full\)/);
   expect(styles).toMatch(/\.lemoon-product-card__label--flash-sale\s*\{\s*background:\s*#F7E600;\s*color:\s*#0B1F3A;/);
   expect(styles).toMatch(/\.lemoon-product-card__label--new\s*\{\s*background:\s*#0B1F3A;\s*color:\s*#FFFFFF;/);
-  expect(styles).toMatch(/\.lemoon-product-card__label--best-seller\s*\{\s*background:\s*#316653;\s*color:\s*#FFFFFF;/);
+  expect(styles).toMatch(/\.lemoon-product-card__label--best-seller\s*\{\s*background:\s*var\(--lemoon-surface-green-deep\);\s*color:\s*var\(--lemoon-text-inverse\);/);
+  expect(tokens).toMatch(/--lemoon-primitive-green-deep:\s*#316653;/);
 });
 
 test('keeps the future AR try-on hidden and the card title secondary to price', async () => {
@@ -39,7 +41,7 @@ test('keeps sale prices single, shows unit prices, and outlines selected dark sw
   expect(styles).toMatch(/\.product-card-wrapper \.card__inner\s*\{[^}]*z-index:\s*1/);
   expect(styles).toMatch(/@media screen and \(max-width: 749px\)\s*\{[^}]*\.lemoon-product-card__swatch\s*\{[^}]*width:\s*1\.8rem;[^}]*height:\s*1\.8rem/);
   expect(styles).toMatch(/--ratio-percent:\s*96% !important/);
-  expect(styles).toMatch(/\.product-card-wrapper \.card__media \.media > img\s*\{[^}]*width:\s*100%;[^}]*height:\s*100%;[^}]*object-fit:\s*cover/);
+  expect(styles).toMatch(/\.product-card-wrapper \.card__media \.media > img\s*\{[^}]*width:\s*100%;[^}]*height:\s*auto;[^}]*object-fit:\s*contain/);
 });
 
 test('uses color-specific gallery images first and preserves query params in variant links', async () => {
@@ -64,7 +66,7 @@ test('renders each variant media preview as a valid Shopify image URL', async ()
   expect(template).not.toMatch(/swatch_secondary \| image_url/);
 });
 
-test('defers the second product card image until near the viewport and removes quick-add markup', async () => {
+test('defers secondary images and keeps quick add available only when a carousel opts in', async () => {
   const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
   const script = await readFile(themeFile('assets/lemoon-product-card.js'), 'utf8');
   const collection = await readFile(themeFile('snippets/lemoon-plp-product-page.liquid'), 'utf8');
@@ -81,7 +83,10 @@ test('defers the second product card image until near the viewport and removes q
   expect(script).toMatch(/pointerdown/);
   expect(script).toMatch(/pointerup/);
   expect(template).not.toMatch(/quick-add-modal|modal-opener|quick-add__submit/);
-  expect(template).not.toMatch(/quick_add|quantity-popover|quick-order-list/);
+  expect(template).toMatch(/if show_quick_add and card_product\.available/);
+  expect(template).toMatch(/form 'product', card_product/);
+  expect(template).toMatch(/data-card-quick-add-variant/);
+  expect(collection).not.toMatch(/show_quick_add/);
   expect(template).not.toMatch(/lemoon-product-card__wishlist/);
   expect(script).not.toMatch(/lemoon:favorites|localStorage/);
 });

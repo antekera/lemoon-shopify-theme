@@ -18,6 +18,8 @@
   --lemoon-primitive-carbon: #1a1a1a;
   --lemoon-primitive-success: #2d8c4e;
   --lemoon-primitive-error: #c0392b;
+  --lemoon-primitive-green-tertiary: #dfe9de;
+  --lemoon-primitive-green-deep: #316653;
 
   --lemoon-primitive-navy-night: #0b1f3a;
   --lemoon-primitive-navy-muted: #1a3560;
@@ -42,6 +44,8 @@
   --lemoon-surface-warm-hover: #e8e2d8;
   --lemoon-surface-inverse: #0b1f3a;
   --lemoon-surface-disabled: #e0ddd8;
+  --lemoon-surface-tertiary-green: var(--lemoon-primitive-green-tertiary);
+  --lemoon-surface-green-deep: var(--lemoon-primitive-green-deep);
 
   /* text */
   --lemoon-text-primary: #1a1a1a;

@@ -1,0 +1,33 @@
+{
+  getDiscountData {
+    id
+    discount {
+      __typename
+      ... on DiscountAutomaticBxgy {
+        title
+        status
+        startsAt
+        endsAt
+        customerGets {
+          items {
+            ... on DiscountCollections { collections { id } }
+          }
+        }
+      }
+      ... on DiscountAutomaticBasic {
+        title
+        status
+        startsAt
+        endsAt
+        context {
+          ... on DiscountCustomerSegments { segments { query } }
+        }
+        customerGets {
+          items {
+            ... on DiscountCollections { collections { id } }
+          }
+        }
+      }
+    }
+  }
+}

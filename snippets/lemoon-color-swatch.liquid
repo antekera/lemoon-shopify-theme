@@ -1,0 +1,26 @@
+{% doc %}
+  Shares the product card colour swatch with the product page.
+  @param {product_option_value} value - Shopify colour option value.
+{% enddoc %}
+{% if value.swatch %}
+  {% render 'swatch', swatch: value.swatch %}
+{% else %}
+  {%- liquid
+                      assign swatch_color = '#D9D4CB'
+                      assign color_name = value.name | downcase
+                      if color_name contains 'azul'
+                        assign swatch_color = '#172B4D'
+                      elsif color_name contains 'carey'
+                        assign swatch_color = '#9B612F'
+                      elsif color_name contains 'negro'
+                        assign swatch_color = '#222222'
+                      elsif color_name contains 'dorado'
+                        assign swatch_color = '#C6A15B'
+                      elsif color_name contains 'plateado'
+                        assign swatch_color = '#A8ADB1'
+                      elsif color_name contains 'transparente'
+                        assign swatch_color = '#E9E6E0'
+                      endif
+  -%}
+  <span class="lemoon-product-card__swatch-color" style="background-color: {{ swatch_color }}"></span>
+{% endif %}

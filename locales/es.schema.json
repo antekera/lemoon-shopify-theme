@@ -375,6 +375,33 @@
     }
   },
   "sections": {
+    "lemoon_featured_products": {
+      "name": "Destacados Lemoon",
+      "settings": {
+        "collection": { "label": "Colección" },
+        "collection_source": {
+          "label": "Origen de productos",
+          "options": { "fixed": { "label": "Colección seleccionada" }, "product_category": { "label": "Categoría del producto" } }
+        },
+        "optical_collection": { "label": "Colección de ópticos" },
+        "sun_collection": { "label": "Colección de sol" },
+        "randomize": { "label": "Mostrar productos al azar" },
+        "defer_load": { "label": "Cargar productos al acercarse al carrusel" },
+        "show_quick_add": { "label": "Mostrar botón para agregar al carrito" },
+        "initial_products": { "label": "Productos iniciales" },
+        "eyebrow": { "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
+        "heading": { "label": "Título", "default": "Armazones favoritos" },
+        "link_label": { "label": "Etiqueta de enlace", "default": "Ver todos" },
+        "products_to_show": { "label": "Productos" }
+      }
+    },
+    "lemoon_trust_bar": {
+      "name": "Barra de confianza",
+      "settings": {
+        "aria_label": { "label": "Etiqueta accesible", "default": "Beneficios de comprar en Lemoon" },
+        "benefits": { "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP." }
+      }
+    },
     "all": {
       "padding": {
         "section_padding_heading": "Relleno",

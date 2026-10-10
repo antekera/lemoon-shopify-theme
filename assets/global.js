@@ -789,7 +789,13 @@ class SliderComponent extends HTMLElement {
 
   initPages() {
     this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => element.clientWidth > 0);
-    if (this.sliderItemsToShow.length < 2) return;
+    if (this.sliderItemsToShow.length < 2) {
+      this.sliderItemOffset = this.slider.clientWidth || 1;
+      this.slidesPerPage = 1;
+      this.totalPages = this.sliderItemsToShow.length;
+      this.update();
+      return;
+    }
     this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
     this.slidesPerPage = Math.floor(
       (this.slider.clientWidth - this.sliderItemsToShow[0].offsetLeft) / this.sliderItemOffset
@@ -806,10 +812,10 @@ class SliderComponent extends HTMLElement {
   update() {
     // Temporarily prevents unneeded updates resulting from variant changes
     // This should be refactored as part of https://github.com/Shopify/dawn/issues/2057
-    if (!this.slider || !this.nextButton) return;
+    if (!this.slider || !this.nextButton || !this.sliderItemsToShow?.length) return;
 
     const previousPage = this.currentPage;
-    this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
+    this.currentPage = this.sliderItemsToShow.length === 1 ? 1 : Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
 
     if (this.currentPageElement && this.pageTotalElement) {
       this.currentPageElement.textContent = this.currentPage;

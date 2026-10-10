@@ -80,12 +80,13 @@
       help_text: help_text,
       additional_props: input_dataset
     %}
-  {%- elsif picker_type == 'button' -%}
+  {%- elsif picker_type == 'button' or picker_type == 'lemoon_color' -%}
     <input
       type="radio"
       id="{{ input_id }}"
       name="{{ input_name | escape }}"
       value="{{ escaped_value }}"
+      {% if picker_type == 'lemoon_color' %}aria-label="{{ escaped_value }}{% if option_disabled %} {{ 'products.product.variant_sold_out_or_unavailable' | t }}{% endif %}"{% endif %}
       form="{{ product_form_id }}"
       {% if value.selected %}
         checked
@@ -95,8 +96,11 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
+    <label for="{{ input_id }}"{% if picker_type == 'lemoon_color' %} class="lemoon-pdp-color-swatch" data-color-name="{{ value | escape }}"{% endif %}>
+      {% if picker_type == 'lemoon_color' %}
+        <span class="lemoon-pdp-color-swatch__icon" aria-hidden="true">{% render 'lemoon-color-swatch', value: value %}</span>
+        <span class="visually-hidden">{{ value | escape }}</span>
+      {% else %}{{ value | escape }}{% endif %}
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}

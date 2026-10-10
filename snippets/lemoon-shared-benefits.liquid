@@ -1,0 +1,18 @@
+{% doc %}
+  Renders the global purchase benefits shared by home and product pages.
+  @param {string} [context] - Product uses a compact vertical layout.
+{% enddoc %}
+<div class="lemoon-shared-benefits{% if context == 'product' %} lemoon-shared-benefits--product{% endif %}">
+  {% assign benefit_keys = 'guarantee,returns,shipping' | split: ',' %}
+  {% assign benefit_icons = 'shield-check,rotate-ccw,truck' | split: ',' %}
+  {% for key in benefit_keys %}
+    {% assign text_key = key | prepend: 'lemoon_' %}
+    {% assign detail_key = text_key | append: '_detail' %}
+    {% if settings[text_key] != blank %}
+      <p class="lemoon-trust-bar__item">
+        {% render 'lemoon-icon', icon: benefit_icons[forloop.index0] %}
+        <span>{{ settings[text_key] | escape }}{% if settings[detail_key] != blank %} <span class="lemoon-trust-bar__second-line">{{ settings[detail_key] | escape }}</span>{% endif %}</span>
+      </p>
+    {% endif %}
+  {% endfor %}
+</div>
