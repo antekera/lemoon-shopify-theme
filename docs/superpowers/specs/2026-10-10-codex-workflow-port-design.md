@@ -55,7 +55,7 @@ The six agent definitions preserve the specialized role prompts currently embedd
 - Use feature branches and PRs; never commit or push directly to `main`.
 - Keep user-facing theme text localized in `locales/en.default.json` and `locales/es.json`.
 - Use Shopify-safe Liquid/snippet conventions and preserve theme-editor schema requirements.
-- Protect production publishing: inspect the currently published theme and require explicit user confirmation immediately before a production push.
+- Protect production publishing: inspect the currently published theme, require explicit user confirmation immediately before a production push, and add Shopify CLI's `--allow-live` flag only after that confirmation for Codex's non-interactive shell.
 - Never stage credentials, `.env`, or `config/settings_data.json`.
 - Run the applicable validation, including Shopify Theme Check, before declaring theme changes ready.
 
@@ -68,7 +68,7 @@ Detailed rule content remains in the current `.claude/rules/` documents during t
 - The Codex commit workflow's explicit-path allowlist includes root `AGENTS.md`, `.agents/skills/**`, and `.codex/agents/**` so future Codex workflow updates can be committed alongside the existing theme, Claude, and documentation paths.
 - PR creation must summarize scope and validation, and must not claim that a Shopify theme was published.
 - Development-theme publishing keeps the existing development theme target and reports the result.
-- Production publishing keeps the explicit confirmation gate. Codex must not infer approval from a request to inspect, prepare, or preview a production push.
+- Production publishing keeps the explicit confirmation gate. Codex must not infer approval from a request to inspect, prepare, or preview a production push. The production push skill adds `--allow-live` only after confirmation, as Shopify CLI requires for live-theme pushes from a non-interactive shell.
 - Start-feature must not discard or overwrite a dirty working tree.
 - Theme status is read-only.
 - Reviewer agents return evidence grouped by file, distinguish blocking findings from notes, and do not edit files unless the user separately asks for fixes.

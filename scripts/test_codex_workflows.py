@@ -106,10 +106,13 @@ def validate_group(group: str) -> None:
         require(confirmation_index >= 0 and allow_live_index >= 0 and confirmation_index < allow_live_index, "production publishing must add --allow-live only after confirmation")
         require("git status --short" in prod and "working tree" in prod and "commit" in prod, "production publishing must stop when the working tree has uncommitted changes")
 
-    if group == "git":
+    if group in {"git", "all"}:
         commit = (ROOT / ".agents/skills/theme-commit/SKILL.md").read_text(encoding="utf-8")
         for path in ("AGENTS.md", ".agents/skills/", ".codex/agents/"):
             require(path in commit, f"commit workflow must allow selected Codex files: {path}")
+        spec = (ROOT / "docs/superpowers/specs/2026-10-10-codex-workflow-port-design.md").read_text(encoding="utf-8")
+        require(".agents/skills/**" in spec and ".codex/agents/**" in spec and "AGENTS.md" in spec, "design spec must document the Codex commit allowlist")
+        require("--allow-live" in spec and "only after confirmation" in spec, "design spec must require --allow-live only after production confirmation")
 
     if group in {"builder", "all"}:
         builder = (ROOT / ".agents/skills/build-theme-section/SKILL.md").read_text(encoding="utf-8")
