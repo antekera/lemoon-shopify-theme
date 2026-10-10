@@ -24,9 +24,9 @@
           {%- if mobile_image != blank -%}
             <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w, {{ mobile_image | image_url: width: 1500 }} 1500w" sizes="100vw">
           {%- elsif mobile_asset != blank -%}
-            <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_url }}">
+            <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_img_url: '375x' }} 375w, {{ mobile_asset | asset_img_url: '550x' }} 550w, {{ mobile_asset | asset_img_url: '750x' }} 750w, {{ mobile_asset | asset_img_url: '941x' }} 941w" sizes="100vw">
           {%- elsif desktop_image == blank and desktop_asset == blank -%}
-            <source media="(max-width: 749px)" srcset="{{ 'lemoon-hero-mobile-placeholder.jpg' | asset_url }}">
+            <source media="(max-width: 749px)" srcset="{{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '375x' }} 375w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '550x' }} 550w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '750x' }} 750w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '941x' }} 941w" sizes="100vw">
           {%- endif -%}
           {%- if desktop_image != blank -%}
             {{ desktop_image | image_url: width: 2400 | image_tag: class: 'lemoon-hero__image', loading: image_loading, fetchpriority: image_priority, widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', alt: desktop_alt }}

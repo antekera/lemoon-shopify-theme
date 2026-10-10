@@ -18,6 +18,7 @@ test('hero renders its critical styles before the first image without a CSS netw
     return styles;
   });
   engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('asset_img_url', (name, size) => `/assets/${name.replace('.jpg', `_${size}.jpg`)}`);
   engine.registerFilter('t', (key) => key);
   const html = await engine.parseAndRender(hero.split('{% schema %}')[0], {
     shop: { name: 'Lemoon' },
@@ -31,7 +32,7 @@ test('hero renders its critical styles before the first image without a CSS netw
   expect(html).not.toContain('href="/assets/lemoon-hero.css"');
   expect(html).toMatch(/src="\/assets\/desktop.jpg"[^>]*loading="eager"[^>]*fetchpriority="high"/);
   expect(html).toMatch(/src="\/assets\/second.jpg"[^>]*loading="lazy"/);
-  expect(html).toContain('srcset="/assets/mobile.jpg"');
+  expect(html).toContain('srcset="/assets/mobile_375x.jpg 375w, /assets/mobile_550x.jpg 550w, /assets/mobile_750x.jpg 750w, /assets/mobile_941x.jpg 941w" sizes="100vw"');
 });
 
 test('home benefits retain their shared layout without importing product-page styles', async () => {
@@ -63,6 +64,23 @@ test('home critical header styles render inline while other pages retain cached 
     expect(home).toContain(styles);
     expect(product).toContain(`href="/assets/${name}"`);
   }
+});
+
+test('category asset fallbacks offer responsive widths and remain lazy loaded', async () => {
+  const section = await source('sections/lifestyle-mood-grid.liquid');
+  const engine = new Liquid();
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('asset_img_url', (name, size) => `/assets/${name.replace('.png', `_${size}.png`)}`);
+  const html = await engine.parseAndRender(section.split('{% schema %}')[0], {
+    routes: { all_products_collection_url: '/collections/all' },
+    section: { settings: {}, blocks: [{ settings: { heading: 'Ópticos' } }, { settings: { heading: 'Sol' } }, { settings: { heading: 'Accesorios' } }] },
+  });
+  for (const name of ['lemoon-style-minimalista', 'lemoon-style-sol', 'lemoon-category-accessories']) {
+    expect(html).toContain(`/assets/${name}_800x.png 800w`);
+    expect(html).toContain(`/assets/${name}_1122x.png 1122w`);
+  }
+  expect(html.match(/sizes="\(min-width: 750px\) 32vw, 100vw"/g)).toHaveLength(3);
+  expect(html.match(/loading="lazy"/g)).toHaveLength(3);
 });
 
 test('about copy shares the same page-width container as featured product carousels', async () => {

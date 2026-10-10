@@ -23,6 +23,8 @@
         {%- else -%}
           <img
             src="{{ fallback_image | asset_url }}"
+            srcset="{{ fallback_image | asset_img_url: '360x' }} 360w, {{ fallback_image | asset_img_url: '600x' }} 600w, {{ fallback_image | asset_img_url: '800x' }} 800w, {{ fallback_image | asset_img_url: '1122x' }} 1122w"
+            sizes="(min-width: 750px) 32vw, 100vw"
             alt="{{ block.settings.heading | escape }}"
             width="1024"
             height="1280"
