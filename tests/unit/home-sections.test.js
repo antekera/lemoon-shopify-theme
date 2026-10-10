@@ -45,6 +45,26 @@ test('home benefits retain their shared layout without importing product-page st
   expect(productStyles).toMatch(/\.lemoon-shared-benefits--product\s*\{\s*display:\s*grid;/);
 });
 
+test('home critical header styles render inline while other pages retain cached stylesheets', async () => {
+  const layout = await source('layout/theme.liquid');
+  const criticalStyles = layout.match(/\{%- if request.page_type == 'index' -%\}([\s\S]*?)\{%- endif -%\}/)[0];
+  const names = [...criticalStyles.matchAll(/'([^']+\.css)' \| inline_asset_content/g)].map((match) => match[1]);
+  expect(names).toHaveLength(5);
+  const assets = Object.fromEntries(await Promise.all(names.map(async (name) => [name, await source(`assets/${name}`)])));
+  for (const styles of Object.values(assets)) expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', (name) => assets[name]);
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(criticalStyles, { request: { page_type: 'index' } });
+  const product = await engine.parseAndRender(criticalStyles, { request: { page_type: 'product' } });
+  expect(home).not.toContain('<link');
+  for (const [name, styles] of Object.entries(assets)) {
+    expect(home).toContain(styles);
+    expect(product).toContain(`href="/assets/${name}"`);
+  }
+});
+
 test('about copy shares the same page-width container as featured product carousels', async () => {
   const [about, featured, styles] = await Promise.all([
     source('sections/lemoon-about.liquid'),

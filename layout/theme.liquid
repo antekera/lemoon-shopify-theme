@@ -295,11 +295,21 @@
     {%- if request.page_type == 'cart' -%}
       {{ 'lemoon-cart-page.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
-    {{ 'component-slider.css' | asset_url | stylesheet_tag }}
-    {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-    {{ 'lemoon-announcement-bar.css' | asset_url | stylesheet_tag }}
-    {{ 'lemoon-header.css' | asset_url | stylesheet_tag }}
-    {{ 'lemoon-mobile-search.css' | asset_url | stylesheet_tag }}
+    {%- if request.page_type == 'index' -%}
+      <style>
+        {{ 'component-slider.css' | inline_asset_content }}
+        {{ 'component-slideshow.css' | inline_asset_content }}
+        {{ 'lemoon-announcement-bar.css' | inline_asset_content }}
+        {{ 'lemoon-header.css' | inline_asset_content }}
+        {{ 'lemoon-mobile-search.css' | inline_asset_content }}
+      </style>
+    {%- else -%}
+      {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+      {{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+      {{ 'lemoon-announcement-bar.css' | asset_url | stylesheet_tag }}
+      {{ 'lemoon-header.css' | asset_url | stylesheet_tag }}
+      {{ 'lemoon-mobile-search.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
