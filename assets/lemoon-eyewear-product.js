@@ -15,7 +15,7 @@ export function validatePrescription(values, progressive) {
     number(`${eye}_cyl`, -6, 6, 0.25);
     number(`${eye}_axis`, 0, 180, 1, Boolean(Number(values[`${eye}_cyl`])));
     if (values[`${eye}_axis`] && !String(values[`${eye}_cyl`] ?? '').trim()) errors.push(`${eye}_cyl`);
-    number(`${eye}_add`, 0.25, 4, 0.25, progressive);
+    if (progressive) number(`${eye}_add`, 0.25, 4, 0.25, true);
   }
   number('pd', 40, 80, 0.5, true);
   return [...new Set(errors)];
