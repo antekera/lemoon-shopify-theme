@@ -19,6 +19,11 @@
           assign image_priority = 'auto'
         endif
       -%}
+      {%- if forloop.first and desktop_image == blank and mobile_image == blank and desktop_asset != blank and mobile_asset != blank -%}
+        {%- capture mobile_srcset -%}{{ mobile_asset | asset_img_url: '375x' }} 375w, {{ mobile_asset | asset_img_url: '550x' }} 550w, {{ mobile_asset | asset_img_url: '750x' }} 750w, {{ mobile_asset | asset_img_url: '941x' }} 941w{%- endcapture -%}
+        {{ mobile_asset | asset_img_url: '750x' | preload_tag: as: 'image', media: '(max-width: 749px)', imagesrcset: mobile_srcset, imagesizes: '100vw', fetchpriority: 'high' }}
+        {{ desktop_asset | asset_url | preload_tag: as: 'image', media: '(min-width: 750px)', fetchpriority: 'high' }}
+      {%- endif -%}
       <div class="lemoon-hero__slide" id="LemoonHeroSlide-{{ block.id }}" role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"{% unless forloop.first %} inert aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
         <picture class="lemoon-hero__picture">
           {%- if mobile_image != blank -%}

@@ -19,6 +19,11 @@ test('hero renders its critical styles before the first image without a CSS netw
   });
   engine.registerFilter('asset_url', (name) => `/assets/${name}`);
   engine.registerFilter('asset_img_url', (name, size) => `/assets/${name.replace('.jpg', `_${size}.jpg`)}`);
+  const preloads = [];
+  engine.registerFilter('preload_tag', (url, ...attributes) => {
+    preloads.push({ url, attributes: Object.fromEntries(attributes) });
+    return '';
+  });
   engine.registerFilter('t', (key) => key);
   const html = await engine.parseAndRender(hero.split('{% schema %}')[0], {
     shop: { name: 'Lemoon' },
@@ -33,6 +38,10 @@ test('hero renders its critical styles before the first image without a CSS netw
   expect(html).toMatch(/src="\/assets\/desktop.jpg"[^>]*loading="eager"[^>]*fetchpriority="high"/);
   expect(html).toMatch(/src="\/assets\/second.jpg"[^>]*loading="lazy"/);
   expect(html).toContain('srcset="/assets/mobile_375x.jpg 375w, /assets/mobile_550x.jpg 550w, /assets/mobile_750x.jpg 750w, /assets/mobile_941x.jpg 941w" sizes="100vw"');
+  expect(preloads).toHaveLength(2);
+  expect(preloads[0]).toMatchObject({ url: '/assets/mobile_750x.jpg', attributes: { as: 'image', media: '(max-width: 749px)', imagesizes: '100vw', fetchpriority: 'high' } });
+  expect(preloads[0].attributes.imagesrcset).toBe('/assets/mobile_375x.jpg 375w, /assets/mobile_550x.jpg 550w, /assets/mobile_750x.jpg 750w, /assets/mobile_941x.jpg 941w');
+  expect(preloads[1]).toMatchObject({ url: '/assets/desktop.jpg', attributes: { as: 'image', media: '(min-width: 750px)', fetchpriority: 'high' } });
 });
 
 test('home benefits retain their shared layout without importing product-page styles', async () => {
