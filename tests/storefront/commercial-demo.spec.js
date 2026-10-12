@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const routes = [
- ['contact', '/pages/contact', '00.000.000-0'],
  ['about', '/pages/nosotros?view=nosotros', 'Servioptic SpA'],
  ['shipping', '/pages/envios-y-entregas?view=envios-y-entregas', '$3.990'],
  ['returns', '/pages/po?view=politica-de-devoluciones', '30 días'],
@@ -11,6 +10,13 @@ const routes = [
  ['operations', '/pages/operativos-oftalmologicos?view=operativos-oftalmologicos', '20 a 40 personas'],
  ['benefits', '/pages/isapres-y-fonasa?view=isapres-y-fonasa', 'no contempla convenios directos'],
 ];
+test('assigned contact page hides sample business data by default', async ({ page }) => {
+ expect((await openStorefrontPage(page, '/pages/contact')).status()).toBe(200);
+ await expect(page.locator('.lemoon-commercial-demo')).toHaveCount(0);
+ await expect(page.locator('#MainContent')).not.toContainText('00.000.000-0');
+ await expect(page.locator('#MainContent')).not.toContainText('contacto@servioptic.example');
+ await expect(page.locator('#MainContent h1')).toHaveCount(1);
+});
 for (const [name, route, sample] of routes) {
  test(`${name} displays clearly identified sample business data without overflow`, async ({ page }) => {
   expect((await openStorefrontPage(page, route)).status()).toBe(200);

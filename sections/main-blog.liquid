@@ -76,6 +76,9 @@
     {%- if blog.articles.size > 0 -%}
       <div class="lemoon-journal__grid">
         {%- for article in blog.articles -%}
+          {%- if forloop.first and section.settings.layout == 'collage' and paginate.current_page == 1 -%}
+            {%- continue -%}
+          {%- endif -%}
           <div class="lemoon-journal__story">
             {%- render 'article-card', blog: blog, article: article, media_height: section.settings.image_height, media_aspect_ratio: article.image.aspect_ratio, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, show_excerpt: true, image_sizes: '(min-width: 1280px) 370px, (min-width: 990px) calc((100vw - 150px) / 3), (min-width: 750px) calc((100vw - 130px) / 2), calc(100vw - 56px)' -%}
           </div>

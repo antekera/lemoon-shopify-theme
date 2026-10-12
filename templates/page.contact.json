@@ -3,7 +3,7 @@
     "main": {
       "type": "lemoon-contact-page",
       "settings": {
-        "demo_data": true,
+        "demo_data": false,
         "demo_content": "<h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p><p>Para revisar el diseño, usamos estos datos ficticios de atención. El correo de ejemplo no recibe mensajes. Puedes probar la validación del formulario con datos de prueba.</p>",
         "padding_top": 64,
         "padding_bottom": 64

@@ -1,8 +1,34 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { Liquid } from 'liquidjs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const section = read('sections/main-blog.liquid');
 const json = (path) => { const source = read(path); return JSON.parse(source.slice(source.indexOf('{'))); };
+test.each([
+  ['collage', 1, 6, 5, true],
+  ['grid', 1, 6, 6, false],
+  ['collage', 2, 6, 6, false],
+  ['collage', 1, 1, 0, true],
+  ['collage', 1, 0, 0, false],
+])('journal %s page %i with %i articles keeps each article in its proper place', (layout, currentPage, count, gridCount, featured) => {
+  const body = section.slice(section.indexOf('<div class="lemoon-journal page-width">'), section.indexOf("{%- if section.settings.show_newsletter -%}"));
+  const engine = new Liquid({ root: new URL('../../snippets/', import.meta.url).pathname, extname: '.liquid' });
+  engine.registerFilter('t', (key) => key);
+  const articles = Array.from({ length: count }, (_, index) => ({ id: index + 1, title: `Article ${index + 1}`, url: `/blogs/news/article-${index + 1}`, content: '', excerpt: '' }));
+  const html = engine.parseAndRenderSync(body, {
+    section: { id: 'journal-test', settings: { layout, show_image: false } },
+    blog: { articles, all_tags: [] },
+    paginate: { current_page: currentPage, items: count, pages: 1 },
+    settings: {},
+  });
+  const grid = html.split('<div class="lemoon-journal__grid">')[1] || '';
+  expect(html.includes('class="lemoon-journal__feature"')).toBe(featured);
+  expect((grid.match(/class="lemoon-journal__story"/g) || []).length).toBe(gridCount);
+  for (const [index, article] of articles.entries()) {
+    expect(html).toContain(`href="${article.url}"`);
+    expect(grid.includes(`href="${article.url}"`)).toBe(!featured || index > 0);
+  }
+});
 test('journal uses native articles, real tag routes and pagination without mock content', () => {
   expect(section).toContain('paginate blog.articles by 6');
   expect(section).toContain('for article in blog.articles');
