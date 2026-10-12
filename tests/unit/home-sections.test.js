@@ -75,6 +75,24 @@ test('home critical header styles render inline while other pages retain cached 
   }
 });
 
+test('home avoids preloading Dawn fonts while other templates retain their font hints', async () => {
+  const layout = await source('layout/theme.liquid');
+  const connect = layout.slice(layout.indexOf('    {%- unless'), layout.indexOf('    <title>'));
+  const fontHints = layout.slice(layout.indexOf('    {%- unless', layout.indexOf('component-cart-items.css')), layout.indexOf('    {%- if localization.available_countries'));
+  const engine = new Liquid();
+  engine.registerFilter('font_url', (font) => `/fonts/${font.family}.woff2`);
+  const settings = { type_body_font: { family: 'body', 'system?': false }, type_header_font: { family: 'heading', 'system?': false } };
+  const home = await engine.parseAndRender(connect + fontHints, { request: { page_type: 'index' }, settings });
+  expect(home).not.toContain('fonts.shopifycdn.com');
+  expect(home).not.toContain('as="font"');
+  const product = await engine.parseAndRender(connect + fontHints, { request: { page_type: 'product' }, settings });
+  expect(product).toContain('fonts.shopifycdn.com');
+  expect(product).toContain('/fonts/body.woff2');
+  expect(product).toContain('/fonts/heading.woff2');
+  expect(layout).toContain("settings.type_body_font | font_face: font_display: 'swap'");
+  expect(layout).toContain('family=Hanken+Grotesk');
+});
+
 test.each(['snippets/lemoon-mobile-nav.liquid', 'snippets/lemoon-mobile-search.liquid', 'sections/footer.liquid'])('home avoids the late CSS dependency in %s', async (path) => {
   const markup = (await source(path)).match(/\{%- if request.page_type == 'index' -%\}[\s\S]*?\{%- endif -%\}/)[0];
   const name = markup.match(/'([^']+\.css)' \| inline_asset_content/)[1];
