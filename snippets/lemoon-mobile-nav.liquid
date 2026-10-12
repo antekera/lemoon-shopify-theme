@@ -4,7 +4,11 @@
   @example
   {% render 'lemoon-mobile-nav', section: section %}
 {% enddoc %}
-{{ 'lemoon-mobile-nav.css' | asset_url | stylesheet_tag }}
+{%- if request.page_type == 'index' -%}
+  <style>{{ 'lemoon-mobile-nav.css' | inline_asset_content }}</style>
+{%- else -%}
+  {{ 'lemoon-mobile-nav.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <script type="module" src="{{ 'lemoon-mobile-nav.js' | asset_url }}"></script>
 <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
 <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="{{ section.id }}" role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>

@@ -75,6 +75,41 @@ test('home critical header styles render inline while other pages retain cached 
   }
 });
 
+test.each(['snippets/lemoon-mobile-nav.liquid', 'snippets/lemoon-mobile-search.liquid', 'sections/footer.liquid'])('home avoids the late CSS dependency in %s', async (path) => {
+  const markup = (await source(path)).match(/\{%- if request.page_type == 'index' -%\}[\s\S]*?\{%- endif -%\}/)[0];
+  const name = markup.match(/'([^']+\.css)' \| inline_asset_content/)[1];
+  const styles = await source(`assets/${name}`);
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', () => styles);
+  engine.registerFilter('asset_url', (asset) => `/assets/${asset}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(markup, { request: { page_type: 'index' } });
+  expect(home).toContain(`<style>${styles}</style>`);
+  expect(home).not.toContain('<link');
+  const product = await engine.parseAndRender(markup, { request: { page_type: 'product' } });
+  expect(product).toContain(`href="/assets/${name}"`);
+});
+
+test('card styles load ratings only when shown and omit unused volume-pricing styles', async () => {
+  const card = await source('snippets/card-product.liquid');
+  const markup = card.slice(card.indexOf('{%- unless skip_styles -%}'), card.indexOf('{%- if card_product and card_product != empty -%}'));
+  const styles = await source('assets/component-price.css');
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', () => styles);
+  engine.registerFilter('asset_url', (asset) => `/assets/${asset}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(markup, { request: { page_type: 'index' }, show_rating: false });
+  expect(home).toContain(`<style>${styles}</style>`);
+  expect(home).not.toContain('<link');
+  const rated = await engine.parseAndRender(markup, { request: { page_type: 'product' }, show_rating: true });
+  expect(rated).toContain('component-rating.css');
+  expect(rated).toContain('component-price.css');
+  expect(rated).not.toContain('component-volume-pricing.css');
+  expect(await engine.parseAndRender(markup, { skip_styles: true })).not.toContain('<style');
+});
+
 test('category asset fallbacks offer responsive widths and remain lazy loaded', async () => {
   const section = await source('sections/lifestyle-mood-grid.liquid');
   const engine = new Liquid();

@@ -1,4 +1,8 @@
-{{ 'section-lemoon-footer.css' | asset_url | stylesheet_tag }}
+{%- if request.page_type == 'index' -%}
+  <style>{{ 'section-lemoon-footer.css' | inline_asset_content }}</style>
+{%- else -%}
+  {{ 'section-lemoon-footer.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <script src="{{ 'section-lemoon-footer.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'lemoon-cookie-preferences.js' | asset_url }}" type="module"></script>
 
