@@ -1,10 +1,44 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
+
+{%- liquid
+  assign article_words = article.content | strip_html | strip_newlines | split: ' ' | size
+  assign reading_minutes = article_words | divided_by: 200.0 | ceil | at_least: 1
+-%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .article-template { padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .article-template > header { max-width: 980px; margin-top: 0; }
+  #shopify-section-{{ section.id }} .article-template__title { font-size: 3.4rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; margin-top: 16px; max-width: 780px; }
+  #shopify-section-{{ section.id }} .lemoon-article__eyebrow { font-size: var(--lemoon-fs-12); text-transform: uppercase; letter-spacing: .06em; }
+  #shopify-section-{{ section.id }} .lemoon-article__excerpt { font-size: var(--lemoon-fs-18); color: var(--lemoon-text-secondary); line-height: 1.5; max-width: 700px; }
+  #shopify-section-{{ section.id }} .lemoon-article__meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-secondary); margin-top: 20px; }
+  #shopify-section-{{ section.id }} .article-template__hero-container { max-width: 980px; padding: 0 20px; margin-top: 40px; }
+  #shopify-section-{{ section.id }} .article-template__hero-container .media { border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .article-template__content { max-width: 700px; padding: 0 20px; font-size: var(--lemoon-fs-18); line-height: 1.75; margin-top: 48px; overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .article-template__content h2 { font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-light); line-height: 1.25; margin-top: 40px; }
+  #shopify-section-{{ section.id }} .article-template__content h3 { font-size: var(--lemoon-fs-20); line-height: 1.35; }
+  #shopify-section-{{ section.id }} .article-template__content img { max-width: 100%; height: auto; border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .article-template__content table { display: block; overflow-x: auto; max-width: 100%; }
+  #shopify-section-{{ section.id }} .article-template__content iframe { max-width: 100%; }
+  #shopify-section-{{ section.id }} .article-template__social-sharing { max-width: 700px; padding: 0 20px; }
+  #shopify-section-{{ section.id }} .lemoon-article__explore { max-width: 660px; margin: 48px auto 0; padding: 32px 20px 0; border-top: 1px solid var(--lemoon-border-default); }
+  #shopify-section-{{ section.id }} .lemoon-article__explore h2 { font-size: var(--lemoon-fs-20); }
+  #shopify-section-{{ section.id }} .lemoon-article__explore .button { background: var(--lemoon-action-accent); color: var(--lemoon-text-brand); border-radius: var(--lemoon-radius-button); }
+  #shopify-section-{{ section.id }} .lemoon-article__explore .button::after { box-shadow: none; }
+  #shopify-section-{{ section.id }} a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  #shopify-section-{{ section.id }} .article-template__comment-wrapper { background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .article-template__comment-wrapper .page-width { max-width: 740px; }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .article-template { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+    #shopify-section-{{ section.id }} .article-template__title { font-size: 4.5rem; }
+  }
+{%- endstyle -%}
+
 <article class="article-template">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when '@app' -%}
-        <div class="page-width page-width--narrow">
+        <div class="page-width page-width--narrow" {{ block.shopify_attributes }}>
           {% render block %}
         </div>
       {%- when 'featured_image' -%}
@@ -46,21 +80,18 @@
           class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
+          <div class="lemoon-article__eyebrow"><a href="{{ blog.url }}">{{ 'sections.lemoon_article.journal' | t }}</a>{% for tag in article.tags %} / <a href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag | escape }}</a>{% endfor %}</div>
           <h1
             class="article-template__title"
           >
             {{ article.title | escape }}
           </h1>
-          {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing">
-              {{- article.published_at | time_tag: format: 'date' -}}
-            </span>
-          {%- endif -%}
-          {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing">
-              <span>{{ article.author }}</span>
-            </span>
-          {%- endif -%}
+          {%- if article.excerpt != blank -%}<p class="lemoon-article__excerpt">{{ article.excerpt | strip_html | escape }}</p>{%- endif -%}
+          <div class="lemoon-article__meta">
+            {%- if block.settings.blog_show_date and article.published_at != blank -%}<span>{{ article.published_at | time_tag: format: 'date' }}</span>{%- endif -%}
+            {%- if block.settings.blog_show_author -%}<span>{{ 'sections.lemoon_article.by' | t }} {{ article.author | escape }}</span>{%- endif -%}
+            <span>{{ 'sections.lemoon_article.reading_time' | t: count: reading_minutes }}</span>
+          </div>
         </header>
 
       {%- when 'content' -%}
@@ -82,6 +113,10 @@
     {%- endcase -%}
   {%- endfor -%}
 
+  <aside class="lemoon-article__explore" aria-labelledby="Article-explore-{{ section.id }}">
+    <h2 id="Article-explore-{{ section.id }}">{{ 'sections.lemoon_article.explore' | t }}</h2>
+    <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'sections.lemoon_article.catalogue' | t }}</a>
+  </aside>
   <div class="article-template__back element-margin-top center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <a href="{{ blog.url }}" class="article-template__link link animate-arrow">
       <span class="icon-wrap">
@@ -110,7 +145,7 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span>
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author | escape }}</span>
                   </footer>
                 </article>
               {%- endif -%}
@@ -119,7 +154,7 @@
                 <article id="{{ comment.id }}" class="article-template__comments-comment">
                   {{ comment.content }}
                   <footer class="right">
-                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author }}</span
+                    <span class="circle-divider caption-with-letter-spacing">{{ comment.author | escape }}</span
                     ><span class="caption-with-letter-spacing">
                       {{- comment.created_at | time_tag: format: 'date' -}}
                     </span>
@@ -150,7 +185,7 @@
             <ul class="form-status-list caption-large">
               {%- for field in form.errors -%}
                 <li>
-                  <a href="#CommentForm-{{ field }}" class="link">
+                  <a href="#CommentForm-{{ section.id }}-{{ field }}" class="link">
                     {%- if form.errors.translated_fields[field] contains 'author' -%}
                       {{ 'blogs.article.name' | t }}
                     {%- elsif form.errors.translated_fields[field] contains 'body' -%}
@@ -184,24 +219,24 @@
                 <input
                   type="text"
                   name="comment[author]"
-                  id="CommentForm-author"
+                  id="CommentForm-{{ section.id }}-author"
                   class="field__input"
                   autocomplete="name"
-                  value="{{ form.author }}"
+                  value="{{ form.author | escape }}"
                   aria-required="true"
                   required
                   {% if form.errors contains 'author' %}
                     aria-invalid="true"
-                    aria-describedby="CommentForm-author-error"
+                    aria-describedby="CommentForm-{{ section.id }}-author-error"
                   {% endif %}
                   placeholder="{{ 'blogs.article.name' | t }}"
                 >
-                <label class="field__label" for="CommentForm-author">
+                <label class="field__label" for="CommentForm-{{ section.id }}-author">
                   {{- 'blogs.article.name' | t }}
                   <span aria-hidden="true">*</span></label
                 >
                 {%- if form.errors contains 'author' -%}
-                  <small id="CommentForm-author-error">
+                  <small id="CommentForm-{{ section.id }}-author-error">
                     <span class="form__message">
                       <span class="svg-wrapper">
                         {{- 'icon-error.svg' | inline_asset_content -}}
@@ -216,26 +251,26 @@
                 <input
                   type="email"
                   name="comment[email]"
-                  id="CommentForm-email"
+                  id="CommentForm-{{ section.id }}-email"
                   autocomplete="email"
                   class="field__input"
-                  value="{{ form.email }}"
+                  value="{{ form.email | escape }}"
                   autocorrect="off"
                   autocapitalize="off"
                   aria-required="true"
                   required
                   {% if form.errors contains 'email' %}
                     aria-invalid="true"
-                    aria-describedby="CommentForm-email-error"
+                    aria-describedby="CommentForm-{{ section.id }}-email-error"
                   {% endif %}
                   placeholder="{{ 'blogs.article.email' | t }}"
                 >
-                <label class="field__label" for="CommentForm-email">
+                <label class="field__label" for="CommentForm-{{ section.id }}-email">
                   {{- 'blogs.article.email' | t }}
                   <span aria-hidden="true">*</span></label
                 >
                 {%- if form.errors contains 'email' -%}
-                  <small id="CommentForm-email-error">
+                  <small id="CommentForm-{{ section.id }}-email-error">
                     <span class="form__message">
                       <span class="svg-wrapper">
                         {{- 'icon-error.svg' | inline_asset_content -}}
@@ -251,23 +286,23 @@
               <textarea
                 rows="5"
                 name="comment[body]"
-                id="CommentForm-body"
+                id="CommentForm-{{ section.id }}-body"
                 class="text-area field__input"
                 aria-required="true"
                 required
                 {% if form.errors contains 'body' %}
                   aria-invalid="true"
-                  aria-describedby="CommentForm-body-error"
+                  aria-describedby="CommentForm-{{ section.id }}-body-error"
                 {% endif %}
                 placeholder="{{ 'blogs.article.message' | t }}"
-              >{{ form.body }}</textarea>
-              <label class="form__label field__label" for="CommentForm-body">
+              >{{ form.body | escape }}</textarea>
+              <label class="form__label field__label" for="CommentForm-{{ section.id }}-body">
                 {{- 'blogs.article.message' | t }}
                 <span aria-hidden="true">*</span></label
               >
             </div>
             {%- if form.errors contains 'body' -%}
-              <small id="CommentForm-body-error">
+              <small id="CommentForm-{{ section.id }}-body-error">
                 <span class="form__message">
                   <span class="svg-wrapper">
                     {{- 'icon-error.svg' | inline_asset_content -}}
@@ -366,6 +401,57 @@
           "id": "share_label",
           "label": "t:sections.main-article.blocks.share.settings.text.label",
           "default": "t:sections.main-article.blocks.share.settings.text.default"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lemoon_article.name",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "featured_image"
+        },
+        {
+          "type": "content"
+        },
+        {
+          "type": "share"
         }
       ]
     }

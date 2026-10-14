@@ -1,88 +1,152 @@
 {%- liquid
-  assign configurator_product = product
-  assign configurator_name = section.settings.product_name
-  assign configurator_subtitle = section.settings.product_subtitle
-  assign configurator_image = section.settings.image
-
-  if configurator_product != blank
-    assign configurator_name = configurator_product.title
-    assign configurator_subtitle = configurator_product.vendor | default: 'Configura tus cristales'
-    if configurator_product.featured_image != blank
-      assign configurator_image = configurator_product.featured_image
-    endif
-  endif
+  assign flow_id = 'LensFlow-' | append: section.id
+  assign selected_variant = product.selected_or_first_available_variant
 -%}
-
-<section class="lemoon-configurator" data-lens-configurator>
-  <div class="lemoon-configurator__preview">
-    {%- if configurator_image != blank -%}
-      {{ configurator_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: configurator_name }}
-    {%- else -%}
-      <span>{{ section.settings.preview_label | escape }}</span>
-    {%- endif -%}
-  </div>
-  <form class="lemoon-configurator__panel" data-configurator-form{% if configurator_product != blank %} action="{{ routes.cart_add_url }}" method="post"{% endif %}>
-    {%- if configurator_product != blank -%}
-      <input type="hidden" name="id" value="{{ configurator_product.selected_or_first_available_variant.id }}">
-    {%- endif -%}
-    <p class="lemoon-configurator__product">{{ configurator_name | escape }} · {{ configurator_subtitle | escape }}</p>
-    <ol class="lemoon-configurator__steps" aria-label="Progreso del configurador">
-      {%- for i in (1..5) -%}<li{% if i == 1 %} class="is-active"{% endif %}>{{ i }}</li>{%- endfor -%}
-    </ol>
-
-    <div class="lemoon-configurator__step is-active" data-step="1">
-      <p class="lemoon-configurator__eyebrow">PASO 1 DE 5</p>
-      <h1>¿Qué necesitas?</h1>
-      <p>Elige la opción que mejor describe tu compra.</p>
-      <fieldset class="lemoon-configurator__choices">
-        <legend class="visually-hidden">Tipo de lentes</legend>
-        {%- for block in section.blocks -%}
-          <label class="lemoon-configurator__choice{% if forloop.index == 2 %} is-selected{% endif %}" {{ block.shopify_attributes }}>
-            <input type="radio" name="lens_type" value="{{ block.settings.title | handleize }}"{% if forloop.index == 2 %} checked{% endif %}>
-            <span><strong>{{ block.settings.title | escape }}</strong><small>{{ block.settings.text | escape }}</small></span>
-          </label>
-        {%- endfor -%}
-      </fieldset>
-    </div>
-
-    <div class="lemoon-configurator__step" data-step="2" hidden>
-      <p class="lemoon-configurator__eyebrow">PASO 2 DE 5</p><h1>Elige el índice</h1><p>Selecciona el grosor que mejor se adapta a tu receta.</p>
-      <div class="lemoon-configurator__choices lemoon-configurator__choices--compact">
-        <label class="lemoon-configurator__choice is-selected"><input type="radio" name="index" value="1.50" checked><span><strong>Estándar 1.50</strong><small>Para recetas bajas.</small></span></label>
-        <label class="lemoon-configurator__choice"><input type="radio" name="index" value="1.67"><span><strong>Ultra 1.67</strong><small>Más delgado y ligero.</small></span></label>
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-lens-flow { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: var(--lemoon-space-12); align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__preview a { color: var(--lemoon-text-brand); text-underline-offset: 0.4rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__preview { position: sticky; top: calc(var(--header-height, 80px) + 24px); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__image { background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); overflow: hidden; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__image img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__product { margin: var(--lemoon-space-5) 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: 2.4rem; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__title { margin: 0 0 var(--lemoon-space-6); font-family: var(--lemoon-font-heading); font-size: 3.2rem; font-weight: var(--lemoon-weight-light); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__steps { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-2); padding: 0; margin: 0 0 var(--lemoon-space-6); list-style: none; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__steps li { padding: var(--lemoon-space-2) var(--lemoon-space-3); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-lg); color: var(--lemoon-text-secondary); font-size: 1.2rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__steps [aria-current] { background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__count { font-size: 1.2rem; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow h2 { margin: 0 0 var(--lemoon-space-4); font-family: var(--lemoon-font-heading); color: var(--lemoon-text-brand); font-size: 2.4rem; font-weight: var(--lemoon-weight-medium); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__hint { color: var(--lemoon-text-secondary); font-size: 1.4rem; line-height: 1.6; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow fieldset { border: 0; padding: 0; margin: 0 0 var(--lemoon-space-5); min-width: 0; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow legend { margin-bottom: var(--lemoon-space-3); font-size: 1.4rem; font-weight: var(--lemoon-weight-medium); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__choices { display: grid; gap: var(--lemoon-space-3); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__choice { display: flex; align-items: center; gap: var(--lemoon-space-3); min-height: 7.2rem; padding: var(--lemoon-space-5); border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__choice:has(input:checked) { border-color: var(--lemoon-border-strong); box-shadow: inset 0 0 0 1px var(--lemoon-border-strong); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow input[type=radio] { width: 2rem; height: 2rem; margin: 0; flex-shrink: 0; accent-color: var(--lemoon-action-primary); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__rx { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--lemoon-space-4); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__rx-eye { display: grid; gap: var(--lemoon-space-3); padding: var(--lemoon-space-4); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__rx label { display: grid; gap: var(--lemoon-space-2); font-size: 1.3rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__rx input { width: 100%; min-height: 4.4rem; padding: var(--lemoon-space-3); border: 1px solid var(--lemoon-border-warm); border-radius: var(--lemoon-radius-search); background: var(--lemoon-surface-page); font: inherit; font-size: 1.6rem; text-align: left; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__rx [aria-invalid=true] { border-color: var(--lemoon-status-error); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__file { width: 100%; padding: var(--lemoon-space-4); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__summary { padding: var(--lemoon-space-5); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__summary div { display: flex; justify-content: space-between; gap: var(--lemoon-space-4); margin-bottom: var(--lemoon-space-3); font-size: 1.4rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__summary dd { margin: 0; text-align: right; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__price { display: flex; justify-content: space-between; gap: var(--lemoon-space-4); padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); font-size: 1.6rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__actions { display: flex; gap: var(--lemoon-space-3); margin-top: var(--lemoon-space-6); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__button { display: inline-flex; justify-content: center; align-items: center; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-6); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); color: var(--lemoon-text-inverse); background: var(--lemoon-action-primary); font-family: var(--lemoon-font-heading); font-size: 1.4rem; font-weight: var(--lemoon-weight-semibold); text-decoration: none; cursor: pointer; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__button--back { color: var(--lemoon-text-brand); background: var(--lemoon-surface-page); }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__button:disabled { opacity: .5; cursor: not-allowed; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow__error { padding: var(--lemoon-space-4); border: 1px solid currentColor; border-radius: var(--lemoon-radius-md); color: var(--lemoon-status-error); font-size: 1.4rem; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow :is(input, button, a):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  #shopify-section-{{ section.id }} .lemoon-lens-flow [hidden] { display: none !important; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-lens-flow__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-lens-flow__preview { position: static; }
+    #shopify-section-{{ section.id }} .lemoon-lens-flow__image img { aspect-ratio: 2 / 1; }
+    #shopify-section-{{ section.id }} .lemoon-lens-flow__title { font-size: 2.8rem; }
+    #shopify-section-{{ section.id }} .lemoon-lens-flow__actions { flex-wrap: wrap; }
+  }
+{%- endstyle -%}
+<div class="lemoon-lens-flow page-width" data-lens-flow data-lens-configurator data-cart-url="{{ routes.cart_url }}" data-add-url="{{ routes.cart_add_url }}.js">
+  <h1 class="lemoon-lens-flow__title">{{ 'lemoon_lens_flow.title' | t }}</h1>
+  {%- if product == blank -%}
+    <p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.choose_frame_hint' | t }}</p>
+    <a class="lemoon-lens-flow__button" href="{{ routes.all_products_collection_url }}">{{ 'lemoon_lens_flow.choose_frame' | t }}</a>
+  {%- else -%}
+    <div class="lemoon-lens-flow__layout">
+      <div class="lemoon-lens-flow__preview">
+        {%- if selected_variant.featured_image != blank -%}
+          <div class="lemoon-lens-flow__image">{{ selected_variant.featured_image | image_url: width: 960 | image_tag: loading: 'eager', widths: '360, 640, 960', sizes: '(min-width: 750px) 40vw, 100vw', alt: product.title }}</div>
+        {%- elsif product.featured_image != blank -%}
+          <div class="lemoon-lens-flow__image">{{ product.featured_image | image_url: width: 960 | image_tag: loading: 'eager', widths: '360, 640, 960', sizes: '(min-width: 750px) 40vw, 100vw', alt: product.title }}</div>
+        {%- endif -%}
+        <p class="lemoon-lens-flow__product">{{ product.title | escape }}</p>
+        <p>{{ selected_variant.options.first | escape }}</p>
+        {%- if product.title contains 'Prototipo' -%}<p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.prototype' | t }}</p>{%- endif -%}
+        <a href="{{ product.url }}?variant={{ selected_variant.id }}&amp;lens_flow=return">{{ 'lemoon_lens_flow.back_product' | t }}</a>
+      </div>
+      <div>
+        {%- form 'product', product, id: flow_id, class: 'lemoon-lens-flow__form', enctype: 'multipart/form-data', novalidate: 'novalidate', data-configurator-form: '' -%}
+          <input type="hidden" name="id" value="" disabled>
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+          <input type="hidden" data-recipe-property name="properties[{{ 'lemoon_lens_flow.property_recipe' | t | escape }}]" disabled>
+          <input type="hidden" data-purpose-property name="properties[{{ 'lemoon_lens_flow.property_use' | t | escape }}]" disabled>
+          <div data-flow-unavailable hidden>
+            <p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.no_packages' | t }}</p>
+            <button class="lemoon-lens-flow__button" type="submit" data-frame-only-add hidden>{{ 'lemoon_lens_flow.buy_frame' | t }}</button>
+            <a class="lemoon-lens-flow__button" href="{{ product.url }}?variant={{ selected_variant.id }}&amp;lens_flow=return">{{ 'lemoon_lens_flow.back_product' | t }}</a>
+          </div>
+          <div data-flow-panels hidden>
+            <ol class="lemoon-lens-flow__steps" data-flow-progress aria-label="{{ 'lemoon_lens_flow.progress_label' | t | escape }}"></ol>
+            <p class="lemoon-lens-flow__count" data-step-count aria-live="polite"></p>
+            <div data-step="use">
+              <h2 tabindex="-1">{{ 'lemoon_lens_flow.use_title' | t }}</h2>
+              <p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.use_hint' | t }}</p>
+              <fieldset><legend class="visually-hidden">{{ 'lemoon_lens_flow.use_title' | t }}</legend><div class="lemoon-lens-flow__choices" data-choices="use"></div></fieldset>
+              <fieldset data-distance-options hidden><legend>{{ 'lemoon_lens_flow.distance_title' | t }}</legend>
+                <div class="lemoon-lens-flow__choices">
+                  <label class="lemoon-lens-flow__choice"><input type="radio" name="flow_distance" data-distance value="far"><span>{{ 'lemoon_lens_flow.distance_far' | t }}</span></label>
+                  <label class="lemoon-lens-flow__choice"><input type="radio" name="flow_distance" data-distance value="near"><span>{{ 'lemoon_lens_flow.distance_near' | t }}</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <div data-step="prescription" hidden>
+              <h2 tabindex="-1">{{ 'lemoon_lens_flow.prescription_title' | t }}</h2>
+              <p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.prescription_hint' | t }}</p>
+              <fieldset><legend class="visually-hidden">{{ 'lemoon_lens_flow.recipe_mode' | t }}</legend><div class="lemoon-lens-flow__choices">
+                <label class="lemoon-lens-flow__choice"><input type="radio" name="flow_recipe_mode" data-recipe-mode value="manual" checked><span>{{ 'lemoon_lens_flow.recipe_manual' | t }}</span></label>
+                <label class="lemoon-lens-flow__choice"><input type="radio" name="flow_recipe_mode" data-recipe-mode value="upload"><span>{{ 'lemoon_lens_flow.recipe_upload' | t }}</span></label>
+              </div></fieldset>
+              <div data-upload-panel hidden><label for="{{ flow_id }}-file">{{ 'lemoon_lens_flow.file_label' | t }}</label><input class="lemoon-lens-flow__file" id="{{ flow_id }}-file" data-recipe-file name="properties[{{ 'lemoon_lens_flow.property_file' | t | escape }}]" type="file" accept=".pdf,.jpg,.jpeg,.png" aria-describedby="{{ flow_id }}-file-hint" disabled><p class="lemoon-lens-flow__hint" id="{{ flow_id }}-file-hint">{{ 'lemoon_lens_flow.file_hint' | t }}</p></div>
+              <div data-manual-panel><div class="lemoon-lens-flow__rx">
+                {%- assign eyes = 'od,oi' | split: ',' -%}
+                {%- for eye in eyes -%}
+                  <fieldset class="lemoon-lens-flow__rx-eye"><legend>{% if eye == 'od' %}{{ 'lemoon_lens_flow.eye_od' | t }}{% else %}{{ 'lemoon_lens_flow.eye_oi' | t }}{% endif %}</legend>
+                    <label for="{{ flow_id }}-{{ eye }}-sph">{{ 'lemoon_lens_flow.sphere' | t }}<input id="{{ flow_id }}-{{ eye }}-sph" data-rx="{{ eye }}_sph" name="properties[{{ eye | upcase }} {{ 'lemoon_lens_flow.sphere' | t | escape }}]" type="number" min="-20" max="10" step="0.25" inputmode="decimal" disabled></label>
+                    <label for="{{ flow_id }}-{{ eye }}-cyl">{{ 'lemoon_lens_flow.cylinder' | t }}<input id="{{ flow_id }}-{{ eye }}-cyl" data-rx="{{ eye }}_cyl" name="properties[{{ eye | upcase }} {{ 'lemoon_lens_flow.cylinder' | t | escape }}]" type="number" min="-6" max="6" step="0.25" inputmode="decimal" disabled></label>
+                    <label for="{{ flow_id }}-{{ eye }}-axis">{{ 'lemoon_lens_flow.axis' | t }}<input id="{{ flow_id }}-{{ eye }}-axis" data-rx="{{ eye }}_axis" name="properties[{{ eye | upcase }} {{ 'lemoon_lens_flow.axis' | t | escape }}]" type="number" min="0" max="180" step="1" inputmode="numeric" disabled></label>
+                    <label data-addition hidden for="{{ flow_id }}-{{ eye }}-add">{{ 'lemoon_lens_flow.addition' | t }}<input id="{{ flow_id }}-{{ eye }}-add" data-rx="{{ eye }}_add" name="properties[{{ eye | upcase }} {{ 'lemoon_lens_flow.addition' | t | escape }}]" type="number" min="0.25" max="4" step="0.25" inputmode="decimal" disabled></label>
+                  </fieldset>
+                {%- endfor -%}
+                <label for="{{ flow_id }}-pd">{{ 'lemoon_lens_flow.pd' | t }}<input id="{{ flow_id }}-pd" data-rx="pd" name="properties[{{ 'lemoon_lens_flow.property_pd' | t | escape }}]" type="number" min="40" max="80" step="0.5" inputmode="decimal" disabled></label>
+              </div></div>
+            </div>
+            <div data-step="crystal" hidden><h2 tabindex="-1">{{ 'lemoon_lens_flow.crystal_title' | t }}</h2><fieldset><legend class="visually-hidden">{{ 'lemoon_lens_flow.crystal_title' | t }}</legend><div class="lemoon-lens-flow__choices" data-choices="crystal"></div></fieldset><p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.catalogue_hint' | t }}</p></div>
+            <div data-step="index" hidden><h2 tabindex="-1">{{ 'lemoon_lens_flow.index_title' | t }}</h2><fieldset><legend class="visually-hidden">{{ 'lemoon_lens_flow.index_title' | t }}</legend><div class="lemoon-lens-flow__choices" data-choices="index"></div></fieldset><p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.index_hint' | t }}</p></div>
+            <div data-step="extra" hidden><h2 tabindex="-1">{{ 'lemoon_lens_flow.extra_title' | t }}</h2><fieldset><legend class="visually-hidden">{{ 'lemoon_lens_flow.extra_title' | t }}</legend><div class="lemoon-lens-flow__choices" data-choices="extra"></div></fieldset></div>
+            <div data-step="review" hidden><h2 tabindex="-1">{{ 'lemoon_lens_flow.review_title' | t }}</h2><dl class="lemoon-lens-flow__summary" data-configurator-summary></dl><p data-recipe-summary></p><div class="lemoon-lens-flow__hint" data-recipe-details></div><p class="lemoon-lens-flow__hint">{{ 'lemoon_lens_flow.review_hint' | t }}</p></div>
+            <p class="lemoon-lens-flow__price"><span>{{ 'lemoon_lens_flow.total' | t }}</span><strong data-flow-price aria-live="polite"></strong></p>
+          </div>
+          <p class="lemoon-lens-flow__error" data-flow-error role="alert" aria-live="assertive" hidden></p>
+          <div class="lemoon-lens-flow__actions" data-flow-actions hidden><button class="lemoon-lens-flow__button lemoon-lens-flow__button--back" type="button" data-configurator-back hidden>{{ 'lemoon_lens_flow.back' | t }}</button><button class="lemoon-lens-flow__button" type="button" data-configurator-next disabled>{{ 'lemoon_lens_flow.continue' | t }}</button></div>
+          <noscript><p>{{ 'lemoon_lens_flow.javascript_hint' | t }}</p><a href="{{ product.url }}">{{ 'lemoon_lens_flow.back_product' | t }}</a></noscript>
+        {%- endform -%}
       </div>
     </div>
-
-    <div class="lemoon-configurator__step" data-step="3" hidden>
-      <p class="lemoon-configurator__eyebrow">PASO 3 DE 5</p><h1>Personaliza tus cristales</h1><p>Agrega tratamientos para tu forma de ver.</p>
-      <div class="lemoon-configurator__checks">
-        <label><input type="checkbox" name="treatment" value="antirreflejo"> Antirreflejo</label><label><input type="checkbox" name="treatment" value="blue"> Filtro azul</label><label><input type="checkbox" name="treatment" value="photochromic"> Fotocromático</label>
-      </div>
-    </div>
-
-    <div class="lemoon-configurator__step" data-step="4" hidden>
-      <p class="lemoon-configurator__eyebrow">PASO 4 DE 5</p><h1>Tu receta</h1><p>Ingresa los datos ahora o podrás enviarlos después.</p>
-      <div class="lemoon-configurator__prescription"><label>OD<input type="text" name="od" placeholder="Esfera"></label><label>OI<input type="text" name="oi" placeholder="Esfera"></label><label>D.P.<input type="text" name="pd" placeholder="mm"></label></div>
-    </div>
-
-    <div class="lemoon-configurator__step" data-step="5" hidden>
-      <p class="lemoon-configurator__eyebrow">PASO 5 DE 5</p><h1>Revisa tu configuración</h1><p>Podrás confirmar todos los detalles antes de agregarla al carrito.</p>
-      <div class="lemoon-configurator__summary" data-configurator-summary></div>
-    </div>
-
-    <div class="lemoon-configurator__actions">
-      <button type="button" class="button button--secondary" data-configurator-back hidden>Volver</button>
-      {%- if configurator_product != blank -%}
-        <button type="button" class="button" data-configurator-next>Continuar <span aria-hidden="true">→</span></button>
-      {%- else -%}
-        <a class="button" href="{{ routes.all_products_collection_url }}">Elegir un armazón <span aria-hidden="true">→</span></a>
-      {%- endif -%}
-    </div>
-    <p class="lemoon-configurator__note">Podrás revisar la configuración antes de pagar.</p>
-  </form>
-</section>
-<script src="{{ 'lens-configurator.js' | asset_url }}" defer="defer"></script>
-
+    {%- capture flow_data -%}{"selectedId":{{ selected_variant.id | json }},"options":{{ product.options | json }},"variants":[{% for variant in product.variants %}{"id":{{ variant.id | json }},"options":{{ variant.options | json }},"available":{{ variant.available | json }},"price":{{ variant.price | json }},"priceLabel":{{ variant.price | money | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}{%- endcapture -%}
+    <script type="application/json" data-lens-data>{{ flow_data | replace: '<', '\u003c' }}</script>
+    {%- capture flow_copy -%}{
+      "continue":{{ 'lemoon_lens_flow.continue' | t | json }},"add":{{ 'lemoon_lens_flow.add' | t | json }},"progress":{{ 'lemoon_lens_flow.progress' | t | json }},"pending":{{ 'lemoon_lens_flow.pending' | t | json }},"price_pending":{{ 'lemoon_lens_flow.price_pending' | t | json }},"cart_error":{{ 'lemoon_lens_flow.cart_error' | t | json }},"recipe_error":{{ 'lemoon_lens_flow.recipe_error' | t | json }},"file_error":{{ 'lemoon_lens_flow.file_error' | t | json }},"recipe_manual":{{ 'lemoon_lens_flow.recipe_manual' | t | json }},"recipe_upload":{{ 'lemoon_lens_flow.recipe_upload' | t | json }},"no_recipe":{{ 'lemoon_lens_flow.no_recipe' | t | json }},"distance_far":{{ 'lemoon_lens_flow.distance_far' | t | json }},"distance_near":{{ 'lemoon_lens_flow.distance_near' | t | json }},
+      "use_mono":{{ 'lemoon_lens_flow.use_mono' | t | json }},"use_progressive":{{ 'lemoon_lens_flow.use_progressive' | t | json }},"use_solar":{{ 'lemoon_lens_flow.use_solar' | t | json }},"crystal_clear":{{ 'lemoon_lens_flow.crystal_clear' | t | json }},"crystal_photo":{{ 'lemoon_lens_flow.crystal_photo' | t | json }},"crystal_sun":{{ 'lemoon_lens_flow.crystal_sun' | t | json }},"extra_none":{{ 'lemoon_lens_flow.extra_none' | t | json }},"extra_blue":{{ 'lemoon_lens_flow.extra_blue' | t | json }},
+      "step_use":{{ 'lemoon_lens_flow.step_use' | t | json }},"step_prescription":{{ 'lemoon_lens_flow.step_prescription' | t | json }},"step_crystal":{{ 'lemoon_lens_flow.step_crystal' | t | json }},"step_index":{{ 'lemoon_lens_flow.step_index' | t | json }},"step_extra":{{ 'lemoon_lens_flow.step_extra' | t | json }},"step_review":{{ 'lemoon_lens_flow.step_review' | t | json }},"summary_use":{{ 'lemoon_lens_flow.summary_use' | t | json }},"summary_crystal":{{ 'lemoon_lens_flow.summary_crystal' | t | json }},"summary_index":{{ 'lemoon_lens_flow.summary_index' | t | json }},"summary_extra":{{ 'lemoon_lens_flow.summary_extra' | t | json }}
+    }{%- endcapture -%}
+    <script type="application/json" data-lens-copy>{{ flow_copy | replace: '<', '\u003c' }}</script>
+    <script type="module" src="{{ 'lens-configurator.js' | asset_url }}"></script>
+  {%- endif -%}
+</div>
 {% schema %}
-{"name":"Configurador de lentes","tag":"section","class":"section","settings":[{"type":"image_picker","id":"image","label":"Imagen del armazón"},{"type":"text","id":"preview_label","label":"Etiqueta de imagen","default":"ARMAZÓN SELECCIONADO"},{"type":"text","id":"product_name","label":"Nombre del producto","default":"Dalton"},{"type":"text","id":"product_subtitle","label":"Subtítulo","default":"Configura tus cristales"}],"blocks":[{"type":"option","name":"Opción","settings":[{"type":"text","id":"title","label":"Título","default":"Solo armazón"},{"type":"text","id":"text","label":"Descripción","default":"Ideal si ya tienes tus lentes."}]}],"max_blocks":3,"presets":[{"name":"Configurador de lentes","blocks":[{"type":"option"},{"type":"option","settings":{"title":"Lentes con receta","text":"Sube tu receta o ingrésala más adelante."}},{"type":"option","settings":{"title":"Lentes de sol","text":"Protección UV y opciones polarizadas."}}]}]}
+{
+  "name": "t:sections.lemoon_lens_flow.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 64 }
+  ],
+  "presets": [{ "name": "t:sections.lemoon_lens_flow.name" }]
+}
 {% endschema %}

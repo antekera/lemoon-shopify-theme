@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Garantía legal</h2><p>La garantía legal de seis meses permite solicitar reparación, cambio o devolución cuando corresponda. La cobertura voluntaria de este ejemplo no sustituye ni reduce esos derechos.</p><h2>Cobertura voluntaria de muestra: 365 días</h2><p>El escenario de prueba contempla revisar defectos de fabricación del armazón durante 365 días corridos desde la recepción. No cubre pérdida, daño accidental, desgaste normal ni modificaciones de terceros dentro de esta cobertura voluntaria.</p><h2>Solicitar revisión</h2><p>Envía el número de pedido, una descripción y fotografías del defecto. La propuesta contempla una primera respuesta en 2 días hábiles y coordinar la evaluación sin costo cuando corresponda. La decisión se informa por escrito.</p><h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p>",
+        "kind": "warranty",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

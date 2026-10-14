@@ -1,0 +1,124 @@
+{%- liquid
+  assign guide_kind = section.settings.guide_kind | default: 'measurements'
+  assign guide_key = 'sections.lemoon_guide.' | append: guide_kind | append: '.'
+  assign title_key = guide_key | append: 'title'
+  assign intro_key = guide_key | append: 'intro'
+  assign visual_title_key = guide_key | append: 'visual_title'
+  assign visual_copy_key = guide_key | append: 'visual_copy'
+  assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+-%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-guide { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
+  #shopify-section-{{ section.id }} .lemoon-guide__hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: var(--lemoon-space-16); align-items: center; margin-bottom: var(--lemoon-space-16); }
+  #shopify-section-{{ section.id }} .lemoon-guide__title { max-width: 64rem; margin: 0; color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; letter-spacing: var(--lemoon-type-h1-tracking); }
+  #shopify-section-{{ section.id }} .lemoon-guide__intro { max-width: 58rem; margin: var(--lemoon-space-6) 0 0; font-size: var(--lemoon-fs-18); line-height: 1.6; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-guide__visual { margin: 0; padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-guide__visual svg { display: block; width: 100%; height: auto; color: var(--lemoon-text-brand); margin-bottom: var(--lemoon-space-6); }
+  #shopify-section-{{ section.id }} .lemoon-guide__visual-title { display: block; margin-bottom: var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-20); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-guide__visual-copy { display: block; font-size: var(--lemoon-fs-14); line-height: 1.6; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-guide__layout { display: grid; grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: var(--lemoon-space-16); align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav { position: sticky; top: 12rem; }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav-title { margin: 0 0 var(--lemoon-space-4); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav ol { margin: 0; padding-left: var(--lemoon-space-5); }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav a { display: inline-block; min-height: 4.4rem; padding: var(--lemoon-space-3) 0; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .4rem; }
+  #shopify-section-{{ section.id }} .lemoon-guide__steps { margin: 0; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .lemoon-guide__step { padding-bottom: var(--lemoon-space-8); margin-bottom: var(--lemoon-space-8); border-bottom: 1px solid var(--lemoon-border-default); scroll-margin-top: 14rem; }
+  #shopify-section-{{ section.id }} .lemoon-guide__step h2 { margin: 0 0 var(--lemoon-space-4); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); line-height: 1.25; }
+  #shopify-section-{{ section.id }} .lemoon-guide__step p { margin: 0; font-size: var(--lemoon-fs-16); line-height: 1.7; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-guide__help { padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-guide__help h2 { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-guide__help p { margin: 0 0 var(--lemoon-space-5); line-height: 1.6; font-size: var(--lemoon-fs-16); }
+  #shopify-section-{{ section.id }} .lemoon-guide__links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lemoon-space-4) var(--lemoon-space-6); }
+  #shopify-section-{{ section.id }} .lemoon-guide__links a { display: inline-flex; min-height: 4.8rem; align-items: center; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .4rem; }
+  #shopify-section-{{ section.id }} .lemoon-guide__links .lemoon-guide__cta { padding: var(--lemoon-space-3) var(--lemoon-space-6); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); border-radius: var(--lemoon-radius-button); text-decoration: none; font-family: var(--lemoon-font-heading); font-weight: var(--lemoon-weight-semibold); }
+  #shopify-section-{{ section.id }} .lemoon-guide__cta:hover { background: var(--lemoon-action-primary-hover); }
+  #shopify-section-{{ section.id }} .lemoon-guide a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .lemoon-guide__hero { gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-guide__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-guide__nav { position: static; }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-guide { padding-top: {{ section.settings.padding_top | times: 0.625 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round: 0 }}px; }
+    #shopify-section-{{ section.id }} .lemoon-guide__hero { grid-template-columns: minmax(0, 1fr); margin-bottom: var(--lemoon-space-10); }
+    #shopify-section-{{ section.id }} .lemoon-guide__title { font-size: 3.4rem; }
+    #shopify-section-{{ section.id }} .lemoon-guide__intro { font-size: var(--lemoon-fs-16); }
+    #shopify-section-{{ section.id }} .lemoon-guide__visual, #shopify-section-{{ section.id }} .lemoon-guide__help { padding: var(--lemoon-space-6); }
+    #shopify-section-{{ section.id }} .lemoon-guide__step h2, #shopify-section-{{ section.id }} .lemoon-guide__help h2 { font-size: 2.4rem; }
+  }
+{%- endstyle -%}
+<div class="lemoon-guide page-width" data-guide-kind="{{ guide_kind | escape }}">
+  <header class="lemoon-guide__hero">
+    <div>
+      <h1 class="lemoon-guide__title">{{ title_key | t }}</h1>
+      <p class="lemoon-guide__intro">{{ intro_key | t }}</p>
+    </div>
+    <figure class="lemoon-guide__visual">
+      <svg viewBox="0 0 320 160" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="28" y="27" width="111" height="68" rx="24"/><rect x="181" y="27" width="111" height="68" rx="24"/>
+        <path d="M139 46c14-10 28-10 42 0M18 37h10m264 0h10M28 117h111m-111-5v10m111-10v10M139 16h42m-42-5v10m42-10v10M40 145h198c20 0 36-7 42-21"/>
+      </svg>
+      <figcaption>
+        <span class="lemoon-guide__visual-title">{{ visual_title_key | t }}</span>
+        <span class="lemoon-guide__visual-copy">{{ visual_copy_key | t }}</span>
+      </figcaption>
+    </figure>
+  </header>
+  <div class="lemoon-guide__layout">
+    <nav class="lemoon-guide__nav" aria-label="{{ 'sections.lemoon_guide.index' | t | escape }}">
+      <p class="lemoon-guide__nav-title">{{ 'sections.lemoon_guide.index' | t }}</p>
+      <ol>
+        {%- for step in (1..3) -%}
+          {%- assign step_title_key = guide_key | append: 'step_' | append: step | append: '_title' -%}
+          <li><a href="#Guide-{{ section.id }}-{{ step }}">{{ step_title_key | t }}</a></li>
+        {%- endfor -%}
+      </ol>
+    </nav>
+    <div>
+      <ol class="lemoon-guide__steps">
+        {%- for step in (1..3) -%}
+          {%- liquid
+            assign step_title_key = guide_key | append: 'step_' | append: step | append: '_title'
+            assign step_body_key = guide_key | append: 'step_' | append: step | append: '_body'
+          -%}
+          <li class="lemoon-guide__step" id="Guide-{{ section.id }}-{{ step }}">
+            <h2>{{ step_title_key | t }}</h2>
+            <p>{{ step_body_key | t }}</p>
+          </li>
+        {%- endfor -%}
+      </ol>
+      <aside class="lemoon-guide__help" aria-labelledby="GuideHelp-{{ section.id }}">
+        <h2 id="GuideHelp-{{ section.id }}">{{ 'sections.lemoon_guide.help_title' | t }}</h2>
+        <p>{{ 'sections.lemoon_guide.help_body' | t }}</p>
+        <div class="lemoon-guide__links">
+          <a class="lemoon-guide__cta" href="{{ routes.all_products_collection_url }}">{{ 'sections.lemoon_guide.catalogue' | t }}</a>
+          <a href="{{ contact_url }}">{{ 'sections.lemoon_guide.contact' | t }}</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_guide.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    {
+      "type": "select", "id": "guide_kind", "label": "t:sections.lemoon_guide.kind_label", "default": "measurements",
+      "options": [
+        { "value": "measurements", "label": "t:sections.lemoon_guide.measurements" },
+        { "value": "face", "label": "t:sections.lemoon_guide.face" },
+        { "value": "order", "label": "t:sections.lemoon_guide.order" },
+        { "value": "try_on", "label": "t:sections.lemoon_guide.try_on" },
+        { "value": "prescription", "label": "t:sections.lemoon_guide.prescription" }
+      ]
+    },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 64 }
+  ],
+  "presets": [{ "name": "t:sections.lemoon_guide.name" }]
+}
+{% endschema %}

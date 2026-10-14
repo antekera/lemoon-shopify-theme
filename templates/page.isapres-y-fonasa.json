@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-service-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Documentos para una solicitud de muestra</h2><p>En este escenario de prueba, Servioptic SpA entrega una boleta y el detalle del producto para que puedas consultar a tu institución las condiciones de tu plan.</p><p>El ejemplo no contempla convenios directos con Isapres o Fonasa ni un porcentaje garantizado de reembolso. La institución confirma los documentos, requisitos y cobertura que correspondan.</p>",
+        "kind": "benefits",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

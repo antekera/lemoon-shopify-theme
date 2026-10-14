@@ -1,0 +1,232 @@
+{
+  "auditedOn": "2026-10-10",
+  "source": "Shopify Admin API: pages(first: 50), pagination complete",
+  "branch": "feat/remaining-storefront-pages",
+  "previewThemeId": "188783886504",
+  "applied": false,
+  "note": "Assignments are store-wide CMS metadata. Review specific templates before applying; current suffixes are preserved for rollback. Published state and CMS content must remain unchanged.",
+  "pages": [
+    {
+      "id": "gid://shopify/Page/121882443944",
+      "title": "Contact",
+      "handle": "contact",
+      "templateSuffix": "contact",
+      "isPublished": true,
+      "proposedTemplateSuffix": "contact",
+      "ticket": "LEM-117",
+      "status": "already_assigned",
+      "templatePath": "templates/page.contact.json",
+      "reviewUrl": "https://lemoon.cl/pages/contact?view=contact&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/122118471848",
+      "title": "sistema-de-diseno",
+      "handle": "sistema-de-diseno",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "status": "no_assignment_proposed",
+      "reason": "Internal design-system page; outside this page rollout."
+    },
+    {
+      "id": "gid://shopify/Page/122118996136",
+      "title": "Terminos y condiciones",
+      "handle": "terminos-y-condiciones",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "proposedTemplateSuffix": "terminos-y-condiciones",
+      "ticket": "LEM-119",
+      "status": "pending_review",
+      "templatePath": "templates/page.terminos-y-condiciones.json",
+      "reviewUrl": "https://lemoon.cl/pages/terminos-y-condiciones?view=terminos-y-condiciones&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/122119028904",
+      "title": "Politica de devoluciones",
+      "handle": "po",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "proposedTemplateSuffix": "politica-de-devoluciones",
+      "ticket": "LEM-113",
+      "status": "pending_review",
+      "templatePath": "templates/page.politica-de-devoluciones.json",
+      "reviewUrl": "https://lemoon.cl/pages/po?view=politica-de-devoluciones&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/122119061672",
+      "title": "Envios y entregas",
+      "handle": "envios-y-entregas",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "proposedTemplateSuffix": "envios-y-entregas",
+      "ticket": "LEM-114",
+      "status": "pending_review",
+      "templatePath": "templates/page.envios-y-entregas.json",
+      "reviewUrl": "https://lemoon.cl/pages/envios-y-entregas?view=envios-y-entregas&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/122119094440",
+      "title": "Preguntas frecuentes",
+      "handle": "preguntas-frecuentes",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "proposedTemplateSuffix": "preguntas-frecuentes",
+      "ticket": "LEM-116",
+      "status": "pending_review",
+      "templatePath": "templates/page.preguntas-frecuentes.json",
+      "reviewUrl": "https://lemoon.cl/pages/preguntas-frecuentes?view=preguntas-frecuentes&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161787576488",
+      "title": "Encuentra tu lente ideal",
+      "handle": "buscar-mi-estilo",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "buscar-mi-estilo",
+      "ticket": "LEM-11",
+      "status": "pending_review",
+      "templatePath": "templates/page.buscar-mi-estilo.json",
+      "reviewUrl": "https://lemoon.cl/pages/buscar-mi-estilo?view=buscar-mi-estilo&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161800257704",
+      "title": "Nosotros",
+      "handle": "nosotros",
+      "templateSuffix": "page",
+      "isPublished": true,
+      "proposedTemplateSuffix": "nosotros",
+      "ticket": "LEM-108",
+      "status": "pending_review",
+      "templatePath": "templates/page.nosotros.json",
+      "reviewUrl": "https://lemoon.cl/pages/nosotros?view=nosotros&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161802879144",
+      "title": "Lentes de sol",
+      "handle": "lentes-de-sol",
+      "templateSuffix": null,
+      "isPublished": true,
+      "status": "no_assignment_proposed",
+      "reason": "Navigation uses the existing native collection, not this legacy CMS page."
+    },
+    {
+      "id": "gid://shopify/Page/161802911912",
+      "title": "Cristales",
+      "handle": "cristales",
+      "templateSuffix": null,
+      "isPublished": true,
+      "status": "no_assignment_proposed",
+      "reason": "Navigation uses the existing native collection, not this legacy CMS page."
+    },
+    {
+      "id": "gid://shopify/Page/161807138984",
+      "title": "Elegir lentes según tu rostro",
+      "handle": "elegir-lentes-segun-tu-rostro",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "guia-rostro",
+      "ticket": "LEM-103",
+      "status": "pending_review",
+      "templatePath": "templates/page.guia-rostro.json",
+      "reviewUrl": "https://lemoon.cl/pages/elegir-lentes-segun-tu-rostro?view=guia-rostro&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807171752",
+      "title": "Cómo usar el probador virtual",
+      "handle": "como-usar-probador-virtual",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "guia-probador",
+      "ticket": "LEM-104",
+      "status": "pending_review",
+      "templatePath": "templates/page.guia-probador.json",
+      "reviewUrl": "https://lemoon.cl/pages/como-usar-probador-virtual?view=guia-probador&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807204520",
+      "title": "Cómo medir tus lentes",
+      "handle": "como-medir-tus-lentes",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "guia-medidas",
+      "ticket": "LEM-105",
+      "status": "pending_review",
+      "templatePath": "templates/page.guia-medidas.json",
+      "reviewUrl": "https://lemoon.cl/pages/como-medir-tus-lentes?view=guia-medidas&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807237288",
+      "title": "Cómo enviar tu prescripción",
+      "handle": "como-enviar-prescripcion",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "guia-prescripcion",
+      "ticket": "LEM-106",
+      "status": "pending_review",
+      "templatePath": "templates/page.guia-prescripcion.json",
+      "reviewUrl": "https://lemoon.cl/pages/como-enviar-prescripcion?view=guia-prescripcion&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807270056",
+      "title": "Cómo hacer tu pedido",
+      "handle": "como-hacer-tu-pedido",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "guia-pedido",
+      "ticket": "LEM-107",
+      "status": "pending_review",
+      "templatePath": "templates/page.guia-pedido.json",
+      "reviewUrl": "https://lemoon.cl/pages/como-hacer-tu-pedido?view=guia-pedido&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807302824",
+      "title": "Isapres y Fonasa",
+      "handle": "isapres-y-fonasa",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "isapres-y-fonasa",
+      "ticket": "LEM-112",
+      "status": "pending_review",
+      "templatePath": "templates/page.isapres-y-fonasa.json",
+      "reviewUrl": "https://lemoon.cl/pages/isapres-y-fonasa?view=isapres-y-fonasa&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807335592",
+      "title": "Garantías",
+      "handle": "garantias",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "garantias",
+      "ticket": "LEM-115",
+      "status": "pending_review",
+      "templatePath": "templates/page.garantias.json",
+      "reviewUrl": "https://lemoon.cl/pages/garantias?view=garantias&preview_theme_id=188783886504"
+    },
+    {
+      "id": "gid://shopify/Page/161807401128",
+      "title": "Operativos oftalmológicos",
+      "handle": "operativos-oftalmologicos",
+      "templateSuffix": null,
+      "isPublished": true,
+      "proposedTemplateSuffix": "operativos-oftalmologicos",
+      "ticket": "LEM-111",
+      "status": "pending_review",
+      "templatePath": "templates/page.operativos-oftalmologicos.json",
+      "reviewUrl": "https://lemoon.cl/pages/operativos-oftalmologicos?view=operativos-oftalmologicos&preview_theme_id=188783886504"
+    }
+  ],
+  "missingPages": [
+    {
+      "handle": "privacidad",
+      "ticket": "LEM-118",
+      "templatePath": "templates/page.privacidad.json",
+      "status": "not_created",
+      "reason": "Native privacy policy is at /policies/privacy-policy. Sample page template is reviewed through /pages/contact?view=privacidad; do not overwrite Contact or the published policy."
+    }
+  ],
+  "missingPurchasableGiftPage": {
+    "ticket": "LEM-9",
+    "templatePath": "templates/page.gift-card.json",
+    "status": "not_created",
+    "reason": "Purchase review uses draft product tarjeta-de-regalo-lemoon with product.gift-card; no credit issued."
+  }
+}

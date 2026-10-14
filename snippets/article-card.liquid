@@ -11,6 +11,7 @@
   - show_author: {String} The setting either show the article author or not. If it's not included it will not show the author by default
   - show_badge: {String} The setting either show the blog badge or not.
   - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  - image_sizes: {String} Responsive image sizes for the caller's grid (optional)
 
   Usage:
   {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
@@ -60,7 +61,7 @@
                   {{ article.image.src | image_url }} {{ article.image.src.width }}w
                 "
                 src="{{ article.image.src | image_url: width: 533 }}"
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+                sizes="{% if image_sizes != blank %}{{ image_sizes | escape }}{% else %}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){% endif %}"
                 alt="{{ article.image.src.alt | escape }}"
                 class="motion-reduce"
                 {% unless lazy_load == false %}

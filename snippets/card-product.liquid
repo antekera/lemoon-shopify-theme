@@ -20,10 +20,14 @@
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 {%- unless skip_styles -%}
-  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
-  {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
-
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {%- if show_rating -%}
+    {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+  {%- if request.page_type == 'index' -%}
+    <style>{{ 'component-price.css' | inline_asset_content }}</style>
+  {%- else -%}
+    {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
   <script src="{{ 'lemoon-product-card.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}

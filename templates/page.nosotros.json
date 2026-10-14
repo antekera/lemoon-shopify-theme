@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-about-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Lemoon y Servioptic SpA</h2><p>En este escenario de demostración, Servioptic SpA opera Lemoon: una tienda de armazones y lentes pensada para acompañarte desde la elección del modelo hasta el seguimiento de tu pedido.</p><h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

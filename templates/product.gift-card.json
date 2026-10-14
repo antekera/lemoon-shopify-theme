@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-gift-card-purchase",
+      "settings": { "intro": "", "padding_top": 36, "padding_bottom": 36 }
+    }
+  },
+  "order": ["main"]
+}

@@ -37,13 +37,18 @@
         </cart-note>
       {%- endif -%}
 
-      <div class="cart__blocks">
+      <div class="cart__blocks lemoon-cart-summary" aria-labelledby="Cart-summary-heading">
+        <h2 id="Cart-summary-heading" class="lemoon-cart-summary__heading">{{ 'sections.cart.summary' | t }}</h2>
         {% for block in section.blocks %}
           {%- case block.type -%}
             {%- when '@app' -%}
               {% render block %}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
+                <dl class="lemoon-cart-summary__rows">
+                  <div><dt>{{ 'sections.cart.subtotal' | t }}</dt><dd>{{ cart.items_subtotal_price | money }}</dd></div>
+                  <div><dt>{{ 'sections.cart.shipping' | t }}</dt><dd>{{ 'sections.cart.shipping_at_checkout' | t }}</dd></div>
+                </dl>
                 <div>
                   {%- if cart.cart_level_discount_applications.size > 0 -%}
                     <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
@@ -127,7 +132,8 @@
           {%- endcase -%}
         {% endfor %}
 
-        <div id="cart-errors"></div>
+        <p class="lemoon-cart-summary__secure">{{ 'sections.cart.secure_checkout' | t }}</p>
+        <div id="cart-errors" role="alert" aria-live="assertive"></div>
       </div>
     </div>
   </div>

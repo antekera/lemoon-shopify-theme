@@ -32,12 +32,16 @@ Update whenever a section is added, removed, or moved.
 | `main-page.liquid`                    | Generic CMS page content             | page template       | ✅ exists |
 | `main-password-footer.liquid`         | Password page footer                 | password template   | ✅ exists |
 | `main-product.liquid`                 | Product detail page (PDP)            | product template    | ✅ exists |
-| `main-search.liquid`                  | Search results                       | search template     | ✅ exists |
+| `main-search.liquid`                  | Editorial catalogue search with native predictive search, real paginated results/facets and recovery suggestions | search template | Customized — awaiting page review |
 | `collapsible-content.liquid`          | Accordion / FAQ                      | any                 | ✅ exists |
 
 ---
 
 ## Custom Lemoon sections — planned
+
+| Section file | Purpose | Used in templates | Status |
+| --- | --- | --- | --- |
+| `lemoon-contact-page.liquid` | Editorial contact page with native Shopify form, required accessible fields and optional confirmed business channels | `page.contact.json` | Implemented — awaiting page review |
 
 Discovered from competitor research (Warby Parker, Ace & Tate, Zeelool, Clearly, Zenni).
 Priority: `MVP` · `POST-MVP`.
@@ -48,11 +52,11 @@ Priority: `MVP` · `POST-MVP`.
 | `how-it-works.liquid`             | 3-step process: elige → configura → recibe                             | MVP      | `[ ]`  |
 | `lifestyle-mood-grid.liquid`      | Editorial style tribe tiles: "Minimalista", "Ejecutivo", "Retro", etc. | MVP      | `[ ]`  |
 | `social-proof-strip.liquid`       | Dark band with star rating, review count, and customer milestone       | MVP      | `[ ]`  |
-| `lens-configurator.liquid`        | Multi-step lens configuration flow (5 steps, custom JS)                | MVP      | `[ ]`  |
+| `lens-configurator.liquid`        | Refined post-PDP lens flow: usage, prescription, crystal, thickness, native package extras and review; only available Shopify combinations | MVP | Implemented — `product.configurador.json` / `page.configurador-de-lentes.json`; awaiting review |
 | `whatsapp-float.liquid`           | Fixed floating WhatsApp CTA button, bottom-right corner                | MVP      | `[ ]`  |
 | `prescription-intent-cta.liquid`  | PDP inline CTA: "¿Necesitas cristales?" → WhatsApp deeplink            | MVP      | `[ ]`  |
 | `size-guide-diagram.liquid`       | Inline armazón dimension diagram with measurement callouts             | MVP      | `[ ]`  |
-| `cart-upsell-row.liquid`          | Accessory upsell strip at the bottom of cart (estuche, paños)          | MVP      | `[ ]`  |
+| `cart-upsell-row.liquid`          | Cart accessory cards from configured Shopify products; hidden for empty cart/no products; quick add only for a single available variant | MVP | Implemented — `cart.json`; awaiting page review |
 | `style-quiz-entry.liquid`         | CTA section launching the style quiz / frame recommender               | POST-MVP | `[ ]`  |
 | `ugc-instagram-grid.liquid`       | Instagram / UGC photo grid (customer lifestyle photos)                 | POST-MVP | `[ ]`  |
 | `loyalty-banner.liquid`           | Lemoon Rewards / loyalty program highlight strip                       | POST-MVP | `[ ]`  |
@@ -102,3 +106,34 @@ Key patterns observed (prioritized for implementation):
 - Trust strip above footer: icon+text horizontal bar (5–6 guarantees at a glance)
 - "Frames" micro-tag (small dark pill) bottom-right of every banner/campaign image
 - Delivery ETA on product cards ("Llega el lunes 25") — reduces purchase anxiety
+
+### Entregas editoriales — octubre 2026
+
+| Sección | Uso | Templates | Estado |
+| --- | --- | --- | --- |
+| `main-blog.liquid` | Journal con artículos/tags/paginación y newsletter nativo | `blog.json`, `blog.editorial.json` | Implementado; revisión aprobada; pruebas storefront aprobadas |
+| `main-article.liquid` | Artículo CMS, lectura calculada, comentarios/share nativos | `article.json`, `article.editorial.json` | Implementado; revisión aprobada; pruebas storefront aprobadas |
+| `lemoon-guide-page.liquid` | Guía editorial reutilizable con índice y diagrama; cinco temas | `page.guia-medidas/rostro/pedido/probador/prescripcion.json` | Implementado; revisión aprobada; 15 casos storefront pasan; asignación CMS pendiente |
+| `lemoon-faq-page.liquid` | Preguntas agrupadas, disclosures nativos y bloques editables | `page.preguntas-frecuentes.json` | Implementado; revisiones aprobadas; storefront aprobado |
+| `lemoon-about-page.liquid` | Identidad editorial, valores e historia verificada opcional | `page.nosotros.json` | Implementado; revisiones aprobadas; storefront aprobado |
+| `lemoon-legal-page.liquid` | Contenido CMS preservado y contacto para condiciones faltantes | `page.envios-y-entregas/politica-de-devoluciones/terminos-y-condiciones/garantias.json` | Shell implementado y revisado; textos definitivos pendientes |
+| `lemoon-service-page.liquid` | Consultas de operativos y condiciones según plan | `page.operativos-oftalmologicos/isapres-y-fonasa.json` | Implementado y revisado; disponibilidad/convenios pendientes |
+| `lemoon-launch-page.liquid` | Lanzamiento con newsletter nativo y consentimiento explícito | `password.json` | Implementado y revisado; storefront aprobado |
+
+| `lemoon-crystal-guide.liquid` | Guía editorial de cristales: tipos, grosor y receta; CTA a ópticos y producto configurable opcional | `collection.json`, visible solo para `cristales` | Implementada; pendiente integración y revisión storefront |
+
+
+Políticas nativas: `layout/theme.liquid` aplica el shell editorial únicamente a
+`request.page_type == 'policy'`, preservando el contenido nativo. Usa
+`assets/lemoon-native-policies.css` y `snippets/lemoon-native-policy-help.liquid`.
+Las preferencias se comparten con el diálogo del footer mediante
+`assets/lemoon-cookie-preferences.js`; no genera una segunda política ni guarda
+consentimiento fuera de la API nativa.
+
+### Selección editorial de armazones — LEM-11
+
+`lemoon-style-quiz.liquid`, `assets/lemoon-style-quiz.js`, `page.buscar-mi-estilo.json`: cuatro preguntas accesibles; curaduría por bloques de producto, máximo tres resultados disponibles, presupuesto estricto y enlace al filtro de precio real de la colección. Usa la variante disponible más económica y conserva una selección editorial sin JavaScript. Implementado para revisión; asignación CMS y validación storefront pendientes. Figma aporta dirección editorial del home; no contiene pantalla específica de este cuestionario.
+
+### Compra de tarjeta regalo — LEM-9
+
+`lemoon-gift-card-purchase.liquid`: composición editorial con tarjeta ilustrativa sin códigos, denominaciones desde variantes nativas y formulario de destinatario opcional con alternativa sin JavaScript. Admite templates de página y producto; rechaza productos normales y deshabilita compra de borradores. Destinos previstos: `page.gift-card.json` y `product.gift-card.json`. Implementada para revisión; catálogo, integración y validación storefront a cargo del flujo de implementación.

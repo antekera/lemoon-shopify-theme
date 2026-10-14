@@ -568,6 +568,10 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   cursor: pointer;
 }
 
+.lemoon-shared-benefits {
+  display: contents;
+}
+
 .lemoon-trust-bar {
   display: flex;
   min-height: 88px;

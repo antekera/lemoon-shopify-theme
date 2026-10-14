@@ -14,7 +14,9 @@ test('disables the lens action for an unavailable variant and restores it for an
   await expect(page.locator('[data-status-sold-out]')).toBeVisible();
   await expect(page.locator('[data-status-sale]')).toBeHidden();
   await expect(configure).toHaveCSS('background-color', 'rgb(232, 234, 237)');
-  await page.getByRole('radio', { name: 'Azul', exact: true }).check();
+  const colour = page.getByRole('radio', { name: 'Azul', exact: true });
+  await page.locator('label.lemoon-pdp__choice').filter({ has: colour }).click();
+  await expect(colour).toBeChecked();
   await expect(configure).toBeEnabled();
   await expect(configure).toHaveText('Seleccionar lentes y comprar');
   await expect(page.locator('[data-pdp-status]')).toBeHidden();

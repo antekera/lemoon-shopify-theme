@@ -4,27 +4,25 @@
       "type": "main-cart-items",
       "settings": {
         "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "cart-footer": {
       "type": "main-cart-footer",
       "settings": {
         "color_scheme": "scheme-1",
-        "padding_top": 20,
-        "padding_bottom": 40
+        "padding_top": 0,
+        "padding_bottom": 0
       },
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -34,13 +32,13 @@
     },
     "upsell": {
       "type": "cart-upsell-row",
-      "blocks": {
-        "case": { "type": "product", "settings": { "placeholder_title": "Estuche", "placeholder_price": "$9.990" } },
-        "cloth": { "type": "product", "settings": { "placeholder_title": "Paño de limpieza", "placeholder_price": "$9.990" } },
-        "cord": { "type": "product", "settings": { "placeholder_title": "Cordón", "placeholder_price": "$9.990" } }
-      },
-      "block_order": ["case", "cloth", "cord"],
-      "settings": { "heading": "Completa tu pedido" }
+      "blocks": {},
+      "block_order": [],
+      "settings": {
+        "heading": "Completa tu pedido",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [

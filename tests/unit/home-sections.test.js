@@ -1,8 +1,149 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
+import { Liquid } from 'liquidjs';
 
 const source = (path) => readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const schemaOf = (liquid) => JSON.parse(liquid.match(/\{% schema %\}([\s\S]*?)\{% endschema %\}/)[1]);
+
+test('hero renders its critical styles before the first image without a CSS network dependency', async () => {
+  const [hero, styles] = await Promise.all([
+    source('sections/lemoon-hero.liquid'),
+    source('assets/lemoon-hero.css'),
+  ]);
+  // Shopify only permits inline assets smaller than 15 KB.
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', (name) => {
+    expect(name).toBe('lemoon-hero.css');
+    return styles;
+  });
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('asset_img_url', (name, size) => `/assets/${name.replace('.jpg', `_${size}.jpg`)}`);
+  const preloads = [];
+  engine.registerFilter('preload_tag', (url, ...attributes) => {
+    preloads.push({ url, attributes: Object.fromEntries(attributes) });
+    return '';
+  });
+  engine.registerFilter('t', (key) => key);
+  const html = await engine.parseAndRender(hero.split('{% schema %}')[0], {
+    shop: { name: 'Lemoon' },
+    section: { id: 'hero', settings: { autoplay_seconds: 4 }, blocks: [
+      { id: 'first', settings: { desktop_asset: 'desktop.jpg', mobile_asset: 'mobile.jpg' } },
+      { id: 'second', settings: { desktop_asset: 'second.jpg' } },
+    ] },
+  });
+  expect(html).toContain(`<style>${styles}</style>`);
+  expect(html.indexOf('</style>')).toBeLessThan(html.indexOf('<picture'));
+  expect(html).not.toContain('href="/assets/lemoon-hero.css"');
+  expect(html).toMatch(/src="\/assets\/desktop.jpg"[^>]*loading="eager"[^>]*fetchpriority="high"/);
+  expect(html).toMatch(/src="\/assets\/second.jpg"[^>]*loading="lazy"/);
+  expect(html).toContain('srcset="/assets/mobile_375x.jpg 375w, /assets/mobile_550x.jpg 550w, /assets/mobile_750x.jpg 750w, /assets/mobile_941x.jpg 941w" sizes="100vw"');
+  expect(preloads).toHaveLength(2);
+  expect(preloads[0]).toMatchObject({ url: '/assets/mobile_750x.jpg', attributes: { as: 'image', media: '(max-width: 749px)', imagesizes: '100vw', fetchpriority: 'high' } });
+  expect(preloads[0].attributes.imagesrcset).toBe('/assets/mobile_375x.jpg 375w, /assets/mobile_550x.jpg 550w, /assets/mobile_750x.jpg 750w, /assets/mobile_941x.jpg 941w');
+  expect(preloads[1]).toMatchObject({ url: '/assets/desktop.jpg', attributes: { as: 'image', media: '(min-width: 750px)', fetchpriority: 'high' } });
+});
+
+test('home benefits retain their shared layout without importing product-page styles', async () => {
+  const [bar, sharedStyles, productStyles] = await Promise.all([
+    source('sections/trust-bar.liquid'),
+    source('assets/lemoon-components.css'),
+    source('assets/lemoon-pdp-layout.css'),
+  ]);
+  expect(bar).not.toContain('lemoon-pdp-layout.css');
+  expect(sharedStyles).toMatch(/\.lemoon-shared-benefits\s*\{\s*display:\s*contents;/);
+  expect(productStyles).toMatch(/\.lemoon-shared-benefits--product\s*\{\s*display:\s*grid;/);
+});
+
+test('home critical header styles render inline while other pages retain cached stylesheets', async () => {
+  const layout = await source('layout/theme.liquid');
+  const criticalStyles = layout.match(/\{%- if request.page_type == 'index' -%\}([\s\S]*?)\{%- endif -%\}/)[0];
+  const names = [...criticalStyles.matchAll(/'([^']+\.css)' \| inline_asset_content/g)].map((match) => match[1]);
+  expect(names).toHaveLength(5);
+  const assets = Object.fromEntries(await Promise.all(names.map(async (name) => [name, await source(`assets/${name}`)])));
+  for (const styles of Object.values(assets)) expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', (name) => assets[name]);
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(criticalStyles, { request: { page_type: 'index' } });
+  const product = await engine.parseAndRender(criticalStyles, { request: { page_type: 'product' } });
+  expect(home).not.toContain('<link');
+  for (const [name, styles] of Object.entries(assets)) {
+    expect(home).toContain(styles);
+    expect(product).toContain(`href="/assets/${name}"`);
+  }
+});
+
+test('home avoids preloading Dawn fonts while other templates retain their font hints', async () => {
+  const layout = await source('layout/theme.liquid');
+  const connect = layout.slice(layout.indexOf('    {%- unless'), layout.indexOf('    <title>'));
+  const fontHints = layout.slice(layout.indexOf('    {%- unless', layout.indexOf('component-cart-items.css')), layout.indexOf('    {%- if localization.available_countries'));
+  const engine = new Liquid();
+  engine.registerFilter('font_url', (font) => `/fonts/${font.family}.woff2`);
+  const settings = { type_body_font: { family: 'body', 'system?': false }, type_header_font: { family: 'heading', 'system?': false } };
+  const home = await engine.parseAndRender(connect + fontHints, { request: { page_type: 'index' }, settings });
+  expect(home).not.toContain('fonts.shopifycdn.com');
+  expect(home).not.toContain('as="font"');
+  const product = await engine.parseAndRender(connect + fontHints, { request: { page_type: 'product' }, settings });
+  expect(product).toContain('fonts.shopifycdn.com');
+  expect(product).toContain('/fonts/body.woff2');
+  expect(product).toContain('/fonts/heading.woff2');
+  expect(layout).toContain("settings.type_body_font | font_face: font_display: 'swap'");
+  expect(layout).toContain('family=Hanken+Grotesk');
+});
+
+test.each(['snippets/lemoon-mobile-nav.liquid', 'snippets/lemoon-mobile-search.liquid', 'sections/footer.liquid'])('home avoids the late CSS dependency in %s', async (path) => {
+  const markup = (await source(path)).match(/\{%- if request.page_type == 'index' -%\}[\s\S]*?\{%- endif -%\}/)[0];
+  const name = markup.match(/'([^']+\.css)' \| inline_asset_content/)[1];
+  const styles = await source(`assets/${name}`);
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', () => styles);
+  engine.registerFilter('asset_url', (asset) => `/assets/${asset}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(markup, { request: { page_type: 'index' } });
+  expect(home).toContain(`<style>${styles}</style>`);
+  expect(home).not.toContain('<link');
+  const product = await engine.parseAndRender(markup, { request: { page_type: 'product' } });
+  expect(product).toContain(`href="/assets/${name}"`);
+});
+
+test('card styles load ratings only when shown and omit unused volume-pricing styles', async () => {
+  const card = await source('snippets/card-product.liquid');
+  const markup = card.slice(card.indexOf('{%- unless skip_styles -%}'), card.indexOf('{%- if card_product and card_product != empty -%}'));
+  const styles = await source('assets/component-price.css');
+  expect(Buffer.byteLength(styles)).toBeLessThan(15 * 1024);
+  const engine = new Liquid();
+  engine.registerFilter('inline_asset_content', () => styles);
+  engine.registerFilter('asset_url', (asset) => `/assets/${asset}`);
+  engine.registerFilter('stylesheet_tag', (url) => `<link rel="stylesheet" href="${url}">`);
+  const home = await engine.parseAndRender(markup, { request: { page_type: 'index' }, show_rating: false });
+  expect(home).toContain(`<style>${styles}</style>`);
+  expect(home).not.toContain('<link');
+  const rated = await engine.parseAndRender(markup, { request: { page_type: 'product' }, show_rating: true });
+  expect(rated).toContain('component-rating.css');
+  expect(rated).toContain('component-price.css');
+  expect(rated).not.toContain('component-volume-pricing.css');
+  expect(await engine.parseAndRender(markup, { skip_styles: true })).not.toContain('<style');
+});
+
+test('category asset fallbacks offer responsive widths and remain lazy loaded', async () => {
+  const section = await source('sections/lifestyle-mood-grid.liquid');
+  const engine = new Liquid();
+  engine.registerFilter('asset_url', (name) => `/assets/${name}`);
+  engine.registerFilter('asset_img_url', (name, size) => `/assets/${name.replace('.png', `_${size}.png`)}`);
+  const html = await engine.parseAndRender(section.split('{% schema %}')[0], {
+    routes: { all_products_collection_url: '/collections/all' },
+    section: { settings: {}, blocks: [{ settings: { heading: 'Ópticos' } }, { settings: { heading: 'Sol' } }, { settings: { heading: 'Accesorios' } }] },
+  });
+  for (const name of ['lemoon-style-minimalista', 'lemoon-style-sol', 'lemoon-category-accessories']) {
+    expect(html).toContain(`/assets/${name}_800x.png 800w`);
+    expect(html).toContain(`/assets/${name}_1122x.png 1122w`);
+  }
+  expect(html.match(/sizes="\(min-width: 750px\) 32vw, 100vw"/g)).toHaveLength(3);
+  expect(html.match(/loading="lazy"/g)).toHaveLength(3);
+});
 
 test('about copy shares the same page-width container as featured product carousels', async () => {
   const [about, featured, styles] = await Promise.all([

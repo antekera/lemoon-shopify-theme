@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p><h2>Datos utilizados en el escenario de prueba</h2><p>El recorrido contempla nombre, correo, dirección de entrega y datos del pedido para gestionar la compra y responder consultas. La información de pago se procesa en el proveedor que esté habilitado en Shopify.</p><h2>Recetas y acceso</h2><p>La receta puede contener información sensible. En este escenario solo se usan documentos sintéticos, sin datos personales reales. El diseño contempla acceso limitado al equipo encargado de preparar el pedido y a los proveedores necesarios, cuyos nombres deben confirmarse antes de operar.</p><h2>Conservación de muestra</h2><p>La propuesta de prueba contempla eliminar los archivos de receta 90 días después de entregar el pedido. Los documentos comerciales se conservan durante los plazos que correspondan. Estos plazos son datos de muestra; no hay una automatización de eliminación implementada por este texto.</p><h2>Comunicaciones y consultas</h2><p>La suscripción comercial es opcional y requiere consentimiento. El escenario contempla solicitudes de acceso, corrección o eliminación por el canal de contacto; el correo de ejemplo no está operativo. La política nativa publicada permanece disponible por separado.</p><h2>Cookies y preferencias</h2><p>Las cookies obligatorias permiten usar el carrito, acceder a la cuenta y completar la compra. Las opcionales se agrupan en personalización (idioma y país), analítica (uso de la tienda y navegación) y marketing (medición de campañas y publicidad según intereses).</p><p>El banner permite aceptar, rechazar o configurar las categorías opcionales. Para cambiar o retirar tu elección, abre Preferencias de cookies en el pie de página, ajusta las categorías y guarda tu elección, o elige Rechazar todas. Shopify administra el registro de estas preferencias.</p><p>Los proveedores de analítica y marketing, sus cookies y los plazos de conservación específicos deben confirmarse antes de publicar esta política de muestra.</p>",
+        "kind": "privacy",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

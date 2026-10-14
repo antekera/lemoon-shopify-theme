@@ -1,0 +1,66 @@
+{%- style -%}
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-preferences {
+  display: inline-flex;
+  min-height: var(--lemoon-size-touch);
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--lemoon-text-inverse);
+  font: inherit;
+  font-size: 1.3rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: .3rem;
+}
+
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-preferences[hidden] { display: none; }
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-preferences:hover { color: var(--lemoon-action-accent); }
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-preferences:focus-visible { outline: 2px solid var(--lemoon-action-accent); outline-offset: 3px; }
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-status { display: block; max-width: 32rem; color: var(--lemoon-text-inverse); font-size: 1.3rem; line-height: 1.5; }
+#shopify-section-{{ section_id }} .lemoon-footer__cookie-status:empty { display: none; }
+
+#shopify-section-{{ section_id }} .lemoon-footer__legal-links { align-items: center; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog { width: min(60rem, calc(100vw - 3.2rem)); max-height: calc(100dvh - 3.2rem); margin: auto; padding: var(--lemoon-space-8); border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-page); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-body); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog::backdrop { background: rgb(11 31 58 / .45); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__header { display: flex; align-items: flex-start; gap: var(--lemoon-space-4); justify-content: space-between; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog h2 { margin: 0; font-family: var(--lemoon-font-heading); font-size: 2.4rem; line-height: 1.25; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog p { font-size: 1.4rem; line-height: 1.6; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__close { display: grid; place-items: center; flex: 0 0 var(--lemoon-size-touch); width: var(--lemoon-size-touch); height: var(--lemoon-size-touch); border: 0; background: transparent; color: inherit; cursor: pointer; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__close svg { width: 2rem; height: 2rem; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__purposes { display: grid; gap: var(--lemoon-space-4); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__purposes label { display: flex; align-items: flex-start; gap: var(--lemoon-space-3); min-height: var(--lemoon-size-touch); padding: var(--lemoon-space-4); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-warm); cursor: pointer; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__purposes input { width: 1.8rem; height: 1.8rem; flex: 0 0 1.8rem; margin: .3rem 0 0; accent-color: var(--lemoon-text-brand); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__purposes strong { display: block; font-size: 1.5rem; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__purposes span span { display: block; margin-top: .4rem; font-size: 1.4rem; line-height: 1.5; color: var(--lemoon-text-secondary); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__policy { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); margin-top: var(--lemoon-space-3); color: inherit; font-size: 1.4rem; text-underline-offset: .3rem; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--lemoon-space-3); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__actions button { min-height: var(--lemoon-size-touch); padding: var(--lemoon-space-3); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-size: 1.4rem; cursor: pointer; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog__actions button:last-child { grid-column: 1 / -1; background: transparent; color: var(--lemoon-text-brand); }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog button:disabled { opacity: .6; cursor: wait; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog :focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 3px; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog [data-cookie-error]:empty { display: none; }
+#shopify-section-{{ section_id }} .lemoon-cookie-dialog [data-cookie-error] { color: var(--lemoon-text-error); }
+@media (max-width: 749px) { #shopify-section-{{ section_id }} .lemoon-cookie-dialog { padding: var(--lemoon-space-5); } }
+{%- endstyle -%}
+
+<dialog class="lemoon-cookie-dialog" id="LemoonCookiePreferences-{{ section_id }}" data-cookie-dialog aria-labelledby="LemoonCookieTitle-{{ section_id }}">
+  <div class="lemoon-cookie-dialog__header">
+    <h2 id="LemoonCookieTitle-{{ section_id }}">{{ 'sections.lemoon_footer_privacy.preferences' | t }}</h2>
+    <button type="button" class="lemoon-cookie-dialog__close" data-cookie-close aria-label="{{ 'sections.lemoon_footer_privacy.close' | t | escape }}"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+  </div>
+  <p>{{ 'sections.lemoon_footer_privacy.intro' | t }}</p>
+  <div class="lemoon-cookie-dialog__purposes">
+    <label><input type="checkbox" checked disabled><span><strong>{{ 'sections.lemoon_footer_privacy.essential' | t }}</strong><span>{{ 'sections.lemoon_footer_privacy.essential_text' | t }}</span></span></label>
+    <label><input type="checkbox" data-cookie-purpose="preferences"><span><strong>{{ 'sections.lemoon_footer_privacy.personalization' | t }}</strong><span>{{ 'sections.lemoon_footer_privacy.personalization_text' | t }}</span></span></label>
+    <label><input type="checkbox" data-cookie-purpose="analytics"><span><strong>{{ 'sections.lemoon_footer_privacy.analytics' | t }}</strong><span>{{ 'sections.lemoon_footer_privacy.analytics_text' | t }}</span></span></label>
+    <label><input type="checkbox" data-cookie-purpose="marketing"><span><strong>{{ 'sections.lemoon_footer_privacy.marketing' | t }}</strong><span>{{ 'sections.lemoon_footer_privacy.marketing_text' | t }}</span></span></label>
+  </div>
+  {%- if privacy_url != blank -%}<a class="lemoon-cookie-dialog__policy" href="{{ privacy_url }}">{{ 'sections.lemoon_footer_privacy.policy_link' | t }}</a>{%- endif -%}
+  <p data-cookie-error data-message="{{ 'sections.lemoon_footer_privacy.save_failed' | t | escape }}" role="alert"></p>
+  <div class="lemoon-cookie-dialog__actions">
+    <button type="button" data-cookie-action="accept">{{ 'sections.lemoon_footer_privacy.accept' | t }}</button>
+    <button type="button" data-cookie-action="reject">{{ 'sections.lemoon_footer_privacy.reject' | t }}</button>
+    <button type="button" data-cookie-action="save">{{ 'sections.lemoon_footer_privacy.save' | t }}</button>
+  </div>
+</dialog>

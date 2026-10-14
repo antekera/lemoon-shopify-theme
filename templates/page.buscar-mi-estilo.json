@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-style-quiz",
+      "settings": {
+        "catalogue": "opticos",
+        "budget_low": 20000,
+        "budget_high": 40000,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "frame_1": {
+          "type": "frame",
+          "settings": {
+            "product": "lemoon-estero",
+            "face": "round",
+            "style": "minimal",
+            "use": "work"
+          }
+        },
+        "frame_2": {
+          "type": "frame",
+          "settings": {
+            "product": "lemoon-jade",
+            "face": "heart",
+            "style": "colorpop",
+            "use": "everyday"
+          }
+        },
+        "frame_3": {
+          "type": "frame",
+          "settings": {
+            "product": "lemoon-genova",
+            "face": "round",
+            "style": "retro",
+            "use": "everyday"
+          }
+        },
+        "frame_4": {
+          "type": "frame",
+          "settings": {
+            "product": "lemoon-faro",
+            "face": "square",
+            "style": "easy",
+            "use": "outdoors"
+          }
+        },
+        "frame_5": {
+          "type": "frame",
+          "settings": {
+            "product": "lemoon-artico",
+            "face": "oval",
+            "style": "minimal",
+            "use": "work"
+          }
+        }
+      },
+      "block_order": [
+        "frame_1",
+        "frame_2",
+        "frame_3",
+        "frame_4",
+        "frame_5"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

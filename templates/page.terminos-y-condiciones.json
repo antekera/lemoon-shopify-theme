@@ -1,1 +1,17 @@
-{ "sections": { "main": { "type": "lemoon-legal-page", "settings": { "intro": "Las condiciones que aplican al uso de nuestro sitio y a tus compras Lemoon." } } }, "order": ["main"] }
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p><h2>Compra y confirmación</h2><p>Este sitio de prueba presenta un escenario de compra de armazones y lentes operado por Servioptic SpA. Antes del pago se revisan el producto, variante, configuración, precio y costo de despacho. La aceptación y disponibilidad se comunican mediante la confirmación del pedido.</p><h2>Precios y pago</h2><p>Los valores se expresan en pesos chilenos. En el escenario de muestra, los precios incluyen los impuestos aplicables y el envío se informa por separado. Solo se ofrecen los medios de pago que el checkout efectivamente tenga habilitados; estos datos no activan proveedores de pago.</p><h2>Configuración de lentes</h2><p>La fabricación de muestra comienza tras revisar la receta y confirmar la configuración. La carga de una receta no implica validación clínica automática. Antes de iniciar una fabricación se debe confirmar el detalle del pedido con el equipo correspondiente.</p><h2>Envíos, devoluciones y garantías</h2><p>Consulta las páginas de muestra de despacho, devolución y garantía. Las condiciones comerciales voluntarias no limitan los derechos legales. Este texto debe reemplazarse por las condiciones aprobadas antes de operar la tienda.</p>",
+        "kind": "terms",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

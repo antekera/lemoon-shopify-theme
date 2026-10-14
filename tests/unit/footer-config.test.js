@@ -45,5 +45,5 @@ test('puts the configurable contact page link before email and targets the conta
   expect(contactLinks.indexOf('contact_link_label')).toBeLessThan(contactLinks.indexOf('email_label'));
   expect(source).toMatch(/"id": "contact_link", "label": "Enlace a contáctanos"/);
   expect(group.sections.footer.settings.contact_link).toBe('/pages/contact');
-  expect(contactTemplate.sections.form.type).toBe('contact-form');
+  expect(contactTemplate.sections.main.type).toBe('lemoon-contact-page');
 });

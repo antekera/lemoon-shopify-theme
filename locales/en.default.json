@@ -282,36 +282,99 @@
       }
     },
     "404": {
-      "title": "Page not found",
-      "subtext": "404"
+      "title": "We couldn’t find this page",
+      "subtext": "404",
+      "description": "The link may have changed or the page is no longer available. Search for what you need or return to the catalogue.",
+      "home": "Back to home",
+      "catalogue": "View all frames",
+      "search_label": "Search the catalogue",
+      "search_placeholder": "Name, shape or material",
+      "search_button": "Search frames"
     }
   },
   "sections": {
+    "main_page": {
+      "empty": "This page is being prepared."
+    },
+    "lemoon_gift_card_purchase": {
+      "title": "Gift card",
+      "intro": "Let them choose their next pair. Select an amount and add a personal message if you like.",
+      "card_label": "Gift card",
+      "amount": "Choose an amount",
+      "sold_out": "Sold out",
+      "recipient_toggle": "Send to someone else",
+      "recipient_legend": "Recipient (optional)",
+      "recipient_email": "Recipient email",
+      "recipient_name": "Recipient name (optional)",
+      "message": "Message (optional, up to 200 characters)",
+      "delivery_note": "Without a recipient email, the gift card is sent to the buyer. Shopify sends it after processing the purchase.",
+      "draft": "This gift card is being prepared and is not available to buy yet.",
+      "total": "Amount",
+      "submit": "Add to cart",
+      "loading": "Adding…",
+      "unavailable": "Gift cards are not available at the moment. Contact us for more information.",
+      "merchant_help": "Select a native Shopify gift card product in this section to preview its denominations and recipient fields.",
+      "other_amount": "Need another amount? Contact us",
+      "error": "We could not confirm the addition. Check your cart before trying again."
+    },
     "lemoon_featured_products": {
       "name": "Lemoon featured products",
       "settings": {
-        "collection": { "label": "Collection" },
+        "collection": {
+          "label": "Collection"
+        },
         "collection_source": {
           "label": "Product source",
-          "options": { "fixed": "Selected collection", "product_category": "Product category" }
+          "options": {
+            "fixed": "Selected collection",
+            "product_category": "Product category"
+          }
         },
-        "optical_collection": { "label": "Optical collection" },
-        "sun_collection": { "label": "Sunglasses collection" },
-        "randomize": { "label": "Show random products" },
-        "defer_load": { "label": "Load products when the carousel is near the viewport" },
-        "show_quick_add": { "label": "Show add to cart button" },
-        "initial_products": { "label": "Initial products" },
-        "eyebrow": { "label": "Eyebrow", "default": "LEMOON SELECTION" },
-        "heading": { "label": "Heading", "default": "Favorite frames" },
-        "link_label": { "label": "Link label", "default": "View all" },
-        "products_to_show": { "label": "Products" }
+        "optical_collection": {
+          "label": "Optical collection"
+        },
+        "sun_collection": {
+          "label": "Sunglasses collection"
+        },
+        "randomize": {
+          "label": "Show random products"
+        },
+        "defer_load": {
+          "label": "Load products when the carousel is near the viewport"
+        },
+        "show_quick_add": {
+          "label": "Show add to cart button"
+        },
+        "initial_products": {
+          "label": "Initial products"
+        },
+        "eyebrow": {
+          "label": "Eyebrow",
+          "default": "LEMOON SELECTION"
+        },
+        "heading": {
+          "label": "Heading",
+          "default": "Favorite frames"
+        },
+        "link_label": {
+          "label": "Link label",
+          "default": "View all"
+        },
+        "products_to_show": {
+          "label": "Products"
+        }
       }
     },
     "lemoon_trust_bar": {
       "name": "Trust bar",
       "settings": {
-        "aria_label": { "label": "Accessible label", "default": "Benefits of shopping with Lemoon" },
-        "benefits": { "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP." }
+        "aria_label": {
+          "label": "Accessible label",
+          "default": "Benefits of shopping with Lemoon"
+        },
+        "benefits": {
+          "content": "Edit this copy in Theme settings → Lemoon benefits and offer. It also appears on the PDP."
+        }
       }
     },
     "cart_notification": {
@@ -393,7 +456,19 @@
       "login": {
         "title": "Have an account?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
-      }
+      },
+      "summary": "Order summary",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "shipping_at_checkout": "Calculated at checkout",
+      "secure_checkout": "Secure checkout with Shopify",
+      "quantity_invalid": "Enter a valid whole quantity.",
+      "item_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      },
+      "empty_description": "Find your next pair. Explore our frames and choose the one for you.",
+      "remove": "Remove"
     },
     "footer": {
       "payment": "Payment methods"
@@ -458,6 +533,376 @@
       "min_error": "This item has a minimum of {{ min }}",
       "max_error": "This item has a maximum of {{ max }}",
       "step_error": "You can only add this item in increments of {{ step }}"
+    },
+    "cart_upsell": {
+      "view_product": "View product",
+      "add_to_cart": "Add to cart",
+      "from_price": "From {{ price }}"
+    },
+    "lemoon_contact_page": {
+      "title": "Let’s talk",
+      "intro": "Ask us about a frame, its measurements or your order. Send us a message and we’ll help you find the information you need.",
+      "email_channel": "Email",
+      "whatsapp_channel": "WhatsApp",
+      "whatsapp_link": "Talk to us on WhatsApp",
+      "hours_channel": "Contact hours",
+      "faq_title": "Have a quick question?",
+      "faq_description": "Find information about frames, lenses and shopping at Lemoon.",
+      "faq_link": "Read our frequently asked questions",
+      "form_title": "Send us a message",
+      "required_hint": "Name, email and message are required. Phone number is optional.",
+      "name": "Name",
+      "email": "Email address",
+      "phone": "Phone number (optional)",
+      "message": "Message",
+      "message_hint": "If you’ve already placed an order, include your order number.",
+      "send": "Send message",
+      "success": "Thanks for writing to us. Your message has been sent.",
+      "error_heading": "We couldn’t send your message. Check the following details."
+    },
+    "lemoon_search_page": {
+      "title": "Find your next frame.",
+      "placeholder": "Search by model, shape or material",
+      "search_label": "Search the catalogue",
+      "submit": "Search",
+      "recovery_title": "Not what you were looking for?",
+      "tip_model": "Try searching for the model name.",
+      "tip_attributes": "Search by shape, colour or material.",
+      "tip_spelling": "Check for spelling mistakes.",
+      "catalogue": "View all frames"
+    },
+    "lemoon_journal": {
+      "eyebrow": "Journal",
+      "title": "Seeing better is something we learn.",
+      "description": "Ideas to choose, care for and wear your glasses with more confidence.",
+      "tags_label": "Article topics",
+      "all": "All",
+      "latest": "The latest for your eyes.",
+      "count": {
+        "one": "{{ count }} article",
+        "other": "{{ count }} articles"
+      },
+      "empty": "New stories are on their way. Meanwhile, find your next frames.",
+      "catalogue": "Explore frames",
+      "newsletter_title": "A useful idea from time to time.",
+      "newsletter_description": "Glasses, style and clarity, delivered to your inbox.",
+      "subscribe": "Subscribe",
+      "consent": "I agree to receive Lemoon emails and can unsubscribe at any time."
+    },
+    "lemoon_article": {
+      "journal": "Journal",
+      "by": "By",
+      "reading_time": {
+        "one": "{{ count }} min read",
+        "other": "{{ count }} min read"
+      },
+      "explore": "Keep exploring",
+      "catalogue": "Explore frames"
+    },
+    "lemoon_guide": {
+      "index": "In this guide",
+      "help_title": "Find your next frame.",
+      "help_body": "Check each model’s options and dimensions. If you need guidance, get in touch before choosing.",
+      "catalogue": "Explore frames",
+      "contact": "Ask our team",
+      "measurements": {
+        "title": "Find your fit.",
+        "intro": "Start with a frame you already find comfortable. Compare its dimensions with the specifications of the model you like.",
+        "visual_title": "Three measurements, in millimetres.",
+        "visual_copy": "Lens width · bridge · temple length. The drawing identifies frame parts; it is not a size scale.",
+        "step_1_title": "Read the numbers on your frame",
+        "step_1_body": "Some temples show three numbers: lens width, bridge width and temple length, in millimetres. Lens width measures one lens, not the full width of the frame.",
+        "step_2_title": "Compare the product specifications",
+        "step_2_body": "Open the product’s measurement guide when available. Distinguish overall width, lens width, bridge, height and temple length. Use that model’s specifications; ask us if a dimension is missing.",
+        "step_3_title": "Consider comfort as well as numbers",
+        "step_3_body": "Measurements help you compare, but bridge and temple shape also affect fit. Use a comfortable frame as a reference and avoid assuming that two models with the same dimensions fit alike."
+      },
+      "face": {
+        "title": "Your style has more than one shape.",
+        "intro": "Explore proportions, colours and silhouettes freely. Face shape can be a reference without becoming a rule for choosing frames.",
+        "visual_title": "One reference, many possibilities.",
+        "visual_copy": "Look at frame width, height and lines. What you enjoy and how it feels matter too.",
+        "step_1_title": "Start with what you like",
+        "step_1_body": "Think about a frame you enjoy wearing: soft or defined lines, subtle or standout colours. Explore a different silhouette when you want a change; you do not need to fit a face-shape category.",
+        "step_2_title": "Look at proportions",
+        "step_2_body": "Compare the model’s width and height with your current frame. Check its photos and dimensions to explore how much space it occupies on your face. Shape labels are a starting point.",
+        "step_3_title": "Make room for comfort",
+        "step_3_body": "Consider support at the bridge and temple length alongside style. A virtual try-on, when available, provides a visual reference and does not confirm physical fit. Ask us if you are unsure about a measurement."
+      },
+      "order": {
+        "title": "Choose. Review. Place your order.",
+        "intro": "Every selection matters, from the catalogue to checkout. This guide helps you review the product’s actual options and your total before buying.",
+        "visual_title": "Your selection, step by step.",
+        "visual_copy": "The price belongs to your selected variant. Review cart details and the conditions shown at checkout.",
+        "step_1_title": "Explore and choose a model",
+        "step_1_body": "Open a catalogue product and review its photos, dimensions and availability. Choose a colour and the options shown on its page. Your selection may change the variant and its price.",
+        "step_2_title": "Review what you add to the cart",
+        "step_2_body": "If the product offers lenses, follow its configuration and complete only the requested information. To buy a frame only, use that option when available. Review the variant, quantity, details and subtotal in your cart.",
+        "step_3_title": "Confirm your details at checkout",
+        "step_3_body": "You can buy as a guest without signing in. Continue from your cart to Shopify checkout and review your contact information, address, available shipping options and payment methods. Check the total and displayed conditions before confirming your order."
+      },
+      "try_on": {
+        "title": "See how it could look.",
+        "intro": "Virtual try-on depends on each product and a connected provider. Check the model’s page to see whether this option is available.",
+        "visual_title": "Photos and dimensions help too.",
+        "visual_copy": "A digital visualisation is a style reference. It does not confirm size or replace checking the physical fit of a frame.",
+        "step_1_title": "Check whether the model offers try-on",
+        "step_1_body": "Open the product page and look for virtual try-on. Access appears only when the model has a configured link; not every product includes it.",
+        "step_2_title": "Read the provider’s instructions",
+        "step_2_body": "If a try-on service is connected, read its instructions and privacy terms before using it. Permissions and requirements depend on that service. The store does not need camera access to browse the catalogue.",
+        "step_3_title": "Without try-on, compare other references",
+        "step_3_body": "Use the model’s photos, dimensions and a frame you already find comfortable. If you need help with a measurement or product options, ask the team before choosing."
+      },
+      "prescription": {
+        "title": "Handle your prescription with care.",
+        "intro": "When a product offers prescription lenses, its page shows the available ways to enter your prescription. Review those fields before adding the product to your cart.",
+        "visual_title": "Personal information in the right place.",
+        "visual_copy": "Use only the prescription fields on the product page when enabled. Do not send health information through newsletter signup.",
+        "step_1_title": "Check the product page’s options",
+        "step_1_body": "Open the product and check whether it offers prescription lens configuration. Manual entry or document upload depends on the options enabled on that page. Not every product requests a prescription.",
+        "step_2_title": "Review your details before adding",
+        "step_2_body": "If manual entry is offered, copy the values from your prescription into their corresponding fields without interpreting or changing them. If document upload is supported, follow the file format and size shown on the page and check that it is legible.",
+        "step_3_title": "Ask when something is unclear",
+        "step_3_body": "If a value is missing or you are unsure how to transfer it to the form, ask before completing your selection. Do not infer values or assume compatibility from this guide. Review your cart details before continuing to checkout."
+      }
+    },
+    "lemoon_faq_page": {
+      "title": "Frequently asked questions.",
+      "intro": "Answers to help you choose your frame, review its options and buy with clear details.",
+      "index": "Browse by topic",
+      "help_title": "Still have a question?",
+      "help_body": "Tell us which model you are considering or where you need help.",
+      "contact": "Get in touch",
+      "choosing": {
+        "title": "Choosing your frame",
+        "question_1": {
+          "question": "How do I choose a size?",
+          "answer": "Compare the product dimensions with a frame you already find comfortable. Distinguish lens width, bridge and temple length; lens width is not overall frame width. Shape and bridge support also affect fit.",
+          "link": "Read the measurement guide"
+        },
+        "question_2": {
+          "question": "Why does the price change when I select options?",
+          "answer": "Colour and available options may select a different variant. Review the price shown after choosing and check the variant and subtotal in your cart. You are charged for the options of the variant you add.",
+          "link": "See how to place your order"
+        },
+        "question_3": {
+          "question": "Does every model offer virtual try-on?",
+          "answer": "Try-on appears only when the model’s page has a configured link. If you do not see it, use its photos and dimensions as a reference. A digital visualisation helps explore style but does not confirm physical fit.",
+          "link": "Read the try-on guide"
+        }
+      },
+      "lenses": {
+        "title": "Lenses and prescriptions",
+        "question_1": {
+          "question": "How do I enter my prescription?",
+          "answer": "First check whether the model offers prescription lenses. Its page shows enabled options for manual entry or a document. Use only those fields, copy values without interpreting them and ask if a value is missing. Do not send health information through newsletter signup.",
+          "link": "Read the prescription guide"
+        },
+        "question_2": {
+          "question": "Can I buy just the frame?",
+          "answer": "When the product page offers a frame-only purchase option, you can select it without completing a prescription. Check the colour, variant and availability before adding it to your cart. Options depend on each product.",
+          "link": "Explore frames"
+        }
+      },
+      "ordering": {
+        "title": "Orders, account and help",
+        "question_1": {
+          "question": "What should I review before confirming my order?",
+          "answer": "Check the product, variant, quantity and subtotal in your cart. Then review your contact information, address, available shipping options, payment methods and total at checkout. Confirm after checking the information and displayed conditions.",
+          "link": "Follow the ordering guide"
+        },
+        "question_2": {
+          "question": "Where do I access my account?",
+          "answer": "An account is optional when shopping. Use the account access link to view orders and manage your profile and addresses. Shopify manages sign-in on its secure page. Sign in using the email associated with your purchase.",
+          "link": "Access my account"
+        },
+        "question_3": {
+          "question": "How do I ask for help with a product or order?",
+          "answer": "Use our contact form and include the model or your order number, if you have one. Briefly explain what you need to review. Do not include passwords, payment details or prescription documents in that message.",
+          "link": "Go to the contact form"
+        }
+      },
+      "policies": {
+        "title": "Shipping and conditions",
+        "question_1": {
+          "question": "Where can I check shipping conditions?",
+          "answer": "Check the shipping page and the options shown at checkout for your address. Review charges and available information before confirming your purchase.",
+          "link": "Review shipping and delivery"
+        },
+        "question_2": {
+          "question": "Where can I find return conditions?",
+          "answer": "Read the current returns policy before buying. If you need clarification for a product or order, ask the team before starting a request.",
+          "link": "Review the returns policy"
+        },
+        "question_3": {
+          "question": "Where can I check the warranty?",
+          "answer": "Read the current warranty conditions for coverage and how to request assistance. If information about your case is missing, contact the team before assuming coverage.",
+          "link": "Review warranty conditions"
+        }
+      }
+    },
+    "lemoon_legal_page": {
+      "eyebrow": "Lemoon · Information",
+      "intro_general": "Information about shopping at Lemoon.",
+      "intro_shipping": "Information about preparing and delivering your glasses.",
+      "intro_returns": "Conditions and steps for requesting a return.",
+      "intro_terms": "Conditions that apply to using our website and shopping at Lemoon.",
+      "intro_privacy": "Information about how your personal data is handled.",
+      "intro_warranty": "Information about warranties and how to request assistance.",
+      "empty_content": "If you need information about these conditions, contact us before completing your purchase.",
+      "help_title": "Need help?",
+      "help_description": "If you have a question about these conditions, send us a message.",
+      "contact": "Contact Lemoon",
+      "navigation": "Shopping information",
+      "shipping": "Shipping and delivery",
+      "returns": "Returns",
+      "warranty": "Warranties",
+      "terms": "Terms and conditions",
+      "privacy": "Privacy"
+    },
+    "lemoon_about_page": {
+      "eyebrow": "About Lemoon",
+      "title": "See well. Feel like you.",
+      "intro": "Your glasses are part of how you see the world and how you express yourself. At Lemoon, we want choosing them to feel personal, clear and considered.",
+      "catalogue": "Explore frames",
+      "measurements": "Compare frame measurements",
+      "values_title": "What guides us",
+      "style_title": "Your own style",
+      "style_body": "We believe there is more than one way to look good. We want to make room for shapes and colours that feel like you.",
+      "fit_title": "Comfort matters",
+      "fit_body": "We want fit to be part of the choice. Comparing measurements and considering how a frame rests on your face helps you choose thoughtfully.",
+      "information_title": "Choose with clarity",
+      "information_body": "We want useful information to come before the purchase: measurements, product details and a place to ask questions.",
+      "help_title": "A good choice starts with a question.",
+      "help_body": "If you are deciding between frames or want to understand a detail, contact us before placing your order. Tell us what you are looking for and which models you are considering.",
+      "contact": "Talk to us"
+    },
+    "lemoon_launch_page": {
+      "title": "A new way to see.",
+      "intro": "We are preparing the Lemoon store. Subscribe with your email if you would like to receive news and hear when we open.",
+      "email": "Your email address",
+      "consent": "I agree to receive Lemoon news by email.",
+      "submit": "Send me updates",
+      "success": "Thanks for subscribing. Your email has been registered to receive Lemoon updates."
+    },
+    "lemoon_service_page": {
+      "eyebrow": "Lemoon · Services and information",
+      "operations_title": "Eye care events",
+      "operations_intro": "Contact us to ask about availability and requirements for eye care events.",
+      "operations_step_1_title": "Ask about availability",
+      "operations_step_1_text": "Use the contact form to ask whether an event is available.",
+      "operations_step_2_title": "Confirm the details",
+      "operations_step_2_text": "Confirm dates, requirements and the scope of care with the team before attending.",
+      "operations_step_3_title": "Arrange the details if available",
+      "operations_step_3_text": "If an event is available, agree on the details and receive information about attending.",
+      "operations_details": "Availability and requirements are confirmed when you enquire. Contact us before planning to attend.",
+      "operations_cta": "Ask about availability",
+      "operations_aside": "Ask about dates, availability and requirements through our contact form.",
+      "benefits_title": "Isapres and Fonasa",
+      "benefits_intro": "Check your plan’s conditions before buying.",
+      "benefits_step_1_title": "Check the benefit",
+      "benefits_step_1_text": "Ask whether your plan covers the service or product you need and which conditions apply.",
+      "benefits_step_2_title": "Confirm the required document",
+      "benefits_step_2_text": "Ask your institution which purchase document it requires and what information it must include.",
+      "benefits_step_3_title": "Check how to submit your request",
+      "benefits_step_3_text": "Confirm the process, deadlines and submission channel with your institution.",
+      "benefits_details": "Coverage or reimbursement conditions depend on your plan and the current rules of your Isapre or Fonasa. Confirm the benefit and required documents directly with your institution before buying.",
+      "benefits_cta": "Contact the team",
+      "benefits_aside": "Your institution can confirm your plan’s conditions. Contact us if you have questions about purchasing at Lemoon.",
+      "aside_title": "Before you continue"
+    },
+    "lemoon_demo": {
+      "notice": "Sample business data · Servioptic SpA. These are not current business terms."
+    },
+    "lemoon_footer_privacy": {
+      "policy": "Privacy",
+      "terms": "Terms and conditions",
+      "shipping": "Shipping",
+      "returns": "Returns",
+      "preferences": "Cookie preferences",
+      "unavailable": "We couldn't open your preferences. Try again or read our privacy policy.",
+      "close": "Close preferences",
+      "intro": "Choose which optional cookies to allow. You can change your choice or reject all from this panel at any time.",
+      "essential": "Essential",
+      "essential_text": "Enable the cart, sign-in and purchase. These are always active.",
+      "personalization": "Personalization",
+      "personalization_text": "Remember preferences such as language and country for future visits.",
+      "analytics": "Analytics",
+      "analytics_text": "Help understand how the store is used and improve navigation.",
+      "marketing": "Marketing",
+      "marketing_text": "Enable campaign measurement and advertising based on your interests.",
+      "policy_link": "Read the privacy policy",
+      "save_failed": "We couldn't save your choice. Please try again.",
+      "accept": "Accept all",
+      "reject": "Reject all",
+      "save": "Save my choice"
+    },
+    "lemoon_crystal_guide": {
+      "title": "Choose your lenses with clarity",
+      "intro": "Start with how you plan to use your glasses. Your final options depend on the frame you choose and the combinations available for that model.",
+      "clear_title": "Clear lenses",
+      "clear_text": "For lenses without a tint, explore the model’s clear lens packages. Available treatments are shown in the configurator.",
+      "photo_title": "Photochromic lenses",
+      "photo_text": "If you prefer lenses that change tint with light, look for a photochromic option. Availability and characteristics depend on the selected package.",
+      "sun_title": "For the sun",
+      "sun_text": "Explore the model’s sun lens options and whether they are offered with or without a prescription. Lens colour and characteristics are confirmed during configuration.",
+      "thickness_title": "Consider thickness",
+      "thickness_text": "Index is one option that can vary between packages. Your choice depends on your prescription and frame; review the available alternatives before deciding.",
+      "prescription_title": "Have your prescription ready",
+      "prescription_text": "If you need prescription lenses, prepare a legible prescription and check the details before placing your order. The configurator shows how you can enter it.",
+      "frames_cta": "Choose an optical frame",
+      "prescription_cta": "How to send my prescription",
+      "configure_cta": "Configure {{ product }}",
+      "configure_note": "Options and price are confirmed in the product configurator."
+    },
+    "lemoon_style_quiz": {
+      "title": "Find your next frame",
+      "intro": "Four questions to explore frames around your preferences. No photos or sign-up.",
+      "step": "Step [current] of [total]",
+      "next": "Continue",
+      "results_cta": "See my selection",
+      "back": "Back",
+      "restart": "Start again",
+      "error": "Choose an option to continue.",
+      "result_title": "A selection to explore",
+      "result_intro": "These editorial suggestions consider your preferences. Comfort and fit should be confirmed when trying on the frame.",
+      "count": "[count] available options in this selection",
+      "empty": "No options in this selection match your preferences and budget. Change your answers or explore the catalogue.",
+      "catalogue": "View catalogue",
+      "budget_catalogue": "Explore this budget",
+      "finished": "Selection ready",
+      "no_js": "Enable JavaScript to answer the questions. You can also explore this editorial selection or visit the catalogue.",
+      "product_cta": "View frame",
+      "budget_prefix": "Up to",
+      "face_title": "How would you describe your face?",
+      "face_hint": "If you are unsure, choose “Not sure”.",
+      "style_title": "Which style feels like you?",
+      "style_hint": "Choose what catches your eye today.",
+      "use_title": "When would you wear them most?",
+      "use_hint": "Think about your everyday routine. This selection does not assess sports protection.",
+      "budget_title": "What is your frame budget?",
+      "budget_hint": "Lenses and additional services are priced separately.",
+      "face": {
+        "round": "Round",
+        "square": "Square",
+        "oval": "Oval",
+        "heart": "Heart",
+        "unsure": "Not sure"
+      },
+      "style": {
+        "minimal": "Minimal",
+        "colorpop": "Colourful",
+        "retro": "Retro",
+        "easy": "Effortless"
+      },
+      "use": {
+        "work": "For work",
+        "everyday": "Every day",
+        "outdoors": "Outdoors"
+      },
+      "budget": {
+        "none": "No set limit"
+      }
     }
   },
   "localization": {
@@ -580,6 +1025,16 @@
     }
   },
   "gift_cards": {
+    "lemoon": {
+      "heading": "Your gift card",
+      "balance": "Available balance",
+      "disabled": "Deactivated",
+      "empty": "No balance remaining",
+      "instructions": "Enter this code when paying for your order in the online store.",
+      "copy_error": "We could not copy it. Select the code to copy it manually.",
+      "print": "Print gift card",
+      "code_label": "Your card code"
+    },
     "issued": {
       "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
       "title": "Here's your {{ value }} gift card balance for {{ shop }}!",
@@ -763,5 +1218,75 @@
     "back_to_frame": "Back to frame",
     "lens_step": "Choose your lenses",
     "lens_step_note": "Choose your lenses and how to provide your prescription."
+  },
+  "lemoon_lens_flow": {
+    "title": "Configure your lenses",
+    "choose_frame_hint": "Choose a frame first. Lens options depend on the model and availability.",
+    "choose_frame": "Choose a frame",
+    "prototype": "Demonstration product: prototype prices, images and options. This is not a commercial offer.",
+    "back_product": "Back to frame",
+    "no_packages": "This frame has no lens packages available in the catalogue. You can review its options on the product page.",
+    "progress_label": "Configuration progress",
+    "progress": "Step {current} of {total}",
+    "use_title": "How will you use your glasses?",
+    "use_hint": "Choose from the options available for this frame.",
+    "distance_title": "Single vision",
+    "distance_far": "For distance vision",
+    "distance_near": "For near vision",
+    "use_mono": "Single vision",
+    "use_progressive": "Progressive",
+    "use_solar": "Sun without prescription",
+    "prescription_title": "Add and review your prescription",
+    "prescription_hint": "Copy your prescription exactly as written or attach a readable document. Validation checks the data format; the prescription and fit must be reviewed before making your glasses.",
+    "recipe_mode": "How to add your prescription",
+    "recipe_manual": "Enter prescription manually",
+    "recipe_upload": "Upload prescription (PDF or image)",
+    "file_label": "Prescription file",
+    "file_hint": "PDF, JPG or PNG, up to 10 MB. Check that all details are readable.",
+    "eye_od": "Right eye (OD)",
+    "eye_oi": "Left eye (OI)",
+    "sphere": "Sphere",
+    "cylinder": "Cylinder",
+    "axis": "Axis",
+    "addition": "Addition",
+    "pd": "Total pupillary distance (mm)",
+    "crystal_title": "Choose your lenses",
+    "catalogue_hint": "Only packages and combinations available for this frame are shown.",
+    "crystal_clear": "Clear",
+    "crystal_photo": "Photochromic",
+    "crystal_sun": "Sun lenses",
+    "index_title": "Choose lens thickness",
+    "index_hint": "The index identifies your lens material. Available options do not replace review of your prescription and fit.",
+    "extra_title": "Choose extras",
+    "extra_none": "No additional blue light filter",
+    "extra_blue": "With blue light filter",
+    "review_title": "Review your configuration",
+    "review_hint": "Confirm the details and price before adding your glasses to the cart. Go back to any previous step to make changes.",
+    "total": "Product total",
+    "back": "Back",
+    "continue": "Continue",
+    "add": "Add to cart",
+    "javascript_hint": "Enable JavaScript to configure your lenses or return to the frame product page.",
+    "pending": "Not selected",
+    "price_pending": "Choose a combination to see its price",
+    "no_recipe": "No prescription",
+    "cart_error": "We couldn’t add your glasses. Please try again.",
+    "recipe_error": "Check your prescription: complete both sphere values and pupillary distance, and review the indicated values.",
+    "file_error": "Attach a PDF, JPG or PNG prescription file up to 10 MB.",
+    "step_use": "Use",
+    "step_prescription": "Prescription",
+    "step_crystal": "Lens",
+    "step_index": "Thickness",
+    "step_extra": "Extras",
+    "step_review": "Summary",
+    "summary_use": "Use",
+    "summary_crystal": "Lens",
+    "summary_index": "Index",
+    "summary_extra": "Extras",
+    "buy_frame": "Buy frame only",
+    "property_recipe": "Prescription",
+    "property_use": "Single vision use",
+    "property_file": "Prescription file",
+    "property_pd": "Pupillary distance (mm)"
   }
 }

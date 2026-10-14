@@ -1,0 +1,29 @@
+#MainContent.lemoon-policy-page { padding: var(--lemoon-space-16) 0; background: var(--lemoon-surface-page); }
+#MainContent .lemoon-native-policy { width: 100%; color: var(--lemoon-text-primary); }
+#MainContent .lemoon-native-policy__eyebrow { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-secondary); font-family: var(--lemoon-font-heading); font-size: 1.2rem; font-weight: var(--lemoon-weight-semibold); letter-spacing: .08em; }
+#MainContent .lemoon-native-policy .shopify-policy__container { max-width: 90rem; margin: 0; padding: 0; }
+#MainContent .lemoon-native-policy .shopify-policy__title { margin: 0 0 var(--lemoon-space-10); padding-bottom: var(--lemoon-space-8); border-bottom: 1px solid var(--lemoon-border-default); text-align: left; }
+#MainContent .lemoon-native-policy .shopify-policy__title h1 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); letter-spacing: var(--lemoon-type-display-tracking); line-height: 1.15; }
+#MainContent .lemoon-native-policy .shopify-policy__body { max-width: 66rem; font-family: var(--lemoon-font-body); font-size: 1.8rem; line-height: 1.75; overflow-wrap: anywhere; }
+#MainContent .lemoon-native-policy .shopify-policy__body > :first-child { margin-top: 0; }
+#MainContent .lemoon-native-policy .shopify-policy__body :is(h2,h3,h4) { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); line-height: 1.3; }
+#MainContent .lemoon-native-policy .shopify-policy__body h2 { margin: var(--lemoon-space-10) 0 var(--lemoon-space-4); font-size: 2.8rem; }
+#MainContent .lemoon-native-policy .shopify-policy__body h3 { margin: var(--lemoon-space-8) 0 var(--lemoon-space-3); font-size: 2.2rem; }
+#MainContent .lemoon-native-policy .shopify-policy__body img { max-width: 100%; height: auto; }
+#MainContent .lemoon-native-policy .shopify-policy__body table { display: block; max-width: 100%; overflow-x: auto; }
+#MainContent .lemoon-native-policy a { color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
+#MainContent .lemoon-native-policy :is(a,button):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+#MainContent .lemoon-native-policy__help { max-width: 66rem; margin-top: var(--lemoon-space-10); padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+#MainContent .lemoon-native-policy__help h2 { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 2.2rem; font-weight: var(--lemoon-weight-medium); }
+#MainContent .lemoon-native-policy__help p { font-size: 1.4rem; line-height: 1.6; }
+#MainContent .lemoon-native-policy__help a { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); font-size: 1.4rem; }
+#MainContent .lemoon-native-policy__preferences { min-height: var(--lemoon-size-touch); padding: var(--lemoon-space-3) var(--lemoon-space-5); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); color: var(--lemoon-text-brand); background: transparent; font-family: var(--lemoon-font-heading); font-size: 1.4rem; cursor: pointer; }
+#MainContent .lemoon-native-policy__preferences[hidden] { display: none; }
+#MainContent .lemoon-native-policy__help [data-cookie-preferences-status] { display: block; font-size: 1.4rem; line-height: 1.6; }
+#MainContent .lemoon-native-policy__help [data-cookie-preferences-status]:empty { display: none; }
+@media screen and (max-width: 749px) {
+  #MainContent.lemoon-policy-page { padding: var(--lemoon-space-10) 0; }
+  #MainContent .lemoon-native-policy .shopify-policy__title { margin-bottom: var(--lemoon-space-8); }
+  #MainContent .lemoon-native-policy .shopify-policy__title h1 { font-size: 3.4rem; }
+  #MainContent .lemoon-native-policy .shopify-policy__body h2 { font-size: 2.4rem; }
+}

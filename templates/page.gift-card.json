@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-gift-card-purchase",
+      "settings": {
+        "gift_card_product": "tarjeta-de-regalo-lemoon",
+        "intro": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["main"]
+}

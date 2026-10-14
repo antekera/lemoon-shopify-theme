@@ -12,14 +12,59 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+#shopify-section-{{ section.id }} .lemoon-page {
+  color: var(--lemoon-text-primary);
+  font-family: var(--lemoon-font-body);
+}
+
+#shopify-section-{{ section.id }} .lemoon-page .main-page-title {
+  color: var(--lemoon-text-brand);
+  font-family: var(--lemoon-font-heading);
+  font-size: clamp(3.4rem, 4.4vw, 5.6rem);
+  font-weight: var(--lemoon-weight-light);
+  line-height: 1.15;
+  letter-spacing: var(--lemoon-type-display-tracking);
+  overflow-wrap: anywhere;
+}
+
+#shopify-section-{{ section.id }} .lemoon-page .rte {
+  font-size: 1.7rem;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+#shopify-section-{{ section.id }} .lemoon-page .rte :is(h2, h3) {
+  color: var(--lemoon-text-brand);
+  font-family: var(--lemoon-font-heading);
+}
+
+#shopify-section-{{ section.id }} .lemoon-page .rte a {
+  color: var(--lemoon-text-brand);
+  text-underline-offset: .3rem;
+}
+
+#shopify-section-{{ section.id }} .lemoon-page .rte a:focus-visible {
+  outline: 2px solid var(--lemoon-border-strong);
+  outline-offset: 4px;
+}
+
+#shopify-section-{{ section.id }} .lemoon-page__empty {
+  color: var(--lemoon-text-secondary);
+}
+
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
+<div class="lemoon-page page-width page-width--narrow section-{{ section.id }}-padding">
   <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+    {%- if page.content != blank -%}
+      {{ page.content }}
+    {%- else -%}
+      <p class="lemoon-page__empty">{{ 'sections.main_page.empty' | t }}</p>
+    {%- endif -%}
   </div>
 </div>
 

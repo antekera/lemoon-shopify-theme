@@ -291,36 +291,99 @@
       }
     },
     "404": {
-      "title": "Página no encontrada",
-      "subtext": "404"
+      "title": "No encontramos esta página",
+      "subtext": "404",
+      "description": "El enlace puede haber cambiado o la página ya no está disponible. Busca lo que necesitas o vuelve al catálogo.",
+      "home": "Volver al inicio",
+      "catalogue": "Ver todos los armazones",
+      "search_label": "Buscar en el catálogo",
+      "search_placeholder": "Nombre, forma o material",
+      "search_button": "Buscar lentes"
     }
   },
   "sections": {
+    "main_page": {
+      "empty": "Esta página está en preparación."
+    },
+    "lemoon_gift_card_purchase": {
+      "title": "Tarjeta de regalo",
+      "intro": "Que elija sus próximos lentes. Escoge un monto y, si quieres, agrega un mensaje personal.",
+      "card_label": "Tarjeta de regalo",
+      "amount": "Elige un monto",
+      "sold_out": "Agotado",
+      "recipient_toggle": "Enviar a otra persona",
+      "recipient_legend": "Destinatario (opcional)",
+      "recipient_email": "Correo del destinatario",
+      "recipient_name": "Nombre del destinatario (opcional)",
+      "message": "Mensaje (opcional, hasta 200 caracteres)",
+      "delivery_note": "Sin correo de destinatario, la tarjeta se envía al comprador. Shopify la envía después de procesar la compra.",
+      "draft": "Esta tarjeta está en preparación y todavía no está disponible para comprar.",
+      "total": "Monto",
+      "submit": "Agregar al carrito",
+      "loading": "Agregando…",
+      "unavailable": "Las tarjetas de regalo aún no están disponibles. Escríbenos para saber más.",
+      "merchant_help": "Selecciona una tarjeta de regalo nativa de Shopify en esta sección para revisar sus montos y campos de destinatario.",
+      "other_amount": "¿Necesitas otro monto? Consúltanos",
+      "error": "No pudimos confirmar la adición. Revisa tu carrito antes de volver a intentarlo."
+    },
     "lemoon_featured_products": {
       "name": "Destacados Lemoon",
       "settings": {
-        "collection": { "label": "Colección" },
+        "collection": {
+          "label": "Colección"
+        },
         "collection_source": {
           "label": "Origen de productos",
-          "options": { "fixed": "Colección seleccionada", "product_category": "Categoría del producto" }
+          "options": {
+            "fixed": "Colección seleccionada",
+            "product_category": "Categoría del producto"
+          }
         },
-        "optical_collection": { "label": "Colección de ópticos" },
-        "sun_collection": { "label": "Colección de sol" },
-        "randomize": { "label": "Mostrar productos al azar" },
-        "defer_load": { "label": "Cargar productos al acercarse al carrusel" },
-        "show_quick_add": { "label": "Mostrar botón para agregar al carrito" },
-        "initial_products": { "label": "Productos iniciales" },
-        "eyebrow": { "label": "Texto superior", "default": "SELECCIÓN LEMOON" },
-        "heading": { "label": "Título", "default": "Armazones favoritos" },
-        "link_label": { "label": "Etiqueta de enlace", "default": "Ver todos" },
-        "products_to_show": { "label": "Productos" }
+        "optical_collection": {
+          "label": "Colección de ópticos"
+        },
+        "sun_collection": {
+          "label": "Colección de sol"
+        },
+        "randomize": {
+          "label": "Mostrar productos al azar"
+        },
+        "defer_load": {
+          "label": "Cargar productos al acercarse al carrusel"
+        },
+        "show_quick_add": {
+          "label": "Mostrar botón para agregar al carrito"
+        },
+        "initial_products": {
+          "label": "Productos iniciales"
+        },
+        "eyebrow": {
+          "label": "Texto superior",
+          "default": "SELECCIÓN LEMOON"
+        },
+        "heading": {
+          "label": "Título",
+          "default": "Armazones favoritos"
+        },
+        "link_label": {
+          "label": "Etiqueta de enlace",
+          "default": "Ver todos"
+        },
+        "products_to_show": {
+          "label": "Productos"
+        }
       }
     },
     "lemoon_trust_bar": {
       "name": "Barra de confianza",
       "settings": {
-        "aria_label": { "label": "Etiqueta accesible", "default": "Beneficios de comprar en Lemoon" },
-        "benefits": { "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP." }
+        "aria_label": {
+          "label": "Etiqueta accesible",
+          "default": "Beneficios de comprar en Lemoon"
+        },
+        "benefits": {
+          "content": "Edita los textos en Configuración del tema → Beneficios y oferta Lemoon. También se muestran en el PDP."
+        }
       }
     },
     "cart_notification": {
@@ -370,7 +433,7 @@
       "remove_title": "Eliminar {{ title }}",
       "note": "Instrucciones especiales del pedido",
       "checkout": "Pagar pedido",
-      "empty": "Tu carrito esta vacío",
+      "empty": "Tu carrito está vacío",
       "product_disclosure": "Aviso sobre el producto",
       "product_disclosures": "Avisos sobre el producto",
       "cart_error": "Hubo un error al actualizar tu carrito de compra. Inténtalo de nuevo.",
@@ -396,7 +459,19 @@
       "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "Aranceles incluidos. Impuestos, descuentos y <a href=\"{{ link }}\">envío</a> calculados en la pantalla de pago.",
       "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "Aranceles incluidos. Impuestos, descuentos y envío calculados en la pantalla de pago.",
       "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Impuestos, descuentos y <a href=\"{{ link }}\">envío</a> calculados en la pantalla de pago.",
-      "taxes_at_checkout_shipping_at_checkout_without_policy": "Impuestos, descuentos y envío calculados en la pantalla de pago."
+      "taxes_at_checkout_shipping_at_checkout_without_policy": "Impuestos, descuentos y envío calculados en la pantalla de pago.",
+      "summary": "Resumen",
+      "subtotal": "Subtotal",
+      "shipping": "Envío",
+      "shipping_at_checkout": "Calculado al pagar",
+      "secure_checkout": "Pago seguro a través de Shopify",
+      "quantity_invalid": "Ingresa una cantidad entera válida.",
+      "item_count": {
+        "one": "{{ count }} producto",
+        "other": "{{ count }} productos"
+      },
+      "empty_description": "Encuentra tu próximo par. Explora nuestros armazones y elige el que va contigo.",
+      "remove": "Eliminar"
     },
     "footer": {
       "payment": "Formas de pago"
@@ -470,6 +545,376 @@
       "min_error": "Este artículo tiene un mínimo de {{ min }}.",
       "max_error": "Este artículo tiene un máximo de {{ max }}.",
       "step_error": "Solo puedes agregar este artículo en incrementos de {{ step }}"
+    },
+    "cart_upsell": {
+      "view_product": "Ver producto",
+      "add_to_cart": "Agregar al carrito",
+      "from_price": "Desde {{ price }}"
+    },
+    "lemoon_contact_page": {
+      "title": "Conversemos",
+      "intro": "Si tienes una consulta sobre un modelo, sus medidas o tu pedido, escríbenos. Te ayudamos a encontrar la información que necesitas.",
+      "email_channel": "Correo electrónico",
+      "whatsapp_channel": "WhatsApp",
+      "whatsapp_link": "Conversemos por WhatsApp",
+      "hours_channel": "Horario de atención",
+      "faq_title": "¿Tienes una duda rápida?",
+      "faq_description": "Encuentra información sobre armazones, cristales y cómo comprar en Lemoon.",
+      "faq_link": "Ver preguntas frecuentes",
+      "form_title": "Escríbenos",
+      "required_hint": "Nombre, correo y mensaje son obligatorios. El teléfono es opcional.",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "phone": "Teléfono (opcional)",
+      "message": "Mensaje",
+      "message_hint": "Si ya compraste, incluye tu número de pedido.",
+      "send": "Enviar mensaje",
+      "success": "Gracias por escribirnos. Tu mensaje fue enviado.",
+      "error_heading": "No pudimos enviar tu mensaje. Revisa los siguientes datos."
+    },
+    "lemoon_search_page": {
+      "title": "Busca sin perderte.",
+      "placeholder": "Busca por modelo, forma o material",
+      "search_label": "Buscar en el catálogo",
+      "submit": "Buscar",
+      "recovery_title": "¿No era lo que buscabas?",
+      "tip_model": "Prueba con el nombre del modelo.",
+      "tip_attributes": "Busca por forma, color o material.",
+      "tip_spelling": "Revisa que no haya errores de escritura.",
+      "catalogue": "Ver todos los armazones"
+    },
+    "lemoon_journal": {
+      "eyebrow": "Journal",
+      "title": "Ver mejor también se aprende.",
+      "description": "Ideas para elegir, cuidar y usar tus lentes con más confianza.",
+      "tags_label": "Temas de artículos",
+      "all": "Todos",
+      "latest": "Lo último para tu mirada.",
+      "count": {
+        "one": "{{ count }} artículo",
+        "other": "{{ count }} artículos"
+      },
+      "empty": "Pronto encontrarás nuevas historias. Mientras tanto, descubre tus próximos armazones.",
+      "catalogue": "Explorar armazones",
+      "newsletter_title": "Una idea útil cada tanto.",
+      "newsletter_description": "Lentes, estilo y claridad en tu correo.",
+      "subscribe": "Suscribirme",
+      "consent": "Acepto recibir correos de Lemoon y puedo cancelar mi suscripción cuando quiera."
+    },
+    "lemoon_article": {
+      "journal": "Journal",
+      "by": "Por",
+      "reading_time": {
+        "one": "{{ count }} min de lectura",
+        "other": "{{ count }} min de lectura"
+      },
+      "explore": "Sigue explorando",
+      "catalogue": "Ver armazones"
+    },
+    "lemoon_guide": {
+      "index": "En esta guía",
+      "help_title": "Encuentra tu próximo armazón.",
+      "help_body": "Revisa las opciones y medidas de cada modelo. Si necesitas orientación, conversemos antes de elegir.",
+      "catalogue": "Explorar armazones",
+      "contact": "Consultar al equipo",
+      "measurements": {
+        "title": "Encuentra tu medida.",
+        "intro": "Un buen punto de partida es un armazón que ya te resulte cómodo. Compara sus medidas con las de la ficha del modelo que te gusta.",
+        "visual_title": "Tres medidas, en milímetros.",
+        "visual_copy": "Ancho del cristal · puente · largo de varilla. El dibujo es una referencia de las partes del armazón, no una escala de talla.",
+        "step_1_title": "Lee los números de tu armazón",
+        "step_1_body": "En algunas varillas aparecen tres números: ancho del cristal, ancho del puente y largo de la varilla, expresados en milímetros. El ancho del cristal corresponde a una lente; no al ancho total del armazón.",
+        "step_2_title": "Compara con la ficha del modelo",
+        "step_2_body": "Abre la guía de medidas del producto cuando esté disponible. Distingue ancho total, ancho del cristal, puente, alto y largo de varillas. Usa los datos de ese modelo; si falta una medida, consúltanos.",
+        "step_3_title": "Busca comodidad, además de números",
+        "step_3_body": "Las medidas ayudan a comparar, pero la forma del puente y las varillas también influyen en el ajuste. Toma como referencia un armazón cómodo y evita asumir que dos modelos de igual medida calzan igual."
+      },
+      "face": {
+        "title": "Tu estilo no tiene una sola forma.",
+        "intro": "Explora proporciones, colores y siluetas con libertad. La forma del rostro puede ser una referencia, sin convertirse en una regla para elegir.",
+        "visual_title": "Una referencia, muchas posibilidades.",
+        "visual_copy": "Mira el ancho, la altura y las líneas del armazón. Lo que te gusta y cómo se siente también cuentan.",
+        "step_1_title": "Empieza por lo que te gusta",
+        "step_1_body": "Piensa en un armazón que disfrutes usar: líneas suaves o marcadas, colores discretos o protagonistas. Prueba una silueta distinta si quieres cambiar; no necesitas encajar en una categoría de rostro.",
+        "step_2_title": "Mira las proporciones",
+        "step_2_body": "Compara el ancho y la altura del modelo con tu armazón actual. Revisa las fotos y medidas de la ficha para explorar cuánto espacio ocupa en tu rostro. Las etiquetas de forma son orientativas.",
+        "step_3_title": "Dale espacio a la comodidad",
+        "step_3_body": "Considera el apoyo en el puente y el largo de las varillas, además del estilo. Un probador virtual, cuando esté disponible, sirve como referencia visual y no confirma el ajuste físico. Si tienes dudas sobre una medida, consúltanos."
+      },
+      "order": {
+        "title": "Elige. Revisa. Haz tu pedido.",
+        "intro": "Desde el catálogo al checkout, cada selección cuenta. Esta guía te ayuda a revisar las opciones reales del producto y el total antes de comprar.",
+        "visual_title": "Tu selección, paso a paso.",
+        "visual_copy": "El precio corresponde a la variante elegida. Revisa los detalles del carrito y las condiciones que muestre el checkout.",
+        "step_1_title": "Explora y elige un modelo",
+        "step_1_body": "Abre un producto del catálogo, revisa sus fotos, medidas y disponibilidad. Elige el color y las opciones que aparezcan en su ficha. La selección puede cambiar la variante y su precio.",
+        "step_2_title": "Revisa lo que agregas al carrito",
+        "step_2_body": "Si el producto ofrece lentes, sigue su configuración y completa solo los datos solicitados. Para comprar únicamente el armazón, usa esa opción cuando esté disponible. En el carrito revisa variante, cantidad, detalles y subtotal.",
+        "step_3_title": "Confirma los datos en checkout",
+        "step_3_body": "Puedes comprar como invitado, sin iniciar sesión. Continúa desde el carrito al checkout de Shopify y revisa tus datos de contacto, dirección, opciones de envío y métodos de pago disponibles. Comprueba el total y las condiciones mostradas antes de confirmar el pedido."
+      },
+      "try_on": {
+        "title": "Mira cómo podría verse.",
+        "intro": "El probador virtual depende de cada producto y de un proveedor conectado. Consulta la ficha del modelo para conocer si tiene esta opción.",
+        "visual_title": "Fotos y medidas siempre ayudan.",
+        "visual_copy": "Una visualización digital es una referencia de estilo. No confirma la talla ni reemplaza comprobar el ajuste del armazón.",
+        "step_1_title": "Comprueba si el modelo tiene probador",
+        "step_1_body": "Abre la ficha del producto y busca la opción de probador virtual. El acceso aparece solo si el modelo tiene un enlace configurado; no todos los productos lo incluyen.",
+        "step_2_title": "Revisa las instrucciones del proveedor",
+        "step_2_body": "Si hay un probador conectado, revisa sus instrucciones y condiciones de privacidad antes de usarlo. Los permisos y requisitos dependen de ese servicio. La tienda no necesita acceso a tu cámara para explorar el catálogo.",
+        "step_3_title": "Si no hay probador, compara otras referencias",
+        "step_3_body": "Usa las fotografías, las dimensiones del modelo y un armazón que ya te resulte cómodo. Si necesitas ayuda con una medida o con las opciones de un producto, consulta al equipo antes de elegir."
+      },
+      "prescription": {
+        "title": "Tu receta, con cuidado.",
+        "intro": "Cuando un producto ofrece lentes con receta, su ficha muestra las opciones disponibles para ingresarla. Revisa esos campos antes de agregar el producto al carrito.",
+        "visual_title": "Datos personales, en el lugar correcto.",
+        "visual_copy": "Usa únicamente los campos de receta de la ficha cuando estén habilitados. No envíes información de salud mediante la suscripción al newsletter.",
+        "step_1_title": "Comprueba las opciones de la ficha",
+        "step_1_body": "Abre el producto y revisa si permite configurar lentes con receta. El ingreso manual o la carga de un documento dependen de las opciones habilitadas en esa ficha. No todos los productos solicitan una receta.",
+        "step_2_title": "Revisa los datos antes de agregar",
+        "step_2_body": "Si hay ingreso manual, copia los valores de tu receta en sus campos correspondientes sin interpretarlos ni modificarlos. Si se permite adjuntar un documento, usa el formato y tamaño que indique la ficha y comprueba que sea legible.",
+        "step_3_title": "Consulta cuando algo no esté claro",
+        "step_3_body": "Si falta un dato o no sabes cómo trasladarlo al formulario, consulta antes de completar la selección. No deduzcas valores ni asumas compatibilidad a partir de esta guía. Revisa los detalles del carrito antes de continuar al checkout."
+      }
+    },
+    "lemoon_faq_page": {
+      "title": "Preguntas frecuentes.",
+      "intro": "Respuestas para elegir tu armazón, revisar sus opciones y comprar con los detalles claros.",
+      "index": "Busca por tema",
+      "help_title": "¿Te quedó una pregunta?",
+      "help_body": "Cuéntanos qué modelo estás mirando o en qué paso necesitas ayuda.",
+      "contact": "Conversemos",
+      "choosing": {
+        "title": "Elegir tu armazón",
+        "question_1": {
+          "question": "¿Cómo sé qué talla elegir?",
+          "answer": "Compara las medidas de la ficha con un armazón que ya te resulte cómodo. Distingue ancho del cristal, puente y largo de varillas; el ancho del cristal no es el ancho total. La forma y el apoyo del puente también influyen en el ajuste.",
+          "link": "Revisar la guía de medidas"
+        },
+        "question_2": {
+          "question": "¿Por qué cambia el precio al elegir opciones?",
+          "answer": "El color y las opciones disponibles pueden seleccionar una variante distinta. Revisa el precio que muestra la ficha después de elegir y comprueba la variante y el subtotal en el carrito. Se cobran las opciones de la variante que agregas.",
+          "link": "Ver cómo hacer tu pedido"
+        },
+        "question_3": {
+          "question": "¿Todos los modelos tienen probador virtual?",
+          "answer": "El probador aparece solo cuando la ficha del modelo tiene un enlace configurado. Si no lo ves, usa sus fotos y medidas como referencia. Una visualización digital ayuda a explorar el estilo, pero no confirma el ajuste físico.",
+          "link": "Conocer la guía del probador"
+        }
+      },
+      "lenses": {
+        "title": "Lentes y receta",
+        "question_1": {
+          "question": "¿Cómo ingreso mi receta?",
+          "answer": "Comprueba primero si el modelo ofrece lentes con receta. La ficha muestra las opciones habilitadas de ingreso manual o documento. Usa únicamente esos campos, copia los datos sin interpretarlos y consulta si falta un valor. No envíes datos de salud a través del newsletter.",
+          "link": "Revisar la guía de receta"
+        },
+        "question_2": {
+          "question": "¿Puedo comprar solo el armazón?",
+          "answer": "Cuando la ficha ofrece la opción de comprar solo armazón, puedes elegirla sin completar una receta. Revisa el color, la variante y la disponibilidad antes de agregarlo al carrito. Las opciones dependen de cada producto.",
+          "link": "Explorar armazones"
+        }
+      },
+      "ordering": {
+        "title": "Pedido, cuenta y ayuda",
+        "question_1": {
+          "question": "¿Qué reviso antes de confirmar mi pedido?",
+          "answer": "En el carrito verifica producto, variante, cantidad y subtotal. Luego revisa en checkout tus datos de contacto, dirección, opciones de envío, métodos de pago y total. Confirma solo después de comprobar la información y las condiciones mostradas.",
+          "link": "Seguir la guía de pedido"
+        },
+        "question_2": {
+          "question": "¿Dónde accedo a mi cuenta?",
+          "answer": "La cuenta es opcional para comprar. Usa el enlace de acceso a tu cuenta para consultar pedidos y administrar tu perfil y direcciones. Shopify gestiona el inicio de sesión en su página segura. Accede con el correo asociado a tu compra.",
+          "link": "Acceder a mi cuenta"
+        },
+        "question_3": {
+          "question": "¿Cómo pido ayuda con un producto o pedido?",
+          "answer": "Usa nuestro formulario de contacto e indica el modelo o tu número de pedido, si lo tienes. Explica brevemente qué necesitas revisar. No incluyas claves, datos de pago ni documentos de receta en ese mensaje.",
+          "link": "Ir al formulario de contacto"
+        }
+      },
+      "policies": {
+        "title": "Envíos y condiciones",
+        "question_1": {
+          "question": "¿Dónde reviso las condiciones de envío?",
+          "answer": "Consulta la página de envíos y las opciones que muestre el checkout para tu dirección. Revisa los cargos y la información disponible antes de confirmar la compra.",
+          "link": "Revisar envíos y entregas"
+        },
+        "question_2": {
+          "question": "¿Dónde encuentro las condiciones de devolución?",
+          "answer": "Revisa la política de devoluciones vigente antes de comprar. Si necesitas aclarar una condición para un producto o pedido, consulta al equipo antes de iniciar una solicitud.",
+          "link": "Revisar la política de devoluciones"
+        },
+        "question_3": {
+          "question": "¿Dónde consulto la garantía?",
+          "answer": "Consulta las condiciones de garantía vigentes para conocer su cobertura y el procedimiento de atención. Si falta información sobre tu caso, contacta al equipo antes de asumir una cobertura.",
+          "link": "Revisar condiciones de garantía"
+        }
+      }
+    },
+    "lemoon_legal_page": {
+      "eyebrow": "Lemoon · Información",
+      "intro_general": "Información sobre tus compras en Lemoon.",
+      "intro_shipping": "Información sobre la preparación y entrega de tus lentes.",
+      "intro_returns": "Condiciones y pasos para solicitar una devolución.",
+      "intro_terms": "Las condiciones que aplican al uso del sitio y a tus compras en Lemoon.",
+      "intro_privacy": "Información sobre el tratamiento de tus datos personales.",
+      "intro_warranty": "Información sobre garantías y cómo solicitar atención.",
+      "empty_content": "Si necesitas información sobre estas condiciones, contáctanos antes de finalizar tu compra.",
+      "help_title": "¿Necesitas ayuda?",
+      "help_description": "Si tienes una consulta sobre estas condiciones, escríbenos.",
+      "contact": "Contactar a Lemoon",
+      "navigation": "Información para tu compra",
+      "shipping": "Envíos y entregas",
+      "returns": "Devoluciones",
+      "warranty": "Garantías",
+      "terms": "Términos y condiciones",
+      "privacy": "Privacidad"
+    },
+    "lemoon_about_page": {
+      "eyebrow": "Sobre Lemoon",
+      "title": "Ver bien. Sentirte tú.",
+      "intro": "Tus lentes son parte de cómo miras el mundo y de cómo te expresas. En Lemoon queremos que elegirlos sea una decisión personal, clara y con sentido.",
+      "catalogue": "Explorar armazones",
+      "measurements": "Comparar medidas de armazones",
+      "values_title": "Lo que nos mueve",
+      "style_title": "Tu estilo, a tu manera",
+      "style_body": "Creemos que hay muchas formas de verse bien. Queremos dar espacio a las formas y colores que se sienten tuyos.",
+      "fit_title": "La comodidad importa",
+      "fit_body": "Queremos que el calce sea parte de la elección. Comparar medidas y pensar cómo se apoya un armazón en tu rostro ayuda a decidir con calma.",
+      "information_title": "Elegir con claridad",
+      "information_body": "Queremos que la información útil llegue antes de la compra: medidas, detalles del producto y un espacio para preguntar.",
+      "help_title": "Una buena elección empieza con una pregunta.",
+      "help_body": "Si estás entre dos armazones o quieres entender un detalle, escríbenos antes de hacer tu pedido. Cuéntanos qué buscas y qué modelos estás mirando.",
+      "contact": "Conversemos"
+    },
+    "lemoon_launch_page": {
+      "title": "Una nueva forma de mirar.",
+      "intro": "Estamos preparando la tienda Lemoon. Si quieres recibir novedades y saber cuándo abrimos, suscríbete con tu correo.",
+      "email": "Tu correo electrónico",
+      "consent": "Acepto recibir novedades de Lemoon por correo electrónico.",
+      "submit": "Quiero recibir novedades",
+      "success": "Gracias por suscribirte. Tu correo quedó registrado para recibir novedades de Lemoon."
+    },
+    "lemoon_service_page": {
+      "eyebrow": "Lemoon · Servicios e información",
+      "operations_title": "Operativos oftalmológicos",
+      "operations_intro": "Escríbenos para consultar disponibilidad y requisitos de los operativos oftalmológicos.",
+      "operations_step_1_title": "Consulta disponibilidad",
+      "operations_step_1_text": "Usa el formulario de contacto para consultar si hay un operativo disponible.",
+      "operations_step_2_title": "Confirma los datos",
+      "operations_step_2_text": "Confirma fechas, requisitos y alcance de la atención con el equipo antes de participar.",
+      "operations_step_3_title": "Coordina si hay disponibilidad",
+      "operations_step_3_text": "Si hay disponibilidad, acuerda los detalles y recibe la información para asistir.",
+      "operations_details": "La disponibilidad y los requisitos se confirman al consultar. Escríbenos antes de planificar tu asistencia.",
+      "operations_cta": "Consultar disponibilidad",
+      "operations_aside": "Consulta fechas, disponibilidad y requisitos por nuestro formulario de contacto.",
+      "benefits_title": "Isapres y Fonasa",
+      "benefits_intro": "Consulta las condiciones de tu plan antes de comprar.",
+      "benefits_step_1_title": "Revisa la prestación",
+      "benefits_step_1_text": "Consulta si tu plan contempla la prestación o el producto que necesitas y qué condiciones aplica.",
+      "benefits_step_2_title": "Confirma el documento requerido",
+      "benefits_step_2_text": "Pregunta a tu institución qué documento de compra exige y qué información debe incluir.",
+      "benefits_step_3_title": "Revisa cómo hacer tu solicitud",
+      "benefits_step_3_text": "Confirma con tu institución el procedimiento, los plazos y el canal para presentar tu solicitud.",
+      "benefits_details": "Las condiciones de cobertura o reembolso dependen de tu plan y de las reglas vigentes de tu Isapre o Fonasa. Confirma la prestación y los documentos requeridos directamente con tu institución antes de comprar.",
+      "benefits_cta": "Consultar al equipo",
+      "benefits_aside": "Tu institución puede confirmar las condiciones de tu plan. Si necesitas consultar sobre la compra en Lemoon, escríbenos.",
+      "aside_title": "Antes de continuar"
+    },
+    "lemoon_demo": {
+      "notice": "Datos comerciales de prueba · Servioptic SpA. No son condiciones comerciales vigentes."
+    },
+    "lemoon_footer_privacy": {
+      "policy": "Privacidad",
+      "terms": "Términos y condiciones",
+      "shipping": "Envíos",
+      "returns": "Devoluciones",
+      "preferences": "Preferencias de cookies",
+      "unavailable": "No pudimos abrir las preferencias. Vuelve a intentarlo o consulta nuestra política de privacidad.",
+      "close": "Cerrar preferencias",
+      "intro": "Elige qué cookies opcionales permitir. Puedes cambiar tu elección o rechazar todas desde este panel cuando quieras.",
+      "essential": "Obligatorias",
+      "essential_text": "Permiten usar el carrito, iniciar sesión y completar la compra. Siempre están activas.",
+      "personalization": "Personalización",
+      "personalization_text": "Recuerdan preferencias como idioma y país para futuras visitas.",
+      "analytics": "Analítica",
+      "analytics_text": "Ayudan a entender cómo se usa la tienda y a mejorar la navegación.",
+      "marketing": "Marketing",
+      "marketing_text": "Permiten medir campañas y mostrar publicidad según tus intereses.",
+      "policy_link": "Leer la política de privacidad",
+      "save_failed": "No pudimos guardar tu elección. Inténtalo nuevamente.",
+      "accept": "Aceptar todas",
+      "reject": "Rechazar todas",
+      "save": "Guardar mi elección"
+    },
+    "lemoon_crystal_guide": {
+      "title": "Elige tus cristales con claridad",
+      "intro": "Empieza por cómo vas a usar tus lentes. Las opciones finales dependen del armazón que elijas y de las combinaciones disponibles para ese modelo.",
+      "clear_title": "Transparentes",
+      "clear_text": "Si buscas cristales sin color, revisa los paquetes transparentes del modelo. Los tratamientos disponibles se indican en el configurador.",
+      "photo_title": "Fotocromáticos",
+      "photo_text": "Si prefieres cristales que cambien de tonalidad con la luz, busca una opción fotocromática. Su disponibilidad y características dependen del paquete elegido.",
+      "sun_title": "Para el sol",
+      "sun_text": "Revisa las opciones solares del modelo y si se ofrecen con o sin receta. El color del cristal y sus características se confirman al configurar.",
+      "thickness_title": "El grosor también cuenta",
+      "thickness_text": "El índice es una de las opciones que puede variar entre paquetes. La elección depende de tu receta y del armazón; revisa las alternativas disponibles antes de decidir.",
+      "prescription_title": "Tu receta, a mano",
+      "prescription_text": "Si necesitas graduación, prepara una receta legible y revisa los datos antes de enviar el pedido. En el configurador puedes ver las formas de ingresarla.",
+      "frames_cta": "Elegir un armazón óptico",
+      "prescription_cta": "Cómo enviar mi receta",
+      "configure_cta": "Configurar {{ product }}",
+      "configure_note": "Las opciones y el precio se confirman en el configurador del producto."
+    },
+    "lemoon_style_quiz": {
+      "title": "Encuentra tu lente ideal",
+      "intro": "Cuatro preguntas para explorar armazones según tus preferencias. Sin fotos ni registro.",
+      "step": "Paso [current] de [total]",
+      "next": "Continuar",
+      "results_cta": "Ver mi selección",
+      "back": "Volver",
+      "restart": "Volver a empezar",
+      "error": "Elige una opción para continuar.",
+      "result_title": "Una selección para explorar",
+      "result_intro": "Estas sugerencias editoriales consideran tus preferencias. La comodidad y el ajuste se confirman al probar el armazón.",
+      "count": "[count] opciones disponibles en esta selección",
+      "empty": "No encontramos opciones de esta selección dentro de tus preferencias y presupuesto. Puedes cambiar tus respuestas o explorar el catálogo.",
+      "catalogue": "Ver catálogo",
+      "budget_catalogue": "Ver opciones en este presupuesto",
+      "finished": "Selección lista",
+      "no_js": "Activa JavaScript para responder las preguntas. También puedes explorar esta selección editorial o visitar el catálogo.",
+      "product_cta": "Ver armazón",
+      "budget_prefix": "Hasta",
+      "face_title": "¿Cómo describirías tu rostro?",
+      "face_hint": "Si no tienes claro qué elegir, puedes continuar con «No estoy seguro/a».",
+      "style_title": "¿Qué estilo te representa?",
+      "style_hint": "Elige lo que más te atrae hoy.",
+      "use_title": "¿Cuándo los usarías más?",
+      "use_hint": "Piensa en tu día a día. Esta selección no considera protección deportiva.",
+      "budget_title": "¿Cuál es tu presupuesto para el armazón?",
+      "budget_hint": "Los cristales y servicios adicionales se cotizan por separado.",
+      "face": {
+        "round": "Redondo",
+        "square": "Cuadrado",
+        "oval": "Ovalado",
+        "heart": "Corazón",
+        "unsure": "No estoy seguro/a"
+      },
+      "style": {
+        "minimal": "Minimal",
+        "colorpop": "Con color",
+        "retro": "Retro",
+        "easy": "Sin esfuerzo"
+      },
+      "use": {
+        "work": "Para trabajar",
+        "everyday": "Todos los días",
+        "outdoors": "Al aire libre"
+      },
+      "budget": {
+        "none": "Sin límite definido"
+      }
     }
   },
   "localization": {
@@ -592,6 +1037,16 @@
     }
   },
   "gift_cards": {
+    "lemoon": {
+      "heading": "Tu tarjeta de regalo",
+      "balance": "Saldo disponible",
+      "disabled": "Desactivada",
+      "empty": "Sin saldo disponible",
+      "instructions": "Ingresa este código al pagar tu compra en la tienda online.",
+      "copy_error": "No pudimos copiarlo. Selecciona el código para copiarlo.",
+      "print": "Imprimir tarjeta",
+      "code_label": "Código de tu tarjeta"
+    },
     "issued": {
       "title": "Este es el saldo de tu tarjeta de regalo de {{ value }} para {{ shop }}.",
       "subtext": "Tu tarjeta de regalo",
@@ -775,5 +1230,75 @@
     "back_to_frame": "Volver al armazón",
     "lens_step": "Elige tus lentes",
     "lens_step_note": "Selecciona tus cristales y cómo entregarás tu receta."
+  },
+  "lemoon_lens_flow": {
+    "title": "Configura tus lentes",
+    "choose_frame_hint": "Primero elige un armazón. Las opciones de cristales dependen del modelo y su disponibilidad.",
+    "choose_frame": "Elegir un armazón",
+    "prototype": "Producto de demostración: precios, imágenes y opciones de prototipo. No es una oferta comercial.",
+    "back_product": "Volver al armazón",
+    "no_packages": "Este armazón no tiene paquetes de cristales disponibles en el catálogo. Puedes revisar sus opciones en la ficha del producto.",
+    "progress_label": "Progreso de configuración",
+    "progress": "Paso {current} de {total}",
+    "use_title": "¿Cómo vas a usar tus lentes?",
+    "use_hint": "Elige entre las opciones disponibles para este armazón.",
+    "distance_title": "Visión monofocal",
+    "distance_far": "Para ver de lejos",
+    "distance_near": "Para ver de cerca",
+    "use_mono": "Monofocal",
+    "use_progressive": "Progresivo",
+    "use_solar": "Sol sin receta",
+    "prescription_title": "Agrega y revisa tu receta",
+    "prescription_hint": "Copia tu receta tal como está escrita o adjunta un documento legible. La validación revisa el formato de los datos; la receta y el ajuste deben revisarse antes de fabricar los lentes.",
+    "recipe_mode": "Cómo agregar la receta",
+    "recipe_manual": "Ingresar receta manualmente",
+    "recipe_upload": "Subir receta (PDF o imagen)",
+    "file_label": "Archivo de receta",
+    "file_hint": "PDF, JPG o PNG, hasta 10 MB. Revisa que se lean todos los datos.",
+    "eye_od": "Ojo derecho (OD)",
+    "eye_oi": "Ojo izquierdo (OI)",
+    "sphere": "Esfera",
+    "cylinder": "Cilindro",
+    "axis": "Eje",
+    "addition": "Adición",
+    "pd": "Distancia pupilar total (mm)",
+    "crystal_title": "Elige tus cristales",
+    "catalogue_hint": "Mostramos únicamente paquetes y combinaciones disponibles para este armazón.",
+    "crystal_clear": "Transparentes",
+    "crystal_photo": "Fotocromáticos",
+    "crystal_sun": "Cristales de sol",
+    "index_title": "Elige el grosor",
+    "index_hint": "El índice identifica el material de tus cristales. Las opciones disponibles no reemplazan la revisión de tu receta y del ajuste.",
+    "extra_title": "Elige los extras",
+    "extra_none": "Sin filtro azul adicional",
+    "extra_blue": "Con filtro azul",
+    "review_title": "Revisa tu configuración",
+    "review_hint": "Confirma los datos y el precio antes de agregar tus lentes al carrito. Puedes volver a los pasos anteriores para corregirlos.",
+    "total": "Total del producto",
+    "back": "Volver",
+    "continue": "Continuar",
+    "add": "Agregar al carrito",
+    "javascript_hint": "Activa JavaScript para configurar tus cristales o vuelve a la ficha del armazón.",
+    "pending": "Por elegir",
+    "price_pending": "Elige una combinación para ver su precio",
+    "no_recipe": "Sin receta",
+    "cart_error": "No pudimos agregar tus lentes. Inténtalo nuevamente.",
+    "recipe_error": "Revisa la receta: completa las esferas de ambos ojos y la distancia pupilar; verifica los valores indicados.",
+    "file_error": "Adjunta una receta en PDF, JPG o PNG de hasta 10 MB.",
+    "step_use": "Uso",
+    "step_prescription": "Receta",
+    "step_crystal": "Cristal",
+    "step_index": "Grosor",
+    "step_extra": "Extras",
+    "step_review": "Resumen",
+    "summary_use": "Uso",
+    "summary_crystal": "Cristal",
+    "summary_index": "Índice",
+    "summary_extra": "Extras",
+    "buy_frame": "Comprar solo armazón",
+    "property_recipe": "Receta",
+    "property_use": "Uso monofocal",
+    "property_file": "Archivo de receta",
+    "property_pd": "Distancia pupilar (mm)"
   }
 }

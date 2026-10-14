@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-service-page",
+      "settings": {
+        "demo_data": true,
+        "demo_content": "<h2>Un operativo de muestra</h2><p>Servioptic SpA coordina, en este escenario de prueba, jornadas para grupos de 20 a 40 personas en Santiago. La solicitud se realiza con al menos 10 días hábiles de anticipación; el presupuesto y la fecha se confirman por escrito.</p><p>La jornada de ejemplo contempla orientación para elegir armazón y coordinación de pedidos. No acredita una atención clínica, agenda real ni profesionales contratados.</p>",
+        "kind": "operations",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

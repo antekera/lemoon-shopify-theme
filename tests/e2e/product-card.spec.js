@@ -7,10 +7,20 @@ const cardStyles = resolve(process.cwd(), 'assets/lemoon-components.css');
 
 test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 
-async function swipeLeft(page, bounds) {
-  const session = await page.context().newCDPSession(page);
+async function swipeLeft(page, bounds, browserName) {
   const x = bounds.x + bounds.width - 30;
   const y = bounds.y + bounds.height / 2;
+  if (browserName !== 'chromium') {
+    // Real mouse input exercises pointer capture in engines without CDP touch injection.
+    await test.step('drag the gallery with the native mouse pointer', async () => {
+      await page.mouse.move(x, y);
+      await page.mouse.down();
+      await page.mouse.move(x - 140, y, { steps: 2 });
+      await page.mouse.up();
+    });
+    return;
+  }
+  const session = await page.context().newCDPSession(page);
   await session.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x, y }] });
   await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x - 70, y }] });
   await session.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x - 140, y }] });
@@ -79,7 +89,7 @@ test('portrait product photos use the card width and stay vertically centered', 
   await expect(image).toHaveCSS('mix-blend-mode', 'multiply');
 });
 
-test('loads the second photo near the viewport and toggles back to the first on the next swipe', async ({ page }) => {
+test('loads the second photo near the viewport and toggles back to the first on the next swipe', async ({ page, browserName }) => {
   await openCard(page, { offscreen: true });
   await page.addStyleTag({ content: '.card__content { position: absolute; inset: 0 auto auto 0; width: 320px; height: 320px; z-index: 2; }' });
   const card = page.locator('.product-card-wrapper');
@@ -91,7 +101,7 @@ test('loads the second photo near the viewport and toggles back to the first on 
   await card.scrollIntoViewIfNeeded();
   await expect(second).toHaveAttribute('src', 'https://cdn.example/diagonal.jpg');
 
-  await swipeLeft(page, await page.locator('.card__media .media').boundingBox());
+  await swipeLeft(page, await page.locator('.card__media .media').boundingBox(), browserName);
   const media = page.locator('.card__media .media');
   const incoming = media.locator('.lemoon-product-card__slide-layer');
   await expect(incoming).toHaveCSS('transition-property', 'opacity');
@@ -102,18 +112,18 @@ test('loads the second photo near the viewport and toggles back to the first on 
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber diagonal');
   expect(await incomingElement.evaluate((element) => element === document.querySelector('.card__media .media img:first-child'))).toBe(true);
   await expect(media.locator('.lemoon-product-card__slide-layer')).toHaveCount(0);
-  await swipeLeft(page, await media.boundingBox());
+  await swipeLeft(page, await media.boundingBox(), browserName);
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Amber front');
   await expect(page.locator('.card__media .media img')).toHaveCount(2);
   await expect(page).toHaveURL(/mobile-search\.html$/);
 });
 
-test('loads the selected variant second photo on demand', async ({ page }) => {
+test('loads the selected variant second photo on demand', async ({ page, browserName }) => {
   await openCard(page);
   await page.locator('.lemoon-product-card__swatch').nth(1).click();
   const media = page.locator('.card__media .media');
   const bounds = await media.boundingBox();
-  await swipeLeft(page, bounds);
+  await swipeLeft(page, bounds, browserName);
   await expect(page.locator('.card__media .media img').first()).toHaveAttribute('alt', 'Black diagonal');
 });
 

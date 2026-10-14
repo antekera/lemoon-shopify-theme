@@ -5,7 +5,11 @@
   {% render 'lemoon-mobile-search', section: section %}
 {% enddoc %}
 <script type="module" src="{{ 'lemoon-mobile-search.js' | asset_url | escape }}"></script>
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{%- if request.page_type == 'index' -%}
+  <style>{{ 'component-card.css' | inline_asset_content }}</style>
+{%- else -%}
+  {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 {%- liquid
   assign panel_id = 'Lemoon-Mobile-Search-' | append: section.id
   assign trend_collection = section.settings.mobile_search_trending_collection

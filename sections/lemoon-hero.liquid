@@ -1,4 +1,4 @@
-{{ 'lemoon-hero.css' | asset_url | stylesheet_tag }}
+<style>{{ 'lemoon-hero.css' | inline_asset_content }}</style>
 <script src="{{ 'lemoon-hero.js' | asset_url }}" defer="defer"></script>
 
 <lemoon-hero class="lemoon-hero" data-autoplay-seconds="{{ section.settings.autoplay_seconds }}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ 'sections.lemoon_hero.label' | t }}">
@@ -19,14 +19,19 @@
           assign image_priority = 'auto'
         endif
       -%}
+      {%- if forloop.first and desktop_image == blank and mobile_image == blank and desktop_asset != blank and mobile_asset != blank -%}
+        {%- capture mobile_srcset -%}{{ mobile_asset | asset_img_url: '375x' }} 375w, {{ mobile_asset | asset_img_url: '550x' }} 550w, {{ mobile_asset | asset_img_url: '750x' }} 750w, {{ mobile_asset | asset_img_url: '941x' }} 941w{%- endcapture -%}
+        {{ mobile_asset | asset_img_url: '750x' | preload_tag: as: 'image', media: '(max-width: 749px)', imagesrcset: mobile_srcset, imagesizes: '100vw', fetchpriority: 'high' }}
+        {{ desktop_asset | asset_url | preload_tag: as: 'image', media: '(min-width: 750px)', fetchpriority: 'high' }}
+      {%- endif -%}
       <div class="lemoon-hero__slide" id="LemoonHeroSlide-{{ block.id }}" role="group" aria-roledescription="{{ 'sections.slideshow.slide' | t }}" aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length }}"{% unless forloop.first %} inert aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
         <picture class="lemoon-hero__picture">
           {%- if mobile_image != blank -%}
             <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w, {{ mobile_image | image_url: width: 1500 }} 1500w" sizes="100vw">
           {%- elsif mobile_asset != blank -%}
-            <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_url }}">
+            <source media="(max-width: 749px)" srcset="{{ mobile_asset | asset_img_url: '375x' }} 375w, {{ mobile_asset | asset_img_url: '550x' }} 550w, {{ mobile_asset | asset_img_url: '750x' }} 750w, {{ mobile_asset | asset_img_url: '941x' }} 941w" sizes="100vw">
           {%- elsif desktop_image == blank and desktop_asset == blank -%}
-            <source media="(max-width: 749px)" srcset="{{ 'lemoon-hero-mobile-placeholder.jpg' | asset_url }}">
+            <source media="(max-width: 749px)" srcset="{{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '375x' }} 375w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '550x' }} 550w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '750x' }} 750w, {{ 'lemoon-hero-mobile-placeholder.jpg' | asset_img_url: '941x' }} 941w" sizes="100vw">
           {%- endif -%}
           {%- if desktop_image != blank -%}
             {{ desktop_image | image_url: width: 2400 | image_tag: class: 'lemoon-hero__image', loading: image_loading, fetchpriority: image_priority, widths: '750, 1100, 1500, 1800, 2400', sizes: '100vw', alt: desktop_alt }}
