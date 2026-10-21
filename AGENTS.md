@@ -9,6 +9,10 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 - For visual work, read `docs/design/brand-guidelines.md` and the relevant design plan or section inventory.
 - Keep edits scoped to the requested work. Do not modify `node_modules/` or Shopify-generated output.
 
+## Current documentation (Context7-first)
+
+For library, framework, SDK, API, CLI, or cloud-service syntax, configuration, migration, setup, or tool-specific debugging, fetch current documentation through Context7 even when the tool is familiar. Start with `resolve-library-id` using the library name and full question unless an exact `/org/project` ID was supplied. Select the most relevant authoritative match, use a version-specific ID when requested, and call `query-docs` with that ID and the full question. Base guidance on the returned documentation. If Context7 is unavailable or lacks the needed documentation, disclose that and consult current official documentation. General programming, business logic debugging, refactoring, and code review alone do not require documentation lookup.
+
 ## Theme conventions
 
 - Use `{% render %}` and pass snippet inputs explicitly. Localize user-facing text through the existing locale files.
