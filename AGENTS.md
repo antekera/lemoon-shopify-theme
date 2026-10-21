@@ -9,6 +9,10 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 - For visual work, read `docs/design/brand-guidelines.md` and the relevant design plan or section inventory.
 - Keep edits scoped to the requested work. Do not modify `node_modules/` or Shopify-generated output.
 
+## Current documentation (Context7-first)
+
+For library, framework, SDK, API, CLI, or cloud-service syntax, configuration, migration, setup, or tool-specific debugging, fetch current documentation through Context7 even when the tool is familiar. Start with `resolve-library-id` using the library name and full question unless an exact `/org/project` ID was supplied. Select the most relevant authoritative match, use a version-specific ID when requested, and call `query-docs` with that ID and the full question. Base guidance on the returned documentation. If Context7 is unavailable or lacks the needed documentation, disclose that and consult current official documentation. General programming, business logic debugging, refactoring, and code review alone do not require documentation lookup.
+
 ## Theme conventions
 
 - Use `{% render %}` and pass snippet inputs explicitly. Localize user-facing text through the existing locale files.
@@ -26,3 +30,13 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 ## Codex skills
 
 Repository skills live under `.agents/skills/`. Use `$<skill-name>` for explicit invocation or select an enabled skill from Codex's skill selector. Follow the skill's scope and safety rules; a skill does not authorize actions outside the user's request.
+
+## Page copywriting
+
+For creating or revising Lemoon page copy, including terms, returns, shipping, privacy, FAQs, and brand pages, use the `lemoon-copywriter` agent defined in `.codex/agents/lemoon-copywriter.toml` when available. If the role is unavailable in the current session, read that file and follow its instructions directly. It researches comparable Chilean eyewear stores, verifies legal claims against current official sources, and produces original es-CL drafts with source notes and unconfirmed business details clearly marked.
+
+## Ticket delivery and testing
+
+When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges to `main` after current checks and required approvals pass when the user authorized delivery through merge. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
+
+For unit and end-to-end test work, use `theme-test-engineer` in `.codex/agents/theme-test-engineer.toml`. It creates and runs relevant Vitest and Playwright tests, distinguishes local fixtures from Shopify storefront coverage, and reports evidence and environment gaps. If a role is unavailable, read its definition and use a general agent with that scope; disclose any unavailable delegation or independent review.

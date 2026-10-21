@@ -25,6 +25,7 @@ SKILLS = {
     "reviews": {"theme-code-review", "theme-conventions-review"},
     "tokens": {"audit-design-tokens"},
     "translator": {"translate-theme-locales"},
+    "delivery": set(),
 }
 AGENTS = {
     "design": {"design-interpreter"},
@@ -32,6 +33,7 @@ AGENTS = {
     "reviews": {"theme-code-reviewer", "theme-conventions-reviewer"},
     "tokens": {"design-token-auditor"},
     "translator": {"chilean-spanish-translator"},
+    "delivery": {"lemoon-copywriter", "linear-delivery-coordinator", "theme-test-engineer"},
 }
 GROUPS = {
     "core": set(),
@@ -43,6 +45,7 @@ GROUPS = {
     "reviews": {"reviews"},
     "tokens": {"tokens"},
     "translator": {"translator"},
+    "delivery": {"delivery"},
     "authoring": {"design", "scaffold", "builder"},
     "quality": {"reviews", "tokens", "translator"},
     "all": set(SKILLS),
@@ -118,6 +121,18 @@ def validate_group(group: str) -> None:
         builder = (ROOT / ".agents/skills/build-theme-section/SKILL.md").read_text(encoding="utf-8")
         require("section-builder" in builder and "agent" in builder.lower(), "section workflow must delegate to the section-builder agent")
 
+    if group in {"delivery", "all"}:
+        reviewer_path = ROOT / ".codex/agents/theme-code-reviewer.toml"
+        with reviewer_path.open("rb") as reviewer_file:
+            reviewer = tomllib.load(reviewer_file)
+        require(reviewer.get("sandbox_mode") == "read-only", "delivery reviewer must remain read-only")
+        instructions = reviewer["developer_instructions"].lower()
+        for required in ("page copy", "research notes", "docs/content/", "independently check cited sources", "official chilean sources"):
+            require(required in instructions, f"delivery reviewer lacks declared copy-review scope: {required}")
+        guidance = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        for required in ("Context7-first", "resolve-library-id", "query-docs"):
+            require(required in guidance, f"test agent documentation reference lacks repository guidance: {required}")
+
     if group in {"tokens", "all"}:
         token_skill = (ROOT / ".agents/skills/audit-design-tokens/SKILL.md").read_text(encoding="utf-8")
         token_agent = (ROOT / ".codex/agents/design-token-auditor.toml").read_text(encoding="utf-8")
@@ -127,7 +142,7 @@ def validate_group(group: str) -> None:
 
     if group == "all":
         require(sum(map(len, SKILLS.values())) == 14, "workflow map must contain exactly 14 skills")
-        require(len(set().union(*AGENTS.values())) == 6, "workflow map must contain exactly six custom agents")
+        require(len(set().union(*AGENTS.values())) == 9, "workflow map must contain exactly nine custom agents")
 
 
 def main() -> int:
