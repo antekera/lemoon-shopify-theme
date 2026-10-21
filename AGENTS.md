@@ -26,3 +26,13 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 ## Codex skills
 
 Repository skills live under `.agents/skills/`. Use `$<skill-name>` for explicit invocation or select an enabled skill from Codex's skill selector. Follow the skill's scope and safety rules; a skill does not authorize actions outside the user's request.
+
+## Page copywriting
+
+For creating or revising Lemoon page copy, including terms, returns, shipping, privacy, FAQs, and brand pages, use the `lemoon-copywriter` agent defined in `.codex/agents/lemoon-copywriter.toml` when available. If the role is unavailable in the current session, read that file and follow its instructions directly. It researches comparable Chilean eyewear stores, verifies legal claims against current official sources, and produces original es-CL drafts with source notes and unconfirmed business details clearly marked.
+
+## Ticket delivery and testing
+
+When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges to `main` after current checks and required approvals pass when the user authorized delivery through merge. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
+
+For unit and end-to-end test work, use `theme-test-engineer` in `.codex/agents/theme-test-engineer.toml`. It creates and runs relevant Vitest and Playwright tests, distinguishes local fixtures from Shopify storefront coverage, and reports evidence and environment gaps. If a role is unavailable, read its definition and use a general agent with that scope; disclose any unavailable delegation or independent review.

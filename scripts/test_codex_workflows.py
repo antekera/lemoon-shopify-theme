@@ -25,6 +25,7 @@ SKILLS = {
     "reviews": {"theme-code-review", "theme-conventions-review"},
     "tokens": {"audit-design-tokens"},
     "translator": {"translate-theme-locales"},
+    "delivery": set(),
 }
 AGENTS = {
     "design": {"design-interpreter"},
@@ -32,6 +33,7 @@ AGENTS = {
     "reviews": {"theme-code-reviewer", "theme-conventions-reviewer"},
     "tokens": {"design-token-auditor"},
     "translator": {"chilean-spanish-translator"},
+    "delivery": {"lemoon-copywriter", "linear-delivery-coordinator", "theme-test-engineer"},
 }
 GROUPS = {
     "core": set(),
@@ -43,6 +45,7 @@ GROUPS = {
     "reviews": {"reviews"},
     "tokens": {"tokens"},
     "translator": {"translator"},
+    "delivery": {"delivery"},
     "authoring": {"design", "scaffold", "builder"},
     "quality": {"reviews", "tokens", "translator"},
     "all": set(SKILLS),
@@ -127,7 +130,7 @@ def validate_group(group: str) -> None:
 
     if group == "all":
         require(sum(map(len, SKILLS.values())) == 14, "workflow map must contain exactly 14 skills")
-        require(len(set().union(*AGENTS.values())) == 6, "workflow map must contain exactly six custom agents")
+        require(len(set().union(*AGENTS.values())) == 9, "workflow map must contain exactly nine custom agents")
 
 
 def main() -> int:
