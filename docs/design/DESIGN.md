@@ -1,198 +1,173 @@
-# Lemoon — guía canónica de implementación visual
+# Lemoon — especificación de implementación visual
 
-**Estado: consolidación documental para revisión de Miguel; no aprobación de diseño.**
-Ticket: [LEM-141](https://linear.app/antekera/issue/LEM-141). Corte de fuentes: 29-10-2026, hora de Santiago (30-10 UTC). Código inspeccionado: `22a9856806a37c2cf965fd4dd9eaf867e107b482`, repositorio `antekera/lemoon-shopify-theme`.
+Esta guía fija las reglas de implementación del storefront a partir de los tokens y componentes existentes del tema. Reutilizar esas reglas al mantener páginas o construir secciones de la misma familia. Cada excepción local se aplica únicamente a su componente. [Brand guidelines](brand-guidelines.md) define el uso de marca; [design-plan](design-plan.md) organiza las superficies; [section-inventory](section-inventory.md) localiza las secciones y [remaining-pages-plan](remaining-pages-plan.md) conserva las dependencias de entrega.
 
-Esta es la ubicación canónica de la guía operativa. Describe lo implementado, conserva la procedencia de las intenciones y separa conflictos pendientes. No crea tokens nuevos, cambia el tema ni aprueba marca, contenido comercial o páginas. Una discrepancia bloquea la aceptación de la superficie afectada, no todo el trabajo visual existente.
+## 1. Fuentes y precedencia
 
-## 1. Cómo usar las fuentes
+La base normativa de esta especificación es la implementación existente: [tokens](../../assets/lemoon-tokens.css), [componentes](../../assets/lemoon-components.css), [base Dawn](../../assets/base.css), [layout](../../layout/theme.liquid) y las fuentes locales enlazadas por componente. Aplicar en este orden:
 
-1. Mandan las instrucciones vigentes de Miguel y las decisiones explícitas del ticket de la superficie. Registrar enlace, fecha y alcance de cada aprobación; no inferirla del nombre del frame, de un check histórico o de un PR integrado.
-2. Para saber qué está implementado, leer la cascada real del tema en el SHA de trabajo. El código acredita implementación, no aprobación visual ni publicación.
-3. Para la intención visual, consultar el nodo específico de Figma y su decisión asociada. Un frame posterior, una página llamada “propuesta” o el texto “approved” dentro del archivo no acreditan aceptación de Miguel.
-4. Este documento reconcilia esas fuentes. [Brand guidelines](brand-guidelines.md) conserva contexto de marca; [design-plan](design-plan.md), [section-inventory](section-inventory.md) y [remaining-pages-plan](remaining-pages-plan.md) conservan planificación e historia. Sus valores o estados antiguos no sobrescriben esta reconciliación.
+1. La instrucción explícita del ticket de la superficie define su alcance y referencia visual.
+2. Para una familia existente, reutilizar su sección, snippet y reglas locales completas, incluidas sus media queries; tienen precedencia sobre los valores genéricos de esta guía.
+3. Para componentes sin excepción local, usar los roles semánticos y valores base de las secciones 2–5. No crear aliases paralelos `--color-primary` ni sustituir tokens por valores de un plan antiguo.
+4. Las referencias Figma sirven para la composición del componente correspondiente. No importar propuestas alternativas o tamaños de frame a todas las páginas.
 
-Leyenda: **implementado** = lectura de código; **observado en Figma** = alcance indicado abajo; **histórico/propuesto** = intención sin aprobación vigente demostrada; **pendiente** = pregunta sin resolver. Ninguna categoría equivale por sí sola a validación de storefront.
+### Referencias visuales por componente
 
-### Registro de fuentes verificadas
+Archivo: [Lemoon Ecommerce](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce). El registro de fuentes de LEM-141 identifica estas referencias inspeccionadas previamente; su alcance se conserva aquí para localizar el diseño:
 
-| Fuente | Lectura realizada y límite |
+| Referencia | Uso |
 | --- | --- |
-| [LEM-141](https://linear.app/antekera/issue/LEM-141) y sus comentarios | Descripción completa y comentario de inicio de tanda leídos live; In Progress. Revisión final de Miguel pendiente. |
-| [Figma: archivo](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce) | Páginas enumeradas por herramienta: Cover `0:1`, Foundations `9:4`, Components `9:5`, Page 4 `73:641`, Flujo de compra de cristales `111:583`, Page 6 `325:1081`, Footer — propuesta 2026 `329:583`, Product Card — propuesta 2026 `379:583`. Page 4, Page 6 y propuesta de footer no se inspeccionaron internamente. No se consultó historial de versiones ni aprobación de cada nodo. |
-| [Portada `9:6`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-6) | Contexto, captura y variables: inverse `#0B1F3A`, texto blanco, acento `#F7E600`; Urbanist 72/300 en portada. Es una portada, no escala universal de página. |
-| [Foundations `9:10`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-10) | Metadatos: paleta `9:13`, tipografía `9:60`, espaciado/radios `9:86`; barras de 4–80px. Contexto/captura adicionales rechazados por cuota Figma; no se afirma comparación visual completa ni verificación de todos los valores de variables. |
-| [Components `9:5`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-5) | Metadatos de componentes y variantes, detallados en sección 5. Contexto/captura de Input `13:10` y Product Card `34:39` sí recibidos y revisados. Contexto de Button `11:32` rechazado por cuota. |
-| [Tokens CSS](../../assets/lemoon-tokens.css), [componentes CSS](../../assets/lemoon-components.css), [base Dawn](../../assets/base.css), [layout](../../layout/theme.liquid) | Inspección de declaraciones y orden de carga; no estilos computados de navegador. CSS de cada sección puede sobrescribir la base. |
-| [Schema de settings](../../config/settings_schema.json) | Opciones/defaults leídos: esquemas de color, font pickers, logo/ancho. Un default no es un valor activo. No se usó `settings_data.json` como evidencia de producción. |
-| [Logo oficial existente](../../assets/lemoon-logo-refined-navy.svg) y [header](../../sections/header.liquid) | Referencia y dimensiones inspeccionadas; header usa el SVG refinado. No se redibuja ni recolorea. |
-| Documentos existentes | Leídos como contexto histórico, incluidos estados de entregas anteriores; no se repitieron esas pruebas ni se confirmó publicación. |
+| [Cover `9:6`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-6) | Navy, blanco y lemon; Urbanist 72/300 pertenece a la portada, no al H1 global |
+| [Foundations `9:10`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-10) | Índice de paleta `9:13`, tipografía `9:60` y espaciado/radios `9:86`; valores operativos en tokens CSS |
+| [Components `9:5`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-5) | Índice de familias y variantes |
+| [Input `13:10`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-10) | Default/Focus/Error/Disabled e icono None/Leading/Trailing; referencia visual de campos |
+| [Product Card `34:39`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=34-39) | Composición y estados Default/Hover/New/Sale; implementar dimensiones fluidas según el grid real |
+| [Button `11:32`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=11-32), [Accordion `33:13`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=33-13), [Modal `33:14`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=33-14) | Familias identificadas en el índice; clases y comportamiento concretos en sección 5 |
+| [Header Light `75:641`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=75-641), [mobile `57:74`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=57-74) | Header claro existente; reutilizar su sección |
+| [Flujo de cristales `412:979`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=412-979) | Referencia indicada por el usuario y registrada en [plan de páginas](remaining-pages-plan.md); sustituye el esquema histórico de cinco pasos |
 
-La consulta de bibliotecas Figma mostró kits comunitarios añadidos, sin demostrar que sean la biblioteca Lemoon aprobada. [LEM-132](https://linear.app/antekera/issue/LEM-132/ux-biblioteca-compartida-de-componentes-y-estados), leído live en Todo, es responsable de completar biblioteca, variantes y fuentes editables; no crear aquí un segundo sistema.
+Las direcciones alternativas y páginas de propuestas de Figma se mantienen como exploraciones; no sustituyen estas familias. La biblioteca editable y sus variantes pertenecen a [LEM-132](https://linear.app/antekera/issue/LEM-132); la identidad extendida y sus aplicaciones pertenecen a [LEM-80](https://linear.app/antekera/issue/LEM-80). Esta guía proporciona la selección operativa de componentes del tema para trabajar sin esperar una biblioteca nueva.
 
-## 2. Tokens y cascada implementados
+## 2. Color y cascada
 
-Usar los tokens semánticos existentes `--lemoon-*`; los nombres históricos `--color-primary`/`secondary` del plan son etiquetas documentales, no una API CSS equivalente garantizada. No usar primitivas en componentes nuevos si ya existe alias semántico.
+Usar los siguientes tokens semánticos de [lemoon-tokens.css](../../assets/lemoon-tokens.css):
 
-En [theme.liquid](../../layout/theme.liquid) los settings generan estilos inline de Dawn (incluidos `--color-foreground`, `--color-background`, botones y fuentes). Luego se cargan Google Fonts, `lemoon-tokens.css`, `base.css`, `lemoon-components.css`, y estilos específicos según superficie. Los tokens sobrescriben familias Dawn; los componentes fijan colores/layout de marca. Una sección con mayor especificidad o estilos inline puede ganar. No asumir que editar un color scheme cambia todos los controles de Lemoon.
-
-### Colores: inventario CSS, no nueva paleta aprobada
-
-Todos los valores de esta tabla proceden de [lemoon-tokens.css](../../assets/lemoon-tokens.css). La corroboración Figma completa permanece limitada según sección 1.
-
-| Rol / token semántico | Valor implementado | Aplicación existente o intención conservada |
+| Rol / token | Valor | Regla de selección |
 | --- | --- | --- |
-| `--lemoon-surface-page` / `--lemoon-text-inverse` | `#FFFFFF` | Superficie clara / texto sobre navy |
-| `--lemoon-surface-warm` / `--lemoon-border-warm` | `#F7F4EE` | Paneles cálidos / contorno de campos; revisar contraste de controles |
-| `--lemoon-surface-warm-hover` | `#E8E2D8` | Hover de superficie cálida |
-| `--lemoon-surface-inverse`, `--lemoon-text-brand`, `--lemoon-border-strong`, `--lemoon-action-primary` | `#0B1F3A` | Navy, acción principal y foco |
-| `--lemoon-action-primary-hover` | `#1A3560` | Hover navy |
-| `--lemoon-action-accent` / `--lemoon-action-accent-hover` | `#F7E600` / `#E6D600` | Acento y hover; usar texto oscuro, no blanco sobre lemon |
-| `--lemoon-text-primary` | `#1A1A1A` | Cuerpo de texto |
-| `--lemoon-text-secondary` | `#51575E` | Ayudas y metadatos; difiere del gris histórico |
+| `--lemoon-surface-page` / `--lemoon-text-inverse` | `#FFFFFF` | Fondo de página / texto sobre navy |
+| `--lemoon-surface-warm` / `--lemoon-border-warm` | `#F7F4EE` | Panel cálido / contorno base de campos |
+| `--lemoon-surface-warm-hover` | `#E8E2D8` | Hover de la superficie cálida |
+| `--lemoon-surface-inverse`, `--lemoon-text-brand`, `--lemoon-border-strong`, `--lemoon-action-primary` | `#0B1F3A` | Superficie inversa, texto de marca, foco y acción principal |
+| `--lemoon-action-primary-hover` | `#1A3560` | Hover de acción navy |
+| `--lemoon-action-accent` / `--lemoon-action-accent-hover` | `#F7E600` / `#E6D600` | Acento y hover; combinar con texto navy o carbon |
+| `--lemoon-text-primary` | `#1A1A1A` | Texto principal |
+| `--lemoon-text-secondary` | `#51575E` | Ayudas, labels y metadatos |
 | `--lemoon-border-default` / `--lemoon-surface-disabled` | `#E0DDD8` | Separadores / superficie deshabilitada |
-| `--lemoon-status-success` | `#2D8C4E` | Confirmación; acompañar de texto/estado semántico |
-| `--lemoon-status-error`, `--lemoon-text-error`, `--lemoon-border-error` | `#C0392B` | Errores; no comunicar solo por color |
-| `--lemoon-surface-tertiary-green` / `--lemoon-surface-green-deep` | `#DFE9DE` / `#316653` | Existen en CSS; uso de marca global pendiente de ratificación |
-| `--lemoon-action-primary-alt` / `--lemoon-action-accent-alt` | `#0E1A29` / `#FFDD00` | Alternativas experimentales, no reemplazos autorizados |
+| `--lemoon-status-success` | `#2D8C4E` | Confirmación acompañada de texto |
+| `--lemoon-status-error`, `--lemoon-text-error`, `--lemoon-border-error` | `#C0392B` | Error acompañado de mensaje y estado semántico |
+| `--lemoon-surface-tertiary-green` / `--lemoon-surface-green-deep` | `#DFE9DE` / `#316653` | Mantener en los componentes que ya los usan, como `.lemoon-about__inner` y la etiqueta `--best-seller`; no convertirlos en fondo general |
 
-La intención histórica combina blanco/carbon/navy, paneles beige y acento lemon acotado. Conservar la composición de la página existente; una nueva combinación o ampliación de uso de verdes requiere decisión, no copiar por su sola presencia en CSS.
+Blanco/carbon es la combinación base; beige distingue paneles y navy las acciones principales. Lemon es acento localizado. Conservar los tratamientos de cada sección existente. Los aliases `--lemoon-action-primary-alt:#0E1A29` y `--lemoon-action-accent-alt:#FFDD00` están reservados a exploraciones; no seleccionarlos para componentes nuevos de esta base.
 
-### Tipografía implementada
+[theme.liquid](../../layout/theme.liquid) genera primero variables Dawn desde settings y luego carga fuentes, tokens, base y componentes, en ese orden. Los estilos de sección se aplican después según su selector. Por eso un color scheme del editor no recolorea todos los controles Lemoon. [settings_schema.json](../../config/settings_schema.json) define opciones y defaults, no los valores activos de una tienda; los font pickers `assistant_n4` quedan sobreescritos por las familias de los tokens.
 
-Familias: `--lemoon-font-heading`: **Urbanist**, sans-serif; `--lemoon-font-body`: **Hanken Grotesk**, sans-serif. Pesos disponibles 300/400/500/600/700 para Urbanist y 400/500/600/700 para Hanken, según import en layout. Los defaults `assistant_n4` del schema no describen la familia efectiva tras overrides.
+## 3. Tipografía
 
-Valores de roles en [tokens](../../assets/lemoon-tokens.css), aplicados por [componentes](../../assets/lemoon-components.css). Tamaños nominales en px con la base de 10px indicada en el archivo; respetar escalado/zoom del usuario y verificar el valor computado si cambia `body_scale`.
+Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Hanken Grotesk**, sans-serif. El [layout](../../layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Hanken 400/500/600/700. Aplicar los roles de [tokens](../../assets/lemoon-tokens.css) mediante las clases de [componentes](../../assets/lemoon-components.css):
 
-| Rol | Familia / peso | Desktop → móvil <750 | Interlínea (factor) | Tracking |
+| Rol | Familia / peso | Tamaño ≥750 → <750 | Interlínea | Tracking |
 | --- | --- | --- | --- | --- |
-| Display `.h0` | Urbanist 300 | 56 → 40 | 1.142857 | −0.5px |
-| H1 | Urbanist 600 | 40 → 32 | 1.2 | −0.3px |
-| H2 | Urbanist 600 | 28 → 20 | 1.285714 | −0.3px |
-| H3 | Urbanist 500 | 20 → 18 | 1.4 | 0 |
-| Body | Hanken 400 | 16 → 16 | 1.5 | 0 |
-| Body small | Hanken 400 | 14 → 14 | 1.428571 | 0 |
-| Caption | Hanken 400 | 12 → 12 | 1.333333 | 0 |
-| Label | Hanken 400 | 13 → 13 | 1.4 | 0 |
-| CTA | Urbanist 600 | 14 → 14 | 1.428571 | 0.3px; uppercase por CSS |
+| Display `.h0` | Urbanist 300 | 5.6rem → 4rem | 1.142857 | −0.5px |
+| H1 / `.h1` | Urbanist 600 | 4rem → 3.2rem | 1.2 | −0.3px |
+| H2 / `.h2` | Urbanist 600 | 2.8rem → 2rem | 1.285714 | −0.3px |
+| H3 / `.h3` | Urbanist 500 | 2rem → 1.8rem | 1.4 | 0 |
+| Body | Hanken 400 | 1.6rem | 1.5 | 0 |
+| Body small | Hanken 400 | 1.4rem | 1.428571 | 0 |
+| Caption | Hanken 400 | 1.2rem | 1.333333 | 0 |
+| Label | Hanken 400 | 1.3rem | 1.4 | 0 |
+| CTA | Urbanist 600 | 1.4rem | 1.428571 | 0.3px, uppercase |
 
-La escala de tamaños disponible incluye 11/12/13/14/15/16/18/20/28/40/56/72. No asignar H1 a un elemento solo por tamaño: mantener jerarquía semántica. Secciones editoriales tienen overrides propios; no aplicar globalmente el antiguo `-0.03em` del plan. El ejemplo legal de sección 8 explica uno de esos overrides.
+Los rem equivalen nominalmente a 10px en la escala base del tema; el root depende de `body_scale`. Preservar rem y escalado del usuario. Elegir H1–H3 por jerarquía semántica y `.h0` por presentación. No aplicar tracking global `−0.03em`. Las excepciones de tarjeta, PLP y shell legal se mantienen en sus selectores, sin alterar estos roles.
 
-## 3. Espaciado, radios, capas y movimiento
+## 4. Espaciado, contenedores y responsive
 
-Fuente: [tokens](../../assets/lemoon-tokens.css); barras de espaciado corroboradas por metadatos [Figma `9:86`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-86).
+Fuente: [tokens](../../assets/lemoon-tokens.css) y [componentes](../../assets/lemoon-components.css).
 
-| Familia | Valores existentes |
+| Familia | Valor y aplicación |
 | --- | --- |
-| `--lemoon-space-{1,2,3,4,5,6,8,10,12,16,20}` | 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80px nominales |
-| Sección / tarjeta / gap | `--lemoon-section-padding`: 64 desktop, 40 móvil; `--lemoon-card-padding`: 20; `--lemoon-grid-gap-desktop/mobile`: 24/16 |
-| Radios | none 0; control 3; sm 4; md 12; lg 20; search 24; modal 16px; full 9999px; button → full |
-| Tamaños | control 48px; touch 44px; search 40px; checkbox 16px |
+| `--lemoon-space-{1,2,3,4,5,6,8,10,12,16,20}` | 0.4, 0.8, 1.2, 1.6, 2, 2.4, 3.2, 4, 4.8, 6.4, 8rem |
+| Padding de sección base | `--lemoon-section-padding`: 6.4rem ≥750; 4rem <750 |
+| Padding de tarjeta base | `--lemoon-card-padding`: 2rem; la tarjeta de producto tiene reglas propias |
+| Gap base desktop/móvil | `--lemoon-grid-gap-desktop/mobile`: 2.4/1.6rem; usar solo donde no haya grid local |
 | Capas | dropdown 100; sticky 200; overlay 300; modal 400; toast 500 |
 | Movimiento | fast 150ms ease; base 250ms ease; slow 400ms ease |
 
-No confundir un círculo visual de 16/20/24px con su área interactiva. El token touch de 44px es la referencia interna; no todos los controles existentes la cumplen automáticamente. El search de 40px necesita comprobar el área real de interacción.
+Cuando una sección exponga `padding_top/bottom`, usar su fórmula responsive y los valores del template. El default de schema 36px no reemplaza el padding de todas las páginas.
 
-La sección puede tomar padding de settings en vez del alias global; preservar su cálculo responsive. El schema convencional usa 0–100px, paso 4 y default 36, que no impone 36 a todas las plantillas. Respetar `prefers-reduced-motion`: hay cobertura parcial en base y componentes (por ejemplo el contador del carrito); no está demostrada cobertura universal de todas las animaciones o scroll suave.
-
-## 4. Breakpoints, grid y responsive
-
-| Intervalo | Regla de implementación |
+| Contenedor / intervalo | Regla |
 | --- | --- |
-| <750px | Overrides móviles de tipografía/tokens a `max-width:749px`; composición apilada según sección; header nominal 56px |
-| 750–989px | Tramo intermedio; no asumir que es desktop reducido. Revisar sidebar, wrap y número de columnas de la sección |
-| ≥990px | Composición desktop donde lo declare la sección; header nominal 72px |
-| ≥1280px | `lemoon-components.css` cambia `--lemoon-gutter-desktop` de 24 a 42px; no es un nuevo breakpoint universal de navegación |
+| `.page-width`, `.page-width-desktop` | Máximo 2000px por `--lemoon-max-width`; conservar centrado heredado de Dawn |
+| <750px | Gutters 16px; escala móvil; composición apilada cuando lo declare la sección |
+| 750–989px | Gutters 24px; composición intermedia propia de la sección |
+| ≥990px | Composición desktop; gutters 24px hasta 1279px |
+| ≥1280px | Gutters 42px; es cambio de gutter, no de navegación |
+| Header | Máximo local 2200px en [header.liquid](../../sections/header.liquid); alturas nominales 72px desktop y 56px móvil según tokens/CSS del header |
+| PLP | Grid local en [lemoon-collection-plp.css](../../assets/lemoon-collection-plp.css): columnas desktop según `--plp-desktop-columns` (fallback 3), dos entre 750–989; móvil según `--plp-mobile-columns` (fallback 2). Gap desktop ≥990: 22px horizontal/30px vertical; móvil: 12/24px |
+| Sidebar PLP | Selector final ≥990: 264px + gap 28px; 750–989: 220px + gap 24px; oculto por estado `--no-filters`; drawer de filtros usa máximo local 320px bajo 990 |
+| Shell legal | Columnas locales 66rem/24rem y gap 6.4rem; una columna y gap 3.2rem bajo 750; ver sección 8 |
 
-[base.css](../../assets/base.css) contiene `.page-width` y utilidades grid Dawn; [componentes](../../assets/lemoon-components.css) redefine `.page-width` con `--lemoon-max-width:2000px`, gutters 16px móvil y 24/42px desktop. El override `--page-width:128rem` en tokens sigue existiendo, pero no limita esa regla más reciente. El header fija un máximo propio de 2200px en [su sección](../../sections/header.liquid). **1280px / 12 columnas / 4 columnas móvil es intención histórica, no grid global efectivo confirmado.** Resolver D3 antes de imponer un ancho nuevo.
+El alias Dawn `--page-width:128rem` existe, pero `.page-width` usa el máximo Lemoon de 2000px. No imponer un grid global de 12/4 columnas ni convertir el máximo de header, sidebar o lectura en máximo global.
 
-La PLP usa grid propio y opciones de columnas: consultar [lemoon-collection-plp.css](../../assets/lemoon-collection-plp.css) y [main-collection-product-grid](../../sections/main-collection-product-grid.liquid), incluidas reglas posteriores que sobrescriben las primeras. Ejemplo: móvil declara gap horizontal 12px y vertical 24px, distintos del alias 16px. No homogeneizar una página existente desde una tabla genérica.
+Mantener orden de lectura al apilar, títulos largos y mensajes de error completos. Evitar overflow horizontal de página; la media y las columnas deben poder contraerse. Verificar los dos lados de 750/990 y de 1280 cuando cambien gutters; usar móvil 390px y el ancho desktop de la referencia para revisar composición. No fijar la página a las dimensiones de un frame.
 
-Para cada implementación: conservar orden de lectura y funciones al apilar; no fijar anchos/altos de frame como viewport obligatorio; permitir títulos extensos, zoom y estados de error; evitar overflow horizontal de página. Comparar al menos móvil 390 y desktop del frame elegido, además de ambos lados de 750/990 y 1280 si afecta al contenedor. Son comprobaciones a realizar en el ticket de página, no resultados de esta entrega documental.
+## 5. Componentes y estados
 
-## 5. Componentes reales y estados
+### Acciones y formularios
 
-Los enlaces Figma de esta tabla se verificaron por metadatos; **Input y Product Card además por contexto y captura**. La matriz orienta reutilización y pendientes; no certifica biblioteca terminada. Completar variantes en [LEM-132](https://linear.app/antekera/issue/LEM-132/ux-biblioteca-compartida-de-componentes-y-estados).
+Reutilizar [base.css](../../assets/base.css), [lemoon-components.css](../../assets/lemoon-components.css) y los formularios nativos de la superficie.
 
-| Componente / referencia | Implementación a reutilizar | Estados y límites |
+| Componente | Selección y medidas | Estados |
 | --- | --- | --- |
-| [Button `11:32`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=11-32) | `.button`, `--secondary`, `--tertiary` en [componentes](../../assets/lemoon-components.css) y [base](../../assets/base.css) | Figma enumera Primary/Secondary/Accent/Ghost/Destructive, Default/Hover/Disabled. Tema: navy→navy muted, secundaria blanca→navy, terciaria transparente. No asumir mapeo de destructive/accent a una clase global. Loading, foco, pressed y disabled necesitan cobertura por superficie. |
-| [Input `13:10`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-10), [Select `13:23`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-23) | `.field__input`, `.select__select`, `.text-area`; componentes + validación nativa de cada formulario | Input observado: Default/Focus/Error/Disabled × icono None/Leading/Trailing, altura 48px, radio 4px, iconos 24px, borde cálido normal y navy/error 2px. No sustituye labels ni validación. Disabled/errores HTML requieren semántica y mensaje, no solo apariencia Figma. |
-| [Checkbox `13:30`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-30), [Radio `13:37`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-37) | Controles nativos usados por filtros/formularios; [facets](../../snippets/facets.liquid) | Metadatos: Checked/Unchecked. Foco, disabled y error no quedan especificados por esas dos variantes; área táctil y etiqueta necesitan QA. |
-| [Product Card `34:39`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=34-39) | [card-product](../../snippets/card-product.liquid), [CSS](../../assets/lemoon-components.css), [JS](../../assets/lemoon-product-card.js) | Figma: Default/Hover/New/Sale × 4 colores, tile 400×430 y media 400×300, radio 12. Código tiene overrides de proporción y texto: no fijar ese tile para todos los grids. Sin imagen secundaria cargada conserva la frontal. Agotado/descuento deben depender del producto real. |
-| [Badge `9:130`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=9-130) / chips / swatches | [componentes](../../assets/lemoon-components.css), [swatch-input](../../snippets/swatch-input.liquid) | Figma enumera New/Sale/Best seller/Sold out. Tokens: editorial 0, compacto 4, chip 20, círculo full. Un badge no acredita novedad, descuento ni popularidad. Selección necesita nombre y estado accesible; revisar overrides locales. |
-| [Accordion `33:13`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=33-13) | `<details>/<summary>` en [FAQ](../../sections/lemoon-faq-page.liquid) | Collapsed/Expanded en metadatos; preservar teclado y contenido legible abierto, objetivo táctil y foco. |
-| [Modal `33:14`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=33-14), [Cart Drawer `65:656`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=65-656), [Size Guide `66:642`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=66-642) | [cart-drawer](../../snippets/cart-drawer.liquid), [global.js](../../assets/global.js), [PDP tools](../../assets/lemoon-pdp-tools.js) | Modal figura con altura 1px en metadatos: no es spec visual completa. Drawer 420×760, tallas 720×520 son frames de referencia. Apertura/cierre, Escape, foco contenido/restaurado, scroll y viewport requieren validación real. |
-| [Header Light Current `75:641`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=75-641), [Hover `75:662`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=75-662), [Mobile `57:74`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=57-74) | [header](../../sections/header.liquid), [CSS](../../assets/lemoon-header.css), [nav JS](../../assets/lemoon-header-nav.js) | Otras variantes Navy/Beige existen; no activarlas automáticamente. Current por `aria-current`, acceso teclado además de hover; comprobar menú abierto y búsqueda sin resultados. |
-| [Announcement `50:63`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=50-63), [Footer desktop `58:80`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=58-80), [mobile `65:643`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=65-643) | [announcement](../../sections/announcement-bar.liquid), [footer](../../sections/footer.liquid), [footer CSS](../../assets/section-lemoon-footer.css) | Referencias históricas; existe una propuesta footer 2026 sin inspección visual aquí. No tomar promociones de Figma como beneficios reales. |
-| Filtros / mensajes / precio | [facets](../../snippets/facets.liquid), [price](../../snippets/price.liquid), [search](../../sections/main-search.liquid), [carrito](../../sections/main-cart-items.liquid) | Cubrir aplicado/no aplicado, vacío, sin resultados, loading, error recuperable, agotado y éxito según función. Preservar estado al actualizar y anunciar cambios relevantes; no prometer estados por existir un spinner. |
+| Acción principal `.button` | Navy/blanco; min-height 48px; padding horizontal 2rem; radio `--lemoon-radius-button` = 9999px; rol CTA | Hover navy muted. Preservar disabled, `.loading`, spinner y bloqueo de envíos duplicados del formulario |
+| Acción secundaria `.button--secondary` | Blanco/texto navy; mismas medidas base | Hover navy/blanco |
+| Acción terciaria `.button--tertiary` | Transparente/texto navy, min-height 48px, padding 2rem | Hover texto navy muted; para menor jerarquía |
+| Acento / destructiva | Reutilizar la clase específica ya presente en la superficie | Las variantes de Figma no crean clases globales `button--accent` o `button--destructive`; no inventar ese mapeo |
+| Input/select | `.field__input`, `.select__select`: altura mínima y altura 48px; radio 4px; blanco/carbon; borde warm 1px | Foco navy 2px. Error: mensaje asociado y `aria-invalid`, color error del token. Disabled nativo y ayuda legible |
+| Textarea | Misma familia visual de input; altura auto | Preservar label, ayuda y validación |
+| Search | Radio de búsqueda 24px y tamaño base 40px donde lo use el componente de búsqueda | Mantener resultados, sin resultados y recuperación; no aplicar ese radio a campos generales |
+| Checkbox/radio | Control nativo; tamaño base 16px y token radio control 3px donde lo use su CSS; conservar círculo del radio | Etiqueta clicable y estado checked/disabled real; no sustituir por un dibujo sin semántica |
 
-## 6. Foco y accesibilidad
+En campos con icono usar el tamaño 24px de la referencia Input y reservar espacio para que no se superponga con texto. Mantener labels persistentes. No usar el borde warm como única señal de identificación del campo: comprobar label, forma y contraste del control completo conforme a sección 6.
 
-Reglas de aceptación para trabajo posterior, sin declaración de conformidad de la tienda:
+### Tarjetas, etiquetas y navegación
 
-- Mantener foco visible en enlaces, botones, campos, swatches, menús y diálogos. [base.css](../../assets/base.css) define outline y fallback `.focused`; [componentes](../../assets/lemoon-components.css) añade anillos navy en campos/swatches; [shell legal](../../sections/lemoon-legal-page.liquid) usa outline navy 2px y offset 4px. Comprobar visibilidad sobre cada fondo y que sticky headers no lo oculten.
-- Mantener skip link, landmarks, H1 de página y orden lógico de títulos. El estilo display no reemplaza semántica. Enlaces navegan y botones ejecutan acciones; iconos solos necesitan nombre accesible, decorativos se ocultan a lectores.
-- Labels persistentes, ayudas y errores asociados al campo; errores expresados por texto e identificación semántica, no solo rojo. Mantener required/disabled y estados expandidos/seleccionados acordes con la función real.
-- Revisar contraste con colores **computados**, incluidos opacity/hover, imágenes y modo forced-colors. Como objetivo de QA WCAG 2.1 AA: texto normal 4.5:1, texto grande 3:1 y controles/indicadores necesarios 3:1. El borde beige en blanco es un riesgo pendiente D6; su presencia en Figma no exime revisión. [Referencia normativa W3C](https://www.w3.org/TR/WCAG21/).
-- Operación completa por teclado, alternativa a hover y arrastre, áreas táctiles acordes con el token interno 44px. Respetar zoom/reflow, reducción de movimiento y ausencia de imagen/JS según función. No esconder información necesaria en tooltips o hover.
-- Probar mensajes de éxito/error y actualizaciones asíncronas con anuncios adecuados; mantener contenido y recuperación tras fallo. Capturas estáticas no prueban estas condiciones.
-
-## 7. Imágenes, marca y presentación editorial
-
-Reutilizar [logo refinado](../../assets/lemoon-logo-refined-navy.svg) como activo, no como texto Urbanist reconstruido. El header lo declara 120×28; el SVG tiene viewBox 824.267×193.523. Mantener proporción. El archivo contiene fill `#0E1A28`, distinto del navy semántico y del tratamiento de la segunda “o” descrito antiguamente; no recolorear para resolverlo. Clearspace, mínimo oficial, favicon y variantes inversas siguen pendientes (D5).
-
-Dirección de imágenes heredada de brand guidelines: producto sobre blanco/gris muy claro con frontal/lateral/perspectiva; lifestyle con luz natural, personas diversas y composición editorial; diagramas de medidas legibles con cotas en mm. Es orientación existente, no aprobación/licencia de cada activo. Los archivos `demo`/`placeholder` y las cajas vacías de Figma no son fotografía final ni prueba de disponibilidad.
-
-Preservar el tratamiento de media de cada sección (producto completo frente a crop editorial); verificar punto focal desktop/móvil. Usar imágenes responsive y dimensiones que eviten saltos; carga diferida bajo el primer pliegue según reglas del repositorio. Texto esencial debe estar en HTML; alt según función y contenido real, sin duplicar adornos. No convertir precios, reseñas, promociones, plazos, direcciones o slogans de muestra en datos del negocio.
-
-Para CMS/políticas: cuerpo legible y ancho acotado, párrafos cortos, títulos jerárquicos, listas y enlaces descriptivos; conservar contenido nativo y separación entre contenido comercial y legal. El shell no demuestra que el texto esté aprobado. La guía editorial final pertenece a [LEM-55](https://linear.app/antekera/issue/LEM-55/marca-mensajes-finales-y-guia-editorial-es-cl-para-agentes), leído en Todo; depende de decisiones estratégicas de LEM-82. Hasta su entrega, reutilizar es-CL existente y cadenas locales, sin crear slogan/misión ni reemplazar hechos pendientes con tono comercial. Cada página mantiene su propia entrega de copy y revisión.
-
-### Límites por superficie
-
-| Superficie | Qué reutilizar / qué debe verificarse |
+| Familia / fuente | Regla de implementación |
 | --- | --- |
-| Storefront Liquid | Tokens/componentes existentes, templates y estilos locales. Rutas/asignación/publicación se verifican en [LEM-86](https://linear.app/antekera/issue/LEM-86), no se deducen del archivo. Configurador/receta mantienen tickets y contratos propios; no se reducen a WhatsApp por un plan viejo. |
-| Página CMS y políticas nativas | [lemoon-legal-page](../../sections/lemoon-legal-page.liquid) y shell `request.page_type == 'policy'` en [layout](../../layout/theme.liquid), con [CSS nativo](../../assets/lemoon-native-policies.css). Preservar contenido y destinos nativos; no crear duplicados por diseño. |
-| Checkout, confirmación/estado y cuentas nuevas/nativas | El tema Liquid no controla la estructura de estas superficies nativas; esta limitación no se generaliza a cuentas clásicas. Logo, colores y fuentes disponibles se gestionan en editor de checkout/cuentas; no prometer Urbanist exacta ni portar el header Liquid. Branding avanzado por API requiere Plus; extensiones y targets dependen de capacidad/plan real. Verificar configuración de cuentas habilitada y capacidades en su ticket antes de especificar controles o rutas. [Checkout oficial](https://help.shopify.com/en/manual/checkout-settings/customize-checkout-configurations/checkout-style), [cuentas oficiales](https://help.shopify.com/en/manual/customers/customer-accounts/customize-customer-accounts). |
-| Back office | Compartir únicamente identidad Lemoon, referencia al logo oficial existente y los colores/familias como evidencia del storefront, sin imponer su uso a todos los controles. No hay aprobación transversal de tokens de app acreditada aquí. Respetar patrones nativos del admin y AGENTS/guía de `antekera/lemoon-next-backoffice`; cualquier mapeo concreto se revisa allí tras verificar remote. No se inspeccionó/renderizó la app en este ticket. |
+| [Product card](../../snippets/card-product.liquid), [CSS](../../assets/lemoon-components.css), [JS](../../assets/lemoon-product-card.js) | Reutilizar el snippet. Outer card transparente y radio 0; media warm con radio 12px, proporción 100/96 y max-height 280px ≥990. Imagen completa `object-fit:contain`. Mantener la frontal hasta que cargue la secundaria; sin secundaria, conservar frontal |
+| Texto de tarjeta | Base: nombre Hanken 13px/16px, precio Urbanist 600 18px/22px; precio anterior Hanken 14px/18px. PLP sobrescribe nombre a 15px ≥990, 14px entre 750–989 y 13px móvil; precio regular 17px ≥750 y 16px móvil. No aplicar H3 global al nombre |
+| Etiquetas de producto | `.lemoon-product-card__label` usa radio full; new navy/blanco, flash-sale lemon/navy, sold-out gris/blanco, best-seller según su clase. Datos de disponibilidad, descuento y tags reales determinan su presencia |
+| Badges genéricos | Editorial `--badge-corner-radius`: 0; compacto `--lemoon-radius-sm`: 4px; chips `--lemoon-radius-lg`: 20px. No sustituir con estos radios las etiquetas de producto que ya tienen regla local |
+| Swatches | Reutilizar [swatch-input](../../snippets/swatch-input.liquid) o swatches del snippet de tarjeta; mantener tamaño local, círculo, nombre y estado seleccionado accesible. No imponer los 20px del frame a todas las superficies |
+| [Header](../../sections/header.liquid), [CSS](../../assets/lemoon-header.css), [JS](../../assets/lemoon-header-nav.js) | Conservar variante clara, logo oficial, navegación y acciones; `aria-current` para destino actual. Menú usable por teclado y apertura explícita en móvil, además de hover desktop |
+| [Announcement](../../sections/announcement-bar.liquid) y [footer](../../sections/footer.liquid) / [CSS](../../assets/section-lemoon-footer.css) | Reutilizar los componentes y sus grupos; contenido desde settings y enlaces reales. No activar una propuesta alternativa por su fecha |
+| [FAQ](../../sections/lemoon-faq-page.liquid) | Reutilizar details/summary, abierto/cerrado, foco y teclado; permitir expansión del contenido sin altura rígida |
+| [Drawer](../../snippets/cart-drawer.liquid), [global.js](../../assets/global.js), [PDP tools](../../assets/lemoon-pdp-tools.js) | Reutilizar apertura/cierre, Escape, contención/restauración de foco y scroll. Radio modal base 16px donde no haya override local. Los 420×760/720×520 de Figma no son dimensiones obligatorias del viewport |
+| [Filtros](../../snippets/facets.liquid), [precio](../../snippets/price.liquid), [búsqueda](../../sections/main-search.liquid), [carrito](../../sections/main-cart-items.liquid) | Conservar datos nativos, estado aplicado/no aplicado, vacío, loading, error recuperable y éxito. Anunciar cambios asíncronos y mantener recuperación tras fallo |
 
-La lectura live de información básica de tienda confirmó `lemoon.cl`, CLP y plan Basic; no se inspeccionaron clientes, pedidos ni recetas. El despacho del coordinador identifica `Shop/76333711528` y alias `pzsrt4-1u.myshopify.com`, distinto de `lemoon-8277.myshopify.com` en la regla histórica de workflow. La identidad numérica/alias procede de ese despacho, no de la consulta básica; registrar discrepancia sin reconfigurar conexión. No inferir tema publicado ni branding activo de ese dato.
+Los radios se eligen por familia. La regla final de `lemoon-components.css` aplica radio button con `!important` a `button`, `.button`, `[role=button]`, `.pagination__item` y `.mobile-facets__open`: prevalece sobre radios locales normales, incluido el 24px declarado antes en acciones del configurador. Mantener esta regla al reutilizar las acciones; las superficies de tarjeta, campos y paneles conservan sus propios radios.
 
-## 8. Ejemplo aplicable sin decisiones nuevas: términos existentes
+## 6. Accesibilidad y comportamiento responsive
 
-**Ejercicio documental sobre archivos; no rediseño, preview ni aprobación de términos.**
+- Mantener skip link, landmarks y un H1 de página con títulos ordenados. Enlaces navegan; botones ejecutan acciones; iconos interactivos tienen nombre accesible.
+- Mantener foco visible de [base.css](../../assets/base.css) y anillos locales. Para el shell legal: navy 2px y offset 4px. Evitar que sticky headers o contenedores lo oculten.
+- Asociar labels, ayudas y errores; expresar errores con texto y estado semántico. Mantener `required`, `disabled`, `aria-expanded`, selección y estado actual sincronizados.
+- Objetivo de contraste [WCAG 2.1 AA](https://www.w3.org/TR/WCAG21/): texto normal 4.5:1; grande 3:1; indicadores necesarios de controles 3:1. Evaluar colores computados, opacity y fondo real. No declarar cumplimiento por reutilizar un token o captura.
+- Objetivo interno de interacción: 44px según `--lemoon-size-touch`; ampliar el área clicable alrededor de iconos/swatch pequeños sin agrandar necesariamente su dibujo. Verificar los controles locales de búsqueda y filtros, que pueden tener medidas visuales menores.
+- Ofrecer operación por teclado y alternativa a hover/arrastre; preservar Escape y retorno de foco en diálogos. Respetar zoom, reflow, forced-colors y `prefers-reduced-motion`; desactivar movimiento no esencial cuando se solicita reducción.
+- Imágenes ausentes, cadenas largas, estados vacío/error y carga no deben ocultar la acción principal ni causar desborde. Mantener feedback de operaciones y contenido recuperable tras fallos.
 
-1. Localizar [template `page.terminos-y-condiciones.json`](../../templates/page.terminos-y-condiciones.json): usa `lemoon-legal-page`, padding 64/64 y `demo_data:true` en este SHA. La presencia del template no demuestra URL/asignación pública. Confirmar destino en LEM-86 y contenido en LEM-119 antes de aceptar/publicar.
-2. Reutilizar [sección existente](../../sections/lemoon-legal-page.liquid), sin otra shell. Ya aplica page/warm, texto brand/primary/secondary y heading/body con tokens. Su H1 específico es Urbanist 300, 46px desktop/34px móvil, leading 1.15; conservarlo como override local, no sustituir por el H1 genérico 40/32 sin decisión.
-3. Su layout es `minmax(0,66rem) minmax(0,24rem)` con gap 64px; bajo 750 pasa a una columna con gap 32px. Cuerpo 18px/1.75 y máximo 66rem. Padding móvil calcula `64 × 0.625 = 40px`. Estos valores están en el archivo y no exigen elegir una nueva medida.
-4. Mantener navegación con `aria-label`, `aria-current`, enlaces de al menos 44px y foco navy 2px/offset 4px. Preservar contenido CMS cuando el modo demo esté desactivado; no cambiar ese modo ni editar copy desde LEM-141. El modo demo actual impide usar el ejemplo como prueba de texto legal final.
-5. En el ticket de página, comprobar contenido real, enlaces de políticas/contacto, lectura móvil/desktop, zoom, teclado y desbordes de la columna. Si hay conflicto con D3 o copy pendiente, registrar evidencia y pedir decisión concreta; conservar el resto de la implementación.
+## 7. Marca, imágenes y superficies
 
-Resultado del ejercicio: se puede identificar sección, tokens, medidas y estados sin inventar diseño; siguen pendientes la validación renderizada, la asignación CMS y el contenido definitivo. No se certifica la página completa.
+Usar el [activo oficial lemoon-logo-refined-navy.svg](../../assets/lemoon-logo-refined-navy.svg) sin redibujar letras ni recolorear. Su fill es `#0E1A28` y su viewBox 824.267×193.523. El header lo declara 120×28; conservar la proporción del activo. Ese tamaño es de header, no mínimo oficial. La definición de variantes, mínimos y clearspace corresponde a identidad extendida en LEM-80; LEM-132 mantiene su aplicación en biblioteca. No reconstruir una segunda “o” amarilla sobre el SVG.
 
-## 9. Discrepancias y preguntas para Miguel
+Fotografía de producto: blanco/gris muy claro, frontal/lateral/perspectiva y armazón completo. Lifestyle: luz natural, entornos limpios, personas diversas y composición editorial. Diagramas: medidas legibles en mm. Conservar el tratamiento contain de producto y el crop/punto focal editorial de cada sección. Usar imágenes responsive con dimensiones que eviten saltos y lazy loading bajo el primer pliegue. Texto esencial en HTML y alt según función. Los placeholders no son fotografía final ni autorización de publicación.
 
-Ninguna fila se resuelve eligiendo silenciosamente un valor. “Conservar” indica continuidad de implementación existente, no ratificación de marca. Añadir aquí el enlace de decisión y actualizar la fuente afectada cuando Miguel responda.
+Contenido: es-CL, frases claras, CTAs que describen la acción y moneda CLP. Reutilizar locales existentes. La voz final pertenece a [LEM-55](https://linear.app/antekera/issue/LEM-55). No convertir slogans, precios, reseñas, garantías o plazos de muestra en hechos del negocio.
 
-| ID / evidencia | Diferencia y efecto | Pregunta concreta / tratamiento provisional |
-| --- | --- | --- |
-| D1 — [plan histórico](design-plan.md) §1 vs [tokens](../../assets/lemoon-tokens.css), portada Figma `9:6` | Plan: navy `#0D1B3E`, hover `#1E3A6E`, lemon `#D4E44B`; CSS: `#0B1F3A`, `#1A3560`, `#F7E600`. Portada corrobora navy/lemon CSS, no todos los contextos. | ¿Ratificas el conjunto semántico CSS como base y retiras los tres valores históricos? Conservar páginas existentes; no recolorear. |
-| D2 — brand guidelines previas vs CSS y [Input `13:10`](https://www.figma.com/design/9EgE1vntKfwoQIQTzBUBNg/Lemoon-Ecommerce?node-id=13-10) | Guía decía inputs/botones 24px; plan dice 4px; CSS usa botones full, campos 4 y search 24; Input observado usa 4. Modal 16 en tokens vs 32 en plan. | ¿Confirmas esos radios por familia y modal 16, o qué componente debe cambiar? No extender un radio global nuevo. |
-| D3 — plan/guía históricos vs cascada | Máximo 1280/12 columnas vs `.page-width` 2000 y header 2200; gaps locales difieren de 24/16. | ¿Se conservan máximos actuales por superficie o cuáles deben volver a 1280? Entregar una decisión por superficie antes de modificar layout. |
-| D4 — CSS vs texto generado por contexto Input | CSS Hanken/secondary `#51575E`; guías previas secondary `#6B6B6B`. El contexto Figma devuelve alias `--lemoon-font-family-body` con fallback `Source Sans 3` y gris `#6B6B6B`, distintos de nombres CSS. No se verificó toda la colección de variables. | ¿Hanken y gris CSS quedan ratificados, y quién sincroniza alias/valores Figma en LEM-132? No instalar otra familia por un fallback generado. |
-| D5 — logo oficial existente vs descripción histórica de wordmark | SVG refinado fill `#0E1A28`; descripción previa segunda “o” lemon y letras navy/white. Estudios `321:583` son variantes nuevas, no reemplazo demostrado. | ¿La regla de acento aplica solo al fallback tipográfico? Confirmar variantes inversas, mínimo y clearspace. Reutilizar activo oficial sin recolor. |
-| D6 — campos beige/blanco en CSS y Figma Input | Borde cálido de muy bajo contraste; la captura no demuestra identificación accesible en todas las variantes. | ¿Qué tratamiento de borde accesible debe especificar LEM-132 tras medir el componente completo? No seleccionar otro color aquí; verificar foco/label y contraste antes de aceptación. |
-| D7 — múltiples direcciones y tarjetas | Originales 60/62/63, Direction 02 `268:584`, Product Card 2026 `379:584`; código card difiere del tile original observado. | ¿Qué nodo/version es la referencia aceptada por superficie y cuáles son exploraciones? Conservar implementación existente y no convertir el nombre “propuesta” en aprobación. |
-| D8 — historial de planes vs alcance vigente | Plan difiere configurador/cuentas a Fase 2 y llama configurador “no existe”; inventario ya contiene implementación. LEM-141/132/55 separan guía/biblioteca/editorial. | La documentación histórica queda contextualizada, no reactiva fases ni difiere receta. Cualquier conflicto de alcance se resuelve en ticket vigente y política MVP, no mediante este documento. |
-| D9 — marca compartida y verdes | Verdes tertiary/deep existen en CSS, sin decisión transversal de back office verificada. | ¿Qué elementos se ratifican para app y qué usos de verdes? No portar estilos de storefront al admin mientras falte esa decisión. |
+| Superficie | Regla |
+| --- | --- |
+| Storefront Liquid | Reutilizar tokens, snippets y secciones de esta guía. [LEM-86](https://linear.app/antekera/issue/LEM-86) organiza rutas/asignaciones; configurador y receta conservan sus contratos propios |
+| CMS / políticas | Reutilizar [shell legal](../../sections/lemoon-legal-page.liquid); para políticas nativas, conservar `request.page_type == 'policy'` en [layout](../../layout/theme.liquid) y [CSS nativo](../../assets/lemoon-native-policies.css). Preservar contenido y destinos nativos, sin duplicar políticas |
+| Checkout / confirmación / cuentas nuevas | Usar el editor nativo de checkout/cuentas y sus opciones disponibles para logo, color y tipografía; no portar header ni estructura Liquid. El plan de páginas conserva la adaptación tipográfica nativa registrada. Verificar capacidad en el ticket de esa superficie antes de añadir extensiones. Fuentes: [checkout](https://help.shopify.com/en/manual/checkout-settings/customize-checkout-configurations/checkout-style), [cuentas](https://help.shopify.com/en/manual/customers/customer-accounts/customize-customer-accounts) |
+| Back office | Compartir nombre Lemoon y activo oficial existente; los colores/familias aquí documentados describen el storefront. Respetar patrones del admin y AGENTS/guía de `antekera/lemoon-next-backoffice`; no imponer a sus controles el CSS ni anchos de esta guía |
 
-## 10. Evidencia de entrega y aceptación pendiente
+## 8. Ejemplo de aplicación: términos
 
-El autor comprobó archivos, referencias relativas, consistencia y alcance del diff documental. En su entrega inicial no ejecutó Vitest, Playwright, preview ni `shopify theme check`. El cambio es exclusivamente documental: no cambia Liquid/CSS/JS/schema/locales ni comportamiento del tema. No se cambió Shopify, Figma, Linear, configuración ni datos de clientes.
+Para mantener la página de términos, partir de [page.terminos-y-condiciones.json](../../templates/page.terminos-y-condiciones.json) y reutilizar [lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid):
 
-Posteriormente, el tester ejecutó `shopify theme check --fail-level error` sobre el snapshot documental registrado en su reporte local `/tmp/lemoon-pilot-validation.md`: 252 archivos inspeccionados, 0 infracciones y salida 0. El log local es `/tmp/lemoon-141-theme-check.log`; estas rutas son evidencia del entorno de trabajo, no enlaces públicos del repositorio. El reporte identifica HEAD/base y hashes de los documentos probados. La corrección documental posterior refresca enlaces, diff y hashes en el reporte local `/tmp/LEM-141-fixes.md`, sin atribuir al tester una ejecución sobre estos nuevos bytes ni repetir Theme Check. Este resultado no acredita aprobación visual, comprobación de versiones Figma, integración ni publicación.
-
-Context7 se intentó primero para restricciones Shopify y devolvió cuota mensual agotada; se consultó ayuda oficial enlazada en sección 7. La cuota Figma impidió completar contexto/capturas de Foundations y Button. No se reclama auditoría integral de variables ni equivalencia visual entre todos los frames y el tema.
-
-La revisión independiente de fuentes/convenciones del snapshot previo quedó registrada en el reporte local `/tmp/LEM-141-review.md`, con dos notas P3 atendidas en esta corrección por el autor; no constituye revisión independiente de los bytes corregidos ni aprobación de marca. Para aceptar LEM-141 siguen pendientes la revisión y decisiones de Miguel (D1–D7/D9 según alcance), incluida la ratificación del CSS como base documental, completar las comprobaciones Figma limitadas y el PR documental a cargo del coordinador. Ninguna respuesta ni aprobación de versiones Figma se presume. Este documento es el artefacto revisable; no marca el ticket Done/In Review ni autoriza merge o publicación.
+1. Conservar `kind:terms` y el padding de template 64px superior/inferior. La fórmula local `×0.625` produce 40px bajo 750px.
+2. Mantener H1 Urbanist 300, 4.6rem desktop/3.4rem móvil, leading 1.15, tracking −0.5px y color brand. Es excepción local; no sustituirlo por H1 base 4/3.2rem.
+3. Mantener layout `minmax(0,66rem) minmax(0,24rem)` con gap 6.4rem; bajo 750 usar una columna y gap 3.2rem. El cuerpo usa Hanken 1.8rem/1.75 y máximo 66rem. El índice cálido usa radio 12px. Ninguna de estas medidas cambia el ancho global.
+4. Conservar enlaces de navegación con `aria-current`, altura mínima 4.4rem y foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
+5. El template contiene `demo_data:true`: el ticket de contenido [LEM-119](https://linear.app/antekera/issue/LEM-119) debe resolver el texto definitivo antes de publicar. Aplicar esta guía no cambia ese setting ni convierte el texto de muestra en términos comerciales.
+6. Revisar lectura, teclado, zoom, enlaces y desbordes a 390px y desktop, incluidos ambos lados de 750px. Verificar asignación CMS en la entrega de la página.
