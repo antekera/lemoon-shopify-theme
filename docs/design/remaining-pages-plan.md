@@ -50,7 +50,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-108 Nosotros | page.nosotros, lemoon-about-page | Historia y hechos de negocio verificables |
 | LEM-109 Blog / LEM-110 Artículo | blog/article y variantes editorial | Artículo real, tags, paginación, newsletter y asignación editorial |
 | LEM-111 Operativos / LEM-112 Isapres y Fonasa | lemoon-service-page | Disponibilidad operativa y convenios confirmados |
-| LEM-113 Reembolsos | Shell editorial; `/pages/politicas` (alias `/pages/po`) | Condiciones por confirmar |
+| LEM-113 Reembolsos | Shell editorial; `/pages/politicas` | Condiciones por confirmar |
 | LEM-114 Envíos/devoluciones / LEM-115 Garantías | lemoon-legal-page | Tarifas, plazos, cobertura y exclusiones reales |
 | LEM-116 FAQ | lemoon-faq-page | Respuestas y condiciones consistentes con políticas |
 | LEM-117 Contacto | page.contact, lemoon-contact-page | Canal público y recepción efectiva del formulario |

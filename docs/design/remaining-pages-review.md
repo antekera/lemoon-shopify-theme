@@ -1,6 +1,6 @@
 # Revisión de páginas — 10 de octubre de 2026
 
-Ruta actual de reembolso: `/pages/politicas`; `/pages/po` es un alias con redirección desde el 30 de octubre de 2026. Las menciones a la ruta anterior en el registro fechado describen las comprobaciones históricas.
+Ruta de reembolso: `/pages/politicas`.
 
 Rama `feat/remaining-storefront-pages`. Los enlaces locales requieren el servidor
 Shopify theme dev de esta sesión en el puerto 9292. Los tickets permanecen
@@ -610,7 +610,7 @@ LEM-125 sigue In Progress, confirmado mediante lectura fresca de Linear. Se
 creó el menú «Lemoon · Cuentas y ayuda · revisión» y se seleccionó/guardó en el
 perfil borrador 7112229032. Conserva los destinos nativos de Mis pedidos y Mi
 perfil, y añade Ayuda con tu pedido (`/pages/contact`), Cambios y devoluciones
-(`/pages/po`) y Garantías (`/pages/garantias`). Tras recargar la cuenta autenticada
+(página de reembolso) y Garantías (`/pages/garantias`). Tras recargar la cuenta autenticada
 publicada, su menú conservó solamente Mis pedidos y Mi perfil: el menú nuevo
 permanece asociado al borrador. No se pulsó Publicar.
 
@@ -631,7 +631,7 @@ onlineStoreURL; el editor no navegó al formulario real, por lo que no se atribu
 a esta interacción una prueba completa del recorrido de posventa.
 
 Una comprobación separada de los destinos canónicos en el navegador abrió el
-formulario de Contacto; `/pages/po` conserva «Esta página está en preparación»
+formulario de Contacto; la página de reembolso conserva «Esta página está en preparación»
 y `/pages/garantias` conserva texto anterior con un correo mal escrito. Las
 plantillas nuevas de estas últimas páginas están preparadas y verificadas con
 `view=`, pero su asignación CMS sigue pendiente en
