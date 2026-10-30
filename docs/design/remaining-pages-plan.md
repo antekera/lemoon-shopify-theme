@@ -46,7 +46,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-45 Búsqueda | `search.json`, main-search, predictive-search | Resultados, filtros, vacío y recuperación |
 | LEM-101 Categorías | PLP y `/collections/all` | Conservar colección; evitar directorio duplicado |
 | LEM-99 Ópticos / LEM-100 Sol | Colecciones nativas + PLP | Productos y destinos reales |
-| LEM-103–107 Guías de rostro, probador, medidas, prescripción y pedido | lemoon-guide-page y templates alternativos | Asignación CMS, contenido y capacidad real de probador/recetas |
+| LEM-103–107 Guías de rostro, probador, medidas, prescripción y pedido | lemoon-guide-page y templates alternativos | Asignación CMS, contenido y capacidad real de probador/recetas; LEM-106 debe resolver el canal confirmado de recepción y la privacidad de las recetas antes de publicar su guía |
 | LEM-108 Nosotros | page.nosotros, lemoon-about-page | Historia y hechos de negocio verificables |
 | LEM-109 Blog / LEM-110 Artículo | blog/article y variantes editorial | Artículo real, tags, paginación, newsletter y asignación editorial |
 | LEM-111 Operativos / LEM-112 Isapres y Fonasa | lemoon-service-page | Disponibilidad operativa y convenios confirmados |
@@ -61,7 +61,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-126 404 | 404.json, main-404 | Respuesta HTTP de no encontrado y acciones de recuperación |
 | LEM-11 Encuentra tu lente ideal | page.buscar-mi-estilo, lemoon-style-quiz | Curaduría/catálogo real y asignación CMS |
 | LEM-23 Configurador / LEM-102 Cristales | lens-configurator, lemoon-crystal-guide | Catálogo, combinaciones, laboratorio y contrato de receta |
-| LEM-9 Gift cards | gift_card.liquid, lemoon-gift-card-purchase, notifications/es | Catálogo, denominaciones, emisión, correo y canje operativo |
+| LEM-9 Gift cards | gift_card.liquid, lemoon-gift-card-purchase, notifications/es | Catálogo, denominaciones, evaluación de viabilidad de monto libre a cargo de LEM-9, emisión, correo y canje operativo |
 | Lanzamiento/password | password.json, lemoon-launch-page | Newsletter y autenticación nativa |
 
 Verificar enlaces del footer (LEM-94) y consentimiento (LEM-95) junto con políticas; LEM-44 agrupa carrito/checkout. LEM-86 mantiene el mapa de rutas y asignaciones. El alcance vigente de configurador, receta y cuentas no se difiere por la antigua mención a Fase 2/LEM-31.

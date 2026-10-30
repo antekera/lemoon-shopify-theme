@@ -7,7 +7,7 @@ Esta guía fija las reglas de implementación del storefront a partir de los tok
 La base normativa de esta especificación es la implementación existente: [tokens](../../assets/lemoon-tokens.css), [componentes](../../assets/lemoon-components.css), [base Dawn](../../assets/base.css), [layout](../../layout/theme.liquid) y las fuentes locales enlazadas por componente. Aplicar en este orden:
 
 1. La instrucción explícita del ticket de la superficie define su alcance y referencia visual.
-2. Para una familia existente, reutilizar su sección, snippet y reglas locales completas, incluidas sus media queries; tienen precedencia sobre los valores genéricos de esta guía.
+2. Para una familia existente, reutilizar su sección, snippet y reglas locales completas, incluidas sus media queries; tienen precedencia sobre los valores genéricos de esta guía. Los requisitos de accesibilidad de las secciones 5–6 prevalecen sobre copiar un defecto local: aplicar la receta accesible a controles nuevos o modificados.
 3. Para componentes sin excepción local, usar los roles semánticos y valores base de las secciones 2–5. No crear aliases paralelos `--color-primary` ni sustituir tokens por valores de un plan antiguo.
 4. Las referencias Figma sirven para la composición del componente correspondiente. No importar propuestas alternativas o tamaños de frame a todas las páginas.
 
@@ -35,9 +35,9 @@ Usar los siguientes tokens semánticos de [lemoon-tokens.css](../../assets/lemoo
 | Rol / token | Valor | Regla de selección |
 | --- | --- | --- |
 | `--lemoon-surface-page` / `--lemoon-text-inverse` | `#FFFFFF` | Fondo de página / texto sobre navy |
-| `--lemoon-surface-warm` / `--lemoon-border-warm` | `#F7F4EE` | Panel cálido / contorno base de campos |
+| `--lemoon-surface-warm` / `--lemoon-border-warm` | `#F7F4EE` | Panel cálido / contorno warm existente; para campos nuevos o modificados aplicar sección 5 |
 | `--lemoon-surface-warm-hover` | `#E8E2D8` | Hover de la superficie cálida |
-| `--lemoon-surface-inverse`, `--lemoon-text-brand`, `--lemoon-border-strong`, `--lemoon-action-primary` | `#0B1F3A` | Superficie inversa, texto de marca, foco y acción principal |
+| `--lemoon-surface-inverse`, `--lemoon-text-brand`, `--lemoon-border-strong`, `--lemoon-action-primary` | `#0B1F3A` | Superficie inversa, texto de marca, contorno accesible de campos, foco y acción principal |
 | `--lemoon-action-primary-hover` | `#1A3560` | Hover de acción navy |
 | `--lemoon-action-accent` / `--lemoon-action-accent-hover` | `#F7E600` / `#E6D600` | Acento y hover; combinar con texto navy o carbon |
 | `--lemoon-text-primary` | `#1A1A1A` | Texto principal |
@@ -108,16 +108,22 @@ Reutilizar [base.css](../../assets/base.css), [lemoon-components.css](../../asse
 
 | Componente | Selección y medidas | Estados |
 | --- | --- | --- |
-| Acción principal `.button` | Navy/blanco; min-height 48px; padding horizontal 2rem; radio `--lemoon-radius-button` = 9999px; rol CTA | Hover navy muted. Preservar disabled, `.loading`, spinner y bloqueo de envíos duplicados del formulario |
-| Acción secundaria `.button--secondary` | Blanco/texto navy; mismas medidas base | Hover navy/blanco |
-| Acción terciaria `.button--tertiary` | Transparente/texto navy, min-height 48px, padding 2rem | Hover texto navy muted; para menor jerarquía |
+| Acción principal `.button` | Navy/blanco; min-height 48px ≥750px / 44px <750px; padding horizontal 2rem; radio `--lemoon-radius-button` = 9999px; rol CTA | Hover navy muted. Preservar disabled, `.loading`, spinner y bloqueo de envíos duplicados del formulario |
+| Acción secundaria `.button--secondary` | Blanco/texto navy; mismas medidas base, incluido min-height 48px ≥750px / 44px <750px | Hover navy/blanco |
+| Acción terciaria `.button--tertiary` | Transparente/texto navy, min-height 48px ≥750px / 44px <750px, padding 2rem | Hover texto navy muted; para menor jerarquía |
 | Acento / destructiva | Reutilizar la clase específica ya presente en la superficie | Las variantes de Figma no crean clases globales `button--accent` o `button--destructive`; no inventar ese mapeo |
-| Input/select | `.field__input`, `.select__select`: altura mínima y altura 48px; radio 4px; blanco/carbon; borde warm 1px | Foco navy 2px. Error: mensaje asociado y `aria-invalid`, color error del token. Disabled nativo y ayuda legible |
+| Input/select | `.field__input`, `.select__select`: altura mínima y altura 48px; radio 4px; blanco/carbon; contorno continuo 1px `--lemoon-border-strong` cuando blanco/warm no delimite el área editable con contraste ≥3:1 (receta debajo) | Foco navy 2px separado del contorno por offset 2px como mínimo. Error: mensaje asociado y `aria-invalid`, color error del token. Disabled nativo y ayuda legible |
 | Textarea | Misma familia visual de input; altura auto | Preservar label, ayuda y validación |
 | Search | Radio de búsqueda 24px y tamaño base 40px donde lo use el componente de búsqueda | Mantener resultados, sin resultados y recuperación; no aplicar ese radio a campos generales |
 | Checkbox/radio | Control nativo; tamaño base 16px y token radio control 3px donde lo use su CSS; conservar círculo del radio | Etiqueta clicable y estado checked/disabled real; no sustituir por un dibujo sin semántica |
 
-En campos con icono usar el tamaño 24px de la referencia Input y reservar espacio para que no se superponga con texto. Mantener labels persistentes. No usar el borde warm como única señal de identificación del campo: comprobar label, forma y contraste del control completo conforme a sección 6.
+Las alturas de la familia base de botones usan `--lemoon-size-control` (48px) desde 750px y `--lemoon-size-touch` (44px) bajo 750px, conforme al override móvil de lemoon-components.css. Conservar las excepciones locales de medidas, como quick-add, dentro de su componente.
+
+**Receta para campos nuevos o modificados:** el área editable debe quedar delimitada antes del foco. Cuando el fondo blanco del campo y su entorno blanco/warm no produzcan una delimitación con contraste ≥3:1, usar un contorno continuo de 1px con `--lemoon-border-strong` (navy `#0B1F3A`), sin opacidad reducida. Aplicar esta regla también a textarea y búsqueda cuando compartan ese caso. El foco debe distinguirse del contorno de reposo: anillo navy de 2px con offset mínimo de 2px, visible y sin recortes. Conservar un label persistente asociado y ayuda vinculada mediante `aria-describedby` cuando corresponda; label, ayuda y placeholder no sustituyen la delimitación del área editable. Comprobar contraste con los colores computados y fondos adyacentes reales en reposo y foco, además de error y disabled según su función.
+
+El borde warm de 1px sobre blanco describe el CSS existente; no es por sí solo la receta aceptable para estos campos: warm/blanco da aproximadamente 1.098:1. El token `--lemoon-border-strong` da aproximadamente 16.518:1 sobre blanco y 15.047:1 sobre warm. Son cálculos de colores sólidos, no una certificación de controles renderizados. [LEM-132](https://linear.app/antekera/issue/LEM-132) debe reconciliar los campos legacy y las variantes de biblioteca con esta receta; reutilizar CSS existente no acredita su cumplimiento ni exime a los controles nuevos o modificados de aplicarla.
+
+En campos con icono usar el tamaño 24px de la referencia Input y reservar espacio para que no se superponga con texto.
 
 ### Tarjetas, etiquetas y navegación
 
