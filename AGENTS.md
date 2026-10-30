@@ -35,8 +35,25 @@ Repository skills live under `.agents/skills/`. Use `$<skill-name>` for explicit
 
 For creating or revising Lemoon page copy, including terms, returns, shipping, privacy, FAQs, and brand pages, use the `lemoon-copywriter` agent defined in `.codex/agents/lemoon-copywriter.toml` when available. If the role is unavailable in the current session, read that file and follow its instructions directly. It researches comparable Chilean eyewear stores, verifies legal claims against current official sources, and produces original es-CL drafts with source notes and unconfirmed business details clearly marked.
 
+## Agent routing
+
+Definitions are in `.codex/agents/`. Select roles by responsibility:
+
+- `theme-developer`: complete theme pages, flows, and integrations; `section-builder`: one approved section.
+- `lemoon-copywriter`: research and write copy; `lemoon-copy-reviewer`: independent editorial/source review. Resolve missing business facts with Miguel in the owning page ticket; deliver final integrated copy and QA before calling the page production-ready.
+- `lemoon-design-lead`: consolidate approved Figma/design guidance and review visual adherence; `design-interpreter`: reference-to-spec work; `design-token-auditor`: read-only token checks.
+- `theme-code-reviewer` and `theme-conventions-reviewer`: independent code and repository-convention reviews; `theme-test-engineer`: acceptance tests; `chilean-spanish-translator`: locale completion.
+
+Back-office roles belong to `antekera/lemoon-next-backoffice`, under its `.codex/agents/`: `backoffice-developer`, `backoffice-code-reviewer`, and `backoffice-test-engineer`. Confirm the repository remote before cross-repository work. If a role is unavailable in this session, read its definition from the matching checkout and dispatch a general agent with those instructions and explicit file ownership. If independent delegation is unavailable, disclose the review gap.
+
 ## Ticket delivery and testing
+
+Linear status ownership: agents may move an authorized ticket to **In Progress** when work starts. When implementation and checks are ready, leave it **In Progress** and add a handoff with PR links, preview, test evidence, and remaining issues. **Only Miguel manually moves tickets to In Review or Done after his review.** A passing check, review approval, or merged PR does not authorize an agent to make either transition; preserve states Miguel has already set.
 
 When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges to `main` after current checks and required approvals pass when the user authorized delivery through merge. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
 
 For unit and end-to-end test work, use `theme-test-engineer` in `.codex/agents/theme-test-engineer.toml`. It creates and runs relevant Vitest and Playwright tests, distinguishes local fixtures from Shopify storefront coverage, and reports evidence and environment gaps. If a role is unavailable, read its definition and use a general agent with that scope; disclose any unavailable delegation or independent review.
+
+## Review execution permissions
+
+Custom agent files inherit parent-session permissions; a role-level `sandbox_mode` does not enforce read-only access. Reviewer prompts define a read-only responsibility, not a security boundary. For technically isolated review, launch the reviewer in a separately configured read-only parent session with mutating connectors unavailable, and verify effective permissions before dispatch. If the runtime cannot establish that isolation, report the limitation and do not claim permission isolation. Where enforced isolation is required, keep merge blocked until that review is available.
