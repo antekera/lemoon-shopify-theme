@@ -35,7 +35,20 @@ Repository skills live under `.agents/skills/`. Use `$<skill-name>` for explicit
 
 For creating or revising Lemoon page copy, including terms, returns, shipping, privacy, FAQs, and brand pages, use the `lemoon-copywriter` agent defined in `.codex/agents/lemoon-copywriter.toml` when available. If the role is unavailable in the current session, read that file and follow its instructions directly. It researches comparable Chilean eyewear stores, verifies legal claims against current official sources, and produces original es-CL drafts with source notes and unconfirmed business details clearly marked.
 
+## Agent routing
+
+Definitions are in `.codex/agents/`. Select roles by responsibility:
+
+- `theme-developer`: complete theme pages, flows, and integrations; `section-builder`: one approved section.
+- `lemoon-copywriter`: research and write copy; `lemoon-copy-reviewer`: independent editorial/source review. Resolve missing business facts with Miguel in the owning page ticket; deliver final integrated copy and QA before calling the page production-ready.
+- `lemoon-design-lead`: consolidate approved Figma/design guidance and review visual adherence; `design-interpreter`: reference-to-spec work; `design-token-auditor`: read-only token checks.
+- `theme-code-reviewer` and `theme-conventions-reviewer`: independent code and repository-convention reviews; `theme-test-engineer`: acceptance tests; `chilean-spanish-translator`: locale completion.
+
+Back-office roles belong to `antekera/lemoon-next-backoffice`, under its `.codex/agents/`: `backoffice-developer`, `backoffice-code-reviewer`, and `backoffice-test-engineer`. Confirm the repository remote before cross-repository work. If a role is unavailable in this session, read its definition from the matching checkout and dispatch a general agent with those instructions and explicit file ownership. If independent delegation is unavailable, disclose the review gap.
+
 ## Ticket delivery and testing
+
+Linear status ownership: agents may move an authorized ticket to **In Progress** when work starts. When implementation and checks are ready, leave it **In Progress** and add a handoff with PR links, preview, test evidence, and remaining issues. **Only Miguel manually moves tickets to In Review or Done after his review.** A passing check, review approval, or merged PR does not authorize an agent to make either transition; preserve states Miguel has already set.
 
 When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges to `main` after current checks and required approvals pass when the user authorized delivery through merge. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
 
