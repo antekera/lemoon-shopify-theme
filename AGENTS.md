@@ -48,6 +48,8 @@ Back-office roles belong to `antekera/lemoon-next-backoffice`, under its `.codex
 
 ## Ticket delivery and testing
 
+For an authorized autonomous MVP queue, the coordinator must read `docs/agents/mvp-queue-policy.md`: select a frozen pilot batch of up to three ready tickets, keep at most two tickets active, and resume from recorded ownership/evidence rather than duplicating work. Use `docs/agents/orca-mvp-pilot-goal.md` as the Orca goal template. These files configure behavior; they start no ticket execution or background service. PR-ready delivery is the default unless the invoking goal explicitly authorizes merge.
+
 Linear status ownership: agents may move an authorized ticket to **In Progress** when work starts. When implementation and checks are ready, leave it **In Progress** and add a handoff with PR links, preview, test evidence, and remaining issues. **Only Miguel manually moves tickets to In Review or Done after his review.** A passing check, review approval, or merged PR does not authorize an agent to make either transition; preserve states Miguel has already set.
 
 When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges to `main` after current checks and required approvals pass when the user authorized delivery through merge. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
