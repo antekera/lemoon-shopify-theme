@@ -23,6 +23,7 @@ For library, framework, SDK, API, CLI, or cloud-service syntax, configuration, m
 ## Git and Shopify safety
 
 - Use the repository's branch prefixes and commit format. Route changes through a pull request to `main`.
+- After every confirmed PR merge, close its Orca sessions and remove its worktrees and merged local/remote branches as part of delivery. Follow [post-merge cleanup](.claude/rules/git-conventions.md#post-merge-cleanup); preserve work added after the reviewed revision and report any cleanup blocker.
 - Do not push to Shopify as part of a code change unless the user requests it.
 - The development theme is `155925381288`. The production theme is the currently published theme; inspect it with `shopify theme list`, show its ID, and get explicit user confirmation immediately before any production push. A request to inspect or prepare a push is not confirmation.
 - Never pull from Shopify over uncommitted work.

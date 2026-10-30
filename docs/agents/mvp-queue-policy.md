@@ -51,6 +51,8 @@ Before resuming, read this checkpoint and the current Linear/PR/Orca state, insp
 
 ## Delivery and stop conditions
 
+For each PR confirmed merged during the run, complete [post-merge cleanup](../../.claude/rules/git-conventions.md#post-merge-cleanup) before ending: remove its Orca sessions, worktrees and covered branches, or checkpoint the precise preservation/removal blocker. Releasing a worker alone does not complete workspace cleanup.
+
 An internal outcome is one of `ready_for_review`, `blocked`, `failed`, or `already_satisfied` with acceptance evidence. These are checkpoint outcomes, never new Linear statuses. `already_satisfied` counts only if the ticket's current acceptance was verified; a title match, screenshot, or merged PR alone is insufficient.
 
 For `ready_for_review`, require final scoped implementation/content, relevant tests/QA, independent reviews, current PR checks, PR links, tested SHA, accessible preview/API or artifact evidence as applicable, and explicit environment gaps. A documentation deliverable may have a justified test/preview-not-applicable note. Missing required evidence, commercial decisions, or legal placeholders prevent this outcome. Add the handoff and move each ready ticket to the team's Review column. Apply AGENTS.md's lifecycle to every ticket, including `already_satisfied`: the designated human reviewer must explicitly approve its deliverable before required merges and completion. Record approval scope, confirm necessary merges and acceptance, then move it to Complete. Until then preserve the review handoff; unfinished or blocked implementation remains In Progress with its blocker. Preserve unrelated/unstarted ticket states.
