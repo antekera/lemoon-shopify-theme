@@ -1,5 +1,7 @@
 # Revisión de páginas — 10 de octubre de 2026
 
+Ruta de reembolso: `/pages/politicas`.
+
 Rama `feat/remaining-storefront-pages`. Los enlaces locales requieren el servidor
 Shopify theme dev de esta sesión en el puerto 9292. Los tickets permanecen
 In Progress para revisión. Los enlaces con `view=` muestran el template nuevo;
@@ -26,7 +28,7 @@ no significan que ya se asignó permanentemente a la página CMS.
 | Operativos | [Servicios](http://127.0.0.1:9292/pages/operativos-oftalmologicos?view=operativos-oftalmologicos) |
 | Isapres y Fonasa | [Información](http://127.0.0.1:9292/pages/isapres-y-fonasa?view=isapres-y-fonasa) |
 | Envíos | [Presentación de política](http://127.0.0.1:9292/pages/envios-y-entregas?view=envios-y-entregas) |
-| Devoluciones | [Presentación de política](http://127.0.0.1:9292/pages/po?view=politica-de-devoluciones) |
+| Devoluciones | [Presentación de política](http://127.0.0.1:9292/pages/politicas?view=politica-de-devoluciones) |
 | Garantías | [Presentación de política](http://127.0.0.1:9292/pages/garantias?view=garantias) |
 | Términos | [Presentación de política](http://127.0.0.1:9292/pages/terminos-y-condiciones?view=terminos-y-condiciones) |
 | Privacidad de prueba | [Borrador editable](http://127.0.0.1:9292/pages/contact?view=privacidad) |
@@ -608,7 +610,7 @@ LEM-125 sigue In Progress, confirmado mediante lectura fresca de Linear. Se
 creó el menú «Lemoon · Cuentas y ayuda · revisión» y se seleccionó/guardó en el
 perfil borrador 7112229032. Conserva los destinos nativos de Mis pedidos y Mi
 perfil, y añade Ayuda con tu pedido (`/pages/contact`), Cambios y devoluciones
-(`/pages/po`) y Garantías (`/pages/garantias`). Tras recargar la cuenta autenticada
+(página de reembolso) y Garantías (`/pages/garantias`). Tras recargar la cuenta autenticada
 publicada, su menú conservó solamente Mis pedidos y Mi perfil: el menú nuevo
 permanece asociado al borrador. No se pulsó Publicar.
 
@@ -629,7 +631,7 @@ onlineStoreURL; el editor no navegó al formulario real, por lo que no se atribu
 a esta interacción una prueba completa del recorrido de posventa.
 
 Una comprobación separada de los destinos canónicos en el navegador abrió el
-formulario de Contacto; `/pages/po` conserva «Esta página está en preparación»
+formulario de Contacto; la página de reembolso conserva «Esta página está en preparación»
 y `/pages/garantias` conserva texto anterior con un correo mal escrito. Las
 plantillas nuevas de estas últimas páginas están preparadas y verificadas con
 `view=`, pero su asignación CMS sigue pendiente en

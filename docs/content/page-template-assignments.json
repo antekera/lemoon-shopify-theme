@@ -42,14 +42,15 @@
     {
       "id": "gid://shopify/Page/122119028904",
       "title": "Politica de devoluciones",
-      "handle": "po",
+      "handle": "politicas",
+      "handleUpdatedOn": "2026-10-30",
       "templateSuffix": "page",
       "isPublished": true,
       "proposedTemplateSuffix": "politica-de-devoluciones",
       "ticket": "LEM-113",
       "status": "pending_review",
       "templatePath": "templates/page.politica-de-devoluciones.json",
-      "reviewUrl": "https://lemoon.cl/pages/po?view=politica-de-devoluciones&preview_theme_id=188783886504"
+      "reviewUrl": "https://lemoon.cl/pages/politicas?view=politica-de-devoluciones&preview_theme_id=188783886504"
     },
     {
       "id": "gid://shopify/Page/122119061672",
