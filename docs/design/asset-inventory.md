@@ -2,11 +2,11 @@
 
 Paquete operativo para el sitemap de [LEM-86](page-inventory.md). Los IDs permiten reutilizar una pieza en varias superficies sin producir una imagen por ruta. **Existente** significa archivo o recurso implementado en el repositorio; no acredita carga en Shopify, derechos de publicación, asignación CMS ni disponibilidad pública. **Faltante** identifica una entrega que se debe producir o conseguir. **Opcional** no bloquea una superficie que ya funciona sin imagen propia.
 
-[DESIGN.md](../../DESIGN.md), aprobado en LEM-141, es la fuente canónica de color, tipografía y presentación; [brand-guidelines](brand-guidelines.md) define su uso. La instrucción histórica de LEM-97 que los dejaba por validar quedó superada por esa aprobación. Este inventario no elige ni reabre colores, tipografías, estilo, variantes de marca ni prompts. Las ampliaciones de identidad pertenecen a LEM-79/80.
+[DESIGN.md](../../DESIGN.md) es la fuente canónica de color, tipografía y presentación; [brand-guidelines](brand-guidelines.md) define su uso. Este inventario no elige ni reabre colores, tipografías, estilo, variantes de marca ni prompts. Las ampliaciones de identidad pertenecen a LEM-79/80.
 
 ## Reglas de entrega
 
-- Las dimensiones marcadas **requisito de entrega** son propuestas técnicas para el contenedor existente, no mínimos de Shopify ni nuevas decisiones de marca. Las dimensiones de archivo y reglas CSS se identifican como tales.
+- Las dimensiones marcadas **requisito de entrega** se fijan para el contenedor existente, no mínimos de Shopify ni nuevas decisiones de marca. Las dimensiones de archivo y reglas CSS se identifican como tales.
 - Conservar originales editables y autorización de uso junto a cada export. La carpeta compartida oficial y los originales de fotografías no están identificados en el repositorio: LEM-78 debe establecer el destino y registrar su enlace por ID antes de entregar. No asumir que un archivo del tema es el original editable.
 - Los archivos existentes tienen su fuente y export local en `assets/`; los nuevos nombres de esta matriz son nombres de entrega, no archivos ya creados. Para selectores de imagen, cargar desde el editor o Contenido → Archivos y seleccionar la pieza en el ajuste indicado. Productos, colecciones y artículos se cargan en su recurso nativo.
 - Alt: describir brevemente contenido y función en es-CL, sin SEO repetitivo ni afirmaciones médicas/comerciales. Producto: modelo, color y vista reales según LEM-71; enlace de categoría: nombre del destino. Decoración junto a texto equivalente: `alt=""`; iconos de controles conservan el nombre accesible del control. No incrustar instrucciones esenciales en una foto.
