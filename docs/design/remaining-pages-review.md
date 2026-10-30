@@ -1,5 +1,7 @@
 # Revisión de páginas — 10 de octubre de 2026
 
+Ruta actual de reembolso: `/pages/politicas`; `/pages/po` es un alias con redirección desde el 30 de octubre de 2026. Las menciones a la ruta anterior en el registro fechado describen las comprobaciones históricas.
+
 Rama `feat/remaining-storefront-pages`. Los enlaces locales requieren el servidor
 Shopify theme dev de esta sesión en el puerto 9292. Los tickets permanecen
 In Progress para revisión. Los enlaces con `view=` muestran el template nuevo;
@@ -26,7 +28,7 @@ no significan que ya se asignó permanentemente a la página CMS.
 | Operativos | [Servicios](http://127.0.0.1:9292/pages/operativos-oftalmologicos?view=operativos-oftalmologicos) |
 | Isapres y Fonasa | [Información](http://127.0.0.1:9292/pages/isapres-y-fonasa?view=isapres-y-fonasa) |
 | Envíos | [Presentación de política](http://127.0.0.1:9292/pages/envios-y-entregas?view=envios-y-entregas) |
-| Devoluciones | [Presentación de política](http://127.0.0.1:9292/pages/po?view=politica-de-devoluciones) |
+| Devoluciones | [Presentación de política](http://127.0.0.1:9292/pages/politicas?view=politica-de-devoluciones) |
 | Garantías | [Presentación de política](http://127.0.0.1:9292/pages/garantias?view=garantias) |
 | Términos | [Presentación de política](http://127.0.0.1:9292/pages/terminos-y-condiciones?view=terminos-y-condiciones) |
 | Privacidad de prueba | [Borrador editable](http://127.0.0.1:9292/pages/contact?view=privacidad) |

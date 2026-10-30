@@ -57,7 +57,7 @@ puede seguir vacío mientras permanezca sin publicar.
 
 | Página | Ticket | Enlace de revisión |
 | --- | --- | --- |
-| Devoluciones | LEM-113 | [Abrir](https://lemoon.cl/pages/po?view=politica-de-devoluciones&preview_theme_id=188783886504) |
+| Devoluciones | LEM-113 | [Abrir](https://lemoon.cl/pages/politicas?view=politica-de-devoluciones&preview_theme_id=188783886504) |
 | Envíos | LEM-114 | [Abrir](https://lemoon.cl/pages/envios-y-entregas?view=envios-y-entregas&preview_theme_id=188783886504) |
 | Garantías | LEM-115 | [Abrir](https://lemoon.cl/pages/garantias?view=garantias&preview_theme_id=188783886504) |
 | Privacidad nativa | LEM-118 | [Abrir](https://lemoon.cl/policies/privacy-policy?preview_theme_id=188783886504). Conserva el texto publicado; shell y acceso a preferencias personalizados. |

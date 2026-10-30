@@ -78,7 +78,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-110 | Artículo | `article.json`, `article.editorial.json`; primer post real | Borrador real creado; plantilla y revisión aprobadas; preview privado validado; In Progress |
 | LEM-111 | Operativos oftalmológicos | Template alternativo; consulta de disponibilidad | Implementado y revisado; datos operativos pendientes; In Progress |
 | LEM-112 | Isapres y Fonasa | Template alternativo; información condicional por plan | Implementado y revisado; convenios no confirmados; In Progress |
-| LEM-113 | Reembolsos | Plantilla editorial sobre /pages/po; handle definitivo pendiente | Shell implementado; condiciones definitivas pendientes; In Progress |
+| LEM-113 | Reembolsos | Plantilla editorial sobre /pages/politicas | Shell implementado; condiciones definitivas pendientes; In Progress |
 | LEM-114 | Envíos y devoluciones | Plantilla editorial; tarifas y plazos pendientes | Shell implementado; condiciones definitivas pendientes; In Progress |
 | LEM-115 | Garantías | Template page.garantias; cobertura y exclusiones pendientes | Shell implementado; condiciones definitivas pendientes; In Progress |
 | LEM-116 | Preguntas frecuentes | 11 preguntas agrupadas y bloques editables | Implementado y revisado; pruebas live aprobadas; In Progress |
@@ -161,7 +161,7 @@ implementación. El estado vigente se detalla en Evidencia de entregas locales:
   identificadores de variante/línea. `cart-upsell-row` permite títulos y precios
   ficticios sin producto configurado; corregirlo dentro de la entrega del carrito.
 - Las rutas de soporte listadas en el footer responden HTTP 200, incluida
-  `/pages/po`. Su existencia no demuestra contenido definitivo ni aprobación.
+  la ruta histórica `/pages/po` (ahora redirige a `/pages/politicas`). Su existencia no demuestra contenido definitivo ni aprobación.
 - `/pages/nosotros` contiene texto de ejemplo: «Título de sección», «Comparte
   información sobre tu marca». Requiere reemplazo completo de esos bloques.
 - `/pages/contact` mantiene el título inglés «Contact» y solo formulario; no
