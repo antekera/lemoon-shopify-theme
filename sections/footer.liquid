@@ -121,7 +121,7 @@
       <ul class="lemoon-footer__legal-links" role="list">
         {%- assign terms_page = pages['terminos-y-condiciones'] -%}
         {%- assign shipping_page = pages['envios-y-entregas'] -%}
-        {%- assign returns_page = pages['po'] -%}
+        {%- assign returns_page = pages['politicas'] -%}
         {%- if shop.privacy_policy != blank -%}<li><a href="{{ shop.privacy_policy.url }}">{{ 'sections.lemoon_footer_privacy.policy' | t }}</a></li>{%- endif -%}
         {%- if shop.terms_of_service != blank -%}<li><a href="{{ shop.terms_of_service.url }}">{{ 'sections.lemoon_footer_privacy.terms' | t }}</a></li>{%- elsif terms_page != blank -%}<li><a href="{{ terms_page.url }}">{{ 'sections.lemoon_footer_privacy.terms' | t }}</a></li>{%- endif -%}
         {%- if shipping_page != blank -%}<li><a href="{{ shipping_page.url }}">{{ 'sections.lemoon_footer_privacy.shipping' | t }}</a></li>{%- endif -%}

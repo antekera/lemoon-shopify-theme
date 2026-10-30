@@ -14,7 +14,7 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   await expect(first.locator('a')).toHaveAttribute('href','/pages/como-medir-tus-lentes');
   await first.locator('summary').press('Enter');
   await expect(first).not.toHaveAttribute('open','');
-  for (const href of ['/pages/como-medir-tus-lentes','/pages/como-hacer-tu-pedido','/pages/como-usar-probador-virtual','/pages/como-enviar-prescripcion','/pages/envios-y-entregas','/pages/po','/pages/garantias']) {
+  for (const href of ['/pages/como-medir-tus-lentes','/pages/como-hacer-tu-pedido','/pages/como-usar-probador-virtual','/pages/como-enviar-prescripcion','/pages/envios-y-entregas','/pages/politicas','/pages/garantias']) {
     await expect(faq.locator(`a[href="${href}"]`).first()).toHaveCount(1);
     expect((await storefrontRequest(page).get(href)).status()).toBe(200);
   }
@@ -51,7 +51,7 @@ for (const [handle, subject] of [['operativos-oftalmologicos','?subject=operativ
   });
 }
 
-for (const [handle, view] of [['envios-y-entregas','envios-y-entregas'],['po','politica-de-devoluciones'],['terminos-y-condiciones','terminos-y-condiciones'],['garantias','garantias']]) {
+for (const [handle, view] of [['envios-y-entregas','envios-y-entregas'],['politicas','politica-de-devoluciones'],['terminos-y-condiciones','terminos-y-condiciones'],['garantias','garantias']]) {
   test(`${handle} preserves its legal title and offers contact for missing conditions`, async ({page}) => {
     expect((await openStorefrontPage(page, `/pages/${handle}?view=${view}`)).status()).toBe(200);
     const legal = page.locator('.lemoon-legal-page');

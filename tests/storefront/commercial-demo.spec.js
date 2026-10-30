@@ -3,7 +3,7 @@ import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const routes = [
  ['about', '/pages/nosotros?view=nosotros', 'Servioptic SpA'],
  ['shipping', '/pages/envios-y-entregas?view=envios-y-entregas', '$3.990'],
- ['returns', '/pages/po?view=politica-de-devoluciones', '30 días'],
+ ['returns', '/pages/politicas?view=politica-de-devoluciones', '30 días'],
  ['warranty', '/pages/garantias?view=garantias', '365 días'],
  ['terms', '/pages/terminos-y-condiciones?view=terminos-y-condiciones', '00.000.000-0'],
  ['privacy draft', '/pages/contact?view=privacidad', '90 días'],
