@@ -1,6 +1,8 @@
 # Lemoon — Plan de Diseño
 
-> Este documento es la fuente de verdad para el diseño del e-commerce. Se consulta al inicio de cada sesión para retomar contexto. Actualizar el estado de cada ítem a medida que avanza el trabajo.
+> **Plan histórico, no especificación visual vigente.** La guía canónica de implementación y sus discrepancias están en [DESIGN.md](DESIGN.md), pendiente de revisión de Miguel. Las marcas `[x]`, propuestas, valores y fases de este plan no acreditan aprobación actual ni publicación. No ejecutar desde aquí cambios globales de color, radios, ancho o tracking: ver D1–D7 de la guía. La biblioteca corresponde a [LEM-132](https://linear.app/antekera/issue/LEM-132), la voz a [LEM-55](https://linear.app/antekera/issue/LEM-55) y el inventario/rutas a [LEM-86](https://linear.app/antekera/issue/LEM-86). Las referencias antiguas a Fase 2 no difieren el alcance MVP vigente de configurador/receta/cuentas.
+
+> Este documento conserva el contexto y el estado histórico de la planificación. Para la guía operativa y las decisiones pendientes, consultar [DESIGN.md](DESIGN.md); este plan no constituye una fuente de verdad vigente ni una instrucción de actualizar sus estados históricos en cada sesión.
 
 ---
 

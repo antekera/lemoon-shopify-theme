@@ -1,6 +1,6 @@
 # Lemoon Brand Guidelines
 
-> Claude reads this file when making any visual or styling decisions. Update as the design system is finalized.
+> **Referencia operativa canónica:** [DESIGN.md](DESIGN.md) (LEM-141), consolidación para revisión de Miguel, aún no aprobada. Consultar allí fuentes, tokens implementados, cascada, discrepancias y preguntas antes de cualquier decisión visual. Las tablas e instrucciones que siguen se conservan como contexto histórico de marca; no constituyen una segunda especificación vigente ni autorización para sustituir valores del tema. En particular, colores, radios, gris secundario, ancho y tratamiento del logo tienen diferencias registradas en DESIGN.md. El archivo oficial existente es [lemoon-logo-refined-navy.svg](../../assets/lemoon-logo-refined-navy.svg); mínimo y clearspace siguen pendientes. La voz final pertenece a [LEM-55](https://linear.app/antekera/issue/LEM-55).
 
 ## Visual reference
 

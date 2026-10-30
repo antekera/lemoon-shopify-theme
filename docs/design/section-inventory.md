@@ -1,5 +1,7 @@
 # Section Inventory
 
+> Guía visual canónica: [DESIGN.md](DESIGN.md) (LEM-141), consolidación pendiente de revisión de Miguel. Este inventario conserva estados históricos; “existe”, “implementado” o pruebas anteriores no acreditan asignación CMS, publicación ni aprobación actual. Para componentes y estados consultar la matriz de la guía y [LEM-132](https://linear.app/antekera/issue/LEM-132); los patrones de competidores que siguen son inspiración, no requisitos comerciales o visuales aprobados.
+
 Living list of all sections in the theme — purpose, status, and template placement.
 Update whenever a section is added, removed, or moved.
 

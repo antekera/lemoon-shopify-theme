@@ -1,5 +1,7 @@
 # Páginas pendientes de Lemoon
 
+> Guía visual canónica: [DESIGN.md](DESIGN.md) (LEM-141), consolidación pendiente de revisión de Miguel. Este plan conserva evidencia histórica; sus aprobaciones/pruebas no se revalidaron en la consolidación documental. Las rutas/superficies se reconcilian en [LEM-86](https://linear.app/antekera/issue/LEM-86), la biblioteca en [LEM-132](https://linear.app/antekera/issue/LEM-132) y la voz en [LEM-55](https://linear.app/antekera/issue/LEM-55). La mención antigua de LEM-31 a continuación no difiere configurador/receta/cuentas del MVP vigente. No usar muestras comerciales ni frames propuestos como decisiones aprobadas.
+
 Fecha de revisión: 2026-10-10. Rama: `feat/remaining-storefront-pages`.
 
 ## Alcance y evidencia
