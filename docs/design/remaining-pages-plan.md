@@ -160,8 +160,8 @@ implementación. El estado vigente se detalla en Evidencia de entregas locales:
 - `/cart` responde HTTP 200. La base Dawn preserva propiedades de línea y
   identificadores de variante/línea. `cart-upsell-row` permite títulos y precios
   ficticios sin producto configurado; corregirlo dentro de la entrega del carrito.
-- Las rutas de soporte listadas en el footer responden HTTP 200, incluida
-  la ruta histórica `/pages/po` (ahora redirige a `/pages/politicas`). Su existencia no demuestra contenido definitivo ni aprobación.
+- Las rutas de soporte listadas en el footer respondían HTTP 200. Su existencia
+  no demuestra contenido definitivo ni aprobación.
 - `/pages/nosotros` contiene texto de ejemplo: «Título de sección», «Comparte
   información sobre tu marca». Requiere reemplazo completo de esos bloques.
 - `/pages/contact` mantiene el título inglés «Contact» y solo formulario; no

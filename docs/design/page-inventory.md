@@ -46,7 +46,6 @@ Las rutas proceden del inventario de Admin y la implementación local. Los templ
 | Contraseña · prelanzamiento | Protección nativa; activación no verificada | `password.json` | [LEM-127](https://linear.app/antekera/issue/LEM-127) |
 | Página genérica · fallback | `/pages/{handle}`; sin destino nuevo | `page.json` | [LEM-128](https://linear.app/antekera/issue/LEM-128) |
 | Modal tallas · medidas en PDP | Componente dentro de PDP | `snippets/lemoon-product-size-guide.liquid`, `lemoon-size-guide-content.liquid` | [LEM-129](https://linear.app/antekera/issue/LEM-129) |
-| Antiparras · categoría estacional | Sin handle registrado | PLP compartida | [LEM-1](https://linear.app/antekera/issue/LEM-1) |
 | Quiz · estilo | `/pages/buscar-mi-estilo` | `page.buscar-mi-estilo.json` | [LEM-11](https://linear.app/antekera/issue/LEM-11) |
 | Gift cards · compra/tarjeta emitida | Producto `tarjeta-de-regalo-lemoon` en borrador; URL de tarjeta no verificada | `page.gift-card.json`, `product.gift-card.json`, `gift_card.liquid` | [LEM-9](https://linear.app/antekera/issue/LEM-9) |
 | Header/menús · acceso | Destinos de compra/cuenta/ayuda | `header-group.json`, header | [LEM-131](https://linear.app/antekera/issue/LEM-131) |
@@ -69,7 +68,7 @@ Las 13 colecciones comparten `collection.json`; [LEM-47](https://linear.app/ante
 | CMS Sol y Cristales | `/pages/lentes-de-sol` y `/pages/cristales` coexisten con colecciones homónimas. Sin entrada en los menús consultados; conservar inventario y revisar su función antes de cambiar enlaces. | LEM-47/23/94 · `page.json` como base local; asignación por verificar |
 | Sistema de diseño | `/pages/sistema-de-diseno`, sin entrada en menús consultados; superficie interna adicional, fuera del recorrido de compra. | LEM-86/141 · `page.sistema-de-diseno.json`; conservar registro sin decidir publicación |
 | Alias FAQ | `/pages/pre` → `/pages/preguntas-frecuentes` es el redirect registrado. | LEM-116/94 · conservar alias existente |
-| Reembolso y quiz | `/pages/politicas` y `/pages/buscar-mi-estilo` son los handles existentes. `/pages/po` redirige a `/pages/politicas`; no hay redirect registrado entre `/guia-estilo` y el quiz. | LEM-113/11/94 · no sustituir por URLs propuestas |
+| Reembolso y quiz | `/pages/politicas` y `/pages/buscar-mi-estilo` son los handles existentes. No hay redirect registrado entre `/guia-estilo` y el quiz. | LEM-113/11/94 · no sustituir por URLs propuestas |
 | Segmentos del header local | Enlaces como `/collections/opticos/negro`, `/collections/lentes-de-sol/mujer` o `/collections/cristales/lectura` no son registros de subcolecciones. | LEM-47/131 · verificar tags/filtros y destinos antes de tratarlos como categorías |
 
 ## Sitemap editable
