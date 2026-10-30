@@ -36,6 +36,19 @@ gh pr create --title "feat: trust-bar section" --body "..."
 Use `/lemoon-start-feature <name>` to create a branch automatically.
 Use `/lemoon-open-pr` to push the branch and open the PR.
 
+## Post-merge cleanup
+
+A confirmed PR merge authorizes cleanup of that PR's sessions, worktrees, and branches. Complete cleanup before the final delivery report; record any exception explicitly.
+
+1. Verify the PR is `MERGED` in GitHub and record its repository, reviewed head, merge commit, branch, and exact Orca workspace selectors. For squash merges, use the PR head as evidence; Git ancestry into `main` alone is insufficient.
+2. Inspect each workspace's tracked and untracked changes, local/remote heads, open PRs, and active ownership. Remove only heads covered by the merged PR. Preserve reused branches, later commits, dirty workspaces, and other tasks' sessions; report what remains and why. Preserve the main checkout and active development services.
+3. Save the handoff, validation and cleanup evidence in Git's common directory before removing task workspaces. Settle supervised Dispatches through Orca; unresolved liveness requires recovery, not forced termination.
+4. From a surviving checkout, close the merged task's Orca sessions with the installed CLI, then remove its worktrees through `orca worktree rm` using exact selectors. Use `git worktree remove` only for a checkout confirmed absent from Orca. Never force-remove a dirty workspace.
+5. Remove any remaining covered local branches and the merged remote branch. Recheck the exact ref before deletion; pin remote deletion to its observed SHA so concurrent work is preserved. A closed but unmerged PR does not authorize deletion under this rule.
+6. Verify the sessions, workspace registrations, directories, and branches are gone. Fetch/prune stale tracking refs and fast-forward a clean `main` from `origin/main`. Record removed resources and preserved exceptions in the checkpoint and final report. A removal error remains pending cleanup, not success.
+
+This is a required delivery step, not a background monitor. If the coordinator is running inside a workspace to remove, hand control to a surviving checkout before closing it.
+
 ## Branch naming
 
 | Prefix      | When to use                         | Example                         |
