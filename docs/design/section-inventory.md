@@ -1,6 +1,6 @@
 # Lemoon — inventario técnico de secciones
 
-Usar [DESIGN.md](DESIGN.md) para valores, responsive, selección de componentes y estados; [design-plan](design-plan.md) organiza las superficies y [remaining-pages-plan](remaining-pages-plan.md) sus dependencias. Este inventario localiza archivos y referencias de template; la asignación CMS se resuelve por página.
+Usar [DESIGN.md](../../DESIGN.md) para valores, responsive, selección de componentes y estados; [design-plan](design-plan.md) organiza las superficies y [remaining-pages-plan](remaining-pages-plan.md) sus dependencias. Este inventario localiza archivos y referencias de template; la asignación CMS se resuelve por página.
 
 ## Base Dawn y componentes de página
 

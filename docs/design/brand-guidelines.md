@@ -1,12 +1,12 @@
 # Lemoon — uso de marca en el tema
 
-[DESIGN.md](DESIGN.md) es la especificación canónica de valores, componentes y responsive. Este documento define cómo aplicar esa base a la marca sin mantener una segunda tabla de tokens.
+[DESIGN.md](../../DESIGN.md) es la especificación canónica de valores, componentes y responsive. Este documento define cómo aplicar esa base a la marca sin mantener una segunda tabla de tokens.
 
 ## Identidad visual
 
 Usar composición limpia, espacio generoso, jerarquía tipográfica clara y fotografía editorial de óptica. Warby Parker es la inspiración histórica de esa dirección; no es una plantilla que deba copiarse ni una fuente de requisitos nuevos.
 
-El storefront usa Urbanist para títulos/acciones y Hanken Grotesk para cuerpo, labels y metadatos. La base es blanco/carbon, navy para acciones y texto de marca, beige para paneles y lemon para acentos localizados. Elegir roles, pesos, medidas y estados según [DESIGN.md](DESIGN.md), incluidas las excepciones locales de tarjeta, PLP y shell legal.
+El storefront usa Urbanist para títulos/acciones y Hanken Grotesk para cuerpo, labels y metadatos. La base es blanco/carbon, navy para acciones y texto de marca, beige para paneles y lemon para acentos localizados. Elegir roles, pesos, medidas y estados según [DESIGN.md](../../DESIGN.md), incluidas las excepciones locales de tarjeta, PLP y shell legal.
 
 ## Logo
 

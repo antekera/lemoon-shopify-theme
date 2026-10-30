@@ -1,6 +1,6 @@
 # Lemoon — plan de superficies y dependencias
 
-Aplicar [DESIGN.md](DESIGN.md) a las familias existentes, [design-plan](design-plan.md) para arquitectura y [section-inventory](section-inventory.md) para archivos/templates. Este plan conserva dependencias funcionales y de contenido por página; estados de revisión, resultados de pruebas y publicación se registran en el ticket y PR propietarios.
+Aplicar [DESIGN.md](../../DESIGN.md) a las familias existentes, [design-plan](design-plan.md) para arquitectura y [section-inventory](section-inventory.md) para archivos/templates. Este plan conserva dependencias funcionales y de contenido por página; estados de revisión, resultados de pruebas y publicación se registran en el ticket y PR propietarios.
 
 ## Referencias de página
 

@@ -1,6 +1,6 @@
 # Lemoon — plan técnico de diseño
 
-Implementar la base visual de [DESIGN.md](DESIGN.md). Este plan organiza páginas y dependencias; los valores de color, tipografía, radios, contenedores y estados se definen allí. [Section inventory](section-inventory.md) localiza los archivos y [remaining-pages-plan](remaining-pages-plan.md) conserva el flujo de cristales y dependencias por ticket.
+Implementar la base visual de [DESIGN.md](../../DESIGN.md). Este plan organiza páginas y dependencias; los valores de color, tipografía, radios, contenedores y estados se definen allí. [Section inventory](section-inventory.md) localiza los archivos y [remaining-pages-plan](remaining-pages-plan.md) conserva el flujo de cristales y dependencias por ticket.
 
 ## 1. Estructura de las superficies
 
@@ -41,6 +41,10 @@ Mantener superficies nativas y su editor de branding; aplicar las reglas de supe
 Reutilizar shells existentes para guías, nosotros, servicios, FAQ, contacto y políticas. Preservar CMS, formularios nativos, destinos de política y consentimiento. Blog y artículo mantienen tags, paginación, contenido, comentarios y share nativos. No confundir shell disponible con contenido final o asignación CMS.
 
 404 mantiene semántica de página no encontrada y acciones de recuperación. Password reutiliza lanzamiento y newsletter con consentimiento. Gift cards usa la superficie nativa de saldo/código/QR y compra desde variantes reales; no emitir crédito ni publicar catálogo al cambiar diseño.
+
+### Integración de estilos y settings
+
+[theme.liquid](../../layout/theme.liquid) genera primero variables Dawn desde settings y luego carga fuentes, tokens, base y componentes, en ese orden. Los estilos de sección se aplican después según su selector. Por eso un color scheme del editor no recolorea todos los controles Lemoon. [settings_schema.json](../../config/settings_schema.json) define opciones y defaults, no los valores activos de una tienda; los font pickers `assistant_n4` quedan sobreescritos por las familias de los tokens.
 
 ## 2. Componentes compartidos
 
