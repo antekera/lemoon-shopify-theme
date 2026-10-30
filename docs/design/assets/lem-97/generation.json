@@ -29,10 +29,12 @@
     },
     {
       "id": "avatar-final",
-      "prompt": "Use case: compositing. Asset type: square social media avatar for Lemoon optical brand, 1024x1024 square. The supplied image is the official lowercase lemoon wordmark. Place that exact wordmark, preserving every letter curve, its navy color and original width/height proportion, horizontally centered on a uniform warm off-white #F7F4EE square background. Wordmark width about74percent of canvas with comfortable margins and centered vertically, fully inside the circle-safe central area. Crisp completely flat graphic export, no photograph, texture, bevel, shadow, gradient, extra icon, lemon, yellow dot, border, slogan or additional text. The only text is the supplied official wordmark lemoon. No font substitution or logo redesign. Output a clean final square brand avatar, not a mockup.",
       "source_file": "docs/design/assets/lem-97/sources/avatar-final.png",
-      "prompt_kind": "verbatim",
-      "input_reference": "assets/lemoon-logo-refined-navy.svg"
+      "input_reference": "docs/design/assets/lem-97/sources/favicon-final.png",
+      "previous_prompt": "Use case: compositing. Asset type: square social media avatar for Lemoon optical brand, 1024x1024 square. The supplied image is the official lowercase lemoon wordmark. Place that exact wordmark, preserving every letter curve, its navy color and original width/height proportion, horizontally centered on a uniform warm off-white #F7F4EE square background. Wordmark width about74percent of canvas with comfortable margins and centered vertically, fully inside the circle-safe central area. Crisp completely flat graphic export, no photograph, texture, bevel, shadow, gradient, extra icon, lemon, yellow dot, border, slogan or additional text. The only text is the supplied official wordmark lemoon. No font substitution or logo redesign. Output a clean final square brand avatar, not a mockup.",
+      "method": "Copy the approved l + solid yellow leaf master without regeneration; resize with sips to 400 and 1024 pixels.",
+      "authorization": "Miguel requested the same image for Instagram, Facebook and TikTok profile pictures.",
+      "source_sha256": "83d7e6b13c084d9870c3f7ace10e8326c67f8f04509efd832266fbecbf0ae20b"
     },
     {
       "id": "favicon-final",
@@ -49,7 +51,7 @@
       "revision": "l + solid yellow leaf; refined v2"
     }
   ],
-  "status": "Local asset package; favicon l + leaf revision approved by Miguel on 2026-10-30. Other assets retain their existing review status. Not configured in CMS or published.",
+  "status": "Local package; favicon and social avatar use the approved l + solid yellow leaf. Social account upload is a separate live operation, recorded after verification.",
   "logo_input_reference": "assets/lemoon-logo-refined-navy.svg",
   "limitations": "Prompts describe intent, not certified output. Raster generations may approximate logo shapes and colors; no identical vector paths or certified color match is claimed. Selected final masters only are archived; intermediate generation/edit inputs are not a complete reproducibility record. Favicon master replaced with the approved l + solid yellow leaf refinement; its exports are copied from that exact approved image without regeneration."
 }
