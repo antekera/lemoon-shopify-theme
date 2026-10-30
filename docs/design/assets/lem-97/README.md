@@ -1,6 +1,6 @@
 # LEM-97 · galería de exports generados
 
-Paquete gráfico generado para Lemoon, guardado en el proyecto; sin carga CMS, integración Liquid ni publicación. Solo tres categorías principales: son escenas genéricas generadas, **no SKU del catálogo**, fotos de stock ni evidencia de productos disponibles. No hay subcategorías ni banners delgados nuevos.
+Paquete gráfico generado para Lemoon, con diez exports y fuentes guardadas en el proyecto. Las tres categorías ya están configuradas en Shopify; favicon 32 y OG están subidos a Archivos con selección pendiente. No se acredita publicación del tema. Solo tres categorías principales: son escenas genéricas generadas, **no SKU del catálogo**, fotos de stock ni evidencia de productos disponibles. No hay subcategorías ni banners delgados nuevos.
 
 ## Galería y archivos
 
@@ -19,16 +19,14 @@ Las miniaturas enlazan los archivos optimizados de `assets/`. Los bytes correspo
 | G02 · Favicon 48<br><img src="../../../../assets/lemoon-favicon-48-v1.png" width="48" alt="Inicial de Lemoon con hoja amarilla"> | [lemoon-favicon-48-v1.png](../../../../assets/lemoon-favicon-48-v1.png) | 48×48 | 1,377 | Inicial de Lemoon con hoja amarilla |
 | X02 · Apple touch<br><img src="../../../../assets/lemoon-apple-touch-icon-180-v1.png" width="180" alt="Inicial de Lemoon con hoja amarilla"> | [lemoon-apple-touch-icon-180-v1.png](../../../../assets/lemoon-apple-touch-icon-180-v1.png) | 180×180 | 19,819 | Inicial de Lemoon con hoja amarilla |
 
-## Aprobación del favicon
+## Estado y configuración
 
-Miguel aprobó el refinamiento **l + hoja amarilla sólida** el 30 de octubre de 2026 y solicitó sustituir los archivos del branch por esa misma imagen. Se reemplazaron el master, los PNG 16/32/48 y Apple touch 180 con los exports de la imagen aprobada, sin regeneración. La hoja no tiene nervadura; la inicial conserva visualmente el gesto del logo. Esta aprobación corresponde a la selección gráfica y al push Git, sin carga ni publicación en Shopify. Las demás piezas conservan su estado de revisión previo.
+- **H02:** Ópticos, Lentes de sol y Accesorios ya tienen su imagen nativa de colección y `custom.plp_promo_banner` configurados en Shopify. El HTML del preview local de las tres colecciones usa las imágenes correctas en los banners desktop/móvil; falta comprobar su recorte visual antes de publicar. Home → `lifestyle-mood-grid` → bloque `mood.image` es independiente y su asignación no queda acreditada por esa carga. Su alt usa `heading`; las descripciones de la tabla sirven como registro o alt de archivo. Exports nativos 1402×1122, aproximadamente 5:4, sin upscale; no usar como fotografía de SKU.
+- **G02:** `lemoon-favicon-32-v1.png` está subido a Shopify Archivos. Pendiente seleccionar y guardar en Configuración del tema → Logo → `favicon` y verificar HTML/render del tema destinatario. La sesión requiere inicio de sesión de Miguel. Los exports 16/48 no tienen slot separado; favicon no renderiza alt.
+- **G03:** `lemoon-og-default-v1.jpg` está subido a Shopify Archivos. Pendiente seleccionar y guardar en Tienda online → Preferencias → imagen para compartir en redes, con inicio de sesión de Miguel. Después verificar `page_image` y HTML OG por tipo de recurso; el snippet actual no emite `og:image:alt`. Subir el archivo no acredita el ajuste ni su aparición pública.
+- **X02:** Miguel administra Instagram, Facebook y TikTok y carga los avatares 400/1024; el login o upload por un agente no bloquea LEM-97. Revisar el recorte circular del canal. Apple 180 queda entregado sin slot Apple touch en el tema. WhatsApp, covers y cabeceras email pertenecen a LEM-78 y sus tickets de integración.
 
-## Carga después de aprobación
-
-- **H02:** Home → `lifestyle-mood-grid` → bloque `mood.image`, una imagen por categoría. El alt del componente usa `heading`: Ópticos / Lentes de sol / Accesorios; las descripciones de la tabla sirven como registro o alt de archivo. No cargar como foto de producto ni asumir que cambia `collection.image` o `custom.plp_promo_banner`. Proporción nativa 1402×1122, aproximadamente 5:4; comprobar cover desktop/móvil y primera imagen `center 20%` antes de publicar. No se amplió a 1500×1200.
-- **G02:** Configuración del tema → Logo → `favicon`, seleccionar PNG 32. Los exports 16/48 no tienen slot separado; favicon no renderiza alt.
-- **G03:** Tienda online → Preferencias → imagen para compartir en redes, JPG 1200×630. Verificar `page_image` y HTML OG por tipo de recurso; el snippet actual no emite `og:image:alt`.
-- **X02:** avatar 400/1024 en el perfil social correspondiente tras revisar el círculo del canal. Apple 180 queda entregado como archivo, sin slot Apple touch en el tema. No se configuró WhatsApp, covers ni email.
+Favicon, Apple y avatar usan la **inicial navy l + hoja amarilla sólida** elegida por Miguel; no sustituyen el wordmark SVG oficial del header. Color y tipografía siguen [DESIGN.md](../../../../DESIGN.md), aprobado en LEM-141. La revisión humana final del ticket y el merge del PR siguen pendientes; la selección gráfica no acredita configuración o publicación.
 
 ## Fuentes y límites
 
@@ -38,4 +36,4 @@ Referencia de identidad aportada a la generación: [logo oficial](../../../../as
 
 Las categorías conservan las dimensiones nativas 1402×1122. OG se entrega a 1200×630 desde un master 1731×909, con ajuste mínimo de proporción. Avatar y favicon parten de masters cuadrados 1254×1254. No hay versiones transparentes en este paquete.
 
-La selección gráfica del favicon cuenta con aprobación humana; las demás piezas requieren revisión antes de su carga. Comprobar también el crop real de cada canal antes de publicar. Esta entrega no acredita render storefront, configuración nativa ni publicación. El inventario conserva responsables de fotografía real LEM-71, hero y pendientes LEM-78, contenido/carga por página e identidad ampliada LEM-79/80.
+Las asignaciones de categorías y el HTML local verificado no equivalen a render público. Favicon y OG requieren selección y verificación en sus ajustes; no se declara configuración nativa ni publicación por disponer de archivos en Shopify. Fotografía real, hero y restantes covers/email mantienen sus responsables LEM-71/78; identidad ampliada pertenece a LEM-79/80. Ver [responsabilidades e inventario completo](../../asset-inventory.md).

@@ -46,12 +46,12 @@
       "approval": {
         "reviewer": "Miguel",
         "date": "2026-10-30",
-        "scope": "Use the same approved refined image for branch favicon assets and push changes; no Shopify publication"
+        "scope": "Selected l + solid yellow leaf graphic for favicon, Apple and avatar exports; header official SVG unchanged. Graphic selection does not certify Shopify selector configuration or publication."
       },
       "revision": "l + solid yellow leaf; refined v2"
     }
   ],
-  "status": "Local package; favicon and social avatar use the approved l + solid yellow leaf. Social account upload is a separate live operation, recorded after verification.",
+  "status": "Ten exports delivered. Three generic category images are assigned in Shopify native collection images and custom.plp_promo_banner, with local preview HTML verified. Favicon 32 and OG 1200x630 are uploaded to Shopify Files but not yet selected in theme favicon/native Preferences; selection and verification await Miguel Shopify login. Miguel owns Instagram, Facebook and TikTok profile uploads; agent login/upload is not a LEM-97 blocker. No public rendering or theme publication is certified.",
   "logo_input_reference": "assets/lemoon-logo-refined-navy.svg",
   "limitations": "Prompts describe intent, not certified output. Raster generations may approximate logo shapes and colors; no identical vector paths or certified color match is claimed. Selected final masters only are archived; intermediate generation/edit inputs are not a complete reproducibility record. Favicon master replaced with the approved l + solid yellow leaf refinement; its exports are copied from that exact approved image without regeneration."
 }
