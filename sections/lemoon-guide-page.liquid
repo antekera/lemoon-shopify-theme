@@ -50,7 +50,8 @@
 <div class="lemoon-guide page-width" data-guide-kind="{{ guide_kind | escape }}">
   <header class="lemoon-guide__hero">
     <div>
-      <h1 class="lemoon-guide__title">{{ title_key | t }}</h1>
+      {%- assign ui_heading_text = title_key | t -%}
+      {% render 'lemoon-ui-heading', text: ui_heading_text, level: 1, class: 'lemoon-guide__title' %}
       <p class="lemoon-guide__intro">{{ intro_key | t }}</p>
     </div>
     <figure class="lemoon-guide__visual">
@@ -82,17 +83,22 @@
             assign step_body_key = guide_key | append: 'step_' | append: step | append: '_body'
           -%}
           <li class="lemoon-guide__step" id="Guide-{{ section.id }}-{{ step }}">
-            <h2>{{ step_title_key | t }}</h2>
+            {%- assign ui_heading_text = step_title_key | t -%}
+            {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2 %}
             <p>{{ step_body_key | t }}</p>
           </li>
         {%- endfor -%}
       </ol>
       <aside class="lemoon-guide__help" aria-labelledby="GuideHelp-{{ section.id }}">
-        <h2 id="GuideHelp-{{ section.id }}">{{ 'sections.lemoon_guide.help_title' | t }}</h2>
+        {%- assign ui_heading_text = 'sections.lemoon_guide.help_title' | t -%}
+        {%- capture ui_heading_id -%}GuideHelp-{{ section.id }}{%- endcapture -%}
+        {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
         <p>{{ 'sections.lemoon_guide.help_body' | t }}</p>
         <div class="lemoon-guide__links">
-          <a class="lemoon-guide__cta" href="{{ routes.all_products_collection_url }}">{{ 'sections.lemoon_guide.catalogue' | t }}</a>
-          <a href="{{ contact_url }}">{{ 'sections.lemoon_guide.contact' | t }}</a>
+          {%- assign catalogue_label = 'sections.lemoon_guide.catalogue' | t -%}
+          {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, style_family: 'local', class: 'lemoon-guide__cta' %}
+          {%- assign contact_label = 'sections.lemoon_guide.contact' | t -%}
+          {% render 'lemoon-ui-action', element: 'a', href: contact_url, label: contact_label, style_family: 'local' %}
         </div>
       </aside>
     </div>

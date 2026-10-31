@@ -1,0 +1,82 @@
+{% doc %}
+  Native price-per-item presentation; the product owner retains quantity arithmetic and tier-table state.
+  @param {object} variant - Selected native variant.
+  @param {string} section_id - Owner section ID for dynamic price updates.
+  @param {number} current_quantity - Owner-calculated next quantity including cart quantity.
+  @param {object[]} price_breaks - Owner-sorted native quantity price breaks.
+  @param {string} base_price - Formatted base price from the owner, used below the first tier or without breaks.
+{% enddoc %}
+<price-per-item
+  id="Price-Per-Item-{{ section_id }}"
+  data-section-id="{{ section_id }}"
+  data-variant-id="{{ variant.id }}"
+>
+  {%- if variant.quantity_price_breaks.size > 0 -%}
+    {%- assign variant_price_compare = variant.compare_at_price -%}
+    <div class="price-per-item">
+      {%- if variant_price_compare -%}
+        <dl class="price-per-item--current">
+          <dt class="visually-hidden">
+            {{ 'products.product.price.regular_price' | t }}
+          </dt>
+          <dd>
+            <s class="variant-item__old-price">
+              {{ variant_price_compare | money_with_currency }}
+            </s>
+          </dd>
+        </dl>
+      {%- endif -%}
+      {%- if current_quantity < price_breaks.last.minimum_quantity -%}
+        {%- assign variant_price = base_price -%}
+        <span class="price-per-item--current">
+          {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+        </span>
+      {%- else -%}
+        {%- for price_break in price_breaks -%}
+          {%- if current_quantity >= price_break.minimum_quantity -%}
+            {%- assign price_break_price = price_break.price | money_with_currency -%}
+            <span class="price-per-item--current">
+              {{-
+                'products.product.volume_pricing.price_at_each_html'
+                | t: price: price_break_price
+              -}}
+            </span>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    {%- assign variant_price = base_price -%}
+    {%- assign variant_price_compare = variant.compare_at_price -%}
+    <div class="price-per-item">
+      {%- if variant_price_compare -%}
+        <dl class="price-per-item--current">
+          <dt class="visually-hidden">
+            {{ 'products.product.price.regular_price' | t }}
+          </dt>
+          <dd>
+            <s class="variant-item__old-price">
+              {{ variant_price_compare | money_with_currency }}
+            </s>
+          </dd>
+          <dt class="visually-hidden">
+            {{ 'products.product.price.sale_price' | t }}
+          </dt>
+          <dd>
+            <span class="price-per-item--current">
+              {{-
+                'products.product.volume_pricing.price_at_each_html'
+                | t: price: variant_price
+              -}}
+            </span>
+          </dd>
+        </dl>
+      {%- else -%}
+        <span class="price-per-item--current">
+          {{- 'products.product.volume_pricing.price_at_each_html' | t: price: variant_price -}}
+        </span>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</price-per-item>

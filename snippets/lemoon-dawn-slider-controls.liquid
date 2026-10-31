@@ -1,0 +1,33 @@
+{% doc %}
+  Controls for Dawn slider-component in global.js, not the Lemoon carousel controller.
+  @param {number} total - Owner item count for the native slider counter.
+  @param {string} [class] - Owner responsive visibility classes appended to slider-buttons.
+{% enddoc %}
+<div class="slider-buttons{% if class != blank %} {{ class | escape }}{% endif %}">
+  <button
+    type="button"
+    class="slider-button slider-button--prev"
+    name="previous"
+    aria-label="{{ 'general.slider.previous_slide' | t }}"
+  >
+    <span class="svg-wrapper">
+      {{- 'icon-caret.svg' | inline_asset_content -}}
+    </span>
+  </button>
+  <div class="slider-counter caption">
+    <span class="slider-counter--current">1</span>
+    <span aria-hidden="true"> / </span>
+    <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+    <span class="slider-counter--total">{{ total | escape }}</span>
+  </div>
+  <button
+    type="button"
+    class="slider-button slider-button--next"
+    name="next"
+    aria-label="{{ 'general.slider.next_slide' | t }}"
+  >
+    <span class="svg-wrapper">
+      {{- 'icon-caret.svg' | inline_asset_content -}}
+    </span>
+  </button>
+</div>

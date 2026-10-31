@@ -1,0 +1,16 @@
+{% doc %}
+  Semantic heading; CSS owns visual size. Plain text/attributes escape here.
+  @param {string} [text] - Plain text or explicit attribute.
+  @param {string} [id] - Plain text or explicit attribute.
+  @param {string} [class] - Plain text or explicit attribute.
+  @param {number} [level] - 1–6; invalid or absent defaults to 2.
+  @example
+  {% render 'lemoon-ui-heading', text: 'Title', level: 1 %}
+{% enddoc %}
+{%- liquid
+  assign heading_level = level | append: ''
+  unless heading_level == '1' or heading_level == '2' or heading_level == '3' or heading_level == '4' or heading_level == '5' or heading_level == '6'
+    assign heading_level = '2'
+  endunless
+-%}
+<h{{ heading_level }}{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if class != blank %} class="{{ class | escape }}"{% endif %}>{{ text | escape }}</h{{ heading_level }}>

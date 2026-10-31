@@ -1,0 +1,5958 @@
+{
+  "schema_version": 2,
+  "ticket": "LEM-142",
+  "base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
+  "scope": {
+    "roots": [
+      "sections",
+      "snippets",
+      "layout",
+      "templates",
+      "blocks",
+      "assets",
+      "config",
+      "locales"
+    ],
+    "enumeration": "git ls-files of the eight roots, including the six PR additions recorded in snapshot.new_source_paths; no explicit paths outside the Git index; private settings excluded without content reads; docs/tests/tooling outside implementation universe",
+    "not_read": [
+      "config/settings_data.json",
+      "secrets",
+      "databases",
+      "customer records"
+    ],
+    "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
+  },
+  "counts": {
+    "total_tracked_paths": 511,
+    "mapped_paths": 480,
+    "excluded_paths": 31,
+    "by_root": {
+      "assets": 257,
+      "config": 2,
+      "layout": 2,
+      "locales": 51,
+      "sections": 70,
+      "snippets": 91,
+      "templates": 38
+    },
+    "mapped_by_extension": {
+      ".css": 81,
+      ".js": 53,
+      ".json": 89,
+      ".liquid": 164,
+      ".svg": 93
+    },
+    "excluded_by_reason": {
+      "binary-image-or-font": 30,
+      "private-settings": 1
+    },
+    "component_families": 44,
+    "section_liquid_files": 68,
+    "section_groups": 2,
+    "section_schema_blocks": 81,
+    "theme_block_files": 0,
+    "total_source_paths": 511,
+    "explicit_new_paths": 0
+  },
+  "components": [
+    {
+      "id": "LM-SHELL",
+      "title": "Shell, contenedores e integración",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "layout/theme.liquid",
+        "layout/password.liquid",
+        "snippets/meta-tags.liquid",
+        "assets/base.css",
+        "assets/lemoon-tokens.css",
+        "assets/lemoon-components.css",
+        "assets/animations.js",
+        "assets/constants.js",
+        "assets/pubsub.js",
+        "assets/theme-editor.js",
+        "assets/standard-actions-override.js",
+        "config/settings_schema.json"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/announcement-bar.liquid",
+        "sections/featured-product.liquid",
+        "sections/main-product.liquid",
+        "sections/slideshow.liquid",
+        "templates/gift_card.liquid"
+      ],
+      "depends_on": [],
+      "documentation_anchor": "lm-shell",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "layout/theme.liquid",
+        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-TYPE",
+      "title": "Tipografía y texto enriquecido",
+      "classification": "atom",
+      "behavior": "presentational",
+      "source_paths": [
+        "assets/base.css",
+        "assets/lemoon-components.css",
+        "assets/lemoon-tokens.css",
+        "sections/rich-text.liquid",
+        "sections/main-page.liquid",
+        "sections/page.liquid",
+        "assets/section-rich-text.css",
+        "assets/section-main-page.css",
+        "snippets/lemoon-ui-heading.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/lemoon-about-page.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-crystal-guide.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-faq.liquid",
+        "sections/lemoon-guide-page.liquid",
+        "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-service-page.liquid",
+        "sections/main-page.liquid",
+        "sections/page.liquid",
+        "sections/rich-text.liquid",
+        "snippets/lemoon-ui-faq-item.liquid",
+        "templates/gift_card.liquid",
+        "templates/index.json",
+        "templates/page.json"
+      ],
+      "depends_on": [
+        "LM-SHELL"
+      ],
+      "documentation_anchor": "lm-type",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-heading.liquid",
+        "scope": "Heading semántico; richtext conserva su dueño y las excepciones tipográficas locales.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-ACTION",
+      "title": "Botones, enlaces y acciones de icono",
+      "classification": "atom",
+      "behavior": "interactive",
+      "source_paths": [
+        "assets/base.css",
+        "assets/lemoon-components.css",
+        "snippets/lemoon-frame-only-button.liquid",
+        "snippets/lemoon-select-lenses-button.liquid",
+        "snippets/lemoon-thumbnail-arrow.liquid",
+        "snippets/lemoon-carousel-controls.liquid",
+        "snippets/lemoon-ui-action.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/footer.liquid",
+        "sections/lemoon-about-page.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-crystal-guide.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/lemoon-guide-page.liquid",
+        "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-service-page.liquid",
+        "sections/main-article.liquid",
+        "snippets/buy-buttons.liquid",
+        "snippets/lemoon-sticky-purchase.liquid",
+        "snippets/product-media-gallery.liquid"
+      ],
+      "depends_on": [
+        "LM-ICON"
+      ],
+      "documentation_anchor": "lm-action",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-action.liquid",
+        "scope": "Base o local; compra mantiene sus adaptadores y formulario nativo.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-ICON",
+      "title": "Familias de iconos, formas y marcas",
+      "classification": "atom",
+      "behavior": "presentational",
+      "source_paths": [
+        "snippets/lemoon-icon.liquid",
+        "snippets/lemoon-frame-shape.liquid",
+        "snippets/lemoon-purchase-step-icon.liquid",
+        "snippets/icon-accordion.liquid",
+        "snippets/icon-with-text.liquid",
+        "snippets/social-icons.liquid"
+      ],
+      "direct_static_consumers": [
+        "sections/announcement-bar.liquid",
+        "sections/collapsible-content.liquid",
+        "sections/featured-product.liquid",
+        "sections/header.liquid",
+        "sections/how-it-works.liquid",
+        "sections/lemoon-shop-by-shape.liquid",
+        "sections/main-password-footer.liquid",
+        "sections/main-product.liquid",
+        "snippets/card-product.liquid",
+        "snippets/header-search.liquid",
+        "snippets/icon-with-text.liquid",
+        "snippets/lemoon-facet-visual.liquid",
+        "snippets/lemoon-mobile-nav-link.liquid",
+        "snippets/lemoon-mobile-nav.liquid",
+        "snippets/lemoon-mobile-search.liquid",
+        "snippets/lemoon-product-heading.liquid",
+        "snippets/lemoon-shared-benefits.liquid",
+        "snippets/lemoon-ui-action.liquid"
+      ],
+      "depends_on": [],
+      "documentation_anchor": "lm-icon",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-icon.liquid",
+        "scope": "icon/size/label; geometría FAQ y marca conservan sus archivos propios.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-FIELD",
+      "title": "Campos, textarea y select",
+      "classification": "atom",
+      "behavior": "interactive",
+      "source_paths": [
+        "assets/base.css",
+        "assets/lemoon-components.css",
+        "assets/section-contact-form.css",
+        "snippets/price-facet.liquid",
+        "snippets/lemoon-ui-field.liquid",
+        "snippets/lemoon-ui-select.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/contact-form.liquid",
+        "sections/footer.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/main-article.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/facets.liquid",
+        "snippets/main-search-results.liquid"
+      ],
+      "depends_on": [
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-field",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-field.liquid",
+        "scope": "Input/textarea; lemoon-ui-select para select. Labels, IDs y error explícitos.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
+    },
+    {
+      "id": "LM-CHOICE",
+      "title": "Checkbox, radio y opciones visuales",
+      "classification": "atom",
+      "behavior": "interactive",
+      "source_paths": [
+        "assets/base.css",
+        "assets/component-product-variant-picker.css",
+        "assets/component-facets.css",
+        "snippets/product-variant-options.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/featured-product.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-product.liquid",
+        "sections/main-search.liquid",
+        "snippets/product-variant-picker.liquid"
+      ],
+      "depends_on": [
+        "LM-FIELD"
+      ],
+      "documentation_anchor": "lm-choice",
+      "availability": {
+        "status": "extraction-pending",
+        "entry_path": "snippets/product-variant-options.liquid",
+        "scope": "Opciones de variante conservan sus nombres, selección y disponibilidad; no hay radio genérico extraído.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-SWATCH",
+      "title": "Swatches de color y selección",
+      "classification": "atom",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/swatch.liquid",
+        "snippets/swatch-input.liquid",
+        "snippets/lemoon-color-swatch.liquid",
+        "assets/component-swatch.css",
+        "assets/component-swatch-input.css"
+      ],
+      "direct_static_consumers": [
+        "sections/featured-product.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-product.liquid",
+        "snippets/card-product.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/facets.liquid",
+        "snippets/lemoon-color-swatch.liquid",
+        "snippets/product-variant-options.liquid",
+        "snippets/product-variant-picker.liquid",
+        "snippets/swatch-input.liquid"
+      ],
+      "depends_on": [
+        "LM-CHOICE"
+      ],
+      "documentation_anchor": "lm-swatch",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/swatch-input.liquid",
+        "scope": "SwatchDrop y formulario real; swatch visual separado de la opción interactiva.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-RANGE",
+      "title": "Rangos y cantidades",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-price-slider.liquid",
+        "snippets/quantity-input.liquid",
+        "snippets/progress-bar.liquid",
+        "assets/component-progress-bar.css",
+        "assets/quantity-popover.css",
+        "assets/quantity-popover.js"
+      ],
+      "direct_static_consumers": [
+        "sections/main-cart-items.liquid",
+        "sections/quick-order-list.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/quantity-input.liquid",
+        "snippets/quick-order-list-row.liquid"
+      ],
+      "depends_on": [
+        "LM-FIELD",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-range",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/quantity-input.liquid",
+        "scope": "Cantidad y lemoon-price-slider son contratos distintos; mantener límites y controladores del dueño.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-LABEL",
+      "title": "Badges, chips e indicadores",
+      "classification": "atom",
+      "behavior": "presentational",
+      "source_paths": [
+        "snippets/lemoon-product-card-labels.liquid",
+        "snippets/lemoon-product-status.liquid",
+        "snippets/lemoon-product-promotions.liquid",
+        "assets/component-discounts.css"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/main-cart-footer.liquid",
+        "sections/main-cart-items.liquid",
+        "snippets/card-product.liquid",
+        "snippets/lemoon-product-heading.liquid"
+      ],
+      "depends_on": [
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-label",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-product-card-labels.liquid",
+        "scope": "Labels derivados del producto; no convertir chips o badges de demo en flags comerciales.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PRICE",
+      "title": "Precio, moneda, totales y rating",
+      "classification": "atom",
+      "behavior": "presentational",
+      "source_paths": [
+        "snippets/price.liquid",
+        "snippets/lemoon-money.liquid",
+        "snippets/unit-price.liquid",
+        "assets/component-price.css",
+        "assets/component-totals.css",
+        "assets/component-rating.css",
+        "assets/component-volume-pricing.css",
+        "assets/price-per-item.js",
+        "snippets/lemoon-cart-tax-note.liquid",
+        "snippets/lemoon-product-unit-price.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/collage.liquid",
+        "sections/featured-collection.liquid",
+        "sections/featured-product.liquid",
+        "sections/header.liquid",
+        "sections/main-cart-footer.liquid",
+        "sections/main-cart-items.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-product.liquid",
+        "sections/main-search.liquid",
+        "sections/predictive-search.liquid",
+        "sections/quick-order-list.liquid",
+        "sections/related-products.liquid",
+        "snippets/card-product.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/price.liquid",
+        "snippets/quick-order-list-row.liquid",
+        "snippets/quick-order-list.liquid"
+      ],
+      "depends_on": [
+        "LM-TYPE",
+        "LM-LABEL"
+      ],
+      "documentation_anchor": "lm-price",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/price.liquid",
+        "scope": "Producto/variante y lemoon-money; no calcular precios en átomos de presentación.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PRODUCT-CARD",
+      "title": "Tarjeta de producto",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/card-product.liquid",
+        "assets/component-card.css",
+        "assets/lemoon-product-card.js",
+        "assets/quick-add.css",
+        "assets/mask-blobs.css",
+        "snippets/lemoon-carousel-results.liquid"
+      ],
+      "direct_static_consumers": [
+        "sections/collage.liquid",
+        "sections/collection-list.liquid",
+        "sections/featured-blog.liquid",
+        "sections/featured-collection.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/main-blog.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-list-collections.liquid",
+        "sections/main-product.liquid",
+        "sections/main-search.liquid",
+        "sections/related-products.liquid",
+        "snippets/card-product.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/lemoon-carousel-results.liquid",
+        "snippets/lemoon-mobile-search.liquid",
+        "snippets/lemoon-plp-product-page.liquid",
+        "snippets/main-search-result-card.liquid",
+        "templates/collection.carousel-accessories.liquid",
+        "templates/collection.carousel.liquid"
+      ],
+      "depends_on": [
+        "LM-PRICE",
+        "LM-LABEL",
+        "LM-SWATCH",
+        "LM-ACTION",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-product-card",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/card-product.liquid",
+        "scope": "card_product y section_id reales; media, precio y JS juntos.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-CONTENT-CARD",
+      "title": "Tarjetas de colección, artículo y resultado CMS",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "snippets/card-collection.liquid",
+        "snippets/article-card.liquid",
+        "snippets/main-search-result-card.liquid",
+        "assets/component-article-card.css"
+      ],
+      "direct_static_consumers": [
+        "sections/collage.liquid",
+        "sections/collection-list.liquid",
+        "sections/featured-blog.liquid",
+        "sections/main-blog.liquid",
+        "sections/main-list-collections.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/main-search-result-card.liquid",
+        "snippets/main-search-results.liquid"
+      ],
+      "depends_on": [
+        "LM-TYPE",
+        "LM-ICON"
+      ],
+      "documentation_anchor": "lm-content-card",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/main-search-result-card.liquid",
+        "scope": "Resultado CMS, article-card y card-collection mantienen APIs diferentes.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-NAV",
+      "title": "Breadcrumb y paginación",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-breadcrumb.liquid",
+        "snippets/pagination.liquid",
+        "assets/component-pagination.css"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-article.liquid",
+        "sections/main-blog.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-list-collections.liquid",
+        "sections/main-product.liquid",
+        "snippets/lemoon-collection-intro.liquid",
+        "snippets/lemoon-plp-product-page.liquid",
+        "snippets/main-search-results.liquid",
+        "snippets/pagination.liquid",
+        "snippets/quick-order-list.liquid"
+      ],
+      "depends_on": [
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-nav",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/pagination.liquid",
+        "scope": "paginate real; breadcrumb tiene contrato propio, no navegación universal.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-FEEDBACK",
+      "title": "Alertas, loading y estados vacíos",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "snippets/loading-spinner.liquid",
+        "assets/loading-spinner.svg",
+        "sections/cart-live-region-text.liquid",
+        "snippets/lemoon-ui-message.liquid"
+      ],
+      "direct_static_consumers": [
+        "sections/featured-product.liquid",
+        "sections/footer.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-article.liquid",
+        "sections/main-cart-items.liquid",
+        "sections/main-product.liquid",
+        "sections/predictive-search.liquid",
+        "snippets/buy-buttons.liquid",
+        "snippets/card-product.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/facets.liquid",
+        "snippets/header-search.liquid",
+        "snippets/lemoon-frame-only-button.liquid",
+        "snippets/lemoon-ui-action.liquid",
+        "snippets/loading-spinner.liquid",
+        "snippets/main-search-results.liquid",
+        "snippets/product-thumbnail.liquid",
+        "snippets/quick-order-list-row.liquid",
+        "snippets/quick-order-list.liquid"
+      ],
+      "depends_on": [
+        "LM-TYPE",
+        "LM-ICON"
+      ],
+      "documentation_anchor": "lm-feedback",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-message.liquid",
+        "scope": "Mensaje explícito sin anuncio automático; loading-spinner conserva su implementación.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
+    },
+    {
+      "id": "LM-DISCLOSURE",
+      "title": "Accordions, disclosures y FAQ",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/collapsible-content.liquid",
+        "sections/lemoon-faq.liquid",
+        "sections/lemoon-faq-page.liquid",
+        "sections/disclosures.liquid",
+        "snippets/product-disclosures.liquid",
+        "assets/component-accordion.css",
+        "assets/collapsible-content.css",
+        "assets/component-disclosures.css",
+        "assets/details-disclosure.js",
+        "assets/disclosures.js",
+        "snippets/lemoon-ui-faq-item.liquid",
+        "assets/global.js"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/collapsible-content.liquid",
+        "sections/disclosures.liquid",
+        "sections/featured-product.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-faq.liquid",
+        "sections/main-product.liquid",
+        "snippets/product-disclosures.liquid",
+        "templates/page.preguntas-frecuentes.json",
+        "templates/product.json"
+      ],
+      "depends_on": [
+        "LM-ICON",
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-disclosure",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-faq-item.liquid",
+        "scope": "FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños.",
+        "recipe_path": "docs/components/recipes/faq-group.md"
+      }
+    },
+    {
+      "id": "LM-OVERLAY",
+      "title": "Modales, drawers y popovers",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "assets/global.js",
+        "assets/details-modal.js",
+        "assets/component-menu-drawer.css",
+        "assets/component-modal-video.css",
+        "assets/cart-disclosure-modal.js",
+        "assets/cart-disclosure-tooltip.js",
+        "snippets/cart-disclosure-indicator.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
+        "sections/collage.liquid",
+        "sections/header.liquid",
+        "sections/main-cart-items.liquid",
+        "snippets/cart-drawer.liquid"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-overlay",
+      "availability": {
+        "status": "extraction-pending",
+        "entry_path": "assets/global.js",
+        "scope": "No hay modal genérico extraído; reutilizar el shell real con Escape, trampa y retorno de foco.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-TABS",
+      "title": "Tabs y guía de medidas",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-size-guide-content.liquid",
+        "snippets/lemoon-frame-dimensions.liquid",
+        "snippets/lemoon-frame-information.liquid",
+        "snippets/lemoon-product-size-guide.liquid",
+        "assets/lemoon-pdp-tools.js"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-product.liquid",
+        "snippets/lemoon-frame-information.liquid",
+        "snippets/lemoon-product-size-guide.liquid",
+        "snippets/lemoon-size-guide-content.liquid"
+      ],
+      "depends_on": [
+        "LM-OVERLAY",
+        "LM-ACTION",
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-tabs",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-size-guide-content.liquid",
+        "scope": "Contenido compartido; controlador y shell PDP no son un tab genérico.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-SLIDER",
+      "title": "Carruseles, slideshow y controles",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-carousel-controls.liquid",
+        "snippets/lemoon-thumbnail-arrow.liquid",
+        "assets/component-slider.css",
+        "assets/component-slideshow.css",
+        "snippets/lemoon-carousel-results.liquid",
+        "snippets/lemoon-dawn-slider-controls.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/collection-list.liquid",
+        "sections/featured-blog.liquid",
+        "sections/featured-collection.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/main-product.liquid",
+        "sections/multicolumn.liquid",
+        "sections/slideshow.liquid",
+        "snippets/product-media-gallery.liquid",
+        "templates/collection.carousel-accessories.liquid",
+        "templates/collection.carousel.liquid"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-ICON"
+      ],
+      "documentation_anchor": "lm-slider",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-carousel-controls.liquid",
+        "scope": "carousel_id y hooks prev/next reales; slider-component conserva global.js.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-MEDIA",
+      "title": "Media responsive, galerías y vídeo",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/product-media-gallery.liquid",
+        "snippets/product-media-modal.liquid",
+        "snippets/product-media.liquid",
+        "snippets/product-thumbnail.liquid",
+        "snippets/lemoon-pdp-image.liquid",
+        "assets/media-gallery.js",
+        "assets/product-modal.js",
+        "assets/product-model.js",
+        "assets/magnify.js",
+        "assets/component-deferred-media.css",
+        "assets/component-product-model.css",
+        "assets/component-model-viewer-ui.css",
+        "sections/video.liquid",
+        "assets/video-section.css"
+      ],
+      "direct_static_consumers": [
+        "sections/collage.liquid",
+        "sections/featured-product.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-product.liquid",
+        "sections/video.liquid",
+        "snippets/product-media-gallery.liquid",
+        "snippets/product-media-modal.liquid",
+        "snippets/product-thumbnail.liquid",
+        "templates/index.json"
+      ],
+      "depends_on": [
+        "LM-OVERLAY",
+        "LM-SLIDER",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-media",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/product-media-gallery.liquid",
+        "scope": "Galería de producto con product/section y sus assets; video/model-viewer tienen dependencias propias.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-FACET",
+      "title": "Filtros, chips activos y sorting",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/facets.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/facets-active-values.liquid",
+        "snippets/lemoon-active-filters.liquid",
+        "snippets/lemoon-facet-visual.liquid",
+        "assets/facets.js",
+        "assets/component-facets.css",
+        "assets/component-show-more.css",
+        "assets/show-more.js"
+      ],
+      "direct_static_consumers": [
+        "sections/featured-product.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-product.liquid",
+        "sections/main-search.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/facets.liquid",
+        "snippets/main-search-results.liquid"
+      ],
+      "depends_on": [
+        "LM-CHOICE",
+        "LM-RANGE",
+        "LM-OVERLAY",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-facet",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/facets.liquid",
+        "scope": "results, filtros y formularios nativos; el átomo select no decide políticas de ordenación.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-SEARCH",
+      "title": "Búsqueda y predictive search",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/main-search.liquid",
+        "sections/predictive-search.liquid",
+        "snippets/main-search-results.liquid",
+        "snippets/header-search.liquid",
+        "assets/main-search.js",
+        "assets/search-form.js",
+        "assets/predictive-search.js",
+        "assets/component-search.css",
+        "assets/component-predictive-search.css"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/header.liquid",
+        "sections/main-search.liquid",
+        "templates/search.json"
+      ],
+      "depends_on": [
+        "LM-FIELD",
+        "LM-FACET",
+        "LM-PRODUCT-CARD",
+        "LM-CONTENT-CARD",
+        "LM-NAV"
+      ],
+      "documentation_anchor": "lm-search",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-search.liquid",
+        "scope": "Componer main-search-results en su contexto search, filtros y términos.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-MOBILE-SEARCH",
+      "title": "Overlay de búsqueda Lemoon",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-mobile-search.liquid",
+        "assets/lemoon-mobile-search.css",
+        "assets/lemoon-mobile-search.js",
+        "assets/lemoon-mobile-search-logic.js"
+      ],
+      "direct_static_consumers": [
+        "assets/lemoon-mobile-search.js",
+        "layout/theme.liquid",
+        "sections/header.liquid",
+        "snippets/lemoon-mobile-search.liquid"
+      ],
+      "depends_on": [
+        "LM-SEARCH",
+        "LM-OVERLAY",
+        "LM-PRODUCT-CARD"
+      ],
+      "documentation_anchor": "lm-mobile-search",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-mobile-search.liquid",
+        "scope": "Overlay y controlador móvil propios; no reemplazarlo por el select de sorting.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-HEADER",
+      "title": "Header, menús y localización",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/header.liquid",
+        "snippets/header-drawer.liquid",
+        "snippets/header-dropdown-menu.liquid",
+        "snippets/header-mega-menu.liquid",
+        "snippets/country-localization.liquid",
+        "snippets/language-localization.liquid",
+        "assets/lemoon-header.css",
+        "assets/lemoon-header-nav.js",
+        "assets/component-list-menu.css",
+        "assets/component-mega-menu.css",
+        "assets/component-localization-form.css",
+        "assets/localization-form.js"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/announcement-bar.liquid",
+        "sections/header-group.json",
+        "sections/header.liquid",
+        "snippets/header-drawer.liquid"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-ICON",
+        "LM-MOBILE-NAV",
+        "LM-MOBILE-SEARCH"
+      ],
+      "documentation_anchor": "lm-header",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/header.liquid",
+        "scope": "Grupo header, navegación/localización y JS existentes; no header ficticio en galería.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-MOBILE-NAV",
+      "title": "Navegación móvil por niveles",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-mobile-nav.liquid",
+        "snippets/lemoon-mobile-nav-link.liquid",
+        "snippets/lemoon-mobile-nav-filter-group.liquid",
+        "assets/lemoon-mobile-nav.css",
+        "assets/lemoon-mobile-nav.js",
+        "assets/lemoon-mobile-nav-logic.js"
+      ],
+      "direct_static_consumers": [
+        "assets/lemoon-mobile-nav.js",
+        "sections/header.liquid",
+        "snippets/lemoon-mobile-nav-filter-group.liquid",
+        "snippets/lemoon-mobile-nav.liquid"
+      ],
+      "depends_on": [
+        "LM-OVERLAY",
+        "LM-ICON",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-mobile-nav",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-mobile-nav.liquid",
+        "scope": "Menús por nivel y controlador propios; preservar IDs, foco y estados.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-FOOTER",
+      "title": "Footer, newsletter, ayuda y pagos",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/footer.liquid",
+        "assets/section-lemoon-footer.css",
+        "assets/section-lemoon-footer.js",
+        "assets/section-footer.css",
+        "assets/component-list-social.css",
+        "assets/component-list-payment.css",
+        "assets/component-newsletter.css",
+        "assets/newsletter-section.css"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "sections/announcement-bar.liquid",
+        "sections/email-signup-banner.liquid",
+        "sections/footer-group.json",
+        "sections/footer.liquid"
+      ],
+      "depends_on": [
+        "LM-DISCLOSURE",
+        "LM-FIELD",
+        "LM-ACTION",
+        "LM-PRIVACY",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-footer",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/footer.liquid",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-PRIVACY",
+      "title": "Preferencias de cookies",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/lemoon-cookie-preferences.liquid",
+        "snippets/lemoon-native-policy-help.liquid",
+        "assets/lemoon-cookie-preferences.js",
+        "assets/lemoon-native-policies.css"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/footer.liquid"
+      ],
+      "depends_on": [
+        "LM-OVERLAY",
+        "LM-CHOICE",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-privacy",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-cookie-preferences.liquid",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-HERO",
+      "title": "Hero y anuncios",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/lemoon-hero.liquid",
+        "sections/image-banner.liquid",
+        "sections/slideshow.liquid",
+        "sections/announcement-bar.liquid",
+        "assets/lemoon-hero.css",
+        "assets/lemoon-hero.js",
+        "assets/section-image-banner.css",
+        "assets/lemoon-announcement-bar.css"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/email-signup-banner.liquid",
+        "sections/header-group.json",
+        "sections/image-banner.liquid",
+        "sections/lemoon-hero.liquid",
+        "sections/slideshow.liquid",
+        "templates/index.json"
+      ],
+      "depends_on": [
+        "LM-SLIDER",
+        "LM-ACTION",
+        "LM-MEDIA"
+      ],
+      "documentation_anchor": "lm-hero",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-hero.liquid",
+        "scope": "Sección con media/settings propios; no banner universal extraído.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-EDITORIAL",
+      "title": "Composiciones editoriales y home",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "sections/collage.liquid",
+        "sections/image-with-text.liquid",
+        "sections/multirow.liquid",
+        "sections/multicolumn.liquid",
+        "sections/lemoon-about.liquid",
+        "sections/lemoon-about-page.liquid",
+        "sections/lifestyle-mood-grid.liquid",
+        "sections/lemoon-shop-by-shape.liquid",
+        "sections/how-it-works.liquid",
+        "sections/trust-bar.liquid",
+        "sections/social-proof-strip.liquid",
+        "snippets/lemoon-shared-benefits.liquid",
+        "snippets/lemoon-commercial-demo.liquid",
+        "assets/collage.css",
+        "assets/component-image-with-text.css",
+        "assets/section-multicolumn.css"
+      ],
+      "direct_static_consumers": [
+        "sections/collage.liquid",
+        "sections/image-with-text.liquid",
+        "sections/lemoon-about-page.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-service-page.liquid",
+        "sections/main-product.liquid",
+        "sections/multicolumn.liquid",
+        "sections/multirow.liquid",
+        "sections/trust-bar.liquid",
+        "templates/index.json",
+        "templates/page.nosotros.json"
+      ],
+      "depends_on": [
+        "LM-TYPE",
+        "LM-ACTION",
+        "LM-ICON",
+        "LM-CONTENT-CARD",
+        "LM-MEDIA"
+      ],
+      "documentation_anchor": "lm-editorial",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-about-page.liquid",
+        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-PRODUCT-LIST",
+      "title": "Listados y recomendaciones de producto",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/featured-collection.liquid",
+        "sections/featured-product.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/related-products.liquid",
+        "sections/collection-list.liquid",
+        "sections/main-list-collections.liquid",
+        "sections/cart-upsell-row.liquid",
+        "assets/lemoon-featured-products.js",
+        "assets/template-collection.css",
+        "assets/section-featured-product.css",
+        "assets/section-related-products.css",
+        "assets/component-complementary-products.css",
+        "assets/section-collection-list.css"
+      ],
+      "direct_static_consumers": [
+        "sections/collection-list.liquid",
+        "sections/featured-collection.liquid",
+        "sections/featured-product.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "sections/main-list-collections.liquid",
+        "sections/main-product.liquid",
+        "sections/main-search.liquid",
+        "sections/related-products.liquid",
+        "templates/cart.json",
+        "templates/index.json",
+        "templates/list-collections.json",
+        "templates/product.json",
+        "templates/product.optica.json"
+      ],
+      "depends_on": [
+        "LM-PRODUCT-CARD",
+        "LM-CONTENT-CARD",
+        "LM-SLIDER",
+        "LM-PURCHASE"
+      ],
+      "documentation_anchor": "lm-product-list",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-featured-products.liquid",
+        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PLP",
+      "title": "Colección y PLP",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/main-collection-banner.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "snippets/lemoon-collection-copy.liquid",
+        "snippets/lemoon-collection-intro.liquid",
+        "snippets/lemoon-collection-promo.liquid",
+        "snippets/lemoon-plp-product-page.liquid",
+        "assets/lemoon-collection-plp.css",
+        "assets/lemoon-collection-plp.js",
+        "assets/component-collection-hero.css",
+        "templates/collection.carousel.liquid",
+        "templates/collection.carousel-accessories.liquid"
+      ],
+      "direct_static_consumers": [
+        "sections/main-collection-banner.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "snippets/lemoon-collection-intro.liquid",
+        "templates/collection.json"
+      ],
+      "depends_on": [
+        "LM-FACET",
+        "LM-PRODUCT-CARD",
+        "LM-NAV",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-plp",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-collection-product-grid.liquid",
+        "scope": "Grid y sidebar locales; no migrar sort de colección al piloto de búsqueda.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PDP",
+      "title": "PDP estándar y óptica",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/main-product.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "snippets/lemoon-product-heading.liquid",
+        "snippets/lemoon-product-sku.liquid",
+        "snippets/lemoon-sticky-purchase.liquid",
+        "snippets/product-variant-picker.liquid",
+        "assets/product-info.js",
+        "assets/lemoon-eyewear-product.js",
+        "assets/lemoon-pdp-layout.css",
+        "assets/lemoon-eyewear-product.css",
+        "assets/section-main-product.css"
+      ],
+      "direct_static_consumers": [
+        "assets/lens-configurator.js",
+        "sections/featured-product.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-product.liquid",
+        "templates/product.json",
+        "templates/product.optica.json"
+      ],
+      "depends_on": [
+        "LM-MEDIA",
+        "LM-PRICE",
+        "LM-SWATCH",
+        "LM-TABS",
+        "LM-PURCHASE",
+        "LM-LABEL"
+      ],
+      "documentation_anchor": "lm-pdp",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-eyewear-product.liquid",
+        "scope": "Preservar variantes, sticky purchase y herramientas; heading genérico no reemplaza product-heading.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PURCHASE",
+      "title": "Formulario de compra y destinatario",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "snippets/buy-buttons.liquid",
+        "snippets/gift-card-recipient-form.liquid",
+        "assets/product-form.js",
+        "assets/recipient-form.js",
+        "assets/quick-add.js",
+        "assets/quick-add-bulk.js"
+      ],
+      "direct_static_consumers": [
+        "sections/featured-product.liquid",
+        "sections/lemoon-featured-products.liquid",
+        "sections/main-product.liquid",
+        "snippets/buy-buttons.liquid",
+        "snippets/gift-card-recipient-form.liquid"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-FIELD",
+        "LM-FEEDBACK",
+        "LM-OVERLAY"
+      ],
+      "documentation_anchor": "lm-purchase",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/buy-buttons.liquid",
+        "scope": "Producto, block y product_form_id; checkout/destinatario nunca pasan al átomo action.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-CONFIG",
+      "title": "Configurador de lentes y receta",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/lens-configurator.liquid",
+        "snippets/lemoon-prescription-fields.liquid",
+        "assets/lens-configurator.js"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/lens-configurator.liquid",
+        "templates/page.configurador-de-lentes.json",
+        "templates/product.configurador.json"
+      ],
+      "depends_on": [
+        "LM-CHOICE",
+        "LM-FIELD",
+        "LM-RANGE",
+        "LM-PURCHASE",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-config",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lens-configurator.liquid",
+        "scope": "Elegibilidad, receta y precios siguen en configurador y contrato de integración.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-CART",
+      "title": "Carrito, drawer y notificación",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/main-cart-items.liquid",
+        "sections/main-cart-footer.liquid",
+        "sections/cart-drawer.liquid",
+        "sections/cart-icon-bubble.liquid",
+        "sections/cart-notification-button.liquid",
+        "sections/cart-notification-product.liquid",
+        "snippets/cart-drawer.liquid",
+        "snippets/cart-notification.liquid",
+        "assets/cart.js",
+        "assets/cart-drawer.js",
+        "assets/cart-notification.js",
+        "assets/lemoon-cart-page.css",
+        "assets/component-cart.css",
+        "assets/component-cart-items.css",
+        "assets/component-cart-drawer.css",
+        "assets/component-cart-notification.css",
+        "snippets/lemoon-cart-tax-note.liquid"
+      ],
+      "direct_static_consumers": [
+        "layout/theme.liquid",
+        "sections/cart-drawer.liquid",
+        "sections/main-cart-footer.liquid",
+        "sections/main-cart-items.liquid",
+        "snippets/cart-drawer.liquid",
+        "templates/cart.json"
+      ],
+      "depends_on": [
+        "LM-RANGE",
+        "LM-PRICE",
+        "LM-PURCHASE",
+        "LM-OVERLAY",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-cart",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-cart-items.liquid",
+        "scope": "Carrito nativo y fragmentos/drawer; estados y anuncios pertenecen al controlador.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-BULK",
+      "title": "Pedidos rápidos y volumen",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/quick-order-list.liquid",
+        "sections/bulk-quick-order-list.liquid",
+        "snippets/quick-order-list.liquid",
+        "snippets/quick-order-list-row.liquid",
+        "snippets/quick-order-product-row.liquid",
+        "assets/quick-order-list.js",
+        "assets/quick-order-list.css"
+      ],
+      "direct_static_consumers": [
+        "sections/bulk-quick-order-list.liquid",
+        "sections/quick-order-list.liquid",
+        "snippets/quick-order-list.liquid"
+      ],
+      "depends_on": [
+        "LM-RANGE",
+        "LM-PRICE",
+        "LM-PURCHASE",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-bulk",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/quick-order-list.liquid",
+        "scope": "Pedidos rápidos/volumen con cantidades y controlador propios; revisar consumidor efectivo antes de usar.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PICKUP",
+      "title": "Disponibilidad de retiro",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/pickup-availability.liquid",
+        "assets/pickup-availability.js",
+        "assets/component-pickup-availability.css"
+      ],
+      "direct_static_consumers": [
+        "snippets/buy-buttons.liquid"
+      ],
+      "depends_on": [
+        "LM-OVERLAY",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-pickup",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/pickup-availability.liquid",
+        "scope": "Fragmento asíncrono nativo, disponibilidad y errores reales; no prometer stock con una demo.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-CONTACT",
+      "title": "Contacto y grupos de formulario",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/contact-form.liquid",
+        "sections/lemoon-contact-page.liquid"
+      ],
+      "direct_static_consumers": [
+        "templates/page.contact.json"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-contact",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-contact-page.liquid",
+        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
+    },
+    {
+      "id": "LM-LEGAL",
+      "title": "Páginas legales, guías y servicios",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-guide-page.liquid",
+        "sections/lemoon-service-page.liquid",
+        "sections/lemoon-crystal-guide.liquid",
+        "assets/lemoon-legal-pages.css"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-faq.liquid",
+        "sections/lemoon-legal-page.liquid",
+        "templates/collection.json",
+        "templates/page.envios-y-entregas.json",
+        "templates/page.garantias.json",
+        "templates/page.guia-medidas.json",
+        "templates/page.guia-pedido.json",
+        "templates/page.guia-prescripcion.json",
+        "templates/page.guia-probador.json",
+        "templates/page.guia-rostro.json",
+        "templates/page.isapres-y-fonasa.json",
+        "templates/page.operativos-oftalmologicos.json",
+        "templates/page.politica-de-devoluciones.json",
+        "templates/page.privacidad.json",
+        "templates/page.terminos-y-condiciones.json"
+      ],
+      "depends_on": [
+        "LM-TYPE",
+        "LM-ACTION",
+        "LM-EDITORIAL"
+      ],
+      "documentation_anchor": "lm-legal",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-guide-page.liquid",
+        "scope": "Guías/servicios y shell legal tienen settings y tipografía propios; conservar políticas nativas.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-JOURNAL",
+      "title": "Blog, artículo, comentarios y compartir",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/main-article.liquid",
+        "sections/main-blog.liquid",
+        "sections/featured-blog.liquid",
+        "snippets/share-button.liquid",
+        "assets/share.js",
+        "assets/section-blog-post.css",
+        "assets/section-main-blog.css",
+        "assets/section-featured-blog.css"
+      ],
+      "direct_static_consumers": [
+        "sections/featured-blog.liquid",
+        "sections/featured-product.liquid",
+        "sections/main-article.liquid",
+        "sections/main-product.liquid",
+        "snippets/share-button.liquid",
+        "templates/article.editorial.json",
+        "templates/article.json",
+        "templates/blog.editorial.json",
+        "templates/blog.json",
+        "templates/index.json"
+      ],
+      "depends_on": [
+        "LM-CONTENT-CARD",
+        "LM-NAV",
+        "LM-FIELD",
+        "LM-FEEDBACK",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-journal",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-article.liquid",
+        "scope": "Artículo/blog y comentarios nativos; article-card/share-button ya existen.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-QUIZ",
+      "title": "Quiz de estilo",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/lemoon-style-quiz.liquid",
+        "assets/lemoon-style-quiz.js"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-style-quiz.liquid",
+        "templates/page.buscar-mi-estilo.json"
+      ],
+      "depends_on": [
+        "LM-CHOICE",
+        "LM-FEEDBACK",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-quiz",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-style-quiz.liquid",
+        "scope": "Flujo y estado pertenecen a su JS; no se extrae un motor de quiz.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    },
+    {
+      "id": "LM-GIFT",
+      "title": "Compra y visualización de gift card",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/lemoon-gift-card-purchase.liquid",
+        "templates/gift_card.liquid",
+        "assets/lemoon-gift-card-purchase.js",
+        "assets/lemoon-gift-card.js",
+        "assets/template-giftcard.css"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-gift-card-purchase.liquid",
+        "templates/gift_card.liquid",
+        "templates/page.gift-card.json",
+        "templates/product.gift-card.json"
+      ],
+      "depends_on": [
+        "LM-CHOICE",
+        "LM-FIELD",
+        "LM-PRICE",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-gift",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-gift-card-purchase.liquid",
+        "scope": "Compra y visualización emitida son superficies distintas; preservar formulario y datos nativos.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
+    },
+    {
+      "id": "LM-PASSWORD",
+      "title": "Password, lanzamiento y newsletter banner",
+      "classification": "compound",
+      "behavior": "interactive",
+      "source_paths": [
+        "sections/lemoon-launch-page.liquid",
+        "sections/main-password-header.liquid",
+        "sections/main-password-footer.liquid",
+        "sections/email-signup-banner.liquid",
+        "assets/lemoon-password.css",
+        "assets/section-password.css",
+        "assets/section-email-signup-banner.css",
+        "assets/password-modal.js"
+      ],
+      "direct_static_consumers": [
+        "layout/password.liquid",
+        "sections/email-signup-banner.liquid",
+        "templates/password.json"
+      ],
+      "depends_on": [
+        "LM-FIELD",
+        "LM-OVERLAY",
+        "LM-FEEDBACK"
+      ],
+      "documentation_anchor": "lm-password",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-launch-page.liquid",
+        "scope": "Layout password y newsletter nativa tienen su cadena CSS y contexto propios.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
+    },
+    {
+      "id": "LM-UTILITY",
+      "title": "404, contenido personalizado y apps",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "sections/main-404.liquid",
+        "sections/custom-liquid.liquid",
+        "sections/apps.liquid",
+        "assets/customer.js"
+      ],
+      "direct_static_consumers": [
+        "templates/404.json"
+      ],
+      "depends_on": [
+        "LM-SHELL",
+        "LM-ACTION"
+      ],
+      "documentation_anchor": "lm-utility",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-404.liquid",
+        "scope": "404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
+    },
+    {
+      "id": "LM-GALLERY",
+      "title": "Galería existente del sistema de diseño",
+      "classification": "compound",
+      "behavior": "presentational",
+      "source_paths": [
+        "sections/lemoon-design-system.liquid",
+        "assets/lemoon-design-system.css"
+      ],
+      "direct_static_consumers": [
+        "sections/lemoon-design-system.liquid",
+        "templates/page.sistema-de-diseno.json"
+      ],
+      "depends_on": [
+        "LM-ACTION",
+        "LM-CHOICE",
+        "LM-DISCLOSURE",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-ICON",
+        "LM-TYPE"
+      ],
+      "documentation_anchor": "lm-gallery",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-design-system.liquid",
+        "scope": "Renders extraídos + demos legacy identificadas; sin prueba comercial ni certificación WCAG.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "path": "assets/animations.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/base.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-CHOICE",
+        "LM-FIELD",
+        "LM-SHELL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/cart-disclosure-modal.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/cart-disclosure-tooltip.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/cart-drawer.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/cart-notification.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/cart.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/collage.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/collapsible-content.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-accordion.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-article-card.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTENT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-card.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-cart-drawer.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-cart-items.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-cart-notification.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-cart.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-collection-hero.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-complementary-products.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-deferred-media.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-disclosures.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-discounts.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LABEL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-facets.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CHOICE",
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-image-with-text.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-list-menu.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-list-payment.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-list-social.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-localization-form.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-mega-menu.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-menu-drawer.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-modal-video.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-model-viewer-ui.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-newsletter.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-pagination.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-pickup-availability.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PICKUP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-predictive-search.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-price.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-product-model.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-product-variant-picker.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CHOICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-progress-bar.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-rating.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-search.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-show-more.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-slider.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SLIDER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-slideshow.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SLIDER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-swatch-input.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SWATCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-swatch.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SWATCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-totals.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-volume-pricing.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/constants.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/customer.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-UTILITY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/details-disclosure.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/details-modal.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/disclosures.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/email-signup-banner-background-mobile.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/email-signup-banner-background.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/facets.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/footer-abstract-transparent.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/global.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY",
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/icon-3d-model.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-account.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-apple.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-arrow.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-banana.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-bottle.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-box.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-caret.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-carrot.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-cart-empty.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-cart.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-chat-bubble.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-check-mark.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-checkmark.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-clipboard.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-close-small.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-close.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-copy.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-dairy-free.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-dairy.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-discount.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-dryer.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-error.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-eye.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-facebook.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-filter.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-fire.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-gluten-free.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-hamburger.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-heart.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-info.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-instagram.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-inventory-status.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-iron.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-leaf.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-leather.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-lightning-bolt.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-lipstick.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-lock.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-map-pin.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-minus.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-nut-free.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-padlock.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-pants.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-pause.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-paw-print.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-pepper.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-perfume.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-pinterest.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-plane.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-plant.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-play.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-plus.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-price-tag.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-question-mark.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-recycle.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-remove.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-reset.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-return.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-ruler.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-search.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-serving-dish.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-share.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-shirt.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-shoe.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-shopify.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-silhouette.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-snapchat.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-snowflake.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-star.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-stopwatch.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-success.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-tick.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-tiktok.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-truck.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-tumblr.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-twitter.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-unavailable.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-vimeo.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-warning.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-washing.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-youtube.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/icon-zoom.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-announcement-bar.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-apple-touch-icon-180-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-avatar-social-1024-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-avatar-social-400-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-cart-page.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-category-accesorios-generic-v1.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-category-accessories.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-category-opticos-generic-v1.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-category-sol-generic-v1.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-collection-plp.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-collection-plp.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-components.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-FIELD",
+        "LM-SHELL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-cookie-preferences.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRIVACY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-design-system.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GALLERY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-eyewear-product.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-eyewear-product.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-favicon-16-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-favicon-32-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-favicon-48-v1.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-featured-products.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-gift-card-purchase.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-gift-card.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-header-nav.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-header.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-hero-desktop-placeholder.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-editorial.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-mobile-placeholder.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-slide-2-desktop.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-slide-2-mobile.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-youth-desktop.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero-youth-mobile.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-hero.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-hero.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-icon-email.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-icon-message.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-icon-whatsapp.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-legal-pages.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-logo-refined-navy.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-logo.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-mobile-nav-logic.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-mobile-nav.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-mobile-nav.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-mobile-search-logic.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-mobile-search.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-mobile-search.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-native-policies.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRIVACY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-og-default-v1.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-password.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-pdp-layout.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-pdp-tools.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-product-card.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-product-demo-amber.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-product-demo-back.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-product-demo-diagonal.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-product-demo-side.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-product-fallback.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-casual.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-ejecutivo.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-minimalista.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-quiz.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-style-retro.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-sol.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-tokens.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lens-configurator.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONFIG"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/loading-spinner.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/localization-form.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/magnify.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/main-search.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/mask-arch.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/mask-blobs.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/media-gallery.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/newsletter-section.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/password-modal.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/pickup-availability.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PICKUP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/predictive-search.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/price-per-item.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/product-form.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/product-info.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/product-modal.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/product-model.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/pubsub.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quantity-popover.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quantity-popover.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quick-add-bulk.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quick-add.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quick-add.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quick-order-list.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/quick-order-list.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/recipient-form.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/search-form.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-blog-post.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-collection-list.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-contact-form.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-email-signup-banner.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-featured-blog.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-featured-product.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-footer.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-image-banner.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-lemoon-footer.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-lemoon-footer.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-main-blog.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-main-page.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-main-product.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-multicolumn.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-password.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-related-products.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-rich-text.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/share.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/show-more.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/sparkle.gif",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/square.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/standard-actions-override.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/template-collection.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/template-giftcard.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/theme-editor.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/video-section.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "config/settings_data.json",
+      "status": "excluded",
+      "reason": "private-settings: valores privados de configuración; contenido nunca leído",
+      "content_read": false
+    },
+    {
+      "path": "config/settings_schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "layout/password.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "layout/theme.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "locales/bg.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/cs.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/cs.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/da.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/da.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/de.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/de.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/el.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/en.default.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/en.default.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/es.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/es.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/fi.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/fi.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/fr.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/fr.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/hr.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/hu.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/id.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/it.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/it.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ja.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ja.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ko.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ko.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/lt.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/nb.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/nb.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/nl.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/nl.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pl.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pl.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pt-BR.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pt-BR.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pt-PT.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/pt-PT.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ro.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/ru.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/sk.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/sl.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/sv.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/sv.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/th.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/th.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/tr.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/tr.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/vi.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/zh-CN.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/zh-CN.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/zh-TW.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "locales/zh-TW.schema.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated JSON parse/key enumeration only; translation quality not reviewed"
+    },
+    {
+      "path": "sections/announcement-bar.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/apps.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-UTILITY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/bulk-quick-order-list.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-drawer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-icon-bubble.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-live-region-text.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-notification-button.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-notification-product.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/cart-upsell-row.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/collage.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/collapsible-content.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/collection-list.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/contact-form.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTACT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/custom-liquid.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-UTILITY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/disclosures.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/email-signup-banner.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/featured-blog.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/featured-collection.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/featured-product.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE",
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/footer-group.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/footer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-FOOTER"
+      ],
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+    },
+    {
+      "path": "sections/header-group.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER",
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/header.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/how-it-works.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/image-banner.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/image-with-text.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-about-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-EDITORIAL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/lemoon-about.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-contact-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-CONTACT",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-crystal-guide.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/lemoon-design-system.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-DISCLOSURE",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-GALLERY",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-eyewear-product.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-faq-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-DISCLOSURE",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-faq.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE",
+        "LM-TYPE"
+      ],
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-featured-products.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-gift-card-purchase.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-guide-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-hero.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-launch-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-legal-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+    },
+    {
+      "path": "sections/lemoon-service-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/lemoon-shop-by-shape.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lemoon-style-quiz.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lens-configurator.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONFIG"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/lifestyle-mood-grid.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-404.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-UTILITY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-article.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+    },
+    {
+      "path": "sections/main-blog.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-cart-footer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/main-cart-items.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-collection-banner.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-collection-product-grid.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD",
+        "LM-PLP"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/main-list-collections.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-password-footer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON",
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/main-password-header.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/main-product.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/main-search.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/multicolumn.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "sections/multirow.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/pickup-availability.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PICKUP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/predictive-search.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/quick-order-list.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/related-products.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/rich-text.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/slideshow.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HERO"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/social-proof-strip.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/trust-bar.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "sections/video.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/article-card.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTENT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/buy-buttons.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/card-collection.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTENT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/card-product.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/cart-disclosure-indicator.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/cart-drawer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/cart-notification.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/country-localization.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/facets-active-values.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/facets-filter-desktop.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/facets-filter-mobile.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/facets.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET",
+        "LM-FIELD"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/gift-card-recipient-form.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PURCHASE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/header-drawer.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/header-dropdown-menu.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/header-mega-menu.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/header-search.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/icon-accordion.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/icon-with-text.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/language-localization.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-HEADER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-active-filters.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-breadcrumb.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-carousel-controls.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-carousel-results.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/lemoon-cart-tax-note.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/lemoon-collection-copy.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-collection-intro.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-collection-promo.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-color-swatch.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SWATCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-commercial-demo.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-cookie-preferences.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRIVACY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-dawn-slider-controls.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/lemoon-facet-visual.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FACET"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-frame-dimensions.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-frame-information.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-frame-only-button.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-frame-shape.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-icon.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-mobile-nav-filter-group.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-mobile-nav-link.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-mobile-nav.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-mobile-search.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MOBILE-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-money.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-native-policy-help.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRIVACY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-pdp-image.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-plp-product-page.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-prescription-fields.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONFIG"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-price-slider.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-card-labels.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LABEL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-heading.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-promotions.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LABEL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-size-guide.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-sku.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-status.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LABEL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-unit-price.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/lemoon-purchase-step-icon.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-select-lenses-button.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-shared-benefits.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-size-guide-content.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-sticky-purchase.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-thumbnail-arrow.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-ui-action.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-faq-item.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-field.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-heading.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-message.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-select.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/loading-spinner.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/main-search-result-card.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTENT-CARD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/main-search-results.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD",
+        "LM-SEARCH"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/meta-tags.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SHELL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/pagination.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-NAV"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/price-facet.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/price.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-disclosures.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-media-gallery.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-media-modal.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-media.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-thumbnail.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-MEDIA"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-variant-options.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CHOICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/product-variant-picker.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/progress-bar.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/quantity-input.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-RANGE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/quick-order-list-row.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/quick-order-list.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/quick-order-product-row.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-BULK"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/share-button.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/social-icons.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ICON"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/swatch-input.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SWATCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/swatch.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SWATCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/unit-price.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/404.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-UTILITY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/article.editorial.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/article.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/blog.editorial.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/blog.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-JOURNAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/cart.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART",
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/collection.carousel-accessories.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP",
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "templates/collection.carousel.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PLP",
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "templates/collection.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL",
+        "LM-PLP"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/gift_card.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT",
+        "LM-ICON",
+        "LM-SHELL",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/index.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL",
+        "LM-HERO",
+        "LM-JOURNAL",
+        "LM-MEDIA",
+        "LM-PRODUCT-LIST",
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/list-collections.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.buscar-mi-estilo.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.configurador-de-lentes.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONFIG"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.contact.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONTACT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.envios-y-entregas.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.garantias.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.gift-card.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.guia-medidas.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.guia-pedido.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.guia-prescripcion.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.guia-probador.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.guia-rostro.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.isapres-y-fonasa.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.nosotros.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-EDITORIAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.operativos-oftalmologicos.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.politica-de-devoluciones.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.preguntas-frecuentes.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.privacidad.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.sistema-de-diseno.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GALLERY"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/page.terminos-y-condiciones.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/password.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PASSWORD"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/product.configurador.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CONFIG"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/product.gift-card.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-GIFT"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/product.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE",
+        "LM-PDP",
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/product.optica.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP",
+        "LM-PRODUCT-LIST"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "templates/search.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SEARCH"
+      ],
+      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    }
+  ],
+  "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
+  "snapshot": {
+    "kind": "delivered implementation source snapshot; not Shopify runtime validation",
+    "date": "2026-10-31",
+    "implementation_base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
+    "new_source_paths": [
+      "snippets/lemoon-ui-action.liquid",
+      "snippets/lemoon-ui-faq-item.liquid",
+      "snippets/lemoon-ui-field.liquid",
+      "snippets/lemoon-ui-heading.liquid",
+      "snippets/lemoon-ui-message.liquid",
+      "snippets/lemoon-ui-select.liquid",
+      "snippets/lemoon-cart-tax-note.liquid",
+      "snippets/lemoon-product-unit-price.liquid",
+      "snippets/lemoon-carousel-results.liquid",
+      "snippets/lemoon-dawn-slider-controls.liquid"
+    ],
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 511 indexed source paths, including the ten PR additions retained in new_source_paths; that list does not assert untracked status.",
+    "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
+    "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
+    "component_adoption": {
+      "base_sha": "15be220684823beb474a2d2f5312faa6ef63cd64",
+      "consumers": {
+        "sections/footer.liquid": [
+          "LM-FIELD",
+          "LM-ACTION",
+          "LM-FEEDBACK"
+        ],
+        "sections/main-article.liquid": [
+          "LM-FIELD",
+          "LM-ACTION",
+          "LM-FEEDBACK"
+        ],
+        "sections/lemoon-legal-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-faq.liquid": [
+          "LM-TYPE",
+          "LM-DISCLOSURE"
+        ]
+      },
+      "contract": "Existing native forms, names/IDs, response semantics, editor attrs and first-open FAQ preserved; optional field order/wrapper/ARIA/trusted slots, action submit input and message h3 only. Shared approved control border/focus correction; no new UI variants.",
+      "proof": "tests/e2e/component-adoption.spec.js compares baseline real Liquid-rendered semantic DOM; Shopify form tags/errors are fixture adapters, no delivery/editor/publication claim."
+    },
+    "reusable_consumers": {
+      "base_sha": "308475cdb40ef23a61de789d74e1d2f357406e81",
+      "consumers": {
+        "sections/main-cart-footer.liquid": [
+          "LM-CART",
+          "LM-PRICE"
+        ],
+        "snippets/cart-drawer.liquid": [
+          "LM-CART",
+          "LM-PRICE"
+        ],
+        "snippets/quick-order-list.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/main-product.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/featured-product.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/collection-list.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/featured-blog.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/multicolumn.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/main-collection-product-grid.liquid": [
+          "LM-FIELD"
+        ],
+        "snippets/facets.liquid": [
+          "LM-FIELD"
+        ],
+        "sections/lemoon-about-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-service-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-crystal-guide.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/main-password-footer.liquid": [
+          "LM-ICON"
+        ],
+        "snippets/social-icons.liquid": [
+          "LM-ICON"
+        ],
+        "templates/collection.carousel.liquid": [
+          "LM-PRODUCT-CARD",
+          "LM-SLIDER"
+        ],
+        "templates/collection.carousel-accessories.liquid": [
+          "LM-PRODUCT-CARD",
+          "LM-SLIDER"
+        ]
+      },
+      "contract": "Four bounded shared snippets; select/heading/action reuse and explicit social ordering. Native schemas/forms/controllers and volume-tier owner state preserved.",
+      "proof": "tests/unit/consumer-contract.test.js and tests/e2e/consumer-contract.spec.js; local real-Liquid fixtures, not Shopify processing or live editor proof."
+    }
+  }
+}

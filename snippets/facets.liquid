@@ -170,14 +170,8 @@
                 <h2 class="facet-filters__label caption-large text-body">
                   <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
                 </h2>
-                <div class="select">
-                  {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
-                  <select
-                    name="sort_by"
-                    class="facet-filters__sort select__select caption-large"
-                    id="SortBy"
-                    aria-describedby="a11y-refresh-page-message"
-                  >
+                {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                {%- capture sort_options_html -%}
                     {%- for option in results.sort_options -%}
                       <option
                         value="{{ option.value | escape }}"
@@ -188,11 +182,8 @@
                         {{ option.name | escape }}
                       </option>
                     {%- endfor -%}
-                  </select>
-                  <span class="svg-wrapper">
-                    {{- 'icon-caret.svg' | inline_asset_content -}}
-                  </span>
-                </div>
+                {%- endcapture -%}
+                {% render 'lemoon-ui-select', id: 'SortBy', name: 'sort_by', class: 'facet-filters__sort select__select caption-large', describedby: 'a11y-refresh-page-message', options_html: sort_options_html %}
               </div>
             </div>
           {%- endif -%}
@@ -337,13 +328,7 @@
                   <div class="mobile-facets__summary">
                     <div class="mobile-facets__sort">
                       <label for="SortBy-mobile">{{ 'products.facets.sort_by_label' | t }}</label>
-                      <div class="select">
-                        <select
-                          name="sort_by"
-                          class="select__select"
-                          id="SortBy-mobile"
-                          aria-describedby="a11y-refresh-page-message"
-                        >
+                      {%- capture sort_options_html -%}
                           {%- for option in results.sort_options -%}
                             <option
                               value="{{ option.value | escape }}"
@@ -354,11 +339,8 @@
                               {{ option.name | escape }}
                             </option>
                           {%- endfor -%}
-                        </select>
-                        <span class="svg-wrapper">
-                          {{- 'icon-caret.svg' | inline_asset_content -}}
-                        </span>
-                      </div>
+                      {%- endcapture -%}
+                      {% render 'lemoon-ui-select', id: 'SortBy-mobile', name: 'sort_by', class: 'select__select', describedby: 'a11y-refresh-page-message', options_html: sort_options_html %}
                     </div>
                   </div>
                 </div>
@@ -408,14 +390,8 @@
             <h2 class="facet-filters__label caption-large text-body">
               <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
             </h2>
-            <div class="select">
-              {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
-              <select
-                name="sort_by"
-                class="facet-filters__sort select__select caption-large"
-                id="SortBy"
-                aria-describedby="a11y-refresh-page-message"
-              >
+            {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+            {%- capture sort_options_html -%}
                 {%- for option in results.sort_options -%}
                   <option
                     value="{{ option.value | escape }}"
@@ -426,11 +402,8 @@
                     {{ option.name | escape }}
                   </option>
                 {%- endfor -%}
-              </select>
-              <span class="svg-wrapper">
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </span>
-            </div>
+            {%- endcapture -%}
+            {% render 'lemoon-ui-select', id: 'SortBy', name: 'sort_by', class: 'facet-filters__sort select__select caption-large', describedby: 'a11y-refresh-page-message', options_html: sort_options_html %}
           </div>
         </div>
 

@@ -5,6 +5,16 @@
   assign terms_url = section.settings.terms_url | default: shop.terms_of_service.url
   assign privacy_url = section.settings.privacy_url | default: shop.privacy_policy.url
   assign warranty_url = section.settings.warranty_url
+  assign legal_title = page.title
+  if section.settings.demo_data and section.settings.kind == 'privacy'
+    assign legal_title = 'sections.lemoon_legal_page.privacy' | t
+  endif
+  assign legal_help_title = 'sections.lemoon_legal_page.help_title' | t
+  assign legal_contact_label = 'sections.lemoon_legal_page.contact' | t
+  assign legal_contact_url = section.settings.contact_url
+  if legal_contact_url == blank
+    assign legal_contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+  endif
 -%}
 {%- style -%}
 /* Editorial legal shell. CMS policy text remains authoritative. */
@@ -52,7 +62,7 @@
 <div class="lemoon-legal-page page-width">
   <header class="lemoon-legal-page__header">
     <p class="lemoon-legal-page__eyebrow">{{ 'sections.lemoon_legal_page.eyebrow' | t }}</p>
-    <h1>{% if section.settings.demo_data and section.settings.kind == 'privacy' %}{{ 'sections.lemoon_legal_page.privacy' | t }}{% else %}{{ page.title | escape }}{% endif %}</h1>
+    {% render 'lemoon-ui-heading', text: legal_title, level: 1 %}
     <p class="lemoon-legal-page__intro">
       {%- if section.settings.intro != blank -%}
         {{ section.settings.intro | escape }}
@@ -82,13 +92,9 @@
         {%- endif -%}
       </div>
       <div class="lemoon-legal-page__help">
-        <h2>{{ 'sections.lemoon_legal_page.help_title' | t }}</h2>
+        {% render 'lemoon-ui-heading', text: legal_help_title, level: 2 %}
         <p>{{ 'sections.lemoon_legal_page.help_description' | t }}</p>
-        {%- if section.settings.contact_url != blank -%}
-          <a href="{{ section.settings.contact_url | escape }}">{{ 'sections.lemoon_legal_page.contact' | t }}</a>
-        {%- else -%}
-          <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'sections.lemoon_legal_page.contact' | t }}</a>
-        {%- endif -%}
+        {% render 'lemoon-ui-action', element: 'a', href: legal_contact_url, label: legal_contact_label, style_family: 'local' %}
       </div>
     </div>
     {%- if shipping_url != blank or returns_url != blank or terms_url != blank or privacy_url != blank or warranty_url != blank -%}

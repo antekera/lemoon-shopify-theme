@@ -1,41 +1,55 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { renderComponentSection as render, contactErrors } from '../helpers/component-library-renderer.mjs';
 
 const file = (name) => readFileSync(new URL(`../../${name}`, import.meta.url), 'utf8');
 const source = () => file('sections/lemoon-contact-page.liquid');
 const json = (name) => { const text = file(name); return JSON.parse(text.slice(text.indexOf('{'))); };
 
 test('contact page uses native Shopify contact processing with required accessible fields', () => {
-  const section = source();
-  expect(section).toMatch(/form 'contact'/);
+  expect(source()).toMatch(/form 'contact'/);
+  const html = render('lemoon-contact-page');
+  expect(html).toMatch(/<form[^>]*method="post"/);
   for (const field of ['name', 'email', 'body']) {
-    const tag = field === 'body' ? 'textarea' : 'input';
-    const markup = section.match(new RegExp(`<${tag}[^>]*name="contact\\[${field}\\]"[^>]*>`))?.[0];
-    expect(markup, `${field} is required`).toContain('required');
-    expect(section).toContain(`for="{{ contact_form_id }}-${field}"`);
+    const markup = html.match(new RegExp(`<(?:input|textarea)[^>]*name="contact\\[${field}\\]"[^>]*>`))?.[0];
+    expect(markup, `${field} required`).toMatch(/\srequired(?:\s|>|=)/);
+    expect(html).toContain(`for="LemoonContact-component-fixture-${field}"`);
   }
-  const phone = section.match(/<input[^>]*name="contact\[phone\]"[^>]*>/s)?.[0];
-  expect(phone).toBeTruthy();
+  const phone = html.match(/<input[^>]*name="contact\[phone\]"[^>]*>/)?.[0];
   expect(phone).toContain('type="tel"');
   expect(phone).not.toMatch(/pattern=|required/);
-  expect(section).toContain('form.posted_successfully?');
-  expect(section).toContain('form.errors');
-  expect(section).toContain('aria-invalid="true"');
-  expect(section).toContain('aria-describedby="{{ contact_form_id }}-email-error"');
-  expect(section).toContain('tabindex="-1" autofocus');
-  expect(section).toContain('aria-live="polite"');
-  expect(section).toContain('aria-live="assertive"');
+  const success = render('lemoon-contact-page', { form: { 'posted_successfully?': true } });
+  expect(success).toContain('role="status"');
+  expect(success).toContain('aria-live="polite"');
+  expect(success).toMatch(/tabindex="-1"[^>]*autofocus/);
+  const error = render('lemoon-contact-page', { form: { errors: contactErrors() } });
+  expect(error).toContain('role="alert"');
+  expect(error).toContain('aria-live="assertive"');
+  expect(error).toContain('aria-invalid="true"');
+  expect(error).toContain('aria-describedby="LemoonContact-component-fixture-email-error"');
 });
 
-test('contact redisplayed values escape user/customer inputs and exposes only configured business channels', () => {
-  const section = source();
-  for (const value of ['form.name', 'form.email', 'form.phone', 'form.body', 'customer.name', 'customer.email', 'customer.phone']) expect(section).toContain(`${value} | escape`);
-  for (const setting of ['contact_email', 'contact_hours', 'whatsapp_url']) expect(section).toContain(`if section.settings.${setting} != blank`);
-  expect(section).not.toMatch(/wa\.me\/\d|\+56\s?9\s?\d|lunes a viernes/i);
-  expect(section.match(/<h1\b/g)).toHaveLength(1);
-  expect(section).not.toMatch(/{{\s*page\.title/);
-  expect(section).toContain("routes.root_url | append: '/pages/preguntas-frecuentes' | replace: '//', '/'");
-  for (const root of ['/', '/en']) expect(`${root}/pages/preguntas-frecuentes`.replaceAll('//', '/')).toBe(`${root === '/' ? '' : root}/pages/preguntas-frecuentes`);
+test('contact redisplays form before customer values, escapes once, and exposes configured channels only', () => {
+  for (const owner of ['form', 'customer']) {
+    const values = { name: 'N"<&', email: 'e"<&', phone: 'p"<&', body: '</textarea>\n&' };
+    const html = render('lemoon-contact-page', { [owner]: values });
+    for (const value of ['N&#34;&lt;&amp;', 'e&#34;&lt;&amp;', 'p&#34;&lt;&amp;']) expect(html).toContain(value);
+    if (owner === 'form') expect(html).toContain('&lt;/textarea&gt;\n&amp;');
+    expect(html).not.toContain('&amp;lt;');
+  }
+  const precedence = render('lemoon-contact-page', { form: { name: 'From form' }, customer: { name: 'From customer' } });
+  expect(precedence).toContain('value="From form"');
+  expect(precedence).not.toContain('From customer');
+  for (const root_url of ['/', '/en']) {
+    const html = render('lemoon-contact-page', { routes: { root_url } });
+    expect(html).toContain(`href="${root_url === '/' ? '' : root_url}/pages/preguntas-frecuentes"`);
+    expect(html.match(/<h1\b/g)).toHaveLength(1);
+    expect(html).not.toMatch(/mailto:|wa\.me/);
+  }
+  const configured = render('lemoon-contact-page', { settings: { contact_email: 'test@example.test', whatsapp_url: 'https://example.test/chat?a=1&b=2', contact_hours: 'Fixture hours' } });
+  expect(configured).toContain('mailto:test@example.test');
+  expect(configured).toContain('https://example.test/chat?a=1&amp;b=2');
+  expect(configured).toContain('Fixture hours');
 });
 
 test('contact template selects custom section and editor settings are localized and padded', () => {

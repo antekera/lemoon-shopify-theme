@@ -1,14 +1,15 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { renderContract } from '../helpers/consumer-contract-renderer.mjs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const s=read(path); return JSON.parse(s.slice(s.indexOf('{'))); };
 
 test('service section has a single localized heading, honest contact routing and optional verified rich text', () => {
  const source=read('sections/lemoon-service-page.liquid');
- expect(source.match(/<h1\b/g)).toHaveLength(1);
+ for (const kind of ['benefits', 'operations']) expect(renderContract(`service-${kind}`).match(/<h1\b/g)).toHaveLength(1);
  expect(source).toContain('sections.lemoon_service_page.operations_title');
  expect(source).toContain('sections.lemoon_service_page.benefits_title');
- expect(source).toContain("{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}?subject=operativos");
+ expect(renderContract('service-operations')).toContain('href="/es/pages/contact?subject=operativos"');
  expect(source).not.toMatch(/page\.content|hola@lemon\.cl|<form|contact\[|RUT/);
  expect(source).toContain('if section.settings.verified_details != blank');
  expect(source).toContain('{{ section.settings.verified_details }}');

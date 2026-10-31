@@ -95,8 +95,7 @@
               <form id="FacetSortForm" class="lemoon-plp-sort__form">
                 <div class="lemoon-plp-sort-controls sorting">
 
-                <div class="select">
-                  <select name="sort_by" id="SortBy" aria-label="{{ 'products.facets.sort_by_label' | t }}" class="select__select" aria-describedby="a11y-refresh-page-message">
+                {%- capture sort_options_html -%}
                     {%- assign relevance_option = collection.sort_options | where: 'value', 'most-relevant' | first -%}
                     {%- assign relevance_value = relevance_option.value | default: 'manual' -%}
                     {%- assign preferred_sorts = 'relevance,created-descending,best-selling,price-ascending,price-descending' | split: ',' -%}
@@ -122,9 +121,9 @@
                       {%- assign current_option = collection.sort_options | where: 'value', current_sort | first -%}
                       {%- if current_option -%}<option value="{{ current_sort | escape }}" selected>{{ current_option.name | escape }}</option>{%- endif -%}
                     {%- endunless -%}
-                  </select>
-                  <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
-                </div>
+                  {%- endcapture -%}
+                {%- assign sort_label = 'products.facets.sort_by_label' | t -%}
+                {% render 'lemoon-ui-select', id: 'SortBy', name: 'sort_by', class: 'select__select', aria_label: sort_label, describedby: 'a11y-refresh-page-message', options_html: sort_options_html %}
                 <details class="lemoon-sort-menu" data-sort-menu>
                   <summary role="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="SortOptions-{{ section.id }}"><span data-sort-label></span><span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span></summary>
                   <div id="SortOptions-{{ section.id }}" class="lemoon-sort-menu__options" role="listbox" aria-label="{{ 'products.facets.sort_by_label' | t }}" data-sort-options></div>

@@ -1,0 +1,119 @@
+{
+  "tag": "section",
+  "attrs": {
+    "aria-labelledby": "LemoonNewsletterHeading-component-fixture",
+    "class": "lemoon-newsletter"
+  },
+  "children": [
+    {
+      "tag": "div",
+      "attrs": {
+        "class": "lemoon-footer__container lemoon-newsletter__inner"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "lemoon-newsletter__copy"
+          },
+          "children": [
+            {
+              "tag": "h2",
+              "attrs": {
+                "id": "LemoonNewsletterHeading-component-fixture"
+              },
+              "children": [
+                "Novedades <&\""
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "lemoon-newsletter__form-wrap"
+          },
+          "children": [
+            {
+              "tag": "form",
+              "attrs": {
+                "action": "/contact#contact_form",
+                "data-shopify-form-fixture": "",
+                "id": "LemoonNewsletter-component-fixture",
+                "method": "post",
+                "class": "lemoon-newsletter__form"
+              },
+              "children": [
+                {
+                  "tag": "input",
+                  "attrs": {
+                    "name": "form_type",
+                    "type": "hidden",
+                    "value": "customer"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "input",
+                  "attrs": {
+                    "name": "utf8",
+                    "type": "hidden",
+                    "value": "✓"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "input",
+                  "attrs": {
+                    "name": "contact[tags]",
+                    "type": "hidden",
+                    "value": "newsletter"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "label",
+                  "attrs": {
+                    "for": "LemoonNewsletterEmail-component-fixture",
+                    "class": "visually-hidden"
+                  },
+                  "children": [
+                    "Correo <&\""
+                  ]
+                },
+                {
+                  "tag": "input",
+                  "attrs": {
+                    "aria-required": "true",
+                    "autocapitalize": "off",
+                    "autocomplete": "email",
+                    "autocorrect": "off",
+                    "id": "LemoonNewsletterEmail-component-fixture",
+                    "name": "contact[email]",
+                    "placeholder": "Correo <&\"",
+                    "required": "",
+                    "type": "email",
+                    "value": "",
+                    "class": "lemoon-newsletter__input"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "button",
+                  "attrs": {
+                    "name": "commit",
+                    "type": "submit",
+                    "class": "lemoon-newsletter__button"
+                  },
+                  "children": [
+                    "Suscribirme"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

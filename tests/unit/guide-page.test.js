@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { test, expect } from 'vitest';
+import { renderComponentSection as render } from '../helpers/component-library-renderer.mjs';
 const file = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const text = file(path); return JSON.parse(text.slice(text.indexOf('{'))); };
 const kinds = { medidas: 'measurements', rostro: 'face', pedido: 'order', probador: 'try_on', prescripcion: 'prescription' };
@@ -10,16 +11,23 @@ test('each guide template chooses one guide without duplicating the page heading
     expect(template.sections.main.type).toBe('lemoon-guide-page');
     expect(template.sections.main.settings.guide_kind).toBe(kind);
   }
-  expect(file('sections/lemoon-guide-page.liquid').match(/<h1\b/g)).toHaveLength(1);
+  for (const guide_kind of Object.values(kinds)) expect(render('lemoon-guide-page', { settings: { guide_kind } }).match(/<h1\b/g)).toHaveLength(1);
 });
 test('guide anchors are unique per section and links preserve the locale root', () => {
-  const source = file('sections/lemoon-guide-page.liquid');
-  expect(source).toContain('Guide-{{ section.id }}-{{ step }}');
-  expect(source).toContain("routes.root_url | append: '/pages/contact' | replace: '//', '/'");
-  expect(source).toContain('routes.all_products_collection_url');
-  expect(source).not.toMatch(/<form|type="file"|getUserMedia|mailto:/);
-  expect(source).toContain('aria-hidden="true"');
-  expect(source).toContain('figcaption');
+  for (const guide_kind of Object.values(kinds)) {
+    for (const root_url of ['/', '/en']) {
+      const html = render('lemoon-guide-page', { id: guide_kind, settings: { guide_kind }, routes: { root_url } });
+      for (const step of [1, 2, 3]) {
+        expect(html).toContain(`href="#Guide-${guide_kind}-${step}"`);
+        expect(html).toContain(`id="Guide-${guide_kind}-${step}"`);
+      }
+      expect(html).toContain(`href="${root_url === '/' ? '' : root_url}/pages/contact"`);
+      expect(html).toContain('href="/collections/all"');
+      expect(html).not.toMatch(/<form|type="file"|getUserMedia|mailto:/);
+      expect(html).toContain('aria-hidden="true"');
+      expect(html).toContain('<figcaption>');
+    }
+  }
 });
 test('guides expose all bilingual instructions and do not invent available services', () => {
   for (const locale of ['en.default', 'es']) {

@@ -302,6 +302,21 @@
     }
   },
   "sections": {
+    "lemoon_ui_gallery": {
+      "tertiary": "Terciaria",
+      "synthetic_note": "Ejemplos de interfaz con datos de muestra, sin envíos ni operaciones comerciales.",
+      "collection_action": "Ver colección",
+      "guide_action": "Guía de estilo",
+      "sold_out_action": "Agotado",
+      "shape_label": "Forma de armazón",
+      "choose_shape": "Elige una forma",
+      "rectangular": "Rectangular",
+      "round": "Redondo",
+      "loading": "Cargando",
+      "readonly": "Solo lectura",
+      "error": "Revisa este campo.",
+      "messages": "Mensajes y preguntas"
+    },
     "main_page": {
       "empty": "Esta página está en preparación."
     },

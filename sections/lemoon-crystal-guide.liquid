@@ -36,33 +36,42 @@
     }
   {%- endstyle -%}
   <div class="lemoon-crystal-guide page-width" aria-labelledby="CrystalGuide-{{ section.id }}">
-    <h2 id="CrystalGuide-{{ section.id }}">{{ 'sections.lemoon_crystal_guide.title' | t }}</h2>
+    {%- assign ui_heading_text = 'sections.lemoon_crystal_guide.title' | t -%}{%- capture ui_heading_id -%}CrystalGuide-{{ section.id }}{%- endcapture -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
     <p class="lemoon-crystal-guide__intro">{{ 'sections.lemoon_crystal_guide.intro' | t }}</p>
     <ul class="lemoon-crystal-guide__grid" role="list">
       <li class="lemoon-crystal-guide__tile">
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.5"/><path d="m16 31 15-15m-9 16 10-10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <h3>{{ 'sections.lemoon_crystal_guide.clear_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.clear_text' | t }}</p>
+        {%- assign ui_heading_text = 'sections.lemoon_crystal_guide.clear_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_crystal_guide.clear_text' | t }}</p>
       </li>
       <li class="lemoon-crystal-guide__tile">
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="17" stroke="currentColor" stroke-width="1.5"/><path d="M24 7a17 17 0 0 1 0 34V7Z" fill="currentColor" opacity=".12"/><path d="M24 7v34" stroke="currentColor" stroke-width="1.5"/></svg>
-        <h3>{{ 'sections.lemoon_crystal_guide.photo_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.photo_text' | t }}</p>
+        {%- assign ui_heading_text = 'sections.lemoon_crystal_guide.photo_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_crystal_guide.photo_text' | t }}</p>
       </li>
       <li class="lemoon-crystal-guide__tile">
         <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" focusable="false"><circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M24 3v5m0 32v5M3 24h5m32 0h5M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <h3>{{ 'sections.lemoon_crystal_guide.sun_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.sun_text' | t }}</p>
+        {%- assign ui_heading_text = 'sections.lemoon_crystal_guide.sun_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_crystal_guide.sun_text' | t }}</p>
       </li>
     </ul>
     <div class="lemoon-crystal-guide__notes">
-      <div><h3>{{ 'sections.lemoon_crystal_guide.thickness_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.thickness_text' | t }}</p></div>
-      <div><h3>{{ 'sections.lemoon_crystal_guide.prescription_title' | t }}</h3><p>{{ 'sections.lemoon_crystal_guide.prescription_text' | t }}</p></div>
+      <div>{%- assign ui_heading_text = 'sections.lemoon_crystal_guide.thickness_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_crystal_guide.thickness_text' | t }}</p></div>
+      <div>{%- assign ui_heading_text = 'sections.lemoon_crystal_guide.prescription_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_crystal_guide.prescription_text' | t }}</p></div>
     </div>
     <div class="lemoon-crystal-guide__links">
-      <a class="lemoon-crystal-guide__primary" href="{{ routes.root_url | append: '/collections/opticos' | replace: '//', '/' }}">{{ 'sections.lemoon_crystal_guide.frames_cta' | t }}</a>
-      <a href="{{ routes.root_url | append: '/pages/como-enviar-prescripcion' | replace: '//', '/' }}">{{ 'sections.lemoon_crystal_guide.prescription_cta' | t }}</a>
+      {%- liquid
+  assign ui_action_label = 'sections.lemoon_crystal_guide.frames_cta' | t
+  assign ui_action_url = routes.root_url | append: '/collections/opticos' | replace: '//', '/'
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local', class: 'lemoon-crystal-guide__primary' %}
+      {%- liquid
+  assign ui_action_label = 'sections.lemoon_crystal_guide.prescription_cta' | t
+  assign ui_action_url = routes.root_url | append: '/pages/como-enviar-prescripcion' | replace: '//', '/'
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}
     </div>
     {%- if has_lens_options -%}
       <div class="lemoon-crystal-guide__product">
-        <a href="{{ configurator_product.url }}?view=configurador">{{ 'sections.lemoon_crystal_guide.configure_cta' | t: product: configurator_product.title | escape }}</a>
+        {%- liquid
+  assign ui_action_label = 'sections.lemoon_crystal_guide.configure_cta' | t: product: configurator_product.title
+  assign ui_action_url = configurator_product.url | append: '?view=configurador'
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}
         <p>{{ 'sections.lemoon_crystal_guide.configure_note' | t }}</p>
         {%- if configurator_product.title contains 'Prototipo' -%}<p>{{ 'lemoon_lens_flow.prototype' | t }}</p>{%- endif -%}
       </div>

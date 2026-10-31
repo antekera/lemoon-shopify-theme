@@ -1,0 +1,21 @@
+{% doc %}
+  Native details/summary; caller owns grouping and unique IDs. answer_html is trusted captured template/editor markup only. editor_attributes accepts block.shopify_attributes only.
+  @param {string} [id] - Explicit identity/plain question or local classes.
+  @param {string} [question] - Explicit identity/plain question or local classes.
+  @param {string} [answer_class] - Explicit identity/plain question or local classes.
+  @param {string} [class] - Explicit identity/plain question or local classes.
+  @param {number} [question_level] - 1–6 renders heading via lemoon-ui-heading; absent leaves plain summary text.
+  @param {string} [answer_html] - Trusted complete answer capture, including paragraph/link structure.
+  @param {boolean} [open] - Native details state; false stays closed.
+  @param {string} [editor_attributes] - Only trusted block.shopify_attributes, emitted unchanged on details root.
+  @param {string} [indicator] - page-svg for existing grouped FAQ plus/minus; absent/none omits it.
+  @example
+  {% render 'lemoon-ui-faq-item', id: 'Faq-1', question: 'Question', question_level: 3, answer_html: answer_html, indicator: 'page-svg' %}
+{% enddoc %}
+<details{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if class != blank %} class="{{ class | escape }}"{% endif %}{% if open == true %} open{% endif %}{% if editor_attributes != blank %} {{ editor_attributes }}{% endif %}>
+  <summary>
+    {%- if question_level != nil -%}{% render 'lemoon-ui-heading', text: question, level: question_level %}{%- else -%}{{ question | escape }}{%- endif -%}
+    {%- if indicator == 'page-svg' -%}<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14"/><path class="lemoon-faq-page__plus-vertical" d="M10 3v14"/></svg>{%- endif -%}
+  </summary>
+  <div{% if answer_class != blank %} class="{{ answer_class | escape }}"{% endif %}>{{ answer_html }}</div>
+</details>

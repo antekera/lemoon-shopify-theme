@@ -7,6 +7,8 @@ description: Scaffold a new Shopify Liquid section for this theme, following the
 
 Use this when the user asks to create the initial structure for a new Shopify theme section. Keep the work scoped to the requested section and required translations.
 
+Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
+
 1. Confirm the requested section name. Convert it to kebab-case for `sections/<name>.liquid`.
 2. Check the current Git branch. Do not create a section on `main`; report the branch and stop if it is `main`.
 3. Read 1–2 similar files in `sections/`, plus `.claude/rules/liquid-conventions.md` and `.claude/rules/section-schema.md`.

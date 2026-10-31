@@ -1,0 +1,22 @@
+{% doc %}
+  Native select; caller owns persistent external label and selected options. options_html is a trusted template capture only. Boolean inputs preserve false.
+  @param {string} [id] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [name] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [class] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [wrapper_class] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [labelledby] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [aria_label] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [describedby] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [form_id] - Native attribute or surface classes; wrapper defaults to select.
+  @param {string} [options_html] - Trusted captured option markup; caller escapes values and labels.
+  @param {boolean} [required] - Opt-in native boolean.
+  @param {boolean} [disabled] - Opt-in native boolean.
+  @param {boolean} [multiple] - Opt-in native boolean.
+  @param {boolean} [show_caret] - Existing caret defaults on; explicit false omits it.
+  @example
+  {% render 'lemoon-ui-select', id: 'SortBy', name: 'sort_by', options_html: options_html %}
+{% enddoc %}
+<div class="lemoon-ui-select {% if wrapper_class != nil %}{{ wrapper_class | escape }}{% else %}select{% endif %}">
+  <select class="lemoon-ui-control {% if class != nil %}{{ class | escape }}{% else %}select__select{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if labelledby != blank %} aria-labelledby="{{ labelledby | escape }}"{% endif %}{% if aria_label != blank %} aria-label="{{ aria_label | escape }}"{% endif %}{% if describedby != blank %} aria-describedby="{{ describedby | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if multiple == true %} multiple{% endif %}>{{ options_html }}</select>
+  {%- unless show_caret == false -%}<span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>{%- endunless -%}
+</div>
