@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -8,6 +9,32 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
+  workflow-tests:
+    name: Python Workflow Tests
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    outputs:
+      runtime_changed: ${{ steps.scope.outputs.runtime_changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Validate Codex workflows
+        run: python3 -B scripts/test_codex_workflows.py all
+      - name: Test workflow validator regressions
+        run: python3 -B scripts/test_codex_workflow_validator.py -v
+      - name: Test CI scope regressions
+        run: python3 -B scripts/test_ci_scope.py -v
+      - name: Determine Lighthouse applicability
+        id: scope
+        env:
+          CI_EVENT_NAME: ${{ github.event_name }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python3 -B scripts/ci_scope.py
+
   mobile-search-tests:
     name: Mobile Search Tests
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
@@ -53,7 +80,10 @@ jobs:
 
   lighthouse:
     name: Lighthouse
-    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    needs: workflow-tests
+    # Known tooling/docs-only PRs have no storefront performance result (N/A).
+    # ci.yml is covered by static workflow validation; main/manual retain full audits.
+    if: (github.event_name != 'pull_request' || github.event.pull_request.draft == false) && needs.workflow-tests.outputs.runtime_changed == 'true'
     runs-on: ubuntu-24.04
     concurrency:
       group: shopify-lighthouse

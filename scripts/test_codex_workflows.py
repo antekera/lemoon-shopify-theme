@@ -30,10 +30,18 @@ SKILLS = {
 AGENTS = {
     "design": {"design-interpreter"},
     "builder": {"section-builder"},
-    "reviews": {"theme-code-reviewer", "theme-conventions-reviewer"},
+    "reviews": {"theme-code-reviewer", "theme-conventions-reviewer", "lemoon-copy-reviewer"},
     "tokens": {"design-token-auditor"},
     "translator": {"chilean-spanish-translator"},
-    "delivery": {"lemoon-copywriter", "linear-delivery-coordinator", "theme-test-engineer"},
+    "delivery": {
+        "lemoon-copywriter", "lemoon-copy-reviewer", "linear-delivery-coordinator",
+        "theme-test-engineer", "theme-developer", "lemoon-design-lead",
+        "theme-code-reviewer", "theme-conventions-reviewer",
+    },
+}
+READ_ONLY_AGENTS = {
+    "theme-code-reviewer", "theme-conventions-reviewer", "lemoon-copy-reviewer",
+    "design-token-auditor",
 }
 GROUPS = {
     "core": set(),
@@ -79,6 +87,26 @@ def validate_agent(name: str) -> None:
     require(config.get("name") == name, f"{name}: TOML name is missing or mismatched")
     require(bool(config.get("description", "").strip()), f"{name}: description is empty")
     require(bool(config.get("developer_instructions", "").strip()), f"{name}: developer_instructions is empty")
+    if name in READ_ONLY_AGENTS:
+        # Role metadata is not an effective runtime permission boundary.
+        instructions = config["developer_instructions"].lower()
+        for required in (
+            "read-only is this role's behavioral scope",
+            "inherit the parent session permissions",
+            "separately configured read-only parent session",
+            "verify effective permissions",
+            "mutating connectors must be unavailable",
+            "report the limitation",
+            "never describe prompt instructions as enforced capability isolation",
+        ):
+            require(required in instructions, f"{name}: missing read-only contract: {required}")
+
+
+def require_agent_scope(name: str, requirements: tuple[str, ...]) -> None:
+    with (ROOT / ".codex/agents" / f"{name}.toml").open("rb") as agent_file:
+        instructions = tomllib.load(agent_file)["developer_instructions"].lower()
+    for required in requirements:
+        require(required.lower() in instructions, f"{name}: missing responsibility: {required}")
 
 
 def validate_group(group: str) -> None:
@@ -122,27 +150,63 @@ def validate_group(group: str) -> None:
         require("section-builder" in builder and "agent" in builder.lower(), "section workflow must delegate to the section-builder agent")
 
     if group in {"delivery", "all"}:
-        reviewer_path = ROOT / ".codex/agents/theme-code-reviewer.toml"
-        with reviewer_path.open("rb") as reviewer_file:
-            reviewer = tomllib.load(reviewer_file)
-        require(reviewer.get("sandbox_mode") == "read-only", "delivery reviewer must remain read-only")
-        instructions = reviewer["developer_instructions"].lower()
-        for required in ("page copy", "research notes", "docs/content/", "independently check cited sources", "official chilean sources"):
-            require(required in instructions, f"delivery reviewer lacks declared copy-review scope: {required}")
+        require_agent_scope("theme-code-reviewer", (
+            "copy integration", "escaping", "html semantics", "localization",
+            "legal-source review belongs to lemoon-copy-reviewer",
+            ".codex/agents/lemoon-copy-reviewer.toml",
+            "instead of treating code approval as copy approval", "do not edit files",
+            "do not rewrite copy, commit, open prs, merge, or change linear states",
+        ))
+        require_agent_scope("lemoon-copy-reviewer", (
+            "editorial guide/research notes", "open cited sources independently",
+            "current official chilean sources", "statutory rights",
+            "confirmed business information", "source/access limitations",
+            "final integrated text", "keep files, linear states/comments, and pr state unchanged",
+            "do not rewrite the copy under review or approve your own work",
+        ))
+        require_agent_scope("theme-developer", (
+            "lemoon-copywriter", "lemoon-copy-reviewer", "same page ticket",
+            "mocked flow", "shopify theme check --fail-level error",
+        ))
+        require_agent_scope("lemoon-design-lead", (
+            "canonical design.md", "sources, confirmed decisions, discrepancies",
+            "review mode is read-only", "distinguish source inspection from rendered verification",
+        ))
+        require_agent_scope("linear-delivery-coordinator", (
+            "independent editorial/source review to lemoon-copy-reviewer",
+            "theme-test-engineer", "theme-code-reviewer", "theme-conventions-reviewer",
+            "sandbox_mode does not enforce isolation", "verify the effective permissions",
+            "keep merge blocked", "designated human reviewer's explicit approval",
+        ))
         guidance = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
         for required in ("Context7-first", "resolve-library-id", "query-docs"):
             require(required in guidance, f"test agent documentation reference lacks repository guidance: {required}")
+        for required in (
+            "custom agent files inherit parent-session permissions",
+            "role-level `sandbox_mode` does not enforce read-only access",
+            "mutating connectors unavailable", "verify effective permissions",
+            "report the limitation", "keep merge blocked",
+        ):
+            require(required in guidance.lower(), f"AGENTS.md lacks review permission guidance: {required}")
 
     if group in {"tokens", "all"}:
         token_skill = (ROOT / ".agents/skills/audit-design-tokens/SKILL.md").read_text(encoding="utf-8")
-        token_agent = (ROOT / ".codex/agents/design-token-auditor.toml").read_text(encoding="utf-8")
         require("--font-heading-family" in token_skill and "'Urbanist', sans-serif" in token_skill, "token skill must audit the documented heading font")
         require("--font-body-family" in token_skill and "'Hanken Grotesk', sans-serif" in token_skill, "token skill must audit the documented body font")
-        require("--font-body-family" in token_agent and "'Hanken Grotesk', sans-serif" in token_agent, "token auditor agent must audit the documented body font")
+        require_agent_scope("design-token-auditor", (
+            "canonical design.md", "assets/base.css", "config/settings_schema.json",
+            "heading/body families and weights", "documented values",
+            "trace variable/settings resolution", "unresolved decisions for lemoon-design-lead",
+            "keep files and external state unchanged",
+        ))
 
     if group == "all":
         require(sum(map(len, SKILLS.values())) == 14, "workflow map must contain exactly 14 skills")
-        require(len(set().union(*AGENTS.values())) == 9, "workflow map must contain exactly nine custom agents")
+        mapped_agents = set().union(*AGENTS.values())
+        actual_agents = {path.stem for path in (ROOT / ".codex/agents").glob("*.toml")}
+        require(mapped_agents == actual_agents,
+                f"agent inventory mismatch: unmapped={sorted(actual_agents - mapped_agents)}, "
+                f"missing={sorted(mapped_agents - actual_agents)}")
 
 
 def main() -> int:
