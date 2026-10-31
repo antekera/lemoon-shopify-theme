@@ -40,6 +40,14 @@ Para valores y recetas usar [DESIGN §2–6](../../DESIGN.md#2-color), sin copia
 
 Antes de extraer preservar `{% render %}` con inputs explícitos, locales, `section.id`, `product_form_id`, hidden inputs y names, hooks/data-*, IDs/ARIA, live regions, form associations y `block.shopify_attributes`. Los settings globales/objetos Shopify que todavía se usan implícitamente se documentan como deuda de contrato, sin fingir APIs puras. **Cart/payment/product-form, resolución de variantes, receta, consentimiento y elegibilidad comercial permanecen fuera de los átomos visuales.**
 
+### Mantenimiento del inventario
+
+Todo componente nuevo —atómico o compuesto, interactivo o presentacional— debe documentarse en este inventario **en el mismo PR que lo incorpora**, respetando las convenciones de alcance, clasificación e IDs anteriores. Al modificar o retirar componentes, mantener consistentes sus contratos, consumidores, variantes, estados y accesibilidad con el [índice JSON](component-inventory.json), su cobertura y referencias.
+
+Un componente cuyo desuso esté comprobado puede retirarse del código y del inventario activo mediante un cambio acotado y revisado. Antes de retirarlo, verificar consumidores reales en Liquid (`render`, secciones, layouts y templates), grupos de secciones, editor del tema, JS dinámico, API de fragmentos y apps. La ausencia de referencias estáticas o de template por sí sola no demuestra desuso; si el uso no está confirmado, conservar el componente y registrar la verificación pendiente. Tras una retirada, actualizar cobertura y referencias tanto en Markdown como en JSON para que reflejen el código resultante.
+
+Se pueden incorporar componentes según las necesidades de cada funcionalidad; la completitud del catálogo no obliga a conservar legacy cuyo desuso esté comprobado. Esta política no declara ningún componente actual en desuso ni ejecuta eliminaciones, refactors o cambios de runtime.
+
 <a id="families"></a>
 ## Índice de familias
 
