@@ -2,6 +2,8 @@
 
 Guía para seleccionar y reutilizar componentes en los tickets de página. [DESIGN.md](../../DESIGN.md) mantiene el contrato visual; esta biblioteca localiza fuentes editables, entradas, estados y criterios de integración. La [guía de marca](brand-guidelines.md) gobierna identidad y el [inventario de páginas](page-inventory.md) identifica destinos y responsables. Las fuentes se editan en su archivo original; no se necesita copiar CSS a un playground ni crear un segundo sistema de tokens.
 
+El [inventario técnico de componentes](component-inventory.md) amplía la cobertura de fuentes y contratos existentes y propone etapas futuras de extracción.
+
 ## Cómo usar la biblioteca
 
 1. Localizar la superficie en el inventario y su template en el [inventario de secciones](section-inventory.md).
