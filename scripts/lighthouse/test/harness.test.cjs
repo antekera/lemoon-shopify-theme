@@ -81,7 +81,7 @@ test('artifact exporter refuses symlinks', t => {
   assert.throws(() => exportArtifacts(path.join(dir,'raw'),path.join(dir,'out'),[]),/symlink/);
 });
 function fixtureData() {
-  return {products:{nodes:manifest.products.map(p => ({...p,onlineStoreUrl:lab.origin+'/products/'+p.handle,lens:p.metafields['custom.lens_compatible'],fixture:p.metafields['custom.lighthouse_fixture'],variants:{nodes:p.variants.map(v => ({...v,inventoryPolicy:'CONTINUE',inventoryItem:{tracked:false,requiresShipping:true},taxable:false,compareAtPrice:null}))},images:{nodes:[{url:'https://cdn.shopify.com/'+p.image.file,width:p.image.width,height:p.image.height,altText:p.image.alt}]}}))},collectionByHandle:{...manifest.collection,products:{nodes:manifest.collection.productHandles.map(handle => ({handle}))}}};
+  return {products:{nodes:manifest.products.map(p => ({...p,onlineStoreUrl:null,publishedAt:'2026-01-01T00:00:00Z',lens:p.metafields['custom.lens_compatible'],fixture:p.metafields['custom.lighthouse_fixture'],variants:{nodes:p.variants.map(v => ({...v,inventoryPolicy:'CONTINUE',inventoryItem:{tracked:false,requiresShipping:true},taxable:false,compareAtPrice:null}))},images:{nodes:[{url:'https://cdn.shopify.com/'+p.image.file,width:p.image.width,height:p.image.height,altText:p.image.alt}]}}))},collectionByHandle:{...manifest.collection,products:{nodes:manifest.collection.productHandles.map(handle => ({handle}))}}};
 }
 test('12-product fixture verifies membership, price, variant, metadata and checksums; rejects drift', () => {
   assert.equal(verifyFixture(fixtureData(),lab).length,12);
@@ -89,14 +89,69 @@ test('12-product fixture verifies membership, price, variant, metadata and check
     const data=fixtureData();mutate(data);assert.throws(() => verifyFixture(data,lab),/fixture|mismatch/);
   }
 });
+test('published ACTIVE password-protected products pass with null Online Store URLs', () => {
+  const data=fixtureData();
+  assert.ok(data.products.nodes.every(p => p.onlineStoreUrl === null));
+  assert.equal(verifyFixture(data,lab).length,12);
+});
+for (const [label,change,field] of [
+  ['draft',{status:'DRAFT'},'product.status'],
+  ['archived',{status:'ARCHIVED'},'product.status'],
+  ['missing status',{status:undefined},'product.status'],
+  ['unpublished',{publishedAt:null},'product.publishedAt'],
+  ['missing publication',{publishedAt:undefined},'product.publishedAt'],
+  ['invalid publication',{publishedAt:'invalid'},'product.publishedAt'],
+  ['non-string publication',{publishedAt:0},'product.publishedAt'],
+  ['future publication',{publishedAt:'9999-01-01T00:00:00Z'},'product.publishedAt']
+]) {
+  test(`fixture rejects ${label} even with a storefront or preview URL`, () => {
+    for (const url of [null,lab.origin+'/products/lighthouse-frame',lab.origin+'/products/lighthouse-frame?preview_theme_id=123']) {
+      const data=fixtureData();
+      Object.assign(data.products.nodes[0],change,{onlineStoreUrl:url,onlineStorePreviewUrl:url});
+      assert.throws(() => verifyFixture(data,lab),error => {
+        assert.equal(error.diagnostic.field,field);
+        assert.equal(error.diagnostic.product,'lighthouse-frame');
+        assert.equal(error.diagnostic.actual,change[field.split('.')[1]] ?? null);
+        return true;
+      });
+    }
+  });
+}
+test('remote query projects Online Store publication and validates protected products before fetching images', async () => {
+  const {verifyRemoteFixture,fixtureDir}=require('../fixture.cjs');
+  for (const change of [null,{status:'DRAFT'},{publishedAt:null},{publishedAt:undefined},{publishedAt:'9999-01-01T00:00:00Z'}]) {
+    let queries=0,images=0;
+    const graphql=async (query,variables) => {
+      queries++;
+      assert.deepEqual(variables,{collection:lab.collection});
+      // Return publishedAt only when the real outgoing products projection requests it.
+      const scalars=new Set(query.match(/products\(first:\s*13\)\s*\{\s*nodes\s*\{([^{}]+)/)[1].match(/\w+/g));
+      const data=fixtureData();
+      if (change) Object.assign(data.products.nodes[0],change);
+      for (const product of data.products.nodes) if (!scalars.has('publishedAt')) delete product.publishedAt;
+      return {...data,shop:{id:'gid://shopify/Shop/'+manifest.shopId,myshopifyDomain:lab.store,currencyCode:'CLP'}};
+    };
+    const fetchImage=async url => {
+      images++;
+      const bytes=fs.readFileSync(path.join(fixtureDir,path.basename(url.pathname)));
+      return {ok:true,arrayBuffer:async () => bytes};
+    };
+    if (change) await assert.rejects(verifyRemoteFixture(lab,graphql,fetchImage),error => {
+      assert.equal(error.diagnostic.field,change.status ? 'product.status' : 'product.publishedAt');
+      return true;
+    });
+    else await verifyRemoteFixture(lab,graphql,fetchImage);
+    assert.equal(queries,1);assert.equal(images,change ? 0 : 12);
+  }
+});
 test('fixture failure retains the exact nonsecret field and expected/actual values through lifecycle export', async () => {
-  const data=fixtureData();data.products.nodes[0].onlineStoreUrl=null;
+  const data=fixtureData();data.products.nodes[0].publishedAt=null;
   let exported=false;
   await assert.rejects(lifecycle({
     audit:async () => verifyFixture(data,lab), cleanup:async () => {},
     export:async (result,error) => {
       assert.equal(result.auditPassed,false);assert.equal(result.cleanupPassed,true);
-      assert.deepEqual(error.diagnostic,{field:'product.onlineStoreUrl',product:'lighthouse-frame',expected:'published Online Store URL',actual:null});
+      assert.deepEqual(error.diagnostic,{field:'product.publishedAt',product:'lighthouse-frame',expected:'valid Online Store publication timestamp at or before verification',actual:null});
       exported=true;
     }
   }),/fixture mismatch/);

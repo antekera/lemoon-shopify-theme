@@ -27,7 +27,9 @@ function verifyFixture(data, c) {
     for (const key of ['title','vendor','productType']) equal(`product.${key}`,expected[key],p[key],handle);
     equal('product.status','ACTIVE',p.status,handle);
     equal('product.tags',expected.tags,[...p.tags].sort(),handle);
-    if (!p.onlineStoreUrl) mismatch('product.onlineStoreUrl','published Online Store URL',p.onlineStoreUrl,handle);
+    // Product.publishedAt is Online Store-specific; password protection can null onlineStoreUrl.
+    const publishedAt = typeof p.publishedAt === 'string' ? Date.parse(p.publishedAt) : NaN;
+    if (!Number.isFinite(publishedAt) || publishedAt > Date.now()) mismatch('product.publishedAt','valid Online Store publication timestamp at or before verification',p.publishedAt,handle);
     for (const [key, value] of Object.entries(expected.metafields)) {
       const actual = key === 'custom.lens_compatible' ? p.lens : p.fixture;
       if (!actual) mismatch(key,value,null,handle);
@@ -53,7 +55,7 @@ function verifyFixture(data, c) {
 async function verifyRemoteFixture(c, graphql, fetchImage = fetch) {
   const data = await graphql(`query Fixture($collection: String!) {
     shop { id myshopifyDomain currencyCode }
-    products(first: 13) { nodes { handle title status vendor productType tags onlineStoreUrl options { name values }
+    products(first: 13) { nodes { handle title status vendor productType tags publishedAt options { name values }
       lens: metafield(namespace: "custom", key: "lens_compatible") { type value }
       fixture: metafield(namespace: "custom", key: "lighthouse_fixture") { type value }
       variants(first: 3) { nodes { title price sku compareAtPrice taxable inventoryPolicy inventoryItem { tracked requiresShipping } } }
