@@ -175,12 +175,13 @@
           <h2>{{ 'blogs.article.comment_form_title' | t }}</h2>
           {%- if form.errors -%}
             <div class="form__message" role="alert">
-              <h3 class="form-status caption-large text-body" tabindex="-1" autofocus>
+              {%- capture comment_status_html -%}
                 <span class="svg-wrapper">
                   {{- 'icon-error.svg' | inline_asset_content -}}
                 </span>
                 {{ 'templates.contact.form.error_heading' | t }}
-              </h3>
+              {%- endcapture -%}
+              {% render 'lemoon-ui-message', tag: 'h3', class: 'form-status caption-large text-body', tabindex: '-1', autofocus: true, content_html: comment_status_html %}
             </div>
             <ul class="form-status-list caption-large">
               {%- for field in form.errors -%}
@@ -200,12 +201,13 @@
             </ul>
           {%- elsif form.posted_successfully? -%}
             <div class="form-status-list form__message" role="status">
-              <h3 class="form-status" tabindex="-1" autofocus>
+              {%- capture comment_status_html -%}
                 <span class="svg-wrapper">
                   {{- 'icon-success.svg' | inline_asset_content -}}
                 </span>
                 {{ post_message | t }}
-              </h3>
+              {%- endcapture -%}
+              {% render 'lemoon-ui-message', tag: 'h3', class: 'form-status', tabindex: '-1', autofocus: true, content_html: comment_status_html %}
             </div>
           {%- endif -%}
 
@@ -215,26 +217,18 @@
             {% endif %}
           >
             <div class="article-template__comment-fields">
-              <div class="field field--with-error">
-                <input
-                  type="text"
-                  name="comment[author]"
-                  id="CommentForm-{{ section.id }}-author"
-                  class="field__input"
-                  autocomplete="name"
-                  value="{{ form.author | escape }}"
-                  aria-required="true"
-                  required
-                  {% if form.errors contains 'author' %}
-                    aria-invalid="true"
-                    aria-describedby="CommentForm-{{ section.id }}-author-error"
-                  {% endif %}
-                  placeholder="{{ 'blogs.article.name' | t }}"
-                >
-                <label class="field__label" for="CommentForm-{{ section.id }}-author">
-                  {{- 'blogs.article.name' | t }}
-                  <span aria-hidden="true">*</span></label
-                >
+              {%- capture comment_required_marker_html %} <span aria-hidden="true">*</span>{% endcapture -%}
+              {%- liquid
+                assign comment_field_id = 'CommentForm-' | append: section.id | append: '-author'
+                assign comment_field_label = 'blogs.article.name' | t
+                assign comment_field_invalid = nil
+                assign comment_field_description = nil
+                if form.errors contains 'author'
+                  assign comment_field_invalid = true
+                  assign comment_field_description = comment_field_id | append: '-error'
+                endif
+              -%}
+              {%- capture comment_field_feedback_html -%}
                 {%- if form.errors contains 'author' -%}
                   <small id="CommentForm-{{ section.id }}-author-error">
                     <span class="form__message">
@@ -242,33 +236,23 @@
                         {{- 'icon-error.svg' | inline_asset_content -}}
                       </span>
                       {{- 'blogs.article.name' | t }}
-                      {{ form.errors.messages.author }}.</span
+                      {{ form.errors.messages.author | escape }}.</span
                     >
                   </small>
                 {%- endif -%}
-              </div>
-              <div class="field field--with-error">
-                <input
-                  type="email"
-                  name="comment[email]"
-                  id="CommentForm-{{ section.id }}-email"
-                  autocomplete="email"
-                  class="field__input"
-                  value="{{ form.email | escape }}"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  aria-required="true"
-                  required
-                  {% if form.errors contains 'email' %}
-                    aria-invalid="true"
-                    aria-describedby="CommentForm-{{ section.id }}-email-error"
-                  {% endif %}
-                  placeholder="{{ 'blogs.article.email' | t }}"
-                >
-                <label class="field__label" for="CommentForm-{{ section.id }}-email">
-                  {{- 'blogs.article.email' | t }}
-                  <span aria-hidden="true">*</span></label
-                >
+              {%- endcapture -%}
+              {% render 'lemoon-ui-field', kind: 'input', id: comment_field_id, name: 'comment[author]', type: 'text', value: form.author, label: comment_field_label, placeholder: comment_field_label, label_class: 'field__label', label_suffix_html: comment_required_marker_html, wrapper_class: 'field field--with-error', autocomplete: 'name', required: true, aria_required: true, invalid: comment_field_invalid, describedby: comment_field_description, feedback_html: comment_field_feedback_html %}
+              {%- liquid
+                assign comment_field_id = 'CommentForm-' | append: section.id | append: '-email'
+                assign comment_field_label = 'blogs.article.email' | t
+                assign comment_field_invalid = nil
+                assign comment_field_description = nil
+                if form.errors contains 'email'
+                  assign comment_field_invalid = true
+                  assign comment_field_description = comment_field_id | append: '-error'
+                endif
+              -%}
+              {%- capture comment_field_feedback_html -%}
                 {%- if form.errors contains 'email' -%}
                   <small id="CommentForm-{{ section.id }}-email-error">
                     <span class="form__message">
@@ -276,31 +260,25 @@
                         {{- 'icon-error.svg' | inline_asset_content -}}
                       </span>
                       {{- 'blogs.article.email' | t }}
-                      {{ form.errors.messages.email }}.</span
+                      {{ form.errors.messages.email | escape }}.</span
                     >
                   </small>
                 {%- endif -%}
-              </div>
+              {%- endcapture -%}
+              {% render 'lemoon-ui-field', kind: 'input', id: comment_field_id, name: 'comment[email]', type: 'email', value: form.email, label: comment_field_label, placeholder: comment_field_label, label_class: 'field__label', label_suffix_html: comment_required_marker_html, wrapper_class: 'field field--with-error', autocomplete: 'email', autocorrect: 'off', autocapitalize: 'off', required: true, aria_required: true, invalid: comment_field_invalid, describedby: comment_field_description, feedback_html: comment_field_feedback_html %}
             </div>
-            <div class="field field--with-error">
-              <textarea
-                rows="5"
-                name="comment[body]"
-                id="CommentForm-{{ section.id }}-body"
-                class="text-area field__input"
-                aria-required="true"
-                required
-                {% if form.errors contains 'body' %}
-                  aria-invalid="true"
-                  aria-describedby="CommentForm-{{ section.id }}-body-error"
-                {% endif %}
-                placeholder="{{ 'blogs.article.message' | t }}"
-              >{{ form.body | escape }}</textarea>
-              <label class="form__label field__label" for="CommentForm-{{ section.id }}-body">
-                {{- 'blogs.article.message' | t }}
-                <span aria-hidden="true">*</span></label
-              >
-            </div>
+              {%- liquid
+                assign comment_field_id = 'CommentForm-' | append: section.id | append: '-body'
+                assign comment_field_label = 'blogs.article.message' | t
+                assign comment_field_invalid = nil
+                assign comment_field_description = nil
+                if form.errors contains 'body'
+                  assign comment_field_invalid = true
+                  assign comment_field_description = comment_field_id | append: '-error'
+                endif
+              -%}
+              {%- assign comment_field_feedback_html = nil -%}
+              {% render 'lemoon-ui-field', kind: 'textarea', id: comment_field_id, name: 'comment[body]', type: 'text', value: form.body, label: comment_field_label, placeholder: comment_field_label, label_class: 'form__label field__label', label_suffix_html: comment_required_marker_html, wrapper_class: 'field field--with-error', rows: 5, control_class: 'text-area field__input', required: true, aria_required: true, invalid: comment_field_invalid, describedby: comment_field_description, feedback_html: comment_field_feedback_html %}
             {%- if form.errors contains 'body' -%}
               <small id="CommentForm-{{ section.id }}-body-error">
                 <span class="form__message">
@@ -316,7 +294,8 @@
           {%- if blog.moderated? -%}
             <p class="article-template__comment-warning caption">{{ 'blogs.article.moderated' | t }}</p>
           {%- endif -%}
-          <input type="submit" class="button" value="{{ 'blogs.article.post' | t }}">
+          {%- assign comment_submit_label = 'blogs.article.post' | t -%}
+          {% render 'lemoon-ui-action', element: 'input', type: 'submit', label: comment_submit_label %}
         {% endform %}
       </div>
     </div>

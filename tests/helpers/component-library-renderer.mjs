@@ -15,6 +15,11 @@ function prepare(source) {
     .replace(/{%-?\s*style\s*-?%}/g, '<style>').replace(/{%-?\s*endstyle\s*-?%}/g, '</style>')
     .replace(/{%-?\s*form\s+'contact',\s*id:\s*contact_form_id,\s*class:\s*'lemoon-contact__form'\s*-?%}/g,
       '<form method="post" action="/contact#contact_form" id="{{ contact_form_id }}" class="lemoon-contact__form" data-shopify-form-fixture><input type="hidden" name="form_type" value="contact"><input type="hidden" name="utf8" value="✓">')
+    .replace(/{%-?\s*form\s+'customer',\s*id:\s*newsletter_form_id,\s*class:\s*'([^']+)'\s*-?%}/g,
+      '<form method="post" action="/contact#contact_form" id="{{ newsletter_form_id }}" class="$1" data-shopify-form-fixture><input type="hidden" name="form_type" value="customer"><input type="hidden" name="utf8" value="✓">')
+    .replace(/{%-?\s*form\s+'new_comment',\s*article\s*-?%}/g,
+      '<form method="post" action="{{ article.url }}/comments#comment_form" id="article-{{ article.id }}-comment-form" data-shopify-form-fixture><input type="hidden" name="form_type" value="new_comment"><input type="hidden" name="utf8" value="✓">')
+    .replace(/{%-?\s*(?:paginate [^%]+|endpaginate)\s*-?%}/g, '')
     .replace(/{%-?\s*endform\s*-?%}/g, '</form>');
 }
 
@@ -33,6 +38,8 @@ export function createComponentEngine({ language = 'es', sourceRoot = root } = {
     }
   });
   // Apply Shopify tag adaptation on every file read, including nested snippets.
+  for (const filter of ['handleize', 'image_url', 'image_tag', 'time_tag', 'payment_type_svg_tag']) engine.registerFilter(filter, () => { throw new Error(`${filter} is outside second-wave fixture scope`); });
+  engine.registerFilter('structured_data', () => '{}');
   engine.registerFilter('money', () => { throw new Error('Money is outside component fixture scope'); });
   engine.registerFilter('asset_url', value => `/assets/${value}`);
   engine.registerFilter('stylesheet_tag', value => `<link rel="stylesheet" href="${escape(value)}">`);

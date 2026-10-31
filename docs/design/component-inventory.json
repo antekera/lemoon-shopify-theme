@@ -114,7 +114,9 @@
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-faq.liquid",
         "sections/lemoon-guide-page.liquid",
+        "sections/lemoon-legal-page.liquid",
         "sections/main-page.liquid",
         "sections/page.liquid",
         "sections/rich-text.liquid",
@@ -151,12 +153,15 @@
       "direct_static_consumers": [
         "layout/password.liquid",
         "layout/theme.liquid",
+        "sections/footer.liquid",
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/lemoon-faq-page.liquid",
         "sections/lemoon-featured-products.liquid",
         "sections/lemoon-guide-page.liquid",
+        "sections/lemoon-legal-page.liquid",
+        "sections/main-article.liquid",
         "snippets/buy-buttons.liquid",
         "snippets/lemoon-sticky-purchase.liquid",
         "snippets/product-media-gallery.liquid"
@@ -230,8 +235,10 @@
         "layout/password.liquid",
         "layout/theme.liquid",
         "sections/contact-form.liquid",
+        "sections/footer.liquid",
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-design-system.liquid",
+        "sections/main-article.liquid",
         "snippets/facets-filter-desktop.liquid",
         "snippets/facets-filter-mobile.liquid",
         "snippets/main-search-results.liquid"
@@ -550,9 +557,11 @@
       ],
       "direct_static_consumers": [
         "sections/featured-product.liquid",
+        "sections/footer.liquid",
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-eyewear-product.liquid",
+        "sections/main-article.liquid",
         "sections/main-cart-items.liquid",
         "sections/main-product.liquid",
         "sections/predictive-search.liquid",
@@ -608,6 +617,7 @@
         "sections/featured-product.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-faq.liquid",
         "sections/main-product.liquid",
         "snippets/product-disclosures.liquid",
         "templates/page.preguntas-frecuentes.json",
@@ -621,7 +631,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-faq-item.liquid",
-        "scope": "FAQ agrupado usa details; FAQ legacy y otros disclosures mantienen sus dueños.",
+        "scope": "FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños.",
         "recipe_path": "docs/components/recipes/faq-group.md"
       }
     },
@@ -1504,7 +1514,8 @@
         "LM-CONTENT-CARD",
         "LM-NAV",
         "LM-FIELD",
-        "LM-FEEDBACK"
+        "LM-FEEDBACK",
+        "LM-ACTION"
       ],
       "documentation_anchor": "lm-journal",
       "availability": {
@@ -4322,9 +4333,12 @@
       "path": "sections/footer.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-ACTION",
+        "LM-FEEDBACK",
+        "LM-FIELD",
         "LM-FOOTER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/header-group.json",
@@ -4438,9 +4452,10 @@
       "path": "sections/lemoon-faq.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-DISCLOSURE"
+        "LM-DISCLOSURE",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-featured-products.liquid",
@@ -4488,9 +4503,11 @@
       "path": "sections/lemoon-legal-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-LEGAL"
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-service-page.liquid",
@@ -4544,9 +4561,12 @@
       "path": "sections/main-article.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-ACTION",
+        "LM-FEEDBACK",
+        "LM-FIELD",
         "LM-JOURNAL"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/main-blog.liquid",
@@ -5767,6 +5787,31 @@
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 507 indexed source paths, including the six PR additions retained in new_source_paths; that list does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
-    "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches."
+    "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
+    "second_adoption_wave": {
+      "base_sha": "15be220684823beb474a2d2f5312faa6ef63cd64",
+      "consumers": {
+        "sections/footer.liquid": [
+          "LM-FIELD",
+          "LM-ACTION",
+          "LM-FEEDBACK"
+        ],
+        "sections/main-article.liquid": [
+          "LM-FIELD",
+          "LM-ACTION",
+          "LM-FEEDBACK"
+        ],
+        "sections/lemoon-legal-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-faq.liquid": [
+          "LM-TYPE",
+          "LM-DISCLOSURE"
+        ]
+      },
+      "contract": "Existing native forms, names/IDs, response semantics, editor attrs and first-open FAQ preserved; optional field order/wrapper/ARIA/trusted slots, action submit input and message h3 only. Shared approved control border/focus correction; no new UI variants.",
+      "proof": "tests/e2e/second-wave.spec.js compares baseline real Liquid-rendered semantic DOM; Shopify form tags/errors are fixture adapters, no delivery/editor/publication claim."
+    }
   }
 }

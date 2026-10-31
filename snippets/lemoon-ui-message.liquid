@@ -1,6 +1,6 @@
 {% doc %}
   Presentation only; no announcement or focus by default. content_html is trusted template markup, never raw customer text; takes precedence over text.
-  @param {string} [tag] - p (default) or div.
+  @param {string} [tag] - p (default), div or h3 (existing form-status heading).
   @param {string} [text] - Plain text, escaped once.
   @param {string} [content_html] - Trusted template capture only, rendered as markup.
   @param {string} [id] - Explicit ID/classes/semantics; live maps to aria-live.
@@ -15,8 +15,8 @@
 {% enddoc %}
 {%- liquid
   assign message_tag = 'p'
-  if tag == 'div'
-    assign message_tag = 'div'
+  if tag == 'div' or tag == 'h3'
+    assign message_tag = tag
   endif
 -%}
 <{{ message_tag }}{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if class != blank %} class="{{ class | escape }}"{% endif %}{% if role != blank %} role="{{ role | escape }}"{% endif %}{% if live != blank %} aria-live="{{ live | escape }}"{% endif %}{% if tabindex != nil %} tabindex="{{ tabindex | escape }}"{% endif %}{% if autofocus == true %} autofocus{% endif %}{% if hidden == true %} hidden{% endif %}>{% if content_html != nil %}{{ content_html }}{% else %}{{ text | escape }}{% endif %}</{{ message_tag }}>

@@ -141,7 +141,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** Escala móvil <750; padding de sección según schema/template. **Accesibilidad.** Nivel semántico independiente de clase visual; preservar links, listas, tablas y contenido CMS sin reinterpretar headings.
 
-**JS.** No controlador tipográfico. **Reutilización actual.** `lemoon-ui-heading` en guía, contacto, FAQ y galería; las clases y wrappers conservan su dueño local.
+**JS.** No controlador tipográfico. **Reutilización actual.** `lemoon-ui-heading` en guía, contacto, FAQ agrupado/legacy, shell legal y galería; las clases y wrappers conservan su dueño local.
 
 **Dependencias de composición:** [LM-SHELL](#lm-shell). Consumidores estáticos en el JSON.
 
@@ -162,7 +162,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** Base 48px ≥750 y 44px <750; no imponer esa caja a todos los iconos sin revisar target. **Accesibilidad.** Conservar nombre accesible, type, form, IDs, ARIA, data-*; un enlace sin href no obtiene semántica disabled por CSS.
 
-**JS.** Ninguno para estilo base; handlers pertenecen al consumidor, nunca al átomo visual. **Reutilización actual.** `lemoon-ui-action` presenta acciones base/local en guía/contacto/FAQ/galería; los adaptadores comerciales compartidos conservan sus hooks y lógica.
+**JS.** Ninguno para estilo base; handlers pertenecen al consumidor, nunca al átomo visual. **Reutilización actual.** `lemoon-ui-action` presenta acciones base/local en guía/contacto/FAQ/galería, newsletter footer y ayuda legal, más submit input de comentarios; los adaptadores comerciales compartidos conservan sus hooks y lógica.
 
 **Dependencias de composición:** [LM-ICON](#lm-icon). Consumidores estáticos en el JSON.
 
@@ -198,13 +198,13 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Variantes existentes.** Text/email/tel/number/date/file/password/search, textarea y select nativos según fuente; floating labels Dawn y labels persistentes locales no son el mismo markup.
 
-**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado. Los controles UI de contacto/búsqueda/galería aplican esa corrección scoped; los campos legacy restantes conservan deuda.
+**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado. Los controles UI de contacto/búsqueda/galería/newsletter footer/comentarios aplican esa corrección scoped; los campos legacy restantes conservan deuda.
 
 **Estados observados / aplicabilidad:** Normal: Valor/placeholder y label; Hover: Reglas locales de contorno; Foco: :focus-visible/:focus-within observado; deuda legacy documentada; Seleccionado: Selección nativa select; Loading: No loading universal de campo; Error: aria-invalid/describedby según formulario; no todas las instancias lo traen; Disabled: disabled nativo donde existe.
 
 **Responsive.** 48px base, textarea auto; columnas del formulario apilan según superficie. **Accesibilidad.** Preservar label-for, hint/error IDs, inputmode, min/max/step y constraints; no copiar defecto de borde al extraer.
 
-**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren el piloto contacto/búsqueda/galería con hint/error e IDs explícitos; newsletter/receta/gift conservan sus contratos locales.
+**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren contacto/búsqueda/galería y la segunda adopción de newsletter footer/comentarios; formularios, IDs y feedback permanecen en sus dueños. Receta/gift conservan sus contratos locales.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
@@ -393,14 +393,14 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** No truncar errores ni tapar acciones al apilar. **Accesibilidad.** Conservar live region IDs; spinner decorativo no reemplaza texto de estado. No duplicar anuncios.
 
-**JS.** Controlador del formulario/producto/cart; no un nuevo bus de toasts. **Reutilización actual.** Spinner compartido y `lemoon-ui-message` presentacional para contacto/galería; las demás operaciones conservan su feedback con semántica propia.
+**JS.** Controlador del formulario/producto/cart; no un nuevo bus de toasts. **Reutilización actual.** Spinner compartido y `lemoon-ui-message` presentacional para contacto/galería/newsletter footer y headings de feedback de comentarios; las demás operaciones conservan su feedback con semántica propia.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type), [LM-ICON](#lm-icon). Consumidores estáticos en el JSON.
 
 <a id="lm-disclosure"></a>
 ### LM-DISCLOSURE · Accordions, disclosures y FAQ
 
-**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-faq-item.liquid](../../snippets/lemoon-ui-faq-item.liquid). FAQ agrupado usa details; FAQ legacy y otros disclosures mantienen sus dueños. [Receta de integración](../components/recipes/faq-group.md).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-faq-item.liquid](../../snippets/lemoon-ui-faq-item.liquid). FAQ agrupado usa details; FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños. [Receta de integración](../components/recipes/faq-group.md).
 
 **Fuentes:** [sections/collapsible-content.liquid](../../sections/collapsible-content.liquid), [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid), [sections/lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid), [sections/disclosures.liquid](../../sections/disclosures.liquid), [snippets/product-disclosures.liquid](../../snippets/product-disclosures.liquid), [assets/component-accordion.css](../../assets/component-accordion.css), [assets/collapsible-content.css](../../assets/collapsible-content.css), [assets/component-disclosures.css](../../assets/component-disclosures.css), [assets/details-disclosure.js](../../assets/details-disclosure.js), [assets/disclosures.js](../../assets/disclosures.js), [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid), [assets/global.js](../../assets/global.js).
 
@@ -414,7 +414,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** Contenido fluido; FAQ page layout local, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
 
-**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado y galería; FAQ legacy, collapsible y disclosure PDP conservan sus contratos.
+**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado, FAQ legacy y galería; collapsible y disclosure PDP conservan sus contratos.
 
 **Dependencias de composición:** [LM-ICON](#lm-icon), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
@@ -1112,12 +1112,14 @@ Entradas que requieren inspección especial al implementar: section rendering de
 
 | Familia | Snippet canónico nuevo | Consumidores reales migrados | Contrato / límite |
 | --- | --- | --- | --- |
-| LM-ACTION | [lemoon-ui-action](../../snippets/lemoon-ui-action.liquid) | Guía, contacto, FAQ agrupado y galería | a/button; base/local; primary/secondary/tertiary; clases locales y booleanos explícitos. Sin lógica comercial |
-| LM-FIELD | [lemoon-ui-field](../../snippets/lemoon-ui-field.liquid) | Cuatro controles de contacto y galería | input/textarea, labels, hint/error; contact/base. Formulario/valores en consumidor |
+| LM-ACTION | [lemoon-ui-action](../../snippets/lemoon-ui-action.liquid) | Guía, contacto, FAQ agrupado, galería, newsletter footer, comentarios y ayuda legal | a/button/input submit; base/local; primary/secondary/tertiary; clases locales y booleanos explícitos. Sin lógica comercial |
+| LM-FIELD | [lemoon-ui-field](../../snippets/lemoon-ui-field.liquid) | Contacto, galería, newsletter footer y comentarios | input/textarea, labels, hint/error y slots confiables; orden/wrapper opt-in; contact/base. Formulario/valores en consumidor |
 | LM-FIELD | [lemoon-ui-select](../../snippets/lemoon-ui-select.liquid) | Ordenación vertical de búsqueda y galería | options_html capturado, label externo persistente, SortBy/sort_by y eventos nativos conservados |
-| LM-TYPE | [lemoon-ui-heading](../../snippets/lemoon-ui-heading.liquid) | Guía, contacto, FAQ y galería; FAQ item | Nivel 1–6 allowlist; semántica separada de tamaño/color |
-| LM-FEEDBACK | [lemoon-ui-message](../../snippets/lemoon-ui-message.liquid) | Respuestas nativas de contacto y estados sintéticos de galería | p/div, texto o content_html confiable, role/live/foco opt-in |
-| LM-DISCLOSURE | [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid) | Fallback/custom del FAQ agrupado y galería | details/summary, pregunta/answer_html, editor attrs en raíz; grupos/routing permanecen en sección |
+| LM-TYPE | [lemoon-ui-heading](../../snippets/lemoon-ui-heading.liquid) | Guía, contacto, FAQ agrupado/legacy, shell legal y galería; FAQ item | Nivel 1–6 allowlist; semántica separada de tamaño/color |
+| LM-FEEDBACK | [lemoon-ui-message](../../snippets/lemoon-ui-message.liquid) | Respuestas de contacto/newsletter, headings de feedback de comentarios y estados sintéticos de galería | p/div/h3, texto o content_html confiable, role/live/foco opt-in |
+| LM-DISCLOSURE | [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid) | Fallback/custom del FAQ agrupado, legacy y galería | details/summary, pregunta/answer_html, editor attrs en raíz; grupos/routing permanecen en sección |
+
+La segunda adopción conserva los cuatro dueños y sus schemas: newsletter customer (contact[tags]/contact[email]/commit), comentarios new_comment (author/email/body, moderación y autofocus de respuesta), cinco templates legales (CMS/políticas/demo/rutas locales) y FAQ legacy de page.preguntas-frecuentes (primer details abierto y block.shopify_attributes). [Pruebas semánticas y de navegador](../../tests/e2e/second-wave.spec.js) comparan DOM Liquid real contra una base previa; los adaptadores de formularios/errores no prueban Shopify. No se incorpora una variante visual ni un wrapper de sección nuevo.
 
 Los contratos completos están en LiquidDoc y en las [seis recetas](../components/README.md#elegir-una-receta). Strings/atributos se escapan una vez al renderizar; `_html` sólo admite capturas confiables y `editor_attributes` sólo `block.shopify_attributes`. Los consumidores mantienen IDs/ARIA, locales, schemas/settings, formularios, rutas y hooks. Las familias canónicas existentes —iconos, spinner, precio, swatches, card-product, controles de carrusel y adaptadores comerciales— conservan su nombre: no se añaden wrappers para renombrarlas.
 
@@ -1126,7 +1128,7 @@ CSS mantiene su orden y dueño: tokens → base → componentes → superficie. 
 <a id="extraction"></a>
 ## Oportunidades pendientes
 
-Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. FAQ legacy, sort de colección, newsletter y operaciones comerciales no fueron migrados por el piloto. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
+Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. El piloto inicial no migró FAQ legacy ni newsletter; la segunda adopción autorizada incorpora sólo FAQ legacy, newsletter del footer, formulario/feedback/submit de comentarios y títulos/ayuda del shell legal usado por cinco templates. Sort de colección y operaciones comerciales siguen fuera de esta adopción. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
 
 <a id="gallery-plan"></a>
 ## Galería actual y demos legacy

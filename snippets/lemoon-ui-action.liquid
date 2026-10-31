@@ -1,12 +1,12 @@
 {% doc %}
   Navigation or native action. Plain text/attributes escape here. Local family adds no button classes; disabled/loading links have no destination. Boolean inputs are native booleans.
   @param {string} [label] - Plain visible accessible label, escaped once.
-  @param {string} [element] - a for navigation; otherwise a native button.
+  @param {string} [element] - a for navigation, input with type submit for a native submit input (label becomes value, no icon/spinner children); otherwise a native button.
   @param {string} [href] - Navigation destination; omitted when disabled or loading.
   @param {string} [type] - Explicit native attribute; type defaults to button (button/submit/reset).
   @param {string} [id] - Caller-generated unique DOM ID.
   @param {string} [name] - Native button name, when supplied.
-  @param {string} [value] - Native button value; an explicitly empty value is preserved.
+  @param {string} [value] - Native button value; an explicitly empty value is preserved. Submit input uses label as value.
   @param {string} [form_id] - Native button form association.
   @param {string} [variant] - primary (default), secondary or tertiary, existing base variants only.
   @param {string} [style_family] - base (default) or local to preserve surface classes.
@@ -28,6 +28,8 @@
   assign action_element = 'button'
   if element == 'a'
     assign action_element = 'a'
+  elsif element == 'input' and type == 'submit'
+    assign action_element = 'input'
   endif
   assign action_type = 'button'
   if type == 'submit' or type == 'reset'
@@ -39,7 +41,11 @@
     assign blocked = true
   endif
 -%}
-<{{ action_element }} class="lemoon-ui-action {% unless style_family == 'local' %}button{% if variant == 'secondary' %} button--secondary{% elsif variant == 'tertiary' %} button--tertiary{% endif %}{% endunless %}{% if class != blank %} {{ class | escape }}{% endif %}{% if loading == true %} loading{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if aria_label != blank %} aria-label="{{ aria_label | escape }}"{% endif %}{% if aria_controls != blank %} aria-controls="{{ aria_controls | escape }}"{% endif %}{% if describedby != blank %} aria-describedby="{{ describedby | escape }}"{% endif %}{% if aria_expanded != nil %} aria-expanded="{{ aria_expanded | escape }}"{% endif %}{% if aria_pressed != nil %} aria-pressed="{{ aria_pressed | escape }}"{% endif %}{% if loading == true %} aria-busy="true"{% endif %}{% if action_element == 'a' %}{% if blocked %} aria-disabled="true" role="link" tabindex="-1"{% elsif href != blank %} href="{{ href | escape }}"{% endif %}{% else %} type="{{ action_type }}"{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if value != nil %} value="{{ value | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if blocked %} disabled{% endif %}{% endif %}>
+{%- capture action_attributes_html -%}class="lemoon-ui-action {% unless style_family == 'local' %}button{% if variant == 'secondary' %} button--secondary{% elsif variant == 'tertiary' %} button--tertiary{% endif %}{% endunless %}{% if class != blank %} {{ class | escape }}{% endif %}{% if loading == true %} loading{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if aria_label != blank %} aria-label="{{ aria_label | escape }}"{% endif %}{% if aria_controls != blank %} aria-controls="{{ aria_controls | escape }}"{% endif %}{% if describedby != blank %} aria-describedby="{{ describedby | escape }}"{% endif %}{% if aria_expanded != nil %} aria-expanded="{{ aria_expanded | escape }}"{% endif %}{% if aria_pressed != nil %} aria-pressed="{{ aria_pressed | escape }}"{% endif %}{% if loading == true %} aria-busy="true"{% endif %}{% if action_element == 'a' %}{% if blocked %} aria-disabled="true" role="link" tabindex="-1"{% elsif href != blank %} href="{{ href | escape }}"{% endif %}{% else %} type="{{ action_type }}"{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if action_element == 'input' %} value="{{ label | escape }}"{% elsif value != nil %} value="{{ value | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if blocked %} disabled{% endif %}{% endif %}{%- endcapture -%}
+{%- if action_element == 'input' -%}
+  <input {{ action_attributes_html }}>
+{%- else -%}
+<{{ action_element }} {{ action_attributes_html }}>
   {%- if icon != blank and icon_position != 'after' -%}{% render 'lemoon-icon', icon: action_icon %}{%- endif -%}
   <span>{{ label | escape }}</span>
   {%- if icon != blank and icon_position == 'after' -%}{% render 'lemoon-icon', icon: action_icon %}{%- endif -%}
@@ -49,3 +55,4 @@
   {%- endif -%}
   {%- endunless -%}
 </{{ action_element }}>
+{%- endif -%}

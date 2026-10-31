@@ -21,31 +21,29 @@
         {%- endif -%}
       </div>
       <div class="lemoon-newsletter__form-wrap">
-        {%- form 'customer', id: newsletter_form_id, class: 'lemoon-newsletter__form' -%}
+        {%- form 'customer', id: newsletter_form_id, class: 'lemoon-newsletter__form lemoon-ui-field' -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
-          <label class="visually-hidden" for="LemoonNewsletterEmail-{{ section.id }}">{{ section.settings.newsletter_placeholder | escape }}</label>
-          <input
-            id="LemoonNewsletterEmail-{{ section.id }}"
-            class="lemoon-newsletter__input"
-            type="email"
-            name="contact[email]"
-            value="{{ form.email | escape }}"
-            placeholder="{{ section.settings.newsletter_placeholder | escape }}"
-            autocomplete="email"
-            autocorrect="off"
-            autocapitalize="off"
-            aria-required="true"
-            required
-            {% if form.errors %}aria-invalid="true" aria-describedby="LemoonNewsletterError-{{ section.id }}"{% elsif form.posted_successfully? %}aria-describedby="LemoonNewsletterSuccess-{{ section.id }}"{% endif %}
-          >
-          <button class="lemoon-newsletter__button" type="submit" name="commit">
-            {{ section.settings.newsletter_button | escape }}
-          </button>
+          {%- liquid
+            assign newsletter_email_id = 'LemoonNewsletterEmail-' | append: section.id
+            assign newsletter_error_id = 'LemoonNewsletterError-' | append: section.id
+            assign newsletter_success_id = 'LemoonNewsletterSuccess-' | append: section.id
+            assign newsletter_invalid = nil
+            assign newsletter_description = nil
+            if form.errors
+              assign newsletter_invalid = true
+              assign newsletter_description = newsletter_error_id
+            elsif form.posted_successfully?
+              assign newsletter_description = newsletter_success_id
+            endif
+          -%}
+          {% render 'lemoon-ui-field', id: newsletter_email_id, name: 'contact[email]', type: 'email', value: form.email, label: section.settings.newsletter_placeholder, placeholder: section.settings.newsletter_placeholder, control_class: 'lemoon-newsletter__input', label_class: 'visually-hidden', unwrapped: true, label_before: true, autocomplete: 'email', autocorrect: 'off', autocapitalize: 'off', aria_required: true, required: true, invalid: newsletter_invalid, describedby: newsletter_description %}
+          {% render 'lemoon-ui-action', type: 'submit', name: 'commit', label: section.settings.newsletter_button, style_family: 'local', class: 'lemoon-newsletter__button' %}
           {%- if form.errors -%}
-            <p id="LemoonNewsletterError-{{ section.id }}" class="lemoon-newsletter__message" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- capture newsletter_error -%}{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}{%- endcapture -%}
+            {% render 'lemoon-ui-message', id: newsletter_error_id, class: 'lemoon-newsletter__message', role: 'alert', text: newsletter_error %}
           {%- endif -%}
           {%- if form.posted_successfully? -%}
-            <p id="LemoonNewsletterSuccess-{{ section.id }}" class="lemoon-newsletter__message" tabindex="-1">{{ section.settings.newsletter_success | escape }}</p>
+            {% render 'lemoon-ui-message', id: newsletter_success_id, class: 'lemoon-newsletter__message', tabindex: '-1', text: section.settings.newsletter_success %}
           {%- endif -%}
         {%- endform -%}
       </div>

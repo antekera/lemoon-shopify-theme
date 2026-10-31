@@ -8,10 +8,10 @@ Familias: LM-CONTACT, LM-FIELD, LM-FEEDBACK, LM-ACTION. Volver al [catálogo](..
 
 | Pieza | Entradas a elegir en el consumidor |
 | --- | --- |
-| field | `kind` input/default o textarea; `id`, `name`, `label`, `type`, `value`, `rows`; `required`, `disabled`, `readonly`, `autocomplete`, `autocapitalize`, `spellcheck`, `placeholder`, `inputmode`, `form_id` |
+| field | `kind` input/default o textarea; `id`, `name`, `label`, `type`, `value`, `rows`; `required`, `disabled`, `readonly`, `autocomplete`, `autocorrect`, `autocapitalize`, `aria_required`, `spellcheck`, `placeholder`, `inputmode`, `form_id` |
 | Feedback de field | `invalid`, `describedby`, `hint`, `hint_id`, `error`, `error_id`; clases `wrapper_class`, `control_class`, `label_class`, `hint_class`, `error_class` |
 | Familia de field | `style_family: 'contact'` conserva label antes del control; base conserva orden flotante Dawn, con placeholder adecuado al diseño del consumidor |
-| message | `tag` p/default o div; `text` escapado o `content_html` capturado; `id`, `class`, `role`, `live`, `tabindex`, `autofocus`, `hidden` explícitos |
+| message | `tag` p/default, div o h3 para status headings existentes; `text` escapado o `content_html` capturado; `id`, `class`, `role`, `live`, `tabindex`, `autofocus`, `hidden` explícitos |
 | Submit | action con `type: 'submit'`, familia local y clase `lemoon-contact__submit`; sin loading ni envío AJAX inventado |
 
 ## Ejemplo dentro del formulario dueño
@@ -65,3 +65,13 @@ Las respuestas se componen dentro de ese mismo formulario, bajo sus condiciones 
 El layout aporta tokens → [base.css](../../../assets/base.css) → [lemoon-components.css](../../../assets/lemoon-components.css). El CSS scoped de contacto mantiene geometría, labels y submit. Los controles migrados añaden delimitación continua con `--lemoon-border-strong` y foco separado según [DESIGN](../../../DESIGN.md#5-componentes-y-estados); revisar pseudo-elementos Dawn, clipping y fondos computados. Esto no certifica campos legacy.
 
 Normal/foco/error/disabled/readonly son estados de control; el error conserva valor y recuperación. Loading pertenece al dueño si existe; contacto nativo no añade JS de loading. Validar labels persistentes, IDs únicos, ayuda/error asociados, required/email y teclado sin enviar un POST. [contact-page.test.js](../../../tests/unit/contact-page.test.js) y [component-library.test.js](../../../tests/unit/component-library.test.js) ejercitan fuentes reales con un form/errores Shopify modelado en fixtures. La prueba local no acredita envío ni entrega de correo, captcha, respuesta real de Shopify o configuración del editor.
+
+## Newsletter del footer y comentarios de artículo
+
+[footer](../../../sections/footer.liquid) mantiene `{% form 'customer' %}`, tags newsletter, email, name commit, IDs de sección y ramas independientes de error/éxito. El field usa `unwrapped: true`, `label_before: true`, label `visually-hidden` y control `lemoon-newsletter__input`. El formulario conserva el grid y añade `lemoon-ui-field` al padre para reutilizar contorno/foco existentes sin un div nuevo. `autocorrect: 'off'`, autocomplete email, autocapitalize off y `aria_required: true` se pasan explícitos. Error usa role alert; éxito conserva tabindex -1 sin inventar role/live/autofocus. Sus strings pasan sin preescape a message.
+
+[main-article](../../../sections/main-article.liquid) mantiene `{% form 'new_comment', article %}`, nombres `comment[author]`, `comment[email]`, `comment[body]`, required/aria-required, valores retornados, rows 5 y autocomplete original. `label_suffix_html` es sólo el capture confiable del asterisco decorativo; `feedback_html` es el capture confiable del small con icono y error de autor/email, dentro del wrapper original. El error body sigue fuera de su field como antes. Escapar datos externos dentro de capturas; nunca pasar texto del cliente como HTML. Los slots no modifican hint/error existentes ni sus asociaciones automáticas.
+
+Message con `tag: 'h3'` conserva heading, icono capturado, tabindex -1 y autofocus dentro del div alert/status original; la sección conserva lista de errores y moderación. Action con `element: 'input', type: 'submit'` conserva el submit input original y usa `label` como value escapado, sin hijos ni cierre input. Sólo esa combinación selecciona input; a/button y defaults de otros consumidores no cambian. No añadir spinner/icon a ese input nativo.
+
+`label_before` y `unwrapped` requieren booleano true; `aria_required` preserva false y se omite si no se pasa. Ningún parámetro acepta un bag de atributos arbitrarios. [second-wave.test.js](../../../tests/unit/second-wave.test.js) cubre compatibilidad y [second-wave.spec.js](../../../tests/e2e/second-wave.spec.js) compara DOM previo, validación nativa/FormData sin POST, foco/forced-colors y reflujo. Los tags Shopify y estados de respuesta son adaptadores deterministas; comentarios publicados, captcha y suscripción real siguen sin comprobarse en Shopify.

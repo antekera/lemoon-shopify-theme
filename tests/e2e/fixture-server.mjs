@@ -6,6 +6,8 @@ import { renderNotification, notificationContext } from '../helpers/gift-notific
 import { renderComponentFixture } from '../helpers/component-library-renderer.mjs';
 import { renderDefaultPage } from '../helpers/default-page-renderer.mjs';
 
+import { renderWaveFixture } from '../helpers/second-wave-renderer.mjs';
+
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
   ['/tests/fixtures/gift-card-purchase.html', 'tests/fixtures/gift-card-purchase.html'],
@@ -41,6 +43,15 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1:4173').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/second-wave.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'newsletter';
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderWaveFixture(scenario));
+    } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
 

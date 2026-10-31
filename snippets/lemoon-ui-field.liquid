@@ -28,6 +28,12 @@
   @param {string} [hint_class] - Surface classes; base defaults to Dawn classes.
   @param {string} [error_class] - Surface classes; base defaults to Dawn classes.
   @param {string} [style_family] - base (default) or contact.
+  @param {string} [autocorrect] - Explicit native attribute, e.g. off for email.
+  @param {boolean} [aria_required] - Explicit aria-required; false is preserved.
+  @param {boolean} [unwrapped] - Omit the field wrapper for an existing form layout; parent supplies lemoon-ui-field for shared border/focus CSS.
+  @param {boolean} [label_before] - Preserve a label-before-control layout without selecting a new style family.
+  @param {string} [label_suffix_html] - Trusted template capture only, e.g. decorative required marker.
+  @param {string} [feedback_html] - Trusted template capture only, placed inside the wrapper after label/control; caller owns associations.
   @example
   {% render 'lemoon-ui-field', id: 'Email', name: 'contact[email]', label: 'Email', type: 'email', required: true %}
 {% enddoc %}
@@ -46,7 +52,7 @@
   assign field_description = field_description | strip
 -%}
 {%- capture control_attributes_html -%}
-  class="lemoon-ui-control {% if control_class != nil %}{{ control_class | escape }}{% elsif style_family != 'contact' %}field__input{% if field_kind == 'textarea' %} text-area{% endif %}{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if autocomplete != blank %} autocomplete="{{ autocomplete | escape }}"{% endif %}{% if autocapitalize != blank %} autocapitalize="{{ autocapitalize | escape }}"{% endif %}{% if placeholder != nil %} placeholder="{{ placeholder | escape }}"{% endif %}{% if inputmode != blank %} inputmode="{{ inputmode | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if spellcheck != nil %} spellcheck="{{ spellcheck | escape }}"{% endif %}{% if invalid != nil %} aria-invalid="{{ invalid | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if readonly == true %} readonly{% endif %}{% if field_description != blank %} aria-describedby="{{ field_description | escape }}"{% endif %}
+  class="lemoon-ui-control {% if control_class != nil %}{{ control_class | escape }}{% elsif style_family != 'contact' %}field__input{% if field_kind == 'textarea' %} text-area{% endif %}{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if autocomplete != blank %} autocomplete="{{ autocomplete | escape }}"{% endif %}{% if autocorrect != blank %} autocorrect="{{ autocorrect | escape }}"{% endif %}{% if aria_required != nil %} aria-required="{{ aria_required | escape }}"{% endif %}{% if autocapitalize != blank %} autocapitalize="{{ autocapitalize | escape }}"{% endif %}{% if placeholder != nil %} placeholder="{{ placeholder | escape }}"{% endif %}{% if inputmode != blank %} inputmode="{{ inputmode | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if spellcheck != nil %} spellcheck="{{ spellcheck | escape }}"{% endif %}{% if invalid != nil %} aria-invalid="{{ invalid | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if readonly == true %} readonly{% endif %}{% if field_description != blank %} aria-describedby="{{ field_description | escape }}"{% endif %}
 {%- endcapture -%}
 {%- capture control_html -%}
   {%- if field_kind == 'textarea' -%}
@@ -55,12 +61,14 @@
     <input {{ control_attributes_html }} type="{{ type | default: 'text' | escape }}" value="{{ value | escape }}">
   {%- endif -%}
 {%- endcapture -%}
-{%- capture label_html -%}<label for="{{ id | escape }}"{% if label_class != nil %} class="{{ label_class | escape }}"{% elsif style_family != 'contact' %} class="field__label"{% endif %}>{{ label | escape }}</label>{%- endcapture -%}
-{%- capture feedback_html -%}
+{%- capture label_html -%}<label for="{{ id | escape }}"{% if label_class != nil %} class="{{ label_class | escape }}"{% elsif style_family != 'contact' %} class="field__label"{% endif %}>{{ label | escape }}{{ label_suffix_html }}</label>{%- endcapture -%}
+{%- capture field_feedback_html -%}
 {%- if hint != blank -%}<p{% if hint_id != blank %} id="{{ hint_id | escape }}"{% endif %}{% if hint_class != blank %} class="{{ hint_class | escape }}"{% endif %}>{{ hint | escape }}</p>{%- endif -%}
 {%- if error != blank -%}<small{% if error_id != blank %} id="{{ error_id | escape }}"{% endif %} class="lemoon-ui-field__error{% if error_class != blank %} {{ error_class | escape }}{% endif %}">{{ error | escape }}</small>{%- endif -%}
 {%- endcapture -%}
-<div class="lemoon-ui-field {% if wrapper_class != nil %}{{ wrapper_class | escape }}{% elsif style_family == 'contact' %}lemoon-contact__field{% else %}field{% endif %}">
-  {%- if style_family == 'contact' -%}{{ label_html }}{{ control_html }}{{ feedback_html }}{%- else -%}{{ control_html }}{{ label_html }}{%- endif -%}
-</div>
-{%- unless style_family == 'contact' -%}{{ feedback_html }}{%- endunless -%}
+{%- unless unwrapped == true -%}<div class="lemoon-ui-field {% if wrapper_class != nil %}{{ wrapper_class | escape }}{% elsif style_family == 'contact' %}lemoon-contact__field{% else %}field{% endif %}">{%- endunless -%}
+  {%- if style_family == 'contact' or label_before == true -%}{{ label_html }}{{ control_html }}{%- else -%}{{ control_html }}{{ label_html }}{%- endif -%}
+  {%- if style_family == 'contact' -%}{{ field_feedback_html }}{%- endif -%}
+  {{- feedback_html -}}
+{%- unless unwrapped == true -%}</div>{%- endunless -%}
+{%- unless style_family == 'contact' -%}{{ field_feedback_html }}{%- endunless -%}
