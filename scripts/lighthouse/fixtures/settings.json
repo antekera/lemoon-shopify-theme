@@ -1,0 +1,12 @@
+{
+  "current": {
+    "logo_width": 120,
+    "type_header_font": "assistant_n4",
+    "type_body_font": "assistant_n4",
+    "page_width": 1200,
+    "animations_reveal_on_scroll": false,
+    "cart_type": "drawer",
+    "predictive_search_enabled": true
+  },
+  "presets": {}
+}

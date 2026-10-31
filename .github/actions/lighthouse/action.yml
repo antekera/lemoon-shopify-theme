@@ -1,0 +1,61 @@
+name: Reproducible Lighthouse
+description: Pinned lab gate or read-only commercial audit, with private authentication and exact cleanup
+inputs:
+  mode:
+    description: lab or commercial
+    default: lab
+runs:
+  using: composite
+  steps:
+    - name: Build pinned Lighthouse harness
+      shell: bash
+      run: docker build --platform linux/amd64 -t lemoon-lighthouse .lighthouse-trusted/scripts/lighthouse
+    - name: Run Lighthouse
+      shell: bash
+      env:
+        AUDIT_MODE: ${{ inputs.mode }}
+      run: |
+        export HARNESS_SHA="$(git -C .lighthouse-trusted rev-parse HEAD)"
+        mkdir -p "$RUNNER_TEMP/lighthouse-state" "$RUNNER_TEMP/lighthouse-reports"
+        docker run --init --name lemoon-lighthouse-run --stop-timeout 120 \
+          --user "$(id -u):$(id -g)" --env HOME=/tmp/harness-home \
+          --env AUDIT_MODE --env GITHUB_SHA --env GITHUB_ACTIONS --env HARNESS_SHA \
+          --env LIGHTHOUSE_STORE --env LIGHTHOUSE_CLIENT_ID --env LIGHTHOUSE_CLIENT_SECRET \
+          --env LIGHTHOUSE_STORE_PASSWORD --env LIGHTHOUSE_PRODUCT_HANDLE --env LIGHTHOUSE_COLLECTION_HANDLE \
+          --env SHOPIFY_STORE --env SHOPIFY_STOREFRONT_ORIGIN --env SHOPIFY_STORE_PASSWORD --env SHOPIFY_PRODUCT_HANDLE --env SHOPIFY_COLLECTION_HANDLE \
+          --volume "$GITHUB_WORKSPACE:/theme:ro" \
+          --volume "$RUNNER_TEMP/lighthouse-state:/state" \
+          --volume "$RUNNER_TEMP/lighthouse-reports:/reports" lemoon-lighthouse
+    - name: Confirm temporary theme cleanup
+      if: always()
+      shell: bash
+      env:
+        AUDIT_MODE: ${{ inputs.mode }}
+      run: |
+        if docker container inspect lemoon-lighthouse-run >/dev/null 2>&1; then
+          docker stop --time 120 lemoon-lighthouse-run >/dev/null
+          docker rm lemoon-lighthouse-run >/dev/null
+        fi
+        # A durable exact-name/ID record survives failure or cancellation of the first container.
+        # No record means creation was never attempted (including a failed image build).
+        if test -f "$RUNNER_TEMP/lighthouse-state/theme.json"; then
+          docker run --rm --init --user "$(id -u):$(id -g)" --env HOME=/tmp/harness-home \
+            --env AUDIT_MODE --env GITHUB_ACTIONS \
+            --env LIGHTHOUSE_STORE --env LIGHTHOUSE_CLIENT_ID --env LIGHTHOUSE_CLIENT_SECRET \
+            --env LIGHTHOUSE_STORE_PASSWORD --env LIGHTHOUSE_PRODUCT_HANDLE --env LIGHTHOUSE_COLLECTION_HANDLE \
+            --volume "$RUNNER_TEMP/lighthouse-state:/state" \
+            --volume "$RUNNER_TEMP/lighthouse-reports:/reports" lemoon-lighthouse --cleanup
+        fi
+    - name: Preserve sanitized Lighthouse evidence
+      if: always()
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      with:
+        name: lighthouse-${{ inputs.mode }}-${{ github.run_attempt }}
+        retention-days: 14
+        if-no-files-found: warn
+        path: |
+          ${{ runner.temp }}/lighthouse-reports/lhr-*.json
+          ${{ runner.temp }}/lighthouse-reports/assertion-results.json
+          ${{ runner.temp }}/lighthouse-reports/versions.json
+          ${{ runner.temp }}/lighthouse-reports/status.json
+          ${{ runner.temp }}/lighthouse-reports/cleanup.json

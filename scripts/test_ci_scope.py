@@ -62,7 +62,9 @@ class ScopeTests(unittest.TestCase):
         for path in (
             "docs/design/test.md", ".codex/agents/test.toml", ".agents/skills/a/SKILL.md",
             ".claude/rules/test.md", "AGENTS.md", "README.MD",
-            ".github/workflows/ci.yml", "scripts/ci_scope.py", "scripts/test_ci_scope.py",
+            ".github/workflows/ci.yml", ".github/workflows/lighthouse-commercial.yml",
+            ".github/actions/lighthouse/action.yml", "scripts/lighthouse/run.cjs",
+            "scripts/lighthouse/fixtures/products.csv", "scripts/ci_scope.py", "scripts/test_ci_scope.py",
             "scripts/test_codex_workflows.py", "scripts/test_codex_workflow_validator.py",
         ):
             self.write(path)
