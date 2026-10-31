@@ -1,6 +1,6 @@
 # LEM-142 — Biblioteca ejecutable de componentes y recetas
 
-Estado: propuesta técnica para revisión. La aclaración de Miguel sustituye el alcance exclusivamente documental del PR40; el código de esta propuesta todavía no está implementado.
+Estado: diseño e implementación aprobados por Miguel el 31-10-2026 («apruebo la implementacion de LEM 142»). La aclaración sustituye el alcance exclusivamente documental del PR40. Implementación en curso según el [plan de ejecución](../plans/2026-10-31-lem-142-reusable-components.md); el código final requiere su propia revisión antes del merge.
 
 ## Resultado esperado
 

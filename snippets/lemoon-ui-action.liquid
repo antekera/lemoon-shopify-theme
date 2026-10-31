@@ -1,0 +1,51 @@
+{% doc %}
+  Navigation or native action. Plain text/attributes escape here. Local family adds no button classes; disabled/loading links have no destination. Boolean inputs are native booleans.
+  @param {string} [label] - Plain visible accessible label, escaped once.
+  @param {string} [element] - a for navigation; otherwise a native button.
+  @param {string} [href] - Navigation destination; omitted when disabled or loading.
+  @param {string} [type] - Explicit native attribute; type defaults to button (button/submit/reset).
+  @param {string} [id] - Caller-generated unique DOM ID.
+  @param {string} [name] - Native button name, when supplied.
+  @param {string} [value] - Native button value; an explicitly empty value is preserved.
+  @param {string} [form_id] - Native button form association.
+  @param {string} [variant] - primary (default), secondary or tertiary, existing base variants only.
+  @param {string} [style_family] - base (default) or local to preserve surface classes.
+  @param {string} [class] - Additional surface classes.
+  @param {boolean} [disabled] - Prevents activation; native disabled on buttons, no href on links.
+  @param {boolean} [loading] - Prevents activation, adds loading class and aria-busy; label remains accessible.
+  @param {boolean} [show_spinner] - Include shared spinner; loading shows it by default, explicit false omits it.
+  @param {string} [aria_label] - Explicit accessible relationship/name.
+  @param {string} [aria_controls] - Explicit accessible relationship/name.
+  @param {string} [describedby] - Explicit accessible relationship/name.
+  @param {boolean} [aria_expanded] - Omitted unless supplied; false is preserved.
+  @param {boolean} [aria_pressed] - Omitted unless supplied; false is preserved.
+  @param {string} [icon] - Existing lemoon-icon name; decorative.
+  @param {string} [icon_position] - before (default) or after the direct label span.
+  @example
+  {% render 'lemoon-ui-action', label: 'Submit', type: 'submit', form_id: 'Contact' %}
+{% enddoc %}
+{%- liquid
+  assign action_element = 'button'
+  if element == 'a'
+    assign action_element = 'a'
+  endif
+  assign action_type = 'button'
+  if type == 'submit' or type == 'reset'
+    assign action_type = type
+  endif
+  assign action_icon = icon | escape
+  assign blocked = false
+  if disabled == true or loading == true
+    assign blocked = true
+  endif
+-%}
+<{{ action_element }} class="lemoon-ui-action {% unless style_family == 'local' %}button{% if variant == 'secondary' %} button--secondary{% elsif variant == 'tertiary' %} button--tertiary{% endif %}{% endunless %}{% if class != blank %} {{ class | escape }}{% endif %}{% if loading == true %} loading{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if aria_label != blank %} aria-label="{{ aria_label | escape }}"{% endif %}{% if aria_controls != blank %} aria-controls="{{ aria_controls | escape }}"{% endif %}{% if describedby != blank %} aria-describedby="{{ describedby | escape }}"{% endif %}{% if aria_expanded != nil %} aria-expanded="{{ aria_expanded | escape }}"{% endif %}{% if aria_pressed != nil %} aria-pressed="{{ aria_pressed | escape }}"{% endif %}{% if loading == true %} aria-busy="true"{% endif %}{% if action_element == 'a' %}{% if blocked %} aria-disabled="true" role="link" tabindex="-1"{% elsif href != blank %} href="{{ href | escape }}"{% endif %}{% else %} type="{{ action_type }}"{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if value != nil %} value="{{ value | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if blocked %} disabled{% endif %}{% endif %}>
+  {%- if icon != blank and icon_position != 'after' -%}{% render 'lemoon-icon', icon: action_icon %}{%- endif -%}
+  <span>{{ label | escape }}</span>
+  {%- if icon != blank and icon_position == 'after' -%}{% render 'lemoon-icon', icon: action_icon %}{%- endif -%}
+  {%- unless show_spinner == false -%}
+  {%- if show_spinner == true or loading == true -%}
+    {%- if loading == true -%}{% render 'loading-spinner', class: 'loading__spinner' %}{%- else -%}{% render 'loading-spinner' %}{%- endif -%}
+  {%- endif -%}
+  {%- endunless -%}
+</{{ action_element }}>

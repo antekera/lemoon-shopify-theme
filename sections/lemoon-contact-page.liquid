@@ -88,7 +88,7 @@
     width: 100%;
     min-height: 4.8rem;
     padding: var(--lemoon-space-3) var(--lemoon-space-5);
-    border: 1px solid var(--lemoon-border-warm);
+    border: 1px solid var(--lemoon-border-strong);
     border-radius: var(--lemoon-radius-search);
     background: var(--lemoon-surface-page);
     color: var(--lemoon-text-primary);
@@ -145,7 +145,8 @@
 <div class="lemoon-contact page-width">
   <div class="lemoon-contact__layout">
     <div class="lemoon-contact__copy">
-      <h1 class="lemoon-contact__title">{{ 'sections.lemoon_contact_page.title' | t }}</h1>
+      {%- assign ui_heading_text = 'sections.lemoon_contact_page.title' | t -%}
+      {% render 'lemoon-ui-heading', text: ui_heading_text, level: 1, class: 'lemoon-contact__title' %}
       <p class="lemoon-contact__intro">{{ 'sections.lemoon_contact_page.intro' | t }}</p>
       {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
       {%- if section.settings.contact_email != blank or section.settings.whatsapp_url != blank or section.settings.contact_hours != blank -%}
@@ -171,46 +172,66 @@
       </dl>
       {%- endif -%}
       <div class="lemoon-contact__faq">
-        <h2 class="lemoon-contact__faq-title">{{ 'sections.lemoon_contact_page.faq_title' | t }}</h2>
+        {%- assign ui_heading_text = 'sections.lemoon_contact_page.faq_title' | t -%}
+        {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, class: 'lemoon-contact__faq-title' %}
         <p>{{ 'sections.lemoon_contact_page.faq_description' | t }}</p>
         <a href="{{ routes.root_url | append: '/pages/preguntas-frecuentes' | replace: '//', '/' }}">{{ 'sections.lemoon_contact_page.faq_link' | t }}</a>
       </div>
     </div>
     <div class="lemoon-contact__panel">
-      <h2 class="lemoon-contact__form-title">{{ 'sections.lemoon_contact_page.form_title' | t }}</h2>
+      {%- assign ui_heading_text = 'sections.lemoon_contact_page.form_title' | t -%}
+      {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, class: 'lemoon-contact__form-title' %}
       <p class="lemoon-contact__required">{{ 'sections.lemoon_contact_page.required_hint' | t }}</p>
       {%- form 'contact', id: contact_form_id, class: 'lemoon-contact__form' -%}
         {%- if form.posted_successfully? -%}
-          <p class="lemoon-contact__status lemoon-contact__status--success" role="status" aria-live="polite" tabindex="-1" autofocus>{{ 'sections.lemoon_contact_page.success' | t }}</p>
+          {%- assign success_text = 'sections.lemoon_contact_page.success' | t -%}
+          {% render 'lemoon-ui-message', text: success_text, class: 'lemoon-contact__status lemoon-contact__status--success', role: 'status', live: 'polite', tabindex: '-1', autofocus: true %}
         {%- elsif form.errors -%}
-          <div class="lemoon-contact__status lemoon-contact__status--error" role="alert" aria-live="assertive" tabindex="-1" autofocus>
+          {%- capture contact_errors_html -%}
             <p>{{ 'sections.lemoon_contact_page.error_heading' | t }}</p>
             {{ form.errors | default_errors }}
-          </div>
+          {%- endcapture -%}
+          {% render 'lemoon-ui-message', tag: 'div', content_html: contact_errors_html, class: 'lemoon-contact__status lemoon-contact__status--error', role: 'alert', live: 'assertive', tabindex: '-1', autofocus: true %}
         {%- endif -%}
+        {%- liquid
+          assign name_value = form.name
+          unless form.name
+            assign name_value = customer.name
+          endunless
+          assign email_value = form.email
+          unless form.email
+            assign email_value = customer.email
+          endunless
+          assign phone_value = form.phone
+          unless form.phone
+            assign phone_value = customer.phone
+          endunless
+          assign name_id = contact_form_id | append: '-name'
+          assign email_id = contact_form_id | append: '-email'
+          assign phone_id = contact_form_id | append: '-phone'
+          assign body_id = contact_form_id | append: '-body'
+          assign email_error_id = contact_form_id | append: '-email-error'
+          assign body_hint_id = contact_form_id | append: '-body-hint'
+          assign name_label = 'sections.lemoon_contact_page.name' | t
+          assign email_label = 'sections.lemoon_contact_page.email' | t
+          assign phone_label = 'sections.lemoon_contact_page.phone' | t
+          assign body_label = 'sections.lemoon_contact_page.message' | t
+          assign body_hint = 'sections.lemoon_contact_page.message_hint' | t
+          assign email_invalid = nil
+          assign email_error = nil
+          if form.errors contains 'email'
+            assign email_invalid = true
+            assign email_error = form.errors.translated_fields.email | capitalize | append: ' ' | append: form.errors.messages.email
+          endif
+          assign send_label = 'sections.lemoon_contact_page.send' | t
+        -%}
         <div class="lemoon-contact__fields">
-          <div class="lemoon-contact__field">
-            <label for="{{ contact_form_id }}-name">{{ 'sections.lemoon_contact_page.name' | t }}</label>
-            <input id="{{ contact_form_id }}-name" type="text" name="contact[name]" autocomplete="name" value="{% if form.name %}{{ form.name | escape }}{% elsif customer %}{{ customer.name | escape }}{% endif %}" required>
-          </div>
-          <div class="lemoon-contact__field">
-            <label for="{{ contact_form_id }}-email">{{ 'sections.lemoon_contact_page.email' | t }}</label>
-            <input id="{{ contact_form_id }}-email" type="email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" value="{% if form.email %}{{ form.email | escape }}{% elsif customer %}{{ customer.email | escape }}{% endif %}" {% if form.errors contains 'email' %}aria-invalid="true" aria-describedby="{{ contact_form_id }}-email-error"{% endif %} required>
-            {%- if form.errors contains 'email' -%}
-              <small class="lemoon-contact__error" id="{{ contact_form_id }}-email-error">{{ form.errors.translated_fields.email | capitalize | escape }} {{ form.errors.messages.email | escape }}</small>
-            {%- endif -%}
-          </div>
-          <div class="lemoon-contact__field">
-            <label for="{{ contact_form_id }}-phone">{{ 'sections.lemoon_contact_page.phone' | t }}</label>
-            <input id="{{ contact_form_id }}-phone" type="tel" name="contact[phone]" autocomplete="tel" value="{% if form.phone %}{{ form.phone | escape }}{% elsif customer %}{{ customer.phone | escape }}{% endif %}">
-          </div>
-          <div class="lemoon-contact__field">
-            <label for="{{ contact_form_id }}-body">{{ 'sections.lemoon_contact_page.message' | t }}</label>
-            <textarea id="{{ contact_form_id }}-body" name="contact[body]" rows="6" aria-describedby="{{ contact_form_id }}-body-hint" required>{{ form.body | escape }}</textarea>
-            <p class="lemoon-contact__hint" id="{{ contact_form_id }}-body-hint">{{ 'sections.lemoon_contact_page.message_hint' | t }}</p>
-          </div>
+          {% render 'lemoon-ui-field', style_family: 'contact', id: name_id, name: 'contact[name]', label: name_label, type: 'text', autocomplete: 'name', value: name_value, required: true %}
+          {% render 'lemoon-ui-field', style_family: 'contact', id: email_id, name: 'contact[email]', label: email_label, type: 'email', autocomplete: 'email', autocapitalize: 'off', spellcheck: false, value: email_value, required: true, invalid: email_invalid, error: email_error, error_id: email_error_id, error_class: 'lemoon-contact__error' %}
+          {% render 'lemoon-ui-field', style_family: 'contact', id: phone_id, name: 'contact[phone]', label: phone_label, type: 'tel', autocomplete: 'tel', value: phone_value %}
+          {% render 'lemoon-ui-field', style_family: 'contact', kind: 'textarea', id: body_id, name: 'contact[body]', label: body_label, rows: 6, value: form.body, required: true, hint: body_hint, hint_id: body_hint_id, hint_class: 'lemoon-contact__hint' %}
         </div>
-        <button class="lemoon-contact__submit" type="submit">{{ 'sections.lemoon_contact_page.send' | t }}</button>
+        {% render 'lemoon-ui-action', type: 'submit', label: send_label, style_family: 'local', class: 'lemoon-contact__submit' %}
       {%- endform -%}
     </div>
   </div>

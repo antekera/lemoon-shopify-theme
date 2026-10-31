@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "ticket": "LEM-142",
-  "base_sha": "93f80a257924520020f0d960f89488c86f104a35",
+  "base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
   "scope": {
     "roots": [
       "sections",
@@ -13,7 +13,7 @@
       "config",
       "locales"
     ],
-    "enumeration": "git ls-files of the eight roots; absent blocks root counted as zero; docs, tests and tooling are outside this implementation universe",
+    "enumeration": "git ls-files of the eight roots, including the six PR additions recorded in snapshot.new_source_paths; no explicit paths outside the Git index; private settings excluded without content reads; docs/tests/tooling outside implementation universe",
     "not_read": [
       "config/settings_data.json",
       "secrets",
@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 501,
-    "mapped_paths": 470,
+    "total_tracked_paths": 507,
+    "mapped_paths": 476,
     "excluded_paths": 31,
     "by_root": {
       "assets": 257,
@@ -32,14 +32,14 @@
       "layout": 2,
       "locales": 51,
       "sections": 70,
-      "snippets": 81,
+      "snippets": 87,
       "templates": 38
     },
     "mapped_by_extension": {
       ".css": 81,
       ".js": 53,
       ".json": 89,
-      ".liquid": 154,
+      ".liquid": 160,
       ".svg": 93
     },
     "excluded_by_reason": {
@@ -50,7 +50,9 @@
     "section_liquid_files": 68,
     "section_groups": 2,
     "section_schema_blocks": 81,
-    "theme_block_files": 0
+    "theme_block_files": 0,
+    "total_source_paths": 507,
+    "explicit_new_paths": 0
   },
   "components": [
     {
@@ -73,6 +75,8 @@
         "config/settings_schema.json"
       ],
       "direct_static_consumers": [
+        "layout/password.liquid",
+        "layout/theme.liquid",
         "sections/announcement-bar.liquid",
         "sections/featured-product.liquid",
         "sections/main-product.liquid",
@@ -80,7 +84,13 @@
         "templates/gift_card.liquid"
       ],
       "depends_on": [],
-      "documentation_anchor": "lm-shell"
+      "documentation_anchor": "lm-shell",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "layout/theme.liquid",
+        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-TYPE",
@@ -95,11 +105,20 @@
         "sections/main-page.liquid",
         "sections/page.liquid",
         "assets/section-rich-text.css",
-        "assets/section-main-page.css"
+        "assets/section-main-page.css",
+        "snippets/lemoon-ui-heading.liquid"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
         "layout/theme.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-faq-page.liquid",
+        "sections/lemoon-guide-page.liquid",
+        "sections/main-page.liquid",
+        "sections/page.liquid",
+        "sections/rich-text.liquid",
+        "snippets/lemoon-ui-faq-item.liquid",
         "templates/gift_card.liquid",
         "templates/index.json",
         "templates/page.json"
@@ -107,7 +126,13 @@
       "depends_on": [
         "LM-SHELL"
       ],
-      "documentation_anchor": "lm-type"
+      "documentation_anchor": "lm-type",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-heading.liquid",
+        "scope": "Heading semántico; richtext conserva su dueño y las excepciones tipográficas locales.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-ACTION",
@@ -120,13 +145,18 @@
         "snippets/lemoon-frame-only-button.liquid",
         "snippets/lemoon-select-lenses-button.liquid",
         "snippets/lemoon-thumbnail-arrow.liquid",
-        "snippets/lemoon-carousel-controls.liquid"
+        "snippets/lemoon-carousel-controls.liquid",
+        "snippets/lemoon-ui-action.liquid"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
         "layout/theme.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
         "sections/lemoon-eyewear-product.liquid",
+        "sections/lemoon-faq-page.liquid",
         "sections/lemoon-featured-products.liquid",
+        "sections/lemoon-guide-page.liquid",
         "snippets/buy-buttons.liquid",
         "snippets/lemoon-sticky-purchase.liquid",
         "snippets/product-media-gallery.liquid"
@@ -134,7 +164,13 @@
       "depends_on": [
         "LM-ICON"
       ],
-      "documentation_anchor": "lm-action"
+      "documentation_anchor": "lm-action",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-action.liquid",
+        "scope": "Base o local; compra mantiene sus adaptadores y formulario nativo.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-ICON",
@@ -159,15 +195,23 @@
         "sections/main-product.liquid",
         "snippets/card-product.liquid",
         "snippets/header-search.liquid",
+        "snippets/icon-with-text.liquid",
         "snippets/lemoon-facet-visual.liquid",
         "snippets/lemoon-mobile-nav-link.liquid",
         "snippets/lemoon-mobile-nav.liquid",
         "snippets/lemoon-mobile-search.liquid",
         "snippets/lemoon-product-heading.liquid",
-        "snippets/lemoon-shared-benefits.liquid"
+        "snippets/lemoon-shared-benefits.liquid",
+        "snippets/lemoon-ui-action.liquid"
       ],
       "depends_on": [],
-      "documentation_anchor": "lm-icon"
+      "documentation_anchor": "lm-icon",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-icon.liquid",
+        "scope": "icon/size/label; geometría FAQ y marca conservan sus archivos propios.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-FIELD",
@@ -178,19 +222,30 @@
         "assets/base.css",
         "assets/lemoon-components.css",
         "assets/section-contact-form.css",
-        "snippets/price-facet.liquid"
+        "snippets/price-facet.liquid",
+        "snippets/lemoon-ui-field.liquid",
+        "snippets/lemoon-ui-select.liquid"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
         "layout/theme.liquid",
         "sections/contact-form.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
         "snippets/facets-filter-desktop.liquid",
-        "snippets/facets-filter-mobile.liquid"
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/main-search-results.liquid"
       ],
       "depends_on": [
         "LM-TYPE"
       ],
-      "documentation_anchor": "lm-field"
+      "documentation_anchor": "lm-field",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-field.liquid",
+        "scope": "Input/textarea; lemoon-ui-select para select. Labels, IDs y error explícitos.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
     },
     {
       "id": "LM-CHOICE",
@@ -215,7 +270,13 @@
       "depends_on": [
         "LM-FIELD"
       ],
-      "documentation_anchor": "lm-choice"
+      "documentation_anchor": "lm-choice",
+      "availability": {
+        "status": "extraction-pending",
+        "entry_path": "snippets/product-variant-options.liquid",
+        "scope": "Opciones de variante conservan sus nombres, selección y disponibilidad; no hay radio genérico extraído.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-SWATCH",
@@ -237,13 +298,21 @@
         "snippets/facets-filter-desktop.liquid",
         "snippets/facets-filter-mobile.liquid",
         "snippets/facets.liquid",
+        "snippets/lemoon-color-swatch.liquid",
         "snippets/product-variant-options.liquid",
-        "snippets/product-variant-picker.liquid"
+        "snippets/product-variant-picker.liquid",
+        "snippets/swatch-input.liquid"
       ],
       "depends_on": [
         "LM-CHOICE"
       ],
-      "documentation_anchor": "lm-swatch"
+      "documentation_anchor": "lm-swatch",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/swatch-input.liquid",
+        "scope": "SwatchDrop y formulario real; swatch visual separado de la opción interactiva.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-RANGE",
@@ -264,13 +333,20 @@
         "snippets/cart-drawer.liquid",
         "snippets/facets-filter-desktop.liquid",
         "snippets/facets-filter-mobile.liquid",
+        "snippets/quantity-input.liquid",
         "snippets/quick-order-list-row.liquid"
       ],
       "depends_on": [
         "LM-FIELD",
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-range"
+      "documentation_anchor": "lm-range",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/quantity-input.liquid",
+        "scope": "Cantidad y lemoon-price-slider son contratos distintos; mantener límites y controladores del dueño.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-LABEL",
@@ -293,7 +369,13 @@
       "depends_on": [
         "LM-TYPE"
       ],
-      "documentation_anchor": "lm-label"
+      "documentation_anchor": "lm-label",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-product-card-labels.liquid",
+        "scope": "Labels derivados del producto; no convertir chips o badges de demo en flags comerciales.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PRICE",
@@ -326,13 +408,20 @@
         "sections/related-products.liquid",
         "snippets/card-product.liquid",
         "snippets/cart-drawer.liquid",
+        "snippets/price.liquid",
         "snippets/quick-order-list-row.liquid"
       ],
       "depends_on": [
         "LM-TYPE",
         "LM-LABEL"
       ],
-      "documentation_anchor": "lm-price"
+      "documentation_anchor": "lm-price",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/price.liquid",
+        "scope": "Producto/variante y lemoon-money; no calcular precios en átomos de presentación.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PRODUCT-CARD",
@@ -358,6 +447,7 @@
         "sections/main-product.liquid",
         "sections/main-search.liquid",
         "sections/related-products.liquid",
+        "snippets/card-product.liquid",
         "snippets/cart-drawer.liquid",
         "snippets/lemoon-mobile-search.liquid",
         "snippets/lemoon-plp-product-page.liquid",
@@ -372,7 +462,13 @@
         "LM-ACTION",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-product-card"
+      "documentation_anchor": "lm-product-card",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/card-product.liquid",
+        "scope": "card_product y section_id reales; media, precio y JS juntos.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-CONTENT-CARD",
@@ -392,13 +488,20 @@
         "sections/main-blog.liquid",
         "sections/main-list-collections.liquid",
         "snippets/cart-drawer.liquid",
+        "snippets/main-search-result-card.liquid",
         "snippets/main-search-results.liquid"
       ],
       "depends_on": [
         "LM-TYPE",
         "LM-ICON"
       ],
-      "documentation_anchor": "lm-content-card"
+      "documentation_anchor": "lm-content-card",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/main-search-result-card.liquid",
+        "scope": "Resultado CMS, article-card y card-collection mantienen APIs diferentes.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-NAV",
@@ -420,12 +523,19 @@
         "snippets/lemoon-collection-intro.liquid",
         "snippets/lemoon-plp-product-page.liquid",
         "snippets/main-search-results.liquid",
+        "snippets/pagination.liquid",
         "snippets/quick-order-list.liquid"
       ],
       "depends_on": [
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-nav"
+      "documentation_anchor": "lm-nav",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/pagination.liquid",
+        "scope": "paginate real; breadcrumb tiene contrato propio, no navegación universal.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-FEEDBACK",
@@ -435,10 +545,13 @@
       "source_paths": [
         "snippets/loading-spinner.liquid",
         "assets/loading-spinner.svg",
-        "sections/cart-live-region-text.liquid"
+        "sections/cart-live-region-text.liquid",
+        "snippets/lemoon-ui-message.liquid"
       ],
       "direct_static_consumers": [
         "sections/featured-product.liquid",
+        "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-design-system.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/main-cart-items.liquid",
         "sections/main-product.liquid",
@@ -449,6 +562,8 @@
         "snippets/facets.liquid",
         "snippets/header-search.liquid",
         "snippets/lemoon-frame-only-button.liquid",
+        "snippets/lemoon-ui-action.liquid",
+        "snippets/loading-spinner.liquid",
         "snippets/main-search-results.liquid",
         "snippets/product-thumbnail.liquid",
         "snippets/quick-order-list-row.liquid",
@@ -458,7 +573,13 @@
         "LM-TYPE",
         "LM-ICON"
       ],
-      "documentation_anchor": "lm-feedback"
+      "documentation_anchor": "lm-feedback",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-message.liquid",
+        "scope": "Mensaje explícito sin anuncio automático; loading-spinner conserva su implementación.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
     },
     {
       "id": "LM-DISCLOSURE",
@@ -475,12 +596,20 @@
         "assets/collapsible-content.css",
         "assets/component-disclosures.css",
         "assets/details-disclosure.js",
-        "assets/disclosures.js"
+        "assets/disclosures.js",
+        "snippets/lemoon-ui-faq-item.liquid",
+        "assets/global.js"
       ],
       "direct_static_consumers": [
+        "layout/password.liquid",
         "layout/theme.liquid",
+        "sections/collapsible-content.liquid",
+        "sections/disclosures.liquid",
         "sections/featured-product.liquid",
+        "sections/lemoon-design-system.liquid",
+        "sections/lemoon-faq-page.liquid",
         "sections/main-product.liquid",
+        "snippets/product-disclosures.liquid",
         "templates/page.preguntas-frecuentes.json",
         "templates/product.json"
       ],
@@ -488,7 +617,13 @@
         "LM-ICON",
         "LM-TYPE"
       ],
-      "documentation_anchor": "lm-disclosure"
+      "documentation_anchor": "lm-disclosure",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-ui-faq-item.liquid",
+        "scope": "FAQ agrupado usa details; FAQ legacy y otros disclosures mantienen sus dueños.",
+        "recipe_path": "docs/components/recipes/faq-group.md"
+      }
     },
     {
       "id": "LM-OVERLAY",
@@ -516,7 +651,13 @@
         "LM-ACTION",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-overlay"
+      "documentation_anchor": "lm-overlay",
+      "availability": {
+        "status": "extraction-pending",
+        "entry_path": "assets/global.js",
+        "scope": "No hay modal genérico extraído; reutilizar el shell real con Escape, trampa y retorno de foco.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-TABS",
@@ -532,14 +673,23 @@
       ],
       "direct_static_consumers": [
         "sections/lemoon-eyewear-product.liquid",
-        "sections/main-product.liquid"
+        "sections/main-product.liquid",
+        "snippets/lemoon-frame-information.liquid",
+        "snippets/lemoon-product-size-guide.liquid",
+        "snippets/lemoon-size-guide-content.liquid"
       ],
       "depends_on": [
         "LM-OVERLAY",
         "LM-ACTION",
         "LM-TYPE"
       ],
-      "documentation_anchor": "lm-tabs"
+      "documentation_anchor": "lm-tabs",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-size-guide-content.liquid",
+        "scope": "Contenido compartido; controlador y shell PDP no son un tab genérico.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-SLIDER",
@@ -568,7 +718,13 @@
         "LM-ACTION",
         "LM-ICON"
       ],
-      "documentation_anchor": "lm-slider"
+      "documentation_anchor": "lm-slider",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-carousel-controls.liquid",
+        "scope": "carousel_id y hooks prev/next reales; slider-component conserva global.js.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-MEDIA",
@@ -596,6 +752,10 @@
         "sections/featured-product.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/main-product.liquid",
+        "sections/video.liquid",
+        "snippets/product-media-gallery.liquid",
+        "snippets/product-media-modal.liquid",
+        "snippets/product-thumbnail.liquid",
         "templates/index.json"
       ],
       "depends_on": [
@@ -603,7 +763,13 @@
         "LM-SLIDER",
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-media"
+      "documentation_anchor": "lm-media",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/product-media-gallery.liquid",
+        "scope": "Galería de producto con product/section y sus assets; video/model-viewer tienen dependencias propias.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-FACET",
@@ -627,6 +793,9 @@
         "sections/main-collection-product-grid.liquid",
         "sections/main-product.liquid",
         "sections/main-search.liquid",
+        "snippets/facets-filter-desktop.liquid",
+        "snippets/facets-filter-mobile.liquid",
+        "snippets/facets.liquid",
         "snippets/main-search-results.liquid"
       ],
       "depends_on": [
@@ -635,7 +804,13 @@
         "LM-OVERLAY",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-facet"
+      "documentation_anchor": "lm-facet",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/facets.liquid",
+        "scope": "results, filtros y formularios nativos; el átomo select no decide políticas de ordenación.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-SEARCH",
@@ -656,6 +831,7 @@
       "direct_static_consumers": [
         "layout/theme.liquid",
         "sections/header.liquid",
+        "sections/main-search.liquid",
         "templates/search.json"
       ],
       "depends_on": [
@@ -665,7 +841,13 @@
         "LM-CONTENT-CARD",
         "LM-NAV"
       ],
-      "documentation_anchor": "lm-search"
+      "documentation_anchor": "lm-search",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-search.liquid",
+        "scope": "Componer main-search-results en su contexto search, filtros y términos.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-MOBILE-SEARCH",
@@ -679,15 +861,23 @@
         "assets/lemoon-mobile-search-logic.js"
       ],
       "direct_static_consumers": [
+        "assets/lemoon-mobile-search.js",
         "layout/theme.liquid",
-        "sections/header.liquid"
+        "sections/header.liquid",
+        "snippets/lemoon-mobile-search.liquid"
       ],
       "depends_on": [
         "LM-SEARCH",
         "LM-OVERLAY",
         "LM-PRODUCT-CARD"
       ],
-      "documentation_anchor": "lm-mobile-search"
+      "documentation_anchor": "lm-mobile-search",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-mobile-search.liquid",
+        "scope": "Overlay y controlador móvil propios; no reemplazarlo por el select de sorting.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-HEADER",
@@ -711,7 +901,9 @@
       "direct_static_consumers": [
         "layout/theme.liquid",
         "sections/announcement-bar.liquid",
-        "sections/header-group.json"
+        "sections/header-group.json",
+        "sections/header.liquid",
+        "snippets/header-drawer.liquid"
       ],
       "depends_on": [
         "LM-ACTION",
@@ -719,7 +911,13 @@
         "LM-MOBILE-NAV",
         "LM-MOBILE-SEARCH"
       ],
-      "documentation_anchor": "lm-header"
+      "documentation_anchor": "lm-header",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/header.liquid",
+        "scope": "Grupo header, navegación/localización y JS existentes; no header ficticio en galería.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-MOBILE-NAV",
@@ -735,14 +933,23 @@
         "assets/lemoon-mobile-nav-logic.js"
       ],
       "direct_static_consumers": [
-        "sections/header.liquid"
+        "assets/lemoon-mobile-nav.js",
+        "sections/header.liquid",
+        "snippets/lemoon-mobile-nav-filter-group.liquid",
+        "snippets/lemoon-mobile-nav.liquid"
       ],
       "depends_on": [
         "LM-OVERLAY",
         "LM-ICON",
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-mobile-nav"
+      "documentation_anchor": "lm-mobile-nav",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-mobile-nav.liquid",
+        "scope": "Menús por nivel y controlador propios; preservar IDs, foco y estados.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-FOOTER",
@@ -763,7 +970,8 @@
         "layout/password.liquid",
         "sections/announcement-bar.liquid",
         "sections/email-signup-banner.liquid",
-        "sections/footer-group.json"
+        "sections/footer-group.json",
+        "sections/footer.liquid"
       ],
       "depends_on": [
         "LM-DISCLOSURE",
@@ -772,7 +980,13 @@
         "LM-PRIVACY",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-footer"
+      "documentation_anchor": "lm-footer",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/footer.liquid",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-PRIVACY",
@@ -794,7 +1008,13 @@
         "LM-CHOICE",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-privacy"
+      "documentation_anchor": "lm-privacy",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/lemoon-cookie-preferences.liquid",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-HERO",
@@ -815,6 +1035,9 @@
         "layout/theme.liquid",
         "sections/email-signup-banner.liquid",
         "sections/header-group.json",
+        "sections/image-banner.liquid",
+        "sections/lemoon-hero.liquid",
+        "sections/slideshow.liquid",
         "templates/index.json"
       ],
       "depends_on": [
@@ -822,7 +1045,13 @@
         "LM-ACTION",
         "LM-MEDIA"
       ],
-      "documentation_anchor": "lm-hero"
+      "documentation_anchor": "lm-hero",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-hero.liquid",
+        "scope": "Sección con media/settings propios; no banner universal extraído.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-EDITORIAL",
@@ -848,11 +1077,17 @@
         "assets/section-multicolumn.css"
       ],
       "direct_static_consumers": [
+        "sections/collage.liquid",
+        "sections/image-with-text.liquid",
+        "sections/lemoon-about-page.liquid",
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/lemoon-legal-page.liquid",
         "sections/lemoon-service-page.liquid",
         "sections/main-product.liquid",
+        "sections/multicolumn.liquid",
+        "sections/multirow.liquid",
+        "sections/trust-bar.liquid",
         "templates/index.json",
         "templates/page.nosotros.json"
       ],
@@ -863,7 +1098,13 @@
         "LM-CONTENT-CARD",
         "LM-MEDIA"
       ],
-      "documentation_anchor": "lm-editorial"
+      "documentation_anchor": "lm-editorial",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-about-page.liquid",
+        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-PRODUCT-LIST",
@@ -886,9 +1127,15 @@
         "assets/section-collection-list.css"
       ],
       "direct_static_consumers": [
+        "sections/collection-list.liquid",
+        "sections/featured-collection.liquid",
+        "sections/featured-product.liquid",
+        "sections/lemoon-featured-products.liquid",
         "sections/main-collection-product-grid.liquid",
+        "sections/main-list-collections.liquid",
         "sections/main-product.liquid",
         "sections/main-search.liquid",
+        "sections/related-products.liquid",
         "templates/cart.json",
         "templates/index.json",
         "templates/list-collections.json",
@@ -901,7 +1148,13 @@
         "LM-SLIDER",
         "LM-PURCHASE"
       ],
-      "documentation_anchor": "lm-product-list"
+      "documentation_anchor": "lm-product-list",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-featured-products.liquid",
+        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PLP",
@@ -922,6 +1175,9 @@
         "templates/collection.carousel-accessories.liquid"
       ],
       "direct_static_consumers": [
+        "sections/main-collection-banner.liquid",
+        "sections/main-collection-product-grid.liquid",
+        "snippets/lemoon-collection-intro.liquid",
         "templates/collection.json"
       ],
       "depends_on": [
@@ -930,7 +1186,13 @@
         "LM-NAV",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-plp"
+      "documentation_anchor": "lm-plp",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-collection-product-grid.liquid",
+        "scope": "Grid y sidebar locales; no migrar sort de colección al piloto de búsqueda.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PDP",
@@ -951,7 +1213,10 @@
         "assets/section-main-product.css"
       ],
       "direct_static_consumers": [
+        "assets/lens-configurator.js",
         "sections/featured-product.liquid",
+        "sections/lemoon-eyewear-product.liquid",
+        "sections/main-product.liquid",
         "templates/product.json",
         "templates/product.optica.json"
       ],
@@ -963,7 +1228,13 @@
         "LM-PURCHASE",
         "LM-LABEL"
       ],
-      "documentation_anchor": "lm-pdp"
+      "documentation_anchor": "lm-pdp",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-eyewear-product.liquid",
+        "scope": "Preservar variantes, sticky purchase y herramientas; heading genérico no reemplaza product-heading.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PURCHASE",
@@ -981,7 +1252,9 @@
       "direct_static_consumers": [
         "sections/featured-product.liquid",
         "sections/lemoon-featured-products.liquid",
-        "sections/main-product.liquid"
+        "sections/main-product.liquid",
+        "snippets/buy-buttons.liquid",
+        "snippets/gift-card-recipient-form.liquid"
       ],
       "depends_on": [
         "LM-ACTION",
@@ -989,7 +1262,13 @@
         "LM-FEEDBACK",
         "LM-OVERLAY"
       ],
-      "documentation_anchor": "lm-purchase"
+      "documentation_anchor": "lm-purchase",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/buy-buttons.liquid",
+        "scope": "Producto, block y product_form_id; checkout/destinatario nunca pasan al átomo action.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-CONFIG",
@@ -1003,6 +1282,7 @@
       ],
       "direct_static_consumers": [
         "sections/lemoon-eyewear-product.liquid",
+        "sections/lens-configurator.liquid",
         "templates/page.configurador-de-lentes.json",
         "templates/product.configurador.json"
       ],
@@ -1013,7 +1293,13 @@
         "LM-PURCHASE",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-config"
+      "documentation_anchor": "lm-config",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lens-configurator.liquid",
+        "scope": "Elegibilidad, receta y precios siguen en configurador y contrato de integración.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-CART",
@@ -1040,6 +1326,10 @@
       ],
       "direct_static_consumers": [
         "layout/theme.liquid",
+        "sections/cart-drawer.liquid",
+        "sections/main-cart-footer.liquid",
+        "sections/main-cart-items.liquid",
+        "snippets/cart-drawer.liquid",
         "templates/cart.json"
       ],
       "depends_on": [
@@ -1049,7 +1339,13 @@
         "LM-OVERLAY",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-cart"
+      "documentation_anchor": "lm-cart",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-cart-items.liquid",
+        "scope": "Carrito nativo y fragmentos/drawer; estados y anuncios pertenecen al controlador.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-BULK",
@@ -1065,14 +1361,24 @@
         "assets/quick-order-list.js",
         "assets/quick-order-list.css"
       ],
-      "direct_static_consumers": [],
+      "direct_static_consumers": [
+        "sections/bulk-quick-order-list.liquid",
+        "sections/quick-order-list.liquid",
+        "snippets/quick-order-list.liquid"
+      ],
       "depends_on": [
         "LM-RANGE",
         "LM-PRICE",
         "LM-PURCHASE",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-bulk"
+      "documentation_anchor": "lm-bulk",
+      "availability": {
+        "status": "canonical-reusable",
+        "entry_path": "snippets/quick-order-list.liquid",
+        "scope": "Pedidos rápidos/volumen con cantidades y controlador propios; revisar consumidor efectivo antes de usar.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PICKUP",
@@ -1091,7 +1397,13 @@
         "LM-OVERLAY",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-pickup"
+      "documentation_anchor": "lm-pickup",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/pickup-availability.liquid",
+        "scope": "Fragmento asíncrono nativo, disponibilidad y errores reales; no prometer stock con una demo.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-CONTACT",
@@ -1106,11 +1418,18 @@
         "templates/page.contact.json"
       ],
       "depends_on": [
-        "LM-FIELD",
         "LM-ACTION",
-        "LM-FEEDBACK"
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-TYPE"
       ],
-      "documentation_anchor": "lm-contact"
+      "documentation_anchor": "lm-contact",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-contact-page.liquid",
+        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos.",
+        "recipe_path": "docs/components/recipes/contact-form.md"
+      }
     },
     {
       "id": "LM-LEGAL",
@@ -1126,6 +1445,7 @@
       ],
       "direct_static_consumers": [
         "sections/lemoon-faq.liquid",
+        "sections/lemoon-legal-page.liquid",
         "templates/collection.json",
         "templates/page.envios-y-entregas.json",
         "templates/page.garantias.json",
@@ -1145,7 +1465,13 @@
         "LM-ACTION",
         "LM-EDITORIAL"
       ],
-      "documentation_anchor": "lm-legal"
+      "documentation_anchor": "lm-legal",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-guide-page.liquid",
+        "scope": "Guías/servicios y shell legal tienen settings y tipografía propios; conservar políticas nativas.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-JOURNAL",
@@ -1163,6 +1489,11 @@
         "assets/section-featured-blog.css"
       ],
       "direct_static_consumers": [
+        "sections/featured-blog.liquid",
+        "sections/featured-product.liquid",
+        "sections/main-article.liquid",
+        "sections/main-product.liquid",
+        "snippets/share-button.liquid",
         "templates/article.editorial.json",
         "templates/article.json",
         "templates/blog.editorial.json",
@@ -1175,7 +1506,13 @@
         "LM-FIELD",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-journal"
+      "documentation_anchor": "lm-journal",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-article.liquid",
+        "scope": "Artículo/blog y comentarios nativos; article-card/share-button ya existen.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-QUIZ",
@@ -1187,6 +1524,7 @@
         "assets/lemoon-style-quiz.js"
       ],
       "direct_static_consumers": [
+        "sections/lemoon-style-quiz.liquid",
         "templates/page.buscar-mi-estilo.json"
       ],
       "depends_on": [
@@ -1194,7 +1532,13 @@
         "LM-FEEDBACK",
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-quiz"
+      "documentation_anchor": "lm-quiz",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-style-quiz.liquid",
+        "scope": "Flujo y estado pertenecen a su JS; no se extrae un motor de quiz.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     },
     {
       "id": "LM-GIFT",
@@ -1209,6 +1553,8 @@
         "assets/template-giftcard.css"
       ],
       "direct_static_consumers": [
+        "sections/lemoon-gift-card-purchase.liquid",
+        "templates/gift_card.liquid",
         "templates/page.gift-card.json",
         "templates/product.gift-card.json"
       ],
@@ -1218,7 +1564,13 @@
         "LM-PRICE",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-gift"
+      "documentation_anchor": "lm-gift",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-gift-card-purchase.liquid",
+        "scope": "Compra y visualización emitida son superficies distintas; preservar formulario y datos nativos.",
+        "recipe_path": "docs/components/recipes/product-card-grid.md"
+      }
     },
     {
       "id": "LM-PASSWORD",
@@ -1237,6 +1589,7 @@
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
+        "sections/email-signup-banner.liquid",
         "templates/password.json"
       ],
       "depends_on": [
@@ -1244,7 +1597,13 @@
         "LM-OVERLAY",
         "LM-FEEDBACK"
       ],
-      "documentation_anchor": "lm-password"
+      "documentation_anchor": "lm-password",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-launch-page.liquid",
+        "scope": "Layout password y newsletter nativa tienen su cadena CSS y contexto propios.",
+        "recipe_path": "docs/components/recipes/guide-help.md"
+      }
     },
     {
       "id": "LM-UTILITY",
@@ -1264,7 +1623,13 @@
         "LM-SHELL",
         "LM-ACTION"
       ],
-      "documentation_anchor": "lm-utility"
+      "documentation_anchor": "lm-utility",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/main-404.liquid",
+        "scope": "404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal.",
+        "recipe_path": "docs/components/recipes/search-sort.md"
+      }
     },
     {
       "id": "LM-GALLERY",
@@ -1276,14 +1641,25 @@
         "assets/lemoon-design-system.css"
       ],
       "direct_static_consumers": [
+        "sections/lemoon-design-system.liquid",
         "templates/page.sistema-de-diseno.json"
       ],
       "depends_on": [
         "LM-ACTION",
+        "LM-CHOICE",
+        "LM-DISCLOSURE",
+        "LM-FEEDBACK",
         "LM-FIELD",
-        "LM-CHOICE"
+        "LM-ICON",
+        "LM-TYPE"
       ],
-      "documentation_anchor": "lm-gallery"
+      "documentation_anchor": "lm-gallery",
+      "availability": {
+        "status": "section-composition",
+        "entry_path": "sections/lemoon-design-system.liquid",
+        "scope": "Renders extraídos + demos legacy identificadas; sin prueba comercial ni certificación WCAG.",
+        "recipe_path": "docs/components/recipes/catalogue-states.md"
+      }
     }
   ],
   "coverage": [
@@ -1750,7 +2126,8 @@
       "path": "assets/global.js",
       "status": "mapped",
       "component_ids": [
-        "LM-OVERLAY"
+        "LM-OVERLAY",
+        "LM-DISCLOSURE"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
@@ -4010,9 +4387,13 @@
       "path": "sections/lemoon-contact-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-CONTACT"
+        "LM-ACTION",
+        "LM-CONTACT",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-crystal-guide.liquid",
@@ -4026,9 +4407,14 @@
       "path": "sections/lemoon-design-system.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-GALLERY"
+        "LM-ACTION",
+        "LM-DISCLOSURE",
+        "LM-FEEDBACK",
+        "LM-FIELD",
+        "LM-GALLERY",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-eyewear-product.liquid",
@@ -4042,9 +4428,11 @@
       "path": "sections/lemoon-faq-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-DISCLOSURE"
+        "LM-ACTION",
+        "LM-DISCLOSURE",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-faq.liquid",
@@ -4074,9 +4462,11 @@
       "path": "sections/lemoon-guide-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-LEGAL"
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-hero.liquid",
@@ -4801,6 +5191,55 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
+      "path": "snippets/lemoon-ui-action.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-ACTION"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-faq-item.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE",
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-field.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-heading.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TYPE"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-message.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FEEDBACK"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
+      "path": "snippets/lemoon-ui-select.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FIELD"
+      ],
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
+    },
+    {
       "path": "snippets/loading-spinner.liquid",
       "status": "mapped",
       "component_ids": [
@@ -4820,9 +5259,10 @@
       "path": "snippets/main-search-results.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-FIELD",
         "LM-SEARCH"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "current source/LiquidDoc and literal UI render dependencies reconciled; not Shopify runtime proof"
     },
     {
       "path": "snippets/meta-tags.liquid",
@@ -5311,5 +5751,22 @@
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     }
-  ]
+  ],
+  "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
+  "snapshot": {
+    "kind": "delivered implementation source snapshot; not Shopify runtime validation",
+    "date": "2026-10-31",
+    "implementation_base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
+    "new_source_paths": [
+      "snippets/lemoon-ui-action.liquid",
+      "snippets/lemoon-ui-faq-item.liquid",
+      "snippets/lemoon-ui-field.liquid",
+      "snippets/lemoon-ui-heading.liquid",
+      "snippets/lemoon-ui-message.liquid",
+      "snippets/lemoon-ui-select.liquid"
+    ],
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 507 indexed source paths, including the six PR additions retained in new_source_paths; that list does not assert untracked status.",
+    "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
+    "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches."
+  }
 }

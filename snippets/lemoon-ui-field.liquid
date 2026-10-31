@@ -1,0 +1,66 @@
+{% doc %}
+  Label/control/help/error composition; plain values escape once. Contact labels precede controls; base retains Dawn floating-label order. Caller owns values, IDs and native form logic.
+  @param {string} [kind] - input (default) or textarea.
+  @param {string} [id] - Caller-generated unique DOM ID, also used by label for.
+  @param {string} [name] - Native form field name.
+  @param {string} [label] - Persistent plain label, escaped once.
+  @param {string} [type] - Native input type; defaults to text, ignored for textarea.
+  @param {string} [value] - Unescaped native value; escaped once as attribute or textarea content.
+  @param {number} [rows] - Textarea rows, defaults to 6.
+  @param {boolean} [required] - Opt-in native required attribute.
+  @param {boolean} [disabled] - Opt-in native disabled attribute.
+  @param {boolean} [readonly] - Opt-in native readonly attribute.
+  @param {boolean} [invalid] - Explicit aria-invalid; false is preserved, omitted when absent.
+  @param {string} [autocomplete] - Explicit native attribute.
+  @param {string} [autocapitalize] - Explicit native attribute.
+  @param {string} [placeholder] - Explicit native attribute.
+  @param {string} [inputmode] - Explicit native attribute.
+  @param {string} [form_id] - Explicit native attribute.
+  @param {boolean} [spellcheck] - Explicit enumerated attribute; false preserved.
+  @param {string} [describedby] - Additional ID tokens, composed with nonempty hint/error IDs.
+  @param {string} [hint] - Plain feedback and caller-generated association IDs.
+  @param {string} [hint_id] - Unique ID for nonempty hint; appended to aria-describedby.
+  @param {string} [error] - Plain feedback and caller-generated association IDs.
+  @param {string} [error_id] - Unique ID for nonempty error; appended to aria-describedby.
+  @param {string} [wrapper_class] - Surface classes; base defaults to Dawn classes.
+  @param {string} [control_class] - Surface classes; base defaults to Dawn classes.
+  @param {string} [label_class] - Surface classes; base defaults to Dawn classes.
+  @param {string} [hint_class] - Surface classes; base defaults to Dawn classes.
+  @param {string} [error_class] - Surface classes; base defaults to Dawn classes.
+  @param {string} [style_family] - base (default) or contact.
+  @example
+  {% render 'lemoon-ui-field', id: 'Email', name: 'contact[email]', label: 'Email', type: 'email', required: true %}
+{% enddoc %}
+{%- liquid
+  assign field_kind = 'input'
+  if kind == 'textarea'
+    assign field_kind = 'textarea'
+  endif
+  assign field_description = describedby | default: ''
+  if hint != blank and hint_id != blank
+    assign field_description = field_description | append: ' ' | append: hint_id
+  endif
+  if error != blank and error_id != blank
+    assign field_description = field_description | append: ' ' | append: error_id
+  endif
+  assign field_description = field_description | strip
+-%}
+{%- capture control_attributes_html -%}
+  class="lemoon-ui-control {% if control_class != nil %}{{ control_class | escape }}{% elsif style_family != 'contact' %}field__input{% if field_kind == 'textarea' %} text-area{% endif %}{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if autocomplete != blank %} autocomplete="{{ autocomplete | escape }}"{% endif %}{% if autocapitalize != blank %} autocapitalize="{{ autocapitalize | escape }}"{% endif %}{% if placeholder != nil %} placeholder="{{ placeholder | escape }}"{% endif %}{% if inputmode != blank %} inputmode="{{ inputmode | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if spellcheck != nil %} spellcheck="{{ spellcheck | escape }}"{% endif %}{% if invalid != nil %} aria-invalid="{{ invalid | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if readonly == true %} readonly{% endif %}{% if field_description != blank %} aria-describedby="{{ field_description | escape }}"{% endif %}
+{%- endcapture -%}
+{%- capture control_html -%}
+  {%- if field_kind == 'textarea' -%}
+    <textarea {{ control_attributes_html }} rows="{{ rows | default: 6 | escape }}">{{ value | escape }}</textarea>
+  {%- else -%}
+    <input {{ control_attributes_html }} type="{{ type | default: 'text' | escape }}" value="{{ value | escape }}">
+  {%- endif -%}
+{%- endcapture -%}
+{%- capture label_html -%}<label for="{{ id | escape }}"{% if label_class != nil %} class="{{ label_class | escape }}"{% elsif style_family != 'contact' %} class="field__label"{% endif %}>{{ label | escape }}</label>{%- endcapture -%}
+{%- capture feedback_html -%}
+{%- if hint != blank -%}<p{% if hint_id != blank %} id="{{ hint_id | escape }}"{% endif %}{% if hint_class != blank %} class="{{ hint_class | escape }}"{% endif %}>{{ hint | escape }}</p>{%- endif -%}
+{%- if error != blank -%}<small{% if error_id != blank %} id="{{ error_id | escape }}"{% endif %} class="lemoon-ui-field__error{% if error_class != blank %} {{ error_class | escape }}{% endif %}">{{ error | escape }}</small>{%- endif -%}
+{%- endcapture -%}
+<div class="lemoon-ui-field {% if wrapper_class != nil %}{{ wrapper_class | escape }}{% elsif style_family == 'contact' %}lemoon-contact__field{% else %}field{% endif %}">
+  {%- if style_family == 'contact' -%}{{ label_html }}{{ control_html }}{{ feedback_html }}{%- else -%}{{ control_html }}{{ label_html }}{%- endif -%}
+</div>
+{%- unless style_family == 'contact' -%}{{ feedback_html }}{%- endunless -%}

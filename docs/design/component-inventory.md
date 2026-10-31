@@ -1,31 +1,32 @@
 # Inventario técnico de componentes existentes — Lemoon
 
-Este inventario localiza la UI del tema y propone cómo extraer unidades compartidas en entregas futuras. **Es documentación de código existente; todavía no es una biblioteca de componentes extraída.** La guía de selección aprobada permanece en [component-library](component-library.md); el contrato visual sigue en [DESIGN.md](../../DESIGN.md), con [brand-guidelines](brand-guidelines.md) para uso de marca. No cambia identidad, fuentes, tokens, diseño ni comportamiento. LEM-80 fue cerrado por el usuario para identidad/fuentes actuales; variantes opcionales posteriores no reabren esa decisión.
+Este inventario localiza la UI del tema, sus seis extracciones reutilizables y las oportunidades pendientes. El [catálogo operativo y las recetas](../components/README.md) muestran cómo usar las implementaciones canónicas; las familias que siguen siendo composiciones locales se identifican como tales. La guía de selección aprobada permanece en [component-library](component-library.md); el contrato visual sigue en [DESIGN.md](../../DESIGN.md), con [brand-guidelines](brand-guidelines.md) para uso de marca. No cambia identidad, fuentes, tokens, diseño ni comportamiento. LEM-80 fue cerrado por el usuario para identidad/fuentes actuales; variantes opcionales posteriores no reabren esa decisión.
 
 <a id="evidence"></a>
 ## Evidencia y alcance
 
-Base inspeccionada: `93f80a257924520020f0d960f89488c86f104a35`, rama `chore/lem-142-component-inventory`, 31-10-2026. Continúa LEM-132/PR #37 incorporado en esa base. El [JSON de cobertura](component-inventory.json) es el índice de rutas, IDs estables, método de inspección y consumidores estáticos; este documento contiene su interpretación técnica y las propuestas. [section-inventory](section-inventory.md) y [page-inventory](page-inventory.md) conservan el mapa de secciones y recorridos.
+Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a35`, rama `chore/lem-142-component-inventory`, 31-10-2026. Continúa LEM-132/PR #37 incorporado en esa base. El [JSON de cobertura](component-inventory.json) es el índice de rutas, IDs estables, método de inspección y consumidores estáticos; este documento contiene su interpretación técnica y las propuestas. [section-inventory](section-inventory.md) y [page-inventory](page-inventory.md) conservan el mapa de secciones y recorridos.
 
-- **Observado:** archivos tracked, markup Liquid, schemas, CSS, JS, imports, entradas de render, referencias de templates/grupos y rutas de datos escritas en código. Los nombres Dawn también contienen adaptaciones Lemoon.
-- **Propuesto:** candidatos, orden de extracción, pilotos y criterios futuros de aceptación. No se crean átomos, dependencias, tickets ni nuevas decisiones visuales con este inventario.
-- **No verificado:** render, CMS/asignación activa de templates, settings efectivos, publicación, Shopify runtime, entrega de formularios, API/stock/pagos, integraciones back office, comportamiento de apps, WCAG o aprobación visual/Figma/humana de esta entrega. No se consultó Figma; la limitación de cuota heredada de LEM-132 no bloquea el inventario de fuentes.
+- **Actual:** snapshot de la implementación entregada en este PR, con seis snippets `lemoon-ui-*` incorporados al índice Git y consumidores migrados. `7e437dc3b693a00aaa13c111c4df9e479b3d8af2` identifica la base previa a esta implementación, no su revisión entregada. El delta de fuentes nuevas se conserva en `snapshot.new_source_paths` del JSON como adiciones del PR, no como rutas sin seguimiento. Contratos y referencias actuales en JSON; estado por familia y recetas en el catálogo.
+- **Histórico:** la enumeración inicial en `93f80a2` tenía 501 rutas, 470 mapped y 31 excluded. La lectura estructural por familia sigue siendo referencia de fuentes locales; las actualizaciones ejecutables que aparecen abajo sustituyen los candidatos de extracción ya implementados.
+- **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
+- **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La enumeración se limita a `git ls-files sections snippets layout templates blocks assets config locales`, ocho raíces, de las cuales `blocks/` no contiene archivos tracked. Docs, tests, herramientas y dependencias externas quedan fuera de ese universo de implementación; sus archivos no se confunden con UI omitida. Cada ruta del universo aparece una vez como mapped o excluded. Todos los textos mapped recibieron **escaneo/parseo estructural automático**; la síntesis por familia se apoya además en lectura dirigida. No se afirma revisión manual línea por línea de las 470 rutas. `direct_static_consumers` es una referencia literal de render/asset/section/template, no una prueba de carga ni una lista completa de dependencia dinámica.
+La cobertura actual enumera las 507 rutas de `git ls-files sections snippets layout templates blocks assets config locales`, incluidos los seis snippets UI añadidos por este PR; no quedan rutas explícitas fuera del índice Git. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` se recalcula con referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
 
-| Universo descubierto | Cantidad |
+| Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
-| Snippets / layouts Liquid | 81 / 2 |
+| Snippets / layouts Liquid | 87 / 2 |
 | Templates JSON / Liquid | 35 / 3 |
 | Assets CSS / JS / SVG | 81 / 53 / 93 |
 | Assets binarios PNG / JPG / GIF | 19 / 10 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total tracked / mapped / excluded** | **501 / 470 / 31** |
-| Familias del inventario | 44 |
+| **Total fuentes / mapped / excluded** | **507 / 476 / 31** |
+| Familias estables | 44 |
 
-El núcleo UI coincide con 191 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global = **326 fuentes**. Al añadir 93 SVG y 51 locales se obtienen 470 mapped. Las exclusiones son 30 imágenes binarias y `config/settings_data.json`, **cuyo contenido nunca se leyó**. No se encontraron fuentes tipográficas binarias ni bundles vendor/minificados tracked que requieran otra exclusión. QR/model-viewer y scripts de plataforma externos son referencias, no archivos locales auditados. Los SVG mapped fueron escaneados como texto, sin revisión visual de geometría; los locales se parsearon y contaron, sin revisión editorial de traducciones.
+El núcleo actual es de **332 fuentes**: 197 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global. Con 93 SVG y 51 locales se obtienen 476 mapped. Las exclusiones conservan 30 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
 
 Hay **61 secciones con schema y 7 fragmentos sin schema**. Veintisiete secciones declaran **81 bloques: 73 declaraciones locales y 8 slots `@app`**; son declaraciones, no instancias ni tipos globales únicos. Los ocho sitios `{% render block %}` corresponden a apps. No hay archivos `blocks/`, ni infraestructura observada de theme blocks reutilizables mediante `content_for 'blocks'`. Los snippets composicionales y los bloques locales de sección no acreditan soporte de Shopify theme blocks. La matriz de secciones lista cada tipo; sus settings y opciones permanecen en el schema del archivo canónico enlazado, incluidas opciones no instanciadas en templates actuales.
 
@@ -100,8 +101,12 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 ## Fichas de fuente
 
+Las fichas conservan la lectura dirigida de superficies en la base histórica, con disponibilidad y fuentes nuevas reconciliadas. Para las seis extracciones, la [actualización ejecutable](#actualización-ejecutable-lem-142), LiquidDoc y recetas sustituyen los candidatos históricos; conservar el comportamiento y límites de los demás dueños.
+
 <a id="lm-shell"></a>
 ### LM-SHELL · Shell, contenedores e integración
+
+**Disponibilidad actual:** composición de sección. Entrada: [theme.liquid](../../layout/theme.liquid). Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección. [Receta de integración](../components/recipes/guide-help.md).
 
 **Fuentes:** [layout/theme.liquid](../../layout/theme.liquid), [layout/password.liquid](../../layout/password.liquid), [snippets/meta-tags.liquid](../../snippets/meta-tags.liquid), [assets/base.css](../../assets/base.css), [assets/lemoon-tokens.css](../../assets/lemoon-tokens.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [assets/animations.js](../../assets/animations.js), [assets/constants.js](../../assets/constants.js), [assets/pubsub.js](../../assets/pubsub.js), [assets/theme-editor.js](../../assets/theme-editor.js), [assets/standard-actions-override.js](../../assets/standard-actions-override.js), [config/settings_schema.json](../../config/settings_schema.json).
 
@@ -122,9 +127,11 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-type"></a>
 ### LM-TYPE · Tipografía y texto enriquecido
 
-**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [assets/lemoon-tokens.css](../../assets/lemoon-tokens.css), [sections/rich-text.liquid](../../sections/rich-text.liquid), [sections/main-page.liquid](../../sections/main-page.liquid), [sections/page.liquid](../../sections/page.liquid), [assets/section-rich-text.css](../../assets/section-rich-text.css), [assets/section-main-page.css](../../assets/section-main-page.css).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-heading.liquid](../../snippets/lemoon-ui-heading.liquid). Heading semántico; richtext conserva su dueño y las excepciones tipográficas locales. [Receta de integración](../components/recipes/guide-help.md).
 
-**Contrato actual.** h1–h6 y .h0–.h5 son selectores, no API Liquid. rich-text usa bloques heading/caption/text/button; main-page usa page.title/content; page usa section.settings.page y heading_size.
+**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [assets/lemoon-tokens.css](../../assets/lemoon-tokens.css), [sections/rich-text.liquid](../../sections/rich-text.liquid), [sections/main-page.liquid](../../sections/main-page.liquid), [sections/page.liquid](../../sections/page.liquid), [assets/section-rich-text.css](../../assets/section-rich-text.css), [assets/section-main-page.css](../../assets/section-main-page.css), [lemoon-ui-heading](../../snippets/lemoon-ui-heading.liquid).
+
+**Contrato de superficie.** h1–h6 y .h0–.h5 son selectores; `lemoon-ui-heading` aporta la API explícita de título. rich-text usa bloques heading/caption/text/button; main-page usa page.title/content; page usa section.settings.page y heading_size.
 
 **Variantes existentes.** Display, headings, body, caption, label, CTA, rte; ancho narrow/full según consumidor.
 
@@ -134,14 +141,16 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 **Responsive.** Escala móvil <750; padding de sección según schema/template. **Accesibilidad.** Nivel semántico independiente de clase visual; preservar links, listas, tablas y contenido CMS sin reinterpretar headings.
 
-**JS.** No controlador tipográfico. **Reutilización actual.** Clases compartidas; encabezados y wrappers duplicados por sección; candidato de composición pequeño, no motor de tipografía.
+**JS.** No controlador tipográfico. **Reutilización actual.** `lemoon-ui-heading` en guía, contacto, FAQ y galería; las clases y wrappers conservan su dueño local.
 
 **Dependencias de composición:** [LM-SHELL](#lm-shell). Consumidores estáticos en el JSON.
 
 <a id="lm-action"></a>
 ### LM-ACTION · Botones, enlaces y acciones de icono
 
-**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [snippets/lemoon-frame-only-button.liquid](../../snippets/lemoon-frame-only-button.liquid), [snippets/lemoon-select-lenses-button.liquid](../../snippets/lemoon-select-lenses-button.liquid), [snippets/lemoon-thumbnail-arrow.liquid](../../snippets/lemoon-thumbnail-arrow.liquid), [snippets/lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-action.liquid](../../snippets/lemoon-ui-action.liquid). Base o local; compra mantiene sus adaptadores y formulario nativo. [Receta de integración](../components/recipes/guide-help.md).
+
+**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [snippets/lemoon-frame-only-button.liquid](../../snippets/lemoon-frame-only-button.liquid), [snippets/lemoon-select-lenses-button.liquid](../../snippets/lemoon-select-lenses-button.liquid), [snippets/lemoon-thumbnail-arrow.liquid](../../snippets/lemoon-thumbnail-arrow.liquid), [snippets/lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid), [lemoon-ui-action](../../snippets/lemoon-ui-action.liquid).
 
 **Contrato actual.** Base CSS no tiene snippet de botón genérico. button[type=submit/button] actúa; a[href] navega. frame-only recibe context(form/eyewear), disabled, section_id, button_class; select-lenses recibe context(link/eyewear/sticky), product, disabled. Estos dos son adaptadores comerciales, no átomos genéricos. carousel-controls recibe carousel_id.
 
@@ -153,12 +162,14 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 **Responsive.** Base 48px ≥750 y 44px <750; no imponer esa caja a todos los iconos sin revisar target. **Accesibilidad.** Conservar nombre accesible, type, form, IDs, ARIA, data-*; un enlace sin href no obtiene semántica disabled por CSS.
 
-**JS.** Ninguno para estilo base; handlers pertenecen al consumidor, nunca al átomo visual. **Reutilización actual.** Estilo reutilizado con markup repetido; adaptadores comerciales ya compartidos. Candidato futuro: render visual explícito sin mover lógica de compra.
+**JS.** Ninguno para estilo base; handlers pertenecen al consumidor, nunca al átomo visual. **Reutilización actual.** `lemoon-ui-action` presenta acciones base/local en guía/contacto/FAQ/galería; los adaptadores comerciales compartidos conservan sus hooks y lógica.
 
 **Dependencias de composición:** [LM-ICON](#lm-icon). Consumidores estáticos en el JSON.
 
 <a id="lm-icon"></a>
 ### LM-ICON · Familias de iconos, formas y marcas
+
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-icon.liquid](../../snippets/lemoon-icon.liquid). icon/size/label; geometría FAQ y marca conservan sus archivos propios. [Receta de integración](../components/recipes/catalogue-states.md).
 
 **Fuentes:** [snippets/lemoon-icon.liquid](../../snippets/lemoon-icon.liquid), [snippets/lemoon-frame-shape.liquid](../../snippets/lemoon-frame-shape.liquid), [snippets/lemoon-purchase-step-icon.liquid](../../snippets/lemoon-purchase-step-icon.liquid), [snippets/icon-accordion.liquid](../../snippets/icon-accordion.liquid), [snippets/icon-with-text.liquid](../../snippets/icon-with-text.liquid), [snippets/social-icons.liquid](../../snippets/social-icons.liquid).
 
@@ -179,24 +190,28 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-field"></a>
 ### LM-FIELD · Campos, textarea y select
 
-**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [assets/section-contact-form.css](../../assets/section-contact-form.css), [snippets/price-facet.liquid](../../snippets/price-facet.liquid).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-field.liquid](../../snippets/lemoon-ui-field.liquid). Input/textarea; lemoon-ui-select para select. Labels, IDs y error explícitos. [Receta de integración](../components/recipes/contact-form.md).
+
+**Fuentes:** [assets/base.css](../../assets/base.css), [assets/lemoon-components.css](../../assets/lemoon-components.css), [assets/section-contact-form.css](../../assets/section-contact-form.css), [snippets/price-facet.liquid](../../snippets/price-facet.liquid), [lemoon-ui-field](../../snippets/lemoon-ui-field.liquid), [lemoon-ui-select](../../snippets/lemoon-ui-select.liquid).
 
 **Contrato actual.** field/field__input/field__label y select/select__select son contratos de clases, con id/name/value/type/autocomplete/required del formulario. textarea usa text-area; price-facet recibe filter y id_prefix, campos numéricos relacionados con price-range. Límites de cada campo permanecen en su fuente canónica; el inventario no reescribe esas constraints.
 
 **Variantes existentes.** Text/email/tel/number/date/file/password/search, textarea y select nativos según fuente; floating labels Dawn y labels persistentes locales no son el mismo markup.
 
-**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado; no afirmar migración realizada.
+**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado. Los controles UI de contacto/búsqueda/galería aplican esa corrección scoped; los campos legacy restantes conservan deuda.
 
 **Estados observados / aplicabilidad:** Normal: Valor/placeholder y label; Hover: Reglas locales de contorno; Foco: :focus-visible/:focus-within observado; deuda legacy documentada; Seleccionado: Selección nativa select; Loading: No loading universal de campo; Error: aria-invalid/describedby según formulario; no todas las instancias lo traen; Disabled: disabled nativo donde existe.
 
 **Responsive.** 48px base, textarea auto; columnas del formulario apilan según superficie. **Accesibilidad.** Preservar label-for, hint/error IDs, inputmode, min/max/step y constraints; no copiar defecto de borde al extraer.
 
-**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** CSS común y markup repetido en contacto/newsletter/receta/gift; candidato campo con slots help/error e IDs explícitos.
+**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren el piloto contacto/búsqueda/galería con hint/error e IDs explícitos; newsletter/receta/gift conservan sus contratos locales.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
 <a id="lm-choice"></a>
 ### LM-CHOICE · Checkbox, radio y opciones visuales
+
+**Disponibilidad actual:** extracción pendiente. Entrada: [product-variant-options.liquid](../../snippets/product-variant-options.liquid). Opciones de variante conservan sus nombres, selección y disponibilidad; no hay radio genérico extraído. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [assets/base.css](../../assets/base.css), [assets/component-product-variant-picker.css](../../assets/component-product-variant-picker.css), [assets/component-facets.css](../../assets/component-facets.css), [snippets/product-variant-options.liquid](../../snippets/product-variant-options.liquid).
 
@@ -217,6 +232,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-swatch"></a>
 ### LM-SWATCH · Swatches de color y selección
 
+**Disponibilidad actual:** reutilizable. Entrada: [swatch-input.liquid](../../snippets/swatch-input.liquid). SwatchDrop y formulario real; swatch visual separado de la opción interactiva. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [snippets/swatch.liquid](../../snippets/swatch.liquid), [snippets/swatch-input.liquid](../../snippets/swatch-input.liquid), [snippets/lemoon-color-swatch.liquid](../../snippets/lemoon-color-swatch.liquid), [assets/component-swatch.css](../../assets/component-swatch.css), [assets/component-swatch-input.css](../../assets/component-swatch-input.css).
 
 **Contrato actual.** swatch: swatch,shape; swatch-input: id,type(default radio),name,value,swatch,product_form_id,checked,disabled,visually_disabled,shape,help_text,additional_props. lemoon-color-swatch: value (option value); usa swatch nativo o fallback por nombre.
@@ -235,6 +252,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-range"></a>
 ### LM-RANGE · Rangos y cantidades
+
+**Disponibilidad actual:** reutilizable. Entrada: [quantity-input.liquid](../../snippets/quantity-input.liquid). Cantidad y lemoon-price-slider son contratos distintos; mantener límites y controladores del dueño. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [snippets/lemoon-price-slider.liquid](../../snippets/lemoon-price-slider.liquid), [snippets/quantity-input.liquid](../../snippets/quantity-input.liquid), [snippets/progress-bar.liquid](../../snippets/progress-bar.liquid), [assets/component-progress-bar.css](../../assets/component-progress-bar.css), [assets/quantity-popover.css](../../assets/quantity-popover.css), [assets/quantity-popover.js](../../assets/quantity-popover.js).
 
@@ -255,6 +274,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-label"></a>
 ### LM-LABEL · Badges, chips e indicadores
 
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-product-card-labels.liquid](../../snippets/lemoon-product-card-labels.liquid). Labels derivados del producto; no convertir chips o badges de demo en flags comerciales. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [snippets/lemoon-product-card-labels.liquid](../../snippets/lemoon-product-card-labels.liquid), [snippets/lemoon-product-status.liquid](../../snippets/lemoon-product-status.liquid), [snippets/lemoon-product-promotions.liquid](../../snippets/lemoon-product-promotions.liquid), [assets/component-discounts.css](../../assets/component-discounts.css).
 
 **Contrato actual.** Card labels: card_product,section_id; tags normalizados, máximo3 con reserva sold-out. PDP status: product.selected_or_first_available_variant. Promotions: shop.metafields.lemoon.pdp_promotions.value; filtra ACTIVE, fechas, primera compra/customer.orders_count y collection_ids; solo contrato leído, ningún registro cliente consultado.
@@ -273,6 +294,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-price"></a>
 ### LM-PRICE · Precio, moneda, totales y rating
+
+**Disponibilidad actual:** reutilizable. Entrada: [price.liquid](../../snippets/price.liquid). Producto/variante y lemoon-money; no calcular precios en átomos de presentación. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [snippets/price.liquid](../../snippets/price.liquid), [snippets/lemoon-money.liquid](../../snippets/lemoon-money.liquid), [snippets/unit-price.liquid](../../snippets/unit-price.liquid), [assets/component-price.css](../../assets/component-price.css), [assets/component-totals.css](../../assets/component-totals.css), [assets/component-rating.css](../../assets/component-rating.css), [assets/component-volume-pricing.css](../../assets/component-volume-pricing.css), [assets/price-per-item.js](../../assets/price-per-item.js).
 
@@ -293,6 +316,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-product-card"></a>
 ### LM-PRODUCT-CARD · Tarjeta de producto
 
+**Disponibilidad actual:** reutilizable. Entrada: [card-product.liquid](../../snippets/card-product.liquid). card_product y section_id reales; media, precio y JS juntos. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [snippets/card-product.liquid](../../snippets/card-product.liquid), [assets/component-card.css](../../assets/component-card.css), [assets/lemoon-product-card.js](../../assets/lemoon-product-card.js), [assets/quick-add.css](../../assets/quick-add.css), [assets/mask-blobs.css](../../assets/mask-blobs.css).
 
 **Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. Producto/variantes/media/settings son entradas de dominio.
@@ -311,6 +336,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-content-card"></a>
 ### LM-CONTENT-CARD · Tarjetas de colección, artículo y resultado CMS
+
+**Disponibilidad actual:** reutilizable. Entrada: [main-search-result-card.liquid](../../snippets/main-search-result-card.liquid). Resultado CMS, article-card y card-collection mantienen APIs diferentes. [Receta de integración](../components/recipes/search-sort.md).
 
 **Fuentes:** [snippets/card-collection.liquid](../../snippets/card-collection.liquid), [snippets/article-card.liquid](../../snippets/article-card.liquid), [snippets/main-search-result-card.liquid](../../snippets/main-search-result-card.liquid), [assets/component-article-card.css](../../assets/component-article-card.css).
 
@@ -331,6 +358,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-nav"></a>
 ### LM-NAV · Breadcrumb y paginación
 
+**Disponibilidad actual:** reutilizable. Entrada: [pagination.liquid](../../snippets/pagination.liquid). paginate real; breadcrumb tiene contrato propio, no navegación universal. [Receta de integración](../components/recipes/search-sort.md).
+
 **Fuentes:** [snippets/lemoon-breadcrumb.liquid](../../snippets/lemoon-breadcrumb.liquid), [snippets/pagination.liquid](../../snippets/pagination.liquid), [assets/component-pagination.css](../../assets/component-pagination.css).
 
 **Contrato actual.** Breadcrumb consume collection,product y request.page_type; elige primera colección no-frontpage si falta contexto PDP. pagination recibe paginate,anchor; usa parts/current/previous/next.
@@ -350,7 +379,9 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-feedback"></a>
 ### LM-FEEDBACK · Alertas, loading y estados vacíos
 
-**Fuentes:** [snippets/loading-spinner.liquid](../../snippets/loading-spinner.liquid), [assets/loading-spinner.svg](../../assets/loading-spinner.svg), [sections/cart-live-region-text.liquid](../../sections/cart-live-region-text.liquid).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-message.liquid](../../snippets/lemoon-ui-message.liquid). Mensaje explícito sin anuncio automático; loading-spinner conserva su implementación. [Receta de integración](../components/recipes/contact-form.md).
+
+**Fuentes:** [snippets/loading-spinner.liquid](../../snippets/loading-spinner.liquid), [assets/loading-spinner.svg](../../assets/loading-spinner.svg), [sections/cart-live-region-text.liquid](../../sections/cart-live-region-text.liquid), [lemoon-ui-message](../../snippets/lemoon-ui-message.liquid).
 
 **Contrato actual.** loading-spinner: class opcional. Feedback usa form.errors/posted_successfully, cart.errors y resultados; no existe API global de toast. cart-live-region-text retorna sections.cart.new_estimated_total y cart.total_price formateado para respuesta parcial.
 
@@ -362,14 +393,16 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 **Responsive.** No truncar errores ni tapar acciones al apilar. **Accesibilidad.** Conservar live region IDs; spinner decorativo no reemplaza texto de estado. No duplicar anuncios.
 
-**JS.** Controlador del formulario/producto/cart; no un nuevo bus de toasts. **Reutilización actual.** Spinner compartido; feedback markup repetido con semántica propia. Candidato message presentacional después de preservar asociaciones.
+**JS.** Controlador del formulario/producto/cart; no un nuevo bus de toasts. **Reutilización actual.** Spinner compartido y `lemoon-ui-message` presentacional para contacto/galería; las demás operaciones conservan su feedback con semántica propia.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type), [LM-ICON](#lm-icon). Consumidores estáticos en el JSON.
 
 <a id="lm-disclosure"></a>
 ### LM-DISCLOSURE · Accordions, disclosures y FAQ
 
-**Fuentes:** [sections/collapsible-content.liquid](../../sections/collapsible-content.liquid), [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid), [sections/lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid), [sections/disclosures.liquid](../../sections/disclosures.liquid), [snippets/product-disclosures.liquid](../../snippets/product-disclosures.liquid), [assets/component-accordion.css](../../assets/component-accordion.css), [assets/collapsible-content.css](../../assets/collapsible-content.css), [assets/component-disclosures.css](../../assets/component-disclosures.css), [assets/details-disclosure.js](../../assets/details-disclosure.js), [assets/disclosures.js](../../assets/disclosures.js).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-faq-item.liquid](../../snippets/lemoon-ui-faq-item.liquid). FAQ agrupado usa details; FAQ legacy y otros disclosures mantienen sus dueños. [Receta de integración](../components/recipes/faq-group.md).
+
+**Fuentes:** [sections/collapsible-content.liquid](../../sections/collapsible-content.liquid), [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid), [sections/lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid), [sections/disclosures.liquid](../../sections/disclosures.liquid), [snippets/product-disclosures.liquid](../../snippets/product-disclosures.liquid), [assets/component-accordion.css](../../assets/component-accordion.css), [assets/collapsible-content.css](../../assets/collapsible-content.css), [assets/component-disclosures.css](../../assets/component-disclosures.css), [assets/details-disclosure.js](../../assets/details-disclosure.js), [assets/disclosures.js](../../assets/disclosures.js), [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid), [assets/global.js](../../assets/global.js).
 
 **Contrato actual.** collapsible-content: bloques collapsible_row con heading/icon/row_content/page. FAQ simple question/answer; FAQ page question con group/link/link_label y grupos locales. product-disclosures: product,block,heading,heading_size,open_by_default,surface(default product_page), metafields.shopify.disclosure y display_preferences surfaces.
 
@@ -381,12 +414,14 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 **Responsive.** Contenido fluido; FAQ page layout local, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
 
-**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente. **Reutilización actual.** Familia de comportamiento compartida, markup/estilos duplicados FAQ/collapsible/PDP; candidato disclosure visual con contenido explícito.
+**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado y galería; FAQ legacy, collapsible y disclosure PDP conservan sus contratos.
 
 **Dependencias de composición:** [LM-ICON](#lm-icon), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
 <a id="lm-overlay"></a>
 ### LM-OVERLAY · Modales, drawers y popovers
+
+**Disponibilidad actual:** extracción pendiente. Entrada: [global.js](../../assets/global.js). No hay modal genérico extraído; reutilizar el shell real con Escape, trampa y retorno de foco. [Receta de integración](../components/recipes/catalogue-states.md).
 
 **Fuentes:** [assets/global.js](../../assets/global.js), [assets/details-modal.js](../../assets/details-modal.js), [assets/component-menu-drawer.css](../../assets/component-menu-drawer.css), [assets/component-modal-video.css](../../assets/component-modal-video.css), [assets/cart-disclosure-modal.js](../../assets/cart-disclosure-modal.js), [assets/cart-disclosure-tooltip.js](../../assets/cart-disclosure-tooltip.js), [snippets/cart-disclosure-indicator.liquid](../../snippets/cart-disclosure-indicator.liquid).
 
@@ -407,6 +442,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-tabs"></a>
 ### LM-TABS · Tabs y guía de medidas
 
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-size-guide-content.liquid](../../snippets/lemoon-size-guide-content.liquid). Contenido compartido; controlador y shell PDP no son un tab genérico. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [snippets/lemoon-size-guide-content.liquid](../../snippets/lemoon-size-guide-content.liquid), [snippets/lemoon-frame-dimensions.liquid](../../snippets/lemoon-frame-dimensions.liquid), [snippets/lemoon-frame-information.liquid](../../snippets/lemoon-frame-information.liquid), [snippets/lemoon-product-size-guide.liquid](../../snippets/lemoon-product-size-guide.liquid), [assets/lemoon-pdp-tools.js](../../assets/lemoon-pdp-tools.js).
 
 **Contrato actual.** Size content: product,instance_id(default product.id); custom.frame_dimensions/shape/material/size/width/weight/gender/face_shapes_compatible. frame-dimensions usa dimensions y dialog opcional para selector de unidades; frame-information pasa product e instance_id al contenido. size-guide drawer recibe product,section_id y crea instance_id propio. Tabs measurements/frame/fit con IDs únicos y unidades mm/in.
@@ -425,6 +462,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-slider"></a>
 ### LM-SLIDER · Carruseles, slideshow y controles
+
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid). carousel_id y hooks prev/next reales; slider-component conserva global.js. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [snippets/lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid), [snippets/lemoon-thumbnail-arrow.liquid](../../snippets/lemoon-thumbnail-arrow.liquid), [assets/component-slider.css](../../assets/component-slider.css), [assets/component-slideshow.css](../../assets/component-slideshow.css).
 
@@ -445,6 +484,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-media"></a>
 ### LM-MEDIA · Media responsive, galerías y vídeo
 
+**Disponibilidad actual:** reutilizable. Entrada: [product-media-gallery.liquid](../../snippets/product-media-gallery.liquid). Galería de producto con product/section y sus assets; video/model-viewer tienen dependencias propias. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [snippets/product-media-gallery.liquid](../../snippets/product-media-gallery.liquid), [snippets/product-media-modal.liquid](../../snippets/product-media-modal.liquid), [snippets/product-media.liquid](../../snippets/product-media.liquid), [snippets/product-thumbnail.liquid](../../snippets/product-thumbnail.liquid), [snippets/lemoon-pdp-image.liquid](../../snippets/lemoon-pdp-image.liquid), [assets/media-gallery.js](../../assets/media-gallery.js), [assets/product-modal.js](../../assets/product-modal.js), [assets/product-model.js](../../assets/product-model.js), [assets/magnify.js](../../assets/magnify.js), [assets/component-deferred-media.css](../../assets/component-deferred-media.css), [assets/component-product-model.css](../../assets/component-product-model.css), [assets/component-model-viewer-ui.css](../../assets/component-model-viewer-ui.css), [sections/video.liquid](../../sections/video.liquid), [assets/video-section.css](../../assets/video-section.css).
 
 **Contrato actual.** product-media-gallery: product,variant_images,limit (también section/settings implícitos); media/modal/thumbnail APIs declaradas en los comentarios Accepts de sus fuentes enlazadas. lemoon-pdp-image: image,sizes,image_class,deferred,primary; anchos320..1946, eager/high para primary y template/noscript lazy diferido. video schema incluye video/video_url, cover_image, description, looping.
@@ -463,6 +504,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-facet"></a>
 ### LM-FACET · Filtros, chips activos y sorting
+
+**Disponibilidad actual:** reutilizable. Entrada: [facets.liquid](../../snippets/facets.liquid). results, filtros y formularios nativos; el átomo select no decide políticas de ordenación. [Receta de integración](../components/recipes/search-sort.md).
 
 **Fuentes:** [snippets/facets.liquid](../../snippets/facets.liquid), [snippets/facets-filter-desktop.liquid](../../snippets/facets-filter-desktop.liquid), [snippets/facets-filter-mobile.liquid](../../snippets/facets-filter-mobile.liquid), [snippets/facets-active-values.liquid](../../snippets/facets-active-values.liquid), [snippets/lemoon-active-filters.liquid](../../snippets/lemoon-active-filters.liquid), [snippets/lemoon-facet-visual.liquid](../../snippets/lemoon-facet-visual.liquid), [assets/facets.js](../../assets/facets.js), [assets/component-facets.css](../../assets/component-facets.css), [assets/component-show-more.css](../../assets/component-show-more.css), [assets/show-more.js](../../assets/show-more.js).
 
@@ -483,6 +526,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-search"></a>
 ### LM-SEARCH · Búsqueda y predictive search
 
+**Disponibilidad actual:** composición de sección. Entrada: [main-search.liquid](../../sections/main-search.liquid). Componer main-search-results en su contexto search, filtros y términos. [Receta de integración](../components/recipes/search-sort.md).
+
 **Fuentes:** [sections/main-search.liquid](../../sections/main-search.liquid), [sections/predictive-search.liquid](../../sections/predictive-search.liquid), [snippets/main-search-results.liquid](../../snippets/main-search-results.liquid), [snippets/header-search.liquid](../../snippets/header-search.liquid), [assets/main-search.js](../../assets/main-search.js), [assets/search-form.js](../../assets/search-form.js), [assets/predictive-search.js](../../assets/predictive-search.js), [assets/component-search.css](../../assets/component-search.css), [assets/component-predictive-search.css](../../assets/component-predictive-search.css).
 
 **Contrato actual.** Search page consume search.terms/results/filters/sort_by y paginate; main-search-results recibe section,paginate,show_all_products,has_results,search_url y consume contexto search. Header search usa input_id; predictive-search section retorna markup para endpoint. URLs reales routes.search_url/predictive_search_url.
@@ -501,6 +546,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-mobile-search"></a>
 ### LM-MOBILE-SEARCH · Overlay de búsqueda Lemoon
+
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-mobile-search.liquid](../../snippets/lemoon-mobile-search.liquid). Overlay y controlador móvil propios; no reemplazarlo por el select de sorting. [Receta de integración](../components/recipes/search-sort.md).
 
 **Fuentes:** [snippets/lemoon-mobile-search.liquid](../../snippets/lemoon-mobile-search.liquid), [assets/lemoon-mobile-search.css](../../assets/lemoon-mobile-search.css), [assets/lemoon-mobile-search.js](../../assets/lemoon-mobile-search.js), [assets/lemoon-mobile-search-logic.js](../../assets/lemoon-mobile-search-logic.js).
 
@@ -521,6 +568,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-header"></a>
 ### LM-HEADER · Header, menús y localización
 
+**Disponibilidad actual:** composición de sección. Entrada: [header.liquid](../../sections/header.liquid). Grupo header, navegación/localización y JS existentes; no header ficticio en galería. [Receta de integración](../components/recipes/catalogue-states.md).
+
 **Fuentes:** [sections/header.liquid](../../sections/header.liquid), [snippets/header-drawer.liquid](../../snippets/header-drawer.liquid), [snippets/header-dropdown-menu.liquid](../../snippets/header-dropdown-menu.liquid), [snippets/header-mega-menu.liquid](../../snippets/header-mega-menu.liquid), [snippets/country-localization.liquid](../../snippets/country-localization.liquid), [snippets/language-localization.liquid](../../snippets/language-localization.liquid), [assets/lemoon-header.css](../../assets/lemoon-header.css), [assets/lemoon-header-nav.js](../../assets/lemoon-header-nav.js), [assets/component-list-menu.css](../../assets/component-list-menu.css), [assets/component-mega-menu.css](../../assets/component-mega-menu.css), [assets/component-localization-form.css](../../assets/component-localization-form.css), [assets/localization-form.js](../../assets/localization-form.js).
 
 **Contrato actual.** Header Lemoon usa settings.menu, bloques drawer_primary/drawer_utility/drawer_subitem y @app; logo oficial inline. Menús Dawn conservados reciben menu/section/settings según las fuentes enlazadas; localization snippets localPosition y localization countries/languages, formulario nativo.
@@ -539,6 +588,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-mobile-nav"></a>
 ### LM-MOBILE-NAV · Navegación móvil por niveles
+
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-mobile-nav.liquid](../../snippets/lemoon-mobile-nav.liquid). Menús por nivel y controlador propios; preservar IDs, foco y estados. [Receta de integración](../components/recipes/catalogue-states.md).
 
 **Fuentes:** [snippets/lemoon-mobile-nav.liquid](../../snippets/lemoon-mobile-nav.liquid), [snippets/lemoon-mobile-nav-link.liquid](../../snippets/lemoon-mobile-nav-link.liquid), [snippets/lemoon-mobile-nav-filter-group.liquid](../../snippets/lemoon-mobile-nav-filter-group.liquid), [assets/lemoon-mobile-nav.css](../../assets/lemoon-mobile-nav.css), [assets/lemoon-mobile-nav.js](../../assets/lemoon-mobile-nav.js), [assets/lemoon-mobile-nav-logic.js](../../assets/lemoon-mobile-nav-logic.js).
 
@@ -559,6 +610,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-footer"></a>
 ### LM-FOOTER · Footer, newsletter, ayuda y pagos
 
+**Disponibilidad actual:** composición de sección. Entrada: [footer.liquid](../../sections/footer.liquid). Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. [Receta de integración](../components/recipes/guide-help.md).
+
 **Fuentes:** [sections/footer.liquid](../../sections/footer.liquid), [assets/section-lemoon-footer.css](../../assets/section-lemoon-footer.css), [assets/section-lemoon-footer.js](../../assets/section-lemoon-footer.js), [assets/section-footer.css](../../assets/section-footer.css), [assets/component-list-social.css](../../assets/component-list-social.css), [assets/component-list-payment.css](../../assets/component-list-payment.css), [assets/component-newsletter.css](../../assets/component-newsletter.css), [assets/newsletter-section.css](../../assets/newsletter-section.css).
 
 **Contrato actual.** Footer actual es Lemoon: navigation_column (heading/menu/open_mobile/mobile_only/desktop_only), legal_links(menu), @app; newsletter form customer contact[email]/tags; ayuda, whatsapp/contact y logos de pago configurables por settings. Mostrar logo no acredita pasarela habilitada.
@@ -577,6 +630,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-privacy"></a>
 ### LM-PRIVACY · Preferencias de cookies
+
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-cookie-preferences.liquid](../../snippets/lemoon-cookie-preferences.liquid). Consentimiento permanece en su controlador y API; galería sin persistencia. [Receta de integración](../components/recipes/catalogue-states.md).
 
 **Fuentes:** [snippets/lemoon-cookie-preferences.liquid](../../snippets/lemoon-cookie-preferences.liquid), [snippets/lemoon-native-policy-help.liquid](../../snippets/lemoon-native-policy-help.liquid), [assets/lemoon-cookie-preferences.js](../../assets/lemoon-cookie-preferences.js), [assets/lemoon-native-policies.css](../../assets/lemoon-native-policies.css).
 
@@ -597,6 +652,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-hero"></a>
 ### LM-HERO · Hero y anuncios
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-hero.liquid](../../sections/lemoon-hero.liquid). Sección con media/settings propios; no banner universal extraído. [Receta de integración](../components/recipes/guide-help.md).
+
 **Fuentes:** [sections/lemoon-hero.liquid](../../sections/lemoon-hero.liquid), [sections/image-banner.liquid](../../sections/image-banner.liquid), [sections/slideshow.liquid](../../sections/slideshow.liquid), [sections/announcement-bar.liquid](../../sections/announcement-bar.liquid), [assets/lemoon-hero.css](../../assets/lemoon-hero.css), [assets/lemoon-hero.js](../../assets/lemoon-hero.js), [assets/section-image-banner.css](../../assets/section-image-banner.css), [assets/lemoon-announcement-bar.css](../../assets/lemoon-announcement-bar.css).
 
 **Contrato actual.** Hero Lemoon: bloques slide desktop/mobile image o asset y dos CTA, autoplay_seconds. Banner Dawn heading/text/buttons, imagen/imagen2, overlay y content position; slideshow slide con heading/subheading/link/color_scheme. Announcement bloques announcement(text/link), auto_rotate/change_slides_speed y localización/social según schema.
@@ -615,6 +672,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-editorial"></a>
 ### LM-EDITORIAL · Composiciones editoriales y home
+
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-about-page.liquid](../../sections/lemoon-about-page.liquid). Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in. [Receta de integración](../components/recipes/guide-help.md).
 
 **Fuentes:** [sections/collage.liquid](../../sections/collage.liquid), [sections/image-with-text.liquid](../../sections/image-with-text.liquid), [sections/multirow.liquid](../../sections/multirow.liquid), [sections/multicolumn.liquid](../../sections/multicolumn.liquid), [sections/lemoon-about.liquid](../../sections/lemoon-about.liquid), [sections/lemoon-about-page.liquid](../../sections/lemoon-about-page.liquid), [sections/lifestyle-mood-grid.liquid](../../sections/lifestyle-mood-grid.liquid), [sections/lemoon-shop-by-shape.liquid](../../sections/lemoon-shop-by-shape.liquid), [sections/how-it-works.liquid](../../sections/how-it-works.liquid), [sections/trust-bar.liquid](../../sections/trust-bar.liquid), [sections/social-proof-strip.liquid](../../sections/social-proof-strip.liquid), [snippets/lemoon-shared-benefits.liquid](../../snippets/lemoon-shared-benefits.liquid), [snippets/lemoon-commercial-demo.liquid](../../snippets/lemoon-commercial-demo.liquid), [assets/collage.css](../../assets/collage.css), [assets/component-image-with-text.css](../../assets/component-image-with-text.css), [assets/section-multicolumn.css](../../assets/section-multicolumn.css).
 
@@ -635,6 +694,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-product-list"></a>
 ### LM-PRODUCT-LIST · Listados y recomendaciones de producto
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid). Listas/recomendaciones conservan colección, carga y vacío en su dueño. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [sections/featured-collection.liquid](../../sections/featured-collection.liquid), [sections/featured-product.liquid](../../sections/featured-product.liquid), [sections/lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid), [sections/related-products.liquid](../../sections/related-products.liquid), [sections/collection-list.liquid](../../sections/collection-list.liquid), [sections/main-list-collections.liquid](../../sections/main-list-collections.liquid), [sections/cart-upsell-row.liquid](../../sections/cart-upsell-row.liquid), [assets/lemoon-featured-products.js](../../assets/lemoon-featured-products.js), [assets/template-collection.css](../../assets/template-collection.css), [assets/section-featured-product.css](../../assets/section-featured-product.css), [assets/section-related-products.css](../../assets/section-related-products.css), [assets/component-complementary-products.css](../../assets/component-complementary-products.css), [assets/section-collection-list.css](../../assets/section-collection-list.css).
 
 **Contrato actual.** Colección/producto, limit/columns, sliders y presentation settings; Lemoon featured: collection_source(collection/optical/sun), initial_products/products_to_show/max_products_to_load,defer_load,randomize,show_quick_add. Recomendaciones Shopify via product-recommendations; upsell consume cart y colección/settings. Featured-product conserva bloques PDP y dominio buy-buttons.
@@ -653,6 +714,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-plp"></a>
 ### LM-PLP · Colección y PLP
+
+**Disponibilidad actual:** composición de sección. Entrada: [main-collection-product-grid.liquid](../../sections/main-collection-product-grid.liquid). Grid y sidebar locales; no migrar sort de colección al piloto de búsqueda. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [sections/main-collection-banner.liquid](../../sections/main-collection-banner.liquid), [sections/main-collection-product-grid.liquid](../../sections/main-collection-product-grid.liquid), [snippets/lemoon-collection-copy.liquid](../../snippets/lemoon-collection-copy.liquid), [snippets/lemoon-collection-intro.liquid](../../snippets/lemoon-collection-intro.liquid), [snippets/lemoon-collection-promo.liquid](../../snippets/lemoon-collection-promo.liquid), [snippets/lemoon-plp-product-page.liquid](../../snippets/lemoon-plp-product-page.liquid), [assets/lemoon-collection-plp.css](../../assets/lemoon-collection-plp.css), [assets/lemoon-collection-plp.js](../../assets/lemoon-collection-plp.js), [assets/component-collection-hero.css](../../assets/component-collection-hero.css), [templates/collection.carousel.liquid](../../templates/collection.carousel.liquid), [templates/collection.carousel-accessories.liquid](../../templates/collection.carousel-accessories.liquid).
 
@@ -673,6 +736,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-pdp"></a>
 ### LM-PDP · PDP estándar y óptica
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-eyewear-product.liquid](../../sections/lemoon-eyewear-product.liquid). Preservar variantes, sticky purchase y herramientas; heading genérico no reemplaza product-heading. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [sections/main-product.liquid](../../sections/main-product.liquid), [sections/lemoon-eyewear-product.liquid](../../sections/lemoon-eyewear-product.liquid), [snippets/lemoon-product-heading.liquid](../../snippets/lemoon-product-heading.liquid), [snippets/lemoon-product-sku.liquid](../../snippets/lemoon-product-sku.liquid), [snippets/lemoon-sticky-purchase.liquid](../../snippets/lemoon-sticky-purchase.liquid), [snippets/product-variant-picker.liquid](../../snippets/product-variant-picker.liquid), [assets/product-info.js](../../assets/product-info.js), [assets/lemoon-eyewear-product.js](../../assets/lemoon-eyewear-product.js), [assets/lemoon-pdp-layout.css](../../assets/lemoon-pdp-layout.css), [assets/lemoon-eyewear-product.css](../../assets/lemoon-eyewear-product.css), [assets/section-main-product.css](../../assets/section-main-product.css).
 
 **Contrato actual.** Producto, variantes/media/metafields custom y reviews; bloques estándar text/title/price/sku/inventory/quantity/variant/buy/description/share/custom/disclosures/collapsible_tab/popup/rating/complementary/icon-with-text/@app; óptica lens_info/@app. product-info actualiza sección/precio/media por variante, optical usa data-variants y controlador propio. Sticky product + settings.lemoon_sticky_purchase.
@@ -691,6 +756,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-purchase"></a>
 ### LM-PURCHASE · Formulario de compra y destinatario
+
+**Disponibilidad actual:** reutilizable. Entrada: [buy-buttons.liquid](../../snippets/buy-buttons.liquid). Producto, block y product_form_id; checkout/destinatario nunca pasan al átomo action. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [snippets/buy-buttons.liquid](../../snippets/buy-buttons.liquid), [snippets/gift-card-recipient-form.liquid](../../snippets/gift-card-recipient-form.liquid), [assets/product-form.js](../../assets/product-form.js), [assets/recipient-form.js](../../assets/recipient-form.js), [assets/quick-add.js](../../assets/quick-add.js), [assets/quick-add-bulk.js](../../assets/quick-add-bulk.js).
 
@@ -711,6 +778,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-config"></a>
 ### LM-CONFIG · Configurador de lentes y receta
 
+**Disponibilidad actual:** composición de sección. Entrada: [lens-configurator.liquid](../../sections/lens-configurator.liquid). Elegibilidad, receta y precios siguen en configurador y contrato de integración. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [sections/lens-configurator.liquid](../../sections/lens-configurator.liquid), [snippets/lemoon-prescription-fields.liquid](../../snippets/lemoon-prescription-fields.liquid), [assets/lens-configurator.js](../../assets/lens-configurator.js).
 
 **Contrato actual.** Form multipart product usa variants/options y JSON data-lens-data; flow steps use/prescription/crystal/index/extra/review condicionados por catálogo. validatePrescription importada de optical; props OD/OI esfera(-20..10,.25), cilindro(-6..6,.25), eje(0..180), adición(.25..4), PD40..80,.5. Upload PDF/JPG/PNG y panel/inputs disabled hasta modo correcto.
@@ -729,6 +798,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-cart"></a>
 ### LM-CART · Carrito, drawer y notificación
+
+**Disponibilidad actual:** composición de sección. Entrada: [main-cart-items.liquid](../../sections/main-cart-items.liquid). Carrito nativo y fragmentos/drawer; estados y anuncios pertenecen al controlador. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [sections/main-cart-items.liquid](../../sections/main-cart-items.liquid), [sections/main-cart-footer.liquid](../../sections/main-cart-footer.liquid), [sections/cart-drawer.liquid](../../sections/cart-drawer.liquid), [sections/cart-icon-bubble.liquid](../../sections/cart-icon-bubble.liquid), [sections/cart-notification-button.liquid](../../sections/cart-notification-button.liquid), [sections/cart-notification-product.liquid](../../sections/cart-notification-product.liquid), [snippets/cart-drawer.liquid](../../snippets/cart-drawer.liquid), [snippets/cart-notification.liquid](../../snippets/cart-notification.liquid), [assets/cart.js](../../assets/cart.js), [assets/cart-drawer.js](../../assets/cart-drawer.js), [assets/cart-notification.js](../../assets/cart-notification.js), [assets/lemoon-cart-page.css](../../assets/lemoon-cart-page.css), [assets/component-cart.css](../../assets/component-cart.css), [assets/component-cart-items.css](../../assets/component-cart-items.css), [assets/component-cart-drawer.css](../../assets/component-cart-drawer.css), [assets/component-cart-notification.css](../../assets/component-cart-notification.css).
 
@@ -749,6 +820,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-bulk"></a>
 ### LM-BULK · Pedidos rápidos y volumen
 
+**Disponibilidad actual:** reutilizable. Entrada: [quick-order-list.liquid](../../snippets/quick-order-list.liquid). Pedidos rápidos/volumen con cantidades y controlador propios; revisar consumidor efectivo antes de usar. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [sections/quick-order-list.liquid](../../sections/quick-order-list.liquid), [sections/bulk-quick-order-list.liquid](../../sections/bulk-quick-order-list.liquid), [snippets/quick-order-list.liquid](../../snippets/quick-order-list.liquid), [snippets/quick-order-list-row.liquid](../../snippets/quick-order-list-row.liquid), [snippets/quick-order-product-row.liquid](../../snippets/quick-order-product-row.liquid), [assets/quick-order-list.js](../../assets/quick-order-list.js), [assets/quick-order-list.css](../../assets/quick-order-list.css).
 
 **Contrato actual.** quick-order-list product,show_image,show_sku,is_modal; row item,sku,image,variant,show_image,show_sku,is_modal y contexto cart/quantity price breaks; bulk section paginas de colección. Firmas adicionales en las fuentes canónicas enlazadas; no equivalen a simple quantity picker.
@@ -767,6 +840,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-pickup"></a>
 ### LM-PICKUP · Disponibilidad de retiro
+
+**Disponibilidad actual:** composición de sección. Entrada: [pickup-availability.liquid](../../sections/pickup-availability.liquid). Fragmento asíncrono nativo, disponibilidad y errores reales; no prometer stock con una demo. [Receta de integración](../components/recipes/product-card-grid.md).
 
 **Fuentes:** [sections/pickup-availability.liquid](../../sections/pickup-availability.liquid), [assets/pickup-availability.js](../../assets/pickup-availability.js), [assets/component-pickup-availability.css](../../assets/component-pickup-availability.css).
 
@@ -787,6 +862,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-contact"></a>
 ### LM-CONTACT · Contacto y grupos de formulario
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-contact-page.liquid](../../sections/lemoon-contact-page.liquid). Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos. [Receta de integración](../components/recipes/contact-form.md).
+
 **Fuentes:** [sections/contact-form.liquid](../../sections/contact-form.liquid), [sections/lemoon-contact-page.liquid](../../sections/lemoon-contact-page.liquid).
 
 **Contrato actual.** Form contact nativo; name,email,tel,body con values/form.errors/customer fallback. Lemoon page exige name/email/body, hint de body, contact_email/hours/whatsapp settings y demo_content opcional. Dawn contact es otra composición.
@@ -799,12 +876,14 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 **Responsive.** Columnas a una móvil y padding schema750; Media queries exactas en las fuentes enlazadas. **Accesibilidad.** Preservar label-for, IDs por sección, error email, status/live y hint; no extraer contacto como un único input.
 
-**JS.** Formulario nativo Shopify; no nuevo controlador inventado. **Reutilización actual.** Dos variantes locales; piloto solo presentación de campo/mensaje sin tocar envío.
+**JS.** Formulario nativo Shopify; no nuevo controlador inventado. **Reutilización actual.** Contacto Lemoon usa field/message/action/heading; formulario Shopify y envío permanecen en la sección. Contacto Dawn conserva su variante local.
 
-**Dependencias de composición:** [LM-FIELD](#lm-field), [LM-ACTION](#lm-action), [LM-FEEDBACK](#lm-feedback). Consumidores estáticos en el JSON.
+**Dependencias de composición:** [LM-ACTION](#lm-action), [LM-FEEDBACK](#lm-feedback), [LM-FIELD](#lm-field), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
 <a id="lm-legal"></a>
 ### LM-LEGAL · Páginas legales, guías y servicios
+
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid). Guías/servicios y shell legal tienen settings y tipografía propios; conservar políticas nativas. [Receta de integración](../components/recipes/guide-help.md).
 
 **Fuentes:** [sections/lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid), [sections/lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid), [sections/lemoon-service-page.liquid](../../sections/lemoon-service-page.liquid), [sections/lemoon-crystal-guide.liquid](../../sections/lemoon-crystal-guide.liquid), [assets/lemoon-legal-pages.css](../../assets/lemoon-legal-pages.css).
 
@@ -825,6 +904,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-journal"></a>
 ### LM-JOURNAL · Blog, artículo, comentarios y compartir
 
+**Disponibilidad actual:** composición de sección. Entrada: [main-article.liquid](../../sections/main-article.liquid). Artículo/blog y comentarios nativos; article-card/share-button ya existen. [Receta de integración](../components/recipes/search-sort.md).
+
 **Fuentes:** [sections/main-article.liquid](../../sections/main-article.liquid), [sections/main-blog.liquid](../../sections/main-blog.liquid), [sections/featured-blog.liquid](../../sections/featured-blog.liquid), [snippets/share-button.liquid](../../snippets/share-button.liquid), [assets/share.js](../../assets/share.js), [assets/section-blog-post.css](../../assets/section-blog-post.css), [assets/section-main-blog.css](../../assets/section-main-blog.css), [assets/section-featured-blog.css](../../assets/section-featured-blog.css).
 
 **Contrato actual.** Blog articles/paginate y show_image/date/author/newsletter; artículo bloques featured_image/title/content/share/@app, comments y form new_comment; share-button share_link,block con settings.share_label; nativo share o clipboard fallback.
@@ -843,6 +924,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-quiz"></a>
 ### LM-QUIZ · Quiz de estilo
+
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid). Flujo y estado pertenecen a su JS; no se extrae un motor de quiz. [Receta de integración](../components/recipes/catalogue-states.md).
 
 **Fuentes:** [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid), [assets/lemoon-style-quiz.js](../../assets/lemoon-style-quiz.js).
 
@@ -863,6 +946,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-gift"></a>
 ### LM-GIFT · Compra y visualización de gift card
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-gift-card-purchase.liquid](../../sections/lemoon-gift-card-purchase.liquid). Compra y visualización emitida son superficies distintas; preservar formulario y datos nativos. [Receta de integración](../components/recipes/product-card-grid.md).
+
 **Fuentes:** [sections/lemoon-gift-card-purchase.liquid](../../sections/lemoon-gift-card-purchase.liquid), [templates/gift_card.liquid](../../templates/gift_card.liquid), [assets/lemoon-gift-card-purchase.js](../../assets/lemoon-gift-card-purchase.js), [assets/lemoon-gift-card.js](../../assets/lemoon-gift-card.js), [assets/template-giftcard.css](../../assets/template-giftcard.css).
 
 **Contrato actual.** Compra: gift_card_product o product con gift_card?; variantes reales de importe, cantidad1 y destinatario opcional properties Shopify. Display gift_card template usa code,balance,expires_on,enabled,qr_identifier, enlaces a shop.url y enlace opcional gift_card.pass_url para Apple Wallet; solo nombres de contrato inspeccionados, ningún código real leído.
@@ -881,6 +966,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 <a id="lm-password"></a>
 ### LM-PASSWORD · Password, lanzamiento y newsletter banner
+
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-launch-page.liquid](../../sections/lemoon-launch-page.liquid). Layout password y newsletter nativa tienen su cadena CSS y contexto propios. [Receta de integración](../components/recipes/guide-help.md).
 
 **Fuentes:** [sections/lemoon-launch-page.liquid](../../sections/lemoon-launch-page.liquid), [sections/main-password-header.liquid](../../sections/main-password-header.liquid), [sections/main-password-footer.liquid](../../sections/main-password-footer.liquid), [sections/email-signup-banner.liquid](../../sections/email-signup-banner.liquid), [assets/lemoon-password.css](../../assets/lemoon-password.css), [assets/section-password.css](../../assets/section-password.css), [assets/section-email-signup-banner.css](../../assets/section-email-signup-banner.css), [assets/password-modal.js](../../assets/password-modal.js).
 
@@ -901,6 +988,8 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-utility"></a>
 ### LM-UTILITY · 404, contenido personalizado y apps
 
+**Disponibilidad actual:** composición de sección. Entrada: [main-404.liquid](../../sections/main-404.liquid). 404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal. [Receta de integración](../components/recipes/search-sort.md).
+
 **Fuentes:** [sections/main-404.liquid](../../sections/main-404.liquid), [sections/custom-liquid.liquid](../../sections/custom-liquid.liquid), [sections/apps.liquid](../../sections/apps.liquid), [assets/customer.js](../../assets/customer.js).
 
 **Contrato actual.** 404 título/texto/link catálogo; custom-liquid setting custom_liquid y color/padding; apps section bloques @app con include_margins; customer.js controla direcciones legacy pero no hay templates/customer en universo.
@@ -920,21 +1009,23 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 <a id="lm-gallery"></a>
 ### LM-GALLERY · Galería existente del sistema de diseño
 
+**Disponibilidad actual:** composición de sección. Entrada: [lemoon-design-system.liquid](../../sections/lemoon-design-system.liquid). Renders extraídos + demos legacy identificadas; sin prueba comercial ni certificación WCAG. [Receta de integración](../components/recipes/catalogue-states.md).
+
 **Fuentes:** [sections/lemoon-design-system.liquid](../../sections/lemoon-design-system.liquid), [assets/lemoon-design-system.css](../../assets/lemoon-design-system.css).
 
-**Contrato actual.** Section sin settings/blocks; page.sistema-de-diseno la instancia. Markup propio de swatches, tipografía, acciones, campos, choice/badges, product card y trust; cero render de snippets reales.
+**Contrato actual.** Section sin settings/blocks; page.sistema-de-diseno la instancia. Renders reales de seis snippets UI en títulos, acciones, campos/select, mensajes y FAQ; swatches de paleta, tipografía de muestra, accent, choice/badges, product card y trust conservan markup demo propio.
 
-**Variantes existentes.** Muestras estáticas .button/.field/.select comparten CSS parcial; tarjeta propia lemoon-design-system__product-card y accent/success son variantes locales, no library real.
+**Variantes existentes.** Base primary/secondary/tertiary, disabled/loading; input/textarea/select y feedback sintéticos. Tarjeta propia lemoon-design-system__product-card y accent/success siguen siendo muestras locales, no variantes globales.
 
 **CSS y excepciones.** Estilos independientes incluidos radios y crop cover demo que difiere contain de card-product. Literales de color/acento/success locales; no promover a tokens ni contrato.
 
-**Estados observados / aplicabilidad:** Normal: Demo estática; Hover: Botones de muestra, sin flujo; Foco: Foco CSS compartido; Seleccionado: Radio checked en muestra; Loading: No loading de integración; Error: No error de integración; Disabled: Un botón disabled de muestra.
+**Estados observados / aplicabilidad:** Normal: Presentación sintética; Hover: Acciones sin operación comercial; Foco: Controles migrados con corrección scoped; Seleccionado: Select/radio nativos; Loading: Action sintético; Error: Campo/mensaje sintético sin anuncio simultáneo; Disabled: Action/campo nativos de muestra; readonly separado.
 
-**Responsive.** Media query749 con swatches2 cols y resto apilado; no cobertura exhaustiva de breakpoints. **Accesibilidad.** Hardcoded copy/IDs y radio sin form operativo; no prueba WCAG, traducción ni componentes reales.
+**Responsive.** Media query749 con swatches2 cols y resto apilado. **Accesibilidad.** Select migrado con label persistente, IDs de controles/FAQ contextualizados y ejemplos nuevos localizados; otros textos/IDs legacy permanecen. La fuente y las demos no certifican WCAG.
 
-**JS.** Sin JS propio. **Reutilización actual.** No es biblioteca extraída: reconstrucción visual paralela. Propuesta de catálogo real y seguro en sección de extracción del documento.
+**JS.** Sin JS propio ni POST. **Reutilización actual.** Seis renders UI ejecutables junto a elementos legacy/demo conservados; revisión de estado actual en la receta de galería.
 
-**Dependencias de composición:** [LM-ACTION](#lm-action), [LM-FIELD](#lm-field), [LM-CHOICE](#lm-choice). Consumidores estáticos en el JSON.
+**Dependencias de composición:** [LM-ACTION](#lm-action), [LM-CHOICE](#lm-choice), [LM-DISCLOSURE](#lm-disclosure), [LM-FEEDBACK](#lm-feedback), [LM-FIELD](#lm-field), [LM-ICON](#lm-icon), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
 <a id="section-matrix"></a>
 ## Matriz de secciones y bloques locales
@@ -1017,50 +1108,36 @@ Los 35 templates JSON y dos grupos se asignan a familias a partir de los tipos d
 Entradas que requieren inspección especial al implementar: section rendering de cart/drawer/notification/pickup/quick-order, imports de validación de receta y lógica móvil, app injection/content_for_header, product-component/collection-component de eventos y contenido CMS/richtext. El índice literal no resuelve de forma general rutas construidas dinámicamente, código de apps o scripts externos. No hay templates de cuentas legacy en este universo: enlaces de cuenta y `customer.js` no prueban páginas Liquid de login/address implementadas; cuentas nuevas/checkout/email/confirmación son límites externos.
 
 <a id="reuse-matrix"></a>
-## Dependencias y oportunidades de reutilización
+## Actualización ejecutable LEM-142
 
-La matriz siguiente resume candidatos **propuestos**; los consumidores actuales exactos están en el JSON. “Canónico” designa una fuente de partida futura, sin autorizar su extracción ni convertir una excepción local en regla global.
-
-| Duplicación observada | Fuente de partida / unidad candidata | Consumidores piloto propuestos | Dependencias y excepciones retenidas |
+| Familia | Snippet canónico nuevo | Consumidores reales migrados | Contrato / límite |
 | --- | --- | --- | --- |
-| Markup de acciones en secciones y demo | CSS `LM-ACTION`; un render visual pequeño con label/type/href/disabled/icon explícitos | `lemoon-guide-page`, luego contacto | Retener frame-only/select-lenses adapters; ningún fetch, payment_button, variante o ID de formulario dentro del átomo |
-| Labels/input/help/error repetidos | `LM-FIELD` + receta accesible DESIGN; nuevo contrato visual explícito por ticket | `lemoon-contact-page`, luego newsletter footer | POST nativo, name/required/autocomplete/values y error email quedan del formulario; password fuera del primer piloto |
-| Feedback éxito/error con wrappers similares | `LM-FEEDBACK`, mensaje presentacional sin bus global | Contacto y comentario de artículo | Roles/live/autofocus/describedby pertenecen a la operación; spinner compartido ya disponible |
-| Tarjeta demo y cards propias de quiz/resultados JS | `card-product` para producto real; display sintético aislado para galería | Featured collection y PLP primero conservando snippet; quiz sólo tras decidir contrato | No mover ranking/predictive/favoritos, analytics/quick-add ni precio/stock a la capa visual; tarjeta artículo/colección sigue familia propia |
-| Radio/checkbox pill/choice cards locales | `LM-CHOICE` + `LM-SWATCH`, envoltorio visual con slots/IDs | Un grupo del quiz con datos sintéticos, luego importe gift sólo con pruebas comerciales | Resolver variante, presupuesto, elegibilidad y recipient properties en controlador; no equiparar botón color tarjeta con radio PDP |
-| FAQ simple/agrupada/collapsible/PDP | `LM-DISCLOSURE`, details/summary con heading y contenido | `lemoon-faq` y `lemoon-faq-page` | Mantener group, links, editor attrs y tamaño local; disclosure regulatorio de metafield sigue adaptador distinto |
-| Dialog de medidas estándar/óptica | Contenido `lemoon-size-guide-content` ya compartido; shell futuro después del piloto FAQ | PDP estándar + óptica con producto fixture | Retener openers y lifecycle separados; tab IDs por instancia; vacío de medidas, unidades y foco requieren cobertura |
-| Flechas de producto/thumbnail/hero | `lemoon-carousel-controls` / `lemoon-thumbnail-arrow` ya reutilizables | `lemoon-featured-products` y thumbnail rail | No compartir algoritmo autoplay/scroll ni semántica de ejes vertical/horizontal sin adaptador |
-| Headers de páginas/aside/steps editoriales | Composiciones locales, candidata futura ayuda/step/shell legal | Guía pedido + guía medidas; luego legal/service | Conservar anchos legales, panel about, orden editorial, iconos y contenido autorizado; no crear section genérica gigante |
-| Línea carrito y tabla bulk con partes repetidas | Cantidad/precio/spinner compartidos antes que una fila comercial | Sólo después de pilotos sin compras | Key/index, descuentos, inventario, selling-plan, quantity rules y AJAX permanecen en cart/bulk |
+| LM-ACTION | [lemoon-ui-action](../../snippets/lemoon-ui-action.liquid) | Guía, contacto, FAQ agrupado y galería | a/button; base/local; primary/secondary/tertiary; clases locales y booleanos explícitos. Sin lógica comercial |
+| LM-FIELD | [lemoon-ui-field](../../snippets/lemoon-ui-field.liquid) | Cuatro controles de contacto y galería | input/textarea, labels, hint/error; contact/base. Formulario/valores en consumidor |
+| LM-FIELD | [lemoon-ui-select](../../snippets/lemoon-ui-select.liquid) | Ordenación vertical de búsqueda y galería | options_html capturado, label externo persistente, SortBy/sort_by y eventos nativos conservados |
+| LM-TYPE | [lemoon-ui-heading](../../snippets/lemoon-ui-heading.liquid) | Guía, contacto, FAQ y galería; FAQ item | Nivel 1–6 allowlist; semántica separada de tamaño/color |
+| LM-FEEDBACK | [lemoon-ui-message](../../snippets/lemoon-ui-message.liquid) | Respuestas nativas de contacto y estados sintéticos de galería | p/div, texto o content_html confiable, role/live/foco opt-in |
+| LM-DISCLOSURE | [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid) | Fallback/custom del FAQ agrupado y galería | details/summary, pregunta/answer_html, editor attrs en raíz; grupos/routing permanecen en sección |
+
+Los contratos completos están en LiquidDoc y en las [seis recetas](../components/README.md#elegir-una-receta). Strings/atributos se escapan una vez al renderizar; `_html` sólo admite capturas confiables y `editor_attributes` sólo `block.shopify_attributes`. Los consumidores mantienen IDs/ARIA, locales, schemas/settings, formularios, rutas y hooks. Las familias canónicas existentes —iconos, spinner, precio, swatches, card-product, controles de carrusel y adaptadores comerciales— conservan su nombre: no se añaden wrappers para renombrarlas.
+
+CSS mantiene su orden y dueño: tokens → base → componentes → superficie. La corrección accesible aprobada de contorno/foco se limita a controles migrados (`.lemoon-ui-control`, wrappers field/select) en [lemoon-components.css](../../assets/lemoon-components.css), con especificidad local de contacto. [global.js](../../assets/global.js) sigue siendo dependencia contextual de details: evitar el prefijo Details-* en FAQ nativo. [facets.js](../../assets/facets.js) conserva la ordenación del formulario dueño. No se introduce JS nuevo para estos átomos.
 
 <a id="extraction"></a>
-## Extracción por etapas y aceptación futura
+## Oportunidades pendientes
 
-Cada etapa requiere un ticket/alcance autorizado, diff acotado y revisión de la entrega; ninguna se ejecuta con esta documentación. Mantener la identidad y fuentes actuales. No reescribir legacy completo ni agregar dependencias para sostener el catálogo.
-
-| Etapa propuesta | Unidad y orden | Aceptación observable de la futura implementación |
-| --- | --- | --- |
-| 1 · Fundaciones usadas | Acciones semánticas, iconos existentes, campo/label/help/error, mensaje y spinner; partir de contratos existentes | Pilot guide/contact usa render real; diff conserva type/href, IDs/names/locale/ARIA/editorattrs; no nuevas reglas de precio ni red; no CSS duplicado en catálogo. Verificar contorno/foco conforme DESIGN, disabled nativo y errores asociados |
-| 2 · Agrupaciones pequeñas | FAQ/details, choice/swatch y controles carousel; después tarjeta real ya compartida | FAQ abre con Enter/Espacio y mantiene block attrs; radio funciona con teclado; card conserva frontal si secundaria falta/falla, color actualiza variant/link y no duplica submit; límites carrusel disabled/aria-controls correctos |
-| 3 · Composiciones de lectura | Guías/ayuda/editorial/legal y formularios completos uno a uno | Contenido/orden de headings y anchors se conservan, textos largos no desbordan, CTA navegación real, feedback éxito sólo tras respuesta real; comparar antes/después con misma fixture y settings |
-| 4 · Superficies interactivas | Overlay/medidas/tabs, luego búsqueda/facets, header/footer | Escape cierra capa correcta, Tab/Shift+Tab y retorno funcionan, scroll se restaura; tabs flechas/Home/End mantienen ARIA; filtros conservan query/URL/back y salida del vacío; errores red visibles según aceptación de su ticket |
-| 5 · Dominio comercial | PDP/carrito/gift/bulk/configurador sólo con sus tests y contratos propios | Misma variante/stock/precio/properties/quantity/selling-plan en payload; una sola compra por acción; red/stock fallidos conservan selección y corrección; pagos/receta/consentimiento requieren integración real propia y revisión humana |
-
-Para cada piloto futuro comprobar 390px y desktop, ambos lados de 750/990 y 1280 si cambia gutter; zoom/reflow, textos largos, reduced-motion, forced-colors, teclado y colores computados reales. Los objetivos y receta accesible permanecen en DESIGN, sin acreditar cumplimiento por copiar clases. Pruebas visuales/funcionales y tests de dominio se agregan sólo en el ticket de implementación que los necesita; el presente inventario se verifica estáticamente.
+Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. FAQ legacy, sort de colección, newsletter y operaciones comerciales no fueron migrados por el piloto. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
 
 <a id="gallery-plan"></a>
-## Galería actual y futuro catálogo
+## Galería actual y demos legacy
 
-`lemoon-design-system` comparte algunas clases `.button`, `.field`, `.select`, pero su tipografía, choice, badge de éxito, tarjeta y panel trust tienen markup/CSS independientes. No renderiza `card-product`, `swatch-input`, `lemoon-icon` ni otros snippets reales. La tarjeta usa `object-fit:cover` frente a `contain` de la tarjeta comercial, el accent es clase local y los botones no ejecutan sus etiquetas. Corazón, “Probar”, precio de muestra y afirmaciones de envío/devolución/garantía no demuestran wishlist, probador ni condiciones vigentes.
+[lemoon-design-system](../../sections/lemoon-design-system.liquid) ahora renderiza los seis snippets nuevos y reutiliza icono/spinner por composición. Los estados sintéticos permanecen inertes: sin POST, compra, datos personales ni persistencia de consentimiento. [La receta de galería](../components/recipes/catalogue-states.md) identifica dependencias y límites.
 
-Propuesta: cuando existan átomos extraídos, la galería deberá **renderizar esos mismos snippets y estilos**, con controles sintéticos que sólo cambien estado local y fixtures identificadas como ficticias. Mostrar normal/hover/focus/selected/loading/error/disabled que realmente apliquen, ejemplos label/help/error y composiciones pequeñas. No hacer POST a carrito, emitir gift cards, consultar recetas/clientes, persistir consentimiento ni presentar muestras comerciales como hechos. Para demostrar un control de compra usar un adaptador inerte identificado, conservando el átomo visual real; el formulario comercial completo se demuestra en su integración separada. Datos de producto fixture deben distinguirse de objetos Shopify y no forzar APIs inválidas del snippet actual.
-
-El catálogo no reemplaza DESIGN, la biblioteca de selección ni las verificaciones de página. Podrá servir como evidencia de reutilización después de implementarse y validarse; su existencia hoy no acredita extracción, Figma, runtime, WCAG, disponibilidad funcional ni aceptación de esta entrega.
+Los elementos independientes que permanecen —tipografía de muestra, accent local, radio/badges, tarjeta y trust panel— son legacy/demo. No equivalen a card-product/swatch-input, variantes globales, garantías o precios vigentes, funcionamiento comercial ni certificación WCAG. La tarjeta comercial real conserva su snippet y contain; no se declara migrada por mostrar una tarjeta separada.
 
 <a id="verification"></a>
-## Verificación documental y límites
+## Verificación y límites de entrega
 
-La entrega comprueba sintaxis JSON, igualdad exacta del conjunto tracked y la cobertura, resolución de todos los IDs/rutas/anchors locales, tipos/settings de schemas, contadores y referencias literales contra fuente. Los hashes, comandos y resultados se entregan al coordinador en `/tmp/LEM-142-delivery.md`; no forman parte del contenido de producto. Se contrasta el núcleo de 326 fuentes con la auditoría preliminar independiente aportada por el coordinador; sus conclusiones no son aprobación final de este documento.
+La comprobación documental reconcilia JSON, 44 IDs estables, rutas de cobertura actual, fuentes/consumidores, links/anchors y parámetros de recetas contra LiquidDoc. Los hashes y resultados de esa revisión concreta están en el reporte externo `/tmp/LEM-142-recipes-delivery.md`; no son contenido de producto. La comprobación histórica exclusivamente documental no debe interpretarse como validación del nuevo runtime.
 
-No se ejecutaron tests de producto, Shopify CLI/Theme Check, navegador, storefront, APIs, push, commit, PR ni Linear. La excepción es intencional para esta entrega exclusivamente documental: no hay cambios de tema que declarar validados. La creación del PR documental, revisión independiente final, revisión humana y cualquier ejecución posterior pertenecen al coordinador y a sus autorizaciones correspondientes.
+Las pruebas de snippets/consumidores y navegador local usan archivos reales con fixtures Shopify declarados; sólo su ejecución registrada acredita esos casos locales. Theme Check, revisión independiente y resultados de integración pertenecen al reporte del coordinador. No confundirlos con envío/entrega de contacto, editor/asignación CMS, storefront Shopify, APIs/stock/pagos/receta, push/publicación, aprobación Figma/visual, certificación WCAG ni aceptación humana de la revisión entregada.

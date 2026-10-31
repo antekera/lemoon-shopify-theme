@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { renderNotification, notificationContext } from '../helpers/gift-notification-renderer.mjs';
+import { renderComponentFixture } from '../helpers/component-library-renderer.mjs';
 import { renderDefaultPage } from '../helpers/default-page-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -40,6 +41,18 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1:4173').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/component-library.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'controls';
+      const html = renderComponentFixture(scenario);
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : html);
+    } catch (error) {
+      response.writeHead(500).end(String(error));
+    }
     return;
   }
 

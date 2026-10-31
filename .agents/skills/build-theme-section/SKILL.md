@@ -9,6 +9,8 @@ Use this after a design spec is approved or when the user gives a clear section 
 
 Delegate the implementation to the `section-builder` custom agent when available. Give it the approved spec or clear request, the relevant design and theme conventions, and the current branch context; review its reported files and validation before finishing.
 
+Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
+
 1. Confirm there is an approved spec or a clear user description. Read it and the relevant project references: `docs/design/brand-guidelines.md`, `docs/design/section-inventory.md`, `.claude/rules/liquid-conventions.md`, `.claude/rules/section-schema.md`, and `.claude/rules/theme-workflow.md`. Report missing references instead of inventing their guidance.
 2. Run `git branch --show-current`. If the branch is `main`, stop before editing and ask the user to switch to a feature branch.
 3. Inspect 1–2 structurally similar sections and any directly relevant snippets/translations.

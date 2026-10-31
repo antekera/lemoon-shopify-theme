@@ -1643,3 +1643,51 @@ a.link:not(.button):not(.pagination__item) {
   text-underline-offset: .25em;
   text-decoration-thickness: 1px;
 }
+
+/* LEM-142: only migrated controls. Their own border replaces Dawn's layered
+   pseudo-element shadows; focus stays separate from the resting boundary. */
+.lemoon-ui-field.field::before,
+.lemoon-ui-field.field::after,
+.lemoon-ui-select.select::before,
+.lemoon-ui-select.select::after {
+  content: none;
+}
+
+.lemoon-ui-field .lemoon-ui-control,
+.lemoon-ui-select .lemoon-ui-control {
+  box-sizing: border-box;
+  border: 1px solid var(--lemoon-border-strong);
+  box-shadow: none;
+}
+
+.lemoon-ui-field .lemoon-ui-control:focus,
+.lemoon-ui-field .lemoon-ui-control:focus-visible,
+.lemoon-ui-select .lemoon-ui-control:focus,
+.lemoon-ui-select .lemoon-ui-control:focus-visible {
+  outline: 2px solid var(--lemoon-border-strong);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+@media (forced-colors: active) {
+  .lemoon-ui-field .lemoon-ui-control,
+  .lemoon-ui-select .lemoon-ui-control {
+    border-color: CanvasText;
+  }
+
+  .lemoon-ui-field .lemoon-ui-control:focus,
+  .lemoon-ui-select .lemoon-ui-control:focus {
+    outline-color: Highlight;
+  }
+}
+
+.lemoon-ui-field__error {
+  color: var(--lemoon-status-error);
+}
+
+/* Explicit SVG dimensions avoid Firefox intrinsic sizing collapsing to zero.
+   Keep the correction within extracted base actions and the 1.8rem spinner. */
+.lemoon-ui-action.button.loading > .loading__spinner .spinner {
+  width: 1.8rem;
+  height: 1.8rem;
+}
