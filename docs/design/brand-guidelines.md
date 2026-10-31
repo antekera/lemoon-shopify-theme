@@ -6,13 +6,13 @@ Guía práctica para aplicar la identidad visual confirmada en website, redes so
 
 ## Alcance de esta versión
 
-Esta versión consolida las decisiones visuales existentes de LEM-141 y los archivos seleccionados de LEM-97. Puede usarse para mantener coherencia con esa base mientras se resuelven las decisiones de la tabla de responsabilidades. La consolidación de LEM-79 requiere revisión humana; no aprueba estrategia, voz final, nuevas variantes ni todas las aplicaciones de marca.
+Esta versión reúne el contrato visual de LEM-141, los archivos seleccionados de LEM-97 y la identidad actual aceptada al cerrar LEM-80. El logo y las fuentes están seleccionados. Propósito, posicionamiento, voz final y entregas por canal mantienen los responsables indicados al final de la guía. La revisión de esta consolidación corresponde a LEM-79.
 
 Propósito, misión, posicionamiento y promesa de marca se resuelven en LEM-82. La dirección visual anterior orienta la presentación, pero no sustituye esas definiciones estratégicas.
 
 ## Logo y símbolos
 
-El [wordmark oficial navy](../../assets/lemoon-logo-refined-navy.svg) es el logo completo. Conservar proporción, trazados y fill original `#0E1A28`, incluido cuando se exporte a un formato compatible con otra superficie. No reconstruirlo con una fuente ni recolorear letras. Los 120×28 del header son una aplicación local, no un mínimo oficial. Variaciones, área de seguridad y tamaños mínimos pertenecen a LEM-80.
+El [wordmark oficial navy](../../assets/lemoon-logo-refined-navy.svg) es el logo completo. Conservar proporción, trazados y fill original `#0E1A28`, incluido cuando se exporte a un formato compatible con otra superficie. No reconstruirlo con una fuente ni recolorear letras. Los 120×28 del header son una aplicación local, no un mínimo oficial. LEM-80 está cerrado con la identidad actual aceptada. Las variantes adicionales, el área de seguridad y los tamaños mínimos podrán formalizarse después si una aplicación concreta los necesita; no son bloqueantes de la identidad actual.
 
 | Uso | Archivo y tratamiento |
 | --- | --- |
@@ -28,7 +28,7 @@ Favicon, Apple y avatar usan la inicial **l navy con hoja amarilla sólida**, so
 
 La base es blanco y carbon para lectura, navy para acciones y texto de marca, beige para paneles y lemon para acentos localizados. Las equivalencias cromáticas y sus roles están en [Color de DESIGN.md](../../DESIGN.md#2-color). Mantener el fill propio del logo aunque difiera del navy de interfaz. Los colores alternativos de exploraciones no son opciones de campaña aprobadas.
 
-En el storefront, **Urbanist** sirve a títulos y acciones; **Hanken Grotesk** a cuerpo, labels y metadatos. Aplicar pesos, escala y excepciones por componente según [Tipografía de DESIGN.md](../../DESIGN.md#3-tipografía). Una tarjeta, un H1 legal y un título editorial mantienen sus reglas locales.
+Las fuentes seleccionadas para el storefront son **Urbanist** para títulos y acciones y **Hanken Grotesk** para cuerpo, labels y metadatos. Aplicar pesos, escala y excepciones por componente según [Tipografía de DESIGN.md](../../DESIGN.md#3-tipografía). Una tarjeta, un H1 legal y un título editorial mantienen sus reglas locales.
 
 Para piezas editables fuera del sitio, conservar esa jerarquía con las familias disponibles en el destino. Si una herramienta o plantilla no admite las fuentes, registrar la limitación y resolver la adaptación en su ticket antes de declararla definitiva. Esta guía no fija una fuente sustituta ni una escala universal para redes o impresión.
 
@@ -97,7 +97,6 @@ Cada ticket propietario confirma los hechos comerciales antes de publicar. Preci
 | --- | --- |
 | Propósito, misión, posicionamiento y promesa | [LEM-82](https://linear.app/antekera/issue/LEM-82); esta guía no los inventa |
 | Mensajes finales, voz y estilo editorial | [LEM-55](https://linear.app/antekera/issue/LEM-55); conservar las reglas básicas actuales mientras se resuelven |
-| Variaciones de logo, mínimos y área de seguridad | [LEM-80](https://linear.app/antekera/issue/LEM-80); usar los activos existentes sin derivaciones nuevas |
 | Fotografía real y estándar de producto | [LEM-71](https://linear.app/antekera/issue/LEM-71); las categorías genéricas no la sustituyen |
 | Assets restantes y organización de entregas | [LEM-78](https://linear.app/antekera/issue/LEM-78); hero principal, exports nativos/email, covers y adaptación WhatsApp si aplica |
 | Biblioteca editable y estados | [LEM-132](https://linear.app/antekera/issue/LEM-132); usar DESIGN.md y las familias vigentes mientras se entrega su revisión |
