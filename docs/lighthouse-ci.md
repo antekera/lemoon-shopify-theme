@@ -58,7 +58,7 @@ GitHub artifacts have a 14-day retention period and use explicit file paths only
 
 - `lhr-*.json`: minimized, sanitized LHR JSON retaining category scores, audit references, numerical audit metrics, timestamps and final/requested URLs with query/fragment/userinfo removed.
 - `assertion-results.json`: allowlisted assertion fields, including passing results and selected-run values.
-- `versions.json`, `status.json`, `cleanup.json`: environment/selection evidence, non-secret exact cleanup ownership (domain/name/ID), and combined audit/cleanup status.
+- `versions.json`, `status.json`, `cleanup.json`: environment/selection evidence, non-secret exact cleanup ownership (domain/name/ID), and combined audit/cleanup status. Catalog, shop identity and GraphQL failures include an allowlisted `status.json` diagnostic with the failing field, manifest product handle where applicable, and bounded expected/actual values, or up to five GraphQL error messages and HTTP status. Known credentials and URL query/userinfo are removed before values are truncated; raw responses, headers and GraphQL extensions are excluded. The diagnostic does not relax fixture validation or prove a performance result.
 
 Raw HTML, DOM, network details, headers, cookies, arbitrary JSON, private configs/auth files and raw command logs are excluded. Known credentials are redacted in plain, JSON/form/URL-encoded and base64 forms, including object keys. LHRs are intentionally minimized; they are not full interactive HTML reports. The harness performs no temporary public-storage upload and creates no GitHub/LHCI check using a separate token.
 

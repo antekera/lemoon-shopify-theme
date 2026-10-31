@@ -4,7 +4,7 @@ const path = require('node:path');
 const {execFile} = require('node:child_process');
 const {randomUUID} = require('node:crypto');
 const {config, routes, collectionConfig, ownedThemes, stageTheme, hash} = require('./core.cjs');
-const {exportArtifacts} = require('./artifacts.cjs');
+const {exportArtifacts, fixtureDiagnostic} = require('./artifacts.cjs');
 const {selectRepresentativeReports} = require('./median.cjs');
 const {verifyRemoteFixture, fixtureDir, manifest} = require('./fixture.cjs');
 
@@ -41,13 +41,22 @@ async function token(c) {
   if (process.env.GITHUB_ACTIONS) console.log(`::add-mask::${json.access_token}`);
   return json.access_token;
 }
-async function graphql(c, query, variables) {
-  const response = await fetch(`${c.origin}/admin/api/2026-10/graphql.json`, {method:'POST', redirect:'error',
+async function graphql(c, query, variables, request = fetch) {
+  const response = await request(`${c.origin}/admin/api/2026-10/graphql.json`, {method:'POST', redirect:'error',
     headers:{'Content-Type':'application/json','X-Shopify-Access-Token':process.env.SHOPIFY_CLI_THEME_TOKEN},
     body:JSON.stringify({query,variables}), signal:AbortSignal.timeout(60000)});
-  if (!response.ok) throw Error('Fixture API request failed');
+  if (!response.ok) {
+    const error = Error('Fixture API request failed');
+    error.diagnostic = {field:'graphql.httpStatus',expected:200,actual:response.status};
+    throw error;
+  }
   const json = await response.json();
-  if (json.errors || !json.data) throw Error('Fixture API returned errors');
+  if (json.errors || !json.data) {
+    const error = Error('Fixture API returned errors');
+    error.diagnostic = {field:'graphql',httpStatus:response.status,
+      messages:Array.isArray(json.errors) ? json.errors.slice(0,5).map(e => typeof e.message === 'string' ? e.message : 'Missing GraphQL error message') : ['Missing GraphQL data']};
+    throw error;
+  }
   return json.data;
 }
 async function list(c, execute = command) {
@@ -72,7 +81,7 @@ async function lifecycle(steps) {
   const result = {auditPassed:false, cleanupPassed:false};
   try {await steps.audit(); result.auditPassed = true;} catch (error) {failure = error;}
   try {await steps.cleanup(); result.cleanupPassed = true;} catch (error) {failure = failure ? new AggregateError([failure,error], 'Audit and cleanup failed') : error;}
-  try {await steps.export(result);} catch (error) {failure = failure ? new AggregateError([failure,error], 'Audit or cleanup and export failed') : error;}
+  try {await steps.export(result,failure);} catch (error) {failure = failure ? new AggregateError([failure,error], 'Audit or cleanup and export failed') : error;}
   if (failure) throw failure;
 }
 async function verifyReports(rawDir, c, id) {
@@ -153,9 +162,11 @@ async function main() {
       if (c.mode === 'lab') await cleanup(c);
       if (!fs.existsSync(path.join(outputDir,'cleanup.json'))) write(path.join(outputDir,'cleanup.json'),{confirmed:true,temporaryTheme:false});
     },
-    export: async result => {
-      exportArtifacts(rawDir,outputDir,[c.password,c.clientSecret,c.token,process.env.SHOPIFY_CLI_THEME_TOKEN]);
-      write(path.join(outputDir,'status.json'),{phase, ...result, passed:result.auditPassed && result.cleanupPassed && !interrupted});
+    export: async (result,error) => {
+      const secrets = [c.password,c.clientId,c.clientSecret,c.token,process.env.SHOPIFY_CLI_THEME_TOKEN];
+      exportArtifacts(rawDir,outputDir,secrets);
+      const diagnostic = phase === 'fixture' ? fixtureDiagnostic(error,secrets) : undefined;
+      write(path.join(outputDir,'status.json'),{phase, ...result, ...(diagnostic ? {diagnostic} : {}), passed:result.auditPassed && result.cleanupPassed && !interrupted});
     }
   });
   if (interrupted) throw Error('Audit interrupted');
@@ -169,4 +180,4 @@ if (require.main === module) {
     process.exitCode = 1;
   });
 }
-module.exports = {lifecycle, verifyReports, cleanup, main};
+module.exports = {lifecycle, verifyReports, cleanup, main, graphql};

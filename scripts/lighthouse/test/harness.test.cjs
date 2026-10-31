@@ -89,6 +89,19 @@ test('12-product fixture verifies membership, price, variant, metadata and check
     const data=fixtureData();mutate(data);assert.throws(() => verifyFixture(data,lab),/fixture|mismatch/);
   }
 });
+test('fixture failure retains the exact nonsecret field and expected/actual values through lifecycle export', async () => {
+  const data=fixtureData();data.products.nodes[0].onlineStoreUrl=null;
+  let exported=false;
+  await assert.rejects(lifecycle({
+    audit:async () => verifyFixture(data,lab), cleanup:async () => {},
+    export:async (result,error) => {
+      assert.equal(result.auditPassed,false);assert.equal(result.cleanupPassed,true);
+      assert.deepEqual(error.diagnostic,{field:'product.onlineStoreUrl',product:'lighthouse-frame',expected:'published Online Store URL',actual:null});
+      exported=true;
+    }
+  }),/fixture mismatch/);
+  assert.equal(exported,true);
+});
 test('staging excludes commercial settings and credentials, preserves hero and maps home collections', t => {
   const dir=temp(t), source=path.join(dir,'source'), target=path.join(dir,'target');
   fs.mkdirSync(path.join(source,'config'),{recursive:true});fs.mkdirSync(path.join(source,'templates'));fs.writeFileSync(path.join(source,'config/settings_data.json'),'commercial');fs.writeFileSync(path.join(source,'.env'),'secret');
@@ -160,4 +173,84 @@ test('commercial configuration rejects absent, malformed and unapproved storefro
   for (const origin of ['http://lemoon.cl','https://attacker.invalid','https://lemoon.cl.attacker.invalid','https://user@lemoon.cl','https://lemoon.cl/','https://lemoon.cl/path','https://lemoon.cl?query=1','https://lemoon.cl#fragment','https://lemoon.cl:443','https://LEMOON.cl',' https://lemoon.cl','https://lemoon.cl\n','https://pzsrt4-1u.myshopify.com']) {
     assert.throws(() => config({...commercial,SHOPIFY_STOREFRONT_ORIGIN:origin}),/Invalid SHOPIFY_STOREFRONT_ORIGIN/,origin);
   }
+});
+
+test('GraphQL failure exports only bounded sanitized diagnostic messages and HTTP status', async () => {
+  const {graphql}=require('../run.cjs');
+  const {fixtureDiagnostic}=require('../artifacts.cjs');
+  const secret='private&value?=ü';
+  const response={ok:true,status:200,json:async () => ({errors:[{message:'Field missing '+secret+' '+encodeURIComponent(secret),extensions:{headers:{authorization:secret}}},{message:'x'.repeat(5000)}],headers:{cookie:secret},data:{secret}})};
+  await assert.rejects(graphql(lab,'query {}',{},async () => response),error => {
+    const diagnostic=fixtureDiagnostic(error,[secret]);
+    assert.equal(diagnostic.field,'graphql');
+    assert.equal(diagnostic.httpStatus,200);
+    assert.equal(diagnostic.messages[0],'Field missing [REDACTED] [REDACTED]');
+    assert.ok(diagnostic.messages[1].length <= 256);
+    assert.ok(!JSON.stringify(diagnostic).includes(secret));
+    assert.ok(!JSON.stringify(diagnostic).includes('authorization'));
+    return true;
+  });
+  await assert.rejects(graphql(lab,'query {}',{},async () => ({ok:false,status:403})),error => {
+    assert.deepEqual(fixtureDiagnostic(error,[]),{field:'graphql.httpStatus',expected:200,actual:403});return true;
+  });
+  const diagnostic=fixtureDiagnostic({diagnostic:{field:'product.title',expected:'expected',actual:'x'.repeat(250)+secret+'y'.repeat(5000),raw:'forbidden'}},[secret]);
+  assert.ok(diagnostic.actual.length <= 256);assert.ok(!JSON.stringify(diagnostic).includes(secret));assert.equal(diagnostic.raw,undefined);
+  assert.equal(fixtureDiagnostic(Error('arbitrary raw dependency error'),[]),undefined);
+  assert.equal(fixtureDiagnostic({diagnostic:{field:'image.origin',actual:'https://user:pass@example.test/image?private=value#fragment'}},[]).actual,'https://example.test/image');
+  await assert.rejects(graphql(lab,'query {}',{},async () => ({ok:true,status:200,json:async () => ({errors:Array.from({length:8},() => ({message:'field missing'}))})})),error => {
+    assert.equal(fixtureDiagnostic(error,[]).messages.length,5);return true;
+  });
+});
+
+for (const [scheme,cleanUrl] of [
+  ['http','http://example.test/image'],['HTTP','http://example.test/image'],['hTtP','http://example.test/image'],
+  ['https','https://example.test/image'],['HTTPS','https://example.test/image'],['HtTpS','https://example.test/image']
+]) {
+  test(`GraphQL diagnostics scrub ${scheme} URL components before truncation without known credentials`, async () => {
+    const {graphql}=require('../run.cjs');
+    const {fixtureDiagnostic}=require('../artifacts.cjs');
+    for (const prefix of ['', 'x'.repeat(240)]) {
+      const message=prefix+scheme+'://synthetic-user:synthetic-pass@example.test/image?private=synthetic-query#synthetic-fragment';
+      await assert.rejects(graphql(lab,'query {}',{},async () => ({ok:true,status:200,json:async () => ({errors:[{message}]})})),error => {
+        const diagnostic=fixtureDiagnostic(error,[]);
+        assert.deepEqual(diagnostic,{field:'graphql',httpStatus:200,messages:[(prefix+cleanUrl).slice(0,256)]});
+        for (const privateValue of ['synthetic-user','synthetic-pass','private=','synthetic-query','synthetic-fragment']) {
+          assert.ok(!JSON.stringify(diagnostic).includes(privateValue),privateValue);
+        }
+        return true;
+      });
+    }
+  });
+}
+
+test('GraphQL diagnostics redact complete encoded credentials crossing the truncation boundary', async () => {
+  const {graphql}=require('../run.cjs');
+  const {fixtureDiagnostic}=require('../artifacts.cjs');
+  const secret='synthetic "credential" & + / ü';
+  for (const encoded of [secret,encodeURIComponent(secret),new URLSearchParams({v:secret}).toString().slice(2),
+    JSON.stringify(secret).slice(1,-1),Buffer.from(secret).toString('base64'),Buffer.from(secret).toString('base64url')]) {
+    const message='x'.repeat(250)+encoded+'y'.repeat(500);
+    await assert.rejects(graphql(lab,'query {}',{},async () => ({ok:true,status:200,json:async () => ({errors:[{message}]})})),error => {
+      assert.deepEqual(fixtureDiagnostic(error,[secret]),{field:'graphql',httpStatus:200,messages:['x'.repeat(250)+'[REDAC']});
+      return true;
+    });
+  }
+});
+
+test('fixture diagnostics identify collection, product, variant, metafield and shop drift without accepting it', async () => {
+  for (const [mutate,field,expected,actual] of [
+    [d => {d.collectionByHandle.sortOrder='MANUAL';},'collection.sortOrder','ALPHA_ASC','MANUAL'],
+    [d => {d.products.nodes[0].vendor='Other';},'product.vendor','Lighthouse Lab','Other'],
+    [d => {d.products.nodes[0].lens={type:'boolean',value:'false'};},'custom.lens_compatible.value','true','false'],
+    [d => {d.products.nodes[0].variants.nodes[0].inventoryItem.tracked=true;},'variants[0].tracked',false,true]
+  ]) {
+    const data=fixtureData();mutate(data);
+    assert.throws(() => verifyFixture(data,lab),error => {
+      assert.equal(error.diagnostic.field,field);assert.deepEqual(error.diagnostic.expected,expected);assert.deepEqual(error.diagnostic.actual,actual);return true;
+    });
+  }
+  const {verifyRemoteFixture}=require('../fixture.cjs');
+  await assert.rejects(verifyRemoteFixture(lab,async () => ({...fixtureData(),shop:{id:'gid://shopify/Shop/'+manifest.shopId,myshopifyDomain:lab.store,currencyCode:'USD'}})),error => {
+    assert.deepEqual(error.diagnostic,{field:'shop.currencyCode',expected:'CLP',actual:'USD'});return true;
+  });
 });

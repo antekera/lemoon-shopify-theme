@@ -9,7 +9,7 @@ function sanitize(value, secrets = []) {
         value = value.split(encoded).join('[REDACTED]');
       }
     }
-    return value.replace(/https?:\/\/[^\s"<>]+/g, raw => {
+    return value.replace(/https?:\/\/[^\s"<>]+/gi, raw => {
       try {const u = new URL(raw); u.username = ''; u.password = ''; u.search = ''; u.hash = ''; return u.href;} catch {return '[URL]';}
     });
   }
@@ -18,6 +18,22 @@ function sanitize(value, secrets = []) {
     .filter(([key]) => !/cookie|header|authorization|token|password|secret|snippet|source|sample/i.test(key))
     .map(([key,v]) => [sanitize(key,secrets),sanitize(v,secrets)]));
   return value;
+}
+function fixtureDiagnostic(error, secrets) {
+  if (!error?.diagnostic) return undefined;
+  // Pick only deliberate fixture projections; never serialize an Error, response,
+  // headers, GraphQL extensions or arbitrary dependency messages. Redact BEFORE
+  // truncation so a secret crossing the length boundary cannot leak a prefix.
+  const allowed = Object.fromEntries(['field','product','expected','actual','httpStatus','messages']
+    .filter(key => key in error.diagnostic).map(key => [key,error.diagnostic[key]]));
+  function bound(value, depth = 0) {
+    if (depth > 4) return '[truncated]';
+    if (typeof value === 'string') return value.slice(0,256);
+    if (Array.isArray(value)) return value.slice(0,13).map(v => bound(v,depth+1));
+    if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).slice(0,8).map(([k,v]) => [k,bound(v,depth+1)]));
+    return value;
+  }
+  return bound(sanitize(allowed,secrets));
 }
 function minimizedLhr(data) {
   // Keep machine-readable scores/metrics and category audit references. Drop arbitrary page
@@ -46,4 +62,4 @@ function exportArtifacts(rawDir, output, secrets) {
     fs.writeFileSync(path.join(output,name),JSON.stringify(sanitize(allowed,secrets),null,2));
   }
 }
-module.exports = {sanitize,exportArtifacts,minimizedLhr};
+module.exports = {sanitize,exportArtifacts,minimizedLhr,fixtureDiagnostic};
