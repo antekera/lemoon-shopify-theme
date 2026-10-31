@@ -1,29 +1,29 @@
 # Inventario técnico de componentes existentes — Lemoon
 
-Este inventario localiza la UI del tema, sus seis extracciones reutilizables y las oportunidades pendientes. El [catálogo operativo y las recetas](../components/README.md) muestran cómo usar las implementaciones canónicas; las familias que siguen siendo composiciones locales se identifican como tales. La guía de selección aprobada permanece en [component-library](component-library.md); el contrato visual sigue en [DESIGN.md](../../DESIGN.md), con [brand-guidelines](brand-guidelines.md) para uso de marca. No cambia identidad, fuentes, tokens, diseño ni comportamiento. LEM-80 fue cerrado por el usuario para identidad/fuentes actuales; variantes opcionales posteriores no reabren esa decisión.
+Este inventario localiza la UI del tema, sus implementaciones reutilizables y las oportunidades pendientes. El [catálogo operativo y las recetas](../components/README.md) muestran cómo usar las implementaciones canónicas; las familias que siguen siendo composiciones locales se identifican como tales. La guía de selección aprobada permanece en [component-library](component-library.md); el contrato visual sigue en [DESIGN.md](../../DESIGN.md), con [brand-guidelines](brand-guidelines.md) para uso de marca. No cambia identidad, fuentes, tokens, diseño ni comportamiento. LEM-80 fue cerrado por el usuario para identidad/fuentes actuales; variantes opcionales posteriores no reabren esa decisión.
 
 <a id="evidence"></a>
 ## Evidencia y alcance
 
 Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a35`, rama `chore/lem-142-component-inventory`, 31-10-2026. Continúa LEM-132/PR #37 incorporado en esa base. El [JSON de cobertura](component-inventory.json) es el índice de rutas, IDs estables, método de inspección y consumidores estáticos; este documento contiene su interpretación técnica y las propuestas. [section-inventory](section-inventory.md) y [page-inventory](page-inventory.md) conservan el mapa de secciones y recorridos.
 
-- **Actual:** snapshot de la implementación entregada en este PR, con seis snippets `lemoon-ui-*` incorporados al índice Git y consumidores migrados. `7e437dc3b693a00aaa13c111c4df9e479b3d8af2` identifica la base previa a esta implementación, no su revisión entregada. El delta de fuentes nuevas se conserva en `snapshot.new_source_paths` del JSON como adiciones del PR, no como rutas sin seguimiento. Contratos y referencias actuales en JSON; estado por familia y recetas en el catálogo.
+- **Actual:** snapshot de la implementación entregada en este PR, con seis snippets `lemoon-ui-*`, cuatro snippets de composición compartida y consumidores migrados. `7e437dc3b693a00aaa13c111c4df9e479b3d8af2` identifica la base previa a esta implementación, no su revisión entregada. El delta de fuentes nuevas se conserva en `snapshot.new_source_paths` del JSON como adiciones del PR, no como rutas sin seguimiento. Contratos y referencias actuales en JSON; estado por familia y recetas en el catálogo.
 - **Histórico:** la enumeración inicial en `93f80a2` tenía 501 rutas, 470 mapped y 31 excluded. La lectura estructural por familia sigue siendo referencia de fuentes locales; las actualizaciones ejecutables que aparecen abajo sustituyen los candidatos de extracción ya implementados.
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura actual enumera las 507 rutas de `git ls-files sections snippets layout templates blocks assets config locales`, incluidos los seis snippets UI añadidos por este PR; no quedan rutas explícitas fuera del índice Git. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` se recalcula con referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
+La cobertura actual enumera las 511 rutas de `git ls-files sections snippets layout templates blocks assets config locales`, incluidos los diez snippets añadidos por este PR; no quedan rutas explícitas fuera del índice Git. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` se recalcula con referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
-| Snippets / layouts Liquid | 87 / 2 |
+| Snippets / layouts Liquid | 91 / 2 |
 | Templates JSON / Liquid | 35 / 3 |
 | Assets CSS / JS / SVG | 81 / 53 / 93 |
 | Assets binarios PNG / JPG / GIF | 19 / 10 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **507 / 476 / 31** |
+| **Total fuentes / mapped / excluded** | **511 / 480 / 31** |
 | Familias estables | 44 |
 
 El núcleo actual es de **332 fuentes**: 197 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global. Con 93 SVG y 51 locales se obtienen 476 mapped. Las exclusiones conservan 30 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
@@ -101,7 +101,7 @@ Se pueden incorporar componentes según las necesidades de cada funcionalidad; l
 
 ## Fichas de fuente
 
-Las fichas conservan la lectura dirigida de superficies en la base histórica, con disponibilidad y fuentes nuevas reconciliadas. Para las seis extracciones, la [actualización ejecutable](#actualización-ejecutable-lem-142), LiquidDoc y recetas sustituyen los candidatos históricos; conservar el comportamiento y límites de los demás dueños.
+Las fichas conservan la lectura dirigida de superficies en la base histórica, con disponibilidad y fuentes nuevas reconciliadas. Para las extracciones reutilizables, la [actualización ejecutable](#actualización-ejecutable-lem-142), LiquidDoc y recetas sustituyen los candidatos históricos; conservar el comportamiento y límites de los demás dueños.
 
 <a id="lm-shell"></a>
 ### LM-SHELL · Shell, contenedores e integración
@@ -198,13 +198,13 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Variantes existentes.** Text/email/tel/number/date/file/password/search, textarea y select nativos según fuente; floating labels Dawn y labels persistentes locales no son el mismo markup.
 
-**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado. Los controles UI de contacto/búsqueda/galería/newsletter footer/comentarios aplican esa corrección scoped; los campos legacy restantes conservan deuda.
+**CSS y excepciones.** --lemoon-size-control, --lemoon-radius-sm, --lemoon-font-body, --lemoon-text-primary/secondary. Legacy .field:after warm; foco box-shadow strong. Receta normativa DESIGN §5 exige delimitación strong cuando corresponda y anillo separado. Los controles UI de contacto/búsqueda/colección/facets/galería/newsletter footer/comentarios aplican esa corrección scoped; los campos legacy restantes conservan deuda.
 
 **Estados observados / aplicabilidad:** Normal: Valor/placeholder y label; Hover: Reglas locales de contorno; Foco: :focus-visible/:focus-within observado; deuda legacy documentada; Seleccionado: Selección nativa select; Loading: No loading universal de campo; Error: aria-invalid/describedby según formulario; no todas las instancias lo traen; Disabled: disabled nativo donde existe.
 
 **Responsive.** 48px base, textarea auto; columnas del formulario apilan según superficie. **Accesibilidad.** Preservar label-for, hint/error IDs, inputmode, min/max/step y constraints; no copiar defecto de borde al extraer.
 
-**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren contacto/búsqueda/galería/newsletter footer/comentarios; formularios, IDs y feedback permanecen en sus dueños. Receta/gift conservan sus contratos locales.
+**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren contacto/búsqueda/colección/facets/galería/newsletter footer/comentarios; formularios, IDs y feedback permanecen en sus dueños. Receta/gift conservan sus contratos locales.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
@@ -297,7 +297,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Disponibilidad actual:** reutilizable. Entrada: [price.liquid](../../snippets/price.liquid). Producto/variante y lemoon-money; no calcular precios en átomos de presentación. [Receta de integración](../components/recipes/product-card-grid.md).
 
-**Fuentes:** [snippets/price.liquid](../../snippets/price.liquid), [snippets/lemoon-money.liquid](../../snippets/lemoon-money.liquid), [snippets/unit-price.liquid](../../snippets/unit-price.liquid), [assets/component-price.css](../../assets/component-price.css), [assets/component-totals.css](../../assets/component-totals.css), [assets/component-rating.css](../../assets/component-rating.css), [assets/component-volume-pricing.css](../../assets/component-volume-pricing.css), [assets/price-per-item.js](../../assets/price-per-item.js).
+**Fuentes:** [snippets/price.liquid](../../snippets/price.liquid), [snippets/lemoon-money.liquid](../../snippets/lemoon-money.liquid), [snippets/unit-price.liquid](../../snippets/unit-price.liquid), [assets/component-price.css](../../assets/component-price.css), [assets/component-totals.css](../../assets/component-totals.css), [assets/component-rating.css](../../assets/component-rating.css), [assets/component-volume-pricing.css](../../assets/component-volume-pricing.css), [assets/price-per-item.js](../../assets/price-per-item.js). [snippets/lemoon-product-unit-price.liquid](../../snippets/lemoon-product-unit-price.liquid), [snippets/lemoon-cart-tax-note.liquid](../../snippets/lemoon-cart-tax-note.liquid).
 
 **Contrato actual.** price: product,placeholder,use_variant,show_badges,price_class,show_compare_at_price; también usa settings.currency_code_enabled. lemoon-money: amount,show_currency_code; unit-price: price,measurement,hide_accessibility_label opcional. Ratings usan metafields reviews.rating/rating_count en consumidores, no snippet rating. price-per-item calcula presentación de quantity breaks de variante.
 
@@ -318,7 +318,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Disponibilidad actual:** reutilizable. Entrada: [card-product.liquid](../../snippets/card-product.liquid). card_product y section_id reales; media, precio y JS juntos. [Receta de integración](../components/recipes/product-card-grid.md).
 
-**Fuentes:** [snippets/card-product.liquid](../../snippets/card-product.liquid), [assets/component-card.css](../../assets/component-card.css), [assets/lemoon-product-card.js](../../assets/lemoon-product-card.js), [assets/quick-add.css](../../assets/quick-add.css), [assets/mask-blobs.css](../../assets/mask-blobs.css).
+**Fuentes:** [snippets/card-product.liquid](../../snippets/card-product.liquid), [assets/component-card.css](../../assets/component-card.css), [assets/lemoon-product-card.js](../../assets/lemoon-product-card.js), [assets/quick-add.css](../../assets/quick-add.css), [assets/mask-blobs.css](../../assets/mask-blobs.css). [snippets/lemoon-carousel-results.liquid](../../snippets/lemoon-carousel-results.liquid).
 
 **Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. Producto/variantes/media/settings son entradas de dominio.
 
@@ -465,7 +465,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Disponibilidad actual:** reutilizable. Entrada: [lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid). carousel_id y hooks prev/next reales; slider-component conserva global.js. [Receta de integración](../components/recipes/product-card-grid.md).
 
-**Fuentes:** [snippets/lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid), [snippets/lemoon-thumbnail-arrow.liquid](../../snippets/lemoon-thumbnail-arrow.liquid), [assets/component-slider.css](../../assets/component-slider.css), [assets/component-slideshow.css](../../assets/component-slideshow.css).
+**Fuentes:** [snippets/lemoon-carousel-controls.liquid](../../snippets/lemoon-carousel-controls.liquid), [snippets/lemoon-thumbnail-arrow.liquid](../../snippets/lemoon-thumbnail-arrow.liquid), [assets/component-slider.css](../../assets/component-slider.css), [assets/component-slideshow.css](../../assets/component-slideshow.css). [snippets/lemoon-dawn-slider-controls.liquid](../../snippets/lemoon-dawn-slider-controls.liquid), [snippets/lemoon-carousel-results.liquid](../../snippets/lemoon-carousel-results.liquid).
 
 **Contrato actual.** Dawn slider-component/slideshow-component dependen IDs Slider-/Slide-, nombres previous/next y contadores; Lemoon carousel controls: carousel_id y data-lemoon-carousel-*; thumbnail-arrow direction (up/down); label se obtiene de locales. Controlador del consumidor define scroll/autoplay.
 
@@ -801,7 +801,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Disponibilidad actual:** composición de sección. Entrada: [main-cart-items.liquid](../../sections/main-cart-items.liquid). Carrito nativo y fragmentos/drawer; estados y anuncios pertenecen al controlador. [Receta de integración](../components/recipes/product-card-grid.md).
 
-**Fuentes:** [sections/main-cart-items.liquid](../../sections/main-cart-items.liquid), [sections/main-cart-footer.liquid](../../sections/main-cart-footer.liquid), [sections/cart-drawer.liquid](../../sections/cart-drawer.liquid), [sections/cart-icon-bubble.liquid](../../sections/cart-icon-bubble.liquid), [sections/cart-notification-button.liquid](../../sections/cart-notification-button.liquid), [sections/cart-notification-product.liquid](../../sections/cart-notification-product.liquid), [snippets/cart-drawer.liquid](../../snippets/cart-drawer.liquid), [snippets/cart-notification.liquid](../../snippets/cart-notification.liquid), [assets/cart.js](../../assets/cart.js), [assets/cart-drawer.js](../../assets/cart-drawer.js), [assets/cart-notification.js](../../assets/cart-notification.js), [assets/lemoon-cart-page.css](../../assets/lemoon-cart-page.css), [assets/component-cart.css](../../assets/component-cart.css), [assets/component-cart-items.css](../../assets/component-cart-items.css), [assets/component-cart-drawer.css](../../assets/component-cart-drawer.css), [assets/component-cart-notification.css](../../assets/component-cart-notification.css).
+**Fuentes:** [sections/main-cart-items.liquid](../../sections/main-cart-items.liquid), [sections/main-cart-footer.liquid](../../sections/main-cart-footer.liquid), [sections/cart-drawer.liquid](../../sections/cart-drawer.liquid), [sections/cart-icon-bubble.liquid](../../sections/cart-icon-bubble.liquid), [sections/cart-notification-button.liquid](../../sections/cart-notification-button.liquid), [sections/cart-notification-product.liquid](../../sections/cart-notification-product.liquid), [snippets/cart-drawer.liquid](../../snippets/cart-drawer.liquid), [snippets/cart-notification.liquid](../../snippets/cart-notification.liquid), [assets/cart.js](../../assets/cart.js), [assets/cart-drawer.js](../../assets/cart-drawer.js), [assets/cart-notification.js](../../assets/cart-notification.js), [assets/lemoon-cart-page.css](../../assets/lemoon-cart-page.css), [assets/component-cart.css](../../assets/component-cart.css), [assets/component-cart-items.css](../../assets/component-cart-items.css), [assets/component-cart-drawer.css](../../assets/component-cart-drawer.css), [assets/component-cart-notification.css](../../assets/component-cart-notification.css). [snippets/lemoon-cart-tax-note.liquid](../../snippets/lemoon-cart-tax-note.liquid).
 
 **Contrato actual.** cart.items/count/discounts/totals/note, item properties/selling_plan/quantity rules y sections AJAX; main-cart-footer bloques subtotal/buttons/@app. Drawer wrapper render cart-drawer; bubble/notification fragments son respuestas parciales. No simplificar cart item a card visual sin identidad de línea/key.
 
@@ -1121,6 +1121,18 @@ Entradas que requieren inspección especial al implementar: section rendering de
 
 Los consumidores conservan sus formularios, contenido y schemas: newsletter customer (contact[tags]/contact[email]/commit), comentarios new_comment (author/email/body, moderación y autofocus de respuesta), cinco templates legales (CMS/políticas/demo/rutas locales) y FAQ legacy de page.preguntas-frecuentes (primer details abierto y block.shopify_attributes). [Pruebas semánticas y de navegador](../../tests/e2e/component-adoption.spec.js) comparan DOM Liquid real contra una base previa; los adaptadores de formularios/errores no prueban Shopify. No se incorpora una variante visual ni un wrapper de sección nuevo.
 
+
+### Composiciones compartidas
+
+| Snippet | Consumidores | Contrato preservado |
+| --- | --- | --- |
+| [lemoon-cart-tax-note](../../snippets/lemoon-cart-tax-note.liquid) | main-cart-footer, cart-drawer, quick-order-list | Ocho combinaciones duties/taxes/política; traducciones HTML y política nativa, sin totales ni checkout |
+| [lemoon-product-unit-price](../../snippets/lemoon-product-unit-price.liquid) | main-product, featured-product | Price-Per-Item, variante y precio por tramo; cálculo de cantidad y variable de tabla posterior permanecen en el dueño |
+| [lemoon-carousel-results](../../snippets/lemoon-carousel-results.liquid) | Dos templates collection.carousel | Lista/paginación de respuesta, elegibilidad y card-product; paginate y quick-add explícito según template |
+| [lemoon-dawn-slider-controls](../../snippets/lemoon-dawn-slider-controls.liquid) | collection-list, featured-blog, multicolumn | Botones previous/next, contador y clases responsive del dueño; global.js, separado del carrusel Lemoon |
+
+Heading/action también se reutilizan en Nosotros, servicios y guía de cristales. Social-icons conserva orden default y admite el orden explícito del footer password. Select cubre colección y las tres ramas de facets, con opciones/IDs/formulario resueltos por el dueño. APIs, dependencias y límites en las recetas de [catálogo](../components/recipes/product-card-grid.md), [búsqueda](../components/recipes/search-sort.md) y [ayuda](../components/recipes/guide-help.md). No se extraen schemas, filas cart/bulk, formularios legacy ni shells genéricos de página/modal.
+
 Los contratos completos están en LiquidDoc y en las [seis recetas](../components/README.md#elegir-una-receta). Strings/atributos se escapan una vez al renderizar; `_html` sólo admite capturas confiables y `editor_attributes` sólo `block.shopify_attributes`. Los consumidores mantienen IDs/ARIA, locales, schemas/settings, formularios, rutas y hooks. Las familias canónicas existentes —iconos, spinner, precio, swatches, card-product, controles de carrusel y adaptadores comerciales— conservan su nombre: no se añaden wrappers para renombrarlas.
 
 CSS mantiene su orden y dueño: tokens → base → componentes → superficie. La corrección accesible aprobada de contorno/foco se limita a controles migrados (`.lemoon-ui-control`, wrappers field/select) en [lemoon-components.css](../../assets/lemoon-components.css), con especificidad local de contacto. [global.js](../../assets/global.js) sigue siendo dependencia contextual de details: evitar el prefijo Details-* en FAQ nativo. [facets.js](../../assets/facets.js) conserva la ordenación del formulario dueño. No se introduce JS nuevo para estos átomos.
@@ -1128,7 +1140,7 @@ CSS mantiene su orden y dueño: tokens → base → componentes → superficie. 
 <a id="extraction"></a>
 ## Oportunidades pendientes
 
-Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. FAQ legacy, newsletter del footer, comentarios y títulos/ayuda del shell legal ya reutilizan los snippets canónicos. Sort de colección y operaciones comerciales conservan sus implementaciones propias. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
+Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. FAQ legacy, newsletter del footer, comentarios y títulos/ayuda del shell legal ya reutilizan los snippets canónicos. Sort de colección y facets reutilizan select manteniendo sus opciones nativas. Filas y operaciones comerciales conservan sus implementaciones propias. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
 
 <a id="gallery-plan"></a>
 ## Galería actual y demos legacy

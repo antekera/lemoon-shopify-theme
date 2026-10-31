@@ -40,3 +40,20 @@ Conservar un H1, jerarquía de pasos, anclas `Guide-<section>-<step>`, `aria-lab
 ## Shell legal: títulos y ayuda
 
 [lemoon-legal-page](../../../sections/lemoon-legal-page.liquid), usado por envíos, devoluciones, términos, privacidad y garantías, compone heading H1/H2 y action local para el enlace de ayuda. La sección resuelve el título CMS o título de privacidad demo, contacto configurado o ruta `/pages/contact` con root localizado, y conserva intro, CMS/política nativa, demo, navegación de políticas y CSS. No se convierte el help en un snippet wrapper ni se migran los links de navegación de políticas. Pasar legal_title/help_title/contact_label sin escape al render; action escapa legal_contact_url una vez. [Pruebas legales](../../../tests/unit/legal-page.test.js) y [comparación DOM previa](../../../tests/e2e/component-adoption.spec.js) cubren estos contratos locales sin probar templates activos de Shopify ni aprobación del contenido.
+
+
+## Nosotros, servicios y guía de cristales
+
+[lemoon-about-page](../../../sections/lemoon-about-page.liquid), [lemoon-service-page](../../../sections/lemoon-service-page.liquid) y [lemoon-crystal-guide](../../../sections/lemoon-crystal-guide.liquid) reutilizan heading/action. Mantener H1/H2/H3, IDs de aria-labelledby, clases de enlaces, raíces localizadas, variantes de servicios y la condición de producto configurador en cada dueño. Usar action local para conservar clases específicas, incluida button cuando ya existía; no crear un shell de página o panel help universal. Richtext/CMS, imágenes y schemas permanecen locales.
+
+## Redes sociales de password
+
+[social-icons](../../../snippets/social-icons.liquid) mantiene `class` opcional y orden default facebook, instagram, youtube, tiktok, twitter, pinterest, snapchat, tumblr, vimeo. El nuevo `order` es una lista de nombres soportados separados por coma; se resuelve contra settings.social_<network>_link y omite redes sin URL. Sólo admite las nueve redes existentes.
+
+[main-password-footer](../../../sections/main-password-footer.liquid) reutiliza el snippet con su orden histórico explícito; no reemplaza el footer ni sus textos Shopify:
+
+```liquid
+{% render 'social-icons', order: 'twitter,facebook,pinterest,instagram,tiktok,tumblr,snapchat,youtube,vimeo' %}
+```
+
+Conservar component-list-social.css, SVG decorativos y etiquetas visually-hidden. El layout password carga dependencias propias. Las [pruebas de consumidores](../../../tests/e2e/consumer-contract.spec.js) comparan orden/semántica local; no comprueban disponibilidad de perfiles ni configuración efectiva del tema activo.

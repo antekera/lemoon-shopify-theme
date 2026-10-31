@@ -6,6 +6,8 @@ import { renderNotification, notificationContext } from '../helpers/gift-notific
 import { renderComponentFixture } from '../helpers/component-library-renderer.mjs';
 import { renderDefaultPage } from '../helpers/default-page-renderer.mjs';
 
+import { renderContractFixture } from '../helpers/consumer-contract-renderer.mjs';
+
 import { renderAdoptionFixture } from '../helpers/component-adoption-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -43,6 +45,15 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1:4173').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/consumer-contract.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'about';
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderContractFixture(scenario, new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('runtime') !== '0'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
 

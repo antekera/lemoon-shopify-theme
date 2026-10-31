@@ -34,11 +34,17 @@
   <div class="lemoon-about-page__hero">
     <header>
       <span class="lemoon-about-page__eyebrow">{{ 'sections.lemoon_about_page.eyebrow' | t }}</span>
-      <h1>{{ 'sections.lemoon_about_page.title' | t }}</h1>
+      {%- assign ui_heading_text = 'sections.lemoon_about_page.title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 1 %}
       <p class="lemoon-about-page__intro">{{ 'sections.lemoon_about_page.intro' | t }}</p>
       <div class="lemoon-about-page__links">
-        <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'sections.lemoon_about_page.catalogue' | t }}</a>
-        <a href="{{ routes.root_url | append: '/pages/como-medir-tus-lentes' | replace: '//', '/' }}">{{ 'sections.lemoon_about_page.measurements' | t }}</a>
+        {%- liquid
+  assign ui_action_label = 'sections.lemoon_about_page.catalogue' | t
+  assign ui_action_url = routes.all_products_collection_url
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local', class: 'button' %}
+        {%- liquid
+  assign ui_action_label = 'sections.lemoon_about_page.measurements' | t
+  assign ui_action_url = routes.root_url | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}
       </div>
     </header>
     {%- if section.settings.image != blank -%}
@@ -50,11 +56,11 @@
     {%- endif -%}
   </div>
   <section class="lemoon-about-page__values" aria-labelledby="About-values-{{ section.id }}">
-    <h2 id="About-values-{{ section.id }}">{{ 'sections.lemoon_about_page.values_title' | t }}</h2>
+    {%- assign ui_heading_text = 'sections.lemoon_about_page.values_title' | t -%}{%- capture ui_heading_id -%}About-values-{{ section.id }}{%- endcapture -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
     <div class="lemoon-about-page__grid">
-      <div class="lemoon-about-page__value"><h3>{{ 'sections.lemoon_about_page.style_title' | t }}</h3><p>{{ 'sections.lemoon_about_page.style_body' | t }}</p></div>
-      <div class="lemoon-about-page__value"><h3>{{ 'sections.lemoon_about_page.fit_title' | t }}</h3><p>{{ 'sections.lemoon_about_page.fit_body' | t }}</p></div>
-      <div class="lemoon-about-page__value"><h3>{{ 'sections.lemoon_about_page.information_title' | t }}</h3><p>{{ 'sections.lemoon_about_page.information_body' | t }}</p></div>
+      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.style_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.style_body' | t }}</p></div>
+      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.fit_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.fit_body' | t }}</p></div>
+      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.information_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.information_body' | t }}</p></div>
     </div>
   </section>
   {%- if section.settings.demo_data -%}<div class="lemoon-about-page__story rte">{% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}</div>{%- endif -%}
@@ -62,9 +68,12 @@
     <div class="lemoon-about-page__story rte">{{ section.settings.story }}</div>
   {%- endif -%}
   <section class="lemoon-about-page__help" aria-labelledby="About-help-{{ section.id }}">
-    <h2 id="About-help-{{ section.id }}">{{ 'sections.lemoon_about_page.help_title' | t }}</h2>
+    {%- assign ui_heading_text = 'sections.lemoon_about_page.help_title' | t -%}{%- capture ui_heading_id -%}About-help-{{ section.id }}{%- endcapture -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
     <p>{{ 'sections.lemoon_about_page.help_body' | t }}</p>
-    <div class="lemoon-about-page__links"><a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'sections.lemoon_about_page.contact' | t }}</a></div>
+    <div class="lemoon-about-page__links">{%- liquid
+  assign ui_action_label = 'sections.lemoon_about_page.contact' | t
+  assign ui_action_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+-%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}</div>
   </section>
 </div>
 

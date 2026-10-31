@@ -6,16 +6,16 @@ Antes de crear o modificar UI, localizar la familia aquí, abrir su receta y lee
 
 | Necesidad | Receta | Piezas principales |
 | --- | --- | --- |
-| Guía, títulos y ayuda | [Guía y ayuda](recipes/guide-help.md) | heading + action; shell local |
+| Guía, títulos y ayuda | [Guía y ayuda](recipes/guide-help.md) | heading + action + social-icons; shell local |
 | Contacto nativo, campos y respuesta | [Formulario](recipes/contact-form.md) | field + message + action |
 | Preguntas agrupadas y richtext | [FAQ](recipes/faq-group.md) | faq-item + heading; grupos locales |
 | Ordenación y resultados | [Búsqueda](recipes/search-sort.md) | select + facets; formulario dueño |
-| Catálogo comercial y tarjeta | [Grid de productos](recipes/product-card-grid.md) | card-product, price, swatch; contratos existentes |
+| Catálogo comercial y tarjeta | [Grid de productos](recipes/product-card-grid.md) | card-product, precio, impuestos/envío, resultados y controles; contratos propios |
 | Demostraciones y estados | [Galería](recipes/catalogue-states.md) | seis snippets UI y límites legacy |
 
 ## Contratos compartidos
 
-Las seis extracciones nuevas viven en `snippets/lemoon-ui-*.liquid`; su LiquidDoc define los parámetros, opcionales y defaults. Los snippets existentes conservan sus nombres y APIs. Los ejemplos de estas recetas son llamadas a esas fuentes, no otra implementación de HTML/CSS.
+Los seis átomos UI viven en `snippets/lemoon-ui-*.liquid`; su LiquidDoc define los parámetros, opcionales y defaults. Las composiciones compartidas de carrito, precio por volumen, resultados de carrusel y controles Dawn se describen en la receta de catálogo. Social-icons mantiene su nombre y admite orden explícito. Los contratos de cada pieza están en su LiquidDoc. Los ejemplos de estas recetas son llamadas a esas fuentes, no otra implementación de HTML/CSS.
 
 Enviar strings/atributos sin preescapar: los snippets UI escapan una vez en la salida. Los slots `_html` reciben solamente capturas de plantilla confiable; escapar cada dato externo dentro de la captura. `editor_attributes` recibe solamente `block.shopify_attributes`. El consumidor genera IDs únicos con sección/formulario/bloque y conserva formulario, rutas, locales, disponibilidad y lógica comercial. Mantener la diferencia entre booleano `false`, atributo omitido y string: no usar defaults que conviertan `false` en otro valor.
 
@@ -74,7 +74,7 @@ Los snippets UI usan los tokens → `base.css` → `lemoon-components.css` del l
 
 ## Componentes compartidos en formularios y ayuda
 
-[Newsletter footer](../../sections/footer.liquid) y [comentarios](../../sections/main-article.liquid) reutilizan field/action/message; [shell legal](../../sections/lemoon-legal-page.liquid) reutiliza heading/action en los cinco templates legales; [FAQ legacy](../../sections/lemoon-faq.liquid) reutiliza heading/faq-item en page.preguntas-frecuentes. Formularios, copy, CMS, routing, moderación y editor permanecen en cada sección. Contratos opcionales y límites en las recetas de [formularios](recipes/contact-form.md), [ayuda](recipes/guide-help.md) y [FAQ](recipes/faq-group.md). El contorno/foco aprobado se aplica a los controles adoptados con el CSS compartido existente.
+[Newsletter footer](../../sections/footer.liquid) y [comentarios](../../sections/main-article.liquid) reutilizan field/action/message; [shell legal](../../sections/lemoon-legal-page.liquid) reutiliza heading/action en los cinco templates legales; [FAQ legacy](../../sections/lemoon-faq.liquid) reutiliza heading/faq-item en page.preguntas-frecuentes. Formularios, copy, CMS, routing, moderación y editor permanecen en cada sección. Contratos opcionales y límites en las recetas de [formularios](recipes/contact-form.md), [ayuda](recipes/guide-help.md) y [FAQ](recipes/faq-group.md). El contorno/foco aprobado se aplica a los controles adoptados con el CSS compartido existente. Colección y facets también reutilizan select; Nosotros, servicios y guía de cristales reutilizan heading/action. Los nuevos fragmentos compartidos de impuestos, precio por volumen y carruseles mantienen sus dueños nativos.
 
 ## Integrar y comprobar
 

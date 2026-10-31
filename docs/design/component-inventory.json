@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 507,
-    "mapped_paths": 476,
+    "total_tracked_paths": 511,
+    "mapped_paths": 480,
     "excluded_paths": 31,
     "by_root": {
       "assets": 257,
@@ -32,14 +32,14 @@
       "layout": 2,
       "locales": 51,
       "sections": 70,
-      "snippets": 87,
+      "snippets": 91,
       "templates": 38
     },
     "mapped_by_extension": {
       ".css": 81,
       ".js": 53,
       ".json": 89,
-      ".liquid": 160,
+      ".liquid": 164,
       ".svg": 93
     },
     "excluded_by_reason": {
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 507,
+    "total_source_paths": 511,
     "explicit_new_paths": 0
   },
   "components": [
@@ -111,12 +111,15 @@
       "direct_static_consumers": [
         "layout/password.liquid",
         "layout/theme.liquid",
+        "sections/lemoon-about-page.liquid",
         "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-crystal-guide.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-faq-page.liquid",
         "sections/lemoon-faq.liquid",
         "sections/lemoon-guide-page.liquid",
         "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-service-page.liquid",
         "sections/main-page.liquid",
         "sections/page.liquid",
         "sections/rich-text.liquid",
@@ -154,13 +157,16 @@
         "layout/password.liquid",
         "layout/theme.liquid",
         "sections/footer.liquid",
+        "sections/lemoon-about-page.liquid",
         "sections/lemoon-contact-page.liquid",
+        "sections/lemoon-crystal-guide.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/lemoon-faq-page.liquid",
         "sections/lemoon-featured-products.liquid",
         "sections/lemoon-guide-page.liquid",
         "sections/lemoon-legal-page.liquid",
+        "sections/lemoon-service-page.liquid",
         "sections/main-article.liquid",
         "snippets/buy-buttons.liquid",
         "snippets/lemoon-sticky-purchase.liquid",
@@ -197,6 +203,7 @@
         "sections/header.liquid",
         "sections/how-it-works.liquid",
         "sections/lemoon-shop-by-shape.liquid",
+        "sections/main-password-footer.liquid",
         "sections/main-product.liquid",
         "snippets/card-product.liquid",
         "snippets/header-search.liquid",
@@ -239,8 +246,10 @@
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-design-system.liquid",
         "sections/main-article.liquid",
+        "sections/main-collection-product-grid.liquid",
         "snippets/facets-filter-desktop.liquid",
         "snippets/facets-filter-mobile.liquid",
+        "snippets/facets.liquid",
         "snippets/main-search-results.liquid"
       ],
       "depends_on": [
@@ -397,7 +406,9 @@
         "assets/component-totals.css",
         "assets/component-rating.css",
         "assets/component-volume-pricing.css",
-        "assets/price-per-item.js"
+        "assets/price-per-item.js",
+        "snippets/lemoon-cart-tax-note.liquid",
+        "snippets/lemoon-product-unit-price.liquid"
       ],
       "direct_static_consumers": [
         "layout/theme.liquid",
@@ -416,7 +427,8 @@
         "snippets/card-product.liquid",
         "snippets/cart-drawer.liquid",
         "snippets/price.liquid",
-        "snippets/quick-order-list-row.liquid"
+        "snippets/quick-order-list-row.liquid",
+        "snippets/quick-order-list.liquid"
       ],
       "depends_on": [
         "LM-TYPE",
@@ -440,7 +452,8 @@
         "assets/component-card.css",
         "assets/lemoon-product-card.js",
         "assets/quick-add.css",
-        "assets/mask-blobs.css"
+        "assets/mask-blobs.css",
+        "snippets/lemoon-carousel-results.liquid"
       ],
       "direct_static_consumers": [
         "sections/collage.liquid",
@@ -456,6 +469,7 @@
         "sections/related-products.liquid",
         "snippets/card-product.liquid",
         "snippets/cart-drawer.liquid",
+        "snippets/lemoon-carousel-results.liquid",
         "snippets/lemoon-mobile-search.liquid",
         "snippets/lemoon-plp-product-page.liquid",
         "snippets/main-search-result-card.liquid",
@@ -710,7 +724,9 @@
         "snippets/lemoon-carousel-controls.liquid",
         "snippets/lemoon-thumbnail-arrow.liquid",
         "assets/component-slider.css",
-        "assets/component-slideshow.css"
+        "assets/component-slideshow.css",
+        "snippets/lemoon-carousel-results.liquid",
+        "snippets/lemoon-dawn-slider-controls.liquid"
       ],
       "direct_static_consumers": [
         "layout/theme.liquid",
@@ -722,7 +738,9 @@
         "sections/main-product.liquid",
         "sections/multicolumn.liquid",
         "sections/slideshow.liquid",
-        "snippets/product-media-gallery.liquid"
+        "snippets/product-media-gallery.liquid",
+        "templates/collection.carousel-accessories.liquid",
+        "templates/collection.carousel.liquid"
       ],
       "depends_on": [
         "LM-ACTION",
@@ -1332,7 +1350,8 @@
         "assets/component-cart.css",
         "assets/component-cart-items.css",
         "assets/component-cart-drawer.css",
-        "assets/component-cart-notification.css"
+        "assets/component-cart-notification.css",
+        "snippets/lemoon-cart-tax-note.liquid"
       ],
       "direct_static_consumers": [
         "layout/theme.liquid",
@@ -4261,9 +4280,10 @@
       "path": "sections/collection-list.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-PRODUCT-LIST"
+        "LM-PRODUCT-LIST",
+        "LM-SLIDER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/contact-form.liquid",
@@ -4301,9 +4321,10 @@
       "path": "sections/featured-blog.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-JOURNAL"
+        "LM-JOURNAL",
+        "LM-SLIDER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/featured-collection.liquid",
@@ -4317,9 +4338,10 @@
       "path": "sections/featured-product.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-PRICE",
         "LM-PRODUCT-LIST"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/footer-group.json",
@@ -4385,9 +4407,11 @@
       "path": "sections/lemoon-about-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-EDITORIAL"
+        "LM-ACTION",
+        "LM-EDITORIAL",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/lemoon-about.liquid",
@@ -4413,9 +4437,11 @@
       "path": "sections/lemoon-crystal-guide.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-LEGAL"
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/lemoon-design-system.liquid",
@@ -4513,9 +4539,11 @@
       "path": "sections/lemoon-service-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-LEGAL"
+        "LM-ACTION",
+        "LM-LEGAL",
+        "LM-TYPE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/lemoon-shop-by-shape.liquid",
@@ -4580,9 +4608,10 @@
       "path": "sections/main-cart-footer.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-CART"
+        "LM-CART",
+        "LM-PRICE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/main-cart-items.liquid",
@@ -4604,9 +4633,10 @@
       "path": "sections/main-collection-product-grid.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-FIELD",
         "LM-PLP"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/main-list-collections.liquid",
@@ -4628,9 +4658,10 @@
       "path": "sections/main-password-footer.liquid",
       "status": "mapped",
       "component_ids": [
+        "LM-ICON",
         "LM-PASSWORD"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/main-password-header.liquid",
@@ -4644,9 +4675,10 @@
       "path": "sections/main-product.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-PDP"
+        "LM-PDP",
+        "LM-PRICE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/main-search.liquid",
@@ -4660,9 +4692,10 @@
       "path": "sections/multicolumn.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-EDITORIAL"
+        "LM-EDITORIAL",
+        "LM-SLIDER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "sections/multirow.liquid",
@@ -4796,9 +4829,10 @@
       "path": "snippets/cart-drawer.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-CART"
+        "LM-CART",
+        "LM-PRICE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/cart-notification.liquid",
@@ -4844,9 +4878,10 @@
       "path": "snippets/facets.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-FACET"
+        "LM-FACET",
+        "LM-FIELD"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/gift-card-recipient-form.liquid",
@@ -4938,6 +4973,24 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
+      "path": "snippets/lemoon-carousel-results.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
+      "path": "snippets/lemoon-cart-tax-note.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-CART",
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
+    },
+    {
       "path": "snippets/lemoon-collection-copy.liquid",
       "status": "mapped",
       "component_ids": [
@@ -4984,6 +5037,14 @@
         "LM-PRIVACY"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-dawn-slider-controls.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-SLIDER"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/lemoon-facet-visual.liquid",
@@ -5160,6 +5221,14 @@
         "LM-LABEL"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-product-unit-price.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRICE"
+      ],
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/lemoon-purchase-step-icon.liquid",
@@ -5400,9 +5469,10 @@
       "path": "snippets/quick-order-list.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-BULK"
+        "LM-BULK",
+        "LM-PRICE"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/quick-order-product-row.liquid",
@@ -5426,7 +5496,7 @@
       "component_ids": [
         "LM-ICON"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "snippets/swatch-input.liquid",
@@ -5506,18 +5576,20 @@
       "status": "mapped",
       "component_ids": [
         "LM-PLP",
-        "LM-PRODUCT-CARD"
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "templates/collection.carousel.liquid",
       "status": "mapped",
       "component_ids": [
         "LM-PLP",
-        "LM-PRODUCT-CARD"
+        "LM-PRODUCT-CARD",
+        "LM-SLIDER"
       ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
+      "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
       "path": "templates/collection.json",
@@ -5783,9 +5855,13 @@
       "snippets/lemoon-ui-field.liquid",
       "snippets/lemoon-ui-heading.liquid",
       "snippets/lemoon-ui-message.liquid",
-      "snippets/lemoon-ui-select.liquid"
+      "snippets/lemoon-ui-select.liquid",
+      "snippets/lemoon-cart-tax-note.liquid",
+      "snippets/lemoon-product-unit-price.liquid",
+      "snippets/lemoon-carousel-results.liquid",
+      "snippets/lemoon-dawn-slider-controls.liquid"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 507 indexed source paths, including the six PR additions retained in new_source_paths; that list does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 511 indexed source paths, including the ten PR additions retained in new_source_paths; that list does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {
@@ -5812,6 +5888,71 @@
       },
       "contract": "Existing native forms, names/IDs, response semantics, editor attrs and first-open FAQ preserved; optional field order/wrapper/ARIA/trusted slots, action submit input and message h3 only. Shared approved control border/focus correction; no new UI variants.",
       "proof": "tests/e2e/component-adoption.spec.js compares baseline real Liquid-rendered semantic DOM; Shopify form tags/errors are fixture adapters, no delivery/editor/publication claim."
+    },
+    "reusable_consumers": {
+      "base_sha": "308475cdb40ef23a61de789d74e1d2f357406e81",
+      "consumers": {
+        "sections/main-cart-footer.liquid": [
+          "LM-CART",
+          "LM-PRICE"
+        ],
+        "snippets/cart-drawer.liquid": [
+          "LM-CART",
+          "LM-PRICE"
+        ],
+        "snippets/quick-order-list.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/main-product.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/featured-product.liquid": [
+          "LM-PRICE"
+        ],
+        "sections/collection-list.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/featured-blog.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/multicolumn.liquid": [
+          "LM-SLIDER"
+        ],
+        "sections/main-collection-product-grid.liquid": [
+          "LM-FIELD"
+        ],
+        "snippets/facets.liquid": [
+          "LM-FIELD"
+        ],
+        "sections/lemoon-about-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-service-page.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/lemoon-crystal-guide.liquid": [
+          "LM-TYPE",
+          "LM-ACTION"
+        ],
+        "sections/main-password-footer.liquid": [
+          "LM-ICON"
+        ],
+        "snippets/social-icons.liquid": [
+          "LM-ICON"
+        ],
+        "templates/collection.carousel.liquid": [
+          "LM-PRODUCT-CARD",
+          "LM-SLIDER"
+        ],
+        "templates/collection.carousel-accessories.liquid": [
+          "LM-PRODUCT-CARD",
+          "LM-SLIDER"
+        ]
+      },
+      "contract": "Four bounded shared snippets; select/heading/action reuse and explicit social ordering. Native schemas/forms/controllers and volume-tier owner state preserved.",
+      "proof": "tests/unit/consumer-contract.test.js and tests/e2e/consumer-contract.spec.js; local real-Liquid fixtures, not Shopify processing or live editor proof."
     }
   }
 }

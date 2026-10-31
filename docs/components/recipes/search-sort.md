@@ -4,7 +4,7 @@ Familias: LM-FIELD, LM-FACET, LM-SEARCH; tarjetas CMS, navegación, búsqueda m�
 
 ## Dueño y condiciones de uso
 
-[main-search-results](../../../snippets/main-search-results.liquid), consumido por [main-search](../../../sections/main-search.liquid), usa [select](../../../snippets/lemoon-ui-select.liquid) **sólo en ordenación vertical de búsqueda**: `show_all_products == false`, sorting activado, filtro vertical y filtros no vacíos. Mantener estas condiciones y `facet-filters-form`/`FacetSortForm`; el átomo no determina qué opciones son admisibles ni cambia la política de colección.
+[main-search-results](../../../snippets/main-search-results.liquid), consumido por [main-search](../../../sections/main-search.liquid), usa [select](../../../snippets/lemoon-ui-select.liquid) en ordenación vertical de búsqueda: `show_all_products == false`, sorting activado, filtro vertical y filtros no vacíos. Mantener estas condiciones y `facet-filters-form`/`FacetSortForm`; el átomo no determina qué opciones son admisibles ni cambia la política de colección.
 
 Select recibe `id`, `name`, `options_html`, `class`, `wrapper_class`, `labelledby`, `aria_label`, `describedby`, `form_id`, `required`, `disabled`, `multiple`, `show_caret`. El wrapper default es `.select`, el control default `.select__select`; el caret existente aparece salvo `show_caret: false`. El label persistente es externo y responsabilidad del consumidor. No hay parámetro genérico de atributos ni HTML externo libre.
 
@@ -38,3 +38,10 @@ El layout carga tokens, [base](../../../assets/base.css) y [componentes](../../.
 Normal/foco/selección/disabled/multiple son nativos; loading/error/vacío y recuperación pertenecen a búsqueda/facets. Omitir booleanos deja atributos ausentes; false no se convierte en un atributo nativo activado. Verificar teclado, label, FormData `sort_by`, selected, eventos que llegan al formulario, términos conservados y estado de resultados tras actualizar.
 
 [component-library.test.js](../../../tests/unit/component-library.test.js) ejercita options/selección y el consumidor con fixtures; la cobertura de navegador local se describe en [catalogue-states](catalogue-states.md#evidencia). No equivale a respuesta real de búsqueda Shopify, historial/red de facets ni prueba de la política de sort de colección, que queda intacta.
+
+
+## Colección y ramas de facets
+
+[main-collection-product-grid](../../../sections/main-collection-product-grid.liquid) también usa select para SortBy; conserva la política relevance/manual, orden preferido, fallback de la opción actual, menú personalizado y `FacetSortForm`. [facets](../../../snippets/facets.liquid) comparte select en horizontal, mobile y drawer. `SortBy-mobile` conserva label externo; los otros SortBy mantienen su label/aria-label y a11y-refresh-page-message. No introducir IDs adicionales ni reemplazar los formularios.
+
+Las opciones se capturan completas en sus dueños y se pasan como options_html; los filtros, términos ocultos, selección y propagación a facets.js no se trasladan al átomo. El CSS compartido aplica la corrección de borde/foco a los selects adoptados; la geometría del menú personalizado sigue en lemoon-collection-plp.css. [Regresión de consumidores](../../../tests/e2e/consumer-contract.spec.js) verifica opciones nativas, fallback, FormData y bubbling local, sin probar peticiones de actualización reales de Shopify.

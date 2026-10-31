@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { renderContract } from '../helpers/consumer-contract-renderer.mjs';
 const read = (file) => readFileSync(new URL(`../../${file}`, import.meta.url), 'utf8');
 const json = (file) => { const text = read(file); return JSON.parse(text.slice(text.indexOf('{'))); };
 const source = read('sections/lemoon-crystal-guide.liquid');
@@ -15,8 +16,8 @@ test('lens guide is supplementary to the collection and has no invented product 
   expect(source).toContain("if option.name == 'Lentes'");
   expect(source).toContain('configurator_product.variants.size > 0');
   expect(source).toContain('if has_lens_options');
-  expect(source).toContain('{{ configurator_product.url }}?view=configurador');
-  expect(source).toContain('t: product: configurator_product.title | escape');
+  expect(renderContract('crystal-configurator')).toContain('href="/products/fixture?view=configurador"');
+  expect(renderContract('crystal-configurator')).toContain('Prototipo &lt;&amp;&#34;');
   expect(source).toContain("'lemoon_lens_flow.prototype' | t");
 });
 

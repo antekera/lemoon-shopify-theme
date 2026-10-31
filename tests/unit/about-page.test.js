@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { renderContract } from '../helpers/consumer-contract-renderer.mjs';
 const file = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const source = file('sections/lemoon-about-page.liquid');
 const json = (path) => { const text = file(path); return JSON.parse(text.slice(text.indexOf('{'))); };
@@ -10,7 +11,7 @@ test('about uses real optional imagery and only configured verified history', ()
   expect(source).toContain('{{ section.settings.story }}');
   expect(source).toContain('lemoon-about-page__abstract" aria-hidden="true"');
   expect(source).not.toMatch(/placeholder_svg_tag|https?:\/\/|page\.content/);
-  expect(source.match(/<h1\b/g)).toHaveLength(1);
+  expect(renderContract('about').match(/<h1\b/g)).toHaveLength(1);
 });
 test('about offers locale-safe existing catalogue, measurement and contact routes', () => {
   expect(source).toContain('routes.all_products_collection_url');

@@ -51,4 +51,39 @@ PLP conserva [lemoon-collection-plp.css](../../../assets/lemoon-collection-plp.c
 
 Probar frontal/secundaria ausente, imagen pendiente, producto sin media, título largo, precio normal/oferta, agotado y variantes. Mantener nombre accesible, foco de enlaces/acciones, alt, región de precio y estado seleccionado accesible del swatch. Error/loading/disabled de compra pertenecen al formulario y controlador; la tarjeta sola no demuestra recuperación de una operación.
 
-Esta receta documenta contratos existentes **sin migración comercial por LEM-142**. Las pruebas de los seis snippets UI no validan tarjeta, checkout, datos de stock, imágenes de Shopify ni integración de receta. La integración de una nueva lista requiere sus pruebas y contexto real; los estados sintéticos de la [galería](catalogue-states.md) no aportan esa aceptación.
+Esta receta documenta código canónico y extracciones acotadas de presentación. Las secciones conservan formularios, controladores y decisiones comerciales. Las pruebas de los seis snippets UI no validan tarjeta, checkout, datos de stock, imágenes de Shopify ni integración de receta. La integración de una nueva lista requiere sus pruebas y contexto real; los estados sintéticos de la [galería](catalogue-states.md) no aportan esa aceptación.
+
+
+## Impuestos y envío del carrito
+
+[lemoon-cart-tax-note](../../../snippets/lemoon-cart-tax-note.liquid) recibe `cart` y `shipping_policy`; conserva el small tax-note y las ocho combinaciones nativas de duties/taxes/política con sus traducciones HTML. Se reutiliza en main-cart-footer, cart-drawer y quick-order-list. No calcula totales ni envía checkout.
+
+```liquid
+{% render 'lemoon-cart-tax-note', cart: cart, shipping_policy: shop.shipping_policy %}
+```
+
+## Precio unitario por volumen
+
+[lemoon-product-unit-price](../../../snippets/lemoon-product-unit-price.liquid) presenta el price-per-item de main-product y featured-product. Recibe `variant`, `section_id`, `current_quantity`, `price_breaks` y `base_price` ya formateado. El dueño conserva `product.quantity_price_breaks_configured?`, la ordenación nativa de breaks, el cálculo de cantidad desde cart/min/increment y `variant_price` cuando alimenta el data-text de la tabla posterior. No mover esas asignaciones a render: las variables internas del snippet no vuelven al dueño.
+
+```liquid
+{% render 'lemoon-product-unit-price', variant: product.selected_or_first_available_variant, section_id: section.id, current_quantity: current_qty_for_volume_pricing, price_breaks: volume_pricing_array, base_price: variant_price %}
+```
+
+Mantener product-info.js/price-per-item.js, `Price-Per-Item-<section>`, data-section-id/data-variant-id, controles Quantity y tabla Volume en su contexto existente. El snippet conserva selección por tramo y compare-at; no sustituye price.liquid ni unit-price.liquid de unidad de medida.
+
+## Respuestas de carrusel y controles Dawn
+
+[lemoon-carousel-results](../../../snippets/lemoon-carousel-results.liquid) recibe `products`, `next_url`, `section_id` y `show_quick_add`. Los dos templates collection.carousel conservan layout none y paginate por 10. La lista compartida conserva productos disponibles con precio positivo y card-product con estilos omitidos, pues el dueño ya carga dependencias. El template normal usa namespace carousel y quick-add false; accesorios usa accessory-carousel y true. Conservar ambos endpoints: lemoon-featured-products.js usa sus respuestas y data-next-page.
+
+```liquid
+{% render 'lemoon-carousel-results', products: collection.products, next_url: paginate.next.url, section_id: 'accessory-carousel', show_quick_add: true %}
+```
+
+[lemoon-dawn-slider-controls](../../../snippets/lemoon-dawn-slider-controls.liquid) recibe `total` y `class` opcional; lo usan collection-list, featured-blog y multicolumn dentro de slider-component. Cada dueño conserva condiciones de visibilidad/conteos y carga global.js/component-slider.css. Los nombres previous/next y las clases slider-counter son hooks del controlador Dawn; no intercambiarlo con lemoon-carousel-controls, que utiliza data-lemoon-carousel-* y otro controlador.
+
+```liquid
+{% render 'lemoon-dawn-slider-controls', total: section.blocks.size, class: 'large-up-hide' %}
+```
+
+[consumer-contract.test.js](../../../tests/unit/consumer-contract.test.js) y [consumer-contract.spec.js](../../../tests/e2e/consumer-contract.spec.js) comparan referencias previas de los consumidores y ejercitan estados de precio, impuestos, ordenación y slider en fixtures locales. El límite card-product de las respuestas de carrusel se modela para comprobar parámetros; esas pruebas no acreditan quick-add real, precios/moneda efectivos, Section Rendering de Shopify ni procesamiento de carrito.

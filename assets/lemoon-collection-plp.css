@@ -54,9 +54,12 @@
   min-width: 15rem;
   min-height: 4.4rem;
   padding: 0 3.4rem 0 0;
-  border: 0;
   box-shadow: none;
   font-size: 1.4rem;
+}
+
+.lemoon-plp-sort__form .select__select:not(.lemoon-ui-control) {
+  border: 0;
 }
 
 .lemoon-plp-sort__form .select::before,
