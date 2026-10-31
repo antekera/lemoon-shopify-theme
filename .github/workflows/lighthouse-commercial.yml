@@ -1,0 +1,41 @@
+name: Commercial Lighthouse audit
+on:
+  workflow_dispatch:
+    inputs:
+      lighthouse_harness_sha:
+        description: Explicitly reviewed 40-character harness commit SHA
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  audit:
+    name: Published storefront performance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    concurrency:
+      group: shopify-lighthouse-commercial
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Validate immutable harness revision
+        env:
+          HARNESS_SHA: ${{ inputs.lighthouse_harness_sha }}
+        run: |
+          [[ "$HARNESS_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo 'A reviewed immutable harness SHA is required'; exit 1; }
+      - name: Check out reviewed harness
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.lighthouse_harness_sha }}
+          path: .lighthouse-trusted
+          persist-credentials: false
+      - name: Audit current published store with real apps and tracking
+        uses: ./.lighthouse-trusted/.github/actions/lighthouse
+        with:
+          mode: commercial
+        env:
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_STOREFRONT_ORIGIN: https://lemoon.cl
+          SHOPIFY_STORE_PASSWORD: ${{ secrets.SHOPIFY_STORE_PASSWORD }}
+          SHOPIFY_PRODUCT_HANDLE: lemoon-dama
+          SHOPIFY_COLLECTION_HANDLE: opticos

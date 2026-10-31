@@ -1,0 +1,15 @@
+{
+  "name": "lemoon-lighthouse-harness",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node --test test/*.test.cjs"
+  },
+  "dependencies": {
+    "@lhci/cli": "0.13.0",
+    "@shopify/cli": "4.8.5",
+    "playwright": "1.63.0",
+    "pngjs": "7.0.0",
+    "puppeteer": "25.16.0"
+  }
+}
