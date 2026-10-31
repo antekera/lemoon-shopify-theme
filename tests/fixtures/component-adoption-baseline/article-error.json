@@ -1,0 +1,563 @@
+{
+  "tag": "div",
+  "attrs": {
+    "id": "comments",
+    "class": "page-width page-width--narrow"
+  },
+  "children": [
+    {
+      "tag": "form",
+      "attrs": {
+        "action": "/blogs/journal/fixture/comments#comment_form",
+        "data-shopify-form-fixture": "",
+        "id": "article-42-comment-form",
+        "method": "post"
+      },
+      "children": [
+        {
+          "tag": "input",
+          "attrs": {
+            "name": "form_type",
+            "type": "hidden",
+            "value": "new_comment"
+          },
+          "children": []
+        },
+        {
+          "tag": "input",
+          "attrs": {
+            "name": "utf8",
+            "type": "hidden",
+            "value": "✓"
+          },
+          "children": []
+        },
+        {
+          "tag": "h2",
+          "attrs": {},
+          "children": [
+            "Deja un comentario"
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "role": "alert",
+            "class": "form__message"
+          },
+          "children": [
+            {
+              "tag": "h3",
+              "attrs": {
+                "autofocus": "",
+                "tabindex": "-1",
+                "class": "caption-large form-status text-body"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "svg-wrapper"
+                  },
+                  "children": [
+                    {
+                      "tag": "svg",
+                      "attrs": {
+                        "viewBox": "0 0 13 13",
+                        "class": "icon icon-error"
+                      },
+                      "children": [
+                        {
+                          "tag": "circle",
+                          "attrs": {
+                            "cx": "6.5",
+                            "cy": "6.5",
+                            "r": "5.5",
+                            "stroke": "#fff",
+                            "stroke-width": "2"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "circle",
+                          "attrs": {
+                            "cx": "6.5",
+                            "cy": "6.5",
+                            "fill": "#EB001B",
+                            "r": "5.5",
+                            "stroke": "#EB001B",
+                            "stroke-width": ".7"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "path",
+                          "attrs": {
+                            "d": "m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656",
+                            "fill": "#fff"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "path",
+                          "attrs": {
+                            "d": "M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z",
+                            "fill": "#fff",
+                            "stroke": "#EB001B",
+                            "stroke-width": ".7"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "Por favor, ajusta lo siguiente:"
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "ul",
+          "attrs": {
+            "class": "caption-large form-status-list"
+          },
+          "children": [
+            {
+              "tag": "li",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "a",
+                  "attrs": {
+                    "href": "#CommentForm-component-fixture-author",
+                    "class": "link"
+                  },
+                  "children": [
+                    "revisa el nombre"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "li",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "a",
+                  "attrs": {
+                    "href": "#CommentForm-component-fixture-email",
+                    "class": "link"
+                  },
+                  "children": [
+                    "correorevisa el correo"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "li",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "a",
+                  "attrs": {
+                    "href": "#CommentForm-component-fixture-body",
+                    "class": "link"
+                  },
+                  "children": [
+                    "revisa el mensaje"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "article-template__comments-fields"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "article-template__comment-fields"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "field field--with-error"
+                  },
+                  "children": [
+                    {
+                      "tag": "input",
+                      "attrs": {
+                        "aria-describedby": "CommentForm-component-fixture-author-error",
+                        "aria-invalid": "true",
+                        "aria-required": "true",
+                        "autocomplete": "name",
+                        "id": "CommentForm-component-fixture-author",
+                        "name": "comment[author]",
+                        "placeholder": "Nombre",
+                        "required": "",
+                        "type": "text",
+                        "value": "Nombre <&\"",
+                        "class": "field__input"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "label",
+                      "attrs": {
+                        "for": "CommentForm-component-fixture-author",
+                        "class": "field__label"
+                      },
+                      "children": [
+                        "Nombre",
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "aria-hidden": "true"
+                          },
+                          "children": [
+                            "*"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "small",
+                      "attrs": {
+                        "id": "CommentForm-component-fixture-author-error"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "form__message"
+                          },
+                          "children": [
+                            {
+                              "tag": "span",
+                              "attrs": {
+                                "class": "svg-wrapper"
+                              },
+                              "children": [
+                                {
+                                  "tag": "svg",
+                                  "attrs": {
+                                    "viewBox": "0 0 13 13",
+                                    "class": "icon icon-error"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "circle",
+                                      "attrs": {
+                                        "cx": "6.5",
+                                        "cy": "6.5",
+                                        "r": "5.5",
+                                        "stroke": "#fff",
+                                        "stroke-width": "2"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "circle",
+                                      "attrs": {
+                                        "cx": "6.5",
+                                        "cy": "6.5",
+                                        "fill": "#EB001B",
+                                        "r": "5.5",
+                                        "stroke": "#EB001B",
+                                        "stroke-width": ".7"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "path",
+                                      "attrs": {
+                                        "d": "m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656",
+                                        "fill": "#fff"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "path",
+                                      "attrs": {
+                                        "d": "M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z",
+                                        "fill": "#fff",
+                                        "stroke": "#EB001B",
+                                        "stroke-width": ".7"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "Nombre revisa el nombre."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "field field--with-error"
+                  },
+                  "children": [
+                    {
+                      "tag": "input",
+                      "attrs": {
+                        "aria-describedby": "CommentForm-component-fixture-email-error",
+                        "aria-invalid": "true",
+                        "aria-required": "true",
+                        "autocapitalize": "off",
+                        "autocomplete": "email",
+                        "autocorrect": "off",
+                        "id": "CommentForm-component-fixture-email",
+                        "name": "comment[email]",
+                        "placeholder": "Correo electrónico",
+                        "required": "",
+                        "type": "email",
+                        "value": "test@example.test",
+                        "class": "field__input"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "label",
+                      "attrs": {
+                        "for": "CommentForm-component-fixture-email",
+                        "class": "field__label"
+                      },
+                      "children": [
+                        "Correo electrónico",
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "aria-hidden": "true"
+                          },
+                          "children": [
+                            "*"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "small",
+                      "attrs": {
+                        "id": "CommentForm-component-fixture-email-error"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "form__message"
+                          },
+                          "children": [
+                            {
+                              "tag": "span",
+                              "attrs": {
+                                "class": "svg-wrapper"
+                              },
+                              "children": [
+                                {
+                                  "tag": "svg",
+                                  "attrs": {
+                                    "viewBox": "0 0 13 13",
+                                    "class": "icon icon-error"
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "circle",
+                                      "attrs": {
+                                        "cx": "6.5",
+                                        "cy": "6.5",
+                                        "r": "5.5",
+                                        "stroke": "#fff",
+                                        "stroke-width": "2"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "circle",
+                                      "attrs": {
+                                        "cx": "6.5",
+                                        "cy": "6.5",
+                                        "fill": "#EB001B",
+                                        "r": "5.5",
+                                        "stroke": "#EB001B",
+                                        "stroke-width": ".7"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "path",
+                                      "attrs": {
+                                        "d": "m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656",
+                                        "fill": "#fff"
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "path",
+                                      "attrs": {
+                                        "d": "M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z",
+                                        "fill": "#fff",
+                                        "stroke": "#EB001B",
+                                        "stroke-width": ".7"
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "Correo electrónico revisa el correo."
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "field field--with-error"
+              },
+              "children": [
+                {
+                  "tag": "textarea",
+                  "attrs": {
+                    "aria-describedby": "CommentForm-component-fixture-body-error",
+                    "aria-invalid": "true",
+                    "aria-required": "true",
+                    "id": "CommentForm-component-fixture-body",
+                    "name": "comment[body]",
+                    "placeholder": "Comentario",
+                    "required": "",
+                    "rows": "5",
+                    "class": "field__input text-area"
+                  },
+                  "children": [
+                    "Texto <&\""
+                  ]
+                },
+                {
+                  "tag": "label",
+                  "attrs": {
+                    "for": "CommentForm-component-fixture-body",
+                    "class": "field__label form__label"
+                  },
+                  "children": [
+                    "Comentario",
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "aria-hidden": "true"
+                      },
+                      "children": [
+                        "*"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "small",
+              "attrs": {
+                "id": "CommentForm-component-fixture-body-error"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "form__message"
+                  },
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "class": "svg-wrapper"
+                      },
+                      "children": [
+                        {
+                          "tag": "svg",
+                          "attrs": {
+                            "viewBox": "0 0 13 13",
+                            "class": "icon icon-error"
+                          },
+                          "children": [
+                            {
+                              "tag": "circle",
+                              "attrs": {
+                                "cx": "6.5",
+                                "cy": "6.5",
+                                "r": "5.5",
+                                "stroke": "#fff",
+                                "stroke-width": "2"
+                              },
+                              "children": []
+                            },
+                            {
+                              "tag": "circle",
+                              "attrs": {
+                                "cx": "6.5",
+                                "cy": "6.5",
+                                "fill": "#EB001B",
+                                "r": "5.5",
+                                "stroke": "#EB001B",
+                                "stroke-width": ".7"
+                              },
+                              "children": []
+                            },
+                            {
+                              "tag": "path",
+                              "attrs": {
+                                "d": "m5.874 3.528.1 4.044h1.053l.1-4.044zm.627 6.133c.38 0 .68-.288.68-.656s-.3-.656-.68-.656-.681.288-.681.656.3.656.68.656",
+                                "fill": "#fff"
+                              },
+                              "children": []
+                            },
+                            {
+                              "tag": "path",
+                              "attrs": {
+                                "d": "M5.874 3.178h-.359l.01.359.1 4.044.008.341h1.736l.008-.341.1-4.044.01-.359H5.873Zm.627 6.833c.56 0 1.03-.432 1.03-1.006s-.47-1.006-1.03-1.006-1.031.432-1.031 1.006.47 1.006 1.03 1.006Z",
+                                "fill": "#fff",
+                                "stroke": "#EB001B",
+                                "stroke-width": ".7"
+                              },
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "Comentario revisa el mensaje."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "input",
+          "attrs": {
+            "type": "submit",
+            "value": "Publicar comentario",
+            "class": "button"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

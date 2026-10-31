@@ -7,6 +7,7 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 - Check the current branch and working tree. Never commit or push directly to `main`; do not discard or overwrite existing local changes.
 - Read the applicable project rules in `.claude/rules/`: `liquid-conventions.md`, `section-schema.md`, `git-conventions.md`, and `theme-workflow.md`. These are shared repository conventions; preserve the Claude workflows themselves.
 - Before creating or changing layouts, components, or styling, read root `DESIGN.md` for the visual contract, `docs/design/brand-guidelines.md` for brand usage, and the relevant design plan or section inventory. Keep `DESIGN.md` as the single source of visual decisions; update it when an authorized design change alters that contract.
+- Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
 - For brand identity, image selection, channel assets, or brand-content reviews, follow [brand guidance](docs/agents/brand-guidance.md).
 - Keep edits scoped to the requested work. Do not modify `node_modules/` or Shopify-generated output.
 

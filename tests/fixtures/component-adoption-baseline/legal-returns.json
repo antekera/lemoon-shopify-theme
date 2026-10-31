@@ -1,0 +1,149 @@
+{
+  "tag": "div",
+  "attrs": {
+    "class": "lemoon-legal-page page-width"
+  },
+  "children": [
+    {
+      "tag": "header",
+      "attrs": {
+        "class": "lemoon-legal-page__header"
+      },
+      "children": [
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "lemoon-legal-page__eyebrow"
+          },
+          "children": [
+            "Lemoon · Información"
+          ]
+        },
+        {
+          "tag": "h1",
+          "attrs": {},
+          "children": [
+            "Legal <&\""
+          ]
+        },
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "lemoon-legal-page__intro"
+          },
+          "children": [
+            "Condiciones y pasos para solicitar una devolución."
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "attrs": {
+        "class": "lemoon-legal-page__layout"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {},
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "lemoon-legal-page__content rte"
+              },
+              "children": [
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "CMS",
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "original"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "lemoon-legal-page__help"
+              },
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "¿Necesitas ayuda?"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "Si tienes una consulta sobre estas condiciones, escríbenos."
+                  ]
+                },
+                {
+                  "tag": "a",
+                  "attrs": {
+                    "href": "/es/pages/contact"
+                  },
+                  "children": [
+                    "Contactar a Lemoon"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "nav",
+          "attrs": {
+            "aria-label": "Información para tu compra",
+            "class": "lemoon-legal-page__navigation"
+          },
+          "children": [
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "lemoon-legal-page__navigation-title"
+              },
+              "children": [
+                "Información para tu compra"
+              ]
+            },
+            {
+              "tag": "ul",
+              "attrs": {
+                "role": "list"
+              },
+              "children": [
+                {
+                  "tag": "li",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "a",
+                      "attrs": {
+                        "href": "/policies/privacy-policy"
+                      },
+                      "children": [
+                        "Privacidad"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

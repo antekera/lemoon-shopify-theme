@@ -51,3 +51,21 @@
 .lemoon-design-system__trust ul { display: grid; gap: 1.2rem; margin: 0; padding: 0; color: var(--lemoon-text-secondary); font-size: 1.6rem; list-style: none; }
 .lemoon-design-system__trust li::before { color: var(--lemoon-action-accent-hover); content: '✓'; margin-right: .8rem; }
 @media screen and (max-width: 749px) { .lemoon-design-system { padding: 4rem 0 8rem; } .lemoon-design-system__intro { padding: 3.2rem 0 4rem; } .lemoon-design-system__intro h1 { font-size: 4rem; } .lemoon-design-system__swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lemoon-design-system__actions, .lemoon-design-system__fields, .lemoon-design-system__commerce { grid-template-columns: 1fr; } .lemoon-design-system__display { font-size: 4rem; } .lemoon-design-system__h1 { font-size: 3.2rem; } .lemoon-design-system__section { padding: 4rem 0; } .lemoon-design-system__trust { padding: 2.4rem; } }
+
+/* Shared UI demonstrations remain inert; local layout owns wrapping/spacing. */
+.lemoon-design-system__actions > div,
+.lemoon-design-system__fields > div {
+  min-width: 0;
+}
+.lemoon-design-system__actions .button {
+  gap: .8rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.lemoon-design-system__actions .lemoon-icon {
+  flex-shrink: 0;
+}
+.lemoon-design-system__fields > div > label {
+  display: block;
+  margin-bottom: var(--lemoon-space-2);
+}

@@ -1,0 +1,136 @@
+{
+  "tag": "section",
+  "attrs": {
+    "class": "lemoon-faq"
+  },
+  "children": [
+    {
+      "tag": "div",
+      "attrs": {
+        "class": "page-width"
+      },
+      "children": [
+        {
+          "tag": "header",
+          "attrs": {
+            "class": "lemoon-faq__header"
+          },
+          "children": [
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "lemoon-faq__eyebrow"
+              },
+              "children": [
+                "LEMOON · AYUDA"
+              ]
+            },
+            {
+              "tag": "h1",
+              "attrs": {},
+              "children": [
+                "Preguntas <&\""
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "lemoon-faq__intro"
+              },
+              "children": [
+                "Respuestas simples para elegir, comprar y cuidar tus lentes."
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "lemoon-faq__list"
+          },
+          "children": [
+            {
+              "tag": "details",
+              "attrs": {
+                "data-shopify-editor-block": "q1",
+                "open": ""
+              },
+              "children": [
+                {
+                  "tag": "summary",
+                  "attrs": {},
+                  "children": [
+                    "Pregunta 1 <&\""
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "lemoon-faq__answer rte"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "Respuesta 1",
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "#destination"
+                          },
+                          "children": [
+                            "Enlace"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "details",
+              "attrs": {
+                "data-shopify-editor-block": "q2"
+              },
+              "children": [
+                {
+                  "tag": "summary",
+                  "attrs": {},
+                  "children": [
+                    "Pregunta 2 <&\""
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "lemoon-faq__answer rte"
+                  },
+                  "children": [
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "Respuesta 2",
+                        {
+                          "tag": "a",
+                          "attrs": {
+                            "href": "#destination"
+                          },
+                          "children": [
+                            "Enlace"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

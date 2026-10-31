@@ -293,6 +293,21 @@
     }
   },
   "sections": {
+    "lemoon_ui_gallery": {
+      "tertiary": "Tertiary",
+      "synthetic_note": "Interface examples with sample data, without submissions or commercial operations.",
+      "collection_action": "View collection",
+      "guide_action": "Style guide",
+      "sold_out_action": "Sold out",
+      "shape_label": "Frame shape",
+      "choose_shape": "Choose a shape",
+      "rectangular": "Rectangular",
+      "round": "Round",
+      "loading": "Loading",
+      "readonly": "Read only",
+      "error": "Check this field.",
+      "messages": "Messages and questions"
+    },
     "main_page": {
       "empty": "This page is being prepared."
     },

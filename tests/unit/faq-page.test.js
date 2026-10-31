@@ -1,16 +1,18 @@
 import { readFileSync } from 'node:fs';
 import { test, expect } from 'vitest';
+import { renderComponentSection as render } from '../helpers/component-library-renderer.mjs';
 const file = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const text = file(path); return JSON.parse(text.slice(text.indexOf('{'))); };
-test('FAQ uses native accessible disclosure groups without custom keyboard code', () => {
-  const section = file('sections/lemoon-faq-page.liquid');
-  expect(section.match(/<h1\b/g)).toHaveLength(1);
-  expect(section).toContain('<details');
-  expect(section).toContain('<summary');
-  expect(section).not.toMatch(/role="button"|aria-expanded=|<script/);
-  expect(section).toContain(':focus-visible');
-  expect(section).toContain('FaqGroup-{{ section.id }}-{{ group }}');
-  expect(section).toContain('FaqQuestion-{{ section.id }}-{{ group }}-{{ question }}');
+test('FAQ renders eleven native disclosure groups with unique anchors and no custom keyboard roles', () => {
+  const html = render('lemoon-faq-page');
+  expect(html.match(/<h1\b/g)).toHaveLength(1);
+  expect(html.match(/<details\b/g)).toHaveLength(11);
+  expect(html.match(/<summary\b/g)).toHaveLength(11);
+  expect(html).not.toMatch(/role="button"|aria-expanded=|<script|id="Details-/);
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  expect(new Set(ids).size).toBe(ids.length);
+  for (const group of ['choosing', 'lenses', 'ordering', 'policies']) expect(html).toContain(`href="#FaqGroup-component-fixture-${group}"`);
+  expect(html).toContain(':focus-visible');
 });
 test('FAQ preserves merchant questions while the new section is the active page', () => {
   const template = json('templates/page.preguntas-frecuentes.json');
@@ -54,7 +56,6 @@ test('FAQ has a valid localized padded editor schema and section-scoped styles',
 test('editor questions are escaped, answers use richtext, and complete custom blocks replace a group fallback', () => {
   const source = file('sections/lemoon-faq-page.liquid');
   expect(source).toContain('block.shopify_attributes');
-  expect(source).toContain('block.settings.question | escape');
   expect(source).toContain('block.settings.link | escape');
   expect(source).toContain('block.settings.link_label | escape');
   expect(source).toContain('if custom_question_count == 0');
@@ -70,4 +71,24 @@ test('editor questions are escaped, answers use richtext, and complete custom bl
       if (setting.default?.startsWith('t:')) expect(copy[setting.default.split('.').at(-1)]).toBeTruthy();
     }
   }
+});
+
+test('complete custom FAQ blocks replace one group, preserve richtext/editor attrs and escape question/links', () => {
+  const block = { id: 'custom-1', type: 'question', shopify_attributes: 'data-shopify-editor-block="fixture"', settings: { group: 'choosing', question: 'Question <&"', answer: '<p>Rich <strong>answer</strong></p>', link: '/help?q="&', link_label: 'Help <&' } };
+  const html = render('lemoon-faq-page', { blocks: [block] });
+  expect(html.match(/<details\b/g)).toHaveLength(9);
+  expect(html).not.toContain('id="FaqQuestion-component-fixture-choosing-');
+  expect(html).toMatch(/<details[^>]*id="FaqBlock-component-fixture-custom-1"[^>]*data-shopify-editor-block="fixture"/);
+  expect(html).toContain('Question &lt;&amp;&#34;');
+  expect(html).toContain('<p>Rich <strong>answer</strong></p>');
+  expect(html).toContain('href="/help?q=&#34;&amp;"');
+  expect(html).toContain('Help &lt;&amp;');
+  for (const settings of [{ question: '', answer: '<p>Answer</p>' }, { question: 'Question', answer: '' }]) {
+    const fallback = render('lemoon-faq-page', { blocks: [{ ...block, settings: { group: 'choosing', ...settings } }] });
+    expect(fallback.match(/<details\b/g)).toHaveLength(11);
+    expect(fallback).not.toContain('FaqBlock-component-fixture-custom-1');
+  }
+  const two = html + render('lemoon-faq-page', { id: 'second', blocks: [block] });
+  const ids = [...two.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  expect(new Set(ids).size).toBe(ids.length);
 });

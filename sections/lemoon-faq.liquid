@@ -4,15 +4,14 @@
   <div class="page-width">
     <header class="lemoon-faq__header">
       <p class="lemoon-faq__eyebrow">LEMOON · AYUDA</p>
-      <h1>{{ page.title | default: 'Preguntas frecuentes' | escape }}</h1>
+      {%- assign faq_title = page.title | default: 'Preguntas frecuentes' -%}
+      {% render 'lemoon-ui-heading', text: faq_title, level: 1 %}
       <p class="lemoon-faq__intro">Respuestas simples para elegir, comprar y cuidar tus lentes.</p>
     </header>
     <div class="lemoon-faq__list">
       {%- for block in section.blocks -%}
-        <details {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}>
-          <summary>{{ block.settings.question | escape }}</summary>
-          <div class="lemoon-faq__answer rte">{{ block.settings.answer }}</div>
-        </details>
+        {%- capture faq_answer_html -%}{{ block.settings.answer }}{%- endcapture -%}
+        {% render 'lemoon-ui-faq-item', question: block.settings.question, answer_html: faq_answer_html, answer_class: 'lemoon-faq__answer rte', open: forloop.first, editor_attributes: block.shopify_attributes %}
       {%- endfor -%}
     </div>
   </div>

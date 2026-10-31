@@ -7,6 +7,8 @@ description: Create a reusable Shopify Liquid snippet with explicit inputs, sema
 
 Use this when the user asks to create a reusable Liquid snippet or partial.
 
+Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
+
 1. Confirm the snippet's purpose and name; use kebab-case under `snippets/`.
 2. Read 1–2 similar snippets and `.claude/rules/liquid-conventions.md`.
 3. Implement semantic markup and keep the snippet focused on one reusable responsibility. Add a comment at the top listing each accepted parameter and its type.

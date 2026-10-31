@@ -45,7 +45,8 @@
 {%- endstyle -%}
 <div class="lemoon-faq-page page-width">
   <header class="lemoon-faq-page__header">
-    <h1 class="lemoon-faq-page__title">{{ 'sections.lemoon_faq_page.title' | t }}</h1>
+    {%- assign ui_heading_text = 'sections.lemoon_faq_page.title' | t -%}
+    {% render 'lemoon-ui-heading', text: ui_heading_text, level: 1, class: 'lemoon-faq-page__title' %}
     <p class="lemoon-faq-page__intro">{{ 'sections.lemoon_faq_page.intro' | t }}</p>
   </header>
   <div class="lemoon-faq-page__layout">
@@ -74,7 +75,9 @@
           endif
         -%}
         <section class="lemoon-faq-page__group" id="FaqGroup-{{ section.id }}-{{ group }}" aria-labelledby="FaqTitle-{{ section.id }}-{{ group }}">
-          <h2 id="FaqTitle-{{ section.id }}-{{ group }}">{{ group_title_key | t }}</h2>
+          {%- assign ui_heading_text = group_title_key | t -%}
+          {%- capture ui_heading_id -%}FaqTitle-{{ section.id }}-{{ group }}{%- endcapture -%}
+          {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
           {%- if custom_question_count == 0 -%}
           {%- for question in (1..question_count) -%}
             {%- liquid
@@ -119,41 +122,38 @@
                   endcase
               endcase
             -%}
-            <details class="lemoon-faq-page__question" id="FaqQuestion-{{ section.id }}-{{ group }}-{{ question }}">
-              <summary>
-                <h3>{{ question_title_key | t }}</h3>
-                <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14"/><path class="lemoon-faq-page__plus-vertical" d="M10 3v14"/></svg>
-              </summary>
-              <div class="lemoon-faq-page__answer">
-                <p>{{ question_answer_key | t }}</p>
-                <a href="{{ question_url }}">{{ question_link_key | t }}</a>
-              </div>
-            </details>
+            {%- capture faq_id -%}FaqQuestion-{{ section.id }}-{{ group }}-{{ question }}{%- endcapture -%}
+            {%- assign faq_question = question_title_key | t -%}
+            {%- capture faq_answer_html -%}
+              <p>{{ question_answer_key | t }}</p>
+              <a href="{{ question_url | escape }}">{{ question_link_key | t }}</a>
+            {%- endcapture -%}
+            {% render 'lemoon-ui-faq-item', id: faq_id, question: faq_question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer', indicator: 'page-svg' %}
           {%- endfor -%}
           {%- else -%}
             {%- for block in section.blocks -%}
               {%- if block.settings.group == group and block.settings.question != blank and block.settings.answer != blank -%}
-                <details class="lemoon-faq-page__question" id="FaqBlock-{{ section.id }}-{{ block.id }}" {{ block.shopify_attributes }}>
-                  <summary>
-                    <h3>{{ block.settings.question | escape }}</h3>
-                    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 10h14"/><path class="lemoon-faq-page__plus-vertical" d="M10 3v14"/></svg>
-                  </summary>
-                  <div class="lemoon-faq-page__answer rte">
-                    {{ block.settings.answer }}
-                    {%- if block.settings.link != blank and block.settings.link_label != blank -%}
-                      <a href="{{ block.settings.link | escape }}">{{ block.settings.link_label | escape }}</a>
-                    {%- endif -%}
-                  </div>
-                </details>
+                {%- capture faq_id -%}FaqBlock-{{ section.id }}-{{ block.id }}{%- endcapture -%}
+                {%- capture faq_answer_html -%}
+                  {{ block.settings.answer }}
+                  {%- if block.settings.link != blank and block.settings.link_label != blank -%}
+                    <a href="{{ block.settings.link | escape }}">{{ block.settings.link_label | escape }}</a>
+                  {%- endif -%}
+                {%- endcapture -%}
+                {% render 'lemoon-ui-faq-item', id: faq_id, question: block.settings.question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer rte', editor_attributes: block.shopify_attributes, indicator: 'page-svg' %}
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
         </section>
       {%- endfor -%}
       <aside class="lemoon-faq-page__help" aria-labelledby="FaqHelp-{{ section.id }}">
-        <h2 id="FaqHelp-{{ section.id }}">{{ 'sections.lemoon_faq_page.help_title' | t }}</h2>
+        {%- assign ui_heading_text = 'sections.lemoon_faq_page.help_title' | t -%}
+        {%- capture ui_heading_id -%}FaqHelp-{{ section.id }}{%- endcapture -%}
+        {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
         <p>{{ 'sections.lemoon_faq_page.help_body' | t }}</p>
-        <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'sections.lemoon_faq_page.contact' | t }}</a>
+        {%- assign faq_contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/' -%}
+        {%- assign faq_contact_label = 'sections.lemoon_faq_page.contact' | t -%}
+        {% render 'lemoon-ui-action', element: 'a', href: faq_contact_url, label: faq_contact_label, style_family: 'local' %}
       </aside>
     </div>
   </div>

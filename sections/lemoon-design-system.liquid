@@ -4,7 +4,7 @@
   <div class="page-width">
     <header class="lemoon-design-system__intro">
       <p class="lemoon-design-system__eyebrow">LEMOON · FASE 1</p>
-      <h1>Sistema de diseño</h1>
+      {% render 'lemoon-ui-heading', text: 'Sistema de diseño', level: 1 %}
       <p>La referencia viva de los tokens y componentes que componen la experiencia Lemoon.</p>
     </header>
 
@@ -13,7 +13,7 @@
     </nav>
 
     <section id="color" class="lemoon-design-system__section" aria-labelledby="color-title">
-      <div class="lemoon-design-system__section-heading"><p>01</p><h2 id="color-title">Color</h2></div>
+      <div class="lemoon-design-system__section-heading"><p>01</p>{% render 'lemoon-ui-heading', text: 'Color', level: 2, id: 'color-title' %}</div>
       <div class="lemoon-design-system__swatches">
         <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-surface-inverse)"></span><strong>Navy</strong><small>#0B1F3A · Brand</small></article>
         <article class="lemoon-design-system__swatch"><span style="--lemoon-swatch: var(--lemoon-action-accent)"></span><strong>Lemon</strong><small>#F7E600 · Accent</small></article>
@@ -24,7 +24,7 @@
     </section>
 
     <section id="tipo" class="lemoon-design-system__section" aria-labelledby="type-title">
-      <div class="lemoon-design-system__section-heading"><p>02</p><h2 id="type-title">Tipografía</h2></div>
+      <div class="lemoon-design-system__section-heading"><p>02</p>{% render 'lemoon-ui-heading', text: 'Tipografía', level: 2, id: 'type-title' %}</div>
       <div class="lemoon-design-system__type-list">
         <div><span>Display · Urbanist 300 · 56/64</span><p class="lemoon-design-system__display">Lentes que te definen.</p></div>
         <div><span>Heading 1 · Urbanist 600 · 40/48</span><p class="lemoon-design-system__h1">Una mirada, muchas formas.</p></div>
@@ -33,28 +33,70 @@
       </div>
     </section>
 
+    <p>{{ 'sections.lemoon_ui_gallery.synthetic_note' | t | escape }}</p>
+
     <section id="acciones" class="lemoon-design-system__section" aria-labelledby="actions-title">
-      <div class="lemoon-design-system__section-heading"><p>03</p><h2 id="actions-title">Botones y estados</h2></div>
+      <div class="lemoon-design-system__section-heading"><p>03</p>{% render 'lemoon-ui-heading', text: 'Botones y estados', level: 2, id: 'actions-title' %}</div>
       <div class="lemoon-design-system__actions">
-        <div><span>Primary</span><button class="button" type="button">Ver colección <span aria-hidden="true">→</span></button></div>
-        <div><span>Secondary</span><button class="button button--secondary" type="button">Guía de estilo</button></div>
+        <div><span>Primary</span>{%- assign collection_label = 'sections.lemoon_ui_gallery.collection_action' | t -%}{% render 'lemoon-ui-action', label: collection_label, icon: 'arrow-right', icon_position: 'after' %}</div>
+        <div><span>Secondary</span>{%- assign guide_label = 'sections.lemoon_ui_gallery.guide_action' | t -%}{% render 'lemoon-ui-action', label: guide_label, variant: 'secondary' %}</div>
         <div><span>Accent</span><button class="button lemoon-design-system__button-accent" type="button">Configurar lentes <span aria-hidden="true">→</span></button></div>
-        <div><span>Disabled</span><button class="button" type="button" disabled>Agotado</button></div>
+        <div><span>Disabled</span>{%- assign sold_out_label = 'sections.lemoon_ui_gallery.sold_out_action' | t -%}{% render 'lemoon-ui-action', label: sold_out_label, disabled: true %}</div>
+        <div><span>{{ 'sections.lemoon_ui_gallery.tertiary' | t | escape }}</span>{% render 'lemoon-ui-action', label: guide_label, variant: 'tertiary' %}</div>
+        <div><span>{{ 'sections.lemoon_ui_gallery.loading' | t | escape }}</span>{%- assign loading_label = 'sections.lemoon_ui_gallery.loading' | t -%}{% render 'lemoon-ui-action', label: loading_label, loading: true %}</div>
       </div>
     </section>
 
     <section id="formularios" class="lemoon-design-system__section" aria-labelledby="fields-title">
-      <div class="lemoon-design-system__section-heading"><p>04</p><h2 id="fields-title">Campos y selección</h2></div>
+      <div class="lemoon-design-system__section-heading"><p>04</p>{% render 'lemoon-ui-heading', text: 'Campos y selección', level: 2, id: 'fields-title' %}</div>
       <div class="lemoon-design-system__fields">
-        <div class="field"><input class="field__input" id="ds-email" type="email" placeholder=" " value="hola@lemoon.cl"><label class="field__label" for="ds-email">Correo electrónico</label></div>
-        <div class="select"><select class="select__select" aria-label="Forma de armazón"><option>Elige una forma</option><option>Rectangular</option><option>Redondo</option></select><span class="svg-wrapper">⌄</span></div>
+        {%- liquid
+          assign ds_email_id = 'DsEmail-' | append: section.id
+          assign ds_select_id = 'DsShape-' | append: section.id
+          assign ds_body_id = 'DsBody-' | append: section.id
+          assign ds_error_id = 'DsError-' | append: section.id
+          assign ds_invalid_id = 'DsInvalid-' | append: section.id
+          assign ds_disabled_id = 'DsDisabled-' | append: section.id
+          assign ds_readonly_id = 'DsReadonly-' | append: section.id
+          assign ds_readonly_hint_id = ds_readonly_id | append: '-hint'
+          assign ds_email_label = 'sections.lemoon_contact_page.email' | t
+          assign ds_body_label = 'sections.lemoon_contact_page.message' | t
+          assign ds_error = 'sections.lemoon_ui_gallery.error' | t
+          assign ds_readonly = 'sections.lemoon_ui_gallery.readonly' | t
+        -%}
+        <div>{% render 'lemoon-ui-field', id: ds_email_id, type: 'email', label: ds_email_label, placeholder: ' ', value: 'hola@lemoon.cl', spellcheck: false %}</div>
+        <div>
+          <label for="{{ ds_select_id }}">{{ 'sections.lemoon_ui_gallery.shape_label' | t | escape }}</label>
+          {%- capture ds_options_html -%}
+            <option value="">{{ 'sections.lemoon_ui_gallery.choose_shape' | t | escape }}</option>
+            <option value="rectangular">{{ 'sections.lemoon_ui_gallery.rectangular' | t | escape }}</option>
+            <option value="round">{{ 'sections.lemoon_ui_gallery.round' | t | escape }}</option>
+          {%- endcapture -%}
+          {% render 'lemoon-ui-select', id: ds_select_id, name: 'shape', options_html: ds_options_html %}
+        </div>
+        <div>{% render 'lemoon-ui-field', kind: 'textarea', id: ds_body_id, label: ds_body_label, placeholder: ' ', rows: 6 %}</div>
+        <div>{% render 'lemoon-ui-field', id: ds_invalid_id, label: ds_email_label, type: 'email', placeholder: ' ', invalid: true, error: ds_error, error_id: ds_error_id %}</div>
+        <div>{% render 'lemoon-ui-field', id: ds_disabled_id, label: ds_email_label, type: 'email', placeholder: ' ', disabled: true %}</div>
+        <div>{% render 'lemoon-ui-field', id: ds_readonly_id, label: ds_email_label, type: 'email', placeholder: ' ', readonly: true, value: 'hola@lemoon.cl', hint: ds_readonly, hint_id: ds_readonly_hint_id %}</div>
         <label class="lemoon-design-system__choice"><input type="radio" name="design-system-choice" checked><span><strong>Opción seleccionada</strong><small>Radio 4px, contenedor 12px.</small></span></label>
       </div>
       <div class="lemoon-design-system__badges"><span class="badge">Nuevo</span><span class="badge color-scheme-2">Oferta</span><span class="lemoon-design-system__success">Disponible</span></div>
     </section>
 
+    <section class="lemoon-design-system__section">
+      {%- assign ds_messages_title = 'sections.lemoon_ui_gallery.messages' | t -%}
+      {% render 'lemoon-ui-heading', text: ds_messages_title, level: 2 %}
+      {%- assign ds_success = 'sections.lemoon_contact_page.success' | t -%}
+      {% render 'lemoon-ui-message', text: ds_success %}
+      {% render 'lemoon-ui-message', text: ds_error %}
+      {%- assign ds_faq_question = 'sections.lemoon_faq_page.choosing.question_1.question' | t -%}
+      {%- capture ds_faq_answer_html -%}<p>{{ 'sections.lemoon_faq_page.choosing.question_1.answer' | t }}</p>{%- endcapture -%}
+      {%- assign ds_faq_id = 'DsFaq-' | append: section.id -%}
+      {% render 'lemoon-ui-faq-item', id: ds_faq_id, question: ds_faq_question, question_level: 3, answer_html: ds_faq_answer_html, open: false %}
+    </section>
+
     <section id="commerce" class="lemoon-design-system__section" aria-labelledby="commerce-title">
-      <div class="lemoon-design-system__section-heading"><p>05</p><h2 id="commerce-title">Producto y confianza</h2></div>
+      <div class="lemoon-design-system__section-heading"><p>05</p>{% render 'lemoon-ui-heading', text: 'Producto y confianza', level: 2, id: 'commerce-title' %}</div>
       <div class="lemoon-design-system__commerce">
         <article class="lemoon-design-system__product-card">
           <div class="lemoon-design-system__product-image"><img src="{{ 'lemoon-product-fallback.png' | asset_url }}" alt="Armazón óptico azul" width="1024" height="1024"><span aria-hidden="true">♡</span><small>Probar →</small></div>

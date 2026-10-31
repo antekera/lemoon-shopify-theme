@@ -1,0 +1,196 @@
+{
+  "tag": "div",
+  "attrs": {
+    "id": "comments",
+    "class": "page-width page-width--narrow"
+  },
+  "children": [
+    {
+      "tag": "form",
+      "attrs": {
+        "action": "/blogs/journal/fixture/comments#comment_form",
+        "data-shopify-form-fixture": "",
+        "id": "article-42-comment-form",
+        "method": "post"
+      },
+      "children": [
+        {
+          "tag": "input",
+          "attrs": {
+            "name": "form_type",
+            "type": "hidden",
+            "value": "new_comment"
+          },
+          "children": []
+        },
+        {
+          "tag": "input",
+          "attrs": {
+            "name": "utf8",
+            "type": "hidden",
+            "value": "✓"
+          },
+          "children": []
+        },
+        {
+          "tag": "h2",
+          "attrs": {},
+          "children": [
+            "Deja un comentario"
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "article-template__comments-fields"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "article-template__comment-fields"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "field field--with-error"
+                  },
+                  "children": [
+                    {
+                      "tag": "input",
+                      "attrs": {
+                        "aria-required": "true",
+                        "autocomplete": "name",
+                        "id": "CommentForm-component-fixture-author",
+                        "name": "comment[author]",
+                        "placeholder": "Nombre",
+                        "required": "",
+                        "type": "text",
+                        "value": "",
+                        "class": "field__input"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "label",
+                      "attrs": {
+                        "for": "CommentForm-component-fixture-author",
+                        "class": "field__label"
+                      },
+                      "children": [
+                        "Nombre",
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "aria-hidden": "true"
+                          },
+                          "children": [
+                            "*"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "field field--with-error"
+                  },
+                  "children": [
+                    {
+                      "tag": "input",
+                      "attrs": {
+                        "aria-required": "true",
+                        "autocapitalize": "off",
+                        "autocomplete": "email",
+                        "autocorrect": "off",
+                        "id": "CommentForm-component-fixture-email",
+                        "name": "comment[email]",
+                        "placeholder": "Correo electrónico",
+                        "required": "",
+                        "type": "email",
+                        "value": "",
+                        "class": "field__input"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "label",
+                      "attrs": {
+                        "for": "CommentForm-component-fixture-email",
+                        "class": "field__label"
+                      },
+                      "children": [
+                        "Correo electrónico",
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "aria-hidden": "true"
+                          },
+                          "children": [
+                            "*"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "field field--with-error"
+              },
+              "children": [
+                {
+                  "tag": "textarea",
+                  "attrs": {
+                    "aria-required": "true",
+                    "id": "CommentForm-component-fixture-body",
+                    "name": "comment[body]",
+                    "placeholder": "Comentario",
+                    "required": "",
+                    "rows": "5",
+                    "class": "field__input text-area"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "label",
+                  "attrs": {
+                    "for": "CommentForm-component-fixture-body",
+                    "class": "field__label form__label"
+                  },
+                  "children": [
+                    "Comentario",
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "aria-hidden": "true"
+                      },
+                      "children": [
+                        "*"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "input",
+          "attrs": {
+            "type": "submit",
+            "value": "Publicar comentario",
+            "class": "button"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}
