@@ -2,6 +2,11 @@ name: CI
 
 on:
   workflow_dispatch:
+    inputs:
+      lighthouse_harness_sha:
+        description: Explicitly reviewed 40-character harness commit SHA
+        required: true
+        type: string
   push:
     branches: [main]
   pull_request:
@@ -9,6 +14,22 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
+  lighthouse-harness:
+    name: Lighthouse Harness Validation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    # Credential-free container validation also runs for draft PRs.
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build pinned Linux amd64 harness
+        run: docker build --platform linux/amd64 -t lemoon-lighthouse scripts/lighthouse
+      - name: Run harness and actual LHCI assertion tests in container
+        run: docker run --rm --init --entrypoint npm lemoon-lighthouse test
+      - name: Smoke real pinned browser, authentication and scored-page identity
+        run: docker run --rm --init --entrypoint node lemoon-lighthouse /harness/smoke.cjs
+
   workflow-tests:
     name: Python Workflow Tests
     if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
@@ -27,6 +48,14 @@ jobs:
         run: python3 -B scripts/test_codex_workflow_validator.py -v
       - name: Test CI scope regressions
         run: python3 -B scripts/test_ci_scope.py -v
+      - name: Set up pinned Node for harness tests
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+      - name: Install locked Lighthouse test tools
+        run: npm ci --prefix scripts/lighthouse --ignore-scripts
+      - name: Test Lighthouse harness regressions
+        run: npm test --prefix scripts/lighthouse
       - name: Determine Lighthouse applicability
         id: scope
         env:
@@ -82,50 +111,38 @@ jobs:
     name: Lighthouse
     needs: workflow-tests
     # Known tooling/docs-only PRs have no storefront performance result (N/A).
-    # ci.yml is covered by static workflow validation; main/manual retain full audits.
+    # Known harness tooling is covered by static tests; main/manual retain full audits.
     if: (github.event_name != 'pull_request' || github.event.pull_request.draft == false) && needs.workflow-tests.outputs.runtime_changed == 'true'
     runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
     concurrency:
-      group: shopify-lighthouse
+      group: shopify-lighthouse-lab
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Check out Lighthouse action
+        with:
+          persist-credentials: false
+      - name: Validate immutable harness revision
+        env:
+          HARNESS_SHA: ${{ github.event.pull_request.base.sha || inputs.lighthouse_harness_sha || github.sha }}
+        run: |
+          [[ "$HARNESS_SHA" =~ ^[0-9a-fA-F]{40}$ ]] || { echo 'A reviewed immutable harness SHA is required'; exit 1; }
+      - name: Check out trusted harness separately from PR theme payload
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: Shopify/lighthouse-ci-action
-          ref: 988f0eeb44ad5f298bd47150e5b9b01c27ead975 # v1
-          path: .github/actions/shopify-lighthouse
+          ref: ${{ github.event.pull_request.base.sha || inputs.lighthouse_harness_sha || github.sha }}
+          path: .lighthouse-trusted
           persist-credentials: false
-      - name: Fix development theme cleanup
-        # Upstream checks an unassigned `theme` variable, so its EXIT trap never deletes the theme.
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path('.github/actions/shopify-lighthouse/entrypoint.sh')
-          source = path.read_text()
-          replacements = {
-              'if [[ -n "${theme+x}" ]]; then': 'if [[ "${preview_id:-}" =~ ^[0-9]+$ ]]; then',
-              'shopify theme delete -d -f': 'shopify theme delete --theme "$preview_id" --force',
-              '    shopify logout': '    # Token authentication does not create a persisted login in this disposable container.',
-              'shopify theme push --development --json --path $theme_root > "$theme_push_log" && cat "$theme_push_log"':
-                  'shopify theme push --development --json --path "$theme_root" > "$theme_push_log"\ncat "$theme_push_log"',
-          }
-          for original, replacement in replacements.items():
-              if source.count(original) != 1:
-                  raise SystemExit('Lighthouse action changed; review the cleanup patch before running.')
-              source = source.replace(original, replacement)
-          path.write_text(source)
-          PY
-          bash -n .github/actions/shopify-lighthouse/entrypoint.sh
-      - name: Lighthouse
-        uses: ./.github/actions/shopify-lighthouse
-        with:
-          store: ${{ secrets.SHOPIFY_STORE }}
-          password: ${{ secrets.SHOPIFY_STORE_PASSWORD }}
-          access_token: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
-          collection_handle: opticos
-          product_handle: lemoon-dama
-          lhci_github_app_token: ${{ secrets.LHCI_GITHUB_TOKEN }}
-          lhci_min_score_performance: 0.6
-          lhci_min_score_accessibility: 0.8
+      - name: Verify approved harness exists (bootstrap fails closed)
+        run: test -f .lighthouse-trusted/scripts/lighthouse/Dockerfile
+      - name: Lighthouse dedicated lab gate
+        uses: ./.lighthouse-trusted/.github/actions/lighthouse
+        env:
+          LIGHTHOUSE_STORE: ${{ vars.LIGHTHOUSE_STORE }}
+          LIGHTHOUSE_CLIENT_ID: ${{ secrets.LIGHTHOUSE_CLIENT_ID }}
+          LIGHTHOUSE_CLIENT_SECRET: ${{ secrets.LIGHTHOUSE_CLIENT_SECRET }}
+          LIGHTHOUSE_STORE_PASSWORD: ${{ secrets.LIGHTHOUSE_STORE_PASSWORD }}
+          LIGHTHOUSE_PRODUCT_HANDLE: ${{ vars.LIGHTHOUSE_PRODUCT_HANDLE }}
+          LIGHTHOUSE_COLLECTION_HANDLE: ${{ vars.LIGHTHOUSE_COLLECTION_HANDLE }}

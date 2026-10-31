@@ -1,0 +1,614 @@
+{
+  "version": "lemoon-lighthouse-v1",
+  "shopId": "102677381410",
+  "products": [
+    {
+      "handle": "lighthouse-frame",
+      "title": "Lighthouse synthetic frame 01",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-01-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-01-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "759aef6ff8eee96c89350417a15ebdd7862afcb6e74fe36120c6d04d66014992",
+        "pixelSha256": "6181dadebe356c44b5652ec3214187a58bcf3adb3d1f590a388097cd4dee259e",
+        "alt": "lemoon-lighthouse-v1 frame 01"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-02",
+      "title": "Lighthouse synthetic frame 02",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-02-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-02-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-02.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "06aa3b793cb6e0c2c89c0b2acb488c1a4b118dd2b6dddc395018b91c2e4b662b",
+        "pixelSha256": "4b8aca77a0f7456a3eb83644d126cd2ca37542d6cdcc1f8185f529c745caf910",
+        "alt": "lemoon-lighthouse-v1 frame 02"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-03",
+      "title": "Lighthouse synthetic frame 03",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-03-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-03-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-03.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "fd7b54029ed38c2272cd8bf8f8188ba4402708832e5c2060d3a84f262ecee430",
+        "pixelSha256": "5345bc2217b4c289fc4ae90e63d0be3525835883da7f5895cde8e3f07a1a921a",
+        "alt": "lemoon-lighthouse-v1 frame 03"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-04",
+      "title": "Lighthouse synthetic frame 04",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-04-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-04-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-04.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "a84e8d43cf1f8644e5398b7bb2f844e5562d11ccb466c5dbe8456a888894ed63",
+        "pixelSha256": "bfc5ab68ded457297fae824add375cf527400acb56b91409a253b31099a5febb",
+        "alt": "lemoon-lighthouse-v1 frame 04"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-05",
+      "title": "Lighthouse synthetic frame 05",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-05-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-05-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-05.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "c9d50c6a95794b0c01a971b63a09be7daa5c549cb7be4cb8821a96f5d8158f67",
+        "pixelSha256": "e39dfdb29d8788399de0306a98c05fed673f0c64ff66b889eaa79113d62f9bf8",
+        "alt": "lemoon-lighthouse-v1 frame 05"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-06",
+      "title": "Lighthouse synthetic frame 06",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-06-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-06-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-06.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "c36eab0b7d808074afbd9f5b0598db20668c87b5d0192101cf5c2f3c6a0a7886",
+        "pixelSha256": "4f52c5ce1a00bb0457737ead4ac76ca26c69203626328adc010836529030052c",
+        "alt": "lemoon-lighthouse-v1 frame 06"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-07",
+      "title": "Lighthouse synthetic frame 07",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-07-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-07-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-07.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "6f3ebb33ace6e7e06bb84387d648772d030f0f26f673941e8192918044b0f8f0",
+        "pixelSha256": "6f78dd3dd81af58de5a5e6cfa711a5e2d023adcff52e27193c049b7c300e513d",
+        "alt": "lemoon-lighthouse-v1 frame 07"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-08",
+      "title": "Lighthouse synthetic frame 08",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-08-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-08-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-08.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "f1e9b96d79e93e6e3b50a883fa45800715bf7c84a43f41d3bcc3493e98d2e2ec",
+        "pixelSha256": "60e0e8da6fe2fb1304448e29615db1ec05f0b4202419c5d7bb294a0795641f08",
+        "alt": "lemoon-lighthouse-v1 frame 08"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-09",
+      "title": "Lighthouse synthetic frame 09",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-09-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-09-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-09.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "6e454893b9e5c54cac9eae7daf49760c81f169eb7d7d4117cd0d93c08503fbbf",
+        "pixelSha256": "2b12774d652409d86b6c7d574d2a2e17437a3915250ecb19695fdac7061deffb",
+        "alt": "lemoon-lighthouse-v1 frame 09"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-10",
+      "title": "Lighthouse synthetic frame 10",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-10-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-10-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-10.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "76770c7f1588293479930fc4e0e3aec7af290ad0c6c7aed0f5b17e9c8bb35172",
+        "pixelSha256": "3c1333097ce50ed6573d1f639c949492f67626e7d0ac06017c827bf8a9e6b435",
+        "alt": "lemoon-lighthouse-v1 frame 10"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-11",
+      "title": "Lighthouse synthetic frame 11",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-11-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-11-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-11.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "9daf46d032d976cb1b87ba4ef28641cb315a879c42ba68cebb9be19314fe43d2",
+        "pixelSha256": "05956a4bbb62a73935f011f1e9725414d5dc54d736d7c8eb6a95e036cc8bd968",
+        "alt": "lemoon-lighthouse-v1 frame 11"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    },
+    {
+      "handle": "lighthouse-frame-12",
+      "title": "Lighthouse synthetic frame 12",
+      "status": "ACTIVE",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Arena",
+            "Negro"
+          ]
+        }
+      ],
+      "variants": [
+        {
+          "title": "Arena",
+          "price": "39990.00",
+          "sku": "LH-V1-12-ARENA"
+        },
+        {
+          "title": "Negro",
+          "price": "39990.00",
+          "sku": "LH-V1-12-NEGRO"
+        }
+      ],
+      "metafields": {
+        "custom.lens_compatible": {
+          "type": "boolean",
+          "value": "true"
+        },
+        "custom.lighthouse_fixture": {
+          "type": "single_line_text_field",
+          "value": "lemoon-lighthouse-v1"
+        }
+      },
+      "image": {
+        "file": "lighthouse-frame-12.png",
+        "width": 1200,
+        "height": 900,
+        "sha256": "30cfb7643c30d9a781fa735cc9160c65aeda3222fdc1b36848a4b9fa5b8223db",
+        "pixelSha256": "53e15f7e9d9dc1257a4c8d8b475883da1611461701121f0289664134bc339a5d",
+        "alt": "lemoon-lighthouse-v1 frame 12"
+      },
+      "vendor": "Lighthouse Lab",
+      "productType": "Armaz\u00f3n",
+      "tags": [
+        "lighthouse-v1"
+      ]
+    }
+  ],
+  "collection": {
+    "handle": "lighthouse-frames",
+    "title": "Lighthouse synthetic frames",
+    "productHandles": [
+      "lighthouse-frame",
+      "lighthouse-frame-02",
+      "lighthouse-frame-03",
+      "lighthouse-frame-04",
+      "lighthouse-frame-05",
+      "lighthouse-frame-06",
+      "lighthouse-frame-07",
+      "lighthouse-frame-08",
+      "lighthouse-frame-09",
+      "lighthouse-frame-10",
+      "lighthouse-frame-11",
+      "lighthouse-frame-12"
+    ],
+    "sortOrder": "ALPHA_ASC"
+  },
+  "settingsSha256": "c55b10b963ee8c4c551653fcf94304587cea276795f007ca1deae5ccfa2b730e"
+}
