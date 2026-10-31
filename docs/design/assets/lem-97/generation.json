@@ -1,0 +1,57 @@
+{
+  "engine": "built-in image_gen",
+  "scope": "LEM-97; category generics and brand raster applications explicitly requested by Miguel",
+  "assets": [
+    {
+      "id": "category-opticos",
+      "prompt": "Use case: product-mockup. Generic editorial main category Ópticos for Lemoon Chile. Photorealistic two unbranded honey translucent and navy optical frames with clear lenses, complete realistic frames and temples, off-white warm #F7F4EE matte surface, natural window light, subtle shadows, clean premium editorial landscape5:4, generous margins and centered crop-safe subjects. No logos, text, people, prices, watermark or clinical claims. Generic category mood, not a specific purchasable SKU.",
+      "source_file": "docs/design/assets/lem-97/sources/category-opticos.png",
+      "prompt_kind": "normalized"
+    },
+    {
+      "id": "category-sol",
+      "prompt": "Use case: product-mockup. Asset type: generic main category Sol for Lemoon Chile eyewear ecommerce. ONE finished photorealistic editorial still-life image, landscape 5:4 ratio, 1500x1200 or nearest. Two unbranded pairs of sunglasses, one classic tortoiseshell acetate with warm brown lenses and one clean dark navy acetate with smoky lenses, complete believable frames and temples. Off-white warm #F7F4EE matte background with a small natural stone plinth, soft warm natural window sunlight and gentle sophisticated shadows, navy accents only in frames. Calm clean premium optical editorial photography, coherent with an optical category image of honey and navy clear-lens glasses on off-white. Arrange entire sunglasses compactly near center, generous breathing room on all edges for responsive crop; avoid near-edge temples or lens cuts. Realistic hinges, optical geometry and reflections, no floating objects or exaggerated CGI. No text, logo, watermark, people, prices, scenery or clinical claims. Generic category mood photo, no specific catalog product or UV claims.",
+      "source_file": "docs/design/assets/lem-97/sources/category-sol.png",
+      "prompt_kind": "verbatim"
+    },
+    {
+      "id": "category-accesorios",
+      "prompt": "Use case: product-mockup. Asset type: generic main category Accesorios for Lemoon Chile eyewear ecommerce. ONE photorealistic premium editorial still-life, landscape 5:4 ratio, 1500x1200 or nearest. A plain unbranded elegant dark navy hard eyeglass case partly open, one warm beige folded microfiber lens-cleaning cloth, and one minimal thin dark eyeglass cord arranged neatly, no eyeglasses necessary. Off-white warm #F7F4EE matte surface, subtly textured natural stone plinth, soft natural window light, warm gentle shadows, clean sophisticated everyday optical accessories photography coherent with honey/navy eyewear category photos. Entire objects compactly centered with generous margins safe for 5:4 crop and wide thin banner, beautiful believable materials and small details. No text, no embossed wordmarks, logos, spray bottles, prices, watermark, certifications or people. Generic category mood, not actual purchasable SKU. Avoid decorative fruit/lemons and loud yellow backgrounds.",
+      "source_file": "docs/design/assets/lem-97/sources/category-accesorios.png",
+      "prompt_kind": "verbatim"
+    },
+    {
+      "id": "og-final",
+      "prompt": "Use case: compositing. Asset type: Lemoon finished Open Graph card. Image 1 is the OFFICIAL logo insert; Image 2 is the exact background edit target. Add the official wordmark from image1 to the empty LEFT HALF of image2, centered vertically around42percent imageheight, wordmark width approximately36percent of total canvas, preserving precisely its actual letter curves, lowercase spelling lemoon, original navy fill, proportions and shapes, no yellow dot. Keep every object, lighting, color and composition from image2 unchanged. The background remains warm off-white. Do not invent a tagline, slogan, labels, URL or extra text. No new illustration, no logo redraw or font substitution, simply place the given official logo faithfully as an insert. Output finished wide Open Graph image at1200x630 or same aspect ratio, crisp legible logo, unobstructed products on right, no mockupframe.",
+      "source_file": "docs/design/assets/lem-97/sources/og-final.png",
+      "prompt_kind": "verbatim",
+      "input_reference": "assets/lemoon-logo-refined-navy.svg"
+    },
+    {
+      "id": "avatar-final",
+      "source_file": "docs/design/assets/lem-97/sources/avatar-final.png",
+      "input_reference": "docs/design/assets/lem-97/sources/favicon-final.png",
+      "previous_prompt": "Use case: compositing. Asset type: square social media avatar for Lemoon optical brand, 1024x1024 square. The supplied image is the official lowercase lemoon wordmark. Place that exact wordmark, preserving every letter curve, its navy color and original width/height proportion, horizontally centered on a uniform warm off-white #F7F4EE square background. Wordmark width about74percent of canvas with comfortable margins and centered vertically, fully inside the circle-safe central area. Crisp completely flat graphic export, no photograph, texture, bevel, shadow, gradient, extra icon, lemon, yellow dot, border, slogan or additional text. The only text is the supplied official wordmark lemoon. No font substitution or logo redesign. Output a clean final square brand avatar, not a mockup.",
+      "method": "Copy the approved l + solid yellow leaf master without regeneration; resize with sips to 400 and 1024 pixels.",
+      "authorization": "Miguel requested the same image for Instagram, Facebook and TikTok profile pictures.",
+      "source_sha256": "83d7e6b13c084d9870c3f7ace10e8326c67f8f04509efd832266fbecbf0ae20b"
+    },
+    {
+      "id": "favicon-final",
+      "prompt": "Edit the supplied Lemoon l + yellow leaf favicon proposal. Keep the navy lowercase l silhouette, its angled rising top, straight vertical stem, and rightward curved bottom foot visually unchanged. Preserve its position and overall composition. Change only the leaf and background finish: remove the navy central vein completely so the leaf is ONE solid flat lemon-yellow #F7E600 silhouette, with no holes, strokes, lines or outlines. Keep it tilted upper-right alongside the upper part of the l, but make it about 12 percent smaller than reference and keep a clear small gap between leaf and l. The lowercase l must remain dominant. Background perfectly uniform warm off-white #F7F4EE, navy #0E1A28 letter, absolutely flat colors throughout with sharp smooth edges. No texture, gradients, shadows, lighting or dimension. Optimize bold silhouette for browser favicon downscaling to 16 and 32 pixels. Preserve generous safe margins. Output one standalone square favicon master, no mockup, comparison sheet, labels, text, border, rounded tile corners or additional elements. This is an exploratory brand application. Do not replace the l with a generic typeface or numeral.",
+      "source_file": "docs/design/assets/lem-97/sources/favicon-final.png",
+      "prompt_kind": "verbatim",
+      "input_reference": "Prior l + yellow leaf raster proposal reviewed in this chat; based on official logo initial",
+      "previous_prompt": "Use case: compositing. Asset type: Lemoon favicon master icon, square1024x1024. The reference is the official lemoon wordmark. Isolate ONLY its first lowercase letter l as the icon: preserve the original tall navy serif l glyph with its angled top and curved bottom foot from the left edge of this reference, not a capital L and not a generic sans-serif replacement. Place this single original lowercase l centered on a perfectly flat warm off-white #F7F4EE square. Glyph about76percent canvasheight, generous symmetric breathing space, bolder faithful serif silhouette that remains recognizable when reduced to16x16. Original navy #0E1A28, clean crisp edges. Absolutely no other letters, no circle, extra icon, moon, glasses, lemon, dots, border, texture, gradients, lighting, shadows, embossing, rounded canvas corners, watermark or mockup. One minimal flat finished favicon master derived from the official first letter, not a redesign of the full logo.",
+      "approval": {
+        "reviewer": "Miguel",
+        "date": "2026-10-30",
+        "scope": "Selected l + solid yellow leaf graphic for favicon, Apple and avatar exports; header official SVG unchanged. Graphic selection does not certify Shopify selector configuration or publication."
+      },
+      "revision": "l + solid yellow leaf; refined v2"
+    }
+  ],
+  "status": "Ten exports delivered. Three generic category images are assigned in Shopify native collection images and custom.plp_promo_banner, with local preview HTML verified. Favicon lemoon-favicon-32-v1.png is selected and saved on active theme 155307737256 (lemoon-shopify-theme/main); the coordinator verified persistence after reload and rel=icon in public /password HTML on 2026-10-30. Global OG lemoon-og-default-v1.jpg was uploaded from the local file through native Preferences, saved and visually confirmed after reload; og:image:secure_url was verified in public /password HTML and local preview. Both HTTP responses were 200. Favicon is per-theme: dev 189557964968 was unchanged and its local preview has no favicon. Only existing published-theme settings and Preferences were saved; no full-theme push or publication was performed and password restriction remains unchanged. Other resource pages and social-platform caches are not certified. Miguel owns Instagram, Facebook and TikTok profile uploads; agent login/upload is not a LEM-97 blocker. Final human ticket review and PR merge remain pending.",
+  "logo_input_reference": "assets/lemoon-logo-refined-navy.svg",
+  "limitations": "Prompts describe intent, not certified output. Raster generations may approximate logo shapes and colors; no identical vector paths or certified color match is claimed. Selected final masters only are archived; intermediate generation/edit inputs are not a complete reproducibility record. Favicon master replaced with the approved l + solid yellow leaf refinement; its exports are copied from that exact approved image without regeneration."
+}
