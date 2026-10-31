@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
-import { renderWave } from '../helpers/second-wave-renderer.mjs';
+import { renderAdoption } from '../helpers/component-adoption-renderer.mjs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const source = read('sections/main-article.liquid');
 const json = (path) => { const raw = read(path); return JSON.parse(raw.slice(raw.indexOf('{'))); };
@@ -26,7 +26,7 @@ test('native comments and sharing are retained with safe redisplayed inputs', ()
   expect(source).toContain('form.posted_successfully?');
   expect(source).toContain('role="alert"');
   expect(source).toContain('role="status"');
-  const html = renderWave('article-error');
+  const html = renderAdoption('article-error');
   expect(html).toContain('value="Nombre &lt;&amp;&#34;"');
   expect(html).toContain('value="test@example.test"');
   expect(html).toContain('>Texto &lt;&amp;&#34;</textarea>');

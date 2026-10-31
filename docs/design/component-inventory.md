@@ -204,7 +204,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** 48px base, textarea auto; columnas del formulario apilan según superficie. **Accesibilidad.** Preservar label-for, hint/error IDs, inputmode, min/max/step y constraints; no copiar defecto de borde al extraer.
 
-**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren contacto/búsqueda/galería y la segunda adopción de newsletter footer/comentarios; formularios, IDs y feedback permanecen en sus dueños. Receta/gift conservan sus contratos locales.
+**JS.** Validación y serialización del formulario; no agregar JS al campo base. **Reutilización actual.** `lemoon-ui-field` y `lemoon-ui-select` cubren contacto/búsqueda/galería/newsletter footer/comentarios; formularios, IDs y feedback permanecen en sus dueños. Receta/gift conservan sus contratos locales.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 
@@ -400,7 +400,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 <a id="lm-disclosure"></a>
 ### LM-DISCLOSURE · Accordions, disclosures y FAQ
 
-**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-faq-item.liquid](../../snippets/lemoon-ui-faq-item.liquid). FAQ agrupado usa details; FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños. [Receta de integración](../components/recipes/faq-group.md).
+**Disponibilidad actual:** reutilizable. Entrada: [lemoon-ui-faq-item.liquid](../../snippets/lemoon-ui-faq-item.liquid). FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños. [Receta de integración](../components/recipes/faq-group.md).
 
 **Fuentes:** [sections/collapsible-content.liquid](../../sections/collapsible-content.liquid), [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid), [sections/lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid), [sections/disclosures.liquid](../../sections/disclosures.liquid), [snippets/product-disclosures.liquid](../../snippets/product-disclosures.liquid), [assets/component-accordion.css](../../assets/component-accordion.css), [assets/collapsible-content.css](../../assets/collapsible-content.css), [assets/component-disclosures.css](../../assets/component-disclosures.css), [assets/details-disclosure.js](../../assets/details-disclosure.js), [assets/disclosures.js](../../assets/disclosures.js), [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid), [assets/global.js](../../assets/global.js).
 
@@ -1119,7 +1119,7 @@ Entradas que requieren inspección especial al implementar: section rendering de
 | LM-FEEDBACK | [lemoon-ui-message](../../snippets/lemoon-ui-message.liquid) | Respuestas de contacto/newsletter, headings de feedback de comentarios y estados sintéticos de galería | p/div/h3, texto o content_html confiable, role/live/foco opt-in |
 | LM-DISCLOSURE | [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid) | Fallback/custom del FAQ agrupado, legacy y galería | details/summary, pregunta/answer_html, editor attrs en raíz; grupos/routing permanecen en sección |
 
-La segunda adopción conserva los cuatro dueños y sus schemas: newsletter customer (contact[tags]/contact[email]/commit), comentarios new_comment (author/email/body, moderación y autofocus de respuesta), cinco templates legales (CMS/políticas/demo/rutas locales) y FAQ legacy de page.preguntas-frecuentes (primer details abierto y block.shopify_attributes). [Pruebas semánticas y de navegador](../../tests/e2e/second-wave.spec.js) comparan DOM Liquid real contra una base previa; los adaptadores de formularios/errores no prueban Shopify. No se incorpora una variante visual ni un wrapper de sección nuevo.
+Los consumidores conservan sus formularios, contenido y schemas: newsletter customer (contact[tags]/contact[email]/commit), comentarios new_comment (author/email/body, moderación y autofocus de respuesta), cinco templates legales (CMS/políticas/demo/rutas locales) y FAQ legacy de page.preguntas-frecuentes (primer details abierto y block.shopify_attributes). [Pruebas semánticas y de navegador](../../tests/e2e/component-adoption.spec.js) comparan DOM Liquid real contra una base previa; los adaptadores de formularios/errores no prueban Shopify. No se incorpora una variante visual ni un wrapper de sección nuevo.
 
 Los contratos completos están en LiquidDoc y en las [seis recetas](../components/README.md#elegir-una-receta). Strings/atributos se escapan una vez al renderizar; `_html` sólo admite capturas confiables y `editor_attributes` sólo `block.shopify_attributes`. Los consumidores mantienen IDs/ARIA, locales, schemas/settings, formularios, rutas y hooks. Las familias canónicas existentes —iconos, spinner, precio, swatches, card-product, controles de carrusel y adaptadores comerciales— conservan su nombre: no se añaden wrappers para renombrarlas.
 
@@ -1128,7 +1128,7 @@ CSS mantiene su orden y dueño: tokens → base → componentes → superficie. 
 <a id="extraction"></a>
 ## Oportunidades pendientes
 
-Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. El piloto inicial no migró FAQ legacy ni newsletter; la segunda adopción autorizada incorpora sólo FAQ legacy, newsletter del footer, formulario/feedback/submit de comentarios y títulos/ayuda del shell legal usado por cinco templates. Sort de colección y operaciones comerciales siguen fuera de esta adopción. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
+Ayuda/steps/shell editorial, radio/checkbox genérico, modal/tab shell y filas cart/bulk siguen siendo candidatos, no APIs disponibles. El panel help se compone con heading/action y CSS local; el contenido de medidas ya compartido no convierte el shell PDP en un modal genérico. FAQ legacy, newsletter del footer, comentarios y títulos/ayuda del shell legal ya reutilizan los snippets canónicos. Sort de colección y operaciones comerciales conservan sus implementaciones propias. Las fases propuestas en la base histórica no autorizan cambios adicionales. Una extracción futura requiere alcance, pruebas del dueño y revisión humana propios.
 
 <a id="gallery-plan"></a>
 ## Galería actual y demos legacy

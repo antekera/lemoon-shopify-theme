@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { renderComponent as render, renderComponentSection as section } from '../helpers/component-library-renderer.mjs';
-import { renderWave } from '../helpers/second-wave-renderer.mjs';
+import { renderAdoption } from '../helpers/component-adoption-renderer.mjs';
 
 test('unwrapped field preserves label order, local classes and false native ARIA without changing defaults', () => {
   const html = render('field', { id: 'mail', name: 'contact[email]', type: 'email', label: 'Correo <&', label_class: 'visually-hidden', control_class: 'newsletter-input', unwrapped: true, label_before: true, aria_required: false, autocorrect: 'off' });
@@ -39,12 +39,12 @@ test('comment status h3 preserves autofocus/tabindex and message tag remains all
 });
 
 test('comment/newsletter states retain their own announcement semantics and moderation branch', () => {
-  expect(renderWave('article-error')).toContain('role="alert"');
-  expect(renderWave('article-success')).toContain('role="status"');
-  expect(renderWave('article-moderated-success')).not.toBe(renderWave('article-success'));
-  expect(renderWave('newsletter-error')).not.toContain('autofocus');
-  expect(renderWave('newsletter-success')).toMatch(/id="LemoonNewsletterSuccess-[^"]+"[^>]*tabindex="-1"/);
-  expect(renderWave('newsletter')).not.toContain('aria-invalid=');
+  expect(renderAdoption('article-error')).toContain('role="alert"');
+  expect(renderAdoption('article-success')).toContain('role="status"');
+  expect(renderAdoption('article-moderated-success')).not.toBe(renderAdoption('article-success'));
+  expect(renderAdoption('newsletter-error')).not.toContain('autofocus');
+  expect(renderAdoption('newsletter-success')).toMatch(/id="LemoonNewsletterSuccess-[^"]+"[^>]*tabindex="-1"/);
+  expect(renderAdoption('newsletter')).not.toContain('aria-invalid=');
 });
 
 test('form identities remain distinct across instances and the five legal templates still consume their shell', () => {

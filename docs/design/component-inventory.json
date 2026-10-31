@@ -4338,7 +4338,7 @@
         "LM-FIELD",
         "LM-FOOTER"
       ],
-      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/header-group.json",
@@ -4455,7 +4455,7 @@
         "LM-DISCLOSURE",
         "LM-TYPE"
       ],
-      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-featured-products.liquid",
@@ -4507,7 +4507,7 @@
         "LM-LEGAL",
         "LM-TYPE"
       ],
-      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/lemoon-service-page.liquid",
@@ -4566,7 +4566,7 @@
         "LM-FIELD",
         "LM-JOURNAL"
       ],
-      "inspection_method": "targeted second-wave consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
+      "inspection_method": "targeted component-adoption consumer/Liquid render inspection; semantic DOM and local browser fixtures verified separately, not Shopify runtime proof"
     },
     {
       "path": "sections/main-blog.liquid",
@@ -5788,7 +5788,7 @@
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 507 indexed source paths, including the six PR additions retained in new_source_paths; that list does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
-    "second_adoption_wave": {
+    "component_adoption": {
       "base_sha": "15be220684823beb474a2d2f5312faa6ef63cd64",
       "consumers": {
         "sections/footer.liquid": [
@@ -5811,7 +5811,7 @@
         ]
       },
       "contract": "Existing native forms, names/IDs, response semantics, editor attrs and first-open FAQ preserved; optional field order/wrapper/ARIA/trusted slots, action submit input and message h3 only. Shared approved control border/focus correction; no new UI variants.",
-      "proof": "tests/e2e/second-wave.spec.js compares baseline real Liquid-rendered semantic DOM; Shopify form tags/errors are fixture adapters, no delivery/editor/publication claim."
+      "proof": "tests/e2e/component-adoption.spec.js compares baseline real Liquid-rendered semantic DOM; Shopify form tags/errors are fixture adapters, no delivery/editor/publication claim."
     }
   }
 }

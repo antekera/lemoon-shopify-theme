@@ -38,7 +38,7 @@ export function createComponentEngine({ language = 'es', sourceRoot = root } = {
     }
   });
   // Apply Shopify tag adaptation on every file read, including nested snippets.
-  for (const filter of ['handleize', 'image_url', 'image_tag', 'time_tag', 'payment_type_svg_tag']) engine.registerFilter(filter, () => { throw new Error(`${filter} is outside second-wave fixture scope`); });
+  for (const filter of ['handleize', 'image_url', 'image_tag', 'time_tag', 'payment_type_svg_tag']) engine.registerFilter(filter, () => { throw new Error(`${filter} is outside component-adoption fixture scope`); });
   engine.registerFilter('structured_data', () => '{}');
   engine.registerFilter('money', () => { throw new Error('Money is outside component fixture scope'); });
   engine.registerFilter('asset_url', value => `/assets/${value}`);

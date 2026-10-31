@@ -72,7 +72,7 @@ Los snippets UI usan los tokens → `base.css` → `lemoon-components.css` del l
 | [LM-UTILITY — 404, contenido personalizado y apps](../design/component-inventory.md#lm-utility) | composición de sección | [main-404.liquid](../../sections/main-404.liquid) | 404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal. [Receta](recipes/search-sort.md). Consumidores estáticos (ejemplos): [404.json](../../templates/404.json). |
 | [LM-GALLERY — Galería existente del sistema de diseño](../design/component-inventory.md#lm-gallery) | composición de sección | [lemoon-design-system.liquid](../../sections/lemoon-design-system.liquid) | Renders extraídos + demos legacy identificadas; sin prueba comercial ni certificación WCAG. [Receta](recipes/catalogue-states.md). Consumidores estáticos (ejemplos): [lemoon-design-system.liquid](../../sections/lemoon-design-system.liquid), [page.sistema-de-diseno.json](../../templates/page.sistema-de-diseno.json). |
 
-## Segunda adopción acotada
+## Componentes compartidos en formularios y ayuda
 
 [Newsletter footer](../../sections/footer.liquid) y [comentarios](../../sections/main-article.liquid) reutilizan field/action/message; [shell legal](../../sections/lemoon-legal-page.liquid) reutiliza heading/action en los cinco templates legales; [FAQ legacy](../../sections/lemoon-faq.liquid) reutiliza heading/faq-item en page.preguntas-frecuentes. Formularios, copy, CMS, routing, moderación y editor permanecen en cada sección. Contratos opcionales y límites en las recetas de [formularios](recipes/contact-form.md), [ayuda](recipes/guide-help.md) y [FAQ](recipes/faq-group.md). El contorno/foco aprobado se aplica a los controles adoptados con el CSS compartido existente.
 

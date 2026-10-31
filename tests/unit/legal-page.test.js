@@ -1,13 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
-import { renderWave } from '../helpers/second-wave-renderer.mjs';
+import { renderAdoption } from '../helpers/component-adoption-renderer.mjs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const source = read(path); return JSON.parse(source.slice(source.indexOf('{'))); };
 
 test('legal shell preserves real CMS content, escapes headings and isolates native privacy fallback', () => {
  const source = read('sections/lemoon-legal-page.liquid');
- const html = renderWave('legal-shipping');
+ const html = renderAdoption('legal-shipping');
  expect(html).toContain('<h1>Legal &lt;&amp;&#34;</h1>');
  expect(source).toContain('{{ page.content }}');
  expect(source).toContain('{{ section.settings.intro | escape }}');
@@ -19,8 +19,8 @@ test('legal shell preserves real CMS content, escapes headings and isolates nati
 
 test('legal navigation uses configured or actual native policies and contact path respects the locale root', () => {
  const source = read('sections/lemoon-legal-page.liquid');
- expect(renderWave('legal-shipping')).toContain('href="/es/pages/contact"');
- expect(renderWave('legal-terms')).toContain('href="/ayuda?x=1&amp;y=2"');
+ expect(renderAdoption('legal-shipping')).toContain('href="/es/pages/contact"');
+ expect(renderAdoption('legal-terms')).toContain('href="/ayuda?x=1&amp;y=2"');
  for (const policy of ['shipping_policy','refund_policy','terms_of_service','privacy_policy']) expect(source).toContain(`shop.${policy}.url`);
  for (const link of ['shipping_url','returns_url','terms_url','privacy_url','warranty_url']) expect(source).toContain(`section.settings.${link}`);
  expect(source).not.toMatch(/href="\/pages\//);

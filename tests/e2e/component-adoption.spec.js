@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 
 const scenarios = ['newsletter', 'newsletter-error', 'newsletter-success', 'article', 'article-error', 'article-success', 'article-moderated-success', 'legacy-faq', ...['shipping','returns','terms','privacy','warranty'].map(kind => `legal-${kind}`)];
-const fixture = scenario => `/tests/fixtures/second-wave.html?scenario=${scenario}`;
+const fixture = scenario => `/tests/fixtures/component-adoption.html?scenario=${scenario}`;
 
 for (const scenario of scenarios) {
   test(`${scenario}: rendered semantic contract`, async ({ page }) => {
@@ -24,7 +24,7 @@ for (const scenario of scenarios) {
       }
       return walk(root);
     });
-    expect(contract).toEqual(JSON.parse(readFileSync(`tests/fixtures/second-wave-baseline/${scenario}.json`)));
+    expect(contract).toEqual(JSON.parse(readFileSync(`tests/fixtures/component-adoption-baseline/${scenario}.json`)));
   });
 }
 
@@ -83,7 +83,7 @@ for (const scenario of ['newsletter','article']) {
 }
 
 for (const width of [390,749,750,989,990,1440]) {
-  test(`second wave sections reflow at ${width}px`, async ({ page }, testInfo) => {
+  test(`adopted component sections reflow at ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 1000 });
     for (const scenario of ['newsletter-error','article-error','legacy-faq','legal-terms']) {
       await page.goto(fixture(scenario));
