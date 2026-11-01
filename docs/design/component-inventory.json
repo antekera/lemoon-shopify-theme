@@ -24,8 +24,8 @@
   },
   "counts": {
     "total_tracked_paths": 514,
-    "mapped_paths": 481,
-    "excluded_paths": 33,
+    "mapped_paths": 482,
+    "excluded_paths": 32,
     "by_root": {
       "assets": 259,
       "config": 2,
@@ -40,10 +40,10 @@
       ".js": 53,
       ".json": 90,
       ".liquid": 164,
-      ".svg": 93
+      ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 32,
+      "binary-image-or-font": 31,
       "private-settings": 1
     },
     "component_families": 44,
@@ -992,7 +992,8 @@
         "assets/component-list-social.css",
         "assets/component-list-payment.css",
         "assets/component-newsletter.css",
-        "assets/newsletter-section.css"
+        "assets/newsletter-section.css",
+        "assets/payment-webpay.svg"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
@@ -3365,10 +3366,12 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
-      "path": "assets/payment-webpay.png",
-      "status": "excluded",
-      "reason": "binary-image-or-font: activo de footer con procedencia documentada en asset-inventory.md; no es un contrato de UI",
-      "content_read": true
+      "path": "assets/payment-webpay.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "official SVG asset; styles and paths preserved, Adobe editing metadata removed"
     },
     {
       "path": "assets/pickup-availability.js",
@@ -5883,7 +5886,7 @@
       "snippets/lemoon-dawn-slider-controls.liquid",
       "templates/page.politica-de-privacidad.json",
       "assets/lemoon-secure-ssl.png",
-      "assets/payment-webpay.png"
+      "assets/payment-webpay.svg"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 514 delivered source paths: the 511-path implementation snapshot, Spanish privacy template and two footer image assets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",

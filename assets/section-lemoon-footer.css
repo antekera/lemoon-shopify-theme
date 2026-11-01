@@ -344,6 +344,13 @@
   padding: 2.4rem 0;
 }
 
+.lemoon-footer__payment-methods {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
 .lemoon-footer__payments .lemoon-footer__security-badge {
   display: inline-flex;
   padding: 2px;
