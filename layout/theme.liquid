@@ -5,7 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
-    <link rel="canonical" href="{{ canonical_url }}">
+    {%- liquid
+      assign lemoon_canonical_url = canonical_url
+      assign lemoon_privacy_page = pages['politica-de-privacidad']
+      if request.page_type == 'policy' and request.path == shop.privacy_policy.url
+        if lemoon_privacy_page != blank and lemoon_privacy_page.published_at != blank and lemoon_privacy_page.template_suffix == 'politica-de-privacidad'
+          assign lemoon_canonical_url = request.origin | append: lemoon_privacy_page.url
+        endif
+      endif
+    -%}
+    <link rel="canonical" href="{{ lemoon_canonical_url | escape }}">
     {%- if request.page_type == 'search' -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}
@@ -31,7 +40,7 @@
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags' %}
+    {% render 'meta-tags', canonical_url: lemoon_canonical_url %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';

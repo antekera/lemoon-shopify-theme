@@ -3552,6 +3552,10 @@
     "lemoon_legal_page": {
       "name": "Lemoon legal page",
       "settings": {
+        "use_native_privacy": {
+          "label": "Use the native privacy policy",
+          "info": "For privacy pages only. Uses the policy from Settings > Policies and ignores page content, demo copy and the introduction."
+        },
         "kind": {
           "label": "Information type",
           "general": "General",

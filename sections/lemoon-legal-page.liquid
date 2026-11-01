@@ -1,7 +1,13 @@
 {{ 'lemoon-legal-pages.css' | asset_url | stylesheet_tag }}
 {%- liquid
+  assign use_native_privacy = false
+  if section.settings.kind == 'privacy' and section.settings.use_native_privacy == true
+    assign use_native_privacy = true
+  endif
   assign legal_title = page.title
-  if section.settings.demo_data and section.settings.kind == 'privacy'
+  if use_native_privacy
+    assign legal_title = shop.privacy_policy.title | default: page.title
+  elsif section.settings.demo_data and section.settings.kind == 'privacy'
     assign legal_title = 'sections.lemoon_legal_page.privacy' | t
   endif
   assign legal_help_title = 'sections.lemoon_legal_page.help_title' | t
@@ -12,7 +18,7 @@
   endif
 -%}
 {%- style -%}
-/* Editorial legal shell. CMS policy text remains authoritative. */
+/* Editorial legal shell. The selected CMS or native policy remains authoritative. */
 #shopify-section-{{ section.id }} .lemoon-legal-page { background: var(--lemoon-surface-page); color: var(--lemoon-text-primary); }
 #shopify-section-{{ section.id }} .lemoon-legal-page__header { max-width: 66rem; margin-inline: auto; padding-bottom: var(--lemoon-space-8); border-bottom: 1px solid var(--lemoon-border-default); }
 #shopify-section-{{ section.id }} .lemoon-legal-page h1 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); letter-spacing: var(--lemoon-type-display-tracking); line-height: 1.15; }
@@ -24,6 +30,7 @@
 #shopify-section-{{ section.id }} .lemoon-legal-page__content :is(h2,h3,h4) { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); line-height: 1.3; }
 #shopify-section-{{ section.id }} .lemoon-legal-page__content h2 { margin: var(--lemoon-space-10) 0 var(--lemoon-space-4); font-size: 2.4rem; }
 #shopify-section-{{ section.id }} .lemoon-legal-page__content h3 { margin: var(--lemoon-space-8) 0 var(--lemoon-space-3); font-size: 2rem; }
+#shopify-section-{{ section.id }} .lemoon-legal-page__content table { display: block; max-width: 100%; overflow-x: auto; }
 #shopify-section-{{ section.id }} .lemoon-legal-page a { color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
 #shopify-section-{{ section.id }} .lemoon-legal-page :is(a,button):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
 #shopify-section-{{ section.id }} .lemoon-legal-page__help { max-width: 66rem; margin-top: var(--lemoon-space-10); padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
@@ -51,6 +58,7 @@
 <div class="lemoon-legal-page page-width">
   <header class="lemoon-legal-page__header">
     {% render 'lemoon-ui-heading', text: legal_title, level: 1 %}
+    {%- unless use_native_privacy -%}
     <p class="lemoon-legal-page__intro">
       {%- if section.settings.intro != blank -%}
         {{ section.settings.intro | escape }}
@@ -65,11 +73,18 @@
         {%- endcase -%}
       {%- endif -%}
     </p>
+    {%- endunless -%}
   </header>
   <div class="lemoon-legal-page__layout">
     <div>
       <div class="lemoon-legal-page__content rte">
-        {%- if section.settings.demo_data -%}
+        {%- if use_native_privacy -%}
+          {%- if shop.privacy_policy.body != blank -%}
+            {{ shop.privacy_policy.body }}
+          {%- else -%}
+            <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
+          {%- endif -%}
+        {%- elsif section.settings.demo_data -%}
           {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
         {%- elsif page.content != blank -%}
           {{ page.content }}
@@ -100,6 +115,13 @@
     ]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_native_privacy",
+      "default": false,
+      "label": "t:sections.lemoon_legal_page.settings.use_native_privacy.label",
+      "info": "t:sections.lemoon_legal_page.settings.use_native_privacy.info"
+    },
     {
       "type": "checkbox",
       "id": "demo_data",
