@@ -11,15 +11,6 @@
       },
       "children": [
         {
-          "tag": "p",
-          "attrs": {
-            "class": "lemoon-legal-page__eyebrow"
-          },
-          "children": [
-            "Lemoon · Información"
-          ]
-        },
-        {
           "tag": "h1",
           "attrs": {},
           "children": [
@@ -96,47 +87,6 @@
                   },
                   "children": [
                     "Contactar a Lemoon"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "tag": "nav",
-          "attrs": {
-            "aria-label": "Información para tu compra",
-            "class": "lemoon-legal-page__navigation"
-          },
-          "children": [
-            {
-              "tag": "p",
-              "attrs": {
-                "class": "lemoon-legal-page__navigation-title"
-              },
-              "children": [
-                "Información para tu compra"
-              ]
-            },
-            {
-              "tag": "ul",
-              "attrs": {
-                "role": "list"
-              },
-              "children": [
-                {
-                  "tag": "li",
-                  "attrs": {},
-                  "children": [
-                    {
-                      "tag": "a",
-                      "attrs": {
-                        "href": "/policies/privacy-policy"
-                      },
-                      "children": [
-                        "Privacidad"
-                      ]
-                    }
                   ]
                 }
               ]

@@ -889,13 +889,13 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** Legal kind shipping/returns/terms/privacy/warranty, intro/page.content/help links/demo; guide_kind pedido/prescripcion/probador/rostro/medidas determina claves y steps; service kind benefits/operations, verified_details/image/demo; crystal-guide configurator_product. No confirma negocio, coberturas, reembolsos ni capacidad del configurador.
 
-**Variantes existentes.** Shell legal + aside, guías paso/ilustración/ayuda, servicio con pasos/image, guía cristales y CTA.
+**Variantes existentes.** Shell legal de una columna centrada sin eyebrow ni navegación lateral; guías paso/ilustración/ayuda, servicio con pasos/image, guía cristales y CTA. Los campos URL de políticas del schema legal se conservan por compatibilidad con configuraciones guardadas, pero no generan un sidebar.
 
-**CSS y excepciones.** 66rem/24rem gap6.4rem legal según DESIGN; variantes guía/service locales; .rte y colores semánticos; muestras no son políticas oficiales.
+**CSS y excepciones.** Shell legal centrado de hasta 66rem, cuerpo 1.6rem/1.6 y subtítulos H2 2.4rem/H3 2rem según DESIGN; variantes guía/service locales; .rte y colores semánticos; muestras no son políticas oficiales. La fecha de vigencia pertenece al contenido aprobado: no se deriva de fechas técnicas de la página.
 
 **Estados observados / aplicabilidad:** Normal: Lectura y links; Hover: Links/CTA; Foco: Solo acciones; Seleccionado: No aplica; Loading: Media lazy; Error: No feedback universal; Disabled: No aplica salvo acciones.
 
-**Responsive.** Legal apila bajo750 gap3.2rem; guía/service conservan media queries locales. **Accesibilidad.** Headings/listas/landmarks y enlaces de ayuda; no acreditar WCAG por estructura.
+**Responsive.** Legal mantiene una columna y ajusta padding bajo750, con H1 4.6rem/3.4rem; guía/service conservan media queries locales. **Accesibilidad.** Headings/listas/landmarks y enlaces de ayuda; no acreditar WCAG por estructura.
 
 **JS.** Sin controlador propio de página; policy cookie help es LM-PRIVACY. **Reutilización actual.** Composiciones con markup inline duplicado; extraer shell solo tras campos/acciones y con contenido dueño validado.
 

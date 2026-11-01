@@ -380,7 +380,6 @@
     >
       {%- if request.page_type == 'policy' -%}
         <div class="lemoon-native-policy page-width">
-          <p class="lemoon-native-policy__eyebrow">{{ 'sections.lemoon_legal_page.eyebrow' | t }}</p>
           {{ content_for_layout }}
           {%- assign policy_contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/' -%}
           {% render 'lemoon-native-policy-help', contact_url: policy_contact_url %}

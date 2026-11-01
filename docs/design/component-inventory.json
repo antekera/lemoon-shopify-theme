@@ -1498,7 +1498,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-guide-page.liquid",
-        "scope": "Guías/servicios y shell legal tienen settings y tipografía propios; conservar políticas nativas.",
+        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
