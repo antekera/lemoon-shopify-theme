@@ -6,9 +6,9 @@ Guía práctica para aplicar la identidad visual confirmada en website, redes so
 
 ## Alcance de esta versión
 
-Esta versión reúne el contrato visual de LEM-141, los archivos seleccionados de LEM-97 y la identidad actual aceptada al cerrar LEM-80. El logo y las fuentes están seleccionados. Propósito, posicionamiento, voz final y entregas por canal mantienen los responsables indicados al final de la guía. La revisión de esta consolidación corresponde a LEM-79.
+Esta versión reúne el contrato visual de LEM-141, los archivos seleccionados de LEM-97 y la identidad actual aceptada al cerrar LEM-80. Incorpora la referencia al brief estratégico LEM-82 y al eslogan aprobados por Miguel el 01-11-2026. La voz final y entregas por canal mantienen los responsables indicados al final de la guía. La revisión de esta consolidación corresponde a LEM-79.
 
-Propósito, misión, posicionamiento y promesa de marca se resuelven en LEM-82. La dirección visual anterior orienta la presentación, pero no sustituye esas definiciones estratégicas.
+El [brief estratégico aprobado](brand-strategy.md), también disponible en [Google Docs](https://docs.google.com/document/d/1XYr1U9mM68X2FfHhL7a9ZfA6hhYmZFx4r2fTxePOkvA/edit), define propósito, misión, posicionamiento, público y personalidad. Consultarlo antes de decidir contenido o expresión de marca. La facilidad de compra lidera y el precio accesible la acompaña; la personalidad es cercana, atrevida y práctica. Aplicar esa dirección dentro del contrato visual de DESIGN.md.
 
 ## Logo y símbolos
 
@@ -76,7 +76,7 @@ El registro de LEM-97 documenta favicon 32 configurado en el tema activo `155307
 
 ## Voz y escritura
 
-Usar es-CL, frases claras y directas, tono cercano, moneda CLP y CTAs que expliquen la acción. En el sitio, reutilizar claves de locales. Los mensajes finales y la guía editorial pertenecen a LEM-55; el propósito y posicionamiento pertenecen a LEM-82.
+Usar es-CL, trato de tú, frases claras y directas, tono cercano, moneda CLP y CTAs que expliquen la acción. En el sitio, reutilizar claves de locales. El eslogan aprobado es **Se te ven bien**. Los demás mensajes finales y la guía editorial pertenecen a LEM-55 y parten del [brief aprobado LEM-82](brand-strategy.md).
 
 Cada ticket propietario confirma los hechos comerciales antes de publicar. Precios, garantías, beneficios, reseñas, plazos y convenios deben proceder de datos reales y condiciones verificadas; una maqueta o un asset no los convierte en promesas de marca.
 
@@ -95,8 +95,8 @@ Cada ticket propietario confirma los hechos comerciales antes de publicar. Preci
 
 | Tema | Responsable y límite |
 | --- | --- |
-| Propósito, misión, posicionamiento y promesa | [LEM-82](https://linear.app/antekera/issue/LEM-82); esta guía no los inventa |
-| Mensajes finales, voz y estilo editorial | [LEM-55](https://linear.app/antekera/issue/LEM-55); conservar las reglas básicas actuales mientras se resuelven |
+| Aplicación de la estrategia aprobada | [Brief LEM-82](brand-strategy.md), aprobado el 01-11-2026; cambios estratégicos requieren nueva aprobación |
+| Mensajes finales, voz y estilo editorial | [LEM-55](https://linear.app/antekera/issue/LEM-55); desarrollar desde el brief y conservar el eslogan aprobado «Se te ven bien» |
 | Fotografía real y estándar de producto | [LEM-71](https://linear.app/antekera/issue/LEM-71); las categorías genéricas no la sustituyen |
 | Assets restantes y organización de entregas | [LEM-78](https://linear.app/antekera/issue/LEM-78); hero principal, exports nativos/email, covers y adaptación WhatsApp si aplica |
 | Biblioteca editable y estados | [LEM-132](https://linear.app/antekera/issue/LEM-132); usar DESIGN.md y las familias vigentes mientras se entrega su revisión |

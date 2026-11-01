@@ -8,6 +8,8 @@ Esta guía fija las reglas de implementación del storefront a partir de los tok
 
 La experiencia debe sentirse cercana y fácil de recorrer. Las fotografías permiten examinar el armazón completo; los títulos orientan y el cuerpo facilita comparar información de producto, ayuda y condiciones. La composición editorial aporta identidad sin competir con el catálogo ni con las acciones de compra.
 
+Para decisiones de expresión visual o redacción, consultar el [brief estratégico LEM-82](docs/design/brand-strategy.md), aprobado por Miguel el 01-11-2026: facilidad de compra, precio accesible y personalidad cercana, atrevida y práctica; eslogan «Se te ven bien». Aplicar esa dirección con las reglas visuales de este documento, sin introducir nuevos tokens, fuentes o componentes por inferencia.
+
 ### Decisiones y motivos
 
 - **Blanco/carbon y paneles beige:** separar lectura y agrupaciones de contenido con una base tranquila que deje protagonismo al producto.
