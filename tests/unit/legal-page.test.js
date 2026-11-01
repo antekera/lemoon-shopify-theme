@@ -17,12 +17,18 @@ test('legal shell preserves real CMS content, escapes headings and isolates nati
  expect(source).not.toMatch(/30 días|365 días|\$\d|[0-9]+%/);
 });
 
-test('legal navigation uses configured or actual native policies and contact path respects the locale root', () => {
+test('legal pages omit the sidebar and eyebrow while preserving localized and configured contact paths', () => {
  const source = read('sections/lemoon-legal-page.liquid');
  expect(renderAdoption('legal-shipping')).toContain('href="/es/pages/contact"');
  expect(renderAdoption('legal-terms')).toContain('href="/ayuda?x=1&amp;y=2"');
- for (const policy of ['shipping_policy','refund_policy','terms_of_service','privacy_policy']) expect(source).toContain(`shop.${policy}.url`);
- for (const link of ['shipping_url','returns_url','terms_url','privacy_url','warranty_url']) expect(source).toContain(`section.settings.${link}`);
+ for (const kind of ['shipping','returns','terms','privacy','warranty']) {
+  const html = renderAdoption(`legal-${kind}`);
+  expect(html).toContain('<p>CMS <strong>original</strong></p>');
+  expect(html).not.toMatch(/<nav\b|lemoon-legal-page__eyebrow/);
+ }
+ const schema = JSON.parse(source.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+ // Keep saved editor settings compatible even though the lateral navigation is removed.
+ for (const link of ['shipping_url','returns_url','terms_url','privacy_url','warranty_url']) expect(schema.settings.map(({ id }) => id)).toContain(link);
  expect(source).not.toMatch(/href="\/pages\//);
 });
 

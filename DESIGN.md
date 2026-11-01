@@ -121,7 +121,7 @@ Cuando una sección exponga `padding_top/bottom`, usar su fórmula responsive y 
 | Header | Máximo local 2200px en [header.liquid](sections/header.liquid); alturas nominales 72px desktop y 56px móvil según tokens/CSS del header |
 | PLP | Grid local en [lemoon-collection-plp.css](assets/lemoon-collection-plp.css): columnas desktop según `--plp-desktop-columns` (fallback 3), dos entre 750–989; móvil según `--plp-mobile-columns` (fallback 2). Gap desktop ≥990: 22px horizontal/30px vertical; móvil: 12/24px |
 | Sidebar PLP | Selector final ≥990: 264px + gap 28px; 750–989: 220px + gap 24px; oculto por estado `--no-filters`; drawer de filtros usa máximo local 320px bajo 990 |
-| Shell legal | Columnas locales 66rem/24rem y gap 6.4rem; una columna y gap 3.2rem bajo 750; ver sección 8 |
+| Shell legal | Una columna centrada de hasta 66rem, sin eyebrow ni navegación lateral; ver sección 8 |
 
 El alias Dawn `--page-width:128rem` existe, pero `.page-width` usa el máximo Lemoon de 2000px. No imponer un grid global de 12/4 columnas ni convertir el máximo de header, sidebar o lectura en máximo global.
 
@@ -206,13 +206,15 @@ Contenido: es-CL, frases claras, CTAs que describen la acción y moneda CLP. Reu
 | Checkout / confirmación / cuentas nuevas | Usar el editor nativo de checkout/cuentas y sus opciones disponibles para logo, color y tipografía; no portar header ni estructura Liquid. El plan de páginas conserva la adaptación tipográfica nativa registrada. Verificar capacidad en el ticket de esa superficie antes de añadir extensiones. Fuentes: [checkout](https://help.shopify.com/en/manual/checkout-settings/customize-checkout-configurations/checkout-style), [cuentas](https://help.shopify.com/en/manual/customers/customer-accounts/customize-customer-accounts) |
 | Back office | Compartir nombre Lemoon y activo oficial existente; los colores/familias aquí documentados describen el storefront. Respetar patrones del admin y AGENTS/guía de `antekera/lemoon-next-backoffice`; no imponer a sus controles el CSS ni anchos de esta guía |
 
+Las políticas nativas y las páginas legales CMS se presentan en una sola columna centrada de hasta 66rem, con título, contenido y ayuda alineados al mismo ancho, sin eyebrow ni navegación lateral. El cuerpo usa 1.6rem con interlineado 1.6; los subtítulos H2 y H3 usan 2.4rem y 2rem, respectivamente. Conservar el contenido propio de cada política y mostrar fechas de vigencia únicamente cuando estén definidas en su contenido aprobado; no deducirlas de la fecha de modificación de la página.
+
 ## 8. Ejemplo de aplicación: términos
 
 Para mantener la página de términos, partir de [page.terminos-y-condiciones.json](templates/page.terminos-y-condiciones.json) y reutilizar [lemoon-legal-page.liquid](sections/lemoon-legal-page.liquid):
 
 1. Conservar `kind:terms` y el padding de template 64px superior/inferior. La fórmula local `×0.625` produce 40px bajo 750px.
 2. Mantener H1 Urbanist 300, 4.6rem desktop/3.4rem móvil, leading 1.15, tracking −0.5px y color brand. Es excepción local; no sustituirlo por H1 base 4/3.2rem.
-3. Mantener layout `minmax(0,66rem) minmax(0,24rem)` con gap 6.4rem; bajo 750 usar una columna y gap 3.2rem. El cuerpo usa Hanken 1.8rem/1.75 y máximo 66rem. El índice cálido usa radio 12px. Ninguna de estas medidas cambia el ancho global.
-4. Conservar enlaces de navegación con `aria-current`, altura mínima 4.4rem y foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
+3. Mantener una columna centrada de hasta 66rem, sin breadcrumb ni índice lateral. El cuerpo usa Hanken 1.6rem/1.6, con H2 de 2.4rem y H3 de 2rem. Ninguna de estas medidas cambia el ancho global.
+4. Conservar enlaces del contenido y ayuda con foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
 5. El template contiene `demo_data:true`: el ticket de contenido [LEM-119](https://linear.app/antekera/issue/LEM-119) debe resolver el texto definitivo antes de publicar. Aplicar esta guía no cambia ese setting ni convierte el texto de muestra en términos comerciales.
 6. Revisar lectura, teclado, zoom, enlaces y desbordes a 390px y desktop, incluidos ambos lados de 750px. Verificar asignación CMS en la entrega de la página.
