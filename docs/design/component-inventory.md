@@ -12,21 +12,21 @@ Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a3
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura actual enumera las 511 rutas de `git ls-files sections snippets layout templates blocks assets config locales`, incluidos los diez snippets añadidos por este PR; no quedan rutas explícitas fuera del índice Git. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` se recalcula con referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
+La cobertura entregada enumera 512 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la nueva plantilla `templates/page.politica-de-privacidad.json`, registrada en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
 | Snippets / layouts Liquid | 91 / 2 |
-| Templates JSON / Liquid | 35 / 3 |
+| Templates JSON / Liquid | 36 / 3 |
 | Assets CSS / JS / SVG | 81 / 53 / 93 |
 | Assets binarios PNG / JPG / GIF | 19 / 10 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **511 / 480 / 31** |
+| **Total fuentes / mapped / excluded** | **512 / 481 / 31** |
 | Familias estables | 44 |
 
-El núcleo actual es de **332 fuentes**: 197 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global. Con 93 SVG y 51 locales se obtienen 476 mapped. Las exclusiones conservan 30 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
+El núcleo actual es de **337 fuentes**: 202 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global. Con 93 SVG y 51 locales se obtienen 481 mapped. Las exclusiones conservan 30 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
 
 Hay **61 secciones con schema y 7 fragmentos sin schema**. Veintisiete secciones declaran **81 bloques: 73 declaraciones locales y 8 slots `@app`**; son declaraciones, no instancias ni tipos globales únicos. Los ocho sitios `{% render block %}` corresponden a apps. No hay archivos `blocks/`, ni infraestructura observada de theme blocks reutilizables mediante `content_for 'blocks'`. Los snippets composicionales y los bloques locales de sección no acreditan soporte de Shopify theme blocks. La matriz de secciones lista cada tipo; sus settings y opciones permanecen en el schema del archivo canónico enlazado, incluidas opciones no instanciadas en templates actuales.
 
@@ -614,7 +614,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [sections/footer.liquid](../../sections/footer.liquid), [assets/section-lemoon-footer.css](../../assets/section-lemoon-footer.css), [assets/section-lemoon-footer.js](../../assets/section-lemoon-footer.js), [assets/section-footer.css](../../assets/section-footer.css), [assets/component-list-social.css](../../assets/component-list-social.css), [assets/component-list-payment.css](../../assets/component-list-payment.css), [assets/component-newsletter.css](../../assets/component-newsletter.css), [assets/newsletter-section.css](../../assets/newsletter-section.css).
 
-**Contrato actual.** Footer actual es Lemoon: navigation_column (heading/menu/open_mobile/mobile_only/desktop_only), legal_links(menu), @app; newsletter form customer contact[email]/tags; ayuda, whatsapp/contact y logos de pago configurables por settings. Mostrar logo no acredita pasarela habilitada.
+**Contrato actual.** Footer actual es Lemoon: navigation_column (heading/menu/open_mobile/mobile_only/desktop_only), legal_links(menu), @app; newsletter form customer contact[email]/tags; ayuda, whatsapp/contact y logos de pago configurables por settings. Mostrar logo no acredita pasarela habilitada. La fila legal inferior contiene Privacidad, Términos y condiciones y Preferencias de cookies; Envíos y Devoluciones se mantienen fuera de esa fila.
 
 **Variantes existentes.** Columnas desktop; details móvil; newsletter success/error; links legales/redes/ayuda; control preferencias cookies.
 
@@ -635,7 +635,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/lemoon-cookie-preferences.liquid](../../snippets/lemoon-cookie-preferences.liquid), [snippets/lemoon-native-policy-help.liquid](../../snippets/lemoon-native-policy-help.liquid), [assets/lemoon-cookie-preferences.js](../../assets/lemoon-cookie-preferences.js), [assets/lemoon-native-policies.css](../../assets/lemoon-native-policies.css).
 
-**Contrato actual.** Cookie snippet recibe section_id y privacy_url; dialog data-cookie-dialog, analytics/marketing/preferences; acciones accept/reject/save. Lee Shopify.customerPrivacy vía loadFeatures consent-tracking-api 0.1 y verifica currentVisitorConsent tras save. Policy help recibe contact_url.
+**Contrato actual.** Cookie snippet recibe section_id y privacy_url; dialog data-cookie-dialog, analytics/marketing/preferences; acciones accept/reject/save. Lee Shopify.customerPrivacy vía loadFeatures consent-tracking-api 0.1 y verifica currentVisitorConsent tras save. Policy help recibe contact_url. El footer elige la página `pages['politica-de-privacidad']` solo cuando existe y usa el template_suffix `politica-de-privacidad`; mientras no se cumpla esa condición conserva la URL de la política nativa. La canonical de la ruta nativa y el URL social usan la misma condición para apuntar a la página española, sin redirect JavaScript ni duplicación del contenido de la política.
 
 **Variantes existentes.** Dialog nativo del footer y opener compartido policy; loading servicio, error disponibilidad/guardado, selección persistida.
 
@@ -887,7 +887,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [sections/lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid), [sections/lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid), [sections/lemoon-service-page.liquid](../../sections/lemoon-service-page.liquid), [sections/lemoon-crystal-guide.liquid](../../sections/lemoon-crystal-guide.liquid), [assets/lemoon-legal-pages.css](../../assets/lemoon-legal-pages.css).
 
-**Contrato actual.** Legal kind shipping/returns/terms/privacy/warranty, intro/page.content/help links/demo; guide_kind pedido/prescripcion/probador/rostro/medidas determina claves y steps; service kind benefits/operations, verified_details/image/demo; crystal-guide configurator_product. No confirma negocio, coberturas, reembolsos ni capacidad del configurador.
+**Contrato actual.** Legal kind shipping/returns/terms/privacy/warranty, intro/page.content/help links/demo. La plantilla `page.politica-de-privacidad.json` activa `use_native_privacy` exclusivamente para kind privacy: fuente única `shop.privacy_policy.body`, sin introducción automática ni fallback a CMS/demo; si está vacía muestra el estado vacío localizado. No duplica el texto ni calcula la vigencia desde datos técnicos. guide_kind pedido/prescripcion/probador/rostro/medidas determina claves y steps; service kind benefits/operations, verified_details/image/demo; crystal-guide configurator_product. No confirma negocio, coberturas, reembolsos ni capacidad del configurador.
 
 **Variantes existentes.** Shell legal de una columna centrada sin eyebrow ni navegación lateral; guías paso/ilustración/ayuda, servicio con pasos/image, guía cristales y CTA. Los campos URL de políticas del schema legal se conservan por compatibilidad con configuraciones guardadas, pero no generan un sidebar.
 

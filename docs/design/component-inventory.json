@@ -13,7 +13,7 @@
       "config",
       "locales"
     ],
-    "enumeration": "git ls-files of the eight roots, including the six PR additions recorded in snapshot.new_source_paths; no explicit paths outside the Git index; private settings excluded without content reads; docs/tests/tooling outside implementation universe",
+    "enumeration": "Git-index enumeration of the eight roots plus delivery additions recorded in snapshot.new_source_paths; private settings excluded without content reads; docs/tests/tooling outside implementation universe",
     "not_read": [
       "config/settings_data.json",
       "secrets",
@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 511,
-    "mapped_paths": 480,
+    "total_tracked_paths": 512,
+    "mapped_paths": 481,
     "excluded_paths": 31,
     "by_root": {
       "assets": 257,
@@ -33,12 +33,12 @@
       "locales": 51,
       "sections": 70,
       "snippets": 91,
-      "templates": 38
+      "templates": 39
     },
     "mapped_by_extension": {
       ".css": 81,
       ".js": 53,
-      ".json": 89,
+      ".json": 90,
       ".liquid": 164,
       ".svg": 93
     },
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 511,
+    "total_source_paths": 512,
     "explicit_new_paths": 0
   },
   "components": [
@@ -1040,7 +1040,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-cookie-preferences.liquid",
-        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia.",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Sin redirect JavaScript.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -1486,6 +1486,7 @@
         "templates/page.isapres-y-fonasa.json",
         "templates/page.operativos-oftalmologicos.json",
         "templates/page.politica-de-devoluciones.json",
+        "templates/page.politica-de-privacidad.json",
         "templates/page.privacidad.json",
         "templates/page.terminos-y-condiciones.json"
       ],
@@ -1498,7 +1499,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-guide-page.liquid",
-        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios.",
+        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -5761,6 +5762,14 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
+      "path": "templates/page.politica-de-privacidad.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "targeted-template-review; native policy source, without duplicated content"
+    },
+    {
       "path": "templates/page.preguntas-frecuentes.json",
       "status": "mapped",
       "component_ids": [
@@ -5847,7 +5856,7 @@
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
   "snapshot": {
     "kind": "delivered implementation source snapshot; not Shopify runtime validation",
-    "date": "2026-10-31",
+    "date": "2026-11-01",
     "implementation_base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
     "new_source_paths": [
       "snippets/lemoon-ui-action.liquid",
@@ -5859,9 +5868,10 @@
       "snippets/lemoon-cart-tax-note.liquid",
       "snippets/lemoon-product-unit-price.liquid",
       "snippets/lemoon-carousel-results.liquid",
-      "snippets/lemoon-dawn-slider-controls.liquid"
+      "snippets/lemoon-dawn-slider-controls.liquid",
+      "templates/page.politica-de-privacidad.json"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage describe the 511 indexed source paths, including the ten PR additions retained in new_source_paths; that list does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 512 delivered source paths: the 511-path implementation snapshot plus the Spanish privacy template. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

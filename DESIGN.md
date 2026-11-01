@@ -208,6 +208,10 @@ Contenido: es-CL, frases claras, CTAs que describen la acción y moneda CLP. Reu
 
 Las políticas nativas y las páginas legales CMS se presentan en una sola columna centrada de hasta 66rem, con título, contenido y ayuda alineados al mismo ancho, sin eyebrow ni navegación lateral. El cuerpo usa 1.6rem con interlineado 1.6; los subtítulos H2 y H3 usan 2.4rem y 2rem, respectivamente. Conservar el contenido propio de cada política y mostrar fechas de vigencia únicamente cuando estén definidas en su contenido aprobado; no deducirlas de la fecha de modificación de la página.
 
+La dirección principal de privacidad es `/pages/politica-de-privacidad`, con la plantilla `page.politica-de-privacidad` y el modo `use_native_privacy` del shell legal. Ese modo muestra exclusivamente `shop.privacy_policy.body`: no copiar el texto a una segunda página CMS. El footer y el panel de cookies prefieren la página en español solo cuando existe publicada con esa plantilla; hasta entonces conservan la ruta nativa. `/policies/privacy-policy` permanece como compatibilidad de Shopify y señala a la página en español mediante canonical y Open Graph cuando está disponible; no se aplica una redirección JavaScript ni se elimina la política requerida por las superficies nativas.
+
+La franja legal inferior del footer contiene Privacidad, Términos y condiciones y Preferencias de cookies; Envíos y Devoluciones no se repiten en esa franja.
+
 ## 8. Ejemplo de aplicación: términos
 
 Para mantener la página de términos, partir de [page.terminos-y-condiciones.json](templates/page.terminos-y-condiciones.json) y reutilizar [lemoon-legal-page.liquid](sections/lemoon-legal-page.liquid):

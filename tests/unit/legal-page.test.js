@@ -14,7 +14,8 @@ test('legal shell preserves real CMS content, escapes headings and isolates nati
  expect(source).toMatch(/elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank[\s\S]*?{{ shop.privacy_policy.body }}/);
  expect(source).toContain("'sections.lemoon_legal_page.empty_content' | t");
  expect(html.match(/<h1\b/g)).toHaveLength(1);
- expect(source).not.toMatch(/30 días|365 días|\$\d|[0-9]+%/);
+ const renderedCopy = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+ expect(renderedCopy).not.toMatch(/30 días|365 días|\$\d|[0-9]+%/);
 });
 
 test('legal pages omit the sidebar and eyebrow while preserving localized and configured contact paths', () => {
@@ -64,4 +65,39 @@ test('legal shell keeps native privacy fallback and demo privacy heading separat
  const demo = renderComponentSection('lemoon-legal-page', { settings: { kind: 'privacy', demo_data: true, demo_content: '<p>Demo</p>' }, context: { page: { title: 'CMS title' } } });
  expect(demo).toContain('<h1>Privacidad</h1>');
  expect(demo).not.toContain('<h1>CMS title</h1>');
+});
+
+test('the Spanish privacy template reads only the native policy without extra introduction or demo content', () => {
+ const template = json('templates/page.politica-de-privacidad.json');
+ expect(template.sections.main.settings).toMatchObject({ kind: 'privacy', use_native_privacy: true, demo_data: false, padding_top: 64, padding_bottom: 64 });
+ const html = renderComponentSection('lemoon-legal-page', {
+  settings: { ...template.sections.main.settings, demo_data: true, demo_content: '<p>Conflicting demo</p>', intro: 'Conflicting introduction' },
+  context: {
+   page: { title: 'Conflicting CMS title', content: '<p>Conflicting CMS</p>' },
+   shop: { privacy_policy: { title: 'Política de privacidad', body: '<p><strong>Fecha de entrada en vigor:</strong> 1 de noviembre de 2026</p><p>[RAZÓN SOCIAL POR COMPLETAR]</p>' } },
+  },
+ });
+ expect(html).toContain('<h1>Política de privacidad</h1>');
+ expect(html).toContain('<p><strong>Fecha de entrada en vigor:</strong> 1 de noviembre de 2026</p>');
+ expect(html).toContain('<p>[RAZÓN SOCIAL POR COMPLETAR]</p>');
+ expect(html).not.toMatch(/Conflicting|lemoon-legal-page__intro\"|lemoon-legal-page__eyebrow|<nav\b/);
+ expect(html.indexOf('<h1>')).toBeLessThan(html.indexOf('Fecha de entrada en vigor:'));
+});
+
+test('native privacy mode shows the localized empty state instead of silently using other copy', () => {
+ const html = renderComponentSection('lemoon-legal-page', {
+  settings: { kind: 'privacy', use_native_privacy: true, demo_data: true, demo_content: '<p>Conflicting demo</p>' },
+  context: { page: { title: 'Privacidad', content: '<p>Conflicting CMS</p>' }, shop: { privacy_policy: { body: '' } } },
+ });
+ expect(html).toContain(json('locales/es.json').sections.lemoon_legal_page.empty_content);
+ expect(html).not.toMatch(/Conflicting|lemoon-legal-page__intro\"/);
+});
+
+test('native privacy mode is opt-in and does not replace other legal page kinds', () => {
+ const html = renderComponentSection('lemoon-legal-page', {
+  settings: { kind: 'shipping', use_native_privacy: true },
+  context: { page: { title: 'Envíos', content: '<p>Shipping CMS</p>' }, shop: { privacy_policy: { body: '<p>Native privacy</p>' } } },
+ });
+ expect(html).toContain('<p>Shipping CMS</p>');
+ expect(html).not.toContain('<p>Native privacy</p>');
 });

@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "lemoon-legal-page",
+      "settings": {
+        "use_native_privacy": true,
+        "demo_data": false,
+        "kind": "privacy",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -9,6 +9,11 @@
 {%- liquid
   assign footer_phone = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
+  assign footer_privacy_page = pages['politica-de-privacidad']
+  assign footer_privacy_url = shop.privacy_policy.url
+  if footer_privacy_page != blank and footer_privacy_page.published_at != blank and footer_privacy_page.template_suffix == 'politica-de-privacidad'
+    assign footer_privacy_url = footer_privacy_page.url
+  endif
 -%}
 
 {%- if section.settings.newsletter_enable -%}
@@ -118,12 +123,8 @@
     <div class="lemoon-footer__legal">
       <ul class="lemoon-footer__legal-links" role="list">
         {%- assign terms_page = pages['terminos-y-condiciones'] -%}
-        {%- assign shipping_page = pages['envios-y-entregas'] -%}
-        {%- assign returns_page = pages['politicas'] -%}
-        {%- if shop.privacy_policy != blank -%}<li><a href="{{ shop.privacy_policy.url }}">{{ 'sections.lemoon_footer_privacy.policy' | t }}</a></li>{%- endif -%}
+        {%- if shop.privacy_policy != blank -%}<li><a href="{{ footer_privacy_url | escape }}">{{ 'sections.lemoon_footer_privacy.policy' | t }}</a></li>{%- endif -%}
         {%- if shop.terms_of_service != blank -%}<li><a href="{{ shop.terms_of_service.url }}">{{ 'sections.lemoon_footer_privacy.terms' | t }}</a></li>{%- elsif terms_page != blank -%}<li><a href="{{ terms_page.url }}">{{ 'sections.lemoon_footer_privacy.terms' | t }}</a></li>{%- endif -%}
-        {%- if shipping_page != blank -%}<li><a href="{{ shipping_page.url }}">{{ 'sections.lemoon_footer_privacy.shipping' | t }}</a></li>{%- endif -%}
-        {%- if returns_page != blank -%}<li><a href="{{ returns_page.url }}">{{ 'sections.lemoon_footer_privacy.returns' | t }}</a></li>{%- endif -%}
         <li data-cookie-preferences-control>
           <button type="button" class="lemoon-footer__cookie-preferences" data-cookie-preferences aria-haspopup="dialog" aria-controls="LemoonCookiePreferences-{{ section.id }}" hidden>{{ 'sections.lemoon_footer_privacy.preferences' | t }}</button>
           <span class="lemoon-footer__cookie-status" data-cookie-preferences-status data-unavailable="{{ 'sections.lemoon_footer_privacy.unavailable' | t | escape }}" role="status"></span>
@@ -146,7 +147,7 @@
     {%- endif -%}
   {%- endfor -%}
 </footer>
-{% render 'lemoon-cookie-preferences', section_id: section.id, privacy_url: shop.privacy_policy.url %}
+{% render 'lemoon-cookie-preferences', section_id: section.id, privacy_url: footer_privacy_url %}
 
 {% schema %}
 {
