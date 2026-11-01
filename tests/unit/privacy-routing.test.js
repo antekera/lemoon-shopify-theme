@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
 import { expect, test } from 'vitest';
 import { createComponentEngine, renderComponentSection } from '../helpers/component-library-renderer.mjs';
 
@@ -36,18 +37,18 @@ function footerPrivacyLinks(html) {
 // The unrelated font/CSS/header-group machinery of the full layout is outside
 // this unit's scope; no routing logic or metadata markup is recreated here.
 const layout = readFileSync(new URL('../../layout/theme.liquid', import.meta.url), 'utf8');
-const canonicalEnd = layout.indexOf('>', layout.indexOf('<link rel="canonical"')) + 1;
+const routingEnd = layout.indexOf("{%- if request.page_type == 'search' -%}");
 const metadataCall = layout.match(/{%\s*render 'meta-tags'[^%]*%}/)?.[0];
-const routingHead = layout.slice(0, canonicalEnd) + metadataCall;
+const routingHead = layout.slice(0, routingEnd) + metadataCall;
 
-function renderHead(privacyPage, { path = nativePath, pageType = 'policy', privacyPath = nativePath } = {}) {
+function renderHead(privacyPage, { path = nativePath, pageType = 'policy', privacyPath = nativePath, designMode = false, requestOrigin = origin } = {}) {
   const engine = createComponentEngine();
   // Required for parsing the actual snippet, but product-price execution is
   // deliberately excluded rather than replaced by an invented pricing filter.
   engine.registerFilter('money_without_currency', () => { throw new Error('Product prices are outside privacy-routing coverage'); });
   return engine.parseAndRenderSync(routingHead, {
     canonical_url: `${origin}${path}`,
-    request: { page_type: pageType, path, origin, locale: { iso_code: 'es' } },
+    request: { page_type: pageType, path, origin: requestOrigin, design_mode: designMode, locale: { iso_code: 'es' } },
     pages: { 'politica-de-privacidad': privacyPage },
     shop: { privacy_policy: { url: privacyPath } },
     settings: {},
@@ -60,6 +61,49 @@ function canonicalLinks(html) {
     openGraph: html.match(/<meta property="og:url" content="([^"]+)"/)?.[1],
   };
 }
+
+function redirectDestination(html) {
+  const destinations = [];
+  for (const [, script] of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)) {
+    runInNewContext(script, { window: { location: { replace: url => destinations.push(url) } } });
+  }
+  return destinations;
+}
+
+test('native privacy replaces browser history with the Spanish page and supports navigation without JavaScript', () => {
+  const html = renderHead(availablePage);
+  expect(redirectDestination(html)).toEqual([spanishPath]);
+  expect(html).toContain(`<noscript>\n        <meta http-equiv="refresh" content="0;url=${spanishPath}">`);
+});
+
+test.each(unavailablePages)('native privacy does not redirect when the Spanish page is %s', (_, privacyPage) => {
+  const html = renderHead(privacyPage);
+  expect(redirectDestination(html)).toEqual([]);
+  expect(html).not.toContain('http-equiv="refresh"');
+});
+
+test('the theme editor can inspect native privacy without being redirected', () => {
+  const html = renderHead(availablePage, { designMode: true });
+  expect(redirectDestination(html)).toEqual([]);
+  expect(html).not.toContain('http-equiv="refresh"');
+});
+
+test('the redirect keeps the current host in local development and follows localized page URLs', () => {
+  const url = `/es-cl${spanishPath}`;
+  const html = renderHead({ ...availablePage, url }, { path: `/es-cl${nativePath}`, privacyPath: `/es-cl${nativePath}`, requestOrigin: 'http://127.0.0.1:9292' });
+  const [destination] = redirectDestination(html);
+  expect(new URL(destination, 'http://127.0.0.1:9292').href).toBe(`http://127.0.0.1:9292${url}`);
+});
+
+test.each([
+  ['/policies/shipping-policy', 'policy'],
+  ['/pages/contact', 'page'],
+  [spanishPath, 'page'],
+])('other routes do not redirect or create a privacy loop: %s', (path, pageType) => {
+  const html = renderHead(availablePage, { path, pageType });
+  expect(redirectDestination(html)).toEqual([]);
+  expect(html).not.toContain('http-equiv="refresh"');
+});
 
 test.each(unavailablePages)('footer and cookie preferences retain native privacy when the Spanish page is %s', (_, privacyPage) => {
   expect(footerPrivacyLinks(renderFooter(privacyPage))).toEqual({ legal: nativePath, preferences: nativePath });

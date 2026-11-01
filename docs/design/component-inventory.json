@@ -1040,7 +1040,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-cookie-preferences.liquid",
-        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Sin redirect JavaScript.",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Redirección de navegador de la ruta nativa a la página española publicada, con fallback sin JavaScript y excepción del editor; no es un HTTP 301.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
