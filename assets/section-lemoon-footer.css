@@ -407,6 +407,10 @@
   list-style: none;
 }
 
+.lemoon-footer__legal-links > [data-cookie-preferences-control]:has(> [data-cookie-preferences][hidden]):has(> [data-cookie-preferences-status]:empty) {
+  display: none;
+}
+
 .lemoon-footer__legal a,
 .lemoon-footer__copyright {
   color: rgba(255, 255, 255, 0.8);
