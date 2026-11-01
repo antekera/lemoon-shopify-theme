@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 512,
-    "mapped_paths": 481,
-    "excluded_paths": 31,
+    "total_tracked_paths": 514,
+    "mapped_paths": 482,
+    "excluded_paths": 32,
     "by_root": {
-      "assets": 257,
+      "assets": 259,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -40,10 +40,10 @@
       ".js": 53,
       ".json": 90,
       ".liquid": 164,
-      ".svg": 93
+      ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 30,
+      "binary-image-or-font": 31,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 512,
+    "total_source_paths": 514,
     "explicit_new_paths": 0
   },
   "components": [
@@ -992,7 +992,8 @@
         "assets/component-list-social.css",
         "assets/component-list-payment.css",
         "assets/component-newsletter.css",
-        "assets/newsletter-section.css"
+        "assets/newsletter-section.css",
+        "assets/payment-webpay.svg"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
@@ -1040,7 +1041,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-cookie-preferences.liquid",
-        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Sin redirect JavaScript.",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Redirección de navegador de la ruta nativa a la página española publicada, con fallback sin JavaScript y excepción del editor; no es un HTTP 301.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -3232,6 +3233,12 @@
       "content_read": false
     },
     {
+      "path": "assets/lemoon-secure-ssl.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo de footer con procedencia documentada en asset-inventory.md; no es un contrato de UI",
+      "content_read": true
+    },
+    {
       "path": "assets/lemoon-style-casual.png",
       "status": "excluded",
       "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
@@ -3357,6 +3364,14 @@
         "LM-PASSWORD"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/payment-webpay.svg",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "official SVG asset; styles and paths preserved, Adobe editing metadata removed"
     },
     {
       "path": "assets/pickup-availability.js",
@@ -5869,9 +5884,11 @@
       "snippets/lemoon-product-unit-price.liquid",
       "snippets/lemoon-carousel-results.liquid",
       "snippets/lemoon-dawn-slider-controls.liquid",
-      "templates/page.politica-de-privacidad.json"
+      "templates/page.politica-de-privacidad.json",
+      "assets/lemoon-secure-ssl.png",
+      "assets/payment-webpay.svg"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 512 delivered source paths: the 511-path implementation snapshot plus the Spanish privacy template. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 514 delivered source paths: the 511-path implementation snapshot, Spanish privacy template and two footer image assets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

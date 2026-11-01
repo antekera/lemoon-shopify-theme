@@ -7,14 +7,26 @@
     <meta name="theme-color" content="">
     {%- liquid
       assign lemoon_canonical_url = canonical_url
+      assign lemoon_privacy_redirect_url = ''
       assign lemoon_privacy_page = pages['politica-de-privacidad']
       if request.page_type == 'policy' and request.path == shop.privacy_policy.url
         if lemoon_privacy_page != blank and lemoon_privacy_page.published_at != blank and lemoon_privacy_page.template_suffix == 'politica-de-privacidad'
           assign lemoon_canonical_url = request.origin | append: lemoon_privacy_page.url
+          unless request.design_mode
+            assign lemoon_privacy_redirect_url = lemoon_privacy_page.url
+          endunless
         endif
       endif
     -%}
     <link rel="canonical" href="{{ lemoon_canonical_url | escape }}">
+    {%- if lemoon_privacy_redirect_url != blank -%}
+      <script>
+        window.location.replace({{ lemoon_privacy_redirect_url | json }});
+      </script>
+      <noscript>
+        <meta http-equiv="refresh" content="0;url={{ lemoon_privacy_redirect_url | escape }}">
+      </noscript>
+    {%- endif -%}
     {%- if request.page_type == 'search' -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}

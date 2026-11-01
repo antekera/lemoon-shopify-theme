@@ -139,3 +139,12 @@ Destinos complementarios de LEM-86: `/pages/lentes-de-sol` y `/pages/cristales` 
 - **LEM-131 — implementación y QA:** header, menús desktop/móvil y announcement; consume G01/G05/N01/N02. **LEM-94** es responsable del footer. La finalización de LEM-131 no bloquea LEM-97 ni convierte su QA de navegación en criterio de entrega de assets.
 
 Fuentes de implementación: [inventario de secciones](section-inventory.md), [Home](../../templates/index.json), [PLP](../../assets/lemoon-collection-plp.css), [hero](../../assets/lemoon-hero.css), [componentes](../../assets/lemoon-components.css) y los consumidores enlazados arriba. Las asignaciones Shopify y el HTML local verificado de las tres categorías no acreditan su render público. La verificación pública de favicon/OG se limita a `/password` (HTTP 200, 2026-10-30); otros recursos y cachés de redes no están certificados. Solo se guardaron ajustes del tema ya publicado y Preferencias, sin push ni publicación completa del tema; la restricción por contraseña continúa activa.
+
+
+## Activos externos del footer — 1 de noviembre de 2026
+
+| Activo | Procedencia | Uso y límites |
+|---|---|---|
+| [lemoon-secure-ssl.png](../../assets/lemoon-secure-ssl.png), 156 × 52 | [Imagen enviada por Miguel](https://cdn.shopify.com/s/files/1/0631/8371/6400/files/icon-securessl.png?v=1749743718), copiada sin cambios | Candado genérico SSL sobre fondo blanco. Alojarse en CDN de Shopify no lo convierte en sello oficial ni acredita una certificación de Shopify. |
+| [payment-webpay.svg](../../assets/payment-webpay.svg), viewBox 80 × 26.8999996 | [SVG de Transbank Developers enviado por Miguel](https://www.transbankdevelopers.cl/public/library/img/svg/logo_webpay.svg) | Estilos y trazados originales conservados; se retiraron DOCTYPE, foreignObject y datos de edición de Illustrator (396 KB → 28 KB), sin cambiar el dibujo. Su presencia no acredita que el medio esté habilitado. |
+| Visa y Mastercard | [Filtro nativo de Shopify](https://shopify.dev/docs/api/liquid/filters/payment_type_svg_tag), tipos `visa` y `master` | Logos SVG renderizados por Shopify; conservar los interruptores existentes del footer. Sin nuevos archivos de marca locales. |
