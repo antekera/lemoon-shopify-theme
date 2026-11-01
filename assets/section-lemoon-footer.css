@@ -346,21 +346,17 @@
 
 .lemoon-footer__payments .lemoon-footer__security-badge {
   display: inline-flex;
-  padding: 0.4rem 0.8rem;
+  padding: 2px;
   border-radius: 0.4rem;
   background: #fff;
 }
 
-.lemoon-footer__security-badge img {
+.lemoon-footer__security-badge img,
+.lemoon-footer__webpay-logo,
+.lemoon-footer__payment-icon {
   display: block;
-  width: 13.2rem;
-  height: auto;
-}
-
-.lemoon-footer__webpay-logo {
-  display: block;
-  width: 10.4rem;
-  height: auto;
+  width: auto;
+  height: 24px;
 }
 
 .lemoon-footer__payment-list {
@@ -379,21 +375,15 @@
 }
 
 .lemoon-footer__payment-badge {
-  min-width: 6.2rem;
-  min-height: 3.2rem;
+  min-width: 0;
+  min-height: 0;
   justify-content: center;
-  padding: 0.5rem 0.9rem;
+  padding: 2px;
   border-radius: 0.4rem;
   background: #fff;
   color: #0b1f3a;
   font-size: 1.2rem;
   font-weight: 700;
-}
-
-.lemoon-footer__payment-icon {
-  display: block;
-  width: 4.2rem;
-  height: auto;
 }
 
 .lemoon-footer__custom-payment img {
