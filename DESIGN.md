@@ -212,6 +212,8 @@ La dirección principal de privacidad es `/pages/politica-de-privacidad`, con la
 
 La franja legal inferior del footer contiene Privacidad, Términos y condiciones y Preferencias de cookies; Envíos y Devoluciones no se repiten en esa franja. El copyright muestra `section.settings.company_name`, escapado, con el valor configurado en Shopify y el emoji decorativo 🇨🇱 a la derecha; su verificación final corresponde al checklist previo al go live. Enlaces, preferencias y empresa comparten la misma lista y su gap responsive; el control de cookies oculto y sin estado no debe dejar un elemento vacío que genere separación adicional.
 
+El bloque de pagos del footer muestra el gráfico SSL proporcionado por el usuario sobre fondo blanco, manteniendo su título configurable para lectores de pantalla. Visa y Mastercard usan `payment_type_svg_tag` de Shopify; Webpay usa el PNG oficial con endoso Transbank, sin alterar proporciones o colores. Se conservan los interruptores de cada medio: mostrar estos logos no acredita activación de pasarelas, certificación de Shopify ni garantía absoluta de seguridad.
+
 ## 8. Ejemplo de aplicación: términos
 
 Para mantener la página de términos, partir de [page.terminos-y-condiciones.json](templates/page.terminos-y-condiciones.json) y reutilizar [lemoon-legal-page.liquid](sections/lemoon-legal-page.liquid):

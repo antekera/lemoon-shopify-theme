@@ -344,6 +344,25 @@
   padding: 2.4rem 0;
 }
 
+.lemoon-footer__payments .lemoon-footer__security-badge {
+  display: inline-flex;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  background: #fff;
+}
+
+.lemoon-footer__security-badge img {
+  display: block;
+  width: 13.2rem;
+  height: auto;
+}
+
+.lemoon-footer__webpay-logo {
+  display: block;
+  width: 10.4rem;
+  height: auto;
+}
+
 .lemoon-footer__payment-list {
   display: flex;
   flex-wrap: wrap;

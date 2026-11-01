@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 512,
+    "total_tracked_paths": 514,
     "mapped_paths": 481,
-    "excluded_paths": 31,
+    "excluded_paths": 33,
     "by_root": {
-      "assets": 257,
+      "assets": 259,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -43,7 +43,7 @@
       ".svg": 93
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 30,
+      "binary-image-or-font": 32,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 512,
+    "total_source_paths": 514,
     "explicit_new_paths": 0
   },
   "components": [
@@ -3232,6 +3232,12 @@
       "content_read": false
     },
     {
+      "path": "assets/lemoon-secure-ssl.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo de footer con procedencia documentada en asset-inventory.md; no es un contrato de UI",
+      "content_read": true
+    },
+    {
       "path": "assets/lemoon-style-casual.png",
       "status": "excluded",
       "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
@@ -3357,6 +3363,12 @@
         "LM-PASSWORD"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/payment-webpay.png",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo de footer con procedencia documentada en asset-inventory.md; no es un contrato de UI",
+      "content_read": true
     },
     {
       "path": "assets/pickup-availability.js",
@@ -5869,9 +5881,11 @@
       "snippets/lemoon-product-unit-price.liquid",
       "snippets/lemoon-carousel-results.liquid",
       "snippets/lemoon-dawn-slider-controls.liquid",
-      "templates/page.politica-de-privacidad.json"
+      "templates/page.politica-de-privacidad.json",
+      "assets/lemoon-secure-ssl.png",
+      "assets/payment-webpay.png"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 512 delivered source paths: the 511-path implementation snapshot plus the Spanish privacy template. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 514 delivered source paths: the 511-path implementation snapshot, Spanish privacy template and two footer image assets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

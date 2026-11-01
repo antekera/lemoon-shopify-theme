@@ -108,11 +108,14 @@
 
     {%- if section.settings.payment_enable -%}
       <div class="lemoon-footer__payments">
-        <h2>{{ section.settings.payment_heading | escape }}</h2>
+        <h2 class="lemoon-footer__security-badge">
+          <span class="visually-hidden">{{ section.settings.payment_heading | escape }}</span>
+          <img src="{{ 'lemoon-secure-ssl.png' | asset_url }}" alt="" width="156" height="52" loading="lazy">
+        </h2>
         <ul class="lemoon-footer__payment-list" role="list">
-          {%- if section.settings.payment_webpay -%}<li class="lemoon-footer__payment-badge">{{ section.settings.payment_webpay_label | escape }}</li>{%- endif -%}
-          {%- if section.settings.payment_visa -%}<li class="lemoon-footer__payment-badge">{{ section.settings.payment_visa_label | escape }}</li>{%- endif -%}
-          {%- if section.settings.payment_mastercard -%}<li class="lemoon-footer__payment-badge">{{ section.settings.payment_mastercard_label | escape }}</li>{%- endif -%}
+          {%- if section.settings.payment_webpay -%}<li class="lemoon-footer__payment-badge"><img class="lemoon-footer__webpay-logo" src="{{ 'payment-webpay.png' | asset_url }}" alt="{{ section.settings.payment_webpay_label | escape }}" width="1309" height="424" loading="lazy"></li>{%- endif -%}
+          {%- if section.settings.payment_visa -%}<li class="lemoon-footer__payment-badge">{{ 'visa' | payment_type_svg_tag: class: 'lemoon-footer__payment-icon' }}</li>{%- endif -%}
+          {%- if section.settings.payment_mastercard -%}<li class="lemoon-footer__payment-badge">{{ 'master' | payment_type_svg_tag: class: 'lemoon-footer__payment-icon' }}</li>{%- endif -%}
         </ul>
       </div>
     {%- endif -%}
