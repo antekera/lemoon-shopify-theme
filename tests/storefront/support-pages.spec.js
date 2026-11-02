@@ -21,7 +21,7 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   await noOverflow(page);
 });
 
-test('Nosotros shows approved copy and its editorial image without demo or contact CTA and connects catalogue by keyboard', async ({page}, testInfo) => {
+test('Nosotros shows approved copy and abstract placeholder without demo or contact CTA and connects catalogue by keyboard', async ({page}, testInfo) => {
   await openStorefrontPage(page, '/pages/nosotros?view=nosotros');
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
@@ -34,12 +34,9 @@ test('Nosotros shows approved copy and its editorial image without demo or conta
   await expect(about).toContainText('Tus lentes son parte de tu día a día.');
   await expect(about).toContainText('Se te ven bien');
   await expect(about).not.toContainText(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|Título de sección|POR CONFIRMAR/i);
-  const image = about.locator('.lemoon-about-page__visual img');
-  await expect(image).toBeVisible();
-  await expect(image).toHaveAttribute('src', /lemoon-nosotros-estanteria-v2/);
-  await expect(image).toHaveAttribute('alt', /ilustrativa/i);
-  await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
-  await expect(about.locator('.lemoon-about-page__abstract')).toHaveCount(0);
+  await expect(about.locator('img')).toHaveCount(0);
+  await expect(about.locator('.lemoon-about-page__abstract')).toBeVisible();
+  await expect(about.locator('.lemoon-about-page__abstract')).toHaveAttribute('aria-hidden', 'true');
   const catalogue = about.getByRole('link', { name: 'Conoce nuestros lentes', exact: true });
   const closingCatalogue = about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true });
   await expect(about.getByRole('link', { name: 'Conversemos', exact: true })).toHaveCount(0);

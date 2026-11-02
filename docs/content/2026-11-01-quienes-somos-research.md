@@ -92,6 +92,13 @@ Las comprobaciones de Theme Check, unitarias y de storefront se registran con su
 
 ## Ajuste de la vista previa — imagen y enlace, 02-11-2026
 
-Decisión vigente: Miguel solicita quitar «Conversemos» e incorporar una imagen realista de una estantería tipo óptica con lentes. Esta decisión sustituye la opción anterior sin imagen para la vista previa actual. Se genera una escena editorial con imagegen, sin marcas, personas, rótulos ni referencias a una ubicación de Lemoon. No documenta un local real ni SKU disponibles. El original, JPG y prompt se conservan en [assets LEM-108](../design/assets/lem-108/README.md).
+Decisión anterior (sustituida en cuanto a imagen por el pendiente pre-go-live al final): Miguel solicita quitar «Conversemos» e incorporar una imagen realista de una estantería tipo óptica con lentes. Esta decisión sustituye la opción anterior sin imagen para la vista previa actual. Se genera una escena editorial con imagegen, sin marcas, personas, rótulos ni referencias a una ubicación de Lemoon. No documenta un local real ni SKU disponibles. El original, JPG y prompt se conservan en [assets LEM-108](../design/assets/lem-108/README.md).
 
 Se configura el selector existente `image` con `shopify://shop_images/lemoon-nosotros-estanteria-v2.jpg`; la imagen sigue siendo reemplazable desde el editor del tema. El alt es «Escena ilustrativa de armazones de lentes exhibidos en estantes de madera.». Se vacía el setting `contact` para omitir el enlace de la tarjeta de servicio; el cierre conserva su acción al catálogo. No hay cambios de Liquid ni de composición. Se aplica únicamente al tema no publicado de revisión `189663019176`.
+
+
+## Decisión vigente — placeholder y recurso final pre-go-live, 02-11-2026
+
+Miguel solicita retirar la imagen de la vista previa y mantener el placeholder abstracto existente para continuar la revisión sin bloqueo. Se elimina `image` de los settings de `page.nosotros`; el selector permanece disponible y los archivos generados se conservan como antecedentes, sin estar seleccionados ni aprobados como recurso final. «Conversemos» sigue retirado.
+
+Se registra en [LEM-143 — Checklist pre-go-live](https://linear.app/antekera/issue/LEM-143) un pendiente de selección/aprobación de imagen, integración en el selector editable y verificación de recorte, carga, alt y visualización en móvil/tablet/escritorio. Ticket propietario: LEM-108. La revisión actual de la página puede continuar con el placeholder; la incorporación del recurso final se comprobará antes del lanzamiento.

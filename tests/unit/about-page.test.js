@@ -14,13 +14,9 @@ const text = html => html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').repla
 const publicDraft = file('docs/content/2026-11-01-quienes-somos-draft.md').split('## Contenido de página')[1].split('\n---')[0];
 const approvedCopy = publicDraft.split(/\n\s*\n/).map(part => part.trim())
   .filter(part => part && !part.startsWith('**[')).map(part => part.replace(/^#+\s*/, '').replaceAll('**', ''));
-// ImageDrop and CDN rendering are verified against Shopify in the storefront test.
-// Keep this fixture focused on real Liquid text/settings without faking image filters.
-const render = (options = {}) => renderComponentSection('lemoon-about-page', {
-  ...options, settings: { ...settings, ...options.settings, image: null },
-});
+const render = options => renderComponentSection('lemoon-about-page', { settings, ...options });
 
-test('about preserves approved copy without demo, names, suppliers or price and configures the editorial image', () => {
+test('about preserves approved copy and the abstract placeholder without demo, names, suppliers or price', () => {
   const html = render();
   const renderedText = text(html);
   for (const paragraph of approvedCopy) {
@@ -33,7 +29,7 @@ test('about preserves approved copy without demo, names, suppliers or price and 
   expect(renderedText).not.toMatch(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|00\.000\.000|Avenida de Ejemplo|POR CONFIRMAR/i);
   expect(settings.demo_data).toBe(false);
   expect(settings).not.toHaveProperty('demo_content');
-  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-estanteria-v2.jpg');
+  expect(settings).not.toHaveProperty('image');
   expect(settings.contact).toBe('');
 });
 

@@ -20,8 +20,13 @@ Generate one extremely photorealistic editorial interior photograph for an eyewe
 
 ## Edición final sin plantas (v2)
 
-Miguel solicita retirar las plantas. Se edita la imagen original con la herramienta integrada imagegen; se eliminan hojas, tallos, maceta y sombras vegetales, conservando la estantería, los lentes y la luz. La v1 queda como antecedente; solo la v2 está seleccionada en el tema de revisión.
+Miguel solicita retirar las plantas. Se edita la imagen original con la herramienta integrada imagegen; se eliminan hojas, tallos, maceta y sombras vegetales, conservando la estantería, los lentes y la luz. La v1 queda como antecedente; la v2 se seleccionó temporalmente en el tema de revisión y después se retiró.
 
 ### Prompt final de edición
 
 Edit the supplied photorealistic eyewear shelving photograph. Remove ALL plants, foliage, trailing vines, leaves, stems, and plant pots completely, including the plant and pot along the upper left edge and top shelf. Also remove their leafy cast shadows from the left plaster wall. Seamlessly reconstruct the plain creamy plaster wall and pale oak shelf behind the removed vegetation using the same textures and physically plausible soft natural daylight. Preserve the exact existing composition, camera framing, 5:4 landscape proportions, oak shelving geometry, every eyeglass frame with its precise shape/material/placement, transparent display stands, lighting warmth, realistic lens reflections, natural contact shadows and lower-right navy foreground detail. Do not add anything. No plants or greenery anywhere. No text, logos, signage, people or new decor. The result should look like the same real editorial photograph simply taken without any plants. Save the final edited image and include its local file path in the output hint for integration into the Shopify theme project.
+
+
+## Estado actual — pendiente pre-go-live
+
+Por decisión posterior de Miguel del 02-11-2026, ninguna de estas imágenes está seleccionada en la página. La vista previa conserva el placeholder abstracto CSS. Ambos originales y JPG se conservan como antecedentes; no son recursos finales aprobados. Seleccionar e integrar la imagen definitiva queda registrado en [LEM-143](https://linear.app/antekera/issue/LEM-143), con LEM-108 como ticket propietario, sin bloquear la revisión actual de la página.
