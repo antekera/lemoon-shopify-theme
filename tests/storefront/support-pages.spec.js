@@ -67,7 +67,7 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   await expect(carousel.locator('button[name="add"]')).toHaveCount(0);
   const track = carousel.locator('.lemoon-featured-products__track');
   const overflow = await track.evaluate(el => el.scrollWidth > el.clientWidth + 1);
-  if (overflow) {
+  if (overflow && page.viewportSize().width >= 750) {
     const next = carousel.locator('[data-lemoon-carousel-next]');
     const previous = carousel.locator('[data-lemoon-carousel-prev]');
     await expect(next).toHaveAccessibleName(/\S/);
@@ -84,6 +84,13 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
     await expect.poll(() => track.evaluate(el => el.scrollLeft)).toBeLessThanOrEqual(initialScroll + 1);
   } else {
     await expect(carousel.locator('[data-lemoon-carousel-controls]')).toBeHidden();
+    if (overflow) {
+      // The shared mobile design hides arrows and uses the native scroll track.
+      const initialScroll = await track.evaluate(el => el.scrollLeft);
+      await track.evaluate(el => el.scrollBy({ left: el.clientWidth, behavior: 'instant' }));
+      await expect.poll(() => track.evaluate(el => el.scrollLeft)).toBeGreaterThan(initialScroll);
+      await track.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
+    }
   }
   await noOverflow(page);
   await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo({ top: 0, behavior: 'instant' }); });
