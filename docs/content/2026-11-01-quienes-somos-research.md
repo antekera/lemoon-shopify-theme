@@ -97,8 +97,13 @@ Decisión anterior (sustituida en cuanto a imagen por el pendiente pre-go-live a
 Se configura el selector existente `image` con `shopify://shop_images/lemoon-nosotros-estanteria-v2.jpg`; la imagen sigue siendo reemplazable desde el editor del tema. El alt es «Escena ilustrativa de armazones de lentes exhibidos en estantes de madera.». Se vacía el setting `contact` para omitir el enlace de la tarjeta de servicio; el cierre conserva su acción al catálogo. No hay cambios de Liquid ni de composición. Se aplica únicamente al tema no publicado de revisión `189663019176`.
 
 
-## Decisión vigente — placeholder y recurso final pre-go-live, 02-11-2026
+## Decisión anterior — placeholder y recurso final pre-go-live, 02-11-2026
 
 Miguel solicita retirar la imagen de la vista previa y mantener el placeholder abstracto existente para continuar la revisión sin bloqueo. Se elimina `image` de los settings de `page.nosotros`; el selector permanece disponible y los archivos generados se conservan como antecedentes, sin estar seleccionados ni aprobados como recurso final. «Conversemos» sigue retirado.
 
 Se registra en [LEM-143 — Checklist pre-go-live](https://linear.app/antekera/issue/LEM-143) un pendiente de selección/aprobación de imagen, integración en el selector editable y verificación de recorte, carga, alt y visualización en móvil/tablet/escritorio. Ticket propietario: LEM-108. La revisión actual de la página puede continuar con el placeholder; la incorporación del recurso final se comprobará antes del lanzamiento.
+
+
+## Decisión vigente — imagen aportada por Miguel
+
+Miguel aporta `mostrador.jpg` y solicita usarla e incluirla en los assets del proyecto. Se copia sin edición a `assets/lemoon-nosotros-mostrador.jpg`, se carga en Files y se selecciona en `lemoon-about-page.image`. Sustituye el placeholder en la vista previa. La procedencia es el archivo aportado por el usuario; no se atribuyen una tienda física propia ni SKU reales a la escena. «Conversemos» sigue retirado. El control de lanzamiento LEM-143 conserva la comprobación del recurso en el resultado publicado, sin dar por cumplido ese gate por una subida a un tema no publicado.

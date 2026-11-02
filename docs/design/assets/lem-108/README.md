@@ -27,6 +27,13 @@ Miguel solicita retirar las plantas. Se edita la imagen original con la herramie
 Edit the supplied photorealistic eyewear shelving photograph. Remove ALL plants, foliage, trailing vines, leaves, stems, and plant pots completely, including the plant and pot along the upper left edge and top shelf. Also remove their leafy cast shadows from the left plaster wall. Seamlessly reconstruct the plain creamy plaster wall and pale oak shelf behind the removed vegetation using the same textures and physically plausible soft natural daylight. Preserve the exact existing composition, camera framing, 5:4 landscape proportions, oak shelving geometry, every eyeglass frame with its precise shape/material/placement, transparent display stands, lighting warmth, realistic lens reflections, natural contact shadows and lower-right navy foreground detail. Do not add anything. No plants or greenery anywhere. No text, logos, signage, people or new decor. The result should look like the same real editorial photograph simply taken without any plants. Save the final edited image and include its local file path in the output hint for integration into the Shopify theme project.
 
 
-## Estado actual — pendiente pre-go-live
+## Estado anterior — placeholder y pendiente pre-go-live
 
 Por decisión posterior de Miguel del 02-11-2026, ninguna de estas imágenes está seleccionada en la página. La vista previa conserva el placeholder abstracto CSS. Ambos originales y JPG se conservan como antecedentes; no son recursos finales aprobados. Seleccionar e integrar la imagen definitiva queda registrado en [LEM-143](https://linear.app/antekera/issue/LEM-143), con LEM-108 como ticket propietario, sin bloquear la revisión actual de la página.
+
+
+## Imagen seleccionada por Miguel — estado actual
+
+El 02-11-2026 Miguel aporta `mostrador.jpg` y pide usarla y trasladarla a los assets de la aplicación. Se conserva el archivo de origen y se copia sin modificaciones a [assets/lemoon-nosotros-mostrador.jpg](../../../../assets/lemoon-nosotros-mostrador.jpg). Dimensiones: 1152×928. SHA-256 idéntico al original: `bccc11b764ea935896c0349111cc701d0ed3d184994d115f5866b02298e66361`. No se genera ni edita esta imagen.
+
+Files: `gid://shopify/MediaImage/46709116698792`. Selector: `shopify://shop_images/lemoon-nosotros-mostrador.jpg`. Alt: «Armazones de lentes exhibidos sobre estantes de madera junto a una ventana.». Se incorpora al tema no publicado de revisión `189663019176`; no se identifica como fotografía de un local propio. El recurso queda seleccionado para esta vista previa; la verificación del resultado publicado antes del lanzamiento sigue dentro de LEM-143.

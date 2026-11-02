@@ -20,7 +20,8 @@
         "help_title": "Hacerlo bien es seguir mejorando",
         "help_body": "<p>La marca que queremos construir se juega en decisiones cotidianas: qué productos ofrecer, con quién trabajar y cómo hacer más fácil tu próxima compra.</p><p>Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque queremos que, cuando pienses en tus próximos lentes, te den ganas de volver a Lemoon.</p>",
         "tagline": "Se te ven bien",
-        "closing_catalogue": "Encuentra tu próximo par"
+        "closing_catalogue": "Encuentra tu próximo par",
+        "image": "shopify://shop_images/lemoon-nosotros-mostrador.jpg"
       }
     }
   },

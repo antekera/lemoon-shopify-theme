@@ -14,9 +14,13 @@ const text = html => html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').repla
 const publicDraft = file('docs/content/2026-11-01-quienes-somos-draft.md').split('## Contenido de página')[1].split('\n---')[0];
 const approvedCopy = publicDraft.split(/\n\s*\n/).map(part => part.trim())
   .filter(part => part && !part.startsWith('**[')).map(part => part.replace(/^#+\s*/, '').replaceAll('**', ''));
-const render = options => renderComponentSection('lemoon-about-page', { settings, ...options });
+// The fixture has no Shopify ImageDrop: validate copy without faking image filters.
+// Real image rendering and loading are covered by the Shopify storefront test.
+const render = (options = {}) => renderComponentSection('lemoon-about-page', {
+  ...options, settings: { ...settings, ...options.settings, image: null },
+});
 
-test('about preserves approved copy and the abstract placeholder without demo, names, suppliers or price', () => {
+test('about preserves approved copy without demo, names, suppliers or price and configures the supplied image', () => {
   const html = render();
   const renderedText = text(html);
   for (const paragraph of approvedCopy) {
@@ -29,7 +33,7 @@ test('about preserves approved copy and the abstract placeholder without demo, n
   expect(renderedText).not.toMatch(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|00\.000\.000|Avenida de Ejemplo|POR CONFIRMAR/i);
   expect(settings.demo_data).toBe(false);
   expect(settings).not.toHaveProperty('demo_content');
-  expect(settings).not.toHaveProperty('image');
+  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-mostrador.jpg');
   expect(settings.contact).toBe('');
 });
 
