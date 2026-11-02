@@ -33,7 +33,7 @@ test('about preserves approved copy without demo, names, suppliers or price and 
   expect(renderedText).not.toMatch(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|00\.000\.000|Avenida de Ejemplo|POR CONFIRMAR/i);
   expect(settings.demo_data).toBe(false);
   expect(settings).not.toHaveProperty('demo_content');
-  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-estanteria-v1.jpg');
+  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-estanteria-v2.jpg');
   expect(settings.contact).toBe('');
 });
 

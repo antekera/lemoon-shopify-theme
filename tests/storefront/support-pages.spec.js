@@ -36,7 +36,7 @@ test('Nosotros shows approved copy and its editorial image without demo or conta
   await expect(about).not.toContainText(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|Título de sección|POR CONFIRMAR/i);
   const image = about.locator('.lemoon-about-page__visual img');
   await expect(image).toBeVisible();
-  await expect(image).toHaveAttribute('src', /lemoon-nosotros-estanteria-v1/);
+  await expect(image).toHaveAttribute('src', /lemoon-nosotros-estanteria-v2/);
   await expect(image).toHaveAttribute('alt', /ilustrativa/i);
   await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
   await expect(about.locator('.lemoon-about-page__abstract')).toHaveCount(0);
