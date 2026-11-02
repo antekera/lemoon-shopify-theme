@@ -346,7 +346,11 @@
           "label": "Ancho de imagen"
         },
         "paragraph": {
-          "content": "Se muestra en el bloque de información de marca del pie de página"
+          "content": "Configura la información de marca y el eslogan que usan las secciones del tema."
+        },
+        "brand_slogan": {
+          "label": "Eslogan",
+          "default": "Se te ven bien"
         }
       }
     },

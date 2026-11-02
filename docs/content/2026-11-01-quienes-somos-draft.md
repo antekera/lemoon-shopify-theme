@@ -16,7 +16,9 @@ También nos importa lo que vas a usar cada día. La forma del armazón, sus med
 
 Sabemos que elegir lentes puede traer preguntas, incluso cuando ya has usado varios pares. Un modelo distinto, una medida que no conoces o un paso de la compra pueden necesitar una explicación. Para nosotros, un buen servicio empieza por escuchar esas dudas y responder de una manera que puedas entender.
 
-Así vamos construyendo Lemoon: con experiencia, atención al producto y ganas de seguir mejorando. Queremos aportar nuestra parte al mundo de la óptica y hacer que comprar tus próximos lentes sea una experiencia que disfrutes. Que te gusten al elegirlos y que te den ganas de usarlos. Se te ven bien.
+Así vamos construyendo Lemoon: con experiencia, atención al producto y ganas de seguir mejorando. Queremos aportar nuestra parte al mundo de la óptica y hacer que comprar tus próximos lentes sea una experiencia que disfrutes. Que te gusten al elegirlos y que te den ganas de usarlos.
+
+Se te ven bien
 
 ---
 
@@ -29,6 +31,9 @@ Así vamos construyendo Lemoon: con experiencia, atención al producto y ganas d
 
 ## Estado editorial — no forma parte del texto público
 
-Reformulación autorizada por Miguel el 02-11-2026 para integrar y actualizar la PR y vista previa, sin publicación. La referencia estructural vigente es la página History de Warby Parker: un relato continuo. El contenido principal consta de un H1 y seis párrafos, sin subtítulos internos, tarjetas, imágenes, composición abstracta ni CTAs intermedias. «Se te ven bien» cierra el último párrafo y conserva el eslogan aprobado.
+Reformulación autorizada por Miguel el 02-11-2026 para integrar y actualizar la PR y vista previa, sin publicación. La referencia estructural vigente es la página History de Warby Parker: un relato continuo. El contenido principal consta de un H1 y seis párrafos, sin subtítulos internos, tarjetas, imágenes, composición abstracta ni CTAs intermedias. «Se te ven bien» se muestra separado del cuerpo y conserva el eslogan aprobado.
 
 Miguel confirmó el equipo de profesionales del rubro óptico con muchos años de experiencia en Chile, la combinación con tecnología y la compra online cómoda con información y asesoría claras y rápidas. La calidad se expresa como compromiso. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones, resultados clínicos ni confrontación con cadenas. La imagen aportada anteriormente queda como antecedente y no debe formar parte del contenido principal. El carrusel posterior y la omisión de newsletter mantienen su alcance separado de este relato. Esta edición documental no certifica la actualización de la plantilla ni del preview; esa integración corresponde al coordinador y al builder. La metadata CMS continúa como propuesta.
+
+
+El eslogan final es un campo global del tema (`brand_slogan`) bajo Información de marca → Eslogan. El valor inicial aprobado es «Se te ven bien», mostrado en un párrafo separado debajo del relato. No forma parte del richtext del cuerpo; un valor vacío oculta ese cierre.

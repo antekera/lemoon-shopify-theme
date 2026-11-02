@@ -4,7 +4,7 @@ import { storefrontRequest } from '../helpers/storefront-request.mjs';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const noOverflow = async (page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 const aboutCopy = readFileSync('docs/content/2026-11-01-quienes-somos-draft.md', 'utf8')
-  .split('## Contenido de página')[1].split('\n---')[0].trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, ''));
+  .split('## Contenido de página')[1].split('\n---')[0].trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, '').replaceAll('**', ''));
 
 test('FAQ groups open and close by keyboard and link to existing guides and policies', async ({page}) => {
   await openStorefrontPage(page, '/pages/preguntas-frecuentes?view=preguntas-frecuentes');
@@ -29,7 +29,13 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
   await expect(about.getByRole('heading', { level: 1 })).toHaveText(aboutCopy[0]);
-  await expect(about.locator('p')).toHaveText(aboutCopy.slice(1));
+  const body = about.locator('.lemoon-about-page__body');
+  const slogan = about.locator('.lemoon-about-page__slogan');
+  await expect(body.locator('p')).toHaveText(aboutCopy.slice(1, -1));
+  await expect(slogan).toHaveText(aboutCopy.at(-1));
+  await expect(about.locator('p')).toHaveCount(7);
+  await expect(body.locator('.lemoon-about-page__slogan')).toHaveCount(0);
+  await expect(body).not.toContainText(aboutCopy.at(-1));
   const readingWidth = await about.evaluate(el => {
     const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
     return parseFloat(getComputedStyle(el).maxWidth) / rootSize;

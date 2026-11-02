@@ -14,6 +14,12 @@
   }
   #shopify-section-{{ section.id }} .lemoon-about-page__body p { margin: 0 0 var(--lemoon-space-6); }
   #shopify-section-{{ section.id }} .lemoon-about-page__body p:last-child { margin-bottom: 0; }
+  #shopify-section-{{ section.id }} .lemoon-about-page__slogan {
+    margin: var(--lemoon-space-8) 0 0;
+    font-family: var(--lemoon-font-body);
+    font-size: var(--lemoon-fs-18);
+    line-height: 1.7;
+  }
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .lemoon-about-page {
       padding-top: {{ section.settings.padding_top }}px;
@@ -35,6 +41,9 @@
       <p>{{ 'sections.lemoon_about_page.intro' | t | escape }}</p>
     {%- endif -%}
   </div>
+  {%- if settings.brand_slogan != blank -%}
+    <p class="lemoon-about-page__slogan">{{ settings.brand_slogan | escape }}</p>
+  {%- endif -%}
 </div>
 
 {% schema %}

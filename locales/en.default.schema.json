@@ -177,7 +177,7 @@
       "name": "Brand information",
       "settings": {
         "paragraph": {
-          "content": "Displays in the footer's brand information block"
+          "content": "Configure the brand information and slogan used by theme sections."
         },
         "brand_headline": {
           "label": "Headline"
@@ -190,6 +190,10 @@
         },
         "brand_image_width": {
           "label": "Image width"
+        },
+        "brand_slogan": {
+          "label": "Slogan",
+          "default": "Se te ven bien"
         }
       }
     },

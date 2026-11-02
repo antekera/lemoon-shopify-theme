@@ -124,3 +124,8 @@ Miguel solicita retirar el enlace «Encuentra tu próximo par» del último bloq
 - Cambios documentales: reformulación del cuerpo y reconciliación de las notas; se conservan las fuentes y decisiones históricas fechadas.
 - Integración autorizada pendiente de evidencia del coordinador: actualizar la plantilla/sección, PR #47 y preview sin publicar, manteniendo contenido editable, carrusel posterior y omisión de newsletter.
 - Validar tras la integración: ausencia de imagen/placeholder, cards, subtítulos internos y CTAs dentro del relato; lectura responsive; correspondencia de párrafos con el draft; enlaces/controles externos que permanezcan y regresiones pertinentes. No atribuir esas comprobaciones a esta edición documental.
+
+
+## Eslogan global separado — decisión vigente, 02-11-2026
+
+Miguel solicita separar «Se te ven bien» del último párrafo y administrar el eslogan en las opciones de Shopify. Se define `brand_slogan` como campo global de Configuración del tema → Información de marca → Eslogan, con el valor inicial aprobado «Se te ven bien». La página consume ese campo en un párrafo independiente al terminar los seis párrafos del relato. No se duplica en el richtext ni se añade un subtítulo, panel o CTA; si el valor guardado está vacío, no se muestra. La configuración privada `settings_data.json` no se versiona; el valor se configura solo en el tema no publicado de revisión durante esta entrega.

@@ -12,18 +12,47 @@ const text = html => html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').repla
   .replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'")
   .replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/\s+/g, ' ').trim();
 const publicDraft = file('docs/content/2026-11-01-quienes-somos-draft.md').split('## Contenido de página')[1].split('\n---')[0];
-const approvedCopy = publicDraft.trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, ''));
+const approvedCopy = publicDraft.trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, '').replaceAll('**', ''));
 const render = (options = {}) => renderComponentSection('lemoon-about-page', {
   ...options, settings: { ...settings, ...options.settings },
 });
 
-test('about renders the approved narrative once as one heading and six continuous paragraphs', () => {
-  const html = render();
+test('about renders the approved narrative and separate global slogan once', () => {
+  const html = render({ context: { settings: { brand_slogan: 'Se te ven bien' } } });
   expect(text(html)).toBe(approvedCopy.join(' '));
   expect(html.match(/<h1\b/g)).toHaveLength(1);
-  expect(html.match(/<p\b/g)).toHaveLength(6);
+  expect(html.match(/<p\b/g)).toHaveLength(7);
+  const body = html.match(/<div class="lemoon-about-page__body">([\s\S]*?)<\/div>/)[1];
+  expect(body.match(/<p\b/g)).toHaveLength(6);
+  expect(text(body)).not.toContain('Se te ven bien');
+  expect(html).toMatch(/<\/div>\s*<p class="lemoon-about-page__slogan">Se te ven bien<\/p>/);
   expect(html).not.toMatch(/<(?:img|figure|a|form|button|h[2-6])\b|lemoon-about-page__(?:abstract|value|hero)|<p\b[^>]*>\s*<p\b/);
   expect(Object.keys(settings).sort()).toEqual(['body', 'padding_bottom', 'padding_top', 'title']);
+});
+
+test('global slogan changes render as escaped separate text and blank values hide it without fallback', () => {
+  const html = render({ context: { settings: { brand_slogan: 'Otro eslogan <&"' } } });
+  expect(html).toMatch(/<p class="lemoon-about-page__slogan">Otro eslogan &lt;&amp;(?:&quot;|&#34;)<\/p>/);
+  expect(text(html)).not.toContain('Se te ven bien');
+  for (const brand_slogan of ['', null, undefined]) {
+    const withoutSlogan = render({ context: { settings: { brand_slogan } } });
+    expect(withoutSlogan).not.toContain('class="lemoon-about-page__slogan"');
+    expect(text(withoutSlogan)).toBe(approvedCopy.slice(0, -1).join(' '));
+  }
+});
+
+test('global brand slogan has a localized editor label and the same approved default in Spanish and English', () => {
+  const group = JSON.parse(file('config/settings_schema.json')).find(item => item.name === 't:settings_schema.brand_information.name');
+  const field = group.settings.find(item => item.id === 'brand_slogan');
+  expect(field.type).toBe('text');
+  for (const key of ['label', 'default']) expect(field[key]).toMatch(/^t:/);
+  for (const language of ['es', 'en.default']) {
+    const messages = json(`locales/${language}.schema.json`);
+    const lookup = key => key.slice(2).split('.').reduce((value, part) => value?.[part], messages);
+    expect(lookup(field.label)).toEqual(expect.any(String));
+    expect(lookup(field.label).length).toBeGreaterThan(0);
+    expect(lookup(field.default)).toBe('Se te ven bien');
+  }
 });
 
 test('about editor escapes the plain title and preserves richtext paragraph formatting', () => {

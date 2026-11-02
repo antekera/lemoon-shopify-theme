@@ -1130,7 +1130,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-about-page.liquid",
-        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda. Nosotros: solo H1 title y richtext body editables, fallbacks localizados y padding; lectura de 72rem, cuerpo 1.8rem/1.7. Sin imagen, placeholder, tarjetas, subtítulos, paneles, CTAs ni demo. page.nosotros conserva el carrusel como sección posterior independiente.",
+        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda. Nosotros: solo H1 title y richtext body editables, fallbacks localizados y padding; lectura de 72rem, cuerpo 1.8rem/1.7. Eslogan global settings.brand_slogan escapado en párrafo independiente tras el cuerpo, omitido si está vacío y sin fallback literal. Sin imagen, placeholder, tarjetas, subtítulos, paneles, CTAs ni demo. page.nosotros conserva el carrusel como sección posterior independiente.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
