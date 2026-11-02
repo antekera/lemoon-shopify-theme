@@ -3,14 +3,29 @@
     "main": {
       "type": "lemoon-about-page",
       "settings": {
-        "demo_data": true,
-        "demo_content": "<h2>Lemoon y Servioptic SpA</h2><p>En este escenario de demostración, Servioptic SpA opera Lemoon: una tienda de armazones y lentes pensada para acompañarte desde la elección del modelo hasta el seguimiento de tu pedido.</p><h2>Servioptic SpA</h2><p><strong>RUT de prueba:</strong> 00.000.000-0 (no válido para facturación).<br><strong>Domicilio de prueba:</strong> Avenida de Ejemplo 123, Santiago, Chile.<br><strong>Correo de prueba:</strong> contacto@servioptic.example.<br><strong>Horario de muestra:</strong> lunes a viernes, de 09:00 a 18:00, hora de Chile.</p>",
+        "title": "Ver bien. Sentirte tú.",
+        "body": "<p>Hay cosas que se vuelven parte de ti. Tus lentes pueden ser una de ellas: te acompañan mientras trabajas, lees, conversas o sales a descubrir algo nuevo. Por eso creemos que elegirlos merece atención, información clara y espacio para encontrar un par que sientas tuyo.</p><p>Somos un equipo de profesionales con muchos años de experiencia en el rubro óptico en Chile. Combinamos ese conocimiento con la tecnología para llevar la experiencia de la óptica al mundo online, con una forma de comprar lentes más cómoda y sencilla.</p><p>Nos mueve la idea de que puedas elegir desde donde estés, mirar con calma y entender tus opciones. Que la información te ayude a avanzar y que, cuando necesites orientación, encuentres una asesoría clara y rápida. La tecnología tiene sentido para nosotros cuando hace más fácil ese recorrido.</p><p>También nos importa lo que vas a usar cada día. La forma del armazón, sus medidas y las opciones de cristales son parte de una elección personal. Queremos ofrecer productos bonitos y de calidad, con cuidado por los detalles y por la información que te permite decidir qué va contigo.</p><p>Sabemos que elegir lentes puede traer preguntas, incluso cuando ya has usado varios pares. Un modelo distinto, una medida que no conoces o un paso de la compra pueden necesitar una explicación. Para nosotros, un buen servicio empieza por escuchar esas dudas y responder de una manera que puedas entender.</p><p>Así vamos construyendo Lemoon: con experiencia, atención al producto y ganas de seguir mejorando. Queremos aportar nuestra parte al mundo de la óptica y hacer que comprar tus próximos lentes sea una experiencia que disfrutes. Que te gusten al elegirlos y que te den ganas de usarlos.</p>",
         "padding_top": 64,
         "padding_bottom": 64
+      }
+    },
+    "products": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "all",
+        "collection_source": "fixed",
+        "randomize": true,
+        "defer_load": false,
+        "show_quick_add": false,
+        "eyebrow": "",
+        "heading": "Encuentra tu próximo par",
+        "link_label": "Ver todos",
+        "products_to_show": 8
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "products"
   ]
 }

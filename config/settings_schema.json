@@ -186,6 +186,12 @@
         "content": "t:settings_schema.brand_information.settings.paragraph.content"
       },
       {
+        "type": "text",
+        "id": "brand_slogan",
+        "label": "t:settings_schema.brand_information.settings.brand_slogan.label",
+        "default": "t:settings_schema.brand_information.settings.brand_slogan.default"
+      },
+      {
         "type": "inline_richtext",
         "id": "brand_headline",
         "label": "t:settings_schema.brand_information.settings.brand_headline.label"

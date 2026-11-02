@@ -76,7 +76,7 @@ El registro de LEM-97 documenta favicon 32 configurado en el tema activo `155307
 
 ## Voz y escritura
 
-Usar es-CL, trato de tú, frases claras y directas, tono cercano, moneda CLP y CTAs que expliquen la acción. En el sitio, reutilizar claves de locales. El eslogan aprobado es **Se te ven bien**. Los demás mensajes finales y la guía editorial pertenecen a LEM-55 y parten del [brief aprobado LEM-82](brand-strategy.md).
+Usar es-CL, trato de tú, frases claras y directas, tono cercano, moneda CLP y CTAs que expliquen la acción. En el sitio, reutilizar claves de locales. El eslogan aprobado es **Se te ven bien**. Se configura en el editor del tema, **Configuración del tema → Información de marca → Eslogan** (`settings.brand_slogan`). Nosotros lo muestra como párrafo independiente después del relato; dejar ese campo vacío lo oculta. El ajuste es global, pero solo lo usan las secciones que lo consumen expresamente. Los demás mensajes finales y la guía editorial pertenecen a LEM-55 y parten del [brief aprobado LEM-82](brand-strategy.md).
 
 Cada ticket propietario confirma los hechos comerciales antes de publicar. Precios, garantías, beneficios, reseñas, plazos y convenios deben proceder de datos reales y condiciones verificadas; una maqueta o un asset no los convierte en promesas de marca.
 

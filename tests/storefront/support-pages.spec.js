@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 import { storefrontRequest } from '../helpers/storefront-request.mjs';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const noOverflow = async (page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+const aboutCopy = readFileSync('docs/content/2026-11-01-quienes-somos-draft.md', 'utf8')
+  .split('## Contenido de página')[1].split('\n---')[0].trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, '').replaceAll('**', ''));
 
 test('FAQ groups open and close by keyboard and link to existing guides and policies', async ({page}) => {
   await openStorefrontPage(page, '/pages/preguntas-frecuentes?view=preguntas-frecuentes');
@@ -21,16 +24,81 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   await noOverflow(page);
 });
 
-test('Nosotros replaces default placeholders and connects values, measurements and contact', async ({page}) => {
+test('Nosotros shows its copy and randomized products without newsletter or contact CTA and preserves newsletter elsewhere', async ({page}, testInfo) => {
   await openStorefrontPage(page, '/pages/nosotros?view=nosotros');
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
-  await expect(about.locator('.lemoon-about-page__value')).toHaveCount(3);
-  await expect(about).not.toContainText('Título de sección');
-  await expect(about.locator('a[href="/pages/como-medir-tus-lentes"]')).toBeVisible();
-  const contact = about.locator('a[href="/pages/contact"]');
-  await contact.focus(); await expect(contact).toBeFocused(); await noOverflow(page);
-  await contact.press('Enter'); await expect(page).toHaveURL(/\/pages\/contact$/);
+  await expect(about.getByRole('heading', { level: 1 })).toHaveText(aboutCopy[0]);
+  const body = about.locator('.lemoon-about-page__body');
+  const slogan = about.locator('.lemoon-about-page__slogan');
+  await expect(body.locator('p')).toHaveText(aboutCopy.slice(1, -1));
+  await expect(slogan).toHaveText(aboutCopy.at(-1));
+  await expect(about.locator('p')).toHaveCount(7);
+  await expect(body.locator('.lemoon-about-page__slogan')).toHaveCount(0);
+  await expect(body).not.toContainText(aboutCopy.at(-1));
+  const readingWidth = await about.evaluate(el => {
+    const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return parseFloat(getComputedStyle(el).maxWidth) / rootSize;
+  });
+  expect(readingWidth).toBeLessThanOrEqual(72);
+  await expect(about.locator('img, figure, a, form, button, h2, h3, h4, h5, h6, .lemoon-about-page__abstract, .lemoon-about-page__value')).toHaveCount(0);
+  await expect(page.locator('.lemoon-newsletter')).toHaveCount(0);
+  const carousel = page.locator('.lemoon-featured-products');
+  await expect(carousel).toHaveCount(1);
+  await expect(carousel).toHaveAttribute('data-randomized', 'true');
+  await expect(carousel.getByRole('heading', { name: 'Encuentra tu próximo par', exact: true })).toBeVisible();
+  const carouselCatalogue = carousel.getByRole('link', { name: 'Ver todos', exact: true });
+  await expect(carouselCatalogue).toHaveAttribute('href', '/collections/all');
+  await carouselCatalogue.focus();
+  await expect(carouselCatalogue).toBeFocused();
+  const items = carousel.locator('.lemoon-featured-products__item');
+  const itemCount = await items.count();
+  expect(itemCount).toBeGreaterThan(0);
+  expect(itemCount).toBeLessThanOrEqual(8);
+  for (const item of await items.all()) {
+    await expect(item).not.toHaveAttribute('hidden');
+    await expect(item.locator('a[href*="/products/"]').first()).toHaveAttribute('href', /\/products\//);
+    await expect(item).not.toContainText(/agotado|sold out/i);
+  }
+  await expect(carousel.locator('button[name="add"]')).toHaveCount(0);
+  const track = carousel.locator('.lemoon-featured-products__track');
+  const overflow = await track.evaluate(el => el.scrollWidth > el.clientWidth + 1);
+  if (overflow && page.viewportSize().width >= 750) {
+    const next = carousel.locator('[data-lemoon-carousel-next]');
+    const previous = carousel.locator('[data-lemoon-carousel-prev]');
+    await expect(next).toHaveAccessibleName(/\S/);
+    await expect(next).toBeEnabled();
+    await expect(previous).toBeDisabled();
+    const initialScroll = await track.evaluate(el => el.scrollLeft);
+    await next.focus();
+    await expect(next).toBeFocused();
+    await next.press('Enter');
+    await expect.poll(() => track.evaluate(el => el.scrollLeft)).toBeGreaterThan(initialScroll);
+    await expect(previous).toBeEnabled();
+    await previous.focus();
+    await previous.press('Enter');
+    await expect.poll(() => track.evaluate(el => el.scrollLeft)).toBeLessThanOrEqual(initialScroll + 1);
+  } else {
+    await expect(carousel.locator('[data-lemoon-carousel-controls]')).toBeHidden();
+    if (overflow) {
+      // The shared mobile design hides arrows and uses the native scroll track.
+      const initialScroll = await track.evaluate(el => el.scrollLeft);
+      await track.evaluate(el => el.scrollBy({ left: el.clientWidth, behavior: 'instant' }));
+      await expect.poll(() => track.evaluate(el => el.scrollLeft)).toBeGreaterThan(initialScroll);
+      await track.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
+    }
+  }
+  await noOverflow(page);
+  await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo({ top: 0, behavior: 'instant' }); });
+  await page.screenshot({ path: testInfo.outputPath('nosotros.png'), fullPage: true });
+  expect((await storefrontRequest(page).get('/collections/all')).status()).toBe(200);
+  await carouselCatalogue.focus();
+  await carouselCatalogue.press('Enter');
+  await expect(page).toHaveURL(/\/collections\/all(?:\?.*)?$/);
+  for (const path of ['/', '/pages/contact']) {
+    await openStorefrontPage(page, path);
+    await expect(page.locator('.lemoon-newsletter')).toBeVisible();
+  }
 });
 
 for (const [handle, subject] of [['operativos-oftalmologicos','?subject=operativos'],['isapres-y-fonasa','']]) {

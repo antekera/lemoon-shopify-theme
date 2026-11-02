@@ -177,7 +177,7 @@
       "name": "Brand information",
       "settings": {
         "paragraph": {
-          "content": "Displays in the footer's brand information block"
+          "content": "Configure the brand information and slogan used by theme sections."
         },
         "brand_headline": {
           "label": "Headline"
@@ -190,6 +190,10 @@
         },
         "brand_image_width": {
           "label": "Image width"
+        },
+        "brand_slogan": {
+          "label": "Slogan",
+          "default": "Se te ven bien"
         }
       }
     },
@@ -3601,10 +3605,8 @@
     },
     "lemoon_about_page": {
       "name": "About Lemoon page",
-      "image_label": "Brand image",
-      "image_info": "Use a real, approved brand image. Without an image, a decorative abstract composition is shown.",
-      "story_label": "Verified brand story",
-      "story_info": "Optional. Add only confirmed details about the brand."
+      "title_label": "Main heading",
+      "body_label": "Brand story"
     },
     "lemoon_launch_page": {
       "name": "Lemoon launch page",

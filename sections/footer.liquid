@@ -9,6 +9,10 @@
 {%- liquid
   assign footer_phone = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
+  assign show_newsletter = section.settings.newsletter_enable
+  if request.page_type == 'page' and page.handle == 'nosotros'
+    assign show_newsletter = false
+  endif
   assign footer_privacy_page = pages['politica-de-privacidad']
   assign footer_privacy_url = shop.privacy_policy.url
   if footer_privacy_page != blank and footer_privacy_page.published_at != blank and footer_privacy_page.template_suffix == 'politica-de-privacidad'
@@ -16,7 +20,7 @@
   endif
 -%}
 
-{%- if section.settings.newsletter_enable -%}
+{%- if show_newsletter -%}
   <section class="lemoon-newsletter" aria-labelledby="LemoonNewsletterHeading-{{ section.id }}">
     <div class="lemoon-footer__container lemoon-newsletter__inner">
       <div class="lemoon-newsletter__copy">

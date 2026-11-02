@@ -46,7 +46,9 @@ La plantilla [page.politica-de-privacidad.json](../../../templates/page.politica
 
 ## Nosotros, servicios y guía de cristales
 
-[lemoon-about-page](../../../sections/lemoon-about-page.liquid), [lemoon-service-page](../../../sections/lemoon-service-page.liquid) y [lemoon-crystal-guide](../../../sections/lemoon-crystal-guide.liquid) reutilizan heading/action. Mantener H1/H2/H3, IDs de aria-labelledby, clases de enlaces, raíces localizadas, variantes de servicios y la condición de producto configurador en cada dueño. Usar action local para conservar clases específicas, incluida button cuando ya existía; no crear un shell de página o panel help universal. Richtext/CMS, imágenes y schemas permanecen locales.
+[lemoon-about-page](../../../sections/lemoon-about-page.liquid) reutiliza heading para un único H1 y conserva un cuerpo richtext editable: relato continuo sin imagen, subtítulos, tarjetas ni acciones. Título y cuerpo vacíos usan los fallbacks localizados; padding y ancho de lectura permanecen locales. El carrusel posterior pertenece a su propia sección.
+
+[lemoon-service-page](../../../sections/lemoon-service-page.liquid) y [lemoon-crystal-guide](../../../sections/lemoon-crystal-guide.liquid) reutilizan heading/action. Mantener H1/H2/H3, IDs de aria-labelledby, clases de enlaces, raíces localizadas, variantes de servicios y la condición de producto configurador en cada dueño. Usar action local para conservar clases específicas, incluida button cuando ya existía; no crear un shell de página o panel help universal. Richtext/CMS, imágenes y schemas permanecen locales.
 
 ## Redes sociales de password
 

@@ -346,7 +346,11 @@
           "label": "Ancho de imagen"
         },
         "paragraph": {
-          "content": "Se muestra en el bloque de información de marca del pie de página"
+          "content": "Configura la información de marca y el eslogan que usan las secciones del tema."
+        },
+        "brand_slogan": {
+          "label": "Eslogan",
+          "default": "Se te ven bien"
         }
       }
     },
@@ -3601,10 +3605,8 @@
     },
     "lemoon_about_page": {
       "name": "Página Sobre Lemoon",
-      "image_label": "Imagen de marca",
-      "image_info": "Usa una imagen real y aprobada de la marca. Sin imagen se muestra una composición abstracta decorativa.",
-      "story_label": "Historia verificada de la marca",
-      "story_info": "Opcional. Agrega solo información confirmada sobre la marca."
+      "title_label": "Título principal",
+      "body_label": "Relato de la marca"
     },
     "lemoon_launch_page": {
       "name": "Lanzamiento Lemoon",
