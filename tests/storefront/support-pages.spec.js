@@ -41,20 +41,22 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
   await expect(about.locator('.lemoon-about-page__abstract')).toHaveCount(0);
   const catalogue = about.getByRole('link', { name: 'Conoce nuestros lentes', exact: true });
-  const closingCatalogue = about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true });
+  await expect(about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true })).toHaveCount(0);
+  await expect(about.locator('.lemoon-about-page__help a')).toHaveCount(0);
   await expect(about.getByRole('link', { name: 'Conversemos', exact: true })).toHaveCount(0);
   await expect(about.locator('a[href="/pages/contact"]')).toHaveCount(0);
   await expect(catalogue).toHaveAttribute('href', '/collections/all');
-  await expect(closingCatalogue).toHaveAttribute('href', '/collections/all');
   await catalogue.focus();
   await expect(catalogue).toBeFocused();
-  await page.keyboard.press('Tab');
-  await expect(closingCatalogue).toBeFocused();
   await expect(page.locator('.lemoon-newsletter')).toHaveCount(0);
   const carousel = page.locator('.lemoon-featured-products');
   await expect(carousel).toHaveCount(1);
   await expect(carousel).toHaveAttribute('data-randomized', 'true');
   await expect(carousel.getByRole('heading', { name: 'Encuentra tu próximo par', exact: true })).toBeVisible();
+  const carouselCatalogue = carousel.getByRole('link', { name: 'Ver todos', exact: true });
+  await expect(carouselCatalogue).toHaveAttribute('href', '/collections/all');
+  await page.keyboard.press('Tab');
+  await expect(carouselCatalogue).toBeFocused();
   const items = carousel.locator('.lemoon-featured-products__item');
   const itemCount = await items.count();
   expect(itemCount).toBeGreaterThan(0);
@@ -96,8 +98,8 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo({ top: 0, behavior: 'instant' }); });
   await page.screenshot({ path: testInfo.outputPath('nosotros.png'), fullPage: true });
   expect((await storefrontRequest(page).get('/collections/all')).status()).toBe(200);
-  await closingCatalogue.focus();
-  await closingCatalogue.press('Enter');
+  await carouselCatalogue.focus();
+  await carouselCatalogue.press('Enter');
   await expect(page).toHaveURL(/\/collections\/all(?:\?.*)?$/);
   for (const path of ['/', '/pages/contact']) {
     await openStorefrontPage(page, path);

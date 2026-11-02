@@ -116,3 +116,8 @@ Miguel solicita retirar la newsletter solo de esta página y añadir un carrusel
 El footer omite su newsletter únicamente cuando la superficie es una página y el handle es `nosotros`; las demás páginas conservan la configuración global. La imagen seleccionada y el texto de marca permanecen. Comprobar selección real de productos, controles y ausencia de newsletter en la vista previa; comparar otra página como control antes de entregar.
 
 La comprobación de storefront confirma que la colección `all` resuelve y el componente aleatoriza ocho tarjetas. El catálogo actual incluye muestras existentes, por ejemplo «Muestra de catálogo — Cristal para pantallas» y «Muestra · Kit…». Esta entrega no cambia productos ni su publicación; la revisión del catálogo comercial antes del go live debe excluir esas muestras de la experiencia pública. El carrusel reutilizado mantiene filtros de disponibilidad y precio positivo, pero esos filtros no equivalen a validar que un producto sea definitivo.
+
+
+## Revisión final antes de PR — enlace del cierre
+
+Miguel solicita retirar el enlace «Encuentra tu próximo par» del último bloque de texto, conservando el carrusel posterior. El template activa `hide_closing_link`, nuevo control del editor con default false para compatibilidad. La sección omite el contenedor completo del enlace y no activa el fallback de contacto. El título del carrusel y «Ver todos» se mantienen; el hero conserva «Conoce nuestros lentes».

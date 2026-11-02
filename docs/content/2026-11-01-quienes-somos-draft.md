@@ -38,8 +38,6 @@ Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque querem
 
 **Se te ven bien**
 
-**[Encuentra tu próximo par](/collections/all)**
-
 ---
 
 ## Metadata propuesta

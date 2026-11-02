@@ -134,13 +134,15 @@
       {%- endif -%}
     </div>
     {%- if section.settings.tagline != blank -%}<p><strong>{{ section.settings.tagline | escape }}</strong></p>{%- endif -%}
-    <div class="lemoon-about-page__links">
-      {%- if section.settings.closing_catalogue != blank -%}
-        {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: section.settings.closing_catalogue, style_family: 'local' %}
-      {%- else -%}
-        {% render 'lemoon-ui-action', element: 'a', href: about_contact_url, label: about_contact, style_family: 'local' %}
-      {%- endif -%}
-    </div>
+    {%- unless section.settings.hide_closing_link -%}
+      <div class="lemoon-about-page__links">
+        {%- if section.settings.closing_catalogue != blank -%}
+          {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: section.settings.closing_catalogue, style_family: 'local' %}
+        {%- else -%}
+          {% render 'lemoon-ui-action', element: 'a', href: about_contact_url, label: about_contact, style_family: 'local' %}
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
   </section>
 </div>
 
@@ -236,6 +238,12 @@
       "type": "text",
       "id": "closing_catalogue",
       "label": "t:sections.lemoon_about_page.closing_catalogue_label"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_closing_link",
+      "default": false,
+      "label": "t:sections.lemoon_about_page.hide_closing_link_label"
     },
     {
       "type": "checkbox",

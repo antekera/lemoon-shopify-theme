@@ -35,19 +35,33 @@ test('about preserves approved copy without demo, names, suppliers or price and 
   expect(settings).not.toHaveProperty('demo_content');
   expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-mostrador.jpg');
   expect(settings.contact).toBe('');
+  expect(settings.hide_closing_link).toBe(true);
+  const closingPanel = html.match(/<section class="lemoon-about-page__help"[\s\S]*?<\/section>/)[0];
+  expect(closingPanel).not.toMatch(/<a\b|lemoon-about-page__links/);
 });
 
 for (const root of ['/', '/en/']) {
-  test(`about renders only the two catalogue actions under localized root ${root}`, () => {
+  test(`about renders only its hero catalogue action under localized root ${root}`, () => {
     const prefix = root === '/' ? '' : '/en';
     const html = render({ routes: { root_url: root, all_products_collection_url: `${prefix}/collections/all` } });
     const links = [...html.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].map(([, href, label]) => ({ href, label: text(label) }));
     expect(links).toEqual([
       { href: `${prefix}/collections/all`, label: 'Conoce nuestros lentes' },
-      { href: `${prefix}/collections/all`, label: 'Encuentra tu próximo par' },
     ]);
   });
 }
+
+
+test('closing link remains available for legacy settings and can be restored in the editor', () => {
+  expect(schema.settings.find(({ id }) => id === 'hide_closing_link')).toMatchObject({ type: 'checkbox', default: false });
+  for (const hide_closing_link of [false, undefined]) {
+    for (const closing_catalogue of ['Encuentra tu próximo par', '']) {
+      const html = render({ settings: { hide_closing_link, closing_catalogue } });
+      const closingPanel = html.match(/<section class="lemoon-about-page__help"[\s\S]*?<\/section>/)[0];
+      expect(closingPanel).toContain(closing_catalogue ? 'href="/collections/all"' : 'href="/pages/contact"');
+    }
+  }
+});
 
 test('about editor text overrides escape headings while preserving formatted paragraphs and verified history', () => {
   const html = render({ settings: {

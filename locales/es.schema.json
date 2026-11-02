@@ -3620,7 +3620,8 @@
       "help_title_label": "Título del cierre",
       "help_body_label": "Texto del cierre",
       "tagline_label": "Eslogan del cierre",
-      "closing_catalogue_label": "Enlace final al catálogo"
+      "closing_catalogue_label": "Enlace final al catálogo",
+      "hide_closing_link_label": "Ocultar enlace del bloque de cierre"
     },
     "lemoon_launch_page": {
       "name": "Lanzamiento Lemoon",

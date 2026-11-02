@@ -1131,7 +1131,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-about-page.liquid",
-        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in. Nosotros: hero, tres tarjetas y cierre editables con fallbacks localizados, CTA contacto en servicio y CTA catálogo final; page.nosotros usa copy LEM-108 sin imagen ni demo.",
+        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in. Nosotros: hero, tres tarjetas y cierre editables con fallbacks localizados, CTA contacto opcional en servicio y CTA catálogo final. hide_closing_link (default false) omite todo el enlace final y su fallback; page.nosotros lo activa, conserva imagen configurable y demo desactivado.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
