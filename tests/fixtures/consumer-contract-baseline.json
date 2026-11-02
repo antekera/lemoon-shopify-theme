@@ -223,12 +223,18 @@
                         ]
                       },
                       {
-                        "tag": "p",
+                        "tag": "div",
                         "attrs": {
-                          "class": "lemoon-about-page__intro"
+                          "class": "lemoon-about-page__intro rte"
                         },
                         "children": [
-                          "Tus lentes son parte de cómo miras el mundo y de cómo te expresas. En Lemoon queremos que elegirlos sea una decisión personal, clara y con sentido."
+                          {
+                            "tag": "p",
+                            "attrs": {},
+                            "children": [
+                              "Tus lentes son parte de cómo miras el mundo y de cómo te expresas. En Lemoon queremos que elegirlos sea una decisión personal, clara y con sentido."
+                            ]
+                          }
                         ]
                       },
                       {
@@ -245,15 +251,6 @@
                             },
                             "children": [
                               "Explorar armazones"
-                            ]
-                          },
-                          {
-                            "tag": "a",
-                            "attrs": {
-                              "href": "/es/pages/como-medir-tus-lentes"
-                            },
-                            "children": [
-                              "Comparar medidas de armazones"
                             ]
                           }
                         ]
@@ -314,10 +311,18 @@
                             ]
                           },
                           {
-                            "tag": "p",
-                            "attrs": {},
+                            "tag": "div",
+                            "attrs": {
+                              "class": "rte"
+                            },
                             "children": [
-                              "Creemos que hay muchas formas de verse bien. Queremos dar espacio a las formas y colores que se sienten tuyos."
+                              {
+                                "tag": "p",
+                                "attrs": {},
+                                "children": [
+                                  "Creemos que hay muchas formas de verse bien. Queremos dar espacio a las formas y colores que se sienten tuyos."
+                                ]
+                              }
                             ]
                           }
                         ]
@@ -336,10 +341,18 @@
                             ]
                           },
                           {
-                            "tag": "p",
-                            "attrs": {},
+                            "tag": "div",
+                            "attrs": {
+                              "class": "rte"
+                            },
                             "children": [
-                              "Queremos que el calce sea parte de la elección. Comparar medidas y pensar cómo se apoya un armazón en tu rostro ayuda a decidir con calma."
+                              {
+                                "tag": "p",
+                                "attrs": {},
+                                "children": [
+                                  "Queremos que el calce sea parte de la elección. Comparar medidas y pensar cómo se apoya un armazón en tu rostro ayuda a decidir con calma."
+                                ]
+                              }
                             ]
                           }
                         ]
@@ -358,10 +371,18 @@
                             ]
                           },
                           {
-                            "tag": "p",
-                            "attrs": {},
+                            "tag": "div",
+                            "attrs": {
+                              "class": "rte"
+                            },
                             "children": [
-                              "Queremos que la información útil llegue antes de la compra: medidas, detalles del producto y un espacio para preguntar."
+                              {
+                                "tag": "p",
+                                "attrs": {},
+                                "children": [
+                                  "Queremos que la información útil llegue antes de la compra: medidas, detalles del producto y un espacio para preguntar."
+                                ]
+                              }
                             ]
                           }
                         ]
@@ -409,10 +430,18 @@
                     ]
                   },
                   {
-                    "tag": "p",
-                    "attrs": {},
+                    "tag": "div",
+                    "attrs": {
+                      "class": "rte"
+                    },
                     "children": [
-                      "Si estás entre dos armazones o quieres entender un detalle, escríbenos antes de hacer tu pedido. Cuéntanos qué buscas y qué modelos estás mirando."
+                      {
+                        "tag": "p",
+                        "attrs": {},
+                        "children": [
+                          "Si estás entre dos armazones o quieres entender un detalle, escríbenos antes de hacer tu pedido. Cuéntanos qué buscas y qué modelos estás mirando."
+                        ]
+                      }
                     ]
                   },
                   {

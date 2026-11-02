@@ -18,6 +18,7 @@
   #shopify-section-{{ section.id }} .lemoon-about-page__grid { display: grid; gap: 24px; }
   #shopify-section-{{ section.id }} .lemoon-about-page__value { padding: 28px; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-modal); }
   #shopify-section-{{ section.id }} .lemoon-about-page__value h3 { font-size: var(--lemoon-fs-20); margin: 0 0 16px; }
+  #shopify-section-{{ section.id }} .lemoon-about-page__value p + p { margin-top: var(--lemoon-space-4); }
   #shopify-section-{{ section.id }} .lemoon-about-page__value p { margin: 0; color: var(--lemoon-text-secondary); line-height: 1.6; }
   #shopify-section-{{ section.id }} .lemoon-about-page__story { max-width: 700px; margin: 64px auto 0; font-size: var(--lemoon-fs-18); line-height: 1.7; }
   #shopify-section-{{ section.id }} .lemoon-about-page__help { margin-top: 64px; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); padding: 32px; }
@@ -30,21 +31,41 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign about_eyebrow = 'sections.lemoon_about_page.eyebrow' | t
+  assign about_eyebrow = section.settings.eyebrow | default: about_eyebrow
+  assign about_title = 'sections.lemoon_about_page.title' | t
+  assign about_title = section.settings.title | default: about_title
+  assign about_catalogue = 'sections.lemoon_about_page.catalogue' | t
+  assign about_catalogue = section.settings.catalogue | default: about_catalogue
+  assign about_values_title = 'sections.lemoon_about_page.values_title' | t
+  assign about_values_title = section.settings.values_title | default: about_values_title
+  assign about_style_title = 'sections.lemoon_about_page.style_title' | t
+  assign about_style_title = section.settings.style_title | default: about_style_title
+  assign about_fit_title = 'sections.lemoon_about_page.fit_title' | t
+  assign about_fit_title = section.settings.fit_title | default: about_fit_title
+  assign about_information_title = 'sections.lemoon_about_page.information_title' | t
+  assign about_information_title = section.settings.information_title | default: about_information_title
+  assign about_help_title = 'sections.lemoon_about_page.help_title' | t
+  assign about_help_title = section.settings.help_title | default: about_help_title
+  assign about_contact = 'sections.lemoon_about_page.contact' | t
+  assign about_contact = section.settings.contact | default: about_contact
+  assign about_contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+-%}
 <div class="lemoon-about-page page-width">
   <div class="lemoon-about-page__hero">
     <header>
-      <span class="lemoon-about-page__eyebrow">{{ 'sections.lemoon_about_page.eyebrow' | t }}</span>
-      {%- assign ui_heading_text = 'sections.lemoon_about_page.title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 1 %}
-      <p class="lemoon-about-page__intro">{{ 'sections.lemoon_about_page.intro' | t }}</p>
+      <span class="lemoon-about-page__eyebrow">{{ about_eyebrow | escape }}</span>
+      {% render 'lemoon-ui-heading', text: about_title, level: 1 %}
+      <div class="lemoon-about-page__intro rte">
+        {%- if section.settings.intro != blank -%}
+          {{ section.settings.intro }}
+        {%- else -%}
+          <p>{{ 'sections.lemoon_about_page.intro' | t | escape }}</p>
+        {%- endif -%}
+      </div>
       <div class="lemoon-about-page__links">
-        {%- liquid
-  assign ui_action_label = 'sections.lemoon_about_page.catalogue' | t
-  assign ui_action_url = routes.all_products_collection_url
--%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local', class: 'button' %}
-        {%- liquid
-  assign ui_action_label = 'sections.lemoon_about_page.measurements' | t
-  assign ui_action_url = routes.root_url | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
--%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}
+        {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: about_catalogue, style_family: 'local', class: 'button' %}
       </div>
     </header>
     {%- if section.settings.image != blank -%}
@@ -56,24 +77,70 @@
     {%- endif -%}
   </div>
   <section class="lemoon-about-page__values" aria-labelledby="About-values-{{ section.id }}">
-    {%- assign ui_heading_text = 'sections.lemoon_about_page.values_title' | t -%}{%- capture ui_heading_id -%}About-values-{{ section.id }}{%- endcapture -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
+    {%- capture about_values_id -%}About-values-{{ section.id }}{%- endcapture -%}
+    {% render 'lemoon-ui-heading', text: about_values_title, level: 2, id: about_values_id %}
     <div class="lemoon-about-page__grid">
-      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.style_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.style_body' | t }}</p></div>
-      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.fit_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.fit_body' | t }}</p></div>
-      <div class="lemoon-about-page__value">{%- assign ui_heading_text = 'sections.lemoon_about_page.information_title' | t -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 3 %}<p>{{ 'sections.lemoon_about_page.information_body' | t }}</p></div>
+      <div class="lemoon-about-page__value">
+        {% render 'lemoon-ui-heading', text: about_style_title, level: 3 %}
+        <div class="rte">
+          {%- if section.settings.style_body != blank -%}
+            {{ section.settings.style_body }}
+          {%- else -%}
+            <p>{{ 'sections.lemoon_about_page.style_body' | t | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="lemoon-about-page__value">
+        {% render 'lemoon-ui-heading', text: about_fit_title, level: 3 %}
+        <div class="rte">
+          {%- if section.settings.fit_body != blank -%}
+            {{ section.settings.fit_body }}
+          {%- else -%}
+            <p>{{ 'sections.lemoon_about_page.fit_body' | t | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="lemoon-about-page__value">
+        {% render 'lemoon-ui-heading', text: about_information_title, level: 3 %}
+        <div class="rte">
+          {%- if section.settings.information_body != blank -%}
+            {{ section.settings.information_body }}
+          {%- else -%}
+            <p>{{ 'sections.lemoon_about_page.information_body' | t | escape }}</p>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.contact != blank -%}
+          <div class="lemoon-about-page__links">
+            {% render 'lemoon-ui-action', element: 'a', href: about_contact_url, label: about_contact, style_family: 'local' %}
+          </div>
+        {%- endif -%}
+      </div>
     </div>
   </section>
-  {%- if section.settings.demo_data -%}<div class="lemoon-about-page__story rte">{% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}</div>{%- endif -%}
+  {%- if section.settings.demo_data -%}
+    <div class="lemoon-about-page__story rte">{% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}</div>
+  {%- endif -%}
   {%- if section.settings.story != blank -%}
     <div class="lemoon-about-page__story rte">{{ section.settings.story }}</div>
   {%- endif -%}
   <section class="lemoon-about-page__help" aria-labelledby="About-help-{{ section.id }}">
-    {%- assign ui_heading_text = 'sections.lemoon_about_page.help_title' | t -%}{%- capture ui_heading_id -%}About-help-{{ section.id }}{%- endcapture -%}{% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
-    <p>{{ 'sections.lemoon_about_page.help_body' | t }}</p>
-    <div class="lemoon-about-page__links">{%- liquid
-  assign ui_action_label = 'sections.lemoon_about_page.contact' | t
-  assign ui_action_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
--%}{% render 'lemoon-ui-action', element: 'a', href: ui_action_url, label: ui_action_label, style_family: 'local' %}</div>
+    {%- capture about_help_id -%}About-help-{{ section.id }}{%- endcapture -%}
+    {% render 'lemoon-ui-heading', text: about_help_title, level: 2, id: about_help_id %}
+    <div class="rte">
+      {%- if section.settings.help_body != blank -%}
+        {{ section.settings.help_body }}
+      {%- else -%}
+        <p>{{ 'sections.lemoon_about_page.help_body' | t | escape }}</p>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.tagline != blank -%}<p><strong>{{ section.settings.tagline | escape }}</strong></p>{%- endif -%}
+    <div class="lemoon-about-page__links">
+      {%- if section.settings.closing_catalogue != blank -%}
+        {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: section.settings.closing_catalogue, style_family: 'local' %}
+      {%- else -%}
+        {% render 'lemoon-ui-action', element: 'a', href: about_contact_url, label: about_contact, style_family: 'local' %}
+      {%- endif -%}
+    </div>
   </section>
 </div>
 
@@ -90,6 +157,86 @@
     ]
   },
   "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:sections.lemoon_about_page.eyebrow_label"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.lemoon_about_page.title_label"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "t:sections.lemoon_about_page.intro_label"
+    },
+    {
+      "type": "text",
+      "id": "catalogue",
+      "label": "t:sections.lemoon_about_page.catalogue_label"
+    },
+    {
+      "type": "text",
+      "id": "values_title",
+      "label": "t:sections.lemoon_about_page.values_title_label"
+    },
+    {
+      "type": "text",
+      "id": "style_title",
+      "label": "t:sections.lemoon_about_page.style_title_label"
+    },
+    {
+      "type": "richtext",
+      "id": "style_body",
+      "label": "t:sections.lemoon_about_page.style_body_label"
+    },
+    {
+      "type": "text",
+      "id": "fit_title",
+      "label": "t:sections.lemoon_about_page.fit_title_label"
+    },
+    {
+      "type": "richtext",
+      "id": "fit_body",
+      "label": "t:sections.lemoon_about_page.fit_body_label"
+    },
+    {
+      "type": "text",
+      "id": "information_title",
+      "label": "t:sections.lemoon_about_page.information_title_label"
+    },
+    {
+      "type": "richtext",
+      "id": "information_body",
+      "label": "t:sections.lemoon_about_page.information_body_label"
+    },
+    {
+      "type": "text",
+      "id": "contact",
+      "label": "t:sections.lemoon_about_page.contact_label"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "t:sections.lemoon_about_page.help_title_label"
+    },
+    {
+      "type": "richtext",
+      "id": "help_body",
+      "label": "t:sections.lemoon_about_page.help_body_label"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "t:sections.lemoon_about_page.tagline_label"
+    },
+    {
+      "type": "text",
+      "id": "closing_catalogue",
+      "label": "t:sections.lemoon_about_page.closing_catalogue_label"
+    },
     {
       "type": "checkbox",
       "id": "demo_data",

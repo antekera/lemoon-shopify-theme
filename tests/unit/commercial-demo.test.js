@@ -22,11 +22,12 @@ test('sample content is opt-in; disabling it preserves native legal CMS and priv
  expect(snippet).toContain('{%- if enabled -%}');
  expect(snippet).toContain("'sections.lemoon_demo.notice' | t");
 });
-test('sample content remains editable with contact disabled by default', () => {
+test('sample content remains editable while Nosotros opts out and contact stays disabled', () => {
  const data=json('docs/content/commercial-test-data.json');
  for(const [handle,content] of Object.entries(data.content)) {
   const settings=json(`templates/page.${handle}.json`).sections.main.settings;
-  expect(settings.demo_data).toBe(handle !== 'contact');
-  expect(settings.demo_content).toBe(content);
+  expect(settings.demo_data).toBe(!['contact', 'nosotros'].includes(handle));
+  if (handle === 'nosotros') expect(settings).not.toHaveProperty('demo_content');
+  else expect(settings.demo_content).toBe(content);
  }
 });

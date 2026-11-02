@@ -21,16 +21,41 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   await noOverflow(page);
 });
 
-test('Nosotros replaces default placeholders and connects values, measurements and contact', async ({page}) => {
+test('Nosotros shows approved copy without imagery or demo and connects catalogue and contact by keyboard', async ({page}, testInfo) => {
   await openStorefrontPage(page, '/pages/nosotros?view=nosotros');
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
-  await expect(about.locator('.lemoon-about-page__value')).toHaveCount(3);
-  await expect(about).not.toContainText('Título de sección');
-  await expect(about.locator('a[href="/pages/como-medir-tus-lentes"]')).toBeVisible();
-  const contact = about.locator('a[href="/pages/contact"]');
-  await contact.focus(); await expect(contact).toBeFocused(); await noOverflow(page);
-  await contact.press('Enter'); await expect(page).toHaveURL(/\/pages\/contact$/);
+  await expect(about.getByRole('heading', { level: 1 })).toHaveText('Ver bien. Sentirte tú.');
+  for (const title of ['Experiencia en óptica, ahora online', 'El cuidado está en los detalles', 'Comprar online también puede sentirse cercano', 'Hacerlo bien es seguir mejorando']) {
+    await expect(about.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  }
+  await expect(about).toContainText('Somos un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile.');
+  await expect(about).toContainText('con la información y asesoría que necesitas para elegir, de forma clara y rápida.');
+  await expect(about).toContainText('Tus lentes son parte de tu día a día.');
+  await expect(about).toContainText('Se te ven bien');
+  await expect(about).not.toContainText(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|Título de sección|POR CONFIRMAR/i);
+  await expect(about.locator('img')).toHaveCount(0);
+  await expect(about.locator('.lemoon-about-page__abstract')).toHaveAttribute('aria-hidden', 'true');
+  const catalogue = about.getByRole('link', { name: 'Conoce nuestros lentes', exact: true });
+  const closingCatalogue = about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true });
+  const contact = about.getByRole('link', { name: 'Conversemos', exact: true });
+  await expect(catalogue).toHaveAttribute('href', '/collections/all');
+  await expect(closingCatalogue).toHaveAttribute('href', '/collections/all');
+  await expect(contact).toHaveAttribute('href', '/pages/contact');
+  await catalogue.focus();
+  await expect(catalogue).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(contact).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(closingCatalogue).toBeFocused();
+  await noOverflow(page);
+  await about.screenshot({ path: testInfo.outputPath('nosotros.png') });
+  for (const href of ['/collections/all', '/pages/contact']) {
+    expect((await storefrontRequest(page).get(href)).status()).toBe(200);
+  }
+  await contact.focus();
+  await contact.press('Enter');
+  await expect(page).toHaveURL(/\/pages\/contact(?:\?.*)?$/);
 });
 
 for (const [handle, subject] of [['operativos-oftalmologicos','?subject=operativos'],['isapres-y-fonasa','']]) {
