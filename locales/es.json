@@ -599,7 +599,7 @@
       "catalogue": "Ver todos los armazones"
     },
     "lemoon_journal": {
-      "eyebrow": "Journal",
+      "eyebrow": "Blog",
       "title": "Ver mejor también se aprende.",
       "description": "Ideas para elegir, cuidar y usar tus lentes con más confianza.",
       "tags_label": "Temas de artículos",
@@ -617,7 +617,7 @@
       "consent": "Acepto recibir correos de Lemoon y puedo cancelar mi suscripción cuando quiera."
     },
     "lemoon_article": {
-      "journal": "Journal",
+      "journal": "Blog",
       "by": "Por",
       "reading_time": {
         "one": "{{ count }} min de lectura",
