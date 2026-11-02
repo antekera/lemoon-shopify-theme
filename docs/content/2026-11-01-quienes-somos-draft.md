@@ -31,9 +31,10 @@ Se te ven bien
 
 ## Estado editorial — no forma parte del texto público
 
-Reformulación autorizada por Miguel el 02-11-2026 para integrar y actualizar la PR y vista previa, sin publicación. La referencia estructural vigente es la página History de Warby Parker: un relato continuo. El contenido principal consta de un H1 y seis párrafos, sin subtítulos internos, tarjetas, imágenes, composición abstracta ni CTAs intermedias. «Se te ven bien» se muestra separado del cuerpo y conserva el eslogan aprobado.
+Versión integrada para revisión en tema no publicado, actualizada el 02-11-2026. El contenido principal es un H1 y seis párrafos continuos, sin imagen, tarjetas, subtítulos internos ni CTAs. El carrusel de productos posterior conserva su alcance separado; la newsletter se omite únicamente en Nosotros.
 
-Miguel confirmó el equipo de profesionales del rubro óptico con muchos años de experiencia en Chile, la combinación con tecnología y la compra online cómoda con información y asesoría claras y rápidas. La calidad se expresa como compromiso. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones, resultados clínicos ni confrontación con cadenas. La imagen aportada anteriormente queda como antecedente y no debe formar parte del contenido principal. El carrusel posterior y la omisión de newsletter mantienen su alcance separado de este relato. Esta edición documental no certifica la actualización de la plantilla ni del preview; esa integración corresponde al coordinador y al builder. La metadata CMS continúa como propuesta.
+El eslogan se administra globalmente en `settings.brand_slogan`, bajo Configuración del tema → Información de marca → Eslogan. El valor aprobado «Se te ven bien» aparece en un párrafo independiente debajo del relato, fuera del richtext; un valor vacío oculta ese cierre.
 
+Los hechos del equipo, su experiencia en Chile y la asesoría online proceden de confirmaciones de Miguel. La calidad se expresa como compromiso, sin precios, proveedores, nombres personales, fabricación propia ni certificaciones. La referencia estructural es Warby Parker — History; el texto es original.
 
-El eslogan final es un campo global del tema (`brand_slogan`) bajo Información de marca → Eslogan. El valor inicial aprobado es «Se te ven bien», mostrado en un párrafo separado debajo del relato. No forma parte del richtext del cuerpo; un valor vacío oculta ese cierre.
+La página CMS conserva `templateSuffix: page`; la revisión usa `view=nosotros`. La metadata anterior sigue como propuesta. La vista previa no publicada, las muestras presentes en el catálogo y la revisión humana pendiente limitan la aceptación final; esta nota no acredita publicación ni cierre del ticket.
