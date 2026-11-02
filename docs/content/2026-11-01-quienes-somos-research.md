@@ -68,7 +68,7 @@ La selección vigente, posterior a la referencia de Warby Parker, es un relato c
 
 Un título, un cuerpo de lectura seguido y espacio suficiente entre párrafos. Mantener Urbanist y Hanken Grotesk y los tokens vigentes de DESIGN.md, sin crear otra identidad. No añadir imágenes, placeholder abstracto CSS, tarjetas, subtítulos, paneles internos, CTAs ni un bloque separado para el eslogan. El copy y el título deben seguir siendo editables. La adaptación de ancho y escala para móvil/tablet/escritorio y las comprobaciones accesibles corresponden a la integración del tema.
 
-El carrusel posterior es una superficie distinta del relato; esta corrección no vuelve a añadir newsletter. No se solicitan fotografías ni queda pendiente un recurso visual para el contenido principal. La imagen `lemoon-nosotros-mostrador.jpg` y los recursos generados existentes son antecedentes; esta decisión no autoriza su borrado ni implica que la imagen represente un local propio.
+El carrusel posterior es una superficie distinta del relato; esta corrección no vuelve a añadir newsletter. No se solicitan fotografías ni queda pendiente un recurso visual para el contenido principal. Las imágenes anteriores quedan fuera del diseño vigente. Miguel autoriza posteriormente retirar del repositorio los archivos sin uso; se conservan los prompts como antecedentes, sin atribuir un local propio a esas escenas.
 
 La edición de los dos MD entrega el texto reformulado y la decisión al coordinador/builder. No prueba por sí sola la modificación de la plantilla, el nuevo resultado de storefront ni la actualización de la PR o del tema de revisión.
 
@@ -129,3 +129,8 @@ Miguel solicita retirar el enlace «Encuentra tu próximo par» del último bloq
 ## Eslogan global separado — decisión vigente, 02-11-2026
 
 Miguel solicita separar «Se te ven bien» del último párrafo y administrar el eslogan en las opciones de Shopify. Se define `brand_slogan` como campo global de Configuración del tema → Información de marca → Eslogan, con el valor inicial aprobado «Se te ven bien». La página consume ese campo en un párrafo independiente al terminar los seis párrafos del relato. No se duplica en el richtext ni se añade un subtítulo, panel o CTA; si el valor guardado está vacío, no se muestra. La configuración privada `settings_data.json` no se versiona; el valor se configura solo en el tema no publicado de revisión durante esta entrega.
+
+
+## Limpieza de imágenes sin uso
+
+Por solicitud posterior de Miguel, se retiran las cinco imágenes de LEM-108 añadidas durante la exploración, al comprobar que no tienen referencias en la implementación actual. Los enlaces del inventario y el registro de assets se actualizan para no apuntar a archivos eliminados. Esta limpieza no borra el original aportado en Downloads ni archivos globales de Shopify Files. No cambia la composición ni las imágenes de producto del carrusel.

@@ -1,46 +1,17 @@
-# LEM-108 — Estantería editorial
+# LEM-108 — Imágenes descartadas
 
-**Estado vigente:** la dirección posterior elegida por Miguel es un relato continuo sin imagen, inspirado en Warby Parker — History. Ninguna imagen de este paquete está seleccionada en la página y la sección ya no contiene selector de imagen. Los archivos se conservan como antecedentes; no generan un requisito de imagen antes del lanzamiento.
+La página vigente usa un relato continuo sin imagen. Por solicitud de Miguel, se retiran del repositorio las cinco imágenes de esta exploración que ya no tienen consumidores:
 
-Solicitud de Miguel, 2 de noviembre de 2026: retirar el enlace «Conversemos» y usar una imagen realista de una estantería tipo tienda física con lentes.
+- `assets/lemoon-nosotros-mostrador.jpg`.
+- Los originales PNG `estanteria-original-v1.png` y `estanteria-original-v2.png`.
+- Los exports JPG `lemoon-nosotros-estanteria-v1.jpg` y `lemoon-nosotros-estanteria-v2.jpg`.
 
-- Generación: herramienta integrada `imagegen`, sin imágenes de referencia.
-- [Original PNG](estanteria-original-v2.png), 1402×1122.
-- [JPG para Shopify](lemoon-nosotros-estanteria-v2.jpg), mismas dimensiones, calidad JPEG 86; sin recorte ni ampliación.
-- Files: `gid://shopify/MediaImage/46708940996776`.
-- [Imagen CDN](https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-nosotros-estanteria-v2.jpg?v=1793652452).
-- Selector: `lemoon-about-page.image`; referencia `shopify://shop_images/lemoon-nosotros-estanteria-v2.jpg`.
-- Alt: «Escena ilustrativa de armazones de lentes exhibidos en estantes de madera.».
-- Destino: tema no publicado de revisión `189663019176`, sin modificación del tema publicado.
+La imagen aportada por el usuario en Downloads permanece intacta. Esta limpieza afecta al repositorio y la PR; no borra archivos globales de Shopify Files ni recursos de otras páginas. Ningún template, sección, snippet, layout, asset, config o locale de la rama referencia estas imágenes. Se conservan los prompts como antecedente de investigación.
 
-Escena generada de carácter editorial. No es una fotografía de un local, equipo o producto específico de Lemoon; no acredita existencias, materiales ni fabricación. No se rotula como tienda física propia. La imagen sigue siendo editable en el selector del tema.
-
-## Prompt de generación inicial (v1)
+## Prompt de generación inicial
 
 Generate one extremely photorealistic editorial interior photograph for an eyewear ecommerce About Us page. Subject: a close view of a beautifully organized real-looking optical shop display shelving, no people. Composition approximately 5:4 landscape, camera level, a restrained section of three warm pale oak shelves recessed into a creamy plaster wall, with about 12 to 16 distinct eyeglass frames on small discrete clear acrylic or matte ivory stands. Actual plausible eyeglasses: intact symmetrical rims, correct two temples folded behind, bridge joins, tiny hinges, nose pads where appropriate, realistic lens transparency and subtle reflections, no floating objects, no duplicated frames or warped shapes. Mix thin dark metal, understated black acetate and translucent honey/tortoiseshell optical frames, natural variation, no visible designer branding. Refined everyday optical retail environment rather than luxury jewelry store. Soft natural daylight entering from camera left, quiet warm offwhite and pale oak with sparse dark navy accents. Crisp tactile oak grain, realistic glass refraction, credible contact shadows, gentle camera depth of field, eye-height commercial interior photography with 50mm lens, premium but approachable, restrained colors, no CGI sheen or oversaturated yellow, natural photographic imperfections. Focus attention on the central glasses on the middle shelf; product arrangement must remain coherent when cropped to 5:4 desktop or mobile. No signage, no text, no logos, no medical equipment, no stock-photo wide store facade, no storefront location cues, no factory or workshop, no claims of being a real Lemoon store. This is a generic illustrative editorial visual, not a picture of a specific SKU. Save the final image and include its local file path in the output hint so it can be added to the local Shopify theme project.
 
-
-## Edición final sin plantas (v2)
-
-Miguel solicita retirar las plantas. Se edita la imagen original con la herramienta integrada imagegen; se eliminan hojas, tallos, maceta y sombras vegetales, conservando la estantería, los lentes y la luz. La v1 queda como antecedente; la v2 se seleccionó temporalmente en el tema de revisión y después se retiró.
-
-### Prompt final de edición
+## Prompt de edición sin plantas
 
 Edit the supplied photorealistic eyewear shelving photograph. Remove ALL plants, foliage, trailing vines, leaves, stems, and plant pots completely, including the plant and pot along the upper left edge and top shelf. Also remove their leafy cast shadows from the left plaster wall. Seamlessly reconstruct the plain creamy plaster wall and pale oak shelf behind the removed vegetation using the same textures and physically plausible soft natural daylight. Preserve the exact existing composition, camera framing, 5:4 landscape proportions, oak shelving geometry, every eyeglass frame with its precise shape/material/placement, transparent display stands, lighting warmth, realistic lens reflections, natural contact shadows and lower-right navy foreground detail. Do not add anything. No plants or greenery anywhere. No text, logos, signage, people or new decor. The result should look like the same real editorial photograph simply taken without any plants. Save the final edited image and include its local file path in the output hint for integration into the Shopify theme project.
-
-
-## Estado anterior — placeholder y pendiente pre-go-live
-
-Por decisión posterior de Miguel del 02-11-2026, ninguna de estas imágenes está seleccionada en la página. La vista previa conserva el placeholder abstracto CSS. Ambos originales y JPG se conservan como antecedentes; no son recursos finales aprobados. Seleccionar e integrar la imagen definitiva queda registrado en [LEM-143](https://linear.app/antekera/issue/LEM-143), con LEM-108 como ticket propietario, sin bloquear la revisión actual de la página.
-
-
-## Imagen seleccionada por Miguel — estado actual
-
-El 02-11-2026 Miguel aporta `mostrador.jpg` y pide usarla y trasladarla a los assets de la aplicación. Se conserva el archivo de origen y se copia sin modificaciones a [assets/lemoon-nosotros-mostrador.jpg](../../../../assets/lemoon-nosotros-mostrador.jpg). Dimensiones: 1152×928. SHA-256 idéntico al original: `bccc11b764ea935896c0349111cc701d0ed3d184994d115f5866b02298e66361`. No se genera ni edita esta imagen.
-
-Files: `gid://shopify/MediaImage/46709116698792`. Selector: `shopify://shop_images/lemoon-nosotros-mostrador.jpg`. Alt: «Armazones de lentes exhibidos sobre estantes de madera junto a una ventana.». Se incorpora al tema no publicado de revisión `189663019176`; no se identifica como fotografía de un local propio. El recurso queda seleccionado para esta vista previa; la verificación del resultado publicado antes del lanzamiento sigue dentro de LEM-143.
-
-
-## Cambio final de dirección — relato sin imagen
-
-Miguel sustituye la composición anterior por un único bloque de texto continuo. La imagen aportada se conserva en assets por su instrucción anterior, pero no forma parte de la plantilla ni de su sección. El control anterior de incorporar una imagen antes del go live queda retirado para esta página; el carrusel independiente conserva sus imágenes de producto.
