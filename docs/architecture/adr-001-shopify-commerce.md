@@ -27,6 +27,8 @@ Shopify es la única plataforma de comercio de Lemoon y la fuente de verdad de s
 
 ### Configurador, receta y comunicaciones del MVP
 
+El contrato de producto aprobado de compra, precio de solo marco, asistencia con Gemini y revisión del laboratorio está en [ADR-002 — Compra de armazones, configuración y receta](adr-002-eyewear-purchase.md). Consultarlo antes de implementar esas capacidades.
+
 El configurador de [LEM-23](https://linear.app/antekera/issue/LEM-23) ofrece las opciones existentes para cada armazón. Comprar solo el armazón sigue siendo válido y usa la configuración reducida aplicable. `custom.lens_compatible` indica únicamente si admite lentes con receta: no enumera tratamientos ni garantiza cualquier graduación. Las opciones concretas y sus requisitos deben verificarse por separado en Shopify; filtro azul no implica por sí mismo receta.
 
 Se permite pagar antes de aportar la receta. Configurador y perfil consumen la misma capacidad de carga y reemplazo: una receta vigente por cliente, sustituida solo después de una recepción exitosa, preservando las asociaciones históricas de pedidos y fórmulas. [LEM-140](https://linear.app/antekera/issue/LEM-140) define el contrato servidor/admin; este ADR no fija endpoints, almacenamiento, permisos ni una autenticación nueva.

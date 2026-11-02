@@ -9,6 +9,7 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 - Before creating or changing layouts, components, or styling, read root `DESIGN.md` for the visual contract, `docs/design/brand-guidelines.md` for brand usage, and the relevant design plan or section inventory. Keep `DESIGN.md` as the single source of visual decisions; update it when an authorized design change alters that contract.
 - Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
 - For brand identity, image selection, channel assets, or brand-content reviews, follow [brand guidance](docs/agents/brand-guidance.md).
+- Before changing catalog offers, product purchase actions, lens configuration, prices, cart/order data, or prescription flows, read [the approved LEM-31 purchase decision](docs/architecture/adr-002-eyewear-purchase.md). Use it as the product contract; verify implementation and Shopify data separately.
 - Keep edits scoped to the requested work. Do not modify `node_modules/` or Shopify-generated output.
 
 ## Current documentation (Context7-first)
