@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { storefrontRequest } from '../helpers/storefront-request.mjs';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const noOverflow = async (page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-const aboutCopy = readFileSync(new URL('../../docs/content/2026-11-01-quienes-somos-draft.md', import.meta.url), 'utf8')
+const aboutCopy = readFileSync('docs/content/2026-11-01-quienes-somos-draft.md', 'utf8')
   .split('## Contenido de página')[1].split('\n---')[0].trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, ''));
 
 test('FAQ groups open and close by keyboard and link to existing guides and policies', async ({page}) => {
