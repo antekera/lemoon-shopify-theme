@@ -8,7 +8,7 @@ Brief inicial del 01-11-2026: Miguel pide una página interesante, con propósit
 
 Actualización de Miguel en esta conversación del 01-11-2026: personas con mucha experiencia en el rubro de las ópticas se unen a Miguel, que aporta tecnología, y de ese encuentro nace Lemoon. La ambición es aportar un poco al rubro, con productos bonitos, de calidad y a buen precio, sin un relato de confrontación con las grandes cadenas. Esta confirmación permitió incorporar una historia propia breve; la mención al precio que acompañó esa versión se retiró por la decisión posterior.
 
-Decisión vigente de Miguel, 02-11-2026: omitir el precio en el copy y no incorporar imágenes por ahora. La dirección es textual, con tipografía, espacio y la alternativa abstracta CSS ya existente. No se solicitan fotografías ni quedan como requisito pendiente de esta versión. La investigación visual se conserva como antecedente, sin recomendar actualmente añadir esas imágenes.
+Decisión inicial de Miguel, 02-11-2026, sustituida en cuanto a imagen por el ajuste al final de estas notas: omitir el precio en el copy y no incorporar imágenes por ahora. La dirección es textual, con tipografía, espacio y la alternativa abstracta CSS ya existente. No se solicitan fotografías ni quedan como requisito pendiente de esta versión. La investigación visual se conserva como antecedente, sin recomendar actualmente añadir esas imágenes.
 
 Corrección posterior del 02-11-2026: hacer menos personal el bloque de experiencia y no dar nombres personales. El texto público presenta la combinación de experiencia óptica y tecnología como capacidades de Lemoon, sin identificar a participantes. Las atribuciones de estas notas se conservan únicamente como fuentes internas.
 
@@ -47,7 +47,7 @@ Las descripciones siguientes registran lo que cada sitio comunica, sin verificar
 
 | Marca y URL exacta | Tratamiento observado | Aprendizaje editorial propuesto para Lemoon / límite |
 | --- | --- | --- |
-| [Ace & Tate — Our story](https://www.aceandtate.com/gb/about/our-story) | Presentación breve y directa; diseño/calidad, responsabilidad, colaboraciones, tiendas y personas con imágenes intercaladas. Reconoce trabajo pendiente en responsabilidad. | Referencia por cercanía y economía de texto: idea clara, rostros, producto y hechos en bloques cortos. El uso de rostros queda como observación histórica; la dirección vigente de Lemoon prescinde de fotos. No copiar frases, escala comercial, servicios ópticos ni promesas ambientales. Conecta con la referencia existente de LEM-81, reabierta el 01-11-2026. |
+| [Ace & Tate — Our story](https://www.aceandtate.com/gb/about/our-story) | Presentación breve y directa; diseño/calidad, responsabilidad, colaboraciones, tiendas y personas con imágenes intercaladas. Reconoce trabajo pendiente en responsabilidad. | Referencia por cercanía y economía de texto: idea clara, rostros, producto y hechos en bloques cortos. El uso de rostros queda como observación histórica; la versión inicial de Lemoon prescindía de fotos; el ajuste posterior usa una escena generada de estantería. No copiar frases, escala comercial, servicios ópticos ni promesas ambientales. Conecta con la referencia existente de LEM-81, reabierta el 01-11-2026. |
 | [Cubitts — About](https://cubitts.com/pages/about) | Conecta filosofía y origen con detalles del objeto, taller, cristales, ajustes y reparación; intercala imágenes y apartados editoriales. | Inspirarse en la atención al detalle y la coherencia entre convicción/producto/servicio. Lemoon no tiene respaldo para apropiarse de manufactura, laboratorio, reparaciones, marca de cristales ni durabilidad. Evitar convertir su nivel de detalle técnico en una ficción de Lemoon. |
 | [MOSCOT — The Moscot Story](https://moscot.com/pages/the-moscot-story) | La página fue abierta y devolvió el documento; su historia se articula en torno a raíces familiares y generaciones. Una búsqueda de detalle y el intento posterior de URL regional devolvieron timeout. | Usar solo la idea de que una historia gana fuerza con personas y evidencia propia. Lemoon cuenta ahora con un origen confirmado, pero no se inventan fechas ni una cronología. Cobertura más limitada que Ace & Tate/Cubitts; no se afirma una auditoría del diseño ni lectura integral de sus 1.649 líneas. |
 
@@ -56,12 +56,12 @@ Ben & Frank apareció durante la búsqueda, pero no se usó su subdominio de ayu
 ## Comparación y elección de enfoque
 
 1. **Editorial humano + producto — exploración inicial, sustituida.** Se estudió una presentación apoyada en fotografía cotidiana y detalle de producto. Queda como antecedente de investigación; no es la dirección vigente ni genera una necesidad de fotografías.
-2. **Dirección textual — vigente desde el 02-11-2026.** El propósito, la historia y los compromisos se expresan con títulos claros, párrafos breves, jerarquía tipográfica y espacio. Se conserva la alternativa abstracta CSS existente, sin añadir imágenes ni cambiar el contrato visual.
+2. **Dirección textual — versión inicial del 02-11-2026.** El propósito, la historia y los compromisos se expresan con títulos claros, párrafos breves, jerarquía tipográfica y espacio. Se conserva la alternativa abstracta CSS existente, sin añadir imágenes ni cambiar el contrato visual.
 3. **Experiencia en óptica y tecnología — contenido incorporado.** La confirmación de Miguel permite explicar esa combinación. Por su última corrección, se presenta como capacidades de Lemoon, con un enfoque menos personal, sin nombres, biografía, cronología inventada ni foto de equipo pendiente.
 
-La dirección vigente combina el segundo enfoque con el bloque de capacidades del tercero, ya incorporado al borrador. Los hechos tienen fuente directa en Miguel; el texto exacto se entrega para su revisión. Su última corrección sustituye el relato personal de origen por una presentación de la experiencia de Lemoon, sin acreditar integración ni QA de la página completa.
+La primera integración combinó el segundo enfoque con el bloque de capacidades del tercero, ya incorporado al borrador. Los hechos tienen fuente directa en Miguel; el texto exacto se entrega para su revisión. Su última corrección sustituye el relato personal de origen por una presentación de la experiencia de Lemoon, sin acreditar integración ni QA de la página completa.
 
-## Dirección visual vigente
+## Dirección visual de la primera integración (antes del ajuste de imagen)
 
 Actualizada por decisión expresa del 02-11-2026: sin imágenes nuevas por ahora. Mantener Urbanist/Hanken Grotesk, navy, blanco, beige y acentos lemon puntuales conforme a DESIGN.md. La personalidad procede del relato, la jerarquía tipográfica y el espacio. Reutilizar la alternativa abstracta CSS de la sección existente; no requiere producir ni cargar un asset.
 
@@ -73,7 +73,7 @@ Actualizada por decisión expresa del 02-11-2026: sin imágenes nuevas por ahora
 | «Comprar online…» | Panel cálido de conversación y enlace claro a contacto. | Texto y tratamiento existente; sin imagen de atención. |
 | Cierre | Frase breve, eslogan oficial y enlace al catálogo. | Texto editable; sin carrusel, video ni animaciones necesarias para entender. |
 
-La sección actual `lemoon-about-page` admite imagen o alternativa abstracta CSS, tres tarjetas, story y help. La elección vigente reutiliza su alternativa abstracta. La integración local conserva la composición existente: hero, tres tarjetas de experiencia/cuidado/servicio y cierre en el panel de ayuda. Los textos son settings editables con fallbacks locales; no se duplica el cierre en story. Mantener lectura móvil en un único orden y foco visible; las validaciones de teclado, contraste, enlaces y responsive se ejecutan después sobre la implementación.
+La sección actual `lemoon-about-page` admite imagen o alternativa abstracta CSS, tres tarjetas, story y help. La primera integración reutilizó su alternativa abstracta; el ajuste posterior configura una imagen editorial generada. La integración local conserva la composición existente: hero, tres tarjetas de experiencia/cuidado/servicio y cierre en el panel de ayuda. Los textos son settings editables con fallbacks locales; no se duplica el cierre en story. Mantener lectura móvil en un único orden y foco visible; las validaciones de teclado, contraste, enlaces y responsive se ejecutan después sobre la implementación.
 
 Las fotografías de competidores se conservan únicamente como observaciones de investigación. No se solicitan fotos de equipo, producto ni A01 para esta versión. La decisión de prescindir de imágenes por ahora no modifica las reglas generales de marca para usos futuros.
 
@@ -89,3 +89,9 @@ Las fotografías de competidores se conservan únicamente como observaciones de 
 - Fotografías no son un pendiente de esta versión. La metadata SEO del draft se conserva como propuesta para una entrega posterior.
 
 Las comprobaciones de Theme Check, unitarias y de storefront se registran con sus resultados reales en la entrega. El ticket conserva revisión humana del resultado y los demás criterios de aceptación antes de completarse; una vista previa no acredita publicación ni aprobación de producción.
+
+## Ajuste de la vista previa — imagen y enlace, 02-11-2026
+
+Decisión vigente: Miguel solicita quitar «Conversemos» e incorporar una imagen realista de una estantería tipo óptica con lentes. Esta decisión sustituye la opción anterior sin imagen para la vista previa actual. Se genera una escena editorial con imagegen, sin marcas, personas, rótulos ni referencias a una ubicación de Lemoon. No documenta un local real ni SKU disponibles. El original, JPG y prompt se conservan en [assets LEM-108](../design/assets/lem-108/README.md).
+
+Se configura el selector existente `image` con `shopify://shop_images/lemoon-nosotros-estanteria-v1.jpg`; la imagen sigue siendo reemplazable desde el editor del tema. El alt es «Escena ilustrativa de armazones de lentes exhibidos en estantes de madera.». Se vacía el setting `contact` para omitir el enlace de la tarjeta de servicio; el cierre conserva su acción al catálogo. No hay cambios de Liquid ni de composición. Se aplica únicamente al tema no publicado de revisión `189663019176`.

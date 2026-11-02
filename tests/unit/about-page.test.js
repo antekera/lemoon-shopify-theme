@@ -14,9 +14,13 @@ const text = html => html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').repla
 const publicDraft = file('docs/content/2026-11-01-quienes-somos-draft.md').split('## Contenido de página')[1].split('\n---')[0];
 const approvedCopy = publicDraft.split(/\n\s*\n/).map(part => part.trim())
   .filter(part => part && !part.startsWith('**[')).map(part => part.replace(/^#+\s*/, '').replaceAll('**', ''));
-const render = options => renderComponentSection('lemoon-about-page', { settings, ...options });
+// ImageDrop and CDN rendering are verified against Shopify in the storefront test.
+// Keep this fixture focused on real Liquid text/settings without faking image filters.
+const render = (options = {}) => renderComponentSection('lemoon-about-page', {
+  ...options, settings: { ...settings, ...options.settings, image: null },
+});
 
-test('about renders every approved heading and paragraph once without demo, names, suppliers, price or imagery', () => {
+test('about preserves approved copy without demo, names, suppliers or price and configures the editorial image', () => {
   const html = render();
   const renderedText = text(html);
   for (const paragraph of approvedCopy) {
@@ -29,17 +33,17 @@ test('about renders every approved heading and paragraph once without demo, name
   expect(renderedText).not.toMatch(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|00\.000\.000|Avenida de Ejemplo|POR CONFIRMAR/i);
   expect(settings.demo_data).toBe(false);
   expect(settings).not.toHaveProperty('demo_content');
-  expect(settings.image).toBeUndefined();
+  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-estanteria-v1.jpg');
+  expect(settings.contact).toBe('');
 });
 
 for (const root of ['/', '/en/']) {
-  test(`about renders catalogue and contact actions under localized root ${root}`, () => {
+  test(`about renders only the two catalogue actions under localized root ${root}`, () => {
     const prefix = root === '/' ? '' : '/en';
     const html = render({ routes: { root_url: root, all_products_collection_url: `${prefix}/collections/all` } });
     const links = [...html.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].map(([, href, label]) => ({ href, label: text(label) }));
     expect(links).toEqual([
       { href: `${prefix}/collections/all`, label: 'Conoce nuestros lentes' },
-      { href: `${prefix}/pages/contact`, label: 'Conversemos' },
       { href: `${prefix}/collections/all`, label: 'Encuentra tu próximo par' },
     ]);
   });
@@ -81,7 +85,7 @@ test('about template content is editor-configurable and its labels resolve in bo
   expect(schema.settings.filter(({ type }) => type === 'range').map(({ id }) => id)).toEqual(['padding_top', 'padding_bottom']);
   for (const [id, value] of Object.entries(settings)) {
     if (typeof value !== 'string') continue;
-    expect(schema.settings.find(setting => setting.id === id), id).toMatchObject({ type: value.startsWith('<p>') ? 'richtext' : 'text' });
+    expect(schema.settings.find(setting => setting.id === id), id).toMatchObject({ type: id === 'image' ? 'image_picker' : value.startsWith('<p>') ? 'richtext' : 'text' });
   }
   for (const language of ['en.default', 'es']) {
     const messages = json(`locales/${language}.json`);

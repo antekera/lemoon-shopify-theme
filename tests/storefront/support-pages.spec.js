@@ -21,7 +21,7 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   await noOverflow(page);
 });
 
-test('Nosotros shows approved copy without imagery or demo and connects catalogue and contact by keyboard', async ({page}, testInfo) => {
+test('Nosotros shows approved copy and its editorial image without demo or contact CTA and connects catalogue by keyboard', async ({page}, testInfo) => {
   await openStorefrontPage(page, '/pages/nosotros?view=nosotros');
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
@@ -34,28 +34,29 @@ test('Nosotros shows approved copy without imagery or demo and connects catalogu
   await expect(about).toContainText('Tus lentes son parte de tu día a día.');
   await expect(about).toContainText('Se te ven bien');
   await expect(about).not.toContainText(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|Título de sección|POR CONFIRMAR/i);
-  await expect(about.locator('img')).toHaveCount(0);
-  await expect(about.locator('.lemoon-about-page__abstract')).toHaveAttribute('aria-hidden', 'true');
+  const image = about.locator('.lemoon-about-page__visual img');
+  await expect(image).toBeVisible();
+  await expect(image).toHaveAttribute('src', /lemoon-nosotros-estanteria-v1/);
+  await expect(image).toHaveAttribute('alt', /ilustrativa/i);
+  await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
+  await expect(about.locator('.lemoon-about-page__abstract')).toHaveCount(0);
   const catalogue = about.getByRole('link', { name: 'Conoce nuestros lentes', exact: true });
   const closingCatalogue = about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true });
-  const contact = about.getByRole('link', { name: 'Conversemos', exact: true });
+  await expect(about.getByRole('link', { name: 'Conversemos', exact: true })).toHaveCount(0);
+  await expect(about.locator('a[href="/pages/contact"]')).toHaveCount(0);
   await expect(catalogue).toHaveAttribute('href', '/collections/all');
   await expect(closingCatalogue).toHaveAttribute('href', '/collections/all');
-  await expect(contact).toHaveAttribute('href', '/pages/contact');
   await catalogue.focus();
   await expect(catalogue).toBeFocused();
   await page.keyboard.press('Tab');
-  await expect(contact).toBeFocused();
-  await page.keyboard.press('Tab');
   await expect(closingCatalogue).toBeFocused();
   await noOverflow(page);
-  await about.screenshot({ path: testInfo.outputPath('nosotros.png') });
-  for (const href of ['/collections/all', '/pages/contact']) {
-    expect((await storefrontRequest(page).get(href)).status()).toBe(200);
-  }
-  await contact.focus();
-  await contact.press('Enter');
-  await expect(page).toHaveURL(/\/pages\/contact(?:\?.*)?$/);
+  await page.evaluate(() => { document.activeElement?.blur(); window.scrollTo({ top: 0, behavior: 'instant' }); });
+  await page.screenshot({ path: testInfo.outputPath('nosotros.png'), fullPage: true });
+  expect((await storefrontRequest(page).get('/collections/all')).status()).toBe(200);
+  await closingCatalogue.focus();
+  await closingCatalogue.press('Enter');
+  await expect(page).toHaveURL(/\/collections\/all(?:\?.*)?$/);
 });
 
 for (const [handle, subject] of [['operativos-oftalmologicos','?subject=operativos'],['isapres-y-fonasa','']]) {

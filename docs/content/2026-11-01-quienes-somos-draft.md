@@ -30,8 +30,6 @@ Elegir tus lentes puede traer preguntas. Sobre un modelo, sus medidas o los paso
 
 Queremos que la sencillez se note también ahí: en cómo explicamos las opciones, escuchamos tus dudas y te orientamos para que puedas decidir con más claridad.
 
-**[Conversemos](/pages/contact)**
-
 ## Hacerlo bien es seguir mejorando
 
 La marca que queremos construir se juega en decisiones cotidianas: qué productos ofrecer, con quién trabajar y cómo hacer más fácil tu próxima compra.
@@ -53,4 +51,4 @@ Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque querem
 
 ## Estado editorial — no forma parte del texto público
 
-Texto integrado en la plantilla local para revisión visual en Shopify, por solicitud de Miguel del 02-11-2026. «Ver bien. Sentirte tú.» es el título de esta página; se conserva el eslogan «Se te ven bien». Miguel confirmó un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile y pidió expresar la adaptación online con información y asesoría claras y rápidas. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones o resultados clínicos. Se conserva la composición abstracta CSS, sin imagen, y demo_data está desactivado. La revisión visual en tema no publicado y la aprobación para producción son etapas distintas. La metadata CMS continúa como propuesta y no se modifica en la página pública durante esta vista previa.
+Texto integrado en la plantilla local para revisión visual en Shopify, por solicitud de Miguel del 02-11-2026. «Ver bien. Sentirte tú.» es el título de esta página; se conserva el eslogan «Se te ven bien». Miguel confirmó un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile y pidió expresar la adaptación online con información y asesoría claras y rápidas. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones o resultados clínicos. Por la última solicitud de revisión visual, se incorpora una escena editorial generada de estantería de lentes y se retira el enlace «Conversemos». La imagen no representa un local ni productos específicos de Lemoon. demo_data permanece desactivado. La revisión visual en tema no publicado y la aprobación para producción son etapas distintas. La metadata CMS continúa como propuesta y no se modifica en la página pública durante esta vista previa.

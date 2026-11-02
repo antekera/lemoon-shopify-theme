@@ -16,11 +16,12 @@
         "fit_body": "<p>Tus lentes son parte de tu día a día. Por eso nos importa tanto cómo se ven como que encuentres un modelo adecuado para ti: su forma, sus medidas y las opciones de cristales.</p><p>Queremos ofrecer lentes que te guste usar, con atención a la calidad y a esos detalles que hacen la diferencia al elegir tu próximo par.</p>",
         "information_title": "Comprar online también puede sentirse cercano",
         "information_body": "<p>Elegir tus lentes puede traer preguntas. Sobre un modelo, sus medidas o los pasos de la compra. Para nosotros, un buen servicio empieza por tomarlas en serio.</p><p>Queremos que la sencillez se note también ahí: en cómo explicamos las opciones, escuchamos tus dudas y te orientamos para que puedas decidir con más claridad.</p>",
-        "contact": "Conversemos",
+        "contact": "",
         "help_title": "Hacerlo bien es seguir mejorando",
         "help_body": "<p>La marca que queremos construir se juega en decisiones cotidianas: qué productos ofrecer, con quién trabajar y cómo hacer más fácil tu próxima compra.</p><p>Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque queremos que, cuando pienses en tus próximos lentes, te den ganas de volver a Lemoon.</p>",
         "tagline": "Se te ven bien",
-        "closing_catalogue": "Encuentra tu próximo par"
+        "closing_catalogue": "Encuentra tu próximo par",
+        "image": "shopify://shop_images/lemoon-nosotros-estanteria-v1.jpg"
       }
     }
   },
