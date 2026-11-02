@@ -157,7 +157,6 @@
         "layout/password.liquid",
         "layout/theme.liquid",
         "sections/footer.liquid",
-        "sections/lemoon-about-page.liquid",
         "sections/lemoon-contact-page.liquid",
         "sections/lemoon-crystal-guide.liquid",
         "sections/lemoon-design-system.liquid",
@@ -1131,7 +1130,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-about-page.liquid",
-        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda; preservar demo opt-in. Nosotros: hero, tres tarjetas y cierre editables con fallbacks localizados, CTA contacto opcional en servicio y CTA catálogo final. hide_closing_link (default false) omite todo el enlace final y su fallback; page.nosotros lo activa, conserva imagen configurable y demo desactivado.",
+        "scope": "Reutilizar sección/editorial existente y lemoon-shared-benefits donde corresponda. Nosotros: solo H1 title y richtext body editables, fallbacks localizados y padding; lectura de 72rem, cuerpo 1.8rem/1.7. Sin imagen, placeholder, tarjetas, subtítulos, paneles, CTAs ni demo. page.nosotros conserva el carrusel como sección posterior independiente.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -4424,7 +4423,6 @@
       "path": "sections/lemoon-about-page.liquid",
       "status": "mapped",
       "component_ids": [
-        "LM-ACTION",
         "LM-EDITORIAL",
         "LM-TYPE"
       ],

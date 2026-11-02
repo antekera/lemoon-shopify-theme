@@ -129,6 +129,12 @@ El alias Dawn `--page-width:128rem` existe, pero `.page-width` usa el máximo Le
 
 Mantener orden de lectura al apilar, títulos largos y mensajes de error completos. Evitar overflow horizontal de página; la media y las columnas deben poder contraerse. Verificar los dos lados de 750/990 y de 1280 cuando cambien gutters; usar móvil 390px y el ancho desktop de la referencia para revisar composición. No fijar la página a las dimensiones de un frame.
 
+### Nosotros: relato editorial continuo
+
+La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026 como un relato continuo, tomando la estructura History de Warby Parker como referencia. Su dueño es `sections/lemoon-about-page.liquid`: un único H1 y un cuerpo richtext editable, sin subtítulos internos, tarjetas, paneles, CTAs, imagen ni placeholder. El eslogan puede cerrar el último párrafo. Esta decisión sustituye el hero con imagen y las tarjetas anteriores solo en esta sección; no cambia otras familias editoriales.
+
+Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Hanken Grotesk, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
+
 ### Movimiento e interacción
 
 El movimiento comunica respuesta y continuidad de estado; la información necesaria permanece disponible sin animación. Reutilizar las transiciones del componente antes de añadir otra.

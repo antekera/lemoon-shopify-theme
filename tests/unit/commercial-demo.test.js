@@ -10,7 +10,7 @@ test('sample identity uses the corrected company and non-operational contact dat
  for(const content of Object.values(data.content))expect(content).not.toContain('Servioproc');
 });
 test('sample content is opt-in; disabling it preserves native legal CMS and privacy content', () => {
- for(const section of ['legal','contact','about','service']) {
+ for(const section of ['legal','contact','service']) {
   const source=read(`sections/lemoon-${section}-page.liquid`);
   const schema=JSON.parse(source.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
   expect(schema.settings.find(s=>s.id==='demo_data').default).toBe(false);
@@ -26,8 +26,12 @@ test('sample content remains editable while Nosotros opts out and contact stays 
  const data=json('docs/content/commercial-test-data.json');
  for(const [handle,content] of Object.entries(data.content)) {
   const settings=json(`templates/page.${handle}.json`).sections.main.settings;
-  expect(settings.demo_data).toBe(!['contact', 'nosotros'].includes(handle));
-  if (handle === 'nosotros') expect(settings).not.toHaveProperty('demo_content');
-  else expect(settings.demo_content).toBe(content);
+  if (handle === 'nosotros') {
+   expect(settings).not.toHaveProperty('demo_data');
+   expect(settings).not.toHaveProperty('demo_content');
+  } else {
+   expect(settings.demo_data).toBe(handle !== 'contact');
+   expect(settings.demo_content).toBe(content);
+  }
  }
 });

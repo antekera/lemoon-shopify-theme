@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
 import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
 
-const file = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
-const json = (path) => { const text = file(path); return JSON.parse(text.slice(text.indexOf('{'))); };
+const file = path => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
+const json = path => { const raw = file(path); return JSON.parse(raw.slice(raw.indexOf('{'))); };
 const source = file('sections/lemoon-about-page.liquid');
 const template = json('templates/page.nosotros.json');
 const settings = template.sections.main.settings;
@@ -12,85 +12,42 @@ const text = html => html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '').repla
   .replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'")
   .replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/\s+/g, ' ').trim();
 const publicDraft = file('docs/content/2026-11-01-quienes-somos-draft.md').split('## Contenido de página')[1].split('\n---')[0];
-const approvedCopy = publicDraft.split(/\n\s*\n/).map(part => part.trim())
-  .filter(part => part && !part.startsWith('**[')).map(part => part.replace(/^#+\s*/, '').replaceAll('**', ''));
-// The fixture has no Shopify ImageDrop: validate copy without faking image filters.
-// Real image rendering and loading are covered by the Shopify storefront test.
+const approvedCopy = publicDraft.trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, ''));
 const render = (options = {}) => renderComponentSection('lemoon-about-page', {
-  ...options, settings: { ...settings, ...options.settings, image: null },
+  ...options, settings: { ...settings, ...options.settings },
 });
 
-test('about preserves approved copy without demo, names, suppliers or price and configures the supplied image', () => {
+test('about renders the approved narrative once as one heading and six continuous paragraphs', () => {
   const html = render();
-  const renderedText = text(html);
-  for (const paragraph of approvedCopy) {
-    expect(renderedText, paragraph).toContain(paragraph);
-    expect(renderedText.split(paragraph).length - 1, paragraph).toBe(1);
-  }
+  expect(text(html)).toBe(approvedCopy.join(' '));
   expect(html.match(/<h1\b/g)).toHaveLength(1);
-  expect(html).not.toMatch(/<img\b|<figure\b|<p\b[^>]*>\s*<p\b/);
-  expect(html).toContain('lemoon-about-page__abstract" aria-hidden="true"');
-  expect(renderedText).not.toMatch(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|00\.000\.000|Avenida de Ejemplo|POR CONFIRMAR/i);
-  expect(settings.demo_data).toBe(false);
-  expect(settings).not.toHaveProperty('demo_content');
-  expect(settings.image).toBe('shopify://shop_images/lemoon-nosotros-mostrador.jpg');
-  expect(settings.contact).toBe('');
-  expect(settings.hide_closing_link).toBe(true);
-  const closingPanel = html.match(/<section class="lemoon-about-page__help"[\s\S]*?<\/section>/)[0];
-  expect(closingPanel).not.toMatch(/<a\b|lemoon-about-page__links/);
+  expect(html.match(/<p\b/g)).toHaveLength(6);
+  expect(html).not.toMatch(/<(?:img|figure|a|form|button|h[2-6])\b|lemoon-about-page__(?:abstract|value|hero)|<p\b[^>]*>\s*<p\b/);
+  expect(Object.keys(settings).sort()).toEqual(['body', 'padding_bottom', 'padding_top', 'title']);
 });
 
-for (const root of ['/', '/en/']) {
-  test(`about renders only its hero catalogue action under localized root ${root}`, () => {
-    const prefix = root === '/' ? '' : '/en';
-    const html = render({ routes: { root_url: root, all_products_collection_url: `${prefix}/collections/all` } });
-    const links = [...html.matchAll(/<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/g)].map(([, href, label]) => ({ href, label: text(label) }));
-    expect(links).toEqual([
-      { href: `${prefix}/collections/all`, label: 'Conoce nuestros lentes' },
-    ]);
-  });
-}
-
-
-test('closing link remains available for legacy settings and can be restored in the editor', () => {
-  expect(schema.settings.find(({ id }) => id === 'hide_closing_link')).toMatchObject({ type: 'checkbox', default: false });
-  for (const hide_closing_link of [false, undefined]) {
-    for (const closing_catalogue of ['Encuentra tu próximo par', '']) {
-      const html = render({ settings: { hide_closing_link, closing_catalogue } });
-      const closingPanel = html.match(/<section class="lemoon-about-page__help"[\s\S]*?<\/section>/)[0];
-      expect(closingPanel).toContain(closing_catalogue ? 'href="/collections/all"' : 'href="/pages/contact"');
-    }
-  }
-});
-
-test('about editor text overrides escape headings while preserving formatted paragraphs and verified history', () => {
+test('about editor escapes the plain title and preserves richtext paragraph formatting', () => {
   const html = render({ settings: {
-    ...settings,
     title: 'Título <&"',
-    intro: '<p>Texto <strong>editable</strong>.</p><p>Segundo párrafo.</p>',
-    story: '<p>Historia <strong>confirmada</strong>.</p>',
+    body: '<p>Texto <strong>editable</strong>.</p><p>Segundo párrafo.</p>',
   } });
-  expect(html).toMatch(/<h1>Título &lt;&amp;(?:&quot;|&#34;)<\/h1>/);
+  expect(html).toMatch(/<h1[^>]*>Título &lt;&amp;(?:&quot;|&#34;)<\/h1>/);
   expect(html).toContain('<p>Texto <strong>editable</strong>.</p><p>Segundo párrafo.</p>');
-  expect(html).toContain('<p>Historia <strong>confirmada</strong>.</p>');
-  expect(text(html)).not.toContain('Hay cosas que se vuelven parte de ti.');
+  expect(text(html)).not.toContain(approvedCopy[1]);
   expect(html).not.toMatch(/<p\b[^>]*>\s*<p\b/);
 });
 
 for (const language of ['es', 'en']) {
-  test(`about preserves translated fallback content when editor fields are absent (${language})`, () => {
+  test(`about retains a translated title fallback with empty editor fields (${language})`, () => {
     const messages = json(`locales/${language === 'es' ? 'es' : 'en.default'}.json`).sections.lemoon_about_page;
     const html = renderComponentSection('lemoon-about-page', { language });
-    const renderedText = text(html);
-    for (const field of ['eyebrow', 'title', 'intro', 'style_title', 'style_body', 'fit_title', 'fit_body', 'information_title', 'information_body', 'help_title', 'help_body']) {
-      expect(renderedText, field).toContain(messages[field]);
-    }
+    expect(text(html)).toContain(messages.title);
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).not.toMatch(/undefined|translation missing/i);
   });
 }
 
-test('about template content is editor-configurable and its labels resolve in both schema locales', () => {
+test('about editor exposes only narrative fields and keeps the separate randomized carousel', () => {
   expect(template.order).toEqual(['main', 'products']);
   expect(template.sections.products).toMatchObject({
     type: 'lemoon-featured-products',
@@ -99,12 +56,12 @@ test('about template content is editor-configurable and its labels resolve in bo
   expect(template.sections.main.type).toBe('lemoon-about-page');
   expect(schema.disabled_on.groups).toEqual(['header', 'footer']);
   expect(schema.presets).toHaveLength(1);
-  expect(schema.settings.find(({ id }) => id === 'story').default).toBeUndefined();
-  expect(schema.settings.filter(({ type }) => type === 'range').map(({ id }) => id)).toEqual(['padding_top', 'padding_bottom']);
-  for (const [id, value] of Object.entries(settings)) {
-    if (typeof value !== 'string') continue;
-    expect(schema.settings.find(setting => setting.id === id), id).toMatchObject({ type: id === 'image' ? 'image_picker' : value.startsWith('<p>') ? 'richtext' : 'text' });
-  }
+  expect(schema.settings.filter(setting => setting.id).map(({ id, type }) => ({ id, type }))).toEqual([
+    { id: 'title', type: 'text' },
+    { id: 'body', type: 'richtext' },
+    { id: 'padding_top', type: 'range' },
+    { id: 'padding_bottom', type: 'range' },
+  ]);
   for (const language of ['en.default', 'es']) {
     const messages = json(`locales/${language}.json`);
     const schemaMessages = json(`locales/${language}.schema.json`);

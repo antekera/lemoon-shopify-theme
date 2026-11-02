@@ -4,39 +4,19 @@ Actualización editorial: 2 de noviembre de 2026.
 
 ## Contenido de página
 
-**Sobre Lemoon**
-
 # Ver bien. Sentirte tú.
 
-Hay cosas que se vuelven parte de ti. Tus lentes pueden ser una de ellas: te acompañan en lo que haces y en cómo te muestras al mundo.
+Hay cosas que se vuelven parte de ti. Tus lentes pueden ser una de ellas: te acompañan mientras trabajas, lees, conversas o sales a descubrir algo nuevo. Por eso creemos que elegirlos merece atención, información clara y espacio para encontrar un par que sientas tuyo.
 
-En Lemoon queremos que encontrar ese par sea más sencillo. Con diseños que te gusten, cuidado por el producto y una forma cercana de ayudarte a elegir.
+Somos un equipo de profesionales con muchos años de experiencia en el rubro óptico en Chile. Combinamos ese conocimiento con la tecnología para llevar la experiencia de la óptica al mundo online, con una forma de comprar lentes más cómoda y sencilla.
 
-**[Conoce nuestros lentes](/collections/all)**
+Nos mueve la idea de que puedas elegir desde donde estés, mirar con calma y entender tus opciones. Que la información te ayude a avanzar y que, cuando necesites orientación, encuentres una asesoría clara y rápida. La tecnología tiene sentido para nosotros cuando hace más fácil ese recorrido.
 
-## Experiencia en óptica, ahora online
+También nos importa lo que vas a usar cada día. La forma del armazón, sus medidas y las opciones de cristales son parte de una elección personal. Queremos ofrecer productos bonitos y de calidad, con cuidado por los detalles y por la información que te permite decidir qué va contigo.
 
-Somos un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile. Adaptamos esa experiencia al mundo online para que puedas comprar tus lentes cómodamente, con la información y asesoría que necesitas para elegir, de forma clara y rápida.
+Sabemos que elegir lentes puede traer preguntas, incluso cuando ya has usado varios pares. Un modelo distinto, una medida que no conoces o un paso de la compra pueden necesitar una explicación. Para nosotros, un buen servicio empieza por escuchar esas dudas y responder de una manera que puedas entender.
 
-## El cuidado está en los detalles
-
-Tus lentes son parte de tu día a día. Por eso nos importa tanto cómo se ven como que encuentres un modelo adecuado para ti: su forma, sus medidas y las opciones de cristales.
-
-Queremos ofrecer lentes que te guste usar, con atención a la calidad y a esos detalles que hacen la diferencia al elegir tu próximo par.
-
-## Comprar online también puede sentirse cercano
-
-Elegir tus lentes puede traer preguntas. Sobre un modelo, sus medidas o los pasos de la compra. Para nosotros, un buen servicio empieza por tomarlas en serio.
-
-Queremos que la sencillez se note también ahí: en cómo explicamos las opciones, escuchamos tus dudas y te orientamos para que puedas decidir con más claridad.
-
-## Hacerlo bien es seguir mejorando
-
-La marca que queremos construir se juega en decisiones cotidianas: qué productos ofrecer, con quién trabajar y cómo hacer más fácil tu próxima compra.
-
-Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque queremos que, cuando pienses en tus próximos lentes, te den ganas de volver a Lemoon.
-
-**Se te ven bien**
+Así vamos construyendo Lemoon: con experiencia, atención al producto y ganas de seguir mejorando. Queremos aportar nuestra parte al mundo de la óptica y hacer que comprar tus próximos lentes sea una experiencia que disfrutes. Que te gusten al elegirlos y que te den ganas de usarlos. Se te ven bien.
 
 ---
 
@@ -49,4 +29,6 @@ Nuestro compromiso es cuidar esas decisiones y seguir aprendiendo. Porque querem
 
 ## Estado editorial — no forma parte del texto público
 
-Texto integrado en la plantilla local para revisión visual en Shopify, por solicitud de Miguel del 02-11-2026. «Ver bien. Sentirte tú.» es el título de esta página; se conserva el eslogan «Se te ven bien». Miguel confirmó un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile y pidió expresar la adaptación online con información y asesoría claras y rápidas. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones o resultados clínicos. Por la última decisión de revisión, se incorpora la imagen de mostrador aportada y seleccionada por Miguel, copiada sin edición a assets/lemoon-nosotros-mostrador.jpg. La verificación final de su integración publicada antes del lanzamiento permanece en LEM-143, con LEM-108 como ticket propietario. El enlace «Conversemos» sigue retirado y demo_data permanece desactivado. La revisión visual en tema no publicado y la aprobación para producción son etapas distintas. La metadata CMS continúa como propuesta y no se modifica en la página pública durante esta vista previa.
+Reformulación autorizada por Miguel el 02-11-2026 para integrar y actualizar la PR y vista previa, sin publicación. La referencia estructural vigente es la página History de Warby Parker: un relato continuo. El contenido principal consta de un H1 y seis párrafos, sin subtítulos internos, tarjetas, imágenes, composición abstracta ni CTAs intermedias. «Se te ven bien» cierra el último párrafo y conserva el eslogan aprobado.
+
+Miguel confirmó el equipo de profesionales del rubro óptico con muchos años de experiencia en Chile, la combinación con tecnología y la compra online cómoda con información y asesoría claras y rápidas. La calidad se expresa como compromiso. La versión pública no identifica personas ni menciona proveedores o precio; no atribuye fabricación propia, certificaciones, resultados clínicos ni confrontación con cadenas. La imagen aportada anteriormente queda como antecedente y no debe formar parte del contenido principal. El carrusel posterior y la omisión de newsletter mantienen su alcance separado de este relato. Esta edición documental no certifica la actualización de la plantilla ni del preview; esa integración corresponde al coordinador y al builder. La metadata CMS continúa como propuesta.

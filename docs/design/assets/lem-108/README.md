@@ -1,5 +1,7 @@
 # LEM-108 — Estantería editorial
 
+**Estado vigente:** la dirección posterior elegida por Miguel es un relato continuo sin imagen, inspirado en Warby Parker — History. Ninguna imagen de este paquete está seleccionada en la página y la sección ya no contiene selector de imagen. Los archivos se conservan como antecedentes; no generan un requisito de imagen antes del lanzamiento.
+
 Solicitud de Miguel, 2 de noviembre de 2026: retirar el enlace «Conversemos» y usar una imagen realista de una estantería tipo tienda física con lentes.
 
 - Generación: herramienta integrada `imagegen`, sin imágenes de referencia.
@@ -37,3 +39,8 @@ Por decisión posterior de Miguel del 02-11-2026, ninguna de estas imágenes est
 El 02-11-2026 Miguel aporta `mostrador.jpg` y pide usarla y trasladarla a los assets de la aplicación. Se conserva el archivo de origen y se copia sin modificaciones a [assets/lemoon-nosotros-mostrador.jpg](../../../../assets/lemoon-nosotros-mostrador.jpg). Dimensiones: 1152×928. SHA-256 idéntico al original: `bccc11b764ea935896c0349111cc701d0ed3d184994d115f5866b02298e66361`. No se genera ni edita esta imagen.
 
 Files: `gid://shopify/MediaImage/46709116698792`. Selector: `shopify://shop_images/lemoon-nosotros-mostrador.jpg`. Alt: «Armazones de lentes exhibidos sobre estantes de madera junto a una ventana.». Se incorpora al tema no publicado de revisión `189663019176`; no se identifica como fotografía de un local propio. El recurso queda seleccionado para esta vista previa; la verificación del resultado publicado antes del lanzamiento sigue dentro de LEM-143.
+
+
+## Cambio final de dirección — relato sin imagen
+
+Miguel sustituye la composición anterior por un único bloque de texto continuo. La imagen aportada se conserva en assets por su instrucción anterior, pero no forma parte de la plantilla ni de su sección. El control anterior de incorporar una imagen antes del go live queda retirado para esta página; el carrusel independiente conserva sus imágenes de producto.

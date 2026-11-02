@@ -3601,27 +3601,8 @@
     },
     "lemoon_about_page": {
       "name": "Página Sobre Lemoon",
-      "image_label": "Imagen de marca",
-      "image_info": "Usa una imagen real y aprobada de la marca. Sin imagen se muestra una composición abstracta decorativa.",
-      "story_label": "Historia verificada de la marca",
-      "story_info": "Opcional. Agrega solo información confirmada sobre la marca.",
-      "eyebrow_label": "Texto superior",
       "title_label": "Título principal",
-      "intro_label": "Introducción",
-      "catalogue_label": "Enlace inicial al catálogo",
-      "values_title_label": "Título del grupo de tarjetas",
-      "style_title_label": "Título de experiencia",
-      "style_body_label": "Texto de experiencia",
-      "fit_title_label": "Título de cuidado",
-      "fit_body_label": "Texto de cuidado",
-      "information_title_label": "Título de servicio",
-      "information_body_label": "Texto de servicio",
-      "contact_label": "Enlace a contacto",
-      "help_title_label": "Título del cierre",
-      "help_body_label": "Texto del cierre",
-      "tagline_label": "Eslogan del cierre",
-      "closing_catalogue_label": "Enlace final al catálogo",
-      "hide_closing_link_label": "Ocultar enlace del bloque de cierre"
+      "body_label": "Relato de la marca"
     },
     "lemoon_launch_page": {
       "name": "Lanzamiento Lemoon",

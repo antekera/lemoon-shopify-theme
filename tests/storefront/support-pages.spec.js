@@ -1,7 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 import { storefrontRequest } from '../helpers/storefront-request.mjs';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const noOverflow = async (page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+const aboutCopy = readFileSync(new URL('../../docs/content/2026-11-01-quienes-somos-draft.md', import.meta.url), 'utf8')
+  .split('## Contenido de página')[1].split('\n---')[0].trim().split(/\n\s*\n/).map(part => part.trim().replace(/^#+\s*/, ''));
 
 test('FAQ groups open and close by keyboard and link to existing guides and policies', async ({page}) => {
   await openStorefrontPage(page, '/pages/preguntas-frecuentes?view=preguntas-frecuentes');
@@ -25,29 +28,14 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   await openStorefrontPage(page, '/pages/nosotros?view=nosotros');
   const about = page.locator('.lemoon-about-page');
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
-  await expect(about.getByRole('heading', { level: 1 })).toHaveText('Ver bien. Sentirte tú.');
-  for (const title of ['Experiencia en óptica, ahora online', 'El cuidado está en los detalles', 'Comprar online también puede sentirse cercano', 'Hacerlo bien es seguir mejorando']) {
-    await expect(about.getByRole('heading', { name: title, exact: true })).toBeVisible();
-  }
-  await expect(about).toContainText('Somos un equipo de profesionales del rubro óptico con muchos años de experiencia en Chile.');
-  await expect(about).toContainText('con la información y asesoría que necesitas para elegir, de forma clara y rápida.');
-  await expect(about).toContainText('Tus lentes son parte de tu día a día.');
-  await expect(about).toContainText('Se te ven bien');
-  await expect(about).not.toContainText(/proveedor|suministra|a buen precio|Miguel|Servioptic|demostraci[oó]n|Título de sección|POR CONFIRMAR/i);
-  const image = about.locator('.lemoon-about-page__visual img');
-  await expect(image).toBeVisible();
-  await expect(image).toHaveAttribute('src', /lemoon-nosotros-mostrador/);
-  await expect(image).toHaveAttribute('alt', 'Armazones de lentes exhibidos sobre estantes de madera junto a una ventana.');
-  await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
-  await expect(about.locator('.lemoon-about-page__abstract')).toHaveCount(0);
-  const catalogue = about.getByRole('link', { name: 'Conoce nuestros lentes', exact: true });
-  await expect(about.getByRole('link', { name: 'Encuentra tu próximo par', exact: true })).toHaveCount(0);
-  await expect(about.locator('.lemoon-about-page__help a')).toHaveCount(0);
-  await expect(about.getByRole('link', { name: 'Conversemos', exact: true })).toHaveCount(0);
-  await expect(about.locator('a[href="/pages/contact"]')).toHaveCount(0);
-  await expect(catalogue).toHaveAttribute('href', '/collections/all');
-  await catalogue.focus();
-  await expect(catalogue).toBeFocused();
+  await expect(about.getByRole('heading', { level: 1 })).toHaveText(aboutCopy[0]);
+  await expect(about.locator('p')).toHaveText(aboutCopy.slice(1));
+  const readingWidth = await about.evaluate(el => {
+    const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return parseFloat(getComputedStyle(el).maxWidth) / rootSize;
+  });
+  expect(readingWidth).toBeLessThanOrEqual(72);
+  await expect(about.locator('img, figure, a, form, button, h2, h3, h4, h5, h6, .lemoon-about-page__abstract, .lemoon-about-page__value')).toHaveCount(0);
   await expect(page.locator('.lemoon-newsletter')).toHaveCount(0);
   const carousel = page.locator('.lemoon-featured-products');
   await expect(carousel).toHaveCount(1);
@@ -55,7 +43,7 @@ test('Nosotros shows its copy and randomized products without newsletter or cont
   await expect(carousel.getByRole('heading', { name: 'Encuentra tu próximo par', exact: true })).toBeVisible();
   const carouselCatalogue = carousel.getByRole('link', { name: 'Ver todos', exact: true });
   await expect(carouselCatalogue).toHaveAttribute('href', '/collections/all');
-  await page.keyboard.press('Tab');
+  await carouselCatalogue.focus();
   await expect(carouselCatalogue).toBeFocused();
   const items = carousel.locator('.lemoon-featured-products__item');
   const itemCount = await items.count();

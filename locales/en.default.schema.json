@@ -3601,27 +3601,8 @@
     },
     "lemoon_about_page": {
       "name": "About Lemoon page",
-      "image_label": "Brand image",
-      "image_info": "Use a real, approved brand image. Without an image, a decorative abstract composition is shown.",
-      "story_label": "Verified brand story",
-      "story_info": "Optional. Add only confirmed details about the brand.",
-      "eyebrow_label": "Eyebrow",
       "title_label": "Main heading",
-      "intro_label": "Introduction",
-      "catalogue_label": "Opening catalogue link",
-      "values_title_label": "Card group heading",
-      "style_title_label": "Experience heading",
-      "style_body_label": "Experience text",
-      "fit_title_label": "Care heading",
-      "fit_body_label": "Care text",
-      "information_title_label": "Service heading",
-      "information_body_label": "Service text",
-      "contact_label": "Contact link",
-      "help_title_label": "Closing heading",
-      "help_body_label": "Closing text",
-      "tagline_label": "Closing slogan",
-      "closing_catalogue_label": "Closing catalogue link",
-      "hide_closing_link_label": "Hide the closing block link"
+      "body_label": "Brand story"
     },
     "lemoon_launch_page": {
       "name": "Lemoon launch page",
