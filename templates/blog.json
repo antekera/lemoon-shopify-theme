@@ -15,7 +15,7 @@
         "layout": "collage",
         "show_image": true,
         "image_height": "medium",
-        "show_date": true,
+        "show_date": false,
         "show_author": false,
         "show_newsletter": false,
         "padding_top": 64,
