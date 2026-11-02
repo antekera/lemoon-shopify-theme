@@ -1013,7 +1013,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. Newsletter omitido solo en request.page_type page con page.handle nosotros; conserva newsletter_enable para el resto.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1168,6 +1168,7 @@
         "templates/cart.json",
         "templates/index.json",
         "templates/list-collections.json",
+        "templates/page.nosotros.json",
         "templates/product.json",
         "templates/product.optica.json"
       ],
@@ -1181,7 +1182,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-featured-products.liquid",
-        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño.",
+        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño. page.nosotros reutiliza el carrusel lemoon-featured-products con colección all, ocho productos aleatorizados y quick-add desactivado.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -5756,7 +5757,8 @@
       "path": "templates/page.nosotros.json",
       "status": "mapped",
       "component_ids": [
-        "LM-EDITORIAL"
+        "LM-EDITORIAL",
+        "LM-PRODUCT-LIST"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },

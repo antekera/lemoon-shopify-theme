@@ -77,7 +77,11 @@ for (const language of ['es', 'en']) {
 }
 
 test('about template content is editor-configurable and its labels resolve in both schema locales', () => {
-  expect(template.order).toEqual(['main']);
+  expect(template.order).toEqual(['main', 'products']);
+  expect(template.sections.products).toMatchObject({
+    type: 'lemoon-featured-products',
+    settings: { collection: 'all', collection_source: 'fixed', randomize: true, products_to_show: 8, show_quick_add: false, defer_load: false },
+  });
   expect(template.sections.main.type).toBe('lemoon-about-page');
   expect(schema.disabled_on.groups).toEqual(['header', 'footer']);
   expect(schema.presets).toHaveLength(1);

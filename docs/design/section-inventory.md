@@ -50,7 +50,7 @@ Estas referencias proceden de los archivos del repositorio. Un template puede in
 | [lemoon-eyewear-product.liquid](../../sections/lemoon-eyewear-product.liquid) | `product.optica.json` |
 | [lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid) | `page.preguntas-frecuentes.json` |
 | [lemoon-faq.liquid](../../sections/lemoon-faq.liquid) | `page.preguntas-frecuentes.json` |
-| [lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid) | `index.json`, `product.json`, `product.optica.json` |
+| [lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid) | `index.json`, `page.nosotros.json`, `product.json`, `product.optica.json` |
 | [lemoon-gift-card-purchase.liquid](../../sections/lemoon-gift-card-purchase.liquid) | `page.gift-card.json`, `product.gift-card.json` |
 | [lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid) | `page.guia-medidas.json`, `page.guia-pedido.json`, `page.guia-prescripcion.json`, `page.guia-probador.json`, `page.guia-rostro.json` |
 | [lemoon-hero.liquid](../../sections/lemoon-hero.liquid) | `index.json` |

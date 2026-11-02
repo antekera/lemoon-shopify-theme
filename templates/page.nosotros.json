@@ -23,9 +23,24 @@
         "closing_catalogue": "Encuentra tu próximo par",
         "image": "shopify://shop_images/lemoon-nosotros-mostrador.jpg"
       }
+    },
+    "products": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "all",
+        "collection_source": "fixed",
+        "randomize": true,
+        "defer_load": false,
+        "show_quick_add": false,
+        "eyebrow": "",
+        "heading": "Encuentra tu próximo par",
+        "link_label": "Ver todos",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "products"
   ]
 }

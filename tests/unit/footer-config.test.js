@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
+import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
 
 const themeFile = (path) => new URL(`../../${path}`, import.meta.url);
 
@@ -47,3 +48,21 @@ test('puts the configurable contact page link before email and targets the conta
   expect(group.sections.footer.settings.contact_link).toBe('/pages/contact');
   expect(contactTemplate.sections.main.type).toBe('lemoon-contact-page');
 });
+
+for (const { pageType, handle, enabled, visible } of [
+  { pageType: 'page', handle: 'nosotros', enabled: true, visible: false },
+  { pageType: 'page', handle: 'contact', enabled: true, visible: true },
+  { pageType: 'index', handle: undefined, enabled: true, visible: true },
+  { pageType: 'product', handle: 'nosotros', enabled: true, visible: true },
+  { pageType: 'page', handle: 'contact', enabled: false, visible: false },
+]) {
+  test(`newsletter visibility remains scoped to Nosotros: ${pageType}/${handle ?? 'home'}, enabled=${enabled}`, () => {
+    const html = renderComponentSection('footer', {
+      settings: { newsletter_enable: enabled, newsletter_heading: 'Novedades', newsletter_placeholder: 'Tu correo', newsletter_button: 'Suscribirme' },
+      context: { request: { page_type: pageType }, page: { handle }, pages: {}, shop: { privacy_policy: { url: '/policies/privacy-policy' } } },
+    });
+    expect(html.includes('class="lemoon-newsletter"')).toBe(visible);
+    expect(html.includes('name="contact[email]"')).toBe(visible);
+    expect(html).toContain('data-lemoon-footer');
+  });
+}

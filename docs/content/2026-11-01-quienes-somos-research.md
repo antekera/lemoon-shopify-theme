@@ -107,3 +107,10 @@ Se registra en [LEM-143 — Checklist pre-go-live](https://linear.app/antekera/i
 ## Decisión vigente — imagen aportada por Miguel
 
 Miguel aporta `mostrador.jpg` y solicita usarla e incluirla en los assets del proyecto. Se copia sin edición a `assets/lemoon-nosotros-mostrador.jpg`, se carga en Files y se selecciona en `lemoon-about-page.image`. Sustituye el placeholder en la vista previa. La procedencia es el archivo aportado por el usuario; no se atribuyen una tienda física propia ni SKU reales a la escena. «Conversemos» sigue retirado. El control de lanzamiento LEM-143 conserva la comprobación del recurso en el resultado publicado, sin dar por cumplido ese gate por una subida a un tema no publicado.
+
+
+## Composición de página — carrusel y newsletter
+
+Miguel solicita retirar la newsletter solo de esta página y añadir un carrusel de productos aleatorios. Se reutiliza `lemoon-featured-products` al final de `page.nosotros`, con colección `all`, aleatorización y hasta ocho productos disponibles con precio positivo según el filtro existente. Se conserva el carrusel, sus controles y las tarjetas del tema; no se añaden acciones rápidas de compra.
+
+El footer omite su newsletter únicamente cuando la superficie es una página y el handle es `nosotros`; las demás páginas conservan la configuración global. La imagen seleccionada y el texto de marca permanecen. Comprobar selección real de productos, controles y ausencia de newsletter en la vista previa; comparar otra página como control antes de entregar.
