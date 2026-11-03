@@ -7,12 +7,14 @@ const json = (path) => {
   return JSON.parse(source.slice(source.indexOf('{')));
 };
 const token = '[PLAZO_ENTREGA]';
-const shop = (value) => ({ metafields: { custom: { plazo_entrega_receta: { value } } } });
-const legal = (value, content = `<p>Entrega ${token}</p>`) => render('lemoon-legal-page', {
+const shop = (value) => ({ metafields: { custom: value === undefined ? {} : { plazo_entrega_receta: { value } } } });
+const legal = (value, content = `<p>Entrega ${token}</p>`, language = 'es') => render('lemoon-legal-page', {
+  language,
   settings: { kind: 'shipping', use_section_content: true, content },
   context: { shop: shop(value), page: { title: 'Envíos', content: '' } },
 });
-const faq = (value, answer = `<p>Entrega ${token}</p>`) => render('lemoon-faq-page', {
+const faq = (value, answer = `<p>Entrega ${token}</p>`, language = 'es') => render('lemoon-faq-page', {
+  language,
   blocks: [{ id: 'delivery', type: 'question', settings: { group: 'ordering', question: '¿Cuánto demora?', answer } }],
   context: { shop: shop(value) },
 });
@@ -26,10 +28,24 @@ test.each([['legal', legal], ['FAQ', faq]])('%s renders the merchant estimate sa
   expect(html).not.toContain(token);
 });
 
-test.each([['legal', legal], ['FAQ', faq]])('%s uses the same initial estimate when no value is configured', (_name, renderPage) => {
+test.each([
+  ['legal Spanish', legal, 'es', '5 a 13 días hábiles'],
+  ['legal English', legal, 'en', '5 to 13 business days'],
+  ['FAQ Spanish', faq, 'es', '5 a 13 días hábiles'],
+  ['FAQ English', faq, 'en', '5 to 13 business days'],
+])('%s uses the storefront language when the estimate is missing or blank', (_name, renderPage, language, expected) => {
   for (const value of [undefined, null, '']) {
-    const html = renderPage(value);
-    expect(html).toContain('5 a 13 días hábiles');
+    const html = renderPage(value, `<p>Entrega ${token}</p>`, language);
+    expect(html).toContain(expected);
+    expect(html).not.toContain(token);
+  }
+});
+
+test.each([['legal', legal], ['FAQ', faq]])('%s preserves and escapes the configured value in both languages', (_name, renderPage) => {
+  for (const language of ['es', 'en']) {
+    const html = renderPage('3 < 5 & 7 days', `<p>Entrega ${token}</p>`, language);
+    expect(html).toContain('3 &lt; 5 &amp; 7 days');
+    expect(html).not.toContain('3 < 5 & 7 days');
     expect(html).not.toContain(token);
   }
 });

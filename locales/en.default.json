@@ -761,6 +761,7 @@
       }
     },
     "lemoon_legal_page": {
+      "delivery_estimate_fallback": "5 to 13 business days",
       "return_address": "Return address:",
       "toc_label": "On this page",
       "eyebrow": "Lemoon · Information",

@@ -189,29 +189,31 @@ test('vertical search preserves native SortBy selection, query context and form 
 });
 
 for (const scenario of ['controls', 'contact', 'search']) {
-  test(`${scenario} controls retain continuous navy boundary, distinct focus and native states`, async ({ page }) => {
+  test(`${scenario} controls retain a continuous boundary, inset focus and native states`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(fixture(scenario));
     const control = page.locator(scenario === 'search' ? '#SortBy' : scenario === 'contact' ? 'input[name="contact[email]"]' : '#fixture-email');
     await expect(control).toHaveCSS('border-top-width', '1px');
     await expect(control).toHaveCSS('border-top-style', 'solid');
     for (const edge of ['top', 'right', 'bottom', 'left']) {
-      await expect(control).toHaveCSS(`border-${edge}-color`, 'rgb(11, 31, 58)');
+      await expect(control).toHaveCSS(`border-${edge}-color`, 'rgb(102, 133, 173)');
       await expect(control).toHaveCSS(`border-${edge}-width`, '1px');
     }
     await control.focus();
     await expect(control).toHaveCSS('outline-width', '2px');
     await expect(control).toHaveCSS('outline-style', 'solid');
     await expect(control).toHaveCSS('outline-color', 'rgb(11, 31, 58)');
-    expect(Number.parseFloat(await control.evaluate(node => getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
+    await expect(control).toHaveCSS('outline-offset', '-2px');
+    await expect(control).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+    await expect(control).toHaveCSS('box-shadow', 'none');
     // Dawn pseudo-elements must not duplicate or conceal the actual boundary.
     expect(await control.evaluate(node => getComputedStyle(node.parentElement, '::after').content)).toMatch(/none|normal/);
     if (scenario === 'controls') {
       await expect(page.locator('#disabled-field')).toBeDisabled();
       await expect(page.locator('#invalid-field')).toHaveAttribute('aria-describedby', 'fixture-error');
-      await expect(page.locator('#invalid-field')).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+      await expect(page.locator('#invalid-field')).toHaveCSS('border-top-color', 'rgb(102, 133, 173)');
       await expect(page.locator('#fixture-error')).toHaveCSS('color', 'rgb(192, 57, 43)');
-      await expect(page.locator('#disabled-field')).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+      await expect(page.locator('#disabled-field')).toHaveCSS('border-top-color', 'rgb(102, 133, 173)');
     }
   });
 }
