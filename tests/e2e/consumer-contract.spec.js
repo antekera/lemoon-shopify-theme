@@ -87,7 +87,7 @@ test('rendered volume tiers drive the real price-per-item controller as quantity
   }
 });
 
-test('collection native fallback keeps a continuous border and separate focus without JavaScript', async ({ browser }) => {
+test('collection native fallback keeps a continuous border and inset focus without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 1000 } });
   const page = await context.newPage();
   try {
@@ -97,12 +97,14 @@ test('collection native fallback keeps a continuous border and separate focus wi
     await expect(page.locator('.lemoon-sort-menu')).toBeHidden();
     for (const edge of ['top', 'right', 'bottom', 'left']) {
       await expect(select).toHaveCSS(`border-${edge}-width`, '1px');
-      await expect(select).toHaveCSS(`border-${edge}-color`, 'rgb(11, 31, 58)');
+      await expect(select).toHaveCSS(`border-${edge}-color`, 'rgb(102, 133, 173)');
     }
     await select.focus();
     await expect(select).toHaveCSS('outline-width', '2px');
     await expect(select).toHaveCSS('outline-color', 'rgb(11, 31, 58)');
-    expect(await select.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
+    await expect(select).toHaveCSS('outline-offset', '-2px');
+    await expect(select).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+    await expect(select).toHaveCSS('box-shadow', 'none');
     await page.emulateMedia({ forcedColors: 'active' });
     await expect(select).toHaveCSS('border-top-style', 'solid');
     await expect(select).toHaveCSS('border-top-width', '1px');
@@ -130,12 +132,14 @@ test('facet sort selectors retain approved boundaries and focus in the productio
   await expect(select).toBeVisible();
   for (const edge of ['top', 'right', 'bottom', 'left']) {
     await expect(select).toHaveCSS(`border-${edge}-width`, '1px');
-    await expect(select).toHaveCSS(`border-${edge}-color`, 'rgb(11, 31, 58)');
+    await expect(select).toHaveCSS(`border-${edge}-color`, 'rgb(102, 133, 173)');
   }
   await select.focus();
   await expect(select).toHaveCSS('outline-width', '2px');
   await expect(select).toHaveCSS('outline-color', 'rgb(11, 31, 58)');
-  expect(await select.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
+  await expect(select).toHaveCSS('outline-offset', '-2px');
+  await expect(select).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+  await expect(select).toHaveCSS('box-shadow', 'none');
   await page.emulateMedia({ forcedColors: 'active' });
   await expect(select).toHaveCSS('border-top-style', 'solid');
   await expect(select).toHaveCSS('border-top-width', '1px');
@@ -143,7 +147,7 @@ test('facet sort selectors retain approved boundaries and focus in the productio
   await expect(select).toHaveCSS('outline-width', '2px');
 });
 
-test('mobile facet sort retains separate navy focus after component-facets stylesheet', async ({ page }) => {
+test('mobile facet sort retains inset navy focus after component-facets stylesheet', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto(fixture('facets-horizontal'));
   await page.locator('details.mobile-facets__disclosure > summary').click();
@@ -154,7 +158,8 @@ test('mobile facet sort retains separate navy focus after component-facets style
   await expect(select).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
   await expect(select).toHaveCSS('outline-width', '2px');
   await expect(select).toHaveCSS('outline-color', 'rgb(11, 31, 58)');
-  expect(await select.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
+  await expect(select).toHaveCSS('outline-offset', '-2px');
+  await expect(select).toHaveCSS('box-shadow', 'none');
   await page.emulateMedia({ forcedColors: 'active' });
   await expect(select).toHaveCSS('border-top-style', 'solid');
   await expect(select).toHaveCSS('border-top-width', '1px');

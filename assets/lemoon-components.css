@@ -1644,8 +1644,7 @@ a.link:not(.button):not(.pagination__item) {
   text-decoration-thickness: 1px;
 }
 
-/* LEM-142: only migrated controls. Their own border replaces Dawn's layered
-   pseudo-element shadows; focus stays separate from the resting boundary. */
+/* Migrated controls use one continuous boundary in resting and focused states. */
 .lemoon-ui-field.field::before,
 .lemoon-ui-field.field::after,
 .lemoon-ui-select.select::before,
@@ -1656,7 +1655,7 @@ a.link:not(.button):not(.pagination__item) {
 .lemoon-ui-field .lemoon-ui-control,
 .lemoon-ui-select .lemoon-ui-control {
   box-sizing: border-box;
-  border: 1px solid var(--lemoon-border-strong);
+  border: 1px solid var(--lemoon-border-input);
   box-shadow: none;
 }
 
@@ -1664,9 +1663,16 @@ a.link:not(.button):not(.pagination__item) {
 .lemoon-ui-field .lemoon-ui-control:focus-visible,
 .lemoon-ui-select .lemoon-ui-control:focus,
 .lemoon-ui-select .lemoon-ui-control:focus-visible {
+  border-color: var(--lemoon-border-strong);
   outline: 2px solid var(--lemoon-border-strong);
-  outline-offset: 2px;
+  outline-offset: -2px;
   box-shadow: none;
+}
+
+.lemoon-ui-field .lemoon-ui-control[aria-invalid='true']:focus,
+.lemoon-ui-select .lemoon-ui-control[aria-invalid='true']:focus {
+  border-color: var(--lemoon-status-error);
+  outline-color: var(--lemoon-status-error);
 }
 
 @media (forced-colors: active) {
@@ -1676,7 +1682,9 @@ a.link:not(.button):not(.pagination__item) {
   }
 
   .lemoon-ui-field .lemoon-ui-control:focus,
-  .lemoon-ui-select .lemoon-ui-control:focus {
+  .lemoon-ui-select .lemoon-ui-control:focus,
+  .lemoon-ui-field .lemoon-ui-control[aria-invalid='true']:focus,
+  .lemoon-ui-select .lemoon-ui-control[aria-invalid='true']:focus {
     outline-color: Highlight;
   }
 }

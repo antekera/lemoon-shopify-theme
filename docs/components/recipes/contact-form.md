@@ -62,7 +62,7 @@ Las respuestas se componen dentro de ese mismo formulario, bajo sus condiciones 
 
 ## CSS, estados y evidencia
 
-El layout aporta tokens → [base.css](../../../assets/base.css) → [lemoon-components.css](../../../assets/lemoon-components.css). El CSS scoped de contacto mantiene geometría, labels y submit. Los controles migrados añaden delimitación continua con `--lemoon-border-strong` y foco separado según [DESIGN](../../../DESIGN.md#5-componentes-y-estados); revisar pseudo-elementos Dawn, clipping y fondos computados. Esto no certifica campos legacy.
+El layout aporta tokens → [base.css](../../../assets/base.css) → [lemoon-components.css](../../../assets/lemoon-components.css). El CSS scoped de contacto mantiene geometría, labels y submit. Los controles migrados añaden delimitación continua con `--lemoon-border-input` y foco navy sobre el mismo borde según [DESIGN](../../../DESIGN.md#5-componentes-y-estados); revisar pseudo-elementos Dawn, clipping y fondos computados. Esto no certifica campos legacy.
 
 Normal/foco/error/disabled/readonly son estados de control; el error conserva valor y recuperación. Loading pertenece al dueño si existe; contacto nativo no añade JS de loading. Validar labels persistentes, IDs únicos, ayuda/error asociados, required/email y teclado sin enviar un POST. [contact-page.test.js](../../../tests/unit/contact-page.test.js) y [component-library.test.js](../../../tests/unit/component-library.test.js) ejercitan fuentes reales con un form/errores Shopify modelado en fixtures. La prueba local no acredita envío ni entrega de correo, captcha, respuesta real de Shopify o configuración del editor.
 

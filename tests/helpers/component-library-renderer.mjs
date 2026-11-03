@@ -23,10 +23,10 @@ function prepare(source) {
     .replace(/{%-?\s*endform\s*-?%}/g, '</form>');
 }
 
-export function createComponentEngine({ language = 'es', sourceRoot = root } = {}) {
+export function createComponentEngine({ language = 'es', sourceRoot = root, globals = {} } = {}) {
   const messages = json(resolve(root, `locales/${language === 'es' ? 'es' : 'en.default'}.json`));
   const fs = { ...new Liquid().options.fs, readFileSync: path => prepare(read(path)), readFile: async path => prepare(read(path)) };
-  const engine = new Liquid({ fs, root: [resolve(sourceRoot, 'sections'), resolve(sourceRoot, 'snippets'), resolve(root, 'snippets')], partials: [resolve(sourceRoot, 'snippets'), resolve(root, 'snippets')], extname: '.liquid', strictFilters: true });
+  const engine = new Liquid({ fs, root: [resolve(sourceRoot, 'sections'), resolve(sourceRoot, 'snippets'), resolve(root, 'snippets')], partials: [resolve(sourceRoot, 'snippets'), resolve(root, 'snippets')], extname: '.liquid', strictFilters: true, globals });
   // LiquidJS 10.30.0 retains a NullDrop on `assign x = nil`; its lhs
   // equality wrongly treats x != blank as true. Shopify nil is blank. Model
   // only assigned nil as native null, retaining all other AssignTag behavior.
@@ -63,7 +63,7 @@ export function renderComponent(name, params = {}) {
 
 export function renderComponentSection(name, options = {}) {
   const { language = 'es', sourceRoot = root, id = 'component-fixture', settings = {}, blocks = [], form = {}, customer = null, routes = {}, context = {} } = options;
-  const engine = createComponentEngine({ language, sourceRoot });
+  const engine = createComponentEngine({ language, sourceRoot, globals: context.shop ? { shop: context.shop } : {} });
   const html = engine.renderFileSync(name, {
     section: { id, settings: { padding_top: 36, padding_bottom: 36, guide_kind: 'measurements', ...settings }, blocks },
     settings: { animations_reveal_on_scroll: false, predictive_search_enabled: false },

@@ -166,7 +166,8 @@
               {%- if block.settings.group == group and block.settings.question != blank and block.settings.answer != blank -%}
                 {%- capture faq_id -%}FaqBlock-{{ section.id }}-{{ block.id }}{%- endcapture -%}
                 {%- capture faq_answer_html -%}
-                  {{ block.settings.answer }}
+                  {%- capture delivery_estimate -%}{%- render 'lemoon-delivery-estimate' -%}{%- endcapture -%}
+                  {{ block.settings.answer | replace: '[PLAZO_ENTREGA]', delivery_estimate }}
                   {%- if block.settings.link != blank and block.settings.link_label != blank -%}
                     <a href="{{ block.settings.link | escape }}">{{ block.settings.link_label | escape }}</a>
                   {%- endif -%}

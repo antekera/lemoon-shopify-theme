@@ -45,3 +45,5 @@ La [Ley 21.719](https://www.bcn.cl/leychile/navegar?idNorma=1209272) entra en vi
 La propuesta de 5–13 días hábiles suma un rango orientativo de elaboración de 3–8 días y uno de transporte de 2–5 días, procedentes de tiendas distintas; no es el plazo publicado por una sola tienda ni evidencia de capacidad de Lemoon. Confirmar con operaciones los plazos reales por producto y destino, zonas apartadas, transportista y punto de inicio antes de retirar el marcador o publicar.
 
 El usuario confirmó el rango total de 5–13 días hábiles para anteojos con receta el 3 de noviembre de 2026. El plazo para productos sin receta sigue pendiente de confirmación.
+
+Actualización posterior del 3 de noviembre: el usuario decidió aplicar el rango estimado a todos los pedidos durante la marcha blanca. El inicio para pedidos sin receta y las condiciones mostradas en checkout siguen pendientes de verificación.
