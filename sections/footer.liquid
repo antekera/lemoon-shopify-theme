@@ -13,8 +13,10 @@
   assign footer_phone = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' | remove: '(' | remove: ')' | remove: '.'
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
   assign show_newsletter = section.settings.newsletter_enable
-  if request.page_type == 'page' and page.handle == 'nosotros'
-    assign show_newsletter = false
+  if request.page_type == 'page'
+    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes'
+      assign show_newsletter = false
+    endif
   endif
   assign newsletter_editorial = false
   assign newsletter_heading = section.settings.newsletter_heading
