@@ -212,7 +212,7 @@
           "settings": {
             "group": "policies",
             "question": "¿Cómo se coordina una devolución o un reembolso?",
-            "answer": "<p>Escríbenos a <a href=\"mailto:devoluciones@lemoon.cl\">devoluciones@lemoon.cl</a> con tu número de pedido y cuéntanos qué ocurrió. Te indicaremos la dirección de devolución y te orientaremos para coordinar el retorno que corresponda. [POR CONFIRMAR: modalidades y costos por causa, y mecanismo de abono según medio de pago]. Consulta la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
+            "answer": "<p>Escríbenos a <a href=\"mailto:devoluciones@lemoon.cl\">devoluciones@lemoon.cl</a> con tu número de pedido y cuéntanos qué ocurrió. Te indicaremos la dirección de devolución y te orientaremos para coordinar el retorno que corresponda. Consulta la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
           }
         },
         "faq_27": {
