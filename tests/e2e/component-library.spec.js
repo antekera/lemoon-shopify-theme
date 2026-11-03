@@ -56,23 +56,46 @@ test('contact synthetic response branches expose associated errors and polite su
   await expect(page.getByRole('alert')).toHaveCount(0);
 });
 
-test('FAQ uses native Enter/Space disclosure and keeps answer links accessible', async ({ page, browserName }) => {
-  await page.goto(fixture('faq'));
-  await expect(page.locator('details')).toHaveCount(11);
-  const details = page.locator('details').first();
-  const summary = details.locator('summary');
-  await expect(details).not.toHaveAttribute('open');
-  await expect(details.locator('.lemoon-faq-page__answer')).toBeHidden();
-  await summary.focus();
+test('FAQ opens the first answer and keyboard interaction closes the previously open question across groups', async ({ page }) => {
+  await page.goto(fixture('faq-custom'));
+  const details = page.locator('.lemoon-faq-page__question');
+  await expect(details).toHaveCount(3);
+  await expect(details.nth(0)).toHaveAttribute('open', '');
+  await expect(details.nth(1)).not.toHaveAttribute('open');
+  await expect(details.nth(0).locator('.lemoon-faq-page__answer')).toBeVisible();
+  const second = details.nth(1).locator('summary');
+  await second.focus();
   await page.keyboard.press('Enter');
-  await expect(details).toHaveAttribute('open', '');
-  await expect(details.locator('.lemoon-faq-page__answer')).toBeVisible();
-  await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
-  await expect(details.getByRole('link')).toBeFocused();
-  await summary.focus();
+  await expect(details.nth(0)).not.toHaveAttribute('open');
+  await expect(details.nth(1)).toHaveAttribute('open', '');
+  await expect(details.nth(1).getByRole('link', { name: 'Contacto dos' })).toBeVisible();
+  await details.nth(2).locator('summary').focus();
   await page.keyboard.press('Space');
-  await expect(details).not.toHaveAttribute('open');
+  await expect(details.nth(1)).not.toHaveAttribute('open');
+  await expect(details.nth(2)).toHaveAttribute('open', '');
+  expect(await page.locator('.lemoon-faq-page__question[open]').count()).toBe(1);
 });
+
+test('FAQ opens the selected editor block and closes the previous one', async ({ page }) => {
+  await page.goto(fixture('faq-editor'));
+  const first = page.locator('[data-editor-block="uno"]');
+  const selected = page.locator('[data-editor-block="tres"]');
+  await expect(first).toHaveAttribute('open', '');
+  await selected.evaluate(el => el.dispatchEvent(new CustomEvent('shopify:block:select', { bubbles: true })));
+  await expect(selected).toHaveAttribute('open', '');
+  await expect(first).not.toHaveAttribute('open');
+});
+
+for (const width of [390, 1440]) {
+  test(`FAQ stays centered and readable at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(fixture('faq-custom'));
+    const box = await page.locator('.lemoon-faq-page').boundingBox();
+    expect(box.width).toBeLessThanOrEqual(700);
+    expect(Math.abs(box.x - (width - box.width) / 2)).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+}
 
 test('select changes by keyboard, contributes FormData and bubbles a real change event', async ({ page }) => {
   await page.goto(fixture('controls'));

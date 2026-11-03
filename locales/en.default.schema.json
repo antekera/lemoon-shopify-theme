@@ -3560,7 +3560,9 @@
       "lenses": "Lenses and prescriptions",
       "ordering": "Orders, account and help",
       "policies": "Shipping and conditions",
-      "editor_info": "Custom questions replace the reference answers in their group. Groups without complete custom questions show the translated references."
+      "editor_info": "Add one block per question and choose its group. Only groups with complete questions are shown.",
+      "legacy_fallback_label": "Show previous questions",
+      "legacy_fallback_info": "Shown only when there are no question blocks. Turn off to leave the list empty."
     },
     "lemoon_legal_page": {
       "name": "Lemoon legal page",

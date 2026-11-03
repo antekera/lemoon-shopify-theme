@@ -5,7 +5,254 @@
       "settings": {
         "padding_top": 64,
         "padding_bottom": 64
-      }
+      },
+      "blocks": {
+        "faq_01": {
+          "type": "question",
+          "settings": {
+            "group": "choosing",
+            "question": "¿Cómo elijo un armazón que me quede bien?",
+            "answer": "<p>Revisa las medidas, la forma y las características de cada modelo. Si tienes unos anteojos cómodos, puedes comparar sus medidas con las de la ficha. Nuestra <a href=\"/pages/elegir-lentes-segun-tu-rostro\">guía para elegir según tu rostro</a> puede ayudarte a empezar.</p>"
+          }
+        },
+        "faq_02": {
+          "type": "question",
+          "settings": {
+            "group": "choosing",
+            "question": "¿Cómo puedo comparar las medidas de un armazón?",
+            "answer": "<p>Puedes usar un par que ya tengas como referencia y revisar el ancho de los cristales, el puente y las patillas. En <a href=\"/pages/como-medir-tus-lentes\">Cómo medir tus lentes</a> encontrarás una orientación para identificar esas medidas.</p>"
+          }
+        },
+        "faq_03": {
+          "type": "question",
+          "settings": {
+            "group": "choosing",
+            "question": "¿Cómo encuentro un estilo que me guste?",
+            "answer": "<p>Puedes explorar los modelos por sus características y probar el <a href=\"/pages/buscar-mi-estilo\">quiz Encuentra tu lente ideal</a>. Sus sugerencias son una ayuda para elegir; revisa también las medidas y la ficha de cada armazón.</p>"
+          }
+        },
+        "faq_04": {
+          "type": "question",
+          "settings": {
+            "group": "choosing",
+            "question": "¿El precio del armazón incluye los cristales graduados?",
+            "answer": "<p>El precio inicial corresponde al armazón. Si eliges cristales graduados o tratamientos, sus precios se suman según tu configuración. Revisa el detalle y el total antes de pagar.</p>"
+          }
+        },
+        "faq_05": {
+          "type": "question",
+          "settings": {
+            "group": "choosing",
+            "question": "¿Puedo comprar un armazón sin cristales graduados?",
+            "answer": "<p>Sí. Puedes comprar cualquier armazón sin cristales graduados. Revisa el detalle de tu elección antes de pagar.</p>"
+          }
+        },
+        "faq_06": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Necesito una receta para comprar lentes ópticos graduados?",
+            "answer": "<p>Sí: para preparar cristales con tu graduación necesitamos las indicaciones de tu receta. Comprueba que corresponda a la persona que usará los lentes y que sus datos sean legibles. Si necesitas orientación sobre tu visión o tu receta, consulta con tu profesional de salud visual.</p>"
+          }
+        },
+        "faq_07": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Cómo envío mi receta?",
+            "answer": "<p>Puedes compartir una imagen de tu receta o ingresar sus valores manualmente, según las opciones habilitadas durante la compra o posteriormente. Revisa la guía <a href=\"/pages/como-enviar-prescripcion\">Cómo enviar tu prescripción</a>; si no encuentras una opción disponible, contáctanos.</p>"
+          }
+        },
+        "faq_08": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Puedo enviar la receta después de comprar?",
+            "answer": "<p>Puedes aportar la receta después de comprar mediante las opciones habilitadas para tu pedido. La preparación de cristales graduados requiere contar con los antecedentes necesarios. Si tienes dudas sobre cómo enviarlos, escríbenos con tu número de pedido.</p>"
+          }
+        },
+        "faq_09": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Qué hago si mi receta está incompleta o no se lee bien?",
+            "answer": "<p>Contáctanos antes de avanzar con una configuración que no puedas confirmar. Podemos orientarte sobre qué dato falta; si necesitas aclarar una indicación de la receta, consulta al profesional que la emitió. No es necesario enviar una historia médica completa.</p>"
+          }
+        },
+        "faq_10": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Cómo sé qué cristales y tratamientos están disponibles?",
+            "answer": "<p>Revisa las opciones que muestra el producto y la descripción de cada alternativa. La disponibilidad puede variar según el armazón y la configuración. Si una característica no aparece clara, consúltanos antes de comprar.</p>"
+          }
+        },
+        "faq_11": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿La lectura de mi receta reemplaza un examen visual?",
+            "answer": "<p>No. La información de la receta permite preparar la configuración solicitada y no reemplaza un examen ni un diagnóstico. Si se ofrece lectura asistida, es opcional: revisa y confirma los valores propuestos antes de usarlos en tu pedido.</p>"
+          }
+        },
+        "faq_12": {
+          "type": "question",
+          "settings": {
+            "group": "lenses",
+            "question": "¿Cómo se tratan los datos de mi receta?",
+            "answer": "<p>La <a href=\"/pages/politica-de-privacidad\">Política de privacidad</a> explica las finalidades y condiciones del tratamiento de tus datos, incluidos los de tu receta. Si tienes una consulta, escríbenos a <a href=\"mailto:hola@lemoon.cl\">hola@lemoon.cl</a>.</p>"
+          }
+        },
+        "faq_13": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Cómo hago un pedido?",
+            "answer": "<p>Elige el producto, revisa las opciones disponibles y agrégalo al carrito. Antes de aceptar la compra, comprueba la configuración, cantidades, datos de entrega, costos y total. Puedes revisar la guía <a href=\"/pages/como-hacer-tu-pedido\">Cómo hacer tu pedido</a>.</p>"
+          }
+        },
+        "faq_14": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Qué medios de pago puedo usar?",
+            "answer": "<p>Puedes elegir entre los medios que estén habilitados al finalizar la compra. Si seleccionas cuotas o financiamiento, revisa el número de cuotas, sus costos e intereses y las condiciones informadas para esa opción antes de aceptarla.</p>"
+          }
+        },
+        "faq_15": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Necesito una cuenta para comprar?",
+            "answer": "<p>[POR CONFIRMAR: si la compra como invitado está habilitada y qué opciones reales de identificación se ofrecen en el proceso de compra]. Si necesitas ayuda para completar el pedido, escríbenos.</p>"
+          }
+        },
+        "faq_16": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿A qué lugares hacen envíos y cuánto cuestan?",
+            "answer": "<p>[POR CONFIRMAR: cobertura, modalidades, tarifas por destino y condiciones de eventual despacho sin costo]. Antes de aceptar la compra debes conocer las opciones para tu dirección y el costo total de despacho. Consulta <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
+          }
+        },
+        "faq_17": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Cuánto se demora mi pedido?",
+            "answer": "<p>[POR CONFIRMAR: plazos reales de preparación, elaboración, transporte y entrega por producto y destino; punto de inicio y días hábiles o corridos]. Si tus lentes requieren cristales graduados, el plazo debe considerar su elaboración y montaje además del transporte. Revisa el plazo aplicable antes de comprar.</p>"
+          }
+        },
+        "faq_18": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Cómo sé si recibieron mi pedido?",
+            "answer": "<p>Conserva las comunicaciones y el comprobante de tu compra. Las comunicaciones necesarias se envían al correo que indiques en el pedido. [POR CONFIRMAR: diferencias entre acuse de recepción, aceptación de la compra y confirmación contractual, y cuándo se envía cada comunicación].</p>"
+          }
+        },
+        "faq_19": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Puedo hacer seguimiento de mi pedido?",
+            "answer": "<p>[POR CONFIRMAR: si existe enlace o código de seguimiento, cuándo se comparte y dónde se consulta]. Si necesitas ayuda, escríbenos con tu número de pedido u otro antecedente que permita identificar la compra.</p>"
+          }
+        },
+        "faq_20": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Puedo cambiar la dirección o un dato después de comprar?",
+            "answer": "<p>Escríbenos indicando el número de pedido, el dato que necesitas corregir y la modificación solicitada. La posibilidad de cambiarlo depende de la etapa del pedido; te informaremos las consecuencias para acordarlas contigo.</p>"
+          }
+        },
+        "faq_21": {
+          "type": "question",
+          "settings": {
+            "group": "ordering",
+            "question": "¿Qué hago si mi pedido se retrasa o llega con problemas?",
+            "answer": "<p>Escríbenos si no llega dentro del plazo acordado, llega incompleto, dañado o contiene un producto distinto. Indica lo ocurrido y los antecedentes de la compra. Puedes adjuntar fotografías si las tienes, pero no necesitas un video de apertura para comunicar tu reclamo.</p>"
+          }
+        },
+        "faq_22": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Puedo arrepentirme de una compra por internet?",
+            "answer": "<p>En compras de productos por internet, puedes comunicar el retracto dentro de los 10 días corridos desde la recepción, salvo las excepciones legales aplicables. Si no se envía la confirmación escrita exigida, el plazo se extiende a 90 días desde la recepción. Revisa las condiciones y cómo comunicarlo en la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
+          }
+        },
+        "faq_23": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Los lentes personalizados tienen derecho a retracto?",
+            "answer": "<p>La excepción legal puede aplicar a bienes efectivamente elaborados o intervenidos según tus especificaciones, bajo las condiciones de la ley. No se excluye automáticamente todo producto óptico. Si corresponde una exclusión, debe informarse de forma destacada antes de contratar o pagar. La garantía legal se mantiene.</p>"
+          }
+        },
+        "faq_24": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Qué ocurre si mis lentes nuevos presentan una falla?",
+            "answer": "<p>Cuando se cumplen los supuestos legales, durante los seis meses desde la recepción puedes elegir reparación gratuita, cambio o devolución de lo pagado. Escríbenos con los antecedentes de tu compra y cuéntanos qué ocurrió. Encontrarás más información en <a href=\"/pages/garantias\">Garantías</a>.</p>"
+          }
+        },
+        "faq_25": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Necesito guardar la caja para ejercer la garantía legal?",
+            "answer": "<p>No necesitas conservar el embalaje original como condición para ejercer la garantía legal de un producto nuevo con una falla cubierta. El retracto tiene reglas distintas sobre la restitución de los elementos originales del embalaje.</p>"
+          }
+        },
+        "faq_26": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Cómo se coordina una devolución o un reembolso?",
+            "answer": "<p>Escríbenos indicando tu pedido y lo ocurrido: retracto, falla u otro problema. Te orientaremos para coordinar el retorno que corresponda. [POR CONFIRMAR: dirección y destinatario de devoluciones, modalidades y costos por causa, y mecanismo de abono según medio de pago]. Consulta la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
+          }
+        },
+        "faq_27": {
+          "type": "question",
+          "settings": {
+            "group": "policies",
+            "question": "¿Cómo puedo contactar a Lemoon?",
+            "answer": "<p>Escríbenos a <a href=\"mailto:hola@lemoon.cl\">hola@lemoon.cl</a> o utiliza <a href=\"/pages/contact\">Escríbenos un mensaje</a>. Si ya compraste, incluye tu número de pedido u otro antecedente que permita localizarlo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_01",
+        "faq_02",
+        "faq_03",
+        "faq_04",
+        "faq_05",
+        "faq_06",
+        "faq_07",
+        "faq_08",
+        "faq_09",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15",
+        "faq_16",
+        "faq_17",
+        "faq_18",
+        "faq_19",
+        "faq_20",
+        "faq_21",
+        "faq_22",
+        "faq_23",
+        "faq_24",
+        "faq_25",
+        "faq_26",
+        "faq_27"
+      ]
     },
     "legacy_faq": {
       "type": "lemoon-faq",
