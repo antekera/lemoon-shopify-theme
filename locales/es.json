@@ -773,6 +773,7 @@
       }
     },
     "lemoon_legal_page": {
+      "toc_label": "En esta página",
       "eyebrow": "Lemoon · Información",
       "intro_general": "Información sobre tus compras en Lemoon.",
       "intro_shipping": "Información sobre la preparación y entrega de tus lentes.",

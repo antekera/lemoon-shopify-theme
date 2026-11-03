@@ -14,7 +14,7 @@
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
   assign show_newsletter = section.settings.newsletter_enable
   if request.page_type == 'page'
-    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes'
+    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias'
       assign show_newsletter = false
     endif
   endif

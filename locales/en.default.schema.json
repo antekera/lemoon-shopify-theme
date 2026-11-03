@@ -3567,6 +3567,14 @@
     "lemoon_legal_page": {
       "name": "Lemoon legal page",
       "settings": {
+        "use_section_content": {
+          "label": "Prefer this section's content",
+          "info": "Shows non-empty editable legal content instead of the page content. Does not change the text stored in Pages. Native privacy and demo mode keep their priority."
+        },
+        "content": {
+          "label": "Legal HTML content",
+          "info": "Editable HTML with headings, lists and tables. Used when this section's preference is enabled, or as a fallback when the page and applicable native policy have no content. Company name and RUT come from shop metafields. Does not evaluate Liquid. Native privacy ignores this field."
+        },
         "use_native_privacy": {
           "label": "Use the native privacy policy",
           "info": "For privacy pages only. Uses the policy from Settings > Policies and ignores page content, demo copy and the introduction."

@@ -1,0 +1,57 @@
+{% doc %}
+  Adds an accessible index to the selected terms-section HTML.
+
+  @param {string} content - Trusted HTML with identity tokens already resolved.
+  @param {string} section_id - Unique owning section ID.
+  @param {string} toc_label - Localized navigation label.
+{% enddoc %}
+{%- liquid
+  assign content_scope = section_id | handleize
+  assign toc_label_id = 'LegalToc-' | append: content_scope
+  assign content_parts = content | append: 'x' | split: '<h2>'
+-%}
+{%- capture toc_links -%}
+  {%- for content_part in content_parts -%}
+    {%- unless forloop.first -%}
+      {%- if content_part contains '</h2>' -%}
+        {%- assign heading_text = content_part | split: '</h2>' | first | strip_html | strip -%}
+        {%- if heading_text != blank -%}
+          {%- assign heading_id = 'LegalContent-' | append: content_scope | append: '-' | append: forloop.index0 -%}
+          <li><a href="#{{ heading_id | escape }}">{{ heading_text | escape_once }}</a></li>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if toc_links != blank -%}
+  <nav class="lemoon-legal-page__toc" aria-labelledby="{{ toc_label_id | escape }}">
+    <p id="{{ toc_label_id | escape }}" class="lemoon-legal-page__toc-label">{{ toc_label | escape }}</p>
+    <ol>{{ toc_links }}</ol>
+  </nav>
+{%- endif -%}
+{%- for content_part in content_parts -%}
+  {%- liquid
+    assign original_part = content_part
+    if forloop.last
+      assign final_part_size = content_part.size | minus: 1
+      assign original_part = content_part | slice: 0, final_part_size
+    endif
+  -%}
+  {%- if forloop.first -%}
+    {{- original_part -}}
+  {%- elsif original_part contains '</h2>' -%}
+    {%- liquid
+      assign heading_html = original_part | split: '</h2>' | first
+      assign heading_fragment = heading_html | append: '</h2>'
+      assign heading_remainder = original_part | remove_first: heading_fragment
+    -%}
+    {%- assign heading_id = 'LegalContent-' | append: content_scope | append: '-' | append: forloop.index0 -%}
+    <h2 id="{{ heading_id | escape }}" tabindex="-1">{{ heading_html }}</h2>
+    {{- heading_remainder -}}
+  {%- else -%}
+    {%- liquid
+      echo '<h2>'
+      echo original_part
+    -%}
+  {%- endif -%}
+{%- endfor -%}

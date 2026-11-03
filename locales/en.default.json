@@ -761,6 +761,7 @@
       }
     },
     "lemoon_legal_page": {
+      "toc_label": "On this page",
       "eyebrow": "Lemoon · Information",
       "intro_general": "Information about shopping at Lemoon.",
       "intro_shipping": "Information about preparing and delivering your glasses.",
