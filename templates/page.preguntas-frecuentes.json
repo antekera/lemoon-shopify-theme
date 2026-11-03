@@ -124,7 +124,7 @@
           "settings": {
             "group": "ordering",
             "question": "¿Necesito una cuenta para comprar?",
-            "answer": "<p>[POR CONFIRMAR: si la compra como invitado está habilitada y qué opciones reales de identificación se ofrecen en el proceso de compra]. Si necesitas ayuda para completar el pedido, escríbenos.</p>"
+            "answer": "<p>No necesitas una cuenta para comprar. Si creas una cuenta, podrás guardar tu receta y tenerla disponible para futuras compras.</p>"
           }
         },
         "faq_16": {
@@ -132,7 +132,7 @@
           "settings": {
             "group": "ordering",
             "question": "¿A qué lugares hacen envíos y cuánto cuestan?",
-            "answer": "<p>[POR CONFIRMAR: cobertura, modalidades, tarifas por destino y condiciones de eventual despacho sin costo]. Antes de aceptar la compra debes conocer las opciones para tu dirección y el costo total de despacho. Consulta <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
+            "answer": "<p>Hacemos envíos a todo Chile. El costo de envío se informa antes de finalizar tu compra. Consulta nuestra página de <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a> para conocer más detalles sobre cobertura y despacho.</p>"
           }
         },
         "faq_17": {
