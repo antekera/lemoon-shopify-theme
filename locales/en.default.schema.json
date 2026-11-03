@@ -3567,6 +3567,10 @@
     "lemoon_legal_page": {
       "name": "Lemoon legal page",
       "settings": {
+        "return_address": {
+          "label": "Return address",
+          "info": "Shown in the refund policy only when filled in."
+        },
         "use_section_content": {
           "label": "Prefer this section's content",
           "info": "Shows non-empty editable legal content instead of the page content. Does not change the text stored in Pages. Native privacy and demo mode keep their priority."

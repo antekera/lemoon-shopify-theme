@@ -773,6 +773,7 @@
       }
     },
     "lemoon_legal_page": {
+      "return_address": "Dirección de devolución:",
       "toc_label": "En esta página",
       "eyebrow": "Lemoon · Información",
       "intro_general": "Información sobre tus compras en Lemoon.",

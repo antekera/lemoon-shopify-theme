@@ -102,3 +102,20 @@ test('native privacy mode is opt-in and does not replace other legal page kinds'
  expect(html).toContain('<p>Shipping CMS</p>');
  expect(html).not.toContain('<p>Native privacy</p>');
 });
+
+test('returns address is shown only when configured and escapes editor input', () => {
+ const settings = json('templates/page.politica-de-devoluciones.json').sections.main.settings;
+ const render = (address) => renderComponentSection('lemoon-legal-page', {
+  settings: { ...settings, return_address: address },
+  context: { page: { title: 'Política de reembolso', content: '' }, shop: {} },
+ });
+ for (const address of [undefined, '', '   ']) {
+  const html = render(address);
+  expect(html).not.toContain('[DIRECCION_DEVOLUCION]');
+  expect(html).not.toContain('Dirección de devolución:');
+ }
+ const html = render('Calle <Ejemplo> 123');
+ expect(html).toContain('Dirección de devolución:');
+ expect(html).toContain('Calle &lt;Ejemplo&gt; 123');
+ expect(html).not.toContain('[DIRECCION_DEVOLUCION]');
+});
