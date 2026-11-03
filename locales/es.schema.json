@@ -3567,6 +3567,14 @@
     "lemoon_legal_page": {
       "name": "Página legal Lemoon",
       "settings": {
+        "use_section_content": {
+          "label": "Preferir el contenido de esta sección",
+          "info": "Muestra el contenido legal editable en lugar del contenido de la página si contiene texto. No cambia el texto guardado en Páginas. La privacidad nativa y la demostración conservan su prioridad."
+        },
+        "content": {
+          "label": "Contenido legal HTML",
+          "info": "HTML editable con títulos, listas y tablas. Se usa al activar la preferencia de esta sección o como respaldo si no hay contenido de página ni política nativa aplicable. Razón social y RUT vienen de los metacampos de tienda. No ejecuta Liquid. La privacidad nativa ignora este campo."
+        },
         "use_native_privacy": {
           "label": "Usar la política de privacidad nativa",
           "info": "Solo para páginas de privacidad. Usa la política de Configuración > Políticas e ignora el contenido de la página, los textos de muestra y la introducción."

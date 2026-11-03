@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 515,
-    "mapped_paths": 483,
+    "total_tracked_paths": 517,
+    "mapped_paths": 485,
     "excluded_paths": 32,
     "by_root": {
       "assets": 260,
@@ -32,14 +32,14 @@
       "layout": 2,
       "locales": 51,
       "sections": 70,
-      "snippets": 91,
+      "snippets": 93,
       "templates": 39
     },
     "mapped_by_extension": {
       ".css": 82,
       ".js": 53,
       ".json": 90,
-      ".liquid": 164,
+      ".liquid": 166,
       ".svg": 94
     },
     "excluded_by_reason": {
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 515,
-    "explicit_new_paths": 1
+    "total_source_paths": 517,
+    "explicit_new_paths": 3
   },
   "components": [
     {
@@ -1474,7 +1474,9 @@
         "sections/lemoon-guide-page.liquid",
         "sections/lemoon-service-page.liquid",
         "sections/lemoon-crystal-guide.liquid",
-        "assets/lemoon-legal-pages.css"
+        "assets/lemoon-legal-pages.css",
+        "snippets/lemoon-business-content.liquid",
+        "snippets/lemoon-legal-section-content.liquid"
       ],
       "direct_static_consumers": [
         "sections/lemoon-faq.liquid",
@@ -1503,7 +1505,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-guide-page.liquid",
-        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política.",
+        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política. El HTML content es respaldo tras CMS y política nativa aplicable; use_section_content (default false) permite preferirlo antes de CMS cuando no está vacío, sin sustituir privacidad nativa explícita ni demo ni modificar texto almacenado. lemoon-business-content resuelve solo razón social/RUT escapados desde inputs explícitos, sin evaluar Liquid ni reinterpretar valores insertados; CMS normal no reescribe identidades históricas. El contenido HTML de sección preferido en términos puede incluir un índice derivado de H2 reales, sin IDs almacenados: nav nombrado, IDs por sección/posición y foco nativo sin JavaScript; otras fuentes/páginas no reciben índice.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -4990,6 +4992,14 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
+      "path": "snippets/lemoon-business-content.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "targeted-source-and-consumer-review; no Shopify runtime claim"
+    },
+    {
       "path": "snippets/lemoon-carousel-controls.liquid",
       "status": "mapped",
       "component_ids": [
@@ -5119,6 +5129,14 @@
         "LM-ICON"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-legal-section-content.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "targeted-source-and-consumer-review; no Shopify runtime claim"
     },
     {
       "path": "snippets/lemoon-mobile-nav-filter-group.liquid",
@@ -5898,9 +5916,11 @@
       "templates/page.politica-de-privacidad.json",
       "assets/lemoon-secure-ssl.png",
       "assets/payment-webpay.svg",
-      "assets/section-lemoon-editorial-newsletter.css"
+      "assets/section-lemoon-editorial-newsletter.css",
+      "snippets/lemoon-business-content.liquid",
+      "snippets/lemoon-legal-section-content.liquid"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 515 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets and editorial newsletter CSS. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

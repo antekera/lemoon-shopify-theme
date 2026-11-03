@@ -1,0 +1,46 @@
+{% doc %}
+  Resolves the two legal-identity tokens without evaluating CMS Liquid.
+
+  @param {string} content - Trusted editor HTML.
+  @param {string} [company_name] - Raw company-name metafield value.
+  @param {string} [company_rut] - Raw company-RUT metafield value.
+  @param {boolean} [legacy_demo] - Replace old identity literals in opted-in demo copy.
+{% enddoc %}
+{%- liquid
+  assign business_content = content
+  if company_name != blank
+    assign escaped_company_name = company_name | escape
+    assign business_content = business_content | replace: '[RAZÓN SOCIAL POR COMPLETAR]', '{{ razon_social }}'
+    if legacy_demo == true
+      assign business_content = business_content | replace: 'Servioptic SpA', '{{ razon_social }}' | replace: 'Servioptic SPA', '{{ razon_social }}'
+    endif
+  endif
+  if company_rut != blank
+    assign escaped_company_rut = company_rut | escape
+    assign business_content = business_content | replace: '[RUT POR COMPLETAR]', '{{ rut_empresa }}'
+    if legacy_demo == true
+      assign business_content = business_content | replace: '00.000.000-0', '{{ rut_empresa }}'
+    endif
+  endif
+  assign company_token = '{{ razon_social }}'
+  assign company_chunks = business_content | append: 'x' | split: company_token
+  for company_chunk in company_chunks
+    assign original_chunk = company_chunk
+    if forloop.last
+      assign final_chunk_size = company_chunk.size | minus: 1
+      assign original_chunk = company_chunk | slice: 0, final_chunk_size
+    endif
+    if company_rut != blank
+      echo original_chunk | replace: '{{ rut_empresa }}', escaped_company_rut
+    else
+      echo original_chunk
+    endif
+    unless forloop.last
+      if company_name != blank
+        echo escaped_company_name
+      else
+        echo company_token
+      endif
+    endunless
+  endfor
+-%}

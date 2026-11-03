@@ -9,9 +9,9 @@ test('legal shell preserves real CMS content, escapes headings and isolates nati
  const source = read('sections/lemoon-legal-page.liquid');
  const html = renderAdoption('legal-shipping');
  expect(html).toContain('<h1>Legal &lt;&amp;&#34;</h1>');
- expect(source).toContain('{{ page.content }}');
+ expect(source).toContain("render 'lemoon-business-content', content: page.content");
  expect(source).toContain('{{ section.settings.intro | escape }}');
- expect(source).toMatch(/elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank[\s\S]*?{{ shop.privacy_policy.body }}/);
+ expect(source).toMatch(/elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank[\s\S]*?render 'lemoon-business-content', content: shop.privacy_policy.body/);
  expect(source).toContain("'sections.lemoon_legal_page.empty_content' | t");
  expect(html.match(/<h1\b/g)).toHaveLength(1);
  const renderedCopy = html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
@@ -44,6 +44,7 @@ test('four legal templates select their explicit kinds and schema uses valid tra
  const source = read('sections/lemoon-legal-page.liquid');
  const schema = JSON.parse(source.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
  expect(schema.settings.filter(({type}) => type === 'range').map(({id}) => id)).toEqual(['padding_top','padding_bottom']);
+ expect(schema.settings.find(({id}) => id === 'use_section_content')).toMatchObject({ type: 'checkbox', default: false });
  expect(schema.presets[0].name).toBe('t:sections.lemoon_legal_page.name');
  expect(schema.disabled_on.groups).toEqual(['header','footer']);
 });

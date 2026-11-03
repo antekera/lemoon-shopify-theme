@@ -16,8 +16,8 @@ test('sample content is opt-in; disabling it preserves native legal CMS and priv
   expect(schema.settings.find(s=>s.id==='demo_data').default).toBe(false);
  }
  const legal=read('sections/lemoon-legal-page.liquid');
- expect(legal).toMatch(/if section.settings.demo_data[\s\S]*?elsif page.content != blank[\s\S]*?{{ page.content }}/);
- expect(legal).toContain('{{ shop.privacy_policy.body }}');
+ expect(legal).toMatch(/if section.settings.demo_data[\s\S]*?elsif page.content != blank[\s\S]*?render 'lemoon-business-content', content: page.content/);
+ expect(legal).toContain("render 'lemoon-business-content', content: shop.privacy_policy.body");
  const snippet=read('snippets/lemoon-commercial-demo.liquid');
  expect(snippet).toContain('{%- if enabled -%}');
  expect(snippet).toContain("'sections.lemoon_demo.notice' | t");
@@ -29,6 +29,10 @@ test('sample content remains editable while Nosotros opts out and contact stays 
   if (handle === 'nosotros') {
    expect(settings).not.toHaveProperty('demo_data');
    expect(settings).not.toHaveProperty('demo_content');
+  } else if (handle === 'garantias') {
+   expect(settings.demo_data).toBe(false);
+   expect(settings).not.toHaveProperty('demo_content');
+   expect(settings.content).toMatch(/<h2>/);
   } else {
    expect(settings.demo_data).toBe(handle !== 'contact');
    expect(settings.demo_content).toBe(content);
