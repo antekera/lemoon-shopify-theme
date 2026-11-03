@@ -85,6 +85,12 @@
   <div class="lemoon-legal-page__layout">
     <div>
       <div class="lemoon-legal-page__content rte">
+        {%- assign return_address = section.settings.return_address | strip -%}
+        {%- capture return_address_html -%}
+          {%- if return_address != blank -%}
+            <p><strong>{{ 'sections.lemoon_legal_page.return_address' | t }}</strong> {{ return_address | escape }}</p>
+          {%- endif -%}
+        {%- endcapture -%}
         {%- if use_native_privacy -%}
           {%- if shop.privacy_policy.body != blank -%}
             {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
@@ -95,12 +101,6 @@
           {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
         {%- elsif section.settings.use_section_content and section.settings.content != blank -%}
           {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
-          {%- assign return_address = section.settings.return_address | strip -%}
-          {%- capture return_address_html -%}
-            {%- if return_address != blank -%}
-              <p><strong>{{ 'sections.lemoon_legal_page.return_address' | t }}</strong> {{ return_address | escape }}</p>
-            {%- endif -%}
-          {%- endcapture -%}
           {%- assign section_content_html = section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html -%}
           {%- if section.settings.kind == 'terms' -%}
             {%- assign toc_label = 'sections.lemoon_legal_page.toc_label' | t -%}
@@ -113,7 +113,8 @@
         {%- elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank -%}
           {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
         {%- elsif section.settings.content != blank -%}
-          {% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
+          {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
+          {{ section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html }}
         {%- else -%}
           <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
         {%- endif -%}
