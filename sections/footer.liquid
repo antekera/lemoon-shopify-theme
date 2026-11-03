@@ -16,6 +16,8 @@
   if request.page_type == 'page'
     if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias'
       assign show_newsletter = false
+    elsif template.suffix == 'politica-de-devoluciones'
+      assign show_newsletter = false
     endif
   endif
   assign newsletter_editorial = false
