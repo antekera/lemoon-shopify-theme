@@ -82,27 +82,27 @@
   {
     "group": "ordering",
     "question": "¿Cuánto se demora mi pedido?",
-    "answer": "<p>[POR CONFIRMAR: plazos reales de preparación, elaboración, transporte y entrega por producto y destino; punto de inicio y días hábiles o corridos]. Si tus lentes requieren cristales graduados, el plazo debe considerar su elaboración y montaje además del transporte. Revisa el plazo aplicable antes de comprar.</p>"
+    "answer": "<p>Para anteojos con receta, la entrega demora entre 5 y 13 días hábiles desde que contamos con tu receta completa. El plazo puede variar según el producto y el destino. El plazo para productos sin receta está pendiente de confirmación. Conoce más en <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
   },
   {
     "group": "ordering",
     "question": "¿Cómo sé si recibieron mi pedido?",
-    "answer": "<p>Conserva las comunicaciones y el comprobante de tu compra. Las comunicaciones necesarias se envían al correo que indiques en el pedido. [POR CONFIRMAR: diferencias entre acuse de recepción, aceptación de la compra y confirmación contractual, y cuándo se envía cada comunicación].</p>"
+    "answer": "<p>Una vez recibido el pago y todos los datos necesarios, incluida tu receta cuando corresponda, tu pedido estará completo y podremos comenzar a prepararlo. Si falta la receta u otra información, quedará pendiente de completar y esto podría retrasar el envío.</p>"
   },
   {
     "group": "ordering",
     "question": "¿Puedo hacer seguimiento de mi pedido?",
-    "answer": "<p>[POR CONFIRMAR: si existe enlace o código de seguimiento, cuándo se comparte y dónde se consulta]. Si necesitas ayuda, escríbenos con tu número de pedido u otro antecedente que permita identificar la compra.</p>"
+    "answer": "<p>Sí. Una vez que tu pedido sea despachado, te enviaremos el número de seguimiento de la empresa de transporte para que puedas consultar el estado de tu envío.</p>"
   },
   {
     "group": "ordering",
     "question": "¿Puedo cambiar la dirección o un dato después de comprar?",
-    "answer": "<p>Escríbenos indicando el número de pedido, el dato que necesitas corregir y la modificación solicitada. La posibilidad de cambiarlo depende de la etapa del pedido; te informaremos las consecuencias para acordarlas contigo.</p>"
+    "answer": "<p>Escríbenos a <a href=\"mailto:pedidos@lemoon.cl\">pedidos@lemoon.cl</a> indicando el número de pedido, el dato que necesitas corregir y la modificación solicitada. La posibilidad de cambiarlo depende de la etapa del pedido; te informaremos las consecuencias para acordarlas contigo.</p>"
   },
   {
     "group": "ordering",
     "question": "¿Qué hago si mi pedido se retrasa o llega con problemas?",
-    "answer": "<p>Escríbenos si no llega dentro del plazo acordado, llega incompleto, dañado o contiene un producto distinto. Indica lo ocurrido y los antecedentes de la compra. Puedes adjuntar fotografías si las tienes, pero no necesitas un video de apertura para comunicar tu reclamo.</p>"
+    "answer": "<p>Si tu pedido no llega dentro del plazo acordado, llega incompleto, dañado o contiene un producto distinto, escríbenos a través de nuestra <a href=\"/pages/contact\">página de contacto</a>. Cuéntanos lo ocurrido e incluye los antecedentes de tu compra. Puedes adjuntar fotografías si las tienes, pero no necesitas un video de apertura para comunicar tu reclamo.</p>"
   },
   {
     "group": "policies",
@@ -127,7 +127,7 @@
   {
     "group": "policies",
     "question": "¿Cómo se coordina una devolución o un reembolso?",
-    "answer": "<p>Escríbenos indicando tu pedido y lo ocurrido: retracto, falla u otro problema. Te orientaremos para coordinar el retorno que corresponda. [POR CONFIRMAR: dirección y destinatario de devoluciones, modalidades y costos por causa, y mecanismo de abono según medio de pago]. Consulta la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
+    "answer": "<p>Escríbenos a <a href=\"mailto:devoluciones@lemoon.cl\">devoluciones@lemoon.cl</a> con tu número de pedido y cuéntanos qué ocurrió. Te indicaremos la dirección de devolución y te orientaremos para coordinar el retorno que corresponda. [POR CONFIRMAR: modalidades y costos por causa, y mecanismo de abono según medio de pago]. Consulta la <a href=\"/pages/politicas\">Política de reembolso</a>.</p>"
   },
   {
     "group": "policies",

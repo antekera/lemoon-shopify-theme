@@ -35,3 +35,13 @@ La [Ley 21.719](https://www.bcn.cl/leychile/navegar?idNorma=1209272) entra en vi
 - Los textos enlazan a guías de pedido/receta y a páginas propietarias de privacidad, envíos, reembolso y garantías; no sustituyen las condiciones completas. Los destinos, asignación de plantillas y el flujo efectivo requieren QA.
 - Preguntas con marcadores necesitan datos reales sobre compra con o sin cuenta, cobertura, tarifas, plazos, aceptación/confirmación, seguimiento, retorno y abono. Son pendientes ya identificados; no se inventan respuestas ni se vuelven promesas operativas.
 - La FAQ es una propuesta inicial para que el usuario descarte o modifique preguntas; mantener los marcadores visibles durante revisión y no publicar como texto definitivo con pendientes.
+
+### Referencias para plazo de entrega (3 de noviembre de 2026)
+
+- [Retrovisión](https://retrovision.cl/pages/preguntas-frecuentes): 3–4 días hábiles para recetas de primer rango antes del despacho; otros cristales demoran más.
+- [Lentes Pitísimas](https://pitisimas.cl/pages/envios-2): 6–8 días hábiles de fabricación de cristales.
+- [Óptica Chile](https://opticachi.com/preguntas-frecuentes-faq/): 2–5 días hábiles adicionales de transporte, según destino y transportista.
+
+La propuesta de 5–13 días hábiles suma un rango orientativo de elaboración de 3–8 días y uno de transporte de 2–5 días, procedentes de tiendas distintas; no es el plazo publicado por una sola tienda ni evidencia de capacidad de Lemoon. Confirmar con operaciones los plazos reales por producto y destino, zonas apartadas, transportista y punto de inicio antes de retirar el marcador o publicar.
+
+El usuario confirmó el rango total de 5–13 días hábiles para anteojos con receta el 3 de noviembre de 2026. El plazo para productos sin receta sigue pendiente de confirmación.
