@@ -4,7 +4,7 @@ import { renderComponentSection as render } from '../helpers/component-library-r
 const file = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const text = file(path); return JSON.parse(text.slice(text.indexOf('{'))); };
 test('FAQ renders eleven native disclosure groups with unique anchors and no custom keyboard roles', () => {
-  const html = render('lemoon-faq-page');
+  const html = render('lemoon-faq-page', { settings: { legacy_fallback: true } });
   expect(html.match(/<h1\b/g)).toHaveLength(1);
   expect(html.match(/<details\b/g)).toHaveLength(11);
   expect(html.match(/<summary\b/g)).toHaveLength(11);
@@ -73,10 +73,10 @@ test('editor questions are escaped, answers use richtext, and complete custom bl
   }
 });
 
-test('complete custom FAQ blocks replace one group, preserve richtext/editor attrs and escape question/links', () => {
+test('complete custom FAQ blocks hide empty groups, preserve richtext/editor attrs and escape question/links', () => {
   const block = { id: 'custom-1', type: 'question', shopify_attributes: 'data-shopify-editor-block="fixture"', settings: { group: 'choosing', question: 'Question <&"', answer: '<p>Rich <strong>answer</strong></p>', link: '/help?q="&', link_label: 'Help <&' } };
   const html = render('lemoon-faq-page', { blocks: [block] });
-  expect(html.match(/<details\b/g)).toHaveLength(9);
+  expect(html.match(/<details\b/g)).toHaveLength(1);
   expect(html).not.toContain('id="FaqQuestion-component-fixture-choosing-');
   expect(html).toMatch(/<details[^>]*id="FaqBlock-component-fixture-custom-1"[^>]*data-shopify-editor-block="fixture"/);
   expect(html).toContain('Question &lt;&amp;&#34;');
@@ -85,10 +85,35 @@ test('complete custom FAQ blocks replace one group, preserve richtext/editor att
   expect(html).toContain('Help &lt;&amp;');
   for (const settings of [{ question: '', answer: '<p>Answer</p>' }, { question: 'Question', answer: '' }]) {
     const fallback = render('lemoon-faq-page', { blocks: [{ ...block, settings: { group: 'choosing', ...settings } }] });
-    expect(fallback.match(/<details\b/g)).toHaveLength(11);
+    expect(fallback.match(/<details\b/g) || []).toHaveLength(0);
     expect(fallback).not.toContain('FaqBlock-component-fixture-custom-1');
   }
   const two = html + render('lemoon-faq-page', { id: 'second', blocks: [block] });
   const ids = [...two.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   expect(new Set(ids).size).toBe(ids.length);
+});
+
+
+test('FAQ starts with one open answer and groups all rendered questions by section', () => {
+  const make = (id, group) => ({ id, type: 'question', shopify_attributes: `data-block-id="${id}"`, settings: { group, question: `Pregunta ${id}`, answer: `<p>Respuesta ${id}</p>` } });
+  const html = render('lemoon-faq-page', { blocks: [make('a', 'choosing'), make('b', 'choosing'), make('c', 'policies')] });
+  const tags = html.match(/<details\b[^>]*>/g) || [];
+  expect(tags).toHaveLength(3);
+  expect(tags.filter(tag => /\sopen(?=\s|>)/.test(tag))).toHaveLength(1);
+  expect(tags[0]).toMatch(/\sopen(?=\s|>)/);
+  for (const tag of tags) expect(tag).toContain('name="FaqAccordion-component-fixture"');
+  expect(html).not.toContain('FaqGroup-component-fixture-lenses');
+  expect(html).not.toContain('FaqGroup-component-fixture-ordering');
+  expect(html).toContain('data-block-id="a"');
+  const second = render('lemoon-faq-page', { id: 'second', blocks: [make('x', 'policies')] });
+  expect(second).toContain('name="FaqAccordion-second"');
+});
+
+test('deleting every merchant block leaves no legacy questions unless opted in', () => {
+  const empty = render('lemoon-faq-page');
+  expect(empty.match(/<details\b/g) || []).toHaveLength(0);
+  expect(empty).not.toContain('FaqQuestion-component-fixture-');
+  const legacy = render('lemoon-faq-page', { settings: { legacy_fallback: true } });
+  expect(legacy.match(/<details\b/g)).toHaveLength(11);
+  expect((legacy.match(/<details\b[^>]*\sopen(?=\s|>)/g) || [])).toHaveLength(1);
 });

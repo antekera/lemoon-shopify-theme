@@ -644,7 +644,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-faq-item.liquid",
-        "scope": "FAQ agrupado y legacy reutilizan details; otros disclosures mantienen sus dueños.",
+        "scope": "FAQ agrupado centrado a 700px, preguntas de 18px en escritorio y 16px en móvil/tablet, y animación progresiva de apertura/cierre; primera pregunta abierta y details exclusivos por sección. Legacy y otros disclosures conservan sus dueños.",
         "recipe_path": "docs/components/recipes/faq-group.md"
       }
     },

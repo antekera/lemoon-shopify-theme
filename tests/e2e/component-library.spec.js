@@ -56,23 +56,110 @@ test('contact synthetic response branches expose associated errors and polite su
   await expect(page.getByRole('alert')).toHaveCount(0);
 });
 
-test('FAQ uses native Enter/Space disclosure and keeps answer links accessible', async ({ page, browserName }) => {
-  await page.goto(fixture('faq'));
-  await expect(page.locator('details')).toHaveCount(11);
-  const details = page.locator('details').first();
-  const summary = details.locator('summary');
-  await expect(details).not.toHaveAttribute('open');
-  await expect(details.locator('.lemoon-faq-page__answer')).toBeHidden();
-  await summary.focus();
+test('FAQ opens the first answer and keyboard interaction closes the previously open question across groups', async ({ page }) => {
+  await page.goto(fixture('faq-custom'));
+  const details = page.locator('.lemoon-faq-page__question');
+  await expect(details).toHaveCount(3);
+  await expect(details.nth(0)).toHaveAttribute('open', '');
+  await expect(details.nth(1)).not.toHaveAttribute('open');
+  await expect(details.nth(0).locator('.lemoon-faq-page__answer')).toBeVisible();
+  const second = details.nth(1).locator('summary');
+  await second.focus();
   await page.keyboard.press('Enter');
-  await expect(details).toHaveAttribute('open', '');
-  await expect(details.locator('.lemoon-faq-page__answer')).toBeVisible();
-  await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
-  await expect(details.getByRole('link')).toBeFocused();
-  await summary.focus();
+  await expect(details.nth(0)).not.toHaveAttribute('open');
+  await expect(details.nth(1)).toHaveAttribute('open', '');
+  await expect(details.nth(1).getByRole('link', { name: 'Contacto dos' })).toBeVisible();
+  await details.nth(2).locator('summary').focus();
   await page.keyboard.press('Space');
-  await expect(details).not.toHaveAttribute('open');
+  await expect(details.nth(1)).not.toHaveAttribute('open');
+  await expect(details.nth(2)).toHaveAttribute('open', '');
+  expect(await page.locator('.lemoon-faq-page__question[open]').count()).toBe(1);
 });
+
+test('FAQ uses responsive question type, 1.5 answer spacing and compact desktop header', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(fixture('faq-custom'));
+  const fontSize = await page.locator('.lemoon-faq-page__question h3').first().evaluate(el => getComputedStyle(el).fontSize);
+  const headerMargin = await page.locator('.lemoon-faq-page__header').evaluate(el => parseFloat(getComputedStyle(el).marginBottom));
+  expect(fontSize).toBe('18px');
+  expect(headerMargin).toBe(32);
+  const answer = page.locator('.lemoon-faq-page__answer').first();
+  await expect(answer).toHaveCSS('font-size', '16px');
+  await expect(answer).toHaveCSS('line-height', '24px');
+  for (const width of [390, 989, 990]) {
+    await page.setViewportSize({ width, height: 900 });
+    await expect(page.locator('.lemoon-faq-page__question h3').first()).toHaveCSS('font-size', width >= 990 ? '18px' : '16px');
+    await expect(answer).toHaveCSS('line-height', '24px');
+  }
+});
+
+test('FAQ opens smoothly and closes without residue when browser supports the enhancement', async ({ page, browserName }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto(fixture('faq-custom'));
+  const supported = await page.evaluate(() => CSS.supports('selector(details::details-content)') && CSS.supports('transition-behavior: allow-discrete'));
+  test.skip(!supported, 'Browser uses the accessible native disclosure fallback');
+  const geometry = await page.evaluate(async () => {
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    const first = document.querySelector('[data-editor-block="uno"]');
+    const second = document.querySelector('[data-editor-block="dos"]');
+    const contentHeight = el => el.getBoundingClientRect().height - el.querySelector('summary').getBoundingClientRect().height;
+    const initial = [contentHeight(first), contentHeight(second)];
+    second.querySelector('summary').click();
+    const frames = [];
+    for (let frame = 0; frame < 30; frame++) {
+      await new Promise(requestAnimationFrame);
+      frames.push([contentHeight(first), contentHeight(second)]);
+    }
+    return { initial, frames };
+  });
+  const [closedHeight, openHeight] = geometry.frames.at(-1);
+  expect(closedHeight).toBeLessThan(3);
+  expect(openHeight).toBeGreaterThan(geometry.initial[1] + 20);
+  // Current Playwright WebKit closes native details immediately despite reporting
+  // support for discrete transitions. Preserve functional fallback coverage; do
+  // not claim the closing animation works in that engine.
+  if (browserName !== 'webkit') {
+    expect(geometry.frames.some(([height]) => height > closedHeight + 2 && height < geometry.initial[0] - 2)).toBe(true);
+  }
+  expect(geometry.frames.some(([, height]) => height > geometry.initial[1] + 2 && height < openHeight - 2)).toBe(true);
+});
+
+test('FAQ respects reduced motion while retaining exclusive disclosure behavior', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(fixture('faq-custom'));
+  const supported = await page.evaluate(() => CSS.supports('selector(details::details-content)') && CSS.supports('transition-behavior: allow-discrete'));
+  const first = page.locator('[data-editor-block="uno"]');
+  const second = page.locator('[data-editor-block="dos"]');
+  if (supported) {
+    const transition = await second.evaluate(el => getComputedStyle(el, '::details-content').transitionDuration);
+    expect(transition.split(',').every(value => parseFloat(value) === 0)).toBe(true);
+  }
+  await second.locator('summary').click();
+  await expect(first).not.toHaveAttribute('open');
+  await expect(second).toHaveAttribute('open', '');
+  await expect(second.locator('.lemoon-faq-page__answer')).toBeVisible();
+});
+
+test('FAQ opens the selected editor block and closes the previous one', async ({ page }) => {
+  await page.goto(fixture('faq-editor'));
+  const first = page.locator('[data-editor-block="uno"]');
+  const selected = page.locator('[data-editor-block="tres"]');
+  await expect(first).toHaveAttribute('open', '');
+  await selected.evaluate(el => el.dispatchEvent(new CustomEvent('shopify:block:select', { bubbles: true })));
+  await expect(selected).toHaveAttribute('open', '');
+  await expect(first).not.toHaveAttribute('open');
+});
+
+for (const width of [390, 1440]) {
+  test(`FAQ stays centered and readable at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(fixture('faq-custom'));
+    const box = await page.locator('.lemoon-faq-page').boundingBox();
+    expect(box.width).toBeLessThanOrEqual(700);
+    expect(Math.abs(box.x - (width - box.width) / 2)).toBeLessThanOrEqual(1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+}
 
 test('select changes by keyboard, contributes FormData and bubbles a real change event', async ({ page }) => {
   await page.goto(fixture('controls'));

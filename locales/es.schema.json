@@ -3560,7 +3560,9 @@
       "lenses": "Lentes y receta",
       "ordering": "Pedido, cuenta y ayuda",
       "policies": "Envíos y condiciones",
-      "editor_info": "Las preguntas personalizadas reemplazan las respuestas de referencia de su grupo. Si el grupo no tiene preguntas personalizadas completas, se muestran las referencias traducidas."
+      "editor_info": "Agrega un bloque por pregunta y elige su grupo. Solo se muestran grupos con preguntas completas.",
+      "legacy_fallback_label": "Mostrar preguntas anteriores",
+      "legacy_fallback_info": "Se muestran solo si no hay bloques de preguntas. Desactiva esta opción para dejar la lista vacía."
     },
     "lemoon_legal_page": {
       "name": "Página legal Lemoon",

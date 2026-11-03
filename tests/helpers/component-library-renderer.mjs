@@ -93,7 +93,11 @@ export function renderComponentFixture(scenario = 'controls', { themeBoxSizing =
   if (scenario === 'contact' || scenario === 'contact-error' || scenario === 'contact-success') {
     content = renderComponentSection('lemoon-contact-page', { form: scenario === 'contact-error' ? { errors: contactErrors() } : scenario === 'contact-success' ? { 'posted_successfully?': true } : {} });
   } else if (scenario === 'faq' || scenario === 'long') {
-    content = renderComponentSection('lemoon-faq-page', { blocks: scenario === 'long' ? [{ id: 'long', shopify_attributes: 'data-shopify-editor-block="fixture"', settings: { group: 'choosing', question: 'Pregunta extensa '.repeat(25), answer: `<p>${'Respuesta extensa con información '.repeat(50)}</p>` } }] : [] });
+    content = renderComponentSection('lemoon-faq-page', { settings: { legacy_fallback: scenario === 'faq' }, blocks: scenario === 'long' ? [{ id: 'long', shopify_attributes: 'data-shopify-editor-block="fixture"', settings: { group: 'choosing', question: 'Pregunta extensa '.repeat(25), answer: `<p>${'Respuesta extensa con información '.repeat(50)}</p>` } }] : [] });
+  } else if (scenario === 'faq-custom' || scenario === 'faq-editor') {
+    const block = (id, group) => ({ id, type: 'question', shopify_attributes: `data-editor-block="${id}"`, settings: { group, question: `Pregunta ${id}`, answer: `<p>Respuesta ${id}</p><p><a href="/pages/contact">Contacto ${id}</a></p>` } });
+    content = renderComponentSection('lemoon-faq-page', { blocks: [block('uno', 'choosing'), block('dos', 'choosing'), block('tres', 'policies')], context: { request: { design_mode: scenario === 'faq-editor' } } });
+    themeBoxSizing = true;
   } else if (scenario === 'guide') {
     content = renderComponentSection('lemoon-guide-page');
   } else if (scenario === 'search') {

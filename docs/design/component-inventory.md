@@ -404,7 +404,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [sections/collapsible-content.liquid](../../sections/collapsible-content.liquid), [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid), [sections/lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid), [sections/disclosures.liquid](../../sections/disclosures.liquid), [snippets/product-disclosures.liquid](../../snippets/product-disclosures.liquid), [assets/component-accordion.css](../../assets/component-accordion.css), [assets/collapsible-content.css](../../assets/collapsible-content.css), [assets/component-disclosures.css](../../assets/component-disclosures.css), [assets/details-disclosure.js](../../assets/details-disclosure.js), [assets/disclosures.js](../../assets/disclosures.js), [lemoon-ui-faq-item](../../snippets/lemoon-ui-faq-item.liquid), [assets/global.js](../../assets/global.js).
 
-**Contrato actual.** collapsible-content: bloques collapsible_row con heading/icon/row_content/page. FAQ simple question/answer; FAQ page question con group/link/link_label y grupos locales. product-disclosures: product,block,heading,heading_size,open_by_default,surface(default product_page), metafields.shopify.disclosure y display_preferences surfaces.
+**Contrato actual.** collapsible-content: bloques collapsible_row con heading/icon/row_content/page. FAQ simple question/answer; FAQ page question con group/link/link_label y grupos locales, primera pregunta abierta y exclusividad nativa mediante name por sección. product-disclosures: product,block,heading,heading_size,open_by_default,surface(default product_page), metafields.shopify.disclosure y display_preferences surfaces.
 
 **Variantes existentes.** details/summary nativo; FAQ agrupada; disclosure de producto con símbolo/content metafield. Nombre collapsible_tab en schema no implica tabs ARIA.
 
@@ -412,9 +412,9 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Estados observados / aplicabilidad:** Normal: Cerrado o open por fuente; Hover: Summary; Foco: Summary nativo; Seleccionado: open del details; Loading: No propio; contenido dependiente puede cargar; Error: No error propio; Disabled: No disabled común.
 
-**Responsive.** Contenido fluido; FAQ page layout local, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
+**Responsive.** FAQ page centrada a 700px con 20px de margen interior; preguntas de 18px en escritorio y 16px en móvil/tablet, con espacio de encabezado de 32px. Su acordeón anima la apertura y cierre progresivamente donde se soportan, y usa respuesta inmediata con movimiento reducido o sin soporte, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
 
-**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado, FAQ legacy y galería; collapsible y disclosure PDP conservan sus contratos.
+**JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente; un listener del editor abre el bloque seleccionado. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado, FAQ legacy y galería; collapsible y disclosure PDP conservan sus contratos.
 
 **Dependencias de composición:** [LM-ICON](#lm-icon), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
 

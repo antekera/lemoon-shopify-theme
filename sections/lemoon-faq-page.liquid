@@ -1,11 +1,18 @@
 {%- assign faq_groups = 'choosing,lenses,ordering,policies' | split: ',' -%}
+{%- assign faq_group_name = 'FaqAccordion-' | append: section.id -%}
+{%- assign faq_first_open = true -%}
+{%- assign faq_has_items = false -%}
+{%- if section.blocks.size == 0 and section.settings.legacy_fallback -%}{%- assign faq_has_items = true -%}{%- endif -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.question != blank and block.settings.answer != blank -%}{%- assign faq_has_items = true -%}{%- endif -%}
+{%- endfor -%}
 {%- style -%}
-  #shopify-section-{{ section.id }} .lemoon-faq-page { max-width: 128rem; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
-  #shopify-section-{{ section.id }} .lemoon-faq-page__header { max-width: 72rem; margin-bottom: var(--lemoon-space-16); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page { max-width: 700px; margin-inline: auto; padding-inline: 20px; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__header { max-width: 72rem; margin-bottom: var(--lemoon-space-8); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__title { margin: 0; font-family: var(--lemoon-font-heading); font-size: 4.6rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; letter-spacing: var(--lemoon-type-h1-tracking); color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__intro { margin: var(--lemoon-space-6) 0 0; font-size: var(--lemoon-fs-18); line-height: 1.6; color: var(--lemoon-text-secondary); }
-  #shopify-section-{{ section.id }} .lemoon-faq-page__layout { display: grid; grid-template-columns: minmax(0, .55fr) minmax(0, 1.45fr); gap: var(--lemoon-space-16); align-items: start; }
-  #shopify-section-{{ section.id }} .lemoon-faq-page__nav { position: sticky; top: 12rem; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); align-items: start; }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__nav { position: static; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__nav-title { margin: 0 0 var(--lemoon-space-3); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__nav ul { margin: 0; padding: 0; list-style: none; }
   #shopify-section-{{ section.id }} .lemoon-faq-page a { color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
@@ -16,10 +23,24 @@
   #shopify-section-{{ section.id }} .lemoon-faq-page__question:last-child { border-bottom: 1px solid var(--lemoon-border-default); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__question summary { display: flex; align-items: center; justify-content: space-between; gap: var(--lemoon-space-5); min-height: 6.4rem; padding: var(--lemoon-space-5) 0; list-style: none; cursor: pointer; }
   #shopify-section-{{ section.id }} .lemoon-faq-page__question summary::-webkit-details-marker { display: none; }
-  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary h3 { margin: 0; font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-18); font-weight: var(--lemoon-weight-medium); line-height: 1.4; color: var(--lemoon-text-brand); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__question summary h3 { margin: 0; font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-16); font-weight: var(--lemoon-weight-medium); line-height: 1.4; color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__question summary svg { flex: 0 0 2rem; width: 2rem; height: 2rem; color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__question[open] .lemoon-faq-page__plus-vertical { display: none; }
-  #shopify-section-{{ section.id }} .lemoon-faq-page__answer { padding: 0 var(--lemoon-space-8) var(--lemoon-space-6) 0; font-size: var(--lemoon-fs-16); line-height: 1.7; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-faq-page__answer { padding: 0 var(--lemoon-space-8) var(--lemoon-space-6) 0; font-size: var(--lemoon-fs-16); line-height: 1.5; color: var(--lemoon-text-secondary); }
+  @supports selector(details::details-content) and (transition-behavior: allow-discrete) {
+    #shopify-section-{{ section.id }} .lemoon-faq-page__question::details-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      overflow: clip;
+      transition: grid-template-rows var(--lemoon-motion-base), content-visibility var(--lemoon-motion-base) allow-discrete;
+    }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__question[open]::details-content { grid-template-rows: 1fr; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__answer { min-block-size: 0; overflow: hidden; padding-bottom: 0; }
+    #shopify-section-{{ section.id }} .lemoon-faq-page__answer::after { content: ''; display: block; block-size: var(--lemoon-space-6); }
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }} .lemoon-faq-page__question::details-content { transition: none; }
+    }
+  }
   #shopify-section-{{ section.id }} .lemoon-faq-page__answer p { margin: 0 0 var(--lemoon-space-3); }
   #shopify-section-{{ section.id }} .lemoon-faq-page__answer a { display: inline-block; padding: var(--lemoon-space-2) 0; }
   #shopify-section-{{ section.id }} .lemoon-faq-page__help { padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
@@ -28,6 +49,9 @@
   #shopify-section-{{ section.id }} .lemoon-faq-page__help a { display: inline-flex; align-items: center; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-6); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); text-decoration: none; }
   #shopify-section-{{ section.id }} .lemoon-faq-page__help a:hover { background: var(--lemoon-action-primary-hover); }
   #shopify-section-{{ section.id }} .lemoon-faq-page :is(summary, a):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
+  @media screen and (min-width: 990px) {
+    #shopify-section-{{ section.id }} .lemoon-faq-page__question summary h3 { font-size: var(--lemoon-fs-18); }
+  }
   @media screen and (max-width: 989px) {
     #shopify-section-{{ section.id }} .lemoon-faq-page__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
     #shopify-section-{{ section.id }} .lemoon-faq-page__nav { position: static; }
@@ -50,15 +74,20 @@
     <p class="lemoon-faq-page__intro">{{ 'sections.lemoon_faq_page.intro' | t }}</p>
   </header>
   <div class="lemoon-faq-page__layout">
+    {%- if faq_has_items -%}
     <nav class="lemoon-faq-page__nav" aria-label="{{ 'sections.lemoon_faq_page.index' | t | escape }}">
       <p class="lemoon-faq-page__nav-title">{{ 'sections.lemoon_faq_page.index' | t }}</p>
       <ul>
         {%- for group in faq_groups -%}
           {%- assign group_title_key = 'sections.lemoon_faq_page.' | append: group | append: '.title' -%}
-          <li><a href="#FaqGroup-{{ section.id }}-{{ group }}">{{ group_title_key | t }}</a></li>
+          {%- assign group_has_items = false -%}
+          {%- if section.blocks.size == 0 and section.settings.legacy_fallback -%}{%- assign group_has_items = true -%}{%- endif -%}
+          {%- for block in section.blocks -%}{%- if block.settings.group == group and block.settings.question != blank and block.settings.answer != blank -%}{%- assign group_has_items = true -%}{%- endif -%}{%- endfor -%}
+          {%- if group_has_items -%}<li><a href="#FaqGroup-{{ section.id }}-{{ group }}">{{ group_title_key | t }}</a></li>{%- endif -%}
         {%- endfor -%}
       </ul>
     </nav>
+    {%- endif -%}
     <div>
       {%- for group in faq_groups -%}
         {%- liquid
@@ -74,6 +103,7 @@
             assign question_count = 2
           endif
         -%}
+        {%- if custom_question_count > 0 or section.blocks.size == 0 and section.settings.legacy_fallback -%}
         <section class="lemoon-faq-page__group" id="FaqGroup-{{ section.id }}-{{ group }}" aria-labelledby="FaqTitle-{{ section.id }}-{{ group }}">
           {%- assign ui_heading_text = group_title_key | t -%}
           {%- capture ui_heading_id -%}FaqTitle-{{ section.id }}-{{ group }}{%- endcapture -%}
@@ -128,7 +158,8 @@
               <p>{{ question_answer_key | t }}</p>
               <a href="{{ question_url | escape }}">{{ question_link_key | t }}</a>
             {%- endcapture -%}
-            {% render 'lemoon-ui-faq-item', id: faq_id, question: faq_question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer', indicator: 'page-svg' %}
+            {% render 'lemoon-ui-faq-item', id: faq_id, question: faq_question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer', indicator: 'page-svg', name: faq_group_name, open: faq_first_open %}
+            {%- assign faq_first_open = false -%}
           {%- endfor -%}
           {%- else -%}
             {%- for block in section.blocks -%}
@@ -140,11 +171,13 @@
                     <a href="{{ block.settings.link | escape }}">{{ block.settings.link_label | escape }}</a>
                   {%- endif -%}
                 {%- endcapture -%}
-                {% render 'lemoon-ui-faq-item', id: faq_id, question: block.settings.question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer rte', editor_attributes: block.shopify_attributes, indicator: 'page-svg' %}
+                {% render 'lemoon-ui-faq-item', id: faq_id, question: block.settings.question, question_level: 3, answer_html: faq_answer_html, class: 'lemoon-faq-page__question', answer_class: 'lemoon-faq-page__answer rte', editor_attributes: block.shopify_attributes, indicator: 'page-svg', name: faq_group_name, open: faq_first_open %}
+                {%- assign faq_first_open = false -%}
               {%- endif -%}
             {%- endfor -%}
           {%- endif -%}
         </section>
+        {%- endif -%}
       {%- endfor -%}
       <aside class="lemoon-faq-page__help" aria-labelledby="FaqHelp-{{ section.id }}">
         {%- assign ui_heading_text = 'sections.lemoon_faq_page.help_title' | t -%}
@@ -158,6 +191,16 @@
     </div>
   </div>
 </div>
+{% if request.design_mode %}
+<script>
+  if (!window.lemoonFaqEditorInitialized) {
+    window.lemoonFaqEditorInitialized = true;
+    document.addEventListener('shopify:block:select', function(event) {
+      if (event.target.matches('.lemoon-faq-page__question')) event.target.open = true;
+    });
+  }
+</script>
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.lemoon_faq_page.name",
@@ -173,6 +216,13 @@
     {
       "type": "paragraph",
       "content": "t:sections.lemoon_faq_page.editor_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "legacy_fallback",
+      "default": false,
+      "label": "t:sections.lemoon_faq_page.legacy_fallback_label",
+      "info": "t:sections.lemoon_faq_page.legacy_fallback_info"
     },
     {
       "type": "header",
