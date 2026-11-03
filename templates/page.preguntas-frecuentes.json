@@ -11,7 +11,7 @@
           "type": "question",
           "settings": {
             "group": "choosing",
-            "question": "¿Cómo elijo un armazón que me quede bien?",
+            "question": "¿Cómo elijo unos anteojos que me queden bien?",
             "answer": "<p>Revisa las medidas, la forma y las características de cada modelo. Si tienes unos anteojos cómodos, puedes comparar sus medidas con las de la ficha. Nuestra <a href=\"/pages/elegir-lentes-segun-tu-rostro\">guía para elegir según tu rostro</a> puede ayudarte a empezar.</p>"
           }
         },
@@ -28,7 +28,7 @@
           "settings": {
             "group": "choosing",
             "question": "¿Cómo encuentro un estilo que me guste?",
-            "answer": "<p>Puedes explorar los modelos por sus características y probar el <a href=\"/pages/buscar-mi-estilo\">quiz Encuentra tu lente ideal</a>. Sus sugerencias son una ayuda para elegir; revisa también las medidas y la ficha de cada armazón.</p>"
+            "answer": "<p>Puedes explorar los modelos por sus características y probar el <a href=\"/pages/buscar-mi-estilo\">quiz Encuentra tu lente ideal</a>. Sus sugerencias son una ayuda para elegir; revisa también las medidas y la ficha de cada modelo.</p>"
           }
         },
         "faq_04": {
