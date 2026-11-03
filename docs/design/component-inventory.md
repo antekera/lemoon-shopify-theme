@@ -412,7 +412,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Estados observados / aplicabilidad:** Normal: Cerrado o open por fuente; Hover: Summary; Foco: Summary nativo; Seleccionado: open del details; Loading: No propio; contenido dependiente puede cargar; Error: No error propio; Disabled: No disabled común.
 
-**Responsive.** FAQ page centrada a 700px con 20px de margen interior, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
+**Responsive.** FAQ page centrada a 700px con 20px de margen interior; preguntas de 18px en escritorio y 16px en móvil/tablet, con espacio de encabezado de 32px. Su acordeón anima la apertura y cierre progresivamente donde se soportan, y usa respuesta inmediata con movimiento reducido o sin soporte, sin trap/scroll lock. **Accesibilidad.** Enter/Espacio nativos; summary con nombre; block.shopify_attributes en roots apropiadas; no convertir FAQ en modal.
 
 **JS.** details-disclosure/disclosures-content cuando usados; details FAQ opera nativamente; un listener del editor abre el bloque seleccionado. **Reutilización actual.** `lemoon-ui-faq-item` comparte la presentación de fallback/custom en FAQ agrupado, FAQ legacy y galería; collapsible y disclosure PDP conservan sus contratos.
 
