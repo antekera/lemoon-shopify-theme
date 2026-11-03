@@ -14,6 +14,6 @@ export function renderAdoption(scenario, sourceRoot) {
 }
 
 export function renderAdoptionFixture(scenario) {
-  const shell = renderComponentFixture('controls');
+  const shell = renderComponentFixture('controls', { themeBoxSizing: true });
   return shell.replace(/<body>[\s\S]*?<script>/, `<body>${renderAdoption(scenario)}<script>`);
 }

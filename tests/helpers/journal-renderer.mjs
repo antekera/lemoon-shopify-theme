@@ -77,7 +77,7 @@ export function journalBrowserFixture(content) {
   // Exact blog-card variables emitted by layout/theme.liquid. Without these,
   // calc(100% - 2 * var(--image-padding)) becomes invalid in this fixture.
   const cardVariables = '<style>:root{--blog-card-image-padding:0rem;--blog-card-corner-radius:0rem;--blog-card-text-alignment:left;--blog-card-border-width:0rem;--blog-card-border-opacity:0;--blog-card-shadow-opacity:0.1;--blog-card-shadow-visible:1;--blog-card-shadow-horizontal-offset:0rem;--blog-card-shadow-vertical-offset:0rem;--blog-card-shadow-blur-radius:0rem}</style>';
-  return renderComponentFixture('controls').replace('</head>', `${cardVariables}</head>`).replace(/<body>[\s\S]*?<script>/, `<body><main>${content}</main><script>`);
+  return renderComponentFixture('controls', { themeBoxSizing: true }).replace('</head>', `${cardVariables}</head>`).replace(/<body>[\s\S]*?<script>/, `<body><main>${content}</main><script>`);
 }
 
 export function renderJournalScenario(scenario) {
