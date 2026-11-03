@@ -12,21 +12,21 @@ Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a3
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura entregada enumera 514 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la plantilla `templates/page.politica-de-privacidad.json` y el PNG de seguridad y el SVG de Webpay del footer, registrados en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
+La cobertura entregada enumera 515 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la plantilla `templates/page.politica-de-privacidad.json` y el PNG de seguridad y el SVG de Webpay del footer y el CSS condicional de newsletter editorial, registrados en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
 | Snippets / layouts Liquid | 91 / 2 |
 | Templates JSON / Liquid | 36 / 3 |
-| Assets CSS / JS / SVG | 81 / 53 / 94 |
+| Assets CSS / JS / SVG | 82 / 53 / 94 |
 | Assets binarios PNG / JPG / GIF | 20 / 10 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **514 / 482 / 32** |
+| **Total fuentes / mapped / excluded** | **515 / 483 / 32** |
 | Familias estables | 44 |
 
-El núcleo actual es de **337 fuentes**: 202 contenedores (secciones, grupos, snippets, layouts, templates), 134 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 482 mapped. Las exclusiones conservan 31 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
+El núcleo actual es de **338 fuentes**: 202 contenedores (secciones, grupos, snippets, layouts, templates), 135 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 483 mapped. Las exclusiones conservan 31 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
 
 Hay **61 secciones con schema y 7 fragmentos sin schema**. Veintisiete secciones declaran **81 bloques: 73 declaraciones locales y 8 slots `@app`**; son declaraciones, no instancias ni tipos globales únicos. Los ocho sitios `{% render block %}` corresponden a apps. No hay archivos `blocks/`, ni infraestructura observada de theme blocks reutilizables mediante `content_for 'blocks'`. Los snippets composicionales y los bloques locales de sección no acreditan soporte de Shopify theme blocks. La matriz de secciones lista cada tipo; sus settings y opciones permanecen en el schema del archivo canónico enlazado, incluidas opciones no instanciadas en templates actuales.
 
@@ -616,7 +616,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** Footer actual es Lemoon: navigation_column (heading/menu/open_mobile/mobile_only/desktop_only), legal_links(menu), @app; newsletter form customer contact[email]/tags, omitido solo cuando request.page_type es page y page.handle es nosotros (conserva newsletter_enable en las demás superficies); ayuda, whatsapp/contact y logos de pago configurables por settings. Mostrar logo no acredita pasarela habilitada. La fila legal inferior contiene Privacidad, Términos y condiciones y Preferencias de cookies; Envíos y Devoluciones se mantienen fuera de esa fila. El copyright muestra company_name configurado en la sección, escapado, con el emoji decorativo 🇨🇱 a la derecha. SSL usa el PNG proporcionado por el usuario sobre fondo blanco; Webpay usa el SVG oficial de Transbank Developers y Visa/Mastercard los SVG nativos de Shopify. La procedencia se registra en asset-inventory.md; no son evidencia de certificación o activación de pagos.
 
-**Variantes existentes.** Columnas desktop; details móvil; newsletter success/error; links legales/redes/ayuda; control preferencias cookies.
+**Variantes existentes.** Columnas desktop; details móvil; newsletter success/error; links legales/redes/ayuda; control preferencias cookies. Blog/artículo usan una tarjeta editorial navy con copy localizado, label visible y consentimiento requerido desmarcado. Su [CSS condicional](../../assets/section-lemoon-editorial-newsletter.css) se carga solo en esas páginas; el resto mantiene la variante cálida y Nosotros conserva su newsletter oculta.
 
 **CSS y excepciones.** .lemoon-footer/newsletter y arte de fondo; CSS Dawn section-footer conservado sin confundir con CSS actual. Tokens de superficie/texto y tamaños locales.
 
@@ -624,7 +624,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** Footer JS fuerza apertura escritorio y restaura estado móvil vía matchMedia; preservar mobile_only/desktop_only. **Accesibilidad.** Conservar heading de newsletter, label oculto, error ID, block attrs, details semantics y status de preferencias.
 
-**JS.** section-lemoon-footer.js; cookies controlador separado; newsletter POST nativo. **Reutilización actual.** Composición específica; newsletter se duplica en blog/launch/email banner y conserva contrato propio.
+**JS.** section-lemoon-footer.js; cookies controlador separado; newsletter POST nativo. **Reutilización actual.** Composición específica; blog/artículo reutilizan el formulario del footer con la variante editorial y mantienen desactivado el newsletter interno del listado. Launch/email banner conservan sus contratos propios.
 
 **Dependencias de composición:** [LM-DISCLOSURE](#lm-disclosure), [LM-FIELD](#lm-field), [LM-ACTION](#lm-action), [LM-PRIVACY](#lm-privacy), [LM-FEEDBACK](#lm-feedback). Consumidores estáticos en el JSON.
 
@@ -908,11 +908,11 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [sections/main-article.liquid](../../sections/main-article.liquid), [sections/main-blog.liquid](../../sections/main-blog.liquid), [sections/featured-blog.liquid](../../sections/featured-blog.liquid), [snippets/share-button.liquid](../../snippets/share-button.liquid), [assets/share.js](../../assets/share.js), [assets/section-blog-post.css](../../assets/section-blog-post.css), [assets/section-main-blog.css](../../assets/section-main-blog.css), [assets/section-featured-blog.css](../../assets/section-featured-blog.css).
 
-**Contrato actual.** Blog articles/paginate y show_image/date/author/newsletter; artículo bloques featured_image/title/content/share/@app, comments y form new_comment; share-button share_link,block con settings.share_label; nativo share o clipboard fallback.
+**Contrato actual.** Blog con título CMS `blog.title` (fallback localizado «Una nueva mirada»), articles/paginate y show_image/date/author/newsletter. El destacado consume categoría/extracto CMS; el grid muestra enlaces de categoría y omite ese destacado en la primera página. Sin grid de artículos restantes se omiten título/contador vacíos; un filtro sin resultados ofrece volver al blog. Artículo bloques featured_image/title/content/share/@app, comments y form new_comment; share-button share_link,block con settings.share_label; nativo share o clipboard fallback.
 
-**Variantes existentes.** Journal feature+list/newsletter; article editorial/default, hero/cuerpo/explore/comments/moderación; share details/copy success.
+**Variantes existentes.** Blog feature+list/newsletter opcional; fechas visibles desactivadas en templates de blog/artículo, sin borrar las fechas CMS/SEO; ambos templates de artículo añaden el carrusel `lemoon-featured-products` con colección Ópticos editable y ocho productos; los templates predeterminado/editorial desactivan el newsletter interno con `show_newsletter: false` y conservan el footer global. La etiqueta visible y el enlace del artículo usan «Blog». Article editorial/default, hero/cuerpo/explore/comments/moderación; share details/copy success. El detalle añade hasta tres lecturas del mismo blog, prioriza etiquetas compartidas y completa con las últimas entradas públicas (hasta 50 candidatas), excluyendo la entrada actual y duplicados. Sin otras entradas no emite el bloque. Todo título, extracto e imagen procede del CMS.
 
-**CSS y excepciones.** Editorial typography y media crop locales, article-card reutilizado para lista; newsletter local conserva consentimiento.
+**CSS y excepciones.** Editorial typography y media crop locales, article-card reutilizado para lista; newsletter local conserva consentimiento. El detalle conserva cuerpo de 700px y hero de 980px, dimensiona embeds YouTube/Vimeo a 16:9 y admite figuras/créditos CMS. El editor debe incluir title accesible y omitir autoplay en los embeds; el CSS no altera la URL de terceros.
 
 **Estados observados / aplicabilidad:** Normal: Lectura/lista/formulario; Hover: Links/share; Foco: Form y details/share status; Seleccionado: No aplica; Loading: Share async si API; Error: Form errors/comment moderation y copy feedback según fuente; Disabled: No disabled global.
 

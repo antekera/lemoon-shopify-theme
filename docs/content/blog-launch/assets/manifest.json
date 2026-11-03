@@ -1,0 +1,35 @@
+{
+  "created_at": "2026-11-01",
+  "method": "image_gen built-in",
+  "kind": "Original conceptual editorial illustrations generated with AI; not catalog products or historical artifact photographs.",
+  "images": [
+    {
+      "key": "numbers",
+      "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-blog-numbers-v1.png?v=1793578386",
+      "fileId": "gid://shopify/MediaImage/46682437976232",
+      "filename": "lemoon-blog-numbers-v1.png",
+      "alt": "Ilustración conceptual de la patilla de unos lentes junto a una regla."
+    },
+    {
+      "key": "style",
+      "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-blog-style-v1.png?v=1793578391",
+      "fileId": "gid://shopify/MediaImage/46682439286952",
+      "filename": "lemoon-blog-style-v1.png",
+      "alt": "Ilustración conceptual de un armazón rodeado de tres combinaciones de ropa."
+    },
+    {
+      "key": "care",
+      "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-blog-care-v1.png?v=1793578396",
+      "fileId": "gid://shopify/MediaImage/46682442072232",
+      "filename": "lemoon-blog-care-v1.png",
+      "alt": "Ilustración conceptual de unos lentes guardados en un estuche rígido junto a un paño."
+    },
+    {
+      "key": "cat-eye",
+      "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/files/lemoon-blog-cat-eye-v1.png?v=1793578403",
+      "fileId": "gid://shopify/MediaImage/46682444005544",
+      "filename": "lemoon-blog-cat-eye-v1.png",
+      "alt": "Ilustración conceptual de un armazón cat-eye sobre formas geométricas."
+    }
+  ]
+}

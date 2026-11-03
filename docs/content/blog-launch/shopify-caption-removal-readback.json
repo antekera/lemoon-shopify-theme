@@ -1,0 +1,33 @@
+{
+  "verifiedAt": "2026-11-02T22:57:04.935Z",
+  "checks": [
+    {
+      "id": "gid://shopify/Article/635166687400",
+      "disclaimerRemoved": true,
+      "bodyOnlyChange": true,
+      "otherFieldsPreserved": true,
+      "hidden": true
+    },
+    {
+      "id": "gid://shopify/Article/635166720168",
+      "disclaimerRemoved": true,
+      "bodyOnlyChange": true,
+      "otherFieldsPreserved": true,
+      "hidden": true
+    },
+    {
+      "id": "gid://shopify/Article/635166752936",
+      "disclaimerRemoved": true,
+      "bodyOnlyChange": true,
+      "otherFieldsPreserved": true,
+      "hidden": true
+    },
+    {
+      "id": "gid://shopify/Article/635166785704",
+      "disclaimerRemoved": true,
+      "bodyOnlyChange": true,
+      "otherFieldsPreserved": true,
+      "hidden": true
+    }
+  ]
+}

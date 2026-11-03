@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-01",
+  "blog": {
+    "id": "gid://shopify/Blog/99066118312",
+    "title": "Una nueva mirada",
+    "handle": "news"
+  },
+  "oldDraftPreserved": true,
+  "note": "Shopify inserted insignificant line breaks between li and strong tags in the first article. bodyEquivalent compares markup after whitespace between tags is normalized.",
+  "articles": [
+    {
+      "id": "gid://shopify/Article/635166687400",
+      "title": "Qué significan los números de tus lentes",
+      "unpublished": true,
+      "bodyMatches": false,
+      "summaryMatches": true,
+      "tagsMatch": true,
+      "hasImage": true,
+      "imageAltMatches": true,
+      "seoMatches": true,
+      "imageDimensions": [
+        1536,
+        1024
+      ],
+      "bodyEquivalent": true
+    },
+    {
+      "id": "gid://shopify/Article/635166720168",
+      "title": "Un armazón, tres formas de llevarlo",
+      "unpublished": true,
+      "bodyMatches": true,
+      "summaryMatches": true,
+      "tagsMatch": true,
+      "hasImage": true,
+      "imageAltMatches": true,
+      "seoMatches": true,
+      "imageDimensions": [
+        1536,
+        1024
+      ],
+      "bodyEquivalent": true
+    },
+    {
+      "id": "gid://shopify/Article/635166752936",
+      "title": "Cómo guardar tus lentes cuando sales",
+      "unpublished": true,
+      "bodyMatches": true,
+      "summaryMatches": true,
+      "tagsMatch": true,
+      "hasImage": true,
+      "imageAltMatches": true,
+      "seoMatches": true,
+      "imageDimensions": [
+        1536,
+        1024
+      ],
+      "bodyEquivalent": true
+    },
+    {
+      "id": "gid://shopify/Article/635166785704",
+      "title": "De dónde vienen los marcos cat-eye",
+      "unpublished": true,
+      "bodyMatches": true,
+      "summaryMatches": true,
+      "tagsMatch": true,
+      "hasImage": true,
+      "imageAltMatches": true,
+      "seoMatches": true,
+      "imageDimensions": [
+        1536,
+        1024
+      ],
+      "bodyEquivalent": true
+    }
+  ]
+}
