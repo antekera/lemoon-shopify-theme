@@ -102,6 +102,8 @@
         {%- elsif section.settings.use_section_content and section.settings.content != blank -%}
           {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
           {%- assign section_content_html = section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html -%}
+          {%- capture delivery_estimate -%}{%- render 'lemoon-delivery-estimate' -%}{%- endcapture -%}
+          {%- assign section_content_html = section_content_html | replace: '[PLAZO_ENTREGA]', delivery_estimate -%}
           {%- if section.settings.kind == 'terms' -%}
             {%- assign toc_label = 'sections.lemoon_legal_page.toc_label' | t -%}
             {% render 'lemoon-legal-section-content', content: section_content_html, section_id: section.id, toc_label: toc_label %}
@@ -114,7 +116,9 @@
           {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
         {%- elsif section.settings.content != blank -%}
           {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
-          {{ section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html }}
+          {%- capture delivery_estimate -%}{%- render 'lemoon-delivery-estimate' -%}{%- endcapture -%}
+          {%- assign section_content_html = section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html -%}
+          {{ section_content_html | replace: '[PLAZO_ENTREGA]', delivery_estimate }}
         {%- else -%}
           <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
         {%- endif -%}

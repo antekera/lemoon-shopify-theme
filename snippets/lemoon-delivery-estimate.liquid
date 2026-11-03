@@ -1,0 +1,4 @@
+{% doc %}
+  Outputs the escaped store-wide delivery estimate for all orders.
+{% enddoc %}
+{{- shop.metafields.custom.plazo_entrega_receta.value | default: '5 a 13 días hábiles' | escape -}}

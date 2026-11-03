@@ -68,17 +68,17 @@ test.each(['blog', 'article'])('%s respects the existing newsletter editor enabl
 test('Nosotros keeps the footer while suppressing its existing newsletter', () => {
   const options = { settings: { newsletter_enable: true, newsletter_heading: 'Contenido existente' } };
   const nosotros = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'nosotros' } } });
-  const contact = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'contact' } } });
+  const contact = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'otra-pagina' } } });
   expect(nosotros).not.toContain('<section class="lemoon-newsletter');
   expect(nosotros).not.toContain('name="contact[email]"');
   expect(nosotros).toContain('<footer class="lemoon-footer"');
   expect(nosotros.slice(nosotros.indexOf('<footer class="lemoon-footer"'))).toBe(contact.slice(contact.indexOf('<footer class="lemoon-footer"')));
 });
 
-test('ordinary CMS pages retain the same warm newsletter markup after the Nosotros guard', () => {
+test('ordinary CMS pages retain the same warm newsletter markup after the page guards', () => {
   const options = { settings: { newsletter_enable: true, newsletter_heading: 'Contenido existente' } };
   const ordinary = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' } } });
-  const contact = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'contact' } } });
+  const contact = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'otra-pagina' } } });
   expect(contact).toBe(ordinary);
   expect(contact).toContain('<section class="lemoon-newsletter"');
   expect(contact).not.toContain('href="/assets/section-lemoon-editorial-newsletter.css"');

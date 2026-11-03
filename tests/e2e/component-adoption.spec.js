@@ -65,17 +65,19 @@ test('legacy FAQ preserves first-open/editor attributes, keyboard toggles and ri
 });
 
 for (const scenario of ['newsletter','article']) {
-  test(`${scenario}: migrated controls use the approved boundary and separate keyboard focus`, async ({ page }) => {
+  test(`${scenario}: migrated controls use the approved boundary and inset keyboard focus`, async ({ page }) => {
     await page.goto(fixture(scenario));
     const control = page.locator('form [type=email]');
     for (const edge of ['top','right','bottom','left']) {
       await expect(control).toHaveCSS(`border-${edge}-width`, '1px');
-      await expect(control).toHaveCSS(`border-${edge}-color`, 'rgb(11, 31, 58)');
+      await expect(control).toHaveCSS(`border-${edge}-color`, 'rgb(102, 133, 173)');
     }
     await control.focus();
     await expect(control).toHaveCSS('outline-color','rgb(11, 31, 58)');
     await expect(control).toHaveCSS('outline-width','2px');
-    expect(await control.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
+    await expect(control).toHaveCSS('outline-offset', '-2px');
+    await expect(control).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+    await expect(control).toHaveCSS('box-shadow', 'none');
     await page.emulateMedia({ forcedColors: 'active' });
     await expect(control).toHaveCSS('border-top-style','solid');
     await expect(control).toHaveCSS('outline-style','solid');
@@ -113,4 +115,67 @@ test('comment response autofocus and error destinations retain their native focu
   await page.goto(fixture('article-error'));
   await page.locator('.form-status-list a[href$="-email"]').click();
   await expect(page.locator('[name="comment[email]"]')).toBeFocused();
+});
+
+for (const scenario of ['controls', 'contact', 'contact-error']) {
+  test(`${scenario}: fields and selects keep a continuous inset focus ring without a second shadow`, async ({ page }) => {
+    await page.goto(`/tests/fixtures/component-library.html?scenario=${scenario}`);
+    const controls = scenario === 'controls'
+      ? page.locator('#fixture-email, #fixture-select, #invalid-field')
+      : page.locator('.lemoon-contact__form :is(input:not([type=hidden]), textarea)');
+    expect(await controls.count()).toBeGreaterThanOrEqual(scenario === 'controls' ? 3 : 4);
+    for (const control of await controls.all()) {
+      await control.blur();
+      const isInvalid = await control.getAttribute('aria-invalid') === 'true';
+      const restingColor = isInvalid && scenario.startsWith('contact') ? 'rgb(192, 57, 43)' : 'rgb(102, 133, 173)';
+      const focusedColor = isInvalid ? 'rgb(192, 57, 43)' : 'rgb(11, 31, 58)';
+      for (const edge of ['top', 'right', 'bottom', 'left']) {
+        await expect(control).toHaveCSS(`border-${edge}-style`, 'solid');
+        await expect(control).toHaveCSS(`border-${edge}-color`, restingColor);
+      }
+      await control.focus();
+      await expect(control).toBeFocused();
+      for (const edge of ['top', 'right', 'bottom', 'left']) {
+        await expect(control).toHaveCSS(`border-${edge}-color`, focusedColor);
+      }
+      await expect(control).toHaveCSS('outline-color', focusedColor);
+      await expect(control).toHaveCSS('outline-style', 'solid');
+      await expect(control).toHaveCSS('outline-width', '2px');
+      await expect(control).toHaveCSS('outline-offset', '-2px');
+      await expect(control).toHaveCSS('box-shadow', 'none');
+    }
+    const invalid = page.locator('[aria-invalid="true"]');
+    if (scenario !== 'contact') expect(await invalid.count()).toBeGreaterThan(0);
+    await page.emulateMedia({ forcedColors: 'active' });
+    const focused = controls.first();
+    await focused.focus();
+    await expect(focused).toHaveCSS('border-top-style', 'solid');
+    await expect(focused).toHaveCSS('outline-style', 'solid');
+    await expect(focused).toHaveCSS('outline-width', '2px');
+    await expect(focused).toHaveCSS('outline-offset', '-2px');
+    if (await invalid.count()) {
+      const invalidControl = invalid.first();
+      await invalidControl.focus();
+      await expect(invalidControl).toHaveCSS('outline-style', 'solid');
+      const colors = await invalidControl.evaluate(node => { const p = document.createElement('span'); p.style.color = 'Highlight'; document.body.append(p); const result = [getComputedStyle(node).outlineColor, getComputedStyle(p).color]; p.remove(); return result; });
+      expect(colors[0]).toBe(colors[1]);
+    }
+  });
+}
+
+
+test('input boundary colors maintain at least 3:1 contrast against white and warm surfaces', async ({ page }) => {
+  await page.goto('/tests/fixtures/component-library.html?scenario=controls');
+  const ratios = await page.evaluate(() => {
+    const v = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const luminance = color => {
+      const probe = document.createElement('span'); probe.style.color = color; document.body.append(probe);
+      const [r, g, b] = getComputedStyle(probe).color.match(/\d+/g).map(Number).map(n => { const c = n / 255; return c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; });
+      probe.remove(); return .2126 * r + .7152 * g + .0722 * b;
+    };
+    return ['--lemoon-border-input', '--lemoon-border-strong'].flatMap(border => ['--lemoon-surface-page', '--lemoon-surface-warm'].map(surface => {
+      const [a, b] = [luminance(v(border)), luminance(v(surface))].sort((x, y) => y - x); return (a + .05) / (b + .05);
+    }));
+  });
+  for (const ratio of ratios) expect(ratio).toBeGreaterThanOrEqual(3);
 });

@@ -140,7 +140,7 @@
           "settings": {
             "group": "ordering",
             "question": "¿Cuánto se demora mi pedido?",
-            "answer": "<p>Para anteojos con receta, la entrega demora entre 5 y 13 días hábiles desde que contamos con tu receta completa. El plazo puede variar según el producto y el destino. El plazo para productos sin receta está pendiente de confirmación. Conoce más en <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
+            "answer": "<p>La entrega de tu pedido se estima en [PLAZO_ENTREGA]. Para pedidos que requieren receta, el plazo comienza cuando contamos con ella completa. El plazo puede variar según el producto, el destino y la empresa de transporte. Conoce más en <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
           }
         },
         "faq_18": {

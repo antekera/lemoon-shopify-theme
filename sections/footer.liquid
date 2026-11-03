@@ -14,9 +14,9 @@
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
   assign show_newsletter = section.settings.newsletter_enable
   if request.page_type == 'page'
-    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias'
+    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias' or page.handle == 'envios-y-entregas' or page.handle == 'contact'
       assign show_newsletter = false
-    elsif template.suffix == 'politica-de-devoluciones'
+    elsif template.suffix == 'politica-de-devoluciones' or template.suffix == 'envios-y-entregas'
       assign show_newsletter = false
     endif
   endif
@@ -96,18 +96,48 @@
         {%- for block in section.blocks -%}
           {%- if block.type == 'navigation_column' -%}
             {%- assign menu = block.settings.menu -%}
+            {%- capture footer_visible_links -%}
+                  {%- for link in menu.links -%}
+                    {%- assign footer_link_url = link.url | split: '?' | first | split: '#' | first -%}
+                    {%- assign footer_url_first = footer_link_url | slice: 0, 1 -%}
+                    {%- assign footer_url_first_two = footer_link_url | slice: 0, 2 -%}
+                    {%- assign footer_url_local = false -%}
+                    {%- if footer_url_first == '/' and footer_url_first_two != '//' -%}{%- assign footer_url_local = true -%}{%- endif -%}
+                    {%- if shop.url != blank -%}
+                      {%- assign footer_shop_prefix = footer_link_url | slice: 0, shop.url.size -%}
+                      {%- assign footer_shop_path = footer_link_url | remove_first: shop.url | slice: 0, 1 -%}
+                      {%- if footer_shop_prefix == shop.url and footer_shop_path == '/' -%}{%- assign footer_url_local = true -%}{%- endif -%}
+                    {%- endif -%}
+                    {%- assign footer_link_path = footer_link_url | split: '/pages/' -%}
+                    {%- assign footer_page_handle = footer_link_path | last | split: '/' | first -%}
+                    {%- assign hide_footer_link = false -%}
+                    {%- if link.type == 'page_link' -%}
+                      {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' -%}
+                        {%- assign hide_footer_link = true -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if footer_link_path.size > 1 and footer_url_local -%}
+                      {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' -%}
+                        {%- assign hide_footer_link = true -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- unless hide_footer_link -%}
+                      <li><a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+                    {%- endunless -%}
+                  {%- endfor -%}
+            {%- endcapture -%}
+            {%- if footer_visible_links != blank or menu == blank or menu.links.size == 0 or request.design_mode -%}
             <details class="lemoon-footer__menu{% if block.settings.mobile_only %} lemoon-footer__menu--mobile-only{% endif %}{% if block.settings.desktop_only %} lemoon-footer__menu--desktop-only{% endif %}" data-mobile-open="{{ block.settings.open_mobile }}"{% if block.settings.open_mobile %} open{% endif %} {{ block.shopify_attributes }}>
               <summary class="lemoon-footer__menu-heading">{{ block.settings.heading | escape }}<span class="lemoon-footer__menu-toggle" aria-hidden="true"></span></summary>
             {%- if menu != blank and menu.links.size > 0 -%}
               <div class="lemoon-footer__menu-content">
                 <ul class="lemoon-footer__menu-links" role="list">
-                  {%- for link in menu.links -%}
-                    <li><a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
-                  {%- endfor -%}
+                  {{ footer_visible_links }}
                 </ul>
               </div>
             {%- endif -%}
             </details>
+            {%- endif -%}
           {%- endif -%}
         {%- endfor -%}
       </nav>
@@ -124,9 +154,41 @@
 
     {%- for block in section.blocks -%}
       {%- if block.type == 'legal_links' and block.settings.menu != blank and block.settings.menu.links.size > 0 -%}
+        {%- capture footer_secondary_links -%}
+          {%- for link in block.settings.menu.links -%}
+            {%- assign footer_link_url = link.url | split: '?' | first | split: '#' | first -%}
+                    {%- assign footer_url_first = footer_link_url | slice: 0, 1 -%}
+                    {%- assign footer_url_first_two = footer_link_url | slice: 0, 2 -%}
+                    {%- assign footer_url_local = false -%}
+                    {%- if footer_url_first == '/' and footer_url_first_two != '//' -%}{%- assign footer_url_local = true -%}{%- endif -%}
+                    {%- if shop.url != blank -%}
+                      {%- assign footer_shop_prefix = footer_link_url | slice: 0, shop.url.size -%}
+                      {%- assign footer_shop_path = footer_link_url | remove_first: shop.url | slice: 0, 1 -%}
+                      {%- if footer_shop_prefix == shop.url and footer_shop_path == '/' -%}{%- assign footer_url_local = true -%}{%- endif -%}
+                    {%- endif -%}
+                    {%- assign footer_link_path = footer_link_url | split: '/pages/' -%}
+                    {%- assign footer_page_handle = footer_link_path | last | split: '/' | first -%}
+                    {%- assign hide_footer_link = false -%}
+                    {%- if link.type == 'page_link' -%}
+                      {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' -%}
+                        {%- assign hide_footer_link = true -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- if footer_link_path.size > 1 and footer_url_local -%}
+                      {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' -%}
+                        {%- assign hide_footer_link = true -%}
+                      {%- endif -%}
+                    {%- endif -%}
+                    {%- unless hide_footer_link -%}
+              <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+        {%- if footer_secondary_links != blank or request.design_mode -%}
         <ul class="lemoon-footer__secondary-links" role="list" {{ block.shopify_attributes }}>
-          {%- for link in block.settings.menu.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
+          {{ footer_secondary_links }}
         </ul>
+        {%- endif -%}
       {%- endif -%}
     {%- endfor -%}
 
