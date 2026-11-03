@@ -70,3 +70,54 @@ test('journal template and editor schema remain valid and localized', () => {
     }
   }
 });
+
+test('CMS title, featured summary and editorial categories render escaped and link to Shopify routes', async () => {
+  const { renderJournal, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const html = renderJournal({ blogTitle: 'Miradas <&"', articles: [journalArticle(1, { title: 'Lentes <&"', tags: ['Elegir tus lentes'], excerpt: '<p>Medidas <strong>claras</strong> & útiles.</p>' })], tags: ['Elegir tus lentes'] });
+  expect(html).toMatch(/<h1>Miradas &lt;&amp;&#34;<\/h1>/);
+  expect(html).toContain('Lentes &lt;&amp;&#34;');
+  expect(html).toContain('Medidas claras &amp; útiles.');
+  expect(html).toContain('/blogs/news/tagged/elegir-tus-lentes');
+  expect(html).not.toContain('lemoon-journal__list-title">');
+  expect(html).not.toContain('<div class="lemoon-journal__grid">');
+  expect(html).not.toContain('<strong>claras</strong>');
+});
+
+test('empty filtered category offers recovery to all posts, and ordinary empty blog offers catalogue', async () => {
+  const { renderJournal } = await import('../helpers/journal-renderer.mjs');
+  const filtered = renderJournal({ currentTags: ['Cuidado'], tags: ['Estilo'] });
+  expect(filtered).toContain('Todavía no hay publicaciones en este tema. Explora las demás historias.');
+  expect(filtered).toContain('href="/blogs/news" class="button"');
+  const empty = renderJournal();
+  expect(empty).toContain('href="/collections/all" class="button"');
+  expect(empty).not.toContain('Todavía no hay publicaciones en este tema. Explora las demás historias.');
+});
+
+test('CMS blog name falls back locally and selected tag is exposed as current', async () => {
+  const { renderJournal, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const html = renderJournal({ blogTitle: '', articles: [journalArticle(1)], tags: ['Cuidado', 'Estilo'], currentTags: ['Cuidado'] });
+  expect(html).toContain('<h1>Una nueva mirada</h1>');
+  expect(html).toMatch(/href="\/blogs\/news\/tagged\/cuidado" aria-current="page"/);
+  expect(html).not.toMatch(/href="\/blogs\/news\/tagged\/estilo" aria-current/);
+});
+
+test('image-present featured and grid articles render complete image Drops and retain loading intent', async () => {
+  const { renderJournal, journalArticle, journalImage } = await import('../helpers/journal-renderer.mjs');
+  const articles = [1, 2, 3].map(id => journalArticle(id, { image: journalImage() }));
+  const html = renderJournal({ articles });
+  const images = [...html.matchAll(/<img\b[^>]*>/g)].map(([image]) => image);
+  expect(images).toHaveLength(3);
+  expect(images[0]).toContain('loading="eager"');
+  for (const image of images.slice(1)) expect(image).toContain('loading="lazy"');
+  for (const image of images) {
+    expect(image).toContain('width="1402"');
+    expect(image).toContain('height="1122"');
+    expect(image).toContain('alt="Ilustración editorial de prueba"');
+    expect(image).toMatch(/src="\/assets\/lemoon-category-opticos-generic-v1\.jpg\?width=\d+"/);
+    expect(image).not.toContain('undefined');
+  }
+  const grid = html.split('<div class="lemoon-journal__grid">')[1];
+  expect(grid).toContain('1402w');
+  expect(grid).toContain('1000w');
+  expect(grid).toContain('360w');
+});

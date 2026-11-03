@@ -1,0 +1,27 @@
+{
+  "data": {
+    "blog": {
+      "id": "gid://shopify/Blog/99066118312",
+      "title": "Una nueva mirada",
+      "handle": "news",
+      "metafields": {
+        "nodes": [
+          {
+            "key": "title_tag",
+            "value": "Una nueva mirada: lentes, estilo y cuidado | Lemoon",
+            "type": "single_line_text_field"
+          },
+          {
+            "key": "description_tag",
+            "value": "Guías para elegir y cuidar tus lentes, ideas de estilo e historias del diseño de armazones. Descubre el blog de Lemoon.",
+            "type": "single_line_text_field"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoxOTIwMTQ0MDE4OTY2MTYsImxhc3RfdmFsdWUiOiIxOTIwMTQ0MDE4OTY2MTYifQ=="
+        }
+      }
+    }
+  }
+}

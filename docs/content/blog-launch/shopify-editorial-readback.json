@@ -1,0 +1,200 @@
+{
+  "verifiedAt": "2026-11-02T22:54:28.500Z",
+  "review": "Independent editorial review: Approved as draft; human review pending.",
+  "checks": [
+    {
+      "id": "gid://shopify/Article/635166687400",
+      "title": "Qué significan los números de tus lentes",
+      "updatedAt": "2026-11-02T22:54:14Z",
+      "bodyEquivalent": true,
+      "summaryMatches": true,
+      "seoMatches": true,
+      "unpublished": true,
+      "identityPreserved": true,
+      "imagePreserved": true,
+      "tagsPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166720168",
+      "title": "Un armazón, tres formas de llevarlo",
+      "updatedAt": "2026-11-02T22:54:15Z",
+      "bodyEquivalent": true,
+      "summaryMatches": true,
+      "seoMatches": true,
+      "unpublished": true,
+      "identityPreserved": true,
+      "imagePreserved": true,
+      "tagsPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166752936",
+      "title": "Cómo guardar tus lentes cuando sales",
+      "updatedAt": "2026-11-02T22:54:16Z",
+      "bodyEquivalent": true,
+      "summaryMatches": true,
+      "seoMatches": true,
+      "unpublished": true,
+      "identityPreserved": true,
+      "imagePreserved": true,
+      "tagsPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166785704",
+      "title": "De dónde vienen los marcos cat-eye",
+      "updatedAt": "2026-11-02T22:54:17Z",
+      "bodyEquivalent": true,
+      "summaryMatches": true,
+      "seoMatches": true,
+      "unpublished": true,
+      "identityPreserved": true,
+      "imagePreserved": true,
+      "tagsPreserved": true
+    }
+  ],
+  "articles": [
+    {
+      "id": "gid://shopify/Article/635166687400",
+      "title": "Qué significan los números de tus lentes",
+      "handle": "que-significan-los-numeros-de-tus-lentes",
+      "body": "<p>En el interior de una patilla puedes encontrar números como <strong>52 □ 18 140</strong>. Esa secuencia describe medidas del armazón en milímetros. <strong>No indica tu graduación ni reemplaza tu receta.</strong></p>\n<h2>Qué significa cada cifra</h2>\n<ul>\n<li>\n<strong>52 mm:</strong> ancho horizontal de uno de los lentes, no del frente completo.</li>\n<li>\n<strong>18 mm:</strong> medida del puente, la zona que une ambos aros sobre la nariz.</li>\n<li>\n<strong>140 mm:</strong> largo de la patilla, desde el frente del marco hacia la oreja.</li>\n</ul>\n<p>El cuadrado separa el ancho del lente y el puente. Las patillas también pueden llevar nombres de modelo y otros códigos: busca las medidas en la ficha del fabricante si no reconoces la secuencia.</p>\n<h2>Cómo usarlas al comparar marcos</h2>\n<p>Si tus lentes actuales te resultan cómodos, anota sus medidas y compáralas con las del modelo que te interesa. Revisa también las fotos del puente y las plaquetas: dos armazones con cifras parecidas pueden sentirse distintos.</p>\n<p>Si tu par actual aprieta o se desliza, sus números sirven para describirlo, pero no son necesariamente las medidas que deberías repetir. Tampoco basta con sumar las cifras para obtener el ancho exterior del marco.</p>\n<p><strong>52 □ 18 140 es solo un ejemplo explicativo, no una talla recomendada.</strong> Si una medida está gastada o falta en la ficha, consulta antes de elegir.</p>\n<h2>Fuente</h2>\n<p><a href=\"https://www.ray-ban.com/japan/size-guide\">Guía de medidas de Ray-Ban</a>, con explicación del ancho de lente, puente y largo de patilla.</p>\n<p><small>Ilustración conceptual creada con IA para Lemoon. No representa un producto del catálogo.</small></p>\n",
+      "summary": "<p>Una guía para entender las medidas del armazón, compararlas y distinguirlas de la graduación de tus cristales.</p>",
+      "isPublished": false,
+      "publishedAt": null,
+      "updatedAt": "2026-11-02T22:54:14Z",
+      "tags": [
+        "Elegir tus lentes"
+      ],
+      "templateSuffix": null,
+      "image": {
+        "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/articles/lemoon-blog-numbers-v1.png?v=1793578538",
+        "altText": "Ilustración conceptual de la patilla de unos lentes junto a una regla."
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Metafield/192014353432744",
+            "namespace": "global",
+            "key": "title_tag",
+            "type": "single_line_text_field",
+            "value": "Qué significan los números de tus lentes | Lemoon"
+          },
+          {
+            "id": "gid://shopify/Metafield/192014353465512",
+            "namespace": "global",
+            "key": "description_tag",
+            "type": "single_line_text_field",
+            "value": "Aprende a leer el ancho de lente, puente y largo de patilla. Usa las medidas del armazón como referencia sin confundirlas con tu receta."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Article/635166720168",
+      "title": "Un armazón, tres formas de llevarlo",
+      "handle": "un-armazon-tres-formas-de-llevarlo",
+      "body": "<p>Un marco oscuro puede acompañar una mañana de trámites, una reunión y una salida a comer. Aquí van tres combinaciones completas para probar con el mismo par. Son propuestas de estilo: puedes adaptarlas con prendas parecidas que ya tengas.</p>\n<h2>1. Jeans y capas para un sábado de paseo</h2>\n<p><strong>Polera blanca lisa, jeans azul recto, zapatillas blancas y sobrecamisa verde oliva.</strong> Completa con un bolso de tela crudo o una mochila negra.</p>\n<p>Deja la sobrecamisa abierta para que se vea la polera. El blanco alrededor del cuello hace visible el borde oscuro de los lentes; el verde agrega color sin repetir el azul del jeans. Es una combinación para caminar por la ciudad, pasar a una librería o almorzar sin cambiarte.</p>\n<h2>2. Camisa y pantalón para una reunión</h2>\n<p><strong>Camisa celeste, pantalón azul marino, mocasines café y cinturón del mismo tono.</strong> Si necesitas otra capa, suma un chaleco fino gris sobre los hombros o bajo una chaqueta.</p>\n<p>Prueba la camisa por dentro del pantalón y dobla las mangas si prefieres un resultado menos formal. El marco oscuro se repite en el pantalón y deja el celeste junto a la cara. Puedes usar esta combinación para una presentación de trabajo o una reunión en la que quieras ir más arreglado.</p>\n<h2>3. Negro y una chaqueta para salir a comer</h2>\n<p><strong>Polera negra, pantalón negro de corte recto, chaqueta beige y botines negros.</strong> Agrega un reloj o unos aros pequeños si sueles usarlos.</p>\n<p>La chaqueta clara separa las capas y contrasta con el borde oscuro de los lentes. Para una cena informal, deja la polera sin estampado y prueba cómo se ve el conjunto con la chaqueta abierta. Así cambias el tono del look sin cambiar de marco.</p>\n<p>Antes de salir, comprueba que los aros, el cuello o los audífonos no empujen las patillas. Quédate con la combinación que te guste y te resulte cómoda durante el plan.</p>\n<p><small>Ilustración conceptual creada con IA para Lemoon. No representa un producto del catálogo.</small></p>\n",
+      "summary": "<p>Tres looks completos con un mismo marco oscuro: jeans para pasear, camisa para una reunión y negro con chaqueta beige para salir.</p>",
+      "isPublished": false,
+      "publishedAt": null,
+      "updatedAt": "2026-11-02T22:54:15Z",
+      "tags": [
+        "Estilo"
+      ],
+      "templateSuffix": null,
+      "image": {
+        "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/articles/lemoon-blog-style-v1.png?v=1793578540",
+        "altText": "Ilustración conceptual de un armazón rodeado de tres combinaciones de ropa."
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Metafield/192014354677928",
+            "namespace": "global",
+            "key": "title_tag",
+            "type": "single_line_text_field",
+            "value": "Un armazón, tres formas de llevarlo | Lemoon"
+          },
+          {
+            "id": "gid://shopify/Metafield/192014354710696",
+            "namespace": "global",
+            "key": "description_tag",
+            "type": "single_line_text_field",
+            "value": "Tres looks con los mismos lentes: polera blanca y jeans, camisa celeste y pantalón marino, o negro con chaqueta beige. Prendas, colores y ocasiones."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Article/635166752936",
+      "title": "Cómo guardar tus lentes cuando sales",
+      "handle": "como-guardar-tus-lentes-cuando-sales",
+      "body": "<p>Si vas a quitarte los lentes durante el día, lleva un estuche rígido. Dejarles un espacio fijo en el bolso evita que terminen sueltos junto a las llaves o bajo un cuaderno.</p>\n<h2>Revisa que el estuche les quede bien</h2>\n<p>El marco debe entrar sin forzarlo y la tapa debe cerrar sin presionar las patillas. Comprueba que no haya monedas, llaves u otros objetos dentro antes de guardarlos.</p>\n<h2>Si no tienes estuche a mano</h2>\n<p>ZEISS recomienda elegir un lugar seguro y dejar los lentes con <strong>los cristales mirando hacia arriba</strong>. Usa esa solución de forma temporal: evita el borde de la mesa y los lugares donde puedan quedar ocultos bajo ropa o papeles.</p>\n<h2>Evita el calor del auto</h2>\n<p>No dejes tus lentes sobre el tablero ni durante largos periodos en un auto al sol. El calor extremo puede afectar el marco, los cristales y sus tratamientos; el estuche no elimina ese riesgo.</p>\n<p>Antes de bajar del auto o levantarte del café, revisa que lleves tus lentes y su estuche. Al llegar a casa, déjalos en un sitio fijo para encontrarlos en la próxima salida.</p>\n<h2>Fuentes</h2>\n<p><a href=\"https://www.zeiss.com/vision-care/en/need-new-lenses/lens-and-screen-cleaning.html\">Consejos de ZEISS sobre limpieza y almacenamiento</a> y <a href=\"https://www.zeiss.com/vision-care/en/eye-health-and-care/health-prevention/how-should-i-take-care-of-my-prescription-spectacle-lenses.html\">cuidado de los cristales ópticos</a>.</p>\n<p><small>Ilustración conceptual creada con IA para Lemoon. No representa un producto del catálogo.</small></p>\n",
+      "summary": "<p>Cómo elegir un estuche que cierre sin presión, dónde dejar los lentes si no lo tienes y por qué evitar el calor del auto.</p>",
+      "isPublished": false,
+      "publishedAt": null,
+      "updatedAt": "2026-11-02T22:54:16Z",
+      "tags": [
+        "Cuidado"
+      ],
+      "templateSuffix": null,
+      "image": {
+        "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/articles/lemoon-blog-care-v1.png?v=1793578543",
+        "altText": "Ilustración conceptual de unos lentes guardados en un estuche rígido junto a un paño."
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Metafield/192014355824808",
+            "namespace": "global",
+            "key": "title_tag",
+            "type": "single_line_text_field",
+            "value": "Cómo guardar tus lentes cuando sales | Lemoon"
+          },
+          {
+            "id": "gid://shopify/Metafield/192014355857576",
+            "namespace": "global",
+            "key": "description_tag",
+            "type": "single_line_text_field",
+            "value": "Revisa el ajuste del estuche, aprende dónde apoyar tus lentes si no lo tienes a mano y evita el calor del auto. Consejos breves para tus salidas."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gid://shopify/Article/635166785704",
+      "title": "De dónde vienen los marcos cat-eye",
+      "handle": "de-donde-vienen-los-marcos-cat-eye",
+      "body": "<p>Los marcos cat-eye se reconocen por sus extremos elevados hacia las patillas. Esa silueta tiene una historia ligada a la artista y diseñadora estadounidense <strong>Altina Schinasi</strong> y sus anteojos Harlequin.</p>\n<h2>De una máscara a un armazón</h2>\n<p>La biografía de Schinasi publicada por Google, con la colaboración de su hijo Terry Sanders, cuenta que la diseñadora buscaba una alternativa a los marcos redondos que veía en una vitrina. Tomó como inspiración las máscaras de Arlequín y comenzó a probar la forma con recortes de papel.</p>\n<p>Los Harlequin ganaron popularidad en Estados Unidos a fines de la década de 1930 y durante los años cuarenta. En 1939, Schinasi recibió el premio de diseño estadounidense de Lord &amp; Taylor por su creación.</p>\n<h2>Una pieza que se puede mirar hoy</h2>\n<p>El Science Museum Group conserva un par de anteojos de sol Harlequin fechado entre <strong>1955 y 1970</strong>: marco plástico café, extremos elevados y lentes verdes.</p>\n<p>En la ficha digital puedes observar el contorno, el grosor del marco y el color de los cristales de esa pieza. Es una referencia concreta de los Harlequin de mediados del siglo XX.</p>\n<h2>Fuentes</h2>\n<p><a href=\"https://doodles.google/doodle/altina-schinasis-116th-birthday/\">Biografía de Altina Schinasi en Google Doodles</a> y <a href=\"https://collection.sciencemuseumgroup.org.uk/objects/co153467\">anteojos Harlequin de la colección del Science Museum Group</a>.</p>\n<p><small>Ilustración conceptual creada con IA para Lemoon. No representa un producto del catálogo.</small></p>\n",
+      "summary": "<p>Los Harlequin de Altina Schinasi, inspirados en máscaras, y una pieza conservada en el Science Museum Group cuentan parte de esta historia.</p>",
+      "isPublished": false,
+      "publishedAt": null,
+      "updatedAt": "2026-11-02T22:54:17Z",
+      "tags": [
+        "Historias"
+      ],
+      "templateSuffix": null,
+      "image": {
+        "url": "https://cdn.shopify.com/s/files/1/0763/3371/1528/articles/lemoon-blog-cat-eye-v1.png?v=1793578547",
+        "altText": "Ilustración conceptual de un armazón cat-eye sobre formas geométricas."
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Metafield/192014357430440",
+            "namespace": "global",
+            "key": "title_tag",
+            "type": "single_line_text_field",
+            "value": "De dónde vienen los marcos cat-eye | Lemoon"
+          },
+          {
+            "id": "gid://shopify/Metafield/192014357463208",
+            "namespace": "global",
+            "key": "description_tag",
+            "type": "single_line_text_field",
+            "value": "Conoce los Harlequin de Altina Schinasi, su inspiración en máscaras de Arlequín y una pieza histórica conservada en el Science Museum Group."
+          }
+        ]
+      }
+    }
+  ]
+}

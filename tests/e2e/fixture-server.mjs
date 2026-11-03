@@ -9,6 +9,7 @@ import { renderDefaultPage } from '../helpers/default-page-renderer.mjs';
 import { renderContractFixture } from '../helpers/consumer-contract-renderer.mjs';
 
 import { renderAdoptionFixture } from '../helpers/component-adoption-renderer.mjs';
+import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
@@ -53,6 +54,15 @@ const server = createServer(async (request, response) => {
       const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'about';
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(renderContractFixture(scenario, new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('runtime') !== '0'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/journal-editorial.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'blog';
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderJournalScenario(scenario));
     } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }

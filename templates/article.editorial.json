@@ -12,7 +12,7 @@
         "title": {
           "type": "title",
           "settings": {
-            "blog_show_date": true,
+            "blog_show_date": false,
             "blog_show_author": true
           }
         },
@@ -34,9 +34,24 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
+    },
+    "article_products": {
+      "type": "lemoon-featured-products",
+      "settings": {
+        "collection": "opticos",
+        "collection_source": "fixed",
+        "randomize": false,
+        "defer_load": false,
+        "show_quick_add": false,
+        "eyebrow": "",
+        "heading": "Encuentra tu próximo par",
+        "link_label": "Ver armazones",
+        "products_to_show": 8
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "article_products"
   ]
 }

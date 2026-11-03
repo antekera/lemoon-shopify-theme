@@ -587,8 +587,10 @@
       "catalogue": "View all frames"
     },
     "lemoon_journal": {
-      "eyebrow": "Journal",
-      "title": "Seeing better is something we learn.",
+      "empty_topic": "There are no stories on this topic yet. Explore the rest of the journal.",
+      "all_stories": "View all stories",
+      "eyebrow": "Blog",
+      "title": "A fresh perspective",
       "description": "Ideas to choose, care for and wear your glasses with more confidence.",
       "tags_label": "Article topics",
       "all": "All",
@@ -605,7 +607,9 @@
       "consent": "I agree to receive Lemoon emails and can unsubscribe at any time."
     },
     "lemoon_article": {
-      "journal": "Journal",
+      "related_title": "Keep discovering",
+      "related_label": "More stories",
+      "journal": "Blog",
       "by": "By",
       "reading_time": {
         "one": "{{ count }} min read",

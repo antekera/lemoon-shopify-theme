@@ -2,17 +2,18 @@
 
 
 {%- liquid
-  assign article_words = article.content | strip_html | strip_newlines | split: ' ' | size
+  assign article_words = article.content | replace: '</p>', ' ' | replace: '</li>', ' ' | replace: '</h2>', ' ' | replace: '</h3>', ' ' | strip_html | split: ' ' | size
   assign reading_minutes = article_words | divided_by: 200.0 | ceil | at_least: 1
 -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .article-template { padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px; color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .article-template > header { max-width: 980px; margin-top: 0; }
-  #shopify-section-{{ section.id }} .article-template__title { font-size: 3.4rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; margin-top: 16px; max-width: 780px; }
+  #shopify-section-{{ section.id }} .article-template__title { font-size: 3.4rem; font-weight: var(--lemoon-weight-light); line-height: 1.15; margin-top: 16px; max-width: 780px; overflow-wrap: anywhere; }
   #shopify-section-{{ section.id }} .lemoon-article__eyebrow { font-size: var(--lemoon-fs-12); text-transform: uppercase; letter-spacing: .06em; }
   #shopify-section-{{ section.id }} .lemoon-article__excerpt { font-size: var(--lemoon-fs-18); color: var(--lemoon-text-secondary); line-height: 1.5; max-width: 700px; }
   #shopify-section-{{ section.id }} .lemoon-article__meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-secondary); margin-top: 20px; }
-  #shopify-section-{{ section.id }} .article-template__hero-container { max-width: 980px; padding: 0 20px; margin-top: 40px; }
+  #shopify-section-{{ section.id }} .lemoon-article__meta > :empty { display: none; }
+  #shopify-section-{{ section.id }} .article-template__hero-container { max-width: 980px; padding: 0 20px; margin: 40px auto 0; }
   #shopify-section-{{ section.id }} .article-template__hero-container .media { border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
   #shopify-section-{{ section.id }} .article-template__content { max-width: 700px; padding: 0 20px; font-size: var(--lemoon-fs-18); line-height: 1.75; margin-top: 48px; overflow-wrap: anywhere; }
   #shopify-section-{{ section.id }} .article-template__content h2 { font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-light); line-height: 1.25; margin-top: 40px; }
@@ -20,6 +21,21 @@
   #shopify-section-{{ section.id }} .article-template__content img { max-width: 100%; height: auto; border-radius: var(--lemoon-radius-md); }
   #shopify-section-{{ section.id }} .article-template__content table { display: block; overflow-x: auto; max-width: 100%; }
   #shopify-section-{{ section.id }} .article-template__content iframe { max-width: 100%; }
+  #shopify-section-{{ section.id }} .article-template__content iframe[src*="youtube.com/"],
+  #shopify-section-{{ section.id }} .article-template__content iframe[src*="youtube-nocookie.com/"],
+  #shopify-section-{{ section.id }} .article-template__content iframe[src*="player.vimeo.com/"] { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; }
+  #shopify-section-{{ section.id }} .article-template__content video { max-width: 100%; height: auto; }
+  #shopify-section-{{ section.id }} .article-template__content figure { margin: 32px 0; }
+  #shopify-section-{{ section.id }} .article-template__content figcaption { margin-top: 8px; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} .lemoon-article__related { max-width: 980px; margin: 48px auto 0; padding: 0 20px; }
+  #shopify-section-{{ section.id }} .lemoon-article__related-list { display: grid; gap: 24px; padding: 0; list-style: none; }
+  #shopify-section-{{ section.id }} .lemoon-article__related-story { min-width: 0; padding: 20px; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-article__related-story img { display: block; width: 100%; height: auto; aspect-ratio: 1.9; object-fit: cover; border-radius: var(--lemoon-radius-md); }
+  #shopify-section-{{ section.id }} .lemoon-article__related-story h3 { font-size: var(--lemoon-fs-20); line-height: 1.4; overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .lemoon-article__related-story p { color: var(--lemoon-text-secondary); overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .lemoon-article__eyebrow { overflow-wrap: anywhere; line-height: 1.5; }
+  #shopify-section-{{ section.id }} .lemoon-article__eyebrow a { color: inherit; text-decoration: none; }
+  #shopify-section-{{ section.id }} .lemoon-article__eyebrow a:hover { text-decoration: underline; }
   #shopify-section-{{ section.id }} .article-template__social-sharing { max-width: 700px; padding: 0 20px; }
   #shopify-section-{{ section.id }} .lemoon-article__explore { max-width: 660px; margin: 48px auto 0; padding: 32px 20px 0; border-top: 1px solid var(--lemoon-border-default); }
   #shopify-section-{{ section.id }} .lemoon-article__explore h2 { font-size: var(--lemoon-fs-20); }
@@ -31,6 +47,7 @@
   @media screen and (min-width: 750px) {
     #shopify-section-{{ section.id }} .article-template { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
     #shopify-section-{{ section.id }} .article-template__title { font-size: 4.5rem; }
+    #shopify-section-{{ section.id }} .lemoon-article__related-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 {%- endstyle -%}
 
@@ -63,7 +80,7 @@
                   {% if article.image.width >= 3000 %}{{ article.image | image_url: width: 3000 }} 3000w,{% endif %}
                   {{ article.image | image_url }} {{ article.image.width }}w
                 "
-                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                sizes="(min-width: 980px) 940px, calc(100vw - 40px)"
                 src="{{ article.image | image_url: width: 1100 }}"
                 loading="eager"
                 fetchpriority="high"
@@ -112,6 +129,45 @@
         </div>
     {%- endcase -%}
   {%- endfor -%}
+
+  {%- liquid
+    assign related_count = 0
+    assign related_ids = '|'
+  -%}
+  {%- capture related_stories -%}
+    {%- for pass in (1..2) -%}
+      {%- for related_article in blog.articles limit: 50 -%}
+        {%- assign related_key = related_article.id | prepend: '|' | append: '|' -%}
+        {%- if related_article.id == article.id or related_ids contains related_key -%}{%- continue -%}{%- endif -%}
+        {%- assign shares_topic = false -%}
+        {%- for tag in article.tags -%}
+          {%- if related_article.tags contains tag -%}{%- assign shares_topic = true -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if pass == 1 and shares_topic == false -%}{%- continue -%}{%- endif -%}
+        <li class="lemoon-article__related-story">
+          {%- if related_article.image != blank -%}
+            {{ related_article.image | image_url: width: 700 | image_tag: widths: '350, 550, 700', sizes: '(min-width: 980px) 260px, (min-width: 750px) 28vw, calc(100vw - 80px)', loading: 'lazy' }}
+          {%- endif -%}
+          <h3><a href="{{ related_article.url }}">{{ related_article.title | escape }}</a></h3>
+          {%- if related_article.excerpt != blank -%}<p>{{ related_article.excerpt | strip_html | truncatewords: 24 | escape }}</p>{%- endif -%}
+        </li>
+        {%- liquid
+          assign related_ids = related_ids | append: related_article.id | append: '|'
+          assign related_count = related_count | plus: 1
+          if related_count == 3
+            break
+          endif
+        -%}
+      {%- endfor -%}
+      {%- if related_count == 3 -%}{%- break -%}{%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {%- if related_count > 0 -%}
+    <aside class="lemoon-article__related" aria-labelledby="Article-related-{{ section.id }}">
+      <h2 id="Article-related-{{ section.id }}">{{ 'sections.lemoon_article.related_title' | t }}</h2>
+      <ul class="lemoon-article__related-list">{{ related_stories }}</ul>
+    </aside>
+  {%- endif -%}
 
   <aside class="lemoon-article__explore" aria-labelledby="Article-explore-{{ section.id }}">
     <h2 id="Article-explore-{{ section.id }}">{{ 'sections.lemoon_article.explore' | t }}</h2>

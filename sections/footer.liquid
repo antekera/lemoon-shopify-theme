@@ -3,6 +3,9 @@
 {%- else -%}
   {{ 'section-lemoon-footer.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
+{%- if request.page_type == 'blog' or request.page_type == 'article' -%}
+  {{ 'section-lemoon-editorial-newsletter.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
 <script src="{{ 'section-lemoon-footer.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'lemoon-cookie-preferences.js' | asset_url }}" type="module"></script>
 
@@ -13,6 +16,20 @@
   if request.page_type == 'page' and page.handle == 'nosotros'
     assign show_newsletter = false
   endif
+  assign newsletter_editorial = false
+  assign newsletter_heading = section.settings.newsletter_heading
+  assign newsletter_placeholder = section.settings.newsletter_placeholder
+  assign newsletter_button = section.settings.newsletter_button
+  assign newsletter_success = section.settings.newsletter_success
+  assign newsletter_label_class = 'visually-hidden'
+  if request.page_type == 'blog' or request.page_type == 'article'
+    assign newsletter_editorial = true
+    assign newsletter_heading = 'sections.lemoon_journal.newsletter_title' | t
+    assign newsletter_placeholder = 'newsletter.label' | t
+    assign newsletter_button = 'sections.lemoon_journal.subscribe' | t
+    assign newsletter_success = 'newsletter.success' | t
+    assign newsletter_label_class = 'lemoon-newsletter__label'
+  endif
   assign footer_privacy_page = pages['politica-de-privacidad']
   assign footer_privacy_url = shop.privacy_policy.url
   if footer_privacy_page != blank and footer_privacy_page.published_at != blank and footer_privacy_page.template_suffix == 'politica-de-privacidad'
@@ -21,11 +38,13 @@
 -%}
 
 {%- if show_newsletter -%}
-  <section class="lemoon-newsletter" aria-labelledby="LemoonNewsletterHeading-{{ section.id }}">
+  <section class="lemoon-newsletter{% if newsletter_editorial %} lemoon-newsletter--editorial{% endif %}" aria-labelledby="LemoonNewsletterHeading-{{ section.id }}">
     <div class="lemoon-footer__container lemoon-newsletter__inner">
       <div class="lemoon-newsletter__copy">
-        <h2 id="LemoonNewsletterHeading-{{ section.id }}">{{ section.settings.newsletter_heading | escape }}</h2>
-        {%- if section.settings.newsletter_text != blank -%}
+        <h2 id="LemoonNewsletterHeading-{{ section.id }}">{{ newsletter_heading | escape }}</h2>
+        {%- if newsletter_editorial -%}
+          <p>{{ 'sections.lemoon_journal.newsletter_description' | t }}</p>
+        {%- elsif section.settings.newsletter_text != blank -%}
           <p><span class="lemoon-newsletter__text--desktop">{{ section.settings.newsletter_text | escape }}</span><span class="lemoon-newsletter__text--mobile">{{ section.settings.newsletter_text_mobile | escape }}</span></p>
         {%- endif -%}
       </div>
@@ -45,14 +64,20 @@
               assign newsletter_description = newsletter_success_id
             endif
           -%}
-          {% render 'lemoon-ui-field', id: newsletter_email_id, name: 'contact[email]', type: 'email', value: form.email, label: section.settings.newsletter_placeholder, placeholder: section.settings.newsletter_placeholder, control_class: 'lemoon-newsletter__input', label_class: 'visually-hidden', unwrapped: true, label_before: true, autocomplete: 'email', autocorrect: 'off', autocapitalize: 'off', aria_required: true, required: true, invalid: newsletter_invalid, describedby: newsletter_description %}
-          {% render 'lemoon-ui-action', type: 'submit', name: 'commit', label: section.settings.newsletter_button, style_family: 'local', class: 'lemoon-newsletter__button' %}
+          {% render 'lemoon-ui-field', id: newsletter_email_id, name: 'contact[email]', type: 'email', value: form.email, label: newsletter_placeholder, placeholder: newsletter_placeholder, control_class: 'lemoon-newsletter__input', label_class: newsletter_label_class, unwrapped: true, label_before: true, autocomplete: 'email', autocorrect: 'off', autocapitalize: 'off', aria_required: true, required: true, invalid: newsletter_invalid, describedby: newsletter_description %}
+          {% render 'lemoon-ui-action', type: 'submit', name: 'commit', label: newsletter_button, style_family: 'local', class: 'lemoon-newsletter__button' %}
+          {%- if newsletter_editorial -%}
+            <label class="lemoon-newsletter__consent" for="{{ newsletter_form_id }}-consent">
+              <input id="{{ newsletter_form_id }}-consent" type="checkbox" name="contact[accepts_marketing]" value="true" required>
+              <span>{{ 'sections.lemoon_journal.consent' | t }}</span>
+            </label>
+          {%- endif -%}
           {%- if form.errors -%}
             {%- capture newsletter_error -%}{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}{%- endcapture -%}
             {% render 'lemoon-ui-message', id: newsletter_error_id, class: 'lemoon-newsletter__message', role: 'alert', text: newsletter_error %}
           {%- endif -%}
           {%- if form.posted_successfully? -%}
-            {% render 'lemoon-ui-message', id: newsletter_success_id, class: 'lemoon-newsletter__message', tabindex: '-1', text: section.settings.newsletter_success %}
+            {% render 'lemoon-ui-message', id: newsletter_success_id, class: 'lemoon-newsletter__message', tabindex: '-1', text: newsletter_success %}
           {%- endif -%}
         {%- endform -%}
       </div>

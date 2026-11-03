@@ -1,0 +1,104 @@
+{
+  "blog_title": "Una nueva mirada",
+  "blog_handle": "news",
+  "language": "es-CL",
+  "status": "published",
+  "articles": [
+    {
+      "handle": "que-significan-los-numeros-de-tus-lentes",
+      "title": "Qué significan los números de tus lentes",
+      "author": "Lemoon",
+      "tags": [
+        "Elegir tus lentes"
+      ],
+      "category": "Elegir tus lentes",
+      "excerpt": "Una guía para entender las medidas del armazón, compararlas y distinguirlas de la graduación de tus cristales.",
+      "summary_html": "<p>Una guía para entender las medidas del armazón, compararlas y distinguirlas de la graduación de tus cristales.</p>",
+      "seo_title": "Qué significan los números de tus lentes | Lemoon",
+      "seo_description": "Aprende a leer el ancho de lente, puente y largo de patilla. Usa las medidas del armazón como referencia sin confundirlas con tu receta.",
+      "body_file": "docs/content/blog-launch/que-significan-los-numeros-de-tus-lentes.html",
+      "is_published": true,
+      "image_brief": "Ilustración conceptual de una patilla genérica junto a una regla sin cifras; no diagrama técnico ni producto del catálogo.",
+      "image_alt": "Ilustración conceptual de la patilla de unos lentes junto a una regla.",
+      "image_caption": "",
+      "social": {
+        "format": "Carrusel",
+        "hook": "¿52, 18, 140? Tus lentes tienen una pista para elegir el próximo marco.",
+        "caption": "Mira el interior de una patilla. Esos números pueden describir el tamaño del armazón: ancho del lente, puente y largo de patilla. No son tu graduación. Guarda esta guía para comparar con calma y lee el artículo en el blog de Lemoon."
+      },
+      "word_count": 231
+    },
+    {
+      "handle": "un-armazon-tres-formas-de-llevarlo",
+      "title": "Un armazón, tres formas de llevarlo",
+      "author": "Lemoon",
+      "tags": [
+        "Estilo"
+      ],
+      "category": "Estilo",
+      "excerpt": "Tres looks completos con un mismo marco oscuro: jeans para pasear, camisa para una reunión y negro con chaqueta beige para salir.",
+      "summary_html": "<p>Tres looks completos con un mismo marco oscuro: jeans para pasear, camisa para una reunión y negro con chaqueta beige para salir.</p>",
+      "seo_title": "Un armazón, tres formas de llevarlo | Lemoon",
+      "seo_description": "Tres looks con los mismos lentes: polera blanca y jeans, camisa celeste y pantalón marino, o negro con chaqueta beige. Prendas, colores y ocasiones.",
+      "body_file": "docs/content/blog-launch/un-armazon-tres-formas-de-llevarlo.html",
+      "is_published": true,
+      "image_brief": "Ilustración conceptual de un único marco genérico rodeado de prendas; no fotografía de cliente ni tríptico.",
+      "image_alt": "Ilustración conceptual de un armazón rodeado de tres combinaciones de ropa.",
+      "image_caption": "",
+      "social": {
+        "format": "Reel",
+        "hook": "Los mismos lentes. Tres planes distintos.",
+        "caption": "Un marco oscuro, tres planes: polera blanca y jeans para pasear; camisa celeste y pantalón marino para una reunión; negro con chaqueta beige para salir. Mira los looks completos en el blog de Lemoon."
+      },
+      "word_count": 313
+    },
+    {
+      "handle": "como-guardar-tus-lentes-cuando-sales",
+      "title": "Cómo guardar tus lentes cuando sales",
+      "author": "Lemoon",
+      "tags": [
+        "Cuidado"
+      ],
+      "category": "Cuidado",
+      "excerpt": "Cómo elegir un estuche que cierre sin presión, dónde dejar los lentes si no lo tienes y por qué evitar el calor del auto.",
+      "summary_html": "<p>Cómo elegir un estuche que cierre sin presión, dónde dejar los lentes si no lo tienes y por qué evitar el calor del auto.</p>",
+      "seo_title": "Cómo guardar tus lentes cuando sales | Lemoon",
+      "seo_description": "Revisa el ajuste del estuche, aprende dónde apoyar tus lentes si no lo tienes a mano y evita el calor del auto. Consejos breves para tus salidas.",
+      "body_file": "docs/content/blog-launch/como-guardar-tus-lentes-cuando-sales.html",
+      "is_published": true,
+      "image_brief": "Ilustración conceptual de un estuche con lentes genéricos junto a un paño; no producto del catálogo.",
+      "image_alt": "Ilustración conceptual de unos lentes guardados en un estuche rígido junto a un paño.",
+      "image_caption": "",
+      "social": {
+        "format": "Carrusel",
+        "hook": "Si no están puestos, ¿sabes dónde están tus lentes?",
+        "caption": "¿Te quitas los lentes al salir? Llévalos en un estuche que cierre sin presionarlos. Si no lo tienes, elige un lugar seguro con los cristales hacia arriba. Evita el tablero y el auto al sol. Más en el blog de Lemoon."
+      },
+      "word_count": 199
+    },
+    {
+      "handle": "de-donde-vienen-los-marcos-cat-eye",
+      "title": "De dónde vienen los marcos cat-eye",
+      "author": "Lemoon",
+      "tags": [
+        "Historias"
+      ],
+      "category": "Historias",
+      "excerpt": "Los Harlequin de Altina Schinasi, inspirados en máscaras, y una pieza conservada en el Science Museum Group cuentan parte de esta historia.",
+      "summary_html": "<p>Los Harlequin de Altina Schinasi, inspirados en máscaras, y una pieza conservada en el Science Museum Group cuentan parte de esta historia.</p>",
+      "seo_title": "De dónde vienen los marcos cat-eye | Lemoon",
+      "seo_description": "Conoce los Harlequin de Altina Schinasi, su inspiración en máscaras de Arlequín y una pieza histórica conservada en el Science Museum Group.",
+      "body_file": "docs/content/blog-launch/de-donde-vienen-los-marcos-cat-eye.html",
+      "is_published": true,
+      "image_brief": "Ilustración conceptual de un marco cat-eye genérico sobre formas geométricas; no fotografía de una pieza histórica.",
+      "image_alt": "Ilustración conceptual de un armazón cat-eye sobre formas geométricas.",
+      "image_caption": "",
+      "social": {
+        "format": "Carrusel",
+        "hook": "Ese pequeño gesto hacia arriba tiene historia.",
+        "caption": "Antes de llamarlos cat-eye, estaban los Harlequin de Altina Schinasi. Su inspiración en máscaras de Arlequín y una pieza del Science Museum Group cuentan parte de la historia. Léela en el blog de Lemoon."
+      },
+      "word_count": 204
+    }
+  ]
+}

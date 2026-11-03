@@ -599,8 +599,10 @@
       "catalogue": "Ver todos los armazones"
     },
     "lemoon_journal": {
+      "empty_topic": "Todavía no hay publicaciones en este tema. Explora las demás historias.",
+      "all_stories": "Ver todas las publicaciones",
       "eyebrow": "Blog",
-      "title": "Ver mejor también se aprende.",
+      "title": "Una nueva mirada",
       "description": "Ideas para elegir, cuidar y usar tus lentes con más confianza.",
       "tags_label": "Temas de artículos",
       "all": "Todos",
@@ -617,6 +619,8 @@
       "consent": "Acepto recibir correos de Lemoon y puedo cancelar mi suscripción cuando quiera."
     },
     "lemoon_article": {
+      "related_title": "Sigue descubriendo",
+      "related_label": "Más publicaciones",
       "journal": "Blog",
       "by": "Por",
       "reading_time": {

@@ -55,3 +55,41 @@ test('article templates select semantic block order and localized schema/padding
     }
   }
 });
+
+test('related articles prioritize shared topics and fill to three without current or duplicate IDs', async () => {
+  const { renderJournalArticle, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const current = journalArticle(12, { tags: ['Cuidado'] });
+  const articles = [current, journalArticle(112, { tags: ['Estilo'] }), journalArticle(23, { tags: ['Cuidado'], title: 'Relacionado <&"' }), journalArticle(24, { tags: ['Cuidado'] }), journalArticle(25, { tags: ['Historias'] })];
+  const html = renderJournalArticle({ article: current, articles });
+  const related = html.split('<ul class="lemoon-article__related-list">')[1].split('</ul>')[0];
+  expect(related.match(/<li /g)).toHaveLength(3);
+  expect([...related.matchAll(/href="([^"]+)"/g)].map(([, url]) => url)).toEqual(['/blogs/news/articulo-23', '/blogs/news/articulo-24', '/blogs/news/articulo-112']);
+  expect(related).toContain('Relacionado &lt;&amp;&#34;');
+  expect(related).not.toContain('/blogs/news/articulo-12"');
+});
+
+test('related articles hide for a sole current article and render without a required image', async () => {
+  const { renderJournalArticle, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const article = journalArticle(1, { tags: [] });
+  expect(renderJournalArticle({ article, articles: [article] })).not.toContain('<aside class="lemoon-article__related"');
+  const html = renderJournalArticle({ article, articles: [article, journalArticle(2)] });
+  expect(html).toContain('href="/blogs/news/articulo-2"');
+  expect(html).not.toContain('<img');
+});
+
+test('article CMS body preserves semantic rich content while title and excerpt remain text', async () => {
+  const { renderJournalArticle, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const body = '<h2>Cuidados</h2><ul><li>Guarda tus lentes</li></ul><figure><img src="/assets/lemoon-category-opticos-generic-v1.jpg" alt="Estuche"><figcaption>Ilustración original.</figcaption></figure><iframe title="Demostración" src="https://www.youtube-nocookie.com/embed/example" width="560" height="315" loading="lazy"></iframe>';
+  const html = renderJournalArticle({ article: journalArticle(1, { title: 'Título <&"', excerpt: '<p>Resumen <strong>editable</strong></p>', content: body }) });
+  expect(html).toContain('Título &lt;&amp;&#34;');
+  expect(html).toContain('Resumen editable');
+  expect(html).toContain(body);
+  expect(html).not.toContain('autoplay');
+});
+
+test('reading time counts words separated by adjacent HTML paragraphs and has a minimum of one minute', async () => {
+  const { renderJournalArticle, journalArticle } = await import('../helpers/journal-renderer.mjs');
+  const html = renderJournalArticle({ article: journalArticle(1, { content: '<p>palabra</p>'.repeat(201) }) });
+  expect(html).toContain('2 min de lectura');
+  expect(renderJournalArticle({ article: journalArticle(1, { content: '' }) })).toContain('1 min de lectura');
+});

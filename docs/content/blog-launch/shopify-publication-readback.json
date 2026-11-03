@@ -1,0 +1,34 @@
+{
+  "verifiedAt": "2026-11-02T23:02:26.956Z",
+  "userAuthorization": "Publicar las cuatro notas; solicitud expresa del usuario el 02-11-2026.",
+  "checks": [
+    {
+      "id": "gid://shopify/Article/635166687400",
+      "title": "Qué significan los números de tus lentes",
+      "published": true,
+      "publishedAt": "2026-11-02T23:00:27Z",
+      "contentPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166720168",
+      "title": "Un armazón, tres formas de llevarlo",
+      "published": true,
+      "publishedAt": "2026-11-02T23:00:28Z",
+      "contentPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166752936",
+      "title": "Cómo guardar tus lentes cuando sales",
+      "published": true,
+      "publishedAt": "2026-11-02T23:00:29Z",
+      "contentPreserved": true
+    },
+    {
+      "id": "gid://shopify/Article/635166785704",
+      "title": "De dónde vienen los marcos cat-eye",
+      "published": true,
+      "publishedAt": "2026-11-02T23:00:30Z",
+      "contentPreserved": true
+    }
+  ]
+}

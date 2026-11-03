@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 514,
-    "mapped_paths": 482,
+    "total_tracked_paths": 515,
+    "mapped_paths": 483,
     "excluded_paths": 32,
     "by_root": {
-      "assets": 259,
+      "assets": 260,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -36,7 +36,7 @@
       "templates": 39
     },
     "mapped_by_extension": {
-      ".css": 81,
+      ".css": 82,
       ".js": 53,
       ".json": 90,
       ".liquid": 164,
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 514,
-    "explicit_new_paths": 0
+    "total_source_paths": 515,
+    "explicit_new_paths": 1
   },
   "components": [
     {
@@ -992,7 +992,8 @@
         "assets/component-list-payment.css",
         "assets/component-newsletter.css",
         "assets/newsletter-section.css",
-        "assets/payment-webpay.svg"
+        "assets/payment-webpay.svg",
+        "assets/section-lemoon-editorial-newsletter.css"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
@@ -1012,7 +1013,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. Newsletter omitido solo en request.page_type page con page.handle nosotros; conserva newsletter_enable para el resto.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. Newsletter omitida en page.nosotros; en blog/article el mismo formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado; otras páginas conservan newsletter cálida.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1164,6 +1165,8 @@
         "sections/main-product.liquid",
         "sections/main-search.liquid",
         "sections/related-products.liquid",
+        "templates/article.editorial.json",
+        "templates/article.json",
         "templates/cart.json",
         "templates/index.json",
         "templates/list-collections.json",
@@ -1181,7 +1184,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-featured-products.liquid",
-        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño. page.nosotros reutiliza el carrusel lemoon-featured-products con colección all, ocho productos aleatorizados y quick-add desactivado.",
+        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño. page.nosotros reutiliza el carrusel con colección all, ocho productos aleatorizados y quick-add desactivado. Los templates de artículo incorporan el carrusel con colección fija editable; no se infiere relación automática entre producto y contenido editorial.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -1542,7 +1545,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-article.liquid",
-        "scope": "Artículo/blog y comentarios nativos; article-card/share-button ya existen.",
+        "scope": "Blog con título CMS y fallback localizado, destacado con categoría/extracto, grid sin duplicado y sin encabezado vacío para un único destacado; filtro vacío recuperable al blog. Artículo/blog y comentarios nativos; article-card/share-button ya existen. Detalle con hasta tres lecturas CMS: prioriza etiquetas compartidas, completa con últimas entradas públicas entre 50 candidatas, excluye actual/duplicados y omite bloque vacío; embeds YouTube/Vimeo responsive 16:9 y figuras con créditos. Los templates blog predeterminado/editorial desactivan el newsletter interno (show_newsletter=false), conservando el footer global; etiqueta visible y enlace del artículo usan Blog. Fechas visibles desactivadas en ambos templates de blog/artículo; las fechas CMS/SEO permanecen. Ambos templates de artículo añaden lemoon-featured-products con colección editable opticos, ocho productos y controles existentes.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       }
     },
@@ -3572,6 +3575,14 @@
         "LM-HERO"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/section-lemoon-editorial-newsletter.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-FOOTER"
+      ],
+      "inspection_method": "targeted editorial newsletter CSS review and local browser verification"
     },
     {
       "path": "assets/section-lemoon-footer.css",
@@ -5886,9 +5897,10 @@
       "snippets/lemoon-dawn-slider-controls.liquid",
       "templates/page.politica-de-privacidad.json",
       "assets/lemoon-secure-ssl.png",
-      "assets/payment-webpay.svg"
+      "assets/payment-webpay.svg",
+      "assets/section-lemoon-editorial-newsletter.css"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 514 delivered source paths: the 511-path implementation snapshot, Spanish privacy template and two footer image assets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 515 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets and editorial newsletter CSS. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

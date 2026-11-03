@@ -1,0 +1,134 @@
+/* Blog and article share the native footer form in the approved journal card. */
+.lemoon-newsletter--editorial {
+  padding: 0 0 var(--lemoon-space-12);
+  background: var(--lemoon-surface-page);
+  color: var(--lemoon-text-inverse);
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--lemoon-space-6);
+  width: min(100% - 3.2rem, 128rem);
+  max-width: 128rem;
+  margin-inline: auto;
+  padding: 2.8rem;
+  border-radius: var(--lemoon-radius-lg);
+  background: var(--lemoon-surface-inverse);
+  color: var(--lemoon-text-inverse);
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__copy h2 {
+  color: inherit;
+  font-family: var(--lemoon-font-heading);
+  font-size: var(--lemoon-fs-28);
+  font-weight: var(--lemoon-weight-light);
+  line-height: 1.25;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__copy p,
+.lemoon-newsletter--editorial .lemoon-newsletter__message {
+  color: inherit;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__form-wrap,
+.lemoon-newsletter--editorial .lemoon-newsletter__copy {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__form {
+  grid-template-columns: minmax(0, 1fr);
+  position: relative;
+}
+
+/* Shopify may insert a zero-height CAPTCHA node on first focus. */
+.lemoon-newsletter--editorial .lemoon-newsletter__form > .h-captcha {
+  position: absolute;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__label {
+  grid-column: 1 / -1;
+  font-size: var(--lemoon-fs-14);
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__input,
+.lemoon-newsletter--editorial .lemoon-newsletter__button {
+  min-height: var(--lemoon-size-control);
+  border-radius: var(--lemoon-radius-button);
+}
+
+.lemoon-newsletter--editorial .lemoon-ui-field .lemoon-newsletter__input {
+  background: var(--lemoon-surface-page);
+  color: var(--lemoon-text-primary);
+  border: 2px solid transparent;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__button {
+  background: var(--lemoon-action-accent);
+  color: var(--lemoon-text-brand);
+  white-space: normal;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__button:hover {
+  background: var(--lemoon-action-accent-hover);
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__consent {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: var(--lemoon-fs-14);
+  line-height: 1.5;
+}
+
+.lemoon-newsletter--editorial .lemoon-newsletter__consent input {
+  flex-shrink: 0;
+  margin-top: .4rem;
+  accent-color: var(--lemoon-action-accent);
+}
+
+.lemoon-newsletter--editorial :focus-visible {
+  outline: 2px solid var(--lemoon-action-accent);
+  outline-offset: 4px;
+}
+
+.lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus,
+.lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus-visible {
+  border-color: var(--lemoon-action-accent);
+  outline: none;
+  box-shadow: none;
+}
+
+@media screen and (min-width: 750px) {
+  .lemoon-newsletter--editorial .lemoon-newsletter__inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    width: min(100% - 4.8rem, 128rem);
+  }
+
+  .lemoon-newsletter--editorial .lemoon-newsletter__form {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .lemoon-newsletter--editorial .lemoon-newsletter__inner {
+    width: min(100% - 8.4rem, 128rem);
+  }
+}
+
+@media (forced-colors: active) {
+  .lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control {
+    border-color: CanvasText;
+  }
+  .lemoon-newsletter--editorial :focus-visible {
+    outline-color: Highlight;
+  }
+
+  .lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus,
+  .lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus-visible {
+    border-color: Highlight;
+  }
+}
