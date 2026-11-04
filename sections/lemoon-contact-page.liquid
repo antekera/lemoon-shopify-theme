@@ -1,4 +1,12 @@
 {%- assign contact_form_id = 'LemoonContact-' | append: section.id -%}
+{%- assign contact_policy = nil -%}
+{%- for policy in shop.policies -%}
+  {%- assign policy_path = policy.url | split: '?' | first | split: '/policies/' -%}
+  {%- if policy_path.size > 1 and policy_path.last == 'contact-information' -%}
+    {%- assign contact_policy = policy -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .lemoon-contact {
     padding-top: {{ section.settings.padding_top }}px;
@@ -163,14 +171,11 @@
       {% render 'lemoon-ui-heading', text: ui_heading_text, level: 1, class: 'lemoon-contact__title' %}
       <p class="lemoon-contact__intro">{{ 'sections.lemoon_contact_page.intro' | t }}</p>
       {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
-      {%- if section.settings.contact_email != blank or section.settings.whatsapp_url != blank or section.settings.contact_hours != blank -%}
+      {%- if contact_policy.body != blank -%}
+        <div class="lemoon-contact__channels rte">{{ contact_policy.body }}</div>
+      {%- endif -%}
+      {%- if section.settings.whatsapp_url != blank or section.settings.contact_hours != blank -%}
       <dl class="lemoon-contact__channels">
-        {%- if section.settings.contact_email != blank -%}
-          <div>
-            <dt>{{ 'sections.lemoon_contact_page.email_channel' | t }}</dt>
-            <dd><a href="mailto:{{ section.settings.contact_email | strip | escape }}">{{ section.settings.contact_email | escape }}</a></dd>
-          </div>
-        {%- endif -%}
         {%- if section.settings.whatsapp_url != blank -%}
           <div>
             <dt>{{ 'sections.lemoon_contact_page.whatsapp_channel' | t }}</dt>
@@ -276,12 +281,6 @@
       "id": "demo_content",
       "label": "t:sections.lemoon_demo.content_label",
       "info": "t:sections.lemoon_demo.content_info"
-    },
-    {
-      "type": "text",
-      "id": "contact_email",
-      "label": "t:sections.lemoon_contact_page.settings.contact_email.label",
-      "info": "t:sections.lemoon_contact_page.settings.contact_email.info"
     },
     {
       "type": "url",
