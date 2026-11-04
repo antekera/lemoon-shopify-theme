@@ -169,3 +169,10 @@ test('shared legal template retains Spanish privacy routing', () => {
  expect(canonicalLinks(renderHead(sharedPage))).toEqual({ canonical: expected, openGraph: expected });
  expect(renderFooter(sharedPage)).toContain(`href="${spanishPath}"`);
 });
+
+
+test('native policy help contains contact but no cookie settings control', () => {
+ const helper = readFileSync(new URL('../../snippets/lemoon-native-policy-help.liquid', import.meta.url), 'utf8');
+ expect(helper).toContain('contact_url');
+ expect(helper).not.toContain('data-cookie-preferences');
+});

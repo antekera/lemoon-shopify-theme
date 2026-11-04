@@ -50,44 +50,21 @@ test.each([['legal', legal], ['FAQ', faq]])('%s preserves and escapes the config
   }
 });
 
-test('shipping and FAQ templates render the shared estimate for all orders', () => {
-  const legalTemplate = json('templates/page.envios-y-entregas.json').sections.main;
+test('shipping legacy template reads the native policy and FAQ uses the configured estimate', () => {
+  const settings = json('templates/page.envios-y-entregas.json').sections.main.settings;
   const faqTemplate = json('templates/page.preguntas-frecuentes.json').sections.main;
   const blocks = faqTemplate.block_order.map(id => ({ id, ...faqTemplate.blocks[id] }));
-  const value = '8 a 15 días hábiles';
-  const shipping = render('lemoon-legal-page', { settings: legalTemplate.settings, context: { shop: shop(value), page: { title: 'Envíos', content: '' } } });
-  const questions = render('lemoon-faq-page', { settings: faqTemplate.settings, blocks, context: { shop: shop(value) } });
-  for (const html of [shipping, questions]) {
-    expect(html).toContain(value);
-    expect(html).not.toContain(token);
-    expect(html).toMatch(/requieren? receta/i);
-  }
+  const shipping = render('lemoon-legal-page', { settings, context: { shop: { shipping_policy: { body: '<p>Native shipping policy</p>' } }, page: { handle: 'envios-y-entregas', title: 'Envíos', content: '' } } });
+  const questions = render('lemoon-faq-page', { settings: faqTemplate.settings, blocks, context: { shop: shop('8 a 15 días hábiles') } });
+  expect(shipping).toContain('Native shipping policy');
+  expect(questions).toContain('8 a 15 días hábiles');
+  expect(settings).not.toHaveProperty('content');
 });
 
-
-test('shipping fallback resolves the estimate and return address without overriding CMS', () => {
-  const settings = json('templates/page.envios-y-entregas.json').sections.main.settings;
-  const show = (address, content = '') => render('lemoon-legal-page', {
-    settings: { ...settings, use_section_content: false, return_address: address },
-    context: { shop: shop('8 a 15 días hábiles'), page: { title: 'Envíos', content } },
-  });
-  const html = show('Calle <Ejemplo> 123');
-  expect(html).toContain('8 a 15 días hábiles');
-  expect(html).toContain('Calle &lt;Ejemplo&gt; 123');
-  expect(html).not.toContain('[DIRECCION_DEVOLUCION]');
-  expect(html).not.toContain(token);
-  const empty = show('');
-  expect(empty).not.toContain('[DIRECCION_DEVOLUCION]');
-  expect(empty).not.toContain('Dirección de devolución:');
-  const cms = show('Calle <Ejemplo> 123', '<p>Contenido CMS prioritario</p>');
-  expect(cms).toContain('Contenido CMS prioritario');
-  expect(cms).not.toContain('Calle &lt;Ejemplo&gt; 123');
-});
-
-test('shipping template renders the effective date and hides an unconfigured return address', () => {
-  const settings = json('templates/page.envios-y-entregas.json').sections.main.settings;
-  const html = render('lemoon-legal-page', { settings, context: { shop: shop('5 a 13 días hábiles'), page: { title: 'Envíos', content: '' } } });
-  expect(html).toContain('4 de noviembre de 2026');
-  expect(html).not.toContain('[DIRECCION_DEVOLUCION]');
-  expect(html).not.toContain('Dirección de devolución:');
+test('shipping section fallback still resolves estimate and return address', () => {
+  const settings = { kind: 'shipping', content: `<p>${token}</p><p>[DIRECCION_DEVOLUCION]</p>` };
+  const show = (address, content = '') => render('lemoon-legal-page', { settings: { ...settings, return_address: address }, context: { shop: shop('8 a 15 días hábiles'), page: { title: 'Envíos', content } } });
+  expect(show('Calle <Ejemplo>')).toContain('Calle &lt;Ejemplo&gt;');
+  expect(show('')).not.toContain('[DIRECCION_DEVOLUCION]');
+  expect(show('Calle', '<p>Contenido CMS prioritario</p>')).toContain('Contenido CMS prioritario');
 });

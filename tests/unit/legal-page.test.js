@@ -33,13 +33,14 @@ test('legal pages omit the sidebar and eyebrow while preserving localized and co
  expect(source).not.toMatch(/href="\/pages\//);
 });
 
-test('four legal templates select their explicit kinds and schema uses valid translated padding controls', () => {
+test('legal templates select shared native policies or the warranty kind and schema uses valid translated padding controls', () => {
  const kinds = {'envios-y-entregas':'shipping','politica-de-devoluciones':'returns','terminos-y-condiciones':'terms','garantias':'warranty'};
  for (const [handle,kind] of Object.entries(kinds)) {
   const template = json(`templates/page.${handle}.json`);
   expect(template.order).toEqual(['main']);
   expect(template.sections.main.type).toBe('lemoon-legal-page');
-  expect(template.sections.main.settings.kind).toBe(kind);
+  if (handle === 'garantias') expect(template.sections.main.settings.kind).toBe(kind);
+  else expect(template.sections.main.settings.use_shared_legal_template).toBe(true);
  }
  const source = read('sections/lemoon-legal-page.liquid');
  const schema = JSON.parse(source.match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
@@ -104,7 +105,7 @@ test('native privacy mode is opt-in and does not replace other legal page kinds'
 });
 
 test('returns address is shown only when configured and escapes editor input', () => {
- const settings = json('templates/page.politica-de-devoluciones.json').sections.main.settings;
+ const settings = { kind: 'returns', content: '<p>[DIRECCION_DEVOLUCION]</p>', use_section_content: true };
  const render = (address) => renderComponentSection('lemoon-legal-page', {
   settings: { ...settings, return_address: address },
   context: { page: { title: 'Política de reembolso', content: '' }, shop: {} },
@@ -121,7 +122,7 @@ test('returns address is shown only when configured and escapes editor input', (
 });
 
 test('fallback section content resolves the return address and leaves CMS content authoritative', () => {
- const settings = json('templates/page.politica-de-devoluciones.json').sections.main.settings;
+ const settings = { kind: 'returns', content: '<p>[DIRECCION_DEVOLUCION]</p>' };
  const render = (address, pageContent = '') => renderComponentSection('lemoon-legal-page', {
   settings: { ...settings, use_section_content: false, return_address: address },
   context: { page: { title: 'Política de reembolso', content: pageContent }, shop: {} },
@@ -178,4 +179,11 @@ test.each(['[RAZÓN SOCIAL POR COMPLETAR]', '[RUT POR COMPLETAR]', '[DOMICILIO L
  expect(html).toContain(json('locales/es.json').sections.lemoon_legal_page.empty_content);
  expect(html).not.toContain(marker);
  expect(html).not.toContain('CMS antiguo');
+});
+
+
+test.each(['terminos-y-condiciones', 'envios-y-entregas', 'politica-de-devoluciones'])('legacy %s template retains native-policy routing without duplicated content', (suffix) => {
+ const template = json(`templates/page.${suffix}.json`);
+ expect(template).toEqual(json('templates/page.legal.json'));
+ expect(template.sections.main.settings).not.toHaveProperty('content');
 });
