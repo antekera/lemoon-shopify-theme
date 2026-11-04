@@ -228,7 +228,7 @@
           <button type="button" class="lemoon-footer__cookie-preferences" data-cookie-preferences aria-haspopup="dialog" aria-controls="LemoonCookiePreferences-{{ section.id }}" hidden>{{ 'sections.lemoon_footer_privacy.preferences' | t }}</button>
           <span class="lemoon-footer__cookie-status" data-cookie-preferences-status data-unavailable="{{ 'sections.lemoon_footer_privacy.unavailable' | t | escape }}" role="status"></span>
         </li>
-        <li class="lemoon-footer__copyright">{{ section.settings.company_name | escape }} <span aria-hidden="true">🇨🇱</span></li>
+        {%- if shop.metafields.custom.razon_social.value != blank -%}<li class="lemoon-footer__copyright">{{ shop.metafields.custom.razon_social.value | escape }} <span aria-hidden="true">🇨🇱</span></li>{%- endif -%}
       </ul>
     </div>
 

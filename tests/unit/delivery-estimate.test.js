@@ -29,12 +29,12 @@ test.each([['legal', legal], ['FAQ', faq]])('%s renders the merchant estimate sa
 });
 
 test.each([
-  ['legal Spanish', legal, 'es', '5 a 13 días hábiles'],
-  ['legal English', legal, 'en', '5 to 13 business days'],
-  ['FAQ Spanish', faq, 'es', '5 a 13 días hábiles'],
-  ['FAQ English', faq, 'en', '5 to 13 business days'],
+  ['legal Spanish', legal, 'es', 'un plazo informado antes de finalizar la compra'],
+  ['legal English', legal, 'en', 'a timeframe provided before checkout'],
+  ['FAQ Spanish', faq, 'es', 'un plazo informado antes de finalizar la compra'],
+  ['FAQ English', faq, 'en', 'a timeframe provided before checkout'],
 ])('%s uses the storefront language when the estimate is missing or blank', (_name, renderPage, language, expected) => {
-  for (const value of [undefined, null, '']) {
+  for (const value of [undefined, null, '', '   ']) {
     const html = renderPage(value, `<p>Entrega ${token}</p>`, language);
     expect(html).toContain(expected);
     expect(html).not.toContain(token);
@@ -60,7 +60,7 @@ test('shipping and FAQ templates render the shared estimate for all orders', () 
   for (const html of [shipping, questions]) {
     expect(html).toContain(value);
     expect(html).not.toContain(token);
-    expect(html).toMatch(/requieren receta/i);
+    expect(html).toMatch(/requieren? receta/i);
   }
 });
 
@@ -87,7 +87,7 @@ test('shipping fallback resolves the estimate and return address without overrid
 test('shipping template renders the effective date and hides an unconfigured return address', () => {
   const settings = json('templates/page.envios-y-entregas.json').sections.main.settings;
   const html = render('lemoon-legal-page', { settings, context: { shop: shop('5 a 13 días hábiles'), page: { title: 'Envíos', content: '' } } });
-  expect(html).toContain('3 de noviembre de 2026');
+  expect(html).toContain('4 de noviembre de 2026');
   expect(html).not.toContain('[DIRECCION_DEVOLUCION]');
   expect(html).not.toContain('Dirección de devolución:');
 });

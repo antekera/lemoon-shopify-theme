@@ -2,4 +2,5 @@
   Outputs the escaped store-wide delivery estimate for all orders.
 {% enddoc %}
 {%- assign delivery_estimate_fallback = 'sections.lemoon_legal_page.delivery_estimate_fallback' | t -%}
-{{- shop.metafields.custom.plazo_entrega_receta.value | default: delivery_estimate_fallback | escape -}}
+{%- assign delivery_estimate = shop.metafields.custom.plazo_entrega_receta.value | strip -%}
+{{- delivery_estimate | default: delivery_estimate_fallback | escape -}}
