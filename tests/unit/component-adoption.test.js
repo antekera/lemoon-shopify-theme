@@ -42,8 +42,8 @@ test('comment/newsletter states retain their own announcement semantics and mode
   expect(renderAdoption('article-error')).toContain('role="alert"');
   expect(renderAdoption('article-success')).toContain('role="status"');
   expect(renderAdoption('article-moderated-success')).not.toBe(renderAdoption('article-success'));
-  expect(renderAdoption('newsletter-error')).not.toContain('autofocus');
-  expect(renderAdoption('newsletter-success')).toMatch(/id="LemoonNewsletterSuccess-[^"]+"[^>]*tabindex="-1"/);
+  expect(renderAdoption('newsletter-blog-error')).not.toContain('autofocus');
+  expect(renderAdoption('newsletter-blog-success')).toMatch(/id="LemoonNewsletterSuccess-[^"]+"[^>]*tabindex="-1"/);
   expect(renderAdoption('newsletter')).not.toContain('aria-invalid=');
 });
 

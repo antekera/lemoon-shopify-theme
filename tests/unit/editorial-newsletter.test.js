@@ -22,8 +22,8 @@ for (const pageType of ['blog', 'article']) {
   });
 }
 
-test('ordinary pages retain configured newsletter copy and do not add editorial consent', () => {
-  const html = renderAdoption('newsletter');
+test('home page retains configured newsletter copy and does not add editorial consent', () => {
+  const html = renderComponentSection('footer', { settings: { newsletter_enable: true, newsletter_heading: 'Novedades <&"' }, context: { request: { page_type: 'index' } } });
   expect(html).toContain('Novedades &lt;&amp;&#34;');
   expect(html).not.toMatch(/<section[^>]*lemoon-newsletter--editorial/);
   expect(html).not.toContain('Una idea útil cada tanto.');
@@ -51,7 +51,7 @@ test('editorial response states keep email association and per-section form iden
   expect(second).toContain('for="LemoonNewsletter-two-consent"');
 });
 
-test.each(['index', 'product', 'collection', 'page', 'search', 'cart'])('%s keeps the configured noneditorial footer variant', pageType => {
+test.each(['index', 'product', 'collection', 'search', 'cart'])('%s keeps the configured noneditorial footer variant', pageType => {
   const html = renderComponentSection('footer', { settings: { newsletter_enable: true, newsletter_heading: 'Contenido existente' }, context: { request: { page_type: pageType } } });
   expect(html).toContain('Contenido existente');
   expect(html).not.toContain('href="/assets/section-lemoon-editorial-newsletter.css"');
@@ -75,11 +75,11 @@ test('Nosotros keeps the footer while suppressing its existing newsletter', () =
   expect(nosotros.slice(nosotros.indexOf('<footer class="lemoon-footer"'))).toBe(contact.slice(contact.indexOf('<footer class="lemoon-footer"')));
 });
 
-test('ordinary CMS pages retain the same warm newsletter markup after the page guards', () => {
+test('ordinary CMS pages suppress the newsletter', () => {
   const options = { settings: { newsletter_enable: true, newsletter_heading: 'Contenido existente' } };
   const ordinary = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' } } });
   const contact = renderComponentSection('footer', { ...options, context: { request: { page_type: 'page' }, page: { handle: 'otra-pagina' } } });
   expect(contact).toBe(ordinary);
-  expect(contact).toContain('<section class="lemoon-newsletter"');
+  expect(contact).not.toContain('<section class="lemoon-newsletter"');
   expect(contact).not.toContain('href="/assets/section-lemoon-editorial-newsletter.css"');
 });

@@ -53,12 +53,13 @@ for (const { pageType, handle, enabled, visible } of [
   { pageType: 'page', handle: 'nosotros', enabled: true, visible: false },
   { pageType: 'page', handle: 'contact', enabled: true, visible: false },
   { pageType: 'page', handle: 'terminos-y-condiciones', enabled: true, visible: false },
-  { pageType: 'page', handle: 'una-pagina', enabled: true, visible: true },
+  { pageType: 'page', handle: 'una-pagina', enabled: true, visible: false },
+  { pageType: 'policy', handle: undefined, enabled: true, visible: false },
   { pageType: 'index', handle: undefined, enabled: true, visible: true },
   { pageType: 'product', handle: 'nosotros', enabled: true, visible: true },
   { pageType: 'page', handle: 'contact', enabled: false, visible: false },
 ]) {
-  test(`newsletter visibility remains scoped to Nosotros: ${pageType}/${handle ?? 'home'}, enabled=${enabled}`, () => {
+  test(`newsletter visibility for pages and policies: ${pageType}/${handle ?? 'home'}, enabled=${enabled}`, () => {
     const html = renderComponentSection('footer', {
       settings: { newsletter_enable: enabled, newsletter_heading: 'Novedades', newsletter_placeholder: 'Tu correo', newsletter_button: 'Suscribirme' },
       context: { request: { page_type: pageType }, page: { handle }, pages: {}, shop: { privacy_policy: { url: '/policies/privacy-policy' } } },
@@ -76,8 +77,8 @@ test('shipping page hides newsletter by handle or template while preserving the 
     context: { request: { page_type: 'page' }, page: { handle }, template: { suffix }, pages: {}, shop: { privacy_policy: { url: '/policies/privacy-policy' } } },
   });
   const contact = page('otra-pagina', '');
-  expect(contact).toContain('class="lemoon-newsletter"');
-  expect(contact).toContain('name="contact[email]"');
+  expect(contact).not.toContain('class="lemoon-newsletter"');
+  expect(contact).not.toContain('name="contact[email]"');
   expect(page('contact', '')).not.toContain('class="lemoon-newsletter"');
   for (const shipping of [page('envios-y-entregas', ''), page('envios-y-entregas', 'envios-y-entregas'), page('other', 'envios-y-entregas'), page('terminos-y-condiciones', ''), page('other', 'terminos-y-condiciones')]) {
     expect(shipping).not.toContain('class="lemoon-newsletter"');
