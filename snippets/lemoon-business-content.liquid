@@ -1,13 +1,25 @@
 {% doc %}
-  Resolves the two legal-identity tokens without evaluating CMS Liquid.
+  Resolves Shopify legal-identity markers without evaluating CMS Liquid.
 
   @param {string} content - Trusted editor HTML.
   @param {string} [company_name] - Raw company-name metafield value.
   @param {string} [company_rut] - Raw company-RUT metafield value.
+  @param {string} [company_address] - Raw legal-address metafield value.
   @param {boolean} [legacy_demo] - Replace old identity literals in opted-in demo copy.
 {% enddoc %}
 {%- liquid
   assign business_content = content
+  assign legal_identity_html = ''
+  if company_name != blank and company_address != blank
+    capture legal_identity_html
+      echo '<p>La persona jurídica que opera comercialmente Lemoon es <strong>'
+      echo company_name | escape
+      echo '</strong>, con domicilio en '
+      echo company_address | escape
+      echo '.</p>'
+    endcapture
+  endif
+  assign business_content = business_content | replace: '[IDENTIDAD_LEGAL_EMPRESA]', legal_identity_html
   if company_name != blank
     assign escaped_company_name = company_name | escape
     assign business_content = business_content | replace: '[RAZÓN SOCIAL POR COMPLETAR]', '{{ razon_social }}'

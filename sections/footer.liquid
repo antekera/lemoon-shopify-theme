@@ -14,9 +14,9 @@
   assign newsletter_form_id = 'LemoonNewsletter-' | append: section.id
   assign show_newsletter = section.settings.newsletter_enable
   if request.page_type == 'page'
-    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias' or page.handle == 'envios-y-entregas' or page.handle == 'contact'
+    if page.handle == 'nosotros' or page.handle == 'preguntas-frecuentes' or page.handle == 'garantias' or page.handle == 'envios-y-entregas' or page.handle == 'contact' or page.handle == 'terminos-y-condiciones' or page.handle == 'politicas'
       assign show_newsletter = false
-    elsif template.suffix == 'politica-de-devoluciones' or template.suffix == 'envios-y-entregas'
+    elsif template.suffix == 'politica-de-devoluciones' or template.suffix == 'envios-y-entregas' or template.suffix == 'terminos-y-condiciones'
       assign show_newsletter = false
     endif
   endif

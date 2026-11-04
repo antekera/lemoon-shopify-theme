@@ -52,6 +52,7 @@ test('puts the configurable contact page link before email and targets the conta
 for (const { pageType, handle, enabled, visible } of [
   { pageType: 'page', handle: 'nosotros', enabled: true, visible: false },
   { pageType: 'page', handle: 'contact', enabled: true, visible: false },
+  { pageType: 'page', handle: 'terminos-y-condiciones', enabled: true, visible: false },
   { pageType: 'page', handle: 'una-pagina', enabled: true, visible: true },
   { pageType: 'index', handle: undefined, enabled: true, visible: true },
   { pageType: 'product', handle: 'nosotros', enabled: true, visible: true },
@@ -78,7 +79,7 @@ test('shipping page hides newsletter by handle or template while preserving the 
   expect(contact).toContain('class="lemoon-newsletter"');
   expect(contact).toContain('name="contact[email]"');
   expect(page('contact', '')).not.toContain('class="lemoon-newsletter"');
-  for (const shipping of [page('envios-y-entregas', ''), page('envios-y-entregas', 'envios-y-entregas'), page('other', 'envios-y-entregas')]) {
+  for (const shipping of [page('envios-y-entregas', ''), page('envios-y-entregas', 'envios-y-entregas'), page('other', 'envios-y-entregas'), page('terminos-y-condiciones', ''), page('other', 'terminos-y-condiciones')]) {
     expect(shipping).not.toContain('class="lemoon-newsletter"');
     expect(shipping).not.toContain('name="contact[email]"');
     expect(shipping).toContain('data-lemoon-footer');

@@ -34,7 +34,7 @@ test('sample content remains editable while Nosotros opts out and contact stays 
    expect(settings.demo_content).toBe(content);
    expect(settings.use_section_content).toBe(true);
    expect(settings.content).toMatch(/<h2>/);
-  } else if (['garantias', 'politica-de-devoluciones'].includes(handle)) {
+  } else if (['garantias', 'politica-de-devoluciones', 'terminos-y-condiciones'].includes(handle)) {
    expect(settings.demo_data).toBe(false);
    expect(settings).not.toHaveProperty('demo_content');
    expect(settings.content).toMatch(/<h2>/);

@@ -19,7 +19,7 @@
           "type": "navigation_column",
           "settings": {
             "heading": "Cómo comprar",
-            "menu": "footer-how-to",
+            "menu": "footer-how-to-review",
             "open_mobile": false,
             "mobile_only": false,
             "desktop_only": false
@@ -29,19 +29,9 @@
           "type": "navigation_column",
           "settings": {
             "heading": "Servicios",
-            "menu": "footer-services",
+            "menu": "footer-services-review",
             "open_mobile": false,
             "mobile_only": false,
-            "desktop_only": true
-          }
-        },
-        "services_mobile": {
-          "type": "navigation_column",
-          "settings": {
-            "heading": "Servicios",
-            "menu": "footer-services-mobile",
-            "open_mobile": false,
-            "mobile_only": true,
             "desktop_only": false
           }
         },
@@ -49,14 +39,19 @@
           "type": "navigation_column",
           "settings": {
             "heading": "Información",
-            "menu": "footer-information",
+            "menu": "footer-information-review",
             "open_mobile": false,
             "mobile_only": false,
             "desktop_only": false
           }
         }
       },
-      "block_order": ["products", "buy", "services", "services_mobile", "information"],
+      "block_order": [
+        "products",
+        "buy",
+        "services",
+        "information"
+      ],
       "settings": {
         "newsletter_enable": true,
         "newsletter_heading": "El camino para ver bien y verte bien comienza aquí.",
@@ -90,5 +85,7 @@
       }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }
