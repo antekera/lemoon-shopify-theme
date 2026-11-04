@@ -35,6 +35,10 @@ For library, framework, SDK, API, CLI, or cloud-service syntax, configuration, m
 
 Repository skills live under `.agents/skills/`. Use `$<skill-name>` for explicit invocation or select an enabled skill from Codex's skill selector. Follow the skill's scope and safety rules; a skill does not authorize actions outside the user's request.
 
+## Legal and contact data
+
+Before changing policy content, legal identity, contact channels, return address, or delivery estimates, read [legal content sources](.claude/rules/legal-content-sources.md) and reconcile Shopify policies, theme settings, metafield consumers, and checkout.
+
 ## Page copywriting
 
 For creating or revising Lemoon page copy, including terms, returns, shipping, privacy, FAQs, and brand pages, use the `lemoon-copywriter` agent defined in `.codex/agents/lemoon-copywriter.toml` when available. If the role is unavailable in the current session, read that file and follow its instructions directly. It researches comparable Chilean eyewear stores, verifies legal claims against current official sources, and produces original es-CL drafts with source notes and unconfirmed business details clearly marked.
