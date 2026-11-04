@@ -1,7 +1,31 @@
 {{ 'lemoon-legal-pages.css' | asset_url | stylesheet_tag }}
 {%- liquid
+  assign legal_kind = section.settings.kind
+  assign use_native_policy = false
+  if section.settings.use_shared_legal_template
+    case page.handle
+      when 'politica-de-privacidad'
+        assign legal_kind = 'privacy'
+        assign native_policy = shop.privacy_policy
+        assign use_native_policy = true
+      when 'terminos-y-condiciones'
+        assign legal_kind = 'terms'
+        assign native_policy = shop.terms_of_service
+        assign use_native_policy = true
+      when 'politicas'
+        assign legal_kind = 'returns'
+        assign native_policy = shop.refund_policy
+        assign use_native_policy = true
+      when 'envios-y-entregas'
+        assign legal_kind = 'shipping'
+        assign native_policy = shop.shipping_policy
+        assign use_native_policy = true
+      when 'garantias'
+        assign legal_kind = 'warranty'
+    endcase
+  endif
   assign use_native_privacy = false
-  if section.settings.kind == 'privacy' and section.settings.use_native_privacy == true
+  if legal_kind == 'privacy' and section.settings.use_native_privacy == true and use_native_policy == false
     assign use_native_privacy = true
   endif
   assign legal_title = page.title
@@ -65,7 +89,7 @@
 <div class="lemoon-legal-page page-width">
   <header class="lemoon-legal-page__header">
     {% render 'lemoon-ui-heading', text: legal_title, level: 1 %}
-    {%- unless use_native_privacy -%}
+    {%- unless use_native_privacy or use_native_policy -%}
     <p class="lemoon-legal-page__intro">
       {%- if section.settings.intro != blank -%}
         {{ section.settings.intro | escape }}
@@ -91,7 +115,30 @@
             <p><strong>{{ 'sections.lemoon_legal_page.return_address' | t }}</strong> {{ return_address | escape }}</p>
           {%- endif -%}
         {%- endcapture -%}
-        {%- if use_native_privacy -%}
+        {%- if use_native_policy -%}
+          {%- liquid
+            assign native_policy_ready = true
+            if native_policy.body contains '[RAZÓN SOCIAL POR COMPLETAR]' or native_policy.body contains '[RUT POR COMPLETAR]' or native_policy.body contains '[DOMICILIO LEGAL POR COMPLETAR]'
+              assign native_policy_ready = false
+            endif
+            if native_policy.body contains '[IDENTIDAD_LEGAL_EMPRESA]' or native_policy.body contains '[PLAZO_ENTREGA]' or native_policy.body contains '[DIRECCION_DEVOLUCION]'
+              assign native_policy_ready = false
+            endif
+            if native_policy.body contains '{{ razon_social }}' or native_policy.body contains '{{ rut_empresa }}' or native_policy.body contains '{{ domicilio_legal }}'
+              assign native_policy_ready = false
+            endif
+          -%}
+          {%- if native_policy.body != blank and native_policy_ready -%}
+            {%- if legal_kind == 'terms' -%}
+              {%- assign toc_label = 'sections.lemoon_legal_page.toc_label' | t -%}
+              {% render 'lemoon-legal-section-content', content: native_policy.body, section_id: section.id, toc_label: toc_label %}
+            {%- else -%}
+              {{ native_policy.body }}
+            {%- endif -%}
+          {%- else -%}
+            <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
+          {%- endif -%}
+        {%- elsif use_native_privacy -%}
           {%- if shop.privacy_policy.body != blank -%}
             {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}
           {%- else -%}
@@ -144,6 +191,13 @@
     ]
   },
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_shared_legal_template",
+      "default": false,
+      "label": "t:sections.lemoon_legal_page.settings.use_shared_legal_template.label",
+      "info": "t:sections.lemoon_legal_page.settings.use_shared_legal_template.info"
+    },
     {
       "type": "checkbox",
       "id": "use_native_privacy",

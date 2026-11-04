@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
-import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
+import { createComponentEngine, renderComponentSection } from '../helpers/component-library-renderer.mjs';
 import { renderAdoption } from '../helpers/component-adoption-renderer.mjs';
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const json = (path) => { const source = read(path); return JSON.parse(source.slice(source.indexOf('{'))); };
@@ -139,4 +139,43 @@ test('fallback section content resolves the return address and leaves CMS conten
  expect(cms).toContain('<p>Contenido CMS prioritario</p>');
  expect(cms).not.toContain('Calle &lt;Ejemplo&gt; 123');
  expect(cms).not.toContain('[DIRECCION_DEVOLUCION]');
+});
+
+test.each([
+ ['politica-de-privacidad', 'privacy_policy'],
+ ['terminos-y-condiciones', 'terms_of_service'],
+ ['politicas', 'refund_policy'],
+ ['envios-y-entregas', 'shipping_policy'],
+])('shared legal template selects only the native policy for %s', (handle, policyKey) => {
+ const settings = json('templates/page.legal.json').sections.main.settings;
+ const page = { handle, title: 'Título CMS', content: '<p>Contenido CMS antiguo</p>' };
+ const shop = { [policyKey]: { title: 'Título nativo', body: '<p>Texto de política nativa</p>' } };
+ const engine = createComponentEngine({ globals: { shop } });
+ engine.registerFilter('handleize', value => String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-'));
+ const html = engine.renderFileSync('lemoon-legal-page', { section: { id: 'legal-shared', settings }, page, shop, routes: { root_url: '/' } });
+ expect(html).toContain('<h1>Título CMS</h1>');
+ expect(html).toContain('<p>Texto de política nativa</p>');
+ expect(html).not.toContain('Contenido CMS antiguo');
+ expect(html).not.toContain('lemoon-legal-page__intro"');
+ const empty = renderComponentSection('lemoon-legal-page', { settings, context: { page, shop: {} } });
+ expect(empty).toContain(json('locales/es.json').sections.lemoon_legal_page.empty_content);
+ expect(empty).not.toContain('Contenido CMS antiguo');
+});
+
+test('shared legal template preserves page CMS for warranty and other pages', () => {
+ const settings = json('templates/page.legal.json').sections.main.settings;
+ for (const handle of ['garantias', 'otra-pagina']) {
+  const html = renderComponentSection('lemoon-legal-page', { settings, context: { page: { handle, title: 'Título', content: '<p>Contenido CMS</p>' }, shop: { refund_policy: { body: '<p>Política ajena</p>' } } } });
+  expect(html).toContain('<p>Contenido CMS</p>');
+  expect(html).not.toContain('Política ajena');
+ }
+});
+
+
+test.each(['[RAZÓN SOCIAL POR COMPLETAR]', '[RUT POR COMPLETAR]', '[DOMICILIO LEGAL POR COMPLETAR]', '[IDENTIDAD_LEGAL_EMPRESA]', '[PLAZO_ENTREGA]', '[DIRECCION_DEVOLUCION]', '{{ razon_social }}', '{{ rut_empresa }}', '{{ domicilio_legal }}'])('shared legal template hides native policy with unresolved marker %s', (marker) => {
+ const settings = json('templates/page.legal.json').sections.main.settings;
+ const html = renderComponentSection('lemoon-legal-page', { settings, context: { page: { handle: 'politica-de-privacidad', title: 'Privacidad', content: '<p>CMS antiguo</p>' }, shop: { privacy_policy: { title: 'Privacidad', body: `<p>${marker}</p>` } } } });
+ expect(html).toContain(json('locales/es.json').sections.lemoon_legal_page.empty_content);
+ expect(html).not.toContain(marker);
+ expect(html).not.toContain('CMS antiguo');
 });
