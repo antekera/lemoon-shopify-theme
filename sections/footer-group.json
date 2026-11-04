@@ -20,7 +20,7 @@
           "settings": {
             "heading": "Cómo comprar",
             "menu": "footer-how-to-review",
-            "open_mobile": true,
+            "open_mobile": false,
             "mobile_only": false,
             "desktop_only": false
           }
@@ -30,7 +30,7 @@
           "settings": {
             "heading": "Servicios",
             "menu": "footer-services-review",
-            "open_mobile": true,
+            "open_mobile": false,
             "mobile_only": false,
             "desktop_only": false
           }
@@ -40,7 +40,7 @@
           "settings": {
             "heading": "Información",
             "menu": "footer-information-review",
-            "open_mobile": true,
+            "open_mobile": false,
             "mobile_only": false,
             "desktop_only": false
           }

@@ -4,7 +4,7 @@ import { renderComponentSection } from '../helpers/component-library-renderer.mj
 
 const themeFile = (path) => new URL(`../../${path}`, import.meta.url);
 
-test('configures four footer link columns for desktop and mobile with accordions closed', async () => {
+test('configures four footer link columns for desktop and mobile with the first accordion open on mobile', async () => {
   const group = JSON.parse(await readFile(themeFile('sections/footer-group.json'), 'utf8'));
   const blocks = Object.values(group.sections.footer.blocks);
   const columns = blocks.filter((block) => block.type === 'navigation_column');
@@ -17,7 +17,7 @@ test('configures four footer link columns for desktop and mobile with accordions
   expect(mobileColumns.map(({ settings }) => settings.heading)).toEqual([
     'Productos', 'Cómo comprar', 'Servicios', 'Información',
   ]);
-  expect(columns.every(({ settings }) => settings.open_mobile === false)).toBe(true);
+  expect(mobileColumns.map(({ settings }) => settings.open_mobile)).toEqual([true, false, false, false]);
   expect(group.sections.footer.block_order).toContain('information');
 });
 
