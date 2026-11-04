@@ -973,15 +973,15 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Fuentes:** [sections/lemoon-launch-page.liquid](../../sections/lemoon-launch-page.liquid), [sections/main-password-header.liquid](../../sections/main-password-header.liquid), [sections/main-password-footer.liquid](../../sections/main-password-footer.liquid), [sections/email-signup-banner.liquid](../../sections/email-signup-banner.liquid), [assets/lemoon-password.css](../../assets/lemoon-password.css), [assets/section-password.css](../../assets/section-password.css), [assets/section-email-signup-banner.css](../../assets/section-email-signup-banner.css), [assets/password-modal.js](../../assets/password-modal.js).
 
-**Contrato actual.** Password header form storefront_password + errors, logo/store messages; footer enlaces admin/powered_by. Launch customer newsletter form email/required marketing consent; email-signup-banner heading/paragraph/email_form bloques y image/layout settings.
+**Contrato actual.** Password header form storefront_password + errors, logo/store messages; footer enlaces admin/powered_by. Launch muestra título informativo de apertura, introducción breve y customer newsletter form email/required marketing consent; email-signup-banner heading/paragraph/email_form bloques y image/layout settings.
 
 **Variantes existentes.** Password modal nativo Dawn details; launch newsletter success/error; banner email signup; no prueba tienda abierta ni envío email.
 
-**CSS y excepciones.** Layout password NO carga global lemoon-components; CSS password/banner debe revisarse separado. Tokens comunes no implican controles idénticos.
+**CSS y excepciones.** Layout password NO carga global lemoon-components; CSS password/banner debe revisarse separado. El botón del newsletter de lanzamiento usa amarillo lemon y texto navy. Tokens comunes no implican controles idénticos.
 
 **Estados observados / aplicabilidad:** Normal: Landing y formulario; Hover: Links/submit; Foco: Error y success enfocable, password input; Seleccionado: Consent checked; Loading: POST nativo; Error: form.errors y posted_successfully; Disabled: Required/constraints; no disabled universal.
 
-**Responsive.** Password/launch estilos locales, banner image_height/mobile alignment. **Accesibilidad.** Preservar password form noindex/configuración layout, consentimiento y labels/IDs/errors.
+**Responsive.** Password/launch estilos locales; en móvil el header deja `--lemoon-space-8` entre logo y acceso por contraseña; banner image_height/mobile alignment. **Accesibilidad.** Preservar password form noindex/configuración layout, consentimiento y labels/IDs/errors.
 
 **JS.** password-modal.js hereda DetailsModal; newsletter native POST. **Reutilización actual.** Newsletter repetido con layout específico; piloto no trasladar CSS global sin revisar cadena password.
 
