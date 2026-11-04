@@ -11,9 +11,17 @@
   assign business_content = content
   assign legal_identity_html = ''
   if company_name != blank and company_address != blank
-    assign identity_name = company_name | escape | prepend: '<strong>' | append: '</strong>'
+    assign identity_name = company_name | escape
     assign identity_address = company_address | escape
     assign identity_text = 'sections.lemoon_legal_page.company_identity' | t: company_name: identity_name, company_address: identity_address
+    assign legal_identity_html = identity_text | prepend: '<p>' | append: '</p>'
+  elsif company_name != blank
+    assign identity_name = company_name | escape
+    assign identity_text = 'sections.lemoon_legal_page.company_name_only' | t: company_name: identity_name
+    assign legal_identity_html = identity_text | prepend: '<p>' | append: '</p>'
+  elsif company_address != blank
+    assign identity_address = company_address | escape
+    assign identity_text = 'sections.lemoon_legal_page.company_address_only' | t: company_address: identity_address
     assign legal_identity_html = identity_text | prepend: '<p>' | append: '</p>'
   endif
   if company_name != blank

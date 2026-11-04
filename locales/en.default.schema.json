@@ -3579,6 +3579,10 @@
           "label": "Legal HTML content",
           "info": "Editable HTML with headings, lists and tables. Used when this section's preference is enabled, or as a fallback when the page and applicable native policy have no content. Company name and RUT come from shop metafields. Does not evaluate Liquid. Native privacy ignores this field."
         },
+        "use_shared_legal_template": {
+          "label": "Use shared legal sources",
+          "info": "Select the Shopify policy by page handle. Warranties and other pages use their page content."
+        },
         "use_native_privacy": {
           "label": "Use the native privacy policy",
           "info": "For privacy pages only. Uses the policy from Settings > Policies and ignores page content, demo copy and the introduction."

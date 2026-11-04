@@ -84,8 +84,11 @@ test.each([
   });
   const html = render('Empresa <SPA>', 'Calle & {{ rut_empresa }}');
   expect(html).toContain(phrase);
-  expect(html).toContain('<strong>Empresa &lt;SPA&gt;</strong>');
+  expect(html).toContain('Empresa &lt;SPA&gt;');
   expect(html).toContain('Calle &amp; {{ rut_empresa }}');
-  expect(render('', 'Calle')).toBe('<h2>Contacto</h2>');
-  expect(render('Empresa', '')).toBe('<h2>Contacto</h2>');
+  expect(render('', 'Calle')).toContain('Calle');
+  expect(render('', 'Calle')).not.toContain('Empresa');
+  expect(render('Empresa', '')).toContain('Empresa');
+  expect(render('Empresa', '')).not.toContain('Calle');
+  expect(render('', '')).toBe('<h2>Contacto</h2>');
 });

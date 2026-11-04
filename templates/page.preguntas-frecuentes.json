@@ -140,7 +140,7 @@
           "settings": {
             "group": "ordering",
             "question": "¿Cuánto se demora mi pedido?",
-            "answer": "<p>La entrega de tu pedido se estima en [PLAZO_ENTREGA]. Para pedidos que requieren receta, el plazo comienza cuando contamos con ella completa. El plazo puede variar según el producto, el destino y la empresa de transporte. Conoce más en <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
+            "answer": "<p>La entrega de tu pedido se estima en [PLAZO_ENTREGA]. El plazo comienza cuando se confirma el pago y, si tu pedido requiere receta, contamos con ella completa. Si debemos corregir la receta, el plazo comienza cuando recibimos y aceptamos la corrección. El plazo puede variar según el producto, el destino y la empresa de transporte. Conoce más en <a href=\"/pages/envios-y-entregas\">Envíos y entregas</a>.</p>"
           }
         },
         "faq_18": {

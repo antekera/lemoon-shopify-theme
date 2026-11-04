@@ -162,3 +162,10 @@ test.each([
   const expected = `${origin}${path}`;
   expect(canonicalLinks(renderHead(availablePage, { path, pageType }))).toEqual({ canonical: expected, openGraph: expected });
 });
+
+test('shared legal template retains Spanish privacy routing', () => {
+ const sharedPage = { ...availablePage, template_suffix: 'legal' };
+ const expected = `${origin}${spanishPath}`;
+ expect(canonicalLinks(renderHead(sharedPage))).toEqual({ canonical: expected, openGraph: expected });
+ expect(renderFooter(sharedPage)).toContain(`href="${spanishPath}"`);
+});

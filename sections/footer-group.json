@@ -10,7 +10,7 @@
           "settings": {
             "heading": "Productos",
             "menu": "footer-products",
-            "open_mobile": false,
+            "open_mobile": true,
             "mobile_only": false,
             "desktop_only": false
           }

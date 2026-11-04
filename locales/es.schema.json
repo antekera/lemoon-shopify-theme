@@ -3579,6 +3579,10 @@
           "label": "Contenido legal HTML",
           "info": "HTML editable con títulos, listas y tablas. Se usa al activar la preferencia de esta sección o como respaldo si no hay contenido de página ni política nativa aplicable. Razón social y RUT vienen de los metacampos de tienda. No ejecuta Liquid. La privacidad nativa ignora este campo."
         },
+        "use_shared_legal_template": {
+          "label": "Usar fuentes legales compartidas",
+          "info": "Selecciona la política de Shopify según el identificador de la página. Garantías y otras páginas usan su contenido CMS."
+        },
         "use_native_privacy": {
           "label": "Usar la política de privacidad nativa",
           "info": "Solo para páginas de privacidad. Usa la política de Configuración > Políticas e ignora el contenido de la página, los textos de muestra y la introducción."

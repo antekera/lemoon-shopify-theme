@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 518,
-    "mapped_paths": 486,
+    "total_tracked_paths": 519,
+    "mapped_paths": 487,
     "excluded_paths": 32,
     "by_root": {
       "assets": 260,
@@ -33,12 +33,12 @@
       "locales": 51,
       "sections": 70,
       "snippets": 94,
-      "templates": 39
+      "templates": 40
     },
     "mapped_by_extension": {
       ".css": 82,
       ".js": 53,
-      ".json": 90,
+      ".json": 91,
       ".liquid": 167,
       ".svg": 94
     },
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 518,
-    "explicit_new_paths": 4
+    "total_source_paths": 519,
+    "explicit_new_paths": 5
   },
   "components": [
     {
@@ -645,7 +645,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-faq-item.liquid",
-        "scope": "FAQ agrupado centrado a 700px, preguntas de 18px en escritorio y 16px en móvil/tablet, y animación progresiva de apertura/cierre; primera pregunta abierta y details exclusivos por sección. Legacy y otros disclosures conservan sus dueños. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con fallback localizado (5 a 13 días hábiles en español), compartido entre FAQ y contenido de sección legal.",
+        "scope": "FAQ agrupado centrado a 700px, preguntas de 18px en escritorio y 16px en móvil/tablet, y animación progresiva de apertura/cierre; primera pregunta abierta y details exclusivos por sección. Legacy y otros disclosures conservan sus dueños. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con texto localizado sin plazo numérico si el metacampo está vacío, compartido entre FAQ y contenido de sección legal.",
         "recipe_path": "docs/components/recipes/faq-group.md"
       }
     },
@@ -1014,7 +1014,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. Newsletter omitida en page.nosotros; en blog/article el mismo formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado; otras páginas conservan newsletter cálida. El newsletter se omite en envíos y entregas por handle o sufijo, manteniendo el footer.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en page.nosotros; en blog/article el mismo formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado; otras páginas conservan newsletter cálida. El newsletter se omite en envíos y entregas por handle o sufijo, manteniendo el footer.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1042,7 +1042,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-cookie-preferences.liquid",
-        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad; en caso contrario conservan la política nativa. Redirección de navegador de la ruta nativa a la página española publicada, con fallback sin JavaScript y excepción del editor; no es un HTTP 301.",
+        "scope": "Consentimiento permanece en su controlador y API; galería sin persistencia. Footer, canonical y URL social eligen la página española solo cuando existe publicada con template_suffix politica-de-privacidad o legal; en caso contrario conservan la política nativa. Redirección de navegador de la ruta nativa a la página española publicada, con fallback sin JavaScript y excepción del editor; no es un HTTP 301.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -1461,7 +1461,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-contact-page.liquid",
-        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos.",
+        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos. La página muestra el cuerpo de la política nativa de información de contacto cuando existe.",
         "recipe_path": "docs/components/recipes/contact-form.md"
       }
     },
@@ -1492,6 +1492,7 @@
         "templates/page.guia-probador.json",
         "templates/page.guia-rostro.json",
         "templates/page.isapres-y-fonasa.json",
+        "templates/page.legal.json",
         "templates/page.operativos-oftalmologicos.json",
         "templates/page.politica-de-devoluciones.json",
         "templates/page.politica-de-privacidad.json",
@@ -1507,7 +1508,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-guide-page.liquid",
-        "scope": "Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política. El campo return_address se inserta escapado en la política de reembolso solo cuando tiene valor; vacío oculta el párrafo, tanto al preferir el contenido de sección como al usarlo de respaldo. El HTML content es respaldo tras CMS y política nativa aplicable; use_section_content (default false) permite preferirlo antes de CMS cuando no está vacío, sin sustituir privacidad nativa explícita ni demo ni modificar texto almacenado. lemoon-business-content resuelve solo razón social/RUT escapados desde inputs explícitos, sin evaluar Liquid ni reinterpretar valores insertados; CMS normal no reescribe identidades históricas. El marcador [IDENTIDAD_LEGAL_EMPRESA] genera un párrafo localizado solo si company_name y company_address tienen valores; ambos se escapan y se insertan como texto opaco. Si falta cualquiera, se omite el párrafo. El contenido HTML de sección preferido en términos puede incluir un índice derivado de H2 reales, sin IDs almacenados: nav nombrado, IDs por sección/posición y foco nativo sin JavaScript; otras fuentes/páginas no reciben índice. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con fallback localizado (5 a 13 días hábiles en español), compartido entre FAQ y contenido de sección legal.",
+        "scope": "Identidad legal disponible por metacampos de tienda; omite cada campo ausente. Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política. El campo return_address se inserta escapado en la política de reembolso solo cuando tiene valor; vacío oculta el párrafo, tanto al preferir el contenido de sección como al usarlo de respaldo. El HTML content es respaldo tras CMS y política nativa aplicable; use_section_content (default false) permite preferirlo antes de CMS cuando no está vacío, sin sustituir privacidad nativa explícita ni demo ni modificar texto almacenado. lemoon-business-content resuelve solo razón social/RUT escapados desde inputs explícitos, sin evaluar Liquid ni reinterpretar valores insertados; CMS normal no reescribe identidades históricas. El marcador [IDENTIDAD_LEGAL_EMPRESA] genera un párrafo localizado con los campos disponibles; se escapan y se insertan como texto opaco. Si faltan ambos, se omite el párrafo. El contenido HTML de sección preferido en términos puede incluir un índice derivado de H2 reales, sin IDs almacenados: nav nombrado, IDs por sección/posición y foco nativo sin JavaScript; otras fuentes/páginas no reciben índice. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con texto localizado sin plazo numérico si el metacampo está vacío, compartido entre FAQ y contenido de sección legal. La plantilla opt-in page.legal selecciona por handle las políticas nativas de Shopify para privacidad, términos, reembolso y envío; muestra estado vacío si falta la política o contiene marcadores conocidos sin resolver. Garantías y otros handles conservan CMS. El cuerpo nativo se presenta sin resolver marcadores para mantener equivalencia con checkout; términos agrega índice accesible.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -5906,6 +5907,14 @@
         "LM-LEGAL"
       ],
       "inspection_method": "manual contract update"
+    },
+    {
+      "path": "templates/page.legal.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "targeted-template-review; opt-in native policy source"
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -5929,9 +5938,10 @@
       "assets/payment-webpay.svg",
       "assets/section-lemoon-editorial-newsletter.css",
       "snippets/lemoon-business-content.liquid",
-      "snippets/lemoon-legal-section-content.liquid"
+      "snippets/lemoon-legal-section-content.liquid",
+      "templates/page.legal.json"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status. Se agrega plantilla legal compartida; la cobertura incluye la incorporación de plazo de entrega.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

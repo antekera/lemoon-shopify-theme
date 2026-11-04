@@ -9,8 +9,12 @@
       assign lemoon_canonical_url = canonical_url
       assign lemoon_privacy_redirect_url = ''
       assign lemoon_privacy_page = pages['politica-de-privacidad']
+      assign lemoon_privacy_template_valid = false
+      if lemoon_privacy_page.template_suffix == 'politica-de-privacidad' or lemoon_privacy_page.template_suffix == 'legal'
+        assign lemoon_privacy_template_valid = true
+      endif
       if request.page_type == 'policy' and request.path == shop.privacy_policy.url
-        if lemoon_privacy_page != blank and lemoon_privacy_page.published_at != blank and lemoon_privacy_page.template_suffix == 'politica-de-privacidad'
+        if lemoon_privacy_page != blank and lemoon_privacy_page.published_at != blank and lemoon_privacy_template_valid
           assign lemoon_canonical_url = request.origin | append: lemoon_privacy_page.url
           unless request.design_mode
             assign lemoon_privacy_redirect_url = lemoon_privacy_page.url
