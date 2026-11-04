@@ -93,14 +93,14 @@
         {%- endcapture -%}
         {%- if use_native_privacy -%}
           {%- if shop.privacy_policy.body != blank -%}
-            {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
+            {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}
           {%- else -%}
             <p>{{ 'sections.lemoon_legal_page.empty_content' | t }}</p>
           {%- endif -%}
         {%- elsif section.settings.demo_data -%}
           {% render 'lemoon-commercial-demo', enabled: section.settings.demo_data, content: section.settings.demo_content, section_id: section.id %}
         {%- elsif section.settings.use_section_content and section.settings.content != blank -%}
-          {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
+          {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}{%- endcapture -%}
           {%- assign section_content_html = section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html -%}
           {%- capture delivery_estimate -%}{%- render 'lemoon-delivery-estimate' -%}{%- endcapture -%}
           {%- assign section_content_html = section_content_html | replace: '[PLAZO_ENTREGA]', delivery_estimate -%}
@@ -111,11 +111,11 @@
             {{ section_content_html }}
           {%- endif -%}
         {%- elsif page.content != blank -%}
-          {% render 'lemoon-business-content', content: page.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
+          {% render 'lemoon-business-content', content: page.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}
         {%- elsif section.settings.kind == 'privacy' and shop.privacy_policy.body != blank -%}
-          {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}
+          {% render 'lemoon-business-content', content: shop.privacy_policy.body, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}
         {%- elsif section.settings.content != blank -%}
-          {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value %}{%- endcapture -%}
+          {%- capture section_content_html -%}{% render 'lemoon-business-content', content: section.settings.content, company_name: shop.metafields.custom.razon_social.value, company_rut: shop.metafields.custom.rut_empresa.value, company_address: shop.metafields.custom.domicilio_legal.value %}{%- endcapture -%}
           {%- capture delivery_estimate -%}{%- render 'lemoon-delivery-estimate' -%}{%- endcapture -%}
           {%- assign section_content_html = section_content_html | replace: '<p>[DIRECCION_DEVOLUCION]</p>', return_address_html -%}
           {{ section_content_html | replace: '[PLAZO_ENTREGA]', delivery_estimate }}

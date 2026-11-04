@@ -773,6 +773,7 @@
       }
     },
     "lemoon_legal_page": {
+      "company_identity": "La persona jurídica que opera comercialmente Lemoon es {{ company_name }}, con domicilio en {{ company_address }}.",
       "delivery_estimate_fallback": "5 a 13 días hábiles",
       "return_address": "Dirección de devolución:",
       "toc_label": "En esta página",
