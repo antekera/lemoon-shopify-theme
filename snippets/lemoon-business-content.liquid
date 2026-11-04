@@ -11,15 +11,11 @@
   assign business_content = content
   assign legal_identity_html = ''
   if company_name != blank and company_address != blank
-    capture legal_identity_html
-      echo '<p>La persona jurídica que opera comercialmente Lemoon es <strong>'
-      echo company_name | escape
-      echo '</strong>, con domicilio en '
-      echo company_address | escape
-      echo '.</p>'
-    endcapture
+    assign identity_name = company_name | escape | prepend: '<strong>' | append: '</strong>'
+    assign identity_address = company_address | escape
+    assign identity_text = 'sections.lemoon_legal_page.company_identity' | t: company_name: identity_name, company_address: identity_address
+    assign legal_identity_html = identity_text | prepend: '<p>' | append: '</p>'
   endif
-  assign business_content = business_content | replace: '[IDENTIDAD_LEGAL_EMPRESA]', legal_identity_html
   if company_name != blank
     assign escaped_company_name = company_name | escape
     assign business_content = business_content | replace: '[RAZÓN SOCIAL POR COMPLETAR]', '{{ razon_social }}'
@@ -36,6 +32,7 @@
   endif
   assign company_token = '{{ razon_social }}'
   assign company_chunks = business_content | append: 'x' | split: company_token
+  capture resolved_content
   for company_chunk in company_chunks
     assign original_chunk = company_chunk
     if forloop.last
@@ -55,4 +52,6 @@
       endif
     endunless
   endfor
+  endcapture
+  echo resolved_content | replace: '[IDENTIDAD_LEGAL_EMPRESA]', legal_identity_html
 -%}

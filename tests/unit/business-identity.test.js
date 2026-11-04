@@ -74,3 +74,18 @@ test('unavailable company values keep original name tokens while substituting th
   expect(renderContent('', '', '12.345.678-9', true)).toBe('');
 });
 
+
+test.each([
+  ['es', 'La persona jurídica que opera comercialmente Lemoon es'],
+  ['en', 'The legal entity operating Lemoon is'],
+])('legal identity is localized and escapes both fields in %s', (language, phrase) => {
+  const render = (company_name, company_address) => engine(language).renderFileSync('lemoon-business-content', {
+    content: '<h2>Contacto</h2>[IDENTIDAD_LEGAL_EMPRESA]', company_name, company_address, company_rut: '123',
+  });
+  const html = render('Empresa <SPA>', 'Calle & {{ rut_empresa }}');
+  expect(html).toContain(phrase);
+  expect(html).toContain('<strong>Empresa &lt;SPA&gt;</strong>');
+  expect(html).toContain('Calle &amp; {{ rut_empresa }}');
+  expect(render('', 'Calle')).toBe('<h2>Contacto</h2>');
+  expect(render('Empresa', '')).toBe('<h2>Contacto</h2>');
+});
