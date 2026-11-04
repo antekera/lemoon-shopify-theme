@@ -1014,7 +1014,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. Newsletter omitida en page.nosotros; en blog/article el mismo formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado; otras páginas conservan newsletter cálida. El newsletter se omite en envíos y entregas por handle o sufijo, manteniendo el footer.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en page.nosotros; en blog/article el mismo formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado; otras páginas conservan newsletter cálida. El newsletter se omite en envíos y entregas por handle o sufijo, manteniendo el footer.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },

@@ -141,3 +141,9 @@ test('footer omits empty service accordions from storefront while keeping blocks
   expect(editor).not.toContain('>Operativos</a>');
   expect(editor).not.toContain('>Isapres</a>');
 });
+
+test('shows WhatsApp only when a number is configured', () => {
+  const render = (number) => renderComponentSection('footer', { settings: { whatsapp_number: number, whatsapp_label: 'Contáctanos por WhatsApp' }, context: { request: { page_type: 'page' }, page: { handle: 'contact' }, shop: {} } });
+  expect(render('')).not.toContain('Contáctanos por WhatsApp');
+  expect(render('+56 (9) 1234-5678')).toContain('href="https://wa.me/56912345678"');
+});
