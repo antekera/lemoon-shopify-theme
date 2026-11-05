@@ -44,6 +44,26 @@ describe('Liquid quiz catalog boundary (declared Shopify-shaped fixtures)', () =
     expect(candidates(renderQuizSection({ scenario: 'empty' }))).toEqual([]);
   });
 
+  it('keeps SVG definitions unique across two section instances and resolves each local reference', () => {
+    const html = ['quiz-first', 'quiz-second'].map(sectionId => renderQuizSection({ sectionId, products: [] })).join('');
+    const svgs = [...html.matchAll(/<svg\b[^>]*>[\s\S]*?<\/svg>/g)].map(match => match[0]);
+    const allIds = [];
+    let referenceCount = 0;
+    for (const svg of svgs) {
+      const ids = [...svg.matchAll(/\sid\s*=\s*(["'])(.*?)\1/g)].map(match => match[2]);
+      allIds.push(...ids);
+      const references = [
+        ...[...svg.matchAll(/url\(\s*["']?#([^"')\s]+)["']?\s*\)/g)].map(match => match[1]),
+        ...[...svg.matchAll(/(?:\s|:)href\s*=\s*["']#([^"']+)["']/g)].map(match => match[1]),
+      ];
+      referenceCount += references.length;
+      for (const reference of references) expect(ids.filter(id => id === reference)).toHaveLength(1);
+    }
+    expect(referenceCount).toBeGreaterThan(0);
+    expect(new Set(allIds).size).toBe(allIds.length);
+    for (const sectionId of ['quiz-first', 'quiz-second']) expect(allIds.some(id => id.includes(sectionId))).toBe(true);
+  });
+
   it('bounds emitted catalog data to fifty products and twenty variants per product', () => {
     const products = Array.from({ length: 51 }, (_, index) => quizProduct(index + 1));
     const rows = candidates(renderQuizSection({ products }));

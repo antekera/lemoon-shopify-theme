@@ -1582,7 +1582,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-style-quiz.liquid",
-        "scope": "Cinco etapas, atributos Shopify por producto/variante, ranking completo sin presupuesto y card-product canónica; resumen editable único antes del listado, sin razones por tarjeta, lotes de doce y dos columnas móviles; límites50productos/20variantes.",
+        "scope": "Cinco etapas, atributos Shopify por producto/variante, ranking completo sin presupuesto y card-product canónica; acabado editorial cálido, muestras SVG comparables con IDs únicos e indicador de selección visible; resumen editable único y compacto antes del listado, sin razones por tarjeta, lotes de doce y dos columnas móviles; límites50productos/20variantes.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },

@@ -49,3 +49,9 @@ Probar navegación y operación por teclado, label persistente, foco distinguibl
 [component-library.test.js](../../../tests/unit/component-library.test.js) renderiza los snippets y consumidores reales mediante [component-library-renderer](../../../tests/helpers/component-library-renderer.mjs); sus objetos/form/filter Shopify son fixtures declarados. Las pruebas de guía/contacto/FAQ preservan contratos de sus superficies. [component-library.spec.js](../../../tests/e2e/component-library.spec.js) es el punto de cobertura de teclado, validación nativa sin POST, details, FormData/eventos, foco y responsive **cuando se ejecuta**; su mera presencia no acredita resultados. La evidencia de ejecución y revisión pertenece al reporte de entrega de la revisión concreta.
 
 Ninguna de estas pruebas locales acredita envío/entrega Shopify, asignaciones CMS, preview/push, datos reales de producto/receta, API/consentimiento, checkout o certificación WCAG. Conservar esas limitaciones al aceptar un nuevo consumidor.
+
+## Muestras y estados del quiz
+
+El quiz conserva sus dueños `lemoon-quiz-options` → `lemoon-quiz-visual`. El primero construye `visual_id` con sección/grupo/código y lo pasa explícitamente al render del SVG; cada gradiente/clipPath usa ese prefijo. Conservar IDs únicos incluso con dos secciones en una página. La etiqueta HTML mantiene el significado, el SVG es decorativo y el input/label nativo conserva interacción/foco. Las muestras de acabado/patrón comparten geometría y no certifican características de un SKU.
+
+El acabado cálido, indicador circular visible en reposo, estados de puntero/selección y resumen móvil se limitan a `.lemoon-quiz`; no se trasladan a `card-product`. Los resultados mantienen dos columnas móviles y separaciones 1.2rem/2.4rem, sin texto de afinidad por tarjeta. [Contrato visual](../../../DESIGN.md) y [spec local](../../design/style-quiz-prototype/visual-finishing-spec.md).

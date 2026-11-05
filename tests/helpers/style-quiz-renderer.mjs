@@ -102,11 +102,11 @@ export function fixtureProducts(scenario = 'default') {
   return products;
 }
 
-export function renderQuizSection({ scenario = 'default', products = fixtureProducts(scenario), language = 'es' } = {}) {
+export function renderQuizSection({ scenario = 'default', products = fixtureProducts(scenario), language = 'es', sectionId = 'quiz-fixture' } = {}) {
   const collection = { handle: 'quiz-fixture', url: '/collections/quiz-fixture', title: 'Colección de prueba', products, products_count: products.length, all_products_count: products.length };
   const engine = createQuizEngine({ language });
-  return `<section id="shopify-section-quiz-fixture">${engine.renderFileSync('lemoon-style-quiz', {
-    section: { id: 'quiz-fixture', settings: { catalogue: collection, padding_top: 64, padding_bottom: 64 }, blocks: [] },
+  return `<section id="shopify-section-${escape(sectionId)}">${engine.renderFileSync('lemoon-style-quiz', {
+    section: { id: sectionId, settings: { catalogue: collection, padding_top: 64, padding_bottom: 64 }, blocks: [] },
     collection, collections: { 'quiz-fixture': collection }, all_products: Object.fromEntries(products.map(product => [product.handle, product])),
     paginate: { pages: 1, current_page: 1, items: products.length },
     routes: { root_url: '/', all_products_collection_url: '/collections/all' },
