@@ -46,9 +46,9 @@ La selección no usa presupuesto, género ni forma del rostro como sustitutos de
 
 Implementar entrada, cinco ejes, selección múltiple, omitir, volver, reiniciar, ayuda de medidas y recuperación al editar. Acabado, patrón, material y transparencia mantienen datos independientes. Proporción oversize y medidas físicas también.
 
-El resultado muestra las preferencias elegidas, un conjunto ordenado de candidatos y hasta tres destacados diversos, con razones que procedan de atributos confirmados. El precio se presenta como información comercial, sin preguntar presupuesto ni participar en el ranking. Si se omite todo, se identifica la selección editorial. Cero, una o dos coincidencias tienen estados útiles; no se rellenan con falsas coincidencias.
+El resultado muestra las preferencias elegidas una sola vez antes del listado, un conjunto ordenado de candidatos y hasta doce productos iniciales; las tarjetas conservan su presentación de catálogo sin razones por producto. El precio se presenta como información comercial, sin preguntar presupuesto ni participar en el ranking. Si se omite todo, se identifica la selección editorial. Cero, una o dos coincidencias tienen estados útiles; no se rellenan con falsas coincidencias.
 
-El bloque de resultados es una composición del quiz que reutiliza `snippets/card-product.liquid`, sus estilos y comportamiento existentes. Presenta el grupo completo ordenado por afinidad, con ampliación o paginación cuando corresponda; los tres destacados son una entrada opcional, no el límite del conjunto. Editar una respuesta actualiza el grupo y sus razones. La carga de más resultados conserva selección, orden y deduplicación. No requiere un widget de terceros.
+El bloque de resultados es una composición del quiz que reutiliza `snippets/card-product.liquid`, sus estilos y comportamiento existentes. Presenta el grupo completo ordenado por afinidad, con ampliación o paginación cuando corresponda; el lote inicial de doce no es el límite del conjunto. Editar una respuesta actualiza el grupo y el resumen de preferencias. La carga de más resultados conserva selección, orden y deduplicación. No requiere un widget de terceros.
 
 ### Implementación propuesta
 
@@ -78,7 +78,7 @@ Perfeccionar primero tres pantallas representativas: entrada, detalles y resulta
 | Detalles | Macros comparables de mate/brillo, liso/carey y construcciones | Fotografías reales bajo luz y escala controladas |
 | Uso | Escenas cercanas con una misma dirección de luz y composición, o una familia de ilustraciones | Fotografía editorial o generación conceptual coherente |
 | Tamaño | Mismo rostro y cámara, modificando solo proporción aparente; ayuda técnica separada | Diagrama o SVG controlado |
-| Resultados | Producto real completo, razones breves y edición visible | Imágenes y datos de la variante |
+| Resultados | Producto real completo, resumen único de preferencias y edición visible; dos columnas móviles | Imágenes y datos de la variante |
 
 El refinamiento cubre espaciado óptico, alineación de imágenes, saltos de línea, radios, bordes, sombras puntuales y estados de interacción. Las texturas de superficie tienen una función acotada, sin competir con las muestras de producto. Las animaciones comunican selección/progreso y respetan movimiento reducido. No se usan esperas artificiales para simular análisis.
 

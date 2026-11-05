@@ -40,6 +40,62 @@ async function skipToResults(quiz, count = 5) {
   await expect(quiz.locator('[data-quiz-results]')).toBeVisible();
 }
 
+async function expectCanonicalResults(quiz) {
+  await expect(quiz.locator('[data-quiz-preferences]')).toHaveCount(1);
+  await expect(quiz.locator('[data-quiz-preferences]')).toBeVisible();
+  await expect(quiz.locator('[data-quiz-product] [data-quiz-reasons]')).toHaveCount(0);
+  const extraContent = await visibleCards(quiz).evaluateAll(nodes => nodes.map(article => {
+    const copy = article.cloneNode(true);
+    copy.querySelectorAll('.card-wrapper, template').forEach(node => node.remove());
+    return copy.textContent.trim();
+  }).filter(Boolean));
+  expect(extraContent).toEqual([]);
+  expect(await quiz.evaluate(root => Boolean(root.querySelector('[data-quiz-preferences]').compareDocumentPosition(root.querySelector('[data-quiz-products]')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+}
+
+test.describe('canonical result grid at mobile width', () => {
+  test.use({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
+  test('shows six products immediately in two columns with PLP spacing', async ({ page }) => {
+    const quiz = await openQuiz(page); await start(quiz); await skipToResults(quiz);
+    await expect(visibleCards(quiz)).toHaveCount(6);
+    await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+    await expectCanonicalResults(quiz);
+    const boxes = await visibleCards(quiz).evaluateAll(nodes => nodes.map(node => node.getBoundingClientRect().toJSON()));
+    expect(boxes[0].y).toBeCloseTo(boxes[1].y, 1);
+    expect(boxes[1].x - boxes[0].right).toBeCloseTo(12, 1);
+    expect(boxes[2].x).toBeCloseTo(boxes[0].x, 1);
+    expect(boxes[2].y - boxes[0].bottom).toBeCloseTo(24, 1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  });
+
+  test('reveals batches of twelve without repeating criteria or resetting an explored swatch', async ({ page }) => {
+    const quiz = await openQuiz(page, 'paginated'); await start(quiz);
+    await quiz.locator('[data-quiz-skip]').click(); await quiz.locator('[data-quiz-skip]').click();
+    await quiz.locator('[data-quiz-tab="patterns"]').click();
+    await quiz.locator('input[name="pattern"][value="tortoise"]').check();
+    await quiz.locator('[data-quiz-next]').click(); await skipToResults(quiz, 2);
+    await expect(visibleCards(quiz)).toHaveCount(12);
+    await expectCanonicalResults(quiz);
+    await expect(quiz.locator('[data-quiz-preferences]')).toContainText('Carey / vetas');
+    const first = visibleCards(quiz).first();
+    await first.getByRole('button', { name: 'Azul', exact: true }).click();
+    const blueURL = await first.locator('a[href*="/products/"]').first().getAttribute('href');
+    await quiz.locator('[data-quiz-more]').click();
+    await expect(visibleCards(quiz)).toHaveCount(24);
+    await expect(first.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(first.locator('a[href*="/products/"]').first()).toHaveAttribute('href', blueURL);
+    await expectCanonicalResults(quiz);
+    await quiz.locator('[data-quiz-more]').click();
+    await expect(visibleCards(quiz)).toHaveCount(27);
+    await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+    const ids = await visibleCards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
+    expect(ids).toEqual(Array.from({ length: 27 }, (_, index) => String(201 + index)));
+    expect(new Set(ids).size).toBe(27);
+    await expect(first.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(quiz.locator('[data-quiz-preferences]')).toContainText('Carey / vetas');
+  });
+});
+
 for (const width of [390, 1440]) {
   test.describe(`quiz journey at ${width}px (real Liquid, fixture Product objects)`, () => {
     test.use({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
@@ -62,10 +118,9 @@ for (const width of [390, 1440]) {
       await skipToResults(quiz);
       await expect(quiz.locator('input:checked')).toHaveCount(0);
       await expect(quiz.locator('[data-quiz-results] h2')).toBeFocused();
-      await expect(visibleCards(quiz)).toHaveCount(3);
-      await expect(quiz.locator('[data-quiz-more]')).toBeVisible();
-      await quiz.locator('[data-quiz-more]').click();
       await expect(visibleCards(quiz)).toHaveCount(6);
+      await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+      await expectCanonicalResults(quiz);
       const ids = await visibleCards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
       expect(ids).toEqual(['101', '102', '103', '104', '105', '106']);
       expect(new Set(ids).size).toBe(ids.length);
@@ -83,10 +138,10 @@ for (const width of [390, 1440]) {
       await quiz.locator('input[name="shape"][value="rectangular"]').check();
       await quiz.locator('[data-quiz-next]').click();
       await skipToResults(quiz, 4);
-      await expect(visibleCards(quiz)).toHaveCount(3);
-      await quiz.locator('[data-quiz-more]').click();
       await expect(visibleCards(quiz)).toHaveCount(5);
-      await expect(visibleCards(quiz).first().locator('[data-quiz-reasons]')).not.toBeEmpty();
+      await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+      await expectCanonicalResults(quiz);
+      await expect(quiz.locator('[data-quiz-preferences]')).toContainText('Rectangulares');
       await quiz.locator('[data-quiz-edit="shape"]').click();
       await expect(quiz.locator('input[name="shape"][value="rectangular"]')).toBeChecked();
       await quiz.locator('input[name="shape"][value="rectangular"]').uncheck();
@@ -128,10 +183,10 @@ for (const axis of ['color', 'pattern']) {
     await option.check();
     await quiz.locator('[data-quiz-next]').click();
     await skipToResults(quiz, axis === 'color' ? 3 : 2);
-    await expect(visibleCards(quiz)).toHaveCount(3);
-    await expect(visibleCards(quiz).first().locator('[data-quiz-reasons]')).toContainText(label);
-    await quiz.locator('[data-quiz-more]').click();
     await expect(visibleCards(quiz)).toHaveCount(6);
+    await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+    await expectCanonicalResults(quiz);
+    await expect(quiz.locator('[data-quiz-preferences]')).toContainText(label);
     const variants = await visibleCards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.variantId));
     expect(variants).toEqual(['1011', '1021', '1031', '1041', '1051', '1061']);
     for (const card of await visibleCards(quiz).all()) await expect(card.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
@@ -140,7 +195,7 @@ for (const axis of ['color', 'pattern']) {
 
 test.describe('variant exploration at mobile width', () => {
   test.use({ viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
-  test('keeps reasons honest when exploring another color and restores them on the matching variant', async ({ page }, testInfo) => {
+  test('explores colors within canonical cards while retaining the chosen criteria once above the grid', async ({ page }, testInfo) => {
     const quiz = await openQuiz(page); await start(quiz);
     await quiz.locator('[data-quiz-skip]').click(); await quiz.locator('[data-quiz-skip]').click();
     await quiz.locator('[data-quiz-tab="patterns"]').click();
@@ -154,11 +209,14 @@ test.describe('variant exploration at mobile width', () => {
     await expect(first.locator('a[href*="/products/"]').first()).toHaveAttribute('href', new RegExp(`variant=${variantId}(?:&|$)`));
     await expect(first.getByRole('button', { name: 'Carey', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(first.getByRole('button', { name: 'Azul', exact: true }).locator('.swatch')).toHaveCSS('background-color', 'rgb(51, 79, 131)');
-    const reasons = first.locator('[data-quiz-reasons]');
-    await expect(reasons).toContainText(patternLabel);
-    const matchingReason = await reasons.innerText();
+    await expectCanonicalResults(quiz);
+    const preferences = quiz.locator('[data-quiz-preferences]');
+    await expect(preferences).toContainText(patternLabel);
+    const recommendedURL = await first.locator('a[href*="/products/"]').first().getAttribute('href');
     for (const card of await visibleCards(quiz).all()) {
       const image = card.locator('.card__media img').first();
+      // Product 106 intentionally has no media; its canonical placeholder remains valid.
+      if (!await image.count()) { await expect(card.locator('.card-wrapper')).toBeVisible(); continue; }
       await image.scrollIntoViewIfNeeded();
       await expect.poll(() => image.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
       await expect(image).toBeVisible();
@@ -178,14 +236,16 @@ test.describe('variant exploration at mobile width', () => {
     await page.mouse.move(0, 0);
     await quiz.screenshot({ path: testInfo.outputPath('mobile-results.png') });
     await first.getByRole('button', { name: 'Azul', exact: true }).click();
-    await expect(reasons).not.toContainText(patternLabel);
-    await expect(reasons).not.toHaveText(matchingReason);
+    await expectCanonicalResults(quiz);
+    await expect(preferences).toContainText(patternLabel);
+    await expect(first.locator('a[href*="/products/"]').first()).not.toHaveAttribute('href', recommendedURL);
     await expect(first.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
-    await quiz.locator('[data-quiz-more]').click();
     await expect(visibleCards(quiz)).toHaveCount(6);
-    await expect(reasons).not.toContainText(patternLabel);
+    await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
     await first.getByRole('button', { name: 'Carey', exact: true }).click();
-    await expect(reasons).toHaveText(matchingReason);
+    await expect(first.locator('a[href*="/products/"]').first()).toHaveAttribute('href', recommendedURL);
+    await expect(preferences).toContainText(patternLabel);
+    await expectCanonicalResults(quiz);
     await expect(first.getByRole('button', { name: 'Carey', exact: true })).toHaveAttribute('aria-pressed', 'true');
   });
 });

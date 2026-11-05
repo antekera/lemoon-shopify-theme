@@ -9,6 +9,25 @@ async function expectNoLiquidErrors(quiz) {
   // Shopify can return HTTP 200 and working JS while rendering missing-snippet errors.
   await expect(quiz).not.toContainText(/Liquid (?:syntax )?error/i);
 }
+async function expectCanonicalResults(page, quiz) {
+  await expect(quiz.locator('[data-quiz-preferences]')).toHaveCount(1);
+  await expect(quiz.locator('[data-quiz-preferences]')).toBeVisible();
+  await expect(quiz.locator('[data-quiz-product] [data-quiz-reasons]')).toHaveCount(0);
+  const extra = await cards(quiz).evaluateAll(nodes => nodes.map(article => {
+    const copy = article.cloneNode(true);
+    copy.querySelectorAll('.card-wrapper, template').forEach(node => node.remove());
+    return copy.textContent.trim();
+  }).filter(Boolean));
+  expect(extra).toEqual([]);
+  expect(await quiz.evaluate(root => Boolean(root.querySelector('[data-quiz-preferences]').compareDocumentPosition(root.querySelector('[data-quiz-products]')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+  if (page.viewportSize().width === 390 && await cards(quiz).count() >= 3) {
+    const boxes = await cards(quiz).evaluateAll(nodes => nodes.slice(0, 3).map(node => node.getBoundingClientRect().toJSON()));
+    expect(boxes[0].y).toBeCloseTo(boxes[1].y, 1);
+    expect(boxes[1].x - boxes[0].right).toBeCloseTo(12, 1);
+    expect(boxes[2].x).toBeCloseTo(boxes[0].x, 1);
+    expect(boxes[2].y - boxes[0].bottom).toBeCloseTo(24, 1);
+  }
+}
 async function openQuiz(page) {
   const response = await openStorefrontPage(page, route);
   expect(response.status()).toBe(200);
@@ -31,7 +50,7 @@ async function skipSteps(quiz, count) {
 async function expandAll(quiz) {
   const more = quiz.locator('[data-quiz-more]');
   // Bounded by the documented 50-product curated collection contract.
-  for (let i = 0; i < 17 && await more.isVisible(); i++) await more.click();
+  for (let i = 0; i < 5 && await more.isVisible(); i++) await more.click();
   await expect(more).toBeHidden();
 }
 
@@ -56,7 +75,10 @@ test('five optional style stages retain selections, show the complete editorial 
   await expect(results.locator('h2')).toBeFocused();
   await expect(quiz.locator('input:checked')).toHaveCount(0);
   await expect(quiz.getByText(/editorial/i).first()).toBeVisible();
-  expect(await cards(quiz).count()).toBeGreaterThan(0);
+  const editorialCount = await quiz.locator('[data-quiz-product]').evaluateAll(nodes => new Set(nodes.filter(node => JSON.parse(node.dataset.candidate).available).map(node => node.dataset.id)).size);
+  await expect(cards(quiz)).toHaveCount(Math.min(12, editorialCount));
+  if (editorialCount <= 12) await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+  await expectCanonicalResults(page, quiz);
   await expandAll(quiz);
   const ids = await cards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
   expect(ids.length).toBeGreaterThan(3);
@@ -75,6 +97,7 @@ test('pattern matching preserves a single recommended variant through the canoni
   await skipSteps(quiz, 2);
   const patterns = quiz.locator('[data-quiz-tab="patterns"]');
   if (await patterns.count()) await patterns.click();
+  const patternLabel = await quiz.locator('label:has(input[name="pattern"][value="tortoise"]) [data-quiz-option-label]').innerText();
   await quiz.locator('input[name="pattern"][value="tortoise"]').check();
   await quiz.locator('[data-quiz-next]').click();
   await expectNoLiquidErrors(quiz);
@@ -87,12 +110,20 @@ test('pattern matching preserves a single recommended variant through the canoni
   expect(new Set(ids).size).toBe(ids.length);
   const first = cards(quiz).first();
   const variantId = await first.getAttribute('data-variant-id');
-  await expect(first.locator('[data-quiz-reasons]')).not.toBeEmpty();
+  await expectCanonicalResults(page, quiz);
+  await expect(quiz.locator('[data-quiz-preferences]')).toContainText(patternLabel);
   const link = first.locator('a[href*="/products/"]').first();
   const href = await link.getAttribute('href');
   expect(new URL(href, 'https://lemoon.cl').searchParams.get('variant')).toBe(variantId);
   const selected = first.locator('.lemoon-product-card__swatch[aria-pressed="true"]');
   if (await selected.count()) await expect(selected).toHaveAttribute('data-variant-url', new RegExp(`variant=${variantId}(?:&|$)`));
+  const selectedLabel = await selected.getAttribute('aria-label');
+  await first.getByRole('button', { name: 'Azul', exact: true }).click();
+  await expect(first.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expectCanonicalResults(page, quiz);
+  await expect(quiz.locator('[data-quiz-preferences]')).toContainText(patternLabel);
+  await first.getByRole('button', { name: selectedLabel, exact: true }).click();
+  await expect(link).toHaveAttribute('href', href);
   const pdpErrors = [];
   page.on('pageerror', error => pdpErrors.push(error.message));
   await page.goto(href);

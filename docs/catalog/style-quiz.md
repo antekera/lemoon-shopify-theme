@@ -41,7 +41,7 @@ Una variante puede tener varias entradas de un criterio. Si no declara ese crite
 1. Revisar ficha/proveedor, categoría, forma, material, variantes y medidas. Mantener fuente verificable para atributos técnicos. Reutilizar campos existentes y evitar valores contradictorios con opciones o fotografías.
 2. Asignar las entradas de afinidad comunes al producto y las específicas a cada variante desde Shopify. Usar las entradas compartidas existentes. Crear entradas solo dentro del vocabulario que entiende la versión del quiz.
 3. Asociar una fotografía adecuada a cada variante. El resultado debe conservar el mismo color, imagen, precio, disponibilidad y enlace. Verificar los cambios de swatch y la variante al abrir la PDP.
-4. Revisar los casos del quiz en los que debe aparecer, y aquellos en que no corresponde afirmar afinidad. Los atributos desconocidos pueden quedar vacíos y no generan razones de coincidencia.
+4. Revisar los casos del quiz en los que debe aparecer, y aquellos en que no corresponde afirmar afinidad. Los atributos desconocidos pueden quedar vacíos y no aportan puntos de afinidad.
 5. Para datos comerciales comprobados, desactivar `style_quiz_demo`. Activar `style_quiz_ready`. Añadir el producto a la colección elegida en el editor para esta sección. Un producto debe estar disponible en el canal de tienda para que el tema lo encuentre.
 6. Probar la selección, editar preferencias y ampliar resultados. Si no aparece, comprobar colección, habilitación, publicación, variantes disponibles, precio válido y atributos efectivos. No cambiar stock para hacer pasar una prueba.
 
@@ -53,7 +53,7 @@ Este límite es de enumeración, no una garantía de rendimiento. La revisión i
 
 - Cada criterio coincidente aporta un punto, independientemente de cuántas selecciones coincidan dentro de él. Presupuesto, género y forma del rostro no puntúan.
 - Se elige la variante disponible con mayor afinidad de cada producto; los empates conservan orden editorial. El grupo completo contiene productos sin duplicados.
-- Con preferencias hay resultados cuando coincide al menos un criterio. Las razones enumeran solamente los criterios que coincidieron; no se afirma coincidencia total ni se muestran porcentajes inventados.
+- Con preferencias hay resultados cuando coincide al menos un criterio. El resumen editable muestra las preferencias de la búsqueda una sola vez antes del listado; no se afirma que cada producto coincida con todas ellas ni se muestran porcentajes inventados. Las tarjetas conservan su presentación de catálogo, sin texto de afinidad por producto.
 - Sin preferencias se muestra una selección identificada como editorial. Si hay pocas o ninguna coincidencia, el usuario puede editar o ampliar sus preferencias; no se inventan productos o características.
 - El quiz termina en la PDP. Precio inicial del marco, cristales y compatibilidades siguen [ADR-002](../architecture/adr-002-eyewear-purchase.md).
 
@@ -72,3 +72,5 @@ Antes de modificar clasificaciones, capturar valores actuales e IDs. Preferir ca
 Para retirar un producto del recomendador, desactivar `style_quiz_ready`; no hace falta despublicarlo. Para corregir un escenario de prueba, modificar solo los IDs del manifiesto. La restauración debe revisar cambios posteriores antes de aplicar la captura previa; no borrar datos nuevos a ciegas ni eliminar el diccionario compartido si ya lo utilizan productos finales.
 
 La carga masiva dependerá de la herramienta usada y de su soporte de listas de referencias y variantes. El manifiesto es un plan trazable, no un CSV universal ni un script con credenciales. El editor de Shopify es el procedimiento inicial para las altas comerciales. No enviar tokens de administración al tema o al navegador.
+
+Revisión del listado LEM-11: hasta doce productos iniciales y ampliación por doce; en móvil, dos tarjetas por fila. La cantidad visible siempre queda limitada a los productos disponibles del grupo real, sin repetir variantes ni inventar coincidencias para completar una grilla.

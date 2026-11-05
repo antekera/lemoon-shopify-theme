@@ -136,6 +136,12 @@ La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026
 
 Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Hanken Grotesk, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
 
+### Quiz de estilo: resultados de catálogo
+
+En `sections/lemoon-style-quiz.liquid`, los resultados usan `card-product` canónica sin texto de afinidad debajo de cada tarjeta. El resumen editable de preferencias aparece una sola vez antes del listado; describe la búsqueda, sin afirmar que cada producto coincide con todos los criterios. Mantener ranking y selección de variante por afinidad.
+
+La grilla conserva tres columnas de escritorio y dos en tablet. Bajo 750px muestra **dos columnas**, con separación horizontal de 1.2rem y vertical de 2.4rem, como la categoría móvil. Las columnas usan `minmax(0,1fr)` y cada tarjeta puede contraerse. Mostrar hasta doce productos inicialmente y ampliar por doce, siempre limitado al grupo real disponible y sin duplicar variantes de un mismo producto. Esta decisión local fue solicitada por el usuario durante la revisión de LEM-11; no modifica las tarjetas ni grids de otras superficies.
+
 ### Movimiento e interacción
 
 El movimiento comunica respuesta y continuidad de estado; la información necesaria permanece disponible sin animación. Reutilizar las transiciones del componente antes de añadir otra.

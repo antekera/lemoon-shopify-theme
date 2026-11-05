@@ -93,6 +93,8 @@ export function quizProduct(id, { shape = 'rectangular', material = 'acetato', r
 
 export function fixtureProducts(scenario = 'default') {
   if (scenario === 'empty') return [];
+  // 27 eligible products exercise two complete 12-card batches plus a final partial batch.
+  if (scenario === 'paginated') return Array.from({ length: 27 }, (_, index) => quizProduct(201 + index));
   const products = [quizProduct(101, { shape: 'redondo' }), ...[102, 103, 104, 105, 106].map(id => quizProduct(id, { noMedia: id === 106 }))];
   if (scenario === 'unsafe') products[0].title = 'Lente <img src=x onerror="alert(1)">';
   // Ineligible rows test the actual Liquid eligibility boundary.

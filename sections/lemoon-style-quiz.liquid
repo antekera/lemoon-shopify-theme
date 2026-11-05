@@ -38,8 +38,6 @@
     data-count-one-label="{{ 'sections.lemoon_style_quiz_v2.count_one' | t | escape }}"
     data-finished-label="{{ 'sections.lemoon_style_quiz_v2.finished' | t | escape }}"
     data-none-label="{{ 'sections.lemoon_style_quiz_v2.none' | t | escape }}"
-    data-reason-label="{{ 'sections.lemoon_style_quiz_v2.reason_intro' | t | escape }}"
-    data-alternative-label="{{ 'sections.lemoon_style_quiz_v2.variant_alternative' | t | escape }}"
     data-error-label="{{ 'sections.lemoon_style_quiz_v2.loading_error' | t | escape }}">
     <header class="lemoon-quiz__intro" data-quiz-intro>
       <div class="lemoon-quiz__invitation">
@@ -160,7 +158,6 @@
                     {% render 'card-product', card_product: item, recommended_variant: candidate_variant, section_id: card_section_id, skip_styles: true, show_secondary_image: true, show_quick_add: false, show_vendor: false, show_rating: false, lazy_load: true %}
                   </template>
                 {%- endif -%}
-                <p class="lemoon-quiz__reasons" data-quiz-reasons hidden></p>
               </article>
             {%- endfor -%}
           {%- endif -%}
@@ -176,15 +173,6 @@
         <button type="button" class="lemoon-quiz__text-link" data-quiz-restart hidden>{{ 'sections.lemoon_style_quiz_v2.restart' | t }}</button>
         <a href="{{ catalogue_url | escape }}" class="lemoon-quiz__text-link">{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
       </div>
-    </div>
-    <div data-quiz-translations hidden>
-      {%- assign axes = 'shape,color,finish,pattern,material,transparency,use,presence' | split: ',' -%}
-      {%- for axis in axes -%}
-        {%- assign axis_key = 'sections.lemoon_style_quiz_v2.axes.' | append: axis -%}
-        {%- assign reason_key = 'sections.lemoon_style_quiz_v2.reasons.' | append: axis -%}
-        <span data-quiz-axis="{{ axis }}">{{ axis_key | t }}</span>
-        <span data-quiz-reason="{{ axis }}">{{ reason_key | t }}</span>
-      {%- endfor -%}
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+const RESULT_BATCH_SIZE = 12;
 const AXES = ['shape', 'color', 'finish', 'pattern', 'material', 'transparency', 'use', 'presence'];
 const ALIASES = {
   shape: { redondo: 'round', rectangular: 'rectangular', 'ojo de gato': 'cat-eye', cat_eye: 'cat-eye', aviador: 'aviator', geometrico: 'geometric', cuadrado: 'square', ovalado: 'oval', pantostico: 'panto' },
@@ -63,8 +64,7 @@ export function initializeQuiz(root) {
   let step = 0;
   let editing = false;
   let ranked = [];
-  let visibleCount = 3;
-  const exploredVariants = new Map();
+  let visibleCount = RESULT_BATCH_SIZE;
   let preparedCards = new WeakSet();
   const readAnswers = () => Object.fromEntries(AXES.map(axis => [axis, [...form.querySelectorAll(`input[name="${axis}"]:checked`)].map(input => input.value)]));
   const labelFor = input => input.closest('label')?.querySelector('[data-quiz-option-label]')?.textContent.trim() || input.value;
@@ -97,28 +97,6 @@ export function initializeQuiz(root) {
     try { return new URL(swatch.dataset.variantUrl, document.baseURI).searchParams.get('variant') || ''; }
     catch { return ''; }
   }
-  function updateReasons(product) {
-    const reasons = product.card.querySelector('[data-quiz-reasons]');
-    if (!reasons) return;
-    const key = String(product.id);
-    const choice = exploredVariants.has(key)
-      ? candidates.find(candidate => String(candidate.id) === key && String(candidate.variantId) === exploredVariants.get(key))
-      : product;
-    const actual = choice ? rankProducts([choice], readAnswers())[0] : null;
-    if (!actual) {
-      reasons.hidden = false;
-      reasons.textContent = root.dataset.alternativeLabel || '';
-      return;
-    }
-    reasons.hidden = actual.editorial;
-    const parts = actual.matched.map(axis => {
-      const matchedValues = valuesFor(axis, actual.attributes?.[axis]);
-      const labels = [...form.querySelectorAll(`input[name="${axis}"]:checked`)].filter(input => matchedValues.includes(valuesFor(axis, [input.value])[0])).map(labelFor);
-      const axisLabel = root.querySelector(`[data-quiz-axis="${axis}"]`)?.textContent.trim() || axis;
-      return `${axisLabel}: ${labels.join(', ')}`;
-    });
-    reasons.textContent = parts.length ? `${root.dataset.reasonLabel || ''} ${parts.join(' · ')}`.trim() : '';
-  }
   function showCards(announce = false) {
     cards.forEach(card => { card.hidden = true; });
     ranked.slice(0, visibleCount).forEach(product => {
@@ -131,25 +109,14 @@ export function initializeQuiz(root) {
         if (initialSwatch && initialSwatch.getAttribute('aria-pressed') !== 'true') initialSwatch.click();
         preparedCards.add(card);
       }
-      updateReasons(product);
     });
     more.hidden = visibleCount >= ranked.length;
     grid.dispatchEvent(new CustomEvent('lemoon:featured-products-updated', { bubbles: true, detail: { root: grid } }));
     if (announce && status) status.textContent = root.querySelector('[data-quiz-result-count]')?.textContent || '';
   }
-  grid.addEventListener('click', event => {
-    const swatch = event.target.closest?.('.lemoon-product-card__swatch');
-    const card = swatch?.closest('[data-quiz-product]');
-    if (!card || !grid.contains(card)) return;
-    const product = ranked.find(candidate => candidate.card === card);
-    if (!product) return;
-    exploredVariants.set(String(product.id), swatchVariant(swatch));
-    updateReasons(product);
-  });
   function showResults() {
     ranked = rankProducts(candidates, readAnswers());
-    visibleCount = 3;
-    exploredVariants.clear();
+    visibleCount = RESULT_BATCH_SIZE;
     preparedCards = new WeakSet();
     form.hidden = true;
     intro.hidden = true;
@@ -179,7 +146,6 @@ export function initializeQuiz(root) {
     editing = false;
     step = 0;
     ranked = [];
-    exploredVariants.clear();
     form.querySelectorAll('details').forEach(details => { details.open = false; });
     tab('finishes');
     form.hidden = true;
@@ -218,7 +184,7 @@ export function initializeQuiz(root) {
   }));
   more.addEventListener('click', () => {
     const previouslyVisible = visibleCount;
-    visibleCount += 3;
+    visibleCount += RESULT_BATCH_SIZE;
     showCards(true);
     // The activated button may disappear after the final batch. Keep focus in the newly revealed group.
     const newlyShown = ranked[previouslyVisible]?.card.querySelector('a,button');

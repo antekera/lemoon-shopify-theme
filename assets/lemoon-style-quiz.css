@@ -68,7 +68,6 @@
 .lemoon-quiz__preference [data-quiz-preference-value] { color: var(--lemoon-text-secondary); overflow-wrap: anywhere; }
 .lemoon-quiz__products { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--lemoon-space-8) var(--lemoon-space-6); margin: var(--lemoon-space-6) 0; }
 .lemoon-quiz__product { min-width: 0; }
-.lemoon-quiz__reasons { font-size: var(--lemoon-fs-12); color: var(--lemoon-text-secondary); margin-top: var(--lemoon-space-3); }
 @media (max-width: 989px) {
   .lemoon-quiz__intro { gap: var(--lemoon-space-6); }
   .lemoon-quiz__stage { gap: var(--lemoon-space-6); grid-template-columns: minmax(0,.9fr) minmax(0,1.3fr); }
@@ -90,7 +89,7 @@
   .lemoon-quiz__option-group > h3 { margin-bottom: var(--lemoon-space-2); }
   .lemoon-quiz__actions { justify-content: flex-start; }
   .lemoon-quiz__flow > .lemoon-quiz__actions .lemoon-quiz__button { min-width: 14rem; }
-  .lemoon-quiz__products { grid-template-columns: minmax(0,1fr); }
+  .lemoon-quiz__products { grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: var(--lemoon-space-3); row-gap: var(--lemoon-space-6); }
   .lemoon-quiz__preference { font-size: var(--lemoon-fs-12); }
   .lemoon-quiz__preference [data-quiz-preference-value] { max-width: 24ch; }
 }
