@@ -46,10 +46,14 @@ test('contact redisplays form before customer values, escapes once, and exposes 
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).not.toMatch(/mailto:|wa\.me/);
   }
-  const configured = render('lemoon-contact-page', { context: { shop: { policies: [{ url: '/policies/contact-information', body: '<p><a href="mailto:test@example.test">test@example.test</a></p>' }] } }, settings: { whatsapp_url: 'https://example.test/chat?a=1&b=2', contact_hours: 'Fixture hours' } });
+  const configured = render('lemoon-contact-page', { context: { shop: { policies: [{ url: '/policies/contact-information', body: '<p><a href="mailto:test@example.test">test@example.test</a></p>' }] } }, settings: { contact_email: 'fallback@example.test', whatsapp_url: 'https://example.test/chat?a=1&b=2', contact_hours: 'Fixture hours' } });
   expect(configured).toContain('mailto:test@example.test');
+  expect(configured).not.toContain('fallback@example.test');
   expect(configured).toContain('https://example.test/chat?a=1&amp;b=2');
   expect(configured).toContain('Fixture hours');
+  const fallback = render('lemoon-contact-page', { settings: { contact_email: 'hola@example.test' } });
+  expect(fallback).toContain('mailto:hola@example.test');
+  expect(fallback).toContain('>hola@example.test</a>');
 });
 
 test('contact template selects custom section and editor settings are localized and padded', () => {
@@ -61,7 +65,8 @@ test('contact template selects custom section and editor settings are localized 
   expect(schema.disabled_on.groups).toEqual(['header', 'footer']);
   expect(schema.presets[0].name).toBe('t:sections.lemoon_contact_page.name');
   expect(schema.settings.filter(({ type }) => type === 'range').map(({ id }) => id)).toEqual(['padding_top', 'padding_bottom']);
-  for (const setting of schema.settings.filter(({ id }) => ['contact_hours', 'whatsapp_url'].includes(id))) expect(setting.default).toBeUndefined();
+  for (const setting of schema.settings.filter(({ id }) => ['contact_email', 'contact_hours', 'whatsapp_url'].includes(id))) expect(setting.default).toBeUndefined();
+  expect(template.sections.main.settings.contact_email).toBe('hola@lemoon.cl');
   expect(section).toContain('#shopify-section-{{ section.id }}');
 });
 
@@ -86,4 +91,6 @@ test('contact information uses the native policy and ignores unrelated or missin
   expect(renderWith([policy('/policies/refund-policy', '<p>Refund only</p>')])).not.toContain('Refund only');
   expect(renderWith([policy('/es/policies/contact-information', '<p>Updated contact</p>')])).toContain('<p>Updated contact</p>');
   expect(renderWith([policy('/policies/contact-information', '')])).not.toContain('lemoon-contact__channels rte');
+  expect(render('lemoon-contact-page', { context: { shop: { policies: [policy('/policies/contact-information', '')] } }, settings: { contact_email: 'hola@example.test' } })).toContain('mailto:hola@example.test');
+  expect(render('lemoon-contact-page', { context: { shop: { policies: [policy('/policies/refund-policy', '<p>Refund only</p>')] } }, settings: { contact_email: 'quoted"<&@example.test' } })).toContain('mailto:quoted&#34;&lt;&amp;@example.test');
 });

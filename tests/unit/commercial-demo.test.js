@@ -36,8 +36,11 @@ test('sample content remains editable while Nosotros opts out and contact stays 
    expect(settings.demo_data).toBe(false);
    expect(settings).not.toHaveProperty('demo_content');
    expect(settings.content).toMatch(/<h2>/);
+  } else if (handle === 'contact') {
+   expect(settings.demo_data).toBe(false);
+   expect(settings).not.toHaveProperty('demo_content');
   } else {
-   expect(settings.demo_data).toBe(handle !== 'contact');
+   expect(settings.demo_data).toBe(true);
    expect(settings.demo_content).toBe(content);
   }
  }

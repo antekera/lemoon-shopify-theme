@@ -4,6 +4,7 @@
       "type": "lemoon-contact-page",
       "settings": {
         "demo_data": false,
+        "contact_email": "hola@lemoon.cl",
         "padding_top": 64,
         "padding_bottom": 64
       }
