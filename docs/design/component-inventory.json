@@ -1641,7 +1641,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-launch-page.liquid",
-        "scope": "Layout password y newsletter nativa tienen su cadena CSS y contexto propios.",
+        "scope": "Layout password y newsletter nativa tienen su cadena CSS y contexto propios. Launch usa título informativo, introducción breve y CTA lemon con texto navy; el header móvil separa logo y acceso por contraseña con --lemoon-space-8.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
