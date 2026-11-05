@@ -13,6 +13,7 @@ async function openQuiz(page) {
   const response = await openStorefrontPage(page, route);
   expect(response.status()).toBe(200);
   await expect(page).not.toHaveURL(/\/password/);
+  await expectNoLiquidErrors(page.locator('body'));
   const quiz = page.locator('[data-style-quiz]');
   await expect(quiz).toBeVisible();
   await expectNoLiquidErrors(quiz);
@@ -92,9 +93,12 @@ test('pattern matching preserves a single recommended variant through the canoni
   expect(new URL(href, 'https://lemoon.cl').searchParams.get('variant')).toBe(variantId);
   const selected = first.locator('.lemoon-product-card__swatch[aria-pressed="true"]');
   if (await selected.count()) await expect(selected).toHaveAttribute('data-variant-url', new RegExp(`variant=${variantId}(?:&|$)`));
+  const pdpErrors = [];
+  page.on('pageerror', error => pdpErrors.push(error.message));
   await page.goto(href);
   await expect(page.locator('#MainContent h1').first()).toBeVisible();
   await expectNoLiquidErrors(page.locator('#MainContent'));
+  expect(pdpErrors).toEqual([]);
   expect(new URL(page.url()).searchParams.get('variant')).toBe(variantId);
 });
 
@@ -104,6 +108,7 @@ test('without JavaScript visitors can browse a real editorial selection and cata
   try {
     const response = await page.goto(route); expect(response.status()).toBe(200);
     const quiz = page.locator('[data-style-quiz]');
+    await expectNoLiquidErrors(page.locator('body'));
     await expect(quiz).toBeVisible();
     await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
     await expect(quiz.locator('noscript')).toBeVisible();
