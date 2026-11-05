@@ -18,7 +18,7 @@
 - Product `custom.style_quiz_ready` boolean gates eligibility; `custom.style_quiz_demo` boolean identifies synthetic test assignments. Do not alter existing compatibility, price, inventory, status or images.
 - Curated collection supports up to 50 products, up to 20 variants each; report this bound to operators. Configured collection supplies future classified products without code edits. Further scaling is explicit, not silently advertised as whole-catalog ranking.
 - Locale prefix `sections.lemoon_style_quiz_v2`. Preserve old translations for compatibility but remove budget UI/runtime.
-- First-stage visual implementation uses existing Lemoon tokens/type/icons and replaceable SVG/editorial media. No Shopify theme push/publication authorized.
+- First-stage visual implementation uses existing Lemoon tokens/type/icons and replaceable SVG/editorial media. Development push to `189557964968` authorized subsequently; production publication remains unauthorized.
 
 ## Review Focus
 
@@ -73,8 +73,15 @@
 - [x] Exercise intro→result, multiselect, skip clearing, back/edit, show-more, reasons, demo label, no-JS, responsive/keyboard and absent media states.
 - [x] Run relevant unit/e2e suites, Theme Check and diff checks; preserve local-vs-Shopify evidence boundaries.
 - [x] Independent code/conventions review and fixes complete; inventory and local handoff prepared.
-- [ ] Shopify storefront QA and human review remain pending; no merge, ticket completion or publication without their respective review/authorization.
+- [x] Shopify storefront QA: 9/9 Chromium cases on desktop/tablet/mobile against development theme `189557964968`, runtime `9c3d06eb`, final guards `51e3a0ab`; incomplete remote dependencies restored from repository, preview explicitly uses `view=buscar-mi-estilo`.
+- [ ] Human review remains pending; no merge, ticket completion or production publication without their respective review/authorization.
 
 ## Execution record
 
 2026-11-05: User explicitly authorized implementation of the presented plan. Continue without another approval round. Existing worktree reused; feature branch `feat/lem-11-style-quiz` fast-forwarded from 43709a87 to local main 5f3aaaef, preserving all research artifacts. Coordinator owns catalog/shared-card/docs; assigned implementer, writer and test engineer own disjoint files. Do not commit other agents' unfinished files or modify main.
+
+2026-11-05: User authorized the development-theme ID correction and continued upload/QA. Operational instructions updated in `9c3d06eb`; 13 quiz files plus existing `templates/product.json` uploaded to `189557964968`. Remote contact-copy difference preserved in scoped locale upload. Visual QA caught an absent icon snippet; RED added, then a104-path static dependency audit restored14 missing existing quiz/PDP dependencies. Extended layout audit covered 187 paths and restored 11 additional existing files, including global.js. Final read-back of all 39 deployed files matched; test guards and ID validation committed in d008f7ce and 51e3a0ab. Storefront 9/9 and Theme Check 303/no offenses passed. Human review and stage-2 visual finishing remain open.
+
+Public-page assignment remains unchanged: Admin Page161787576488 is published with null templateSuffix. The authorized development preview forces view=buscar-mi-estilo; canonical routing without view and public release remain pending. No production publish or page-assignment change.
+
+Final real QA: storefront 9/9 in36.0s and visual PASS at390/820/1440 over51e3a0ab, including PDP without JS errors. Images/fonts loaded, no overflow, exact current price/variant preserved; root inspected three representative screenshots. Test-role evidence in /tmp/lem-11-shopify-qa-2026-11-05/. Human review, canonical public routing and stage2 remain pending.
