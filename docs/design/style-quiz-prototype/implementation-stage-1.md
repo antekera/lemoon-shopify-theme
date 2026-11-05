@@ -10,7 +10,7 @@ Fecha: 05-11-2026. Base: `5f3aaaefd5b93e492477636088f7f70ae13e73b9`. Rama: `feat
 - Resumen editable de preferencias una sola vez antes del listado. Las tarjetas mantienen su presentación canónica de catálogo, sin texto de afinidad por producto; explorar un swatch conserva imagen, precio y enlace de esa variante.
 - Tarjetas canónicas con contrato opcional de variante inicial: media/precio/URL/swatch coherentes, conservación de talla al cambiar color y fallback neutro cuando falta media. Consumidores existentes conservan su comportamiento sin ese parámetro.
 - Colección y catálogo Shopify, sin atributos de afinidad en bloques ni presupuesto. Fallback editorial sin JavaScript y aviso explícito de demostración.
-- Estilo base con tokens existentes y H1/H2 según DESIGN.md; las ilustraciones y la fotografía editorial son provisionales. El perfeccionamiento visual de etapa 2 queda pendiente.
+- Estilo base con tokens existentes y H1/H2 según DESIGN.md; las ilustraciones y la fotografía editorial son provisionales. El primer pase de acabado visual de etapa 2 se entrega en `7c689dfe`; las macros reales de materiales/producto siguen sujetas a fuentes verificadas.
 
 ## Shopify
 
@@ -56,7 +56,7 @@ Los revisores tuvieron responsabilidad de solo lectura, sin aislamiento técnico
 ## Pendientes y límites
 
 1. Asignación final de plantilla y verificación de URL sin `view` durante la salida pública autorizada; revisión humana del entregable y del acabado visual. La suite de storefront ya se ejecutó contra Shopify; el editor de temas no se verificó en esta etapa. Publicación en producción y merge conservan sus autorizaciones independientes.
-2. Revisar la etapa funcional y desarrollar el acabado visual de las tres pantallas representativas antes de extenderlo a todo el flujo.
+2. Revisar humanamente el primer pase de acabado visual de entrada, detalles y resultados; futuras macros deben basarse en imágenes verificadas del catálogo final.
 3. Verificar fotografías y atributos comerciales de los productos finales, reemplazando escenarios de demostración.
 4. Medir rendimiento antes de ampliar el conjunto inicial. El máximo de enumeración 50×20 produce unos 7,27 MB de HTML en un fixture; templates inertes posponen imágenes, no bytes de HTML. No se ha validado ese máximo en Shopify.
 
@@ -103,3 +103,16 @@ RED de los dos nuevos E2E confirmado con el runtime anterior (tres productos fre
 Se subieron solo `assets/lemoon-style-quiz.css`, `assets/lemoon-style-quiz.js` y `sections/lemoon-style-quiz.liquid` al tema de desarrollo `189557964968`. La descarga posterior coincidió byte por byte en los tres archivos. Theme Check: 301 archivos sin ofensas. `DESIGN.md`, guía, estrategia e inventarios reflejan el contrato actualizado. La vista previa conserva `view=buscar-mi-estilo`; no se modificó la asignación global de la página ni producción.
 
 QA móvil real final del ajuste: PASS, 390px de viewport y grilla de 173px +12px +173px, separación vertical24px; cinco productos visibles inicialmente, resumen único antes del listado y cero elementos data-quiz-reasons. Las cinco imágenes cargaron; precios vigentes, enlaces y variantes concordaron con los candidatos. Sin overflow ni errores JavaScript; swatches Azul/Carey correctos. La ampliación por doce se verifica con el fixture local de 27 productos porque el catálogo real mantiene cinco. Evidencia nueva: `/tmp/lem-11-results-grid-2026-11-05/summary.json`, `report.json`, `storefront.log`, `390-results.png` y `390-results-viewport.png`. Root inspeccionó la captura final; cookies temporales eliminadas.
+
+
+## Primer pase de acabado visual — etapa 2
+
+El usuario pidió avanzar en paralelo al siguiente paso del quiz. La [spec de acabado](visual-finishing-spec.md) concreta la dirección editorial con momentos lúdicos y distingue las capturas inspeccionadas del Figma no reabierto. Implementación `7c689dfe78d4ce5a6c1c1a984ec1a5208f4fa2c9`: marco cálido para la fotografía existente completa, muestras SVG comparables (Liso uniforme, Carey orgánico, Mate/Brillante con distinta luz), indicador de selección visible en reposo, pista compartida de pestañas y recapitulación móvil compacta en dos columnas con Detalles a ancho completo. No cambian textos, ranking, metadatos, tarjetas, dos columnas de productos ni lotes de doce.
+
+Validación local: **38/38 unitarias**, **13/13 E2E**, QA en 320/390/749/750/820/989/990/1440, teclado, objetivos de edición≥48px, clic real del indicador, forced-colors/reduced-motion, fuentes e imágenes cargadas y sin overflow ni errores JS. La regresión estructural renderiza dos secciones para comprobar IDs SVG únicos y referencias locales resueltas. Theme Check: **304 archivos sin ofensas**.
+
+Revisión de diseño independiente: **Approve**, sin P1/P2, siete capturas locales y diff comparados con la spec; no reabrió Figma ni afirmó permisos técnicamente aislados. Se subieron solo el CSS y los dos snippets del acabado al tema de desarrollo `189557964968`; descarga posterior idéntica en los tres archivos.
+
+Verificación real posterior: **9/9 storefront en 38,5 s**; entrada/detalles/resultados en 390/820/1440, sin Liquid errors, errores JavaScript ni overflow. Seis defs/refs SVG resueltas y sin duplicados; indicador seleccionable, cinco controles de edición≥48px, grilla móvil 173px+12px+173px y separación vertical24px. Las cinco cards reales conservaron imagen, precio y variante; no se alteró catálogo ni producción. Root inspeccionó tres capturas reales representativas.
+
+Evidencia: `/tmp/lem-11-visual-finish-2026-11-05/real-summary.json`, `real-report.json`, `real-storefront.log`, capturas `real-*` y su versión `-viewport`. Los reportes/capturas `local-*` son fixtures y no se confunden con Shopify. Cookies temporales eliminadas. Chromium únicamente; editor de temas, Figma y navegadores/dispositivos adicionales no se verificaron. La URL de revisión sigue seleccionando `view=buscar-mi-estilo`; asignación pública y producción continúan pendientes de su salida autorizada.
