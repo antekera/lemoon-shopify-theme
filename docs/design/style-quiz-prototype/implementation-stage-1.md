@@ -6,8 +6,8 @@ Fecha: 05-11-2026. Base: `5f3aaaefd5b93e492477636088f7f70ae13e73b9`. Rama: `feat
 
 - Entrada y cinco etapas con multiselección, omisión, volver, edición y reinicio.
 - Atributos independientes para forma, color, acabado, patrón, material, transparencia, uso y presencia. Oversize no se deduce de talla.
-- Ranking de todo el grupo pertinente, una mejor variante disponible por producto; tres tarjetas iniciales y ampliación conservando orden y preferencias.
-- Resumen editable y razones de coincidencia. Al explorar otro swatch las razones cambian o se identifica la variante como alternativa.
+- Ranking de todo el grupo pertinente, una mejor variante disponible por producto; hasta doce tarjetas iniciales y ampliación por doce, conservando orden y preferencias.
+- Resumen editable de preferencias una sola vez antes del listado. Las tarjetas mantienen su presentación canónica de catálogo, sin texto de afinidad por producto; explorar un swatch conserva imagen, precio y enlace de esa variante.
 - Tarjetas canónicas con contrato opcional de variante inicial: media/precio/URL/swatch coherentes, conservación de talla al cambiar color y fallback neutro cuando falta media. Consumidores existentes conservan su comportamiento sin ese parámetro.
 - Colección y catálogo Shopify, sin atributos de afinidad en bloques ni presupuesto. Fallback editorial sin JavaScript y aviso explícito de demostración.
 - Estilo base con tokens existentes y H1/H2 según DESIGN.md; las ilustraciones y la fotografía editorial son provisionales. El perfeccionamiento visual de etapa 2 queda pendiente.
@@ -22,9 +22,10 @@ La [guía de operación](../../catalog/style-quiz.md) explica atributos, herenci
 
 | Comprobación | Evidencia |
 | --- | --- |
-| Suite unitaria completa | 44 archivos, **418 pruebas aprobadas**, Node 24.19.0 |
-| E2E de quiz | **11 pruebas Chromium aprobadas**, móvil 390 px y escritorio 1440 px |
-| Theme Check | **303 archivos sin ofensas** |
+| Suite unitaria completa, entrega inicial | 44 archivos, **418 pruebas aprobadas**, Node 24.19.0; registro previo al ajuste del listado |
+| Unitarias afectadas, revisión de listado | **37/37 aprobadas**, ranking, serialización y tarjetas, Node 24.19.0 |
+| E2E de quiz, revisión de listado | **13/13 pruebas Chromium aprobadas**, móvil 390 px y escritorio 1440 px, escenario paginado de 27 productos |
+| Theme Check, revisión de listado | **301 archivos sin ofensas** |
 | Diff y JSON | `git diff --check` y validación de JSON/enlaces locales, correctos |
 | Catálogo | Lectura Admin API antes/después y comparación de datos preexistentes |
 | Visual local | Entrada/detalles/resultados móviles, fuentes Urbanist/Hanken cargadas, imágenes y swatches visibles |
@@ -91,3 +92,14 @@ La navegación natural sin `view` no constituye evidencia de la nueva plantilla:
 QA visual independiente final: **PASS** sobre `51e3a0abe2170096bc97a6303f7ca5f387690d2c`, Chromium 390/820/1440 px, entrada/forma/detalles/resultados/swatch. Tres tarjetas iniciales se ampliaron a cinco productos únicos; Carey/Azul mantuvieron precio vigente, imagen, enlace y razones coherentes. La ficha adicional conservó el ID de variante y precio de su candidato, sin errores JavaScript. Root inspeccionó las capturas finales de entrada móvil, detalles tablet y resultados escritorio. No se probaron Safari/Firefox ni dispositivos físicos.
 
 Evidencia real separada de los fixtures: `/tmp/lem-11-shopify-qa-2026-11-05/summary-final.json`, `report.json`, `storefront-final.log` y capturas de los cinco estados por ancho. Los dos RED quedaron archivados en `before-icon-fix/` y `before-global-js-fix/`. Se eliminaron las cookies temporales. `python3 scripts/test_codex_workflows.py all` y `git diff --check` pasan.
+
+
+## Revisión del listado solicitada por el usuario
+
+Implementación `678a88ec`: dos tarjetas por fila bajo 750px, separaciones de 1.2rem/2.4rem como categorías y hasta doce productos iniciales con ampliación por doce. Se eliminó el texto de afinidad debajo de cada tarjeta; el resumen editable aparece una sola vez antes de la grilla. No cambió la tarjeta canónica, el ranking, la elegibilidad ni el catálogo. El resumen describe preferencias y no atribuye todos los criterios a cada producto. Se mantiene el swatch explorado al ampliar y se restablece la variante recomendada al recalcular preferencias.
+
+RED de los dos nuevos E2E confirmado con el runtime anterior (tres productos frente a seis/doce). GREEN: 37/37 unitarias afectadas, 13/13 E2E locales y 9/9 storefront Shopify (38,0 s). El fixture de 27 productos comprobó 12→24→27, deduplicación y conservación del swatch. El storefront conserva la comprobación de variante/precio/enlace, errores Liquid/JavaScript y fallback sin JS. La revisión independiente acotada de `theme-code-reviewer` aprobó sin P1/P2; responsabilidad de lectura sin aislamiento técnico de permisos.
+
+Se subieron solo `assets/lemoon-style-quiz.css`, `assets/lemoon-style-quiz.js` y `sections/lemoon-style-quiz.liquid` al tema de desarrollo `189557964968`. La descarga posterior coincidió byte por byte en los tres archivos. Theme Check: 301 archivos sin ofensas. `DESIGN.md`, guía, estrategia e inventarios reflejan el contrato actualizado. La vista previa conserva `view=buscar-mi-estilo`; no se modificó la asignación global de la página ni producción.
+
+QA móvil real final del ajuste: PASS, 390px de viewport y grilla de 173px +12px +173px, separación vertical24px; cinco productos visibles inicialmente, resumen único antes del listado y cero elementos data-quiz-reasons. Las cinco imágenes cargaron; precios vigentes, enlaces y variantes concordaron con los candidatos. Sin overflow ni errores JavaScript; swatches Azul/Carey correctos. La ampliación por doce se verifica con el fixture local de 27 productos porque el catálogo real mantiene cinco. Evidencia nueva: `/tmp/lem-11-results-grid-2026-11-05/summary.json`, `report.json`, `storefront.log`, `390-results.png` y `390-results-viewport.png`. Root inspeccionó la captura final; cookies temporales eliminadas.
