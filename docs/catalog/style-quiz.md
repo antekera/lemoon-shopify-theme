@@ -59,6 +59,19 @@ Las muestras y descripciones del diccionario ayudan a mantener el catálogo. El 
 
 La configuración no convierte los ejemplos de talla existentes en medidas certificadas, ni usa estos campos para deducir compacto/intermedio/oversize. Los cinco productos de prueba siguen sin dimensiones ni peso: queda pendiente la carga con información verificada del proveedor.
 
+## Precarga desde Product Studio del back office
+
+El alta inicial reúne fotografías, título, textos y características en un borrador de Product Studio. El operador revisa las propuestas y sus fuentes antes de preparar el producto en Shopify. Estos metadatos forman parte de esa misma carga, no de una clasificación paralela exclusiva del tema.
+
+- Producto: reutilizar `custom.frame_shape`, `custom.frame_material` y los campos físicos existentes. Resolver las entradas de `custom.style_traits` por criterio/código en el diccionario de la tienda.
+- Variante: asociar `custom.style_traits` al ID real de su variante y conservar el reemplazo por criterio. Nunca agregar los atributos de todos los colores al producto o asociarlos por posición de una lista.
+- No copiar los IDs de los productos o metaobjetos de demostración como constantes de integración. No recrear definiciones ni duplicar el diccionario en cada alta.
+- Conservar los estados de revisión, evidencia y aprobación humana. Datos desconocidos permanecen ausentes y la habilitación del quiz requiere decisión explícita; no inferir talla, material o prestaciones desde una foto.
+- Después de la precarga, el comerciante puede editar estos valores desde Shopify. Una repetición del proceso no debe sobrescribir una edición posterior: igualdad permite omitir la escritura; diferencia requiere conciliación; un valor ausente debe protegerse frente a una creación concurrente.
+- El alta de producto nuevo y la asociación de variantes deben respetar las capacidades reales del flujo existente; no se da por implementada la creación automática de variantes por incorporar sus metadatos.
+
+Seguimiento: [PR #9 del back office](https://github.com/antekera/lemoon-next-backoffice/pull/9), [LEM-70 — carga y producción de contenido](https://linear.app/antekera/issue/LEM-70), [LEM-64 — onboarding](https://linear.app/antekera/issue/LEM-64), [LEM-93 — contrato de datos](https://linear.app/antekera/issue/LEM-93) y [LEM-145 — compatibilidad del catálogo](https://linear.app/antekera/issue/LEM-145). El tema consume el resultado de Shopify en [LEM-11](https://linear.app/antekera/issue/LEM-11). La implementación y su evidencia se revisan en el PR; esta guía no acredita un despliegue del back office ni escrituras de productos finales.
+
 ## Alta de un producto final
 
 1. Revisar ficha/proveedor, categoría, forma, material, variantes y medidas. Mantener fuente verificable para atributos técnicos. Reutilizar campos existentes y evitar valores contradictorios con opciones o fotografías.
