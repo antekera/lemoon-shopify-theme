@@ -487,7 +487,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/card-product.liquid",
-        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch coherentes; sin parámetro conserva contrato.",
+        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },

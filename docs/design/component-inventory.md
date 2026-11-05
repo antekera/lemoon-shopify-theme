@@ -322,7 +322,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. `recommended_variant` opcional se valida contra las variantes del producto e inicializa media/precio/URL/swatch conjuntamente para LEM-11; omitido o ajeno conserva el comportamiento anterior. Producto/variantes/media/settings son entradas de dominio.
 
-**Variantes existentes.** Normal/placeholder; media secundaria; color swatches; quick-add; horizontal; masks heredadas. Quick-add se renderiza con show_quick_add y card_product.available; usa selected_or_first_available_variant, quantity=1 y botón disabled si variante no disponible. No hay guard requires_selling_plan en este snippet: limitación a revisar antes de ampliar.
+**Variantes existentes.** Normal/placeholder; media secundaria; color swatches; quick-add; horizontal; masks heredadas. Quick-add se renderiza con show_quick_add y card_product.available; reutiliza card_variant ya validada (selected_or_first_available_variant salvo recommended_variant válida), quantity=1 y botón disabled si variante no disponible. No hay guard requires_selling_plan en este snippet: limitación a revisar antes de ampliar.
 
 **CSS y excepciones.** Outer transparente radio0; media warm radio local12 y ratio100/96, contain; máximo local280px ≥990. Tipografía PLP sobrescribe base. Try-on/favorito son controles de superficie, no prueba de servicio.
 

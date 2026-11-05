@@ -380,8 +380,7 @@
         </div>
       </div>
       {%- if show_quick_add and card_product.available -%}
-        {%- assign quick_add_variant = card_product.selected_or_first_available_variant -%}
-        {%- if has_recommended_variant -%}{%- assign quick_add_variant = card_variant -%}{%- endif -%}
+        {%- assign quick_add_variant = card_variant -%}
         {%- assign quick_add_form_id = 'CardQuickAdd-' | append: section_id | append: '-' | append: card_product.id -%}
         <product-form class="lemoon-product-card__quick-add" data-hide-errors="true">
           {%- form 'product', card_product, id: quick_add_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}

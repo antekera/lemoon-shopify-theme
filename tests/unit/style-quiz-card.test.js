@@ -66,6 +66,8 @@ describe('canonical card recommended variant', () => {
   it('keeps an opted-in quick-add form on the displayed recommended variant', () => {
     const product = quizProduct(1);
     expect(card(product, product.variants[1], { show_quick_add: true })).toContain('name="id" value="12"');
+    expect(card(product, undefined, { show_quick_add: true })).toContain('name="id" value="11"');
+    expect(card(product, quizProduct(2).variants[1], { show_quick_add: true })).toContain('name="id" value="11"');
   });
 
   it('only renders a secondary image associated with the recommended color', () => {
