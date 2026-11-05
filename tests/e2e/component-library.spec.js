@@ -56,6 +56,22 @@ test('contact synthetic response branches expose associated errors and polite su
   await expect(page.getByRole('alert')).toHaveCount(0);
 });
 
+for (const width of [390, 820, 1440]) {
+  test(`contact channels show the confirmed email and WhatsApp action at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(fixture('contact-channels'));
+    await expect(page.getByRole('link', { name: 'hola@lemoon.cl' })).toHaveAttribute('href', 'mailto:hola@lemoon.cl');
+    const whatsapp = page.getByRole('link', { name: 'Contáctanos por WhatsApp' });
+    await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/56973319401');
+    await expect(whatsapp.locator('img')).toHaveAttribute('src', '/assets/lemoon-icon-whatsapp.svg');
+    await expect(page.locator('.lemoon-contact__channels dt')).toHaveCount(1);
+    expect(await whatsapp.evaluate(node => node.getBoundingClientRect().width < node.parentElement.getBoundingClientRect().width)).toBe(true);
+    await whatsapp.focus();
+    await expect(whatsapp).toHaveCSS('outline-style', 'solid');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+  });
+}
+
 test('FAQ opens the first answer and keyboard interaction closes the previously open question across groups', async ({ page }) => {
   await page.goto(fixture('faq-custom'));
   const details = page.locator('.lemoon-faq-page__question');

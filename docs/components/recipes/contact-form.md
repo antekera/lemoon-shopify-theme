@@ -6,6 +6,8 @@ Familias: LM-CONTACT, LM-FIELD, LM-FEEDBACK, LM-ACTION. Volver al [catálogo](..
 
 [lemoon-contact-page](../../../sections/lemoon-contact-page.liquid) conserva `{% form 'contact' %}`, `form`, `customer`, precedencia de valores, errores y respuesta. [field](../../../snippets/lemoon-ui-field.liquid), [message](../../../snippets/lemoon-ui-message.liquid), [heading](../../../snippets/lemoon-ui-heading.liquid) y [action](../../../snippets/lemoon-ui-action.liquid) presentan esos datos. El contacto Dawn de [contact-form](../../../sections/contact-form.liquid) sigue siendo otro consumidor legacy; no fue migrado automáticamente.
 
+La sección prefiere el cuerpo de la política nativa de información de contacto si Shopify lo expone en `shop.policies`. Si no aparece, muestra el ajuste editable `contact_email` configurado en `page.contact.json`; vacío lo oculta. El enlace WhatsApp de Contacto reutiliza el icono y la etiqueta del footer con un fondo de alto contraste, sin un rótulo separado sobre el botón. `whatsapp_url` queda configurado con el número confirmado en `footer-group.json` y es editable en el Admin; los ajustes de ambas secciones son independientes y deben mantenerse coordinados cuando cambie el número. Sin enlace, se oculta. Horarios sólo aparecen con un ajuste explícito. Verificar el render real: la política de contacto del Admin puede no figurar en `shop.policies` del storefront.
+
 | Pieza | Entradas a elegir en el consumidor |
 | --- | --- |
 | field | `kind` input/default o textarea; `id`, `name`, `label`, `type`, `value`, `rows`; `required`, `disabled`, `readonly`, `autocomplete`, `autocorrect`, `autocapitalize`, `aria_required`, `spellcheck`, `placeholder`, `inputmode`, `form_id` |

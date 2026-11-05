@@ -7,6 +7,10 @@
     {%- break -%}
   {%- endif -%}
 {%- endfor -%}
+{%- assign show_contact_email = false -%}
+{%- if contact_policy.body == blank and section.settings.contact_email != blank -%}
+  {%- assign show_contact_email = true -%}
+{%- endif -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .lemoon-contact {
     padding-top: {{ section.settings.padding_top }}px;
@@ -55,6 +59,30 @@
     color: var(--lemoon-text-brand);
     text-underline-offset: .4rem;
     overflow-wrap: anywhere;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__copy a.lemoon-contact__whatsapp {
+    display: inline-flex;
+    justify-self: start;
+    align-items: center;
+    gap: var(--lemoon-space-3);
+    min-height: 4.8rem;
+    padding: var(--lemoon-space-3) var(--lemoon-space-5);
+    border-radius: var(--lemoon-radius-button);
+    background: var(--lemoon-action-primary);
+    color: var(--lemoon-text-inverse);
+    font-family: var(--lemoon-font-heading);
+    font-weight: var(--lemoon-weight-semibold);
+    text-decoration: none;
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__copy a.lemoon-contact__whatsapp:hover {
+    background: var(--lemoon-action-primary-hover);
+  }
+  #shopify-section-{{ section.id }} .lemoon-contact__whatsapp .lemoon-footer__contact-icon {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 2rem;
+    place-items: center;
   }
   #shopify-section-{{ section.id }} .lemoon-contact__faq {
     max-width: 40rem;
@@ -174,12 +202,12 @@
       {%- if contact_policy.body != blank -%}
         <div class="lemoon-contact__channels rte">{{ contact_policy.body }}</div>
       {%- endif -%}
-      {%- if section.settings.whatsapp_url != blank or section.settings.contact_hours != blank -%}
+      {%- if show_contact_email or section.settings.contact_hours != blank -%}
       <dl class="lemoon-contact__channels">
-        {%- if section.settings.whatsapp_url != blank -%}
+        {%- if show_contact_email -%}
           <div>
-            <dt>{{ 'sections.lemoon_contact_page.whatsapp_channel' | t }}</dt>
-            <dd><a href="{{ section.settings.whatsapp_url | escape }}">{{ 'sections.lemoon_contact_page.whatsapp_link' | t }}</a></dd>
+            <dt>{{ 'sections.lemoon_contact_page.email_channel' | t }}</dt>
+            <dd><a href="mailto:{{ section.settings.contact_email | escape }}">{{ section.settings.contact_email | escape }}</a></dd>
           </div>
         {%- endif -%}
         {%- if section.settings.contact_hours != blank -%}
@@ -189,6 +217,11 @@
           </div>
         {%- endif -%}
       </dl>
+      {%- endif -%}
+      {%- if section.settings.whatsapp_url != blank -%}
+        <div class="lemoon-contact__channels">
+          <a class="lemoon-contact__whatsapp" href="{{ section.settings.whatsapp_url | escape }}" target="_blank" rel="noopener" aria-label="{{ 'sections.lemoon_contact_page.whatsapp_link' | t | escape }}"><span class="lemoon-footer__contact-icon" aria-hidden="true"><img src="{{ 'lemoon-icon-whatsapp.svg' | asset_url }}" alt="" width="20" height="20"></span><span>{{ 'sections.lemoon_contact_page.whatsapp_link' | t }}</span></a>
+        </div>
       {%- endif -%}
       <div class="lemoon-contact__faq">
         {%- assign ui_heading_text = 'sections.lemoon_contact_page.faq_title' | t -%}
@@ -281,6 +314,12 @@
       "id": "demo_content",
       "label": "t:sections.lemoon_demo.content_label",
       "info": "t:sections.lemoon_demo.content_info"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "t:sections.lemoon_contact_page.settings.contact_email.label",
+      "info": "t:sections.lemoon_contact_page.settings.contact_email.info"
     },
     {
       "type": "url",

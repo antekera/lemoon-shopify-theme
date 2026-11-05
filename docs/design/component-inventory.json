@@ -1461,7 +1461,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-contact-page.liquid",
-        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos. La página muestra el cuerpo de la política nativa de información de contacto cuando existe.",
+        "scope": "Formulario Shopify conserva valores, errores y respuesta; controles presentan esos datos. La página prefiere la política nativa de contacto y, si no está disponible, usa contact_email editable y escapado. WhatsApp usa enlace editable e icono compartido con el footer, sin rótulo separado.",
         "recipe_path": "docs/components/recipes/contact-form.md"
       }
     },
