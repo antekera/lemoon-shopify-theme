@@ -868,7 +868,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Fuentes:** [sections/contact-form.liquid](../../sections/contact-form.liquid), [sections/lemoon-contact-page.liquid](../../sections/lemoon-contact-page.liquid).
 
-**Contrato actual.** Form contact nativo; name,email,tel,body con values/form.errors/customer fallback. Lemoon page exige name/email/body, hint de body y prefiere el cuerpo de la política nativa de información de contacto cuando está disponible. Si no lo está, muestra `contact_email` editable y escapado; WhatsApp usa enlace editable, icono compartido con el footer y se oculta sin URL. Horarios y demo_content son opcionales. Dawn contact es otra composición.
+**Contrato actual.** Form contact nativo; name,email,tel,body con values/form.errors/customer fallback. Lemoon page exige name/email/body, hint de body y prefiere el cuerpo de la política nativa de información de contacto cuando está disponible. Si no lo está, muestra `contact_email` editable y escapado; WhatsApp usa enlace editable, icono compartido con el footer, sin rótulo separado, y se oculta sin URL. Horarios y demo_content son opcionales. Dawn contact es otra composición.
 
 **Variantes existentes.** Formulario normal/error/success; panel de canales/FAQ; demo separado de datos confirmados.
 

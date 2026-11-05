@@ -51,6 +51,7 @@ test('contact redisplays form before customer values, escapes once, and exposes 
   expect(configured).not.toContain('fallback@example.test');
   expect(configured).toContain('https://example.test/chat?a=1&amp;b=2');
   expect(configured).toContain('class="lemoon-contact__whatsapp"');
+  expect(configured).not.toContain('<dt>WhatsApp</dt>');
   expect(configured).toContain('lemoon-icon-whatsapp.svg');
   expect(configured).toContain('target="_blank" rel="noopener"');
   expect(configured).toContain('Fixture hours');

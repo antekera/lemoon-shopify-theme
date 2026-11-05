@@ -64,6 +64,8 @@ for (const width of [390, 820, 1440]) {
     const whatsapp = page.getByRole('link', { name: 'Contáctanos por WhatsApp' });
     await expect(whatsapp).toHaveAttribute('href', 'https://wa.me/56973319401');
     await expect(whatsapp.locator('img')).toHaveAttribute('src', '/assets/lemoon-icon-whatsapp.svg');
+    await expect(page.locator('.lemoon-contact__channels dt')).toHaveCount(1);
+    expect(await whatsapp.evaluate(node => node.getBoundingClientRect().width < node.parentElement.getBoundingClientRect().width)).toBe(true);
     await whatsapp.focus();
     await expect(whatsapp).toHaveCSS('outline-style', 'solid');
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
