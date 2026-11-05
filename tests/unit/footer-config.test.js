@@ -3,9 +3,13 @@ import { expect, test } from 'vitest';
 import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
 
 const themeFile = (path) => new URL(`../../${path}`, import.meta.url);
+const readThemeJson = async (path) => {
+  const source = await readFile(themeFile(path), 'utf8');
+  return JSON.parse(source.slice(source.indexOf('{')));
+};
 
 test('configures four footer link columns for desktop and mobile with the first accordion open on mobile', async () => {
-  const group = JSON.parse(await readFile(themeFile('sections/footer-group.json'), 'utf8'));
+  const group = await readThemeJson('sections/footer-group.json');
   const blocks = Object.values(group.sections.footer.blocks);
   const columns = blocks.filter((block) => block.type === 'navigation_column');
   const desktopColumns = columns.filter((block) => block.settings.mobile_only !== true);
@@ -22,7 +26,7 @@ test('configures four footer link columns for desktop and mobile with the first 
 });
 
 test('keeps the approved newsletter copy and footer social settings in the section config', async () => {
-  const group = JSON.parse(await readFile(themeFile('sections/footer-group.json'), 'utf8'));
+  const group = await readThemeJson('sections/footer-group.json');
   const settings = group.sections.footer.settings;
 
   expect(settings.newsletter_heading).toBe('El camino para ver bien y verte bien comienza aquí.');
@@ -38,9 +42,9 @@ test('keeps the approved newsletter copy and footer social settings in the secti
 
 test('puts the configurable contact page link before email and targets the contact form page', async () => {
   const source = await readFile(themeFile('sections/footer.liquid'), 'utf8');
-  const group = JSON.parse(await readFile(themeFile('sections/footer-group.json'), 'utf8'));
+  const group = await readThemeJson('sections/footer-group.json');
   const contactLinks = source.match(/<div class="lemoon-footer__contact-list">([\s\S]*?)<\/div>/)?.[1];
-  const contactTemplate = JSON.parse(await readFile(themeFile('templates/page.contact.json'), 'utf8'));
+  const contactTemplate = await readThemeJson('templates/page.contact.json');
 
   expect(contactLinks).toBeDefined();
   expect(contactLinks.indexOf('contact_link_label')).toBeLessThan(contactLinks.indexOf('email_label'));

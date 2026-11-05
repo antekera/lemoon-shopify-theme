@@ -15,6 +15,7 @@ for (const width of [390, 1280]) {
     await page.route('**/tests/fixtures/announcement-bar.html', route => route.fulfill({ contentType: 'text/html', body: html }));
     await page.goto('/tests/fixtures/announcement-bar.html', { waitUntil: 'commit' });
     await expect(page.locator('main')).toBeVisible();
+    await page.waitForFunction(() => [...document.querySelectorAll('link[rel="stylesheet"]')].every(link => link.sheet));
     const initialTop = await page.locator('main').evaluate(el => el.getBoundingClientRect().top);
     expect(initialTop).toBeGreaterThanOrEqual(width < 750 ? 32 : 36);
     releaseScript();

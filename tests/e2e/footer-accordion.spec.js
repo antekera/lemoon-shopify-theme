@@ -27,6 +27,9 @@ test('slides the footer accordion open and closed on mobile', async ({ page }) =
   expect(opening?.frames[0]).toBe('0px');
   expect(Number.parseFloat(opening?.frames[1])).toBeGreaterThan(0);
 
+  await content.evaluate(async (element) => {
+    await Promise.all(element.getAnimations().map((animation) => animation.finished));
+  });
   await summary.click();
   const closing = await content.evaluate((element) => {
     const animation = element.getAnimations()[0];
