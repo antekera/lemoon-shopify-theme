@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "store": "lemoon-8277.myshopify.com",
+  "scope": "Existing merchant-owned definitions and style-dictionary descriptions; no product or variant value changes.",
+  "metafieldDefinitionUpdates": [
+    {
+      "namespace": "custom",
+      "key": "frame_shape",
+      "ownerType": "PRODUCT",
+      "description": "Forma visual del armazón, según ficha e imágenes. El quiz usa las formas representadas en sus preguntas; no convertir browline o mariposa en otra forma para forzar coincidencias."
+    },
+    {
+      "namespace": "custom",
+      "key": "frame_material",
+      "ownerType": "PRODUCT",
+      "description": "Material confirmado por proveedor. No deducirlo del color, brillo o patrón. Si cambia entre variantes, revisar el modelo antes de atribuirlo a todo el producto."
+    },
+    {
+      "namespace": "custom",
+      "key": "frame_width",
+      "ownerType": "PRODUCT",
+      "description": "Ajuste físico: estrecho, estándar o ancho, según datos verificados. Es independiente de la presencia visual compacto/intermedio/oversize del quiz.",
+      "name": "Ancho físico del armazón"
+    },
+    {
+      "namespace": "custom",
+      "key": "frame_size",
+      "ownerType": "PRODUCT",
+      "description": "Talla física según información verificada. Conservar las opciones existentes; no elegir una talla por apariencia oversize ni usar una medida aislada como ancho total.",
+      "name": "Talla física del armazón"
+    },
+    {
+      "namespace": "custom",
+      "key": "frame_dimensions",
+      "ownerType": "PRODUCT",
+      "description": "Medidas verificadas en mm, como JSON: frame_width, lens_width, bridge, lens_height y temple. Incluir solo medidas conocidas; no estimar ni deducir el ancho total de otra medida.",
+      "pin": true
+    },
+    {
+      "namespace": "custom",
+      "key": "frame_weight",
+      "ownerType": "PRODUCT",
+      "description": "Peso verificado del armazón en gramos. Dejar vacío cuando no se conozca; no calcularlo por apariencia o material.",
+      "pin": true
+    },
+    {
+      "namespace": "custom",
+      "key": "style_traits",
+      "ownerType": "PRODUCT",
+      "description": "Características comunes a todas las variantes: color, acabado, patrón, transparencia, uso y presencia visual. Seleccionar entradas existentes; la variante puede reemplazar cada criterio."
+    },
+    {
+      "namespace": "custom",
+      "key": "style_quiz_ready",
+      "ownerType": "PRODUCT",
+      "description": "Incluir en la guía de estilo después de revisar atributos, variantes e imágenes y añadirlo a la colección del quiz. Con datos sintéticos, mantener activada la marca de demostración."
+    },
+    {
+      "namespace": "custom",
+      "key": "style_quiz_demo",
+      "ownerType": "PRODUCT",
+      "description": "Activar para atributos sintéticos de prueba. Genera aviso de demostración en el quiz; desactivar solo tras verificar las características del producto final."
+    },
+    {
+      "namespace": "custom",
+      "key": "style_traits",
+      "ownerType": "PRODUCTVARIANT",
+      "description": "Características propias de esta variante. Cada criterio indicado reemplaza ese mismo criterio del producto; los demás se heredan. Una lista vacía hereda todo. No combinar atributos de otras variantes."
+    }
+  ],
+  "metaobjectDefinitionId": "gid://shopify/MetaobjectDefinition/37833048232",
+  "metaobjectDefinitionUpdate": {
+    "description": "Diccionario compartido de características de estilo para productos y variantes. Sus códigos deben coincidir con el quiz. Uso y presencia son criterios editoriales; no certifican prestaciones ni ajuste físico.",
+    "fieldDefinitions": [
+      {
+        "update": {
+          "key": "group",
+          "description": "Criterio del atributo: color, acabado (finish), patrón (pattern), transparencia (transparency), uso (use) o presencia visual (presence). Mantener la pareja criterio/código de la guía."
+        }
+      },
+      {
+        "update": {
+          "key": "code",
+          "description": "Código estable que interpreta el quiz. Elegir del vocabulario admitido y conservar su criterio; cambiar un código compartido afecta a todos los productos que lo referencian.",
+          "validations": [
+            {
+              "name": "choices",
+              "value": "[\"black\",\"brown\",\"light\",\"bold\",\"matte\",\"glossy\",\"plain\",\"tortoise\",\"opaque\",\"translucent\",\"transparent\",\"work\",\"everyday\",\"going_out\",\"outdoors\",\"compact\",\"medium\",\"oversize\"]"
+            }
+          ]
+        }
+      },
+      {
+        "update": {
+          "key": "label",
+          "description": "Nombre legible para seleccionar el atributo en Shopify. Los textos actuales del quiz proceden de sus traducciones; cambiar este nombre no cambia las preguntas."
+        }
+      },
+      {
+        "update": {
+          "key": "description",
+          "description": "Criterio de clasificación para quien mantiene el catálogo. No sustituye la ficha del proveedor ni certifica atributos de los productos asociados."
+        }
+      },
+      {
+        "update": {
+          "key": "image",
+          "description": "Muestra de referencia del atributo. No cambia las fotos de producto ni las ilustraciones actuales del quiz.",
+          "validations": [
+            {
+              "name": "file_type_options",
+              "value": "[\"Image\"]"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "traitDescriptions": {
+    "color-black": "Familia cromática negra y gris del armazón. Evaluar el color por separado de patrón, acabado y transparencia.",
+    "color-brown": "Familia cromática café y miel del armazón. Un patrón carey no basta por sí solo para asignar esta familia.",
+    "color-light": "Tonos claros del armazón. Un color claro no implica que el material sea transparente o translúcido.",
+    "color-bold": "Colores protagonistas del armazón, según criterio editorial de la colección. Clasificar por separado patrón y transparencia.",
+    "finish-matte": "Acabado visual mate o de bajo brillo. Confirmar en la ficha o imágenes; no deducir el material.",
+    "finish-glossy": "Acabado visual brillante. Confirmar en la ficha o imágenes; no implica un material o patrón específico.",
+    "pattern-plain": "Superficie visual lisa, sin vetas ni estampado. Se clasifica independientemente del color y material.",
+    "pattern-tortoise": "Patrón carey o de vetas. Asignar la familia de color por separado; el patrón no prueba que el armazón sea café.",
+    "transparency-opaque": "Material visualmente opaco. Clasificar por separado color, brillo y material del armazón.",
+    "transparency-translucent": "Material que deja pasar luz con transparencia parcial. Confirmar con ficha o imágenes; no inferirlo de un tono claro.",
+    "transparency-transparent": "Material visualmente transparente. Confirmar con ficha o imágenes; no inferirlo de un tono claro.",
+    "use-work": "Afinidad editorial para trabajo o estudio. No atribuye filtro azul, graduación ni un tipo de cristal.",
+    "use-everyday": "Afinidad editorial para uso cotidiano. No certifica comodidad, resistencia ni prestaciones técnicas.",
+    "use-going-out": "Afinidad editorial para salir o cambiar de look. Puede combinarse con otros contextos de uso.",
+    "use-outdoors": "Afinidad editorial para paseos al aire libre. No acredita protección UV ni que incluya cristales solares.",
+    "presence-compact": "Presencia visual compacta. No equivale automáticamente a talla pequeña, ajuste estrecho o una medida física.",
+    "presence-medium": "Presencia visual intermedia. Revisar las medidas físicas por separado al comparar ajuste.",
+    "presence-oversize": "Presencia visual oversize o protagonista. No equivale automáticamente a talla grande ni confirma el ajuste físico."
+  },
+  "allowedCodesByGroup": {
+    "color": [
+      "black",
+      "brown",
+      "light",
+      "bold"
+    ],
+    "finish": [
+      "matte",
+      "glossy"
+    ],
+    "pattern": [
+      "plain",
+      "tortoise"
+    ],
+    "transparency": [
+      "opaque",
+      "translucent",
+      "transparent"
+    ],
+    "use": [
+      "work",
+      "everyday",
+      "going_out",
+      "outdoors"
+    ],
+    "presence": [
+      "compact",
+      "medium",
+      "oversize"
+    ]
+  }
+}

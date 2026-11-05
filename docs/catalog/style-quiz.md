@@ -6,12 +6,15 @@ El quiz lee Shopify. Para que un nuevo producto participe se clasifica, se habil
 
 | Dato | Ubicación | Tipo / uso |
 | --- | --- | --- |
-| Forma | Producto → `custom.frame_shape` | Campo existente de texto controlado. Redondo, cuadrado, rectangular, aviador, geométrico, ovalado, pantóstico y ojo de gato conservan significados distintos |
+| Forma | Producto → `custom.frame_shape` | Campo existente de texto controlado. Las diez opciones existentes se conservan. El quiz representa ocho; browline y mariposa no se recodifican como otras formas |
 | Material | Producto → `custom.frame_material` | Campo existente. Acetato, metal, titanio, TR-90, madera o mixto, según datos de proveedor |
 | Afinidades | Producto y variante → `custom.style_traits` | Lista de referencias a entradas de `lemoon_style_trait` |
 | Habilitación | Producto → `custom.style_quiz_ready` | Booleano. Activar después de revisar clasificación, imágenes y variantes |
 | Demostración | Producto → `custom.style_quiz_demo` | Booleano. Activado para escenarios sintéticos; genera aviso visible en el quiz |
-| Medidas | Campos actuales `custom.frame_dimensions`, `frame_size`, `frame_width` | Se conservan; las medidas físicas no determinan automáticamente presencia oversize |
+| Ancho físico | Producto → `custom.frame_width` | Estrecho/estándar/ancho; ajuste físico independiente de presencia visual |
+| Talla física | Producto → `custom.frame_size` | Opciones existentes conservadas; no interpretar oversize como talla |
+| Medidas | Producto → `custom.frame_dimensions` | JSON con medidas verificadas en mm; fijado en la ficha de producto |
+| Peso | Producto → `custom.frame_weight` | Decimal en gramos; fijado en la ficha y vacío si no hay dato confirmado |
 
 Cada entrada de **Afinidad de estilo Lemoon** contiene `group` (criterio), `code` (código estable), `label` (nombre), y opcionalmente `description` e `image`. Las definiciones son propiedad de la tienda, editables por el comerciante y legibles por el storefront; no dependen de una app instalada. La imagen del atributo es una muestra, no sustituye a la fotografía de la variante.
 
@@ -35,6 +38,26 @@ Una variante que declara un criterio reemplaza **todo ese criterio** del product
 Una variante puede tener varias entradas de un criterio. Si no declara ese criterio, lo hereda del producto. Una lista vacía hereda todos los criterios; no funciona como «borrar la herencia». Evitar entradas contradictorias y dejar sin clasificar lo desconocido. Ausencia de dato no puntúa como coincidencia.
 
 «Carey» es patrón: no basta para asignar café. Verificar su familia cromática por separado. El contexto de uso es una selección editorial de estilo y no atribuye filtro azul, protección solar, resistencia o prestaciones de los cristales. La apariencia oversize y el ajuste físico se revisan por vías diferentes.
+
+## Dónde configurarlo en Shopify
+
+1. En **Productos**, abrir el producto y llegar a **Metacampos**. Forma, material, ancho físico, talla física, afinidades, habilitación y demostración están fijados; también se fijaron medidas en mm y peso en g. [Abrir el producto Jade de prueba](https://admin.shopify.com/store/lemoon-8277/products/9581568262312).
+2. En **Afinidades de estilo**, seleccionar las entradas comunes a todas sus variantes. No crear una copia del diccionario por cada producto.
+3. En **Variantes**, abrir cada color y editar **Afinidades de estilo de la variante**. Elegir aquí color/patrón y cualquier otro criterio que cambie. La ayuda del campo explica la herencia y el reemplazo por criterio.
+4. En **Contenido → Metaobjetos → Afinidad de estilo Lemoon**, revisar las 18 entradas y sus descripciones de clasificación. Sus códigos están restringidos al vocabulario del quiz y las muestras opcionales aceptan imágenes.
+5. Revisar los atributos y fotografías antes de activar **Listo para el quiz de estilo**. Conservar **Datos de demostración del quiz** en los escenarios sintéticos. La colección configurada en la sección también debe incluir el producto.
+
+Forma/material se asignan a nivel producto; no hay un reemplazo de esos dos campos a nivel variante en esta versión. Si cambian entre variantes, resolver esa estructura antes de dar por clasificado todo el producto. Color, acabado, patrón, transparencia, uso y presencia se asignan mediante la lista compartida de afinidades, con reemplazo por criterio en la variante.
+
+Los códigos de criterio se conservan (`finish` = acabado, `pattern` = patrón, `use` = uso, `presence` = presencia visual). Shopify restringe los criterios y códigos por separado; revisar también que la pareja sea la de la tabla. No hay una validación cruzada automática criterio/código. Los 18 pares actuales se comprobaron al terminar la configuración.
+
+Las muestras y descripciones del diccionario ayudan a mantener el catálogo. El quiz actual usa sus ilustraciones y traducciones del tema: cargar una muestra aquí no cambia automáticamente una pregunta ni sustituye las fotografías de las variantes.
+
+### Cargar medidas comprobadas
+
+`custom.frame_dimensions` conserva el tipo JSON y las claves consumidas por la guía de medidas: `frame_width` (ancho total), `lens_width` (ancho del lente), `bridge` (puente), `lens_height` (alto del lente) y `temple` (patilla). Todos los valores representan milímetros. Incluir únicamente claves con datos confirmados; no rellenar medidas desconocidas ni calcular el ancho total a partir de una medida aislada. El campo de peso usa gramos.
+
+La configuración no convierte los ejemplos de talla existentes en medidas certificadas, ni usa estos campos para deducir compacto/intermedio/oversize. Los cinco productos de prueba siguen sin dimensiones ni peso: queda pendiente la carga con información verificada del proveedor.
 
 ## Alta de un producto final
 
@@ -74,3 +97,13 @@ Para retirar un producto del recomendador, desactivar `style_quiz_ready`; no hac
 La carga masiva dependerá de la herramienta usada y de su soporte de listas de referencias y variantes. El manifiesto es un plan trazable, no un CSV universal ni un script con credenciales. El editor de Shopify es el procedimiento inicial para las altas comerciales. No enviar tokens de administración al tema o al navegador.
 
 Revisión del listado LEM-11: hasta doce productos iniciales y ampliación por doce; en móvil, dos tarjetas por fila. La cantidad visible siempre queda limitada a los productos disponibles del grupo real, sin repetir variantes ni inventar coincidencias para completar una grilla.
+
+## Ajuste administrativo verificado
+
+Se revisaron las definiciones existentes antes de escribir. Se actualizaron diez definiciones de metacampos con ayudas en español, se aclararon los nombres de ancho/talla física y se fijaron medidas/peso. No se crearon campos duplicados ni se cambiaron claves, tipos, opciones físicas, referencias o permisos.
+
+En `lemoon_style_trait` se añadieron ayudas a sus cinco campos, una lista controlada de 18 códigos y restricción de imagen para la muestra. Se completó la descripción de clasificación de las 18 entradas existentes mediante actualizaciones parciales; IDs, handles, criterio, código, nombre e imagen se conservaron. El [manifiesto de configuración](../../scripts/style-quiz-admin-config.json) registra el ajuste; no es un script que deba ejecutarse a ciegas.
+
+La lectura posterior comprobó que los cinco productos y diez variantes conservan todos los valores consultados (metacampos, precios, inventario, estados y fecha de publicación). Las diez variantes tienen cobertura efectiva de ocho criterios con datos de demostración. No se cambiaron categorías, compatibilidades, publicación, precios, inventario ni fotografías. Las dos pruebas storefront de selección de variante, escritorio/móvil, aprobaron después del ajuste (34,5 s; código del tema `7ca27245`). No se subieron archivos de tema.
+
+La lectura de las diez definiciones actualizadas devolvió `ALL_VALID`. La restricción de archivos usa la [validación oficial de tipos de archivo de Shopify](https://shopify.dev/docs/apps/build/metafields/list-of-validation-options#file-type-options). Los snapshots antes/después y la matriz de cobertura se conservan en el ledger ignorado `catalog-admin-before.json` / `catalog-admin-after.json`; evidencia del smoke en `/tmp/lem-11-catalog-admin-2026-11-05/storefront-pattern.log`.
