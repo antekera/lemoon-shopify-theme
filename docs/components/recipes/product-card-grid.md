@@ -9,6 +9,7 @@ Familias: LM-PRODUCT-CARD, LM-PRICE, LM-SWATCH, LM-LABEL, LM-PRODUCT-LIST y cont
 | API existente | Uso |
 | --- | --- |
 | `card_product`, `section_id` | Product Liquid real e identidad de sección; conservar IDs de enlaces/formularios |
+| `recommended_variant` | Opcional para el quiz: se valida por ID entre las variantes de `card_product`. Inicializa imagen, precio, URL y swatch en la misma variante. Omitido/ajeno conserva el contrato anterior |
 | `media_aspect_ratio`, `image_shape` | Respetar la geometría y overrides de la superficie, no imponer proporción global |
 | `show_secondary_image`, `lazy_load` | Media secundaria y carga diferida; false explícito permite imagen prioritaria donde el dueño lo decida |
 | `show_vendor`, `show_rating`, `extend_height`, `horizontal_class` | Opcionales según el contrato actual de card-product |
@@ -38,6 +39,10 @@ Para precio independiente:
 ```
 
 [price](../../../snippets/price.liquid) compone [lemoon-money](../../../snippets/lemoon-money.liquid) y precios de producto/variante; disponibilidad, descuento y moneda no se inventan en el consumidor. [swatch-input](../../../snippets/swatch-input.liquid) requiere `id`, `name`, valor de opción/SwatchDrop, `product_form_id`, `checked` y estado; preservar el selector de variantes y su contrato de escaping existente. Su `additional_props` legacy no autoriza contenido externo libre ni amplía los contratos nuevos UI. [lemoon-product-card-labels](../../../snippets/lemoon-product-card-labels.liquid) deriva etiquetas de datos reales. Iconos/spinner y [lemoon-carousel-controls](../../../snippets/lemoon-carousel-controls.liquid) siguen siendo sus implementaciones canónicas.
+
+El render de `price` admite `price_variant` junto a `use_variant: true` para la variante ya validada por la tarjeta; omitido mantiene `product.selected_or_first_available_variant`. No pasar objetos de demostración como precios comerciales. El quiz compone el grupo y las razones fuera de la tarjeta y no habilita quick-add. Cada instancia por variante usa un `section_id` único para preservar IDs de enlaces. Las variantes alternas se mantienen en templates inertes hasta mostrarse; después se inicializa el controlador existente mediante su evento de actualización.
+
+Si se explora otro swatch desde los resultados, la tarjeta conserva su contrato de media/precio/URL y el quiz actualiza las razones con los datos de esa variante; no conserva una afirmación de afinidad que pertenecía a otra versión. Las pruebas de `style-quiz-card.test.js` renderizan el snippet real con adaptadores locales explícitos; no certifican los ProductDrop de Shopify.
 
 ## Dependencias y fronteras comerciales
 

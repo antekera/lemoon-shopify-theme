@@ -3666,6 +3666,12 @@
         }
       }
     },
+    "lemoon_style_quiz_v2": {
+      "name": "Find your style",
+      "collection_label": "Style guide collection",
+      "collection_info": "Use a curated collection of up to 50 products with complete, enabled quiz attributes. The guide evaluates up to 20 variants per product.",
+      "image_label": "Intro editorial image"
+    },
     "lemoon_style_quiz": {
       "name": "Frame selection",
       "collection": "Catalogue collection",

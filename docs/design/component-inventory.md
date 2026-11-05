@@ -299,7 +299,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/price.liquid](../../snippets/price.liquid), [snippets/lemoon-money.liquid](../../snippets/lemoon-money.liquid), [snippets/unit-price.liquid](../../snippets/unit-price.liquid), [assets/component-price.css](../../assets/component-price.css), [assets/component-totals.css](../../assets/component-totals.css), [assets/component-rating.css](../../assets/component-rating.css), [assets/component-volume-pricing.css](../../assets/component-volume-pricing.css), [assets/price-per-item.js](../../assets/price-per-item.js). [snippets/lemoon-product-unit-price.liquid](../../snippets/lemoon-product-unit-price.liquid), [snippets/lemoon-cart-tax-note.liquid](../../snippets/lemoon-cart-tax-note.liquid).
 
-**Contrato actual.** price: product,placeholder,use_variant,show_badges,price_class,show_compare_at_price; también usa settings.currency_code_enabled. lemoon-money: amount,show_currency_code; unit-price: price,measurement,hide_accessibility_label opcional. Ratings usan metafields reviews.rating/rating_count en consumidores, no snippet rating. price-per-item calcula presentación de quantity breaks de variante.
+**Contrato actual.** price: product,placeholder,use_variant,show_badges,price_class,show_compare_at_price; `price_variant` opcional junto a use_variant recibe la variante validada por card-product, y omitido conserva selected_or_first_available_variant. También usa settings.currency_code_enabled. lemoon-money: amount,show_currency_code; unit-price: price,measurement,hide_accessibility_label opcional. Ratings usan metafields reviews.rating/rating_count en consumidores, no snippet rating. price-per-item calcula presentación de quantity breaks de variante.
 
 **Variantes existentes.** Regular/sale/from/compare-at/unit-price/volume y total cart; rating estrellas/fracción; no generar precio o reseña de ejemplo como real.
 
@@ -320,7 +320,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/card-product.liquid](../../snippets/card-product.liquid), [assets/component-card.css](../../assets/component-card.css), [assets/lemoon-product-card.js](../../assets/lemoon-product-card.js), [assets/quick-add.css](../../assets/quick-add.css), [assets/mask-blobs.css](../../assets/mask-blobs.css). [snippets/lemoon-carousel-results.liquid](../../snippets/lemoon-carousel-results.liquid).
 
-**Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. Producto/variantes/media/settings son entradas de dominio.
+**Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. `recommended_variant` opcional se valida contra las variantes del producto e inicializa media/precio/URL/swatch conjuntamente para LEM-11; omitido o ajeno conserva el comportamiento anterior. Producto/variantes/media/settings son entradas de dominio.
 
 **Variantes existentes.** Normal/placeholder; media secundaria; color swatches; quick-add; horizontal; masks heredadas. Quick-add se renderiza con show_quick_add y card_product.available; usa selected_or_first_available_variant, quantity=1 y botón disabled si variante no disponible. No hay guard requires_selling_plan en este snippet: limitación a revisar antes de ampliar.
 
@@ -929,21 +929,21 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Disponibilidad actual:** composición de sección. Entrada: [lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid). Flujo y estado pertenecen a su JS; no se extrae un motor de quiz. [Receta de integración](../components/recipes/catalogue-states.md).
 
-**Fuentes:** [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid), [assets/lemoon-style-quiz.js](../../assets/lemoon-style-quiz.js).
+**Fuentes:** [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid), [assets/lemoon-style-quiz.js](../../assets/lemoon-style-quiz.js), [assets/lemoon-style-quiz.css](../../assets/lemoon-style-quiz.css), [lemoon-quiz-candidate](../../snippets/lemoon-quiz-candidate.liquid), [lemoon-quiz-options](../../snippets/lemoon-quiz-options.liquid), [lemoon-quiz-visual](../../snippets/lemoon-quiz-visual.liquid).
 
-**Contrato actual.** Cuatro preguntas face/style/use/budget; frame blocks product,face,style,use; budget_low/high y catalogue. rankProducts descarta unavailable/IDs repetidos/precio inválido/fuera de tope, orden por matches con tie estable y slice0..3; sugerencias no son recomendación clínica.
+**Contrato actual.** Entrada y cinco etapas forma/color/detalles/uso/presencia; detalles mantiene acabado/patrón/material/transparencia separados. Colección configurada con productos `custom.style_quiz_ready`, forma/material existentes y `custom.style_traits` por producto/variante. Cada criterio de variante reemplaza su grupo en el producto. Fuente acotada a 50 productos/20 variantes; [guía de catálogo](../catalog/style-quiz.md). `rankProducts` devuelve grupo completo por afinidad, una mejor variante disponible por producto, empate editorial estable, sin presupuesto/género/rostro; no es recomendación clínica.
 
-**Variantes existentes.** Sin JS selección curada visible; con JS wizard con progreso/back/restart/error y máximo3 resultados; vacío mantiene catálogo.
+**Variantes existentes.** Sin JS una variante editorial por producto; con JS entrada, selección múltiple, progreso, volver/omitir/reiniciar, pestañas de detalles, ayuda de medidas, resumen editable y tres resultados iniciales ampliables. Editorial identificado al omitir todo; cero/pocos resultados sin falsas coincidencias. Los productos de prueba llevan aviso de demostración.
 
-**CSS y excepciones.** .lemoon-quiz inline, choices/cards propios; markup producto difiere card-product y no debe proclamarse átomo compartido.
+**CSS y excepciones.** `.lemoon-quiz` tiene CSS local con tokens existentes, SVG ilustrativos reemplazables y media editorial genérica. Resultados reutilizan `card-product` y sus dependencias con `recommended_variant`; el grid, razones y límites pertenecen al quiz. No define una variante global de tarjeta.
 
-**Estados observados / aplicabilidad:** Normal: Pregunta o catálogo sin JS; Hover: Choices y CTAs; Foco: Legend/results heading al avanzar; Seleccionado: Radio checked; Loading: No loader ranking local; discoverPriceParameter fetch con timeout; Error: Pregunta sin selección -> error/aria-invalid; catálogo price-param fallback; Disabled: No disabled universal; constraints del catálogo.
+**Estados implementados / aplicabilidad:** Normal: Entrada/preguntas/resultados; Hover: Choices y CTAs; Foco: Título de etapa/resultado, inicio tras reiniciar y nuevos resultados al ampliar; Seleccionado: Checkboxes y check visible; Loading: Ranking local sin espera simulada, templates de tarjetas alternas inertes; Error: JSON inválido conserva fallback editorial; vacío/pocos permiten editar. No existe selección obligatoria ni descubrimiento de filtros de precio.
 
-**Responsive.** Choices/cards apilan con CSS local; conservar orden preguntas/resultados. **Accesibilidad.** Fieldset/legend, progress/status, error ID y foco; no usar selección solo por color.
+**Responsive.** Retícula de preguntas y tarjetas fluida con breakpoints locales; conservar orden preguntas/resultados. **Accesibilidad.** Fieldset/legend, títulos enfocables, checkbox con label, progress/status, details nativo, feedback con texto y check, reduced motion y forced colors. Pruebas locales no equivalen a certificación WCAG ni a Shopify-render.
 
-**JS.** lemoon-style-quiz.js, price-filter discover GET; sin carrito ni receta. **Reutilización actual.** Composición específica; sólo candidate choice/message/card de datos sintéticos, no algoritmo en atom.
+**JS.** `lemoon-style-quiz.js` mantiene estado y ranking y reutiliza `lemoon-product-card.js` para tarjetas/swatches. Sin carrito ni receta, backend nuevo ni dependencia de app de quiz. Las pruebas locales renderizan Liquid con adaptadores explícitos; el funcionamiento en Shopify requiere su verificación separada.
 
-**Dependencias de composición:** [LM-CHOICE](#lm-choice), [LM-FEEDBACK](#lm-feedback), [LM-ACTION](#lm-action). Consumidores estáticos en el JSON.
+**Dependencias de composición:** [LM-CHOICE](#lm-choice), [LM-FEEDBACK](#lm-feedback), [LM-ACTION](#lm-action), [LM-PRODUCT-CARD](#lm-product-card). Consumidores estáticos en el JSON.
 
 <a id="lm-gift"></a>
 ### LM-GIFT · Compra y visualización de gift card
@@ -1076,7 +1076,7 @@ Esta matriz asigna **las 68 secciones**, incluidos los endpoints sin schema. Las
 | [sections/lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid) | [LM-LEGAL](#lm-legal) | Sin bloques declarados |
 | [sections/lemoon-service-page.liquid](../../sections/lemoon-service-page.liquid) | [LM-LEGAL](#lm-legal) | Sin bloques declarados |
 | [sections/lemoon-shop-by-shape.liquid](../../sections/lemoon-shop-by-shape.liquid) | [LM-EDITORIAL](#lm-editorial) | `shape` |
-| [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid) | [LM-QUIZ](#lm-quiz) | `frame` |
+| [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid) | [LM-QUIZ](#lm-quiz) | sin bloques; colección y atributos Shopify |
 | [sections/lens-configurator.liquid](../../sections/lens-configurator.liquid) | [LM-CONFIG](#lm-config) | Sin bloques declarados |
 | [sections/lifestyle-mood-grid.liquid](../../sections/lifestyle-mood-grid.liquid) | [LM-EDITORIAL](#lm-editorial) | `mood` |
 | [sections/main-404.liquid](../../sections/main-404.liquid) | [LM-UTILITY](#lm-utility) | Sin bloques declarados |

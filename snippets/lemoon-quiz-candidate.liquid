@@ -1,0 +1,40 @@
+{% comment %}
+  Quiz-only JSON for one actual variant. Caller escapes the complete JSON for an HTML attribute.
+  Inputs: product (Product), variant (ProductVariant).
+  Each trait group on the variant replaces that entire group from the product.
+{% endcomment %}
+{
+  "id": {{ product.id | append: '' | json }},
+  "variantId": {{ variant.id | append: '' | json }},
+  "price": {{ variant.price | json }},
+  "available": {{ variant.available | json }},
+  "attributes": {
+    "shape": [{{ product.metafields.custom.frame_shape.value | json }}],
+    "material": [{{ product.metafields.custom.frame_material.value | json }}],
+    {%- assign groups = 'color,finish,pattern,transparency,use,presence' | split: ',' -%}
+    {%- for group in groups -%}
+      {%- liquid
+        assign has_variant_group = false
+        for trait in variant.metafields.custom.style_traits.value
+          if trait.group.value == group
+            assign has_variant_group = true
+            break
+          endif
+        endfor
+        assign traits = product.metafields.custom.style_traits.value
+        if has_variant_group
+          assign traits = variant.metafields.custom.style_traits.value
+        endif
+        assign separator = ''
+      -%}
+      {{ group | json }}: [
+        {%- for trait in traits -%}
+          {%- if trait.group.value == group and trait.code.value != blank -%}
+            {{ separator }}{{ trait.code.value | json }}
+            {%- assign separator = ',' -%}
+          {%- endif -%}
+        {%- endfor -%}
+      ]{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  }
+}

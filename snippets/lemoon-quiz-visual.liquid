@@ -1,0 +1,50 @@
+{% comment %}Illustrative quiz artwork only, not a SKU photograph. Inputs: group, value.{% endcomment %}
+<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" fill="none" focusable="false">
+  {%- case group -%}
+    {%- when 'shape' -%}
+      {%- capture lens -%}
+        {%- case value -%}
+          {%- when 'round' -%}<ellipse cx="85" cy="78" rx="54" ry="48"/>
+          {%- when 'rectangular' -%}<path d="M29 43Q84 34 141 43L136 109Q95 122 42 112Q28 102 29 43Z"/>
+          {%- when 'square' -%}<path d="M35 29Q85 24 137 30L134 117Q87 125 39 117Z"/>
+          {%- when 'cat-eye' -%}<path d="M20 32Q74 52 142 43L133 104Q90 126 48 111Q28 92 20 32Z"/>
+          {%- when 'aviator' -%}<path d="M29 48C29 31 53 25 82 28C108 31 126 37 138 48C140 65 128 86 111 103C96 119 82 123 68 114C45 99 29 77 29 48Z"/>
+          {%- when 'geometric' -%}<path d="M30 55L67 29L117 36L141 76L116 116L65 122L28 88Z"/>
+          {%- when 'oval' -%}<ellipse cx="85" cy="80" rx="56" ry="35"/>
+          {%- when 'panto' -%}<path d="M30 53Q85 28 140 53Q144 100 113 119Q79 140 46 113Q28 90 30 53Z"/>
+        {%- endcase -%}
+      {%- endcapture -%}
+      <g stroke="currentColor" stroke-width="7" stroke-linejoin="round">{{ lens }}<g transform="translate(320 0) scale(-1 1)">{{ lens }}</g><path d="M141 62Q160 48 179 62M25 54L10 48M295 54L310 48"/>{% if value == 'aviator' %}<path d="M140 45Q160 32 180 45"/>{% endif %}</g>
+    {%- when 'color' -%}
+      {%- case value -%}
+        {%- when 'black' -%}<circle cx="88" cy="80" r="36" fill="#222527"/><circle cx="160" cy="80" r="36" fill="#58606a"/><circle cx="232" cy="80" r="36" fill="#999a96"/>
+        {%- when 'brown' -%}<circle cx="88" cy="80" r="36" fill="#66432f"/><circle cx="160" cy="80" r="36" fill="#a17c40"/><circle cx="232" cy="80" r="36" fill="#d2b784"/>
+        {%- when 'light' -%}<circle cx="88" cy="80" r="36" fill="#dedbd3"/><circle cx="160" cy="80" r="36" fill="#cfae9e"/><circle cx="232" cy="80" r="36" fill="#c4d0d2"/>
+        {%- when 'bold' -%}<circle cx="88" cy="80" r="36" fill="#406b58"/><circle cx="160" cy="80" r="36" fill="#355d7c"/><circle cx="232" cy="80" r="36" fill="#96545f"/>
+      {%- endcase -%}
+    {%- when 'finish', 'pattern' -%}
+      <rect x="12" y="6" width="296" height="148" rx="6" fill="#a47a48"/>
+      {%- if value == 'tortoise' -%}<g fill="#563825"><path d="M12 20Q70 0 91 43L73 78L12 56Z"/><path d="M194 6L270 6L242 68L183 39Z"/><path d="M12 121Q78 69 133 123L112 154H12Z"/><path d="M220 93L308 70V154H247Z"/></g><g fill="#deb06c"><path d="M48 8L82 13L107 54L65 43Z"/><path d="M145 56L194 44L179 98L132 110Z"/><path d="M139 133L175 111L202 154H154Z"/></g>{%- endif -%}
+      <path d="M12 144Q90 32 308 37" stroke="#d1b183" stroke-width="10" opacity=".55"/>
+      {%- if value == 'glossy' -%}<path d="M83 154L177 6H198L105 154Z" fill="white" opacity=".5"/><path d="M114 154L208 6H216L122 154Z" fill="white" opacity=".8"/>{%- endif -%}
+    {%- when 'material' -%}
+      <g stroke="currentColor" stroke-linejoin="round" stroke-width="{% if value == 'metal' or value == 'titanium' %}3{% else %}12{% endif %}"><path d="M28 47Q86 30 139 47L135 111Q85 128 40 112Z"/><path d="M181 47Q235 30 292 47L280 112Q231 127 185 111Z"/><path d="M140 63Q160 48 180 63M27 54L12 47M293 54L309 47"/></g>
+      {%- if value == 'wood' -%}<g stroke="#a47a48" stroke-width="3"><path d="M38 47L82 40M44 55L90 48M192 45L235 39M196 52L244 45"/></g>{%- endif -%}
+      {%- if value == 'mixed' -%}<path d="M28 47Q86 30 139 47M181 47Q235 30 292 47" stroke="#a47a48" stroke-width="12"/>{%- endif -%}
+    {%- when 'transparency' -%}
+      <path d="M20 118L105 33L181 108L257 30L300 72" stroke="currentColor" stroke-width="5" opacity=".45"/>
+      <rect x="66" y="24" width="188" height="112" rx="42" fill="#a47a48" fill-opacity="{% case value %}{% when 'opaque' %}1{% when 'translucent' %}.65{% else %}.15{% endcase %}" stroke="#a47a48" stroke-width="6"/>
+    {%- when 'use' -%}
+      {%- case value -%}
+        {%- when 'work' -%}<rect x="40" y="30" width="155" height="94" rx="5" stroke="currentColor" stroke-width="6"/><path d="M22 135H211" stroke="currentColor" stroke-width="6"/><path d="M234 79H270V128H234ZM270 89C302 85 302 120 270 115" stroke="#a47a48" stroke-width="6"/>
+        {%- when 'everyday' -%}<path d="M31 142V60H89V142M117 142V24H190V142M217 142V76H274V142" fill="#d5ccbd"/><path d="M46 79H69M46 102H69M133 46H174M133 73H174M133 100H174M233 97H258" stroke="white" stroke-width="9"/>
+        {%- when 'going_out' -%}<path d="M66 24C31 77 78 119 119 103C71 108 53 76 66 24Z" fill="currentColor"/><path d="M234 28L243 49L267 51L248 67L254 90L234 77L213 90L219 67L201 51L225 49Z" fill="#a47a48"/><path d="M32 145Q159 93 288 145" stroke="currentColor" stroke-width="3"/>
+        {%- when 'outdoors' -%}<circle cx="246" cy="35" r="23" fill="var(--lemoon-action-accent)"/><path d="M18 144L98 39L163 110L216 64L302 144Z" fill="#d5ccbd"/><path d="M34 144L104 70L134 103L157 98L205 144Z" fill="#b4b7a8"/>
+      {%- endcase -%}
+    {%- when 'presence' -%}
+      <path d="M116 151Q117 114 160 114Q203 114 204 151" fill="#d9d2c6"/><ellipse cx="160" cy="68" rx="41" ry="58" fill="#e6d5c0"/><path d="M118 50Q111 -3 158 3Q208 -3 202 50L180 29L139 36Z" fill="#b9a58b"/>
+      <path d="M152 95Q160 100 168 95" stroke="#b9a58b" stroke-width="2"/>
+      {%- case value -%}{%- when 'compact' -%}{%- assign radius = 15 -%}{%- when 'oversize' -%}{%- assign radius = 25 -%}{%- else -%}{%- assign radius = 20 -%}{%- endcase -%}
+      <g stroke="currentColor" stroke-width="3"><circle cx="135" cy="63" r="{{ radius }}"/><circle cx="185" cy="63" r="{{ radius }}"/><path d="M151 59Q160 52 169 59"/></g>
+  {%- endcase -%}
+</svg>

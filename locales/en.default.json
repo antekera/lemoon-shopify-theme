@@ -880,6 +880,152 @@
       "configure_cta": "Configure {{ product }}",
       "configure_note": "Options and price are confirmed in the product configurator."
     },
+    "lemoon_style_quiz_v2": {
+      "name": "Find your style",
+      "eyebrow": "Find your style",
+      "title": "Your next pair. Very you.",
+      "intro": "Shapes, colours and details that feel like you. Let’s find your next pair.",
+      "steps": "5 steps",
+      "pace": "You can change your mind",
+      "start": "Find my style",
+      "catalogue": "Explore the catalogue",
+      "next": "Continue",
+      "results_cta": "See my selection",
+      "back": "Back",
+      "skip": "Show me variety",
+      "restart": "Start again",
+      "edit": "Change preferences",
+      "more": "See more of my selection",
+      "empty_title": "Let’s keep looking",
+      "empty": "We couldn’t find available products matching your preferences. Try changing a preference or explore the catalogue.",
+      "editorial": "With no preferences selected, here is an editorial selection to explore.",
+      "demo": "Demonstration selection: these products include test attributes that do not represent a verified final catalogue.",
+      "no_js": "You can explore this editorial selection or visit the catalogue. To answer the guide and refine your results, enable JavaScript in your browser.",
+      "results_title": "There’s more than one way to be you.",
+      "results_intro": "A selection to get you started. Change any preference and keep exploring.",
+      "preference_hint": "Your preferences are a starting point. You can change them at any time.",
+      "none": "No preference",
+      "reason_intro": "Matches your preferences for:",
+      "step_status": "Step [current] of [total]",
+      "count": "[count] products in your selection",
+      "count_one": "1 product in your selection",
+      "finished": "Your selection is ready",
+      "loading_error": "We couldn’t prepare your selection. You can try again or explore the catalogue.",
+      "few_intro": "We found a few matches. You can change a preference to keep exploring.",
+      "details_note": "Material, pattern, finish and transparency are separate features. You can explore each one.",
+      "presence_note": "Oversize describes a visual proportion, not a physical size. Check measurements when comparing frames.",
+      "use_note": "Your plans guide the style. Compatible lenses and treatments are selected later.",
+      "price_note": "Frame price. Compatible lenses and treatments are selected and charged separately.",
+      "collection_label": "Style guide collection",
+      "collection_info": "Use a curated collection of up to 50 products with complete, enabled quiz attributes. The guide evaluates up to 20 variants per product.",
+      "image_label": "Intro editorial image",
+      "measures": {
+        "title": "Already have a pair that fits you?",
+        "intro": "Look for the numbers on the temple of a pair that fits you. Use them as a reference when comparing.",
+        "numbers": "50 □ 18 — 140",
+        "labels": "Lens width · bridge · temple (mm)",
+        "note": "These are separate measurements; no single one gives the total frame width. Compare them with each product’s measurements. They do not confirm how a frame will fit you."
+      },
+      "axes": {
+        "shape": "Shape",
+        "color": "Colour",
+        "finish": "Finish",
+        "pattern": "Pattern",
+        "material": "Material",
+        "transparency": "Transparency",
+        "use": "Use",
+        "presence": "Size"
+      },
+      "stages": {
+        "shape": {
+          "title": "Which shapes make you look twice?",
+          "hint": "Choose the ones you’d like to try. You can choose more than one."
+        },
+        "color": {
+          "title": "Which colours feel like you?",
+          "hint": "Build your palette. You don’t have to pick just one colour."
+        },
+        "details": {
+          "title": "Look a little closer. Which details do you like?",
+          "hint": "Explore finishes, patterns and materials. Choose what catches your eye."
+        },
+        "use": {
+          "title": "What plans do you see yourself wearing them for?",
+          "hint": "Think about your day-to-day life. You can choose more than one."
+        },
+        "presence": {
+          "title": "How much presence do you like your frames to have?",
+          "hint": "Compact or a statement: let’s compare proportions."
+        }
+      },
+      "tabs": {
+        "finishes": "Finishes",
+        "patterns": "Patterns",
+        "materials": "Materials"
+      },
+      "options": {
+        "shape": {
+          "round": "Round",
+          "rectangular": "Rectangular",
+          "cat_eye": "Cat-eye",
+          "aviator": "Aviator",
+          "geometric": "Geometric",
+          "square": "Square",
+          "oval": "Oval",
+          "panto": "Panto"
+        },
+        "color": {
+          "black": "Blacks and greys",
+          "brown": "Browns and honey",
+          "light": "Light tones",
+          "bold": "Statement colours"
+        },
+        "finish": {
+          "matte": "Matte",
+          "glossy": "Glossy"
+        },
+        "pattern": {
+          "plain": "Plain",
+          "tortoise": "Tortoiseshell / streaked"
+        },
+        "material": {
+          "acetate": "Acetate",
+          "metal": "Metal",
+          "titanium": "Titanium",
+          "tr90": "TR-90",
+          "wood": "Wood",
+          "mixed": "Mixed"
+        },
+        "transparency": {
+          "opaque": "Opaque",
+          "translucent": "Translucent",
+          "transparent": "Transparent"
+        },
+        "use": {
+          "work": "Work or study",
+          "everyday": "Every day",
+          "going_out": "Going out and changing your look",
+          "outdoors": "Time outdoors"
+        },
+        "presence": {
+          "compact": "Compact",
+          "medium": "Medium",
+          "oversize": "Oversize"
+        }
+      },
+      "reasons": {
+        "shape": "shape",
+        "color": "colour",
+        "finish": "finish",
+        "pattern": "pattern",
+        "material": "material",
+        "transparency": "transparency",
+        "use": "plans",
+        "presence": "visual proportion"
+      },
+      "details_label": "Details",
+      "variant_alternative": "You are exploring another variant. Check its details on the product page."
+    },
     "lemoon_style_quiz": {
       "title": "Find your next frame",
       "intro": "Four questions to explore frames around your preferences. No photos or sign-up.",

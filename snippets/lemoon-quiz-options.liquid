@@ -1,0 +1,21 @@
+{% comment %}
+  Quiz-only checkbox group with illustrative, replaceable visuals.
+  Inputs: group (canonical attribute key), options (comma-separated codes), section_id.
+{% endcomment %}
+{%- assign option_codes = options | split: ',' -%}
+{%- assign group_key = 'sections.lemoon_style_quiz_v2.axes.' | append: group -%}
+<div class="lemoon-quiz__option-group" data-quiz-group="{{ group | escape }}">
+  <h3>{{ group_key | t }}</h3>
+  <div class="lemoon-quiz__options lemoon-quiz__options--{{ group | escape }}">
+    {%- for code in option_codes -%}
+      {%- assign locale_code = code | replace: '-', '_' -%}
+      {%- assign label_key = 'sections.lemoon_style_quiz_v2.options.' | append: group | append: '.' | append: locale_code -%}
+      <label class="lemoon-quiz__option" for="QuizChoice-{{ section_id }}-{{ group }}-{{ code }}">
+        <input id="QuizChoice-{{ section_id }}-{{ group }}-{{ code }}" type="checkbox" name="{{ group | escape }}" value="{{ code | escape }}">
+        <span class="lemoon-quiz__visual" aria-hidden="true">{% render 'lemoon-quiz-visual', group: group, value: code %}</span>
+        <span class="lemoon-quiz__option-label" data-quiz-option-label>{{ label_key | t }}</span>
+        <span class="lemoon-quiz__selected" aria-hidden="true">{% render 'lemoon-icon', icon: 'check', size: 16 %}</span>
+      </label>
+    {%- endfor -%}
+  </div>
+</div>
