@@ -50,6 +50,9 @@ test('contact redisplays form before customer values, escapes once, and exposes 
   expect(configured).toContain('mailto:test@example.test');
   expect(configured).not.toContain('fallback@example.test');
   expect(configured).toContain('https://example.test/chat?a=1&amp;b=2');
+  expect(configured).toContain('class="lemoon-contact__whatsapp"');
+  expect(configured).toContain('lemoon-icon-whatsapp.svg');
+  expect(configured).toContain('target="_blank" rel="noopener"');
   expect(configured).toContain('Fixture hours');
   const fallback = render('lemoon-contact-page', { settings: { contact_email: 'hola@example.test' } });
   expect(fallback).toContain('mailto:hola@example.test');
@@ -67,6 +70,8 @@ test('contact template selects custom section and editor settings are localized 
   expect(schema.settings.filter(({ type }) => type === 'range').map(({ id }) => id)).toEqual(['padding_top', 'padding_bottom']);
   for (const setting of schema.settings.filter(({ id }) => ['contact_email', 'contact_hours', 'whatsapp_url'].includes(id))) expect(setting.default).toBeUndefined();
   expect(template.sections.main.settings.contact_email).toBe('hola@lemoon.cl');
+  const footer = json('sections/footer-group.json').sections.footer.settings;
+  expect(template.sections.main.settings.whatsapp_url).toBe(`https://wa.me/${footer.whatsapp_number}`);
   expect(section).toContain('#shopify-section-{{ section.id }}');
 });
 

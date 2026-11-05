@@ -90,8 +90,11 @@ export function searchFixtureOptions(overrides = {}) {
 
 export function renderComponentFixture(scenario = 'controls', { themeBoxSizing = false } = {}) {
   let content;
-  if (scenario === 'contact' || scenario === 'contact-error' || scenario === 'contact-success') {
-    content = renderComponentSection('lemoon-contact-page', { form: scenario === 'contact-error' ? { errors: contactErrors() } : scenario === 'contact-success' ? { 'posted_successfully?': true } : {} });
+  if (scenario === 'contact' || scenario === 'contact-error' || scenario === 'contact-success' || scenario === 'contact-channels') {
+    content = renderComponentSection('lemoon-contact-page', {
+      form: scenario === 'contact-error' ? { errors: contactErrors() } : scenario === 'contact-success' ? { 'posted_successfully?': true } : {},
+      settings: scenario === 'contact-channels' ? { contact_email: 'hola@lemoon.cl', whatsapp_url: 'https://wa.me/56973319401' } : {},
+    });
   } else if (scenario === 'faq' || scenario === 'long') {
     content = renderComponentSection('lemoon-faq-page', { settings: { legacy_fallback: scenario === 'faq' }, blocks: scenario === 'long' ? [{ id: 'long', shopify_attributes: 'data-shopify-editor-block="fixture"', settings: { group: 'choosing', question: 'Pregunta extensa '.repeat(25), answer: `<p>${'Respuesta extensa con información '.repeat(50)}</p>` } }] : [] });
   } else if (scenario === 'faq-custom' || scenario === 'faq-editor') {
