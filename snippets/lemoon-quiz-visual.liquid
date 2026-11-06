@@ -1,0 +1,136 @@
+{% comment %}Illustrative quiz artwork only, not a SKU photograph. Inputs: group, value, visual_id (unique per section/group/option).{% endcomment %}
+{%- assign art_id = visual_id | escape -%}
+<svg viewBox="{% if group == 'color' %}0 0 32 32{% else %}0 0 320 160{% endif %}" xmlns="http://www.w3.org/2000/svg" fill="none" focusable="false">
+  {%- case group -%}
+    {%- when 'shape' -%}
+      {%- if value == 'aviator' -%}
+        {%- comment -%}Single-contour icon study: realistic teardrop rims and double bridge. No SKU depiction.{%- endcomment -%}
+        {%- assign aviator_rim = 'M144 59C143 42 129 30 109 27C85 22 58 24 43 32C25 42 23 61 25 80C26 105 41 121 61 125C79 130 99 117 118 98C133 83 145 70 144 59Z' -%}
+        <g stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="{{ aviator_rim }}"/>
+          <path d="{{ aviator_rim }}" transform="translate(320 0) scale(-1 1)"/>
+          <path d="M113 28C142 30 178 30 207 28M145 57V49C145 39 175 39 175 49V57M15 67H24M296 67H305"/>
+        </g>
+      {%- else -%}
+        {%- liquid
+          case value
+            when 'round'
+              assign rim = 'M143 80C143 110 119 134 89 134S35 110 35 80S59 26 89 26S143 50 143 80Z'
+              assign bridge = 'M143 75C152 66 168 66 177 75M24 73H35M285 73H296'
+            when 'rectangular'
+              assign rim = 'M37 48C65 44 108 44 134 48C142 49 146 54 145 62L140 94C139 103 134 107 124 108C99 111 64 111 42 107C33 105 29 101 28 93L25 63C24 54 28 49 37 48Z'
+              assign bridge = 'M145 61C154 56 166 56 175 61M15 58H25M295 58H305'
+            when 'square'
+              assign rim = 'M39 33C65 29 110 29 133 33C141 35 145 40 145 49L142 108C141 119 135 125 123 127C98 131 65 130 44 125C33 123 28 116 27 105L25 52C24 41 28 36 39 33Z'
+              assign bridge = 'M145 54C154 48 166 48 175 54M15 47H25M295 47H305'
+            when 'cat-eye'
+              assign rim = 'M24 36C58 38 104 39 132 49C142 53 147 64 143 78C139 91 135 96 129 101C115 118 87 123 64 115C41 107 28 85 25 63C24 52 23 42 24 36Z'
+              assign bridge = 'M145 66C154 61 166 61 175 66M15 36H24M296 36H305'
+            when 'geometric'
+              assign rim = 'M54 33L124 38L147 78L111 123L55 117L25 78Z'
+              assign bridge = 'M145 73C154 66 166 66 175 73M16 73H26M294 73H304'
+            when 'oval'
+              assign rim = 'M145 80C145 102 118 119 85 119S25 103 25 81S52 42 85 42S145 58 145 80Z'
+              assign bridge = 'M145 78C154 70 166 70 175 78M14 76H25M295 76H306'
+            when 'panto'
+              assign rim = 'M34 46C56 31 112 30 134 45C142 51 145 61 143 73C141 105 120 128 89 128C58 128 36 105 31 76C29 64 28 53 34 46Z'
+              assign bridge = 'M143 60C149 60 148 50 155 50H165C172 50 171 60 177 60M20 54H31M289 54H300'
+          endcase
+        -%}
+        <g stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="{% if value == 'geometric' %}miter{% else %}round{% endif %}">
+          <path d="{{ rim }}"/>
+          <path d="{{ rim }}" transform="translate(320 0) scale(-1 1)"/>
+          <path d="{{ bridge }}"/>
+        </g>
+      {%- endif -%}
+    {%- when 'color' -%}
+      {%- if value == 'tortoise' or value == 'two_tone' or value == 'silver' -%}
+        <defs><clipPath id="{{ art_id }}-swatch"><circle cx="16" cy="16" r="12"/></clipPath></defs>
+      {%- endif -%}
+      {%- case value -%}
+        {%- when 'bold' -%}
+          <circle cx="16" cy="9" r="6.5" fill="#e44b42"/><circle cx="10" cy="20" r="6.5" fill="#16b8a9"/><circle cx="22" cy="20" r="6.5" fill="#245ad2"/>
+        {%- when 'neutral' -%}
+          <circle cx="16" cy="9" r="6.5" fill="#555957"/><circle cx="10" cy="20" r="6.5" fill="#796552"/><circle cx="22" cy="20" r="6.5" fill="#c4c9cd"/>
+        {%- when 'black' -%}
+          <circle cx="16" cy="16" r="12" fill="#151515"/>
+        {%- when 'tortoise' -%}
+          <g clip-path="url(#{{ art_id }}-swatch)">
+            <circle cx="16" cy="16" r="12" fill="#b87a35"/>
+            <path d="M3 4C10 1 14 4 12 9S6 12 8 18S3 24 0 21ZM18 1C25 0 31 7 26 12S18 9 17 6ZM14 15C19 10 24 13 22 18S28 20 27 26S18 33 16 27S10 21 14 15ZM3 28C8 22 13 25 13 31L1 34Z" fill="#48291e"/>
+            <path d="M12 9C15 7 18 9 17 12S12 16 11 13ZM7 20C10 18 12 20 11 23S7 25 6 23Z" fill="#d6a653"/>
+          </g>
+        {%- when 'two_tone' -%}
+          <g clip-path="url(#{{ art_id }}-swatch)"><circle cx="16" cy="16" r="12" fill="#bac8d1"/><path d="M3 3H29V16H3Z" fill="#413431"/></g>
+        {%- when 'transparent' -%}
+          <circle cx="16" cy="16" r="11.5" fill="#f5fbfc" stroke="#c1dfe7"/>
+          <path d="M9 20L20 9M14 24L24 14" stroke="white" stroke-width="3"/>
+        {%- when 'silver' -%}
+          <g clip-path="url(#{{ art_id }}-swatch)"><circle cx="16" cy="16" r="12" fill="#b7bec2"/><path d="M5 29L29 5M-2 27L24 1" stroke="#e2e6e8" stroke-width="5"/></g>
+      {%- endcase -%}
+    {%- when 'finish', 'pattern' -%}
+      <defs>
+        <clipPath id="{{ art_id }}-piece"><rect x="28" y="20" width="264" height="120" rx="22"/></clipPath>
+        {%- if group == 'finish' -%}
+          <linearGradient id="{{ art_id }}-light" x1="50" y1="20" x2="270" y2="140" gradientUnits="userSpaceOnUse">
+            <stop stop-color="white" stop-opacity=".16"/>
+            <stop offset=".55" stop-color="white" stop-opacity="0"/>
+            <stop offset="1" stop-color="currentColor" stop-opacity=".12"/>
+          </linearGradient>
+        {%- endif -%}
+      </defs>
+      <ellipse cx="160" cy="148" rx="112" ry="5" fill="currentColor" opacity=".08"/>
+      <rect x="28" y="20" width="264" height="120" rx="22" fill="#a47a48"/>
+      <g clip-path="url(#{{ art_id }}-piece)">
+        {%- if value == 'tortoise' -%}
+          <g fill="#563825">
+            <path d="M2 22C28 2 75 8 88 37C98 63 63 80 37 68C18 58-2 50 2 22Z"/>
+            <path d="M178 8C220-4 263 14 263 43C262 74 223 85 195 66C175 51 155 30 178 8Z"/>
+            <path d="M13 113C32 86 78 88 99 106C124 131 95 161 65 159C35 157-3 143 13 113Z"/>
+            <path d="M218 106C242 76 290 76 310 102C336 134 302 166 269 154C243 144 197 133 218 106Z"/>
+          </g>
+          <g fill="#deb06c" opacity=".85">
+            <path d="M98 20C117 9 153 16 157 42C161 65 130 75 111 60C96 48 81 31 98 20Z"/>
+            <path d="M124 100C147 76 182 83 187 108C193 136 158 151 139 135C128 126 108 115 124 100Z"/>
+            <path d="M263 17C280 11 304 22 304 37C306 60 285 65 274 50C268 41 247 28 263 17Z"/>
+          </g>
+        {%- endif -%}
+        {%- if group == 'finish' -%}<rect x="28" y="20" width="264" height="120" fill="url(#{{ art_id }}-light)"/>{%- endif -%}
+        {%- if value == 'glossy' -%}
+          <path d="M74 20H118L205 140H161Z" fill="white" opacity=".3"/>
+          <path d="M129 20H139L226 140H216Z" fill="white" opacity=".65"/>
+        {%- endif -%}
+      </g>
+      <rect x="29" y="21" width="262" height="118" rx="21" stroke="currentColor" stroke-opacity=".14" stroke-width="2"/>
+    {%- when 'material' -%}
+      <ellipse cx="160" cy="140" rx="130" ry="7" fill="currentColor" opacity=".06"/>
+      <g stroke="currentColor" stroke-linejoin="round" stroke-width="{% if value == 'metal' or value == 'titanium' %}3{% else %}12{% endif %}"><path d="M28 47Q86 30 139 47L135 111Q85 128 40 112Z"/><path d="M181 47Q235 30 292 47L280 112Q231 127 185 111Z"/><path d="M140 63Q160 48 180 63M27 54L12 47M293 54L309 47"/></g>
+      {%- if value == 'wood' -%}<g stroke="#a47a48" stroke-width="3"><path d="M38 47L82 40M44 55L90 48M192 45L235 39M196 52L244 45"/></g>{%- endif -%}
+      {%- if value == 'mixed' -%}<path d="M28 47Q86 30 139 47M181 47Q235 30 292 47" stroke="#a47a48" stroke-width="12"/>{%- endif -%}
+    {%- when 'transparency' -%}
+      <path d="M20 118L105 33L181 108L257 30L300 72" stroke="currentColor" stroke-width="5" opacity=".45"/>
+      <rect x="66" y="24" width="188" height="112" rx="42" fill="#a47a48" fill-opacity="{% case value %}{% when 'opaque' %}1{% when 'translucent' %}.65{% else %}.15{% endcase %}" stroke="#a47a48" stroke-width="6"/>
+    {%- when 'use' -%}
+      {%- case value -%}
+        {%- when 'work' -%}<rect x="40" y="30" width="155" height="94" rx="5" stroke="currentColor" stroke-width="6"/><path d="M22 135H211" stroke="currentColor" stroke-width="6"/><path d="M234 79H270V128H234ZM270 89C302 85 302 120 270 115" stroke="#a47a48" stroke-width="6"/>
+        {%- when 'everyday' -%}<path d="M31 142V60H89V142M117 142V24H190V142M217 142V76H274V142" fill="#d5ccbd"/><path d="M46 79H69M46 102H69M133 46H174M133 73H174M133 100H174M233 97H258" stroke="white" stroke-width="9"/>
+        {%- when 'going_out' -%}<path d="M66 24C31 77 78 119 119 103C71 108 53 76 66 24Z" fill="currentColor"/><path d="M234 28L243 49L267 51L248 67L254 90L234 77L213 90L219 67L201 51L225 49Z" fill="#a47a48"/><path d="M32 145Q159 93 288 145" stroke="currentColor" stroke-width="3"/>
+        {%- when 'outdoors' -%}<circle cx="246" cy="35" r="23" fill="var(--lemoon-action-accent)"/><path d="M18 144L98 39L163 110L216 64L302 144Z" fill="#d5ccbd"/><path d="M34 144L104 70L134 103L157 98L205 144Z" fill="#b4b7a8"/>
+      {%- endcase -%}
+    {%- when 'presence' -%}
+      <g stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".6">
+        <path d="M113 54V44C113 23 130 10 160 10C190 10 207 23 207 44V54M113 73C115 92 127 110 145 117Q160 124 175 117C193 110 205 92 207 73"/>
+        <path d="M112 56C103 51 103 73 113 77M208 56C217 51 217 73 207 77M141 116V130L113 140Q99 145 94 154M179 116V130L207 140Q221 145 226 154"/>
+      </g>
+      {%- case value -%}
+        {%- when 'compact' -%}{%- assign frame_scale = '.78' -%}
+        {%- when 'oversize' -%}{%- assign frame_scale = '1.13' -%}
+        {%- else -%}{%- assign frame_scale = '.95' -%}
+      {%- endcase -%}
+      <g transform="translate(160 61) scale({{ frame_scale }})" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-49-9Q-30-15-9-9L-11 10Q-12 16-27 17Q-43 18-45 10Z"/>
+        <path d="M49-9Q30-15 9-9L11 10Q12 16 27 17Q43 18 45 10Z"/>
+        <path d="M-9-3Q0-10 9-3M-49-6L-55-8M49-6L55-8"/>
+      </g>
+  {%- endcase -%}
+</svg>

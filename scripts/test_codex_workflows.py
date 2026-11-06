@@ -130,7 +130,7 @@ def validate_group(group: str) -> None:
     if group in {"shopify", "all"}:
         dev = (ROOT / ".agents/skills/push-theme-dev/SKILL.md").read_text(encoding="utf-8")
         prod = (ROOT / ".agents/skills/push-theme-production/SKILL.md").read_text(encoding="utf-8").lower()
-        require("155925381288" in dev, "dev publishing skill must target theme 155925381288")
+        require("189557964968" in dev, "dev publishing skill must target theme 189557964968")
         require("shopify theme list" in prod and "confirm" in prod, "production publishing must inspect the live theme and require confirmation")
         confirmation_index = prod.find("only after confirmation")
         allow_live_index = prod.find("--allow-live")

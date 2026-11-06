@@ -1,92 +1,157 @@
 import { test, expect } from '@playwright/test';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
-const route = '/pages/buscar-mi-estilo?view=buscar-mi-estilo';
+
+// This suite requires an authorized Shopify-rendered preview of LEM-11.
+// Local Liquid fixtures are covered separately in tests/e2e/style-quiz.spec.js.
+const route = '/pages/buscar-mi-estilo';
+const cards = quiz => quiz.locator('[data-quiz-product]:visible');
+async function expectNoLiquidErrors(quiz) {
+  // Shopify can return HTTP 200 and working JS while rendering missing-snippet errors.
+  await expect(quiz).not.toContainText(/Liquid (?:syntax )?error/i);
+}
+async function expectCanonicalResults(page, quiz) {
+  await expect(quiz.locator('[data-quiz-preferences]')).toHaveCount(1);
+  await expect(quiz.locator('[data-quiz-preferences]')).toBeVisible();
+  await expect(quiz.locator('[data-quiz-product] [data-quiz-reasons]')).toHaveCount(0);
+  const extra = await cards(quiz).evaluateAll(nodes => nodes.map(article => {
+    const copy = article.cloneNode(true);
+    copy.querySelectorAll('.card-wrapper, template').forEach(node => node.remove());
+    return copy.textContent.trim();
+  }).filter(Boolean));
+  expect(extra).toEqual([]);
+  expect(await quiz.evaluate(root => Boolean(root.querySelector('[data-quiz-preferences]').compareDocumentPosition(root.querySelector('[data-quiz-products]')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+  if (page.viewportSize().width === 390 && await cards(quiz).count() >= 3) {
+    const boxes = await cards(quiz).evaluateAll(nodes => nodes.slice(0, 3).map(node => node.getBoundingClientRect().toJSON()));
+    expect(boxes[0].y).toBeCloseTo(boxes[1].y, 1);
+    expect(boxes[1].x - boxes[0].right).toBeCloseTo(12, 1);
+    expect(boxes[2].x).toBeCloseTo(boxes[0].x, 1);
+    expect(boxes[2].y - boxes[0].bottom).toBeCloseTo(24, 1);
+  }
+}
 async function openQuiz(page) {
   const response = await openStorefrontPage(page, route);
   expect(response.status()).toBe(200);
   await expect(page).not.toHaveURL(/\/password/);
+  await expectNoLiquidErrors(page.locator('body'));
   const quiz = page.locator('[data-style-quiz]');
   await expect(quiz).toBeVisible();
-  await expect(quiz.locator('[data-quiz-form]')).toBeVisible();
+  await expectNoLiquidErrors(quiz);
+  await expect(quiz.locator('[data-quiz-start]')).toBeVisible();
+  await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
   return quiz;
 }
-async function choose(quiz,step,value) {
-  await quiz.locator(`[data-step="${step}"] input[value="${value}"]`).check();
-  await quiz.locator('[data-quiz-next]').click();
+async function continueSteps(quiz, count) {
+  for (let i = 0; i < count; i++) {
+    await expectNoLiquidErrors(quiz);
+    await quiz.locator('[data-quiz-next]').click();
+    await expectNoLiquidErrors(quiz);
+  }
 }
-test('quiz validates, retains answers on back, reveals real available frames and resets', async ({page}) => {
+async function expandAll(quiz) {
+  const more = quiz.locator('[data-quiz-more]');
+  // Bounded by the documented 50-product curated collection contract.
+  for (let i = 0; i < 5 && await more.isVisible(); i++) await more.click();
+  await expect(more).toBeHidden();
+}
+
+test('category plus five optional style stages retain selections, show the complete editorial group and go back', async ({ page }) => {
   const quiz = await openQuiz(page);
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
+  await expect(quiz.locator('[data-step="budget"]')).toHaveCount(0);
+  await quiz.locator('[data-quiz-start]').click();
+  await expect(quiz.locator('[data-step="category"]')).toBeVisible();
   await quiz.locator('[data-quiz-next]').click();
-  await expect(quiz.locator('[data-quiz-error]')).toBeVisible();
-  const errorId = await quiz.locator('[data-quiz-error]').getAttribute('id');
-  await expect(quiz.locator('[data-step="face"]')).toHaveAttribute('aria-describedby',errorId);
-  await expect(quiz.locator('[data-step="face"]')).toHaveAttribute('aria-invalid','true');
-  await expect(quiz.locator('[data-step="face"] input').first()).toBeFocused();
-  await choose(quiz,'face','round');
-  await expect(quiz.locator('[data-step="style"] legend')).toBeFocused();
-  await expect(quiz.locator('[data-step="face"]')).not.toHaveAttribute('aria-invalid');
+  await expectNoLiquidErrors(quiz);
+  const rectangular = quiz.locator('input[name="shape"][value="rectangular"]');
+  const catEye = quiz.locator('input[name="shape"][value="cat-eye"]');
+  await rectangular.check(); await catEye.check();
+  await quiz.locator('[data-quiz-next]').click();
+  await expectNoLiquidErrors(quiz);
+  await expect(quiz.locator('[data-step="color"] [data-quiz-question]')).toBeFocused();
   await quiz.locator('[data-quiz-back]').click();
-  await expect(quiz.locator('[data-step="face"] input[value="round"]')).toBeChecked();
-  await quiz.locator('[data-quiz-next]').click();
-  await choose(quiz,'style','minimal');
-  await choose(quiz,'use','work');
-  await choose(quiz,'budget','none');
+  await expect(rectangular).toBeChecked(); await expect(catEye).toBeChecked();
+  await rectangular.uncheck(); await catEye.uncheck();
+  await continueSteps(quiz, 5);
   const results = quiz.locator('[data-quiz-results]');
   await expect(results).toBeVisible();
+  await expectNoLiquidErrors(quiz);
   await expect(results.locator('h2')).toBeFocused();
-  const cards = results.locator('[data-quiz-product]:visible');
-  expect(await cards.count()).toBeGreaterThanOrEqual(2);
-  expect(await cards.count()).toBeLessThanOrEqual(3);
-  const ids = await cards.evaluateAll(nodes => nodes.map(node=>node.dataset.id));
-  expect(new Set(ids).size).toBe(ids.length);
-  const rankedHandles = await cards.locator('a').evaluateAll(nodes => nodes.map(node => new URL(node.href).pathname));
-  expect(rankedHandles).toEqual(['/products/lemoon-estero','/products/lemoon-artico','/products/lemoon-genova']);
-  const href = await cards.first().locator('a').getAttribute('href');
-  expect(href).toMatch(/\/products\/[^?]+\?variant=\d+/);
-  await expect(cards.first().locator('h3')).not.toBeEmpty();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await quiz.locator('[data-quiz-restart]').click();
-  await expect(quiz.locator('[data-step="face"]')).toBeVisible();
   await expect(quiz.locator('input:checked')).toHaveCount(0);
+  await expect(quiz.getByText(/editorial/i).first()).toBeVisible();
+  const editorialCount = await quiz.locator('[data-quiz-product]').evaluateAll(nodes => new Set(nodes.filter(node => JSON.parse(node.dataset.candidate).available).map(node => node.dataset.id)).size);
+  await expect(cards(quiz)).toHaveCount(Math.min(12, editorialCount));
+  if (editorialCount <= 12) await expect(quiz.locator('[data-quiz-more]')).toBeHidden();
+  await expectCanonicalResults(page, quiz);
+  await expandAll(quiz);
+  const ids = await cards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
+  expect(ids.length).toBeGreaterThan(3);
+  expect(new Set(ids).size).toBe(ids.length);
+  await expect(cards(quiz).first().locator('.card-wrapper')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await quiz.locator('[data-quiz-results-back]').click();
   await expect(results).toBeHidden();
+  await expect(quiz.locator('input:checked')).toHaveCount(0);
+});
+
+test('pattern matching preserves a single recommended variant through the canonical card and PDP link', async ({ page }) => {
+  const quiz = await openQuiz(page);
+  await quiz.locator('[data-quiz-start]').click();
+  await expect(quiz.locator('[data-step="category"]')).toBeVisible();
+  await quiz.locator('[data-quiz-next]').click();
+  await expectNoLiquidErrors(quiz);
+  await continueSteps(quiz, 1);
+  const patternLabel = await quiz.locator('[data-step="color"] label:has(input[name="pattern"][value="tortoise"]) [data-quiz-option-label]').innerText();
+  await quiz.locator('[data-step="color"] input[name="pattern"][value="tortoise"]').check();
+  await quiz.locator('[data-quiz-next]').click();
+  await expectNoLiquidErrors(quiz);
+  await continueSteps(quiz, 3);
+  await expect(quiz.locator('[data-quiz-results]')).toBeVisible();
+  await expectNoLiquidErrors(quiz);
+  expect(await cards(quiz).count()).toBeGreaterThan(0);
+  await expandAll(quiz);
+  const ids = await cards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
+  expect(new Set(ids).size).toBe(ids.length);
+  const first = cards(quiz).first();
+  const variantId = await first.getAttribute('data-variant-id');
+  await expectCanonicalResults(page, quiz);
+  await expect(quiz.locator('[data-quiz-preferences]')).toContainText(patternLabel);
+  const link = first.locator('a[href*="/products/"]').first();
+  const href = await link.getAttribute('href');
+  expect(new URL(href, 'https://lemoon.cl').searchParams.get('variant')).toBe(variantId);
+  const selected = first.locator('.lemoon-product-card__swatch[aria-pressed="true"]');
+  if (await selected.count()) await expect(selected).toHaveAttribute('data-variant-url', new RegExp(`variant=${variantId}(?:&|$)`));
+  const selectedLabel = await selected.getAttribute('aria-label');
+  await first.getByRole('button', { name: 'Azul', exact: true }).click();
+  await expect(first.getByRole('button', { name: 'Azul', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await expectCanonicalResults(page, quiz);
+  await expect(quiz.locator('[data-quiz-preferences]')).toContainText(patternLabel);
+  await first.getByRole('button', { name: selectedLabel, exact: true }).click();
+  await expect(link).toHaveAttribute('href', href);
+  const pdpErrors = [];
+  page.on('pageerror', error => pdpErrors.push(error.message));
   await page.goto(href);
   await expect(page.locator('#MainContent h1').first()).toBeVisible();
-  await expect(page).toHaveURL(/\/products\//);
+  await expectNoLiquidErrors(page.locator('#MainContent'));
+  expect(pdpErrors).toEqual([]);
+  expect(new URL(page.url()).searchParams.get('variant')).toBe(variantId);
 });
-test('budget link uses the actual collection price parameter and preserves its cap', async ({page}) => {
-  const quiz = await openQuiz(page);
-  await expect(quiz).toHaveAttribute('data-price-parameter','filter.v.price.lte');
-  await choose(quiz,'face','unsure');
-  await choose(quiz,'style','minimal');
-  await choose(quiz,'use','work');
-  const budget = quiz.locator('[data-step="budget"] input').first();
-  const cents = Number(await budget.getAttribute('value'));
-  expect(Number.isFinite(cents)).toBe(true);
-  await budget.check(); await quiz.locator('[data-quiz-next]').click();
-  const cards = quiz.locator('[data-quiz-product]:visible');
-  for (const price of await cards.evaluateAll(nodes=>nodes.map(node=>Number(node.dataset.price)))) expect(price).toBeLessThanOrEqual(cents);
-  const href = await quiz.locator('[data-quiz-catalogue]').getAttribute('href');
-  const parameter = await quiz.getAttribute('data-price-parameter');
-  expect(parameter).toBe('filter.v.price.lte');
-  expect(new URL(href,'https://lemoon.cl').searchParams.get(parameter)).toBe(String(cents/100));
-  await quiz.locator('[data-quiz-catalogue]').click();
-  await expect(page).toHaveURL(/\/collections\/opticos\?/);
-  await expect(page.locator('#MainContent h1')).toBeVisible();
-});
-test('without JavaScript visitors can browse the real editorial selection and catalogue', async ({browser,baseURL,viewport,storageState}) => {
-  const context = await browser.newContext({ javaScriptEnabled:false, baseURL, viewport, storageState });
+
+test('without JavaScript visitors can browse a real editorial selection and catalogue', async ({ browser, baseURL, viewport, storageState }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, baseURL, viewport, storageState });
   const page = await context.newPage();
   try {
-    const response = await page.goto(route);
-    expect(response.status()).toBe(200);
+    const response = await page.goto(route); expect(response.status()).toBe(200);
     const quiz = page.locator('[data-style-quiz]');
+    await expectNoLiquidErrors(page.locator('body'));
     await expect(quiz).toBeVisible();
     await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
     await expect(quiz.locator('noscript')).toBeVisible();
-    expect(await quiz.locator('[data-quiz-product]').count()).toBeGreaterThan(0);
-    await expect(quiz.locator('[data-quiz-restart]')).toBeHidden();
-    await quiz.locator('[data-quiz-catalogue]').click();
-    await expect(page).toHaveURL(/\/collections\/opticos$/);
+    await expectNoLiquidErrors(quiz);
+    const ids = await cards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
+    expect(ids.length).toBeGreaterThan(0);
+    expect(new Set(ids).size).toBe(ids.length);
+    await expect(quiz.locator('[data-quiz-results-back]')).toBeHidden();
+    await quiz.locator('[data-quiz-results] [data-quiz-catalogue]').click();
+    await expect(page).toHaveURL(/\/collections\//);
   } finally { await context.close(); }
 });

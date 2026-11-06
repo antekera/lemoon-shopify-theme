@@ -23,23 +23,23 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 519,
-    "mapped_paths": 487,
+    "total_tracked_paths": 523,
+    "mapped_paths": 491,
     "excluded_paths": 32,
     "by_root": {
-      "assets": 260,
+      "assets": 261,
       "config": 2,
       "layout": 2,
       "locales": 51,
       "sections": 70,
-      "snippets": 94,
+      "snippets": 97,
       "templates": 40
     },
     "mapped_by_extension": {
-      ".css": 82,
+      ".css": 83,
       ".js": 53,
       ".json": 91,
-      ".liquid": 167,
+      ".liquid": 170,
       ".svg": 94
     },
     "excluded_by_reason": {
@@ -49,10 +49,10 @@
     "component_families": 44,
     "section_liquid_files": 68,
     "section_groups": 2,
-    "section_schema_blocks": 81,
+    "section_schema_blocks": 80,
     "theme_block_files": 0,
-    "total_source_paths": 519,
-    "explicit_new_paths": 5
+    "total_source_paths": 523,
+    "explicit_new_paths": 9
   },
   "components": [
     {
@@ -437,7 +437,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/price.liquid",
-        "scope": "Producto/variante y lemoon-money; no calcular precios en átomos de presentación.",
+        "scope": "Producto/variante y lemoon-money; price_variant opcional para variante validada con use_variant, sin calcular precios en presentación.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -473,7 +473,8 @@
         "snippets/lemoon-plp-product-page.liquid",
         "snippets/main-search-result-card.liquid",
         "templates/collection.carousel-accessories.liquid",
-        "templates/collection.carousel.liquid"
+        "templates/collection.carousel.liquid",
+        "sections/lemoon-style-quiz.liquid"
       ],
       "depends_on": [
         "LM-PRICE",
@@ -486,7 +487,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/card-product.liquid",
-        "scope": "card_product y section_id reales; media, precio y JS juntos.",
+        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; swatches sin media propia usan fallback neutro con alt vacío al cambiar de variante, sin conservar otra foto ni vista secundaria de otro color; secundaria vacía no emite imagen ni URLs; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -873,7 +874,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-search.liquid",
-        "scope": "Componer main-search-results en su contexto search, filtros y términos.",
+        "scope": "Componer main-search-results con search y all_collection explícitos, filtros y términos; preservar el fallback de colección para consumidores anteriores.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       }
     },
@@ -1561,7 +1562,11 @@
       "behavior": "interactive",
       "source_paths": [
         "sections/lemoon-style-quiz.liquid",
-        "assets/lemoon-style-quiz.js"
+        "assets/lemoon-style-quiz.js",
+        "assets/lemoon-style-quiz.css",
+        "snippets/lemoon-quiz-candidate.liquid",
+        "snippets/lemoon-quiz-options.liquid",
+        "snippets/lemoon-quiz-visual.liquid"
       ],
       "direct_static_consumers": [
         "sections/lemoon-style-quiz.liquid",
@@ -1570,13 +1575,14 @@
       "depends_on": [
         "LM-CHOICE",
         "LM-FEEDBACK",
-        "LM-ACTION"
+        "LM-ACTION",
+        "LM-PRODUCT-CARD"
       ],
       "documentation_anchor": "lm-quiz",
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-style-quiz.liquid",
-        "scope": "Flujo y estado pertenecen a su JS; no se extrae un motor de quiz.",
+        "scope": "Rótulo visible solo antes del título, sin headings repetidos antes de opciones; grupos con aria-label localizado. Descripciones de todas las etapas encima de opciones, al80% desde750px y100% móvil sin límite42ch, opciones centradas máximo96rem. Entrada con descripción móvil al ancho completo de contenido entre gutters y título breve en una línea habitual, sin leyenda de pasos/ritmo y catálogo subrayado en reposo. Números decorativos 01–06 navy de mayor visibilidad. Stepper centrado de seis círculos amarillos de 12px con gap20px y aro navy para el actual, que pasan a navy al completar; contador solo accesible y Volver abajo reemplaza Muéstrame variedad. Seis etapas: categoría ópticos/solares opcional con radio y filtro estricto por product.type antes del ranking; uso contextual sin trabajo/estudio en solares y Paseos y viajes; categorías con estudio blanco de una sola montura en perspectiva, JPEG480/960 3:2 decorativos; assets anteriores conservados. Color con siete botones compactos (sin dorado), muestras planas32×32, retícula3/2 y mínimo72px; Carey/Transparentes solo en Color; Detalles solo Acabados/Materiales; Acabados con miniaturas macro generadas64×64 en tarjetas horizontales, JPEG128/256 y acabado mate/brillante sobre carbón, SVG previos preservados; con seis imágenes generadas de estudio blanco por material JPEG480/960 3:2 y SVG previos preservados, sin pestaña Patrones ni opacidad/transparencia, neutrales compatibles con brown/light y plateado explícito. Atributos Shopify por producto/variante, ranking completo sin presupuesto y card-product canónica; portada y cuatro escenas de uso JPEG editoriales v1 responsive 3:2/contain, decorativas y no SKU; ocho formas en tres columnas en todos los anchos (padding8px y etiquetas12px en móvil), con outline frontal realista simplificado como icono, contorno único5 navy sin líneas interiores/relleno/sombra, tres paths por opción, cat-eye con parte superior menos curvada y geométrico con facetas rectas/esquinas miter; Aviador conserva geometría aprobada y las siete restantes se presentan para revisión visual; medidas de referencia opcionales con ejemplo numérico16px en móvil/escritorio, chevron nativo giratorio y campos lente/puente/patilla mm excluidos del anillo general del quiz, con foco por borde navy2px sin anillo exterior/sombra ni salto; tres valores válidos autoseleccionan un radio de presencia por heurística editorial local (índice2*lente+puente, <118 compacto/118–128 intermedio/>128 oversize), sin inferir ancho total ni calce; manual prevalece hasta editar medidas, volver conserva estado y errores no bloquean avanzar; sin persistencia ni envío; tamaño con silueta neutra outline de cabeza/cuello/hombros, sin rasgos ni rellenos, misma base y montura escalada0.78/0.95/1.13, sin inferencia de talla física; restantes muestras SVG comparables con IDs únicos e indicador de selección visible; resumen dl de solo lectura con seis celdas iguales,3columnas desktop/2móvil y filas1fr antes del listado; Ir atrás secuencial desde resultados conserva respuestas/medidas/progreso, sin reinicio ni enlaces de edición; aviso demo visible retirado sin cambiar flags comerciales, catálogo con botón relleno navy redondeado y destino /collections/all en entrada/resultados, sin razones por tarjeta, lotes de doce y dos columnas móviles; límites50productos/20variantes.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -3263,6 +3269,14 @@
       "status": "excluded",
       "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
       "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-quiz.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "LEM-11 implementation and local Liquid fixture review; Shopify runtime separate"
     },
     {
       "path": "assets/lemoon-style-quiz.js",
@@ -5086,6 +5100,15 @@
       "inspection_method": "targeted reusable consumer/Liquid inspection; local regression fixtures do not prove Shopify runtime"
     },
     {
+      "path": "snippets/lemoon-delivery-estimate.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-DISCLOSURE",
+        "LM-LEGAL"
+      ],
+      "inspection_method": "manual contract update"
+    },
+    {
       "path": "snippets/lemoon-facet-visual.liquid",
       "status": "mapped",
       "component_ids": [
@@ -5284,6 +5307,30 @@
         "LM-ICON"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "snippets/lemoon-quiz-candidate.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "LEM-11 implementation and local Liquid fixture review; Shopify runtime separate"
+    },
+    {
+      "path": "snippets/lemoon-quiz-options.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "LEM-11 implementation and local Liquid fixture review; Shopify runtime separate"
+    },
+    {
+      "path": "snippets/lemoon-quiz-visual.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "LEM-11 implementation and local Liquid fixture review; Shopify runtime separate"
     },
     {
       "path": "snippets/lemoon-select-lenses-button.liquid",
@@ -5784,6 +5831,14 @@
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
     {
+      "path": "templates/page.legal.json",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "targeted-template-review; opt-in native policy source"
+    },
+    {
       "path": "templates/page.nosotros.json",
       "status": "mapped",
       "component_ids": [
@@ -5898,23 +5953,6 @@
         "LM-SEARCH"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
-    },
-    {
-      "path": "snippets/lemoon-delivery-estimate.liquid",
-      "status": "mapped",
-      "component_ids": [
-        "LM-DISCLOSURE",
-        "LM-LEGAL"
-      ],
-      "inspection_method": "manual contract update"
-    },
-    {
-      "path": "templates/page.legal.json",
-      "status": "mapped",
-      "component_ids": [
-        "LM-LEGAL"
-      ],
-      "inspection_method": "targeted-template-review; opt-in native policy source"
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -5939,7 +5977,11 @@
       "assets/section-lemoon-editorial-newsletter.css",
       "snippets/lemoon-business-content.liquid",
       "snippets/lemoon-legal-section-content.liquid",
-      "templates/page.legal.json"
+      "templates/page.legal.json",
+      "assets/lemoon-style-quiz.css",
+      "snippets/lemoon-quiz-candidate.liquid",
+      "snippets/lemoon-quiz-options.liquid",
+      "snippets/lemoon-quiz-visual.liquid"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status. Se agrega plantilla legal compartida; la cobertura incluye la incorporación de plazo de entrega.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
@@ -6033,6 +6075,17 @@
       },
       "contract": "Four bounded shared snippets; select/heading/action reuse and explicit social ordering. Native schemas/forms/controllers and volume-tier owner state preserved.",
       "proof": "tests/unit/consumer-contract.test.js and tests/e2e/consumer-contract.spec.js; local real-Liquid fixtures, not Shopify processing or live editor proof."
+    },
+    "style_quiz": {
+      "ticket": "LEM-11",
+      "date": "2026-11-05",
+      "base_sha": "5f3aaaef",
+      "families": [
+        "LM-QUIZ",
+        "LM-PRODUCT-CARD",
+        "LM-PRICE"
+      ],
+      "contract": "Five-stage style quiz, product/variant trait references, full ranked group, optional recommended_variant and price_variant; no Shopify publication claim."
     }
   }
 }

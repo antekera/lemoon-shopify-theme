@@ -260,10 +260,10 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
 }
 
 /* Keep the front image visible until the deferred hover image has loaded. */
-.card-wrapper.product-card-wrapper .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img:first-child {
+.card-wrapper.product-card-wrapper .card .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img:first-child {
   opacity: 1;
 }
-.card-wrapper.product-card-wrapper .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img + img {
+.card-wrapper.product-card-wrapper .card .media.media--hover-effect:not(.lemoon-product-card__secondary-ready) > img + img {
   opacity: 0;
 }
 

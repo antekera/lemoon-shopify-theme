@@ -68,7 +68,7 @@ Estas referencias proceden de los archivos del repositorio. Un template puede in
 
 Las políticas nativas usan el shell de `request.page_type == 'policy'` en [layout/theme.liquid](../../layout/theme.liquid), [lemoon-native-policies.css](../../assets/lemoon-native-policies.css) y [lemoon-native-policy-help](../../snippets/lemoon-native-policy-help.liquid). Las preferencias se comparten con el diálogo del footer mediante [lemoon-cookie-preferences.js](../../assets/lemoon-cookie-preferences.js), sin crear una segunda política.
 
-La selección editorial de armazones usa [lemoon-style-quiz](../../sections/lemoon-style-quiz.liquid): cuatro preguntas, curaduría por bloques de producto, máximo tres resultados disponibles, presupuesto y selección sin JavaScript. La compra de tarjeta regalo usa [lemoon-gift-card-purchase](../../sections/lemoon-gift-card-purchase.liquid): variantes nativas y destinatario opcional con alternativa sin JavaScript. Sus dependencias operativas se mantienen en LEM-11 y LEM-9.
+La selección editorial de armazones usa [lemoon-style-quiz](../../sections/lemoon-style-quiz.liquid): cinco etapas de estilo, atributos Shopify por producto y variante, grupo completo por afinidad sin presupuesto y alternativa editorial sin JavaScript. El listado muestra hasta doce productos iniciales, resumen único y dos tarjetas por fila en móvil; [operación de catálogo](../catalog/style-quiz.md). La compra de tarjeta regalo usa [lemoon-gift-card-purchase](../../sections/lemoon-gift-card-purchase.liquid): variantes nativas y destinatario opcional con alternativa sin JavaScript. Sus dependencias operativas se mantienen en LEM-11 y LEM-9.
 
 ## Historia de exploración
 

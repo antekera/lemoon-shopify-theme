@@ -9,6 +9,7 @@ Familias: LM-PRODUCT-CARD, LM-PRICE, LM-SWATCH, LM-LABEL, LM-PRODUCT-LIST y cont
 | API existente | Uso |
 | --- | --- |
 | `card_product`, `section_id` | Product Liquid real e identidad de sección; conservar IDs de enlaces/formularios |
+| `recommended_variant` | Opcional para el quiz: se valida por ID entre las variantes de `card_product`. Inicializa imagen, precio, URL y swatch en la misma variante. Omitido/ajeno conserva el contrato anterior |
 | `media_aspect_ratio`, `image_shape` | Respetar la geometría y overrides de la superficie, no imponer proporción global |
 | `show_secondary_image`, `lazy_load` | Media secundaria y carga diferida; false explícito permite imagen prioritaria donde el dueño lo decida |
 | `show_vendor`, `show_rating`, `extend_height`, `horizontal_class` | Opcionales según el contrato actual de card-product |
@@ -38,6 +39,10 @@ Para precio independiente:
 ```
 
 [price](../../../snippets/price.liquid) compone [lemoon-money](../../../snippets/lemoon-money.liquid) y precios de producto/variante; disponibilidad, descuento y moneda no se inventan en el consumidor. [swatch-input](../../../snippets/swatch-input.liquid) requiere `id`, `name`, valor de opción/SwatchDrop, `product_form_id`, `checked` y estado; preservar el selector de variantes y su contrato de escaping existente. Su `additional_props` legacy no autoriza contenido externo libre ni amplía los contratos nuevos UI. [lemoon-product-card-labels](../../../snippets/lemoon-product-card-labels.liquid) deriva etiquetas de datos reales. Iconos/spinner y [lemoon-carousel-controls](../../../snippets/lemoon-carousel-controls.liquid) siguen siendo sus implementaciones canónicas.
+
+El render de `price` admite `price_variant` junto a `use_variant: true` para la variante ya validada por la tarjeta; omitido mantiene `product.selected_or_first_available_variant`. No pasar objetos de demostración como precios comerciales. El quiz compone el grupo y un único resumen editable de preferencias antes del listado, conserva las tarjetas sin texto de afinidad y no habilita quick-add. Cada instancia por variante usa un `section_id` único para preservar IDs de enlaces. Las variantes alternas se mantienen en templates inertes hasta mostrarse; después se inicializa el controlador existente mediante su evento de actualización.
+
+Si se explora otro swatch desde los resultados, la tarjeta conserva su contrato de media/precio/URL y la elección se mantiene al ampliar el listado. El resumen superior describe las preferencias de la búsqueda, sin atribuir todas ellas a cada producto ni a una variante explorada. Las pruebas de `style-quiz-card.test.js` renderizan el snippet real con adaptadores locales explícitos; no certifican los ProductDrop de Shopify.
 
 ## Dependencias y fronteras comerciales
 
@@ -87,3 +92,9 @@ Mantener product-info.js/price-per-item.js, `Price-Per-Item-<section>`, data-sec
 ```
 
 [consumer-contract.test.js](../../../tests/unit/consumer-contract.test.js) y [consumer-contract.spec.js](../../../tests/e2e/consumer-contract.spec.js) comparan referencias previas de los consumidores y ejercitan estados de precio, impuestos, ordenación y slider en fixtures locales. El límite card-product de las respuestas de carrusel se modela para comprobar parámetros; esas pruebas no acreditan quick-add real, precios/moneda efectivos, Section Rendering de Shopify ni procesamiento de carrito.
+
+En tarjetas con `recommended_variant`, cada swatch sin media propia debe publicar `lemoon-product-fallback.png` como `data-primary-src`, con alt vacío. Una URL vacía deja la galería sin elementos y puede conservar la foto del color anterior aunque cambien precio/enlaces. No usar la foto de otra variante para ese color; la tarjeta sin `recommended_variant` conserva su contrato anterior.
+
+Un `data-secondary-src` explícitamente vacío indica que el color no tiene segunda vista: retirar el estado de hover y las fuentes anteriores, e invalidar cualquier decodificación pendiente. Recuperar `data-lazy-src` solo si el swatch no declara el atributo; los valores secundarios explícitos no heredan el srcset de otro color. Los selectores de espera en `lemoon-components.css` deben prevalecer sobre el hover de `component-card.css`, aunque este se cargue después, para mantener visible la imagen principal.
+
+La vista secundaria inicial se renderiza solo si `card_secondary_media != blank`: Shopify puede representar la ausencia como cadena vacía, distinta de `null`. No pasar ese valor vacío a `image_url`; las pruebas LiquidJS no reproducen necesariamente esta diferencia del render nativo.

@@ -1,6 +1,8 @@
 {% doc %}
 Renders the search page inside its pagination context.
 @param {object} section - The main search section and its settings.
+@param {object} search - The native Shopify search object.
+@param {object} [all_collection] - The all-products collection; falls back to collections.all for existing consumers.
 @param {object} paginate - Pagination details for the active result source.
 @param {boolean} show_all_products - Whether the page is showing the full catalog.
 @param {boolean} has_results - Whether the active result source has any items.
@@ -8,6 +10,7 @@ Renders the search page inside its pagination context.
 {% enddoc %}
 
 {%- liquid
+  assign search_collection = all_collection | default: collections.all
   assign escaped_search_terms = search.terms | escape
   assign show_native_toolbar = false
   if show_all_products == false and search.filters != empty
@@ -79,7 +82,7 @@ Renders the search page inside its pagination context.
       {%- unless show_native_toolbar -%}
         <p class="lemoon-search__count" role="status">
           {%- if show_all_products -%}
-            {{ 'products.facets.product_count_simple' | t: count: collections.all.products_count }}
+            {{ 'products.facets.product_count_simple' | t: count: search_collection.products_count }}
           {%- elsif search.performed -%}
             {{ 'templates.search.results_with_count_and_term' | t: terms: escaped_search_terms, count: search.results_count }}
           {%- endif -%}
@@ -193,7 +196,7 @@ Renders the search page inside its pagination context.
                 role="list"
               >
                 {%- if show_all_products -%}
-                  {%- assign search_results = collections.all.products -%}
+                  {%- assign search_results = search_collection.products -%}
                 {%- else -%}
                   {%- assign search_results = search.results -%}
                 {%- endif -%}

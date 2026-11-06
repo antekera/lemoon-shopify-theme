@@ -20,6 +20,12 @@ Lemoon represents a HTML-first, JavaScript-only-as-needed approach to theme deve
 
 You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/lemoon/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
 
+## Documentación operativa de Lemoon
+
+- [Guía de catálogo del quiz de estilo](docs/catalog/style-quiz.md): características de producto y variante, vocabulario, herencia, medidas físicas, habilitación y alta de productos finales desde Shopify o la precarga del back office.
+- [Configuración administrativa de atributos](scripts/style-quiz-admin-config.json): registro del contrato de metacampos y del diccionario compartido, sin credenciales ni ejecución automática.
+- La carga inicial de fotos, títulos, textos y metadatos se integra en Product Studio del [back office](https://github.com/antekera/lemoon-next-backoffice/pull/9). Shopify conserva la edición final; los reintentos deben preservar sus cambios posteriores.
+
 ## Getting started
 
 We recommend using Lemoon as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
