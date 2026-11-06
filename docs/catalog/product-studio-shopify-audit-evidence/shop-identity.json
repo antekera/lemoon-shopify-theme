@@ -1,0 +1,33 @@
+{
+  "verified_on": "2026-11-05",
+  "source": "Shopify connector Admin GraphQL read-only and public HTTP HEAD redirects",
+  "shop": {
+    "id": "gid://shopify/Shop/76333711528",
+    "name": "lemoon",
+    "myshopifyDomain": "pzsrt4-1u.myshopify.com",
+    "primaryDomain": {
+      "host": "lemoon.cl",
+      "url": "https://lemoon.cl"
+    }
+  },
+  "http_redirects": {
+    "https://lemoon-8277.myshopify.com": "https://lemoon.cl/password",
+    "https://pzsrt4-1u.myshopify.com": "https://lemoon.cl/password",
+    "https://lemoon.cl": "https://lemoon.cl/password"
+  },
+  "versioned_backoffice_configuration": {
+    "repository_head": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+    "file_last_commit": "c68559910451aaefd89353b5ff8588a87d9269e1",
+    "paths": [
+      "infra/cdk.json:9",
+      "services/api/scripts/configure-development-catalog-webhooks.ts:60"
+    ],
+    "shopDomain": "pzsrt4-1u.myshopify.com"
+  },
+  "limits": [
+    "Not evidence of access token belonging to Lemoon Admin",
+    "Not effective deployed runtime flags",
+    "Not Shopify Catalog Sources status",
+    "Public redirects do not establish historical domain rename date or OAuth alias acceptance"
+  ]
+}

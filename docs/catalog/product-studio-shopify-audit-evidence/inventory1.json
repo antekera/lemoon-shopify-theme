@@ -1,0 +1,18 @@
+{
+  "accessedAt": "2026-11-06T02:49:16.282Z",
+  "actor": "agent connector, not app",
+  "query": "query($after:String){products(first:50,after:$after){nodes{id variants(first:50){nodes{id inventoryItem{id tracked unitCost{amount currencyCode} duplicateSkuCount inventoryLevels(first:50){nodes{id location{id isActive fulfillsOnlineOrders} quantities(names:[\"available\",\"on_hand\",\"committed\"]){name quantity}} pageInfo{hasNextPage endCursor}}}} pageInfo{hasNextPage endCursor}}} pageInfo{hasNextPage endCursor}}}",
+  "variables": {
+    "after": null
+  },
+  "result": {
+    "error": "invalid_request",
+    "error_description": "GraphQL errors occurred: Query cost is 1248, which exceeds the single query max cost limit (1000).\n\nSee https://shopify.dev/docs/api/usage/rate-limits for more information on how the\ncost of a query is calculated.\n\nTo query larger amounts of data with fewer limits, bulk operations should be used instead.\nSee https://shopify.dev/docs/api/usage/bulk-operations/queries for usage details.\n",
+    "graphql_errors": [
+      {
+        "message": "Query cost is 1248, which exceeds the single query max cost limit (1000).\n\nSee https://shopify.dev/docs/api/usage/rate-limits for more information on how the\ncost of a query is calculated.\n\nTo query larger amounts of data with fewer limits, bulk operations should be used instead.\nSee https://shopify.dev/docs/api/usage/bulk-operations/queries for usage details.\n"
+      }
+    ],
+    "error_code": "INVALID_ARGUMENT"
+  }
+}
