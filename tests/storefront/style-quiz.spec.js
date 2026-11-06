@@ -3,7 +3,7 @@ import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 
 // This suite requires an authorized Shopify-rendered preview of LEM-11.
 // Local Liquid fixtures are covered separately in tests/e2e/style-quiz.spec.js.
-const route = '/pages/buscar-mi-estilo?view=buscar-mi-estilo';
+const route = '/pages/buscar-mi-estilo';
 const cards = quiz => quiz.locator('[data-quiz-product]:visible');
 async function expectNoLiquidErrors(quiz) {
   // Shopify can return HTTP 200 and working JS while rendering missing-snippet errors.
@@ -40,10 +40,10 @@ async function openQuiz(page) {
   await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
   return quiz;
 }
-async function skipSteps(quiz, count) {
+async function continueSteps(quiz, count) {
   for (let i = 0; i < count; i++) {
     await expectNoLiquidErrors(quiz);
-    await quiz.locator('[data-quiz-skip]').click();
+    await quiz.locator('[data-quiz-next]').click();
     await expectNoLiquidErrors(quiz);
   }
 }
@@ -54,11 +54,13 @@ async function expandAll(quiz) {
   await expect(more).toBeHidden();
 }
 
-test('five optional style stages retain selections, show the complete editorial group and reset', async ({ page }) => {
+test('category plus five optional style stages retain selections, show the complete editorial group and go back', async ({ page }) => {
   const quiz = await openQuiz(page);
   await expect(page.locator('#MainContent h1')).toHaveCount(1);
   await expect(quiz.locator('[data-step="budget"]')).toHaveCount(0);
   await quiz.locator('[data-quiz-start]').click();
+  await expect(quiz.locator('[data-step="category"]')).toBeVisible();
+  await quiz.locator('[data-quiz-next]').click();
   await expectNoLiquidErrors(quiz);
   const rectangular = quiz.locator('input[name="shape"][value="rectangular"]');
   const catEye = quiz.locator('input[name="shape"][value="cat-eye"]');
@@ -68,7 +70,8 @@ test('five optional style stages retain selections, show the complete editorial 
   await expect(quiz.locator('[data-step="color"] [data-quiz-question]')).toBeFocused();
   await quiz.locator('[data-quiz-back]').click();
   await expect(rectangular).toBeChecked(); await expect(catEye).toBeChecked();
-  await skipSteps(quiz, 5);
+  await rectangular.uncheck(); await catEye.uncheck();
+  await continueSteps(quiz, 5);
   const results = quiz.locator('[data-quiz-results]');
   await expect(results).toBeVisible();
   await expectNoLiquidErrors(quiz);
@@ -85,7 +88,7 @@ test('five optional style stages retain selections, show the complete editorial 
   expect(new Set(ids).size).toBe(ids.length);
   await expect(cards(quiz).first().locator('.card-wrapper')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await quiz.locator('[data-quiz-restart]').click();
+  await quiz.locator('[data-quiz-results-back]').click();
   await expect(results).toBeHidden();
   await expect(quiz.locator('input:checked')).toHaveCount(0);
 });
@@ -93,15 +96,15 @@ test('five optional style stages retain selections, show the complete editorial 
 test('pattern matching preserves a single recommended variant through the canonical card and PDP link', async ({ page }) => {
   const quiz = await openQuiz(page);
   await quiz.locator('[data-quiz-start]').click();
-  await expectNoLiquidErrors(quiz);
-  await skipSteps(quiz, 2);
-  const patterns = quiz.locator('[data-quiz-tab="patterns"]');
-  if (await patterns.count()) await patterns.click();
-  const patternLabel = await quiz.locator('label:has(input[name="pattern"][value="tortoise"]) [data-quiz-option-label]').innerText();
-  await quiz.locator('input[name="pattern"][value="tortoise"]').check();
+  await expect(quiz.locator('[data-step="category"]')).toBeVisible();
   await quiz.locator('[data-quiz-next]').click();
   await expectNoLiquidErrors(quiz);
-  await skipSteps(quiz, 2);
+  await continueSteps(quiz, 1);
+  const patternLabel = await quiz.locator('[data-step="color"] label:has(input[name="pattern"][value="tortoise"]) [data-quiz-option-label]').innerText();
+  await quiz.locator('[data-step="color"] input[name="pattern"][value="tortoise"]').check();
+  await quiz.locator('[data-quiz-next]').click();
+  await expectNoLiquidErrors(quiz);
+  await continueSteps(quiz, 3);
   await expect(quiz.locator('[data-quiz-results]')).toBeVisible();
   await expectNoLiquidErrors(quiz);
   expect(await cards(quiz).count()).toBeGreaterThan(0);
@@ -147,8 +150,8 @@ test('without JavaScript visitors can browse a real editorial selection and cata
     const ids = await cards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));
     expect(ids.length).toBeGreaterThan(0);
     expect(new Set(ids).size).toBe(ids.length);
-    await expect(quiz.locator('[data-quiz-restart]')).toBeHidden();
-    await quiz.locator('[data-quiz-catalogue]').click();
+    await expect(quiz.locator('[data-quiz-results-back]')).toBeHidden();
+    await quiz.locator('[data-quiz-results] [data-quiz-catalogue]').click();
     await expect(page).toHaveURL(/\/collections\//);
   } finally { await context.close(); }
 });

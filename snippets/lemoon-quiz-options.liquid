@@ -1,20 +1,75 @@
 {% comment %}
-  Quiz-only checkbox group with illustrative, replaceable visuals.
-  Inputs: group (canonical attribute key), options (comma-separated codes), section_id.
+  Quiz-only choice group (category/presence radio, other groups checkbox) with illustrative, replaceable visuals.
+  Inputs: group (displayed group), options (comma-separated codes), section_id.
+  Color keeps Carey and Transparentes on their canonical pattern/transparency input names.
 {% endcomment %}
 {%- assign option_codes = options | split: ',' -%}
 {%- assign group_key = 'sections.lemoon_style_quiz_v2.axes.' | append: group -%}
-<div class="lemoon-quiz__option-group" data-quiz-group="{{ group | escape }}">
-  <h3>{{ group_key | t }}</h3>
+<div class="lemoon-quiz__option-group" data-quiz-group="{{ group | escape }}" role="group" aria-label="{{ group_key | t | escape }}">
   <div class="lemoon-quiz__options lemoon-quiz__options--{{ group | escape }}">
     {%- for code in option_codes -%}
       {%- assign locale_code = code | replace: '-', '_' -%}
       {%- assign label_key = 'sections.lemoon_style_quiz_v2.options.' | append: group | append: '.' | append: locale_code -%}
+      {%- liquid
+        assign input_group = group
+        if group == 'color' and code == 'tortoise'
+          assign input_group = 'pattern'
+        elsif group == 'color' and code == 'transparent'
+          assign input_group = 'transparency'
+        endif
+      -%}
       {%- capture visual_id -%}QuizVisual-{{ section_id }}-{{ group }}-{{ code }}{%- endcapture -%}
       <label class="lemoon-quiz__option" for="QuizChoice-{{ section_id }}-{{ group }}-{{ code }}">
-        <input id="QuizChoice-{{ section_id }}-{{ group }}-{{ code }}" type="checkbox" name="{{ group | escape }}" value="{{ code | escape }}">
-        <span class="lemoon-quiz__visual" aria-hidden="true">{% render 'lemoon-quiz-visual', group: group, value: code, visual_id: visual_id %}</span>
-        <span class="lemoon-quiz__option-label" data-quiz-option-label>{{ label_key | t }}</span>
+        <input id="QuizChoice-{{ section_id }}-{{ group }}-{{ code }}" type="{% if group == 'category' or group == 'presence' %}radio{% else %}checkbox{% endif %}" name="{{ input_group | escape }}" value="{{ code | escape }}">
+        <span class="lemoon-quiz__visual{% if group == 'color' %} lemoon-quiz__visual--color{% endif %}{% if group == 'finish' %} lemoon-quiz__visual--finish{% endif %}{% if group == 'use' or group == 'category' or group == 'material' %} lemoon-quiz__visual--photo{% endif %}" aria-hidden="true">
+          {%- if group == 'finish' -%}
+            {%- assign finish_asset = 'lemoon-quiz-finish-' | append: code | append: '-macro-v1-' -%}
+            {%- assign finish_small = finish_asset | append: '128.jpg' -%}
+            {%- assign finish_large = finish_asset | append: '256.jpg' -%}
+            <img
+              src="{{ finish_small | asset_url }}"
+              srcset="{{ finish_small | asset_url }} 128w, {{ finish_large | asset_url }} 256w"
+              sizes="64px"
+              width="128"
+              height="128"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            >
+          {%- elsif group == 'category' or group == 'material' -%}
+            {%- assign studio_asset = 'lemoon-quiz-' | append: group | append: '-' | append: code | append: '-studio-v1-' -%}
+            {%- assign studio_small = studio_asset | append: '480.jpg' -%}
+            {%- assign studio_large = studio_asset | append: '960.jpg' -%}
+            <img
+              src="{{ studio_large | asset_url }}"
+              srcset="{{ studio_small | asset_url }} 480w, {{ studio_large | asset_url }} 960w"
+              sizes="(min-width: 1040px) 440px, 44vw"
+              width="960"
+              height="640"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            >
+          {%- elsif group == 'use' -%}
+            {%- assign scene_code = code | replace: '_', '-' -%}
+            {%- assign scene_asset = 'lemoon-quiz-' | append: scene_code | append: '-editorial-v1-' -%}
+            {%- assign scene_small = scene_asset | append: '480.jpg' -%}
+            {%- assign scene_large = scene_asset | append: '960.jpg' -%}
+            <img
+              src="{{ scene_large | asset_url }}"
+              srcset="{{ scene_small | asset_url }} 480w, {{ scene_large | asset_url }} 960w"
+              sizes="(min-width: 990px) 30vw, (min-width: 750px) 25vw, 45vw"
+              width="960"
+              height="640"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            >
+          {%- else -%}
+            {% render 'lemoon-quiz-visual', group: group, value: code, visual_id: visual_id %}
+          {%- endif -%}
+        </span>
+        <span class="lemoon-quiz__option-label" data-quiz-option-label{% if group == 'use' and code == 'outdoors' %} data-optical-label="{{ label_key | t | escape }}" data-sun-label="{{ 'sections.lemoon_style_quiz_v2.sun_outdoors' | t | escape }}"{% endif %}>{{ label_key | t }}</span>
         <span class="lemoon-quiz__selected" aria-hidden="true">{% render 'lemoon-icon', icon: 'check', size: 16 %}</span>
       </label>
     {%- endfor -%}

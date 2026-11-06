@@ -3,7 +3,18 @@
   Inputs: product (Product), variant (ProductVariant).
   Each trait group on the variant replaces that entire group from the product.
 {% endcomment %}
+{%- liquid
+  assign product_type = product.type | strip | downcase | replace: 'ó', 'o'
+  assign category = ''
+  case product_type
+    when 'optico', 'opticos', 'optical'
+      assign category = 'optical'
+    when 'solar', 'solares', 'lentes de sol', 'sunglasses'
+      assign category = 'sun'
+  endcase
+-%}
 {
+  "category": {{ category | json }},
   "id": {{ product.id | append: '' | json }},
   "variantId": {{ variant.id | append: '' | json }},
   "price": {{ variant.price | json }},

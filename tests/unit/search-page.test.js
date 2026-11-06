@@ -1,5 +1,8 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { expect, test } from 'vitest';
+import { renderComponentSection, searchFixtureOptions } from '../helpers/component-library-renderer.mjs';
 const file = (name) => readFileSync(new URL(`../../${name}`, import.meta.url), 'utf8');
 const json = (name) => { const text = file(name); return JSON.parse(text.slice(text.indexOf('{'))); };
 
@@ -50,4 +53,36 @@ test('search copy is bilingual with no fabricated result counts or static catalo
     for (const key of keys) expect(messages[key], `${locale} ${key}`).toBeTruthy();
   }
   expect(results).not.toMatch(/Dalton|89\.990|36 resultados/i);
+});
+
+test('all-products search renders the supplied collection count and items without a global collections object', () => {
+  const sourceRoot = mkdtempSync(join(tmpdir(), 'lemoon-search-context-'));
+  mkdirSync(join(sourceRoot, 'snippets'));
+  // Isolate collection selection from the commercial card's money/image adapters.
+  // The parent results snippet and all other nested controls remain real source.
+  writeFileSync(join(sourceRoot, 'snippets/main-search-result-card.liquid'), '<li data-result-id="{{ item.id }}">{{ item.title | escape }}</li>');
+  const options = searchFixtureOptions();
+  const supplied = { products_count: 2, products: [{ id: 'optical', title: 'Óptico de referencia' }, { id: 'sun', title: 'Solar de referencia' }] };
+  const render = context => renderComponentSection('main-search-results', {
+    ...options, sourceRoot,
+    context: { ...options.context, show_all_products: true, has_results: true, ...context },
+  });
+  try {
+    const html = render({ all_collection: supplied });
+    expect(html).toMatch(/lemoon-search__count[^>]*>\s*2 productos/);
+    expect([...html.matchAll(/data-result-id="([^"]+)"/g)].map(match => match[1])).toEqual(['optical', 'sun']);
+    expect(html).toContain('Óptico de referencia');
+    expect(html).toContain('Solar de referencia');
+    expect(html).not.toMatch(/Liquid (?:syntax )?error/);
+
+    const conflictingGlobal = render({ all_collection: supplied, collections: { all: { products_count: 1, products: [{ id: 'wrong-global', title: 'Colección no seleccionada' }] } } });
+    expect(conflictingGlobal).not.toContain('wrong-global');
+    expect(conflictingGlobal).toContain('data-result-id="sun"');
+
+    const legacyConsumer = render({ collections: { all: supplied } });
+    expect(legacyConsumer).toMatch(/lemoon-search__count[^>]*>\s*2 productos/);
+    expect(legacyConsumer).toContain('data-result-id="optical"');
+  } finally {
+    rmSync(sourceRoot, { recursive: true, force: true });
+  }
 });

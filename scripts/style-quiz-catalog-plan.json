@@ -16,7 +16,7 @@
     {
       "group": "color",
       "code": "black",
-      "label": "Negros y grises",
+      "label": "Negros",
       "handle": "color-black"
     },
     {
@@ -52,31 +52,31 @@
     {
       "group": "pattern",
       "code": "plain",
-      "label": "Liso",
+      "label": "Legado — Liso",
       "handle": "pattern-plain"
     },
     {
       "group": "pattern",
       "code": "tortoise",
-      "label": "Carey / vetas",
+      "label": "Carey",
       "handle": "pattern-tortoise"
     },
     {
       "group": "transparency",
       "code": "opaque",
-      "label": "Opaco",
+      "label": "Legado — Opaco",
       "handle": "transparency-opaque"
     },
     {
       "group": "transparency",
       "code": "translucent",
-      "label": "Translúcido",
+      "label": "Legado — Translúcido",
       "handle": "transparency-translucent"
     },
     {
       "group": "transparency",
       "code": "transparent",
-      "label": "Transparente",
+      "label": "Transparentes",
       "handle": "transparency-transparent"
     },
     {
@@ -120,6 +120,24 @@
       "code": "oversize",
       "label": "Oversize",
       "handle": "presence-oversize"
+    },
+    {
+      "group": "color",
+      "code": "neutral",
+      "label": "Tonos neutros",
+      "handle": "color-neutral"
+    },
+    {
+      "group": "color",
+      "code": "two_tone",
+      "label": "Bicolor",
+      "handle": "color-two-tone"
+    },
+    {
+      "group": "color",
+      "code": "silver",
+      "label": "Plateados",
+      "handle": "color-silver"
     }
   ],
   "assignments": [

@@ -883,9 +883,9 @@
     "lemoon_style_quiz_v2": {
       "name": "Find your style",
       "eyebrow": "Find your style",
-      "title": "Your next pair. Very you.",
-      "intro": "Shapes, colours and details that feel like you. Let’s find your next pair.",
-      "steps": "5 steps",
+      "title": "Your next pair.",
+      "intro": "Shapes, colours and details that feel like you. Find yours.",
+      "steps": "6 steps",
       "pace": "You can change your mind",
       "start": "Find my style",
       "catalogue": "Explore the catalogue",
@@ -898,12 +898,12 @@
       "more": "See more of my selection",
       "empty_title": "Let’s keep looking",
       "empty": "We couldn’t find available products matching your preferences. Try changing a preference or explore the catalogue.",
-      "editorial": "With no preferences selected, here is an editorial selection to explore.",
+      "editorial": "With no style preferences selected, here is an editorial selection to explore.",
       "demo": "Demonstration selection: these products include test attributes that do not represent a verified final catalogue.",
       "no_js": "You can explore this editorial selection or visit the catalogue. To answer the guide and refine your results, enable JavaScript in your browser.",
       "results_title": "There’s more than one way to be you.",
       "results_intro": "A selection to get you started. Change any preference and keep exploring.",
-      "preference_hint": "Your preferences are a starting point. You can change them at any time.",
+      "preference_hint": "These are your preferences. To change them, use Go back.",
       "none": "No preference",
       "reason_intro": "Matches your preferences for:",
       "step_status": "Step [current] of [total]",
@@ -912,7 +912,7 @@
       "finished": "Your selection is ready",
       "loading_error": "We couldn’t prepare your selection. You can try again or explore the catalogue.",
       "few_intro": "We found a few matches. You can change a preference to keep exploring.",
-      "details_note": "Material, pattern, finish and transparency are separate features. You can explore each one.",
+      "details_note": "You can combine your finish and material preferences.",
       "presence_note": "Oversize describes a visual proportion, not a physical size. Check measurements when comparing frames.",
       "use_note": "Your plans guide the style. Compatible lenses and treatments are selected later.",
       "price_note": "Frame price. Compatible lenses and treatments are selected and charged separately.",
@@ -921,12 +921,21 @@
       "image_label": "Intro editorial image",
       "measures": {
         "title": "Already have a pair that fits you?",
-        "intro": "Look for the numbers on the temple of a pair that fits you. Use them as a reference when comparing.",
+        "intro": "Find the numbers on the temple of your glasses and enter all three measurements. We’ll suggest a visual proportion that you can change.",
         "numbers": "50 □ 18 — 140",
         "labels": "Lens width · bridge · temple (mm)",
-        "note": "These are separate measurements; no single one gives the total frame width. Compare them with each product’s measurements. They do not confirm how a frame will fit you."
+        "note": "This is a visual proportion reference, not an exact size or a guarantee of fit. Temple length helps compare the arms but does not change the size suggestion.",
+        "lens_width": "Lens width (mm)",
+        "bridge": "Bridge (mm)",
+        "temple": "Temple (mm)",
+        "invalid": "Check the measurements in mm: lens width 30–80, bridge 10–35, and temple 100–180. Use whole numbers.",
+        "suggestion": "Suggestion: [size]. We’ve selected it; you can change it above.",
+        "manual": "We kept your choice. Changing the measurements will generate a new suggestion."
       },
+      "sun_outdoors": "Outings and travel",
+      "sun_use_note": "These plans guide your style choices. Check each product page for its features.",
       "axes": {
+        "category": "Eyewear type",
         "shape": "Shape",
         "color": "Colour",
         "finish": "Finish",
@@ -937,6 +946,10 @@
         "presence": "Size"
       },
       "stages": {
+        "category": {
+          "title": "What are you looking for?",
+          "hint": "Choose one to guide your selection. If you're still deciding, you can explore both."
+        },
         "shape": {
           "title": "Which shapes make you look twice?",
           "hint": "Choose the ones you’d like to try. You can choose more than one."
@@ -947,7 +960,7 @@
         },
         "details": {
           "title": "Look a little closer. Which details do you like?",
-          "hint": "Explore finishes, patterns and materials. Choose what catches your eye."
+          "hint": "Explore finishes and materials. Choose what catches your eye."
         },
         "use": {
           "title": "What plans do you see yourself wearing them for?",
@@ -964,6 +977,10 @@
         "materials": "Materials"
       },
       "options": {
+        "category": {
+          "optical": "Optical glasses",
+          "sun": "Sunglasses"
+        },
         "shape": {
           "round": "Round",
           "rectangular": "Rectangular",
@@ -975,10 +992,15 @@
           "panto": "Panto"
         },
         "color": {
-          "black": "Blacks and greys",
+          "black": "Black",
           "brown": "Browns and honey",
           "light": "Light tones",
-          "bold": "Statement colours"
+          "bold": "Colors",
+          "neutral": "Neutrals",
+          "tortoise": "Tortoise",
+          "two_tone": "Two-tone",
+          "transparent": "Clear",
+          "silver": "Silver"
         },
         "finish": {
           "matte": "Matte",
@@ -1024,7 +1046,8 @@
         "presence": "visual proportion"
       },
       "details_label": "Details",
-      "variant_alternative": "You are exploring another variant. Check its details on the product page."
+      "variant_alternative": "You are exploring another variant. Check its details on the product page.",
+      "results_back": "Go back"
     },
     "lemoon_style_quiz": {
       "title": "Find your next frame",

@@ -1,8 +1,24 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
 import { renderQuizSection, quizProduct } from '../helpers/style-quiz-renderer.mjs';
 
 const decode = value => value.replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code))).replaceAll('&quot;', '"').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
 const candidates = html => [...html.matchAll(/data-candidate=(?:"([^"]*)"|'([^']*)')/g)].map(match => JSON.parse(decode(match[1] ?? match[2])));
+
+it('wires the natural style-quiz page template to the quiz with an all-category candidate source', () => {
+  const raw = readFileSync(new URL('../../templates/page.buscar-mi-estilo.json', import.meta.url), 'utf8');
+  const template = JSON.parse(raw.slice(raw.indexOf('{')));
+  expect(template.order).toEqual(['main']);
+  expect(template.sections.main.type).toBe('lemoon-style-quiz');
+  expect(template.sections.main.settings.catalogue).toBe('all');
+
+  const rows = candidates(renderQuizSection({ products: [
+    quizProduct(501, { category: 'Óptico' }), quizProduct(502, { category: 'Solar' }),
+    quizProduct(503, { category: 'Solar', ready: false }),
+  ] }));
+  expect([...new Set(rows.map(row => row.category))]).toEqual(['optical', 'sun']);
+  expect([...new Set(rows.map(row => row.id))]).toEqual(['501', '502']);
+});
 
 describe('Liquid quiz catalog boundary (declared Shopify-shaped fixtures)', () => {
   it('emits only ready products and marks sold-out variants ineligible', () => {
@@ -75,4 +91,53 @@ describe('Liquid quiz catalog boundary (declared Shopify-shaped fixtures)', () =
     expect(variants).toHaveLength(20);
     expect(variants.some(row => String(row.variantId) === '2020')).toBe(false);
   });
+});
+
+
+it('serializes declared product categories and leaves unknown types unclassified', () => {
+  const types = ['Óptico', 'Ópticos', 'Optical', 'Solar', 'Solares', 'Lentes de sol', 'Sunglasses', 'Accesorios', ''];
+  const rows = candidates(renderQuizSection({ products: types.map((category, index) => quizProduct(301 + index, { category })) }));
+  expect(rows.filter((_, index) => index % 2 === 0).map(row => row.category)).toEqual([
+    'optical', 'optical', 'optical', 'sun', 'sun', 'sun', 'sun', '', '',
+  ]);
+});
+
+
+it('renders one six-segment accessible progressbar and bottom back navigation without skip', () => {
+  const html = renderQuizSection({ products: [] });
+  expect(html.match(/data-quiz-segment=/g)).toHaveLength(6);
+  expect(html).toContain('role="progressbar"');
+  expect(html).toContain('aria-valuemin="0"');
+  expect(html).toContain('aria-valuemax="6"');
+  expect(html).toContain('aria-valuenow="0"');
+  expect(html).not.toContain('data-quiz-skip');
+  expect(html.match(/data-quiz-back/g)).toHaveLength(1);
+  expect(html).toMatch(/lemoon-quiz__actions[\s\S]*data-quiz-back/);
+});
+
+it('renders seven color choices with Carey and transparent routed to their actual criteria and unique IDs', () => {
+  const html = renderQuizSection({ products: [] });
+  const colorStage = html.match(/<fieldset\b[^>]*data-step="color"[\s\S]*?<\/fieldset>/)?.[0];
+  const inputs = [...colorStage.matchAll(/<input\b[^>]*>/g)].map(([markup]) => Object.fromEntries([...markup.matchAll(/(\w+)="([^"]*)"/g)].map(match => [match[1], match[2]])));
+  expect(inputs.map(input => [input.name, input.value])).toEqual([
+    ['color', 'bold'], ['color', 'neutral'], ['color', 'black'], ['pattern', 'tortoise'],
+    ['color', 'two_tone'], ['transparency', 'transparent'], ['color', 'silver'],
+  ]);
+  expect(inputs.every(input => input.type === 'checkbox')).toBe(true);
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);
+  expect(new Set(ids).size).toBe(ids.length);
+});
+
+
+it('keeps Details limited to finishes and materials with pattern/transparency only in Color', () => {
+  const html = renderQuizSection({ products: [] });
+  const details = html.match(/<fieldset\b[^>]*data-step="details"[\s\S]*?<\/fieldset>/)?.[0];
+  const tabs = [...details.matchAll(/data-quiz-tab="([^"]+)"/g)].map(match => match[1]);
+  expect(tabs).toEqual(['finishes', 'materials']);
+  expect(details).not.toMatch(/name="(?:pattern|transparency)"/);
+  expect([...details.matchAll(/<input\b[^>]*name="([^"]+)"/g)].map(match => match[1])).toEqual([
+    'finish', 'finish', 'material', 'material', 'material', 'material', 'material', 'material',
+  ]);
+  expect(html.match(/name="pattern"/g)).toHaveLength(1);
+  expect(html.match(/name="transparency"/g)).toHaveLength(1);
 });

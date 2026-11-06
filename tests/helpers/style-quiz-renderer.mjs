@@ -61,7 +61,7 @@ function image(id, suffix, extra = {}) {
 }
 export const quizTrait = (group, code, label = code) => ({ group: { value: group }, code: { value: code }, label: { value: label } });
 
-export function quizProduct(id, { shape = 'rectangular', material = 'acetato', ready = true, demo = true, noMedia = false, unavailable = false, title = `Lente de prueba ${id}` } = {}) {
+export function quizProduct(id, { shape = 'rectangular', material = 'acetato', ready = true, demo = true, noMedia = false, unavailable = false, category = 'Óptico', title = `Lente de prueba ${id}` } = {}) {
   const blue = image(id, 'blue'); const tortoise = image(id, 'tortoise');
   const variant = (variantId, name, media, traits, price) => ({
     id: variantId, product: { id }, title: name, options: [name], price, compare_at_price: null, available: !unavailable,
@@ -74,7 +74,7 @@ export function quizProduct(id, { shape = 'rectangular', material = 'acetato', r
     variant(id * 10 + 2, 'Carey', tortoise, [quizTrait('color', 'brown'), quizTrait('pattern', 'tortoise'), quizTrait('finish', 'glossy')], 14000 + id),
   ];
   return {
-    id, title, handle: `lente-${id}`, url: `/products/lente-${id}`, available: !unavailable, vendor: 'Lemoon', type: 'Óptico', tags: [],
+    id, title, handle: `lente-${id}`, url: `/products/lente-${id}`, available: !unavailable, vendor: 'Lemoon', type: category, tags: [],
     variants, selected_or_first_available_variant: variants[0], selected_variant: null,
     featured_media: noMedia ? null : blue, featured_image: noMedia ? null : blue, media: noMedia ? [] : [blue, tortoise], images: noMedia ? [] : [blue, tortoise],
     price: variants[0].price, price_min: variants[0].price, price_max: variants[1].price, price_varies: true,
@@ -93,6 +93,27 @@ export function quizProduct(id, { shape = 'rectangular', material = 'acetato', r
 
 export function fixtureProducts(scenario = 'default') {
   if (scenario === 'empty') return [];
+  if (scenario === 'categories') return [
+    quizProduct(301, { category: 'Óptico' }),
+    quizProduct(302, { category: 'Solar' }),
+    quizProduct(303, { category: 'Sunglasses' }),
+    quizProduct(304, { category: 'Accesorios' }),
+  ];
+  if (scenario === 'colors') {
+    const traits = [
+      [quizTrait('color', 'brown')], [quizTrait('color', 'light')],
+      [quizTrait('color', 'black')], [quizTrait('color', 'two_tone')],
+      [quizTrait('color', 'silver')], [],
+      [quizTrait('transparency', 'transparent')], [quizTrait('pattern', 'tortoise')],
+      [quizTrait('color', 'bold')],
+    ];
+    return traits.map((values, index) => {
+      const product = quizProduct(401 + index, { material: 'metal' });
+      product.metafields.custom.style_traits.value = values;
+      product.variants.forEach(variant => { variant.metafields.custom.style_traits.value = values; });
+      return product;
+    });
+  }
   // 27 eligible products exercise two complete 12-card batches plus a final partial batch.
   if (scenario === 'paginated') return Array.from({ length: 27 }, (_, index) => quizProduct(201 + index));
   const products = [quizProduct(101, { shape: 'redondo' }), ...[102, 103, 104, 105, 106].map(id => quizProduct(id, { noMedia: id === 106 }))];

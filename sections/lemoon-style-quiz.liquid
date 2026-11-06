@@ -1,13 +1,9 @@
 {%- liquid
   assign catalogue = section.settings.catalogue
-  assign catalogue_url = catalogue.url | default: routes.all_products_collection_url
+  assign catalogue_url = routes.all_products_collection_url
   assign candidate_count = 0
-  assign has_demo = false
   for item in catalogue.products limit: 50
     if item.metafields.custom.style_quiz_ready.value == true
-      if item.metafields.custom.style_quiz_demo.value == true
-        assign has_demo = true
-      endif
       for variant in item.variants limit: 20
         if variant.available
           assign candidate_count = candidate_count | plus: 1
@@ -44,7 +40,6 @@
         <p class="lemoon-quiz__eyebrow">{{ 'sections.lemoon_style_quiz_v2.eyebrow' | t }}</p>
         <h1>{{ 'sections.lemoon_style_quiz_v2.title' | t }}</h1>
         <p class="lemoon-quiz__lead">{{ 'sections.lemoon_style_quiz_v2.intro' | t }}</p>
-        <p class="lemoon-quiz__pace">{{ 'sections.lemoon_style_quiz_v2.steps' | t }} · {{ 'sections.lemoon_style_quiz_v2.pace' | t }}</p>
         <button type="button" class="lemoon-quiz__button" data-quiz-start hidden>{{ 'sections.lemoon_style_quiz_v2.start' | t }}{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
         <a class="lemoon-quiz__text-link" href="{{ catalogue_url | escape }}" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
       </div>
@@ -52,17 +47,29 @@
         {%- if section.settings.editorial_image != blank -%}
           {{ section.settings.editorial_image | image_url: width: 1400 | image_tag: widths: '350, 650, 900, 1400', sizes: '(min-width: 990px) 46vw, 90vw', loading: 'eager' }}
         {%- else -%}
-          <img src="{{ 'lemoon-category-opticos-generic-v1.jpg' | asset_url }}" width="1402" height="1122" alt="" loading="eager">
+          <img
+            src="{{ 'lemoon-quiz-hero-editorial-v1-1400.jpg' | asset_url }}"
+            srcset="{{ 'lemoon-quiz-hero-editorial-v1-700.jpg' | asset_url }} 700w, {{ 'lemoon-quiz-hero-editorial-v1-1400.jpg' | asset_url }} 1400w"
+            sizes="(min-width: 990px) 46vw, 90vw"
+            width="1400"
+            height="933"
+            alt=""
+            loading="eager"
+            decoding="async"
+          >
         {%- endif -%}
       </div>
     </header>
     <p class="lemoon-quiz__status" data-quiz-status role="status" aria-live="polite" aria-atomic="true"></p>
     <form class="lemoon-quiz__flow" data-quiz-form hidden>
+      {%- assign stage_names = 'category,shape,color,details,use,presence' | split: ',' -%}
       <div class="lemoon-quiz__navigation">
-        <button type="button" class="lemoon-quiz__text-link" data-quiz-back>{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}{{ 'sections.lemoon_style_quiz_v2.back' | t }}</button>
-        <progress data-quiz-progress max="5" value="1" aria-label="{{ 'sections.lemoon_style_quiz_v2.steps' | t | escape }}"></progress>
+        <div class="lemoon-quiz__progress" data-quiz-progress role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="{{ 'sections.lemoon_style_quiz_v2.steps' | t | escape }}">
+          {%- for stage in stage_names -%}
+            <span class="lemoon-quiz__segment" data-quiz-segment="{{ stage }}" data-complete="false" aria-hidden="true"></span>
+          {%- endfor -%}
+        </div>
       </div>
-      {%- assign stage_names = 'shape,color,details,use,presence' | split: ',' -%}
       {%- for stage in stage_names -%}
         {%- assign stage_key = 'sections.lemoon_style_quiz_v2.stages.' | append: stage -%}
         {%- assign axis_key = 'sections.lemoon_style_quiz_v2.axes.' | append: stage -%}
@@ -76,13 +83,15 @@
           </div>
           <div class="lemoon-quiz__choices">
             {%- case stage -%}
+              {%- when 'category' -%}
+                {% render 'lemoon-quiz-options', group: 'category', options: 'optical,sun', section_id: section.id %}
               {%- when 'shape' -%}
                 {% render 'lemoon-quiz-options', group: 'shape', options: 'round,rectangular,cat-eye,aviator,geometric,square,oval,panto', section_id: section.id %}
               {%- when 'color' -%}
-                {% render 'lemoon-quiz-options', group: 'color', options: 'black,brown,light,bold', section_id: section.id %}
+                {% render 'lemoon-quiz-options', group: 'color', options: 'bold,neutral,black,tortoise,two_tone,transparent,silver', section_id: section.id %}
               {%- when 'details' -%}
                 <div class="lemoon-quiz__tabs" data-quiz-tabs hidden>
-                  {%- assign tab_names = 'finishes,patterns,materials' | split: ',' -%}
+                  {%- assign tab_names = 'finishes,materials' | split: ',' -%}
                   {%- for tab in tab_names -%}
                     {%- assign tab_key = 'sections.lemoon_style_quiz_v2.tabs.' | append: tab -%}
                     <button type="button" data-quiz-tab="{{ tab }}" aria-controls="QuizPanel-{{ section.id }}-{{ tab }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">{{ tab_key | t }}</button>
@@ -90,10 +99,6 @@
                 </div>
                 <div id="QuizPanel-{{ section.id }}-finishes" data-quiz-panel="finishes">
                   {% render 'lemoon-quiz-options', group: 'finish', options: 'matte,glossy', section_id: section.id %}
-                  {% render 'lemoon-quiz-options', group: 'transparency', options: 'opaque,translucent,transparent', section_id: section.id %}
-                </div>
-                <div id="QuizPanel-{{ section.id }}-patterns" data-quiz-panel="patterns">
-                  {% render 'lemoon-quiz-options', group: 'pattern', options: 'plain,tortoise', section_id: section.id %}
                 </div>
                 <div id="QuizPanel-{{ section.id }}-materials" data-quiz-panel="materials">
                   {% render 'lemoon-quiz-options', group: 'material', options: 'acetate,metal,titanium,tr90,wood,mixed', section_id: section.id %}
@@ -101,15 +106,30 @@
                 <p class="lemoon-quiz__hint">{{ 'sections.lemoon_style_quiz_v2.details_note' | t }}</p>
               {%- when 'use' -%}
                 {% render 'lemoon-quiz-options', group: 'use', options: 'work,everyday,going_out,outdoors', section_id: section.id %}
-                <p class="lemoon-quiz__hint">{{ 'sections.lemoon_style_quiz_v2.use_note' | t }}</p>
+                <p class="lemoon-quiz__hint" data-quiz-use-note data-optical-label="{{ 'sections.lemoon_style_quiz_v2.use_note' | t | escape }}" data-sun-label="{{ 'sections.lemoon_style_quiz_v2.sun_use_note' | t | escape }}">{{ 'sections.lemoon_style_quiz_v2.use_note' | t }}</p>
               {%- when 'presence' -%}
                 {% render 'lemoon-quiz-options', group: 'presence', options: 'compact,medium,oversize', section_id: section.id %}
                 <details class="lemoon-quiz__measures" data-quiz-measures>
-                  <summary>{{ 'sections.lemoon_style_quiz_v2.measures.title' | t }}</summary>
+                  <summary><span>{{ 'sections.lemoon_style_quiz_v2.measures.title' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-down', size: 20 %}</summary>
                   <p>{{ 'sections.lemoon_style_quiz_v2.measures.intro' | t }}</p>
                   <p class="lemoon-quiz__measure-numbers">{{ 'sections.lemoon_style_quiz_v2.measures.numbers' | t }}</p>
                   <p>{{ 'sections.lemoon_style_quiz_v2.measures.labels' | t }}</p>
-                  <p>{{ 'sections.lemoon_style_quiz_v2.measures.note' | t }}</p>
+                  <div class="lemoon-quiz__measure-fields">
+                    {%- assign measure_names = 'lens_width,bridge,temple' | split: ',' -%}
+                    {%- assign measure_examples = '50,18,140' | split: ',' -%}
+                    {%- for measure in measure_names -%}
+                      {%- assign measure_label = 'sections.lemoon_style_quiz_v2.measures.' | append: measure -%}
+                      <div>
+                        <label for="QuizMeasure-{{ section.id }}-{{ measure }}">{{ measure_label | t }}</label>
+                        <input id="QuizMeasure-{{ section.id }}-{{ measure }}" type="text" inputmode="numeric" maxlength="3" autocomplete="off" placeholder="{{ measure_examples[forloop.index0] }}" data-quiz-measure="{{ measure }}" aria-describedby="QuizMeasureNote-{{ section.id }} QuizMeasureStatus-{{ section.id }}">
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                  <p id="QuizMeasureStatus-{{ section.id }}" class="lemoon-quiz__measure-feedback" role="status" aria-live="polite" aria-atomic="true" data-quiz-measure-status
+                    data-invalid-label="{{ 'sections.lemoon_style_quiz_v2.measures.invalid' | t | escape }}"
+                    data-suggestion-label="{{ 'sections.lemoon_style_quiz_v2.measures.suggestion' | t | escape }}"
+                    data-manual-label="{{ 'sections.lemoon_style_quiz_v2.measures.manual' | t | escape }}"></p>
+                  <p id="QuizMeasureNote-{{ section.id }}">{{ 'sections.lemoon_style_quiz_v2.measures.note' | t }}</p>
                 </details>
                 <p class="lemoon-quiz__hint">{{ 'sections.lemoon_style_quiz_v2.presence_note' | t }}</p>
             {%- endcase -%}
@@ -117,7 +137,7 @@
         </fieldset>
       {%- endfor -%}
       <div class="lemoon-quiz__actions">
-        <button type="button" class="lemoon-quiz__text-link" data-quiz-skip>{{ 'sections.lemoon_style_quiz_v2.skip' | t }}</button>
+        <button type="button" class="lemoon-quiz__text-link" data-quiz-back>{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}{{ 'sections.lemoon_style_quiz_v2.back' | t }}</button>
         <button type="submit" class="lemoon-quiz__button" data-quiz-next>{{ 'sections.lemoon_style_quiz_v2.next' | t }}</button>
       </div>
     </form>
@@ -126,19 +146,18 @@
       <h2 tabindex="-1">{{ 'sections.lemoon_style_quiz_v2.results_title' | t }}</h2>
       <p>{{ 'sections.lemoon_style_quiz_v2.results_intro' | t }}</p>
       <noscript><p>{{ 'sections.lemoon_style_quiz_v2.no_js' | t }}</p></noscript>
-      {%- if has_demo -%}<p class="lemoon-quiz__demo" data-quiz-demo>{{ 'sections.lemoon_style_quiz_v2.demo' | t }}</p>{%- endif -%}
       <p data-quiz-editorial>{{ 'sections.lemoon_style_quiz_v2.editorial' | t }}</p>
       <div class="lemoon-quiz__preferences" data-quiz-preferences hidden>
         <p>{{ 'sections.lemoon_style_quiz_v2.preference_hint' | t }}</p>
-        <div class="lemoon-quiz__preference-list">
+        <dl class="lemoon-quiz__preference-list">
           {%- for stage in stage_names -%}
             {%- assign axis_key = 'sections.lemoon_style_quiz_v2.axes.' | append: stage -%}
-            <button type="button" data-quiz-edit="{{ stage }}" class="lemoon-quiz__preference">
-              <span>{%- if stage == 'details' -%}{{ 'sections.lemoon_style_quiz_v2.details_label' | t }}{%- else -%}{{ axis_key | t }}{%- endif -%}</span>
-              <span data-quiz-preference-value></span>{% render 'lemoon-icon', icon: 'arrow-right', size: 16 %}
-            </button>
+            <div data-quiz-preference="{{ stage }}" class="lemoon-quiz__preference">
+              <dt>{%- if stage == 'details' -%}{{ 'sections.lemoon_style_quiz_v2.details_label' | t }}{%- else -%}{{ axis_key | t }}{%- endif -%}</dt>
+              <dd data-quiz-preference-value></dd>
+            </div>
           {%- endfor -%}
-        </div>
+        </dl>
       </div>
       <p data-quiz-result-count></p>
       <p data-quiz-few hidden>{{ 'sections.lemoon_style_quiz_v2.few_intro' | t }}</p>
@@ -169,9 +188,9 @@
       </div>
       <p>{{ 'sections.lemoon_style_quiz_v2.price_note' | t }}</p>
       <div class="lemoon-quiz__actions">
+        <button type="button" class="lemoon-quiz__text-link" data-quiz-results-back hidden>{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}{{ 'sections.lemoon_style_quiz_v2.results_back' | t }}</button>
         <button type="button" class="lemoon-quiz__button" data-quiz-more hidden>{{ 'sections.lemoon_style_quiz_v2.more' | t }}</button>
-        <button type="button" class="lemoon-quiz__text-link" data-quiz-restart hidden>{{ 'sections.lemoon_style_quiz_v2.restart' | t }}</button>
-        <a href="{{ catalogue_url | escape }}" class="lemoon-quiz__text-link">{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
+        <a href="{{ catalogue_url | escape }}" class="lemoon-quiz__button" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
       </div>
     </div>
   </div>

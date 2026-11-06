@@ -1,8 +1,37 @@
 import { describe, it, expect } from 'vitest';
-import { rankProducts } from '../../assets/lemoon-style-quiz.js';
+import { rankProducts, suggestPresence } from '../../assets/lemoon-style-quiz.js';
 
 const candidate = (id, attributes = {}, extra = {}) => ({ id, variantId: `${id}-blue`, price: 50000, available: true, attributes, ...extra });
 const ids = result => result.map(item => item.id);
+
+describe('optional measurement-based visual proportion suggestion', () => {
+  it.each([
+    [48, 18, 'compact'], [49, 19, 'compact'], [49, 20, 'medium'],
+    [50, 18, 'medium'], [54, 20, 'medium'], [55, 19, 'oversize'], [58, 18, 'oversize'],
+  ])('suggests a visual proportion for %s / %s mm', (lens_width, bridge, expected) => {
+    expect(suggestPresence({ lens_width, bridge, temple: 140 })).toBe(expected);
+  });
+
+  it('requires three valid measurements and does not treat temple length as frontal width', () => {
+    expect(suggestPresence({ lens_width: ' 50 ', bridge: '18', temple: '140' })).toBe('medium');
+    for (const temple of [100, 140, 180]) expect(suggestPresence({ lens_width: 50, bridge: 18, temple })).toBe('medium');
+    for (const missing of ['lens_width', 'bridge', 'temple']) {
+      const measures = { lens_width: 50, bridge: 18, temple: 140 };
+      delete measures[missing];
+      expect(suggestPresence(measures)).toBeNull();
+    }
+    expect(suggestPresence()).toBeNull();
+    expect(suggestPresence(null)).toBeNull();
+  });
+
+  it('does not classify malformed, fractional or out-of-range references', () => {
+    for (const lens_width of ['', 'abc', '5e1', '50.5', -50, 0, 29, 81, Infinity]) {
+      expect(suggestPresence({ lens_width, bridge: 18, temple: 140 })).toBeNull();
+    }
+    for (const bridge of [9, 36]) expect(suggestPresence({ lens_width: 50, bridge, temple: 140 })).toBeNull();
+    for (const temple of [99, 181]) expect(suggestPresence({ lens_width: 50, bridge: 18, temple })).toBeNull();
+  });
+});
 
 describe('style affinity recommendations', () => {
   it('returns the complete ranked group and truthful reasons, preserving order for ties', () => {
@@ -106,5 +135,55 @@ describe('style affinity recommendations', () => {
     expect(rankProducts(products, { shape: ['square'] })).toEqual([]);
     expect(ids(rankProducts(products, { shape: ['round'] }))).toEqual(['a']);
     expect(ids(rankProducts(products, { shape: ['round'], color: ['blue'] }))).toEqual(['a', 'b']);
+  });
+});
+
+
+describe('quiz category boundary', () => {
+  const products = [
+    candidate('optical', { shape: ['round'] }, { category: 'optical' }),
+    candidate('sun', { shape: ['round'], color: ['brown'] }, { category: 'sun' }),
+    candidate('unknown', { shape: ['round'], color: ['brown'] }),
+  ];
+  it('excludes other and unknown categories even when their style score is stronger', () => {
+    expect(ids(rankProducts(products, { category: ['optical'], shape: ['round'], color: ['brown'] }))).toEqual(['optical']);
+    expect(ids(rankProducts(products, { category: ['sun'], shape: ['round'] }))).toEqual(['sun']);
+  });
+  it('allows a category-only editorial selection without adding a style score', () => {
+    const result = rankProducts(products, { category: ['sun'] });
+    expect(ids(result)).toEqual(['sun']);
+    expect(result[0]).toMatchObject({ score: 0, matched: [], editorial: true });
+  });
+  it('keeps the mixed editorial selection when category is skipped', () => {
+    expect(ids(rankProducts(products, { category: [] }))).toEqual(['optical', 'sun', 'unknown']);
+  });
+});
+
+
+describe('compact color choices preserve independent catalog criteria', () => {
+  it('normalizes legacy brown/light colors into the neutral family in candidates and answers', () => {
+    const products = [
+      candidate('brown', { color: ['brown'] }), candidate('light', { color: ['light'] }),
+      candidate('neutral', { color: ['neutral'] }), candidate('bold', { color: ['bold'] }),
+    ];
+    expect(ids(rankProducts(products, { color: ['neutral'] }))).toEqual(['brown', 'light', 'neutral']);
+    expect(ids(rankProducts(products, { color: ['brown', 'light'] }))).toEqual(['brown', 'light', 'neutral']);
+    expect(rankProducts(products, { color: ['neutral', 'brown', 'light'] }).every(row => row.score === 1)).toBe(true);
+  });
+  it('counts duplicated Carey/transparency selections once per actual criterion', () => {
+    const [result] = rankProducts([candidate('both', { pattern: ['tortoise'], transparency: ['transparent'] })], {
+      pattern: ['tortoise', 'tortoise'], transparency: ['transparent', 'transparent'],
+    });
+    expect(result).toMatchObject({ score: 2, matched: ['pattern', 'transparency'] });
+  });
+  it('requires declared silver color and does not infer it from a metallic material', () => {
+    expect(ids(rankProducts([
+      candidate('metal', { material: ['metal'] }), candidate('titanium', { material: ['titanium'] }),
+      candidate('silver', { color: ['silver'], material: ['acetate'] }),
+    ], { color: ['silver'] }))).toEqual(['silver']);
+  });
+  it('does not reinterpret tortoise or transparency as a color attribute', () => {
+    const products = [candidate('color-only', { color: ['tortoise', 'transparent'] }), candidate('actual', { pattern: ['tortoise'], transparency: ['transparent'] })];
+    expect(ids(rankProducts(products, { pattern: ['tortoise'], transparency: ['transparent'] }))).toEqual(['actual']);
   });
 });

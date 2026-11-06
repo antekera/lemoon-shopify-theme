@@ -1,0 +1,72 @@
+[
+  {
+    "file": "assets/lemoon-quiz-hero-editorial-v1-700.jpg",
+    "width": 700,
+    "height": 466,
+    "bytes": 61258,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-hero-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-hero-editorial-v1-1400.jpg",
+    "width": 1400,
+    "height": 933,
+    "bytes": 227842,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-hero-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-work-editorial-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 44163,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-work-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-work-editorial-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 147059,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-work-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-everyday-editorial-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 44554,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-everyday-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-everyday-editorial-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 136327,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-everyday-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-going-out-editorial-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 46462,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-going-out-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-going-out-editorial-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 139945,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-going-out-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-outdoors-editorial-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 55177,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-outdoors-editorial-v1.png"
+  },
+  {
+    "file": "assets/lemoon-quiz-outdoors-editorial-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 179535,
+    "source": "docs/design/style-quiz-prototype/generated-images-v1/lemoon-quiz-outdoors-editorial-v1.png"
+  }
+]
