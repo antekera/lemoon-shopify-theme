@@ -62,11 +62,15 @@ export function initializeQuiz(root) {
   const grid = root.querySelector('[data-quiz-products]');
   const steps = [...(form?.querySelectorAll('[data-step]') || [])];
   const cards = [...root.querySelectorAll('[data-quiz-product]')];
-  if (!form || !intro || !start || !results || !grid || steps.length !== 6) return;
+  if (!form || !intro || !start || !results || !grid || steps.length !== 6) {
+    root.classList.remove('lemoon-quiz--enhancing');
+    return;
+  }
   let candidates;
   try {
     candidates = cards.map(card => ({ ...JSON.parse(card.dataset.candidate), card }));
   } catch {
+    root.classList.remove('lemoon-quiz--enhancing');
     const status = root.querySelector('[data-quiz-status]');
     if (status) status.textContent = root.dataset.errorLabel || '';
     return;
@@ -219,9 +223,9 @@ export function initializeQuiz(root) {
     if (status) status.textContent = root.dataset.finishedLabel || '';
     focus(results.querySelector('h2'));
   }
-  start.hidden = false;
   results.hidden = true;
   start.addEventListener('click', showStep);
+  start.disabled = false;
   back.addEventListener('click', () => {
     if (step === 0) {
       form.hidden = true; intro.hidden = false;

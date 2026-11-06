@@ -1,5 +1,9 @@
 .lemoon-quiz { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-body); }
 .lemoon-quiz [hidden] { display: none !important; }
+/* Set synchronously before the intro paints; module loading must not move it. */
+.lemoon-quiz:not(.lemoon-quiz--enhancing) [data-quiz-start]:disabled { display: none; }
+.lemoon-quiz--enhancing [data-quiz-start]:disabled { cursor: wait; }
+.lemoon-quiz--enhancing:not([data-ready]) [data-quiz-results] { display: none; }
 .lemoon-quiz :is(h1,h2,h3,p) { margin-top: 0; }
 .lemoon-quiz :is(h1,h2) { font-family: var(--lemoon-font-heading); letter-spacing: var(--lemoon-type-h1-tracking); text-wrap: balance; }
 .lemoon-quiz h1 { font-size: var(--lemoon-type-h1-size); line-height: var(--lemoon-type-h1-leading); font-weight: var(--lemoon-weight-semibold); max-width: none; text-wrap: initial; margin-bottom: var(--lemoon-space-6); }
