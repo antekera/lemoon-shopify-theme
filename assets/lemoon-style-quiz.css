@@ -64,7 +64,7 @@
 .lemoon-quiz__measures summary .lemoon-icon { flex: 0 0 2rem; transition: transform var(--lemoon-motion-fast); }
 .lemoon-quiz__measures[open] summary .lemoon-icon { transform: rotate(180deg); }
 .lemoon-quiz__measures p { font-size: var(--lemoon-fs-14); }
-.lemoon-quiz__measures .lemoon-quiz__measure-numbers { font: var(--lemoon-weight-medium) var(--lemoon-fs-28)/1.4 var(--lemoon-font-heading); }
+.lemoon-quiz__measures .lemoon-quiz__measure-numbers { font: var(--lemoon-weight-medium) var(--lemoon-fs-16)/1.4 var(--lemoon-font-heading); }
 .lemoon-quiz__measure-fields { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--lemoon-space-3); margin-top: var(--lemoon-space-5); }
 .lemoon-quiz__measure-fields > div { display: flex; flex-direction: column; min-width: 0; }
 .lemoon-quiz__measure-fields label { flex: 1; margin-bottom: var(--lemoon-space-2); font-size: var(--lemoon-fs-12); }
