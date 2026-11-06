@@ -2,7 +2,7 @@
 
 ## Alcance y revisión humana pendiente
 
-Rama `feat/lem-129-size-guide-modal`, base `0cada135da9534cd91b29b50cf0db9a64184e962`. Cambios en el contenido compartido de la guía y sus consumidores PDP estándar y óptica. La entrada desde Home requiere aclarar el bloque y producto que aportaría las medidas; no se incorpora un producto arbitrario. LEM-105 y el resto de LEM-46 conservan sus entregables separados.
+Rama `feat/lem-129-size-guide-modal`, base `0cada135da9534cd91b29b50cf0db9a64184e962`. Cambios en el contenido compartido de la guía y sus consumidores PDP estándar y óptica. Miguel confirmó «Solo el modal de la PDP» el 06-11-2026, registrado en el comentario Linear `ed5ed092-abb2-4408-b8c3-0360c451e767`: no se agrega entrada desde Home. Esta aclaración define el alcance; no aprueba el PR ni autoriza merge o publicación. LEM-105 y el resto de LEM-46 conservan sus entregables separados.
 
 ## Resultado implementado
 
@@ -27,7 +27,7 @@ El fixture genera el contenido desde los snippets Liquid actuales y usa datos si
 
 ## Límites de entrega
 
-No se subió ni publicó ningún tema, ni se modificaron productos/metafields. La aceptación de Home sigue pendiente. Revisión humana explícita antes de merge y cierre; QA sobre un tema Shopify actualizado requiere una publicación de desarrollo autorizada por separado. Las revisiones de agentes tienen responsabilidad de solo lectura, sin aislamiento técnico de permisos.
+No se subió ni publicó ningún tema, ni se modificaron productos/metafields. El alcance PDP está confirmado; la entrega queda pendiente de revisión humana explícita antes de merge y cierre. QA sobre un tema Shopify actualizado requiere una publicación de desarrollo autorizada por separado. Las revisiones de agentes tienen responsabilidad de solo lectura, sin aislamiento técnico de permisos.
 
 ## Verificación reproducible
 
@@ -46,3 +46,5 @@ La prueba unitaria de fallback se ejecutó contra los snippets originales export
 QA específico: 10/10 pruebas Chromium aprobadas sobre ambos consumidores a 390/820/1440: apertura, cierre visible/Escape, retorno del foco, ciclo Tab/Shift+Tab, flechas/Home/End, unidades, datos parciales/ausentes/inválidos y scroll largo. Las pruebas iniciales descubrieron salida de Tab a la barra del navegador; se corrigió el límite en el componente compartido, recalculando los controles visibles después de cambiar pestaña. El fixture óptico necesitó incorporar el reset `box-sizing` del layout real; no se cambió producción para compensar esa omisión.
 
 Revisión independiente de código aprobada; convención de selector corregida a 48px y revisión de convenciones aprobada. Diseño inspeccionó capturas de los dos consumidores a los tres anchos, pestañas, vacío y scroll: sin hallazgos bloqueantes. La etiqueta accesible frontal/lateral sin escala fue revisada por copywriter. Capturas locales en `/tmp/lem129-qa/`; logs en `/tmp/lem129-{unit-final,size-guide-e2e-final,eyewear-e2e,theme-check-final}.log`. Las capturas usan fuentes de respaldo; no se certifican las fuentes descargadas, Safari/Firefox ni el render Shopify actualizado.
+
+CI del runtime `ba95b03f6b827e4e387be921408f9ed622c91101`: Theme Check y Lighthouse Harness Validation aprobados en la ejecución `42163602597`. Los jobs Lighthouse, Mobile Search Tests y Python Workflow Tests se omitieron por las reglas de alcance; no se presentan como pruebas ejecutadas. La actualización posterior de alcance modifica únicamente este informe.
