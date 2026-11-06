@@ -65,6 +65,75 @@ async function expectCanonicalResults(quiz) {
   expect(await quiz.evaluate(root => Boolean(root.querySelector('[data-quiz-preferences]').compareDocumentPosition(root.querySelector('[data-quiz-products]')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
 }
 
+// Holding the real controller isolates loading layout from image/font timing.
+for (const width of [390, 1440]) {
+  test.describe(`stable initial quiz layout at ${width}px`, () => {
+    test.use({ viewport: { width, height: 844 }, reducedMotion: 'reduce' });
+    test('keeps the hero and following content fixed while the controller loads', async ({ page }, testInfo) => {
+      let releaseModule;
+      const moduleGate = new Promise(resolveGate => { releaseModule = resolveGate; });
+      await page.route('**/assets/lemoon-style-quiz.js', async request => {
+        await moduleGate;
+        await request.fallback();
+      });
+      try {
+        await page.goto(route, { waitUntil: 'commit' });
+        const quiz = page.locator('[data-style-quiz]');
+        const button = quiz.locator('[data-quiz-start]');
+        const image = quiz.locator('.lemoon-quiz__editorial');
+        await expect(image).toHaveCSS('position', 'relative');
+        await quiz.locator('[data-quiz-results] [data-quiz-catalogue]').waitFor({ state: 'attached' });
+        await page.evaluate(async () => {
+          await document.fonts.ready;
+          await document.querySelector('.lemoon-quiz__editorial img').decode();
+          const footer = document.createElement('footer');
+          footer.id = 'loading-layout-footer';
+          footer.textContent = 'Contenido posterior de prueba';
+          footer.style.height = '120px';
+          document.querySelector('main').after(footer);
+          await new Promise(resolveFrame => requestAnimationFrame(() => requestAnimationFrame(resolveFrame)));
+        });
+        const pending = {
+          image: await image.boundingBox(),
+          footer: await page.locator('#loading-layout-footer').boundingBox(),
+          buttonVisible: await button.isVisible(),
+          buttonDisabled: await button.isDisabled(),
+          resultsVisible: await quiz.locator('[data-quiz-results]').isVisible(),
+        };
+        releaseModule();
+        await expect(button).toBeEnabled();
+        await expect(button).toBeVisible();
+        await expect(quiz.locator('[data-quiz-results]')).toBeHidden();
+        const ready = {
+          image: await image.boundingBox(),
+          footer: await page.locator('#loading-layout-footer').boundingBox(),
+        };
+        await writeFile(testInfo.outputPath('loading-layout.json'), JSON.stringify({ width, pending, ready }, null, 2));
+        await testInfo.attach('loading-layout.json', { path: testInfo.outputPath('loading-layout.json'), contentType: 'application/json' });
+        expect(ready.image.y - pending.image.y, 'image must not jump when the start action becomes usable').toBeCloseTo(0, 1);
+        expect(ready.footer.y - pending.footer.y, 'editorial fallback must not move following content at initialization').toBeCloseTo(0, 1);
+        expect(pending.buttonVisible, 'start action reserves its final visible geometry while loading').toBe(true);
+        expect(pending.buttonDisabled, 'the pending start action cannot run a missing controller').toBe(true);
+        expect(pending.resultsVisible, 'results must not flash before the visitor starts').toBe(false);
+        await button.click();
+        await expect(quiz.locator('[data-step="category"]')).toBeVisible();
+      } finally { releaseModule(); }
+    });
+  });
+}
+
+test('a failed controller download restores the real editorial fallback and catalogue', async ({ page }) => {
+  await page.route('**/assets/lemoon-style-quiz.js', request => request.abort('failed'));
+  const response = await page.goto(route);
+  expect(response.status()).toBe(200);
+  const quiz = page.locator('[data-style-quiz]');
+  await expect(quiz.locator('[data-quiz-start]')).toBeHidden();
+  await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
+  await expect(quiz.locator('[data-quiz-results]')).toBeVisible();
+  await expect(visibleCards(quiz)).toHaveCount(6);
+  await expect(quiz.locator('[data-quiz-results] [data-quiz-catalogue]')).toHaveAttribute('href', '/collections/all');
+});
+
 for (const width of [390, 1440]) {
   test.describe(`read-only results summary at ${width}px`, () => {
     test.use({ viewport: { width, height: 1100 }, reducedMotion: 'reduce' });
@@ -513,7 +582,9 @@ test('without JavaScript the real Liquid provides one editorial card per eligibl
     const page = await context.newPage();
     const response = await page.goto(route); expect(response.status()).toBe(200);
     const quiz = page.locator('[data-style-quiz]');
+    await expect(quiz.locator('[data-quiz-start]')).toBeHidden();
     await expect(quiz.locator('[data-quiz-form]')).toBeHidden();
+    await expect(quiz.locator('[data-quiz-results] [data-quiz-catalogue]')).toHaveAttribute('href', '/collections/all');
     await expect(quiz.locator('noscript')).toBeVisible();
     await expect(visibleCards(quiz)).toHaveCount(6);
     const ids = await visibleCards(quiz).evaluateAll(nodes => nodes.map(node => node.dataset.id));

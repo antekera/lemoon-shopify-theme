@@ -18,7 +18,6 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'lemoon-style-quiz.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'lemoon-product-card.js' | asset_url }}" defer="defer"></script>
-<script type="module" src="{{ 'lemoon-style-quiz.js' | asset_url }}"></script>
 {%- style -%}
   #shopify-section-{{ section.id }} .lemoon-quiz { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
   @media (max-width: 749px) {
@@ -35,12 +34,15 @@
     data-finished-label="{{ 'sections.lemoon_style_quiz_v2.finished' | t | escape }}"
     data-none-label="{{ 'sections.lemoon_style_quiz_v2.none' | t | escape }}"
     data-error-label="{{ 'sections.lemoon_style_quiz_v2.loading_error' | t | escape }}">
+    <script>
+      document.currentScript.parentElement.classList.add('lemoon-quiz--enhancing');
+    </script>
     <header class="lemoon-quiz__intro" data-quiz-intro>
       <div class="lemoon-quiz__invitation">
         <p class="lemoon-quiz__eyebrow">{{ 'sections.lemoon_style_quiz_v2.eyebrow' | t }}</p>
         <h1>{{ 'sections.lemoon_style_quiz_v2.title' | t }}</h1>
         <p class="lemoon-quiz__lead">{{ 'sections.lemoon_style_quiz_v2.intro' | t }}</p>
-        <button type="button" class="lemoon-quiz__button" data-quiz-start hidden>{{ 'sections.lemoon_style_quiz_v2.start' | t }}{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
+        <button type="button" class="lemoon-quiz__button" data-quiz-start disabled>{{ 'sections.lemoon_style_quiz_v2.start' | t }}{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
         <a class="lemoon-quiz__text-link" href="{{ catalogue_url | escape }}" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
       </div>
       <div class="lemoon-quiz__editorial">
@@ -193,6 +195,7 @@
         <a href="{{ catalogue_url | escape }}" class="lemoon-quiz__button" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
       </div>
     </div>
+    <script type="module" src="{{ 'lemoon-style-quiz.js' | asset_url }}" onerror="this.parentElement.classList.remove('lemoon-quiz--enhancing')"></script>
   </div>
 </div>
 {% schema %}
