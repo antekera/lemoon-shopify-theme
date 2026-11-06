@@ -59,7 +59,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         if (event.target.matches('[data-option]')) this.updateVariant();
         if (event.target.matches('[data-recipe-mode]')) this.updatePrescription();
         if (event.target.matches('[data-rx]')) event.target.removeAttribute('aria-invalid');
-        if (event.target.matches('[data-units]')) this.updateUnits(event.target.value);
+        if (event.target.matches('[data-units]')) this.updateUnits(event.target.value, event.target.closest('.lemoon-pdp__dimensions'));
       });
       this.addEventListener('click', (event) => {
         const thumb = event.target.closest('[data-media-target]');
@@ -252,8 +252,8 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       }
     }
 
-    updateUnits(unit) {
-      this.querySelectorAll('[data-mm]').forEach((value) => {
+    updateUnits(unit, dimensions) {
+      dimensions.querySelectorAll('[data-mm]').forEach((value) => {
         value.textContent = unit === 'in' ? `${(Number(value.dataset.mm) / 25.4).toFixed(2)} in` : `${value.dataset.mm} mm`;
       });
     }

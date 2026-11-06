@@ -1,13 +1,39 @@
 {% doc %}
   Frame measurements from a merchant-owned JSON product metafield.
-  @param {object} dimensions - Measurements in millimeters.
+  @param {object} dimensions - Positive numeric measurements in millimeters.
   @param {boolean} [dialog] - Render unit selector in the size dialog.
 {% enddoc %}
-<div class="lemoon-pdp__dimensions">
-  <svg viewBox="0 0 420 150" role="img" aria-label="{{ 'lemoon_pdp.frame_diagram' | t }}"><g fill="none" stroke="currentColor" stroke-width="3"><path d="M35 45 Q95 25 166 45 L158 101 Q98 128 45 101 Z M254 45 Q325 25 385 45 L375 101 Q322 128 262 101 Z M166 49 Q210 28 254 49 M35 45 L20 42 M385 45 L400 42"/><path stroke-width="1" d="M20 15 H400 M20 9 V21 M400 9 V21 M45 139 H158 M45 133 V145 M158 133 V145 M175 80 H245 M175 74 V86 M245 74 V86"/></g></svg>
-  {% if dialog %}<label class="lemoon-pdp__unit-label">{{ 'lemoon_pdp.units' | t }}<select data-units><option value="mm">{{ 'lemoon_pdp.millimeters' | t }}</option><option value="in">{{ 'lemoon_pdp.inches' | t }}</option></select></label>{% endif %}
-  <dl>
-    {% assign keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ',' %}
-    {% for key in keys %}{% if dimensions[key] != blank %}{% assign label_key = 'lemoon_pdp.' | append: key %}<div><dt>{{ label_key | t }}</dt><dd data-mm="{{ dimensions[key] }}">{{ dimensions[key] }} mm</dd></div>{% endif %}{% endfor %}
-  </dl>
-</div>
+{%- liquid
+  assign keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
+  assign markers = 'A,B,C,D,E' | split: ','
+  assign has_measurements = false
+-%}
+{%- capture measurement_rows -%}
+  {%- for key in keys -%}
+    {%- assign measurement = dimensions[key] -%}
+    {%- assign numeric_measurement = measurement | plus: 0 -%}
+    {%- if measurement == numeric_measurement and numeric_measurement > 0 -%}
+      {%- assign has_measurements = true -%}
+      {%- assign label_key = 'lemoon_pdp.' | append: key -%}
+      <div><dt><span aria-hidden="true">{{ markers[forloop.index0] }} · </span>{{ label_key | t }}</dt><dd data-mm="{{ measurement | escape }}">{{ measurement | escape }} mm</dd></div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- if has_measurements -%}
+  <div class="lemoon-pdp__dimensions">
+    <svg viewBox="0 0 420 240" role="img" aria-label="{{ 'lemoon_pdp.frame_diagram' | t }}">
+      <g fill="none" stroke="currentColor" stroke-width="3">
+        <path d="M35 55 Q95 35 166 55 L158 111 Q98 138 45 111 Z M254 55 Q325 35 385 55 L375 111 Q322 138 262 111 Z M166 59 Q210 38 254 59 M35 55 L20 52 M385 55 L400 52"/>
+        <path d="M65 200 L295 184 Q325 184 337 208 L342 224"/>
+        <path stroke-width="1" d="M20 18 H400 M20 12 V24 M400 12 V24 M45 148 H158 M45 142 V154 M158 142 V154 M175 90 H245 M175 84 V96 M245 84 V96 M407 55 V111 M401 55 H413 M401 111 H413 M65 173 H337 M65 167 V179 M337 167 V179"/>
+      </g>
+      <g fill="currentColor" font-size="16" font-family="inherit" text-anchor="middle" aria-hidden="true">
+        <text x="210" y="13">A</text><text x="101" y="143">B</text><text x="210" y="85">C</text><text x="395" y="88">D</text><text x="201" y="168">E</text>
+      </g>
+    </svg>
+    {% if dialog %}<label class="lemoon-pdp__unit-label">{{ 'lemoon_pdp.units' | t }}<select data-units><option value="mm">{{ 'lemoon_pdp.millimeters' | t }}</option><option value="in">{{ 'lemoon_pdp.inches' | t }}</option></select></label>{% endif %}
+    <dl>{{ measurement_rows }}</dl>
+  </div>
+{%- else -%}
+  <p class="lemoon-size-guide__empty">{{ 'lemoon_pdp.measurements_unavailable' | t }}</p>
+{%- endif -%}

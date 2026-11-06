@@ -1215,7 +1215,7 @@
     "addition": "Addition (ADD)",
     "pd": "Total pupillary distance (mm)",
     "rx_note": "PD between 40 and 80 mm. Prescription saved for review before production. If it exceeds this form, choose to send it later.",
-    "frame_diagram": "Front view frame measurement diagram",
+    "frame_diagram": "Frame measurement diagram, front and side views, not to scale.",
     "size_guide_tabs": "Frame information",
     "measurements_tab": "Measurements",
     "frame_tab": "Frame details",

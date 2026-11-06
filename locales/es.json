@@ -1227,7 +1227,7 @@
     "addition": "Adición (ADD)",
     "pd": "Distancia pupilar total (mm)",
     "rx_note": "D.P. entre 40 y 80 mm. Se guarda la receta para revisión antes de fabricar. Si tu receta queda fuera del formulario, elige enviarla después.",
-    "frame_diagram": "Diagrama de medidas del armazón, vista frontal",
+    "frame_diagram": "Esquema de medidas del armazón, vistas frontal y lateral, sin escala.",
     "size_guide_tabs": "Información del armazón",
     "measurements_tab": "Medidas",
     "frame_tab": "Características",
