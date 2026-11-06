@@ -1,0 +1,41 @@
+{
+  "stylesheet": "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap",
+  "files": [
+    {
+      "file": "assets/font-0.ttf",
+      "source": "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4Q.ttf"
+    },
+    {
+      "file": "assets/font-1.ttf",
+      "source": "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4Q.ttf"
+    },
+    {
+      "file": "assets/font-2.ttf",
+      "source": "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4Q.ttf"
+    },
+    {
+      "file": "assets/font-3.ttf",
+      "source": "https://fonts.gstatic.com/s/hankengrotesk/v12/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4Q.ttf"
+    },
+    {
+      "file": "assets/font-4.ttf",
+      "source": "https://fonts.gstatic.com/s/urbanist/v18/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDlR4fFg.ttf"
+    },
+    {
+      "file": "assets/font-5.ttf",
+      "source": "https://fonts.gstatic.com/s/urbanist/v18/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDyx4fFg.ttf"
+    },
+    {
+      "file": "assets/font-6.ttf",
+      "source": "https://fonts.gstatic.com/s/urbanist/v18/L0xjDF02iFML4hGCyOCpRdycFsGxSrqD-R4fFg.ttf"
+    },
+    {
+      "file": "assets/font-7.ttf",
+      "source": "https://fonts.gstatic.com/s/urbanist/v18/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDFRkfFg.ttf"
+    },
+    {
+      "file": "assets/font-8.ttf",
+      "source": "https://fonts.gstatic.com/s/urbanist/v18/L0xjDF02iFML4hGCyOCpRdycFsGxSrqDLBkfFg.ttf"
+    }
+  ]
+}
