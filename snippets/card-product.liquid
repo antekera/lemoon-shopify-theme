@@ -151,7 +151,7 @@
                 >
                 {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
 
-                {%- if card_secondary_media != null and show_secondary_image -%}
+                {%- if card_secondary_media != blank and show_secondary_image -%}
                   <img
                     draggable="false"
                     data-lazy-srcset="

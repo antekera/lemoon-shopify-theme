@@ -94,4 +94,14 @@ describe('canonical card recommended variant', () => {
     product.media.push(careyDiagonal);
     expect(card(product, product.variants[1], { show_secondary_image: true })).toContain('data-lazy-src="/carey-diagonal.jpg');
   });
+
+  it('renders only the primary photograph when the recommended color has no diagonal', () => {
+    const product = quizProduct(1);
+    const html = card(product, product.variants[1], { show_secondary_image: true });
+    expect(html.match(/<img\b[^>]*>/g)).toHaveLength(1);
+    expect(primaryImage(html)).toContain(`src="${product.variants[1].featured_media.url}?width=533"`);
+    expect(html).not.toContain('data-lazy-src=');
+    expect(html).not.toContain('data-lazy-srcset=');
+    expect(html).not.toContain('Liquid error');
+  });
 });
