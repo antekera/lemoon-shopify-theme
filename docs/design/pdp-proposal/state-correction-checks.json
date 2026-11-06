@@ -1,0 +1,607 @@
+{
+  "generatedAt": "2026-11-06T06:24:31.205Z",
+  "browser": "153.0.8010.12",
+  "scope": "Focused P2 local simulation, no actual photo/Shopify recovery",
+  "historicalEvidence": "render-checks.json; not rerun as a full suite",
+  "contexts": [
+    {
+      "state": "base",
+      "width": 390,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Forma cuadrada y material acetato, según los campos observados. Sin descripción editorial aprobada en esta propuesta.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$1.199 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Forma cuadrada y material acetato, según los campos observados. Sin descripción editorial aprobada en esta propuesta.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$1.199 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "nodata",
+      "width": 390,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción y materiales no disponibles para este producto. No hay forma ni material validados en este escenario.",
+        "measurementDetail": "Medidas individuales no disponibles para este producto. No inferir dimensiones desde una talla textual ni trasladar datos de otro modelo.",
+        "price": "Precio no disponible",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción y materiales no disponibles para este producto. No hay forma ni material validados en este escenario.",
+        "measurementDetail": "Medidas individuales no disponibles para este producto. No inferir dimensiones desde una talla textual ni trasladar datos de otro modelo.",
+        "price": "Precio no disponible",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "pricechange",
+      "width": 390,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas configuradas en milímetros para Dalton Prototipo; no inferidas desde la talla textual.",
+        "dimensions": "Ancho del armazón: 140 mm; ancho del lente: 54 mm; puente: 17 mm; alto del lente: 42 mm; patilla: 145 mm.",
+        "description": "Forma pantoscópica y acetato según campos observados del prototipo interno. No se adopta su oferta comercial.",
+        "measurementDetail": "Datos JSON propios de Dalton: frame_width (ancho del armazón) 140 mm; lens_width (ancho del lente) 54 mm; bridge (puente) 17 mm; lens_height (alto del lente) 42 mm; temple (patilla) 145 mm. Son valores configurados, no medición física. La guía compartida LEM-129 conserva su integración separada.",
+        "price": "$59.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas configuradas en milímetros para Dalton Prototipo; no inferidas desde la talla textual.",
+        "dimensions": "Ancho del armazón: 140 mm; ancho del lente: 54 mm; puente: 17 mm; alto del lente: 42 mm; patilla: 145 mm.",
+        "description": "Forma pantoscópica y acetato según campos observados del prototipo interno. No se adopta su oferta comercial.",
+        "measurementDetail": "Datos JSON propios de Dalton: frame_width (ancho del armazón) 140 mm; lens_width (ancho del lente) 54 mm; bridge (puente) 17 mm; lens_height (alto del lente) 42 mm; temple (patilla) 145 mm. Son valores configurados, no medición física. La guía compartida LEM-129 conserva su integración separada.",
+        "price": "$59.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "accessory",
+      "width": 390,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción del accesorio por completar con el contenido de su producto.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$9.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción del accesorio por completar con el contenido de su producto.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$9.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "sun",
+      "width": 390,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Sin modelo asignado: esta vista solo explica el alcance del precio de un marco de sol.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "Precio base por confirmar",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Sin modelo asignado: esta vista solo explica el alcance del precio de un marco de sol.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "Precio base por confirmar",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "base",
+      "width": 1440,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Forma cuadrada y material acetato, según los campos observados. Sin descripción editorial aprobada en esta propuesta.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$1.199 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Forma cuadrada y material acetato, según los campos observados. Sin descripción editorial aprobada en esta propuesta.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$1.199 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "nodata",
+      "width": 1440,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción y materiales no disponibles para este producto. No hay forma ni material validados en este escenario.",
+        "measurementDetail": "Medidas individuales no disponibles para este producto. No inferir dimensiones desde una talla textual ni trasladar datos de otro modelo.",
+        "price": "Precio no disponible",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción y materiales no disponibles para este producto. No hay forma ni material validados en este escenario.",
+        "measurementDetail": "Medidas individuales no disponibles para este producto. No inferir dimensiones desde una talla textual ni trasladar datos de otro modelo.",
+        "price": "Precio no disponible",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "pricechange",
+      "width": 1440,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas configuradas en milímetros para Dalton Prototipo; no inferidas desde la talla textual.",
+        "dimensions": "Ancho del armazón: 140 mm; ancho del lente: 54 mm; puente: 17 mm; alto del lente: 42 mm; patilla: 145 mm.",
+        "description": "Forma pantoscópica y acetato según campos observados del prototipo interno. No se adopta su oferta comercial.",
+        "measurementDetail": "Datos JSON propios de Dalton: frame_width (ancho del armazón) 140 mm; lens_width (ancho del lente) 54 mm; bridge (puente) 17 mm; lens_height (alto del lente) 42 mm; temple (patilla) 145 mm. Son valores configurados, no medición física. La guía compartida LEM-129 conserva su integración separada.",
+        "price": "$59.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas configuradas en milímetros para Dalton Prototipo; no inferidas desde la talla textual.",
+        "dimensions": "Ancho del armazón: 140 mm; ancho del lente: 54 mm; puente: 17 mm; alto del lente: 42 mm; patilla: 145 mm.",
+        "description": "Forma pantoscópica y acetato según campos observados del prototipo interno. No se adopta su oferta comercial.",
+        "measurementDetail": "Datos JSON propios de Dalton: frame_width (ancho del armazón) 140 mm; lens_width (ancho del lente) 54 mm; bridge (puente) 17 mm; lens_height (alto del lente) 42 mm; temple (patilla) 145 mm. Son valores configurados, no medición física. La guía compartida LEM-129 conserva su integración separada.",
+        "price": "$59.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "accessory",
+      "width": 1440,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción del accesorio por completar con el contenido de su producto.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$9.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Descripción del accesorio por completar con el contenido de su producto.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "$9.900 CLP",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    },
+    {
+      "state": "sun",
+      "width": 1440,
+      "default": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Sin modelo asignado: esta vista solo explica el alcance del precio de un marco de sol.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "Precio base por confirmar",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      },
+      "expanded": {
+        "overflow": false,
+        "h1Count": 1,
+        "helper": "Medidas individuales no disponibles. La talla textual no confirma unidades.",
+        "dimensions": "No disponibles",
+        "description": "Sin modelo asignado: esta vista solo explica el alcance del precio de un marco de sol.",
+        "measurementDetail": "No convertir la talla escrita en milímetros. La guía compartida LEM-129 mostrará solo medidas numéricas válidas del producto.",
+        "price": "Precio base por confirmar",
+        "logos": [
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          },
+          {
+            "src": "../../../assets/lemoon-logo-refined-navy.svg",
+            "loaded": true,
+            "width": 122,
+            "height": 28.640625
+          }
+        ]
+      }
+    }
+  ],
+  "partial": [
+    {
+      "width": 390,
+      "failed": {
+        "overflow": false,
+        "selected": [
+          "0"
+        ],
+        "zoomDisabled": true,
+        "title": "No pudimos cargar este espacio · simulación",
+        "count": "Espacio 1 fallido · simulación",
+        "retryVisible": true
+      },
+      "secondary": {
+        "overflow": false,
+        "selected": [
+          "1"
+        ],
+        "zoomDisabled": false,
+        "title": "Espacio 2 disponible · simulación",
+        "count": "Espacio 2 de 3 · selección válida · simulación",
+        "retryVisible": false,
+        "focused": "1"
+      },
+      "recovered": {
+        "overflow": false,
+        "selected": [
+          "0"
+        ],
+        "zoomDisabled": false,
+        "title": "Espacio 1 disponible · simulación",
+        "count": "Espacio 1 de 3 · reintento local completado · simulación",
+        "retryVisible": true,
+        "focused": "media-retry"
+      }
+    },
+    {
+      "width": 1440,
+      "failed": {
+        "overflow": false,
+        "selected": [
+          "0"
+        ],
+        "zoomDisabled": true,
+        "title": "No pudimos cargar este espacio · simulación",
+        "count": "Espacio 1 fallido · simulación",
+        "retryVisible": true
+      },
+      "secondary": {
+        "overflow": false,
+        "selected": [
+          "1"
+        ],
+        "zoomDisabled": false,
+        "title": "Espacio 2 disponible · simulación",
+        "count": "Espacio 2 de 3 · selección válida · simulación",
+        "retryVisible": false,
+        "focused": "1"
+      },
+      "recovered": {
+        "overflow": false,
+        "selected": [
+          "0"
+        ],
+        "zoomDisabled": false,
+        "title": "Espacio 1 disponible · simulación",
+        "count": "Espacio 1 de 3 · reintento local completado · simulación",
+        "retryVisible": true,
+        "focused": "media-retry"
+      }
+    }
+  ],
+  "keyboard": [
+    {
+      "width": 390,
+      "checks": [
+        "ArrowRight selects valid secondary",
+        "Home returns failed selection",
+        "Enter retry preserves retry focus",
+        "Zoom Enter/Tab/Escape restores opener for valid secondary",
+        "Recovered slot zoom/Escape restores opener"
+      ],
+      "passed": true
+    },
+    {
+      "width": 1440,
+      "checks": [
+        "ArrowRight selects valid secondary",
+        "Home returns failed selection",
+        "Enter retry preserves retry focus",
+        "Zoom Enter/Tab/Escape restores opener for valid secondary",
+        "Recovered slot zoom/Escape restores opener"
+      ],
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "passed": true
+}

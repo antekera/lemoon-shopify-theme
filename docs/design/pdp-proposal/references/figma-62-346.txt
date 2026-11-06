@@ -1,0 +1,226 @@
+const imgArtwork = "[temporary-asset-url-omitted]";
+const imgArtwork1 = "[temporary-asset-url-omitted]";
+const imgArtwork2 = "[temporary-asset-url-omitted]";
+const imgArtwork3 = "[temporary-asset-url-omitted]";
+const imgGroup = "[temporary-asset-url-omitted]";
+const imgGroup1 = "[temporary-asset-url-omitted]";
+const imgGroup2 = "[temporary-asset-url-omitted]";
+const imgSwatch = "[temporary-asset-url-omitted]";
+const imgSwatch1 = "[temporary-asset-url-omitted]";
+const imgSwatch2 = "[temporary-asset-url-omitted]";
+const imgSwatch3 = "[temporary-asset-url-omitted]";
+
+type IconProps = {
+  className?: string;
+  name?: "Search" | "User" | "ShoppingBag" | "MessageCircle";
+};
+
+function Icon({ className, name = "Search" }: IconProps) {
+  const isMessageCircle = name === "MessageCircle";
+  const isShoppingBag = name === "ShoppingBag";
+  const isUser = name === "User";
+  return (
+    <div className={className || "relative size-[24px]"} id={isMessageCircle ? "node-36_48" : isShoppingBag ? "node-36_11" : isUser ? "node-36_7" : "node-36_3"}>
+      <div className="absolute left-0 size-[24px] top-0" id={isMessageCircle ? "node-36_49" : isShoppingBag ? "node-36_12" : isUser ? "node-36_8" : "node-36_4"} data-name="Artwork">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={isMessageCircle ? imgArtwork3 : isShoppingBag ? imgArtwork2 : isUser ? imgArtwork1 : imgArtwork} />
+      </div>
+    </div>
+  );
+}
+
+function HeaderDesktop({ className }: { className?: string }) {
+  return (
+    <div className={className || "bg-[var(--lemoon-surface-page,white)] content-stretch flex h-[72px] items-center relative w-[1440px]"} data-node-id="55:63" data-name="Header / Desktop">
+      <div className="content-stretch flex h-[72px] items-center overflow-clip pl-[40px] relative shrink-0 w-[360px]" data-node-id="55:64" data-name="Brand">
+        <p className="[word-break:break-word] font-['Urbanist:Bold'] font-bold leading-[0] relative shrink-0 text-[#0b1f3a] text-[22px] whitespace-nowrap" data-node-id="55:67">
+          <span className="leading-[normal]">lemo</span>
+          <span className="leading-[normal] text-[#f7e600]">o</span>
+          <span className="leading-[normal]">n</span>
+        </p>
+      </div>
+      <div className="[word-break:break-word] content-stretch flex font-['Urbanist:Medium'] font-medium gap-[32px] h-[72px] items-center justify-center leading-[normal] overflow-clip relative shrink-0 text-[15px] text-[color:var(--lemoon-text-primary,#1a1a1a)] w-[720px] whitespace-nowrap" data-node-id="55:65" data-name="Primary navigation">
+        <p className="relative shrink-0" data-node-id="55:68">
+          Armazones
+        </p>
+        <p className="relative shrink-0" data-node-id="55:69">
+          Sol
+        </p>
+        <p className="relative shrink-0" data-node-id="55:70">
+          Progresivos
+        </p>
+        <p className="relative shrink-0" data-node-id="55:71">
+          Marcas
+        </p>
+        <p className="relative shrink-0" data-node-id="55:72">
+          Sobre nosotros
+        </p>
+      </div>
+      <div className="content-stretch flex gap-[20px] h-[72px] items-center justify-end overflow-clip pr-[40px] relative shrink-0 w-[360px]" data-node-id="55:66" data-name="Utility navigation">
+        <div className="content-stretch flex gap-[4px] items-center overflow-clip relative shrink-0" data-node-id="55:73" data-name="WhatsApp link">
+          <Icon className="relative shrink-0 size-[16px]" name="MessageCircle" />
+          <p className="[word-break:break-word] font-['Urbanist:Regular'] font-normal leading-[normal] relative shrink-0 text-[13px] text-[color:var(--lemoon-text-primary,#1a1a1a)] whitespace-nowrap" data-node-id="55:77">
+            WhatsApp
+          </p>
+        </div>
+        <Icon className="relative shrink-0 size-[24px]" />
+        <Icon className="relative shrink-0 size-[24px]" name="User" />
+        <div className="overflow-clip relative shrink-0 size-[28px]" data-node-id="55:86" data-name="Cart">
+          <Icon className="absolute left-0 size-[24px] top-[2px]" name="ShoppingBag" />
+          <div className="absolute bg-[var(--lemoon-text-brand,#0b1f3a)] content-stretch flex items-center justify-center left-[14px] overflow-clip rounded-[7px] size-[14px] top-0" data-node-id="55:91" data-name="Cart count">
+            <p className="[word-break:break-word] font-['Urbanist:Bold'] font-bold leading-[normal] relative shrink-0 text-[9px] text-[color:var(--lemoon-text-inverse,white)] whitespace-nowrap" data-node-id="55:92">
+              2
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bg-[var(--lemoon-border-default,#e0ddd8)] h-px left-0 top-[71px] w-[1440px]" data-node-id="55:93" data-name="Bottom border" />
+    </div>
+  );
+}
+
+type AnnouncementBarProps = {
+  className?: string;
+  message?: string;
+};
+
+function AnnouncementBar({ className, message = "Envío gratis a todo Chile en pedidos sobre $70.000" }: AnnouncementBarProps) {
+  return (
+    <div className={className || "bg-[var(--lemoon-surface-inverse,#0b1f3a)] content-stretch flex h-[32px] items-center justify-between relative w-[1440px]"} data-node-id="50:63" data-name="Announcement Bar">
+      <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[760px]" data-node-id="50:64" data-name="Promo rotator">
+        <div className="content-stretch flex h-[32px] items-center overflow-clip relative shrink-0 w-[650px]" data-node-id="50:65" data-name="Rotating promotion">
+          <p className="[word-break:break-word] font-['Urbanist:Regular'] font-normal leading-[normal] relative shrink-0 text-[13px] text-[color:var(--lemoon-text-inverse,white)] whitespace-nowrap" data-node-id="50:79">
+            {message}
+          </p>
+        </div>
+      </div>
+      <div className="content-stretch flex gap-[16px] h-[32px] items-center justify-end overflow-clip relative shrink-0 w-[680px]" data-node-id="50:66" data-name="Utility links and social">
+        <p className="[word-break:break-word] font-['Urbanist:Regular'] font-normal leading-[normal] relative shrink-0 text-[12px] text-[color:var(--lemoon-text-inverse,white)] whitespace-nowrap" data-node-id="52:74">
+          Ayuda
+        </p>
+        <p className="[word-break:break-word] font-['Urbanist:Regular'] font-normal leading-[normal] relative shrink-0 text-[12px] text-[color:var(--lemoon-text-inverse,white)] whitespace-nowrap" data-node-id="52:75">
+          Envíos
+        </p>
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-node-id="52:76" data-name="Icon / Instagram / Inverse">
+          <div className="absolute inset-[12.5%]" data-node-id="52:77" data-name="Group">
+            <div className="absolute inset-[-7.29%]">
+              <img alt="" className="block max-w-none size-full" src={imgGroup} />
+            </div>
+          </div>
+        </div>
+        <div className="overflow-clip relative shrink-0 size-[16px]" data-node-id="52:81" data-name="Icon / TikTok / Inverse">
+          <div className="absolute bottom-[22.9%] left-1/4 right-[20.83%] top-[16.67%]" data-node-id="52:82" data-name="Group">
+            <div className="absolute inset-[-9.05%_-10.1%]">
+              <img alt="" className="block max-w-none size-full" src={imgGroup1} />
+            </div>
+          </div>
+        </div>
+        <div className="overflow-clip relative shrink-0 size-[20px]" data-node-id="50:75" data-name="Icon / X / Inverse">
+          <div className="absolute inset-1/4" data-node-id="50:76" data-name="Group">
+            <div className="absolute inset-[-8.75%]">
+              <img alt="" className="block max-w-none size-full" src={imgGroup2} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function PdpDesktop() {
+  return (
+    <div className="bg-[var(--lemoon-surface-page,white)] relative size-full" data-node-id="62:346" data-name="PDP / Desktop">
+      <AnnouncementBar className="absolute bg-[var(--lemoon-surface-inverse,#0b1f3a)] content-stretch flex h-[32px] items-center justify-between left-0 top-0 w-[1440px]" />
+      <HeaderDesktop className="absolute bg-[var(--lemoon-surface-page,white)] content-stretch flex h-[72px] items-center left-0 top-[32px] w-[1440px]" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[18.2px] leading-[normal] left-[80px] text-[13px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[128px] w-[500px] whitespace-pre-wrap" data-node-id="62:398">{`Inicio  ›  Armazones  ›  Rectangulares  ›  Dalton`}</p>
+      <div className="absolute bg-[var(--lemoon-surface-page,white)] h-[820px] left-[80px] overflow-clip top-[176px] w-[760px]" data-node-id="62:399" data-name="Gallery">
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[600px] left-[76px] overflow-clip rounded-[12px] top-0 w-[684px]" data-node-id="62:400" data-name="Main product media">
+          <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium h-[16.8px] leading-[normal] left-[250px] text-[12px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[290px] w-[180px]" data-node-id="62:401">
+            FOTO DE PRODUCTO
+          </p>
+        </div>
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] border-2 border-[var(--lemoon-text-brand,#0b1f3a)] border-solid h-[96px] left-[76px] rounded-[8px] top-[632px] w-[132px]" data-node-id="62:402" data-name="Thumbnail 1" />
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[96px] left-[230px] rounded-[8px] top-[632px] w-[132px]" data-node-id="62:403" data-name="Thumbnail 2" />
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[96px] left-[384px] rounded-[8px] top-[632px] w-[132px]" data-node-id="62:404" data-name="Thumbnail 3" />
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[96px] left-[538px] rounded-[8px] top-[632px] w-[132px]" data-node-id="62:405" data-name="Thumbnail 4" />
+      </div>
+      <div className="absolute bg-[var(--lemoon-surface-page,white)] h-[940px] left-[900px] overflow-clip top-[176px] w-[460px]" data-node-id="62:406" data-name="Product information">
+        <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[16.8px] leading-[normal] left-0 text-[12px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-0 w-[500px]" data-node-id="62:407">
+          LEMOON
+        </p>
+        <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[56px] leading-[normal] left-0 text-[40px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[28px] w-[500px]" data-node-id="62:408">
+          Dalton
+        </p>
+        <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[19.6px] leading-[normal] left-0 text-[14px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[92px] w-[500px] whitespace-pre-wrap" data-node-id="62:409">{`★★★★★   4.8 (127 reseñas)`}</p>
+        <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[39.2px] leading-[normal] left-0 text-[28px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[136px] w-[500px]" data-node-id="62:410">
+          $89.990
+        </p>
+        <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[18.2px] leading-[normal] left-[144px] text-[13px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[146px] w-[240px]" data-node-id="62:411">
+          Solo armazón · IVA incluido
+        </p>
+        <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium h-[19.6px] leading-[normal] left-0 text-[14px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[206px] w-[500px]" data-node-id="62:412">
+          Elige tu color
+        </p>
+        <div className="absolute left-0 size-[24px] top-[238px]" data-node-id="62:413" data-name="Swatch">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSwatch} />
+        </div>
+        <div className="absolute left-[36px] size-[24px] top-[238px]" data-node-id="62:414" data-name="Swatch">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSwatch1} />
+        </div>
+        <div className="absolute left-[72px] size-[24px] top-[238px]" data-node-id="62:415" data-name="Swatch">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSwatch2} />
+        </div>
+        <div className="absolute left-[108px] size-[24px] top-[238px]" data-node-id="62:416" data-name="Swatch">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgSwatch3} />
+        </div>
+        <div className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[19.6px] leading-[0] left-0 text-[14px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[300px] w-[420px] whitespace-pre-wrap" data-node-id="62:417">
+          <p className="leading-[normal] mb-0">{`Forma: Rectangular     Material: Acetato`}</p>
+          <p className="leading-[normal]">{`Lente: 52mm          Puente: 18mm          Varilla: 145mm`}</p>
+        </div>
+        <div className="absolute bg-[var(--lemoon-surface-inverse,#0b1f3a)] h-[52px] left-0 overflow-clip rounded-[24px] top-[408px] w-[460px]" data-node-id="62:418" data-name="Add to cart">
+          <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[19.6px] leading-[normal] left-[142px] text-[14px] text-[color:var(--lemoon-text-inverse,white)] top-[18px] w-[200px]" data-node-id="62:419">
+            AGREGAR AL CARRITO
+          </p>
+        </div>
+        <div className="absolute bg-[var(--lemoon-action-accent,#f7e600)] h-[52px] left-0 overflow-clip rounded-[24px] top-[472px] w-[460px]" data-node-id="62:420" data-name="Lens CTA">
+          <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[19.6px] leading-[normal] left-[92px] text-[14px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[18px] w-[300px]" data-node-id="62:421">
+            CONFIGURAR CON CRISTALES →
+          </p>
+        </div>
+        <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[70px] left-0 overflow-clip rounded-[8px] top-[552px] w-[460px]" data-node-id="62:422" data-name="Product trust">
+          <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[18.2px] leading-[normal] left-[18px] text-[13px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[26px] w-[420px] whitespace-pre-wrap" data-node-id="62:423">{`Envío gratis   ·   Devolución 30 días   ·   Garantía`}</p>
+        </div>
+        <div className="[word-break:break-word] absolute bg-[var(--lemoon-surface-page,white)] font-['Urbanist:Medium'] font-medium h-[200px] leading-[normal] left-0 overflow-clip text-[15px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[660px] w-[460px] whitespace-pre" data-node-id="62:424" data-name="Details accordions">
+          <p className="absolute left-0 top-0" data-node-id="62:425">{`Descripción                                         +`}</p>
+          <p className="absolute left-0 top-[46px]" data-node-id="62:426">{`Materiales                                         +`}</p>
+          <p className="absolute left-0 top-[92px]" data-node-id="62:427">{`Ajuste y talla                                         +`}</p>
+          <p className="absolute left-0 top-[138px]" data-node-id="62:428">{`Cuidado y limpieza                                         +`}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Announcement Bar
+**Node ID:** 50:63
+
+Global compact promotion bar, 32px high. Rotating promotion content sits on the left. Right side contains utility links (Ayuda, Envíos), Instagram and TikTok social icons, and the dismiss control.
+
+## Header / Desktop
+**Node ID:** 55:63
+
+Desktop header — Light treatment. The second “o” in lemoon is Lemon Yellow (#F7E600). Navigation states: Current and Hover use a 2px Lemon Yellow underline; text color remains surface-appropriate.
+
+## Icon
+**Node ID:** 36:58
+
+Lemoon’s core 24px Lucide-style icon library. The matching SVG source is maintained for Shopify use; preserve a 1.75px round stroke and use currentColor in implementation.
+The generated code contains image and SVG URL constants, e.g. const image = '[temporary-asset-url-omitted] These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

@@ -1,0 +1,2978 @@
+{
+  "generatedAt": "2026-11-06T06:13:30.750Z",
+  "browser": "153.0.8010.12",
+  "modulePath": "/Users/miguel/Projects/lemoon/lemoon-theme/node_modules/@playwright/test",
+  "scope": "Local file artifact, not Shopify",
+  "viewports": [
+    {
+      "width": 320,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 749,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 750,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 989,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 990,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 1279,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    }
+  ],
+  "states": [
+    {
+      "state": "accessory",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 48,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "loaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "accessory",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 48,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "loaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "sun",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "sun",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "soldout",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "soldout",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "nodata",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "nodata",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "partial",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "partial",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "single",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "single",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "long",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "long",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "invalid",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "invalid",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "loading",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "loading",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "error",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "error",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "quantity",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "quantity",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "compatible",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "compatible",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "incompatible",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "incompatible",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "pricechange",
+      "width": 390,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "22px",
+        "weight": "500",
+        "lineHeight": "26.4px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    },
+    {
+      "state": "pricechange",
+      "width": 1440,
+      "overflow": false,
+      "h1Count": 1,
+      "h1": {
+        "font": "Urbanist, sans-serif",
+        "size": "24px",
+        "weight": "500",
+        "lineHeight": "28.8px"
+      },
+      "price": {
+        "size": "20px",
+        "weight": "500"
+      },
+      "button": {
+        "height": 52,
+        "radius": "9999px"
+      },
+      "radioCount": 2,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "weight": "600",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "400",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "500",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "weight": "600",
+          "status": "unloaded"
+        }
+      ],
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        },
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true,
+          "naturalWidth": 824,
+          "naturalHeight": 194,
+          "renderedWidth": 122,
+          "renderedHeight": 28.640625,
+          "expectedRatio": 4.259271507779437,
+          "ratioPreserved": true
+        }
+      ],
+      "mediaBinding": "No verified product media association; annotated slots only"
+    }
+  ],
+  "keyboard": [
+    {
+      "check": "native radio arrow selects Carey",
+      "pass": true
+    },
+    {
+      "check": "rail End selects third slot",
+      "pass": true
+    },
+    {
+      "check": "size-entry opens, cycles focus, Escape restores opener",
+      "pass": true
+    },
+    {
+      "check": "rx-entry opens, cycles focus, Escape restores opener",
+      "pass": true
+    },
+    {
+      "check": "primary opens, cycles focus, Escape restores opener",
+      "pass": true
+    },
+    {
+      "check": "zoom opens, cycles focus, Escape restores opener",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "focus": {
+    "outline": "rgb(11, 31, 58) solid 2px",
+    "offset": "4px"
+  },
+  "sourceCascade": [
+    {
+      "width": 390,
+      "h1Size": "22px",
+      "h1Weight": "500",
+      "priceSize": "20px",
+      "priceWeight": "500",
+      "buttonRadius": "9999px",
+      "buttonBackground": "rgb(247, 230, 0)",
+      "buttonFont": "16px",
+      "buttonWeight": "400"
+    },
+    {
+      "width": 820,
+      "h1Size": "24px",
+      "h1Weight": "500",
+      "priceSize": "20px",
+      "priceWeight": "500",
+      "buttonRadius": "9999px",
+      "buttonBackground": "rgb(247, 230, 0)",
+      "buttonFont": "16px",
+      "buttonWeight": "400"
+    },
+    {
+      "width": 1440,
+      "h1Size": "24px",
+      "h1Weight": "500",
+      "priceSize": "20px",
+      "priceWeight": "500",
+      "buttonRadius": "9999px",
+      "buttonBackground": "rgb(247, 230, 0)",
+      "buttonFont": "16px",
+      "buttonWeight": "400"
+    }
+  ],
+  "contrasts": [
+    {
+      "name": "navy/white",
+      "ratio": 16.51824183536946
+    },
+    {
+      "name": "secondary/white",
+      "ratio": 7.304920787989079
+    },
+    {
+      "name": "secondary/warm",
+      "ratio": 6.654335545186693
+    },
+    {
+      "name": "input-border/white",
+      "ratio": 3.8020103661053493
+    },
+    {
+      "name": "error/white",
+      "ratio": 5.438402422419904
+    }
+  ],
+  "externalRuntimeRequests": [],
+  "passed": true
+}
