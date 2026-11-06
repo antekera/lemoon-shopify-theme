@@ -47,6 +47,22 @@ if (typeof window !== 'undefined') {
       if (this.ready) return;
       this.ready = true;
       this.tabs = [...this.querySelectorAll('[data-size-tab]')];
+      const dialog = this.closest('dialog');
+      // Recompute after tab changes: hidden panels must not define the focus boundary.
+      dialog?.addEventListener('keydown', (event) => {
+        if (event.key !== 'Tab') return;
+        const items = [...dialog.querySelectorAll('button, a[href], input, select, textarea, [tabindex]')]
+          .filter((item) => item.tabIndex >= 0 && !item.disabled && item.getClientRects().length);
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && event.target === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && event.target === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
       this.selectTab = (tab, focus = false) => {
         this.tabs.forEach((item) => {
           const selected = item === tab;
@@ -102,7 +118,7 @@ if (typeof window !== 'undefined') {
       dialog?.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close(); });
       dialog?.addEventListener('change', (event) => {
         if (!event.target.matches('[data-units]')) return;
-        dialog.querySelectorAll('[data-mm]').forEach((label) => { label.textContent = event.target.value === 'in' ? `${(Number(label.dataset.mm) / 25.4).toFixed(2)} in` : `${label.dataset.mm} mm`; });
+        event.target.closest('.lemoon-pdp__dimensions').querySelectorAll('[data-mm]').forEach((label) => { label.textContent = event.target.value === 'in' ? `${(Number(label.dataset.mm) / 25.4).toFixed(2)} in` : `${label.dataset.mm} mm`; });
       });
     }
   });

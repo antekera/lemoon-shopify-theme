@@ -10,6 +10,7 @@ import { renderContractFixture } from '../helpers/consumer-contract-renderer.mjs
 
 import { renderAdoptionFixture } from '../helpers/component-adoption-renderer.mjs';
 import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
+import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
@@ -46,6 +47,15 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1:4173').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/size-guide.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderSizeGuideFixture(query.get('shell') || 'standard', query.get('scenario') || 'complete'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
 
@@ -139,8 +149,9 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.listen(4173, '127.0.0.1', () => {
-  console.log('Fixture ready at http://127.0.0.1:4173');
+const port = Number(process.env.PORT || 4173);
+server.listen(port, '127.0.0.1', () => {
+  console.log(`Fixture ready at http://127.0.0.1:${port}`);
 });
 
 for (const signal of ['SIGINT', 'SIGTERM']) {

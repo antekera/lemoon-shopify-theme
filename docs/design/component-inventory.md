@@ -446,15 +446,15 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/lemoon-size-guide-content.liquid](../../snippets/lemoon-size-guide-content.liquid), [snippets/lemoon-frame-dimensions.liquid](../../snippets/lemoon-frame-dimensions.liquid), [snippets/lemoon-frame-information.liquid](../../snippets/lemoon-frame-information.liquid), [snippets/lemoon-product-size-guide.liquid](../../snippets/lemoon-product-size-guide.liquid), [assets/lemoon-pdp-tools.js](../../assets/lemoon-pdp-tools.js).
 
-**Contrato actual.** Size content: product,instance_id(default product.id); custom.frame_dimensions/shape/material/size/width/weight/gender/face_shapes_compatible. frame-dimensions usa dimensions y dialog opcional para selector de unidades; frame-information pasa product e instance_id al contenido. size-guide drawer recibe product,section_id y crea instance_id propio. Tabs measurements/frame/fit con IDs únicos y unidades mm/in.
+**Contrato actual.** Size content: product,instance_id(default product.id); custom.frame_dimensions/shape/material/size/width/weight/gender/face_shapes_compatible. frame-dimensions usa dimensions y dialog opcional para selector de unidades; frame-information pasa product e instance_id al contenido. size-guide drawer recibe product,section_id y crea instance_id propio. Tabs measurements/frame/fit con IDs únicos y unidades mm/in. LEM-129: `frame_dimensions` acepta únicamente números JSON positivos en las cinco claves conocidas; omite campos inválidos y muestra el vacío localizado si ninguno es válido. Las referencias A–E enlazan cotas del esquema frontal/lateral sin escala con las filas disponibles; no representan un SKU ni aportan medidas de ejemplo.
 
 **Variantes existentes.** Tres tabs ARIA reales; contenido inline y drawer; datos ausentes -> mensaje localizado; no confundir con collapsible_tab.
 
-**CSS y excepciones.** .lemoon-size-guide*, .lemoon-size-drawer en PDP CSS; drawer máximo480px/100vw radio0, scroll local, --lemoon-border-strong para tab seleccionado donde fuente lo usa.
+**CSS y excepciones.** .lemoon-size-guide*, .lemoon-size-drawer en PDP CSS; drawer máximo480px/100vw radio0, scroll local con cierre sticky siempre disponible y contenido largo ajustable; selector de unidad con altura48px y contorno/foco accesible; --lemoon-border-strong para tab seleccionado donde fuente lo usa.
 
 **Estados observados / aplicabilidad:** Normal: Tab measurements inicial; Hover: Botones tabs; Foco: Roving tabindex y flechas/Home/End del JS; Seleccionado: aria-selected y hidden panel sincronizados; Loading: No spinner propio; Error: Faltan datos es vacío, no error de red; Disabled: No disabled global.
 
-**Responsive.** Drawer 100dvh y contenido overflow; diagrama fluido y cambio de unidades local. **Accesibilidad.** Preservar tablist/tab/tabpanel, aria-controls/labelledby, instance_id en múltiples apariciones y retorno del dialog.
+**Responsive.** Drawer 100dvh y contenido overflow; diagrama fluido y cambio de unidades local. **Accesibilidad.** Preservar tablist/tab/tabpanel, aria-controls/labelledby, paneles enfocables y ciclo Tab/Shift+Tab dentro del diálogo según los controles visibles, instance_id en múltiples apariciones y retorno del dialog. La conversión mm/in queda confinada al bloque de dimensiones del selector que cambia.
 
 **JS.** lemoon-pdp-tools.js: lemoon-size-guide, lemoon-product-tools y native dialog; óptica usa controlador propio para opener. **Reutilización actual.** Contenido/diagrama ya compartidos por PDP; shell dialog duplicado óptica/estándar. Retener adaptadores hasta prueba.
 

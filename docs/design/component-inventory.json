@@ -711,7 +711,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-size-guide-content.liquid",
-        "scope": "Contenido compartido; controlador y shell PDP no son un tab genérico.",
+        "scope": "Contenido compartido; controlador y shell PDP no son un tab genérico. LEM-129: dimensiones JSON numéricas positivas, vacío sin valores válidos, esquema frontal/lateral A–E sin escala, paneles enfocables, ciclo Tab por controles visibles, selector48px y cierre sticky; conversión de unidades confinada a su bloque.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
