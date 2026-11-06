@@ -93,6 +93,15 @@ export function quizProduct(id, { shape = 'rectangular', material = 'acetato', r
 
 export function fixtureProducts(scenario = 'default') {
   if (scenario === 'empty') return [];
+  if (scenario === 'missing-media') {
+    const product = quizProduct(601);
+    const diagonal = image(601, 'blue-diagonal', { url: '/assets/lemoon-quiz-category-optical-studio-v1-480.jpg', alt: 'card-diagonal:azul' });
+    product.variants[1].featured_media = null;
+    product.variants[1].featured_image = null;
+    product.media = [product.featured_media, diagonal];
+    product.images = [product.featured_image, diagonal];
+    return [product];
+  }
   if (scenario === 'categories') return [
     quizProduct(301, { category: 'Óptico' }),
     quizProduct(302, { category: 'Solar' }),

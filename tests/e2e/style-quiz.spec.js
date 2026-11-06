@@ -401,6 +401,90 @@ test.describe('variant exploration at mobile width', () => {
   });
 });
 
+for (const width of [390, 1440]) {
+  test.describe(`missing-media color exploration at ${width}px`, () => {
+    test.use({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+    test('changes photo to neutral fallback and back while keeping variant price and links coherent', async ({ page }, testInfo) => {
+      const quiz = await openQuiz(page, 'missing-media'); await start(quiz); await continueToResults(quiz);
+      const result = visibleCards(quiz).first();
+      await expect(visibleCards(quiz)).toHaveCount(1);
+      const primary = result.locator('.card__media img').first();
+      const media = result.locator('.card__media .media');
+      const secondary = result.locator('.card__media img').nth(1);
+      const blue = result.getByRole('button', { name: 'Azul', exact: true });
+      const tortoise = result.getByRole('button', { name: 'Carey', exact: true });
+      const price = result.locator('.price-item--regular').first();
+      const productLinks = result.locator('a[href*="/products/"]');
+      const expectVariant = async swatch => {
+        await expect(swatch).toHaveAttribute('aria-pressed', 'true');
+        const expectedURL = await swatch.getAttribute('data-variant-url');
+        const expectedPrice = await swatch.getAttribute('data-price');
+        for (const link of await productLinks.all()) await expect(link).toHaveAttribute('href', expectedURL);
+        await expect(price).toHaveText(expectedPrice);
+      };
+      await expect(primary).toHaveAttribute('src', /lemoon-category-opticos-generic-v1\.jpg/);
+      await expectVariant(blue);
+      await expect(secondary).toHaveAttribute('src', /lemoon-quiz-category-optical-studio-v1-480\.jpg/);
+      await expect(media).toHaveClass(/lemoon-product-card__secondary-ready/);
+      const blueSource = await blue.getAttribute('data-primary-src');
+      await tortoise.click();
+      await expectVariant(tortoise);
+      await expect(primary).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');
+      await expect.poll(() => primary.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
+      await expect.poll(() => primary.evaluate(node => new URL(node.currentSrc).pathname)).toBe('/assets/lemoon-product-fallback.png');
+      await expect(primary).toHaveAttribute('alt', '');
+      await result.hover();
+      await expect(media).not.toHaveClass(/lemoon-product-card__secondary-ready/);
+      await expect(primary).toHaveCSS('opacity', '1');
+      await expect(secondary).toHaveCSS('opacity', '0');
+      await result.screenshot({ path: testInfo.outputPath('missing-media-neutral-fallback.png') });
+      await blue.click();
+      await expectVariant(blue);
+      await expect(primary).toHaveAttribute('src', blueSource);
+      await expect(primary).not.toHaveAttribute('src', /lemoon-product-fallback/);
+      await expect.poll(() => primary.evaluate(node => node.complete && node.naturalWidth > 0)).toBe(true);
+      await expect.poll(() => primary.evaluate(node => new URL(node.currentSrc).pathname)).toBe('/assets/lemoon-category-opticos-generic-v1.jpg');
+      await expect(secondary).toHaveAttribute('src', /lemoon-quiz-category-optical-studio-v1-480\.jpg/);
+      await expect(media).toHaveClass(/lemoon-product-card__secondary-ready/);
+      await expectCanonicalResults(quiz);
+    });
+  });
+}
+
+test('a previous color decode cannot restore the secondary image after choosing a missing-media color', async ({ page }) => {
+  await page.addInitScript(() => {
+    const decode = HTMLImageElement.prototype.decode;
+    const pending = [];
+    const releases = [];
+    window.__quizSecondaryDecode = {
+      count: () => pending.length,
+      release: async () => {
+        releases.splice(0).forEach(resolve => resolve());
+        await Promise.all(pending);
+      },
+    };
+    HTMLImageElement.prototype.decode = function () {
+      const loaded = decode.call(this);
+      if (!this.src.includes('lemoon-quiz-category-optical-studio-v1-480.jpg')) return loaded;
+      const gate = new Promise(resolve => releases.push(resolve));
+      const held = Promise.all([loaded, gate]).then(() => undefined);
+      pending.push(held);
+      return held;
+    };
+  });
+  const quiz = await openQuiz(page, 'missing-media'); await start(quiz); await continueToResults(quiz);
+  const result = visibleCards(quiz).first();
+  const media = result.locator('.card__media .media');
+  const primary = result.locator('.card__media img').first();
+  await expect.poll(() => page.evaluate(() => window.__quizSecondaryDecode.count())).toBeGreaterThan(0);
+  await expect(media).not.toHaveClass(/lemoon-product-card__secondary-ready/);
+  await result.getByRole('button', { name: 'Carey', exact: true }).click();
+  await expect(primary).toHaveAttribute('src', '/assets/lemoon-product-fallback.png');
+  await page.evaluate(() => window.__quizSecondaryDecode.release());
+  await expect(media).not.toHaveClass(/lemoon-product-card__secondary-ready/);
+  await expect(primary).toHaveCSS('opacity', '1');
+});
+
 test('an empty catalog produces useful zero results rather than invented products', async ({ page }) => {
   const quiz = await openQuiz(page, 'empty'); await start(quiz); await continueToResults(quiz);
   await expect(visibleCards(quiz)).toHaveCount(0);

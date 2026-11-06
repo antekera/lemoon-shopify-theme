@@ -92,3 +92,7 @@ Mantener product-info.js/price-per-item.js, `Price-Per-Item-<section>`, data-sec
 ```
 
 [consumer-contract.test.js](../../../tests/unit/consumer-contract.test.js) y [consumer-contract.spec.js](../../../tests/e2e/consumer-contract.spec.js) comparan referencias previas de los consumidores y ejercitan estados de precio, impuestos, ordenación y slider en fixtures locales. El límite card-product de las respuestas de carrusel se modela para comprobar parámetros; esas pruebas no acreditan quick-add real, precios/moneda efectivos, Section Rendering de Shopify ni procesamiento de carrito.
+
+En tarjetas con `recommended_variant`, cada swatch sin media propia debe publicar `lemoon-product-fallback.png` como `data-primary-src`, con alt vacío. Una URL vacía deja la galería sin elementos y puede conservar la foto del color anterior aunque cambien precio/enlaces. No usar la foto de otra variante para ese color; la tarjeta sin `recommended_variant` conserva su contrato anterior.
+
+Un `data-secondary-src` explícitamente vacío indica que el color no tiene segunda vista: retirar el estado de hover y las fuentes anteriores, e invalidar cualquier decodificación pendiente. Recuperar `data-lazy-src` solo si el swatch no declara el atributo; los valores secundarios explícitos no heredan el srcset de otro color. Los selectores de espera en `lemoon-components.css` deben prevalecer sobre el hover de `component-card.css`, aunque este se cargue después, para mantener visible la imagen principal.

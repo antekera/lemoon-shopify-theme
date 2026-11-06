@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createQuizEngine, quizProduct } from '../helpers/style-quiz-renderer.mjs';
+import { createQuizEngine, quizProduct, fixtureProducts } from '../helpers/style-quiz-renderer.mjs';
 
 function card(product, recommended_variant, params = {}) {
   const engine = createQuizEngine();
@@ -46,6 +46,20 @@ describe('canonical card recommended variant', () => {
     const html = card(product, product.variants[1]);
     expect(primaryImage(html)).toContain('/assets/lemoon-product-fallback.png');
     expect(regularPrice(html)).toBe('$140.01');
+  });
+
+  it('provides a neutral image source for a missing-media alternate color on a photographed recommended card', () => {
+    const [product] = fixtureProducts('missing-media');
+    const html = card(product, product.variants[0], { show_secondary_image: true });
+    expect(primaryImage(html)).toContain('lemoon-category-opticos-generic-v1.jpg');
+    const alternate = html.match(/<button\b[^>]*aria-label="Carey"[^>]*>/)?.[0];
+    expect(alternate).toContain('data-primary-src="/assets/lemoon-product-fallback.png"');
+    expect(alternate).toContain('data-primary-alt=""');
+    expect(alternate).toContain('data-secondary-src=""');
+    expect(alternate).toContain('data-variant-url="/products/lente-601?variant=6012"');
+    expect(alternate).toContain('data-price="$146.01"');
+    const legacyAlternate = card(product).match(/<button\b[^>]*aria-label="Carey"[^>]*>/)?.[0];
+    expect(legacyAlternate).toContain('data-primary-src="/assets/lemoon-category-opticos-generic-v1.jpg?width=720"');
   });
 
   it('preserves non-color options when exploring a color from a recommended variant', () => {

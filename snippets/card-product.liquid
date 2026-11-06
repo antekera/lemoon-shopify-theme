@@ -358,8 +358,8 @@
                       {% if swatch_selection_unavailable %}disabled{% endif %}
                       aria-label="{{ value.name | escape }}"
                       aria-pressed="{% if swatch_selected %}true{% else %}false{% endif %}"
-                      data-primary-src="{% if swatch_primary_image %}{{ swatch_primary_image | image_url: width: 720 }}{% endif %}"
-                      data-primary-alt="{{ card_product.title | escape }} — {{ value.name | escape }} — vista frontal"
+                      data-primary-src="{% if swatch_primary_image %}{{ swatch_primary_image | image_url: width: 720 }}{% elsif has_recommended_variant %}{{ 'lemoon-product-fallback.png' | asset_url }}{% endif %}"
+                      data-primary-alt="{% unless has_recommended_variant and swatch_primary_image == blank %}{{ card_product.title | escape }} — {{ value.name | escape }} — vista frontal{% endunless %}"
                       data-secondary-src="{% if swatch_secondary_image %}{{ swatch_secondary_image | image_url: width: 720 }}{% endif %}"
                       data-secondary-srcset="{% if swatch_secondary_image %}{% if swatch_secondary_image.width >= 360 %}{{ swatch_secondary_image | image_url: width: 360 }} 360w,{% endif %}{% if swatch_secondary_image.width >= 533 %}{{ swatch_secondary_image | image_url: width: 533 }} 533w,{% endif %}{{ swatch_secondary_image | image_url: width: 720 }} 720w{% endif %}"
                       data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
