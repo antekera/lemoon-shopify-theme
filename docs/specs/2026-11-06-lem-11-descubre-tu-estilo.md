@@ -4,7 +4,7 @@ Estado: diseño propuesto para revisión antes de implementar. Rama `fix/lem-11-
 
 ## Resultado solicitado
 
-1. El enlace del footer y el nombre de la página serán **Descubre tu estilo**. La URL será `/pages/descubre-tu-estilo`; la anterior redirigirá a ella.
+1. El enlace del footer y el nombre de la página serán **Descubre tu estilo**. La URL será `/pages/descubre-tu-estilo`; la anterior dejará de existir y devolverá 404, sin redirección.
 2. El título visible seguirá siendo **Descubre tu estilo ideal.** y el subtítulo **Formas, colores y detalles que van contigo. Encuentra los tuyos.**
 3. El texto del quiz tendrá tamaño de lectura regular, también en móvil.
 4. Atrás y Adelante del navegador recorrerán las preguntas conservando las respuestas.
@@ -16,7 +16,8 @@ El último punto incorpora la aclaración de Miguel: los metaobjetos del quiz ta
 ## Nombre, ruta y accesos
 
 - Conservar la página Shopify existente `161787576488` y el template interno `page.buscar-mi-estilo.json`; cambiar su handle no exige duplicar página o renombrar el template.
-- Cambiar título de página a `Descubre tu estilo`, handle a `descubre-tu-estilo` y verificar la redirección desde `/pages/buscar-mi-estilo`.
+- Cambiar título de página a `Descubre tu estilo` y handle a `descubre-tu-estilo`, sin crear una redirección desde `/pages/buscar-mi-estilo`. Desactivar la creación automática de redirección al modificar el handle.
+- Verificar que no quede una página ni una redirección activa para `/pages/buscar-mi-estilo`; si existe una redirección de esa ruta, retirarla de forma acotada. La ruta anterior debe devolver HTTP 404. Esta decisión sustituye la propuesta inicial de conservar compatibilidad mediante redirección.
 - Actualizar el título y destino del enlace en los menús Shopify que realmente lo contienen. La lectura actual encontró `footer-how-to`, `footer-services-review` y `footer-services-mobile-review`. Preservar el resto de cada menú y sus asociaciones de recurso.
 - Conciliar accesos de header/búsqueda móvil, FAQ, documentación vigente y pruebas con la nueva URL. No reescribir evidencia histórica como si hubiese usado la nueva ruta.
 - La comprobación administrativa actual confirma que la página está publicada, usa `templateSuffix: buscar-mi-estilo` y conserva el handle anterior. Estos cambios de CMS se coordinarán con la entrega del tema; se respaldarán y se leerán nuevamente para comprobarlos.
@@ -88,13 +89,13 @@ No mapear familias de color a un color concreto de variante por aproximación. C
 - Tema: controlador/estilos/markup del quiz; destinos de navegación; serialización de la URL de filtros; PLP/facets solo donde sea necesario para presentar los criterios reales y mantener coherencia de variante.
 - El quiz dejará de cargar tarjetas y datos completos de candidatos para puntuar localmente. Usará únicamente el vocabulario y correspondencias necesarios para construir filtros válidos.
 - Documentación: contrato visual, receta, inventarios Markdown/JSON, guía de catálogo, rutas vigentes y pruebas. El título «Descubre tu estilo ideal.» ya está recuperado en esta rama.
-- Shopify: página, menús/redirección, definiciones y configuración de filtros; asignación y derivación de atributos de prueba. Todo con respaldo y lectura posterior.
+- Shopify: página y menús, comprobación de ausencia de la ruta anterior y su redirección, definiciones y configuración de filtros; asignación y derivación de atributos de prueba. Todo con respaldo y lectura posterior.
 - Back office: vocabulario y derivación/publicación de los mismos campos, manteniendo la protección de ediciones concurrentes y la fuente comercial en Shopify. La preparación documental no acredita token, scopes ni despliegue de esa app.
 - La publicación del tema y los despliegues conservan sus autorizaciones separadas. Esta especificación no los ejecuta.
 
 ## Pruebas de aceptación
 
-1. Footer/header/búsqueda móvil llevan a la nueva ruta; la anterior redirige; la URL natural usa la plantilla correcta.
+1. Footer/header/búsqueda móvil llevan a la nueva ruta y la URL natural usa la plantilla correcta. `/pages/buscar-mi-estilo` devuelve HTTP 404, sin cabecera de redirección ni navegación automática hacia la nueva página.
 2. Texto computado y targets legibles a 390/749/750/989/990/1440 px, zoom y teclado, sin overflow ni regresión del salto inicial.
 3. Acabados y Materiales visibles simultáneamente y seleccionables con teclado, sin pestaña oculta.
 4. Atrás/Adelante, cambios después de Atrás, recarga, retorno desde categoría y referencias de medidas conservan estado y foco sin bucles de historial.
