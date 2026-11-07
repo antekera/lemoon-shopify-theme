@@ -15,6 +15,27 @@ const regularPrice = html => html.match(/<span class="price-item price-item--reg
 const primaryImage = html => html.match(/<img\b[^>]*>/)?.[0];
 
 describe('canonical card recommended variant', () => {
+  it('keeps a native filtered ProductDrop contract coherent without an explicit recommended variant', () => {
+    // Shopify documents selected_or_first_available_variant as the most relevant
+    // variant in filtered collections. This models that input, not its index.
+    const product = quizProduct(1);
+    const matching = product.variants[1];
+    matching.featured_media.url = '/native-filtered-carey.jpg';
+    product.selected_or_first_available_variant = matching;
+    product.selected_variant = matching;
+    product.url = matching.url;
+    product.featured_media = matching.featured_media;
+    product.featured_image = matching.featured_image;
+    product.options_with_values[0].values.forEach(value => { value.selected = value.name === matching.title; });
+    const html = card(product, undefined, { show_quick_add: true });
+    expect(links(html)).toEqual([matching.url, matching.url, matching.url]);
+    expect(primaryImage(html)).toContain('src="/native-filtered-carey.jpg?width=533"');
+    expect(regularPrice(html)).toBe('$140.01');
+    expect(html.match(/<button\b[^>]*aria-label="Carey"[^>]*>/)?.[0]).toContain('aria-pressed="true"');
+    expect(html.match(/<button\b[^>]*aria-label="Azul"[^>]*>/)?.[0]).toContain('aria-pressed="false"');
+    expect(html).toContain('name="id" value="12"');
+  });
+
   it('renders the chosen variant media, price, links and selected swatch together', () => {
     const product = quizProduct(1);
     product.variants[1].featured_media.url = '/carey-selected.jpg';

@@ -60,6 +60,13 @@ function image(id, suffix, extra = {}) {
   return { ...value, preview_image: { ...value }, src: { ...value } };
 }
 export const quizTrait = (group, code, label = code) => ({ group: { value: group }, code: { value: code }, label: { value: label } });
+export const quizDictionary = () => Object.entries({
+  color: ['bold', 'neutral', 'brown', 'light', 'black', 'two_tone', 'silver'],
+  finish: ['matte', 'glossy'], pattern: ['tortoise'], transparency: ['transparent'],
+  use: ['work', 'everyday', 'going_out', 'outdoors'], presence: ['compact', 'medium', 'oversize'],
+}).flatMap(([group, codes]) => codes.map(code => ({ group, code })))
+  .map((trait, index) => ({ id: `gid://shopify/Metaobject/${index + 100}`, ...trait }));
+export const quizAvailableFilters = () => ['filter.p.product_type', 'filter.p.m.custom.frame_shape', 'filter.p.m.custom.frame_material', ...['color', 'finish', 'pattern', 'transparency', 'use', 'presence'].map(axis => `filter.v.m.custom.style_filter_${axis}`)];
 
 export function quizProduct(id, { shape = 'rectangular', material = 'acetato', ready = true, demo = true, noMedia = false, unavailable = false, category = 'Óptico', title = `Lente de prueba ${id}` } = {}) {
   const blue = image(id, 'blue'); const tortoise = image(id, 'tortoise');
@@ -132,20 +139,22 @@ export function fixtureProducts(scenario = 'default') {
   return products;
 }
 
-export function renderQuizSection({ scenario = 'default', products = fixtureProducts(scenario), language = 'es', sectionId = 'quiz-fixture' } = {}) {
+export function renderQuizSection({ scenario = 'default', products = fixtureProducts(scenario), language = 'es', sectionId = 'quiz-fixture', traits = quizDictionary(), types = ['Óptico', 'Ópticos', 'Optical', 'Solar', 'Solares', 'Lentes de sol', 'Sunglasses'], dictionaryPages = 1, availableFilters = quizAvailableFilters() } = {}) {
   const collection = { handle: 'quiz-fixture', url: '/collections/quiz-fixture', title: 'Colección de prueba', products, products_count: products.length, all_products_count: products.length };
   const engine = createQuizEngine({ language });
+  engine.options.globals.shop.types = types;
   return `<section id="shopify-section-${escape(sectionId)}">${engine.renderFileSync('lemoon-style-quiz', {
     section: { id: sectionId, settings: { catalogue: collection, padding_top: 64, padding_bottom: 64 }, blocks: [] },
-    collection, collections: { 'quiz-fixture': collection }, all_products: Object.fromEntries(products.map(product => [product.handle, product])),
-    paginate: { pages: 1, current_page: 1, items: products.length },
+    collection, collections: { 'quiz-fixture': collection, all: { ...collection, filters: availableFilters.map(param_name => ({ param_name })) } }, all_products: Object.fromEntries(products.map(product => [product.handle, product])),
+    metaobjects: { lemoon_style_trait: { values: traits.map(({ id, group, code }) => ({ system: { id }, ...quizTrait(group, code) })) } },
+    paginate: { pages: dictionaryPages, current_page: 1, items: traits.length },
     routes: { root_url: '/', all_products_collection_url: '/collections/all' },
   })}</section>`;
 }
 
 export function renderQuizFixture(scenario = 'default') {
   let content = renderQuizSection({ scenario });
-  if (scenario === 'malformed') content = content.replace(/data-candidate="[^"]*"/, 'data-candidate="{broken"');
+  if (scenario === 'malformed') content = content.replace(/(<script type="application\/json" data-quiz-filter-config>)[\s\S]*?(<\/script>)/, '$1{broken$2');
   const shell = renderComponentFixture('controls', { themeBoxSizing: true });
   // Exact product-card settings emitted by layout/theme.liquid. Omitting these
   // collapses the card's absolute media width despite successful image loads.

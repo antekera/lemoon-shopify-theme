@@ -80,13 +80,19 @@
       "id": "gid://shopify/Page/161787576488",
       "title": "Encuentra tu lente ideal",
       "handle": "buscar-mi-estilo",
-      "templateSuffix": null,
+      "templateSuffix": "buscar-mi-estilo",
       "isPublished": true,
       "proposedTemplateSuffix": "buscar-mi-estilo",
       "ticket": "LEM-11",
-      "status": "pending_review",
+      "status": "changes_in_progress",
       "templatePath": "templates/page.buscar-mi-estilo.json",
-      "reviewUrl": "https://lemoon.cl/pages/buscar-mi-estilo?view=buscar-mi-estilo&preview_theme_id=188783886504"
+      "reviewUrl": "https://lemoon.cl/pages/buscar-mi-estilo",
+      "proposedTitle": "Descubre tu estilo",
+      "proposedHandle": "descubre-tu-estilo",
+      "proposedUrl": "https://lemoon.cl/pages/descubre-tu-estilo",
+      "previousRouteBehavior": "HTTP 404; no redirect",
+      "cmsReadAt": "2026-11-06",
+      "cmsChangeStatus": "pending_coordinated_activation"
     },
     {
       "id": "gid://shopify/Page/161800257704",
