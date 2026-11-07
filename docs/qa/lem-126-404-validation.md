@@ -1,5 +1,7 @@
 # LEM-126 — validación de Página 404
 
+> Registro histórico del 06-11-2026. La revisión visual aprobada por el usuario y el preview nativo posteriores se documentan en [QA de la ilustración y enlaces](lem-126-404-lemon-local.md) y [adopción de Instrument Sans](lem-126-instrument-sans-trial.md). Los resultados de búsqueda de esta ejecución describen la versión anterior, previa a su retirada solicitada.
+
 Fecha: 06-11-2026 (UTC y America/Santiago). Resultado: **already_satisfied para la superficie 404**, con limitaciones y hallazgo de destino documentados abajo; revisión independiente **Approved**, con aprobación humana del ticket pendiente.
 
 ## Revisión y fuentes

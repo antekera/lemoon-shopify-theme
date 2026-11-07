@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 519,
+    "total_tracked_paths": 520,
     "mapped_paths": 487,
-    "excluded_paths": 32,
+    "excluded_paths": 33,
     "by_root": {
-      "assets": 260,
+      "assets": 261,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -43,7 +43,7 @@
       ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 31,
+      "binary-image-or-font": 32,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 519,
-    "explicit_new_paths": 5
+    "total_source_paths": 520,
+    "explicit_new_paths": 6
   },
   "components": [
     {
@@ -137,6 +137,19 @@
         "entry_path": "snippets/lemoon-ui-heading.liquid",
         "scope": "Heading semántico; richtext conserva su dueño y las excepciones tipográficas locales.",
         "recipe_path": "docs/components/recipes/guide-help.md"
+      },
+      "font_adoption": {
+        "approved": "2026-11-07",
+        "body_family": "Instrument Sans",
+        "heading_family": "Urbanist",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "status": "approved by user; production publication separate",
+        "scope": "body token; theme, password and gift-card font requests; password body; component gallery label; existing sizes unchanged"
       }
     },
     {
@@ -1667,9 +1680,12 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-404.liquid",
-        "scope": "404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal.",
+        "scope": "404 sin buscador, navegación home/catálogo/FAQ/contacto con foco único sin sombra e ilustración decorativa de armazón y limón; número 404 HTML independiente, sin JS. custom-liquid/apps conservan schemas propios; no wrapper universal.",
         "recipe_path": "docs/components/recipes/search-sort.md"
-      }
+      },
+      "decorative_assets": [
+        "assets/lemoon-404-frame-lemon-v2.webp"
+      ]
     },
     {
       "id": "LM-GALLERY",
@@ -5915,6 +5931,12 @@
         "LM-LEGAL"
       ],
       "inspection_method": "targeted-template-review; opt-in native policy source"
+    },
+    {
+      "path": "assets/lemoon-404-frame-lemon-v2.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: ilustración decorativa 404 inspeccionada visualmente; contrato en LM-UTILITY",
+      "content_read": true
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -5939,7 +5961,8 @@
       "assets/section-lemoon-editorial-newsletter.css",
       "snippets/lemoon-business-content.liquid",
       "snippets/lemoon-legal-section-content.liquid",
-      "templates/page.legal.json"
+      "templates/page.legal.json",
+      "assets/lemoon-404-frame-lemon-v2.webp"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status. Se agrega plantilla legal compartida; la cobertura incluye la incorporación de plazo de entrega.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",

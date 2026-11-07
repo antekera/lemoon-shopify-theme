@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-07",
+  "surface": "404",
+  "tool": "image_gen.imagegen built-in edit",
+  "prompt": "Edit the supplied Lemoon 404 illustration. The current lemon looks embedded in the glasses; fix that visual problem decisively. Keep the original mature, clean, flat editorial style and rounded navy eyeglass frame, using navy #0B1F3A and lemon yellow #F7E600 only. Recompose the image as two clearly SEPARATE objects: intact eyeglasses occupy the lower-left and center; a small whole yellow lemon with one navy leaf sits in the upper-right negative space as a separate graphic accent. Leave a generous, unmistakable transparent gap between lemon/leaf and every part of the eyeglass frame: at least half the lemon's width of visible empty space. The lemon must NOT touch, sit on, overlap, replace, attach to, grow out of, or enter the glasses. Both lens openings must be completely clear, with no fruit covering them. Refine the glasses into a coherent elegant silhouette with a subtle three-quarter tilt and believable temples. Reduce visual clutter: retain at most two tiny expressive navy strokes, no sweeping lines. Entire illustration comfortably inside canvas with breathing room at all edges. Wide 3:2 composition, actual transparent alpha background including lenses, no backdrop, no shadows, no glow, no gradients, no texture, no outlines around canvas, no text, no numerals, no logo, no mascot, no facial features. This is an airy balanced standalone illustration, readable when reduced to 280px wide, not a product photo.",
+  "reference": "docs/design/assets/lem-126/lemoon-404-frame-lemon-v1.webp",
+  "change": "Lemon and leaf separated from frame and lenses with visible negative space; less decorative clutter",
+  "transparent_background": true,
+  "asset": "assets/lemoon-404-frame-lemon-v2.webp",
+  "source_dimensions": [
+    1536,
+    1024
+  ],
+  "export_dimensions": [
+    960,
+    640
+  ],
+  "encoding": "cwebp -q 88 -resize 960 0; alpha preserved",
+  "status": "approved by user on 2026-11-07; integrated and verified in unpublished Shopify preview 189821550760; production publication separate",
+  "bytes": 34528
+}

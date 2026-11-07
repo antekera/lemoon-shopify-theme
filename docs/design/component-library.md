@@ -42,7 +42,7 @@ Aplicar [DESIGN §2–5](../../DESIGN.md#2-color) y los nombres reales de [lemoo
 | Lectura, ayudas y paneles | `--lemoon-text-primary`, `--lemoon-text-secondary`, `--lemoon-surface-page`, `--lemoon-surface-warm` |
 | Error y confirmación | `--lemoon-text-error`, `--lemoon-border-error`, `--lemoon-status-error`, `--lemoon-status-success`; siempre acompañados de texto |
 | Disabled | `--lemoon-surface-disabled`; conservar semántica y tratamiento local, sin inferir que todos los controles consumen este token |
-| Tipografía | `--lemoon-font-heading` Urbanist para títulos/acciones; `--lemoon-font-body` Hanken Grotesk para cuerpo/labels. Mantener excepciones de tarjeta/PLP |
+| Tipografía | `--lemoon-font-heading` Urbanist para títulos/acciones; `--lemoon-font-body` Instrument Sans para cuerpo/labels. Mantener excepciones de tarjeta/PLP |
 | Ritmo y forma | `--lemoon-space-*`; `--lemoon-radius-button` para acciones, `--lemoon-radius-sm` para campo base, radio local para cada familia |
 | Movimiento y capas | `--lemoon-motion-fast/base/slow`; capas y reducción de movimiento según DESIGN §4 |
 
@@ -78,7 +78,7 @@ Enter/Espacio operan botones nativos; Enter activa enlaces. No convertir enlaces
 
 ### Reconciliación de campos legacy
 
-**Estado existente:** `.field:after` y `.select:after` usan contorno/sombra warm en lemoon-components.css. Contacto también declara borde warm en su selector local. El nodo Input conserva borde warm en reposo y foco como borde navy de 2px; su código de referencia incluye fallback tipográfico Source Sans 3 y texto secundario distinto del tema. Esas diferencias no sustituyen Hanken ni los roles aprobados de DESIGN.md.
+**Estado existente:** `.field:after` y `.select:after` usan contorno/sombra warm en lemoon-components.css. Contacto también declara borde warm en su selector local. El nodo Input conserva borde warm en reposo y foco como borde navy de 2px; su código de referencia incluye fallback tipográfico Source Sans 3 y texto secundario distinto del tema. Esas diferencias no sustituyen Instrument Sans ni los roles aprobados de DESIGN.md.
 
 **Receta normativa para nuevas implementaciones o modificaciones:** cuando blanco/warm no delimite el área editable con ≥3:1, usar contorno continuo de 1px `--lemoon-border-strong`, sin opacidad reducida, más el anillo de foco de 2px con offset ≥2px. Aplicar también a textarea y búsqueda en ese caso; el label y placeholder no sustituyen el contorno. Warm/blanco ronda 1.098:1; navy/blanco 16.518:1 y navy/warm 15.047:1 según DESIGN.md. Son relaciones entre colores sólidos, no prueba de contraste renderizado.
 

@@ -192,7 +192,7 @@ def validate_group(group: str) -> None:
     if group in {"tokens", "all"}:
         token_skill = (ROOT / ".agents/skills/audit-design-tokens/SKILL.md").read_text(encoding="utf-8")
         require("--font-heading-family" in token_skill and "'Urbanist', sans-serif" in token_skill, "token skill must audit the documented heading font")
-        require("--font-body-family" in token_skill and "'Hanken Grotesk', sans-serif" in token_skill, "token skill must audit the documented body font")
+        require("--font-body-family" in token_skill and "'Instrument Sans', sans-serif" in token_skill, "token skill must audit the documented body font")
         require_agent_scope("design-token-auditor", (
             "canonical design.md", "assets/base.css", "config/settings_schema.json",
             "heading/body families and weights", "documented values",

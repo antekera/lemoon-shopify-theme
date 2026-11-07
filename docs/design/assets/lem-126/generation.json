@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-07",
+  "surface": "404",
+  "tool": "image_gen.imagegen built-in",
+  "intent": "original illustration, not a product SKU or logo",
+  "direction_authorization": "User: vamos con tu recomendacion: Armazón + gesto lemon",
+  "prompt": "Create an original contemporary editorial illustration for Lemoon, a Chilean eyewear brand, for a 404 page. Illustration only, no text, no lettering, no numbers, no logos, no UI. Single expressive pair of rounded acetate eyeglasses drawn in rich flat navy #0B1F3A, shown at a playful slight three-quarter tilt with clearly open transparent lenses and a visible slender temple. A small vivid lemon yellow #F7E600 lemon fruit with one navy leaf rests lightly against the upper-right corner of the glasses, like a witty visual accent. A few spare curved navy lines suggest searching or a small change of direction. Organic confident curves, restrained flat editorial illustration, warm approachable clever personality, mature design store aesthetic, no cute face, no eyes, no mascot, no clip-art, no photorealism, no 3D, no gradients, no shadows, no fuzzy texture. Navy and lemon yellow only, transparent background everywhere else including lenses. Wide composition about 3:2 with generous transparent margins, entire glasses and lemon visible, clean silhouette with balanced negative space. It should be legible at 300 pixels wide and be strong enough to sit above a large live-text 404 on a beige page.",
+  "transparent_background": true,
+  "source_dimensions": [
+    1536,
+    1024
+  ],
+  "asset": "docs/design/assets/lem-126/lemoon-404-frame-lemon-v1.webp",
+  "export_dimensions": [
+    960,
+    640
+  ],
+  "encoding": "cwebp -q 88 -resize 960 0; alpha preserved",
+  "bytes": 49374,
+  "status": "superseded by v2 after user visual feedback; archived original",
+  "original_consumer_asset": "assets/lemoon-404-frame-lemon-v1.webp"
+}
