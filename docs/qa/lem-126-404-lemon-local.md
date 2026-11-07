@@ -71,3 +71,11 @@ Servicio nativo en `http://127.0.0.1:9295/lemoon-404-preview?pb=0`, ejecutado de
 Verificación actual: GET devuelve **HTTP 404**, identidad `Shopify.theme.id=189821550760`, rol `unpublished`, H1 localizado, cuatro enlaces y ausencia del buscador local de la sección. Ilustración v2 cargada con ancho intrínseco 960; header/footer presentes en DOM. Sin texto Liquid error en la respuesta inspeccionada. Captura de navegador revisada visualmente. No constituye una suite completa de destinos, interacción, responsive ni auditoría del shell. La copia conserva contenido comercial del tema de origen; esta comprobación no lo aprueba.
 
 Terminal Orca del servidor: `term_478a98c7-b39a-4891-8217-8d160e9848ed`. El comando mantiene sincronización de los cinco archivos mientras esté activo. Esta etapa sí sube archivos al tema de preview a petición del usuario; las menciones anteriores de «sin upload» describen etapas históricas. Sin publicación en producción, commit, merge ni cambio de Linear.
+
+## Corrección del comentario de revisión: conservar idioma
+
+Comentario `4501782035` del PR #65, revisado contra `8fc2954a`: los nuevos enlaces FAQ/contacto usaban rutas fijas y perdían el prefijo al navegar desde `/en`. Ambos se construyen ahora con `routes.root_url | append: '/pages/…' | replace: '//', '/'`, igual que el enlace FAQ existente en Contacto. Home, catálogo, textos, foco y diseño permanecen iguales; inventario MD/JSON actualizado.
+
+Regresión renderizando la sección Liquid con el helper existente: antes fallaban `/en` y `/en/`, mientras `/` pasaba; después pasan las tres variantes y los cuatro hrefs conservan su destino sin barras duplicadas. Suites `not-found-page` y `contact-page`: **10/10 PASS**, dos archivos, Node 24.19.0. Theme Check: **314 archivos, cero offenses**. `git diff --check` PASS. Revisión independiente focal **Approved**, sin bloqueos, de solo lectura por responsabilidad y sin aislamiento técnico.
+
+Evidencia `/tmp/lem126-locale-qa/` (red/green/report/hashes), archivada con las demás entregas en Git common dir. No se repitió la suite completa ni navegador: este check prueba construcción de enlaces, no disponibilidad de páginas CMS localizadas. Corrección enviada al mismo PR, sin merge ni publicación en producción.

@@ -1688,7 +1688,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-404.liquid",
-        "scope": "404 sin buscador, navegación home/catálogo/FAQ/contacto con foco único sin sombra e ilustración decorativa de armazón y limón; número 404 HTML independiente, sin JS. custom-liquid/apps conservan schemas propios; no wrapper universal.",
+        "scope": "404 sin buscador, navegación home/catálogo/FAQ/contacto con prefijo de idioma preservado mediante routes.root_url con foco único sin sombra e ilustración decorativa de armazón y limón; número 404 HTML independiente, sin JS. custom-liquid/apps conservan schemas propios; no wrapper universal.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       },
       "decorative_assets": [

@@ -94,8 +94,8 @@
       <nav class="lemoon-not-found__links" aria-labelledby="NotFoundTitle-{{ section.id }}">
         <a href="{{ routes.root_url }}">{{ 'templates.404.home' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}">{{ 'templates.404.catalogue' | t }}</a>
-        <a href="/pages/preguntas-frecuentes">{{ 'templates.404.faq' | t }}</a>
-        <a href="/pages/contact">{{ 'templates.404.contact' | t }}</a>
+        <a href="{{ routes.root_url | append: '/pages/preguntas-frecuentes' | replace: '//', '/' }}">{{ 'templates.404.faq' | t }}</a>
+        <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'templates.404.contact' | t }}</a>
       </nav>
     </div>
     <div class="lemoon-not-found__visual" aria-hidden="true">

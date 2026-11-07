@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from 'vitest';
+import { renderComponentSection } from '../helpers/component-library-renderer.mjs';
 
 const file = (name) => readFileSync(new URL(`../../${name}`, import.meta.url), 'utf8');
 
@@ -25,4 +26,19 @@ test('404 schema remains editable and references valid bilingual translations', 
     const messages = JSON.parse(text.slice(text.indexOf('{'))).templates['404'];
     for (const key of ['description', 'home', 'catalogue', 'faq', 'contact']) expect(messages[key]).toBeTruthy();
   }
+});
+
+test.each(['/', '/en', '/en/'])('404 recovery links preserve locale root %s without doubled slashes', (root_url) => {
+  const prefix = root_url === '/' ? '' : root_url.replace(/\/$/, '');
+  const catalogue = `${prefix}/collections/all`;
+  const html = renderComponentSection('main-404', { routes: { root_url, all_products_collection_url: catalogue } });
+  const links = [...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((match) => match[1]);
+
+  expect(links).toEqual([
+    root_url,
+    catalogue,
+    `${prefix}/pages/preguntas-frecuentes`,
+    `${prefix}/pages/contact`,
+  ]);
+  expect(links.every((href) => !href.includes('//'))).toBe(true);
 });
