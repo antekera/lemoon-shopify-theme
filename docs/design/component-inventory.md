@@ -668,7 +668,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Responsive.** Picture móvil/desktop y reglas propias; conservar reduced-motion, visibilitychange y pausa autoplay donde implementada. **Accesibilidad.** Labels de slide/prev/next y pausa de slideshow; no afirmar autoplay accesible por lectura estática.
 
-**JS.** lemoon-hero custom element; global slideshow y theme-editor para Dawn. **Reutilización actual.** Composiciones distintas, no un solo snippet hero; compartir solo acciones/media probados.
+**JS.** lemoon-hero custom element; callbacks de altura, scroll, navegación y autoplay ligados al elemento antes de registrar observers/listeners, con limpieza al desconectar y reconexión compatible. Global slideshow y theme-editor para Dawn. **Reutilización actual.** Composiciones distintas, no un solo snippet hero; compartir solo acciones/media probados.
 
 **Dependencias de composición:** [LM-SLIDER](#lm-slider), [LM-ACTION](#lm-action), [LM-MEDIA](#lm-media). Consumidores estáticos en el JSON.
 

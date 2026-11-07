@@ -1092,7 +1092,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-hero.liquid",
-        "scope": "Sección con media/settings propios; no banner universal extraído.",
+        "scope": "Sección con media/settings propios; no banner universal extraído. Callbacks de altura, scroll, navegación y autoplay ligados al elemento, con limpieza de observers/listeners al desconectar y reconexión compatible.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },

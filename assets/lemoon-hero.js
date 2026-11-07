@@ -15,12 +15,12 @@ if (!customElements.get('lemoon-hero')) {
         this.track.append(this.loopClone);
       }
       this.currentIndex = 0;
-      this.updateHeight ||= this.updateHeight.bind(this);
-      this.updateCurrent ||= this.updateCurrent.bind(this);
-      this.onScrollEnd ||= this.onScrollEnd.bind(this);
-      this.onBlockSelect ||= this.onBlockSelect.bind(this);
-      this.syncAutoplay ||= this.syncAutoplay.bind(this);
-      this.onNavigationClick ||= this.onNavigationClick.bind(this);
+      this.updateHeight = this.updateHeight.bind(this);
+      this.updateCurrent = this.updateCurrent.bind(this);
+      this.onScrollEnd = this.onScrollEnd.bind(this);
+      this.onBlockSelect = this.onBlockSelect.bind(this);
+      this.syncAutoplay = this.syncAutoplay.bind(this);
+      this.onNavigationClick = this.onNavigationClick.bind(this);
       this.motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
       this.updateHeight();
       this.heightObserver = new ResizeObserver(this.updateHeight);
