@@ -57,7 +57,6 @@
         <fieldset class="lemoon-quiz__stage" data-step="{{ stage }}"{% unless forloop.first %} hidden{% endunless %}>
           <legend class="visually-hidden">{{ stage_key | append: '.title' | t }}</legend>
           <div class="lemoon-quiz__question">
-            <span class="lemoon-quiz__number" aria-hidden="true">0{{ forloop.index }}</span>
             <p class="lemoon-quiz__eyebrow">{%- if stage == 'details' -%}{{ 'sections.lemoon_style_quiz_v2.details_label' | t }}{%- else -%}{{ axis_key | t }}{%- endif -%}</p>
             <h2 tabindex="-1" data-quiz-question>{{ stage_key | append: '.title' | t }}</h2>
             <p>{{ stage_key | append: '.hint' | t }}</p>
@@ -157,7 +156,7 @@
           "dictionaryComplete": {% if paginate.pages > 1 %}false{% else %}true{% endif %},
           "traits": [
             {%- for trait in metaobjects.lemoon_style_trait.values -%}
-              { "id": {{ trait.system.id | json }}, "group": {{ trait.group.value | json | replace: '<', json_less_than }}, "code": {{ trait.code.value | json | replace: '<', json_less_than }} }{% unless forloop.last %},{% endunless %}
+              { "id": {{ trait.system.id | prepend: 'gid://shopify/Metaobject/' | json }}, "group": {{ trait.group.value | json | replace: '<', json_less_than }}, "code": {{ trait.code.value | json | replace: '<', json_less_than }} }{% unless forloop.last %},{% endunless %}
             {%- endfor -%}
           ]
         }

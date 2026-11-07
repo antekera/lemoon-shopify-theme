@@ -35,7 +35,6 @@
 .lemoon-quiz__stage { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--lemoon-space-8); min-width: 0; padding: 0; border: 0; margin: 0; }
 .lemoon-quiz__question h2 { font-size: var(--lemoon-type-h2-size); line-height: var(--lemoon-type-h2-leading); font-weight: var(--lemoon-weight-semibold); margin-bottom: var(--lemoon-space-6); }
 .lemoon-quiz__question > p:last-child { color: var(--lemoon-text-secondary); width: 80%; max-width: none; }
-.lemoon-quiz__number { display: block; font: var(--lemoon-weight-light) var(--lemoon-fs-72)/1 var(--lemoon-font-heading); color: var(--lemoon-text-brand); margin-bottom: var(--lemoon-space-5); }
 .lemoon-quiz__choices { min-width: 0; width: 100%; max-width: 96rem; justify-self: center; }
 .lemoon-quiz__option-group { margin-bottom: var(--lemoon-space-5); }
 .lemoon-quiz__options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--lemoon-space-3); }
@@ -106,7 +105,6 @@
   .lemoon-quiz__options--color .lemoon-quiz__option { padding: var(--lemoon-space-3); }
   .lemoon-quiz__invitation { max-width: none; }
   .lemoon-quiz__lead { font-size: var(--lemoon-fs-16); max-width: none; width: 100%; }
-  .lemoon-quiz__number { display: none; }
   .lemoon-quiz__navigation { margin-bottom: var(--lemoon-space-6); }
   .lemoon-quiz__question h2 { margin-bottom: var(--lemoon-space-4); }
   .lemoon-quiz__question > p:last-child { width: 100%; margin-bottom: 0; }

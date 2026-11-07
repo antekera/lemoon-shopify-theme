@@ -14,13 +14,14 @@ async function open(page) {
 }
 async function next(quiz, count = 1) { for (let i = 0; i < count; i++) await quiz.locator('[data-quiz-next]').click(); }
 
-test('natural route renders the quiz and the old handle returns HTTP404 without redirection', async ({ page, request, baseURL }) => {
+test('natural route renders the quiz and the old handle returns HTTP404 without redirection', async ({ page, baseURL }) => {
   const quiz = await open(page);
   await expect(page.locator('#MainContent h1')).toHaveText('Descubre tu estilo ideal.');
   await expect(quiz.locator('[data-quiz-product], [data-candidate], [data-quiz-results]')).toHaveCount(0);
   const oldURL = new URL('/pages/buscar-mi-estilo', baseURL);
-  if (process.env.STOREFRONT_PREVIEW_THEME_ID) oldURL.searchParams.set('preview_theme_id', process.env.STOREFRONT_PREVIEW_THEME_ID);
-  const response = await request.get(oldURL.href, { maxRedirects: 0 });
+  // Reuse the authenticated browser cookies; preview_theme_id itself introduces
+  // Shopify's 302 preview handshake and is not part of the natural public URL.
+  const response = await page.request.get(oldURL.href, { maxRedirects: 0 });
   expect(response.status()).toBe(404); expect(response.headers().location).toBeUndefined();
   await page.goto(oldURL.href); expect(new URL(page.url()).pathname).toBe('/pages/buscar-mi-estilo'); await expect(page.locator('[data-style-quiz]')).toHaveCount(0);
 });
@@ -29,13 +30,14 @@ test('Shopify exposes every selected axis and applies editable native filters be
   const quiz = await open(page);
   const config = JSON.parse(await quiz.locator('[data-quiz-filter-config]').textContent());
   expect(config.dictionaryComplete).toBe(true); expect(config.availableFilters).toEqual(expect.arrayContaining(required));
+  for (const trait of config.traits) expect(trait.id).toMatch(/^gid:\/\/shopify\/Metaobject\/[1-9]\d*$/);
   await quiz.locator('[data-quiz-start]').click(); await quiz.locator('input[value="optical"]').check(); await next(quiz);
   await quiz.locator('input[name="shape"][value="round"]').check(); await next(quiz);
   for (const value of ['black', 'silver', 'tortoise', 'transparent']) await quiz.locator(`[data-step="color"] input[value="${value}"]`).check(); await next(quiz);
   await quiz.locator('input[name="finish"][value="matte"]').check(); await quiz.locator('input[name="finish"][value="glossy"]').check(); await quiz.locator('input[name="material"][value="metal"]').check(); await next(quiz);
   await quiz.locator('input[name="use"][value="everyday"]').check(); await next(quiz);
   await quiz.locator('input[name="presence"][value="medium"]').check(); await next(quiz);
-  await expect(page).toHaveURL(/\/collections\/all\?/); await expect(page.locator('#ProductCount')).toBeVisible();
+  await expect(page).toHaveURL(/\/collections\/all\?/); await expect(page.locator('#ProductCount')).toBeAttached();
   await expect(page.locator('#MainContent')).not.toContainText(/Liquid (?:syntax )?error/);
   const query = new URL(page.url()).searchParams;
   for (const field of required) {
@@ -57,7 +59,8 @@ test('an unrestricted quiz hands the complete catalogue count and pagination to 
   const quiz = await open(page); await quiz.locator('[data-quiz-start]').click(); await next(quiz, 6);
   await expect(page).toHaveURL(/\/collections\/all(?:\?|$)/);
   expect([...new URL(page.url()).searchParams.keys()].filter(key => key.startsWith('filter.'))).toEqual([]);
-  const count = page.locator('#ProductCount'); await expect(count).toBeVisible();
+  // Desktop hides its count on mobile; data attributes remain the count contract.
+  const count = page.locator('#ProductCount'); await expect(count).toBeAttached();
   const expectedCount = Number(await count.getAttribute('data-product-count'));
   expect(expectedCount).toBe(Number(await count.getAttribute('data-total-count')));
   const cards = page.locator('#product-grid > li');
