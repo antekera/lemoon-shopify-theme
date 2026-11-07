@@ -1094,8 +1094,7 @@
         "entry_path": "sections/lemoon-hero.liquid",
         "scope": "Sección con media/settings propios; no banner universal extraído.",
         "recipe_path": "docs/components/recipes/guide-help.md"
-      },
-      "announcement_text_visibility": "Text rendered in HTML; local announcement CSS keeps opacity at 1 and disables message fade animations during rotation. Existing carousel movement, controls, autoplay, reduced motion and natural text height remain."
+      }
     },
     {
       "id": "LM-EDITORIAL",
