@@ -1,0 +1,98 @@
+{
+  "head": "208fe3f61efb40e3855e88ac1be9cdf50bb7fa22",
+  "sha256": {
+    "sections/lemoon-style-quiz.liquid": "d3f7b772285f9ff97863769ca9c87e95f4a354b152e6bd38b88a1b0f16df5e86",
+    "assets/lemoon-style-quiz.js": "7bdcf91b8acacec25eec1fb3e9c7436d1fc7c86f9b322ba641d94e5caebcc369",
+    "assets/lemoon-style-quiz.css": "702032cdbe12d8c64bbd230513699918b86f3bb9f1c02c328fe61dec5b71c694",
+    "snippets/lemoon-quiz-options.liquid": "b9f162570308ed6798ab39e89af11b94ffe31c248757fedefc0f8403ef93f9db",
+    "snippets/lemoon-quiz-candidate.liquid": "e094cfed4d6bf8e30d648dcd738bcc3ed00c075fdc5087a7c2592e615902f7a3",
+    "snippets/lemoon-quiz-visual.liquid": "a0ae29cde37fe89f1946380f490052986cfdf5244a347050e884717d31b19180",
+    "sections/main-search.liquid": "7e7dedc9cf199325fb9c9c7db0f1f3a66cf8c8483f0ba5e9921cf1bcec413a16",
+    "snippets/main-search-results.liquid": "05e94d324d96fc7832cc73ffc5bf4a8fd255b070715b7f539affbf60b5dae60c",
+    "templates/page.buscar-mi-estilo.json": "0e69476b7b948e9a37c71bece79b14bb6016223bac4e3d2a9858c76fa5590ec0",
+    "locales/es.json": "4cfda0becb36249c335b41cda69c9a737a5a63e44ba76ea492e8ac39baeb5094",
+    "locales/en.default.json": "1629290d12722e2fc4808e6050c98f0e82f78f59f51566ee16ded2652563f3bc",
+    "tests/e2e/style-quiz.spec.js": "9fe3ebaf9c9429332f04dd378a36ca6203dc03e1a7930ee53159530e36515693",
+    "tests/unit/search-page.test.js": "7203004b31dc16b9f009314a718cff6be064c8aa6515395b0609a85d9888b068",
+    "tests/unit/style-quiz-render.test.js": "3eee9fe1f05af3c799d950fce4ec4e15cf2a13957855425f59e5a3fde4787243"
+  },
+  "date": "2026-11-06",
+  "testEnvironment": {
+    "node": "25.9.0",
+    "projectPinnedNode": "24.19.0",
+    "browser": "Chromium local fixtures"
+  },
+  "checks": {
+    "focusedUnit": {
+      "passed": 17
+    },
+    "fullUnit": {
+      "passed": 441,
+      "files": 44
+    },
+    "e2e": {
+      "passed": 86,
+      "quiz": 25,
+      "other": 61
+    }
+  },
+  "screenshots": [
+    {
+      "file": "intro-mobile.png",
+      "width": 358,
+      "height": 637,
+      "sha256": "e4a945d097ea4fb2f0aa1328debc4068cdfdb75c5f0b3c3a35e75bc7cb804494"
+    },
+    {
+      "file": "summary-mobile.png",
+      "width": 358,
+      "height": 409,
+      "sha256": "6faf74ef9e98d48aaaca7283b3fe12595ae70b876455e47f4e3ba40848eca739"
+    },
+    {
+      "file": "summary-desktop.png",
+      "width": 1356,
+      "height": 227,
+      "sha256": "09014f7d1d6ab7a5d1c75fd80af1bd6ffe7ea63802fea429bbc46511e83dbe41"
+    },
+    {
+      "file": "results-actions-mobile.png",
+      "width": 358,
+      "height": 49,
+      "sha256": "23891a12cd99e216e10e500a5f07c61b836c6b93083433c72fa7909d7e7e8822"
+    },
+    {
+      "file": "measure-focus-mobile.png",
+      "width": 358,
+      "height": 525,
+      "sha256": "b34deae161e36e8335438aa8fe7c05ddf651808b79dca27a536cca783b16e1c5"
+    },
+    {
+      "file": "sun-use-mobile.png",
+      "width": 358,
+      "height": 779,
+      "sha256": "c6a52c0307dc3cb9f68bbfcaf80b11692223849d31e0ced048454bbcc658d214"
+    },
+    {
+      "file": "colors-mobile.png",
+      "width": 358,
+      "height": 695,
+      "sha256": "e1bf1871c5d62e34394760efb6713c43beebaa4d1b1a87909434651a836f9100"
+    },
+    {
+      "file": "materials-mobile.png",
+      "width": 358,
+      "height": 1072,
+      "sha256": "ba404e4c4b350e02053d0bdb47b24edb1c8819baa3930f5de3d6a91c219f822d"
+    }
+  ],
+  "liveObservations": {
+    "publishedTheme": "155307737256",
+    "quizPage": "161787576488",
+    "quizPageTemplateSuffix": null,
+    "searchSnippetsPresent": true,
+    "publicSearchHttpStatus": 429,
+    "themePush": false,
+    "pageMutation": false
+  }
+}

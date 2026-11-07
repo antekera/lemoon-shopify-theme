@@ -37,7 +37,7 @@
           "settings": {
             "group": "choosing",
             "question": "¿Cómo encuentro un estilo que me guste?",
-            "answer": "<p>Puedes explorar los modelos por sus características y probar el <a href=\"/pages/buscar-mi-estilo\">quiz Encuentra tu lente ideal</a>. Sus sugerencias son una ayuda para elegir; revisa también las medidas y la ficha de cada modelo.</p>"
+            "answer": "<p>Puedes explorar los modelos por sus características y probar el <a href=\"/pages/descubre-tu-estilo\">quiz Descubre tu estilo</a>. Sus sugerencias son una ayuda para elegir; revisa también las medidas y la ficha de cada modelo.</p>"
           }
         },
         "faq_04": {

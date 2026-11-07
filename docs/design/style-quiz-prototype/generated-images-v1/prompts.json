@@ -1,0 +1,52 @@
+{
+  "created": "2026-11-05",
+  "tool": "image_gen.imagegen (built-in)",
+  "status": "conceptual assets, not wired into runtime or uploaded to Shopify",
+  "images": [
+    {
+      "id": "hero",
+      "prompt": "Use case: photorealistic-natural. Asset for Lemoon Chile eyewear style quiz, approved visual direction editorial with playful moments. Authentic premium editorial still-life photography, tactile warm off-white #F7F4EE, deep navy #0B1F3A and a tiny lemon yellow #F7E600 accent, believable soft daylight and subtle film grain, restrained artistic composition, friendly and attainable rather than ostentatious. Physically accurate generic unbranded optical eyeglasses with clear untinted lenses, coherent bridge, exactly two lenses and two temples, no duplicated parts, no distorted frames. These are conceptual editorial props, not specific catalog SKUs. No logos, no text, no letters, no watermark, no typography, no collage or borders. Create a single landscape image 3:2 for the QUIZ INTRO. A beautifully art-directed arrangement of THREE complete different optical frame silhouettes: a navy rounded panto, translucent honey rectangular and deep brown upswept frame. Arrange on three low tactile matte paper/plaster plinths at subtly differing heights on a warm ivory surface, with tasteful gently curved cut-paper shapes in navy and a tiny lemon strip behind. Full frames readable and uncropped, varied perspectives showing clear lenses, visual rhythm and natural soft diagonal shadows. Cropping-safe generous 15% margins all around. Eyeglasses occupy central 65% of image. Sophisticated eyewear magazine still life, not a UI mockup, not shiny plastic CGI. Product sharpness with warm approachable atmosphere.",
+      "file": "lemoon-quiz-hero-editorial-v1.png",
+      "original_filename": "exec-37b89f9a-da28-42b8-901e-cd8ff3f562e5.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "1d0c5b17e51c6b99d67a4c56b1a3e751e5614088003dd3d7c23d042d5af65c2c"
+    },
+    {
+      "id": "work",
+      "prompt": "Use case: photorealistic-natural. Asset for Lemoon Chile eyewear style quiz, approved visual direction editorial with playful moments. Authentic premium editorial still-life photography, tactile warm off-white #F7F4EE, deep navy #0B1F3A and a tiny lemon yellow #F7E600 accent, believable soft daylight and subtle film grain, restrained artistic composition, friendly and attainable rather than ostentatious. Physically accurate generic unbranded optical eyeglasses with clear untinted lenses, coherent bridge, exactly two lenses and two temples, no duplicated parts, no distorted frames. These are conceptual editorial props, not specific catalog SKUs. No logos, no text, no letters, no watermark, no typography, no collage or borders. Create a single landscape image 3:2 for the answer WORK / STUDY. Quiet comfortable real work desk, a plain open cream notebook with entirely blank pages and a small navy pencil, corner of closed unbranded navy laptop at back, one minimal unbranded navy rounded rectangular optical frame resting on notebook in foreground. Exactly one pair of glasses, fully visible. A tiny lemon-yellow paper tab. Mid-close shot from above at 45 degrees, frame centered within safe middle 65%, believable morning window light, ivory oak desk, gentle paper texture. No people, no hands. Keep scene simple and immediate to read as a small quiz choice; glasses clear untinted lenses, no functional performance claims.",
+      "file": "lemoon-quiz-work-editorial-v1.png",
+      "original_filename": "exec-6a2b65f2-37a1-4556-abdd-62650f3daaa6.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6afa77120eef918d9b3d83b90b199e625d8e76853a7f1cf84be59c0fc7cbd1e4"
+    },
+    {
+      "id": "everyday",
+      "prompt": "Use case: photorealistic-natural. Asset for Lemoon Chile eyewear style quiz, approved visual direction editorial with playful moments. Authentic premium editorial still-life photography, tactile warm off-white #F7F4EE, deep navy #0B1F3A and a tiny lemon yellow #F7E600 accent, believable soft daylight and subtle film grain, restrained artistic composition, friendly and attainable rather than ostentatious. Physically accurate generic unbranded optical eyeglasses with clear untinted lenses, coherent bridge, exactly two lenses and two temples, no duplicated parts, no distorted frames. These are conceptual editorial props, not specific catalog SKUs. No logos, no text, no letters, no watermark, no typography, no collage or borders. Create a single landscape image 3:2 for the answer EVERYDAY. Everyday pause in a bright neighborhood cafe: a plain warm ivory ceramic coffee cup on saucer toward back left, a folded navy canvas tote to one side, one unbranded navy rounded rectangular optical frame placed on a small warm ivory table in foreground, tiny lemon-yellow fabric tab. Exactly one complete pair of glasses, fully visible in central safe 65%. Inviting natural daylight, soft background bokeh suggesting everyday city life with no recognizable storefronts, no people, no hands. Medium close 45-degree overhead editorial photograph. Simple balanced composition readable at small size, cream/navy palette, genuine linen and ceramic textures.",
+      "file": "lemoon-quiz-everyday-editorial-v1.png",
+      "original_filename": "exec-23f8b3be-bc1b-4e92-8859-a3eb6b28142d.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "b5616c5a6b60c7227507e4c13fa7b1fe4fc3772b4421554284d7d164b3897965"
+    },
+    {
+      "id": "going-out",
+      "prompt": "Use case: photorealistic-natural. Asset for Lemoon Chile eyewear style quiz, approved visual direction editorial with playful moments. Authentic premium editorial still-life photography, tactile warm off-white #F7F4EE, deep navy #0B1F3A and a tiny lemon yellow #F7E600 accent, believable soft daylight and subtle film grain, restrained artistic composition, friendly and attainable rather than ostentatious. Physically accurate generic unbranded optical eyeglasses with clear untinted lenses, coherent bridge, exactly two lenses and two temples, no duplicated parts, no distorted frames. These are conceptual editorial props, not specific catalog SKUs. No logos, no text, no letters, no watermark, no typography, no collage or borders. Create a single landscape image 3:2 for the answer GOING OUT. A friendly evening out suggested by a small bistro table: one unbranded navy rounded rectangular optical frame with CLEAR lenses neatly placed on an ivory linen napkin in foreground, a plain ivory ceramic small plate and a tiny warm amber lamp softly blurred in the background, tiny lemon-yellow paper accent. Exactly one pair of glasses fully visible and centered within middle 65%. Warm early-evening window light with gentle amber highlights; night mood but bright enough to examine the glasses, natural navy/cream with subtle cocoa colors. No alcohol, no people, no hands, no gender-coded jewelry or luxury props. Welcoming polished editorial photograph, tactile linen, calm celebratory mood, no text anywhere.",
+      "file": "lemoon-quiz-going-out-editorial-v1.png",
+      "original_filename": "exec-c82616b1-1ca7-4ed0-b020-9980e403cfc9.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "6b4fe8006bad1b7468769e82592dcfdd1036f70020c148776be5e07d87099aa6"
+    },
+    {
+      "id": "outdoors",
+      "prompt": "Use case: photorealistic-natural. Asset for Lemoon Chile eyewear style quiz, approved visual direction editorial with playful moments. Authentic premium editorial still-life photography, tactile warm off-white #F7F4EE, deep navy #0B1F3A and a tiny lemon yellow #F7E600 accent, believable soft daylight and subtle film grain, restrained artistic composition, friendly and attainable rather than ostentatious. Physically accurate generic unbranded optical eyeglasses with clear untinted lenses, coherent bridge, exactly two lenses and two temples, no duplicated parts, no distorted frames. These are conceptual editorial props, not specific catalog SKUs. No logos, no text, no letters, no watermark, no typography, no collage or borders. Create a single landscape image 3:2 for the answer OUTDOORS. A quiet daytime pause at a natural park lookout with distant softly blurred Chilean foothills and muted olive vegetation. In foreground one unbranded navy rounded rectangular optical frame with CLEAR UNTINTED lenses placed safely on a smooth warm ivory stone picnic ledge beside a folded plain navy cotton bandana, tiny lemon-yellow fabric tab. Exactly one pair fully visible centered in safe middle 65%. Comfortable soft late-afternoon natural daylight, subtle warm stone grain, no harsh lens glare. Close editorial still life with landscape atmosphere, readable at small quiz card size. No people, no hands, no sunglasses, no sports equipment, no implication of UV protection or technical lens performance.",
+      "file": "lemoon-quiz-outdoors-editorial-v1.png",
+      "original_filename": "exec-79e6c9be-c6fb-4203-bf9a-c9f63027ddd1.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "cc23f3414e1791263284bade622af3a87e3d9957f63617bf50daecb46419b70d"
+    }
+  ]
+}

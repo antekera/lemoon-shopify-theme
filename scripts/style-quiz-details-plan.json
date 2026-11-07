@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "store": "lemoon.cl",
+  "type": "lemoon_style_trait",
+  "scope": "Dictionary labels/descriptions only. Preserve IDs, codes, groups, validations and product/variant references. No deletion or theme push.",
+  "detailsTabs": [
+    "finishes",
+    "materials"
+  ],
+  "colorOnlyCriteria": {
+    "Carey": {
+      "group": "pattern",
+      "code": "tortoise"
+    },
+    "Transparentes": {
+      "group": "transparency",
+      "code": "transparent"
+    }
+  },
+  "legacyHandles": [
+    "pattern-plain",
+    "transparency-opaque",
+    "transparency-translucent"
+  ],
+  "definitionDescription": "Diccionario del quiz: Color incluye Carey y Transparentes; Detalles solo Acabados y Materiales. Mantener criterios técnicos separados. Las entradas Legado conservan referencias; no usarlas para nuevas clasificaciones.",
+  "fieldDescriptions": {
+    "group": "Criterio técnico del atributo. Carey usa pattern y Transparentes transparency, ambos mostrados en Color. Detalles usa finish y el material del producto. Conservar la pareja criterio/código; entradas Legado no se ofrecen.",
+    "code": "Código estable. plain, opaque y translucent son legado sin opciones en el quiz; se conservan por referencias. Nuevas clasificaciones: pattern/tortoise (Carey en Color), transparency/transparent (Transparentes en Color)."
+  },
+  "entryPatches": [
+    {
+      "handle": "pattern-plain",
+      "fields": {
+        "label": "Legado — Liso",
+        "description": "Entrada conservada por sus referencias existentes. Liso ya no se ofrece en el quiz; no usar para nuevas clasificaciones. Carey se elige en Color."
+      }
+    },
+    {
+      "handle": "pattern-tortoise",
+      "fields": {
+        "label": "Carey",
+        "description": "Patrón carey del armazón, seleccionable en Color. Se conserva el criterio pattern/tortoise; no implica color café ni material específico."
+      }
+    },
+    {
+      "handle": "transparency-opaque",
+      "fields": {
+        "label": "Legado — Opaco",
+        "description": "Entrada conservada por sus referencias existentes. Opaco ya no se ofrece en Detalles ni en el quiz; no usar para nuevas clasificaciones."
+      }
+    },
+    {
+      "handle": "transparency-translucent",
+      "fields": {
+        "label": "Legado — Translúcido",
+        "description": "Entrada conservada por sus referencias existentes. Translúcido ya no se ofrece en Detalles ni en el quiz; no usar para nuevas clasificaciones."
+      }
+    },
+    {
+      "handle": "transparency-transparent",
+      "fields": {
+        "label": "Transparentes",
+        "description": "Apariencia transparente del armazón, seleccionable en Color. Conserva transparency/transparent; no se infiere de un tono claro ni acredita cristales incluidos."
+      }
+    }
+  ],
+  "remoteVerification": {
+    "date": "2026-11-06",
+    "entriesBefore": 21,
+    "entriesAfter": 21,
+    "allIDsPreserved": true,
+    "codesGroupsValidationsPreserved": true,
+    "productVariantWrites": 0,
+    "deletions": 0,
+    "themePush": false
+  }
+}

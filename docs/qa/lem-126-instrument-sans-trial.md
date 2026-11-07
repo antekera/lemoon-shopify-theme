@@ -48,3 +48,11 @@ Gate final local: Vitest **397/397 pruebas, 42/42 archivos**, sin fallos ni skip
 Revisiones independientes: código sin bloqueos de runtime y convenciones **Ready to push**; los estados documentales anteriores de aprobación/upload se conciliaron con la aprobación humana y preview registrados. Revisiones de solo lectura por responsabilidad, sin aislamiento técnico de permisos.
 
 Entrega autorizada: commit y push de esta rama al PR #65. Merge, cierre Linear y publicación en producción permanecen separados de esta solicitud. El tema no publicado 189821550760 conserva el preview autorizado.
+
+## Integración de main para resolver el conflicto del PR
+
+Después del primer envío `409d380d`, GitHub detectó conflicto con `origin/main@14dfae93`. Se integró esa base en la rama del PR, conservando el quiz y sus registros de inventario; no se fusionó el PR a main. Único archivo con conflicto textual: `docs/design/component-inventory.json`. Resolución desde el inventario de main más la adopción tipográfica y el asset decorativo 404: **555 rutas únicas = todas las rutas del índice en los ocho roots**, sin faltantes ni extras. Las cinco referencias normativas de fuente incorporadas desde main (documentos del quiz y helper de render) se actualizaron a Instrument Sans, preservando los resultados visuales históricos como históricos.
+
+Gate sobre el árbol integrado: **463/463 unitarias, 45/45 archivos**, cero fallos/skips, Node 24.19.0; workflows Python `all` PASS, **9/9** regresiones; Theme Check **314 archivos, cero offenses**. Evidencia `/tmp/lem126-merge-qa/`, archivada en Git common dir con el resto. No se repitió e2e local del quiz; los servicios de otras sesiones se conservaron y CI realiza sus checks aislados tras enviar la resolución. Los resultados anteriores 397/298 corresponden al árbol previo a esta integración.
+
+El preview no publicado conserva la sincronización de los diez archivos de 404/fuente documentados, ampliada a `templates/gift_card.liquid` para incluir su carga de fuente coherente. No se activan gift cards ni se publica producción.

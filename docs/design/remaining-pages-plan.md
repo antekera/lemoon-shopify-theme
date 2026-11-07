@@ -59,7 +59,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-120 Checkout / LEM-121 Confirmación y estado | Editor nativo de branding | Capacidad real, publicación y recorrido de compra |
 | LEM-122 Acceso / LEM-123 Perfil/direcciones / LEM-124 Pedidos / LEM-125 Detalle | Cuentas nuevas nativas | Sesión real, persistencia, direcciones, pedidos e aislamiento entre clientes |
 | LEM-126 404 | 404.json, main-404 | Respuesta HTTP de no encontrado y acciones de recuperación |
-| LEM-11 Encuentra tu lente ideal | page.buscar-mi-estilo, lemoon-style-quiz | Curaduría/catálogo real y asignación CMS |
+| LEM-11 Descubre tu estilo | page.buscar-mi-estilo, lemoon-style-quiz; ruta prevista `/pages/descubre-tu-estilo` | Activación CMS sin redirect de la ruta anterior y QA del recorrido nuevo; datos/actualización de filtros con Shopify y back office |
 | LEM-23 Configurador / LEM-102 Cristales | lens-configurator, lemoon-crystal-guide | Catálogo, combinaciones, laboratorio y contrato de receta |
 | LEM-9 Gift cards | gift_card.liquid, lemoon-gift-card-purchase, notifications/es | Catálogo, denominaciones, evaluación de viabilidad de monto libre a cargo de LEM-9, emisión, correo y canje operativo |
 | Lanzamiento/password | password.json, lemoon-launch-page | Newsletter y autenticación nativa |

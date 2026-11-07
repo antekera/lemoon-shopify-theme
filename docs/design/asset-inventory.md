@@ -101,7 +101,7 @@ Se conservan las 42 superficies de LEM-86; cada fila indica sus piezas propias a
 | 36 Contraseña | Prelanzamiento | G01 o logo configurable; A04 opcional; formulario sin arte propio obligatorio |
 | 37 Página genérica | `/pages/{handle}` | Sin asset propio obligatorio; media de contenido CMS solo si la página lo requiere |
 | 38 Modal tallas | Dentro PDP | P02 compartido con PDP, sin export duplicado |
-| 39 Quiz | `/pages/buscar-mi-estilo` | P01 en resultados; preguntas HTML sin imagen propia |
+| 39 Quiz | `/pages/buscar-mi-estilo` | P01 en resultados; [serie editorial de portada y cuatro usos](style-quiz-prototype/generated-images-v1/README.md) con originales/prompts y exports JPEG responsive. Escenas generadas conceptuales; las demás preguntas conservan SVG y texto HTML |
 | 40 Gift cards | Compra / tarjeta emitida | A05, G01 y media de producto si aplica; sin nueva variante de logo |
 | 41 Header/menús | Global | G01/G05, N01, N02 opcional. Announcement sin imagen propia; implementación LEM-131 |
 | 42 Footer | Global | G04/G05; newsletter sin imagen nueva |
@@ -149,3 +149,17 @@ Fuentes de implementación: [inventario de secciones](section-inventory.md), [Ho
 | [lemoon-secure-ssl.png](../../assets/lemoon-secure-ssl.png), 156 × 52 | [Imagen enviada por Miguel](https://cdn.shopify.com/s/files/1/0631/8371/6400/files/icon-securessl.png?v=1749743718), copiada sin cambios | Candado genérico SSL sobre fondo blanco. Alojarse en CDN de Shopify no lo convierte en sello oficial ni acredita una certificación de Shopify. |
 | [payment-webpay.svg](../../assets/payment-webpay.svg), viewBox 80 × 26.8999996 | [SVG de Transbank Developers enviado por Miguel](https://www.transbankdevelopers.cl/public/library/img/svg/logo_webpay.svg) | Estilos y trazados originales conservados; se retiraron DOCTYPE, foreignObject y datos de edición de Illustrator (396 KB → 28 KB), sin cambiar el dibujo. Su presencia no acredita que el medio esté habilitado. |
 | Visa y Mastercard | [Filtro nativo de Shopify](https://shopify.dev/docs/api/liquid/filters/payment_type_svg_tag), tipos `visa` y `master` | Logos SVG renderizados por Shopify; conservar los interruptores existentes del footer. Sin nuevos archivos de marca locales. |
+
+La versión anterior del primer paso reutilizaba `lemoon-category-opticos-generic-v1.jpg` y `lemoon-category-sol-generic-v1.jpg`. Ambos activos H02 se conservan intactos; la versión actual del quiz usa la nueva serie de estudio descrita más abajo.
+
+Familia Forma del quiz: dibujos originales en `lemoon-quiz-visual.liquid`, ocho outlines SVG frontales320×160 de contorno único5 navy, sin líneas interiores, microdetalles, rellenos ni sombras. Aviador mantiene geometría aprobada; las otras siete formas siguen el mismo proceso de referencia real → simplificación → depuración. [Fuentes frontales y criterio](style-quiz-prototype/visual-finishing-spec.md#familia-de-formas-outline-realista). No se incorporan fotografías ni marcas externas al tema ni se acredita SKU Lemoon. Extensión autorizada, presentada para revisión visual local.
+
+Color del quiz: siete muestras SVG planas32×32 integradas en `lemoon-quiz-visual.liquid`, con IDs únicos por sección/grupo/opción. Colores, Tonos neutros, Negros, Carey, Bicolor, Transparentes y Plateados; sin Dorados. Son referencias conceptuales de armazón, no fotografías ni prueba de material. Presentación horizontal compacta, muestra decorativa y etiqueta HTML. Sin nuevos archivos raster.
+
+Primer paso del quiz: [serie de estudio blanco v1](style-quiz-prototype/generated-category-studio-v1/README.md), una montura óptica y una de sol en perspectiva, originales PNG1536×1024 y exports JPEG480/960 de calidad85. Alt vacío junto al texto de elección; contain, 3:2. Assets `lemoon-quiz-category-{optical,sun}-studio-v1-{480,960}.jpg`. Los anteriores `lemoon-category-opticos-generic-v1.jpg` y `lemoon-category-sol-generic-v1.jpg` se conservan íntegros y mantienen sus otros consumidores.
+
+Materiales del cuarto paso del quiz: [serie de estudio blanco v1](style-quiz-prototype/generated-material-studio-v1/README.md), seis monturas clásicas en perspectiva para Acetato, Metal, Titanio, TR-90, Madera y Mixto. Originales PNG1536×1024 y doce exports `lemoon-quiz-material-{acetate,metal,titanium,tr90,wood,mixed}-studio-v1-{480,960}.jpg`, calidad85. Conceptuales, sin acreditación de composición de SKU. Se conservan los SVG y todos los assets anteriores.
+
+Acabados del quiz: [serie macro v1](style-quiz-prototype/generated-finish-macro-v1/README.md), Mate y Brillante sobre un borde de armazón carbón, dos originales PNG y cuatro JPEG128/256 de calidad85. `lemoon-quiz-finish-{matte,glossy}-macro-v1-{128,256}.jpg`; miniatura64×64 con etiqueta, sin sustituir ni eliminar SVG anteriores. Referencias conceptuales generadas, no SKU.
+
+Tamaño del quiz: SVG originales en la rama presence de lemoon-quiz-visual.liquid. Silueta frontal neutra sin rasgos ni rellenos y montura suavemente rectangular escalada para las tres opciones. Sin nuevos raster ni cambios a otros dibujos.

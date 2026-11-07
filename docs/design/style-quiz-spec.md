@@ -79,3 +79,17 @@ convenciones, Theme Check y revisión visual del HTML realmente renderizado.
 La plantilla alternativa permite revisar la página sin asignarla globalmente
 al CMS publicado. Una respuesta de contraseña de Shopify no cuenta como
 validación del quiz; documentar esa limitación si impide una corrida live.
+
+## Ajuste aprobado — tipo de lentes al inicio (2026-11-06)
+
+El recorrido pasa a seis etapas: tipo de lentes → forma → color → detalles → uso → tamaño. Tipo admite radio ópticos/solares, o ambos al continuar sin seleccionar. Los resultados se restringen a la categoría elegida antes de puntuar estilo; desconocidos no se clasifican por inferencia. Para solares, Trabajo/estudio queda oculto y sin selección, y el código `outdoors` se presenta como Paseos y viajes. Se conservan las demás elecciones al editar categoría, seis accesos de edición, reinicio y navegación atrás. Imágenes genéricas existentes de Ópticos/Sol, decorativas; la memoria de imágenes se trabajará después.
+
+Ver [contrato de catálogo](../catalog/style-quiz.md#separación-entre-ópticos-y-solares) para el mapeo de tipos Shopify y el límite de colección. Entrega local con fixtures mixtos; sin modificación de datos ni publicación en Shopify.
+
+## Ajuste de navegación aprobado — 2026-11-06
+
+Seis círculos centrados de 12px, separados por 20px y con aro navy en el actual, inicialmente amarillos; al avanzar, el segmento completado pasa a navy. Volver conserva selecciones y progreso completado; reiniciar limpia ambos. El contador Paso X de 6 permanece solo en el anuncio accesible. Volver deja la cabecera y reemplaza la acción inferior Muéstrame variedad en todas las etapas. Continuar sin seleccionar conserva la opcionalidad; ya no hay un botón dedicado para limpiar la etapa.
+
+## Detalles simplificado
+
+El cuarto paso presenta únicamente Acabados y Materiales. Se retiran Patrones y todos los controles Opaco/Translúcido/Transparente. Carey y Transparentes permanecen solo en Color, con sus criterios Shopify originales; no hay controles duplicados ni sincronización entre pasos. Los MetaObjects obsoletos que tienen referencias se conservan como Legado.

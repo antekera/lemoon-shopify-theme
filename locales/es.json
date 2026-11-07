@@ -422,7 +422,7 @@
       "wishlist": "Mis favoritos",
       "shipping_returns": "Envíos y retornos",
       "faq": "Preguntas frecuentes",
-      "find_style": "Encuentra tu lente ideal",
+      "find_style": "Descubre tu estilo",
       "trends": "Tendencias",
       "banner_alt": "Descubre las tendencias de Lemoon",
       "previous_product": "Producto anterior",
@@ -889,6 +889,175 @@
       "prescription_cta": "Cómo enviar mi receta",
       "configure_cta": "Configurar {{ product }}",
       "configure_note": "Las opciones y el precio se confirman en el configurador del producto."
+    },
+    "lemoon_style_quiz_v2": {
+      "name": "Descubre tu estilo",
+      "eyebrow": "Descubre tu estilo",
+      "title": "Descubre tu estilo ideal.",
+      "intro": "Formas, colores y detalles que van contigo. Encuentra los tuyos.",
+      "steps": "6 pasos",
+      "pace": "Puedes cambiar de idea",
+      "start": "Encontrar mi estilo",
+      "catalogue": "Explorar el catálogo",
+      "next": "Continuar",
+      "results_cta": "Ver mi selección",
+      "back": "Volver",
+      "skip": "Muéstrame variedad",
+      "restart": "Volver a empezar",
+      "edit": "Cambiar preferencias",
+      "more": "Ver más de mi selección",
+      "empty_title": "Sigamos buscando",
+      "empty": "No encontramos productos disponibles que coincidan con tus preferencias. Prueba cambiando alguna o explora el catálogo.",
+      "editorial": "Sin preferencias de estilo elegidas, te mostramos una selección editorial para explorar.",
+      "demo": "Selección de demostración: estos productos incluyen características de prueba que no representan un catálogo final verificado.",
+      "no_js": "Puedes explorar el catálogo. Para responder la guía y filtrar los resultados, activa JavaScript en tu navegador.",
+      "results_title": "Hay más de una forma de ser tú.",
+      "results_intro": "Una selección para empezar. Cambia cualquier pista y sigue explorando.",
+      "preference_hint": "Estas son tus preferencias. Para cambiarlas, usa Ir atrás.",
+      "none": "Sin preferencia",
+      "reason_intro": "Coincide con tus preferencias de:",
+      "step_status": "Paso [current] de [total]",
+      "count": "[count] productos en tu selección",
+      "count_one": "1 producto en tu selección",
+      "finished": "Tu selección está lista",
+      "loading_error": "No pudimos preparar tu selección. Puedes volver a intentarlo o explorar el catálogo.",
+      "few_intro": "Encontramos pocas coincidencias. Puedes cambiar una preferencia para seguir explorando.",
+      "details_note": "Puedes combinar tus preferencias de acabado y material.",
+      "presence_note": "Oversize es una proporción visual, no una talla física. Revisa las medidas al comparar.",
+      "use_note": "El uso orienta el estilo. Los cristales y tratamientos compatibles se eligen después.",
+      "price_note": "Precio del marco. Los cristales y tratamientos compatibles se eligen y se suman aparte.",
+      "collection_label": "Colección para la guía de estilo",
+      "collection_info": "Usa una colección curada de hasta 50 productos con los atributos del quiz completos y habilitados. La guía evalúa hasta 20 variantes por producto.",
+      "image_label": "Imagen editorial de entrada",
+      "measures": {
+        "title": "¿Ya tienes unos que te acomodan?",
+        "intro": "Busca los números en la patilla de tus lentes y completa las tres medidas. Te sugeriremos una proporción que puedes cambiar.",
+        "numbers": "50 □ 18 — 140",
+        "labels": "Ancho de lente · puente · patilla (mm)",
+        "note": "Es una referencia de proporción, no una talla exacta ni una garantía de calce. La patilla sirve para comparar el largo, pero no cambia la sugerencia de tamaño.",
+        "lens_width": "Ancho del lente (mm)",
+        "bridge": "Puente (mm)",
+        "temple": "Patilla (mm)",
+        "invalid": "Revisa las medidas en mm: ancho del lente entre 30 y 80, puente entre 10 y 35, y patilla entre 100 y 180. Usa números enteros.",
+        "suggestion": "Sugerencia: [size]. Ya la seleccionamos; puedes cambiarla arriba.",
+        "manual": "Mantuvimos tu elección. Si cambias las medidas, volveremos a sugerirte una opción."
+      },
+      "sun_outdoors": "Paseos y viajes",
+      "sun_use_note": "Estos planes orientan el estilo. Revisa las características de cada producto en su ficha.",
+      "axes": {
+        "category": "Tipo de lentes",
+        "shape": "Forma",
+        "color": "Color",
+        "finish": "Acabado",
+        "pattern": "Patrón",
+        "material": "Material",
+        "transparency": "Transparencia",
+        "use": "Uso",
+        "presence": "Tamaño"
+      },
+      "stages": {
+        "category": {
+          "title": "¿Qué estás buscando?",
+          "hint": "Elige una opción para orientar tu selección. Si aún no decides, puedes explorar ambos."
+        },
+        "shape": {
+          "title": "¿Qué formas te hacen mirar dos veces?",
+          "hint": "Elige las que te dan ganas de probar. Puedes elegir más de una."
+        },
+        "color": {
+          "title": "¿Qué colores van contigo?",
+          "hint": "Arma tu paleta. No tienes que quedarte con un solo color."
+        },
+        "details": {
+          "title": "Acércate un poco. ¿Qué detalles te gustan?",
+          "hint": "Explora acabados y materiales. Elige lo que te llame la atención."
+        },
+        "use": {
+          "title": "¿En qué planes te ves con ellos?",
+          "hint": "Piensa en tu día a día. Puedes elegir más de un plan."
+        },
+        "presence": {
+          "title": "¿Qué presencia te gusta que tengan?",
+          "hint": "Compactos o protagonistas: comparemos proporciones."
+        }
+      },
+      "tabs": {
+        "finishes": "Acabados",
+        "patterns": "Patrones",
+        "materials": "Materiales"
+      },
+      "options": {
+        "category": {
+          "optical": "Lentes ópticos",
+          "sun": "Lentes de sol"
+        },
+        "shape": {
+          "round": "Redondos",
+          "rectangular": "Rectangulares",
+          "cat_eye": "Cat-eye",
+          "aviator": "Aviador",
+          "geometric": "Geométricos",
+          "square": "Cuadrados",
+          "oval": "Ovalados",
+          "panto": "Pantósticos"
+        },
+        "color": {
+          "black": "Negros",
+          "brown": "Cafés y miel",
+          "light": "Tonos claros",
+          "bold": "Colores",
+          "neutral": "Tonos neutros",
+          "tortoise": "Carey",
+          "two_tone": "Bicolor",
+          "transparent": "Transparentes",
+          "silver": "Plateados"
+        },
+        "finish": {
+          "matte": "Mate",
+          "glossy": "Brillante"
+        },
+        "pattern": {
+          "plain": "Liso",
+          "tortoise": "Carey / vetas"
+        },
+        "material": {
+          "acetate": "Acetato",
+          "metal": "Metal",
+          "titanium": "Titanio",
+          "tr90": "TR-90",
+          "wood": "Madera",
+          "mixed": "Mixto"
+        },
+        "transparency": {
+          "opaque": "Opaco",
+          "translucent": "Translúcido",
+          "transparent": "Transparente"
+        },
+        "use": {
+          "work": "Trabajo o estudio",
+          "everyday": "Todos los días",
+          "going_out": "Salir y cambiar de look",
+          "outdoors": "Paseos al aire libre"
+        },
+        "presence": {
+          "compact": "Compactos",
+          "medium": "Intermedios",
+          "oversize": "Oversize"
+        }
+      },
+      "reasons": {
+        "shape": "forma",
+        "color": "color",
+        "finish": "acabado",
+        "pattern": "patrón",
+        "material": "material",
+        "transparency": "transparencia",
+        "use": "planes de uso",
+        "presence": "proporción visual"
+      },
+      "details_label": "Detalles",
+      "variant_alternative": "Estás explorando otra variante. Revisa sus detalles en la ficha del producto.",
+      "results_back": "Ir atrás"
     },
     "lemoon_style_quiz": {
       "title": "Encuentra tu lente ideal",

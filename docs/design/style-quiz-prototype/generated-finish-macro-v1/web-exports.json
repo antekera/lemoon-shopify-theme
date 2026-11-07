@@ -1,0 +1,34 @@
+{
+  "quality": 85,
+  "exports": [
+    {
+      "path": "assets/lemoon-quiz-finish-glossy-macro-v1-128.jpg",
+      "width": 128,
+      "height": 128,
+      "bytes": 4430,
+      "sha256": "2130d294eba45f0174f8ba2eeb93253114d177b4eda6ed390526a7e6eb1f5e8c"
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-glossy-macro-v1-256.jpg",
+      "width": 256,
+      "height": 256,
+      "bytes": 11137,
+      "sha256": "403a6749aef8c93911d2e2d730b56b2987f4efa9787b957866d1375a390a3d04"
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-matte-macro-v1-128.jpg",
+      "width": 128,
+      "height": 128,
+      "bytes": 3927,
+      "sha256": "7dec982bf89ae4215fdf30a271375809fc37e9d6e4caad6aed6b351e103722de"
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-matte-macro-v1-256.jpg",
+      "width": 256,
+      "height": 256,
+      "bytes": 9646,
+      "sha256": "0db0cf80159b7cdc711d0bc9564453cfd2d0412603410c68b14eda0b9a7983c0"
+    }
+  ],
+  "total_bytes": 29140
+}

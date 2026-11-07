@@ -1,0 +1,92 @@
+{
+  "generated": "2026-11-06",
+  "format": "JPEG",
+  "quality": 85,
+  "exports": [
+    {
+      "path": "assets/lemoon-quiz-material-acetate-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 22562,
+      "sha256": "dc0281a3bb118cef147e3ed2c41333bf210c0e168d56a952d62e789d001bda7b"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-acetate-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 80993,
+      "sha256": "cfe72e11a4bb6f38e3b212fc26d541e630664f75ecbef8f38f00d2743f52b764"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-metal-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 16178,
+      "sha256": "45406fac74333ab63f0ead9d182b5d992f9bada8951135b808352603ccc3aba7"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-metal-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 63945,
+      "sha256": "6a14949d85d9a22126f062b500bba80b13ea4187bfbcb80a750d9ebac040270e"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-mixed-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 19855,
+      "sha256": "3018beebf6cc52ecfd764136f83fe5be372c3ad3ffd1902e330182eb1bce02eb"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-mixed-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 70999,
+      "sha256": "4be36b55196489eaf29c3eae174613a4367cf25524143c56688a5c452a90d163"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-titanium-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 17814,
+      "sha256": "cb41f4f2fc5849396615b424eb6d3141232f404d3693749f13f582b7d76795b6"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-titanium-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 65897,
+      "sha256": "f6ca88dce1fa3db08ff710d67df2b2d131bccdfdeec8f37597623c77a4918cca"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-tr90-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 20360,
+      "sha256": "df3a9bdd62baa411161ae256fce1d97d75a24d25644f16953aebab4766d9ce15"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-tr90-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 70057,
+      "sha256": "4c09f94697b781614816a02a5a104d594f3189d3370becd99c0cd573ffe1782b"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-wood-studio-v1-480.jpg",
+      "width": 480,
+      "height": 320,
+      "bytes": 22290,
+      "sha256": "4ea497adaf55f7f557a516c73c9e604529a6968283408b47f28d57818f78602d"
+    },
+    {
+      "path": "assets/lemoon-quiz-material-wood-studio-v1-960.jpg",
+      "width": 960,
+      "height": 640,
+      "bytes": 79976,
+      "sha256": "3f81ac0ac3044f6771bd90a9953ac89f93d64d5ece5b78f7571a774d2925db9d"
+    }
+  ],
+  "total_bytes": 550926
+}

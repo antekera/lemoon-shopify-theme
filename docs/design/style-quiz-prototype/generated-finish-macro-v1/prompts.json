@@ -1,0 +1,15 @@
+{
+  "tool": "image_gen.imagegen",
+  "requests": [
+    {
+      "key": "matte",
+      "prompt": "Create a photorealistic premium eyewear finish sample for a compact ecommerce quiz thumbnail, square 1024x1024. Extreme macro studio photograph of ONLY the upper outer corner of a traditional thick charcoal-black eyeglass frame, a curved brow rim flowing into a temple at the upper right and a small clear lens opening at lower right. Same neutral dark charcoal material, emphasize surface finish not color or shape. Object fills most of square, clean off-white background, restrained soft side lighting, sharp highly realistic craftsmanship, legible even at 64px, no brands, no text, no sphere, no floating ball, no illustrated vector blocks, no textures unrelated to eyeglasses, no human, no full pair of glasses. Finish: MATTE. Fine realistic uniform satin microtexture with softly diffuse light, zero sharp specular highlights, no scratches or fabric grain. Deep charcoal surface with subtle gentle gradients that reveal the curved frame edge.",
+      "source": "/Users/miguel/Library/Application Support/orca/codex-accounts/9b904603-09b9-4e90-b808-ed6610f76938/home/generated_images/01a1b105-8ead-7a90-a8da-38e1648ddc27/exec-babbfb1c-a161-4e34-b70d-d9c519a5bdb4.png"
+    },
+    {
+      "key": "glossy",
+      "prompt": "Create a photorealistic premium eyewear finish sample for a compact ecommerce quiz thumbnail, square 1024x1024. Extreme macro studio photograph of ONLY the upper outer corner of a traditional thick charcoal-black eyeglass frame, a curved brow rim flowing into a temple at the upper right and a small clear lens opening at lower right. Same neutral dark charcoal material, emphasize surface finish not color or shape. Object fills most of square, clean off-white background, restrained soft side lighting, sharp highly realistic craftsmanship, legible even at 64px, no brands, no text, no sphere, no floating ball, no illustrated vector blocks, no textures unrelated to eyeglasses, no human, no full pair of glasses. Finish: GLOSSY. Smooth highly polished dark charcoal surface with one clear broad white softbox reflection following the curved brow and a small clean highlight on the outer edge. Reflective lacquer appearance, zero glitter, zero metallic flakes, no extra ornaments.",
+      "source": "/Users/miguel/Library/Application Support/orca/codex-accounts/9b904603-09b9-4e90-b808-ed6610f76938/home/generated_images/01a1b105-8ead-7a90-a8da-38e1648ddc27/exec-6c6511d9-6636-4c2c-a060-e652fb598a2d.png"
+    }
+  ]
+}
