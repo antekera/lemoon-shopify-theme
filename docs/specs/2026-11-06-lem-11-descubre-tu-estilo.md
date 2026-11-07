@@ -1,6 +1,6 @@
 # LEM-11 · Descubre tu estilo: navegación y salida a categorías
 
-Estado: diseño propuesto para revisión antes de implementar. Rama `fix/lem-11-quiz-copy-feedback`, base `5391d588`; el commit `198c7c65` ya recupera el título acordado. Este documento no acredita cambios de Shopify ni publicación.
+Estado: especificación aprobada por Miguel con «Apruebo. Procede.»; implementación en curso. Rama `fix/lem-11-quiz-copy-feedback`, base `5391d588`; el commit `198c7c65` ya recupera el título acordado. Este documento no acredita cambios de Shopify ni publicación.
 
 ## Resultado solicitado
 
@@ -108,5 +108,5 @@ No mapear familias de color a un color concreto de variante por aproximación. C
 
 - [Filtrado nativo de Shopify](https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering): parámetros, filtros por producto/variante, referencias a metaobjetos y lógica AND/OR.
 - [Presentar filtros en el tema](https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering/support-storefront-filtering): `collection.filters` y valores activos.
-- Lecturas actuales de página, menús y filtros de producción del 06-11-2026. No se ejecutaron escrituras administrativas durante esta investigación.
+- Lecturas de página, menús y filtros de producción del 06-11-2026. La investigación inicial fue de solo lectura; las escrituras posteriores aprobadas, su evidencia y los bloqueos de activación se registran en [estado de entrega](../qa/lem-11-feedback-readiness.md).
 - Código: `sections/main-collection-product-grid.liquid`, `snippets/facets.liquid`, `assets/facets.js`, `snippets/lemoon-plp-product-page.liquid`, `snippets/lemoon-quiz-candidate.liquid` y `docs/catalog/style-quiz.md`.

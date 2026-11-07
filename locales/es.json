@@ -423,7 +423,7 @@
       "wishlist": "Mis favoritos",
       "shipping_returns": "Envíos y retornos",
       "faq": "Preguntas frecuentes",
-      "find_style": "Encuentra tu lente ideal",
+      "find_style": "Descubre tu estilo",
       "trends": "Tendencias",
       "banner_alt": "Descubre las tendencias de Lemoon",
       "previous_product": "Producto anterior",
@@ -892,8 +892,8 @@
       "configure_note": "Las opciones y el precio se confirman en el configurador del producto."
     },
     "lemoon_style_quiz_v2": {
-      "name": "Encuentra tu estilo",
-      "eyebrow": "Encuentra tu estilo",
+      "name": "Descubre tu estilo",
+      "eyebrow": "Descubre tu estilo",
       "title": "Descubre tu estilo ideal.",
       "intro": "Formas, colores y detalles que van contigo. Encuentra los tuyos.",
       "steps": "6 pasos",
@@ -911,7 +911,7 @@
       "empty": "No encontramos productos disponibles que coincidan con tus preferencias. Prueba cambiando alguna o explora el catálogo.",
       "editorial": "Sin preferencias de estilo elegidas, te mostramos una selección editorial para explorar.",
       "demo": "Selección de demostración: estos productos incluyen características de prueba que no representan un catálogo final verificado.",
-      "no_js": "Puedes explorar esta selección editorial o visitar el catálogo. Para responder la guía y ajustar los resultados, activa JavaScript en tu navegador.",
+      "no_js": "Puedes explorar el catálogo. Para responder la guía y filtrar los resultados, activa JavaScript en tu navegador.",
       "results_title": "Hay más de una forma de ser tú.",
       "results_intro": "Una selección para empezar. Cambia cualquier pista y sigue explorando.",
       "preference_hint": "Estas son tus preferencias. Para cambiarlas, usa Ir atrás.",

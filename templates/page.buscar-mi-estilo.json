@@ -3,7 +3,6 @@
     "main": {
       "type": "lemoon-style-quiz",
       "settings": {
-        "catalogue": "all",
         "padding_top": 64,
         "padding_bottom": 64
       }

@@ -414,7 +414,7 @@
       "wishlist": "My favorites",
       "shipping_returns": "Shipping and returns",
       "faq": "Frequently asked questions",
-      "find_style": "Find your ideal glasses",
+      "find_style": "Discover your style",
       "trends": "Trends",
       "banner_alt": "Discover Lemoon trends",
       "previous_product": "Previous product",
@@ -880,8 +880,8 @@
       "configure_note": "Options and price are confirmed in the product configurator."
     },
     "lemoon_style_quiz_v2": {
-      "name": "Find your style",
-      "eyebrow": "Find your style",
+      "name": "Discover your style",
+      "eyebrow": "Discover your style",
       "title": "Discover your ideal style.",
       "intro": "Shapes, colours and details that feel like you. Find yours.",
       "steps": "6 steps",
@@ -899,7 +899,7 @@
       "empty": "We couldn’t find available products matching your preferences. Try changing a preference or explore the catalogue.",
       "editorial": "With no style preferences selected, here is an editorial selection to explore.",
       "demo": "Demonstration selection: these products include test attributes that do not represent a verified final catalogue.",
-      "no_js": "You can explore this editorial selection or visit the catalogue. To answer the guide and refine your results, enable JavaScript in your browser.",
+      "no_js": "You can explore the catalogue. To answer the guide and filter results, enable JavaScript in your browser.",
       "results_title": "There’s more than one way to be you.",
       "results_intro": "A selection to get you started. Change any preference and keep exploring.",
       "preference_hint": "These are your preferences. To change them, use Go back.",

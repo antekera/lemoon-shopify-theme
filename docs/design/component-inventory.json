@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 523,
-    "mapped_paths": 491,
-    "excluded_paths": 32,
+    "total_tracked_paths": 554,
+    "mapped_paths": 492,
+    "excluded_paths": 62,
     "by_root": {
-      "assets": 261,
+      "assets": 292,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -37,13 +37,13 @@
     },
     "mapped_by_extension": {
       ".css": 83,
-      ".js": 53,
+      ".js": 54,
       ".json": 91,
       ".liquid": 170,
       ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 31,
+      "binary-image-or-font": 61,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 80,
     "theme_block_files": 0,
-    "total_source_paths": 523,
-    "explicit_new_paths": 9
+    "total_source_paths": 554,
+    "explicit_new_paths": 0
   },
   "components": [
     {
@@ -473,8 +473,7 @@
         "snippets/lemoon-plp-product-page.liquid",
         "snippets/main-search-result-card.liquid",
         "templates/collection.carousel-accessories.liquid",
-        "templates/collection.carousel.liquid",
-        "sections/lemoon-style-quiz.liquid"
+        "templates/collection.carousel.liquid"
       ],
       "depends_on": [
         "LM-PRICE",
@@ -1563,28 +1562,31 @@
       "source_paths": [
         "sections/lemoon-style-quiz.liquid",
         "assets/lemoon-style-quiz.js",
+        "assets/lemoon-style-quiz-filters.js",
         "assets/lemoon-style-quiz.css",
-        "snippets/lemoon-quiz-candidate.liquid",
         "snippets/lemoon-quiz-options.liquid",
         "snippets/lemoon-quiz-visual.liquid"
       ],
       "direct_static_consumers": [
+        "assets/lemoon-style-quiz.js",
         "sections/lemoon-style-quiz.liquid",
         "templates/page.buscar-mi-estilo.json"
       ],
       "depends_on": [
         "LM-CHOICE",
         "LM-FEEDBACK",
-        "LM-ACTION",
-        "LM-PRODUCT-CARD"
+        "LM-ACTION"
       ],
       "documentation_anchor": "lm-quiz",
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-style-quiz.liquid",
-        "scope": "Rótulo visible solo antes del título, sin headings repetidos antes de opciones; grupos con aria-label localizado. Descripciones de todas las etapas encima de opciones, al80% desde750px y100% móvil sin límite42ch, opciones centradas máximo96rem. Entrada con descripción móvil al ancho completo de contenido entre gutters y título «Descubre tu estilo ideal.» con reflujo natural, sin leyenda de pasos/ritmo y catálogo subrayado en reposo. Números decorativos 01–06 navy de mayor visibilidad. Stepper centrado de seis círculos amarillos de 12px con gap20px y aro navy para el actual, que pasan a navy al completar; contador solo accesible y Volver abajo reemplaza Muéstrame variedad. Seis etapas: categoría ópticos/solares opcional con radio y filtro estricto por product.type antes del ranking; uso contextual sin trabajo/estudio en solares y Paseos y viajes; categorías con estudio blanco de una sola montura en perspectiva, JPEG480/960 3:2 decorativos; assets anteriores conservados. Color con siete botones compactos (sin dorado), muestras planas32×32, retícula3/2 y mínimo72px; Carey/Transparentes solo en Color; Detalles solo Acabados/Materiales; Acabados con miniaturas macro generadas64×64 en tarjetas horizontales, JPEG128/256 y acabado mate/brillante sobre carbón, SVG previos preservados; con seis imágenes generadas de estudio blanco por material JPEG480/960 3:2 y SVG previos preservados, sin pestaña Patrones ni opacidad/transparencia, neutrales compatibles con brown/light y plateado explícito. Atributos Shopify por producto/variante, ranking completo sin presupuesto y card-product canónica; portada y cuatro escenas de uso JPEG editoriales v1 responsive 3:2/contain, decorativas y no SKU; ocho formas en tres columnas en todos los anchos (padding8px y etiquetas12px en móvil), con outline frontal realista simplificado como icono, contorno único5 navy sin líneas interiores/relleno/sombra, tres paths por opción, cat-eye con parte superior menos curvada y geométrico con facetas rectas/esquinas miter; Aviador conserva geometría aprobada y las siete restantes se presentan para revisión visual; medidas de referencia opcionales con ejemplo numérico16px en móvil/escritorio, chevron nativo giratorio y campos lente/puente/patilla mm excluidos del anillo general del quiz, con foco por borde navy2px sin anillo exterior/sombra ni salto; tres valores válidos autoseleccionan un radio de presencia por heurística editorial local (índice2*lente+puente, <118 compacto/118–128 intermedio/>128 oversize), sin inferir ancho total ni calce; manual prevalece hasta editar medidas, volver conserva estado y errores no bloquean avanzar; sin persistencia ni envío; tamaño con silueta neutra outline de cabeza/cuello/hombros, sin rasgos ni rellenos, misma base y montura escalada0.78/0.95/1.13, sin inferencia de talla física; restantes muestras SVG comparables con IDs únicos e indicador de selección visible; resumen dl de solo lectura con seis celdas iguales,3columnas desktop/2móvil y filas1fr antes del listado; Ir atrás secuencial desde resultados conserva respuestas/medidas/progreso, sin reinicio ni enlaces de edición; aviso demo visible retirado sin cambiar flags comerciales, catálogo con botón relleno navy redondeado y destino /collections/all en entrada/resultados, sin razones por tarjeta, lotes de doce y dos columnas móviles; límites50productos/20variantes. Carga inicial estable: inicio navy visible y disabled hasta enlazar el controlador; marcador síncrono local oculta resultados editoriales durante la carga del módulo sin desplazar imagen/footer. Sin JS, módulo fallido o candidatos inválidos conserva fallback editorial y oculta inicio inoperante, sin alturas rígidas ni cambios de ranking.",
+        "scope": "Seis preguntas opcionales y snapshots versionados por entrada de historial; la intro permite salir, avanzar añade entrada, inputs reemplazan y Atrás/Adelante o recarga restauran el estado exacto con medidas y modo manual. Detalles apila Acabados y después Materiales sin pestañas; cuerpo/opciones/campos de 16px y peso 400, acciones 16px semibold y ayudas>=14px, conservando H1/H2, tokens y fotografías. Ruta pública prevista /pages/descubre-tu-estilo y anterior 404 sin redirección; template interno conservado. CTA final a /collections/all nativa con OR en un criterio y AND entre criterios; tipos reales, valores de forma/material con tildes/TR-90 y GIDs por grupo del diccionario existente. Helper puro valida referencias y availableFilters desde collection.filters, sin emitir URL parcial; error conserva respuestas y catálogo. Quiz sin ranking, candidatos, tarjetas/precios ni límite 50/20; PLP conserva filtros, chips, ordenación, contador, paginación y vacío nativos. Inicio estable y alternativa de catálogo sin JS o ante error. Assets legacy preservados y candidato inactivo. Fuente/fixtures no acreditan CMS, seis filtros activos, catálogo completo ni sync/despliegue del back office.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
-      }
+      },
+      "legacy_source_paths": [
+        "snippets/lemoon-quiz-candidate.liquid"
+      ]
     },
     {
       "id": "LM-GIFT",
@@ -3247,6 +3249,186 @@
       "content_read": false
     },
     {
+      "path": "assets/lemoon-quiz-category-optical-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-category-optical-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-category-sun-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-category-sun-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-everyday-editorial-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-everyday-editorial-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-glossy-macro-v1-128.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-glossy-macro-v1-256.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-matte-macro-v1-128.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-finish-matte-macro-v1-256.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-going-out-editorial-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-going-out-editorial-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-hero-editorial-v1-1400.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-hero-editorial-v1-700.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-acetate-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-acetate-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-metal-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-metal-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-mixed-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-mixed-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-titanium-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-titanium-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-tr90-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-tr90-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-wood-studio-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-material-wood-studio-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-outdoors-editorial-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-outdoors-editorial-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-work-editorial-v1-480.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
+      "path": "assets/lemoon-quiz-work-editorial-v1-960.jpg",
+      "status": "excluded",
+      "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
+      "content_read": false
+    },
+    {
       "path": "assets/lemoon-secure-ssl.png",
       "status": "excluded",
       "reason": "binary-image-or-font: activo de footer con procedencia documentada en asset-inventory.md; no es un contrato de UI",
@@ -3269,6 +3451,14 @@
       "status": "excluded",
       "reason": "binary-image-or-font: activo visual, no contrato de UI; no se abrió contenido binario",
       "content_read": false
+    },
+    {
+      "path": "assets/lemoon-style-quiz-filters.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-QUIZ"
+      ],
+      "inspection_method": "targeted native-filter helper source inspection; not Shopify runtime validation"
     },
     {
       "path": "assets/lemoon-style-quiz.css",
@@ -5314,7 +5504,7 @@
       "component_ids": [
         "LM-QUIZ"
       ],
-      "inspection_method": "LEM-11 implementation and local Liquid fixture review; Shopify runtime separate"
+      "inspection_method": "legacy source retained; no active render from current quiz section; not a global removal or runtime claim"
     },
     {
       "path": "snippets/lemoon-quiz-options.liquid",
@@ -5958,7 +6148,7 @@
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
   "snapshot": {
     "kind": "delivered implementation source snapshot; not Shopify runtime validation",
-    "date": "2026-11-01",
+    "date": "2026-11-06",
     "implementation_base_sha": "7e437dc3b693a00aaa13c111c4df9e479b3d8af2",
     "new_source_paths": [
       "snippets/lemoon-ui-action.liquid",
@@ -5981,9 +6171,10 @@
       "assets/lemoon-style-quiz.css",
       "snippets/lemoon-quiz-candidate.liquid",
       "snippets/lemoon-quiz-options.liquid",
-      "snippets/lemoon-quiz-visual.liquid"
+      "snippets/lemoon-quiz-visual.liquid",
+      "assets/lemoon-style-quiz-filters.js"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha is retained as history; base_sha and implementation_base_sha identify the pre-implementation base, not the delivered revision. Counts and coverage now describe 517 delivered source paths: the 511-path implementation snapshot, Spanish privacy template, two footer image assets editorial newsletter CSS and two legal snippets. new_source_paths retains earlier implementation additions and this new template; it does not assert untracked status. Se agrega plantilla legal compartida; la cobertura incluye la incorporación de plazo de entrega.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {
@@ -6078,14 +6269,16 @@
     },
     "style_quiz": {
       "ticket": "LEM-11",
-      "date": "2026-11-05",
-      "base_sha": "5f3aaaef",
+      "date": "2026-11-06",
+      "base_sha": "c686e6ee95fe016174e178aa2c1aded70466723b",
       "families": [
-        "LM-QUIZ",
-        "LM-PRODUCT-CARD",
-        "LM-PRICE"
+        "LM-QUIZ"
       ],
-      "contract": "Five-stage style quiz, product/variant trait references, full ranked group, optional recommended_variant and price_variant; no Shopify publication claim."
+      "contract": "Seis preguntas opcionales y snapshots versionados por entrada de historial; la intro permite salir, avanzar añade entrada, inputs reemplazan y Atrás/Adelante o recarga restauran el estado exacto con medidas y modo manual. Detalles apila Acabados y después Materiales sin pestañas; cuerpo/opciones/campos de 16px y peso 400, acciones 16px semibold y ayudas>=14px, conservando H1/H2, tokens y fotografías. Ruta pública prevista /pages/descubre-tu-estilo y anterior 404 sin redirección; template interno conservado. CTA final a /collections/all nativa con OR en un criterio y AND entre criterios; tipos reales, valores de forma/material con tildes/TR-90 y GIDs por grupo del diccionario existente. Helper puro valida referencias y availableFilters desde collection.filters, sin emitir URL parcial; error conserva respuestas y catálogo. Quiz sin ranking, candidatos, tarjetas/precios ni límite 50/20; PLP conserva filtros, chips, ordenación, contador, paginación y vacío nativos. Inicio estable y alternativa de catálogo sin JS o ante error. Assets legacy preservados y candidato inactivo. Fuente/fixtures no acreditan CMS, seis filtros activos, catálogo completo ni sync/despliegue del back office.",
+      "legacy_preserved": [
+        "snippets/lemoon-quiz-candidate.liquid"
+      ],
+      "native_preparation_boundary": "Six variant list-reference definitions created and 60/60 derived values read back for ten variants of five demo products, source metadata unchanged per coordinator. Product type is exposed in native collection; six derived filters remain absent and Search & Discovery returns errors. CMS/routes, complete catalog native filtering/sync, variant behavior and deployment remain separately unverified."
     }
   }
 }
