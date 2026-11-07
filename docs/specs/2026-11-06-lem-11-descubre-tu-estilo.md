@@ -43,6 +43,7 @@ El último punto incorpora la aclaración de Miguel: los metaobjetos del quiz ta
 ## Resultados: contrato de categoría
 
 - Al pulsar el CTA final, guardar el estado del último paso y navegar a `/collections/all` con los filtros elegidos. Las preguntas omitidas no añaden restricciones.
+- Cada valor se envía como parámetro repetido, igual que el formulario nativo de filtros.
 - La selección se convierte en filtros nativos: **OR entre valores del mismo criterio y AND entre criterios distintos**, igual que al usar manualmente el panel de categorías. Se elimina la puntuación por afinidad y no se amplían coincidencias silenciosamente.
 - Conservar filtros editables, chips activos, eliminación de filtros, ordenación, contador y paginación propios de la PLP. Los conteos y el conjunto completo proceden de Shopify, sin el límite de enumeración de 50 productos/20 variantes del recomendador anterior.
 - No añadir presupuesto, género o diagnóstico facial al quiz. El precio puede seguir disponible en la categoría como filtro voluntario existente.
@@ -51,7 +52,7 @@ El último punto incorpora la aclaración de Miguel: los metaobjetos del quiz ta
 
 ### Lo que existe y lo que falta
 
-La lectura de `/collections/all` en el tema publicado `155307737256` encontró filtros de género, precio, forma, color de variante, tipo de receta, material y talla física. No expuso los criterios de afinidad del quiz. La PLP ya consume `collection.filters` y pagina `collection.products`.
+La lectura inicial de `/collections/all` en el tema publicado `155307737256` encontró filtros de género, precio, forma, color de variante, tipo de receta, material y talla física. No expuso los criterios de afinidad del quiz. La PLP ya consume `collection.filters` y pagina `collection.products`.
 
 `custom.style_traits` mezcla seis criterios en una única lista de referencias a `lemoon_style_trait`. Activarlo como un único filtro no permite expresar correctamente, por ejemplo, `(negro OR plateado) AND (mate OR brillante)`. Además, una variante puede reemplazar un criterio del producto; no debe mezclarse el color de una variante con el acabado de otra.
 

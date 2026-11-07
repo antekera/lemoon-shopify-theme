@@ -70,10 +70,10 @@ test('six stages submit one native collection URL with all criteria and return f
   await expect(quiz.locator('[data-quiz-product], [data-quiz-results], [data-candidate]')).toHaveCount(0);
   await next(quiz); await expect(page).toHaveURL(/\/collections\/all\?/);
   const query = new URL(page.url()).searchParams;
-  expect(query.get('filter.p.m.custom.frame_shape')).toBe('redondo,ojo de gato');
+  expect(query.getAll('filter.p.m.custom.frame_shape')).toEqual(['redondo', 'ojo de gato']);
   expect(query.get('filter.p.m.custom.frame_material')).toBe('TR-90');
-  expect(query.get('filter.v.m.custom.style_filter_color').split(',')).toHaveLength(4);
-  expect(query.get('filter.v.m.custom.style_filter_finish').split(',')).toHaveLength(2);
+  expect(query.getAll('filter.v.m.custom.style_filter_color')).toHaveLength(4);
+  expect(query.getAll('filter.v.m.custom.style_filter_finish')).toHaveLength(2);
   for (const group of ['pattern', 'transparency', 'use', 'presence']) expect(query.has(`filter.v.m.custom.style_filter_${group}`)).toBe(true);
   await page.goBack(); await at(page.locator('[data-style-quiz]'), 'presence');
   expect(await page.evaluate(() => window.__quizDocumentID), 'return must rebuild the quiz document rather than reuse bfcache').not.toBe(documentID);

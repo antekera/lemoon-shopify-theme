@@ -53,7 +53,8 @@ export function buildQuizCollectionURL(answers = {}, config) {
     const parameter = axis === 'category' ? 'filter.p.product_type'
       : PRODUCT_VALUES[axis] ? `filter.p.m.custom.frame_${axis}` : `filter.v.m.custom.style_filter_${axis}`;
     if (!Array.isArray(config.availableFilters) || !config.availableFilters.includes(parameter)) fail(`unavailable ${parameter}`);
-    params.set(parameter, [...new Set(values)].join(','));
+    // Match Shopify's native facet forms: one parameter for each selected value.
+    for (const value of new Set(values)) params.append(parameter, value);
   }
   const query = params.toString();
   return config.collectionUrl + (query ? `?${query}` : '');

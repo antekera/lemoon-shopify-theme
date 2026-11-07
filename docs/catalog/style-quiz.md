@@ -82,17 +82,19 @@ La precarga de Product Studio debe reutilizar esta derivación y los límites de
 
 Antes de corregir datos, respaldar valores e IDs y preservar cambios posteriores al snapshot. Limitar escrituras al alcance autorizado, leer de vuelta y comprobar tipos/referencias/acceso. No eliminar entradas compartidas ni cambiar tipo/claves de campos existentes sin revisar consumidores. Las marcas de demostración y fotografías sintéticas no acreditan atributos finales. Nunca enviar credenciales de Admin al tema/navegador.
 
+La URL de salida envía cada valor en un parámetro repetido, como los formularios nativos de filtros. No concatenar referencias GID antes de pasarlas a URLSearchParams: codificar la coma como `%2C` dejó esa selección sin reconocer en esta tienda. La coma literal sí funcionó; se adopta el parámetro repetido del formulario nativo.
+
 ## Estado de preparación al 06-11-2026
 
 Snapshot administrativo comunicado por coordinación durante esta entrega, separado de QA local y de las evidencias históricas:
 
 - Creadas seis definiciones PRODUCTVARIANT `custom.style_filter_{color,finish,pattern,transparency,use,presence}`, listas de referencias con PUBLIC_READ hacia `MetaobjectDefinition/37833048232`. Diccionario existente de21 entradas conservado.
 - Readback posterior verificado de 60/60 listas derivadas en las 10 variantes de los cinco productos demo; los valores fuente de producto/variante se compararon y permanecen idénticos. Evidencia de coordinación en el directorio Git común: `delivery-evidence/lem-11-copy-feedback/demo-products-after-native-projections.json`. Los errores 500 intermitentes previos no se usan como prueba de una escritura; este readback acota la preparación al grupo demo, sin acreditar todo el catálogo ni sincronización posterior.
-- El filtro de tipo de producto, «Tipo de lentes», aparece en la lectura real de `/collections/all`. Los seis campos derivados todavía no aparecen en esa lectura. En Search & Discovery, seleccionar «Color de estilo» produjo error 500; después de recuperar sesión/login, la pantalla principal de la app mostró error general. La exposición de los seis criterios sigue bloqueada; no se reemplaza por filtrado local.
+- «Tipo de lentes» y los seis campos derivados aparecen en la lectura real de `/collections/all`. Tras errores intermitentes de Search & Discovery se recuperó la sesión y se guardaron con OR; cada campo muestra únicamente sus valores asignados. La matriz de colección publicada pasó48comprobaciones, sin errores de runtime: combinaciones, contradicciones entre variantes, chips, eliminación, ordenación y paginación. La serialización usa parámetros repetidos del formulario nativo, comprobados con referencias reales; no se concatena el separador antes de URLSearchParams. [Evidencia y límites](../qa/lem-11-feedback-readiness.md).
 - Página y menús CMS permanecen intactos para activación coordinada. La consulta paginada de redirects encontró cero coincidencias exactas para la ruta anterior; esa ausencia no acredita todavía el 404 HTTP tras cambiar el handle. Ruta nueva y 404 sin redirección siguen pendientes de actualización/verificación coordinada.
-- Trabajo de derivación/sync del back office en curso aislado desde PR9; no desplegado. Requiere pruebas y evidencia propias.
+- Derivación y sync incorporados a PR9 en859ba02;206pruebas y revisión/QA independientes aprobadas, CIverde. No desplegado: faltan scopes/flags efectivos, capacidad máxima y mecanismo comprobado ante cualquier edición directa de metacampos.
 
-Queda verificar exposición y lógica nativa del catálogo completo, actualizaciones posteriores, coherencia de variante, navegación real y rutas CMS. Los fixtures y Theme Check no sustituyen estos puntos ni autorizan publicación de tema/despliegue.
+Queda verificar el recorrido del quiz nuevo una vez entregado al tema, las rutas CMS, el catálogo comercial completo y las actualizaciones posteriores con la app desplegada. La QA nativa de esta etapa cubre la colección publicada y los cinco escenarios demo; no acredita el despliegue del quiz ni del back office.
 
 ## Evidencia histórica de la etapa con ranking
 

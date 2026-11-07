@@ -28,15 +28,19 @@ Fecha: 06-11-2026. Base del tema `5391d588`; rama `fix/lem-11-quiz-copy-feedback
 
 Los backups y lecturas sanitizadas están en el directorio Git común `delivery-evidence/lem-11-copy-feedback/`: `definitions-dictionary-before.json`, `demo-products-before-native-projections.json`, `demo-products-after-native-projections.json`, `page-menus-before.json` y lecturas de filtros. No contienen contraseña ni token. Los IDs anteriores son evidencia de esta tienda, no constantes que deban copiarse a otra.
 
-## Bloqueo de activación nativa
+## Configuración activada y comprobación nativa
 
-Search & Discovery muestra los seis nuevos metacampos de variante en su selector. Al elegir **Color de estilo**, la aplicación devuelve «Hay un problema al cargar esta página». Los reintentos y la recuperación de la sesión también terminaron en error de la aplicación. El conector Admin presentó errores HTTP500 intermitentes; las escrituras se conciliaron mediante lecturas antes de reintentar.
+Search & Discovery mostró errores intermitentes al seleccionar Color y después de guardar Acabado. La lectura posterior confirmó que el guardado de Acabado sí se aplicó: no se repitió a ciegas. Recuperada la sesión, se guardaron los demás campos con operador OR y etiquetas **Familia de color, Acabado, Patrón, Transparencia, Uso y Presencia visual**. Se conservaron los filtros anteriores.
 
-La última lectura de colección expuso género, precio, forma, color de opción, receta, material, talla física y tipo de producto. **No expuso los seis filtros derivados.** Definiciones, datos y disponibilidad en el selector no acreditan que Search & Discovery los haya activado.
+IDs de configuración observados: tipo77524861096, color77525385384, patrón77525418152, transparencia77525516456, uso77525614760 y presencia77525647528. El ID de Acabado no se capturó; su exposición se verificó directamente en storefront. Son IDs administrativos de esta tienda, no constantes del tema.
 
-El quiz verifica `collections['all'].filters` antes de enviar cada criterio. Mientras falte un filtro elegido, conserva la última pregunta y sus respuestas, ofrece reintento y el enlace al catálogo; no genera una URL parcial que omita preferencias.
+La lectura autenticada final de `/collections/all` confirmó los seis parámetros `filter.v.m.custom.style_filter_*`, además de tipo, forma, material y los filtros anteriores. No hubo error Liquid. La lista de valores expone únicamente atributos asignados del grupo correspondiente; no mostró las21entradas mezcladas del diccionario.
 
-Pendiente en la aplicación instalada: habilitar los seis criterios, comprobar su operador OR y verificar en storefront las combinaciones entre criterios/variantes, valores activos, eliminación, sorting, conteos, vacío y paginación. No se instalaron aplicaciones ni ampliaron permisos para sortear el error.
+El quiz verifica `collections['all'].filters` antes de enviar cada criterio. Si un filtro se deshabilita después, conserva respuestas y catálogo alternativo, sin generar una URL parcial.
+
+La QA sobre la colección publicada detectó que concatenar GIDs antes de URLSearchParams produce una coma codificada `%2C`: la combinación devolvió cero resultados y ningún chip activo. El formulario nativo repite el parámetro y devolvió cinco productos con dos chips; una coma literal también funcionó. El helper se corrigió para seguir exactamente la forma nativa repetida. Tres regresiones con GIDs reales fallaron sobre1b1165 y pasaron con la corrección.
+
+Comprobaciones nativas ya observadas: OR por colores, AND color/acabado (Estero y Faro), contradicción entre variantes (cero resultados real), edición/eliminación de chips, ordenación conservando filtros y paginación Óptico (38productos,15por página, segunda página sin IDs repetidos). Las tarjetas Carey conservaron contexto de variante, imagen, precio y swatch; la interacción del swatch alternativo se comprueba por separado. La matriz final pasó **48/48 comprobaciones nativas**, sin errores de runtime. Los seis criterios combinados seleccionaron Génova/Jade; esa comprobación usa el valor legado translúcido para validar el índice, no una opción nueva del quiz. Transparentes no tiene asignaciones actuales y devolvió cero honesto con opción de limpiar filtros. La prueba de swatch Azul desde Carey también conservó imagen, selección y variante real en PDP; la URL publicada contiene parámetros variant repetidos, pero Shopify resolvió el último y no se demostró fallo funcional. No se amplió el delta de tarjeta por esa observación. No se confunde esta QA de colección publicada con el quiz nuevo aún no publicado. Un recorrido adicional ejecutó el controlador local con el diccionario/exposición reales y abrió la colección publicada mediante el puente de preview: neutral + Carey + brillante + todos los días + oversize devolvió Génova y Jade, sin preferencias omitidas. Tampoco acredita el Liquid del quiz nuevo publicado.
 
 ## Página y menús: activación coordinada pendiente
 
@@ -48,7 +52,9 @@ Esta coordinación no autoriza un push al tema publicado. Las pruebas del CMS po
 
 ## Back office y límites de integración
 
-Delta aislado en `feat/lem-11-native-style-filters`, base PR9 `48ca70e`, repositorio `antekera/lemoon-next-backoffice`. Amplía vocabulario y prepara publicación/refresh de seis campos efectivos por variante. Se preserva el checkout propietario, incluido su `apps/web/next-env.d.ts` modificado.
+Delta aislado en `feat/lem-11-native-style-filters`, base PR9 `48ca70e`, integrado con árbol idéntico en PR9 mediante `859ba02379a3d9f11febac9136cd28c5c762d650`, repositorio `antekera/lemoon-next-backoffice`. Amplía vocabulario y prepara publicación/refresh de seis campos efectivos por variante. Se preserva el checkout propietario, incluido su `apps/web/next-env.d.ts` modificado (SHA2560f70629890b72a0a82e91972cc032c04b658b26c265373cb711cf576bfbf8fcc).
+
+Verificación final del back office:206/206pruebas,1020aserciones, tipos/lint/formato y builds domain/API/infra. Web compiló con Webpack (14/14rutas) ante una limitación local de Turbopack y dependencias enlazadas. La revisión y QA independientes detectaron y cerraron una carrera de variante creada antes de activar ready: la lectura final ahora verifica las seis listas derivadas reales y devuelve conflicto si una falta o cambió. Cinco regresiones permanentes y la reproducción original pasaron; no se afirma atomicidad global. CI Quality42322375153SUCCESS sobre859ba02.
 
 La derivación debe consumir fuentes Shopify frescas y resolver el diccionario de la tienda. La fuente ausente no se crea artificialmente para obtener una guardia: esa condición requiere relectura y convergencia acotada, no ofrece una transacción global. Un fallo o fuente incompleta debe impedir marcar el producto como listo.
 
@@ -58,17 +64,17 @@ La reconciliación autenticada y los eventos existentes de producto son superfic
 
 Validación final de las fuentes locales:
 
-- `npm run test:unit`: **459/459**, después de reproducir y corregir tres casos de referencia neutral ausente (prueba roja conservada).
+- `npm run test:unit`: **462/462**, después de reproducir y corregir referencias neutral ausentes y serialización nativa múltiple (pruebas rojas conservadas).
 - `npm run test:e2e -- tests/e2e/style-quiz.spec.js --reporter=list`: **25/25 Chromium** en la revisión final.
 - `npm run test:e2e:cross-browser -- tests/e2e/style-quiz.spec.js --reporter=list`: **50/50 Firefox/WebKit** en la revisión final.
 - La suite Chromium completa anterior pasó **271/271** sobre los mismos controladores/layout; dos casos de historial agregados después se ejecutaron también por separado. No se etiqueta esa ejecución anterior como una nueva suite completa.
-- Theme Check: **cero infracciones** (última ejecución: 334 archivos inspeccionados); diff-check limpio.
+- Theme Check: **cero infracciones** (última ejecución: 340 archivos inspeccionados); diff-check limpio.
 - Revisión independiente de código **Approved**, P2 de neutral completo cerrado; revisión de convenciones **Ready to push**, sin hallazgos. Responsabilidad de solo lectura sin aislamiento técnico.
 
-Hashes SHA-256 de runtime revisados: controlador `8925653b3d90314878c3e970f4ee515130608099a6ec0f2a55f0229e986f204e`; helper `b40af8d34cad99502ceec8ba9c4ab6781d12e288cacee0242e26e96f00465dd6`; CSS `d46bca540b660db96c724b4177b86165a55e113a7dbe78dc17be0b97305d7ca2`; sección `8ac661da4e791b0c6f865209b0d64537d8497f8bee4ebe45b5c562f4125d8991`.
+Hashes SHA-256 de runtime revisados: controlador `8925653b3d90314878c3e970f4ee515130608099a6ec0f2a55f0229e986f204e`; helper `07768b105bc32d54b1c2a36fdb47bff36c10a8dfccbcc5129e63b552547d2fde`; CSS `d46bca540b660db96c724b4177b86165a55e113a7dbe78dc17be0b97305d7ca2`; sección `8ac661da4e791b0c6f865209b0d64537d8497f8bee4ebe45b5c562f4125d8991`.
 
 El retorno reconstruido se prueba con un ID de documento distinto; no se demostró bfcache real. Zoom se comprueba mediante reflow equivalente a 720px CSS, sin controlar zoom del navegador. La prueba de primera pintura fija fuentes externas para aislar la carga del módulo: no mide LCP ni estabilidad de carga de fuentes. Las doce pruebas storefront están preparadas pero no ejecutadas porque aún falta la configuración y entrega remota.
 
- Fixtures LiquidJS y navegador comprueban el comportamiento del código, no la indexación Shopify ni la entrega de webhooks. La plantilla de producto nativa selecciona la variante relevante en colecciones filtradas; el contrato de entrada de la tarjeta se prueba con fixtures y su comprobación real sigue pendiente.
+ Fixtures LiquidJS y navegador comprueban el comportamiento del código, no la indexación Shopify ni la entrega de webhooks. La colección publicada seleccionó la variante relevante en los cinco casos Carey y en el cambio a Azul probado. Esto es evidencia acotada a esos escenarios, no a todo el catálogo comercial.
 
 Referencias primarias: [filtros nativos y semántica](https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering), [variante relevante de producto](https://shopify.dev/docs/api/liquid/objects/product#product-selected_or_first_available_variant), [topics de webhook](https://shopify.dev/docs/api/admin-graphql/2026-01/enums/WebhookSubscriptionTopic).
