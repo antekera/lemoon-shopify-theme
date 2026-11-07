@@ -624,16 +624,18 @@
       "catalogue": "Explore frames",
       "contact": "Ask our team",
       "measurements": {
-        "title": "Find your fit.",
-        "intro": "Start with a frame you already find comfortable. Compare its dimensions with the specifications of the model you like.",
+        "title": "How to measure your glasses",
+        "intro": "Start with glasses that feel comfortable. Learn to read the temple code and compare their measurements with the frame you are considering.",
         "visual_title": "Three measurements, in millimetres.",
         "visual_copy": "Lens width · bridge · temple length. The drawing identifies frame parts; it is not a size scale.",
-        "step_1_title": "Read the numbers on your frame",
-        "step_1_body": "Some temples show three numbers: lens width, bridge width and temple length, in millimetres. Lens width measures one lens, not the full width of the frame.",
-        "step_2_title": "Compare the product specifications",
-        "step_2_body": "Open the product’s measurement guide when available. Distinguish overall width, lens width, bridge, height and temple length. Use that model’s specifications; ask us if a dimension is missing.",
-        "step_3_title": "Consider comfort as well as numbers",
-        "step_3_body": "Measurements help you compare, but bridge and temple shape also affect fit. Use a comfortable frame as a reference and avoid assuming that two models with the same dimensions fit alike."
+        "step_1_title": "1. Check the temple arm",
+        "step_1_body": "<p>Look for the numbers printed inside a temple arm. Some frames show three measurements: lens width, bridge and temple length. Other numbers or letters may identify the model or color.</p>",
+        "step_2_title": "2. Compare the same measurements",
+        "step_2_body": "<p>If you cannot find the code, use a ruler in millimeters as a reference. Look at the front of the frame to compare its width and the width of each lens. Measure the overall width from one outside edge of the front to the other: this is not the distance between the hinges.</p><p>For temple length, follow the path from the hinge to the end, including the part that curves behind the ear. Do not bend or straighten it to measure it.</p><p>Do not calculate overall width by adding two lens widths and the bridge: the rim and frame ends also take up space.</p>",
+        "step_3_title": "3. Check the model’s size guide",
+        "step_3_body": "<p>On the frame’s product page, open the size guide and compare each measurement with your glasses. Use the measurements available for that model. A written size such as small or medium does not replace measurements in millimeters.</p><p>Two frames with similar measurements may feel different because of the shape of the bridge and temple arms. Use the comparison as a reference and ask about any missing measurements before choosing.</p>",
+        "help_title": "Missing a measurement?",
+        "help_body": "<p>Check the model’s product page. If the measurement you need is missing, you can ask about it before choosing.</p>"
       },
       "face": {
         "title": "Your style has more than one shape.",
@@ -1312,5 +1314,34 @@
     "property_use": "Single vision use",
     "property_file": "Prescription file",
     "property_pd": "Pupillary distance (mm)"
+  },
+  "lemoon_size_guide": {
+    "front_view": "Front view",
+    "side_view": "Side view",
+    "diagram_note": "Reference diagram, not to scale.",
+    "page_diagram_note": "Educational diagram, not to scale. It does not represent a specific product.",
+    "product_measurements": "Measurements of this frame",
+    "product_intro": "Compare these with glasses that feel comfortable. Check the same measurement on both frames.",
+    "comparison_title": "Compare with your glasses",
+    "comparison_intro": "Look inside a temple arm. If you find three numbers, they may indicate lens width, bridge and temple length, in that order and in millimeters.",
+    "example": "Example:",
+    "educational_note": "Educational example. It does not represent the measurements of a specific product.",
+    "code_lens_width": "52 mm wide for one lens.",
+    "code_bridge": "18 mm between the lenses.",
+    "code_temple": "145 mm from the hinge to the end of the temple arm.",
+    "no_code": "Cannot see a code? Use a ruler in millimeters to compare your frame. Lens width and overall frame width are different measurements.",
+    "comparison_limit": "Measurements help you compare. The shape of the bridge and temple arms also affects how two frames feel.",
+    "full_guide": "How to measure your glasses",
+    "help_link": "Ask about a measurement",
+    "catalogue": "View catalogue",
+    "close": "Close size guide",
+    "partial_measurements": "The available measurements for this frame are shown.",
+    "definitions": {
+      "frame_width": "From one outside edge of the front of the frame to the other.",
+      "lens_width": "Horizontal width of one lens at its widest point.",
+      "bridge": "The shortest distance between the two lenses at the bridge.",
+      "lens_height": "Vertical height of one lens at its tallest point.",
+      "temple": "From the hinge to the end of the temple arm, following its shape."
+    }
   }
 }

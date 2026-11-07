@@ -1,0 +1,47 @@
+{% doc %}
+  Educational temple inscription, independent of product measurements.
+  @param {string} instance_id - Unique prefix for the comparison heading.
+  @param {number} [heading_level] - Semantic heading level, default 2.
+  @param {boolean} [show_heading] - Show the heading unless false.
+  @param {boolean} [compact] - Use the compact drawer composition.
+{% enddoc %}
+{%- liquid
+  assign comparison_level = heading_level | default: 2
+  assign comparison_title = 'lemoon_size_guide.comparison_title' | t
+  assign comparison_heading_id = 'SizeComparison-' | append: instance_id
+  assign comparison_keys = 'lens_width,bridge,temple' | split: ','
+-%}
+<div class="lemoon-size-comparison{% if compact %} lemoon-size-comparison--compact{% endif %}">
+  {%- unless show_heading == false -%}
+    {% render 'lemoon-ui-heading', text: comparison_title, level: comparison_level, id: comparison_heading_id %}
+  {%- endunless -%}
+  <p class="lemoon-size-comparison__intro">{{ 'lemoon_size_guide.comparison_intro' | t }}</p>
+  <p class="lemoon-size-comparison__example-label">{{ 'lemoon_size_guide.example' | t }} <span class="lemoon-size-comparison__code">52 □ 18–145</span></p>
+  <p class="lemoon-size-comparison__note">{{ 'lemoon_size_guide.educational_note' | t }}</p>
+  <svg class="lemoon-size-comparison__temple" viewBox="0 0 400 130" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 76L272 44Q302 41 320 65L350 106Q354 111 360 105L364 101Q367 98 363 92L333 50Q314 24 279 28L24 61Z M24 61L15 65V79L24 76M37 61V74"/>
+    <path d="M113 60L222 46" stroke-width="1" stroke-dasharray="3 4"/>
+  </svg>
+  <ol class="lemoon-size-comparison__rows">
+    {%- for key in comparison_keys -%}
+      {%- liquid
+        assign label_key = 'lemoon_pdp.' | append: key
+        assign explanation_key = 'lemoon_size_guide.code_' | append: key
+      -%}
+      <li class="lemoon-size-comparison__row">
+        <svg class="lemoon-size-comparison__icon" viewBox="0 0 64 40" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          {%- case key -%}
+            {%- when 'lens_width' -%}<path d="M5 12Q18 5 32 12L29 30Q17 36 8 29Z M39 12Q49 6 60 12L57 29Q47 35 40 29ZM32 14Q36 10 39 14M7 5H30M7 2V8M30 2V8"/>
+            {%- when 'bridge' -%}<path d="M5 12Q18 5 28 12L25 30Q15 34 8 28Z M36 12Q49 5 60 12L57 28Q47 34 39 30ZM28 14Q32 10 36 14M28 5H36M28 2V8M36 2V8"/>
+            {%- when 'temple' -%}<path d="M5 21L43 12Q50 10 54 18L60 31M5 17L43 8Q52 6 58 17L63 29M7 9L41 2M5 6L9 12"/>
+          {%- endcase -%}
+        </svg>
+        <div class="lemoon-size-comparison__detail">
+          <p class="lemoon-size-comparison__code">{% if key == 'lens_width' %}<strong>52</strong>{% else %}52{% endif %} □ {% if key == 'bridge' %}<strong>18</strong>{% else %}18{% endif %}–{% if key == 'temple' %}<strong>145</strong>{% else %}145{% endif %}</p>
+          <p class="lemoon-size-comparison__definition"><span>{{ label_key | t }}</span>{{ explanation_key | t }}</p>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ol>
+  <p class="lemoon-size-comparison__footer">{{ 'lemoon_size_guide.no_code' | t }}</p>
+</div>

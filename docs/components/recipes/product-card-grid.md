@@ -87,3 +87,16 @@ Mantener product-info.js/price-per-item.js, `Price-Per-Item-<section>`, data-sec
 ```
 
 [consumer-contract.test.js](../../../tests/unit/consumer-contract.test.js) y [consumer-contract.spec.js](../../../tests/e2e/consumer-contract.spec.js) comparan referencias previas de los consumidores y ejercitan estados de precio, impuestos, ordenación y slider en fixtures locales. El límite card-product de las respuestas de carrusel se modela para comprobar parámetros; esas pruebas no acreditan quick-add real, precios/moneda efectivos, Section Rendering de Shopify ni procesamiento de carrito.
+
+## Guía de medidas de PDP
+
+`lemoon-size-guide-content` recibe `product`, `instance_id` y `presentation` opcional. El default conserva las tres pestañas inline; ambos diálogos pasan `presentation: 'dialog'` para lectura continua bajo el H2 del shell. El controlador nativo y sus adaptadores mantienen apertura, cierre, foco y unidades; no crear otro motor de diálogo.
+
+```liquid
+{% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
+{% render 'lemoon-frame-dimensions', dimensions: dimensions, instance_id: dimensions_instance_id, dialog: true %}
+```
+
+Los hosts `main-product` y `lemoon-eyewear-product` cargan `component-lemoon-size-guide.css` una vez, además del CSS/JS PDP existente. `lemoon-frame-dimensions` conserva solo números JSON positivos conocidos y pasa un ID distinto al dibujo compartido. El ejemplo educativo procede de `lemoon-size-guide-comparison`; sus tres números no rellenan ningún dato del producto ni cambian al convertir unidades. Las medidas parciales/vacías se expresan en texto, sin selector vacío.
+
+En modo diálogo, el setting de página solo genera enlace si `url`, `published_at` y template `guia-medidas` están disponibles. No se inserta el cuerpo CMS completo; el modo inline conserva su comportamiento legado. Verificar IDs únicos entre inline/diálogo, conversión local, foco/retorno y reflow con texto ampliado. [Receta educativa](guide-help.md) documenta la reutilización de los gráficos sin producto.

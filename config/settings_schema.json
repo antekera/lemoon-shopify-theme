@@ -413,8 +413,8 @@
       {
         "type": "page",
         "id": "lemoon_size_guide_page",
-        "label": "Página de guía de tallas",
-        "info": "Su contenido se muestra en el modal de todos los productos."
+        "label": "t:settings_schema.lemoon_size_guide.page_label",
+        "info": "t:settings_schema.lemoon_size_guide.page_info"
       },
       {
         "type": "checkbox",

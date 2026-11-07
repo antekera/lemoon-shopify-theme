@@ -63,3 +63,18 @@ La plantilla adicional `page.legal` es opt-in. Para los handles de privacidad, t
 ```
 
 Conservar component-list-social.css, SVG decorativos y etiquetas visually-hidden. El layout password carga dependencias propias. Las [pruebas de consumidores](../../../tests/e2e/consumer-contract.spec.js) comparan orden/semántica local; no comprueban disponibilidad de perfiles ni configuración efectiva del tema activo.
+
+## Guía educativa de medidas
+
+El modo `measurements` de `lemoon-guide-page` mantiene el índice, las anclas y la ayuda de familia, con H1 desde `page.title` (fallback localizado). Sus campos `measurements_intro`, `measurements_step_{1,2,3}_title`, `measurements_step_{1,2,3}_body` y `measurements_help_body` pertenecen al editor de la sección y se ignoran en las otras cuatro guías. Intro/cuerpos/ayuda son richtext sin wrapper `<p>` adicional; un valor vacío o compuesto solo por espacios/párrafos vacíos usa el fallback localizado. El título de página y SEO permanecen en sus campos nativos.
+
+Reutilizar los recursos compartidos, sin un SKU de ejemplo:
+
+```liquid
+{% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false %}
+{% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
+```
+
+`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` (true salvo false explícito) y `compact` (false). Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cifras reales pertenecen exclusivamente al consumidor `lemoon-frame-dimensions`.
+
+La sección carga `component-lemoon-size-guide.css` solo en measurements. No crea un diálogo ni una herramienta para medir en pantalla. La página usa los destinos de catálogo/contacto de la familia y no vuelve a un producto arbitrario. Verificar template asignado y contenido editable real en Shopify aparte de los fixtures locales; la existencia de `page.guia-medidas.json` no acredita esa asignación.

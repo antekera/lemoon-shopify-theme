@@ -12,21 +12,21 @@ Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a3
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura entregada enumera 519 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la plantilla `templates/page.politica-de-privacidad.json` y el PNG de seguridad y el SVG de Webpay del footer el CSS condicional de newsletter editorial y tres snippets legales compartidos y la plantilla legal compartida, registrados en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
+La cobertura entregada enumera 522 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la plantilla `templates/page.politica-de-privacidad.json` y el PNG de seguridad y el SVG de Webpay del footer el CSS condicional de newsletter editorial y tres snippets legales compartidos y la plantilla legal compartida, y dos snippets más el CSS compartido de guía de medidas, registrados en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
-| Snippets / layouts Liquid | 93 / 2 |
+| Snippets / layouts Liquid | 96 / 2 |
 | Templates JSON / Liquid | 37 / 3 |
-| Assets CSS / JS / SVG | 82 / 53 / 94 |
+| Assets CSS / JS / SVG | 83 / 53 / 94 |
 | Assets binarios PNG / JPG / GIF | 20 / 10 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **519 / 487 / 32** |
+| **Total fuentes / mapped / excluded** | **522 / 490 / 32** |
 | Familias estables | 44 |
 
-El núcleo actual es de **342 fuentes**: 206 contenedores (secciones, grupos, snippets, layouts, templates), 135 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 487 mapped. Las exclusiones conservan 31 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
+El núcleo actual es de **345 fuentes**: 208 contenedores (secciones, grupos, snippets, layouts, templates), 136 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 490 mapped. Las exclusiones conservan 31 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
 
 Hay **61 secciones con schema y 7 fragmentos sin schema**. Veintisiete secciones declaran **81 bloques: 73 declaraciones locales y 8 slots `@app`**; son declaraciones, no instancias ni tipos globales únicos. Los ocho sitios `{% render block %}` corresponden a apps. No hay archivos `blocks/`, ni infraestructura observada de theme blocks reutilizables mediante `content_for 'blocks'`. Los snippets composicionales y los bloques locales de sección no acreditan soporte de Shopify theme blocks. La matriz de secciones lista cada tipo; sus settings y opciones permanecen en el schema del archivo canónico enlazado, incluidas opciones no instanciadas en templates actuales.
 
@@ -446,19 +446,19 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/lemoon-size-guide-content.liquid](../../snippets/lemoon-size-guide-content.liquid), [snippets/lemoon-frame-dimensions.liquid](../../snippets/lemoon-frame-dimensions.liquid), [snippets/lemoon-frame-information.liquid](../../snippets/lemoon-frame-information.liquid), [snippets/lemoon-product-size-guide.liquid](../../snippets/lemoon-product-size-guide.liquid), [assets/lemoon-pdp-tools.js](../../assets/lemoon-pdp-tools.js).
 
-**Contrato actual.** Size content: product,instance_id(default product.id); custom.frame_dimensions/shape/material/size/width/weight/gender/face_shapes_compatible. frame-dimensions usa dimensions y dialog opcional para selector de unidades; frame-information pasa product e instance_id al contenido. size-guide drawer recibe product,section_id y crea instance_id propio. Tabs measurements/frame/fit con IDs únicos y unidades mm/in. LEM-129: `frame_dimensions` acepta únicamente números JSON positivos en las cinco claves conocidas; omite campos inválidos y muestra el vacío localizado si ninguno es válido. Las referencias A–E enlazan cotas del esquema frontal/lateral sin escala con las filas disponibles; no representan un SKU ni aportan medidas de ejemplo.
+**Contrato actual.** `lemoon-size-guide-content`: product, instance_id y presentation (`tabs` por defecto, `dialog` continuo). `custom.frame_dimensions/shape/material/size/width/weight/gender/face_shapes_compatible` conservan sus fuentes. `lemoon-frame-dimensions` usa dimensions, instance_id único y dialog opcional para selector; acepta solo números JSON positivos de cinco claves conocidas y muestra nota parcial o vacío sin datos válidos. No deriva cifras de talla/estilo. Frame-information conserva el default inline; los adaptadores estándar/óptico pasan dialog explícitamente.
 
-**Variantes existentes.** Tres tabs ARIA reales; contenido inline y drawer; datos ausentes -> mensaje localizado; no confundir con collapsible_tab.
+**Compartidos presentacionales.** [lemoon-frame-measurement-diagram](../../snippets/lemoon-frame-measurement-diagram.liquid) recibe instance_id/label y emite SVG frontal/lateral A–E con títulos únicos y figcaption sin escala. [lemoon-size-guide-comparison](../../snippets/lemoon-size-guide-comparison.liquid) recibe instance_id, heading_level(default2), show_heading(true salvo false), compact(false); ejemplo52 □18–145, tres filas de énfasis semántico y miniiconos decorativos. No recibe producto. Ambos usan [component-lemoon-size-guide.css](../../assets/component-lemoon-size-guide.css), cargado por el host PDP o measurements de guía.
 
-**CSS y excepciones.** .lemoon-size-guide*, .lemoon-size-drawer en PDP CSS; drawer máximo480px/100vw radio0, scroll local con cierre sticky siempre disponible y contenido largo ajustable; selector de unidad con altura48px y contorno/foco accesible; --lemoon-border-strong para tab seleccionado donde fuente lo usa.
+**Variantes y datos.** Inline: tres pestañas ARIA measurements/frame/fit con IDs propios y flechas/Home/End. Diálogo: medidas→comparación→características/ajuste disponibles bajo H3, sin roles de tabs. Se preservan los datos secundarios; vacíos omiten esas secciones. La guía CMS completa no se incrusta en dialog: enlace solo con URL/publicación/template guia-medidas; inline conserva su fallback legado. El código educativo no llena cifras ausentes y permanece en mm al cambiar la lista real a pulgadas.
 
-**Estados observados / aplicabilidad:** Normal: Tab measurements inicial; Hover: Botones tabs; Foco: Roving tabindex y flechas/Home/End del JS; Seleccionado: aria-selected y hidden panel sincronizados; Loading: No spinner propio; Error: Faltan datos es vacío, no error de red; Disabled: No disabled global.
+**CSS y responsive.** Drawer máximo480px/100vw radio0, scroll local, cierre sticky, selector48px y foco accesible. Dibujos siempre apilados dentro del drawer; la página puede usar dos columnas desde750px. Filas flexibles permiten bajar detalle y envolver código con texto ampliado, sin reducirlo para forzar columnas.
 
-**Responsive.** Drawer 100dvh y contenido overflow; diagrama fluido y cambio de unidades local. **Accesibilidad.** Preservar tablist/tab/tabpanel, aria-controls/labelledby, paneles enfocables y ciclo Tab/Shift+Tab dentro del diálogo según los controles visibles, instance_id en múltiples apariciones y retorno del dialog. La conversión mm/in queda confinada al bloque de dimensiones del selector que cambia.
+**Estados / accesibilidad.** Inline conserva selección/hidden y paneles enfocables; dialog conserva los controladores, Escape, contención/retorno de foco y cierre visible. Parcial/vacío se describe en texto, no como error de red. Valores/nombres en HTML; diagramas sin escala y ejemplo rotulado educativo. La conversión mm/in se confina al bloque cuyo selector cambia. Sin loading o formulario nuevo.
 
-**JS.** lemoon-pdp-tools.js: lemoon-size-guide, lemoon-product-tools y native dialog; óptica usa controlador propio para opener. **Reutilización actual.** Contenido/diagrama ya compartidos por PDP; shell dialog duplicado óptica/estándar. Retener adaptadores hasta prueba.
+**JS.** lemoon-pdp-tools.js: lemoon-size-guide, lemoon-product-tools y native dialog; óptica conserva controlador propio. No se agregó JavaScript para recursos estáticos. Dos shells se conservan deliberadamente; no hay motor genérico nuevo.
 
-**Dependencias de composición:** [LM-OVERLAY](#lm-overlay), [LM-ACTION](#lm-action), [LM-TYPE](#lm-type). Consumidores estáticos en el JSON.
+**Dependencias de composición:** [LM-OVERLAY](#lm-overlay), [LM-ACTION](#lm-action), [LM-TYPE](#lm-type); [LM-LEGAL](#lm-legal) reutiliza los gráficos educativos en su modo measurements. Consumidores estáticos en el JSON.
 
 <a id="lm-slider"></a>
 ### LM-SLIDER · Carruseles, slideshow y controles
@@ -902,6 +902,8 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 **JS.** Sin controlador propio de página; policy cookie help es LM-PRIVACY. **Reutilización actual.** Composiciones con markup inline duplicado; extraer shell solo tras campos/acciones y con contenido dueño validado.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type), [LM-ACTION](#lm-action), [LM-EDITORIAL](#lm-editorial). Consumidores estáticos en el JSON.
+
+La guía `measurements` añade H1 desde page.title o fallback, ocho campos de intro/pasos/ayuda text/richtext usados solo en ese modo y fallback para espacios/párrafos vacíos. Retira únicamente su figura genérica de hero y usa los gráficos compartidos en sus tres pasos educativos, sin producto ni selector de medidas. Conserva anclas/índice/ayuda. Las otras cuatro guías ignoran los overrides. Asignación CMS, SEO y editor real requieren comprobación de integración separada.
 
 <a id="lm-journal"></a>
 ### LM-JOURNAL · Blog, artículo, comentarios y compartir

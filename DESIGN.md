@@ -235,3 +235,15 @@ Para mantener la página de términos, partir de [page.terminos-y-condiciones.js
 4. Conservar enlaces del contenido y ayuda con foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
 5. El template contiene `demo_data:true`: el ticket de contenido [LEM-119](https://linear.app/antekera/issue/LEM-119) debe resolver el texto definitivo antes de publicar. Aplicar esta guía no cambia ese setting ni convierte el texto de muestra en términos comerciales.
 6. Revisar lectura, teclado, zoom, enlaces y desbordes a 390px y desktop, incluidos ambos lados de 750px. Verificar asignación CMS en la entrega de la página.
+
+### Guía de medidas: PDP y página educativa
+
+La implementación de LEM-129/105 fue autorizada con «Implementalo» el 07-11-2026 sobre [la propuesta basada en Zeelool](docs/superpowers/specs/2026-11-07-size-guide-pdp-page-design.md). Se conserva el drawer de máximo 480px y sus controladores. Su contenido es continuo: contexto del producto, medidas disponibles, lectura del código de patilla y datos secundarios existentes. Las tres pestañas se conservan exclusivamente en el contenido inline. No hay entrada nueva desde Home.
+
+[El dibujo frontal/lateral](snippets/lemoon-frame-measurement-diagram.liquid) y [la comparación de código](snippets/lemoon-size-guide-comparison.liquid) son originales y comparten [CSS](assets/component-lemoon-size-guide.css), tokens navy/warm y tipografía existentes. A–E se relacionan con nombres HTML; el esquema no tiene escala. El ejemplo 52 □ 18–145 está identificado como educativo, separado de los números del producto y no cambia al convertir mm/in. No se incorpora tabla universal de tallas. Las cotas solo usan números positivos conocidos de `custom.frame_dimensions`; talla textual y estilo no completan cifras ausentes.
+
+Los dibujos permanecen apilados dentro del drawer a todos los anchos. En la página, pueden usar dos columnas desde 750px. Las filas del ejemplo envuelven su detalle bajo el icono cuando el ancho o el tamaño de texto lo requiere; no reducen el texto para forzar columnas. Se conservan cierre sticky, unidades con campo de 48px, foco, Escape y restauración al opener. El modo continuo no emite roles de pestañas.
+
+`lemoon-guide-page` cambia solo su modo `measurements`: H1 de la página CMS o fallback, intro y tres pasos editables, sin figura genérica duplicada en el hero. Los pasos conservan sus anclas, índice y ayuda de familia. El código de patilla aparece en el primer paso y las cinco definiciones con esquema A–E en el segundo. Las demás cuatro guías conservan contenido y hero. Los cuerpos richtext se presentan sin anidar párrafos y los vacíos significativos usan el fallback localizado.
+
+El modal enlaza al page setting solo cuando tiene URL, publicación y plantilla `guia-medidas`; no inserta su cuerpo completo. El contenido inline conserva su respaldo legacy. La asignación CMS/SEO y la convención física del catálogo deben verificarse aparte: esta implementación no certifica las cifras de un SKU ni publica un tema.

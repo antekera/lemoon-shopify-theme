@@ -636,16 +636,18 @@
       "catalogue": "Explorar armazones",
       "contact": "Consultar al equipo",
       "measurements": {
-        "title": "Encuentra tu medida.",
-        "intro": "Un buen punto de partida es un armazón que ya te resulte cómodo. Compara sus medidas con las de la ficha del modelo que te gusta.",
+        "title": "Cómo medir tus lentes",
+        "intro": "Parte con unos lentes que te resulten cómodos. Aprende a leer el código de la patilla y a comparar sus medidas con las del armazón que estás mirando.",
         "visual_title": "Tres medidas, en milímetros.",
         "visual_copy": "Ancho del cristal · puente · largo de varilla. El dibujo es una referencia de las partes del armazón, no una escala de talla.",
-        "step_1_title": "Lee los números de tu armazón",
-        "step_1_body": "En algunas varillas aparecen tres números: ancho del cristal, ancho del puente y largo de la varilla, expresados en milímetros. El ancho del cristal corresponde a una lente; no al ancho total del armazón.",
-        "step_2_title": "Compara con la ficha del modelo",
-        "step_2_body": "Abre la guía de medidas del producto cuando esté disponible. Distingue ancho total, ancho del cristal, puente, alto y largo de varillas. Usa los datos de ese modelo; si falta una medida, consúltanos.",
-        "step_3_title": "Busca comodidad, además de números",
-        "step_3_body": "Las medidas ayudan a comparar, pero la forma del puente y las varillas también influyen en el ajuste. Toma como referencia un armazón cómodo y evita asumir que dos modelos de igual medida calzan igual."
+        "step_1_title": "1. Revisa la patilla",
+        "step_1_body": "<p>Busca los números impresos en la cara interior de una patilla, también llamada varilla. En algunos armazones aparecen tres medidas: ancho del cristal, puente y largo de patilla. Otros números o letras pueden identificar el modelo o el color.</p>",
+        "step_2_title": "2. Compara las mismas medidas",
+        "step_2_body": "<p>Si no encuentras el código, usa una regla en milímetros para tomar una referencia. Mira el armazón de frente para comparar su ancho y el de cada cristal. Mide el ancho total de un extremo exterior del frente al otro: no es la distancia entre las bisagras.</p><p>Para el largo de la patilla, considera el recorrido desde la bisagra hasta el extremo, incluida la parte que se curva hacia la oreja. No la dobles ni la endereces para medirla.</p><p>No calcules el ancho total sumando dos cristales y el puente: el borde y los extremos del marco también ocupan espacio.</p>",
+        "step_3_title": "3. Revisa la guía del modelo",
+        "step_3_body": "<p>En la ficha del armazón, abre «Guía de medidas» y compara cada dato con el de tus lentes. Usa las medidas que estén disponibles para ese modelo. Una talla escrita, como pequeño o mediano, no reemplaza las cifras en milímetros.</p><p>Dos armazones con medidas parecidas pueden sentirse distintos por la forma del puente y de las patillas. Toma la comparación como una referencia y, si te falta un dato, consulta antes de elegir.</p>",
+        "help_title": "¿Te falta una medida?",
+        "help_body": "<p>Revisa la ficha del modelo. Si falta el dato que necesitas para compararlo, puedes consultarlo antes de elegir.</p>"
       },
       "face": {
         "title": "Tu estilo no tiene una sola forma.",
@@ -1246,7 +1248,7 @@
     "lens_width": "Ancho del cristal",
     "bridge": "Puente",
     "lens_height": "Alto del cristal",
-    "temple": "Largo de varillas",
+    "temple": "Largo de patilla",
     "upload": "Subir receta (PDF o imagen)",
     "upload_note": "PDF, JPG o PNG, hasta 10 MB. El archivo se adjunta a tu producto y podrás verlo en el carrito.",
     "upload_error": "Selecciona un archivo PDF, JPG o PNG de hasta 10 MB.",
@@ -1324,5 +1326,34 @@
     "property_use": "Uso monofocal",
     "property_file": "Archivo de receta",
     "property_pd": "Distancia pupilar (mm)"
+  },
+  "lemoon_size_guide": {
+    "front_view": "Vista frontal",
+    "side_view": "Vista lateral",
+    "diagram_note": "Esquema de referencia, sin escala.",
+    "page_diagram_note": "Esquema educativo, sin escala. No representa un producto específico.",
+    "product_measurements": "Medidas de este armazón",
+    "product_intro": "Compáralas con unos lentes que te resulten cómodos. Revisa la misma medida en ambos armazones.",
+    "comparison_title": "Compara con tus lentes",
+    "comparison_intro": "Mira la cara interior de una patilla. Si encuentras tres números, pueden indicar el ancho del cristal, el puente y el largo de la patilla, en ese orden y en milímetros.",
+    "example": "Ejemplo:",
+    "educational_note": "Ejemplo educativo. No representa las medidas de un producto específico.",
+    "code_lens_width": "52 mm de ancho para un cristal.",
+    "code_bridge": "18 mm de separación entre los cristales.",
+    "code_temple": "145 mm desde la bisagra hasta el extremo de la patilla.",
+    "no_code": "¿No ves el código? Usa una regla en milímetros para comparar tu armazón. El ancho de un cristal y el ancho total son medidas distintas.",
+    "comparison_limit": "Las medidas ayudan a comparar. La forma del puente y de las patillas también influye en cómo se sienten dos armazones.",
+    "full_guide": "Cómo medir tus lentes",
+    "help_link": "Consultar una medida",
+    "catalogue": "Ver catálogo",
+    "close": "Cerrar guía de medidas",
+    "partial_measurements": "Se muestran las medidas disponibles de este armazón.",
+    "definitions": {
+      "frame_width": "De un extremo exterior del frente del armazón al otro.",
+      "lens_width": "Ancho horizontal de un cristal en su parte más ancha.",
+      "bridge": "Distancia más corta entre los dos cristales, en la zona del puente.",
+      "lens_height": "Altura vertical de un cristal en su parte más alta.",
+      "temple": "Desde la bisagra hasta el extremo de la patilla, siguiendo su recorrido."
+    }
   }
 }

@@ -385,6 +385,10 @@
           "label": "Menú"
         }
       }
+    },
+    "lemoon_size_guide": {
+      "page_label": "Página de guía de medidas",
+      "page_info": "El modal enlaza a la página publicada con plantilla guia-medidas; no inserta su contenido completo. La información inline conserva el contenido existente."
     }
   },
   "sections": {
@@ -3544,7 +3548,25 @@
       "face": "Tu estilo no tiene una sola forma.",
       "order": "Elige. Revisa. Haz tu pedido.",
       "try_on": "Mira cómo podría verse.",
-      "prescription": "Tu receta, con cuidado."
+      "prescription": "Tu receta, con cuidado.",
+      "measurements_editor_heading": "Contenido de la guía de medidas",
+      "measurements_editor_info": "Estos campos se usan solo en la guía de medidas. Un campo vacío muestra el texto traducido.",
+      "measurements_intro_label": "Introducción",
+      "measurements_intro_default": "<p>Parte con unos lentes que te resulten cómodos. Aprende a leer el código de la patilla y a comparar sus medidas con las del armazón que estás mirando.</p>",
+      "measurements_help_body_label": "Texto de ayuda",
+      "measurements_help_body_default": "<p>Revisa la ficha del modelo. Si falta el dato que necesitas para compararlo, puedes consultarlo antes de elegir.</p>",
+      "measurements_step_1_title_label": "Paso 1: título",
+      "measurements_step_1_body_label": "Paso 1: contenido",
+      "measurements_step_1_title_default": "1. Revisa la patilla",
+      "measurements_step_1_body_default": "<p>Busca los números impresos en la cara interior de una patilla, también llamada varilla. En algunos armazones aparecen tres medidas: ancho del cristal, puente y largo de patilla. Otros números o letras pueden identificar el modelo o el color.</p>",
+      "measurements_step_2_title_label": "Paso 2: título",
+      "measurements_step_2_body_label": "Paso 2: contenido",
+      "measurements_step_2_title_default": "2. Compara las mismas medidas",
+      "measurements_step_2_body_default": "<p>Si no encuentras el código, usa una regla en milímetros para tomar una referencia. Mira el armazón de frente para comparar su ancho y el de cada cristal. Mide el ancho total de un extremo exterior del frente al otro: no es la distancia entre las bisagras.</p><p>Para el largo de la patilla, considera el recorrido desde la bisagra hasta el extremo, incluida la parte que se curva hacia la oreja. No la dobles ni la endereces para medirla.</p><p>No calcules el ancho total sumando dos cristales y el puente: el borde y los extremos del marco también ocupan espacio.</p>",
+      "measurements_step_3_title_label": "Paso 3: título",
+      "measurements_step_3_body_label": "Paso 3: contenido",
+      "measurements_step_3_title_default": "3. Revisa la guía del modelo",
+      "measurements_step_3_body_default": "<p>En la ficha del armazón, abre «Guía de medidas» y compara cada dato con el de tus lentes. Usa las medidas que estén disponibles para ese modelo. Una talla escrita, como pequeño o mediano, no reemplaza las cifras en milímetros.</p><p>Dos armazones con medidas parecidas pueden sentirse distintos por la forma del puente y de las patillas. Toma la comparación como una referencia y, si te falta un dato, consulta antes de elegir.</p>"
     },
     "lemoon_faq_page": {
       "name": "Preguntas frecuentes Lemoon",

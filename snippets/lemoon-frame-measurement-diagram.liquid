@@ -1,0 +1,41 @@
+{% doc %}
+  Original, schematic frame views shared by the PDP and educational guide.
+  @param {string} instance_id - Unique prefix for accessible SVG titles.
+  @param {string} label - Localized description of both views; no product values.
+{% enddoc %}
+<figure class="lemoon-measurement-diagram">
+  <div class="lemoon-measurement-diagram__views">
+    <div class="lemoon-measurement-diagram__view">
+      <svg viewBox="0 0 400 218" role="img" aria-labelledby="FrameFront-{{ instance_id | escape }}" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <title id="FrameFront-{{ instance_id | escape }}">{{ 'lemoon_size_guide.front_view' | t | escape }}</title>
+        <g stroke-width="3">
+          <rect x="28" y="64" width="142" height="102" rx="30"/>
+          <rect x="230" y="64" width="142" height="102" rx="30"/>
+          <path d="M170 100Q200 84 230 100M28 84H17M372 84H383"/>
+          <rect x="42" y="78" width="114" height="74" rx="20" stroke-width="1.5"/>
+          <rect x="244" y="78" width="114" height="74" rx="20" stroke-width="1.5"/>
+        </g>
+        <g stroke-width="1.2">
+          <path d="M17 40H383M17 33V47M383 33V47M42 182H156M42 175V189M156 175V189M156 116H244M156 109V123M244 109V123M378 78V152M372 78H384M372 152H384"/>
+        </g>
+        <g fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">
+          <text x="200" y="27">A</text><text x="99" y="207">B</text><text x="200" y="142">C</text><text x="391" y="120">D</text>
+        </g>
+      </svg>
+      <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.front_view' | t }}</p>
+    </div>
+    <div class="lemoon-measurement-diagram__view">
+      <svg viewBox="0 0 400 164" role="img" aria-labelledby="FrameSide-{{ instance_id | escape }}" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <title id="FrameSide-{{ instance_id | escape }}">{{ 'lemoon_size_guide.side_view' | t | escape }}</title>
+        <g stroke-width="3">
+          <path d="M30 93L274 73Q302 71 316 94L337 130Q341 137 347 132L352 127Q356 123 353 118L331 82Q315 57 282 59L30 79Z"/>
+          <path d="M30 79L22 84V97L30 93M42 80V92"/>
+        </g>
+        <g stroke-width="1.2"><path d="M35 54L276 35Q318 32 343 75L373 126M31 48L39 60M367 130L379 122"/></g>
+        <text x="197" y="24" fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">E</text>
+      </svg>
+      <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.side_view' | t }}</p>
+    </div>
+  </div>
+  <figcaption>{{ label | escape }}</figcaption>
+</figure>
