@@ -1,0 +1,276 @@
+{
+  "snapshot": "2026-11-06T05:14:18.597Z",
+  "notice": "Muestras internas observadas; no aprobación comercial ni prueba de publicación. Media sin vincular.",
+  "products": [
+    {
+      "id": "gid://shopify/Product/9581567869096",
+      "title": "Lemoon Artico",
+      "handle": "lemoon-artico",
+      "variant": "gid://shopify/ProductVariant/55898368049320",
+      "price": "1199",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-05T13:57:46Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581567901864",
+      "title": "Lemoon Bora",
+      "handle": "lemoon-bora",
+      "variant": "gid://shopify/ProductVariant/55898368082088",
+      "price": "499",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:43Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581567934632",
+      "title": "Lemoon Cairo",
+      "handle": "lemoon-cairo",
+      "variant": "gid://shopify/ProductVariant/55898368147624",
+      "price": "1199",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:43Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568000168",
+      "title": "Lemoon Dorado",
+      "handle": "lemoon-dorado",
+      "variant": "gid://shopify/ProductVariant/55898368180392",
+      "price": "1399",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:43Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568032936",
+      "title": "Lemoon Estero",
+      "handle": "lemoon-estero",
+      "variant": "gid://shopify/ProductVariant/55898368213160",
+      "price": "699",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-05T13:57:46Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568065704",
+      "title": "Lemoon Faro",
+      "handle": "lemoon-faro",
+      "variant": "gid://shopify/ProductVariant/55898368245928",
+      "price": "599",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-05T13:57:46Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568131240",
+      "title": "Lemoon Genova",
+      "handle": "lemoon-genova",
+      "variant": "gid://shopify/ProductVariant/55898368311464",
+      "price": "1399",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-05T13:57:46Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568164008",
+      "title": "Lemoon Hana",
+      "handle": "lemoon-hana",
+      "variant": "gid://shopify/ProductVariant/55898368344232",
+      "price": "1399",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:44Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568229544",
+      "title": "Lemoon Inca",
+      "handle": "lemoon-inca",
+      "variant": "gid://shopify/ProductVariant/55898368377000",
+      "price": "399",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:44Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568262312",
+      "title": "Lemoon Jade",
+      "handle": "lemoon-jade",
+      "variant": "gid://shopify/ProductVariant/55898368409768",
+      "price": "999",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-05T13:57:46Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568295080",
+      "title": "Lemoon Kali",
+      "handle": "lemoon-kali",
+      "variant": "gid://shopify/ProductVariant/55898368442536",
+      "price": "1199",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:45Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568360616",
+      "title": "Lemoon Lima",
+      "handle": "lemoon-lima",
+      "variant": "gid://shopify/ProductVariant/55898368475304",
+      "price": "499",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:45Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568426152",
+      "title": "Lemoon Maipo",
+      "handle": "lemoon-maipo",
+      "variant": "gid://shopify/ProductVariant/55898368770216",
+      "price": "899",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:45Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568524456",
+      "title": "Lemoon Nilo",
+      "handle": "lemoon-nilo",
+      "variant": "gid://shopify/ProductVariant/55898368835752",
+      "price": "1399",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:45Z"
+    },
+    {
+      "id": "gid://shopify/Product/9581568557224",
+      "title": "Lemoon Oslo",
+      "handle": "lemoon-oslo",
+      "variant": "gid://shopify/ProductVariant/55898368868520",
+      "price": "999",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "available": true,
+      "updatedAt": "2026-11-04T21:20:45Z"
+    }
+  ]
+}

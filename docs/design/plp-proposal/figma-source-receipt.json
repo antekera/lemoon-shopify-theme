@@ -1,0 +1,16 @@
+{
+  "fileKey": "9EgE1vntKfwoQIQTzBUBNg",
+  "observedOn": "2026-11-06",
+  "version": "not exposed by connector",
+  "method": "get_metadata root0:1; get_design_context with screenshots for three catalog frames",
+  "metadataExcerpt": [
+    "  <frame id=\"62:146\" name=\"Catalog / Desktop\" x=\"3200\" y=\"0\" width=\"1440\" height=\"2020\">",
+    "    <frame id=\"269:689\" name=\"Catalog / Desktop / Direction 02\" x=\"1320\" y=\"80\" width=\"1200\" height=\"1810\">",
+    "      <rounded-rectangle id=\"304:583\" name=\"PLP product-grid banner image placeholder\" x=\"282\" y=\"200\" width=\"878\" height=\"160\" />",
+    "      <text id=\"304:584\" name=\"PLP product-grid banner label\" x=\"570\" y=\"273\" width=\"269\" height=\"16\" />",
+    "    <frame id=\"270:657\" name=\"Catalog / Mobile / Direction 02\" x=\"470\" y=\"1780\" width=\"390\" height=\"1700\">",
+    "      <rounded-rectangle id=\"304:585\" name=\"PLP product-grid banner image placeholder\" x=\"20\" y=\"108\" width=\"350\" height=\"160\" />",
+    "      <text id=\"304:586\" name=\"PLP product-grid banner label\" x=\"137\" y=\"170\" width=\"121\" height=\"26\" />"
+  ],
+  "approval": "not established"
+}

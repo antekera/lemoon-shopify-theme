@@ -1,0 +1,40 @@
+{
+  "method": "WCAG sRGB relative luminance of solid design colors; no certification of storefront or browser forced colors",
+  "pairs": [
+    {
+      "foreground": "#0B1F3A",
+      "background": "#FFFFFF",
+      "ratio": 16.518
+    },
+    {
+      "foreground": "#51575E",
+      "background": "#F7F4EE",
+      "ratio": 6.654
+    },
+    {
+      "foreground": "#1A1A1A",
+      "background": "#FFFFFF",
+      "ratio": 17.404
+    },
+    {
+      "foreground": "#6685AD",
+      "background": "#FFFFFF",
+      "ratio": 3.802
+    },
+    {
+      "foreground": "#6685AD",
+      "background": "#F7F4EE",
+      "ratio": 3.463
+    },
+    {
+      "foreground": "#C0392B",
+      "background": "#FFFFFF",
+      "ratio": 5.438
+    },
+    {
+      "foreground": "#0B1F3A",
+      "background": "#F7E600",
+      "ratio": 12.801
+    }
+  ]
+}

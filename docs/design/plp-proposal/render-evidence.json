@@ -1,0 +1,796 @@
+{
+  "date": "2026-11-06T05:31:00.886Z",
+  "environment": "Existing Playwright, headless Chromium, local file URL; static design only",
+  "results": [
+    {
+      "width": 320,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 142,
+        "height": 136.3125,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 142,
+        "height": 18.1875,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "13px",
+        "line": "18.2px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 142,
+        "height": 20.796875,
+        "font": "Urbanist, sans-serif",
+        "size": "16px",
+        "line": "20.8px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "142px 142px"
+    },
+    {
+      "width": 390,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 177,
+        "height": 169.90625,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 177,
+        "height": 18.1875,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "13px",
+        "line": "18.2px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 177,
+        "height": 20.796875,
+        "font": "Urbanist, sans-serif",
+        "size": "16px",
+        "line": "20.8px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "177px 177px"
+    },
+    {
+      "width": 749,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 356.5,
+        "height": 342.234375,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 356.5,
+        "height": 18.1875,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "13px",
+        "line": "18.2px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 356.5,
+        "height": 20.796875,
+        "font": "Urbanist, sans-serif",
+        "size": "16px",
+        "line": "20.8px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "356.5px 356.5px"
+    },
+    {
+      "width": 750,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 219,
+        "height": 210.234375,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 219,
+        "height": 19.59375,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "14px",
+        "line": "19.6px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 219,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "219px 219px"
+    },
+    {
+      "width": 820,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 254,
+        "height": 243.828125,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 254,
+        "height": 19.59375,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "14px",
+        "line": "19.6px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 254,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "254px 254px"
+    },
+    {
+      "width": 989,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 338.5,
+        "height": 324.953125,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 338.5,
+        "height": 19.59375,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "14px",
+        "line": "19.6px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 338.5,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "338.5px 338.5px"
+    },
+    {
+      "width": 990,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 202,
+        "height": 193.90625,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 202,
+        "height": 21,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "15px",
+        "line": "21px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 202,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "202px 202px 202px"
+    },
+    {
+      "width": 1279,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 298.328125,
+        "height": 280,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 298.328125,
+        "height": 21,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "15px",
+        "line": "21px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 298.328125,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "298.328px 298.328px 298.344px"
+    },
+    {
+      "width": 1280,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 286.65625,
+        "height": 275.1875,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 286.65625,
+        "height": 21,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "15px",
+        "line": "21px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 286.65625,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "286.656px 286.672px 286.656px"
+    },
+    {
+      "width": 1440,
+      "overflow": false,
+      "h1": 1,
+      "fonts": [
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "loaded"
+        },
+        {
+          "family": "Hanken Grotesk",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "loaded"
+        },
+        {
+          "family": "Urbanist",
+          "status": "unloaded"
+        }
+      ],
+      "media": {
+        "width": 340,
+        "height": 280,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "16px",
+        "line": "24px",
+        "weight": "400",
+        "radius": "12px",
+        "background": "rgb(247, 244, 238)"
+      },
+      "title": {
+        "width": 340,
+        "height": 21,
+        "font": "\"Hanken Grotesk\", sans-serif",
+        "size": "15px",
+        "line": "21px",
+        "weight": "400",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "price": {
+        "width": 340,
+        "height": 22.09375,
+        "font": "Urbanist, sans-serif",
+        "size": "17px",
+        "line": "22.1px",
+        "weight": "600",
+        "radius": "0px",
+        "background": "rgba(0, 0, 0, 0)"
+      },
+      "grid": "340px 340px 340px"
+    },
+    {
+      "state": "drawer",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "state": "empty",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "state": "zero",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "state": "loading",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "state": "error",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "drawerFocus": "<summary>Género</summary>"
+    },
+    {
+      "escapeRestores": true,
+      "bodyUnlock": true
+    },
+    {
+      "stress320Overflow": false
+    },
+    {
+      "usedFontsReady": true,
+      "images": [
+        {
+          "src": "../../../assets/lemoon-logo-refined-navy.svg",
+          "loaded": true
+        }
+      ]
+    },
+    {
+      "tabWrap": true
+    },
+    {
+      "shiftTabWrap": true
+    }
+  ]
+}

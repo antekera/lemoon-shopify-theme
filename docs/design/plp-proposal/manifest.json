@@ -1,0 +1,328 @@
+{
+  "base": "0cada135da9534cd91b29b50cf0db9a64184e962",
+  "branch": "chore/lem-135-plp-design",
+  "status": "author proposal; independent and human review pending",
+  "sourceDate": "2026-11-06T05:14:18.597Z",
+  "sourceIntakeSHA256": "4cc81d75df0ef6d3a784ac9fa685431de9dc3f07a9e7409fa3a7b580059bcd65",
+  "files": [
+    {
+      "path": "docs/design/plp-proposal/README.md",
+      "bytes": 4602,
+      "sha256": "568e384d897f524e217d959b7c4ea5268f6bb59a6fd19c3686a575973d1f5cc5"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/LICENSE-hankengrotesk.txt",
+      "bytes": 4402,
+      "sha256": "e02ccb89a86839b22feff7872ff5cc355cc0f58318d29eee20e2cf83a612f16d"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/LICENSE-urbanist.txt",
+      "bytes": 4385,
+      "sha256": "ee1221b1c2d08920e5f9ca764eb228dafa5c8090df9cf665373c2287b9cb8f49"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-0.ttf",
+      "bytes": 57248,
+      "sha256": "451376abefae9121f5dd0372d26865e7654b1041b9fdacdf57c6bd5cbf691da0"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-1.ttf",
+      "bytes": 57240,
+      "sha256": "366c9f60de8654362826a500399e568e6198696b8fbd999ba7d0c03c9ba742b6"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-2.ttf",
+      "bytes": 57212,
+      "sha256": "b7a672834374ef3a96e81abd2fd9bb61b282d3e75711fd4d9097e7e2e8c3b823"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-3.ttf",
+      "bytes": 57144,
+      "sha256": "e9d18189973e32e2614842ca777412639245271ee5016cbbc5024b9081d686dc"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-4.ttf",
+      "bytes": 41128,
+      "sha256": "c6b87c6459b61470cb7b2f46c85fd8ee6933257224cef908128d54e7ab0a55cc"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-5.ttf",
+      "bytes": 41060,
+      "sha256": "599ec73b0a0388ba35a861b6f40bb77f9874b77c13f6499b15ad734f5715505c"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-6.ttf",
+      "bytes": 41116,
+      "sha256": "7b9e538738641d4243175732167b2a9fe440f139fc783547846673988d87c95c"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-7.ttf",
+      "bytes": 41108,
+      "sha256": "beb886f39281fdb7f0927346b8d7ff5141a2866a43f21c5251fa73eed783224f"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/font-8.ttf",
+      "bytes": 40984,
+      "sha256": "e166b470f65b6c2a7bc8ac8718273ac63882e215caa76e1de7dc25c8875d243d"
+    },
+    {
+      "path": "docs/design/plp-proposal/assets/fonts.css",
+      "bytes": 1365,
+      "sha256": "c36e7716c0a3a258b7dd82c333e01d425faecb9f3c72a9ad455d73268cf8c9a0"
+    },
+    {
+      "path": "docs/design/plp-proposal/catalog-samples.json",
+      "bytes": 6614,
+      "sha256": "610a99a5abe742b89324739501d319b30f8e580eb6df4be5d6fccca73b7c79f1"
+    },
+    {
+      "path": "docs/design/plp-proposal/contrast-evidence.json",
+      "bytes": 819,
+      "sha256": "ee178ad00f86d7bf6170c89c837f7ed94ad0c7e42a7475e008fcfabaf0ac6289"
+    },
+    {
+      "path": "docs/design/plp-proposal/correction-evidence.json",
+      "bytes": 13435,
+      "sha256": "005b68c4edc4c3fed5d166ce05fbd8f06ffabfc87a3b4afc926952389891af91"
+    },
+    {
+      "path": "docs/design/plp-proposal/figma-source-receipt.json",
+      "bytes": 1178,
+      "sha256": "a0af5eb359a874babea6a19e47a4545299984f81083226d39cc9f241b91fd8f4"
+    },
+    {
+      "path": "docs/design/plp-proposal/font-provenance.json",
+      "bytes": 1572,
+      "sha256": "1b2f66b068dbb241b1f165911f6ffc2bb1bed086061fca24ff193a36a7b28521"
+    },
+    {
+      "path": "docs/design/plp-proposal/index.html",
+      "bytes": 3429,
+      "sha256": "8ed96726a64518fc199b86137bf0189bf4680abd0a25e03407705fc6c5e4809b"
+    },
+    {
+      "path": "docs/design/plp-proposal/proposal.css",
+      "bytes": 9823,
+      "sha256": "46978943029550771748ce619c6d73db028099bc1152f980df0cf737198f3a3d"
+    },
+    {
+      "path": "docs/design/plp-proposal/proposal.js",
+      "bytes": 6958,
+      "sha256": "ba0e9197ad016007c907b171e81862f75b1cb305863bea14742be94b2f3524b9"
+    },
+    {
+      "path": "docs/design/plp-proposal/render-evidence.json",
+      "bytes": 17997,
+      "sha256": "fdfb54fd62a92187ac074acd2ade8e322b002c48f8557b0a47128e72ae9c3e9f"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/drawer-390.png",
+      "bytes": 41489,
+      "sha256": "071fe3cb3c9f187c1a8f0040bfb7562dcaa6688714c60cc6e6855e72b95258a9"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/empty-390.png",
+      "bytes": 37300,
+      "sha256": "1daf98a0968f192aac7555afc0124c3ef7daa3a835bf67f1434938b7add8b78c"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/error-390.png",
+      "bytes": 41043,
+      "sha256": "89fe8d270d40f2a5e1740dff675d329535dd2544857cccc4bb2b917510502e34"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/loading-390.png",
+      "bytes": 36586,
+      "sha256": "3e16449d62b90fe916fad6d10a267d9015360645fafaafa4f3a2b9cda3f77f65"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/optional-1440.png",
+      "bytes": 180063,
+      "sha256": "518aef1f81a5f1ae8b9dd63611eca31c4a2efb5a2616c76464757118b44ec21c"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/optional-320.png",
+      "bytes": 160543,
+      "sha256": "ee7bedd7e3a52de8ae866b745ccb25baed780ac2cbe2760547d4457c9e8d801d"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/optional-390.png",
+      "bytes": 162042,
+      "sha256": "a23f37d4163513463e385463cb60a1e2be050cce2dd68541ef2af36863e6ee34"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/plp-1440.png",
+      "bytes": 151646,
+      "sha256": "bd155912f042a6201c69d3f37df979602791d86f01f3dafa089d9b6d8e59aada"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/plp-390.png",
+      "bytes": 134965,
+      "sha256": "d1c50c7312b7c606e9b66678d6690a9c6721ac3b5a3f763cdfbfb12643a6cff1"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/plp-820.png",
+      "bytes": 176418,
+      "sha256": "31852cc903cfebdd368ee05eb86c26d84c1b9ec3b47bc6f54a9a6d81b7e868cd"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/states-1440.png",
+      "bytes": 220192,
+      "sha256": "4cbfd248c36090b7640c38add5659b13627879728b9d23e1bb3168b87d0efdac"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/states-320.png",
+      "bytes": 213138,
+      "sha256": "d2e732c8c005467580fb835aa549f50247eaffab51c631626a3d786156767452"
+    },
+    {
+      "path": "docs/design/plp-proposal/renders/zero-390.png",
+      "bytes": 44293,
+      "sha256": "5ec66c961b0618c4af4d7307596c531baa9628793d8758201b2cd7b288ddf9e8"
+    },
+    {
+      "path": "docs/design/plp-proposal/samples.js",
+      "bytes": 4348,
+      "sha256": "5f4429b88e1977d8b2a8acd63c1c90009041b80883c2dd5d340e7bd90ac921c2"
+    },
+    {
+      "path": "docs/design/plp-proposal/states.html",
+      "bytes": 4082,
+      "sha256": "392ce31f9a06eac5064ed75912efdaa228b145527b34121fbce60e7a36d519f3"
+    },
+    {
+      "path": "docs/design/plp-design-spec.md",
+      "bytes": 24902,
+      "sha256": "9e34990fdd835725131710a466e596497402324dc97f4f84dae01e1f1337b958"
+    }
+  ],
+  "baseSourcesAndDependencies": [
+    {
+      "path": "DESIGN.md",
+      "bytes": 32911,
+      "sha256": "25e1e85bf4abd59893a6d867cec26217ff56d005385a4afc08f275bbed8e1d50"
+    },
+    {
+      "path": "docs/design/brand-guidelines.md",
+      "bytes": 13773,
+      "sha256": "851738bc049bcc00c46c0c1c434188eb0553db3d146411a3ff736ccecea36e6b"
+    },
+    {
+      "path": "docs/design/design-plan.md",
+      "bytes": 8366,
+      "sha256": "5f9a188ec5414f585bca3ca60fef845221bb39e90fa31b475f6ce3755ca6100c"
+    },
+    {
+      "path": "docs/design/brand-strategy.md",
+      "bytes": 6057,
+      "sha256": "7fa1955c8bae41ec264521c6c456f791bcf208330a3da58931649ee8092bd3f0"
+    },
+    {
+      "path": "docs/design/page-inventory.md",
+      "bytes": 12025,
+      "sha256": "156eed6fe49f15db735cf576b52fa8f926347c8aba04730551df58134c50b351"
+    },
+    {
+      "path": "docs/components/README.md",
+      "bytes": 26447,
+      "sha256": "0a19ca1726ee5fd0c83100840ef0f036fad12cd19f4c3ba4a29c20f78b2a7445"
+    },
+    {
+      "path": "docs/components/recipes/product-card-grid.md",
+      "bytes": 9051,
+      "sha256": "3e25a9751e94fe370c0a9ec9d5df1d2541334524f6d607ff55baa83c8af1749d"
+    },
+    {
+      "path": "docs/architecture/adr-002-eyewear-purchase.md",
+      "bytes": 6584,
+      "sha256": "da5ff0e0990d5711934e162fddc6a608f22fbcac453a7e81c99d6bdbbbfd225f"
+    },
+    {
+      "path": "docs/shopify-collection-plp-setup.md",
+      "bytes": 6355,
+      "sha256": "635f32c1852de2c828daf82289e4b35935c3b46344c4e3bf8c40c2eb4acb2a75"
+    },
+    {
+      "path": "templates/collection.json",
+      "bytes": 1188,
+      "sha256": "04c8b37d0cf2ee4541428db597cd8b9979289b784b52623f26a37b966684db2f"
+    },
+    {
+      "path": "templates/cart.json",
+      "bytes": 945,
+      "sha256": "4dd60d9dc4d79cb1d828af1e6c5a927d5ac4e8213cab3fea7982097b3efb2b9a"
+    },
+    {
+      "path": "sections/main-collection-product-grid.liquid",
+      "bytes": 16861,
+      "sha256": "49f7abc1415eb7f6f0b0fa3e4b9694565459d67a21f1fa0750bffdc668bd7d3e"
+    },
+    {
+      "path": "sections/main-collection-banner.liquid",
+      "bytes": 519,
+      "sha256": "c33f4334a92529d21070cabdb255f19b3dc5891afc4e515dfd574aaba574caa5"
+    },
+    {
+      "path": "sections/main-cart-items.liquid",
+      "bytes": 26808,
+      "sha256": "e59e9836460798c51ce02e11c5831169eefb26562801eb8b72c84b6fd8229ee2"
+    },
+    {
+      "path": "sections/main-cart-footer.liquid",
+      "bytes": 5409,
+      "sha256": "8533576fa17bbe882cbac54a26009ba9e870e8ec41e6806a418c123e4896c33e"
+    },
+    {
+      "path": "snippets/card-product.liquid",
+      "bytes": 22775,
+      "sha256": "d01afc37db03b8fffc0beb6b18ec9226a4428a2928c1f9fa8291fba86eb32879"
+    },
+    {
+      "path": "snippets/facets.liquid",
+      "bytes": 23042,
+      "sha256": "59c8ed0c01604700e0eb959acdd7ace0a9f500bd1b68d12cd67bf76183ad27f2"
+    },
+    {
+      "path": "assets/lemoon-collection-plp.css",
+      "bytes": 32901,
+      "sha256": "47ccfa863817d2ac8f3a660b8587f25e9214b8ed9321b1c897905bd3f2398215"
+    },
+    {
+      "path": "assets/lens-configurator.js",
+      "bytes": 14636,
+      "sha256": "b226ace2685d70bc8b37efde867ffaf009b7dee1682228b01ba667bd37726657"
+    },
+    {
+      "path": "snippets/lemoon-plp-product-page.liquid",
+      "bytes": 2291,
+      "sha256": "4bcb6943a25b21b0b9e748ee97e1c711b5fd2c8f0f23da63d49954f67c96511a"
+    },
+    {
+      "path": "snippets/lemoon-active-filters.liquid",
+      "bytes": 1507,
+      "sha256": "48bb1d57f5964e834e7ea64103ac3074ca589b96c1ff5f27c11d56e8f2d3a915"
+    },
+    {
+      "path": "assets/lemoon-collection-plp.js",
+      "bytes": 10066,
+      "sha256": "a7c71e8716d4b557cb7ce2fb29690354c5949ca42f2a8357899c959d97589d83"
+    },
+    {
+      "path": "assets/lemoon-logo-refined-navy.svg",
+      "bytes": 6733,
+      "sha256": "3a74fbcf348989f5ff55b66b0da552cb05fc8d16712797b5909b57c0168f0d83"
+    },
+    {
+      "path": "docs/components/recipes/search-sort.md",
+      "bytes": 5417,
+      "sha256": "0b748e02585cf7ca5a2ccc2998f3662a7a8acde159c6338e34702cbfab00897f"
+    },
+    {
+      "path": "assets/lemoon-tokens.css",
+      "bytes": 9651,
+      "sha256": "1018350f97ad06e8f33506602ac6d99dc5d8c9184947bc8011d2fe3014c80b28"
+    }
+  ],
+  "rights": "Fonts: bundled SIL OFL; logo: existing Lemoon official asset; no product photography generated/downloaded; neutral anatomy slots are CSS",
+  "scope": "Documentation only; canonical DESIGN and runtime unchanged"
+}

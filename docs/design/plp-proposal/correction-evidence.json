@@ -1,0 +1,570 @@
+{
+  "scope": "Focused author correction P2/P3; static local Chromium only; independent re-review pending",
+  "command": "node /tmp/lem-135-correction-check.cjs before; node /tmp/lem-135-correction-check.cjs after",
+  "before": {
+    "date": "2026-11-06T05:39:28.000Z",
+    "records": [
+      {
+        "width": 320,
+        "optional": true,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 137.5,
+          "bottom": 307.5,
+          "height": 170,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 351.5,
+          "bottom": 385.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "890759b8b37dee884fa1c1feef005a1854dde683b0f3d0358540c6b885cfaca6"
+      },
+      {
+        "width": 390,
+        "optional": true,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 137.5,
+          "bottom": 307.5,
+          "height": 170,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 351.5,
+          "bottom": 385.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "1a2f60aa010cc827f55e4a7c1ac695d0227832e22fe3d7683a8d4c2937ec0fce"
+      },
+      {
+        "width": 320,
+        "optional": false,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 157.5,
+          "bottom": 191.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "03c8310efdf634b281c1d16b05b82493efda38774802fd2766a5d648c3bb2d7c"
+      },
+      {
+        "width": 390,
+        "optional": false,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 157.5,
+          "bottom": 191.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "d1c50c7312b7c606e9b66678d6690a9c6721ac3b5a3f763cdfbfb12643a6cff1"
+      },
+      {
+        "width": 1440,
+        "optional": true,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 34,
+          "bottom": 106,
+          "height": 72,
+          "visible": true
+        },
+        "banner": {
+          "top": 132,
+          "bottom": 304.796875,
+          "height": 172.796875,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "desktopBreadcrumb": {
+          "top": 132,
+          "bottom": 151.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "heading": {
+          "top": 328.796875,
+          "bottom": 364.796875,
+          "height": 36,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "518aef1f81a5f1ae8b9dd63611eca31c4a2efb5a2616c76464757118b44ec21c"
+      },
+      {
+        "width": 1440,
+        "optional": false,
+        "dom": [
+          "breadcrumb mobile",
+          "banner",
+          "intro"
+        ],
+        "header": {
+          "top": 34,
+          "bottom": 106,
+          "height": 72,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "desktopBreadcrumb": {
+          "top": 132,
+          "bottom": 151.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "heading": {
+          "top": 132,
+          "bottom": 168,
+          "height": 36,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "bd155912f042a6201c69d3f37df979602791d86f01f3dafa089d9b6d8e59aada"
+      }
+    ]
+  },
+  "after": {
+    "date": "2026-11-06T05:39:36.599Z",
+    "records": [
+      {
+        "width": 320,
+        "optional": true,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 122,
+          "bottom": 292,
+          "height": 170,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 316,
+          "bottom": 335.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 351.5,
+          "bottom": 385.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "ee7bedd7e3a52de8ae866b745ccb25baed780ac2cbe2760547d4457c9e8d801d"
+      },
+      {
+        "width": 390,
+        "optional": true,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 122,
+          "bottom": 292,
+          "height": 170,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 316,
+          "bottom": 335.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 351.5,
+          "bottom": 385.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "a23f37d4163513463e385463cb60a1e2be050cce2dd68541ef2af36863e6ee34"
+      },
+      {
+        "width": 320,
+        "optional": false,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 157.5,
+          "bottom": 191.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "03c8310efdf634b281c1d16b05b82493efda38774802fd2766a5d648c3bb2d7c"
+      },
+      {
+        "width": 390,
+        "optional": false,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 46,
+          "bottom": 102,
+          "height": 56,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 122,
+          "bottom": 141.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "desktopBreadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": true
+        },
+        "heading": {
+          "top": 157.5,
+          "bottom": 191.09375,
+          "height": 33.59375,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "d1c50c7312b7c606e9b66678d6690a9c6721ac3b5a3f763cdfbfb12643a6cff1"
+      },
+      {
+        "width": 1440,
+        "optional": true,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 34,
+          "bottom": 106,
+          "height": 72,
+          "visible": true
+        },
+        "banner": {
+          "top": 132,
+          "bottom": 304.796875,
+          "height": 172.796875,
+          "visible": true
+        },
+        "breadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "desktopBreadcrumb": {
+          "top": 132,
+          "bottom": 151.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "heading": {
+          "top": 328.796875,
+          "bottom": 364.796875,
+          "height": 36,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "518aef1f81a5f1ae8b9dd63611eca31c4a2efb5a2616c76464757118b44ec21c"
+      },
+      {
+        "width": 1440,
+        "optional": false,
+        "dom": [
+          "banner",
+          "breadcrumb mobile",
+          "intro"
+        ],
+        "header": {
+          "top": 34,
+          "bottom": 106,
+          "height": 72,
+          "visible": true
+        },
+        "banner": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "breadcrumb": {
+          "top": 0,
+          "bottom": 0,
+          "height": 0,
+          "visible": false
+        },
+        "desktopBreadcrumb": {
+          "top": 132,
+          "bottom": 151.5,
+          "height": 19.5,
+          "visible": true
+        },
+        "heading": {
+          "top": 132,
+          "bottom": 168,
+          "height": 36,
+          "visible": true
+        },
+        "overflow": false,
+        "h1Count": 1,
+        "fontsReady": true,
+        "screenshotSHA256": "bd155912f042a6201c69d3f37df979602791d86f01f3dafa089d9b6d8e59aada"
+      },
+      {
+        "drawerTabWrap": true,
+        "drawerShiftTabWrap": true,
+        "escapeRestores": true,
+        "scrollUnlock": true
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "width": 320,
+      "optional": true,
+      "screenshotUnchanged": false
+    },
+    {
+      "width": 390,
+      "optional": true,
+      "screenshotUnchanged": false
+    },
+    {
+      "width": 320,
+      "optional": false,
+      "screenshotUnchanged": true
+    },
+    {
+      "width": 390,
+      "optional": false,
+      "screenshotUnchanged": true
+    },
+    {
+      "width": 1440,
+      "optional": true,
+      "screenshotUnchanged": true
+    },
+    {
+      "width": 1440,
+      "optional": false,
+      "screenshotUnchanged": true
+    }
+  ],
+  "visualInspection": "Directly inspected 320x844 and 390x844 viewport PNGs of corrected optional state; full-page counterparts delivered",
+  "historicalEvidence": "render-evidence.json, contrast-evidence.json and existing eleven PNGs unchanged, retained from initial authorship; not rerun as a broad suite"
+}
