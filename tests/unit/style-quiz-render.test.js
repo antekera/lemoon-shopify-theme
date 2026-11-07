@@ -1,8 +1,17 @@
 import { it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { renderQuizSection, quizProduct, quizDictionary, quizAvailableFilters } from '../helpers/style-quiz-renderer.mjs';
+import { buildQuizCollectionURL } from '../../assets/lemoon-style-quiz-filters.js';
 
 const configuration = html => JSON.parse(html.match(/<script type="application\/json" data-quiz-filter-config>([\s\S]*?)<\/script>/)[1]);
+it('converts numeric Liquid metaobject IDs into native filter references', () => {
+  const traits = quizDictionary().map((trait, index) => ({ ...trait, id: `gid://shopify/Metaobject/${660341424296 + index}` }));
+  const config = configuration(renderQuizSection({ traits }));
+  const selection = new URL(buildQuizCollectionURL({ color: ['black', 'neutral'], pattern: ['tortoise'] }, config), 'https://example.test');
+  expect(config.traits).toEqual(traits);
+  expect(selection.searchParams.getAll('filter.v.m.custom.style_filter_color')).toEqual(['black', 'neutral', 'brown', 'light'].map(code => traits.find(trait => trait.group === 'color' && trait.code === code).id));
+  expect(selection.searchParams.get('filter.v.m.custom.style_filter_pattern')).toBe(traits.find(trait => trait.code === 'tortoise').id);
+});
 it('retains the internal page template to the quiz', () => {
   const raw = readFileSync(new URL('../../templates/page.buscar-mi-estilo.json', import.meta.url), 'utf8');
   const template = JSON.parse(raw.slice(raw.indexOf('{')));

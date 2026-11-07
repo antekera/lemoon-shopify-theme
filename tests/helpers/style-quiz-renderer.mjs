@@ -146,7 +146,8 @@ export function renderQuizSection({ scenario = 'default', products = fixtureProd
   return `<section id="shopify-section-${escape(sectionId)}">${engine.renderFileSync('lemoon-style-quiz', {
     section: { id: sectionId, settings: { catalogue: collection, padding_top: 64, padding_bottom: 64 }, blocks: [] },
     collection, collections: { 'quiz-fixture': collection, all: { ...collection, filters: availableFilters.map(param_name => ({ param_name })) } }, all_products: Object.fromEntries(products.map(product => [product.handle, product])),
-    metaobjects: { lemoon_style_trait: { values: traits.map(({ id, group, code }) => ({ system: { id }, ...quizTrait(group, code) })) } },
+    // Shopify Liquid exposes system.id as a number, unlike Admin GraphQL GIDs.
+    metaobjects: { lemoon_style_trait: { values: traits.map(({ id, group, code }) => ({ system: { id: Number(id.split('/').at(-1)) }, ...quizTrait(group, code) })) } },
     paginate: { pages: dictionaryPages, current_page: 1, items: traits.length },
     routes: { root_url: '/', all_products_collection_url: '/collections/all' },
   })}</section>`;

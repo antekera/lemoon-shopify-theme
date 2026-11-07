@@ -83,9 +83,9 @@ test('six stages submit one native collection URL with all criteria and return f
   expect(await page.evaluate(() => performance.getEntriesByType('navigation')[0].type)).toBe('reload');
 });
 
-test('skipping every answer navigates unrestricted instead of embedding a capped catalogue', async ({ page }) => {
+test('skipping every answer navigates unrestricted instead of embedding a capped catalogue', async ({ page, baseURL }) => {
   const quiz = await open(page); await start(quiz); await next(quiz, 6);
-  await expect(page).toHaveURL('http://127.0.0.1:4173/collections/all');
+  await expect(page).toHaveURL(new URL('/collections/all', baseURL).href);
 });
 
 test('history restores exact snapshots, replaces input changes, preserves foreign state and truncates a new branch', async ({ page }) => {
@@ -214,11 +214,11 @@ for (const width of [390, 1440]) {
   });
 }
 
-test('a failed module or disabled JavaScript retains a real catalogue alternative', async ({ page, browser }) => {
+test('a failed module or disabled JavaScript retains a real catalogue alternative', async ({ page, browser, baseURL }) => {
   await install(page); await page.route('**/assets/lemoon-style-quiz.js', request => request.abort('failed')); await page.goto(route);
   await expect(page.locator('[data-quiz-form]')).toBeHidden(); await expect(page.locator('[data-quiz-fallback] a')).toBeVisible();
   const context = await browser.newContext({ javaScriptEnabled: false }); const noJS = await context.newPage();
-  try { await install(noJS); await noJS.goto('http://127.0.0.1:4173' + route); await expect(noJS.locator('noscript')).toBeVisible(); await noJS.locator('[data-quiz-fallback] a').click(); await expect(noJS).toHaveURL(/\/collections\/all$/); } finally { await context.close(); }
+  try { await install(noJS); await noJS.goto(new URL(route, baseURL).href); await expect(noJS.locator('noscript')).toBeVisible(); await noJS.locator('[data-quiz-fallback] a').click(); await expect(noJS).toHaveURL(/\/collections\/all$/); } finally { await context.close(); }
 });
 
 test('at 200% zoom equivalent width the keyboard flow retains focus and avoids overflow', async ({ page }) => {

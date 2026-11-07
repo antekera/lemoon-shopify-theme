@@ -157,7 +157,7 @@
           "dictionaryComplete": {% if paginate.pages > 1 %}false{% else %}true{% endif %},
           "traits": [
             {%- for trait in metaobjects.lemoon_style_trait.values -%}
-              { "id": {{ trait.system.id | json }}, "group": {{ trait.group.value | json | replace: '<', json_less_than }}, "code": {{ trait.code.value | json | replace: '<', json_less_than }} }{% unless forloop.last %},{% endunless %}
+              { "id": {{ trait.system.id | prepend: 'gid://shopify/Metaobject/' | json }}, "group": {{ trait.group.value | json | replace: '<', json_less_than }}, "code": {{ trait.code.value | json | replace: '<', json_less_than }} }{% unless forloop.last %},{% endunless %}
             {%- endfor -%}
           ]
         }
