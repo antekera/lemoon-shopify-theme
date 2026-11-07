@@ -28,7 +28,7 @@ La [guía de operación](../../catalog/style-quiz.md) explica atributos, herenci
 | Theme Check, revisión de listado | **301 archivos sin ofensas** |
 | Diff y JSON | `git diff --check` y validación de JSON/enlaces locales, correctos |
 | Catálogo | Lectura Admin API antes/después y comparación de datos preexistentes |
-| Visual local | Entrada/detalles/resultados móviles, fuentes Urbanist/Hanken cargadas, imágenes y swatches visibles |
+| Visual local | Entrada/detalles/resultados móviles, fuentes del tema cargadas (registro histórico; familia body vigente: Instrument Sans), imágenes y swatches visibles |
 | Visual Shopify | PASS: 390/820/1440 px, cinco estados por ancho, fotos/fuentes cargadas, sin overflow ni errores JS/Liquid en los recorridos; precio/imagen/URL y razones coherentes al cambiar variante |
 | Storefront Shopify | **9/9 pruebas aprobadas**, Chromium en escritorio 1440 px, tablet 820 px y móvil 390 px; tema de desarrollo `189557964968` |
 

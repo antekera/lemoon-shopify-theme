@@ -59,8 +59,7 @@ enlace general y su etiqueta sin prometer filtros.
 
 ## Diseño y accesibilidad
 
-Conservar header y footer actuales. Urbanist ligero para el título; Hanken
-Grotesk para lectura. Fondo blanco, tarjetas claras, navy para acciones y
+Conservar header y footer actuales. Urbanist ligero para el título; Instrument Sans para lectura. Fondo blanco, tarjetas claras, navy para acciones y
 acento lemon discreto. CSS limitado a la sección y tokens existentes.
 Una columna en mobile, alternativas amplias, controles de al menos 44 px.
 

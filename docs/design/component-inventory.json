@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 554,
+    "total_tracked_paths": 555,
     "mapped_paths": 492,
-    "excluded_paths": 62,
+    "excluded_paths": 63,
     "by_root": {
-      "assets": 292,
+      "assets": 293,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -43,7 +43,7 @@
       ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 61,
+      "binary-image-or-font": 62,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 80,
     "theme_block_files": 0,
-    "total_source_paths": 554,
+    "total_source_paths": 555,
     "explicit_new_paths": 0
   },
   "components": [
@@ -137,6 +137,19 @@
         "entry_path": "snippets/lemoon-ui-heading.liquid",
         "scope": "Heading semántico; richtext conserva su dueño y las excepciones tipográficas locales.",
         "recipe_path": "docs/components/recipes/guide-help.md"
+      },
+      "font_adoption": {
+        "approved": "2026-11-07",
+        "body_family": "Instrument Sans",
+        "heading_family": "Urbanist",
+        "weights": [
+          400,
+          500,
+          600,
+          700
+        ],
+        "status": "approved by user; production publication separate",
+        "scope": "body token; theme, password and gift-card font requests; password body; component gallery label; existing sizes unchanged"
       }
     },
     {
@@ -1675,9 +1688,12 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-404.liquid",
-        "scope": "404/custom-liquid/apps conservan sus schemas y contenido; no fabricar un wrapper universal.",
+        "scope": "404 sin buscador, navegación home/catálogo/FAQ/contacto con prefijo de idioma preservado mediante routes.root_url con foco único sin sombra e ilustración decorativa de armazón y limón; número 404 HTML independiente, sin JS. custom-liquid/apps conservan schemas propios; no wrapper universal.",
         "recipe_path": "docs/components/recipes/search-sort.md"
-      }
+      },
+      "decorative_assets": [
+        "assets/lemoon-404-frame-lemon-v2.webp"
+      ]
     },
     {
       "id": "LM-GALLERY",
@@ -6143,6 +6159,12 @@
         "LM-SEARCH"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/lemoon-404-frame-lemon-v2.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: ilustración decorativa 404 inspeccionada visualmente; contrato en LM-UTILITY",
+      "content_read": true
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -6172,9 +6194,10 @@
       "snippets/lemoon-quiz-candidate.liquid",
       "snippets/lemoon-quiz-options.liquid",
       "snippets/lemoon-quiz-visual.liquid",
-      "assets/lemoon-style-quiz-filters.js"
+      "assets/lemoon-style-quiz-filters.js",
+      "assets/lemoon-404-frame-lemon-v2.webp"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

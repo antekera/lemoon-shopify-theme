@@ -28,7 +28,9 @@ Favicon, Apple y avatar usan la inicial **l navy con hoja amarilla sólida**, so
 
 La base es blanco y carbon para lectura, navy para acciones y texto de marca, beige para paneles y lemon para acentos localizados. Las equivalencias cromáticas y sus roles están en [Color de DESIGN.md](../../DESIGN.md#2-color). Mantener el fill propio del logo aunque difiera del navy de interfaz. Los colores alternativos de exploraciones no son opciones de campaña aprobadas.
 
-Las fuentes seleccionadas para el storefront son **Urbanist** para títulos y acciones y **Hanken Grotesk** para cuerpo, labels y metadatos. Aplicar pesos, escala y excepciones por componente según [Tipografía de DESIGN.md](../../DESIGN.md#3-tipografía). Una tarjeta, un H1 legal y un título editorial mantienen sus reglas locales.
+> Actualización aprobada el 07-11-2026: Instrument Sans es la fuente definitiva de cuerpo, labels y metadatos. Urbanist y el logo se conservan. Ver [contrato tipográfico vigente](../../DESIGN.md#3-tipografía). La decisión de marca no acredita por sí sola publicación en Shopify.
+
+Las fuentes seleccionadas para el storefront son **Urbanist** para títulos y acciones y **Instrument Sans** para cuerpo, labels y metadatos. Aplicar pesos, escala y excepciones por componente según [Tipografía de DESIGN.md](../../DESIGN.md#3-tipografía). Una tarjeta, un H1 legal y un título editorial mantienen sus reglas locales.
 
 Para piezas editables fuera del sitio, conservar esa jerarquía con las familias disponibles en el destino. Si una herramienta o plantilla no admite las fuentes, registrar la limitación y resolver la adaptación en su ticket antes de declararla definitiva. Esta guía no fija una fuente sustituta ni una escala universal para redes o impresión.
 

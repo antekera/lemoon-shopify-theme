@@ -100,7 +100,7 @@ Ante pocas coincidencias, mostrar lo disponible y sugerir cambiar una preferenci
 - Las mismas opciones para cualquier género. Evitar que edad o género determinen estilos permitidos. Fotografías con diversidad de edades y apariencias; los gustos los declara cada persona.
 - “Cualquier edad” en la experiencia no significa disponibilidad de tallas infantiles. Si se quiere recomendar a niñas y niños, se debe confirmar surtido y medidas apropiadas. No pedir fecha de nacimiento para descubrir gustos.
 - Lenguaje cercano en es-CL, con tú y humor breve; evitar jerga generacional, anglicismos y pruebas cronometradas. Mantener texto además de imágenes o colores.
-- Proponer riqueza mediante fotografía, escala, encuadre, superposición decorativa moderada, retículas y transiciones, usando Urbanist/Hanken y navy/beige/lemon existentes. No requiere una identidad nueva. Sombras o composiciones nuevas deben revisarse en el diseño y documentarse si alteran DESIGN.md.
+- Proponer riqueza mediante fotografía, escala, encuadre, superposición decorativa moderada, retículas y transiciones, usando Urbanist/Instrument Sans y navy/beige/lemon existentes. No requiere una identidad nueva. Sombras o composiciones nuevas deben revisarse en el diseño y documentarse si alteran DESIGN.md.
 - Controles amplios, teclado, foco visible, anuncios del cambio de paso, selección perceptible sin depender del color, alternativa a cualquier gesto de arrastrar y resultado usable con zoom. Deslizar puede ser una mejora opcional, no el único mecanismo.
 - No pedir selfie, receta, email ni cuenta para mostrar recomendaciones. Guardar o compartir resultados sería una ampliación posterior con finalidad y datos definidos.
 

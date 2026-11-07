@@ -293,12 +293,11 @@
     "404": {
       "title": "No encontramos esta página",
       "subtext": "404",
-      "description": "El enlace puede haber cambiado o la página ya no está disponible. Busca lo que necesitas o vuelve al catálogo.",
+      "description": "El enlace puede haber cambiado o la página ya no está disponible. Puedes volver al inicio, explorar el catálogo o encontrar ayuda en estos enlaces.",
       "home": "Volver al inicio",
       "catalogue": "Ver todos los armazones",
-      "search_label": "Buscar en el catálogo",
-      "search_placeholder": "Nombre, forma o material",
-      "search_button": "Buscar lentes"
+      "faq": "Preguntas frecuentes",
+      "contact": "Contáctanos"
     }
   },
   "sections": {

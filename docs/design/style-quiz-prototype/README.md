@@ -25,7 +25,7 @@ El archivo contiene **26 frames**: los siete anteriores en ambas resoluciones, c
 
 ## Tratamiento visual y activos
 
-Se usan el wordmark SVG del repositorio, navy `#0b1f3a`, cálido `#f7f4ee`, acento limón `#f7e600`, Urbanist y Hanken Grotesk. La portada reutiliza `assets/lemoon-category-opticos-generic-v1.jpg`, activo editorial genérico que no acredita un SKU. Las siluetas, escenas y muestras son vectores editables conceptuales; no son fotografías de productos disponibles.
+La referencia vigente para implementación usa el wordmark SVG del repositorio, navy `#0b1f3a`, cálido `#f7f4ee`, acento limón `#f7e600`, Urbanist y Instrument Sans. La adopción tipográfica del 07-11-2026 no certifica una actualización de los frames Figma ni de las capturas históricas de este prototipo. La portada reutiliza `assets/lemoon-category-opticos-generic-v1.jpg`, activo editorial genérico que no acredita un SKU. Las siluetas, escenas y muestras son vectores editables conceptuales; no son fotografías de productos disponibles.
 
 La búsqueda de bibliotecas y el intento de importar componentes originales no encontraron una biblioteca Lemoon publicada utilizable. Se compuso el diseño con capas nativas y variables locales de referencia; no quedó vinculado a una biblioteca compartida. No se publicó una biblioteca nueva.
 

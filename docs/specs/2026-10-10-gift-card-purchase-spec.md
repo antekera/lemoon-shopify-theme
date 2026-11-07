@@ -16,7 +16,7 @@ título «Tarjeta de regalo», explicación breve, monto y formulario a la derec
 Mobile una columna. El monto visual debe venir del precio de la variante elegida,
 no del título de la opción ni de una constante. Tarjeta ilustrativa sin códigos
 reales o simulados. Usar logo SVG existente en superficie clara; no inventar sello.
-Tipografía Urbanist/Hanken; tokens semánticos Lemoon; foco visible y controles44px.
+Tipografía Urbanist/Instrument Sans; tokens semánticos Lemoon; foco visible y controles44px.
 
 ## Sección y datos
 

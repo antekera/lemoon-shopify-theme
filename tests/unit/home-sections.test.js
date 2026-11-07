@@ -90,7 +90,7 @@ test('home avoids preloading Dawn fonts while other templates retain their font 
   expect(product).toContain('/fonts/body.woff2');
   expect(product).toContain('/fonts/heading.woff2');
   expect(layout).toContain("settings.type_body_font | font_face: font_display: 'swap'");
-  expect(layout).toContain('family=Hanken+Grotesk');
+  expect(layout).toContain('family=Instrument+Sans:wght@400;500;600;700');
 });
 
 test.each(['snippets/lemoon-mobile-nav.liquid', 'snippets/lemoon-mobile-search.liquid', 'sections/footer.liquid'])('home avoids the late CSS dependency in %s', async (path) => {

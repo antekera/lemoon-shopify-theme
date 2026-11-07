@@ -133,7 +133,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato de superficie.** h1–h6 y .h0–.h5 son selectores; `lemoon-ui-heading` aporta la API explícita de título. rich-text usa bloques heading/caption/text/button; main-page usa page.title/content; page usa section.settings.page y heading_size.
 
-**Variantes existentes.** Display, headings, body, caption, label, CTA, rte; ancho narrow/full según consumidor.
+**Variantes existentes.** Display, headings, body, caption, label, CTA, rte; ancho narrow/full según consumidor. Familia body aprobada el 07-11-2026: Instrument Sans 400/500/600/700 en token y cargas de los layouts del tema, contraseña y gift card; password usa el mismo token y la galería identifica Instrument Sans. Urbanist y medidas se conservan.
 
 **CSS y excepciones.** --lemoon-font-heading/body y --lemoon-type-*; H4/H5 conservan base Dawn. Tamaños de nombres/precios de tarjeta y legal son excepciones, no nuevos roles globales.
 
@@ -683,7 +683,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Variantes existentes.** Grids/collage/image-text/rows/columns; about home y página; mood tiles; shape navigation; steps; benefits/review strip; commercial-demo enabled/content/section_id es muestra marcada, no operación real.
 
-**CSS y excepciones.** About home conserva su panel green. Nosotros usa lectura local de hasta 72rem, cuerpo Hanken Grotesk 1.8rem/1.7 y párrafos separados por el token space-6; el H1 conserva su rol global. No trasladar esta excepción editorial ni el panel verde al sistema global.
+**CSS y excepciones.** About home conserva su panel green. Nosotros usa lectura local de hasta 72rem, cuerpo Instrument Sans 1.8rem/1.7 y párrafos separados por el token space-6; el H1 conserva su rol global. No trasladar esta excepción editorial ni el panel verde al sistema global.
 
 **Estados observados / aplicabilidad:** Normal: Composición y contenido; Hover: Links/tile/CTA; Foco: Solo acciones; Seleccionado: No aplica; Loading: Media lazy; slider multicolumn si habilitado; Error: No feedback propio; Disabled: No aplica salvo acciones.
 
@@ -998,7 +998,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Fuentes:** [sections/main-404.liquid](../../sections/main-404.liquid), [sections/custom-liquid.liquid](../../sections/custom-liquid.liquid), [sections/apps.liquid](../../sections/apps.liquid), [assets/customer.js](../../assets/customer.js).
 
-**Contrato actual.** 404 título/texto/link catálogo; custom-liquid setting custom_liquid y color/padding; apps section bloques @app con include_margins; customer.js controla direcciones legacy pero no hay templates/customer en universo.
+**Contrato actual.** 404 título/texto, navegación home/catálogo/FAQ/contacto sin buscador, con FAQ y contacto construidos desde `routes.root_url` para conservar el prefijo de idioma, e ilustración decorativa de armazón con gesto lemon (`assets/lemoon-404-frame-lemon-v2.webp`), con dimensiones intrínsecas, alt vacío y número 404 como texto independiente dentro de un conjunto aria-hidden. Conserva dos columnas y apilado bajo 750px; sin JS. Los enlaces tienen un solo contorno de foco, sin box-shadow añadido. Dirección autorizada el 07-11-2026, render 404 aprobado por el usuario el 07-11-2026. custom-liquid setting custom_liquid y color/padding; apps section bloques @app con include_margins; customer.js controla direcciones legacy pero no hay templates/customer en universo.
 
 **Variantes existentes.** Fallback404, inyección editor Liquid, app slots y controlador direcciones retenido. No son catálogo de átomos ni cuenta nueva implementada.
 

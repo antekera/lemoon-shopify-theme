@@ -14,7 +14,7 @@ Para decisiones de expresión visual o redacción, consultar el [brief estratég
 
 - **Blanco/carbon y paneles beige:** separar lectura y agrupaciones de contenido con una base tranquila que deje protagonismo al producto.
 - **Navy en acciones y foco:** dar continuidad visual a la navegación y a los controles que guían el recorrido. Lemon destaca momentos puntuales sin competir con la acción principal.
-- **Urbanist y Hanken Grotesk:** distinguir títulos/acciones del texto de lectura con las dos familias existentes; mantener sus roles facilita reconocer la jerarquía entre páginas.
+- **Urbanist y Instrument Sans:** distinguir títulos/acciones del texto de lectura con las dos familias existentes; mantener sus roles facilita reconocer la jerarquía entre páginas.
 - **Producto completo y crop editorial:** mostrar el armazón con `contain` permite examinar su forma; las imágenes lifestyle pueden usar recorte y punto focal para comunicar contexto.
 - **Medidas por familia:** una tarjeta de catálogo y una página legal resuelven tareas distintas; conservar sus proporciones y anchos locales mantiene legibilidad y consistencia sin uniformarlos.
 
@@ -83,7 +83,9 @@ Los roles semánticos gobiernan los controles Lemoon; un color scheme del editor
 
 ## 3. Tipografía
 
-Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Hanken Grotesk**, sans-serif. El [layout](layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Hanken 400/500/600/700. Aplicar los roles de [tokens](assets/lemoon-tokens.css) mediante las clases de [componentes](assets/lemoon-components.css):
+> **Fuente de cuerpo aprobada el 07-11-2026:** el usuario eligió Instrument Sans como sustitución definitiva para `--lemoon-font-body` y sus consumidores. Se cargan pesos 400/500/600/700 con `display=swap`; Urbanist, logo, tamaños, pesos, interlíneas y espaciados se conservan. Esta decisión actualiza las referencias tipográficas anteriores de esta guía; la publicación Shopify mantiene su autorización independiente.
+
+Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Instrument Sans**, sans-serif. El [layout](layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Instrument Sans 400/500/600/700. Aplicar los roles de [tokens](assets/lemoon-tokens.css) mediante las clases de [componentes](assets/lemoon-components.css):
 
 | Rol | Familia / peso | Tamaño ≥750 → <750 | Interlínea | Tracking |
 | --- | --- | --- | --- | --- |
@@ -91,10 +93,10 @@ Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body
 | H1 / `.h1` | Urbanist 600 | 4rem → 3.2rem | 1.2 | −0.3px |
 | H2 / `.h2` | Urbanist 600 | 2.8rem → 2rem | 1.285714 | −0.3px |
 | H3 / `.h3` | Urbanist 500 | 2rem → 1.8rem | 1.4 | 0 |
-| Body | Hanken 400 | 1.6rem | 1.5 | 0 |
-| Body small | Hanken 400 | 1.4rem | 1.428571 | 0 |
-| Caption | Hanken 400 | 1.2rem | 1.333333 | 0 |
-| Label | Hanken 400 | 1.3rem | 1.4 | 0 |
+| Body | Instrument Sans 400 | 1.6rem | 1.5 | 0 |
+| Body small | Instrument Sans 400 | 1.4rem | 1.428571 | 0 |
+| Caption | Instrument Sans 400 | 1.2rem | 1.333333 | 0 |
+| Label | Instrument Sans 400 | 1.3rem | 1.4 | 0 |
 | CTA | Urbanist 600 | 1.4rem | 1.428571 | 0.3px, uppercase |
 
 Los rem equivalen nominalmente a 10px en la escala base del tema; el root depende de `body_scale`. Preservar rem y escalado del usuario. Elegir H1–H3 por jerarquía semántica y `.h0` por presentación. No aplicar tracking global `−0.03em`. Las excepciones de tarjeta, PLP y shell legal se mantienen en sus selectores, sin alterar estos roles.
@@ -132,9 +134,13 @@ Mantener orden de lectura al apilar, títulos largos y mensajes de error complet
 
 ### Nosotros: relato editorial continuo
 
-La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026 como un relato continuo, tomando la estructura History de Warby Parker como referencia. Su dueño es `sections/lemoon-about-page.liquid`: un único H1 y un cuerpo richtext editable, sin subtítulos internos, tarjetas, paneles, CTAs, imagen ni placeholder. El eslogan se muestra después del cuerpo como un párrafo independiente desde el ajuste global `settings.brand_slogan`; separarlo con `--lemoon-space-8`, conservar Hanken Grotesk 1.8rem/1.7 y omitirlo si el valor está vacío. El cuerpo editable no duplica el eslogan. Esta decisión sustituye el hero con imagen y las tarjetas anteriores solo en esta sección; no cambia otras familias editoriales.
+La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026 como un relato continuo, tomando la estructura History de Warby Parker como referencia. Su dueño es `sections/lemoon-about-page.liquid`: un único H1 y un cuerpo richtext editable, sin subtítulos internos, tarjetas, paneles, CTAs, imagen ni placeholder. El eslogan se muestra después del cuerpo como un párrafo independiente desde el ajuste global `settings.brand_slogan`; separarlo con `--lemoon-space-8`, conservar Instrument Sans 1.8rem/1.7 y omitirlo si el valor está vacío. El cuerpo editable no duplica el eslogan. Esta decisión sustituye el hero con imagen y las tarjetas anteriores solo en esta sección; no cambia otras familias editoriales.
 
-Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Hanken Grotesk, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
+Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Instrument Sans, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
+
+### Página 404: armazón y gesto lemon
+
+Dirección autorizada por el usuario el 07-11-2026: ilustración original de un armazón navy con un limón y hoja como acento separado del marco y de los cristales por espacio visible, sin mascota ni cambios de identidad. `sections/main-404.liquid` conserva la composición de dos columnas y su apilado bajo 750px, mensaje localizado y cuatro enlaces de recuperación: inicio, catálogo, preguntas frecuentes y contacto. Por petición del usuario se retiró el buscador local de esta sección; los enlaces muestran un único contorno de foco navy, sin box-shadow adicional. La pieza decorativa `assets/lemoon-404-frame-lemon-v2.webp` se contiene completa en el panel beige, con proporción intrínseca y ancho fluido; el número 404 sigue siendo texto HTML independiente. El conjunto visual lleva `aria-hidden="true"` y la imagen alt vacío: el H1 ya comunica el error. No añadir animación ni repetir el arte del footer. El usuario aprobó el render final de la 404 el 07-11-2026; la publicación en producción mantiene su autorización independiente.
 
 ### Quiz de estilo: navegación a catálogo
 
@@ -202,7 +208,7 @@ En campos con icono usar el tamaño 24px de la referencia Input y reservar espac
 | Familia / fuente | Regla de implementación |
 | --- | --- |
 | [Product card](snippets/card-product.liquid), [CSS](assets/lemoon-components.css), [JS](assets/lemoon-product-card.js) | Reutilizar el snippet. Outer card transparente y radio 0; media warm con radio 12px, proporción 100/96 y max-height 280px ≥990. Imagen completa `object-fit:contain`. Mantener la frontal hasta que cargue la secundaria; sin secundaria, conservar frontal |
-| Texto de tarjeta | Base: nombre Hanken 13px/16px, precio Urbanist 600 18px/22px; precio anterior Hanken 14px/18px. PLP sobrescribe nombre a 15px ≥990, 14px entre 750–989 y 13px móvil; precio regular 17px ≥750 y 16px móvil. No aplicar H3 global al nombre |
+| Texto de tarjeta | Base: nombre Instrument Sans 13px/16px, precio Urbanist 600 18px/22px; precio anterior Instrument Sans 14px/18px. PLP sobrescribe nombre a 15px ≥990, 14px entre 750–989 y 13px móvil; precio regular 17px ≥750 y 16px móvil. No aplicar H3 global al nombre |
 | Etiquetas de producto | `.lemoon-product-card__label` usa radio full; new navy/blanco, flash-sale lemon/navy, sold-out gris/blanco, best-seller según su clase. Datos de disponibilidad, descuento y tags reales determinan su presencia |
 | Badges genéricos | Editorial `--badge-corner-radius`: 0; compacto `--lemoon-radius-sm`: 4px; chips `--lemoon-radius-lg`: 20px. No sustituir con estos radios las etiquetas de producto que ya tienen regla local |
 | Swatches | Reutilizar [swatch-input](snippets/swatch-input.liquid) o swatches del snippet de tarjeta; mantener tamaño local, círculo, nombre y estado seleccionado accesible. No imponer los 20px del frame a todas las superficies |
@@ -255,7 +261,7 @@ Para mantener la página de términos, partir de [page.terminos-y-condiciones.js
 
 1. Conservar `kind:terms` y el padding de template 64px superior/inferior. La fórmula local `×0.625` produce 40px bajo 750px.
 2. Mantener H1 Urbanist 300, 4.6rem desktop/3.4rem móvil, leading 1.15, tracking −0.5px y color brand. Es excepción local; no sustituirlo por H1 base 4/3.2rem.
-3. Mantener una columna centrada de hasta 66rem, sin breadcrumb ni índice lateral. El cuerpo usa Hanken 1.6rem/1.6, con H2 de 2.4rem y H3 de 2rem. Ninguna de estas medidas cambia el ancho global.
+3. Mantener una columna centrada de hasta 66rem, sin breadcrumb ni índice lateral. El cuerpo usa Instrument Sans 1.6rem/1.6, con H2 de 2.4rem y H3 de 2rem. Ninguna de estas medidas cambia el ancho global.
 4. Conservar enlaces del contenido y ayuda con foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
 5. El template contiene `demo_data:true`: el ticket de contenido [LEM-119](https://linear.app/antekera/issue/LEM-119) debe resolver el texto definitivo antes de publicar. Aplicar esta guía no cambia ese setting ni convierte el texto de muestra en términos comerciales.
 6. Revisar lectura, teclado, zoom, enlaces y desbordes a 390px y desktop, incluidos ambos lados de 750px. Verificar asignación CMS en la entrega de la página.

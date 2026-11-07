@@ -162,7 +162,7 @@ export function renderQuizFixture(scenario = 'default') {
   const layoutContext = '<style>:root{--page-width:120rem;--page-width-margin:0rem;--product-card-image-padding:0rem;--product-card-corner-radius:0rem;--product-card-text-alignment:left;--product-card-border-width:0rem;--product-card-border-opacity:0;--product-card-shadow-opacity:0.1;--product-card-shadow-visible:1;--product-card-shadow-horizontal-offset:0rem;--product-card-shadow-vertical-offset:0rem;--product-card-shadow-blur-radius:0rem}</style>';
   // The same brand font stylesheet used by theme.liquid; functional tests do
   // not depend on network font availability and screenshots report that limit.
-  const fonts = '<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">';
+  const fonts = '<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">';
   return shell.replace('</head>', `${layoutContext}${fonts}</head>`).replace(/<body>[\s\S]*?<script>/, `<body><main id="MainContent">${content}</main><script>`)
     .replace('</body>', '<script src="/assets/constants.js"></script><script src="/assets/pubsub.js"></script><script src="/assets/global.js"></script></body>');
 }

@@ -20,7 +20,7 @@ Especificación de implementación local, 05-11-2026. Base inspeccionada: `941b2
 - Mismo contenido, orden de cinco etapas, multiselección, omisión, edición, ranking, metadatos y precios reales.
 - Resultados: dos columnas móviles y tablet, tres de escritorio, hasta doce iniciales y ampliación por doce; separaciones móviles **1.2rem horizontal / 2.4rem vertical**.
 - Resumen editable una sola vez antes del listado y tarjetas canónicas sin texto de afinidad. No alterar `card-product`, swatches, títulos, badges, precios ni fotografías de producto.
-- Urbanist 600 para H1/H2 en sus roles actuales; Hanken para lectura. No volver al Light del boceto ni introducir una tercera fuente.
+- Urbanist 600 para H1/H2 en sus roles actuales; Instrument Sans para lectura. No volver al Light del boceto ni introducir una tercera fuente.
 - Blanco para lectura, cálido para superficies, navy para acciones y lemon solo como acento. Producto completo en catálogo; crop editorial solo en portada.
 - Las imágenes genéricas no son SKU. Las ilustraciones de opciones son conceptuales y nunca acreditan material, transparencia o ajuste de una referencia vendida.
 
