@@ -45,6 +45,8 @@
 }
 
 .lemoon-announcement-bar .announcement-bar__message {
+  animation: none;
+  opacity: 1;
   color: var(--lemoon-text-inverse, #ffffff);
   font-family: var(--lemoon-font-body, sans-serif);
   font-size: 1.3rem;

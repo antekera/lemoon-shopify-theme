@@ -660,7 +660,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Contrato actual.** Hero Lemoon: bloques slide desktop/mobile image o asset y dos CTA, autoplay_seconds. Banner Dawn heading/text/buttons, imagen/imagen2, overlay y content position; slideshow slide con heading/subheading/link/color_scheme. Announcement bloques announcement(text/link), auto_rotate/change_slides_speed y localización/social según schema.
 
-**Variantes existentes.** Hero slide estático/múltiple autoplay; image-banner sin controlador; slideshow Dawn; strip anuncios con slider.
+**Variantes existentes.** Hero slide estático/múltiple autoplay; image-banner sin controlador; slideshow Dawn; strip anuncios con slider y texto siempre opaco durante la rotación (sin fade de opacidad); primer mensaje disponible en HTML, controles/autoplay/reduced motion conservados y sin altura rígida que recorte texto.
 
 **CSS y excepciones.** Crop/picture, puntos focales y overlay locales; no convertir assets placeholder en referencia comercial. Tokens y literales de composición permanecen en el CSS de la fuente enlazada.
 
