@@ -1,0 +1,134 @@
+const imgArtwork = "[temporary-asset-url-omitted]";
+const imgArtwork1 = "[temporary-asset-url-omitted]";
+const imgIconMenu = "[temporary-asset-url-omitted]";
+const imgEllipse = "[temporary-asset-url-omitted]";
+const imgEllipse1 = "[temporary-asset-url-omitted]";
+const imgEllipse2 = "[temporary-asset-url-omitted]";
+const imgEllipse3 = "[temporary-asset-url-omitted]";
+
+type IconProps = {
+  className?: string;
+  name?: "Search" | "ShoppingBag";
+};
+
+function Icon({ className, name = "Search" }: IconProps) {
+  const isShoppingBag = name === "ShoppingBag";
+  return (
+    <div className={className || "relative size-[24px]"} id={isShoppingBag ? "node-36_11" : "node-36_3"}>
+      <div className="absolute left-0 size-[24px] top-0" id={isShoppingBag ? "node-36_12" : "node-36_4"} data-name="Artwork">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={isShoppingBag ? imgArtwork1 : imgArtwork} />
+      </div>
+    </div>
+  );
+}
+
+function HeaderMobile({ className }: { className?: string }) {
+  return (
+    <div className={className || "bg-[var(--lemoon-surface-page,white)] content-stretch flex h-[56px] items-center justify-between relative w-[390px]"} data-node-id="57:74" data-name="Header / Mobile">
+      <div className="overflow-clip relative shrink-0 size-[56px]" data-node-id="57:75" data-name="Menu">
+        <div className="absolute left-[16px] size-[24px] top-[16px]" data-node-id="57:76" data-name="Icon / Menu">
+          <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgIconMenu} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] font-['Urbanist:Bold'] font-bold leading-[normal] relative shrink-0 text-[20px] text-[color:var(--lemoon-text-brand,#0b1f3a)] whitespace-nowrap" data-node-id="57:78">
+        lemoon
+      </p>
+      <div className="content-stretch flex gap-[16px] h-[56px] items-center overflow-clip pr-[16px] relative shrink-0 w-[112px]" data-node-id="57:79" data-name="Actions">
+        <Icon className="relative shrink-0 size-[24px]" />
+        <div className="overflow-clip relative shrink-0 size-[28px]" data-node-id="57:84" data-name="Cart">
+          <Icon className="absolute left-0 size-[24px] top-[2px]" name="ShoppingBag" />
+          <div className="absolute bg-[var(--lemoon-text-brand,#0b1f3a)] content-stretch flex items-center justify-center left-[14px] overflow-clip rounded-[7px] size-[14px] top-0" data-node-id="57:89" data-name="Cart count">
+            <p className="[word-break:break-word] font-['Urbanist:Bold'] font-bold leading-[normal] relative shrink-0 text-[9px] text-[color:var(--lemoon-text-inverse,white)] whitespace-nowrap" data-node-id="57:90">
+              2
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute bg-[var(--lemoon-border-default,#e0ddd8)] h-px left-0 top-[55px] w-[390px]" data-node-id="57:91" data-name="Bottom border" />
+    </div>
+  );
+}
+
+export default function PdpMobile() {
+  return (
+    <div className="bg-[var(--lemoon-surface-page,white)] relative size-full" data-node-id="63:448" data-name="PDP / Mobile">
+      <HeaderMobile className="absolute bg-[var(--lemoon-surface-page,white)] content-stretch flex h-[56px] items-center justify-between left-0 top-0 w-[390px]" />
+      <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] left-0 overflow-clip size-[390px] top-[56px]" data-node-id="63:467" data-name="Product media">
+        <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium h-[15.4px] leading-[normal] left-[120px] text-[11px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[188px] w-[150px]" data-node-id="63:468">
+          FOTO DE PRODUCTO
+        </p>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[16.8px] leading-[normal] left-[24px] text-[12px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[478px] w-[330px]" data-node-id="63:469">
+        LEMOON
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[44.8px] leading-[normal] left-[24px] text-[32px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[500px] w-[330px]" data-node-id="63:470">
+        Dalton
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[18.2px] leading-[normal] left-[24px] text-[13px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[548px] w-[330px] whitespace-pre-wrap" data-node-id="63:471">{`★★★★★   4.8 (127 reseñas)`}</p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[39.2px] leading-[normal] left-[24px] text-[28px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[586px] w-[330px]" data-node-id="63:472">
+        $89.990
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[18.2px] leading-[normal] left-[146px] text-[13px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[596px] w-[200px]" data-node-id="63:473">
+        Solo armazón · IVA incluido
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium h-[19.6px] leading-[normal] left-[24px] text-[14px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[662px] w-[330px]" data-node-id="63:474">
+        Elige tu color
+      </p>
+      <div className="absolute left-[24px] size-[24px] top-[696px]" data-node-id="63:475" data-name="Ellipse">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse} />
+      </div>
+      <div className="absolute left-[62px] size-[24px] top-[696px]" data-node-id="63:476" data-name="Ellipse">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse1} />
+      </div>
+      <div className="absolute left-[100px] size-[24px] top-[696px]" data-node-id="63:477" data-name="Ellipse">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse2} />
+      </div>
+      <div className="absolute left-[138px] size-[24px] top-[696px]" data-node-id="63:478" data-name="Ellipse">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse3} />
+      </div>
+      <div className="absolute bg-[var(--lemoon-surface-warm,#f7f4ee)] h-[122px] left-[24px] overflow-clip rounded-[8px] top-[756px] w-[342px]" data-node-id="63:479" data-name="Specs">
+        <div className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal h-[19.6px] leading-[0] left-[16px] text-[14px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[18px] w-[300px]" data-node-id="63:480">
+          <p className="leading-[normal] mb-0">Forma: Rectangular</p>
+          <p className="leading-[normal] mb-0">Material: Acetato · Lente: 52mm</p>
+          <p className="leading-[normal]">Puente: 18mm · Varilla: 145mm</p>
+        </div>
+      </div>
+      <div className="absolute bg-[var(--lemoon-surface-inverse,#0b1f3a)] h-[52px] left-[24px] overflow-clip rounded-[24px] top-[920px] w-[342px]" data-node-id="63:481" data-name="Add cart">
+        <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[19.6px] leading-[normal] left-[88px] text-[14px] text-[color:var(--lemoon-text-inverse,white)] top-[18px] w-[200px]" data-node-id="63:482">
+          AGREGAR AL CARRITO
+        </p>
+      </div>
+      <div className="absolute bg-[var(--lemoon-action-accent,#f7e600)] h-[52px] left-[24px] overflow-clip rounded-[24px] top-[984px] w-[342px]" data-node-id="63:483" data-name="Configure lenses">
+        <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold h-[18.2px] leading-[normal] left-[46px] text-[13px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[18px] w-[270px]" data-node-id="63:484">
+          CONFIGURAR CON CRISTALES →
+        </p>
+      </div>
+      <div className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium h-[22.4px] leading-[0] left-[24px] text-[16px] text-[color:var(--lemoon-text-brand,#0b1f3a)] top-[1096px] w-[342px]" data-node-id="63:485">
+        <p className="leading-[normal] mb-0">Descripción</p>
+        <p className="leading-[normal] mb-0">Materiales</p>
+        <p className="leading-[normal] mb-0">Ajuste y talla</p>
+        <p className="leading-[normal]">Cuidado y limpieza</p>
+      </div>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+Component descriptions: The following components have usage descriptions or documentation links defined in Figma. These descriptions provide important context about the intended usage, best practices, and any constraints for each component. Follow these guidelines when implementing or using these components.
+
+## Header / Mobile
+**Node ID:** 57:74
+
+Mobile global header, 390px wide: menu, centered wordmark, search and cart badge.
+
+## Icon
+**Node ID:** 36:58
+
+Lemoon’s core 24px Lucide-style icon library. The matching SVG source is maintained for Shopify use; preserve a 1.75px round stroke and use currentColor in implementation.
+The generated code contains image and SVG URL constants, e.g. const image = '[temporary-asset-url-omitted] These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

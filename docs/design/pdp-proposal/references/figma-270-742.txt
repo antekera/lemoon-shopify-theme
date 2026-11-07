@@ -1,0 +1,137 @@
+const imgLine = "[temporary-asset-url-omitted]";
+const imgLine1 = "[temporary-asset-url-omitted]";
+const imgMenuTrigger = "[temporary-asset-url-omitted]";
+const imgHeaderIconSearch = "[temporary-asset-url-omitted]";
+const imgHeaderIconHeart = "[temporary-asset-url-omitted]";
+const imgHeaderIconBag = "[temporary-asset-url-omitted]";
+const imgCartQuantityBadge = "[temporary-asset-url-omitted]";
+
+export default function PdpMobileDirection02() {
+  return (
+    <div className="bg-[var(--color-background,white)] relative size-full" data-node-id="270:742" data-name="PDP / Mobile / Direction 02">
+      <div className="absolute bg-[var(--color-primary,#0b1f3a)] h-[26px] left-0 top-0 w-[390px]" data-node-id="270:743" data-name="Mobile announcement" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[18px] text-[9px] text-[color:var(--color-background,white)] top-[7px] whitespace-nowrap" data-node-id="270:744">
+        ENVÍO GRATIS · CAMBIOS SIN COSTO
+      </p>
+      <div className="absolute bg-[var(--color-background,white)] h-[58px] left-0 top-[26px] w-[390px]" data-node-id="270:745" data-name="Mobile header" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[54px] text-[22px] text-[color:var(--color-primary,#0b1f3a)] top-[44px] whitespace-nowrap" data-node-id="270:746">
+        lemo
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[106px] text-[22px] text-[color:var(--color-secondary,#f7e600)] top-[44px] whitespace-nowrap" data-node-id="270:747">
+        o
+      </p>
+      <div className="absolute h-0 left-0 top-[84px] w-[390px]" data-node-id="270:749" data-name="Line">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgLine} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal leading-[normal] left-[20px] text-[11px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[108px] whitespace-nowrap" data-node-id="270:750">
+        Armazones / Dalton
+      </p>
+      <div className="absolute bg-[var(--lemoon-surface-disabled,#e0ddd8)] h-[340px] left-[20px] rounded-[22px] top-[140px] w-[350px]" data-node-id="270:751" data-name="Product image placeholder" />
+      <div className="absolute bg-[var(--color-secondary,#f7e600)] left-[278px] rounded-[27px] size-[54px] top-[162px]" data-node-id="270:752" data-name="Lemon accent" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[20px] text-[10px] text-[color:var(--lemoon-action-accent,#f7e600)] top-[520px] whitespace-nowrap" data-node-id="270:758">
+        DALTON
+      </p>
+      <div className="[word-break:break-word] absolute font-['Urbanist:Light'] font-light leading-[0] left-[20px] text-[34px] text-[color:var(--color-primary,#0b1f3a)] top-[544px] whitespace-nowrap" data-node-id="270:759">
+        <p className="leading-[normal] mb-0">Una forma que</p>
+        <p className="leading-[normal]">hace presencia.</p>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[20px] text-[25px] text-[color:var(--color-primary,#0b1f3a)] top-[642px] whitespace-nowrap" data-node-id="270:760">
+        $89.990
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[20px] text-[14px] text-[color:var(--color-primary,#0b1f3a)] top-[700px] whitespace-nowrap" data-node-id="270:761">
+        Color: Tortoise
+      </p>
+      <div className="absolute bg-[var(--color-text,#1a1a1a)] left-[20px] rounded-[14px] size-[28px] top-[730px]" data-node-id="270:762" data-name="swatch" />
+      <div className="absolute bg-[var(--color-primary,#0b1f3a)] left-[58px] rounded-[14px] size-[28px] top-[730px]" data-node-id="270:763" data-name="swatch" />
+      <div className="absolute bg-[var(--lemoon-surface-page,white)] left-[96px] rounded-[14px] size-[28px] top-[730px]" data-node-id="270:764" data-name="swatch" />
+      <div className="absolute bg-[var(--color-secondary,#f7e600)] left-[134px] rounded-[14px] size-[28px] top-[730px]" data-node-id="270:765" data-name="swatch" />
+      <div className="absolute bg-[var(--color-surface-warm,#f7f4ee)] h-[56px] left-[20px] rounded-[12px] top-[790px] w-[350px]" data-node-id="270:766" data-name="Trust" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[38px] text-[13px] text-[color:var(--color-primary,#0b1f3a)] top-[810px] whitespace-nowrap" data-node-id="270:767">
+        Incluye estuche + ajuste de por vida
+      </p>
+      <div className="absolute h-0 left-[20px] top-[880px] w-[350px]" data-node-id="270:768" data-name="Line">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgLine1} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[20px] text-[14px] text-[color:var(--color-primary,#0b1f3a)] top-[898px] whitespace-nowrap" data-node-id="270:769">
+        Descripción
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal leading-[normal] left-[348px] text-[18px] text-[color:var(--color-primary,#0b1f3a)] top-[898px] whitespace-nowrap" data-node-id="270:770">
+        +
+      </p>
+      <div className="absolute h-0 left-[20px] top-[928px] w-[350px]" data-node-id="270:771" data-name="Line">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgLine1} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[20px] text-[14px] text-[color:var(--color-primary,#0b1f3a)] top-[946px] whitespace-nowrap" data-node-id="270:772">
+        Materiales
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal leading-[normal] left-[348px] text-[18px] text-[color:var(--color-primary,#0b1f3a)] top-[946px] whitespace-nowrap" data-node-id="270:773">
+        +
+      </p>
+      <div className="absolute h-0 left-[20px] top-[976px] w-[350px]" data-node-id="270:774" data-name="Line">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgLine1} />
+        </div>
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Medium'] font-medium leading-[normal] left-[20px] text-[14px] text-[color:var(--color-primary,#0b1f3a)] top-[994px] whitespace-nowrap" data-node-id="270:775">
+        Ajuste y talla
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Regular'] font-normal leading-[normal] left-[348px] text-[18px] text-[color:var(--color-primary,#0b1f3a)] top-[994px] whitespace-nowrap" data-node-id="270:776">
+        +
+      </p>
+      <div className="absolute bg-[var(--color-secondary,#f7e600)] h-[52px] left-[20px] rounded-[26px] top-[1050px] w-[350px]" data-node-id="270:777" data-name="Bottom cta" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[105px] text-[13px] text-[color:var(--color-primary,#0b1f3a)] top-[1067px] whitespace-pre" data-node-id="270:778">{`CONFIGURAR CRISTALES  →`}</p>
+      <div className="absolute bg-[var(--color-primary,#0b1f3a)] h-[52px] left-[20px] rounded-[26px] top-[1114px] w-[350px]" data-node-id="270:779" data-name="Bottom cart" />
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[118px] text-[13px] text-[color:var(--color-background,white)] top-[1131px] whitespace-nowrap" data-node-id="270:780">
+        AGREGAR AL CARRITO
+      </p>
+      <div className="absolute h-0 left-[22px] top-[47px] w-[18px]" data-node-id="288:655" data-name="Menu trigger">
+        <div className="absolute inset-[-2px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgMenuTrigger} />
+        </div>
+      </div>
+      <div className="absolute h-0 left-[22px] top-[53px] w-[18px]" data-node-id="288:656" data-name="Menu trigger">
+        <div className="absolute inset-[-2px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgMenuTrigger} />
+        </div>
+      </div>
+      <div className="absolute h-0 left-[22px] top-[59px] w-[18px]" data-node-id="288:657" data-name="Menu trigger">
+        <div className="absolute inset-[-2px_0_0_0]">
+          <img alt="" className="block max-w-none size-full" src={imgMenuTrigger} />
+        </div>
+      </div>
+      <div className="absolute left-[292px] size-[20px] top-[45px]" data-node-id="292:653" data-name="Header icon / search">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHeaderIconSearch} />
+      </div>
+      <div className="absolute left-[322px] size-[20px] top-[45px]" data-node-id="292:656" data-name="Header icon / heart">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHeaderIconHeart} />
+      </div>
+      <div className="absolute left-[350px] size-[21px] top-[44px]" data-node-id="292:658" data-name="Header icon / bag">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgHeaderIconBag} />
+      </div>
+      <div className="absolute left-[364px] size-[15px] top-[40px]" data-node-id="292:661" data-name="Cart quantity badge">
+        <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgCartQuantityBadge} />
+      </div>
+      <p className="[word-break:break-word] absolute font-['Urbanist:Bold'] font-bold leading-[normal] left-[369px] text-[8px] text-[color:var(--color-primary,#0b1f3a)] top-[43px] whitespace-nowrap" data-node-id="292:662">
+        2
+      </p>
+      <p className="[word-break:break-word] absolute font-['Urbanist:SemiBold'] font-semibold leading-[normal] left-[130.5px] text-[12px] text-[color:var(--lemoon-text-secondary,#6b6b6b)] top-[303px] whitespace-nowrap" data-node-id="294:586">
+        IMAGEN DE PRODUCTO
+      </p>
+    </div>
+  );
+}
+SUPER CRITICAL: The generated React+Tailwind code MUST be converted to match the target project's technology stack and styling system.
+1. Analyze the target codebase to identify: technology stack, styling approach, component patterns, and design tokens
+2. Convert React syntax to the target framework/library
+3. Transform all Tailwind classes to the target styling system while preserving exact visual design
+4. Follow the project's existing patterns and conventions
+DO NOT install any Tailwind as a dependency unless the user instructs you to do so.
+
+Node ids have been added to the code as data attributes, e.g. `data-node-id="1:2"`.
+The generated code contains image and SVG URL constants, e.g. const image = '[temporary-asset-url-omitted] These URLs are temporary download sources and expire after 7 days. Download each asset into the project with curl -L, then replace its URL in the generated code with a reference to the downloaded asset. Never use the temporary URLs as runtime image sources.

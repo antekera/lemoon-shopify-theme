@@ -1,0 +1,549 @@
+{
+  "generatedAt": "2026-11-06",
+  "baseSha": "0cada135da9534cd91b29b50cf0db9a64184e962",
+  "branch": "chore/lem-134-pdp-design",
+  "remote": "https://github.com/antekera/lemoon-shopify-theme.git",
+  "status": "author proposal; independent review and Miguel approval pending",
+  "files": [
+    {
+      "path": "docs/design/pdp-design-spec.md",
+      "bytes": 31482,
+      "sha256": "29643cdcf08653a2e5384903bfbb9f1397825cc7461e6f0d89ca4c9115ab4e34",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/README.md",
+      "bytes": 3230,
+      "sha256": "f5a765d7b7f15c5b05a304bcade70988802cccba48174647f04d838e63912624",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/fonts.css",
+      "bytes": 970,
+      "sha256": "2837eae0e2b7d5b4b25980082ac6a5115bbd6bb96f7b723860f6417eae89f408",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-400.ttf",
+      "bytes": 57248,
+      "sha256": "451376abefae9121f5dd0372d26865e7654b1041b9fdacdf57c6bd5cbf691da0",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-500.ttf",
+      "bytes": 57240,
+      "sha256": "366c9f60de8654362826a500399e568e6198696b8fbd999ba7d0c03c9ba742b6",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-600.ttf",
+      "bytes": 57212,
+      "sha256": "b7a672834374ef3a96e81abd2fd9bb61b282d3e75711fd4d9097e7e2e8c3b823",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hankengrotesk-OFL.txt",
+      "bytes": 4402,
+      "sha256": "e02ccb89a86839b22feff7872ff5cc355cc0f58318d29eee20e2cf83a612f16d",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/sources.json",
+      "bytes": 1151,
+      "sha256": "6877089c2d70c610c3ea75305d400025dac63363a851464eccf7ef423adec722",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-400.ttf",
+      "bytes": 41060,
+      "sha256": "599ec73b0a0388ba35a861b6f40bb77f9874b77c13f6499b15ad734f5715505c",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-500.ttf",
+      "bytes": 41116,
+      "sha256": "7b9e538738641d4243175732167b2a9fe440f139fc783547846673988d87c95c",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-600.ttf",
+      "bytes": 41108,
+      "sha256": "beb886f39281fdb7f0927346b8d7ff5141a2866a43f21c5251fa73eed783224f",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-OFL.txt",
+      "bytes": 4385,
+      "sha256": "ee1221b1c2d08920e5f9ca764eb228dafa5c8090df9cf665373c2287b9cb8f49",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/index.html",
+      "bytes": 6932,
+      "sha256": "788c18033fd2a7d0cf4e99262bffab3ee848879a7a089ee8409a3b439eb02ec9",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/proposal.css",
+      "bytes": 8344,
+      "sha256": "24428f87354adfe057c3f683c0d3afd169e7ac6eabe2be34d3f9557e0c790970",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/proposal.js",
+      "bytes": 13433,
+      "sha256": "5bf9f78a69aa11458a9466d67b60e70adef3a1a38bf9ab01427944efc032b70a",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/catalog-excerpts.json",
+      "bytes": 22141,
+      "sha256": "eb1beaac547ebcde2e6dff962dd339e0e841a7294bb907c00335a974af478b16",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-269-821.png",
+      "bytes": 62524,
+      "sha256": "1e62620eb6164f306585400c22392589d0c85b3db729306777effee4d0035b6f",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-269-821.txt",
+      "bytes": 12701,
+      "sha256": "6711d01c89a4c96666137c845a8e96875933ceada6ec0a000e4ae3cd5f6582c4",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-270-742.png",
+      "bytes": 38505,
+      "sha256": "6f8f2ec88b94e269eb86c6ca764b067e7b37c0336d648d4090e2b01c98b77ac1",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-270-742.txt",
+      "bytes": 11412,
+      "sha256": "fbca596a2fe60549a9eb3f94a0f90834bf80bce902d235fdc6b461eca380bae4",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-62-346.png",
+      "bytes": 63701,
+      "sha256": "954e128a0405f72655b7d0cadf2ecf2c4c1e7a4b63e99a6c178a28ca247f0639",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-62-346.txt",
+      "bytes": 17736,
+      "sha256": "d0306e593981a55b57c7868e14dd67a1262fb182e923cbb9b5cf7e7eee857fc9",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-63-448.png",
+      "bytes": 37106,
+      "sha256": "dabffdee64d5ff45258924eaba3fc7d6d6a226294207ca4544f435897bc287ee",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-63-448.txt",
+      "bytes": 10089,
+      "sha256": "a18a6332de222fa6a9c24b019a89b99d72784a08752d61f61f589977ff93a4aa",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/references/figma-observations.json",
+      "bytes": 1064,
+      "sha256": "eac48dcb7c528c859ece88a65080b82ab5022895cc471a1dd8efaf6f79d8c94a",
+      "provenance": "Figma read snapshot or upstream licensed font, see source records"
+    },
+    {
+      "path": "docs/design/pdp-proposal/render-checks.json",
+      "bytes": 73406,
+      "sha256": "c7d938d5fb7cce9e980d59e53facadc0df2e385c117a498e730ef2a6b1bbdf05",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/render-state-corrections.cjs",
+      "bytes": 7477,
+      "sha256": "9862f7535db6de76e2581f7adfb00cad7d32eb81df2a8072b44ca6c7c1c6c34a",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/render.cjs",
+      "bytes": 7057,
+      "sha256": "6a97a08a0bcc60503827f093afca841e35ac9f73e9cb96cb3c2f3334a240e28c",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/accessory-1440.png",
+      "bytes": 126987,
+      "sha256": "4c05c004c1ad7fae249c3900ae98c2a474bd4280019cb6649184b5173a90da6f",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/accessory-390.png",
+      "bytes": 110539,
+      "sha256": "a63acd3756dcc6c0267dc70d4dda50ec90e13a49c3424c0df7cf9fd6ebc699c3",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/accessory-expanded-390.png",
+      "bytes": 115910,
+      "sha256": "c8dddae1178d6e11e20d72b6515e4b2c1d664560520619c1690b5eaf1caf8f92",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/compatible-1440.png",
+      "bytes": 167609,
+      "sha256": "8db2891e3beb205308e6a68f191b516c3069c34d53decc6947cdab12e2aac052",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/compatible-390.png",
+      "bytes": 148576,
+      "sha256": "aece34175146aae618b280430d7257d268f6b51d9473dc68546e9a183bde8f6c",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/error-1440.png",
+      "bytes": 168529,
+      "sha256": "46833954896dd0e7ed3b58ca12bb39db07abc5bcea4977c79bbe665f12b559c3",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/error-390.png",
+      "bytes": 149560,
+      "sha256": "739c51bc21b8951bc8df07854bce25f6cef1ec8ac3227650cf286326f70c01b5",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/incompatible-1440.png",
+      "bytes": 168139,
+      "sha256": "c4c2e714a8cf5be9af8485a12c1b277653de360f6d0c12ec27b03e9d5f7ca60f",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/incompatible-390.png",
+      "bytes": 148777,
+      "sha256": "4549714f917f218f4d02abf5df55206f5e82be176fa12d69fc51e4a52d601d0f",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/invalid-1440.png",
+      "bytes": 167035,
+      "sha256": "725893f0a6f32c30a1112e5b961d73a904bd446d5d319982a6b9ee98542f35b2",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/invalid-390.png",
+      "bytes": 148116,
+      "sha256": "3b6bcbe31ac887b05d55a1b09de536d11fd3b231d0f36b81bf3816c69c17ca35",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/loading-1440.png",
+      "bytes": 162323,
+      "sha256": "7b3f5477eb320f5a7157953e6f793273478a8822b8f287446b60e9593cf274f5",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/loading-390.png",
+      "bytes": 143259,
+      "sha256": "75efb4ce189779db5d446fb0fced0aa152db2c3ec3cc7943cad21f9a92f4c7e8",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/long-1440.png",
+      "bytes": 181894,
+      "sha256": "e13069f3b31d0273f9b4e177a9bd24264b59215e5cd254f8a891468dbec1b46d",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/long-390.png",
+      "bytes": 159667,
+      "sha256": "f60df30feeb31cddbf707d51abd0dd2127c6fe6953e3ac3db266b7ccbcbf2f93",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/main-1440.png",
+      "bytes": 165817,
+      "sha256": "48ef6ca207c483099ae9d5d14a4aca0bea55e23419a429f2067f5fce0a4658d9",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/main-390.png",
+      "bytes": 147012,
+      "sha256": "85d9fab6639ca534871bdbd2c20dec73e640b1230342907b967359b17d9073a0",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/main-820.png",
+      "bytes": 160654,
+      "sha256": "ec300684a7f033ce03c3cb548d62a1af39ab94c0e710f9b6d750afcbf6d763a9",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/nodata-1440.png",
+      "bytes": 148572,
+      "sha256": "c04cf40fbe836c7a77ba6f006f69f2a4da4dfa5d7fbee1cb8edaae496ceb52dc",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/nodata-390.png",
+      "bytes": 129950,
+      "sha256": "d44286a51c872a7b219e82d6c651a6c70d8f38c4a59b82c4452ebe5a5b640144",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/nodata-expanded-1440.png",
+      "bytes": 180052,
+      "sha256": "03538f9370eb955faa7e264426c817f5e6cd5a42b79e0f083f9b38b800c16fc3",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/nodata-expanded-390.png",
+      "bytes": 156209,
+      "sha256": "f168481ce0650ff62cea0b360a679f16ee82f80d8bbc692948b317368290c6a5",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-1440.png",
+      "bytes": 175939,
+      "sha256": "bc1ea45f55024655f16058658a6e8c2a9e26b39483fa14afd304ae7514cc6138",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-390.png",
+      "bytes": 156363,
+      "sha256": "a437d105d78e71cb3d0dd8bad4142d9b042d15d7ce4040da86731684da45b722",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-retry-1440.png",
+      "bytes": 176669,
+      "sha256": "3df72f81c607e594ee96ad4d3a53fc466f5e0fce7849c7cfd67f3142b62ffaee",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-retry-390.png",
+      "bytes": 157057,
+      "sha256": "604a94a9edf829163956f7f29f51359e398ac4a8b88e7b05b20b99fc44ba9adf",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-secondary-1440.png",
+      "bytes": 168651,
+      "sha256": "932ccad6deb9668acafdf8663e16fbd74c48fb69f078d0ef97e128db07c217ce",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/partial-secondary-390.png",
+      "bytes": 149735,
+      "sha256": "f8a3e3aa102138579bd8d7698d08da8a77a2bbacc8ae0b1bf5bf1311460fe2c0",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/pricechange-1440.png",
+      "bytes": 184057,
+      "sha256": "990982651e8956298792f128a428202def08636b450c2438759119c92bfbaac9",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/pricechange-390.png",
+      "bytes": 159512,
+      "sha256": "8d82cec28caf553f33385d1613fb3de8d4d1f1fcfb6809ed1a714283a724f441",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/pricechange-expanded-1440.png",
+      "bytes": 232234,
+      "sha256": "202088d166b67407a044d144750c7c84d2302643f3a42af8817ea21d14a59912",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/pricechange-expanded-390.png",
+      "bytes": 197494,
+      "sha256": "5d2c30e5fe66bde31cb7ac5e87a7ce08ca384860e435f4d818ec04b10d680e03",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/quantity-1440.png",
+      "bytes": 175784,
+      "sha256": "c3764a9df0dc87daa894501cac939633a296fad8bd40d916fe8c30271385f465",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/quantity-390.png",
+      "bytes": 156120,
+      "sha256": "7905c502e28e76c6a3b3d096a707e562cff61c2a5b25f34892bbcbb278373c8c",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/single-1440.png",
+      "bytes": 162322,
+      "sha256": "bd3085b8c45c12aa9b69f01100bc8e70265096ccdaf7a289fc86e5b031cdc5c5",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/single-390.png",
+      "bytes": 143881,
+      "sha256": "1c5b315a5e36c2cdf3d254aca60e1aca80aefbaac6c4b057433cfe908a7efc7c",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/soldout-1440.png",
+      "bytes": 164402,
+      "sha256": "233e6c7f286302ee864a33ba04717cf906f505f5474d15a91df2fe2f263b3d14",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/soldout-390.png",
+      "bytes": 145799,
+      "sha256": "dd58c6917dfbf5358445345e1eac9edd1ce754429c2f726283738a3b01ac61d8",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/state-sheet-1.png",
+      "bytes": 853900,
+      "sha256": "1cc7e0218bf03efa1fbfc3fff305030b23983aee971eefe343b6224f85fbe90c",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/state-sheet-2.png",
+      "bytes": 716637,
+      "sha256": "da3cbda1452394985278ffe4bdd23782fcae6fe99cda7fdd06e44a8233c995ff",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/state-sheet-3.png",
+      "bytes": 832987,
+      "sha256": "5c917493555b3beb375cd3a9c2af38b3185d039469e02c9fac4c40a2a553d60f",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/state-sheet-4.png",
+      "bytes": 384203,
+      "sha256": "53d6c7540a62476524cb25fe083ce1e6ff7b28c1c44e5cf65ad788556f79ee5d",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/sun-1440.png",
+      "bytes": 143466,
+      "sha256": "2f233a4e12c6ffaa30214c7141820e2731ef96d33f26f47fcaec19b5ee7a6828",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/sun-390.png",
+      "bytes": 125479,
+      "sha256": "68180d3019071baeaed0f81908a77cb5438581b9b665a470f3450af542f610f9",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/renders/sun-expanded-390.png",
+      "bytes": 150076,
+      "sha256": "f6c5c7d95188522ea90055ba0ff6aa4159a32b51bb4f78c8b343e339f7fe2186",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/source-records.json",
+      "bytes": 11491,
+      "sha256": "ac59489e863aa28fd69631410595ca70faa828a6328508977da4c3e25889bc41",
+      "provenance": "local design authorship"
+    },
+    {
+      "path": "docs/design/pdp-proposal/state-correction-checks.json",
+      "bytes": 23189,
+      "sha256": "68023e10825e65c0c3e243edc7e049bdb8e3d373df34629d0108fa54d9ab5bbf",
+      "provenance": "local focused P2 correction evidence"
+    },
+    {
+      "path": "docs/design/pdp-proposal/state-sheets.html",
+      "bytes": 2042,
+      "sha256": "24ce3db5c592fe09f12370a8d1db818294522e88bdda989efeee16961213a318",
+      "provenance": "local design authorship"
+    }
+  ],
+  "directVisualRuntimeDependencies": [
+    {
+      "path": "assets/lemoon-tokens.css",
+      "bytes": 9651,
+      "sha256": "1018350f97ad06e8f33506602ac6d99dc5d8c9184947bc8011d2fe3014c80b28",
+      "sourceRevision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-logo-refined-navy.svg",
+      "bytes": 6733,
+      "sha256": "3a74fbcf348989f5ff55b66b0da552cb05fc8d16712797b5909b57c0168f0d83",
+      "sourceRevision": "0cada135da9534cd91b29b50cf0db9a64184e962",
+      "provenance": "Official wordmark per docs/design/brand-guidelines.md:15; canonical SVG unchanged, height:auto with intrinsic ratio"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-600.ttf",
+      "bytes": 57212,
+      "sha256": "b7a672834374ef3a96e81abd2fd9bb61b282d3e75711fd4d9097e7e2e8c3b823",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-400.ttf",
+      "bytes": 57248,
+      "sha256": "451376abefae9121f5dd0372d26865e7654b1041b9fdacdf57c6bd5cbf691da0",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-400.ttf",
+      "bytes": 41060,
+      "sha256": "599ec73b0a0388ba35a861b6f40bb77f9874b77c13f6499b15ad734f5715505c",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-600.ttf",
+      "bytes": 41108,
+      "sha256": "beb886f39281fdb7f0927346b8d7ff5141a2866a43f21c5251fa73eed783224f",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/hanken-grotesk-500.ttf",
+      "bytes": 57240,
+      "sha256": "366c9f60de8654362826a500399e568e6198696b8fbd999ba7d0c03c9ba742b6",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/urbanist-500.ttf",
+      "bytes": 41116,
+      "sha256": "7b9e538738641d4243175732167b2a9fe440f139fc783547846673988d87c95c",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/fonts/fonts.css",
+      "bytes": 970,
+      "sha256": "2837eae0e2b7d5b4b25980082ac6a5115bbd6bb96f7b723860f6417eae89f408",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/proposal.css",
+      "bytes": 8344,
+      "sha256": "24428f87354adfe057c3f683c0d3afd169e7ac6eabe2be34d3f9557e0c790970",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    },
+    {
+      "path": "docs/design/pdp-proposal/proposal.js",
+      "bytes": 13433,
+      "sha256": "5bf9f78a69aa11458a9466d67b60e70adef3a1a38bf9ab01427944efc032b70a",
+      "sourceRevision": "this proposal; font upstream URLs and OFL in fonts/sources.json"
+    }
+  ],
+  "referencePins": {
+    "LEM-23": "eaf530f0d936fb572e074e40d75f37b2fc56e6dd",
+    "LEM-129": "ba95b03f6b827e4e387be921408f9ed622c91101",
+    "Figma": "9EgE1vntKfwoQIQTzBUBNg; observed 2026-11-06; no immutable file version exposed"
+  },
+  "selfHash": "Excluded to avoid circular hash; report records this manifest hash",
+  "portability": "Keep checkout-relative canonical tokens/logo, locally bundled fonts; no runtime network.",
+  "stateCorrectionEvidence": {
+    "current": "state-correction-checks.json",
+    "reproduce": "node docs/design/pdp-proposal/render-state-corrections.cjs",
+    "historicalNotRerun": "render-checks.json and unaffected PNGs",
+    "rerenderedExisting": "nodata/pricechange/partial at390/1440 and sheets1/3",
+    "newCaptures": "expanded disclosures and partial secondary/retry annotated simulations",
+    "scope": "two independent-review P2 corrections only; P1-P5 unchanged"
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "base": "0cada135da9534cd91b29b50cf0db9a64184e962",
+  "accessedAt": "2026-11-06",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 10262,
+      "sha256": "d9d608efa23c1f01e9b36179edd7fb2228719313579dece9feb22056ee921180",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "DESIGN.md",
+      "bytes": 32911,
+      "sha256": "25e1e85bf4abd59893a6d867cec26217ff56d005385a4afc08f275bbed8e1d50",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": ".claude/rules/liquid-conventions.md",
+      "bytes": 1734,
+      "sha256": "a13fc3244957b526a10cf4a35a1c6cdd1822add9073043f5ba30c9b8e56acc5f",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": ".claude/rules/section-schema.md",
+      "bytes": 2609,
+      "sha256": "382ea3c84c07b532144b12de32ea782fd14931856cd3255769f727c867a78130",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": ".claude/rules/git-conventions.md",
+      "bytes": 4378,
+      "sha256": "8b3c0d0a0fe57d2d404a2a0a3241758f2f204768afd065eb62a136a9e2282006",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": ".claude/rules/theme-workflow.md",
+      "bytes": 1647,
+      "sha256": "0d75d2f748855b4021e8427c81d020286f2de6585be288d98d129de94bdec58c",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/brand-guidelines.md",
+      "bytes": 13773,
+      "sha256": "851738bc049bcc00c46c0c1c434188eb0553db3d146411a3ff736ccecea36e6b",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/agents/brand-guidance.md",
+      "bytes": 4201,
+      "sha256": "363dfe0e785818561d346f2fcc434c6ee4d6b0fcb948bd1f588150984a83cc32",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/brand-strategy.md",
+      "bytes": 6057,
+      "sha256": "7fa1955c8bae41ec264521c6c456f791bcf208330a3da58931649ee8092bd3f0",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/architecture/adr-002-eyewear-purchase.md",
+      "bytes": 6584,
+      "sha256": "da5ff0e0990d5711934e162fddc6a608f22fbcac453a7e81c99d6bdbbbfd225f",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/design-plan.md",
+      "bytes": 8366,
+      "sha256": "5f9a188ec5414f585bca3ca60fef845221bb39e90fa31b475f6ce3755ca6100c",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/remaining-pages-plan.md",
+      "bytes": 8383,
+      "sha256": "70fb4980e55c97730118f4cfbbed4f279da0c647b041d12e44828bdd1e09616f",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/section-inventory.md",
+      "bytes": 9484,
+      "sha256": "c3cf366498b38e2a2cd73fa3f4dedf25179ac389d7fa6fa668543c67fecdda7d",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/design/component-inventory.md",
+      "bytes": 149256,
+      "sha256": "e47274f1c5424a985a48a87ff090b7f43a1fbbba5a4f33458d7ef627d4a139d6",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/components/README.md",
+      "bytes": 26447,
+      "sha256": "0a19ca1726ee5fd0c83100840ef0f036fad12cd19f4c3ba4a29c20f78b2a7445",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "docs/components/recipes/product-card-grid.md",
+      "bytes": 9051,
+      "sha256": "3e25a9751e94fe370c0a9ec9d5df1d2541334524f6d607ff55baa83c8af1749d",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "templates/product.json",
+      "bytes": 2897,
+      "sha256": "975e8e901a55b43eba5d2f6718c4a1ecf96a77c61f28bd94194cfb7177115321",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "templates/product.optica.json",
+      "bytes": 2711,
+      "sha256": "e9ab576c433f6438fbe76658d3046fb8f6819cb21b502f67b05d6287d710d311",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "sections/main-product.liquid",
+      "bytes": 99090,
+      "sha256": "a336c3122e26811863eabe84c64c3bb2d128cf52a63216ecb005b45a44554126",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "sections/lemoon-eyewear-product.liquid",
+      "bytes": 16733,
+      "sha256": "1bfa516e14f2d4cf25db76c34c8f213f0ceda33a684935af566b9fc620155b82",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-tokens.css",
+      "bytes": 9651,
+      "sha256": "1018350f97ad06e8f33506602ac6d99dc5d8c9184947bc8011d2fe3014c80b28",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-components.css",
+      "bytes": 50016,
+      "sha256": "08a376ec1397a3361e7ebd2d28f619d936515910c3beeee7387ee8fe0b266760",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-eyewear-product.css",
+      "bytes": 12052,
+      "sha256": "6d015ebf89b3b476b07223db34e9fc8da71fb9daba0644a1ccede6c4253254a2",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-pdp-layout.css",
+      "bytes": 32958,
+      "sha256": "93b2845d2204844b451afaba780fa0e42adee31fcef1284a2d4ef94d3c5e5415",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-eyewear-product.js",
+      "bytes": 17786,
+      "sha256": "4c6d5a073591ddb29b1105dbec2405780b039395f8aacacda77b48d23bf3215e",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-pdp-tools.js",
+      "bytes": 21501,
+      "sha256": "6464e4e07823d708fc7c699bc439fc0a43b315bf1cf948e43be77c4eb1366d29",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "layout/theme.liquid",
+      "bytes": 21690,
+      "sha256": "ea4030647baea1a218cec5d65bfdc39a02a6c41944202d7f3df3bd6502cb7e9a",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-product-heading.liquid",
+      "bytes": 598,
+      "sha256": "8a0746b75761b638a9ba99c1a7d89bb07c4548e7ce67525212e000d757b6058e",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-pdp-image.liquid",
+      "bytes": 933,
+      "sha256": "d22619c72206058e5521ac1d15c74323b9ad8725fe8db4dea28739fae74a2712",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-frame-dimensions.liquid",
+      "bytes": 1311,
+      "sha256": "477e6bb1842efec028e847af78055d239a112fd200a37b13df50aca88ba00917",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/price.liquid",
+      "bytes": 5537,
+      "sha256": "ce0fffddca9455727eeb6b48498cb058945285dc1f9ce16db4826ced8f3263a5",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/buy-buttons.liquid",
+      "bytes": 6919,
+      "sha256": "2bafb5d11e34c92542ad0a7b0314d2deffead06fdc95c8efa9535a62d4e6e8ad",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-money.liquid",
+      "bytes": 551,
+      "sha256": "d20072b57a079301a5c87fda1f94e1a46633e5fb065fb789b7a210b42c192dc8",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-select-lenses-button.liquid",
+      "bytes": 1385,
+      "sha256": "0c4b4f29b7dcf99e5b8974c4a8c0caabf592c105ec4112e01226bf36e52ab3d9",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "snippets/lemoon-frame-only-button.liquid",
+      "bytes": 1263,
+      "sha256": "7d811706a5138a2ed09ee9b6406e99e3e93ac19df5d414b5d5cdcb7db0976a5b",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "locales/es.json",
+      "bytes": 68552,
+      "sha256": "36d3499518c8c370de88ebbb3799e948ec9574e04c00592b9a86a4da7efe530e",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "assets/lemoon-logo-refined-navy.svg",
+      "bytes": 6733,
+      "sha256": "3a74fbcf348989f5ff55b66b0da552cb05fc8d16712797b5909b57c0168f0d83",
+      "revision": "0cada135da9534cd91b29b50cf0db9a64184e962"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-23-configurator-design/docs/specs/2026-11-05-lem-23-configurador-spec.md",
+      "bytes": 27153,
+      "sha256": "e6e6e16840c39775457c384546a53a867dea15d154f3cbbcb07b7d9f72e712fb",
+      "revision": "eaf530f0d936fb572e074e40d75f37b2fc56e6dd",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-23-configurator-design/docs/design/lem-23-proposal/README.md",
+      "bytes": 6616,
+      "sha256": "4f7d55df60cab5a8d9bae15611d45302548a636ed823ec9dc561c0423e98a68b",
+      "revision": "eaf530f0d936fb572e074e40d75f37b2fc56e6dd",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-23-configurator-design/docs/design/lem-23-proposal/manifest.json",
+      "bytes": 18292,
+      "sha256": "f261014feb27698487dca1960f5989ef4efd05e6ae228010e4e43ad72a5c48e9",
+      "revision": "eaf530f0d936fb572e074e40d75f37b2fc56e6dd",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-129-size-guide-modal/docs/lem-129-size-guide-review.md",
+      "bytes": 4623,
+      "sha256": "dc8888f16e87e184842ee2d805a5743ef584d9826dd2b722ceef4bc45a301f88",
+      "revision": "ba95b03f6b827e4e387be921408f9ed622c91101",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-129-size-guide-modal/snippets/lemoon-product-size-guide.liquid",
+      "bytes": 1085,
+      "sha256": "3a110bbf27156f4b9acaa5e913705ed4112fc2e1761e7ea858d96f03faac2a67",
+      "revision": "ba95b03f6b827e4e387be921408f9ed622c91101",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/Users/miguel/orca/workspaces/lemoon-theme/lem-129-size-guide-modal/snippets/lemoon-size-guide-content.liquid",
+      "bytes": 4684,
+      "sha256": "20cd19468378372d5225d8aa95a548844484e807057448642b0fc8146540f0ea",
+      "revision": "ba95b03f6b827e4e387be921408f9ed622c91101",
+      "status": "proposed separate-owner reference, not adopted"
+    },
+    {
+      "path": "/tmp/lem-next-pdp-intake.md",
+      "bytes": 15330,
+      "sha256": "048534c2b54c26ce1120de36108bac9fb44451dda433298f4e6d53dfbb7a624a",
+      "status": "coordinator supplied intake; catalog availability not refreshed"
+    },
+    {
+      "path": "/tmp/lem-next-pdp-intake.json",
+      "bytes": 537424,
+      "sha256": "992e64e7ba80cd60c1103ea6855cb190014f5eaf40c86d5796497c5fc7d6b866",
+      "status": "coordinator supplied intake; catalog availability not refreshed"
+    },
+    {
+      "path": "/tmp/lem-next-design-intake.json",
+      "bytes": 670939,
+      "sha256": "4cc81d75df0ef6d3a784ac9fa685431de9dc3f07a9e7409fa3a7b580059bcd65",
+      "status": "coordinator supplied intake; catalog availability not refreshed"
+    }
+  ]
+}

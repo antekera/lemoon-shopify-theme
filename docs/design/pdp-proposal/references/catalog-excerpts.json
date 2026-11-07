@@ -1,0 +1,768 @@
+{
+  "observedAt": "2026-11-06T05:14:18.597Z",
+  "origin": "run_579ab8e5a3f9-next-design-intake.json",
+  "notice": "Internal snapshot, not approved/current public offers. No media associations present.",
+  "products": [
+    {
+      "id": "gid://shopify/Product/9581567869096",
+      "title": "Lemoon Artico",
+      "handle": "lemoon-artico",
+      "status": "ACTIVE",
+      "productType": "Óptico",
+      "tags": [
+        "acetato",
+        "armazón",
+        "cuadrado",
+        "flash-sale",
+        "hombre",
+        "triángulo",
+        "óptico"
+      ],
+      "onlineStoreUrl": null,
+      "updatedAt": "2026-11-05T13:57:46Z",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Azul",
+            "Carey"
+          ]
+        }
+      ],
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/55898368049320",
+            "title": "Azul",
+            "price": "1199",
+            "compareAtPrice": "1499",
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67608895619240",
+            "title": "Carey",
+            "price": "1199",
+            "compareAtPrice": "1499",
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              }
+            ]
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo2NzYwODg5NTYxOTI0MCwibGFzdF92YWx1ZSI6Mn0="
+        }
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "key": "frame_shape",
+            "type": "single_line_text_field",
+            "value": "cuadrado"
+          },
+          {
+            "key": "frame_material",
+            "type": "single_line_text_field",
+            "value": "acetato"
+          },
+          {
+            "key": "frame_size",
+            "type": "single_line_text_field",
+            "value": "mediano (54-17-145)"
+          },
+          {
+            "key": "frame_width",
+            "type": "single_line_text_field",
+            "value": "ancho"
+          },
+          {
+            "key": "face_shapes_compatible",
+            "type": "single_line_text_field",
+            "value": "triángulo"
+          },
+          {
+            "key": "lens_compatible",
+            "type": "list.metaobject_reference",
+            "value": "[\"gid://shopify/Metaobject/301394821288\"]"
+          },
+          {
+            "key": "gender",
+            "type": "single_line_text_field",
+            "value": "hombre"
+          },
+          {
+            "key": "prescription_type",
+            "type": "list.single_line_text_field",
+            "value": "[\"Monofocal\"]"
+          },
+          {
+            "key": "style_quiz_demo",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "style_quiz_ready",
+            "type": "boolean",
+            "value": "true"
+          },
+          {
+            "key": "style_traits",
+            "type": "list.metaobject_reference",
+            "value": "[\"gid://shopify/Metaobject/660341588136\",\"gid://shopify/Metaobject/660341948584\",\"gid://shopify/Metaobject/660341784744\",\"gid://shopify/Metaobject/660341817512\",\"gid://shopify/Metaobject/660341686440\"]"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoxOTIyMjgyNzc0NTI5NjgsImxhc3RfdmFsdWUiOiIxOTIyMjgyNzc0NTI5NjgifQ=="
+        }
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/348896231592",
+            "handle": "frontpage"
+          },
+          {
+            "id": "gid://shopify/Collection/349510009000",
+            "handle": "opticos"
+          },
+          {
+            "id": "gid://shopify/Collection/349510074536",
+            "handle": "opticos-hombre"
+          },
+          {
+            "id": "gid://shopify/Collection/349510271144",
+            "handle": "mejor-vendidos"
+          },
+          {
+            "id": "gid://shopify/Collection/349510303912",
+            "handle": "lo-nuevo"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjozNDk1MTAzMDM5MTIsImxhc3RfdmFsdWUiOiIyMDI2LTA4LTIxVDIzOjU0OjU3Ljg1ODIzMjAwMFoifQ=="
+        }
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15409107763368",
+      "title": "Lemoon Dalton · Prototipo",
+      "handle": "lemoon-dalton-prototipo",
+      "status": "UNLISTED",
+      "productType": "Óptico",
+      "tags": [
+        "acetato",
+        "armazón",
+        "prototipo",
+        "unisex",
+        "óptico"
+      ],
+      "onlineStoreUrl": null,
+      "updatedAt": "2026-11-04T21:20:52Z",
+      "options": [
+        {
+          "name": "Color",
+          "values": [
+            "Carey",
+            "Azul"
+          ]
+        },
+        {
+          "name": "Lentes",
+          "values": [
+            "Solo armazón",
+            "Monofocal",
+            "Monofocal + filtro azul",
+            "Monofocal fotocromático",
+            "Progresivo",
+            "Solar sin receta"
+          ]
+        },
+        {
+          "name": "Índice",
+          "values": [
+            "Estándar 1.50",
+            "Delgado 1.67"
+          ]
+        }
+      ],
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/67616399392936",
+            "title": "Carey / Solo armazón / Estándar 1.50",
+            "price": "39900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Solo armazón"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399425704",
+            "title": "Carey / Monofocal / Estándar 1.50",
+            "price": "59900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399458472",
+            "title": "Carey / Monofocal / Delgado 1.67",
+            "price": "84900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399491240",
+            "title": "Carey / Monofocal + filtro azul / Estándar 1.50",
+            "price": "69900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal + filtro azul"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399524008",
+            "title": "Carey / Monofocal + filtro azul / Delgado 1.67",
+            "price": "94900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal + filtro azul"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399556776",
+            "title": "Carey / Monofocal fotocromático / Estándar 1.50",
+            "price": "84900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal fotocromático"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399589544",
+            "title": "Carey / Monofocal fotocromático / Delgado 1.67",
+            "price": "109900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal fotocromático"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399622312",
+            "title": "Carey / Progresivo / Estándar 1.50",
+            "price": "119900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Progresivo"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399655080",
+            "title": "Carey / Progresivo / Delgado 1.67",
+            "price": "144900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Progresivo"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399687848",
+            "title": "Carey / Solar sin receta / Estándar 1.50",
+            "price": "59900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Carey"
+              },
+              {
+                "name": "Lentes",
+                "value": "Solar sin receta"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399720616",
+            "title": "Azul / Solo armazón / Estándar 1.50",
+            "price": "39900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Solo armazón"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399753384",
+            "title": "Azul / Monofocal / Estándar 1.50",
+            "price": "59900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399786152",
+            "title": "Azul / Monofocal / Delgado 1.67",
+            "price": "84900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399818920",
+            "title": "Azul / Monofocal + filtro azul / Estándar 1.50",
+            "price": "69900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal + filtro azul"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399851688",
+            "title": "Azul / Monofocal + filtro azul / Delgado 1.67",
+            "price": "94900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal + filtro azul"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399884456",
+            "title": "Azul / Monofocal fotocromático / Estándar 1.50",
+            "price": "84900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal fotocromático"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399917224",
+            "title": "Azul / Monofocal fotocromático / Delgado 1.67",
+            "price": "109900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Monofocal fotocromático"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399949992",
+            "title": "Azul / Progresivo / Estándar 1.50",
+            "price": "119900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Progresivo"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616399982760",
+            "title": "Azul / Progresivo / Delgado 1.67",
+            "price": "144900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Progresivo"
+              },
+              {
+                "name": "Índice",
+                "value": "Delgado 1.67"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/ProductVariant/67616400015528",
+            "title": "Azul / Solar sin receta / Estándar 1.50",
+            "price": "59900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Color",
+                "value": "Azul"
+              },
+              {
+                "name": "Lentes",
+                "value": "Solar sin receta"
+              },
+              {
+                "name": "Índice",
+                "value": "Estándar 1.50"
+              }
+            ]
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo2NzYxNjQwMDAxNTUyOCwibGFzdF92YWx1ZSI6MjB9"
+        }
+      },
+      "metafields": {
+        "nodes": [
+          {
+            "key": "frame_shape",
+            "type": "single_line_text_field",
+            "value": "pantóstico"
+          },
+          {
+            "key": "frame_material",
+            "type": "single_line_text_field",
+            "value": "acetato"
+          },
+          {
+            "key": "frame_width",
+            "type": "single_line_text_field",
+            "value": "estándar"
+          },
+          {
+            "key": "frame_size",
+            "type": "single_line_text_field",
+            "value": "mediano (54-17-145)"
+          },
+          {
+            "key": "gender",
+            "type": "single_line_text_field",
+            "value": "unisex"
+          },
+          {
+            "key": "face_shapes_compatible",
+            "type": "single_line_text_field",
+            "value": "ovalado"
+          },
+          {
+            "key": "prescription_type",
+            "type": "list.single_line_text_field",
+            "value": "[\"Monofocal\",\"Progresiva\",\"Sin receta\"]"
+          },
+          {
+            "key": "frame_dimensions",
+            "type": "json",
+            "value": "{\"frame_width\":140,\"lens_width\":54,\"bridge\":17,\"lens_height\":42,\"temple\":145}"
+          },
+          {
+            "key": "frame_weight",
+            "type": "number_decimal",
+            "value": "22.5"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoxOTA3MTM0NjI2MjAzMjgsImxhc3RfdmFsdWUiOiIxOTA3MTM0NjI2MjAzMjgifQ=="
+        }
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/349510009000",
+            "handle": "opticos"
+          },
+          {
+            "id": "gid://shopify/Collection/349510140072",
+            "handle": "opticos-unisex"
+          },
+          {
+            "id": "gid://shopify/Collection/349510271144",
+            "handle": "mejor-vendidos"
+          },
+          {
+            "id": "gid://shopify/Collection/349510303912",
+            "handle": "lo-nuevo"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjozNDk1MTAzMDM5MTIsImxhc3RfdmFsdWUiOiIyMDI2LTA4LTIxVDIzOjU0OjU3Ljg1ODIzMjAwMFoifQ=="
+        }
+      }
+    },
+    {
+      "id": "gid://shopify/Product/15416233590952",
+      "title": "Muestra · Estuche rígido para lentes",
+      "handle": "muestra-estuche-rigido-para-lentes",
+      "status": "ACTIVE",
+      "productType": "Accesorio",
+      "tags": [
+        "accesorios",
+        "muestra"
+      ],
+      "onlineStoreUrl": null,
+      "updatedAt": "2026-11-04T21:20:52Z",
+      "options": [
+        {
+          "name": "Title",
+          "values": [
+            "Default Title"
+          ]
+        }
+      ],
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/67634654380200",
+            "title": "Default Title",
+            "price": "9900",
+            "compareAtPrice": null,
+            "availableForSale": true,
+            "selectedOptions": [
+              {
+                "name": "Title",
+                "value": "Default Title"
+              }
+            ]
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDM4MDIwMCwibGFzdF92YWx1ZSI6MX0="
+        }
+      },
+      "metafields": {
+        "nodes": [],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": null
+        }
+      },
+      "collections": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Collection/349510172840",
+            "handle": "accesorios"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjozNDk1MTAxNzI4NDAsImxhc3RfdmFsdWUiOiIyMDI2LTA4LTIxVDIzOjU0OjMyLjQwNzUwNjAwMFoifQ=="
+        }
+      }
+    }
+  ]
+}
