@@ -1,0 +1,109 @@
+{
+  "accessedAt": "2026-11-06T02:48:43.666Z",
+  "actor": "Shopify agent connector; not app token",
+  "sanitization": "Only catalog resources; third-party review/widget metadata omitted",
+  "result": {
+    "data": {
+      "publications": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Publication/207751970984",
+            "autoPublish": false,
+            "catalog": {
+              "id": "gid://shopify/AppCatalog/114928320680",
+              "title": "Channel Catalog 207751970984 for Online Store",
+              "status": "ACTIVE"
+            },
+            "channels": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/Channel/207751970984",
+                  "name": "Tienda online",
+                  "handle": "online_store",
+                  "activeRegions": []
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoyMDc3NTE5NzA5ODQsImxhc3RfdmFsdWUiOjIwNzc1MTk3MDk4NH0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Publication/207752036520",
+            "autoPublish": false,
+            "catalog": {
+              "id": "gid://shopify/AppCatalog/114928386216",
+              "title": "Channel Catalog 207752036520 for Point of Sale",
+              "status": "ACTIVE"
+            },
+            "channels": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/Channel/207752036520",
+                  "name": "Point of Sale",
+                  "handle": "pos",
+                  "activeRegions": []
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoyMDc3NTIwMzY1MjAsImxhc3RfdmFsdWUiOjIwNzc1MjAzNjUyMH0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Publication/208446718120",
+            "autoPublish": false,
+            "catalog": {
+              "id": "gid://shopify/AppCatalog/115455033512",
+              "title": "Channel Catalog 208446718120 for Google & YouTube",
+              "status": "ACTIVE"
+            },
+            "channels": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/Channel/208446718120",
+                  "name": "Google & YouTube",
+                  "handle": "google",
+                  "activeRegions": []
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoyMDg0NDY3MTgxMjAsImxhc3RfdmFsdWUiOjIwODQ0NjcxODEyMH0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Publication/228145496232",
+            "autoPublish": false,
+            "catalog": {
+              "id": "gid://shopify/AppCatalog/128042336424",
+              "title": "Channel Catalog 228145496232 for Facebook & Instagram",
+              "status": "ACTIVE"
+            },
+            "channels": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/Channel/228145496232",
+                  "name": "Facebook & Instagram",
+                  "handle": "facebook-ads",
+                  "activeRegions": []
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoyMjgxNDU0OTYyMzIsImxhc3RfdmFsdWUiOjIyODE0NTQ5NjIzMn0="
+              }
+            }
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoyMjgxNDU0OTYyMzIsImxhc3RfdmFsdWUiOiIyMjgxNDU0OTYyMzIifQ=="
+        }
+      }
+    }
+  }
+}
