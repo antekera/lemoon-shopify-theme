@@ -92,8 +92,9 @@
 
 **Ownership:** coordinator para evidencia/PR/Linear; test engineer y reviewers separados para comprobación. Reviewer read-only por responsabilidad; no afirmar aislamiento técnico inexistente.
 
-- [ ] Revisar el delta completo y ejecutar `npm run test:unit`, pruebas E2E afectadas y `SHOPIFY_FLAG_NO_INPUT=1 npx --yes @shopify/cli@4.8.5 theme check --fail-level error` con Node24.19.0. Ejecutar también los checks requeridos por CI para el head final; no usar resultados del modal anterior para cerrar esta composición.
-- [ ] Revisar capturas de390/820/1440, reflow320, texto200%, movimiento reducido, lectura de ejemplo y ausencia de desbordamiento. Navegador local prueba fixtures; un paso separado debe comprobar Liquid real/Shopify cuando exista preview autorizado.
+- [x] Revisar el delta completo y ejecutar pruebas sobre el código integrado `1db003a4`: 499 unitarias, 300 E2E, Theme Check316 sin observaciones al umbral warning, workflows/Python. Node24.19.0 y CLI4.8.5. No se reutilizaron resultados del modal anterior para certificar esta composición.
+- [ ] Completar los checks remotos aplicables al head final del PR; el borrador no ejecuta los jobs que CI condiciona a ready_for_review.
+- [x] Revisar capturas de390/820/1440, reflow320, texto200% completo, movimiento reducido, lectura de ejemplo y ausencia de desbordamiento. Navegador local prueba fixtures; un paso separado debe comprobar Liquid real/Shopify cuando exista preview autorizado.
 - [ ] Revisiones independientes: editorial/fuentes, diseño contra spec/Zeelool y `DESIGN.md`, código y convenciones. Corregir hallazgos y refrescar las pruebas afectadas. Ejemplos educativos son contenido funcional claramente rotulado, no placeholders comerciales.
 - [ ] Antes de cualquier escritura externa, confirmar entorno y autorización vigente. Snapshot: página ID161807204520, handle`como-medir-tus-lentes`, publicada con `templateSuffix:null`; Contacto ID121882443944, handle`contact`, publicada con suffix`contact`. La plantilla local no acredita la asignación.
 - [ ] Preparar el contenido editable/SEO aprobados. Asignar `guia-medidas` y seleccionar la página en settings únicamente en el entorno autorizado que tenga los cambios. Conservar el bodyCMS previo para recuperación; no borrarlo para ocultar una discrepancia. No guardar este JSON de settings en Git.
@@ -112,3 +113,6 @@ Miguel autorizó implementar esta composición y continuar su desarrollo. Se con
 ## Checkpoint de implementación local
 
 Compartidos, modal y página implementados en `36c05b94`; correcciones nativas de HTML en `5ab2b851` y margen SVG al ampliar texto en `d13d3046`. Las tareas1–3 se entregaron como una unidad de integración con dueño único de producción, y pruebas con dueño separado; no se perdieron los gates de revisión. El commit integrado sustituye los tres mensajes sugeridos del plan. La preparación de template ya existente no exigió reescribir su JSON. La aceptación Shopify/editor/SEO/catálogo de tarea4 sigue pendiente. La base remota avanzó a `5bcb463b` y se integrará preservando Instrument Sans y el trabajo de los otros tickets. Evidencia final y revisión posterior se registrarán en el informe QA.
+
+
+Validación integrada final: `1db003a4`, base `5bcb463b`. Revisiones independientes de código, convenciones y diseño/copy integrados aprobadas para el entregable local; fixes `_html` y margen SVG cerrados. [Informe QA persistente](../../qa/lem-129-105-size-guides-local.md) con preview Tailscale, capturas, comandos y límites. LEM-129/105 siguen In Progress; integración Shopify/editor/SEO/catálogo y revisión humana pendientes.
