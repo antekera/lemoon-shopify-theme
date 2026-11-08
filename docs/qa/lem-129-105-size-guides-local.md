@@ -12,6 +12,8 @@ La página seleccionada en el ajuste global solo se enlaza desde el modal cuando
 
 ## Preview
 
+Actualización posterior: [revisión gráfica realista](lem-129-105-realistic-svg.md), código `26ba73f6`. Los enlaces compartidos de preview muestran el último snapshot servido; las capturas y resultados de este informe siguen correspondiendo a `1db003a4`.
+
 Servidor local en `127.0.0.1:4189`, snapshot inmutable del código validado. Proxy Tailscale privado, puerto 9451; requiere conexión a la tailnet. No utiliza Funnel.
 
 - [Modal estándar](https://miguels-mac-mini.tail51dddb.ts.net:9451/tests/fixtures/size-guide.html?shell=standard&scenario=complete): pulsar «Guía de medidas».
