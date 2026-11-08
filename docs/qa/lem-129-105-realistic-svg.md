@@ -1,5 +1,7 @@
 # LEM-129 / LEM-105 — revisión de los SVG de lentes
 
+Revisión gráfica vigente: [lentes clásicos y planos](lem-129-105-classic-flat.md), código `b9611c8e`, según la indicación posterior de Miguel. Las capturas y resultados de este documento pertenecen a su revisión histórica; las URLs compartidas muestran el snapshot más reciente.
+
 Petición de Miguel: dibujar los contornos desde unos lentes ópticos reales y acercar la representación al volumen de un armazón, superando el esquema de líneas anterior. Código de esta revisión: `26ba73f68c0bef7567990cc7f6c334df1b106380`, sobre `b844b602`. Es una corrección gráfica de los dos recursos compartidos del modal y la página.
 
 ## Referencia observada
