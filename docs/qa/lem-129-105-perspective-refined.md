@@ -1,5 +1,15 @@
 # LEM-129 / LEM-105 — corrección de perspectiva Donnalyn
 
+## Ajuste vigente — continuidad con el lente izquierdo (08-11-2026)
+
+Se conserva íntegro el lente izquierdo como referencia y se ajustan únicamente la abertura y una faceta interior del derecho. El derecho comparte su continuidad de curva junto al puente y en la base, manteniendo su tamaño mayor por la perspectiva. No cambian silueta exterior, patillas, remaches, miniiconos ni datos. La interpretación aplicada y el resultado quedan sujetos a la revisión de Miguel.
+
+Base `e2c50928`; SHA256 vigente del snippet `d59813a44f60a430b1179dd1bb41e452e6976e0aed7e29271434a041202140bb`. [Perspectiva vigente](lem-129-105-perspective-refined/after-matched.png).
+
+Verificación nueva: 29/29 unitarias afectadas, 37/37 E2E Chromium y Theme Check316 sin observaciones, Node24.19.0 y CLI4.8.5. Código y diseño independientes: Approved para el delta de dos trazados; solo lectura conductual, sin aislamiento técnico. Logs en `/tmp/lem129-perspective-matched/{unit,e2e,theme-check}.log`. Sin cambios en pruebas. Los resultados de abajo corresponden a la revisión anterior; las limitaciones nativas y de publicación siguen vigentes.
+
+## Revisión anterior — evidencia histórica
+
 Miguel pidió corregir la deformación de la vista en perspectiva y acercarla a [la foto del Donnalyn](https://s3.zeelool.com/admin/product/image/bdb5b03f1409dbb2f78442c86b786036.jpg), del [modelo elegido](https://www.zeelool.com/goods-detail/ZJGT372549-04). La revisión afecta únicamente al SVG grande de comparación; no cambia el frontal/lateral de cotas, miniiconos, textos, unidades, datos, CSS ni controladores.
 
 Base: `9639efcecdad490160d576188629ded5c46bfdb5`. SHA256 del snippet validado: `b1918c9f65d23076d0633e66002af10e324b04386bd11800dc0a38890f90ac99`.
