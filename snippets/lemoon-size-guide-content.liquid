@@ -1,6 +1,6 @@
 {% doc %}
-  Renders generic measurement references in a dialog or product information in inline tabs.
-  @param {product} [product] - Current Shopify product, required for inline tabs only.
+  Renders product measurements with educational references in a dialog or inline product tabs.
+  @param {product} [product] - Current Shopify product for measurements and inline tabs.
   @param {string} [instance_id] - Unique ID prefix when this content appears more than once.
   @param {string} [presentation] - tabs (default) or continuous dialog content.
 {% enddoc %}
@@ -9,28 +9,48 @@
   assign measurement_instance_id = size_guide_id | append: '-measurements'
   assign comparison_instance_id = size_guide_id | append: '-comparison'
   assign guide_page = settings.lemoon_size_guide_page
-  assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
 -%}
 {%- if presentation == 'dialog' -%}
+{%- liquid
+  assign dimensions = product.metafields.custom.frame_dimensions.value
+  assign measurement_keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
+  assign measurement_count = 0
+  for key in measurement_keys
+    assign measurement = dimensions[key]
+    assign numeric_measurement = measurement | plus: 0
+    if measurement == numeric_measurement and numeric_measurement > 0
+      assign measurement_count = measurement_count | plus: 1
+    endif
+  endfor
+-%}
 <lemoon-size-guide class="lemoon-size-guide lemoon-size-guide--dialog">
   <section class="lemoon-size-guide__block" aria-labelledby="SizeMeasurements-{{ size_guide_id | escape }}">
     <h3 id="SizeMeasurements-{{ size_guide_id | escape }}">{{ 'lemoon_pdp.measurements_tab' | t }}</h3>
+    {%- if measurement_count > 0 -%}
+      {%- if product.tags contains 'lemoon-measurements-demo' -%}<p class="lemoon-size-guide__note lemoon-size-guide__demo-notice">{{ 'lemoon_size_guide.demo_dimensions_notice' | t }}</p>{%- endif -%}
+      {%- if measurement_count < 5 -%}<p class="lemoon-size-guide__note">{{ 'lemoon_size_guide.partial_measurements' | t }}</p>{%- endif -%}
+    {%- else -%}
+      <p class="lemoon-size-guide__empty">{{ 'lemoon_pdp.measurements_unavailable' | t }}</p>
+    {%- endif -%}
     <div class="lemoon-size-guide__measurement-visual">
       {%- assign diagram_label = 'lemoon_size_guide.diagram_note' | t -%}
-      {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
+      {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label, product_measurements: true, dimensions: dimensions %}
     </div>
-    {% render 'lemoon-measurement-definitions' %}
   </section>
-  <section class="lemoon-size-guide__block">
-    {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, heading_level: 3, compact: true %}
-  </section>
-  <p class="lemoon-size-guide__note">{{ 'lemoon_size_guide.comparison_limit' | t }}</p>
-  <div class="lemoon-size-guide__links">
-    {%- if guide_page.url != blank and guide_page.template_suffix == 'guia-medidas' and guide_page.published_at != blank -%}
-      <a href="{{ guide_page.url | escape }}">{{ 'lemoon_size_guide.full_guide' | t }}</a>
-    {%- endif -%}
-    <a href="{{ contact_url | escape }}">{{ 'lemoon_size_guide.help_link' | t }}</a>
-  </div>
+  <details class="lemoon-size-guide__comparison">
+    <summary><span>{{ 'lemoon_size_guide.comparison_title' | t }}</span>{{ 'icon-caret.svg' | inline_asset_content | replace: '<svg ', '<svg aria-hidden="true" focusable="false" ' }}</summary>
+    {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, compact: true, annotated_temple: true, show_rows: false %}
+    {%- liquid
+      assign guide_url = routes.root_url | default: '/' | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
+      if guide_page.url != blank and guide_page.template_suffix == 'guia-medidas' and guide_page.published_at != blank
+        assign guide_url = guide_page.url
+      endif
+    -%}
+    <div class="lemoon-size-guide__links">
+      <p>{{ 'lemoon_size_guide.more_questions' | t }}</p>
+      <a href="{{ guide_url | escape }}">{{ 'lemoon_size_guide.full_guide' | t }}</a>
+    </div>
+  </details>
 </lemoon-size-guide>
 {%- else -%}
 {%- liquid

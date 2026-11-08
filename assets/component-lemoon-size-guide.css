@@ -50,3 +50,28 @@
 .lemoon-measurement-definitions > div { min-width: 0; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
 .lemoon-measurement-definitions dt { margin: 0 0 var(--lemoon-space-2); color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); }
 .lemoon-measurement-definitions dd { min-width: 0; margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+
+/* PDP values stay in HTML so long numbers and enlarged text cannot distort SVGs. */
+.lemoon-measurement-diagram__values { display: grid; gap: 0; margin: var(--lemoon-space-5) 0 0; color: var(--lemoon-text-brand); }
+.lemoon-measurement-diagram__values > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--lemoon-space-2) var(--lemoon-space-4); min-width: 0; padding: var(--lemoon-space-3) 0; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-measurement-diagram__values dt, .lemoon-measurement-diagram__values dd { margin: 0; font-size: var(--lemoon-fs-14); line-height: 1.6; }
+.lemoon-measurement-diagram__values dt { font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-diagram__values dd { overflow-wrap: anywhere; }
+.lemoon-measurement-definitions__value { display: block; margin-bottom: var(--lemoon-space-2); font-size: var(--lemoon-fs-16); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-definitions__label { display: block; }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__links p { flex-basis: 100%; margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison { margin-top: var(--lemoon-space-6); }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison[open] { min-height: var(--lemoon-size-guide-comparison-height, 0px); }
+
+/* Keep the close control above the full-width comparison heading. */
+.lemoon-pdp__dialog.lemoon-size-drawer:has(.lemoon-size-guide--dialog) {
+  --lemoon-size-guide-padding-top: 72px;
+  --lemoon-size-guide-reading-top: calc(var(--lemoon-space-4) + var(--lemoon-size-touch) + var(--lemoon-space-3));
+  padding-top: var(--lemoon-size-guide-padding-top);
+  scroll-padding-top: var(--lemoon-size-guide-reading-top);
+}
+.lemoon-size-drawer:has(.lemoon-size-guide--dialog) .lemoon-pdp__close { top: calc(var(--lemoon-space-4) - var(--lemoon-size-guide-padding-top)); }
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison > summary { padding-right: 0; }

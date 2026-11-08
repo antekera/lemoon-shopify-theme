@@ -13,6 +13,7 @@ import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
 import { renderQuizFixture } from '../helpers/style-quiz-renderer.mjs';
 import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
 import { renderSizeGuidePageFixture } from '../helpers/size-guide-page-renderer.mjs';
+import { renderSharedDrawerFixture } from '../helpers/shared-drawers-renderer.mjs';
 import { renderMeasurementGuideAnalyticsFixture } from '../helpers/measurement-guide-analytics-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -77,6 +78,16 @@ const server = createServer(async (request, response) => {
       const query = new URL(request.url, 'http://127.0.0.1').searchParams;
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(renderSizeGuideFixture(query.get('shell') || 'standard', query.get('scenario') || 'complete'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/shared-drawers.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      const html = renderSharedDrawerFixture(query.get('kind') || 'generic');
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : html);
     } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }

@@ -12,6 +12,15 @@
 <script type="module" src="{{ 'lemoon-mobile-nav.js' | asset_url }}"></script>
 <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
 <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="{{ section.id }}" role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>
+  <div class="lemoon-mobile-nav__controls" data-lemoon-nav-controls>
+    <button type="button" class="lemoon-mobile-nav__back" data-lemoon-nav-back hidden>
+      {% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}
+      <span>{{ 'sections.header.back_to_menu' | t }}</span>
+    </button>
+    <button type="button" class="lemoon-mobile-nav__close" data-lemoon-nav-close aria-label="{{ 'accessibility.close' | t }}">
+      {% render 'lemoon-icon', icon: 'x', size: 20 %}
+    </button>
+  </div>
   <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
     <nav aria-label="{{ 'sections.header.menu' | t }}">
       <ul class="lemoon-mobile-nav__primary" role="list">

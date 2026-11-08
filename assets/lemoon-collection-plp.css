@@ -682,7 +682,6 @@
     transition: transform 320ms ease, visibility 0s linear 320ms;
   }
   .js .lemoon-plp .mobile-facets__disclosure:not(.menu-opening) .mobile-facets__inner {
-    transform: translateX(101%);
     visibility: hidden;
   }
   .lemoon-plp .mobile-facets__disclosure.menu-opening .mobile-facets__inner {

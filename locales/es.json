@@ -1496,6 +1496,8 @@
     "property_pd": "Distancia pupilar (mm)"
   },
   "lemoon_size_guide": {
+    "more_questions": "¿Tienes más dudas?",
+    "modal_frame_width_definition": "Mide en línea horizontal desde un extremo exterior del frente hasta el otro, incluyendo los bordes del armazón.",
     "product_details_heading": "Características del producto",
     "demo_dimensions_notice": "Medidas de prueba para revisar esta página. No corresponden a medidas físicas verificadas del producto.",
     "front_view": "Vista frontal",

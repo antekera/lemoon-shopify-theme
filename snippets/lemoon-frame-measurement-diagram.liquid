@@ -1,7 +1,9 @@
 {% doc %}
   Original frame illustration informed by real eyewear, not a product rendering.
   @param {string} instance_id - Unique prefix for accessible SVG titles and paint IDs.
-  @param {string} label - Localized description of both views; no product values.
+  @param {boolean} [product_measurements] - Show compact named HTML references only when explicitly true.
+  @param {object} [dimensions] - Native positive numeric product measurements in millimeters.
+  @param {string} label - Localized description of both views.
 {% enddoc %}
 <figure class="lemoon-measurement-diagram">
   <div class="lemoon-measurement-diagram__views">
@@ -74,5 +76,21 @@
       <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.side_view' | t }}</p>
     </div>
   </div>
+  {%- if product_measurements == true -%}
+    {%- liquid
+      assign measurement_keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
+      assign measurement_markers = 'A,B,C,D,E' | split: ','
+    -%}
+    <dl class="lemoon-measurement-diagram__values" aria-label="{{ 'lemoon_pdp.measurements_tab' | t }}">
+      {%- for key in measurement_keys -%}
+        {%- liquid
+          assign measurement = dimensions[key]
+          assign numeric_measurement = measurement | plus: 0
+          assign label_key = 'lemoon_pdp.' | append: key
+        -%}
+        <div><dt>{{ label_key | t }}</dt><dd><span class="lemoon-measurement-diagram__marker">{{ measurement_markers[forloop.index0] }}:</span> {% if measurement == numeric_measurement and numeric_measurement > 0 %}{{ measurement | escape }} mm{% else %}—{% endif %}</dd></div>
+      {%- endfor -%}
+    </dl>
+  {%- endif -%}
   <figcaption>{{ label | escape }}</figcaption>
 </figure>

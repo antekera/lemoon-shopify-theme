@@ -11,8 +11,18 @@ import { renderComponentSection } from '../tests/helpers/component-library-rende
 const root = fileURLToPath(new URL('../', import.meta.url));
 export const previewAssetPrefix = '/__lem129_preview/';
 export const previewAssets = new Map([
+  [`${previewAssetPrefix}lemoon-eyewear-product.js`, resolve(root, 'assets/lemoon-eyewear-product.js')],
   [`${previewAssetPrefix}lemoon-measurement-guide-analytics.js`, resolve(root, 'assets/lemoon-measurement-guide-analytics.js')],
   [`${previewAssetPrefix}lemoon-cookie-preferences.js`, resolve(root, 'assets/lemoon-cookie-preferences.js')],
+  [`${previewAssetPrefix}cart-drawer.js`, resolve(root, 'assets/cart-drawer.js')],
+  [`${previewAssetPrefix}component-lemoon-drawer.css`, resolve(root, 'assets/component-lemoon-drawer.css')],
+  [`${previewAssetPrefix}lemoon-mobile-nav.css`, resolve(root, 'assets/lemoon-mobile-nav.css')],
+  [`${previewAssetPrefix}lemoon-mobile-nav.js`, resolve(root, 'assets/lemoon-mobile-nav.js')],
+  [`${previewAssetPrefix}lemoon-mobile-nav-logic.js`, resolve(root, 'assets/lemoon-mobile-nav-logic.js')],
+  [`${previewAssetPrefix}lemoon-collection-plp.css`, resolve(root, 'assets/lemoon-collection-plp.css')],
+  [`${previewAssetPrefix}pickup-availability.js`, resolve(root, 'assets/pickup-availability.js')],
+  [`${previewAssetPrefix}lemoon-pdp-layout.css`, resolve(root, 'assets/lemoon-pdp-layout.css')],
+  [`${previewAssetPrefix}lemoon-pdp-tools.js`, resolve(root, 'assets/lemoon-pdp-tools.js')],
   [`${previewAssetPrefix}component-lemoon-size-guide.css`, resolve(root, 'assets/component-lemoon-size-guide.css')],
   [`${previewAssetPrefix}lemoon-components.css`, resolve(root, 'assets/lemoon-components.css')],
 ]);

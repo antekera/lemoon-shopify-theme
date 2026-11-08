@@ -29,6 +29,8 @@ function initialize(scope = document) {
   const triggers = [...header.querySelectorAll('[data-lemoon-nav-open]')];
   const root = drawer.querySelector('[data-lemoon-nav-root]');
   const panels = [...drawer.querySelectorAll('[data-lemoon-nav-panel]')];
+  const controls = drawer.querySelector('[data-lemoon-nav-controls]');
+  const backButton = drawer.querySelector('[data-lemoon-nav-back]');
   if (!root || !triggers.length) return;
 
   document.body.append(overlay, drawer);
@@ -44,9 +46,21 @@ function initialize(scope = document) {
 
   controller = { abort, drawer, overlay, header, sectionId, get previousOverflow() { return previousOverflow; } };
 
+  const isMobile = () => window.matchMedia('(max-width: 749px)').matches;
+  const isVisibleControl = (element) => element && element.getClientRects().length > 0 &&
+    getComputedStyle(element).visibility !== 'hidden' &&
+    !element.closest('[hidden], [inert], [aria-hidden="true"]');
+
+  function focusItems() {
+    const items = isMobile()
+      ? [...(controls?.querySelectorAll(focusable) || []), ...activePanel.querySelectorAll(focusable)]
+      : [triggers.find(isVisibleControl), ...activePanel.querySelectorAll(focusable)];
+    return items.filter(isVisibleControl);
+  }
+
   function measure() {
     const main = header.querySelector(
-      window.matchMedia('(max-width: 749px)').matches ? '.lemoon-header__mobile-inner' : '.lemoon-header__desktop'
+      isMobile() ? '.lemoon-header__mobile-inner' : '.lemoon-header__desktop'
     );
     const top = Math.max(0, main.getBoundingClientRect().bottom);
     drawer.style.setProperty('--lemoon-nav-top', `${top}px`);
@@ -54,6 +68,8 @@ function initialize(scope = document) {
   }
 
   function updateTriggers() {
+    if (backButton) backButton.hidden = level !== 'sub';
+    drawer.style.setProperty('--lemoon-nav-controls-height', `${controls?.offsetHeight || 0}px`);
     triggers.forEach((trigger) => {
       trigger.setAttribute('aria-expanded', String(level !== 'closed'));
       trigger.setAttribute('aria-label', level === 'sub' ? trigger.dataset.navBackLabel : level === 'root' ? trigger.dataset.navCloseLabel : trigger.dataset.navOpenLabel);
@@ -100,7 +116,7 @@ function initialize(scope = document) {
     level = 'root';
     switchPanel(root, 'back', animate);
     updateTriggers();
-    if (focus) root.querySelector(focusable)?.focus({ preventScroll: true });
+    if (focus) (isMobile() ? focusItems()[0] : root.querySelector(focusable))?.focus({ preventScroll: true });
   }
 
   function showPanel(slot) {
@@ -109,7 +125,7 @@ function initialize(scope = document) {
     level = 'sub';
     switchPanel(panel, 'forward', true);
     updateTriggers();
-    (panel.querySelector(focusable) || panel).focus({ preventScroll: true });
+    (isMobile() ? focusItems()[0] || panel : panel.querySelector(focusable) || panel).focus({ preventScroll: true });
   }
 
   function open(trigger) {
@@ -135,7 +151,9 @@ function initialize(scope = document) {
     drawer.inert = true;
     document.body.style.overflow = previousOverflow;
     updateTriggers();
-    lastTrigger?.focus();
+    const restoreTarget = isVisibleControl(lastTrigger) ? lastTrigger :
+      triggers.find(isVisibleControl) || [...header.querySelectorAll(focusable)].find(isVisibleControl);
+    restoreTarget?.focus();
   }
 
   triggers.forEach((trigger) => {
@@ -147,19 +165,30 @@ function initialize(scope = document) {
     }, { signal });
   });
   drawer.addEventListener('click', (event) => {
+    if (event.target.closest('[data-lemoon-nav-close]')) { close(); return; }
+    if (event.target.closest('[data-lemoon-nav-back]')) { showRoot(); return; }
     const target = event.target.closest('[data-lemoon-nav-target]');
     if (target) showPanel(target.dataset.lemoonNavTarget);
   }, { signal });
   overlay.addEventListener('click', close, { signal });
-  window.addEventListener('resize', () => { if (level !== 'closed') measure(); }, { signal });
+  window.addEventListener('resize', () => {
+    if (level === 'closed') return;
+    // The current header exposes its menu opener only below 750px.
+    if (!triggers.some(isVisibleControl)) { close(); return; }
+    measure();
+    updateTriggers();
+    // Crossing the mobile breakpoint can hide the focused header/toolbar control.
+    if (!isVisibleControl(document.activeElement) || (isMobile() && !drawer.contains(document.activeElement))) {
+      (focusItems()[0] || drawer).focus({ preventScroll: true });
+    }
+  }, { signal });
   window.addEventListener('scroll', () => { if (level !== 'closed') measure(); }, { passive: true, signal });
   document.addEventListener('keydown', (event) => {
     if (level === 'closed') return;
     if (event.key === 'Escape') { close(); return; }
     if (event.key !== 'Tab') return;
-    const activeTrigger = triggers.find((trigger) => trigger.getClientRects().length > 0);
-    const currentPanel = activePanel;
-    const items = [activeTrigger, ...currentPanel.querySelectorAll(focusable)].filter(Boolean);
+    const items = focusItems();
+    if (!items.length) { event.preventDefault(); drawer.focus(); return; }
     const index = items.indexOf(document.activeElement);
     if (event.shiftKey && index <= 0) {
       event.preventDefault();

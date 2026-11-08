@@ -92,6 +92,10 @@ if (!customElements.get('pickup-availability-drawer')) {
         super();
 
         this.onBodyClick = this.handleBodyClick.bind(this);
+        this.backdrop = document.createElement('div');
+        this.backdrop.className = 'lemoon-drawer-backdrop';
+        this.backdrop.setAttribute('aria-hidden', 'true');
+        this.backdrop.addEventListener('click', () => this.hide());
 
         this.querySelector('button').addEventListener('click', () => {
           this.hide();
@@ -113,7 +117,14 @@ if (!customElements.get('pickup-availability-drawer')) {
         }
       }
 
+      disconnectedCallback() {
+        if (this.hasAttribute('open')) this.hide();
+        else this.backdrop.remove();
+        document.body.removeEventListener('click', this.onBodyClick);
+      }
+
       hide() {
+        this.backdrop.remove();
         this.removeAttribute('open');
         document.body.removeEventListener('click', this.onBodyClick);
         document.body.classList.remove('overflow-hidden');
@@ -122,6 +133,7 @@ if (!customElements.get('pickup-availability-drawer')) {
 
       show(focusElement) {
         this.focusElement = focusElement;
+        document.body.appendChild(this.backdrop);
         this.setAttribute('open', '');
         document.body.addEventListener('click', this.onBodyClick);
         document.body.classList.add('overflow-hidden');

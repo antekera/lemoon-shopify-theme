@@ -1484,6 +1484,8 @@
     "property_pd": "Pupillary distance (mm)"
   },
   "lemoon_size_guide": {
+    "more_questions": "Still have questions?",
+    "modal_frame_width_definition": "Measure horizontally from one outside edge of the frame front to the other, including the frame rims.",
     "product_details_heading": "Product details",
     "demo_dimensions_notice": "Sample measurements for reviewing this page. They are not verified physical measurements of this product.",
     "front_view": "Front view",

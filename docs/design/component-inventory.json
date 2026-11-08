@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 559,
-    "mapped_paths": 497,
+    "total_tracked_paths": 561,
+    "mapped_paths": 498,
     "excluded_paths": 63,
     "by_root": {
-      "assets": 295,
+      "assets": 296,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -36,7 +36,7 @@
       "templates": 40
     },
     "mapped_by_extension": {
-      ".css": 84,
+      ".css": 85,
       ".js": 55,
       ".json": 91,
       ".liquid": 173,
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 80,
     "theme_block_files": 0,
-    "total_source_paths": 560,
-    "explicit_new_paths": 1
+    "total_source_paths": 561,
+    "explicit_new_paths": 0
   },
   "components": [
     {
@@ -674,7 +674,8 @@
         "assets/component-modal-video.css",
         "assets/cart-disclosure-modal.js",
         "assets/cart-disclosure-tooltip.js",
-        "snippets/cart-disclosure-indicator.liquid"
+        "snippets/cart-disclosure-indicator.liquid",
+        "assets/component-lemoon-drawer.css"
       ],
       "direct_static_consumers": [
         "layout/password.liquid",
@@ -692,7 +693,7 @@
       "availability": {
         "status": "extraction-pending",
         "entry_path": "assets/global.js",
-        "scope": "No hay modal genérico extraído; reutilizar el shell real con Escape, trampa y retorno de foco.",
+        "scope": "Shared mobile drawer presentation in component-lemoon-drawer.css for native dialog.lemoon-drawer and current size/cart/Lemoon navigation/facets/pickup adapters: full width, bottom-up, minimum32px top overlay,16px top corners, safe-area and local scroll. Existing controllers own opening, Escape, focus and restoration. Navigation adds visible internal mobile close/back; pickup mounts and removes an intercepting sibling backdrop. Desktop, nested submenus, centered modals and unused legacy HeaderDrawer remain owned by their existing surfaces. No generic dialog engine extracted. Mobile size-dialog exit remains opaque; the existing guide instance provides requestClose with a feature-detected native-modal exit fallback when CSS overlay transitions are unsupported. Repeated Escape guarded; reduced-motion and desktop preserve native close behavior. No duplicate versioned module import.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -729,7 +730,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-size-guide-content.liquid",
-        "scope": "Reference-only continuous dialog: front/side A–E diagram, shared definitions and educational temple code, no product argument or product measurements/specs/fit/units. Inline product details retain three ARIA tabs; measurements table accepts only positive JSON numbers in mm, with partial/empty states and an explicit sample-data notice only for valid dimensions on products tagged lemoon-measurements-demo. No inline diagram or CMS guide body. Optical details embed this sole inline section beside existing accordions and preserve SKU. Existing native controllers, sticky close and unique diagram IDs remain. Shared definitions accept optional class_name and are reused by measurements page. Approved Donnalyn silhouettes and original SVG paths remain unchanged; page index/steps/help and other guide modes retain prior design. Page-only annotated_temple:true adds a decorative inner-temple inscription, restrained navy outline/leader and a 12px educational figcaption below the original perspective. Base SVG paths and default modal composition are unchanged.",
+        "scope": "Continuous dialog receives product: approved front/side A–E diagram followed by one compact named HTML reference list with positive native JSON mm values, em dash for missing data and partial/empty/demo notices. Long measurement instructions are omitted from the modal only. Educational comparison is a closed native disclosure with canonical chevron and annotated_temple:true, show_rows:false, reusing the page inner-temple inscription/outline/leader and educational caption. Final localized help inside the comparison disclosure links to a configured published guia-medidas page or the canonical localized guide handle; both help and link stay hidden while collapsed and its body is excluded from the drawer focus boundary. Inline product details retain three ARIA tabs, positive mm values and partial/empty/demo notices, without inline diagrams or CMS body. Existing standard/optical guide open handlers reset dialog scrollTop to zero after showModal, without affecting other dialogs. The modal comparison has --lemoon-space-6 top margin. Closing the size drawer collapses its comparison; expanding it aligns its full-width summary below the sticky close row (72px base), with its chevron at the content right edge and the close control at the 16px top inset, using drawer-local scrolling with reduced-motion support and sufficient minimum content height. Existing native controllers, drawer motion, sticky close, unique SVG IDs and approved Donnalyn paths remain. Educational page defaults, explanatory rows and long definitions remain unchanged.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -1928,6 +1929,14 @@
         "LM-EDITORIAL"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
+    },
+    {
+      "path": "assets/component-lemoon-drawer.css",
+      "status": "mapped",
+      "component_ids": [
+        "LM-OVERLAY"
+      ],
+      "inspection_method": "manual source inspection; shared mobile presentation, no dialog-engine extraction"
     },
     {
       "path": "assets/component-lemoon-size-guide.css",
@@ -6257,9 +6266,10 @@
       "snippets/lemoon-size-guide-comparison.liquid",
       "assets/component-lemoon-size-guide.css",
       "snippets/lemoon-measurement-definitions.liquid",
+      "assets/component-lemoon-drawer.css",
       "assets/lemoon-measurement-guide-analytics.js"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. Page-only delivery on 2026-11-08 declares one new source: assets/lemoon-measurement-guide-analytics.js. Shared drawer and PDP refinements remain outside this bundle.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. On2026-11-08 the shared mobile drawer presentation adds one declared non-indexed CSS source:559 tracked +1 addition =560 total,497 mapped and63 excluded. Analytics guide publisher adds a second declared non-indexed source on2026-11-08:561 total source paths,498 mapped,63 excluded,559 tracked and2 declared additions. Final index reconciliation on2026-11-08:561 tracked/source paths,498 mapped,63 excluded,0 explicit non-indexed additions; new_source_paths retains historical delivery additions.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {
