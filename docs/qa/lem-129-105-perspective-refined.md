@@ -1,6 +1,14 @@
 # LEM-129 / LEM-105 — corrección de perspectiva Donnalyn
 
-## Ajuste vigente — corrección del izquierdo, alcance aclarado (08-11-2026)
+## Ajuste vigente — esquina izquierda más cuadrada (08-11-2026)
+
+Miguel pidió cuadrar un poco la zona de los tornillos del lente izquierdo para evitar la apariencia de ojo de gato. Se baja la punta exterior, se forma un frente corto vertical con radio suave y se alinea el par de remaches; la raíz de la patilla lejana acompaña la esquina. Ambas aberturas, lente derecho, puente y el resto de la ilustración se conservan.
+
+Base `64d4a47b`; SHA256 vigente `d1a74f523d079f491ccb934e5e4fd31a1d0a699207b71c101b7f5d6b55d2aa17`. [Perspectiva vigente](lem-129-105-perspective-refined/after-square-corner.png).
+
+Verificación nueva: 29/29 unitarias afectadas, 37/37 E2E Chromium y Theme Check316 sin observaciones, Node24.19.0/CLI4.8.5. Código y diseño independientes: Approved para el microdelta; responsabilidad read-only conductual sin aislamiento técnico. Logs en `/tmp/lem129-square-corner/{unit,e2e,theme-check}.log`. Sin cambios de pruebas, datos ni controladores. Las capturas/resultados de abajo son históricos; revisión humana e integración Shopify pendientes. Sin publicación ni merge.
+
+## Revisión anterior — corrección de abertura izquierda (08-11-2026)
 
 Miguel aclaró «Corregir el izquierdo». Se restaura el derecho y su faceta exactamente a `e2c50928`; solo se redibuja la abertura izquierda respecto de esa base. La abertura anterior se extendía demasiado hacia el lateral en la zona alta: el ajuste recupera el grosor del aro y sigue mejor el cuadrado redondeado/acortamiento de la foto. No se alteran el contorno exterior, patillas, remaches, miniiconos ni datos.
 
