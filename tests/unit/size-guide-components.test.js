@@ -36,6 +36,22 @@ describe('shared educational measurement graphics', () => {
     for (const value of [52, 18, 145]) expect(html).toMatch(new RegExp(`<strong[^>]*>\\s*${value}\\s*<\\/strong>`));
     expect(html.match(/class="lemoon-size-comparison__definition"/g)).toHaveLength(3);
   });
+  it('annotates the page illustration with a caption below while preserving the default artwork and note placement', () => {
+    const params = { instance_id: 'annotated-comparison' };
+    const normal = render('lemoon-size-guide-comparison', params);
+    expect(render('lemoon-size-guide-comparison', { ...params, annotated_temple: false })).toBe(normal);
+    expect(normal).not.toMatch(/__inscription|<figcaption/);
+    expect(normal.indexOf('class="lemoon-size-comparison__note"')).toBeLessThan(normal.indexOf('<svg'));
+    const annotated = render('lemoon-size-guide-comparison', { ...params, annotated_temple: true });
+    expect(annotated).toContain('class="lemoon-size-comparison__inscription"');
+    expect(annotated).toMatch(/<figcaption[^>]*>Ejemplo educativo\. No representa las medidas de un producto específico\.<\/figcaption>/);
+    expect(annotated.indexOf('<figcaption')).toBeGreaterThan(annotated.indexOf('</svg>'));
+    const illustrationPaths = html => {
+      const svg = html.match(/<svg class="lemoon-size-comparison__temple"[\s\S]*?<\/svg>/)[0];
+      return [...svg.replace(/<g class="lemoon-size-comparison__inscription"[\s\S]*?<\/g>/, '').matchAll(/<path\b[^>]*\bd="([^"]+)"/g)].map(match => match[1]);
+    };
+    expect(illustrationPaths(annotated)).toEqual(illustrationPaths(normal));
+  });
   it('keeps all SVG and description associations unique across multiple instances', () => {
     const html = ['first', 'second'].map(instance_id => render('lemoon-frame-measurement-diagram', { instance_id, label: 'Esquema de medidas' }) + render('lemoon-size-guide-comparison', { instance_id: `${instance_id}-comparison` })).join('');
     const values = ids(html);

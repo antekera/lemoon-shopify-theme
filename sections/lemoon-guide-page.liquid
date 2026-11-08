@@ -171,7 +171,7 @@
                 {%- if body_override_text != blank -%}{{ section.settings[body_setting] }}{%- else -%}{{ step_body_key | t }}{%- endif -%}
               </div>
               {%- if step == 1 -%}
-                {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false %}
+                {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false, annotated_temple: true %}
               {%- elsif step == 2 -%}
                 <div class="lemoon-guide__measurement-visual">
                   {%- assign diagram_label = 'lemoon_size_guide.page_diagram_note' | t -%}

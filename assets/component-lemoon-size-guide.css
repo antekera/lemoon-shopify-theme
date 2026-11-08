@@ -15,6 +15,8 @@
 .lemoon-size-comparison__example-label .lemoon-size-comparison__code { display: block; margin-top: var(--lemoon-space-2); font-size: var(--lemoon-fs-20); font-weight: var(--lemoon-weight-medium); }
 .lemoon-size-comparison__note { margin: var(--lemoon-space-3) 0 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14) !important; }
 .lemoon-size-comparison__temple { display: block; width: 100%; max-width: 44rem; height: auto; margin: var(--lemoon-space-6) auto 0; color: var(--lemoon-text-brand); }
+.lemoon-size-comparison__example-figure { margin: 0; }
+.lemoon-size-comparison--annotated .lemoon-size-comparison__note { margin-top: var(--lemoon-space-4); font-size: var(--lemoon-fs-12) !important; line-height: 1.5; }
 .lemoon-size-comparison__rows { list-style: none; margin: var(--lemoon-space-6) 0 0; padding: 0; }
 .lemoon-size-comparison__row:last-child { border-bottom: 1px solid var(--lemoon-border-default); }
 .lemoon-size-comparison__row { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-4); align-items: flex-start; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }

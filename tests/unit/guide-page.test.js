@@ -66,6 +66,7 @@ test('measurements uses CMS title and editor text with semantic richtext fallbac
   expect(html).not.toMatch(/<p\b[^>]*>\s*<p/);
   expect(html).not.toMatch(/<figure[^>]+class="lemoon-guide__visual"/);
   expect(html).toContain('Ejemplo educativo.');
+  expect(html).toContain('class="lemoon-size-comparison__inscription"');
   expect(html).not.toMatch(/data-mm|data-units|<dialog/);
   for (const blank of ['', '<p></p>', '<p> </p>', '<p>&nbsp;</p>', '<p><br></p>', '<p>\u00a0</p>']) {
     const fallback = render('lemoon-guide-page', { settings: { guide_kind: 'measurements', measurements_intro: blank, measurements_step_1_body: blank, measurements_help_body: blank } });
@@ -83,6 +84,7 @@ test('measurement overrides leave the other four guide variants unchanged', () =
     const actual = render('lemoon-guide-page', { id: guide_kind, settings: { guide_kind, ...overrides }, context: { page: { title: 'IGNORED CMS' } } });
     expect(actual).toBe(baseline);
     expect(actual).toContain('<figcaption>');
+    expect(actual).not.toContain('lemoon-size-comparison__inscription');
   }
 });
 

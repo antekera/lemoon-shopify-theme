@@ -67,3 +67,15 @@ Antes de publicación siguen pendientes revisión humana del contenido integrado
 ## Entrega de contenido
 
 [Propuesta es-CL y mapa es/en](2026-11-08-como-medir-tus-lentes-draft.md). Incluye mapa de claves exactas para storefront, correspondencia de los ocho defaults del editor y SEO propuesto para campos nativos. Solo se escribieron estos dos documentos de contenido; integración local, revisión independiente y preview corresponden al coordinador.
+
+## Ajuste solicitado por el usuario — 08-11-2026
+
+Delta limitado a tres claves por idioma, manteniendo los tres pasos y los ocho campos editoriales:
+
+- Se retira completo el segundo párrafo del paso 1 que comenzaba «También puedes encontrar». La ayuda final y el componente compartido conservan la orientación cuando no se puede leer el código; no se traslada ni duplica ese párrafo.
+- El título del paso 3 ahora nombra la página del producto. Se conserva la indicación local de abrir «Características del producto» → «Medidas» en su primer párrafo.
+- El cierre pasa a explicar cómo seguir si las cifras difieren: identificar la parte y la diferencia en mm, comparar cada componente y observar su forma en las fotos, consultando el modelo y la medida concreta si persiste la duda. Las fotos sirven para observar formas, nunca para deducir cifras ausentes.
+
+Se reabrió y leyó el 08-11-2026 [el artículo de Zeelool sobre medidas y diferencias entre armazones](https://www.zeelool.com/blog/frame/same-measurements-different-glasses-fit), actualizado por la tienda el 23-09-2026. Su explicación distingue las dimensiones impresas de la curva, posición de bisagras y forma de las piezas; su orientación de comparación combina cifras disponibles e imágenes frontales, laterales y en ángulo. Esto sustenta comparar por componente y revisar formas. El cierre también precisa el efecto de dimensiones distintas: un frente más ancho ocupa más espacio horizontal y un cristal más alto cambia la proporción vertical; medidas y forma de puente y patillas intervienen en el apoyo y la sujeción. El artículo distingue ancho total, altura, contorno del puente y ángulo de patillas como factores distintos; no se deduce una predicción de calce para un SKU ni una tolerancia válida para todas las personas.
+
+La frase sobre una diferencia pequeña es una orientación editorial para continuar la comparación, no una tolerancia de aceptación física: no fija un rango en mm, no determina qué modelo sirve, no promete el mismo calce ni autoriza ajustes del armazón. No se añaden criterios de receta, anatomía o medidas de rostro. No se repite la auditoría del catálogo ni se afirma una nueva inspección interactiva o publicación.

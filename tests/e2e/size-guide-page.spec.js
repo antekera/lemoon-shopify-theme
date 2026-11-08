@@ -11,6 +11,17 @@ for (const [width, height] of [[390, 844], [820, 1180], [1440, 900]]) {
     await expect(page.locator('.lemoon-guide__hero figure')).toHaveCount(0);
     await expect(page.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo. No representa las medidas de un producto específico.');
     await expect(page.locator('.lemoon-size-comparison h2')).toHaveCount(0);
+    const example = page.locator('.lemoon-size-comparison__example-figure');
+    await expect(example).toHaveCount(1);
+    const caption = example.locator('figcaption');
+    await expect(caption).toHaveText('Ejemplo educativo. No representa las medidas de un producto específico.');
+    await expect(caption).toHaveCSS('font-size', '12px');
+    await expect(example.locator('.lemoon-size-comparison__inscription')).toHaveCount(1);
+    await expect(example.locator('.lemoon-size-comparison__inscription text')).toHaveText('52 □ 18–145');
+    await expect(example.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+    await page.evaluate(() => document.fonts.ready);
+    const graphicBounds = await example.locator('svg').boundingBox(), captionBounds = await caption.boundingBox();
+    expect(captionBounds.y).toBeGreaterThanOrEqual(graphicBounds.y + graphicBounds.height);
     await expect(page.locator('.lemoon-measurement-diagram')).toHaveCount(1);
     await expect(page.locator('[data-mm], [data-units], dialog')).toHaveCount(0);
     const links = page.locator('.lemoon-guide__nav a'); await expect(links).toHaveCount(3);
@@ -27,6 +38,7 @@ for (const [width, height] of [[390, 844], [820, 1180], [1440, 900]]) {
     expect(new Set(ids).size).toBe(ids.length);
     await page.evaluate(() => document.fonts.ready);
     await page.screenshot({ path: testInfo.outputPath(`guide-page-${width}.png`), fullPage: true });
+    if (width === 390) await page.locator('.lemoon-size-comparison__example').screenshot({ path: testInfo.outputPath('guide-page-390-example-closeup.png') });
     expect(errors).toEqual([]);
   });
 }
