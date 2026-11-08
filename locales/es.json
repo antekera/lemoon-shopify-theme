@@ -641,13 +641,13 @@
         "visual_title": "Tres medidas, en milímetros.",
         "visual_copy": "Ancho del cristal · puente · largo de varilla. El dibujo es una referencia de las partes del armazón, no una escala de talla.",
         "step_1_title": "1. Revisa la patilla",
-        "step_1_body": "<p>Busca los números impresos en la cara interior de una patilla, también llamada varilla. En algunos armazones aparecen tres medidas: ancho del cristal, puente y largo de patilla. Otros números o letras pueden identificar el modelo o el color.</p>",
+        "step_1_body_html": "<p>Busca los números impresos en la cara interior de una patilla, también llamada varilla. En algunos armazones aparecen tres medidas: ancho del cristal, puente y largo de patilla. Otros números o letras pueden identificar el modelo o el color.</p>",
         "step_2_title": "2. Compara las mismas medidas",
-        "step_2_body": "<p>Si no encuentras el código, usa una regla en milímetros para tomar una referencia. Mira el armazón de frente para comparar su ancho y el de cada cristal. Mide el ancho total de un extremo exterior del frente al otro: no es la distancia entre las bisagras.</p><p>Para el largo de la patilla, considera el recorrido desde la bisagra hasta el extremo, incluida la parte que se curva hacia la oreja. No la dobles ni la endereces para medirla.</p><p>No calcules el ancho total sumando dos cristales y el puente: el borde y los extremos del marco también ocupan espacio.</p>",
+        "step_2_body_html": "<p>Si no encuentras el código, usa una regla en milímetros para tomar una referencia. Mira el armazón de frente para comparar su ancho y el de cada cristal. Mide el ancho total de un extremo exterior del frente al otro: no es la distancia entre las bisagras.</p><p>Para el largo de la patilla, considera el recorrido desde la bisagra hasta el extremo, incluida la parte que se curva hacia la oreja. No la dobles ni la endereces para medirla.</p><p>No calcules el ancho total sumando dos cristales y el puente: el borde y los extremos del marco también ocupan espacio.</p>",
         "step_3_title": "3. Revisa la guía del modelo",
-        "step_3_body": "<p>En la ficha del armazón, abre «Guía de medidas» y compara cada dato con el de tus lentes. Usa las medidas que estén disponibles para ese modelo. Una talla escrita, como pequeño o mediano, no reemplaza las cifras en milímetros.</p><p>Dos armazones con medidas parecidas pueden sentirse distintos por la forma del puente y de las patillas. Toma la comparación como una referencia y, si te falta un dato, consulta antes de elegir.</p>",
+        "step_3_body_html": "<p>En la ficha del armazón, abre «Guía de medidas» y compara cada dato con el de tus lentes. Usa las medidas que estén disponibles para ese modelo. Una talla escrita, como pequeño o mediano, no reemplaza las cifras en milímetros.</p><p>Dos armazones con medidas parecidas pueden sentirse distintos por la forma del puente y de las patillas. Toma la comparación como una referencia y, si te falta un dato, consulta antes de elegir.</p>",
         "help_title": "¿Te falta una medida?",
-        "help_body": "<p>Revisa la ficha del modelo. Si falta el dato que necesitas para compararlo, puedes consultarlo antes de elegir.</p>"
+        "help_body_html": "<p>Revisa la ficha del modelo. Si falta el dato que necesitas para compararlo, puedes consultarlo antes de elegir.</p>"
       },
       "face": {
         "title": "Tu estilo no tiene una sola forma.",

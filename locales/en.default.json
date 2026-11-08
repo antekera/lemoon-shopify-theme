@@ -629,13 +629,13 @@
         "visual_title": "Three measurements, in millimetres.",
         "visual_copy": "Lens width · bridge · temple length. The drawing identifies frame parts; it is not a size scale.",
         "step_1_title": "1. Check the temple arm",
-        "step_1_body": "<p>Look for the numbers printed inside a temple arm. Some frames show three measurements: lens width, bridge and temple length. Other numbers or letters may identify the model or color.</p>",
+        "step_1_body_html": "<p>Look for the numbers printed inside a temple arm. Some frames show three measurements: lens width, bridge and temple length. Other numbers or letters may identify the model or color.</p>",
         "step_2_title": "2. Compare the same measurements",
-        "step_2_body": "<p>If you cannot find the code, use a ruler in millimeters as a reference. Look at the front of the frame to compare its width and the width of each lens. Measure the overall width from one outside edge of the front to the other: this is not the distance between the hinges.</p><p>For temple length, follow the path from the hinge to the end, including the part that curves behind the ear. Do not bend or straighten it to measure it.</p><p>Do not calculate overall width by adding two lens widths and the bridge: the rim and frame ends also take up space.</p>",
+        "step_2_body_html": "<p>If you cannot find the code, use a ruler in millimeters as a reference. Look at the front of the frame to compare its width and the width of each lens. Measure the overall width from one outside edge of the front to the other: this is not the distance between the hinges.</p><p>For temple length, follow the path from the hinge to the end, including the part that curves behind the ear. Do not bend or straighten it to measure it.</p><p>Do not calculate overall width by adding two lens widths and the bridge: the rim and frame ends also take up space.</p>",
         "step_3_title": "3. Check the model’s size guide",
-        "step_3_body": "<p>On the frame’s product page, open the size guide and compare each measurement with your glasses. Use the measurements available for that model. A written size such as small or medium does not replace measurements in millimeters.</p><p>Two frames with similar measurements may feel different because of the shape of the bridge and temple arms. Use the comparison as a reference and ask about any missing measurements before choosing.</p>",
+        "step_3_body_html": "<p>On the frame’s product page, open the size guide and compare each measurement with your glasses. Use the measurements available for that model. A written size such as small or medium does not replace measurements in millimeters.</p><p>Two frames with similar measurements may feel different because of the shape of the bridge and temple arms. Use the comparison as a reference and ask about any missing measurements before choosing.</p>",
         "help_title": "Missing a measurement?",
-        "help_body": "<p>Check the model’s product page. If the measurement you need is missing, you can ask about it before choosing.</p>"
+        "help_body_html": "<p>Check the model’s product page. If the measurement you need is missing, you can ask about it before choosing.</p>"
       },
       "face": {
         "title": "Your style has more than one shape.",

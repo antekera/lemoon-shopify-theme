@@ -118,6 +118,9 @@
           {%- liquid
             assign step_title_key = guide_key | append: 'step_' | append: step | append: '_title'
             assign step_body_key = guide_key | append: 'step_' | append: step | append: '_body'
+            if guide_kind == 'measurements'
+              assign step_body_key = step_body_key | append: '_html'
+            endif
           -%}
           <li class="lemoon-guide__step" id="Guide-{{ section.id }}-{{ step }}">
             {%- liquid
@@ -162,7 +165,7 @@
         {%- capture ui_heading_id -%}GuideHelp-{{ section.id }}{%- endcapture -%}
         {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2, id: ui_heading_id %}
         {%- if guide_kind == 'measurements' -%}
-          <div class="rte">{%- if measurements_help_text != blank -%}{{ section.settings.measurements_help_body }}{%- else -%}{{ 'sections.lemoon_guide.measurements.help_body' | t }}{%- endif -%}</div>
+          <div class="rte">{%- if measurements_help_text != blank -%}{{ section.settings.measurements_help_body }}{%- else -%}{{ 'sections.lemoon_guide.measurements.help_body_html' | t }}{%- endif -%}</div>
         {%- else -%}
           <p>{{ 'sections.lemoon_guide.help_body' | t }}</p>
         {%- endif -%}
