@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, it, expect } from 'vitest';
 import { faceGuideSchema, faceGuideSection, faceGuideShapes, renderFaceGuide, shapeParam } from '../helpers/face-guide-renderer.mjs';
 
-const readback = JSON.parse(readFileSync(new URL('../../docs/design/face-guide-proposal/catalogue-links-readback.json', import.meta.url)));
+const readback = JSON.parse(readFileSync(new URL('../fixtures/face-guide-catalogue-links.json', import.meta.url)));
 const articles = html => [...html.matchAll(/<article\b[^>]*>[\s\S]*?<\/article>/g)].map(([article]) => article);
 const links = html => [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)].map(([markup, href, content]) => ({ markup, url: new URL(href.replaceAll('&amp;', '&'), 'https://fixture.test'), text: content.replace(/<[^>]*>/g, '').trim() }));
 const catalogueLinks = html => links(html).filter(({ url, markup }) => url.pathname.endsWith('/collections/all') && /class="[^"]*lemoon-face-guide__cta/.test(markup));

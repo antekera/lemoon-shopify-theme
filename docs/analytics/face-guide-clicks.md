@@ -10,7 +10,7 @@ La sección publica `lemoon:face_guide_click` mediante Shopify Customer Events. 
 | --- | --- | --- | --- |
 | Seis entradas del índice | `face_index` | `index` | Familia de destino |
 | Doce tarjetas de formas: SVG y nombre en un enlace | `frame_shape` | `family` | Familia y forma individual |
-| Seis botones «Ver armazones» | `family_catalogue` | `family` | Familia y dos formas, si la selección está disponible |
+| Seis enlaces «Ver armazones» | `family_catalogue` | `family` | Familia y dos formas, si la selección está disponible |
 | Enlace a medidas | `measure` | `fit` | Guía de medidas |
 | Botón de catálogo del banner | `catalogue` | `closing` | Catálogo |
 | Enlace al quiz del banner | `quiz` | `closing` | Quiz |

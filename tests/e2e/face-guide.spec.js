@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 const route = '/tests/fixtures/face-guide.html';
 const param = 'filter.p.m.custom.frame_shape';
 const families = ['Ovalado', 'Redondo', 'Cuadrado', 'Corazón', 'Diamante', 'Alargado'];
-const readback = JSON.parse(readFileSync('docs/design/face-guide-proposal/catalogue-links-readback.json'));
+const readback = JSON.parse(readFileSync('tests/fixtures/face-guide-catalogue-links.json'));
 const family = (page, index) => page.getByRole('article', { name: families[index], exact: true });
 
 for (const width of [390, 820, 1440]) {
@@ -93,7 +93,7 @@ for (const width of [390, 820, 1440]) {
 for (const [index, evidence] of readback.entries()) {
   test(`${families[index]} exits the guide for the native PLP URL with both selections`, async ({ page }) => {
     // Navigation target is a deterministic acknowledgement, not a Shopify PLP.
-    // The actual native PLP readback is separately dated in catalogue-links-readback.json.
+    // The actual native PLP readback is separately dated in face-guide-catalogue-links.json.
     await page.route('**/collections/all?*', request => request.fulfill({ contentType: 'text/html; charset=utf-8', body: '<!doctype html><html lang="es"><meta charset="utf-8"><title>Fixture destination</title><h1>Destino de catálogo del fixture</h1></html>' }));
     await page.goto(route);
     await family(page, index).locator('.lemoon-face-guide__cta').click();
