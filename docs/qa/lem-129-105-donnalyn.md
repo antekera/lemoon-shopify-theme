@@ -1,5 +1,7 @@
 # LEM-129 / LEM-105 — referencia Donnalyn
 
+Revisión posterior: [corrección de perspectiva](lem-129-105-perspective-refined.md). Este informe conserva el dibujo y la validación histórica de `49e1fde5`; los enlaces compartidos muestran el último snapshot.
+
 Código validado: `49e1fde5aab78aa0d10a7aa5ed13a078c356799e`. Miguel eligió [Zeelool Donnalyn ZJGT372549-04](https://www.zeelool.com/goods-detail/ZJGT372549-04) como nueva referencia de forma. Esta revisión sustituye la gráfica clásica plana; sus pruebas y capturas anteriores se conservan como evidencia histórica.
 
 ## Dibujo vigente
