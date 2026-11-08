@@ -1,6 +1,14 @@
 # LEM-129 / LEM-105 — corrección de perspectiva Donnalyn
 
-## Ajuste vigente — continuidad con el lente izquierdo (08-11-2026)
+## Ajuste vigente — corrección del izquierdo, alcance aclarado (08-11-2026)
+
+Miguel aclaró «Corregir el izquierdo». Se restaura el derecho y su faceta exactamente a `e2c50928`; solo se redibuja la abertura izquierda respecto de esa base. La abertura anterior se extendía demasiado hacia el lateral en la zona alta: el ajuste recupera el grosor del aro y sigue mejor el cuadrado redondeado/acortamiento de la foto. No se alteran el contorno exterior, patillas, remaches, miniiconos ni datos.
+
+Base de trabajo `25ad2ef0`; SHA256 vigente del snippet `c41325f64c6b1e17315bd474962cff483620637e0929222f6a67f50cc8629eb8`. [Perspectiva vigente](lem-129-105-perspective-refined/after-left.png). La interpretación anterior de abajo queda sustituida, sin atribuirle aceptación humana.
+
+Verificación nueva: 29/29 unitarias afectadas, 37/37 E2E Chromium y Theme Check316 sin observaciones, Node24.19.0/CLI4.8.5. Código y diseño independientes: Approved para el delta acotado; responsabilidad read-only conductual sin aislamiento técnico. Logs en `/tmp/lem129-left-lens/{unit,e2e,theme-check}.log`. Sin cambios en pruebas. Pendientes Shopify nativo/editor/SEO/catálogo y revisión humana; sin publicación ni merge.
+
+## Interpretación sustituida — ajuste del derecho (08-11-2026)
 
 Se conserva íntegro el lente izquierdo como referencia y se ajustan únicamente la abertura y una faceta interior del derecho. El derecho comparte su continuidad de curva junto al puente y en la base, manteniendo su tamaño mayor por la perspectiva. No cambian silueta exterior, patillas, remaches, miniiconos ni datos. La interpretación aplicada y el resultado quedan sujetos a la revisión de Miguel.
 
