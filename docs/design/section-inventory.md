@@ -48,11 +48,12 @@ Estas referencias proceden de los archivos del repositorio. Un template puede in
 | [lemoon-crystal-guide.liquid](../../sections/lemoon-crystal-guide.liquid) | `collection.json` |
 | [lemoon-design-system.liquid](../../sections/lemoon-design-system.liquid) | `page.sistema-de-diseno.json` |
 | [lemoon-eyewear-product.liquid](../../sections/lemoon-eyewear-product.liquid) | `product.optica.json` |
+| [lemoon-face-guide.liquid](../../sections/lemoon-face-guide.liquid) | `page.guia-rostro.json`; seis familias editables, ilustraciones y salidas a filtros nativos de armazón |
 | [lemoon-faq-page.liquid](../../sections/lemoon-faq-page.liquid) | `page.preguntas-frecuentes.json` |
 | [lemoon-faq.liquid](../../sections/lemoon-faq.liquid) | `page.preguntas-frecuentes.json` |
 | [lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid) | `index.json`, `page.nosotros.json`, `product.json`, `product.optica.json` |
 | [lemoon-gift-card-purchase.liquid](../../sections/lemoon-gift-card-purchase.liquid) | `page.gift-card.json`, `product.gift-card.json` |
-| [lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid) | `page.guia-medidas.json`, `page.guia-pedido.json`, `page.guia-prescripcion.json`, `page.guia-probador.json`, `page.guia-rostro.json` |
+| [lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid) | `page.guia-medidas.json`, `page.guia-pedido.json`, `page.guia-prescripcion.json`, `page.guia-probador.json` |
 | [lemoon-hero.liquid](../../sections/lemoon-hero.liquid) | `index.json` |
 | [lemoon-launch-page.liquid](../../sections/lemoon-launch-page.liquid) | `password.json` |
 | [lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid) | `page.envios-y-entregas.json`, `page.garantias.json`, `page.politica-de-devoluciones.json`, `page.privacidad.json`, `page.terminos-y-condiciones.json` |

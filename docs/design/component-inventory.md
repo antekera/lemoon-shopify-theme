@@ -12,23 +12,24 @@ Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a3
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura entregada enumera **561 rutas fuente** en las ocho raíces del JSON:561 indexadas, incluidas la presentación compartida del drawer móvil y el publisher analítico de measurements. Se conserva la actualización de `main` con los 30 JPG del quiz antes omitidos y el WebP decorativo de 404, junto a tres snippets y un CSS compartidos de la guía de medidas. La conciliación usa rutas/metadatos, sin abrir contenido binario ni privado; la inspección visual histórica del WebP se conserva como evidencia de su ticket. `snapshot.new_source_paths` retiene adiciones históricas y las adiciones de esta entrega; `explicit_new_paths` es0, porque todas las fuentes declaradas están indexadas. Docs/tests/herramientas quedan fuera del universo. Cada ruta aparece una vez mapped o excluded; consumidores directos son referencias estáticas, sin inferir uso efectivo ni dependencia transitiva.
+La cobertura integrada enumera **604 rutas fuente** indexadas: 502 mapped y 102 excluded. Combina las guías de medidas y rostro, los drawers móviles y la limpieza del CSS duplicado; `snapshot.new_source_paths` conserva la trazabilidad histórica, sin adiciones pendientes de indexar. Docs/tests/herramientas quedan fuera del universo. Cada ruta aparece una vez; consumidores directos son referencias estáticas, sin inferir uso efectivo o dependencias transitivas. La conciliación usa rutas y metadatos, sin leer contenido binario ni privado.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
-| Secciones Liquid / grupos JSON | 68 / 2 |
-| Snippets / layouts Liquid | 100 / 2 |
+| Secciones Liquid / grupos JSON | 69 / 2 |
+| Snippets / layouts Liquid | 102 / 2 |
 | Templates JSON / Liquid | 37 / 3 |
-| Assets CSS / JS / SVG | 85 / 55 / 94 |
-| Assets binarios PNG / JPG / GIF / WebP | 20 / 40 / 1 / 1 |
+| Assets CSS / JS / SVG | 85 / 56 / 94 |
+| Assets binarios PNG / JPG / GIF / WebP | 20 / 40 / 1 / 40 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **561 / 498 / 63** |
+| **Total fuentes / mapped / excluded** | **604 / 502 / 102** |
 | Familias estables | 44 |
 
-El núcleo actual es de **353 fuentes**: 212 contenedores (secciones/grupos/snippets/layouts/templates), 140 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 498 mapped. Las exclusiones conservan 62 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceder a valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
+El núcleo actual es de **357 fuentes**: 215 contenedores (secciones/grupos/snippets/layouts/templates), 141 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 502 mapped. Las exclusiones conservan 101 imágenes binarias y `config/settings_data.json`, cuyo contenido no se lee. Los assets de rostro y ajuste mantienen su procedencia en el inventario de assets.
 
-Hay **61 secciones con schema y 7 fragmentos sin schema**. Los schemas contienen **80 declaraciones de bloques**, incluidos 8 slots `@app`; son declaraciones, no instancias ni tipos globales únicos. No hay archivos `blocks/`. Este conteo estructural no acredita soporte de theme blocks ni uso efectivo en el editor; settings/opciones permanecen en las fuentes canónicas.
+Hay 62 secciones con schema y 7 fragmentos sin schema. Los schemas contienen 81 declaraciones de bloques, incluidos 8 slots `@app`; son declaraciones, no instancias ni tipos globales únicos. Estos conteos no acreditan soporte de theme blocks, asignación CMS ni publicación.
+
 
 <a id="reading"></a>
 ## Lectura y contratos compartidos
@@ -255,7 +256,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Disponibilidad actual:** reutilizable. Entrada: [quantity-input.liquid](../../snippets/quantity-input.liquid). Cantidad y lemoon-price-slider son contratos distintos; mantener límites y controladores del dueño. [Receta de integración](../components/recipes/product-card-grid.md).
 
-**Fuentes:** [snippets/lemoon-price-slider.liquid](../../snippets/lemoon-price-slider.liquid), [snippets/quantity-input.liquid](../../snippets/quantity-input.liquid), [snippets/progress-bar.liquid](../../snippets/progress-bar.liquid), [assets/component-progress-bar.css](../../assets/component-progress-bar.css), [assets/quantity-popover.css](../../assets/quantity-popover.css), [assets/quantity-popover.js](../../assets/quantity-popover.js).
+**Fuentes:** [snippets/lemoon-price-slider.liquid](../../snippets/lemoon-price-slider.liquid), [snippets/quantity-input.liquid](../../snippets/quantity-input.liquid), [snippets/progress-bar.liquid](../../snippets/progress-bar.liquid), [assets/base.css](../../assets/base.css) (estilos de progreso), [assets/quantity-popover.css](../../assets/quantity-popover.css), [assets/quantity-popover.js](../../assets/quantity-popover.js).
 
 **Contrato actual.** Precio recibe filter,id_prefix; dos range min/max, outputs y hidden params Shopify, step=1000 y máximo redondeado. quantity-input recibe variant,variant_id,min y usa cart item_count, quantity_rule min/max/increment; progress-bar es visual sin props. No intercambiar quantity y price-range.
 
@@ -905,7 +906,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Responsive.** Legal mantiene una columna y ajusta padding bajo750, con H1 4.6rem/3.4rem; guía/service conservan media queries locales. **Accesibilidad.** Headings/listas/landmarks y enlaces de ayuda; no acreditar WCAG por estructura.
 
-**JS.** Sin controlador propio de página; policy cookie help es LM-PRIVACY. **Reutilización actual.** Composiciones con markup inline duplicado; extraer shell solo tras campos/acciones y con contenido dueño validado.
+**JS.** Legal y las guías anteriores no tienen controlador propio de página; policy cookie help es LM-PRIVACY. Rostro carga el módulo opcional observacional de clics descrito abajo, sin dependencia para contenido/navegación. **Reutilización actual.** Composiciones con markup inline duplicado; extraer shell solo tras campos/acciones y con contenido dueño validado.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type), [LM-ACTION](#lm-action), [LM-EDITORIAL](#lm-editorial). Consumidores estáticos en el JSON.
 
@@ -914,6 +915,8 @@ La guía `measurements` añade H1 desde page.title o fallback, ocho campos de in
 La guía educativa de medidas conserva únicamente «Ver catálogo» en su bloque final de ayuda; el botón «Consultar una medida» fue retirado por petición del usuario el08-11-2026. Las otras cuatro guías mantienen su enlace de contacto.
 
 Analítica exclusiva de measurements: cuatro custom events, permiso nativo de Analytics reutilizado desde LM-PRIVACY y documento visible, sin datos personales en payload. El receptor GA4 vive fuera de assets y no está activado; [contrato y publicación](../analytics/measurement-guide.md). No hay alteración visual.
+
+**Guía visual de rostro (LEM-103, 08-11-2026).** `sections/lemoon-face-guide.liquid` especializa únicamente `templates/page.guia-rostro.json`: seis bloques `family`, H1/heading/action canónicos, dos pistas y motivo, retratos originales o imagen/alt editables; no-JS con índice y módulos visibles. Dependencias locales: `assets/lemoon-face-guide.css`, `snippets/lemoon-face-guide-links.liquid`, `snippets/lemoon-face-guide-illustration.liquid` (referencia SVG anterior, fuera del fallback actual), siluetas canónicas de `lemoon-quiz-visual` (`group: shape`, arte idéntico al paso Forma del quiz) y seis WebP `lemoon-face-{oval,round,square,heart,diamond,long}-v1.webp`. Los maestros de 1254px conservan procedencia; el render usa derivados WebP `lemoon-face-<familia>-v1-{180,360,640,960}.webp`: índice 180/360 y retratos 360/640/960 con `srcset`/`sizes`. Ajuste usa tres ilustraciones raster editoriales aprobadas, con anillos lemon en puente, pómulo y patilla/oreja, sin escala ni promesa de ajuste. El `image_picker` mantiene prioridad; fallback `lemoon-fit-{bridge,cheek,temple}-editorial-v1-{350,700,1400}.webp`, src700, dimensiones700×438, responsive/lazy, `contain`8:5 y alt vacío; títulos/consejos en HTML editable y salidas a medidas/quiz/catálogo. No son fotos de SKU. `lemoon-face-guide-links` recibe bloque, filtro real, ruta localizada, settings e ID de sección; cada arte del quiz tiene ID por sección/bloque/posición: solo promete la combinación si ambos valores existen; de otro modo catálogo completo y ayuda. Destino personalizado usa label neutral. El CTA predeterminado de las familias dice «Ver armazones»/`View frames` y conserva su override editable y los dos filtros. El wrapper local `lemoon-face-guide__family-actions` centra los seis enlaces bajo750px y los alinea a la izquierda desde750px, sin realinear copy/hint. `.cta--text` conserva la clase base `.cta`, metadata/evento único y presenta texto navy subrayado transparente normal/hover, sin borde/radio, target44px mínimo y foco navy2px. El CTA del cierre verde mantiene filled navy/blanco/hoverprimario. El foco de fragmento de los artículos reemplaza el outline/halo global Dawn por sombra local navy10%4px/20px; forced-colors usa Highlight2px sin sombra, y los enlaces conservan su foco. El acento lemon de la interfaz es un sparkles decorativo canónico junto al H1,32px desktop/28px móvil, primer path relleno accent sin contorno y cruces abiertas navy1.1; wrapper flex/gap12/H1contraíble sin cambio tipográfico. Sin nombre accesible ni interacción. Forced-colors conserva Canvas/LinkText en botones normal/hover y CanvasText/Highlight en icono; no se crea variante global. Se retiraron «Ver formas», `back_index`, inputs de regreso y wrapper/CSS sin consumidor; ayuda de fallback después del CTA. El único banner de forma mixta va al cierre después del ajuste y usa el verde existente por autorización puntual; conserva copy editable, catálogo override y quiz. Se retiraron los settings/locales `final_title`/`final_body` sin consumidor. Sin ranking, cámara ni datos biométricos. `assets/lemoon-face-guide.js` publica solo el custom event `lemoon:face_guide_click` con enums controlados y permisos de analítica comprobados por clic. Usa la API Shopify de privacidad 0.2; sin permiso/API no emite ni almacena/replay. Handler delegado singleton por documento, teclado/clic medio, reload de sección y errores de publicación sin bloquear enlaces. Ejemplos disponibles enlazan SVG+label en un único control; fallback sin valor permanece sin enlace. No carga otro SDK Google ni acredita recepción GA4; ver contrato/payload y límite operativo en la receta. Índice 6/3 columnas, módulos 2/1 desde/bajo750, imágenes `contain` 1:1, dimensiones reservadas/lazy, cuerpo 16px, targets44, foco/forced-colors. Hover/foco en enlaces; no hay selección persistente, loading interactivo o estado disabled local. Textos vacíos usan locales en/es. Fuente/fixtures no prueban CMS, editor Shopify o publicación.
 
 <a id="lm-journal"></a>
 ### LM-JOURNAL · Blog, artículo, comentarios y compartir
@@ -1086,6 +1089,7 @@ Esta matriz asigna **las 68 secciones**, incluidos los endpoints sin schema. Las
 | [sections/lemoon-faq.liquid](../../sections/lemoon-faq.liquid) | [LM-DISCLOSURE](#lm-disclosure) | `question` |
 | [sections/lemoon-featured-products.liquid](../../sections/lemoon-featured-products.liquid) | [LM-PRODUCT-LIST](#lm-product-list) | Sin bloques declarados |
 | [sections/lemoon-gift-card-purchase.liquid](../../sections/lemoon-gift-card-purchase.liquid) | [LM-GIFT](#lm-gift) | Sin bloques declarados |
+| [sections/lemoon-face-guide.liquid](../../sections/lemoon-face-guide.liquid) | [LM-LEGAL](#lm-legal) | `family` (máximo 6) |
 | [sections/lemoon-guide-page.liquid](../../sections/lemoon-guide-page.liquid) | [LM-LEGAL](#lm-legal) | Sin bloques declarados |
 | [sections/lemoon-hero.liquid](../../sections/lemoon-hero.liquid) | [LM-HERO](#lm-hero) | `slide` |
 | [sections/lemoon-launch-page.liquid](../../sections/lemoon-launch-page.liquid) | [LM-PASSWORD](#lm-password) | Sin bloques declarados |

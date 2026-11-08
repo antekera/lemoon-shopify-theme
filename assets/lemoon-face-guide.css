@@ -1,0 +1,71 @@
+.lemoon-face-guide { color: var(--lemoon-text-primary); font-family: var(--lemoon-font-body); font-size: var(--lemoon-fs-16); line-height: 1.6; }
+.lemoon-face-guide *, .lemoon-face-guide *::before, .lemoon-face-guide *::after { box-sizing: border-box; }
+.lemoon-face-guide h1, .lemoon-face-guide h2, .lemoon-face-guide h3 { margin: 0; color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); letter-spacing: var(--lemoon-type-h1-tracking); }
+.lemoon-face-guide h1 { font-size: var(--lemoon-type-h1-size); font-weight: var(--lemoon-weight-semibold); line-height: 1.2; }
+.lemoon-face-guide h2 { font-size: var(--lemoon-type-h2-size); font-weight: var(--lemoon-type-h2-weight); line-height: var(--lemoon-type-h2-leading); }
+.lemoon-face-guide h3 { font-size: var(--lemoon-fs-20); font-weight: var(--lemoon-weight-medium); line-height: 1.4; }
+.lemoon-face-guide p { margin: var(--lemoon-space-4) 0; }
+.lemoon-face-guide__intro { max-width: 80rem; margin-bottom: var(--lemoon-space-12); }
+.lemoon-face-guide__heading { display: flex; align-items: flex-start; gap: var(--lemoon-space-3); }
+.lemoon-face-guide__heading h1 { min-width: 0; overflow-wrap: anywhere; }
+.lemoon-face-guide__intro-accent { display: block; flex-shrink: 0; width: 3.2rem; height: 3.2rem; margin-top: var(--lemoon-space-1); }
+.lemoon-face-guide__intro-accent svg { display: block; width: 100%; height: 100%; fill: none; stroke: var(--lemoon-text-brand); stroke-width: 1.1; }
+.lemoon-face-guide__intro-accent svg > path:first-child { fill: var(--lemoon-action-accent); stroke: none; }
+.lemoon-face-guide__reading { max-width: 80rem; }
+.lemoon-face-guide__index { margin-bottom: var(--lemoon-space-16); scroll-margin-top: 12rem; }
+.lemoon-face-guide__index-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--lemoon-space-4); padding: 0; margin: var(--lemoon-space-8) 0 0; list-style: none; }
+.lemoon-face-guide__index-link { display: flex; flex-direction: column; align-items: center; gap: var(--lemoon-space-3); min-height: 4.4rem; padding: var(--lemoon-space-3); color: var(--lemoon-text-brand); text-align: center; text-decoration-thickness: 1px; text-underline-offset: .4rem; border-radius: var(--lemoon-radius-modal); }
+.lemoon-face-guide__index-link:hover { background: var(--lemoon-surface-warm); }
+.lemoon-face-guide__thumbnail { display: block; width: 100%; max-width: 18rem; aspect-ratio: 1; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); overflow: hidden; }
+.lemoon-face-guide__thumbnail img, .lemoon-face-guide__portrait img, .lemoon-face-guide__fit-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.lemoon-face-guide__families { display: grid; gap: var(--lemoon-space-12); }
+.lemoon-face-guide__family { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: var(--lemoon-space-12); align-items: center; padding-bottom: var(--lemoon-space-12); border-bottom: 1px solid var(--lemoon-border-default); scroll-margin-top: 12rem; }
+.lemoon-face-guide__portrait { width: 100%; max-width: 40rem; aspect-ratio: 1; justify-self: center; overflow: hidden; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); }
+.lemoon-face-guide__family-copy { min-width: 0; max-width: 70rem; }
+.lemoon-face-guide__cues { padding-left: var(--lemoon-space-6); margin: var(--lemoon-space-4) 0; }
+.lemoon-face-guide__cues li + li { margin-top: var(--lemoon-space-2); }
+.lemoon-face-guide__frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--lemoon-space-4); margin: var(--lemoon-space-6) 0; }
+.lemoon-face-guide__frame { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--lemoon-space-3); padding: var(--lemoon-space-4); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); color: var(--lemoon-text-brand); text-align: center; }
+.lemoon-face-guide__frame-art { display: block; width: min(100%, 15rem); }
+.lemoon-face-guide__frame-art svg { display: block; width: 100%; height: auto; }
+.lemoon-face-guide__frame > span:not(.lemoon-face-guide__frame-art) { display: flex; align-items: center; min-height: 4.4rem; }
+.lemoon-face-guide__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 4.8rem; max-width: 100%; padding: var(--lemoon-space-3) var(--lemoon-space-6); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); font: 600 var(--lemoon-fs-16)/1.5 var(--lemoon-font-heading); text-align: center; text-decoration: none; overflow-wrap: anywhere; }
+.lemoon-face-guide__cta:hover { background: var(--lemoon-action-primary-hover); }
+.lemoon-face-guide__family-actions { display: flex; justify-content: center; }
+.lemoon-face-guide__cta--text, .lemoon-face-guide__cta--text:hover { min-height: 4.4rem; padding: var(--lemoon-space-2) 0; border: 0; border-radius: 0; background: transparent; color: var(--lemoon-text-brand); font: inherit; text-decoration: underline; text-underline-offset: .4rem; }
+.lemoon-face-guide__text-link { display: inline-flex; align-items: center; min-height: 4.4rem; padding: var(--lemoon-space-2) 0; color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
+.lemoon-face-guide__fallback { color: var(--lemoon-text-secondary); }
+.lemoon-face-guide__help { max-width: 100rem; margin: var(--lemoon-space-12) auto; padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-tertiary-green); }
+.lemoon-face-guide__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lemoon-space-4) var(--lemoon-space-6); margin-top: var(--lemoon-space-6); }
+.lemoon-face-guide__fit { margin-top: var(--lemoon-space-16); }
+.lemoon-face-guide__fit-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--lemoon-space-6); margin: var(--lemoon-space-8) 0; }
+.lemoon-face-guide__fit-hint { margin: 0; min-width: 0; }
+.lemoon-face-guide__fit-art { aspect-ratio: 8 / 5; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); color: var(--lemoon-text-brand); overflow: hidden; margin-bottom: var(--lemoon-space-4); }
+.lemoon-face-guide__fit-art svg { display: block; width: 100%; height: 100%; }
+.lemoon-face-guide a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; box-shadow: none; }
+.lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 0; box-shadow: 0 var(--lemoon-space-1) var(--lemoon-space-5) color-mix(in srgb, var(--lemoon-text-brand) 10%, transparent); }
+@media screen and (min-width: 750px) {
+  .lemoon-face-guide__family-actions { justify-content: flex-start; }
+}
+@media screen and (max-width: 989px) {
+  .lemoon-face-guide__index-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lemoon-face-guide__family { gap: var(--lemoon-space-8); }
+}
+@media screen and (max-width: 749px) {
+  .lemoon-face-guide__intro-accent { width: 2.8rem; height: 2.8rem; }
+  .lemoon-face-guide__index-grid { gap: var(--lemoon-space-2); }
+  .lemoon-face-guide__index-link { padding: var(--lemoon-space-2); }
+  .lemoon-face-guide__family { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-6); }
+  .lemoon-face-guide__portrait { max-width: 34rem; }
+  .lemoon-face-guide__fit-grid { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+  .lemoon-face-guide__fit-hint { max-width: 46rem; width: 100%; margin-inline: auto; }
+  .lemoon-face-guide__help { padding: var(--lemoon-space-6); }
+}
+@media (forced-colors: active) {
+  .lemoon-face-guide__intro-accent svg { stroke: CanvasText; }
+  .lemoon-face-guide__intro-accent svg > path:first-child { fill: Highlight; }
+  .lemoon-face-guide__cta, .lemoon-face-guide__cta:hover { border-color: LinkText; background: Canvas; color: LinkText; }
+  .lemoon-face-guide a:focus-visible { outline-color: Highlight; }
+  .lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 2px solid Highlight; outline-offset: 4px; box-shadow: none; }
+  .lemoon-face-guide__frame, .lemoon-face-guide__portrait, .lemoon-face-guide__fit-art { border: 1px solid CanvasText; }
+}

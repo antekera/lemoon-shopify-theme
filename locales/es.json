@@ -1109,6 +1109,77 @@
       "budget": {
         "none": "Sin límite definido"
       }
+    },
+    "lemoon_face_guide": {
+      "title": "Elegir lentes según tu rostro",
+      "intro": "Tu rostro puede darte ideas para elegir un armazón. Compara las ilustraciones y explora las formas que te gusten: son puntos de partida, y tú eliges qué llevar.",
+      "index_title": "Mira el contorno, explora las formas",
+      "index_body": "Mírate de frente en un espejo. Observa dónde se ve más ancho tu rostro y si predominan las curvas o los ángulos. Estas seis familias son aproximadas; puedes reconocer rasgos de más de una.",
+      "unknown_title": "¿No reconoces tu forma?",
+      "unknown_body": "No necesitas elegir una sola. Puedes tomar ideas de dos familias o empezar directamente por los armazones: curvas para acompañar otras curvas, ángulos para crear contraste. Mira también una opción distinta de la sugerida. Tu gusto tiene espacio aquí.",
+      "fit_title": "La forma orienta el estilo. El ajuste se revisa aparte",
+      "fit_body": "Una silueta puede gustarte y necesitar otra talla o un apoyo diferente. Compara las medidas disponibles con las de un armazón que te resulte cómodo; dos modelos con números parecidos pueden sentirse distintos.",
+      "bridge_title": "Puente",
+      "bridge_body": "Se apoya sin apretar ni deslizarse constantemente.",
+      "cheek_title": "Pómulos",
+      "cheek_body": "No empujan el marco hacia arriba al sonreír.",
+      "temple_title": "Patillas",
+      "temple_body": "No presionan los costados de la cabeza ni detrás de las orejas.",
+      "fit_detail": "Cejas: mira cómo se relacionan con el borde superior y qué expresión te gusta; no tienen que seguir una línea idéntica. Ojos: observa su posición dentro de los aros. Esta referencia visual no confirma el centrado de los cristales con receta.",
+      "fit_help": "Si el armazón aprieta, se mueve o necesitas ajustarlo, consulta a un profesional de la óptica. La forma del rostro no determina tu talla ni qué cristales necesitas.",
+      "measure_label": "Ver cómo medir mis lentes",
+      "catalogue_label": "Explorar armazones",
+      "quiz_label": "Descubre tu estilo",
+      "filtered_label": "Ver armazones",
+      "fallback_label": "Ver catálogo",
+      "fallback_hint": "Puedes explorar el catálogo completo y elegir las formas disponibles desde sus filtros.",
+      "custom_label": "Explorar armazones",
+      "families": {
+        "oval": {
+          "name": "Ovalado",
+          "cue_1": "El largo destaca un poco sobre el ancho.",
+          "cue_2": "El contorno se estrecha con curvas hacia el mentón.",
+          "reason": "Las líneas rectas aportan contraste; las curvas acompañan el contorno. Compara ambas opciones para ver qué presencia quieres darle al armazón."
+        },
+        "round": {
+          "name": "Redondo",
+          "cue_1": "El ancho y el largo se ven parecidos.",
+          "cue_2": "Las mejillas y la mandíbula dibujan un contorno curvo.",
+          "reason": "Los bordes rectos y las esquinas crean contraste con las curvas del rostro. Si prefieres repetir esas curvas, también puedes elegir un marco redondo."
+        },
+        "square": {
+          "name": "Cuadrado",
+          "cue_1": "La frente y la mandíbula tienen un ancho parecido.",
+          "cue_2": "Los ángulos de la mandíbula se distinguen en el contorno.",
+          "reason": "Las curvas del armazón contrastan con las líneas más rectas. Un marco angular puede repetirlas si prefieres darles más presencia."
+        },
+        "heart": {
+          "name": "Corazón",
+          "cue_1": "La frente se ve más ancha que la mandíbula.",
+          "cue_2": "El contorno se estrecha hacia el mentón.",
+          "reason": "Las bases curvas suman una línea redondeada en el centro del rostro. Un borde fino puede darle menos protagonismo al marco, si ese es el efecto que buscas."
+        },
+        "diamond": {
+          "name": "Diamante",
+          "cue_1": "Los pómulos son la zona más ancha del contorno.",
+          "cue_2": "La frente y la mandíbula se ven más estrechas.",
+          "reason": "Las curvas contrastan con los ángulos; las esquinas elevadas del ojo de gato llevan la atención hacia la parte superior del armazón."
+        },
+        "long": {
+          "name": "Alargado",
+          "cue_1": "El largo se ve claramente mayor que el ancho.",
+          "cue_2": "La frente, los pómulos y la mandíbula tienen anchos parecidos.",
+          "reason": "Los redondos y los aviador de base curva son opciones para explorar. Compara modelos con más altura: ocupan más espacio en el centro del rostro. La forma del armazón no garantiza esa altura; revisa las fotos y las medidas."
+        }
+      },
+      "shapes": {
+        "rectangular": "Rectangulares",
+        "redondo": "Redondos",
+        "geométrico": "Geométricos",
+        "ovalado": "Ovalados",
+        "aviador": "Aviador",
+        "ojo de gato": "Ojo de gato"
+      }
     }
   },
   "localization": {

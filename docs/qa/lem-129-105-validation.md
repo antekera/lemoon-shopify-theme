@@ -17,34 +17,36 @@ Contratos vigentes: [DESIGN](../../DESIGN.md), [receta PDP](../components/recipe
 
 El preview superpone LiquidJS y assets locales permitidos a snapshots HTML nativos de solo lectura. Conserva compra/header/footer, falla ante un modal ambiguo y declara `X-Lemoon-Local-Preview: liquidjs-native-shell-snapshot`; no acredita un nuevo despliegue ni QA nativa completa. Dalton usa el contexto verificado de solo lectura140/54/17/42/145mm; los fixtures usan cifras sintéticas distintas.
 
-No se cargaron datos de prueba, asignaciones CMS ni temas en esta entrega. Instalación/recepción real GA4, asignaciones nativas y publicación requieren su entrega autorizada y QA correspondiente. El PR permanece en borrador para revisión humana final. Revisiones independientes de código y convenciones operan con responsabilidad de solo lectura, sin aislamiento técnico de permisos.
+No se cargaron datos de prueba, asignaciones CMS ni temas en esta entrega. Instalación/recepción real GA4, asignaciones nativas y publicación requieren su entrega autorizada y QA correspondiente. El PR permanece abierto para revisión humana final. Revisiones independientes de código y convenciones operan con responsabilidad de solo lectura, sin aislamiento técnico de permisos.
 
-## Verificación
+## Verificación de integración con main
 
-Node24.19.0 y ShopifyCLI4.8.5 fijados. Las suites de fixtures no equivalen a storefront nativo. El bloque siguiente registra la corrida integrada final; evidencia detallada y capturas históricas archivadas fuera del árbol Git. Los borradores y planes sustituidos se retiraron para conservar solo contratos y evidencia vigente.
+Se integró `main` en `3d9da9ee4f99f96943b01868907fd40eb913960f` sobre el feature `2353fef938bcf430bd3971bec9130468d7801b9f`. Se resolvieron cuatro conflictos: receta `guide-help`, inventarios MD/JSON y servidor de fixtures. Ambas guías y familias de fixtures permanecen; la limpieza del PR75 se conserva. Los cuatro locales/schema no pierden ni alteran hojas independientes de ninguno de los padres. No se añadieron comportamientos nuevos en esta resolución.
 
-Corrida integrada del 08-11-2026 sobre `41fb392360b32f614e2edb512e2fe6cf7e628f55` más el árbol local entregado. Las huellas de los 20 archivos runtime modificados se mantuvieron iguales durante las comprobaciones.
+Node24.19.0 y ShopifyCLI4.8.5 fijados. Las suites de fixtures no equivalen a storefront nativo.
 
 | Suite | Resultado | Cobertura |
 | --- | --- | --- |
-| Unitarias completas | 525/525 PASS, 52 archivos | Liquid, datos, componentes, helpers y analítica |
-| Modal PDP | 58/58 PASS | Chromium/WebKit; ambos shells, 320–1440px, 200% de texto, datos ausentes/parciales/demo, acordeón, foco, reapertura y navegación |
-| Drawers compartidos | 44/44 PASS | Chromium; genérico, navegación, carrito vacío/con contenido, filtros, retiro y PDP; responsive, teclado y movimiento reducido |
-| Movimiento de salida | 24/24 PASS | Chromium/WebKit; X, Escape, backdrop, solicitudes repetidas, frames visibles, escritorio y movimiento reducido |
-| Página y analítica | 21/21 PASS | Chromium; 10 casos de página y 11 de consentimiento/eventos, ES/EN y ausencia segura de SDK |
+| Unitarias completas | 604/604 PASS,54 archivos | Liquid, datos, componentes, helpers, analítica y guías de ambas ramas |
+| Modal PDP | 58/58 PASS | Chromium/WebKit; ambos shells,320–1440px, texto200%, datos, acordeón, foco y reapertura |
+| Drawers compartidos | 44/44 PASS | Chromium; navegación, carrito, filtros, retiro, PDP y movimiento reducido |
+| Movimiento de salida | 24/24 PASS | Chromium/WebKit; X, Escape, backdrop, solicitudes repetidas y frames visibles |
+| Página y analítica | 21/21 PASS | Chromium;10 casos de página y11 de consentimiento/eventos, ES/EN |
+| Guía de rostros integrada desde main | 16/16 PASS | Chromium; responsive, índices, filtros, foco, eventos y reflow |
 
-Total E2E: **147/147 PASS**, sin fallos ni casos omitidos. No se añadieron pruebas ni se modificó el runtime para esta corrida. Los contratos de acordeón y movimiento conservan las expectativas funcionales; no se incrementaron reintentos.
+Total E2E: **163/163 PASS**, sin fallos ni casos omitidos. No hubo cambios de fuentes durante la corrida ni nuevas pruebas o ajustes de expectativas. El servidor de fixtures mantiene ambas familias de rutas/imports y la precedencia `LEMOON_FIXTURE_PORT → PORT →4173`; se comprobaron ambos controles de puerto por separado.
 
-Comandos resumidos, con `node` resuelto al binario 24.19.0 fijado y el mismo PATH para los servidores fixture:
+Comandos resumidos, usando el binario24.19.0 y el mismo PATH para los servidores:
 
 ```sh
-node node_modules/vitest/vitest.mjs run --reporter=json --outputFile=/tmp/lem129-pr64-final-unit-20261108.json
-SIZE_GUIDE_PORT=4197 node node_modules/@playwright/test/cli.js test --config tests/e2e/size-guide.config.js --output /tmp/lem129-pr64-final-modal-20261108
-SHARED_DRAWER_PORT=4198 node node_modules/@playwright/test/cli.js test --config tests/e2e/shared-drawers.config.js --output /tmp/lem129-pr64-final-shared-drawers-20261108
-DRAWER_MOTION_PORT=4199 node node_modules/@playwright/test/cli.js test --config tests/e2e/drawer-motion.config.js --output /tmp/lem129-pr64-final-drawer-motion-20261108
-SIZE_GUIDE_PORT=4201 node node_modules/@playwright/test/cli.js test --config tests/e2e/measurement-guide-analytics.config.js --output /tmp/lem129-pr64-final-page-analytics-20261108
+node node_modules/vitest/vitest.mjs run
+SIZE_GUIDE_PORT=4197 node node_modules/@playwright/test/cli.js test --config tests/e2e/size-guide.config.js
+SHARED_DRAWER_PORT=4198 node node_modules/@playwright/test/cli.js test --config tests/e2e/shared-drawers.config.js
+DRAWER_MOTION_PORT=4199 node node_modules/@playwright/test/cli.js test --config tests/e2e/drawer-motion.config.js
+SIZE_GUIDE_PORT=4201 node node_modules/@playwright/test/cli.js test --config tests/e2e/measurement-guide-analytics.config.js
+LEMOON_FIXTURE_PORT=4202 node node_modules/@playwright/test/cli.js test tests/e2e/face-guide.spec.js
 ```
 
-Manifiesto final con resultados, estados de los runners y 35 huellas de código/pruebas: `/tmp/lem129-pr64-final-validation-20261108.json`. Capturas/frames están en los directorios `--output` anteriores. Los puertos fixture 4197/4198/4199/4201 quedaron cerrados; el preview 9452 se conservó. La recepción real en GA4 y la cobertura nativa Shopify permanecen fuera de estas pruebas de fixtures.
+Manifiesto con resultados y57 huellas: `/tmp/lem129-pr64-merge-validation-20261108.json`; copia persistente en la evidencia de entrega fuera del árbol Git. Servidores fixture cerrados; preview9452 preservado. Theme Check:371 archivos,0 observaciones al umbral error. Inventario:604 fuentes indexadas,502 mapped,102 excluded y0 adiciones pendientes. Revisiones independientes de código/convenciones aprobadas, con responsabilidad de solo lectura conductual.
 
-Theme Check final:367 archivos,0 observaciones al umbral error. Inventario reconciliado tras indexar el CSS compartido:561 fuentes indexadas,498 mapped,63 excluded,0 adiciones pendientes de indexar. Se archivaron fuera de Git60 documentos/capturas sustituidos (49 antes indexados),6.3MB, sin referencias internas rotas; permanecen contratos, aprobación humana de la página y este informe final. La limpieza no elimina el historial de commits.
+Se conservan la aprobación histórica de la página y los contratos vigentes. Los60 documentos/capturas sustituidos siguen archivados fuera de Git; esta integración no los restaura ni reescribe el historial. La recepción real en GA4, asignaciones/QA nativa y publicación Shopify quedan fuera de estas comprobaciones.

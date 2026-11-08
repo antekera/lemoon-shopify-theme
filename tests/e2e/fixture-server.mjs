@@ -15,6 +15,7 @@ import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
 import { renderSizeGuidePageFixture } from '../helpers/size-guide-page-renderer.mjs';
 import { renderSharedDrawerFixture } from '../helpers/shared-drawers-renderer.mjs';
 import { renderMeasurementGuideAnalyticsFixture } from '../helpers/measurement-guide-analytics-renderer.mjs';
+import { renderFaceGuideFixture } from '../helpers/face-guide-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
@@ -97,6 +98,15 @@ const server = createServer(async (request, response) => {
       const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'default';
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(renderQuizFixture(scenario));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/face-guide.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1').searchParams.get('scenario') || 'default';
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : renderFaceGuideFixture(scenario));
     } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
@@ -191,7 +201,7 @@ const server = createServer(async (request, response) => {
   }
 });
 
-const port = Number(process.env.PORT || 4173);
+const port = Number(process.env.LEMOON_FIXTURE_PORT || process.env.PORT || 4173);
 server.listen(port, '127.0.0.1', () => {
   console.log(`Fixture ready at http://127.0.0.1:${port}`);
 });

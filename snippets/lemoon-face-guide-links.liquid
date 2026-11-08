@@ -1,0 +1,101 @@
+{% doc %}
+  Face guide's decorative frame pair and honest native collection exit.
+  Both configured values must be exposed by the live frame-shape filter.
+  @param {object} block - Family block with two native shape values and optional destination.
+  @param {object} shape_filter - Live collections.all frame_shape filter, or nil.
+  @param {object} guide_settings - Editable guide labels and fallback hint.
+  @param {string} instance_id - Parent section ID for unique decorative art instances.
+  @param {string} catalogue_url - Localized all-products collection route.
+{% enddoc %}
+{%- liquid
+  assign first_value = block.settings.shape_1
+  assign second_value = block.settings.shape_2
+  assign first_available = false
+  assign second_available = false
+  for value in shape_filter.values
+    if value.value == first_value
+      assign first_available = true
+    endif
+    if value.value == second_value
+      assign second_available = true
+    endif
+  endfor
+  assign first_key = 'sections.lemoon_face_guide.shapes.' | append: first_value
+  assign second_key = 'sections.lemoon_face_guide.shapes.' | append: second_value
+  assign first_label = first_key | t
+  assign second_label = second_key | t
+  assign first_label = block.settings.shape_1_label | default: first_label
+  assign second_label = block.settings.shape_2_label | default: second_label
+  assign parameter = shape_filter.param_name | url_encode
+  assign encoded_first = first_value | url_encode
+  assign encoded_second = second_value | url_encode
+  assign destination = catalogue_url
+  assign filtered = false
+  if first_available and second_available and first_value != second_value
+    assign filtered = true
+    assign destination = catalogue_url | append: '?' | append: parameter | append: '=' | append: encoded_first | append: '&' | append: parameter | append: '=' | append: encoded_second
+  endif
+  assign label = 'sections.lemoon_face_guide.fallback_label' | t
+  assign label = guide_settings.fallback_label | default: label
+  if filtered
+    assign label = 'sections.lemoon_face_guide.filtered_label' | t: first: first_label, second: second_label
+    assign label = block.settings.filtered_label | default: label
+  endif
+  if block.settings.destination != blank
+    assign destination = block.settings.destination
+    assign label = 'sections.lemoon_face_guide.custom_label' | t
+    assign label = block.settings.custom_label | default: label
+  endif
+-%}
+<div class="lemoon-face-guide__frames">
+  {%- for position in (1..2) -%}
+    {%- liquid
+      assign frame_value = first_value
+      assign frame_label = first_label
+      assign available = first_available
+      if position == 2
+        assign frame_value = second_value
+        assign frame_label = second_label
+        assign available = second_available
+      endif
+      assign frame_icon = 'round'
+      case frame_value
+        when 'rectangular'
+          assign frame_icon = 'rectangular'
+        when 'geométrico'
+          assign frame_icon = 'geometric'
+        when 'ovalado'
+          assign frame_icon = 'oval'
+        when 'aviador'
+          assign frame_icon = 'aviator'
+        when 'ojo de gato'
+          assign frame_icon = 'cat-eye'
+      endcase
+      assign visual_id = instance_id | append: '-' | append: block.id | append: '-frame-' | append: position
+      assign encoded_value = frame_value | url_encode
+      assign frame_url = catalogue_url | append: '?' | append: parameter | append: '=' | append: encoded_value
+    -%}
+    {%- if available -%}
+      <a class="lemoon-face-guide__frame" href="{{ frame_url | escape }}" data-face-guide-action="frame_shape" data-face-guide-position="family" data-face-guide-destination="filtered_catalogue" data-face-guide-frame="{{ frame_value | escape }}">
+        <span class="lemoon-face-guide__frame-art" aria-hidden="true">
+          {% render 'lemoon-quiz-visual', group: 'shape', value: frame_icon, visual_id: visual_id %}
+        </span>
+        <span class="lemoon-face-guide__text-link">{{ frame_label | escape }}</span>
+      </a>
+    {%- else -%}
+      <div class="lemoon-face-guide__frame">
+        <span class="lemoon-face-guide__frame-art" aria-hidden="true">
+          {% render 'lemoon-quiz-visual', group: 'shape', value: frame_icon, visual_id: visual_id %}
+        </span>
+        <span>{{ frame_label | escape }}</span>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+<div class="lemoon-face-guide__family-actions" data-face-guide-action="family_catalogue" data-face-guide-position="family" data-face-guide-destination="{% if block.settings.destination != blank %}custom{% elsif filtered %}filtered_catalogue{% else %}catalogue{% endif %}"{% if filtered and block.settings.destination == blank %} data-face-guide-shapes="{{ first_value | escape }}|{{ second_value | escape }}"{% endif %}>
+  {% render 'lemoon-ui-action', element: 'a', href: destination, label: label, style_family: 'local', class: 'lemoon-face-guide__cta lemoon-face-guide__cta--text' %}
+</div>
+{%- unless filtered or block.settings.destination != blank -%}
+  {%- assign hint = 'sections.lemoon_face_guide.fallback_hint' | t -%}
+  <p class="lemoon-face-guide__fallback">{{ guide_settings.fallback_hint | default: hint | escape }}</p>
+{%- endunless -%}
