@@ -11,7 +11,10 @@ import { renderComponentSection } from '../tests/helpers/component-library-rende
 const root = fileURLToPath(new URL('../', import.meta.url));
 export const previewAssetPrefix = '/__lem129_preview/';
 export const previewAssets = new Map([
+  [`${previewAssetPrefix}lemoon-measurement-guide-analytics.js`, resolve(root, 'assets/lemoon-measurement-guide-analytics.js')],
+  [`${previewAssetPrefix}lemoon-cookie-preferences.js`, resolve(root, 'assets/lemoon-cookie-preferences.js')],
   [`${previewAssetPrefix}component-lemoon-size-guide.css`, resolve(root, 'assets/component-lemoon-size-guide.css')],
+  [`${previewAssetPrefix}lemoon-components.css`, resolve(root, 'assets/lemoon-components.css')],
 ]);
 
 export function isSizeGuidePage(pathname) {
@@ -67,14 +70,18 @@ export function overlaySizeGuidePage(html, { pathname }) {
     id: section.id,
     settings: guideSettings,
     routes: { root_url: localeRoot, all_products_collection_url: `${localeRoot}collections/all` },
-    context: { page: { title: titleMarkup ? plainTitle(titleMarkup) : '' } },
+    context: { page: { title: titleMarkup ? plainTitle(titleMarkup) : '' }, request: { locale: { iso_code: language } } },
   });
   // The helper's test wrapper is discarded. Keep Shopify's original wrapper
-  // and all surrounding sections byte-for-byte, including its attributes.
+  // and surrounding markup, including its attributes. The shared stylesheet
+  // reference is redirected to the local allowlist below for local variants.
   const openEnd = rendered.indexOf('>') + 1;
   const closeStart = rendered.lastIndexOf('</section>');
   if (!openEnd || closeStart < openEnd) throw new Error('Local guide renderer did not emit its expected wrapper');
   let inner = rendered.slice(openEnd, closeStart);
   inner = inner.replaceAll('/assets/component-lemoon-size-guide.css', `${previewAssetPrefix}component-lemoon-size-guide.css`);
-  return html.slice(0, section.openEnd) + inner + html.slice(section.closeStart);
+  inner = inner.replaceAll('/assets/lemoon-measurement-guide-analytics.js', `${previewAssetPrefix}lemoon-measurement-guide-analytics.js`);
+  const document = html.slice(0, section.openEnd) + inner + html.slice(section.closeStart);
+  return document.replace(/(href=["'])(?:\/cdn\/shop\/t\/\d+\/assets\/|\/assets\/)lemoon-components\.css(?:\?[^"']*)?(["'])/g,
+    (_, prefix, quote) => `${prefix}${previewAssetPrefix}lemoon-components.css${quote}`);
 }

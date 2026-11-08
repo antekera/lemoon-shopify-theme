@@ -1,0 +1,36 @@
+{
+  "approved_at_utc": "2026-11-08T21:57:35Z",
+  "reviewer": "Miguel",
+  "quote": "La página Cómo medir tus lentes está aprobada. Ahora vamos con los cambio del modal en PDP.",
+  "scope": "Current local integrated measurement guide page; PDP modal edits remain in progress. No approval to merge mixed PR64 or publish/install GA4 pixel.",
+  "base_head": "2caa06df99d61817bd3028bcc7d7fe95494d8817",
+  "sha256": {
+    "sections/lemoon-guide-page.liquid": "1b0d09acf6f2c6fd5a4a91d387893b4bbecb0ae7d5d3f7915e2c9b79b46aed8e",
+    "locales/es.json": "394323dc66dfd3e2a2f6ac609956e1e4c08cac28b0a42ba8923f71773c080fb8",
+    "locales/es.schema.json": "38019a7ad5bd816085741a30dc4d3a3ade8022addd0d92522591e234d7f6ce75",
+    "locales/en.default.json": "20aa985b55121d8828c67f7831fadd6236193b25e1b2851bec24066f5c49f51b",
+    "locales/en.default.schema.json": "acfb6e6b0659e6edf061482edc24a5ce29eed814e9e414d1a0feadb3173e992a",
+    "snippets/lemoon-frame-measurement-diagram.liquid": "1426056a8bfffc968212064d77e6b9167726f1d4a46ca597e6ad452ac5660fc0",
+    "snippets/lemoon-size-guide-comparison.liquid": "bc2311c889999d81858b48bae420653957744510577d3d61d76eedb252a75283",
+    "snippets/lemoon-measurement-definitions.liquid": "6430701e5c302875ad6b1ef26f8e8f9940e851015b454ba915cbc154f1a11e1e",
+    "assets/component-lemoon-size-guide.css": "4d34f4e3dfd3541297a3d08e097af0b428f64b5fcdbd49967cfb51d450ff2f3a",
+    "assets/lemoon-components.css": "6da4716d408a30d0041411f54ae6fdad196665b8017dd7a5fd66344e07a91f5a",
+    "assets/component-lemoon-drawer.css": "9642101016d5c5f9f5f70a3266d662578ef060275aed16e9d0a56a003dbfcb8a",
+    "assets/lemoon-measurement-guide-analytics.js": "7b6c89981c4a75057d37082bcf56d1664ef4c0d1bd953a98a5982735621988a6",
+    "scripts/shopify-pixels/lemoon-measurement-guide-ga4.js": "a2b0426ce8494a337bed5bf56edb8feb77c0449c9d7316c7152388a99196fe64"
+  },
+  "page_only_bundle": {
+    "base_head": "2caa06df99d61817bd3028bcc7d7fe95494d8817",
+    "note": "Original sha256 values above record the complete local preview at approval time, including then-current modal dependencies. This page-only extraction preserves the approved section and page runtime; excludes unapproved PDP/shared drawer changes and the modal-only locale key. No merge or publication authorization.",
+    "sha256": {
+      "sections/lemoon-guide-page.liquid": "1b0d09acf6f2c6fd5a4a91d387893b4bbecb0ae7d5d3f7915e2c9b79b46aed8e",
+      "snippets/lemoon-ui-action.liquid": "8b3704d7b0b8d9f0741daa61fdeb7f1bf48aeaee34703aa16870ba8932309222",
+      "assets/lemoon-components.css": "6da4716d408a30d0041411f54ae6fdad196665b8017dd7a5fd66344e07a91f5a",
+      "assets/lemoon-measurement-guide-analytics.js": "7b6c89981c4a75057d37082bcf56d1664ef4c0d1bd953a98a5982735621988a6",
+      "locales/en.default.json": "4b2c26687694333efda33c69c1aa6eed4ae75501414e2771c45cda112759d473",
+      "locales/en.default.schema.json": "acfb6e6b0659e6edf061482edc24a5ce29eed814e9e414d1a0feadb3173e992a",
+      "locales/es.json": "5f6392da53654c0fa6292a3d362725079b1a036828f01ae242690eb048e0ac21",
+      "locales/es.schema.json": "38019a7ad5bd816085741a30dc4d3a3ade8022addd0d92522591e234d7f6ce75"
+    }
+  }
+}

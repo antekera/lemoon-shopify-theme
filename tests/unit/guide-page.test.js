@@ -21,8 +21,18 @@ test('guide anchors are unique per section and links preserve the locale root', 
         expect(html).toContain(`href="#Guide-${guide_kind}-${step}"`);
         expect(html).toContain(`id="Guide-${guide_kind}-${step}"`);
       }
-      expect(html).toContain(`href="${root_url === '/' ? '' : root_url}/pages/contact"`);
+      const contactHref = `href="${root_url === '/' ? '' : root_url}/pages/contact"`;
+      if (guide_kind === 'measurements') expect(html).not.toContain(contactHref);
+      else expect(html).toContain(contactHref);
       expect(html).toContain('href="/collections/all"');
+      const catalogueLink = html.match(/<a\b[^>]*href="\/collections\/all"[^>]*>/)?.[0];
+      if (guide_kind === 'measurements') {
+        expect(catalogueLink).toContain('button--accent');
+        expect(catalogueLink).not.toContain('lemoon-guide__cta');
+      } else {
+        expect(catalogueLink).toContain('lemoon-guide__cta');
+        expect(catalogueLink).not.toContain('button--accent');
+      }
       expect(html).not.toMatch(/<form|type="file"|getUserMedia|mailto:/);
       expect(html).toContain('aria-hidden="true"');
       expect(html).toContain('<figcaption>');

@@ -5,37 +5,55 @@ const tag = (html, name) => html.match(new RegExp(`<${name}\\b[^>]*>`))?.[0] ?? 
 const control = (html, name) => html.match(new RegExp(`<(?:input|textarea|select)\\b[^>]*name="${name.replaceAll('[', '\\[').replaceAll(']', '\\]')}"[^>]*>`))?.[0] ?? '';
 
 test('action navigation escapes text/attributes once and preserves local CSS', () => {
-  const html = render('action', { element: 'a', label: '<Contact "us"> &', href: '/help?q="<&', style_family: 'local', class: 'lemoon-guide__cta' });
+  const params = { element: 'a', label: '<Contact "us"> &', href: '/help?q="<&', style_family: 'local', class: 'lemoon-guide__cta' };
+  const html = render('action', params);
   expect(tag(html, 'a')).toContain('href="/help?q=&#34;&lt;&amp;"');
   expect(html).toContain('&lt;Contact &#34;us&#34;&gt; &amp;');
   expect(html).not.toContain('&amp;lt;');
   expect(tag(html, 'a')).toContain('lemoon-guide__cta');
   expect(tag(html, 'a')).not.toMatch(/\bbutton\b/);
+  for (const variant of ['primary', 'secondary', 'tertiary', 'accent']) expect(render('action', { ...params, variant })).toBe(html);
 });
-test.each(['primary', 'secondary', 'tertiary'])('base action %s uses existing variant', variant => {
+test.each(['primary', 'secondary', 'tertiary', 'accent'])('base action %s preserves native button and navigation behavior', variant => {
   const html = render('action', { label: 'Action', variant });
   expect(tag(html, 'button')).toContain('button');
   if (variant !== 'primary') expect(html).toContain(`button--${variant}`);
+  const link = render('action', { element: 'a', href: '/collections/all', label: 'Catalog', variant });
+  expect(tag(link, 'a')).toContain('href="/collections/all"');
+  if (variant !== 'primary') expect(tag(link, 'a')).toContain(`button--${variant}`);
 });
 test('action defaults to non-submitting button and preserves explicit native submit association', () => {
   expect(tag(render('action', { label: 'Test' }), 'button')).toContain('type="button"');
-  const html = render('action', { label: 'Send', type: 'submit', form_id: 'contact-1', id: 'send', name: 'commit', value: 'save' });
-  for (const attr of ['type="submit"', 'form="contact-1"', 'id="send"', 'name="commit"', 'value="save"']) expect(tag(html, 'button')).toContain(attr);
+  expect(render('action', { label: 'Test', variant: 'primary' })).toBe(render('action', { label: 'Test' }));
+  for (const variant of ['primary', 'accent']) {
+    const params = { label: 'Send', type: 'submit', form_id: 'contact-1', id: 'send', name: 'commit', value: 'save', variant };
+    const html = render('action', params);
+    for (const attr of ['type="submit"', 'form="contact-1"', 'id="send"', 'name="commit"', 'value="save"']) expect(tag(html, 'button')).toContain(attr);
+    const input = render('action', { ...params, element: 'input' });
+    for (const attr of ['type="submit"', 'form="contact-1"', 'id="send"', 'name="commit"', 'value="Send"']) expect(tag(input, 'input')).toContain(attr);
+    expect(input).not.toMatch(/<button|<span|<svg/);
+  }
 });
 test('disabled and loading links cannot retain an activatable destination', () => {
-  for (const params of [{ disabled: true }, { loading: true }]) {
-    const html = render('action', { element: 'a', href: '/must-not-open', label: 'Wait', ...params });
+  for (const variant of ['primary', 'accent']) for (const params of [{ disabled: true }, { loading: true }]) {
+    const html = render('action', { element: 'a', href: '/must-not-open', label: 'Wait', variant, ...params });
     expect(tag(html, 'a')).not.toContain('href=');
     expect(tag(html, 'a')).toContain('aria-disabled="true"');
+    for (const element of ['button', 'input']) {
+      const native = render('action', { element, type: 'submit', label: 'Wait', variant, ...params });
+      expect(tag(native, element)).toMatch(/\sdisabled(?:\s|>|=)/);
+    }
   }
 });
 test('loading action preserves label, direct shared spinner and native disabling', () => {
-  const html = render('action', { label: 'Wait', loading: true });
-  expect(tag(html, 'button')).toMatch(/\sdisabled(?:\s|>|=)/);
-  expect(tag(html, 'button')).toContain('aria-busy="true"');
-  expect(html).toMatch(/<span[^>]*>Wait<\/span>/);
-  expect(html).toContain('loading__spinner');
-  expect(html).toContain('<svg');
+  for (const variant of ['primary', 'accent']) {
+    const html = render('action', { label: 'Wait', loading: true, variant });
+    expect(tag(html, 'button')).toMatch(/\sdisabled(?:\s|>|=)/);
+    expect(tag(html, 'button')).toContain('aria-busy="true"');
+    expect(html).toMatch(/<span[^>]*>Wait<\/span>/);
+    expect(html).toContain('loading__spinner');
+    expect(html).toContain('<svg');
+  }
 });
 test('optional boolean and ARIA false values remain distinct from omission', () => {
   const html = render('action', { label: 'Toggle', disabled: false, aria_expanded: false, aria_pressed: false });

@@ -31,8 +31,26 @@ for (const [width, height] of [[390, 844], [820, 1180], [1440, 900]]) {
       await expect(page).toHaveURL(new RegExp(`#${id}$`));
       await expect(page.locator(`#${id}`)).toBeInViewport();
     }
-    await expect(page.getByRole('link', { name: 'Ver catálogo', exact: true })).toHaveAttribute('href', '/collections/all');
-    await expect(page.locator('.lemoon-guide__links a[href="/pages/contact"]')).toHaveCount(1);
+    const catalogueLink = page.getByRole('link', { name: 'Ver catálogo', exact: true });
+    const contactLink = page.locator('.lemoon-guide__links a[href="/pages/contact"]');
+    await expect(catalogueLink).toHaveAttribute('href', '/collections/all');
+    await expect(contactLink).toHaveCount(0);
+    await expect(page.locator('.lemoon-guide__links a')).toHaveCount(1);
+    await catalogueLink.scrollIntoViewIfNeeded();
+    await page.mouse.move(0, 0);
+    await expect(catalogueLink).toHaveCSS('background-color', 'rgb(247, 230, 0)');
+    await expect(catalogueLink).toHaveCSS('color', 'rgb(11, 31, 58)');
+    expect((await catalogueLink.boundingBox()).height).toBeGreaterThanOrEqual(width < 750 ? 44 : 48);
+    await catalogueLink.hover();
+    await expect(catalogueLink).toHaveCSS('background-color', 'rgb(230, 214, 0)');
+    await page.mouse.move(0, 0);
+    await catalogueLink.focus(); await page.keyboard.press('Shift+Tab');
+    await expect(links.last()).toBeFocused();
+    await page.keyboard.press('Tab'); await expect(catalogueLink).toBeFocused();
+    expect(await catalogueLink.evaluate(element => element.matches(':focus-visible'))).toBe(true);
+    const outline = await catalogueLink.evaluate(element => ({ style: getComputedStyle(element).outlineStyle, width: parseFloat(getComputedStyle(element).outlineWidth) }));
+    expect(outline.style).not.toBe('none'); expect(outline.width).toBeGreaterThanOrEqual(2);
+    await catalogueLink.screenshot({ path: testInfo.outputPath(`guide-catalogue-action-${width}.png`) });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
     const ids = await page.locator('[id]').evaluateAll(elements => elements.map(el => el.id));
     expect(new Set(ids).size).toBe(ids.length);
@@ -49,7 +67,7 @@ test('guide page: editor overrides, empty richtext fallback and locale root', as
   await expect(page.locator('.lemoon-guide__steps h2').first()).toHaveText('Primero: revisa la patilla');
   await expect(page.locator('.lemoon-guide__nav a').first()).toHaveText('Primero: revisa la patilla');
   await expect(page.getByRole('link', { name: 'Ver catálogo', exact: true })).toHaveAttribute('href', '/en/collections/all');
-  await expect(page.locator('.lemoon-guide__links a[href="/en/pages/contact"]')).toHaveCount(1);
+  await expect(page.locator('.lemoon-guide__links a[href="/en/pages/contact"]')).toHaveCount(0);
   await page.goto('/tests/fixtures/size-guide-page.html?scenario=blank');
   expect((await page.locator('.lemoon-guide__intro').innerText()).trim().length).toBeGreaterThan(20);
   expect((await page.locator('.lemoon-guide__step').first().innerText()).trim().length).toBeGreaterThan(80);

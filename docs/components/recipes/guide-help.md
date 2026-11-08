@@ -6,7 +6,7 @@ Familias: LM-TYPE, LM-ACTION, LM-LEGAL; shell/editorial/hero/footer/password con
 
 Consumidor: [lemoon-guide-page](../../../sections/lemoon-guide-page.liquid). Reutiliza [heading](../../../snippets/lemoon-ui-heading.liquid) para H1, pasos H2 y ayuda H2, y [action](../../../snippets/lemoon-ui-action.liquid) para navegación. El aside, el índice, los tres pasos y las rutas pertenecen a la sección: **no existe un snippet help-panel**. El shell legal, hero, footer y password se integran desde sus propias secciones, no copiando este aside.
 
-`heading` recibe `text`, `level` (1–6, default 2), `id` y `class`; su nivel no elige tamaño visual. `action` distingue `element: 'a'` de botón (default, `type: 'button'`) y del submit input opt-in de comentarios (`element: 'input', type: 'submit'`). Sus variantes base son primary/default, secondary y tertiary. `style_family: 'local'` conserva las clases del consumidor sin `.button`; no convierte una CTA de guía en variante global.
+`heading` recibe `text`, `level` (1–6, default 2), `id` y `class`; su nivel no elige tamaño visual. `action` distingue `element: 'a'` de botón (default, `type: 'button'`) y del submit input opt-in de comentarios (`element: 'input', type: 'submit'`). Sus variantes base son primary/default, secondary, tertiary y accent. `style_family: 'local'` conserva las clases del consumidor sin `.button`; no convierte una CTA de guía en variante global.
 
 ## Ejemplo en la guía
 
@@ -21,11 +21,13 @@ Dentro de `lemoon-guide-page`, después de resolver `contact_url` desde las ruta
   {% render 'lemoon-ui-heading', text: help_title, level: 2, id: help_id %}
   <p>{{ 'sections.lemoon_guide.help_body' | t | escape }}</p>
   <div class="lemoon-guide__links">
-    {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, style_family: 'local', class: 'lemoon-guide__cta' %}
+    {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, variant: 'accent' %}
     {% render 'lemoon-ui-action', element: 'a', href: contact_url, label: contact_label, style_family: 'local' %}
   </div>
 </aside>
 ```
+
+La variante `accent` usa la familia base: amarillo `--lemoon-action-accent`, texto `--lemoon-text-brand` y hover `--lemoon-action-accent-hover`. Se invoca con `variant: 'accent'`, sin `style_family: 'local'`. El catálogo de measurements la utiliza; las otras cuatro guías conservan su CTA local anterior. `local` sigue omitiendo clases y variantes base. Los estados disabled/loading conservan el bloqueo de destinos y la semántica nativa.
 
 Los textos pasados al snippet no llevan `escape`: se escapan en él. Los atributos y texto emitidos directamente por el consumidor se escapan allí. Este ejemplo compone piezas; no duplica sus implementaciones ni sus estilos.
 
@@ -83,3 +85,7 @@ El paso ya explica dónde buscar el código, por eso pasa `show_intro: false` pa
 La sección carga `component-lemoon-size-guide.css` solo en measurements. No crea un diálogo ni una herramienta para medir en pantalla. La página usa los destinos de catálogo/contacto de la familia y no vuelve a un producto arbitrario. Verificar template asignado y contenido editable real en Shopify aparte de los fixtures locales; la existencia de `page.guia-medidas.json` no acredita esa asignación.
 
 La forma vigente usa Donnalyn ZJGT372549-04, referencia elegida por el usuario: aperturas cuadradas altas, esquinas suaves amplias, puente sencillo y patillas curvadas, redibujadas desde frontal y tres cuartos. Conservar IDs por instance_id para títulos/gradientes/paths y margen al 200 %. A–E y las definiciones HTML describen magnitudes del producto, no cifras del referente. No incrustar fotos, logos, estampado ni valores comerciales.
+
+En la guía `measurements`, el bloque final conserva solo «Ver catálogo»; no renderiza el enlace «Consultar una medida». Las demás guías conservan su acción de contacto.
+
+La guía de medidas incorpora hooks de analítica en los hosts de título/pasos/índice/CTA y carga su módulo solo en ese modo, fuera del editor. No ampliar los inputs de los átomos para tracking. Publica custom events Shopify con permiso nativo y datos acotados; el [receptor GA4](../../analytics/measurement-guide.md) se configura por separado y no se instala con el tema.

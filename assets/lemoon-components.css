@@ -150,6 +150,40 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   color: var(--lemoon-action-primary-hover);
 }
 
+/* Explicit opt-in accent variant for the shared base action. */
+.lemoon-ui-action.button--accent {
+  background: var(--lemoon-action-accent);
+  color: var(--lemoon-text-brand);
+}
+
+.lemoon-ui-action.button--accent:not([disabled]):not([aria-disabled='true']):not(.loading):hover {
+  background: var(--lemoon-action-accent-hover);
+}
+
+.lemoon-ui-action.button--accent:is([disabled], [aria-disabled='true'], .loading):hover {
+  background: var(--lemoon-action-accent);
+}
+
+/* Dawn's scheme-colored pseudo-border must not surround the yellow surface. */
+.lemoon-ui-action.button--accent::after,
+.lemoon-ui-action.button--accent:hover::after {
+  box-shadow: none;
+}
+
+.lemoon-ui-action.button--accent.loading {
+  color: transparent;
+}
+
+.lemoon-ui-action.button--accent.loading > .loading__spinner .path {
+  stroke: var(--lemoon-text-brand);
+}
+
+@media screen and (forced-colors: active) {
+  .lemoon-ui-action.button--accent.loading {
+    color: rgb(var(--color-foreground));
+  }
+}
+
 .field__input,
 .select__select,
 .customer .field input,

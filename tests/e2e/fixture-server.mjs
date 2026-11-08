@@ -13,6 +13,7 @@ import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
 import { renderQuizFixture } from '../helpers/style-quiz-renderer.mjs';
 import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
 import { renderSizeGuidePageFixture } from '../helpers/size-guide-page-renderer.mjs';
+import { renderMeasurementGuideAnalyticsFixture } from '../helpers/measurement-guide-analytics-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const fixtureFiles = new Map([
@@ -57,6 +58,16 @@ const server = createServer(async (request, response) => {
       const query = new URL(request.url, 'http://127.0.0.1').searchParams;
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(renderSizeGuidePageFixture(query.get('scenario') || 'default', pathname.startsWith('/en/') || query.get('locale') === 'en' ? '/en' : '/'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/measurement-guide-analytics.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      const html = renderMeasurementGuideAnalyticsFixture({ consent: query.get('consent') || 'granted', language: query.get('locale') || 'es', kind: query.get('kind') || 'measurements', editor: query.get('editor') === '1' });
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : html);
     } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }

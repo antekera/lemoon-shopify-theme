@@ -13,6 +13,7 @@
 -%}
 {%- if guide_kind == 'measurements' -%}
   {{ 'component-lemoon-size-guide.css' | asset_url | stylesheet_tag }}
+  {%- unless request.design_mode -%}<script type="module" src="{{ 'lemoon-measurement-guide-analytics.js' | asset_url }}"></script>{%- endunless -%}
 {%- endif -%}
 {%- style -%}
   #shopify-section-{{ section.id }} .lemoon-guide { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-primary); }
@@ -36,7 +37,7 @@
   #shopify-section-{{ section.id }} .lemoon-guide__help h2 { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-guide__help p { margin: 0 0 var(--lemoon-space-5); line-height: 1.6; font-size: var(--lemoon-fs-16); }
   #shopify-section-{{ section.id }} .lemoon-guide__links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lemoon-space-4) var(--lemoon-space-6); }
-  #shopify-section-{{ section.id }} .lemoon-guide__links a { display: inline-flex; min-height: 4.8rem; align-items: center; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .4rem; }
+  #shopify-section-{{ section.id }} .lemoon-guide__links a:not(.button) { display: inline-flex; min-height: 4.8rem; align-items: center; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .4rem; }
   #shopify-section-{{ section.id }} .lemoon-guide__links .lemoon-guide__cta { padding: var(--lemoon-space-3) var(--lemoon-space-6); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); border-radius: var(--lemoon-radius-button); text-decoration: none; font-family: var(--lemoon-font-heading); font-weight: var(--lemoon-weight-semibold); }
   #shopify-section-{{ section.id }} .lemoon-guide__cta:hover { background: var(--lemoon-action-primary-hover); }
   #shopify-section-{{ section.id }} .lemoon-guide a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
@@ -99,9 +100,10 @@
   }
   {% endif %}
 {%- endstyle -%}
-<div class="lemoon-guide page-width" data-guide-kind="{{ guide_kind | escape }}">
+{%- assign guide_analytics_language = request.locale.iso_code | default: localization.language.iso_code | default: 'es' | slice: 0, 2 | downcase -%}
+<div class="lemoon-guide page-width" data-guide-kind="{{ guide_kind | escape }}"{% if guide_kind == 'measurements' %} data-measurement-guide data-guide-language="{% if guide_analytics_language == 'en' %}en{% else %}es{% endif %}"{% endif %}>
   <header class="lemoon-guide__hero">
-    <div>
+    <div{% if guide_kind == 'measurements' %} data-measurement-guide-intro{% endif %}>
       {%- assign ui_heading_text = title_key | t -%}
       {%- if guide_kind == 'measurements' and page.title != blank -%}{%- assign ui_heading_text = page.title -%}{%- endif -%}
       {% render 'lemoon-ui-heading', text: ui_heading_text, level: 1, class: 'lemoon-guide__title' %}
@@ -140,7 +142,7 @@
               assign step_title = section.settings[title_setting]
             endif
           -%}
-          <li><a href="#Guide-{{ section.id }}-{{ step }}">{{ step_title | escape }}</a></li>
+          <li><a href="#Guide-{{ section.id }}-{{ step }}"{% if guide_kind == 'measurements' %} data-measurement-guide-step-click="{{ step }}"{% endif %}>{{ step_title | escape }}</a></li>
         {%- endfor -%}
       </ol>
     </nav>
@@ -154,7 +156,7 @@
               assign step_body_key = step_body_key | append: '_html'
             endif
           -%}
-          <li class="lemoon-guide__step" id="Guide-{{ section.id }}-{{ step }}">
+          <li class="lemoon-guide__step" id="Guide-{{ section.id }}-{{ step }}"{% if guide_kind == 'measurements' %} data-measurement-guide-step="{{ step }}"{% endif %}>
             {%- liquid
               assign ui_heading_text = step_title_key | t
               assign title_setting = 'measurements_step_' | append: step | append: '_title'
@@ -195,13 +197,18 @@
         {%- else -%}
           <p>{{ 'sections.lemoon_guide.help_body' | t }}</p>
         {%- endif -%}
-        <div class="lemoon-guide__links">
+        <div class="lemoon-guide__links"{% if guide_kind == 'measurements' %} data-measurement-guide-catalogue{% endif %}>
           {%- assign catalogue_label = 'sections.lemoon_guide.catalogue' | t -%}
           {%- if guide_kind == 'measurements' -%}{%- assign catalogue_label = 'lemoon_size_guide.catalogue' | t -%}{%- endif -%}
-          {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, style_family: 'local', class: 'lemoon-guide__cta' %}
-          {%- assign contact_label = 'sections.lemoon_guide.contact' | t -%}
-          {%- if guide_kind == 'measurements' -%}{%- assign contact_label = 'lemoon_size_guide.help_link' | t -%}{%- endif -%}
-          {% render 'lemoon-ui-action', element: 'a', href: contact_url, label: contact_label, style_family: 'local' %}
+          {%- if guide_kind == 'measurements' -%}
+            {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, variant: 'accent' %}
+          {%- else -%}
+            {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, style_family: 'local', class: 'lemoon-guide__cta' %}
+          {%- endif -%}
+          {%- unless guide_kind == 'measurements' -%}
+            {%- assign contact_label = 'sections.lemoon_guide.contact' | t -%}
+            {% render 'lemoon-ui-action', element: 'a', href: contact_url, label: contact_label, style_family: 'local' %}
+          {%- endunless -%}
         </div>
       </aside>
     </div>

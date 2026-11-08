@@ -24,10 +24,10 @@
   },
   "counts": {
     "total_tracked_paths": 559,
-    "mapped_paths": 496,
+    "mapped_paths": 497,
     "excluded_paths": 63,
     "by_root": {
-      "assets": 294,
+      "assets": 295,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -37,7 +37,7 @@
     },
     "mapped_by_extension": {
       ".css": 84,
-      ".js": 54,
+      ".js": 55,
       ".json": 91,
       ".liquid": 173,
       ".svg": 94
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 80,
     "theme_block_files": 0,
-    "total_source_paths": 559,
-    "explicit_new_paths": 0
+    "total_source_paths": 560,
+    "explicit_new_paths": 1
   },
   "components": [
     {
@@ -191,7 +191,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-action.liquid",
-        "scope": "Base o local; compra mantiene sus adaptadores y formulario nativo.",
+        "scope": "Base o local; variant primary(default), secondary, tertiary y accent en familia base. Accent reutilizable: amarillo/navy con hover/foco y estados nativos, solicitado para Ver catálogo de measurements. Compra mantiene sus adaptadores y formulario nativo.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1049,7 +1049,8 @@
       ],
       "direct_static_consumers": [
         "layout/theme.liquid",
-        "sections/footer.liquid"
+        "sections/footer.liquid",
+        "assets/lemoon-measurement-guide-analytics.js"
       ],
       "depends_on": [
         "LM-OVERLAY",
@@ -1500,7 +1501,8 @@
         "snippets/lemoon-frame-measurement-diagram.liquid",
         "snippets/lemoon-size-guide-comparison.liquid",
         "assets/component-lemoon-size-guide.css",
-        "snippets/lemoon-measurement-definitions.liquid"
+        "snippets/lemoon-measurement-definitions.liquid",
+        "assets/lemoon-measurement-guide-analytics.js"
       ],
       "direct_static_consumers": [
         "sections/lemoon-faq.liquid",
@@ -1525,13 +1527,14 @@
         "LM-TYPE",
         "LM-ACTION",
         "LM-EDITORIAL",
-        "LM-TABS"
+        "LM-TABS",
+        "LM-PRIVACY"
       ],
       "documentation_anchor": "lm-legal",
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-guide-page.liquid",
-        "scope": "Identidad legal disponible por metacampos de tienda; omite cada campo ausente. Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política. El campo return_address se inserta escapado en la política de reembolso solo cuando tiene valor; vacío oculta el párrafo, tanto al preferir el contenido de sección como al usarlo de respaldo. El HTML content es respaldo tras CMS y política nativa aplicable; use_section_content (default false) permite preferirlo antes de CMS cuando no está vacío, sin sustituir privacidad nativa explícita ni demo ni modificar texto almacenado. lemoon-business-content resuelve solo razón social/RUT escapados desde inputs explícitos, sin evaluar Liquid ni reinterpretar valores insertados; CMS normal no reescribe identidades históricas. El marcador [IDENTIDAD_LEGAL_EMPRESA] genera un párrafo localizado con los campos disponibles; se escapan y se insertan como texto opaco. Si faltan ambos, se omite el párrafo. El contenido HTML de sección preferido en términos puede incluir un índice derivado de H2 reales, sin IDs almacenados: nav nombrado, IDs por sección/posición y foco nativo sin JavaScript; otras fuentes/páginas no reciben índice. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con texto localizado sin plazo numérico si el metacampo está vacío, compartido entre FAQ y contenido de sección legal. Las plantillas históricas de términos, reembolso y envío reutilizan page.legal sin duplicar texto; sus sufijos se conservan por compatibilidad. La plantilla opt-in page.legal selecciona por handle las políticas nativas de Shopify para privacidad, términos, reembolso y envío; muestra estado vacío si falta la política o contiene marcadores conocidos sin resolver. Garantías y otros handles conservan CMS. El cuerpo nativo se presenta sin resolver marcadores para mantener equivalencia con checkout; términos agrega índice accesible. LEM-105 measurements-only: CMS page H1 fallback, eight scoped editor text/richtext fields with meaningful-empty fallbacks, three preserved anchors, shared educational diagram/code, no generic hero graphic; other guide kinds retain their contract. Template assignment/SEO/editor proof remains external. Measurement definitions are shared with the reference-only PDP modal; numeric product dimensions remain exclusively in PDP characteristics. Page-only annotated_temple:true adds a decorative inner-temple inscription, restrained navy outline/leader and a 12px educational figcaption below the original perspective. Base SVG paths and default modal composition are unchanged.",
+        "scope": "Identidad legal disponible por metacampos de tienda; omite cada campo ausente. Shell legal de una columna centrada hasta 66rem, cuerpo 1.6rem/1.6, sin eyebrow ni navegación lateral; conserva CMS, política nativa, demo y ayuda. Guías/servicios mantienen sus settings y tipografía propios. La plantilla española de privacidad usa use_native_privacy para leer solo shop.privacy_policy.body; ignora CMS/demo/intro y conserva el estado vacío si falta la política. El campo return_address se inserta escapado en la política de reembolso solo cuando tiene valor; vacío oculta el párrafo, tanto al preferir el contenido de sección como al usarlo de respaldo. El HTML content es respaldo tras CMS y política nativa aplicable; use_section_content (default false) permite preferirlo antes de CMS cuando no está vacío, sin sustituir privacidad nativa explícita ni demo ni modificar texto almacenado. lemoon-business-content resuelve solo razón social/RUT escapados desde inputs explícitos, sin evaluar Liquid ni reinterpretar valores insertados; CMS normal no reescribe identidades históricas. El marcador [IDENTIDAD_LEGAL_EMPRESA] genera un párrafo localizado con los campos disponibles; se escapan y se insertan como texto opaco. Si faltan ambos, se omite el párrafo. El contenido HTML de sección preferido en términos puede incluir un índice derivado de H2 reales, sin IDs almacenados: nav nombrado, IDs por sección/posición y foco nativo sin JavaScript; otras fuentes/páginas no reciben índice. El marcador [PLAZO_ENTREGA] usa el metafield custom.plazo_entrega_receta escapado con texto localizado sin plazo numérico si el metacampo está vacío, compartido entre FAQ y contenido de sección legal. Las plantillas históricas de términos, reembolso y envío reutilizan page.legal sin duplicar texto; sus sufijos se conservan por compatibilidad. La plantilla opt-in page.legal selecciona por handle las políticas nativas de Shopify para privacidad, términos, reembolso y envío; muestra estado vacío si falta la política o contiene marcadores conocidos sin resolver. Garantías y otros handles conservan CMS. El cuerpo nativo se presenta sin resolver marcadores para mantener equivalencia con checkout; términos agrega índice accesible. LEM-105 measurements-only: CMS page H1 fallback, eight scoped editor text/richtext fields with meaningful-empty fallbacks, three preserved anchors, shared educational diagram/code, no generic hero graphic; other guide kinds retain their contract. Template assignment/SEO/editor proof remains external. Measurement definitions are shared with the reference-only PDP modal; numeric product dimensions remain exclusively in PDP characteristics. Page-only annotated_temple:true adds a decorative inner-temple inscription, restrained navy outline/leader and a 12px educational figcaption below the original perspective. Base SVG paths and default modal composition are unchanged. Measurements guide final help keeps only the catalogue action; its consultation button is omitted. Other guide kinds retain their contact action. Measurements guide only: consent-gated Shopify custom events for visible guide/steps, index and catalogue actions; no page_view or ecommerce duplication authored in theme. GA4 custom-pixel receiver is prepared outside theme assets and not installed or activated. See docs/analytics/measurement-guide.md.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -3164,6 +3167,14 @@
         "LM-ICON"
       ],
       "inspection_method": "automated SVG text scan only; geometry not visually reviewed"
+    },
+    {
+      "path": "assets/lemoon-measurement-guide-analytics.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "manual source inspection; page-only custom analytics publisher, no Google SDK in theme"
     },
     {
       "path": "assets/lemoon-mobile-nav-logic.js",
@@ -6245,9 +6256,10 @@
       "snippets/lemoon-frame-measurement-diagram.liquid",
       "snippets/lemoon-size-guide-comparison.liquid",
       "assets/component-lemoon-size-guide.css",
-      "snippets/lemoon-measurement-definitions.liquid"
+      "snippets/lemoon-measurement-definitions.liquid",
+      "assets/lemoon-measurement-guide-analytics.js"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. Page-only delivery on 2026-11-08 declares one new source: assets/lemoon-measurement-guide-analytics.js. Shared drawer and PDP refinements remain outside this bundle.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {

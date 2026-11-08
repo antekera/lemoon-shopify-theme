@@ -33,3 +33,23 @@ El primer overlay conectado al backend produjo redirecciones intermitentes a /pa
 Artifacts completos: /tmp/lem105-page-refinements-validation/run-6mpm1itf (suites/fixtures y fallo inicial) y /tmp/lem105-preview-snapshot-stability (fix final estable). Se preservan en Git common/delivery-evidence al cerrar este checkpoint.
 
 No hubo pushes a Shopify, cambios de catálogo/página CMS, merge o publicación. El tema de revisión remoto conserva la versión anterior; estas correcciones permanecen en el worktree y el preview local para revisión humana.
+
+## Variante reutilizable de catálogo
+
+A petición del usuario, el enlace «Ver catálogo» de measurements utiliza el snippet lemoon-ui-action con variant:accent en familia base. Fondo --lemoon-action-accent (#F7E600), texto --lemoon-text-brand (#0B1F3A) y hover --lemoon-action-accent-hover (#E6D600). Los otros modos de guía conservan su acción local. Se documenta el nuevo contrato en DESIGN, receta e inventarios; no se deduce de una variante Figma anterior.
+
+Verificación del delta: 40/40 unitarias focales y 10/10 E2E página, sin fallos/omitidos/retries, más prueba focal de loading en forced-colors para button/input. Se preservan href, foco visible, targets 44/48px, estados bloqueados y spinner. Una transición hover falló inicialmente por el scroll suave del test que desplazaba 42px el objetivo; se corrigió solo la precondición scrollIntoViewIfNeeded, conservando assertions y trazas iniciales. No se repitió la suite global.
+
+Theme Check de 318 archivos sin incidencias al umbral warning. Revisión independiente de código Approved tras restaurar el respaldo de texto loading en forced-colors; convenciones Ready to push, sin que ese veredicto autorice publicar. Solo lectura conductual, sin aislamiento técnico.
+
+Overlay 9452 a 390px: colores/hover correctos, CSS global local 200, botón 44px, sin overflow/errores. El helper de preview ahora permite también lemoon-components.css y cambia únicamente su href para esta página; el resto del shell conserva el snapshot anterior. No hubo nueva subida a Shopify ni cambios de tema remoto. Artifact completo: /tmp/lem105-accent-action-validation/run-kvu4egc2.
+
+[Botón de catálogo local](lem-105-page-refinements/catalogue-accent-390.png).
+
+### Retiro de acción de consulta final · 08-11-2026
+
+Por petición del usuario, la ayuda final de measurements conserva solo «Ver catálogo». El enlace de contacto de las otras cuatro guías y el footer global permanecen en sus dueños. Validación:9/9 unitarias de guía y10/10 E2E de página; Theme Check sin observaciones. Preview9452 HTTP200 con0 enlaces «Consultar una medida» en la ayuda y contacto del footer conservado. Evidencia local en `/tmp/lem105-remove-contact-validation`; sin publicación Shopify.
+
+### Cierre del paso3 · 08-11-2026
+
+Se retiró únicamente la oración final que remitía a consultar por modelo y medida, sincronizando es/en, defaults del editor y draft. Unitarias de guía9/9 PASS; preview9452 ES/EN HTTP200 confirma la ausencia y conserva la oración previa y el catálogo. Sin cambios publicados en Shopify.
