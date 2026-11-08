@@ -23,11 +23,11 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 555,
-    "mapped_paths": 497,
+    "total_tracked_paths": 598,
+    "mapped_paths": 496,
     "excluded_paths": 102,
     "by_root": {
-      "assets": 334,
+      "assets": 333,
       "config": 2,
       "layout": 2,
       "locales": 51,
@@ -36,7 +36,7 @@
       "templates": 40
     },
     "mapped_by_extension": {
-      ".css": 84,
+      ".css": 83,
       ".js": 55,
       ".json": 91,
       ".liquid": 173,
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 599,
-    "explicit_new_paths": 44
+    "total_source_paths": 598,
+    "explicit_new_paths": 0
   },
   "components": [
     {
@@ -355,7 +355,7 @@
         "snippets/lemoon-price-slider.liquid",
         "snippets/quantity-input.liquid",
         "snippets/progress-bar.liquid",
-        "assets/component-progress-bar.css",
+        "assets/base.css",
         "assets/quantity-popover.css",
         "assets/quantity-popover.js"
       ],
@@ -1796,6 +1796,7 @@
         "LM-ACTION",
         "LM-CHOICE",
         "LM-FIELD",
+        "LM-RANGE",
         "LM-SHELL",
         "LM-TYPE"
       ],
@@ -2087,14 +2088,6 @@
       "status": "mapped",
       "component_ids": [
         "LM-CHOICE"
-      ],
-      "inspection_method": "automated-structural-scan; not a claim of full manual review"
-    },
-    {
-      "path": "assets/component-progress-bar.css",
-      "status": "mapped",
-      "component_ids": [
-        "LM-RANGE"
       ],
       "inspection_method": "automated-structural-scan; not a claim of full manual review"
     },
@@ -6575,7 +6568,7 @@
       "assets/lemoon-fit-temple-editorial-v1-700.webp",
       "assets/lemoon-fit-temple-editorial-v1-1400.webp"
     ],
-    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset.",
+    "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. Cleanup reconciliation on 2026-11-08: the 44 LEM-103 delivery additions are already indexed; removing one unused duplicate stylesheet leaves 598 indexed/source paths, 496 mapped, 102 excluded and 0 non-indexed additions. Progress styles remain in base.css.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
     "consumer_method": "Literal executable render/section/section-group and asset filter references with LiquidDoc/comments removed; template/group sections.type and local JS/CSS imports. No inferred transitive/dynamic consumers or setting-type string matches.",
     "component_adoption": {
