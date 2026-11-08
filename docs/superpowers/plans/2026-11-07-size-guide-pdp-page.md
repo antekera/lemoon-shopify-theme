@@ -10,7 +10,7 @@
 
 **Spec:** [Propuesta de diseño](../specs/2026-11-07-size-guide-pdp-page-design.md). [Copy propuesto](../../content/2026-11-07-size-guide-copy-draft.md). [Auditoría de datos](../../content/2026-11-07-size-guide-data-audit.md).
 
-**Estado:** planificación preparada para revisión humana. Las tareas siguientes **no están ejecutadas**. El runtime actual `ba95b03f` / head documental `e19bbe75` y su CI previo no prueban esta nueva composición ni la página ampliada.
+**Estado:** implementación autorizada por Miguel («Implementalo», reiterado con «Continúa la implementación») y en ejecución el 07-11-2026 desde `fd66f9c9`. La autorización permite desarrollar la composición; la revisión humana del resultado, merge y publicación siguen pendientes. El runtime anterior `ba95b03f` y su CI previo no prueban esta nueva composición ni la página ampliada.
 
 ## Global Constraints
 
@@ -49,11 +49,11 @@
 - `lemoon-frame-dimensions`: conserva `dimensions`, `dialog`; añade `instance_id` y renderiza el dibujo, manteniendo validación y lista HTML.
 - `lemoon-size-guide-comparison`: `instance_id:string`, `heading_level:number=2`, `show_heading:boolean=true`, `compact:boolean=false`; tres filas de código/miniicono/explicación, sin parámetro product. La nota de ejemplo debe funcionar en página y modal sin decir «este producto» en una página genérica.
 
-- [ ] Escribir pruebas de render: nombres y unidades accesibles en HTML; dibujo sin cifras SKU; ejemplo52□18–145 rotulado educativo; tres segmentos destacados sin depender solo del color; dos instancias sin IDs duplicados. Rechazar formularios, scripts, URLs de activos de terceros o herramientas de medición en pantalla.
-- [ ] Ejecutar `npm run test:unit -- tests/unit/size-guide-components.test.js`; comprobar fallos por los nuevos componentes ausentes, sin alterar el checkout compartido para simular el baseline.
-- [ ] Crear ilustraciones propias y CSS local usando tokens. La patilla muestra su recorrido/quiebre; no introducir una regla imprimible o con escala física en pantalla. Las cotas y la instrucción indican los extremos exteriores al comparar con una regla real; no se necesita un tercer gráfico obligatorio.
-- [ ] Ejecutar pruebas nuevas y `tests/unit/size-guide.test.js`; los casos completos/parciales/vacíos originales deben seguir pasando. La nueva pieza visual no cambia el contrato numérico.
-- [ ] Registrar compartidos en `docs/design/component-inventory.md/.json` y `docs/components/recipes/product-card-grid.md` / `guide-help.md`, con alcance e inputs. Commit acotado: `feat: add shared size guide illustrations`.
+- [x] Escribir pruebas de render: nombres y unidades accesibles en HTML; dibujo sin cifras SKU; ejemplo52□18–145 rotulado educativo; tres segmentos destacados sin depender solo del color; dos instancias sin IDs duplicados. Rechazar formularios, scripts, URLs de activos de terceros o herramientas de medición en pantalla.
+- [x] Ejecutar `npm run test:unit -- tests/unit/size-guide-components.test.js`; comprobar fallos por los nuevos componentes ausentes, sin alterar el checkout compartido para simular el baseline.
+- [x] Crear ilustraciones propias y CSS local usando tokens. La patilla muestra su recorrido/quiebre; no introducir una regla imprimible o con escala física en pantalla. Las cotas y la instrucción indican los extremos exteriores al comparar con una regla real; no se necesita un tercer gráfico obligatorio.
+- [x] Ejecutar pruebas nuevas y `tests/unit/size-guide.test.js`; los casos completos/parciales/vacíos originales deben seguir pasando. La nueva pieza visual no cambia el contrato numérico.
+- [x] Registrar compartidos en `docs/design/component-inventory.md/.json` y `docs/components/recipes/product-card-grid.md` / `guide-help.md`, con alcance e inputs. Commit acotado: `feat: add shared size guide illustrations`.
 
 ## Tarea2 — Modal PDP continuo
 
@@ -63,14 +63,14 @@
 
 **Interfaces:** `lemoon-size-guide-content(product,instance_id,presentation='tabs')`; los dos diálogos pasan `presentation:'dialog'`. En el modo dialog, bloques H3 de medidas→comparación→características/ajuste disponibles. El modo default mantiene tablist/tab/tabpanel y teclado existentes.
 
-- [ ] Añadir pruebas de render para `presentation:'dialog'`: no tablist/tab/tabpanel; hay cinco medidas/código educativo separados; datos secundarios preservados cuando existen; cero medidas sin selector ni filas ficticias. `presentation` ausente conserva tres tabs.
-- [ ] Añadir casos: JSON parcial; claves inválidas; talla sin JSON; producto sin secundarios; nombres largos escapados; página CMS con contenido largo cuyo cuerpo no aparece dentro del modal.
-- [ ] Ejecutar las pruebas enfocadas y confirmar el fallo del contrato nuevo antes de implementar la rama dialog.
-- [ ] Integrar bloques continuos dentro del shell actual, con H2 único del diálogo y H3 hijos. Cargar CSS compartido desde los hosts main-product/óptica; pasar IDs diferenciados a dibujo inline/dialog. La página no recibe ni renderiza el diálogo.
-- [ ] Resolver enlace de guía desde el page setting existente solo con página válida y plantilla `guia-medidas`; no inyectar `page.content`. Actualizar la información del setting para explicar su nuevo uso como destino, conservando valores guardados y fallback inline legado. Sin `preview_theme_id` en enlaces finales.
-- [ ] Actualizar el fixture de guía a markup renderizado actual. El caso de guía del test óptico debe usar el renderer dinámico; no regenerar la captura completa del producto ni alterar sus casos de compra/configurador.
-- [ ] Ejecutar `npx playwright test --config tests/e2e/size-guide.config.js`: ambos shells a390/820/1440; abrir sin navegación, cierre visible, Escape, Tab/Shift+Tab, retorno al opener, scroll interno, unidades locales. Añadir una aparición inline para comprobar que conserva tabs/flechas/Home/End y que su cifra mm no cambia al convertir el diálogo.
-- [ ] Confirmar dibujo apilado en el drawer480px también a1440viewport; targets44px/campo48px y contenido200% sin recorte. Registrar composición aprobada en `DESIGN.md` e inventarios. Commit: `feat: refine PDP size guide around measurement comparison`.
+- [x] Añadir pruebas de render para `presentation:'dialog'`: no tablist/tab/tabpanel; hay cinco medidas/código educativo separados; datos secundarios preservados cuando existen; cero medidas sin selector ni filas ficticias. `presentation` ausente conserva tres tabs.
+- [x] Añadir casos: JSON parcial; claves inválidas; talla sin JSON; producto sin secundarios; nombres largos escapados; página CMS con contenido largo cuyo cuerpo no aparece dentro del modal.
+- [x] Ejecutar las pruebas enfocadas y confirmar el fallo del contrato nuevo antes de implementar la rama dialog.
+- [x] Integrar bloques continuos dentro del shell actual, con H2 único del diálogo y H3 hijos. Cargar CSS compartido desde los hosts main-product/óptica; pasar IDs diferenciados a dibujo inline/dialog. La página no recibe ni renderiza el diálogo.
+- [x] Resolver enlace de guía desde el page setting existente solo con página válida y plantilla `guia-medidas`; no inyectar `page.content`. Actualizar la información del setting para explicar su nuevo uso como destino, conservando valores guardados y fallback inline legado. Sin `preview_theme_id` en enlaces finales.
+- [x] Actualizar el fixture de guía a markup renderizado actual. El caso de guía del test óptico debe usar el renderer dinámico; no regenerar la captura completa del producto ni alterar sus casos de compra/configurador.
+- [x] Ejecutar `npx playwright test --config tests/e2e/size-guide.config.js`: ambos shells a390/820/1440; abrir sin navegación, cierre visible, Escape, Tab/Shift+Tab, retorno al opener, scroll interno, unidades locales. Añadir una aparición inline para comprobar que conserva tabs/flechas/Home/End y que su cifra mm no cambia al convertir el diálogo.
+- [x] Confirmar dibujo apilado en el drawer480px también a1440viewport; targets44px/campo48px y contenido200% sin recorte. Registrar composición aprobada en `DESIGN.md` e inventarios. Commit: `feat: refine PDP size guide around measurement comparison`.
 
 ## Tarea3 — Página educativa editable
 
@@ -80,13 +80,13 @@
 
 **Interfaces:** los tres pasos existentes mantienen anclas `Guide-{section.id}-{1,2,3}`. H1 usa `page.title`, fallback localizado. Inputs editor: `measurements_intro`, `measurements_step_{1,2,3}_title`, `measurements_step_{1,2,3}_body`, `measurements_help_body`. Cuerpo/intro/ayuda son richtext; títulos text. Un vacío significativo usa el fallback aprobado.
 
-- [ ] Añadir pruebas: un H1 y sus tres anclas; titleCMS escapado; intro/cuerpo/ayuda override solo en measurements; párrafo vacío no crea un bloque mudo; richtext no envuelto en otro p; código/diagrama educativos sin `data-mm` de un SKU ni selector de conversión vacío.
-- [ ] Para cada otra guía (`face`, `order`, `try_on`, `prescription`), renderizar con los nuevos settings llenos y comprobar que los ignora y conserva hero/texto/IDs previos. No cambiar sus traducciones.
-- [ ] Ejecutar `npm run test:unit -- tests/unit/guide-page.test.js` y confirmar los fallos de las capacidades nuevas.
-- [ ] Integrar título/intro y tres pasos según el spec: patilla/código, medidas/regla, comparación con PDP. Retirar solo en measurements el hero gráfico genérico duplicado. Reutilizar comparación con `show_heading:false` bajo el H2 del paso y gráfico A–E sin números reales.
-- [ ] Cargar CSS compartido solo cuando se usa; aplicar editor overrides y fallbacks sin mover las demás guías a un CMS nuevo. Mantener padding e índice de la familia. Para richtext, identificar vacío real sin descartar formatos válidos.
-- [ ] Crear fixture de página renderizado con título y settings CMS sintéticos identificados; ruta nueva `/tests/fixtures/size-guide-page.html`. Probar enlaces con raíz `/` y `/en`, contacto `/pages/contact`, catálogo nativo, tres anclas, teclado y reflow390/820/1440. No inventar un botón que regresa a un producto arbitrario.
-- [ ] Ejecutar pruebas de página y regresión de las cinco guías. Commit: `feat: complete editable frame measurement guide page`.
+- [x] Añadir pruebas: un H1 y sus tres anclas; titleCMS escapado; intro/cuerpo/ayuda override solo en measurements; párrafo vacío no crea un bloque mudo; richtext no envuelto en otro p; código/diagrama educativos sin `data-mm` de un SKU ni selector de conversión vacío.
+- [x] Para cada otra guía (`face`, `order`, `try_on`, `prescription`), renderizar con los nuevos settings llenos y comprobar que los ignora y conserva hero/texto/IDs previos. No cambiar sus traducciones.
+- [x] Ejecutar `npm run test:unit -- tests/unit/guide-page.test.js` y confirmar los fallos de las capacidades nuevas.
+- [x] Integrar título/intro y tres pasos según el spec: patilla/código, medidas/regla, comparación con PDP. Retirar solo en measurements el hero gráfico genérico duplicado. Reutilizar comparación con `show_heading:false` bajo el H2 del paso y gráfico A–E sin números reales.
+- [x] Cargar CSS compartido solo cuando se usa; aplicar editor overrides y fallbacks sin mover las demás guías a un CMS nuevo. Mantener padding e índice de la familia. Para richtext, identificar vacío real sin descartar formatos válidos.
+- [x] Crear fixture de página renderizado con título y settings CMS sintéticos identificados; ruta nueva `/tests/fixtures/size-guide-page.html`. Probar enlaces con raíz `/` y `/en`, contacto `/pages/contact`, catálogo nativo, tres anclas, teclado y reflow390/820/1440. No inventar un botón que regresa a un producto arbitrario.
+- [x] Ejecutar pruebas de página y regresión de las cinco guías. Commit: `feat: complete editable frame measurement guide page`.
 
 ## Tarea4 — Validación, integración Shopify y handoff
 
@@ -106,4 +106,9 @@
 
 Cobertura: gráficos compartidos→tarea1; modal→tarea2; guía editable→tarea3; carga/QA/revisión→tarea4. Los cinco riesgos de Review Focus tienen comprobación en su tarea. Las interfaces usan los mismos nombres que el spec. No se añaden dependencias ni pruebas para validar la mera existencia de estos documentos.
 
-Pendiente de Miguel: revisar la composición propuesta, el copy y este plan. Se conserva la ruta de roles solicitada: theme-developer implementa por tareas; theme-test-engineer verifica; diseño, copy y código/convenciones reciben revisiones independientes. No se inicia runtime desde esta preparación.
+Miguel autorizó implementar esta composición y continuar su desarrollo. Se conserva la ruta de roles solicitada: theme-developer implementa; theme-test-engineer verifica; diseño y código/convenciones reciben revisiones independientes. La revisión editorial previa del borrador no sustituye la revisión del contenido integrado. Preview local con datos sintéticos en puerto 4189 y acceso privado Tailscale en 9451; no es un tema Shopify ni acredita asignación CMS.
+
+
+## Checkpoint de implementación local
+
+Compartidos, modal y página implementados en `36c05b94`; correcciones nativas de HTML en `5ab2b851` y margen SVG al ampliar texto en `d13d3046`. Las tareas1–3 se entregaron como una unidad de integración con dueño único de producción, y pruebas con dueño separado; no se perdieron los gates de revisión. El commit integrado sustituye los tres mensajes sugeridos del plan. La preparación de template ya existente no exigió reescribir su JSON. La aceptación Shopify/editor/SEO/catálogo de tarea4 sigue pendiente. La base remota avanzó a `5bcb463b` y se integrará preservando Instrument Sans y el trabajo de los otros tickets. Evidencia final y revisión posterior se registrarán en el informe QA.

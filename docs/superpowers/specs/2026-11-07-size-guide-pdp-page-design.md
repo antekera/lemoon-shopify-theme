@@ -1,6 +1,6 @@
 # Guía de medidas PDP y página — propuesta de diseño para desarrollo
 
-Estado: **propuesta para revisión humana**, 07-11-2026. Alcance solicitado: preparar LEM-129 (modal PDP) y LEM-105 (`/pages/como-medir-tus-lentes`), con Zeelool como referencia principal. No autoriza merge, carga de catálogo ni publicación. Esta especificación complementa `DESIGN.md`; no crea otra fuente de tokens ni cambia todavía el contrato visual implementado.
+Estado: **implementación autorizada por Miguel, pendiente de revisión humana del resultado**, 07-11-2026. Alcance solicitado: preparar LEM-129 (modal PDP) y LEM-105 (`/pages/como-medir-tus-lentes`), con Zeelool como referencia principal. No autoriza merge, carga de catálogo ni publicación. La composición implementada se registra en `DESIGN.md`, que conserva el contrato visual y la fuente de tokens. Esta especificación mantiene la trazabilidad de la propuesta autorizada.
 
 ## 1. Fuentes y decisiones
 
@@ -135,6 +135,6 @@ No se fijan mínimos de “calce seguro”, recomendaciones clínicas, rangos RX
 | Regresión | Otras cuatro guías mantienen contenido/hero/schema guardado; PDP inline conserva pestañas y compra/configurador/media no cambian. |
 | Compartidos | Ejemplo educativo claramente marcado, no usa números SKU, no aparece en fallback como dato real; estilo y textos coherentes en ambas superficies. |
 
-Pruebas locales y Theme Check probarán el código correspondiente; no prueban carga de catálogo, publicación, inbox ni un tema comercial actualizado. Esta preparación es documental: se comprobó `git diff --check`, sin ejecutar ni atribuir pruebas de implementación nueva. La aprobación del diseño, la aprobación del entregable de cada ticket, merge y publicación siguen siendo etapas distintas.
+Pruebas locales y Theme Check probarán el código correspondiente; no prueban carga de catálogo, publicación, inbox ni un tema comercial actualizado. La preparación inicial fue documental; sus comprobaciones no acreditaban runtime. La implementación y sus pruebas posteriores se registran por revisión en el plan y el informe QA, sin reutilizar resultados anteriores como prueba de un head nuevo. La aprobación del diseño, la aprobación del entregable de cada ticket, merge y publicación siguen siendo etapas distintas.
 
-Pendientes concretos antes de ejecutar/presentar producción: aceptación de esta composición propuesta; copy final del writer/reviewer; confirmación de convención física por catálogo; y comprobación real de página/asignación/enlaces cuando exista el entorno autorizado. No hay autorización aquí para subir un tema, cambiar medidas o activar una ruta.
+Pendientes concretos antes de presentar producción: revisión humana del entregable integrado, confirmación de convención física por catálogo y comprobación real de página/editor/SEO/asignación/enlaces en un entorno autorizado. No hay autorización aquí para subir un tema, cambiar medidas o activar una ruta.
