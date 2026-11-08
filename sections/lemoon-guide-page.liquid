@@ -33,7 +33,7 @@
   #shopify-section-{{ section.id }} .lemoon-guide__steps { margin: 0; padding: 0; list-style: none; }
   #shopify-section-{{ section.id }} .lemoon-guide__step { padding-bottom: var(--lemoon-space-8); margin-bottom: var(--lemoon-space-8); border-bottom: 1px solid var(--lemoon-border-default); scroll-margin-top: 14rem; }
   #shopify-section-{{ section.id }} .lemoon-guide__step h2 { margin: 0 0 var(--lemoon-space-4); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); line-height: 1.25; }
-  #shopify-section-{{ section.id }} .lemoon-guide__step p { margin: 0; font-size: var(--lemoon-fs-16); line-height: 1.7; color: var(--lemoon-text-secondary); }
+  #shopify-section-{{ section.id }} {% if guide_kind == 'measurements' %}.lemoon-guide__measurement-body p{% else %}.lemoon-guide__step p{% endif %} { margin: 0; font-size: var(--lemoon-fs-16); line-height: 1.7; color: var(--lemoon-text-secondary); }
   #shopify-section-{{ section.id }} .lemoon-guide__help { padding: var(--lemoon-space-8); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
   #shopify-section-{{ section.id }} .lemoon-guide__help h2 { margin: 0 0 var(--lemoon-space-3); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-fs-28); font-weight: var(--lemoon-weight-medium); color: var(--lemoon-text-brand); }
   #shopify-section-{{ section.id }} .lemoon-guide__help p { margin: 0 0 var(--lemoon-space-5); line-height: 1.6; font-size: var(--lemoon-fs-16); }
@@ -66,6 +66,40 @@
     #shopify-section-{{ section.id }} .lemoon-guide__visual, #shopify-section-{{ section.id }} .lemoon-guide__help { padding: var(--lemoon-space-6); }
     #shopify-section-{{ section.id }} .lemoon-guide__step h2, #shopify-section-{{ section.id }} .lemoon-guide__help h2 { font-size: 2.4rem; }
   }
+  {% if guide_kind == 'measurements' %}
+  #shopify-section-{{ section.id }} .lemoon-guide__hero { padding-bottom: var(--lemoon-space-8); margin-bottom: var(--lemoon-space-12); border-bottom: 1px solid var(--lemoon-border-default); }
+  #shopify-section-{{ section.id }} .lemoon-guide__intro { max-width: 70ch; }
+  #shopify-section-{{ section.id }} .lemoon-guide__intro > :last-child { margin-bottom: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__layout { grid-template-columns: minmax(18rem, 24rem) minmax(0, 1fr); gap: var(--lemoon-space-16); }
+  #shopify-section-{{ section.id }} .lemoon-guide__layout > div { min-width: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav a { display: block; min-height: var(--lemoon-size-touch); padding: var(--lemoon-space-3) var(--lemoon-space-4); border-left: 1px solid var(--lemoon-border-default); line-height: 1.5; text-decoration: none; }
+  #shopify-section-{{ section.id }} .lemoon-guide__nav a:hover { border-left-color: var(--lemoon-border-strong); text-decoration: underline; }
+  #shopify-section-{{ section.id }} .lemoon-guide__step { padding-bottom: var(--lemoon-space-10); margin-bottom: var(--lemoon-space-10); }
+  #shopify-section-{{ section.id }} .lemoon-guide__step:last-child { padding-bottom: 0; margin-bottom: var(--lemoon-space-10); border-bottom: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__measurement-body { max-width: 70ch; }
+  #shopify-section-{{ section.id }} .lemoon-guide__definitions { gap: 0; margin-top: var(--lemoon-space-8); }
+  #shopify-section-{{ section.id }} .lemoon-guide__definitions > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-2); padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
+  #shopify-section-{{ section.id }} .lemoon-guide__definitions dt { margin: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__definitions dd { min-width: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__help { padding: var(--lemoon-space-8) 0 0; border-top: 1px solid var(--lemoon-border-default); border-radius: 0; background: var(--lemoon-surface-page); }
+  #shopify-section-{{ section.id }} .lemoon-guide__help .rte { max-width: 70ch; }
+  #shopify-section-{{ section.id }} .lemoon-guide__help .rte p { margin: 0; }
+  #shopify-section-{{ section.id }} .lemoon-guide__help .rte p + p { margin-top: var(--lemoon-space-4); }
+  #shopify-section-{{ section.id }} .lemoon-guide__help .lemoon-guide__links { margin-top: var(--lemoon-space-6); }
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} .lemoon-guide__definitions > div { grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: var(--lemoon-space-6); }
+  }
+  @media screen and (max-width: 989px) {
+    #shopify-section-{{ section.id }} .lemoon-guide__layout { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-10); }
+    #shopify-section-{{ section.id }} .lemoon-guide__nav { padding-bottom: var(--lemoon-space-6); border-bottom: 1px solid var(--lemoon-border-default); }
+    #shopify-section-{{ section.id }} .lemoon-guide__nav ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: var(--lemoon-space-3) var(--lemoon-space-4); }
+  }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-guide__hero { padding-bottom: var(--lemoon-space-6); margin-bottom: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-guide__step { padding-bottom: var(--lemoon-space-8); margin-bottom: var(--lemoon-space-8); }
+    #shopify-section-{{ section.id }} .lemoon-guide__step:last-child { margin-bottom: var(--lemoon-space-8); }
+  }
+  {% endif %}
 {%- endstyle -%}
 <div class="lemoon-guide page-width" data-guide-kind="{{ guide_kind | escape }}">
   <header class="lemoon-guide__hero">
@@ -139,7 +173,7 @@
                 {%- if body_override_text != blank -%}{{ section.settings[body_setting] }}{%- else -%}{{ step_body_key | t }}{%- endif -%}
               </div>
               {%- if step == 1 -%}
-                {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false %}
+                {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false %}
               {%- elsif step == 2 -%}
                 <div class="lemoon-guide__measurement-visual">
                   {%- assign diagram_label = 'lemoon_size_guide.page_diagram_note' | t -%}

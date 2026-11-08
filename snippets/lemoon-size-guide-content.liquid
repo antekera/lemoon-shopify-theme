@@ -50,7 +50,7 @@
   <section class="lemoon-size-guide__block" aria-labelledby="SizeMeasurements-{{ size_guide_id | escape }}">
     <h3 id="SizeMeasurements-{{ size_guide_id | escape }}">{{ 'lemoon_size_guide.product_measurements' | t }}</h3>
     <p class="lemoon-size-guide__intro">{{ 'lemoon_size_guide.product_intro' | t }}</p>
-    {% render 'lemoon-frame-dimensions', dimensions: dimensions, dialog: true, instance_id: measurement_instance_id %}
+    {% render 'lemoon-frame-dimensions', dimensions: dimensions, dialog: true, instance_id: measurement_instance_id, values_first: true %}
   </section>
   <section class="lemoon-size-guide__block">
     {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, heading_level: 3, compact: true %}

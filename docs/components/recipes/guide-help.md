@@ -71,11 +71,13 @@ El modo `measurements` de `lemoon-guide-page` mantiene el índice, las anclas y 
 Reutilizar los recursos compartidos, sin un SKU de ejemplo:
 
 ```liquid
-{% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false %}
+{% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false %}
 {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
 ```
 
-`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` (true salvo false explícito) y `compact` (false). Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cifras reales pertenecen exclusivamente al consumidor `lemoon-frame-dimensions`.
+`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` y `show_intro` (true salvo false explícito) y `compact` (false). Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cifras reales pertenecen exclusivamente al consumidor `lemoon-frame-dimensions`.
+
+El paso ya explica dónde buscar el código, por eso pasa `show_intro: false` para omitir únicamente la instrucción repetida del componente; conserva ejemplo, nota educativa y definiciones. El ejemplo y sus filas usan dos columnas solo con ancho útil suficiente, no por un breakpoint de viewport que ignore el índice. El índice, las filas A–E y la ayuda blanca con borde superior se refinan solo en measurements.
 
 La sección carga `component-lemoon-size-guide.css` solo en measurements. No crea un diálogo ni una herramienta para medir en pantalla. La página usa los destinos de catálogo/contacto de la familia y no vuelve a un producto arbitrario. Verificar template asignado y contenido editable real en Shopify aparte de los fixtures locales; la existencia de `page.guia-medidas.json` no acredita esa asignación.
 

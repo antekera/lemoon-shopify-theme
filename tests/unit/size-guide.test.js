@@ -32,6 +32,25 @@ describe('continuous PDP dialog composition', () => {
     for (const text of ['Acetato', 'Rectangular', '22 g', 'Unisex', 'Ovalado, corazón']) expect(dialog).toContain(text);
     expect(renderSizeContent('complete', options).match(/role="tab"/g)).toHaveLength(3);
   });
+  it('puts units and every product value before the explanatory drawing in dialog reading order', () => {
+    const html = renderSizeContent('complete', { ...options, presentation: 'dialog' });
+    const unitSelector = html.indexOf('<select');
+    const diagram = html.indexOf('<figure');
+    expect(unitSelector).toBeGreaterThan(-1);
+    for (const value of [140, 52, 18, 42, 145]) {
+      const position = html.indexOf(`data-mm="${value}"`);
+      expect(position).toBeGreaterThan(unitSelector);
+      expect(position).toBeLessThan(diagram);
+    }
+  });
+  it('preserves drawing, units and values in the default inline reading order', () => {
+    const html = renderSizeContent('complete', options);
+    const diagram = html.indexOf('<figure');
+    const unitSelector = html.indexOf('<select');
+    expect(diagram).toBeGreaterThan(-1);
+    expect(unitSelector).toBeGreaterThan(diagram);
+    for (const value of [140, 52, 18, 42, 145]) expect(html.indexOf(`data-mm="${value}"`)).toBeGreaterThan(unitSelector);
+  });
 });
 
 describe('continuous dialog data and page boundaries', () => {

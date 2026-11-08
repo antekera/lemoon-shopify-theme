@@ -105,10 +105,12 @@ La vista secundaria inicial se renderiza solo si `card_secondary_media != blank`
 
 ```liquid
 {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
-{% render 'lemoon-frame-dimensions', dimensions: dimensions, instance_id: dimensions_instance_id, dialog: true %}
+{% render 'lemoon-frame-dimensions', dimensions: dimensions, instance_id: dimensions_instance_id, dialog: true, values_first: true %}
 ```
 
-Los hosts `main-product` y `lemoon-eyewear-product` cargan `component-lemoon-size-guide.css` una vez, además del CSS/JS PDP existente. `lemoon-frame-dimensions` conserva solo números JSON positivos conocidos y pasa un ID distinto al dibujo compartido. El ejemplo educativo procede de `lemoon-size-guide-comparison`; sus tres números no rellenan ningún dato del producto ni cambian al convertir unidades. Las medidas parciales/vacías se expresan en texto, sin selector vacío.
+Los hosts `main-product` y `lemoon-eyewear-product` cargan `component-lemoon-size-guide.css` una vez, además del CSS/JS PDP existente. `lemoon-frame-dimensions` conserva solo números JSON positivos conocidos y pasa un ID distinto al dibujo compartido. El argumento opcional `values_first` coloca selector y cifras antes del diagrama únicamente en el diálogo continuo. Omitirlo conserva el orden del consumidor inline. El ejemplo educativo procede de `lemoon-size-guide-comparison`; sus tres números no rellenan ningún dato del producto ni cambian al convertir unidades. Las medidas parciales/vacías se expresan en texto, sin selector vacío.
+
+El bloque de ejemplo agrupa código, nota educativa y perspectiva en una superficie cálida; las medidas reales permanecen en una lista independiente sobre blanco. No modifica trazados SVG ni controladores.
 
 En modo diálogo, el setting de página solo genera enlace si `url`, `published_at` y template `guia-medidas` están disponibles. No se inserta el cuerpo CMS completo; el modo inline conserva su comportamiento legado. Verificar IDs únicos entre inline/diálogo, conversión local, foco/retorno y reflow con texto ampliado. [Receta educativa](guide-help.md) documenta la reutilización de los gráficos sin producto.
 

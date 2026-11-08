@@ -1,5 +1,7 @@
 # Guía de medidas PDP y página — propuesta de diseño para desarrollo
 
+Refinamiento de composición autorizado el 08-11-2026: Miguel aprobó el dibujo `8611a1f4` y pidió continuar diseñando las secciones con preview final. El contrato operativo de DESIGN incorpora unidades/lista antes de diagramas en dialog (inline conserva orden), agrupación cálida del ejemplo, filas por ancho útil, índice24rem y ayuda blanca. Esto actualiza el orden gráfico/lista histórico de §2; no autoriza merge, publicación o cierre de tickets.
+
 Estado: **implementación autorizada por Miguel, pendiente de revisión humana del resultado**, 07-11-2026. Alcance solicitado: preparar LEM-129 (modal PDP) y LEM-105 (`/pages/como-medir-tus-lentes`), con Zeelool como referencia principal. No autoriza merge, carga de catálogo ni publicación. La composición implementada se registra en `DESIGN.md`, que conserva el contrato visual y la fuente de tokens. Esta especificación mantiene la trazabilidad de la propuesta autorizada.
 
 ## 1. Fuentes y decisiones
@@ -30,7 +32,7 @@ Reutilizar el `<dialog>` y sus openers de PDP estándar y óptica. Apertura sin 
 Orden dentro del diálogo:
 
 1. H2 «Guía de medidas» y nombre del producto como contexto secundario escapado; sin repetir precio ni acciones de compra.
-2. H3 «Medidas de este armazón», selector mm/pulgadas y dibujo frontal/lateral con referencias A–E. Debajo, lista HTML de las medidas disponibles. mm inicial; cambiar unidades solo convierte esta lista, no el código educativo ni otros bloques de PDP.
+2. H3 «Medidas de este armazón», selector mm/pulgadas y lista HTML de las medidas disponibles antes del dibujo frontal/lateral con referencias A–E. mm inicial; cambiar unidades solo convierte esta lista, no el código educativo ni otros bloques de PDP.
 3. H3 «Compara con tus lentes»: patilla ilustrada, inscripción educativa y tres filas de explicación (miniicono, código con segmento destacado, nombre/definición). El ejemplo se identifica antes del gráfico y nunca sustituye las cifras del producto.
 4. Características y datos declarados de ajuste como dos listas bajo H3, solo cuando haya datos. Mantener forma/material/peso/género y talla/clasificación de ancho/rostros declarados que antes existían en las pestañas; no trasladarlos a recomendaciones automáticas ni borrar datos al retirar las pestañas del diálogo. La advertencia de ajuste acompaña a la segunda lista. Sin datos, omitir estas secciones secundarias; el vacío principal de medidas sigue visible.
 5. Enlace «Cómo medir tus lentes» a la página válida y canal de ayuda existente. El enlace no es necesario para entender las cifras ni sustituye la ayuda breve dentro del modal.

@@ -68,6 +68,25 @@ for (const shell of ['standard', 'eyewear']) {
     });
   }
 
+  test(`${shell}: 390px product measurements are readable in the first view before the drawing`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const dialog = await openGuide(page, shell);
+    await page.evaluate(() => document.fonts.ready);
+    expect(await dialog.evaluate(element => element.scrollTop)).toBe(0);
+    const units = dialog.getByRole('combobox', { name: 'Unidad de medida', exact: true });
+    await expect(units).toBeInViewport({ ratio: 1 });
+    const firstDrawing = dialog.locator('.lemoon-measurement-diagram').first();
+    expect(await units.evaluate((element, drawing) => Boolean(element.compareDocumentPosition(drawing) & Node.DOCUMENT_POSITION_FOLLOWING), await firstDrawing.elementHandle())).toBe(true);
+    await expect(dialog.locator('[data-mm]')).toHaveCount(5);
+    for (const value of [140, 52, 18, 42, 145]) {
+      const measurement = dialog.locator(`[data-mm="${value}"]`);
+      await expect(measurement).toHaveText(`${value} mm`);
+      await expect(measurement.locator('..')).toBeInViewport({ ratio: 1 });
+    }
+    expect(await dialog.evaluate(element => element.scrollTop)).toBe(0);
+    await page.screenshot({ path: testInfo.outputPath(`${shell}-390-first-view-measurements.png`) });
+  });
+
   test(`${shell}: partial, invalid and size-only data never manufacture measurements`, async ({ page }) => {
     for (const scenario of ['partial', 'missing', 'empty-object', 'invalid', 'unknown', 'size-only']) {
       const dialog = await openGuide(page, shell, scenario);

@@ -3,6 +3,7 @@
   @param {object} dimensions - Positive numeric measurements in millimeters.
   @param {boolean} [dialog] - Render unit selector in the size dialog.
   @param {string} instance_id - Unique prefix for accessible diagram titles.
+  @param {boolean} [values_first] - Put units and product values before the diagram in continuous dialogs.
 {% enddoc %}
 {%- liquid
   assign keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
@@ -25,10 +26,17 @@
 {%- if has_measurements -%}
   <div class="lemoon-pdp__dimensions">
     {%- assign diagram_label = 'lemoon_size_guide.diagram_note' | t -%}
+    {%- unless values_first -%}
     {% render 'lemoon-frame-measurement-diagram', instance_id: instance_id, label: diagram_label %}
+    {%- endunless -%}
     {% if dialog %}<label class="lemoon-pdp__unit-label">{{ 'lemoon_pdp.units' | t }}<select data-units><option value="mm">{{ 'lemoon_pdp.millimeters' | t }}</option><option value="in">{{ 'lemoon_pdp.inches' | t }}</option></select></label>{% endif %}
     <dl>{{ measurement_rows }}</dl>
     {%- if measurement_count < 5 -%}<p class="lemoon-size-guide__note">{{ 'lemoon_size_guide.partial_measurements' | t }}</p>{%- endif -%}
+    {%- if values_first -%}
+      <div class="lemoon-pdp__measurement-visual">
+        {% render 'lemoon-frame-measurement-diagram', instance_id: instance_id, label: diagram_label %}
+      </div>
+    {%- endif -%}
   </div>
 {%- else -%}
   <p class="lemoon-size-guide__empty">{{ 'lemoon_pdp.measurements_unavailable' | t }}</p>

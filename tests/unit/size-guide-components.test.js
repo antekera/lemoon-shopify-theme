@@ -26,6 +26,16 @@ describe('shared educational measurement graphics', () => {
     expect(html).not.toMatch(/<h[1-6]\b/);
     expect(html).toContain('Ejemplo educativo.');
   });
+  it('can omit a repeated host introduction while retaining the educational example and three definitions', () => {
+    const params = { instance_id: 'host-introduction' };
+    const intro = render('lemoon-size-guide-comparison', params).match(/<p class="lemoon-size-comparison__intro">([\s\S]*?)<\/p>/)?.[1];
+    expect(intro).toBeTruthy();
+    const html = render('lemoon-size-guide-comparison', { ...params, show_intro: false });
+    expect(html).not.toContain(intro);
+    expect(html).toContain('Ejemplo educativo. No representa las medidas de un producto específico.');
+    for (const value of [52, 18, 145]) expect(html).toMatch(new RegExp(`<strong[^>]*>\\s*${value}\\s*<\\/strong>`));
+    expect(html.match(/class="lemoon-size-comparison__definition"/g)).toHaveLength(3);
+  });
   it('keeps all SVG and description associations unique across multiple instances', () => {
     const html = ['first', 'second'].map(instance_id => render('lemoon-frame-measurement-diagram', { instance_id, label: 'Esquema de medidas' }) + render('lemoon-size-guide-comparison', { instance_id: `${instance_id}-comparison` })).join('');
     const values = ids(html);

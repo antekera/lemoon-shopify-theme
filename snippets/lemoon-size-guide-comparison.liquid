@@ -3,6 +3,7 @@
   @param {string} instance_id - Unique prefix for the comparison heading.
   @param {number} [heading_level] - Semantic heading level, default 2.
   @param {boolean} [show_heading] - Show the heading unless false.
+  @param {boolean} [show_intro] - Show the instruction unless the host already provides it.
   @param {boolean} [compact] - Use the compact drawer composition.
 {% enddoc %}
 {%- liquid
@@ -15,7 +16,10 @@
   {%- unless show_heading == false -%}
     {% render 'lemoon-ui-heading', text: comparison_title, level: comparison_level, id: comparison_heading_id %}
   {%- endunless -%}
+  {%- unless show_intro == false -%}
   <p class="lemoon-size-comparison__intro">{{ 'lemoon_size_guide.comparison_intro' | t }}</p>
+  {%- endunless -%}
+  <div class="lemoon-size-comparison__example">
   <p class="lemoon-size-comparison__example-label">{{ 'lemoon_size_guide.example' | t }} <span class="lemoon-size-comparison__code">52 □ 18–145</span></p>
   <p class="lemoon-size-comparison__note">{{ 'lemoon_size_guide.educational_note' | t }}</p>
   <svg class="lemoon-size-comparison__temple" viewBox="8 6 404 230" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
@@ -48,6 +52,7 @@
       <circle cx="288.55" cy="124.7" r="2.1"/><circle cx="288.28" cy="131.3" r="2.1"/>
     </g>
   </svg>
+  </div>
   <ol class="lemoon-size-comparison__rows">
     {%- for key in comparison_keys -%}
       {%- liquid

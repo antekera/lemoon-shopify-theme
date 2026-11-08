@@ -1,0 +1,18 @@
+{
+  "DESIGN.md": "8aefcabb356ab7f601451ed508d9f83a24ba3f982072cf059fe2e47164569904",
+  "assets/component-lemoon-size-guide.css": "e78b1a655b57a2cecb344a9a74839382c8a231131ff57da58793d7238a20570e",
+  "assets/lemoon-pdp-layout.css": "8a4c336bf4ea55f483f2b73268e8ed7717c99d49b60159c1813e4836c35b14c3",
+  "docs/components/recipes/guide-help.md": "fccc1b63e45978b2b242ae443a7621950bde669499963b174acccb48a1623916",
+  "docs/components/recipes/product-card-grid.md": "7bd767d387fa0cdf4b86b02b496eecaaf76e8547b8a9afbef1c68d6071617121",
+  "docs/design/component-inventory.json": "60a195d4d2093d2b18fa5533f94fe650ed5bc6457ad641ff292c315c93311220",
+  "docs/design/component-inventory.md": "b93abd56e61b99ce4b06f080bf7e62890f7da357e924ffb820a04a3f9503657e",
+  "docs/superpowers/specs/2026-11-07-size-guide-pdp-page-design.md": "2db5beaa206befd15ab239e791db193284c4de21ed480c5dc24d924fc676b367",
+  "sections/lemoon-guide-page.liquid": "fc82554e10d4f8ffe39e96054d8549f62b6ef9ad4ee421caa7662f23203ccd84",
+  "snippets/lemoon-frame-dimensions.liquid": "f4621cf9bd3ef3d446a94e89dcb735b4b38f3e3f09122330b2c35b1f0aa156d5",
+  "snippets/lemoon-size-guide-comparison.liquid": "03cfdda08793634831cc106808e780728a5dc312b9190887db03e4ed93f88c1f",
+  "snippets/lemoon-size-guide-content.liquid": "a5674617466ebabc10f681a404060f0c1c5219a1550e27fbdcc45edd683dc439",
+  "tests/e2e/size-guide.spec.js": "5c057e937ea90673980230e19bb25b985b727699b50c218347ddf4289d1369bb",
+  "tests/unit/size-guide-components.test.js": "b59686a45d609ed3cbeda613a134344aa0f14477220b2a484bc130a5a59f8163",
+  "tests/unit/size-guide.test.js": "f42a5d31471b98c2bd5e57dc121d900f9937b8dade3fce76553588ff90f99185",
+  "head": "8611a1f4d1b84ad1eeccaa7240e6914771077d9e"
+}

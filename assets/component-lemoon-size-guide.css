@@ -9,12 +9,14 @@
 .lemoon-size-comparison h2, .lemoon-size-comparison h3 { margin: 0 0 var(--lemoon-space-4); color: var(--lemoon-text-brand); }
 .lemoon-size-comparison p { font-size: var(--lemoon-fs-16); line-height: 1.6; }
 .lemoon-size-comparison__intro { margin: 0 0 var(--lemoon-space-5); color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison__example { min-width: 0; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
 .lemoon-size-comparison__example-label { margin: 0; color: var(--lemoon-text-brand); }
 .lemoon-size-comparison__code { color: var(--lemoon-text-brand); white-space: normal; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
 .lemoon-size-comparison__example-label .lemoon-size-comparison__code { display: block; margin-top: var(--lemoon-space-2); font-size: var(--lemoon-fs-20); font-weight: var(--lemoon-weight-medium); }
 .lemoon-size-comparison__note { margin: var(--lemoon-space-3) 0 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14) !important; }
-.lemoon-size-comparison__temple { display: block; width: 100%; max-width: 44rem; height: auto; margin: var(--lemoon-space-6) auto; color: var(--lemoon-text-brand); }
-.lemoon-size-comparison__rows { list-style: none; margin: 0; padding: 0; }
+.lemoon-size-comparison__temple { display: block; width: 100%; max-width: 44rem; height: auto; margin: var(--lemoon-space-6) auto 0; color: var(--lemoon-text-brand); }
+.lemoon-size-comparison__rows { list-style: none; margin: var(--lemoon-space-6) 0 0; padding: 0; }
+.lemoon-size-comparison__row:last-child { border-bottom: 1px solid var(--lemoon-border-default); }
 .lemoon-size-comparison__row { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-4); align-items: flex-start; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
 .lemoon-size-comparison__icon { display: block; width: 64px; flex: 0 0 64px; height: auto; margin-top: var(--lemoon-space-2); color: var(--lemoon-text-brand); }
 .lemoon-size-comparison__detail { flex: 1 1 14rem; min-width: 0; }
@@ -22,8 +24,18 @@
 .lemoon-size-comparison__code strong { font-weight: var(--lemoon-weight-bold); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em; }
 .lemoon-size-comparison__definition { margin: 0; color: var(--lemoon-text-secondary); }
 .lemoon-size-comparison__definition span { display: block; color: var(--lemoon-text-brand); font-weight: var(--lemoon-weight-semibold); }
-.lemoon-size-comparison__footer { margin: var(--lemoon-space-4) 0 0; color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison__footer { margin: var(--lemoon-space-5) 0 0; color: var(--lemoon-text-secondary); }
 .lemoon-size-comparison--compact p { font-size: var(--lemoon-fs-14); }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-6); align-items: flex-start; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison > h2,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison > h3,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__intro,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__footer { flex: 0 1 100%; margin: 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__example,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__rows { flex: 1 1 32rem; min-width: 0; margin: 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__row { gap: var(--lemoon-space-3); padding: var(--lemoon-space-5) 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__row:first-child { border-top: 0; padding-top: 0; }
+
 @media screen and (min-width: 750px) {
   .lemoon-guide[data-guide-kind="measurements"] .lemoon-measurement-diagram__views { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
