@@ -9,8 +9,6 @@
   assign form_id = 'EyewearForm-' | append: section.id
   assign current_media = current_variant.featured_media | default: product.featured_media
   assign secondary_media = product.media | where: 'media_type', 'image' | reject: 'id', current_media.id | first
-  assign dimensions = product.metafields.custom.frame_dimensions.value
-  assign dimensions_instance_id = section.id | append: '-summary-measurements'
 -%}
 <lemoon-eyewear class="lemoon-pdp page-width" data-product-id="{{ product.id }}" data-cart-url="{{ routes.cart_url }}" data-configurator-url="{{ product.url | escape }}">
   <div class="lemoon-pdp__grid">
@@ -150,15 +148,11 @@
 
   <div class="lemoon-pdp__details">
     <div>
-      <p class="lemoon-pdp__eyebrow">{{ 'lemoon_pdp.made_for_you' | t }}</p><h2>{{ 'lemoon_pdp.details' | t }}</h2>
+      {% assign frame_information_id = section.id | append: '-inline' %}
+      {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
       <dl class="lemoon-pdp__specs">
-        <div><dt>{{ 'lemoon_pdp.shape' | t }}</dt><dd>{{ product.metafields.custom.frame_shape.value | capitalize | escape }}</dd></div>
-        <div><dt>{{ 'lemoon_pdp.material' | t }}</dt><dd>{{ product.metafields.custom.frame_material.value | capitalize | escape }}</dd></div>
-        <div><dt>{{ 'lemoon_pdp.fit' | t }}</dt><dd>{{ product.metafields.custom.frame_width.value | capitalize | escape }}</dd></div>
-        {% if product.metafields.custom.frame_weight.value != blank %}<div><dt>{{ 'lemoon_pdp.weight' | t }}</dt><dd>{{ product.metafields.custom.frame_weight.value }} g</dd></div>{% endif %}
-        <div><dt>SKU</dt><dd data-sku>{{ current_variant.sku | escape }}</dd></div>
+        <div><dt>{{ 'products.product.sku' | t }}</dt><dd data-sku>{{ current_variant.sku | escape }}</dd></div>
       </dl>
-      {% if dimensions != blank %}{% render 'lemoon-frame-dimensions', dimensions: dimensions, instance_id: dimensions_instance_id %}{% endif %}
     </div>
     <div class="lemoon-pdp__accordions">
       <details><summary>{{ 'lemoon_pdp.lens_details' | t }}</summary><div class="lemoon-pdp__lens-guide">
@@ -178,10 +172,8 @@
     {% unless has_review_app %}<p>{{ 'lemoon_pdp.no_reviews' | t }}</p>{% endunless %}
   </div>
 
-  {% assign frame_information_id = section.id | append: '-inline' %}
-  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
   {% assign drawer_instance_id = section.id | append: '-drawer' %}
-  <dialog class="lemoon-pdp__dialog lemoon-size-drawer" data-dialog="size" aria-labelledby="SizeTitle-{{ section.id }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'lemoon_size_guide.close' | t }}">×</button><h2 id="SizeTitle-{{ section.id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2>{% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}</dialog>
+  <dialog class="lemoon-pdp__dialog lemoon-size-drawer" data-dialog="size" aria-labelledby="SizeTitle-{{ section.id }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'lemoon_size_guide.close' | t }}">×</button><h2 id="SizeTitle-{{ section.id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2>{% render 'lemoon-size-guide-content', instance_id: drawer_instance_id, presentation: 'dialog' %}</dialog>
   {% for media in product.media %}{% if media.media_type == 'image' %}<dialog class="lemoon-pdp__dialog lemoon-pdp__dialog--zoom" data-dialog="zoom-{{ media.id }}" aria-label="{{ 'lemoon_pdp.zoom' | t }}"><button type="button" data-close-dialog class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button>{{ media | image_url: width: 2000 | image_tag: loading: 'lazy', alt: media.alt }}</dialog>{% endif %}{% endfor %}
   <script type="application/json" data-variants>[
     {% for variant in product.variants %}{"id":{{ variant.id | json }},"options":{{ variant.options | json }},"available":{{ variant.available | json }},"price":{{ variant.price | json }},"formattedPrice":{{ variant.price | money | json }},"formattedCompare":{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money | json }}{% else %}null{% endif %},"sku":{{ variant.sku | json }},"mediaId":{{ variant.featured_media.id | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}

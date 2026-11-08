@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { renderSizeContent } from '../helpers/size-guide-renderer.mjs';
+import { renderSizeContent, sizeGuideContext } from '../helpers/size-guide-renderer.mjs';
 const options = process.env.SIZE_GUIDE_SOURCE_ROOT ? { sourceRoot: process.env.SIZE_GUIDE_SOURCE_ROOT } : {};
 describe('product measurements Liquid rendering', () => {
   it('renders all supplied mm measurements without substitutions', () => {
@@ -23,65 +23,71 @@ describe('product measurements Liquid rendering', () => {
   }
 });
 
-describe('continuous PDP dialog composition', () => {
-  it('uses semantic sections instead of tabs while retaining default inline tabs', () => {
+describe('generic guide and product information boundaries', () => {
+  it('keeps the three product-information tabs and their real data outside the generic dialog', () => {
     const dialog = renderSizeContent('complete', { ...options, presentation: 'dialog' });
     expect(dialog).not.toMatch(/role="(?:tablist|tab|tabpanel)"/);
     expect(dialog).toContain('Ejemplo educativo.');
-    expect(dialog.match(/data-mm=/g)).toHaveLength(5);
-    for (const text of ['Acetato', 'Rectangular', '22 g', 'Unisex', 'Ovalado, corazón']) expect(dialog).toContain(text);
-    expect(renderSizeContent('complete', options).match(/role="tab"/g)).toHaveLength(3);
-  });
-  it('puts units and every product value before the explanatory drawing in dialog reading order', () => {
-    const html = renderSizeContent('complete', { ...options, presentation: 'dialog' });
-    const unitSelector = html.indexOf('<select');
-    const diagram = html.indexOf('<figure');
-    expect(unitSelector).toBeGreaterThan(-1);
-    for (const value of [140, 52, 18, 42, 145]) {
-      const position = html.indexOf(`data-mm="${value}"`);
-      expect(position).toBeGreaterThan(unitSelector);
-      expect(position).toBeLessThan(diagram);
+    expect(dialog).not.toMatch(/data-mm=|data-units/);
+    const inline = renderSizeContent('complete', options);
+    expect(inline.match(/role="tab"/g)).toHaveLength(3);
+    expect(inline.match(/data-mm=/g)).toHaveLength(5);
+    for (const text of ['Acetato', 'Rectangular', '22 g', 'Unisex', 'Ovalado, corazón']) {
+      expect(inline).toContain(text);
+      expect(dialog).not.toContain(text);
     }
   });
-  it('preserves drawing, units and values in the default inline reading order', () => {
+  it('renders diagrams and five explanations without a current-product table or conversion control', () => {
+    const html = renderSizeContent('complete', { ...options, presentation: 'dialog' });
+    expect(html.match(/role="img"/g)).toHaveLength(2);
+    expect(html.match(/<dt>/g)).toHaveLength(5);
+    expect(html).not.toMatch(/data-mm=|data-units|140 mm|42 mm|Armazón sintético/);
+    expect(html).toContain('Ejemplo educativo. No representa las medidas de un producto específico.');
+  });
+  it('keeps inline measurements in mm without the educational diagrams or CMS guide body', () => {
     const html = renderSizeContent('complete', options);
-    const diagram = html.indexOf('<figure');
-    const unitSelector = html.indexOf('<select');
-    expect(diagram).toBeGreaterThan(-1);
-    expect(unitSelector).toBeGreaterThan(diagram);
-    for (const value of [140, 52, 18, 42, 145]) expect(html.indexOf(`data-mm="${value}"`)).toBeGreaterThan(unitSelector);
+    for (const value of [140, 52, 18, 42, 145]) expect(html).toContain(`>${value} mm</dd>`);
+    expect(html).not.toMatch(/<svg|<figure|data-units|Ejemplo educativo/);
+    expect(renderSizeContent('long', options)).not.toContain('Contenido sintético extenso');
   });
 });
 
-describe('continuous dialog data and page boundaries', () => {
+describe('generic dialog data independence and page boundaries', () => {
   const dialog = (scenario, context) => renderSizeContent(scenario, { ...options, presentation: 'dialog', context });
+  const reference = () => dialog('complete');
   for (const scenario of ['missing', 'empty-object', 'unknown', 'invalid', 'size-only']) {
-    it(`keeps education separate from unavailable product measurements (${scenario})`, () => {
-      const html = dialog(scenario);
-      expect(html).not.toMatch(/data-mm=|data-units/);
-      expect(html).toContain('Las medidas de este armazón aún no están disponibles.');
-      expect(html).toContain('Ejemplo educativo.');
-      if (scenario === 'size-only') expect(html).toMatch(/<dd>\s*M\s*<\/dd>/);
-      else expect(html).not.toMatch(/<dl[^>]*class="lemoon-size-guide__specs"/);
+    it(`keeps the generic reference identical for ${scenario} product measurements`, () => {
+      expect(dialog(scenario)).toBe(reference());
     });
   }
-  it('renders partial supplied values and their information warning', () => {
-    const html = dialog('partial');
+  it('keeps partial supplied values and their warning in product information only', () => {
+    const html = renderSizeContent('partial', options);
     expect(html.match(/data-mm=/g)).toHaveLength(2);
     expect(html).toContain('data-mm="52"'); expect(html).toContain('data-mm="145"');
     expect(html).toContain('Se muestran las medidas disponibles de este armazón.');
+    expect(dialog('partial')).toBe(reference());
   });
-  it('omits absent secondary sections while keeping supplied numeric measurements', () => {
-    const html = dialog('secondary-empty');
+  it('preserves the numeric table when secondary product information is absent', () => {
+    const html = renderSizeContent('secondary-empty', options);
     expect(html.match(/data-mm=/g)).toHaveLength(5);
     expect(html).not.toMatch(/<dl[^>]*class="lemoon-size-guide__specs"/);
+    expect(dialog('secondary-empty')).toBe(reference());
   });
-  it('escapes product context and never embeds the long CMS guide in the dialog', () => {
-    const title = dialog('long-title');
-    expect(title).toContain('&lt;script&gt;');
-    expect(title).not.toContain('<script>título largo</script>');
+  it('does not require a product or expose its title or CMS body in the generic guide', () => {
+    expect(dialog('long-title')).toBe(reference());
+    expect(dialog('complete', { product: null })).toBe(reference());
     expect(dialog('long')).not.toContain('Contenido sintético extenso');
-    expect(renderSizeContent('long', options)).toContain('Contenido sintético extenso');
+  });
+  it('identifies explicitly tagged demo numbers only beside a nonempty PDP table', () => {
+    const taggedProduct = scenario => ({ ...sizeGuideContext(scenario).product, tags: ['lemoon-measurements-demo'] });
+    const notice = 'Medidas de prueba para revisar esta página.';
+    const tagged = renderSizeContent('complete', { ...options, context: { product: taggedProduct('complete') } });
+    expect(tagged).toContain(notice);
+    expect(tagged.match(/data-mm=/g)).toHaveLength(5);
+    expect(tagged.indexOf(notice)).toBeLessThan(tagged.indexOf('data-mm='));
+    expect(renderSizeContent('complete', options)).not.toContain(notice);
+    expect(renderSizeContent('missing', { ...options, context: { product: taggedProduct('missing') } })).not.toContain(notice);
+    expect(dialog('complete', { product: taggedProduct('complete') })).toBe(reference());
   });
   it('links the full guide only for a selected published guide template', () => {
     const page = { url: '/en/pages/como-medir-tus-lentes', template_suffix: 'guia-medidas', published_at: '2026-10-04', content: '<p>NEVER EMBED THIS BODY</p>' };

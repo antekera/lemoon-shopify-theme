@@ -42,3 +42,9 @@
 @media (forced-colors: active) {
   .lemoon-size-comparison__code strong { text-decoration-color: CanvasText; }
 }
+
+/* Product-independent A–E definitions shared by the drawer and educational page. */
+.lemoon-measurement-definitions { display: grid; gap: 0; margin: var(--lemoon-space-6) 0 0; }
+.lemoon-measurement-definitions > div { min-width: 0; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-measurement-definitions dt { margin: 0 0 var(--lemoon-space-2); color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-definitions dd { min-width: 0; margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }

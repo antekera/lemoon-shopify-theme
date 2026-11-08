@@ -632,7 +632,7 @@
         "step_2_title": "2. Measure the frame in millimeters",
         "step_2_body_html": "<p>Work with your actual glasses and write down each measurement with its name. Look straight at the front and align the ruler with the part you are measuring; avoid taking the reading diagonally.</p><p>In this diagram, overall width runs from one outside edge of the front to the other. It is not the same as measuring between the hinges. Check that the measurements you compare use the same endpoints, and do not calculate overall width by adding the two lenses and the bridge: the frame edges also take up space.</p><p>Letters A–E help you locate each part. The drawings are not to scale: use the ruler on your glasses, not on the screen.</p>",
         "step_3_title": "3. Compare with the model’s product page",
-        "step_3_body_html": "<p>Open the size guide on the product page of the frame you are considering. Keep your notes nearby and compare one measurement at a time, always in the same unit.</p><ul><li>Match the measurement names and endpoints: lens width with lens width, overall width with overall width.</li><li>Use only the measurements available for that model. If one is missing, do not infer it from the photo, drawing or size label.</li><li>A written size such as small or medium does not replace measurements in millimeters or fill in missing values.</li></ul><p>Two frames with similar numbers may feel different because of their bridge, temple arms and front shape. Use the comparison as a starting point; it does not guarantee the same comfort.</p>",
+        "step_3_body_html": "<p>On the product page of the frame you are considering, find “Product details” and open the “Measurements” tab. Keep your notes nearby and compare one measurement at a time, always in the same unit.</p><ul><li>Match the measurement names and endpoints: lens width with lens width, overall width with overall width.</li><li>Use only the measurements available for that model. If one is missing, do not infer it from the photo, drawing or size label.</li><li>A written size such as small or medium does not replace measurements in millimeters or fill in missing values.</li></ul><p>Two frames with similar numbers may feel different because of their bridge, temple arms and front shape. Use the comparison as a starting point; it does not guarantee the same comfort.</p>",
         "help_title": "Missing a measurement?",
         "help_body_html": "<p>If a marking is unreadable, a product measurement is missing or you do not have glasses to compare, ask before choosing. Include the model and the measurement you need clarified.</p>"
       },
@@ -1484,6 +1484,8 @@
     "property_pd": "Pupillary distance (mm)"
   },
   "lemoon_size_guide": {
+    "product_details_heading": "Product details",
+    "demo_dimensions_notice": "Sample measurements for reviewing this page. They are not verified physical measurements of this product.",
     "front_view": "Front view",
     "side_view": "Side view",
     "diagram_note": "Reference diagram, not to scale.",

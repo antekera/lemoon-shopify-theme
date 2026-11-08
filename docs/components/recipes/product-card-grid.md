@@ -101,17 +101,17 @@ La vista secundaria inicial se renderiza solo si `card_secondary_media != blank`
 
 ## Guía de medidas de PDP
 
-`lemoon-size-guide-content` recibe `product`, `instance_id` y `presentation` opcional. El default conserva las tres pestañas inline; ambos diálogos pasan `presentation: 'dialog'` para lectura continua bajo el H2 del shell. El controlador nativo y sus adaptadores mantienen apertura, cierre, foco y unidades; no crear otro motor de diálogo.
+`lemoon-size-guide-content` recibe `instance_id` y `presentation` opcional; `product` solo se pasa al modo inline. El default conserva las tres pestañas de características; ambos diálogos pasan `presentation: 'dialog'` para referencias educativas continuas bajo el H2 del shell, sin consultar ni repetir datos del producto. El controlador nativo y sus adaptadores mantienen apertura, cierre y foco; no crear otro motor de diálogo.
 
 ```liquid
-{% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
-{% render 'lemoon-frame-dimensions', dimensions: dimensions, instance_id: dimensions_instance_id, dialog: true, values_first: true %}
+{% render 'lemoon-size-guide-content', instance_id: drawer_instance_id, presentation: 'dialog' %}
+{% render 'lemoon-frame-dimensions', dimensions: dimensions, demo_dimensions: demo_dimensions %}
 ```
 
-Los hosts `main-product` y `lemoon-eyewear-product` cargan `component-lemoon-size-guide.css` una vez, además del CSS/JS PDP existente. `lemoon-frame-dimensions` conserva solo números JSON positivos conocidos y pasa un ID distinto al dibujo compartido. El argumento opcional `values_first` coloca selector y cifras antes del diagrama únicamente en el diálogo continuo. Omitirlo conserva el orden del consumidor inline. El ejemplo educativo procede de `lemoon-size-guide-comparison`; sus tres números no rellenan ningún dato del producto ni cambian al convertir unidades. Las medidas parciales/vacías se expresan en texto, sin selector vacío.
+Los hosts `main-product` y `lemoon-eyewear-product` cargan `component-lemoon-size-guide.css` una vez, además del CSS/JS PDP existente. `lemoon-frame-dimensions` conserva solo números JSON positivos conocidos y emite exclusivamente una lista en mm en la PDP. El argumento `demo_dimensions` añade aviso a datos válidos cuando el llamador detecta la etiqueta exacta `lemoon-measurements-demo`. No hay diagrama ni selector en esta tabla. Las medidas parciales/vacías se expresan en texto. El modal y la página comparten el dibujo y `lemoon-measurement-definitions` (clase adicional opcional `class_name`), sin cifras del SKU. El ejemplo educativo procede de `lemoon-size-guide-comparison`; sus tres números no rellenan ningún dato del producto.
 
 El bloque de ejemplo agrupa código, nota educativa y perspectiva en una superficie cálida; las medidas reales permanecen en una lista independiente sobre blanco. No modifica trazados SVG ni controladores.
 
-En modo diálogo, el setting de página solo genera enlace si `url`, `published_at` y template `guia-medidas` están disponibles. No se inserta el cuerpo CMS completo; el modo inline conserva su comportamiento legado. Verificar IDs únicos entre inline/diálogo, conversión local, foco/retorno y reflow con texto ampliado. [Receta educativa](guide-help.md) documenta la reutilización de los gráficos sin producto.
+En modo diálogo, el setting de página solo genera enlace si `url`, `published_at` y template `guia-medidas` están disponibles. No se inserta el cuerpo CMS completo en ninguna superficie PDP. Verificar IDs únicos entre inline/diálogo, independencia del modal respecto al producto, aviso de prueba, foco/retorno y reflow con texto ampliado. En óptica la sección inline ocupa la columna izquierda de detalles, sin un segundo listado; SKU y acordeones permanecen. [Receta educativa](guide-help.md) documenta la reutilización de los gráficos sin producto.
 
-La guía compartida usa la silueta Donnalyn elegida por el usuario, con frontal/lateral de medidas y perspectiva para mostrar la patilla interior. Solo se toma la forma y construcción general de las fotos: no estampado, logo ni medidas del referente. IDs de títulos/gradientes/paths por instance_id. Se conservan host, CSS/JS, datos y conversión de unidades.
+La guía compartida usa la silueta Donnalyn elegida por el usuario, con frontal/lateral de medidas y perspectiva para mostrar la patilla interior. Solo se toma la forma y construcción general de las fotos: no estampado, logo ni medidas del referente. IDs de títulos/gradientes/paths por instance_id. Se conservan host, SVG aprobados y controladores.

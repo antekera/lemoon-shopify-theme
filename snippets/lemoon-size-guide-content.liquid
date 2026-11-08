@@ -1,11 +1,39 @@
 {% doc %}
-  Renders product-specific frame measurements, specifications, and fit guidance.
-  @param {product} product - Current Shopify product.
+  Renders generic measurement references in a dialog or product information in inline tabs.
+  @param {product} [product] - Current Shopify product, required for inline tabs only.
   @param {string} [instance_id] - Unique ID prefix when this content appears more than once.
   @param {string} [presentation] - tabs (default) or continuous dialog content.
 {% enddoc %}
 {%- liquid
   assign size_guide_id = instance_id | default: product.id
+  assign measurement_instance_id = size_guide_id | append: '-measurements'
+  assign comparison_instance_id = size_guide_id | append: '-comparison'
+  assign guide_page = settings.lemoon_size_guide_page
+  assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+-%}
+{%- if presentation == 'dialog' -%}
+<lemoon-size-guide class="lemoon-size-guide lemoon-size-guide--dialog">
+  <section class="lemoon-size-guide__block" aria-labelledby="SizeMeasurements-{{ size_guide_id | escape }}">
+    <h3 id="SizeMeasurements-{{ size_guide_id | escape }}">{{ 'lemoon_pdp.measurements_tab' | t }}</h3>
+    <div class="lemoon-size-guide__measurement-visual">
+      {%- assign diagram_label = 'lemoon_size_guide.diagram_note' | t -%}
+      {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
+    </div>
+    {% render 'lemoon-measurement-definitions' %}
+  </section>
+  <section class="lemoon-size-guide__block">
+    {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, heading_level: 3, compact: true %}
+  </section>
+  <p class="lemoon-size-guide__note">{{ 'lemoon_size_guide.comparison_limit' | t }}</p>
+  <div class="lemoon-size-guide__links">
+    {%- if guide_page.url != blank and guide_page.template_suffix == 'guia-medidas' and guide_page.published_at != blank -%}
+      <a href="{{ guide_page.url | escape }}">{{ 'lemoon_size_guide.full_guide' | t }}</a>
+    {%- endif -%}
+    <a href="{{ contact_url | escape }}">{{ 'lemoon_size_guide.help_link' | t }}</a>
+  </div>
+</lemoon-size-guide>
+{%- else -%}
+{%- liquid
   assign dimensions = product.metafields.custom.frame_dimensions.value
   assign frame_shape = product.metafields.custom.frame_shape.value
   assign frame_material = product.metafields.custom.frame_material.value
@@ -14,10 +42,10 @@
   assign frame_weight = product.metafields.custom.frame_weight.value
   assign gender = product.metafields.custom.gender.value
   assign face_shapes = product.metafields.custom.face_shapes_compatible.value
-  assign measurement_instance_id = size_guide_id | append: '-measurements'
-  assign comparison_instance_id = size_guide_id | append: '-comparison'
-  assign guide_page = settings.lemoon_size_guide_page
-  assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
+  assign demo_dimensions = false
+  if product.tags contains 'lemoon-measurements-demo'
+    assign demo_dimensions = true
+  endif
 -%}
 {%- capture frame_content -%}
     {%- if frame_shape != blank or frame_material != blank or frame_weight != blank or gender != blank -%}
@@ -44,38 +72,6 @@
       <p class="lemoon-size-guide__empty">{{ 'lemoon_pdp.fit_unavailable' | t }}</p>
     {%- endif -%}
 {%- endcapture -%}
-{%- if presentation == 'dialog' -%}
-<lemoon-size-guide class="lemoon-size-guide lemoon-size-guide--dialog">
-  {%- if product.title != blank -%}<p class="lemoon-size-guide__product">{{ product.title | escape }}</p>{%- endif -%}
-  <section class="lemoon-size-guide__block" aria-labelledby="SizeMeasurements-{{ size_guide_id | escape }}">
-    <h3 id="SizeMeasurements-{{ size_guide_id | escape }}">{{ 'lemoon_size_guide.product_measurements' | t }}</h3>
-    <p class="lemoon-size-guide__intro">{{ 'lemoon_size_guide.product_intro' | t }}</p>
-    {% render 'lemoon-frame-dimensions', dimensions: dimensions, dialog: true, instance_id: measurement_instance_id, values_first: true %}
-  </section>
-  <section class="lemoon-size-guide__block">
-    {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, heading_level: 3, compact: true %}
-  </section>
-  {%- if frame_shape != blank or frame_material != blank or frame_weight != blank or gender != blank -%}
-    <section class="lemoon-size-guide__block" aria-labelledby="SizeFrame-{{ size_guide_id | escape }}">
-      <h3 id="SizeFrame-{{ size_guide_id | escape }}">{{ 'lemoon_pdp.frame_tab' | t }}</h3>
-      {{ frame_content }}
-    </section>
-  {%- endif -%}
-  {%- if frame_size != blank or frame_width != blank or face_shapes != blank -%}
-    <section class="lemoon-size-guide__block" aria-labelledby="SizeFit-{{ size_guide_id | escape }}">
-      <h3 id="SizeFit-{{ size_guide_id | escape }}">{{ 'lemoon_pdp.fit_tab' | t }}</h3>
-      {{ fit_content }}
-    </section>
-  {%- endif -%}
-  <p class="lemoon-size-guide__note">{{ 'lemoon_size_guide.comparison_limit' | t }}</p>
-  <div class="lemoon-size-guide__links">
-    {%- if guide_page.url != blank and guide_page.template_suffix == 'guia-medidas' and guide_page.published_at != blank -%}
-      <a href="{{ guide_page.url | escape }}">{{ 'lemoon_size_guide.full_guide' | t }}</a>
-    {%- endif -%}
-    <a href="{{ contact_url | escape }}">{{ 'lemoon_size_guide.help_link' | t }}</a>
-  </div>
-</lemoon-size-guide>
-{%- else -%}
 <lemoon-size-guide class="lemoon-size-guide">
   <div class="lemoon-size-guide__tabs" role="tablist" aria-label="{{ 'lemoon_pdp.size_guide_tabs' | t }}">
     <button type="button" role="tab" id="SizeTabMeasurements-{{ size_guide_id }}" aria-controls="SizePanelMeasurements-{{ size_guide_id }}" aria-selected="true" tabindex="0" data-size-tab="measurements">{{ 'lemoon_pdp.measurements_tab' | t }}</button>
@@ -84,14 +80,7 @@
   </div>
 
   <section id="SizePanelMeasurements-{{ size_guide_id }}" class="lemoon-size-guide__panel" role="tabpanel" tabindex="0" aria-labelledby="SizeTabMeasurements-{{ size_guide_id }}" data-size-panel="measurements">
-    {% render 'lemoon-frame-dimensions', dimensions: dimensions, dialog: true, instance_id: measurement_instance_id %}
-    {%- if settings.lemoon_size_guide_page != blank -%}
-      <div class="lemoon-size-guide__instructions rte">{{ settings.lemoon_size_guide_page.content }}</div>
-    {%- elsif settings.lemoon_size_guide_placeholder != blank -%}
-      <div class="lemoon-size-guide__instructions rte">{{ settings.lemoon_size_guide_placeholder }}</div>
-    {%- else -%}
-      <p class="lemoon-size-guide__instructions">{{ 'lemoon_pdp.size_note' | t }}</p>
-    {%- endif -%}
+    {% render 'lemoon-frame-dimensions', dimensions: dimensions, demo_dimensions: demo_dimensions %}
   </section>
 
   <section id="SizePanelFrame-{{ size_guide_id }}" class="lemoon-size-guide__panel" role="tabpanel" tabindex="0" aria-labelledby="SizeTabFrame-{{ size_guide_id }}" data-size-panel="frame" hidden>

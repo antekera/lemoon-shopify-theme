@@ -17,7 +17,7 @@ async function expectNoOverflow(page, dialog, width) {
 
 for (const shell of ['standard', 'eyewear']) {
   for (const [width, height] of [[390, 844], [820, 1180], [1440, 900]]) {
-    test(`${shell}: ${width}px continuous measurements, keyboard, units and close`, async ({ page }, testInfo) => {
+    test(`${shell}: ${width}px generic measurement reference, keyboard and close`, async ({ page }, testInfo) => {
       await page.setViewportSize({ width, height });
       const errors = []; page.on('pageerror', error => errors.push(error.message));
       const dialog = await openGuide(page, shell);
@@ -26,18 +26,11 @@ for (const shell of ['standard', 'eyewear']) {
       await expect(dialog.getByRole('tabpanel')).toHaveCount(0);
       await expect(dialog.getByRole('heading', { level: 2 })).toHaveCount(1);
       await expect(dialog.locator('h3').first()).toContainText('Medidas');
-      await expect(dialog).toContainText('140 mm');
-      await expect(dialog).toContainText('145 mm');
-      await expect(dialog).toContainText('Acetato');
-      await expect(dialog).toContainText('Ovalado, corazón');
-      const comparison = dialog.locator('.lemoon-size-comparison');
-      const educationalCode = await comparison.textContent();
-      await dialog.getByRole('combobox', { name: 'Unidad de medida', exact: true }).selectOption('in');
-      await expect(dialog.locator('[data-mm="140"]')).toHaveText('5.51 in');
+      await expect(dialog.locator('[data-mm], [data-units], .lemoon-size-guide__specs')).toHaveCount(0);
+      for (const productText of ['Armazón sintético', '140 mm', '42 mm', 'Acetato', 'Ovalado, corazón']) await expect(dialog).not.toContainText(productText);
+      await expect(dialog.locator('.lemoon-measurement-definitions > div')).toHaveCount(5);
+      await expect(dialog.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo.');
       await expect(page.locator('[data-inline-measurements] [data-mm="140"]')).toHaveText('140 mm');
-      expect(await comparison.textContent()).toBe(educationalCode);
-      await dialog.getByRole('combobox', { name: 'Unidad de medida', exact: true }).selectOption('mm');
-      await expect(dialog.locator('[data-mm="140"]')).toHaveText('140 mm');
       await closeFor(dialog).focus();
       for (const key of ['Tab', 'Shift+Tab']) for (let step = 0; step < 9; step++) {
         await page.keyboard.press(key);
@@ -48,8 +41,6 @@ for (const shell of ['standard', 'eyewear']) {
       await expectNoOverflow(page, dialog, width);
       const closeBounds = await closeFor(dialog).boundingBox();
       expect(closeBounds.width).toBeGreaterThanOrEqual(44); expect(closeBounds.height).toBeGreaterThanOrEqual(44);
-      const unitBounds = await dialog.locator('[data-units]').boundingBox();
-      expect(unitBounds.height).toBeGreaterThanOrEqual(48);
       const drawings = dialog.locator('.lemoon-measurement-diagram svg');
       expect(await drawings.count()).toBe(2);
       const first = await drawings.nth(0).boundingBox(), second = await drawings.nth(1).boundingBox();
@@ -68,36 +59,40 @@ for (const shell of ['standard', 'eyewear']) {
     });
   }
 
-  test(`${shell}: 390px product measurements are readable in the first view before the drawing`, async ({ page }, testInfo) => {
+  test(`${shell}: product information keeps real mm values and identifies only tagged demo measurements`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    const dialog = await openGuide(page, shell);
-    await page.evaluate(() => document.fonts.ready);
-    expect(await dialog.evaluate(element => element.scrollTop)).toBe(0);
-    const units = dialog.getByRole('combobox', { name: 'Unidad de medida', exact: true });
-    await expect(units).toBeInViewport({ ratio: 1 });
-    const firstDrawing = dialog.locator('.lemoon-measurement-diagram').first();
-    expect(await units.evaluate((element, drawing) => Boolean(element.compareDocumentPosition(drawing) & Node.DOCUMENT_POSITION_FOLLOWING), await firstDrawing.elementHandle())).toBe(true);
-    await expect(dialog.locator('[data-mm]')).toHaveCount(5);
-    for (const value of [140, 52, 18, 42, 145]) {
-      const measurement = dialog.locator(`[data-mm="${value}"]`);
-      await expect(measurement).toHaveText(`${value} mm`);
-      await expect(measurement.locator('..')).toBeInViewport({ ratio: 1 });
+    for (const scenario of ['complete', 'demo']) {
+      await page.goto(`/tests/fixtures/size-guide.html?shell=${shell}&scenario=${scenario}`);
+      const inline = page.locator('[data-inline-measurements]');
+      await expect(inline.getByRole('tab')).toHaveCount(3);
+      await expect(inline.locator('[data-mm]')).toHaveCount(5);
+      for (const value of [140, 52, 18, 42, 145]) await expect(inline.locator(`[data-mm="${value}"]`)).toHaveText(`${value} mm`);
+      await expect(inline.locator('svg, figure, [data-units]')).toHaveCount(0);
+      const notice = inline.locator('.lemoon-size-guide__demo-notice');
+      await expect(notice).toHaveCount(scenario === 'demo' ? 1 : 0);
+      if (scenario === 'demo') await expect(notice).toContainText('Medidas de prueba para revisar esta página.');
+      await page.evaluate(() => document.fonts.ready);
+      await inline.screenshot({ path: testInfo.outputPath(`${shell}-${scenario}-product-measurements.png`) });
+      await openerFor(page).click();
+      await expect(dialogFor(page).locator('[data-mm], .lemoon-size-guide__demo-notice')).toHaveCount(0);
     }
-    expect(await dialog.evaluate(element => element.scrollTop)).toBe(0);
-    await page.screenshot({ path: testInfo.outputPath(`${shell}-390-first-view-measurements.png`) });
   });
 
-  test(`${shell}: partial, invalid and size-only data never manufacture measurements`, async ({ page }) => {
-    for (const scenario of ['partial', 'missing', 'empty-object', 'invalid', 'unknown', 'size-only']) {
+  test(`${shell}: generic reference is independent of partial, missing, invalid or contextual product data`, async ({ page }) => {
+    const baseline = await (await openGuide(page, shell)).innerHTML();
+    for (const scenario of ['partial', 'missing', 'empty-object', 'invalid', 'unknown', 'size-only', 'secondary-empty', 'long-title']) {
       const dialog = await openGuide(page, shell, scenario);
+      expect(await dialog.innerHTML()).toBe(baseline);
+      const inline = page.locator('[data-inline-measurements]');
       if (scenario === 'partial') {
-        await expect(dialog.locator('[data-mm]')).toHaveCount(2);
-        await expect(dialog).toContainText('52 mm'); await expect(dialog).toContainText('145 mm');
-      } else {
-        await expect(dialog.locator('[data-mm]')).toHaveCount(0);
-        await expect(dialog.locator('[data-units]')).toHaveCount(0);
-        await expect(dialog).toContainText('Las medidas de este armazón aún no están disponibles.');
+        await expect(inline.locator('[data-mm]')).toHaveCount(2);
+        await expect(inline.locator('[data-mm="52"]')).toHaveText('52 mm'); await expect(inline.locator('[data-mm="145"]')).toHaveText('145 mm');
+        await expect(inline).toContainText('Se muestran las medidas disponibles de este armazón.');
+      } else if (!['secondary-empty', 'long-title'].includes(scenario)) {
+        await expect(inline.locator('[data-mm]')).toHaveCount(0);
+        await expect(inline).toContainText('Las medidas de este armazón aún no están disponibles.');
       }
+      await expect(dialog.locator('[data-mm], [data-units]')).toHaveCount(0);
       await expect(dialog.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo.');
       await expect(dialog.getByRole('tab')).toHaveCount(0);
     }
@@ -107,6 +102,7 @@ for (const shell of ['standard', 'eyewear']) {
     await page.setViewportSize({ width: 390, height: 600 });
     const dialog = await openGuide(page, shell, 'long');
     await expect(dialog).not.toContainText('Contenido sintético extenso');
+    await expect(page.locator('[data-inline-measurements]')).not.toContainText('Contenido sintético extenso');
     const documentTop = await page.evaluate(() => window.scrollY);
     await expect.poll(() => dialog.evaluate(el => el.scrollHeight > el.clientHeight)).toBe(true);
     await dialog.evaluate(el => { el.scrollTop = el.scrollHeight; });
@@ -160,7 +156,7 @@ for (const shell of ['standard', 'eyewear']) {
     expect(clippedLabels).toEqual([]);
   });
 
-  test(`${shell}: 320px reflow, 200% text, long product name and reduced motion`, async ({ page }, testInfo) => {
+  test(`${shell}: 320px reference reflow, 200% text and ignored long product name`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width: 320, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     const dialog = await openGuide(page, shell, 'long-title');

@@ -73,9 +73,10 @@ Reutilizar los recursos compartidos, sin un SKU de ejemplo:
 ```liquid
 {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false %}
 {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
+{% render 'lemoon-measurement-definitions', class_name: 'lemoon-guide__definitions' %}
 ```
 
-`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` y `show_intro` (true salvo false explícito) y `compact` (false). Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cifras reales pertenecen exclusivamente al consumidor `lemoon-frame-dimensions`.
+`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` y `show_intro` (true salvo false explícito) y `compact` (false). Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cinco definiciones HTML se reutilizan con `lemoon-measurement-definitions` (class_name opcional). Las cifras reales pertenecen exclusivamente al consumidor inline `lemoon-frame-dimensions` de características PDP; el modal explica las magnitudes sin repetir valores del SKU.
 
 El paso ya explica dónde buscar el código, por eso pasa `show_intro: false` para omitir únicamente la instrucción repetida del componente; conserva ejemplo, nota educativa y definiciones. El ejemplo y sus filas usan dos columnas solo con ancho útil suficiente, no por un breakpoint de viewport que ignore el índice. El índice, las filas A–E y la ayuda blanca con borde superior se refinan solo en measurements.
 

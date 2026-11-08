@@ -644,7 +644,7 @@
         "step_2_title": "2. Mide el armazón en milímetros",
         "step_2_body_html": "<p>Trabaja sobre tus lentes reales y anota cada medida con su nombre. Mira el frente de forma recta y mantén la regla alineada con el tramo que vas a medir; evita tomar la lectura en diagonal.</p><p>En este esquema, el ancho total va de un extremo exterior del frente al otro. No es lo mismo que medir entre bisagras. Comprueba que las cifras que compares usen los mismos extremos y no calcules el ancho total sumando los dos cristales y el puente: los bordes del armazón también ocupan espacio.</p><p>Las letras A–E te ayudan a ubicar cada parte. Los dibujos no están a escala: usa la regla sobre tus lentes, no sobre la pantalla.</p>",
         "step_3_title": "3. Compara con la ficha del modelo",
-        "step_3_body_html": "<p>En la ficha del armazón que te interesa, abre «Guía de medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul><p>Dos armazones con números parecidos pueden sentirse distintos por la forma del puente, las patillas y el frente. Usa la comparación como punto de partida; no garantiza la misma comodidad.</p>",
+        "step_3_body_html": "<p>En la ficha del armazón que te interesa, busca «Características del producto» y abre la pestaña «Medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul><p>Dos armazones con números parecidos pueden sentirse distintos por la forma del puente, las patillas y el frente. Usa la comparación como punto de partida; no garantiza la misma comodidad.</p>",
         "help_title": "¿Te falta una medida?",
         "help_body_html": "<p>Si una inscripción no se lee, falta un dato en la ficha o no tienes unos lentes para comparar, consulta antes de elegir. Indica el modelo y la medida que necesitas aclarar.</p>"
       },
@@ -1496,6 +1496,8 @@
     "property_pd": "Distancia pupilar (mm)"
   },
   "lemoon_size_guide": {
+    "product_details_heading": "Características del producto",
+    "demo_dimensions_notice": "Medidas de prueba para revisar esta página. No corresponden a medidas físicas verificadas del producto.",
     "front_view": "Vista frontal",
     "side_view": "Vista lateral",
     "diagram_note": "Esquema de referencia, sin escala.",

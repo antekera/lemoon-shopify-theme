@@ -113,7 +113,7 @@ test('submits the chosen variant and recipe to Shopify and recovers from a rejec
   expect(bodies[1]).not.toContain('properties[OD Esfera]');
 });
 
-test('opens the current product size guide with continuous measurements and comparison', async ({ page }) => {
+test('opens a generic size reference while keeping current-product measurements in the PDP', async ({ page }) => {
   await page.goto('/tests/fixtures/size-guide.html?shell=eyewear');
   const opener = page.getByRole('button', { name: 'Guía de medidas', exact: true });
   await opener.click();
@@ -121,11 +121,11 @@ test('opens the current product size guide with continuous measurements and comp
   await expect(dialog).toHaveClass(/lemoon-size-drawer/);
   await expect.poll(() => dialog.evaluate(element => Math.round(element.getBoundingClientRect().right))).toBe(page.viewportSize().width);
   await expect(dialog.getByRole('tab')).toHaveCount(0);
-  await expect(dialog).toContainText('140 mm'); await expect(dialog).toContainText('145 mm');
-  await dialog.getByRole('combobox', { name: 'Unidad de medida', exact: true }).selectOption('in');
-  await expect(dialog).toContainText('5.51 in');
+  await expect(dialog.locator('[data-mm], [data-units], .lemoon-size-guide__specs')).toHaveCount(0);
+  await expect(page.locator('[data-inline-measurements] [data-mm="140"]')).toHaveText('140 mm');
+  await expect(page.locator('[data-inline-measurements] [data-mm="145"]')).toHaveText('145 mm');
   await expect(dialog.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo.');
-  await expect(dialog).toContainText('Acetato'); await expect(dialog).toContainText('Ovalado, corazón');
+  await expect(dialog).not.toContainText('Acetato'); await expect(dialog).not.toContainText('Ovalado, corazón');
   await dialog.getByRole('button', { name: 'Cerrar guía de medidas', exact: true }).click();
   await expect(dialog).toBeHidden(); await expect(opener).toBeFocused();
 });

@@ -6,8 +6,6 @@
   assign visual_title_key = guide_key | append: 'visual_title'
   assign visual_copy_key = guide_key | append: 'visual_copy'
   assign contact_url = routes.root_url | append: '/pages/contact' | replace: '//', '/'
-  assign measurement_keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
-  assign measurement_markers = 'A,B,C,D,E' | split: ','
   assign measurement_instance_id = section.id | append: '-page-measurements'
   assign comparison_instance_id = section.id | append: '-page-comparison'
   assign measurements_intro_text = section.settings.measurements_intro | strip_html | replace: '&nbsp;', '' | replace: ' ', '' | strip
@@ -179,13 +177,7 @@
                   {%- assign diagram_label = 'lemoon_size_guide.page_diagram_note' | t -%}
                   {% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
                 </div>
-                <dl class="lemoon-guide__definitions">
-                  {%- for key in measurement_keys -%}
-                    {%- assign label_key = 'lemoon_pdp.' | append: key -%}
-                    {%- assign definition_key = 'lemoon_size_guide.definitions.' | append: key -%}
-                    <div><dt><span aria-hidden="true">{{ measurement_markers[forloop.index0] }} · </span>{{ label_key | t }}</dt><dd>{{ definition_key | t }}</dd></div>
-                  {%- endfor -%}
-                </dl>
+                {% render 'lemoon-measurement-definitions', class_name: 'lemoon-guide__definitions' %}
               {%- endif -%}
             {%- else -%}
               <p>{{ step_body_key | t }}</p>
