@@ -27,53 +27,6 @@
     font-size: 1.6rem;
     line-height: 1.6;
   }
-  #shopify-section-{{ section.id }} .lemoon-not-found__search {
-    max-width: 52rem;
-    margin: 0;
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__label {
-    display: block;
-    margin-bottom: var(--lemoon-space-3);
-    font-size: 1.4rem;
-    font-weight: var(--lemoon-weight-medium);
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__search-row {
-    display: flex;
-    gap: var(--lemoon-space-3);
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__input {
-    flex: 1;
-    min-width: 0;
-    min-height: 4.8rem;
-    padding: var(--lemoon-space-3) var(--lemoon-space-5);
-    border: 1px solid var(--lemoon-border-warm);
-    border-radius: var(--lemoon-radius-search);
-    background: var(--lemoon-surface-page);
-    color: var(--lemoon-text-primary);
-    font: inherit;
-    font-size: 1.4rem;
-    text-align: left;
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__input::placeholder {
-    color: var(--lemoon-text-secondary);
-    opacity: 1;
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__submit {
-    min-height: 4.8rem;
-    padding: var(--lemoon-space-3) var(--lemoon-space-5);
-    border: 1px solid var(--lemoon-action-primary);
-    border-radius: var(--lemoon-radius-button);
-    background: var(--lemoon-action-primary);
-    color: var(--lemoon-text-inverse);
-    font-family: var(--lemoon-font-heading);
-    font-size: 1.4rem;
-    font-weight: var(--lemoon-weight-semibold);
-    cursor: pointer;
-  }
-  #shopify-section-{{ section.id }} .lemoon-not-found__submit:hover {
-    background: var(--lemoon-action-primary-hover);
-    border-color: var(--lemoon-action-primary-hover);
-  }
   #shopify-section-{{ section.id }} .lemoon-not-found__links {
     display: flex;
     flex-wrap: wrap;
@@ -90,34 +43,45 @@
     text-underline-offset: .4rem;
   }
   #shopify-section-{{ section.id }} .lemoon-not-found__visual {
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: 34rem;
+    padding: var(--lemoon-space-6);
     border-radius: var(--lemoon-radius-modal);
     background: var(--lemoon-surface-warm);
     color: var(--lemoon-text-brand);
     font-family: var(--lemoon-font-heading);
-    font-size: clamp(10rem, 15vw, 20rem);
+    font-size: 8rem;
     font-weight: var(--lemoon-weight-light);
     line-height: 1;
-    letter-spacing: -.6rem;
+    letter-spacing: -.3rem;
   }
-  #shopify-section-{{ section.id }} .lemoon-not-found :is(a, input, button):focus-visible {
+  #shopify-section-{{ section.id }} .lemoon-not-found__illustration {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
+    margin-bottom: var(--lemoon-space-4);
+  }
+  #shopify-section-{{ section.id }} .lemoon-not-found__links a:focus-visible,
+  #shopify-section-{{ section.id }} .lemoon-not-found__links a.focused {
     outline: 2px solid var(--lemoon-border-strong);
-    outline-offset: 4px;
+    outline-offset: 2px;
+    box-shadow: none;
   }
   @media screen and (max-width: 749px) {
     #shopify-section-{{ section.id }} .lemoon-not-found__layout {
       grid-template-columns: minmax(0, 1fr);
       gap: var(--lemoon-space-8);
     }
-    #shopify-section-{{ section.id }} .lemoon-not-found__search-row {
-      flex-direction: column;
-    }
     #shopify-section-{{ section.id }} .lemoon-not-found__visual {
-      min-height: 16rem;
-      font-size: 10rem;
-      letter-spacing: -.3rem;
+      min-height: 0;
+      font-size: 6.4rem;
+    }
+    #shopify-section-{{ section.id }} .lemoon-not-found__illustration {
+      max-width: 28rem;
     }
   }
 {%- endstyle -%}
@@ -125,30 +89,26 @@
 <div class="lemoon-not-found page-width">
   <div class="lemoon-not-found__layout">
     <div class="lemoon-not-found__copy">
-      <h1 class="lemoon-not-found__title">{{ 'templates.404.title' | t }}</h1>
+      <h1 id="NotFoundTitle-{{ section.id }}" class="lemoon-not-found__title">{{ 'templates.404.title' | t }}</h1>
       <p class="lemoon-not-found__description">{{ 'templates.404.description' | t }}</p>
-      <form class="lemoon-not-found__search" action="{{ routes.search_url }}" method="get" role="search">
-        <label class="lemoon-not-found__label" for="NotFoundSearch-{{ section.id }}">{{ 'templates.404.search_label' | t }}</label>
-        <div class="lemoon-not-found__search-row">
-          <input
-            class="lemoon-not-found__input"
-            id="NotFoundSearch-{{ section.id }}"
-            type="search"
-            name="q"
-            placeholder="{{ 'templates.404.search_placeholder' | t | escape }}"
-            required
-          >
-          <input type="hidden" name="type" value="product">
-          <input type="hidden" name="options[prefix]" value="last">
-          <button class="lemoon-not-found__submit" type="submit">{{ 'templates.404.search_button' | t }}</button>
-        </div>
-      </form>
-      <div class="lemoon-not-found__links">
+      <nav class="lemoon-not-found__links" aria-labelledby="NotFoundTitle-{{ section.id }}">
         <a href="{{ routes.root_url }}">{{ 'templates.404.home' | t }}</a>
         <a href="{{ routes.all_products_collection_url }}">{{ 'templates.404.catalogue' | t }}</a>
-      </div>
+        <a href="{{ routes.root_url | append: '/pages/preguntas-frecuentes' | replace: '//', '/' }}">{{ 'templates.404.faq' | t }}</a>
+        <a href="{{ routes.root_url | append: '/pages/contact' | replace: '//', '/' }}">{{ 'templates.404.contact' | t }}</a>
+      </nav>
     </div>
-    <div class="lemoon-not-found__visual" aria-hidden="true">404</div>
+    <div class="lemoon-not-found__visual" aria-hidden="true">
+      <img
+        class="lemoon-not-found__illustration"
+        src="{{ 'lemoon-404-frame-lemon-v2.webp' | asset_url }}"
+        width="960"
+        height="640"
+        alt=""
+        loading="lazy"
+      >
+      <span>404</span>
+    </div>
   </div>
 </div>
 

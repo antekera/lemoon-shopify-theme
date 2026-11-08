@@ -130,7 +130,7 @@ def validate_group(group: str) -> None:
     if group in {"shopify", "all"}:
         dev = (ROOT / ".agents/skills/push-theme-dev/SKILL.md").read_text(encoding="utf-8")
         prod = (ROOT / ".agents/skills/push-theme-production/SKILL.md").read_text(encoding="utf-8").lower()
-        require("155925381288" in dev, "dev publishing skill must target theme 155925381288")
+        require("189557964968" in dev, "dev publishing skill must target theme 189557964968")
         require("shopify theme list" in prod and "confirm" in prod, "production publishing must inspect the live theme and require confirmation")
         confirmation_index = prod.find("only after confirmation")
         allow_live_index = prod.find("--allow-live")
@@ -192,7 +192,7 @@ def validate_group(group: str) -> None:
     if group in {"tokens", "all"}:
         token_skill = (ROOT / ".agents/skills/audit-design-tokens/SKILL.md").read_text(encoding="utf-8")
         require("--font-heading-family" in token_skill and "'Urbanist', sans-serif" in token_skill, "token skill must audit the documented heading font")
-        require("--font-body-family" in token_skill and "'Hanken Grotesk', sans-serif" in token_skill, "token skill must audit the documented body font")
+        require("--font-body-family" in token_skill and "'Instrument Sans', sans-serif" in token_skill, "token skill must audit the documented body font")
         require_agent_scope("design-token-auditor", (
             "canonical design.md", "assets/base.css", "config/settings_schema.json",
             "heading/body families and weights", "documented values",

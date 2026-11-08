@@ -1,247 +1,182 @@
-{%- liquid
-  assign catalogue = section.settings.catalogue
-  assign catalogue_url = catalogue.url | default: routes.all_products_collection_url
-  assign price_parameter = ''
-  for filter in catalogue.filters
-    if filter.type == 'price_range'
-      assign price_parameter = filter.max_value.param_name
-    endif
-  endfor
-  assign budget_low = section.settings.budget_low | at_least: 0 | times: 100
-  assign budget_high = section.settings.budget_high | at_least: 0 | times: 100
--%}
-<script type="module" src="{{ 'lemoon-style-quiz.js' | asset_url }}"></script>
+{%- assign catalogue_url = routes.all_products_collection_url -%}
+{%- capture json_less_than -%}\u003c{%- endcapture -%}
+{{ 'lemoon-style-quiz.css' | asset_url | stylesheet_tag }}
 {%- style -%}
-  #shopify-section-{{ section.id }} .lemoon-quiz { padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px; color: var(--lemoon-text-brand); }
-  #shopify-section-{{ section.id }} .lemoon-quiz [hidden] { display: none !important; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__header { max-width: 70rem; margin-bottom: var(--lemoon-space-10); }
-  #shopify-section-{{ section.id }} .lemoon-quiz h1 { margin: 0; font: var(--lemoon-weight-light) 4.6rem/1.15 var(--lemoon-font-heading); letter-spacing: var(--lemoon-type-h1-tracking); }
-  #shopify-section-{{ section.id }} .lemoon-quiz p { line-height: 1.6; color: var(--lemoon-text-secondary); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__intro { font-size: var(--lemoon-fs-18); margin: var(--lemoon-space-5) 0 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__flow { max-width: 78rem; }
-  #shopify-section-{{ section.id }} .lemoon-quiz progress { display: block; width: 100%; height: .4rem; accent-color: var(--lemoon-action-accent); margin: var(--lemoon-space-4) 0 var(--lemoon-space-8); border: 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz progress::-webkit-progress-bar { background: var(--lemoon-surface-warm); }
-  #shopify-section-{{ section.id }} .lemoon-quiz progress::-webkit-progress-value { background: var(--lemoon-action-accent); }
-  #shopify-section-{{ section.id }} .lemoon-quiz fieldset { padding: 0; border: 0; margin: 0; min-width: 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz legend, #shopify-section-{{ section.id }} .lemoon-quiz h2 { font: var(--lemoon-weight-medium) 2.8rem/1.25 var(--lemoon-font-heading); margin: 0; padding: 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--lemoon-space-4); margin: var(--lemoon-space-6) 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__option { display: flex; align-items: center; gap: var(--lemoon-space-4); min-height: 7.2rem; padding: var(--lemoon-space-5); background: var(--lemoon-surface-warm); border: 1px solid var(--lemoon-border-warm); border-radius: var(--lemoon-radius-modal); cursor: pointer; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__option:has(input:checked) { border-color: var(--lemoon-border-strong); box-shadow: inset 0 -.3rem 0 var(--lemoon-action-accent); }
-  #shopify-section-{{ section.id }} .lemoon-quiz input { margin: 0; width: 1.8rem; height: 1.8rem; flex: 0 0 auto; accent-color: var(--lemoon-action-primary); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__actions { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-4); margin-top: var(--lemoon-space-6); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__button { display: inline-flex; align-items: center; justify-content: center; min-height: 4.8rem; padding: var(--lemoon-space-3) var(--lemoon-space-6); border: 1px solid var(--lemoon-action-primary); border-radius: var(--lemoon-radius-button); background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); text-decoration: none; font: var(--lemoon-weight-semibold) 1.4rem/1.4 var(--lemoon-font-heading); cursor: pointer; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__button--secondary { background: var(--lemoon-surface-page); color: var(--lemoon-text-brand); }
-  #shopify-section-{{ section.id }} .lemoon-quiz :is(a,button,input,legend,h2):focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__error { color: var(--lemoon-text-error); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__products { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--lemoon-space-6); margin: var(--lemoon-space-8) 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__product { min-width: 0; }
-  #shopify-section-{{ section.id }} .lemoon-quiz__product img { width: 100%; height: auto; aspect-ratio: 4/3; object-fit: contain; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__product h3 { font: var(--lemoon-weight-medium) 2.2rem/1.3 var(--lemoon-font-heading); margin: var(--lemoon-space-4) 0 var(--lemoon-space-2); }
-  #shopify-section-{{ section.id }} .lemoon-quiz__product a { display: inline-flex; align-items: center; min-height: 4.4rem; color: var(--lemoon-text-brand); text-underline-offset: .4rem; }
-  @media(max-width:749px) {
-    #shopify-section-{{ section.id }} .lemoon-quiz__options { grid-template-columns: minmax(0,1fr); }
+  #shopify-section-{{ section.id }} .lemoon-quiz { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  @media (max-width: 749px) {
     #shopify-section-{{ section.id }} .lemoon-quiz { padding-top: {{ section.settings.padding_top | times: 0.625 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.625 | round }}px; }
-    #shopify-section-{{ section.id }} .lemoon-quiz h1 { font-size: 3.4rem; }
-    #shopify-section-{{ section.id }} .lemoon-quiz legend, #shopify-section-{{ section.id }} .lemoon-quiz h2 { font-size: 2.4rem; }
-    #shopify-section-{{ section.id }} .lemoon-quiz__option { padding: var(--lemoon-space-4); font-size: 1.4rem; }
-    #shopify-section-{{ section.id }} .lemoon-quiz__products { grid-template-columns: minmax(0,1fr); }
   }
 {%- endstyle -%}
-<div class="page-width"><div class="lemoon-quiz" data-style-quiz data-catalogue="{{ catalogue_url | escape }}" data-price-parameter="{{ price_parameter | escape }}" data-next-label="{{ 'sections.lemoon_style_quiz.next' | t | escape }}" data-result-label="{{ 'sections.lemoon_style_quiz.results_cta' | t | escape }}" data-step-label="{{ 'sections.lemoon_style_quiz.step' | t | escape }}" data-count-label="{{ 'sections.lemoon_style_quiz.count' | t | escape }}" data-finished-label="{{ 'sections.lemoon_style_quiz.finished' | t | escape }}" data-budget-label="{{ 'sections.lemoon_style_quiz.budget_catalogue' | t | escape }}" data-catalogue-label="{{ 'sections.lemoon_style_quiz.catalogue' | t | escape }}">
-<header class="lemoon-quiz__header"><h1>{{ 'sections.lemoon_style_quiz.title' | t }}</h1><p class="lemoon-quiz__intro">{{ 'sections.lemoon_style_quiz.intro' | t }}</p></header>
-<p data-quiz-status role="status" aria-live="polite"></p>
-<form class="lemoon-quiz__flow" data-quiz-form hidden novalidate>
-<progress data-quiz-progress max="4" value="1" aria-label="{{ 'sections.lemoon_style_quiz.title' | t | escape }}"></progress>
-<fieldset data-step="face"><legend tabindex="-1">{{ 'sections.lemoon_style_quiz.face_title' | t }}</legend><p>{{ 'sections.lemoon_style_quiz.face_hint' | t }}</p><div class="lemoon-quiz__options">
-{%- assign options = 'round,square,oval,heart,unsure' | split: ',' -%}{%- for option in options -%}{%- assign option_key = 'sections.lemoon_style_quiz.face.' | append: option -%}
-<label class="lemoon-quiz__option"><input type="radio" name="face" value="{{ option | escape }}"><span>{{ option_key | t }}</span></label>{%- endfor -%}
-</div></fieldset>
-<fieldset data-step="style"><legend tabindex="-1">{{ 'sections.lemoon_style_quiz.style_title' | t }}</legend><p>{{ 'sections.lemoon_style_quiz.style_hint' | t }}</p><div class="lemoon-quiz__options">
-{%- assign options = 'minimal,colorpop,retro,easy' | split: ',' -%}{%- for option in options -%}{%- assign option_key = 'sections.lemoon_style_quiz.style.' | append: option -%}
-<label class="lemoon-quiz__option"><input type="radio" name="style" value="{{ option | escape }}"><span>{{ option_key | t }}</span></label>{%- endfor -%}
-</div></fieldset>
-<fieldset data-step="use"><legend tabindex="-1">{{ 'sections.lemoon_style_quiz.use_title' | t }}</legend><p>{{ 'sections.lemoon_style_quiz.use_hint' | t }}</p><div class="lemoon-quiz__options">
-{%- assign options = 'work,everyday,outdoors' | split: ',' -%}{%- for option in options -%}{%- assign option_key = 'sections.lemoon_style_quiz.use.' | append: option -%}
-<label class="lemoon-quiz__option"><input type="radio" name="use" value="{{ option | escape }}"><span>{{ option_key | t }}</span></label>{%- endfor -%}
-</div></fieldset>
-<fieldset data-step="budget"><legend tabindex="-1">{{ 'sections.lemoon_style_quiz.budget_title' | t }}</legend><p>{{ 'sections.lemoon_style_quiz.budget_hint' | t }}</p><div class="lemoon-quiz__options">
-{%- if shop.currency == 'CLP' and cart.currency.iso_code == shop.currency -%}
-<label class="lemoon-quiz__option"><input type="radio" name="budget" value="{{ budget_low }}"><span>{{ 'sections.lemoon_style_quiz.budget_prefix' | t }} {{ budget_low | money_with_currency }}</span></label>
-{%- unless budget_high == budget_low -%}<label class="lemoon-quiz__option"><input type="radio" name="budget" value="{{ budget_high }}"><span>{{ 'sections.lemoon_style_quiz.budget_prefix' | t }} {{ budget_high | money_with_currency }}</span></label>{%- endunless -%}
-{%- endif -%}
-<label class="lemoon-quiz__option"><input type="radio" name="budget" value="none"><span>{{ 'sections.lemoon_style_quiz.budget.none' | t }}</span></label></div></fieldset>
-<p class="lemoon-quiz__error" data-quiz-error id="QuizError-{{ section.id }}" role="alert" hidden>{{ 'sections.lemoon_style_quiz.error' | t }}</p>
-<div class="lemoon-quiz__actions"><button class="lemoon-quiz__button lemoon-quiz__button--secondary" type="button" data-quiz-back hidden>{{ 'sections.lemoon_style_quiz.back' | t }}</button><button class="lemoon-quiz__button" type="submit" data-quiz-next>{{ 'sections.lemoon_style_quiz.next' | t }}</button></div>
-</form>
-<div data-quiz-results><h2 tabindex="-1">{{ 'sections.lemoon_style_quiz.result_title' | t }}</h2><p>{{ 'sections.lemoon_style_quiz.result_intro' | t }}</p><noscript><p>{{ 'sections.lemoon_style_quiz.no_js' | t }}</p></noscript><p data-quiz-result-count></p>
-<div class="lemoon-quiz__products">
-{%- assign seen_products = '|' -%}
-{%- assign rendered_count = 0 -%}
-{%- for block in section.blocks -%}
-{%- liquid
-  assign product = block.settings.product
-  assign candidate_variant = nil
-  for variant in product.variants
-    if variant.available
-      if candidate_variant == nil or variant.price < candidate_variant.price
-        assign candidate_variant = variant
-      endif
-    endif
-  endfor
-  assign product_marker = product.id | prepend: '|' | append: '|'
--%}
-{%- if product != blank and candidate_variant != nil -%}{%- unless seen_products contains product_marker -%}
-{%- assign seen_products = seen_products | append: product.id | append: '|' -%}
-{%- assign rendered_count = rendered_count | plus: 1 -%}
-<article class="lemoon-quiz__product" data-quiz-product data-id="{{ product.id }}" data-price="{{ candidate_variant.price }}" data-face="{{ block.settings.face | escape }}" data-style="{{ block.settings.style | escape }}" data-use="{{ block.settings.use | escape }}" {{ block.shopify_attributes }}>
-{%- if product.featured_image != blank -%}{{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '300, 600, 900', sizes: '(min-width: 750px) 30vw, 90vw' }}{%- endif -%}
-<h3>{{ product.title | escape }}</h3><p>{{ candidate_variant.price | money_with_currency }}</p><a href="{{ candidate_variant.url | escape }}">{{ 'sections.lemoon_style_quiz.product_cta' | t }} <span class="visually-hidden">{{ product.title | escape }}</span></a></article>
-{%- endunless -%}{%- endif -%}{%- endfor -%}</div>
-<p data-quiz-empty{% unless rendered_count == 0 %} hidden{% endunless %}>{{ 'sections.lemoon_style_quiz.empty' | t }}</p>
-<div class="lemoon-quiz__actions"><a class="lemoon-quiz__button" href="{{ catalogue_url | escape }}" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz.catalogue' | t }}</a><button class="lemoon-quiz__button lemoon-quiz__button--secondary" type="button" data-quiz-restart hidden>{{ 'sections.lemoon_style_quiz.restart' | t }}</button></div></div>
-</div></div>
-{% schema %}
-{
-  "name": "t:sections.lemoon_style_quiz.name",
-  "tag": "section",
-  "class": "section",
-  "disabled_on": {
-    "groups": [
-      "header",
-      "footer"
-    ]
-  },
-  "settings": [
-    {
-      "type": "collection",
-      "id": "catalogue",
-      "label": "t:sections.lemoon_style_quiz.collection",
-      "info": "t:sections.lemoon_style_quiz.collection_info"
-    },
-    {
-      "type": "number",
-      "id": "budget_low",
-      "default": 20000,
-      "label": "t:sections.lemoon_style_quiz.budget_low"
-    },
-    {
-      "type": "number",
-      "id": "budget_high",
-      "default": 40000,
-      "label": "t:sections.lemoon_style_quiz.budget_high"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 64,
-      "label": "t:sections.all.padding.padding_top"
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "default": 64,
-      "label": "t:sections.all.padding.padding_bottom"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "frame",
-      "name": "t:sections.lemoon_style_quiz.product",
-      "settings": [
+<div class="page-width">
+  <div class="lemoon-quiz" data-style-quiz
+    data-next-label="{{ 'sections.lemoon_style_quiz_v2.next' | t | escape }}"
+    data-result-label="{{ 'sections.lemoon_style_quiz_v2.results_cta' | t | escape }}"
+    data-step-label="{{ 'sections.lemoon_style_quiz_v2.step_status' | t | escape }}"
+    data-error-label="{{ 'sections.lemoon_style_quiz_v2.loading_error' | t | escape }}">
+    <script>
+      document.currentScript.parentElement.classList.add('lemoon-quiz--enhancing');
+    </script>
+    <header class="lemoon-quiz__intro" data-quiz-intro>
+      <div class="lemoon-quiz__invitation">
+        <p class="lemoon-quiz__eyebrow">{{ 'sections.lemoon_style_quiz_v2.eyebrow' | t }}</p>
+        <h1>{{ 'sections.lemoon_style_quiz_v2.title' | t }}</h1>
+        <p class="lemoon-quiz__lead">{{ 'sections.lemoon_style_quiz_v2.intro' | t }}</p>
+        <button type="button" class="lemoon-quiz__button" data-quiz-start disabled>{{ 'sections.lemoon_style_quiz_v2.start' | t }}{% render 'lemoon-icon', icon: 'arrow-right', size: 20 %}</button>
+        <a class="lemoon-quiz__text-link" href="{{ catalogue_url | escape }}" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
+      </div>
+      <div class="lemoon-quiz__editorial">
+        {%- if section.settings.editorial_image != blank -%}
+          {{ section.settings.editorial_image | image_url: width: 1400 | image_tag: widths: '350, 650, 900, 1400', sizes: '(min-width: 990px) 46vw, 90vw', loading: 'eager' }}
+        {%- else -%}
+          <img
+            src="{{ 'lemoon-quiz-hero-editorial-v1-1400.jpg' | asset_url }}"
+            srcset="{{ 'lemoon-quiz-hero-editorial-v1-700.jpg' | asset_url }} 700w, {{ 'lemoon-quiz-hero-editorial-v1-1400.jpg' | asset_url }} 1400w"
+            sizes="(min-width: 990px) 46vw, 90vw"
+            width="1400"
+            height="933"
+            alt=""
+            loading="eager"
+            decoding="async"
+          >
+        {%- endif -%}
+      </div>
+    </header>
+    <p class="lemoon-quiz__status" data-quiz-status role="status" aria-live="polite" aria-atomic="true"></p>
+    <form class="lemoon-quiz__flow" data-quiz-form hidden>
+      {%- assign stage_names = 'category,shape,color,details,use,presence' | split: ',' -%}
+      <div class="lemoon-quiz__navigation">
+        <div class="lemoon-quiz__progress" data-quiz-progress role="progressbar" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" aria-label="{{ 'sections.lemoon_style_quiz_v2.steps' | t | escape }}">
+          {%- for stage in stage_names -%}
+            <span class="lemoon-quiz__segment" data-quiz-segment="{{ stage }}" data-complete="false" aria-hidden="true"></span>
+          {%- endfor -%}
+        </div>
+      </div>
+      {%- for stage in stage_names -%}
+        {%- assign stage_key = 'sections.lemoon_style_quiz_v2.stages.' | append: stage -%}
+        {%- assign axis_key = 'sections.lemoon_style_quiz_v2.axes.' | append: stage -%}
+        <fieldset class="lemoon-quiz__stage" data-step="{{ stage }}"{% unless forloop.first %} hidden{% endunless %}>
+          <legend class="visually-hidden">{{ stage_key | append: '.title' | t }}</legend>
+          <div class="lemoon-quiz__question">
+            <p class="lemoon-quiz__eyebrow">{%- if stage == 'details' -%}{{ 'sections.lemoon_style_quiz_v2.details_label' | t }}{%- else -%}{{ axis_key | t }}{%- endif -%}</p>
+            <h2 tabindex="-1" data-quiz-question>{{ stage_key | append: '.title' | t }}</h2>
+            <p>{{ stage_key | append: '.hint' | t }}</p>
+          </div>
+          <div class="lemoon-quiz__choices">
+            {%- case stage -%}
+              {%- when 'category' -%}
+                {% render 'lemoon-quiz-options', group: 'category', options: 'optical,sun', section_id: section.id %}
+              {%- when 'shape' -%}
+                {% render 'lemoon-quiz-options', group: 'shape', options: 'round,rectangular,cat-eye,aviator,geometric,square,oval,panto', section_id: section.id %}
+              {%- when 'color' -%}
+                {% render 'lemoon-quiz-options', group: 'color', options: 'bold,neutral,black,tortoise,two_tone,transparent,silver', section_id: section.id %}
+              {%- when 'details' -%}
+                <div class="lemoon-quiz__detail-group">
+                  <h3>{{ 'sections.lemoon_style_quiz_v2.tabs.finishes' | t }}</h3>
+                  {% render 'lemoon-quiz-options', group: 'finish', options: 'matte,glossy', section_id: section.id %}
+                </div>
+                <div class="lemoon-quiz__detail-group">
+                  <h3>{{ 'sections.lemoon_style_quiz_v2.tabs.materials' | t }}</h3>
+                  {% render 'lemoon-quiz-options', group: 'material', options: 'acetate,metal,titanium,tr90,wood,mixed', section_id: section.id %}
+                </div>
+                <p class="lemoon-quiz__hint">{{ 'sections.lemoon_style_quiz_v2.details_note' | t }}</p>
+              {%- when 'use' -%}
+                {% render 'lemoon-quiz-options', group: 'use', options: 'work,everyday,going_out,outdoors', section_id: section.id %}
+                <p class="lemoon-quiz__hint" data-quiz-use-note data-optical-label="{{ 'sections.lemoon_style_quiz_v2.use_note' | t | escape }}" data-sun-label="{{ 'sections.lemoon_style_quiz_v2.sun_use_note' | t | escape }}">{{ 'sections.lemoon_style_quiz_v2.use_note' | t }}</p>
+              {%- when 'presence' -%}
+                {% render 'lemoon-quiz-options', group: 'presence', options: 'compact,medium,oversize', section_id: section.id %}
+                <details class="lemoon-quiz__measures" data-quiz-measures>
+                  <summary><span>{{ 'sections.lemoon_style_quiz_v2.measures.title' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-down', size: 20 %}</summary>
+                  <p>{{ 'sections.lemoon_style_quiz_v2.measures.intro' | t }}</p>
+                  <p class="lemoon-quiz__measure-numbers">{{ 'sections.lemoon_style_quiz_v2.measures.numbers' | t }}</p>
+                  <p>{{ 'sections.lemoon_style_quiz_v2.measures.labels' | t }}</p>
+                  <div class="lemoon-quiz__measure-fields">
+                    {%- assign measure_names = 'lens_width,bridge,temple' | split: ',' -%}
+                    {%- assign measure_examples = '50,18,140' | split: ',' -%}
+                    {%- for measure in measure_names -%}
+                      {%- assign measure_label = 'sections.lemoon_style_quiz_v2.measures.' | append: measure -%}
+                      <div>
+                        <label for="QuizMeasure-{{ section.id }}-{{ measure }}">{{ measure_label | t }}</label>
+                        <input id="QuizMeasure-{{ section.id }}-{{ measure }}" type="text" inputmode="numeric" maxlength="3" autocomplete="off" placeholder="{{ measure_examples[forloop.index0] }}" data-quiz-measure="{{ measure }}" aria-describedby="QuizMeasureNote-{{ section.id }} QuizMeasureStatus-{{ section.id }}">
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                  <p id="QuizMeasureStatus-{{ section.id }}" class="lemoon-quiz__measure-feedback" role="status" aria-live="polite" aria-atomic="true" data-quiz-measure-status
+                    data-invalid-label="{{ 'sections.lemoon_style_quiz_v2.measures.invalid' | t | escape }}"
+                    data-suggestion-label="{{ 'sections.lemoon_style_quiz_v2.measures.suggestion' | t | escape }}"
+                    data-manual-label="{{ 'sections.lemoon_style_quiz_v2.measures.manual' | t | escape }}"></p>
+                  <p id="QuizMeasureNote-{{ section.id }}">{{ 'sections.lemoon_style_quiz_v2.measures.note' | t }}</p>
+                </details>
+                <p class="lemoon-quiz__hint">{{ 'sections.lemoon_style_quiz_v2.presence_note' | t }}</p>
+            {%- endcase -%}
+          </div>
+        </fieldset>
+      {%- endfor -%}
+      <div class="lemoon-quiz__actions">
+        <button type="button" class="lemoon-quiz__text-link" data-quiz-back>{% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}{{ 'sections.lemoon_style_quiz_v2.back' | t }}</button>
+        <button type="submit" class="lemoon-quiz__button" data-quiz-next>{{ 'sections.lemoon_style_quiz_v2.next' | t }}</button>
+      </div>
+    </form>
+    <div class="lemoon-quiz__fallback" data-quiz-fallback>
+      <noscript><p>{{ 'sections.lemoon_style_quiz_v2.no_js' | t }}</p></noscript>
+      <a href="{{ catalogue_url | escape }}" class="lemoon-quiz__text-link" data-quiz-catalogue>{{ 'sections.lemoon_style_quiz_v2.catalogue' | t }}</a>
+    </div>
+    {%- paginate metaobjects.lemoon_style_trait.values by 250 -%}
+      <script type="application/json" data-quiz-filter-config>
         {
-          "type": "product",
-          "id": "product",
-          "label": "t:sections.lemoon_style_quiz.product",
-          "info": "t:sections.lemoon_style_quiz.product_info"
-        },
-        {
-          "type": "select",
-          "id": "face",
-          "label": "t:sections.lemoon_style_quiz.face",
-          "default": "round",
-          "options": [
-            {
-              "value": "round",
-              "label": "t:sections.lemoon_style_quiz.face_options.round"
-            },
-            {
-              "value": "square",
-              "label": "t:sections.lemoon_style_quiz.face_options.square"
-            },
-            {
-              "value": "oval",
-              "label": "t:sections.lemoon_style_quiz.face_options.oval"
-            },
-            {
-              "value": "heart",
-              "label": "t:sections.lemoon_style_quiz.face_options.heart"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "style",
-          "label": "t:sections.lemoon_style_quiz.style",
-          "default": "minimal",
-          "options": [
-            {
-              "value": "minimal",
-              "label": "t:sections.lemoon_style_quiz.style_options.minimal"
-            },
-            {
-              "value": "colorpop",
-              "label": "t:sections.lemoon_style_quiz.style_options.colorpop"
-            },
-            {
-              "value": "retro",
-              "label": "t:sections.lemoon_style_quiz.style_options.retro"
-            },
-            {
-              "value": "easy",
-              "label": "t:sections.lemoon_style_quiz.style_options.easy"
-            }
-          ]
-        },
-        {
-          "type": "select",
-          "id": "use",
-          "label": "t:sections.lemoon_style_quiz.use",
-          "default": "work",
-          "options": [
-            {
-              "value": "work",
-              "label": "t:sections.lemoon_style_quiz.use_options.work"
-            },
-            {
-              "value": "everyday",
-              "label": "t:sections.lemoon_style_quiz.use_options.everyday"
-            },
-            {
-              "value": "outdoors",
-              "label": "t:sections.lemoon_style_quiz.use_options.outdoors"
-            }
+          "collectionUrl": {{ catalogue_url | json }},
+          "categories": {
+            {%- assign category_codes = 'optical,sun' | split: ',' -%}
+            {%- for category_code in category_codes -%}
+              {{ category_code | json }}: [
+                {%- assign category_separator = '' -%}
+                {%- for product_type in shop.types -%}
+                  {%- liquid
+                    assign normalized_type = product_type | strip | downcase | replace: 'ó', 'o'
+                    assign recognized_category = ''
+                    case normalized_type
+                      when 'optico', 'opticos', 'optical'
+                        assign recognized_category = 'optical'
+                      when 'solar', 'solares', 'lentes de sol', 'sunglasses', 'muestra solar'
+                        assign recognized_category = 'sun'
+                    endcase
+                  -%}
+                  {%- if recognized_category == category_code -%}
+                    {{ category_separator }}{{ product_type | json | replace: '<', json_less_than }}
+                    {%- assign category_separator = ',' -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              ]{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          },
+          "availableFilters": [
+            {%- for native_filter in collections['all'].filters -%}
+              {{ native_filter.param_name | json }}{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ],
+          "dictionaryComplete": {% if paginate.pages > 1 %}false{% else %}true{% endif %},
+          "traits": [
+            {%- for trait in metaobjects.lemoon_style_trait.values -%}
+              { "id": {{ trait.system.id | prepend: 'gid://shopify/Metaobject/' | json }}, "group": {{ trait.group.value | json | replace: '<', json_less_than }}, "code": {{ trait.code.value | json | replace: '<', json_less_than }} }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
           ]
         }
-      ]
-    }
+      </script>
+    {%- endpaginate -%}
+    <script type="module" src="{{ 'lemoon-style-quiz.js' | asset_url }}" onerror="this.parentElement.classList.remove('lemoon-quiz--enhancing')"></script>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_style_quiz_v2.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "image_picker", "id": "editorial_image", "label": "t:sections.lemoon_style_quiz_v2.image_label" },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64, "label": "t:sections.all.padding.padding_top" },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64, "label": "t:sections.all.padding.padding_bottom" }
   ],
-  "max_blocks": 20,
-  "presets": [
-    {
-      "name": "t:sections.lemoon_style_quiz.name"
-    }
-  ]
+  "presets": [{ "name": "t:sections.lemoon_style_quiz_v2.name" }]
 }
 {% endschema %}

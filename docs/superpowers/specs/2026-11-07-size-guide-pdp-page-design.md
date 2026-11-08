@@ -105,7 +105,7 @@ Si esa confirmación no llega, puede completarse el desarrollo educativo con fix
 
 ## 6. Tipografía, color, espaciado y responsive
 
-Reutilizar tokens semánticos de `DESIGN.md`: Urbanist en títulos/acciones, Hanken Grotesk en lectura/labels, `--lemoon-text-brand`, `--lemoon-text-primary/secondary`, `--lemoon-surface-page/warm`, `--lemoon-border-default/strong`. Un panel cálido agrupa las medidas; la ayuda es lectura sobre blanco. No nuevos aliases ni colores.
+La integración de `main` en `5bcb463b` conserva Instrument Sans, adoptada en PR65 después de la propuesta inicial con Hanken. Reutilizar tokens semánticos de `DESIGN.md`: Urbanist en títulos/acciones, Instrument Sans en lectura/labels, `--lemoon-text-brand`, `--lemoon-text-primary/secondary`, `--lemoon-surface-page/warm`, `--lemoon-border-default/strong`. Un panel cálido agrupa las medidas; la ayuda es lectura sobre blanco. No nuevos aliases ni colores.
 
 - Drawer: máximo local 480px, altura máxima 100dvh y scroll interno existentes. Padding lateral actual 32px desde 750 y 24px bajo 750; separar bloques con `--lemoon-space-8`, filas con `--lemoon-space-4`. Título de diálogo conserva 24px; H3 usa el rol local aprobado o base H3 sin crear una tercera escala.
 - Diagramas frontal/lateral del drawer: siempre apilados, porque su ancho máximo es 480px incluso a viewport 1440. En la página independiente pueden usar dos columnas desde 750 solo cuando cada dibujo y cota resulten legibles; bajo 750 se apilan. No reducir texto para forzar columnas.

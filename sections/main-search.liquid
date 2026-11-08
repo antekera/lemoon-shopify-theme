@@ -140,6 +140,8 @@
   {% paginate collections.all.products by 24 %}
     {% render 'main-search-results',
       section: section,
+      search: search,
+      all_collection: collections.all,
       paginate: paginate,
       show_all_products: show_all_products,
       has_results: has_results,
@@ -150,6 +152,8 @@
   {% paginate search.results by 24 %}
     {% render 'main-search-results',
       section: section,
+      search: search,
+      all_collection: collections.all,
       paginate: paginate,
       show_all_products: show_all_products,
       has_results: has_results,

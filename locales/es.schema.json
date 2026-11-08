@@ -3688,6 +3688,12 @@
         }
       }
     },
+    "lemoon_style_quiz_v2": {
+      "name": "Descubre tu estilo",
+      "collection_label": "Colección para la guía de estilo",
+      "collection_info": "Usa una colección curada de hasta 50 productos con los atributos del quiz completos y habilitados. La guía evalúa hasta 20 variantes por producto.",
+      "image_label": "Imagen editorial de entrada"
+    },
     "lemoon_style_quiz": {
       "name": "Selección de armazones",
       "collection": "Colección del catálogo",

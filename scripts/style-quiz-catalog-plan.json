@@ -1,0 +1,305 @@
+{
+  "schemaVersion": 1,
+  "shop": "lemoon.cl",
+  "metaobjectType": "lemoon_style_trait",
+  "referenceField": "custom.style_traits",
+  "groups": [
+    "color",
+    "finish",
+    "pattern",
+    "transparency",
+    "use",
+    "presence"
+  ],
+  "provenance": "Synthetic style scenarios assigned only to the existing LM-DEMO seed variants. Existing shape and material are retained Shopify data, not physically verified.",
+  "entries": [
+    {
+      "group": "color",
+      "code": "black",
+      "label": "Negros",
+      "handle": "color-black"
+    },
+    {
+      "group": "color",
+      "code": "brown",
+      "label": "Cafés y miel",
+      "handle": "color-brown"
+    },
+    {
+      "group": "color",
+      "code": "light",
+      "label": "Tonos claros",
+      "handle": "color-light"
+    },
+    {
+      "group": "color",
+      "code": "bold",
+      "label": "Colores protagonistas",
+      "handle": "color-bold"
+    },
+    {
+      "group": "finish",
+      "code": "matte",
+      "label": "Mate",
+      "handle": "finish-matte"
+    },
+    {
+      "group": "finish",
+      "code": "glossy",
+      "label": "Brillante",
+      "handle": "finish-glossy"
+    },
+    {
+      "group": "pattern",
+      "code": "plain",
+      "label": "Legado — Liso",
+      "handle": "pattern-plain"
+    },
+    {
+      "group": "pattern",
+      "code": "tortoise",
+      "label": "Carey",
+      "handle": "pattern-tortoise"
+    },
+    {
+      "group": "transparency",
+      "code": "opaque",
+      "label": "Legado — Opaco",
+      "handle": "transparency-opaque"
+    },
+    {
+      "group": "transparency",
+      "code": "translucent",
+      "label": "Legado — Translúcido",
+      "handle": "transparency-translucent"
+    },
+    {
+      "group": "transparency",
+      "code": "transparent",
+      "label": "Transparentes",
+      "handle": "transparency-transparent"
+    },
+    {
+      "group": "use",
+      "code": "work",
+      "label": "Trabajo o estudio",
+      "handle": "use-work"
+    },
+    {
+      "group": "use",
+      "code": "everyday",
+      "label": "Todos los días",
+      "handle": "use-everyday"
+    },
+    {
+      "group": "use",
+      "code": "going_out",
+      "label": "Salir y cambiar de look",
+      "handle": "use-going-out"
+    },
+    {
+      "group": "use",
+      "code": "outdoors",
+      "label": "Paseos al aire libre",
+      "handle": "use-outdoors"
+    },
+    {
+      "group": "presence",
+      "code": "compact",
+      "label": "Compactos",
+      "handle": "presence-compact"
+    },
+    {
+      "group": "presence",
+      "code": "medium",
+      "label": "Intermedios",
+      "handle": "presence-medium"
+    },
+    {
+      "group": "presence",
+      "code": "oversize",
+      "label": "Oversize",
+      "handle": "presence-oversize"
+    },
+    {
+      "group": "color",
+      "code": "neutral",
+      "label": "Tonos neutros",
+      "handle": "color-neutral"
+    },
+    {
+      "group": "color",
+      "code": "two_tone",
+      "label": "Bicolor",
+      "handle": "color-two-tone"
+    },
+    {
+      "group": "color",
+      "code": "silver",
+      "label": "Plateados",
+      "handle": "color-silver"
+    }
+  ],
+  "assignments": [
+    {
+      "handle": "lemoon-artico",
+      "productId": "gid://shopify/Product/9581567869096",
+      "demo": true,
+      "traits": [
+        "finish-glossy",
+        "presence-medium",
+        "use-work",
+        "use-everyday",
+        "transparency-opaque"
+      ],
+      "variants": [
+        {
+          "variantId": "gid://shopify/ProductVariant/55898368049320",
+          "sku": "LM-DEMO-55898368049320",
+          "title": "Azul",
+          "traits": [
+            "color-bold",
+            "pattern-plain"
+          ]
+        },
+        {
+          "variantId": "gid://shopify/ProductVariant/67608895619240",
+          "sku": "LM-DEMO-67608895619240",
+          "title": "Carey",
+          "traits": [
+            "color-brown",
+            "pattern-tortoise"
+          ]
+        }
+      ]
+    },
+    {
+      "handle": "lemoon-estero",
+      "productId": "gid://shopify/Product/9581568032936",
+      "demo": true,
+      "traits": [
+        "finish-matte",
+        "presence-compact",
+        "use-work",
+        "use-everyday",
+        "transparency-opaque"
+      ],
+      "variants": [
+        {
+          "variantId": "gid://shopify/ProductVariant/55898368213160",
+          "sku": "LM-DEMO-55898368213160",
+          "title": "Azul",
+          "traits": [
+            "color-bold",
+            "pattern-plain"
+          ]
+        },
+        {
+          "variantId": "gid://shopify/ProductVariant/67608897683624",
+          "sku": "LM-DEMO-67608897683624",
+          "title": "Carey",
+          "traits": [
+            "color-brown",
+            "pattern-tortoise"
+          ]
+        }
+      ]
+    },
+    {
+      "handle": "lemoon-faro",
+      "productId": "gid://shopify/Product/9581568065704",
+      "demo": true,
+      "traits": [
+        "finish-matte",
+        "presence-compact",
+        "use-outdoors",
+        "use-everyday",
+        "transparency-opaque"
+      ],
+      "variants": [
+        {
+          "variantId": "gid://shopify/ProductVariant/55898368245928",
+          "sku": "LM-DEMO-55898368245928",
+          "title": "Azul",
+          "traits": [
+            "color-bold",
+            "pattern-plain"
+          ]
+        },
+        {
+          "variantId": "gid://shopify/ProductVariant/67608897650856",
+          "sku": "LM-DEMO-67608897650856",
+          "title": "Carey",
+          "traits": [
+            "color-brown",
+            "pattern-tortoise"
+          ]
+        }
+      ]
+    },
+    {
+      "handle": "lemoon-genova",
+      "productId": "gid://shopify/Product/9581568131240",
+      "demo": true,
+      "traits": [
+        "finish-glossy",
+        "presence-oversize",
+        "use-work",
+        "use-everyday",
+        "transparency-translucent"
+      ],
+      "variants": [
+        {
+          "variantId": "gid://shopify/ProductVariant/55898368311464",
+          "sku": "LM-DEMO-55898368311464",
+          "title": "Azul",
+          "traits": [
+            "color-bold",
+            "pattern-plain"
+          ]
+        },
+        {
+          "variantId": "gid://shopify/ProductVariant/67608897749160",
+          "sku": "LM-DEMO-67608897749160",
+          "title": "Carey",
+          "traits": [
+            "color-brown",
+            "pattern-tortoise"
+          ]
+        }
+      ]
+    },
+    {
+      "handle": "lemoon-jade",
+      "productId": "gid://shopify/Product/9581568262312",
+      "demo": true,
+      "traits": [
+        "finish-glossy",
+        "presence-oversize",
+        "use-going-out",
+        "use-everyday",
+        "transparency-translucent"
+      ],
+      "variants": [
+        {
+          "variantId": "gid://shopify/ProductVariant/55898368409768",
+          "sku": "LM-DEMO-55898368409768",
+          "title": "Azul",
+          "traits": [
+            "color-bold",
+            "pattern-plain"
+          ]
+        },
+        {
+          "variantId": "gid://shopify/ProductVariant/67608897913000",
+          "sku": "LM-DEMO-67608897913000",
+          "title": "Carey",
+          "traits": [
+            "color-brown",
+            "pattern-tortoise"
+          ]
+        }
+      ]
+    }
+  ]
+}

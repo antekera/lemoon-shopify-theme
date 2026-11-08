@@ -59,7 +59,7 @@ no demuestra que esas capacidades o datos comerciales estén implementados.
 | LEM-120 Checkout / LEM-121 Confirmación y estado | Editor nativo de branding | Capacidad real, publicación y recorrido de compra |
 | LEM-122 Acceso / LEM-123 Perfil/direcciones / LEM-124 Pedidos / LEM-125 Detalle | Cuentas nuevas nativas | Sesión real, persistencia, direcciones, pedidos e aislamiento entre clientes |
 | LEM-126 404 | 404.json, main-404 | Respuesta HTTP de no encontrado y acciones de recuperación |
-| LEM-11 Encuentra tu lente ideal | page.buscar-mi-estilo, lemoon-style-quiz | Curaduría/catálogo real y asignación CMS |
+| LEM-11 Descubre tu estilo | page.buscar-mi-estilo, lemoon-style-quiz; ruta prevista `/pages/descubre-tu-estilo` | Activación CMS sin redirect de la ruta anterior y QA del recorrido nuevo; datos/actualización de filtros con Shopify y back office |
 | LEM-23 Configurador / LEM-102 Cristales | lens-configurator, lemoon-crystal-guide | Catálogo, combinaciones, laboratorio y contrato de receta |
 | LEM-9 Gift cards | gift_card.liquid, lemoon-gift-card-purchase, notifications/es | Catálogo, denominaciones, evaluación de viabilidad de monto libre a cargo de LEM-9, emisión, correo y canje operativo |
 | Lanzamiento/password | password.json, lemoon-launch-page | Newsletter y autenticación nativa |
@@ -70,7 +70,7 @@ Verificar enlaces del footer (LEM-94) y consentimiento (LEM-95) junto con polít
 
 Mantener contenido CMS y destinos de política nativos. Los templates alternativos de guías, nosotros y servicios necesitan asignación en CMS. Las políticas deben sustituir los datos de muestra por hechos confirmados antes de publicación. La opción `demo_data` conserva el retorno al CMS al desactivarse; no modifica la configuración operativa del negocio. Fuentes de trabajo: [datos comerciales de prueba](../content/commercial-test-data.json) y [notas de políticas](../content/policies-review-notes.md).
 
-El branding nativo usa las opciones disponibles del editor, sin forzar el CSS del storefront. La entrega histórica de checkout registró logo refinado PNG de 120px, header blanco, acento navy, resumen beige `#F7F4EE`, títulos Urbanist y cuerpo Source Sans Pro como adaptación nativa a la ausencia de Hanken Grotesk en ese editor. Esta es una aplicación local; no cambia la familia body del tema. Conservar el borrador nativo hasta la decisión de publicación de su ticket.
+El branding nativo usa las opciones disponibles del editor, sin forzar el CSS del storefront. La entrega histórica de checkout registró logo refinado PNG de 120px, header blanco, acento navy, resumen beige `#F7F4EE`, títulos Urbanist y cuerpo Source Sans Pro como adaptación nativa a la ausencia de la familia de cuerpo anterior en ese editor. Esta es una aplicación local histórica; no cambia la familia body vigente Instrument Sans ni verifica su disponibilidad en el editor nativo. Conservar el borrador nativo hasta la decisión de publicación de su ticket.
 
 No introducir correos, WhatsApp, horarios, devolución de 30 días ni garantía de 365 días como hechos sin confirmación. La auditoría histórica detectó discrepancia entre `ayuda@lemoon.cl` configurado y `hola@lemoon.cl` del footer; el ticket de contacto debe fijar el canal público. El artículo borrador y las tarjetas de regalo requieren sus propias decisiones de publicación; la existencia de plantilla no activa venta ni emite crédito.
 

@@ -55,7 +55,7 @@
         "mobile_search_show_wishlist": true,
         "mobile_search_shipping_page": "shopify://pages/envios-y-entregas",
         "mobile_search_faq_page": "/pages/preguntas-frecuentes",
-        "mobile_search_style_page": "/pages/buscar-mi-estilo",
+        "mobile_search_style_page": "/pages/descubre-tu-estilo",
         "view_all_label": "Ver todo",
         "shape_heading": "Por forma",
         "color_heading": "Por color",
@@ -99,8 +99,8 @@
           "type": "drawer_primary",
           "settings": {
             "slot": "guia",
-            "title": "Encuentra tu lente ideal",
-            "link": "/pages/buscar-mi-estilo",
+            "title": "Descubre tu estilo",
+            "link": "/pages/descubre-tu-estilo",
             "icon": "sparkles",
             "has_submenu": false
           }

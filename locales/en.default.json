@@ -284,12 +284,11 @@
     "404": {
       "title": "We couldn’t find this page",
       "subtext": "404",
-      "description": "The link may have changed or the page is no longer available. Search for what you need or return to the catalogue.",
+      "description": "The link may have changed or the page is no longer available. You can return home, explore the catalogue or find help using these links.",
       "home": "Back to home",
       "catalogue": "View all frames",
-      "search_label": "Search the catalogue",
-      "search_placeholder": "Name, shape or material",
-      "search_button": "Search frames"
+      "faq": "Frequently asked questions",
+      "contact": "Contact us"
     }
   },
   "sections": {
@@ -414,7 +413,7 @@
       "wishlist": "My favorites",
       "shipping_returns": "Shipping and returns",
       "faq": "Frequently asked questions",
-      "find_style": "Find your ideal glasses",
+      "find_style": "Discover your style",
       "trends": "Trends",
       "banner_alt": "Discover Lemoon trends",
       "previous_product": "Previous product",
@@ -880,6 +879,175 @@
       "prescription_cta": "How to send my prescription",
       "configure_cta": "Configure {{ product }}",
       "configure_note": "Options and price are confirmed in the product configurator."
+    },
+    "lemoon_style_quiz_v2": {
+      "name": "Discover your style",
+      "eyebrow": "Discover your style",
+      "title": "Discover your ideal style.",
+      "intro": "Shapes, colours and details that feel like you. Find yours.",
+      "steps": "6 steps",
+      "pace": "You can change your mind",
+      "start": "Find my style",
+      "catalogue": "Explore the catalogue",
+      "next": "Continue",
+      "results_cta": "See my selection",
+      "back": "Back",
+      "skip": "Show me variety",
+      "restart": "Start again",
+      "edit": "Change preferences",
+      "more": "See more of my selection",
+      "empty_title": "Let’s keep looking",
+      "empty": "We couldn’t find available products matching your preferences. Try changing a preference or explore the catalogue.",
+      "editorial": "With no style preferences selected, here is an editorial selection to explore.",
+      "demo": "Demonstration selection: these products include test attributes that do not represent a verified final catalogue.",
+      "no_js": "You can explore the catalogue. To answer the guide and filter results, enable JavaScript in your browser.",
+      "results_title": "There’s more than one way to be you.",
+      "results_intro": "A selection to get you started. Change any preference and keep exploring.",
+      "preference_hint": "These are your preferences. To change them, use Go back.",
+      "none": "No preference",
+      "reason_intro": "Matches your preferences for:",
+      "step_status": "Step [current] of [total]",
+      "count": "[count] products in your selection",
+      "count_one": "1 product in your selection",
+      "finished": "Your selection is ready",
+      "loading_error": "We couldn’t prepare your selection. You can try again or explore the catalogue.",
+      "few_intro": "We found a few matches. You can change a preference to keep exploring.",
+      "details_note": "You can combine your finish and material preferences.",
+      "presence_note": "Oversize describes a visual proportion, not a physical size. Check measurements when comparing frames.",
+      "use_note": "Your plans guide the style. Compatible lenses and treatments are selected later.",
+      "price_note": "Frame price. Compatible lenses and treatments are selected and charged separately.",
+      "collection_label": "Style guide collection",
+      "collection_info": "Use a curated collection of up to 50 products with complete, enabled quiz attributes. The guide evaluates up to 20 variants per product.",
+      "image_label": "Intro editorial image",
+      "measures": {
+        "title": "Already have a pair that fits you?",
+        "intro": "Find the numbers on the temple of your glasses and enter all three measurements. We’ll suggest a visual proportion that you can change.",
+        "numbers": "50 □ 18 — 140",
+        "labels": "Lens width · bridge · temple (mm)",
+        "note": "This is a visual proportion reference, not an exact size or a guarantee of fit. Temple length helps compare the arms but does not change the size suggestion.",
+        "lens_width": "Lens width (mm)",
+        "bridge": "Bridge (mm)",
+        "temple": "Temple (mm)",
+        "invalid": "Check the measurements in mm: lens width 30–80, bridge 10–35, and temple 100–180. Use whole numbers.",
+        "suggestion": "Suggestion: [size]. We’ve selected it; you can change it above.",
+        "manual": "We kept your choice. Changing the measurements will generate a new suggestion."
+      },
+      "sun_outdoors": "Outings and travel",
+      "sun_use_note": "These plans guide your style choices. Check each product page for its features.",
+      "axes": {
+        "category": "Eyewear type",
+        "shape": "Shape",
+        "color": "Colour",
+        "finish": "Finish",
+        "pattern": "Pattern",
+        "material": "Material",
+        "transparency": "Transparency",
+        "use": "Use",
+        "presence": "Size"
+      },
+      "stages": {
+        "category": {
+          "title": "What are you looking for?",
+          "hint": "Choose one to guide your selection. If you're still deciding, you can explore both."
+        },
+        "shape": {
+          "title": "Which shapes make you look twice?",
+          "hint": "Choose the ones you’d like to try. You can choose more than one."
+        },
+        "color": {
+          "title": "Which colours feel like you?",
+          "hint": "Build your palette. You don’t have to pick just one colour."
+        },
+        "details": {
+          "title": "Look a little closer. Which details do you like?",
+          "hint": "Explore finishes and materials. Choose what catches your eye."
+        },
+        "use": {
+          "title": "What plans do you see yourself wearing them for?",
+          "hint": "Think about your day-to-day life. You can choose more than one."
+        },
+        "presence": {
+          "title": "How much presence do you like your frames to have?",
+          "hint": "Compact or a statement: let’s compare proportions."
+        }
+      },
+      "tabs": {
+        "finishes": "Finishes",
+        "patterns": "Patterns",
+        "materials": "Materials"
+      },
+      "options": {
+        "category": {
+          "optical": "Optical glasses",
+          "sun": "Sunglasses"
+        },
+        "shape": {
+          "round": "Round",
+          "rectangular": "Rectangular",
+          "cat_eye": "Cat-eye",
+          "aviator": "Aviator",
+          "geometric": "Geometric",
+          "square": "Square",
+          "oval": "Oval",
+          "panto": "Panto"
+        },
+        "color": {
+          "black": "Black",
+          "brown": "Browns and honey",
+          "light": "Light tones",
+          "bold": "Colors",
+          "neutral": "Neutrals",
+          "tortoise": "Tortoise",
+          "two_tone": "Two-tone",
+          "transparent": "Clear",
+          "silver": "Silver"
+        },
+        "finish": {
+          "matte": "Matte",
+          "glossy": "Glossy"
+        },
+        "pattern": {
+          "plain": "Plain",
+          "tortoise": "Tortoiseshell / streaked"
+        },
+        "material": {
+          "acetate": "Acetate",
+          "metal": "Metal",
+          "titanium": "Titanium",
+          "tr90": "TR-90",
+          "wood": "Wood",
+          "mixed": "Mixed"
+        },
+        "transparency": {
+          "opaque": "Opaque",
+          "translucent": "Translucent",
+          "transparent": "Transparent"
+        },
+        "use": {
+          "work": "Work or study",
+          "everyday": "Every day",
+          "going_out": "Going out and changing your look",
+          "outdoors": "Time outdoors"
+        },
+        "presence": {
+          "compact": "Compact",
+          "medium": "Medium",
+          "oversize": "Oversize"
+        }
+      },
+      "reasons": {
+        "shape": "shape",
+        "color": "colour",
+        "finish": "finish",
+        "pattern": "pattern",
+        "material": "material",
+        "transparency": "transparency",
+        "use": "plans",
+        "presence": "visual proportion"
+      },
+      "details_label": "Details",
+      "variant_alternative": "You are exploring another variant. Check its details on the product page.",
+      "results_back": "Go back"
     },
     "lemoon_style_quiz": {
       "title": "Find your next frame",

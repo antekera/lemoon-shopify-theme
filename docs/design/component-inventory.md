@@ -12,23 +12,23 @@ Base histórica del inventario inicial: `93f80a257924520020f0d960f89488c86f104a3
 - **Pendiente:** otras oportunidades de consolidación, revisión final de estos metadatos y aceptación humana de la implementación. Los estados del catálogo no implican que las 44 familias se hayan reescrito.
 - **Límites:** fuente/contratos estáticos y pruebas de fixtures no prueban CMS/asignación activa, valores efectivos, publicación, envío Shopify, APIs/stock/pagos, integración back office, WCAG ni aprobación visual. No se consultó Figma en esta actualización.
 
-La cobertura entregada enumera 522 rutas: las 511 del índice anterior de `git ls-files sections snippets layout templates blocks assets config locales` más la plantilla `templates/page.politica-de-privacidad.json` y el PNG de seguridad y el SVG de Webpay del footer el CSS condicional de newsletter editorial y tres snippets legales compartidos y la plantilla legal compartida, y dos snippets más el CSS compartido de guía de medidas, registrados en `snapshot.new_source_paths`. Docs, tests, herramientas y dependencias externas quedan fuera del universo de implementación. Cada ruta aparece una vez mapped o excluded; `direct_static_consumers` usa referencias literales entre fuentes actuales, sin inferir dependencia transitiva/dinámica ni uso efectivo. La síntesis por familia combina escaneo estructural con lectura dirigida; no afirma revisión manual de cada línea.
+La cobertura entregada enumera **558 rutas tracked** del índice Git en las ocho raíces del JSON, sin adiciones no indexadas. Se conserva la actualización de `main` con los 30 JPG del quiz antes omitidos y el WebP decorativo de 404, junto a dos snippets y un CSS compartidos de la guía de medidas. La conciliación usa rutas/metadatos, sin abrir contenido binario ni privado; la inspección visual histórica del WebP se conserva como evidencia de su ticket. `snapshot.new_source_paths` retiene adiciones históricas ya versionadas, no rutas sin seguimiento. Docs/tests/herramientas quedan fuera del universo. Cada ruta aparece una vez mapped o excluded; consumidores directos son referencias estáticas, sin inferir uso efectivo ni dependencia transitiva.
 
 | Universo actual descubierto | Cantidad |
 | --- | ---: |
 | Secciones Liquid / grupos JSON | 68 / 2 |
-| Snippets / layouts Liquid | 96 / 2 |
+| Snippets / layouts Liquid | 99 / 2 |
 | Templates JSON / Liquid | 37 / 3 |
-| Assets CSS / JS / SVG | 83 / 53 / 94 |
-| Assets binarios PNG / JPG / GIF | 20 / 10 / 1 |
+| Assets CSS / JS / SVG | 84 / 54 / 94 |
+| Assets binarios PNG / JPG / GIF / WebP | 20 / 40 / 1 / 1 |
 | Config schema / settings privados excluidos | 1 / 1 |
 | Locales JSON (texto y schema) | 51 |
-| **Total fuentes / mapped / excluded** | **522 / 490 / 32** |
+| **Total fuentes / mapped / excluded** | **558 / 495 / 63** |
 | Familias estables | 44 |
 
-El núcleo actual es de **345 fuentes**: 208 contenedores (secciones, grupos, snippets, layouts, templates), 136 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 490 mapped. Las exclusiones conservan 31 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceso a sus valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
+El núcleo actual es de **350 fuentes**: 211 contenedores (secciones/grupos/snippets/layouts/templates), 138 assets CSS/JS y 1 schema global. Con 94 SVG y 51 locales se obtienen 495 mapped. Las exclusiones conservan 62 imágenes binarias y `config/settings_data.json`, **cuyo contenido no se lee**. Enumerar su ruta no implica acceder a valores. SVG/locales son cobertura textual, no revisión visual/editorial completa.
 
-Hay **61 secciones con schema y 7 fragmentos sin schema**. Veintisiete secciones declaran **81 bloques: 73 declaraciones locales y 8 slots `@app`**; son declaraciones, no instancias ni tipos globales únicos. Los ocho sitios `{% render block %}` corresponden a apps. No hay archivos `blocks/`, ni infraestructura observada de theme blocks reutilizables mediante `content_for 'blocks'`. Los snippets composicionales y los bloques locales de sección no acreditan soporte de Shopify theme blocks. La matriz de secciones lista cada tipo; sus settings y opciones permanecen en el schema del archivo canónico enlazado, incluidas opciones no instanciadas en templates actuales.
+Hay **61 secciones con schema y 7 fragmentos sin schema**. Los schemas contienen **80 declaraciones de bloques**, incluidos 8 slots `@app`; son declaraciones, no instancias ni tipos globales únicos. No hay archivos `blocks/`. Este conteo estructural no acredita soporte de theme blocks ni uso efectivo en el editor; settings/opciones permanecen en las fuentes canónicas.
 
 <a id="reading"></a>
 ## Lectura y contratos compartidos
@@ -133,7 +133,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato de superficie.** h1–h6 y .h0–.h5 son selectores; `lemoon-ui-heading` aporta la API explícita de título. rich-text usa bloques heading/caption/text/button; main-page usa page.title/content; page usa section.settings.page y heading_size.
 
-**Variantes existentes.** Display, headings, body, caption, label, CTA, rte; ancho narrow/full según consumidor.
+**Variantes existentes.** Display, headings, body, caption, label, CTA, rte; ancho narrow/full según consumidor. Familia body aprobada el 07-11-2026: Instrument Sans 400/500/600/700 en token y cargas de los layouts del tema, contraseña y gift card; password usa el mismo token y la galería identifica Instrument Sans. Urbanist y medidas se conservan.
 
 **CSS y excepciones.** --lemoon-font-heading/body y --lemoon-type-*; H4/H5 conservan base Dawn. Tamaños de nombres/precios de tarjeta y legal son excepciones, no nuevos roles globales.
 
@@ -299,7 +299,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/price.liquid](../../snippets/price.liquid), [snippets/lemoon-money.liquid](../../snippets/lemoon-money.liquid), [snippets/unit-price.liquid](../../snippets/unit-price.liquid), [assets/component-price.css](../../assets/component-price.css), [assets/component-totals.css](../../assets/component-totals.css), [assets/component-rating.css](../../assets/component-rating.css), [assets/component-volume-pricing.css](../../assets/component-volume-pricing.css), [assets/price-per-item.js](../../assets/price-per-item.js). [snippets/lemoon-product-unit-price.liquid](../../snippets/lemoon-product-unit-price.liquid), [snippets/lemoon-cart-tax-note.liquid](../../snippets/lemoon-cart-tax-note.liquid).
 
-**Contrato actual.** price: product,placeholder,use_variant,show_badges,price_class,show_compare_at_price; también usa settings.currency_code_enabled. lemoon-money: amount,show_currency_code; unit-price: price,measurement,hide_accessibility_label opcional. Ratings usan metafields reviews.rating/rating_count en consumidores, no snippet rating. price-per-item calcula presentación de quantity breaks de variante.
+**Contrato actual.** price: product,placeholder,use_variant,show_badges,price_class,show_compare_at_price; `price_variant` opcional junto a use_variant recibe la variante validada por card-product, y omitido conserva selected_or_first_available_variant. También usa settings.currency_code_enabled. lemoon-money: amount,show_currency_code; unit-price: price,measurement,hide_accessibility_label opcional. Ratings usan metafields reviews.rating/rating_count en consumidores, no snippet rating. price-per-item calcula presentación de quantity breaks de variante.
 
 **Variantes existentes.** Regular/sale/from/compare-at/unit-price/volume y total cart; rating estrellas/fracción; no generar precio o reseña de ejemplo como real.
 
@@ -309,7 +309,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Responsive.** Precio local de card/PLP diferente de PDP; evitar imponer H3. **Accesibilidad.** Conservar texto regular/sale oculto, s para anterior, moneda/unidad y labels de rating.
 
-**JS.** price-per-item y actualizaciones de producto/cart; display Liquid por defecto. **Reutilización actual.** price/money/unit-price compartidos; prices inline óptica/gift/quiz/cart son duplicación parcial con dominios distintos.
+**JS.** price-per-item y actualizaciones de producto/cart; display Liquid por defecto. **Reutilización actual.** price/money/unit-price compartidos; prices inline óptica/gift/cart son duplicación parcial con dominios distintos.
 
 **Dependencias de composición:** [LM-TYPE](#lm-type), [LM-LABEL](#lm-label). Consumidores estáticos en el JSON.
 
@@ -320,9 +320,9 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [snippets/card-product.liquid](../../snippets/card-product.liquid), [assets/component-card.css](../../assets/component-card.css), [assets/lemoon-product-card.js](../../assets/lemoon-product-card.js), [assets/quick-add.css](../../assets/quick-add.css), [assets/mask-blobs.css](../../assets/mask-blobs.css). [snippets/lemoon-carousel-results.liquid](../../snippets/lemoon-carousel-results.liquid).
 
-**Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. Producto/variantes/media/settings son entradas de dominio.
+**Contrato actual.** card_product,media_aspect_ratio,image_shape,show_secondary_image,show_vendor,show_rating,extend_height,lazy_load,skip_styles,section_id,show_quick_add,horizontal_class,placeholder_image; además enable_gallery_swipe y product_view_context usados en código aunque no en comentario API. `recommended_variant` opcional se valida contra las variantes del producto e inicializa media/precio/URL/swatch conjuntamente para LEM-11; swatches sin media propia usan fallback neutro con alt vacío para retirar la foto anterior y no reusan una vista secundaria de otro color; una secundaria vacía no emite imagen ni URLs; omitido o ajeno conserva el comportamiento anterior. Producto/variantes/media/settings son entradas de dominio.
 
-**Variantes existentes.** Normal/placeholder; media secundaria; color swatches; quick-add; horizontal; masks heredadas. Quick-add se renderiza con show_quick_add y card_product.available; usa selected_or_first_available_variant, quantity=1 y botón disabled si variante no disponible. No hay guard requires_selling_plan en este snippet: limitación a revisar antes de ampliar.
+**Variantes existentes.** Normal/placeholder; media secundaria; color swatches; quick-add; horizontal; masks heredadas. Quick-add se renderiza con show_quick_add y card_product.available; reutiliza card_variant ya validada (selected_or_first_available_variant salvo recommended_variant válida), quantity=1 y botón disabled si variante no disponible. No hay guard requires_selling_plan en este snippet: limitación a revisar antes de ampliar.
 
 **CSS y excepciones.** Outer transparente radio0; media warm radio local12 y ratio100/96, contain; máximo local280px ≥990. Tipografía PLP sobrescribe base. Try-on/favorito son controles de superficie, no prueba de servicio.
 
@@ -385,7 +385,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** loading-spinner: class opcional. Feedback usa form.errors/posted_successfully, cart.errors y resultados; no existe API global de toast. cart-live-region-text retorna sections.cart.new_estimated_total y cart.total_price formateado para respuesta parcial.
 
-**Variantes existentes.** Inline error/success/status; spinner .loading__spinner; vacío search/cart/quiz/medidas; progreso bulk/quiz separado.
+**Variantes existentes.** Inline error/success/status; spinner .loading__spinner; vacío search/cart/colección/medidas; progreso bulk/quiz separado.
 
 **CSS y excepciones.** --lemoon-status-error/success y texto local; form__message, product-form__error, cart-item__error, lemoon-contact__status; literal backgrounds locales quedan en familia, no nueva paleta.
 
@@ -530,7 +530,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Fuentes:** [sections/main-search.liquid](../../sections/main-search.liquid), [sections/predictive-search.liquid](../../sections/predictive-search.liquid), [snippets/main-search-results.liquid](../../snippets/main-search-results.liquid), [snippets/header-search.liquid](../../snippets/header-search.liquid), [assets/main-search.js](../../assets/main-search.js), [assets/search-form.js](../../assets/search-form.js), [assets/predictive-search.js](../../assets/predictive-search.js), [assets/component-search.css](../../assets/component-search.css), [assets/component-predictive-search.css](../../assets/component-predictive-search.css).
 
-**Contrato actual.** Search page consume search.terms/results/filters/sort_by y paginate; main-search-results recibe section,paginate,show_all_products,has_results,search_url y consume contexto search. Header search usa input_id; predictive-search section retorna markup para endpoint. URLs reales routes.search_url/predictive_search_url.
+**Contrato actual.** Search page consume search.terms/results/filters/sort_by y paginate; main-search-results recibe section,search,all_collection,paginate,show_all_products,has_results,search_url; usa la colección explícita con fallback compatible a collections.all. Header search usa input_id; predictive-search section retorna markup para endpoint. URLs reales routes.search_url/predictive_search_url.
 
 **Variantes existentes.** Página resultados producto/artículo/page; predictive groups products/collections/pages/articles/queries; suggestions y vacío; header-search Dawn existe aunque header Lemoon usa overlay propio.
 
@@ -668,7 +668,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Responsive.** Picture móvil/desktop y reglas propias; conservar reduced-motion, visibilitychange y pausa autoplay donde implementada. **Accesibilidad.** Labels de slide/prev/next y pausa de slideshow; no afirmar autoplay accesible por lectura estática.
 
-**JS.** lemoon-hero custom element; global slideshow y theme-editor para Dawn. **Reutilización actual.** Composiciones distintas, no un solo snippet hero; compartir solo acciones/media probados.
+**JS.** lemoon-hero custom element; callbacks de altura, scroll, navegación y autoplay ligados al elemento antes de registrar observers/listeners, con limpieza al desconectar y reconexión compatible. Global slideshow y theme-editor para Dawn. **Reutilización actual.** Composiciones distintas, no un solo snippet hero; compartir solo acciones/media probados.
 
 **Dependencias de composición:** [LM-SLIDER](#lm-slider), [LM-ACTION](#lm-action), [LM-MEDIA](#lm-media). Consumidores estáticos en el JSON.
 
@@ -683,7 +683,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Variantes existentes.** Grids/collage/image-text/rows/columns; about home y página; mood tiles; shape navigation; steps; benefits/review strip; commercial-demo enabled/content/section_id es muestra marcada, no operación real.
 
-**CSS y excepciones.** About home conserva su panel green. Nosotros usa lectura local de hasta 72rem, cuerpo Hanken Grotesk 1.8rem/1.7 y párrafos separados por el token space-6; el H1 conserva su rol global. No trasladar esta excepción editorial ni el panel verde al sistema global.
+**CSS y excepciones.** About home conserva su panel green. Nosotros usa lectura local de hasta 72rem, cuerpo Instrument Sans 1.8rem/1.7 y párrafos separados por el token space-6; el H1 conserva su rol global. No trasladar esta excepción editorial ni el panel verde al sistema global.
 
 **Estados observados / aplicabilidad:** Normal: Composición y contenido; Hover: Links/tile/CTA; Foco: Solo acciones; Seleccionado: No aplica; Loading: Media lazy; slider multicolumn si habilitado; Error: No feedback propio; Disabled: No aplica salvo acciones.
 
@@ -931,21 +931,25 @@ La guía `measurements` añade H1 desde page.title o fallback, ocho campos de in
 
 **Disponibilidad actual:** composición de sección. Entrada: [lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid). Flujo y estado pertenecen a su JS; no se extrae un motor de quiz. [Receta de integración](../components/recipes/catalogue-states.md).
 
-**Fuentes:** [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid), [assets/lemoon-style-quiz.js](../../assets/lemoon-style-quiz.js).
+**Fuentes activas:** [sección](../../sections/lemoon-style-quiz.liquid), [controlador](../../assets/lemoon-style-quiz.js), [helper puro de filtros](../../assets/lemoon-style-quiz-filters.js), [CSS](../../assets/lemoon-style-quiz.css), [opciones](../../snippets/lemoon-quiz-options.liquid) y [visuales](../../snippets/lemoon-quiz-visual.liquid). `lemoon-quiz-candidate` se conserva como fuente legacy cubierta, sin render en el quiz actual; no se elimina su archivo ni se declara retirada global de sus contratos.
 
-**Contrato actual.** Cuatro preguntas face/style/use/budget; frame blocks product,face,style,use; budget_low/high y catalogue. rankProducts descarta unavailable/IDs repetidos/precio inválido/fuera de tope, orden por matches con tie estable y slice0..3; sugerencias no son recomendación clínica.
+**Contrato actual.** Entrada «Descubre tu estilo ideal.» y «Formas, colores y detalles que van contigo. Encuentra los tuyos.». Intro y seis preguntas opcionales: categoría/forma/color/detalles/uso/presencia. Sin presupuesto, género ni diagnóstico facial. Categoría única ópticos/solares; solares oculta/limpia trabajo y usa Paseos y viajes. Carey y Transparentes solo en Color, con criterios patrón/transparencia. Detalles apila Acabados y después Materiales con headings localizados, visibles a la vez y sin pestañas. Ruta pública prevista `/pages/descubre-tu-estilo`, antigua 404 sin redirección; template interno mantiene `page.buscar-mi-estilo.json`. CMS/HTTP remoto requiere verificación propia.
 
-**Variantes existentes.** Sin JS selección curada visible; con JS wizard con progreso/back/restart/error y máximo3 resultados; vacío mantiene catálogo.
+**Filtros y resultados.** El CTA final guarda snapshot y navega a `/collections/all`: OR entre valores del mismo criterio y AND entre criterios; preguntas omitidas no restringen. `buildQuizCollectionURL(answers, config)` exige correspondencias válidas de producto/afinidades y parámetro seleccionado expuesto. Configuración Liquid con `collectionUrl`, `categories` desde tipos reales, `traits:{id,group,code}` del diccionario existente, `dictionaryComplete` y `availableFilters` de `collections['all'].filters`. Forma/material conservan valores Shopify con tildes/`TR-90`; afinidades usan GIDs reales por grupo. Liquid entrega `trait.system.id` numérico: la sección antepone `gid://shopify/Metaobject/` antes de serializar JSON; el renderer de pruebas también modela ese ID numérico y comprueba su uso en URLs nativas. Referencias inválidas/ambiguas, diccionario truncado o filtro ausente muestran error localizado y catálogo sin descartar criterios. No enumera50/20, no rankea ni renderiza tarjetas, precios, resumen o resultados. La PLP mantiene tarjetas canónicas, filtros/chips editables, contador, sorting, vacío y paginación; su funcionamiento completo y coherencia de variante se verifican en Shopify aparte.
 
-**CSS y excepciones.** .lemoon-quiz inline, choices/cards propios; markup producto difiere card-product y no debe proclamarse átomo compartido.
+**Carga inicial y estados.** Inicio navy con espacio estable y disabled hasta enlazar controlador; marcador síncrono oculta respaldo durante carga, sin altura rígida. Sin JS/módulo fallido/JSON inválido, catálogo accesible e inicio inoperante oculto. Normal: intro/pregunta; hover: opciones/acciones; foco: título de etapa restaurada, controles y retorno intro; seleccionado: radios/checkboxes/check; loading: módulo inicial, sin espera simulada; error: referencias/configuración conserva respuestas y ofrece catálogo; vacío: pertenece a la colección nativa. No hay selección obligatoria.
 
-**Estados observados / aplicabilidad:** Normal: Pregunta o catálogo sin JS; Hover: Choices y CTAs; Foco: Legend/results heading al avanzar; Seleccionado: Radio checked; Loading: No loader ranking local; discoverPriceParameter fetch con timeout; Error: Pregunta sin selección -> error/aria-invalid; catálogo price-param fallback; Disabled: No disabled universal; constraints del catálogo.
+**Historial.** `history.state.lemoonStyleQuiz`, versión 1, fragmentos `#style-quiz-{etapa}`. Cada entrada guarda ruta/etapa, respuestas por códigos permitidos, posición/trayecto, progreso completado, medidas, acordeón y modo manual/automático. Avanzar push; inputs replace; Volver usa entrada previa propia y replace como respaldo si falta; popstate restaura snapshot exacto sin push. Intro inicial permite salir con Atrás; estado ajeno preservado, corrupción vuelve a intro segura. Reload/retorno desde colección restaura estado y foco sin requerir bfcache. Cambiar preferencias después de Atrás crea la rama normal de historial. No perfil ni persistencia permanente.
 
-**Responsive.** Choices/cards apilan con CSS local; conservar orden preguntas/resultados. **Accesibilidad.** Fieldset/legend, progress/status, error ID y foco; no usar selección solo por color.
+**CSS y responsive.** Tokens existentes, marco editorial cálido y columnas internas conservadas. Cuerpo/opciones/campos mínimo 16px/400, acciones 16px semibold y ayudas mínimo 14px; H1/H2 mantienen su escala. Descripciones80% desde 750px/100% móvil, opciones centradas máximo 96rem y gutters nativos. Ocho formas en tres columnas, padding móvil 8px y labels 16px sin truncado, contorno navy único 5 sin relleno/sombra/interiores y Aviador aprobado conservado. Headings de pregunta sin rótulos duplicados, grupos accesibles. Indicador seis círculos 12px/gap 20px, pendientes amarillo/completados navy, aro del actual y anuncio solo accesible; sin números decorativos grandes 01–06 en ningún ancho; progreso según snapshot restaurado. Reduced motion/forced colors mantienen las alternativas accesibles.
 
-**JS.** lemoon-style-quiz.js, price-filter discover GET; sin carrito ni receta. **Reutilización actual.** Composición específica; sólo candidate choice/message/card de datos sintéticos, no algoritmo en atom.
+**Fotografía y opciones.** Siete colores compactos con muestra plana32×32, retícula3/2 y mínimo72px; neutrales reúnen neutral/brown/light, plateado explícito. Acabados usa macro128/256 con miniatura64×64 y tarjeta horizontal≥96px; Materiales seis fotos de estudio480/960,960×640,contain3:2. Portada configurable o editorial700/1400, cuatro usos480/960 y categorías de estudio480/960; alt vacío, dimensiones explícitas e imágenes inferiores diferidas. Escenas conceptuales, no SKU ni evidencia de composición. IDs únicos por sección/grupo/código. Assets y SVG anteriores preservados. [Editorial](style-quiz-prototype/generated-images-v1/README.md), [categorías](style-quiz-prototype/generated-category-studio-v1/README.md), [materiales](style-quiz-prototype/generated-material-studio-v1/README.md), [acabados](style-quiz-prototype/generated-finish-macro-v1/README.md).
 
-**Dependencias de composición:** [LM-CHOICE](#lm-choice), [LM-FEEDBACK](#lm-feedback), [LM-ACTION](#lm-action). Consumidores estáticos en el JSON.
+**Medidas y accesibilidad.** Fieldset/legend, radio/checkbox con label, titles enfocables, progreso/status accesible, details/summary nativo con chevron20px. Tres campos opcionales mm con labels/IDs por sección, foco por borde navy2px compensado sin salto y feedback/aria-invalid. Heurística editorial `2*lente+puente` (<118 compacto,118–128 intermedio,>128 oversize), validando lente30–80/puente10–35/patilla100–180; patilla no determina proporción. Manual prevalece hasta editar medidas; restaurar no recalcula. Historial guarda referencias, sin perfil ni envío; no inferir ancho total/talla/calce ni modificar producto. Silueta neutra de presencia con misma base y montura escalada. Pruebas locales no acreditan WCAG, calce o integración Shopify.
+
+**JS y dependencias.** Controlador del quiz más helper puro; opciones/visuales canónicos. Sin carga de `lemoon-product-card.js`, CSS card/swatch/price ni datos de candidatos desde la sección. Las tarjetas/precios pertenecen a la PLP; contratos opcionales `recommended_variant`/`price_variant` pueden seguir en sus implementaciones legacy, sin dependencia activa del quiz. Sin carrito, receta, backend nuevo o app de quiz. [Guía de catálogo y estado de preparación](../catalog/style-quiz.md#estado-de-preparación-al-06-11-2026): definiciones y proyecciones del grupo demo verificadas, con exposición/sync/CMS pendientes, no equivalen a entrega operativa.
+
+**Dependencias de composición:** [LM-CHOICE](#lm-choice), [LM-FEEDBACK](#lm-feedback), [LM-ACTION](#lm-action). Consumidores estáticos en JSON; la colección de destino mantiene sus propias dependencias.
 
 <a id="lm-gift"></a>
 ### LM-GIFT · Compra y visualización de gift card
@@ -996,7 +1000,7 @@ La guía `measurements` añade H1 desde page.title o fallback, ocho campos de in
 
 **Fuentes:** [sections/main-404.liquid](../../sections/main-404.liquid), [sections/custom-liquid.liquid](../../sections/custom-liquid.liquid), [sections/apps.liquid](../../sections/apps.liquid), [assets/customer.js](../../assets/customer.js).
 
-**Contrato actual.** 404 título/texto/link catálogo; custom-liquid setting custom_liquid y color/padding; apps section bloques @app con include_margins; customer.js controla direcciones legacy pero no hay templates/customer en universo.
+**Contrato actual.** 404 título/texto, navegación home/catálogo/FAQ/contacto sin buscador, con FAQ y contacto construidos desde `routes.root_url` para conservar el prefijo de idioma, e ilustración decorativa de armazón con gesto lemon (`assets/lemoon-404-frame-lemon-v2.webp`), con dimensiones intrínsecas, alt vacío y número 404 como texto independiente dentro de un conjunto aria-hidden. Conserva dos columnas y apilado bajo 750px; sin JS. Los enlaces tienen un solo contorno de foco, sin box-shadow añadido. Dirección autorizada el 07-11-2026, render 404 aprobado por el usuario el 07-11-2026. custom-liquid setting custom_liquid y color/padding; apps section bloques @app con include_margins; customer.js controla direcciones legacy pero no hay templates/customer en universo.
 
 **Variantes existentes.** Fallback404, inyección editor Liquid, app slots y controlador direcciones retenido. No son catálogo de átomos ni cuenta nueva implementada.
 
@@ -1078,7 +1082,7 @@ Esta matriz asigna **las 68 secciones**, incluidos los endpoints sin schema. Las
 | [sections/lemoon-legal-page.liquid](../../sections/lemoon-legal-page.liquid) | [LM-LEGAL](#lm-legal) | Sin bloques declarados |
 | [sections/lemoon-service-page.liquid](../../sections/lemoon-service-page.liquid) | [LM-LEGAL](#lm-legal) | Sin bloques declarados |
 | [sections/lemoon-shop-by-shape.liquid](../../sections/lemoon-shop-by-shape.liquid) | [LM-EDITORIAL](#lm-editorial) | `shape` |
-| [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid) | [LM-QUIZ](#lm-quiz) | `frame` |
+| [sections/lemoon-style-quiz.liquid](../../sections/lemoon-style-quiz.liquid) | [LM-QUIZ](#lm-quiz) | sin bloques; tipos/diccionario/filtros Shopify y snapshots de navegación |
 | [sections/lens-configurator.liquid](../../sections/lens-configurator.liquid) | [LM-CONFIG](#lm-config) | Sin bloques declarados |
 | [sections/lifestyle-mood-grid.liquid](../../sections/lifestyle-mood-grid.liquid) | [LM-EDITORIAL](#lm-editorial) | `mood` |
 | [sections/main-404.liquid](../../sections/main-404.liquid) | [LM-UTILITY](#lm-utility) | Sin bloques declarados |

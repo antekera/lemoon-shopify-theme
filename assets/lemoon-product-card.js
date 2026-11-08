@@ -40,14 +40,26 @@
     const secondary = card.querySelector('.card__media .media img:nth-child(2)');
     if (!secondary) return;
     const selectedSwatch = swatch || card.querySelector('.lemoon-product-card__swatch.is-selected');
-    const src = selectedSwatch?.dataset.secondarySrc || secondary.dataset.lazySrc;
-    if (!src || secondary.dataset.loadedSrc === src) return;
+    const hasSwatchSecondary = selectedSwatch?.hasAttribute('data-secondary-src');
+    const src = hasSwatchSecondary ? selectedSwatch.dataset.secondarySrc : secondary.dataset.lazySrc;
     const media = secondary.parentElement;
+    if (!src) {
+      media.classList.remove('lemoon-product-card__secondary-ready');
+      // Invalidate pending decodes before clearing the previous color's image.
+      delete secondary.dataset.loadedSrc;
+      secondary.removeAttribute('srcset');
+      secondary.removeAttribute('sizes');
+      secondary.removeAttribute('src');
+      secondary.alt = '';
+      return;
+    }
+    if (secondary.dataset.loadedSrc === src) return;
     media.classList.remove('lemoon-product-card__secondary-ready');
-    const srcset = selectedSwatch?.dataset.secondarySrcset || secondary.dataset.lazySrcset;
+    const srcset = hasSwatchSecondary ? selectedSwatch.dataset.secondarySrcset : secondary.dataset.lazySrcset;
     secondary.removeAttribute('srcset');
     if (srcset) secondary.srcset = srcset;
-    const sizes = selectedSwatch?.dataset.secondarySizes || secondary.dataset.lazySizes;
+    const sizes = hasSwatchSecondary ? selectedSwatch.dataset.secondarySizes : secondary.dataset.lazySizes;
+    secondary.removeAttribute('sizes');
     if (sizes) secondary.sizes = sizes;
     secondary.src = src;
     secondary.alt = selectedSwatch?.dataset.secondaryAlt || secondary.alt;

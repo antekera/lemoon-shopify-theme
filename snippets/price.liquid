@@ -4,6 +4,7 @@
   Accepts:
   - product: {Object} Product Liquid object (optional)
   - placeholder: {Boolean} Renders a placeholder price (optional)
+  - price_variant: {Object} Explicit variant supplied by a validated product-card consumer (optional)
   - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
@@ -14,7 +15,7 @@
 {% endcomment %}
 {%- liquid
   if use_variant
-    assign target = product.selected_or_first_available_variant
+    assign target = price_variant | default: product.selected_or_first_available_variant
   elsif placeholder
     assign target = null
   else

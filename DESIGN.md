@@ -14,7 +14,7 @@ Para decisiones de expresión visual o redacción, consultar el [brief estratég
 
 - **Blanco/carbon y paneles beige:** separar lectura y agrupaciones de contenido con una base tranquila que deje protagonismo al producto.
 - **Navy en acciones y foco:** dar continuidad visual a la navegación y a los controles que guían el recorrido. Lemon destaca momentos puntuales sin competir con la acción principal.
-- **Urbanist y Hanken Grotesk:** distinguir títulos/acciones del texto de lectura con las dos familias existentes; mantener sus roles facilita reconocer la jerarquía entre páginas.
+- **Urbanist y Instrument Sans:** distinguir títulos/acciones del texto de lectura con las dos familias existentes; mantener sus roles facilita reconocer la jerarquía entre páginas.
 - **Producto completo y crop editorial:** mostrar el armazón con `contain` permite examinar su forma; las imágenes lifestyle pueden usar recorte y punto focal para comunicar contexto.
 - **Medidas por familia:** una tarjeta de catálogo y una página legal resuelven tareas distintas; conservar sus proporciones y anchos locales mantiene legibilidad y consistencia sin uniformarlos.
 
@@ -83,7 +83,9 @@ Los roles semánticos gobiernan los controles Lemoon; un color scheme del editor
 
 ## 3. Tipografía
 
-Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Hanken Grotesk**, sans-serif. El [layout](layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Hanken 400/500/600/700. Aplicar los roles de [tokens](assets/lemoon-tokens.css) mediante las clases de [componentes](assets/lemoon-components.css):
+> **Fuente de cuerpo aprobada el 07-11-2026:** el usuario eligió Instrument Sans como sustitución definitiva para `--lemoon-font-body` y sus consumidores. Se cargan pesos 400/500/600/700 con `display=swap`; Urbanist, logo, tamaños, pesos, interlíneas y espaciados se conservan. Esta decisión actualiza las referencias tipográficas anteriores de esta guía; la publicación Shopify mantiene su autorización independiente.
+
+Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Instrument Sans**, sans-serif. El [layout](layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Instrument Sans 400/500/600/700. Aplicar los roles de [tokens](assets/lemoon-tokens.css) mediante las clases de [componentes](assets/lemoon-components.css):
 
 | Rol | Familia / peso | Tamaño ≥750 → <750 | Interlínea | Tracking |
 | --- | --- | --- | --- | --- |
@@ -91,10 +93,10 @@ Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body
 | H1 / `.h1` | Urbanist 600 | 4rem → 3.2rem | 1.2 | −0.3px |
 | H2 / `.h2` | Urbanist 600 | 2.8rem → 2rem | 1.285714 | −0.3px |
 | H3 / `.h3` | Urbanist 500 | 2rem → 1.8rem | 1.4 | 0 |
-| Body | Hanken 400 | 1.6rem | 1.5 | 0 |
-| Body small | Hanken 400 | 1.4rem | 1.428571 | 0 |
-| Caption | Hanken 400 | 1.2rem | 1.333333 | 0 |
-| Label | Hanken 400 | 1.3rem | 1.4 | 0 |
+| Body | Instrument Sans 400 | 1.6rem | 1.5 | 0 |
+| Body small | Instrument Sans 400 | 1.4rem | 1.428571 | 0 |
+| Caption | Instrument Sans 400 | 1.2rem | 1.333333 | 0 |
+| Label | Instrument Sans 400 | 1.3rem | 1.4 | 0 |
 | CTA | Urbanist 600 | 1.4rem | 1.428571 | 0.3px, uppercase |
 
 Los rem equivalen nominalmente a 10px en la escala base del tema; el root depende de `body_scale`. Preservar rem y escalado del usuario. Elegir H1–H3 por jerarquía semántica y `.h0` por presentación. No aplicar tracking global `−0.03em`. Las excepciones de tarjeta, PLP y shell legal se mantienen en sus selectores, sin alterar estos roles.
@@ -132,9 +134,37 @@ Mantener orden de lectura al apilar, títulos largos y mensajes de error complet
 
 ### Nosotros: relato editorial continuo
 
-La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026 como un relato continuo, tomando la estructura History de Warby Parker como referencia. Su dueño es `sections/lemoon-about-page.liquid`: un único H1 y un cuerpo richtext editable, sin subtítulos internos, tarjetas, paneles, CTAs, imagen ni placeholder. El eslogan se muestra después del cuerpo como un párrafo independiente desde el ajuste global `settings.brand_slogan`; separarlo con `--lemoon-space-8`, conservar Hanken Grotesk 1.8rem/1.7 y omitirlo si el valor está vacío. El cuerpo editable no duplica el eslogan. Esta decisión sustituye el hero con imagen y las tarjetas anteriores solo en esta sección; no cambia otras familias editoriales.
+La composición de `/pages/nosotros` fue autorizada por el usuario el 02-11-2026 como un relato continuo, tomando la estructura History de Warby Parker como referencia. Su dueño es `sections/lemoon-about-page.liquid`: un único H1 y un cuerpo richtext editable, sin subtítulos internos, tarjetas, paneles, CTAs, imagen ni placeholder. El eslogan se muestra después del cuerpo como un párrafo independiente desde el ajuste global `settings.brand_slogan`; separarlo con `--lemoon-space-8`, conservar Instrument Sans 1.8rem/1.7 y omitirlo si el valor está vacío. El cuerpo editable no duplica el eslogan. Esta decisión sustituye el hero con imagen y las tarjetas anteriores solo en esta sección; no cambia otras familias editoriales.
 
-Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Hanken Grotesk, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
+Mantener un ancho local máximo de 72rem y los gutters responsive existentes de `.page-width`. El H1 conserva Urbanist y su escala/peso global; el cuerpo usa Instrument Sans, `--lemoon-fs-18` y line-height 1.7, con separación `--lemoon-space-6` entre párrafos. Conservar el padding configurable de la sección (75% bajo 750px). El carrusel de productos permanece como sección independiente posterior, con su composición y controles existentes; no forma parte del relato.
+
+### Página 404: armazón y gesto lemon
+
+Dirección autorizada por el usuario el 07-11-2026: ilustración original de un armazón navy con un limón y hoja como acento separado del marco y de los cristales por espacio visible, sin mascota ni cambios de identidad. `sections/main-404.liquid` conserva la composición de dos columnas y su apilado bajo 750px, mensaje localizado y cuatro enlaces de recuperación: inicio, catálogo, preguntas frecuentes y contacto. Por petición del usuario se retiró el buscador local de esta sección; los enlaces muestran un único contorno de foco navy, sin box-shadow adicional. La pieza decorativa `assets/lemoon-404-frame-lemon-v2.webp` se contiene completa en el panel beige, con proporción intrínseca y ancho fluido; el número 404 sigue siendo texto HTML independiente. El conjunto visual lleva `aria-hidden="true"` y la imagen alt vacío: el H1 ya comunica el error. No añadir animación ni repetir el arte del footer. El usuario aprobó el render final de la 404 el 07-11-2026; la publicación en producción mantiene su autorización independiente.
+
+### Quiz de estilo: navegación a catálogo
+
+El contrato vigente de [LEM-11](docs/specs/2026-11-06-lem-11-descubre-tu-estilo.md), aprobado el 06-11-2026, conserva seis preguntas opcionales: categoría, forma, color, detalles, uso y presencia. La entrada usa exactamente «Descubre tu estilo ideal.» y «Formas, colores y detalles que van contigo. Encuentra los tuyos.», con reflujo natural y acceso a catálogo subrayado en reposo. El destino público previsto es `/pages/descubre-tu-estilo`; `/pages/buscar-mi-estilo` debe devolver 404 sin redirección. El archivo interno `templates/page.buscar-mi-estilo.json` conserva su nombre: no acredita el handle ni la asignación CMS remota.
+
+El rótulo de cada pregunta aparece una sola vez, encima del título; fieldset/legend y grupos con `aria-label` localizado conservan su nombre accesible. Pregunta y descripción preceden a las opciones; descripción al 80% desde 750px y 100% por debajo, opciones centradas con máximo 96rem y gutters del tema. Cuerpo, opciones y campos usan al menos 16px, peso 400; acciones 16px semibold y ayudas secundarias al menos 14px. H1/H2, fuentes, colores y espaciado conservan sus tokens. Forma mantiene tres columnas si las etiquetas completas y los targets caben, sin truncado; padding móvil 8px y etiquetas de 16px.
+
+Detalles presenta Acabados y después Materiales en vertical, con encabezados localizados, ambos grupos visibles y sin pestañas. Se conservan selección, foco, códigos e imágenes diferidas. Carey y Transparentes se eligen solo en Color y mantienen `pattern/tortoise` y `transparency/transparent`. Para solares, Trabajo/estudio se oculta y limpia, y `outdoors` se presenta como Paseos y viajes; cambiar categoría conserva preferencias compatibles.
+
+El indicador mantiene seis círculos de 12px separados por 20px: amarillo pendiente, navy completado y aro navy de 2px con separación de 4px para el actual. Sin numeración decorativa grande 01–06 en ningún ancho; «Paso X de 6» solo accesible. Volver queda abajo a la izquierda y Continuar a la derecha. El progreso pertenece al snapshot de la entrada restaurada; no hay reinicio ni etapa de resultados embebidos.
+
+`lemoon-style-quiz.js` reserva `history.state.lemoonStyleQuiz`, versión 1, preservando el estado ajeno y usando fragmentos `#style-quiz-{etapa}` para intro y preguntas. Avanzar añade una entrada; cambiar inputs reemplaza la actual. Volver recorre la entrada previa conocida del quiz; un acceso restaurado sin ella reemplaza la etapa actual por la anterior. Atrás/Adelante restauran el snapshot exacto sin añadir entradas. Desde la intro inicial, Atrás permite salir normalmente. Cada snapshot valida ruta, códigos permitidos, etapa, posición/trayecto, pasos completados, medidas, apertura del acordeón y modo automático/manual de presencia. Recarga y retorno desde colección restauran ese estado y el foco del título conocido; valores corruptos vuelven a intro segura. No se crea perfil ni persistencia permanente.
+
+El CTA final guarda el último snapshot y navega a `/collections/all` con filtros nativos: OR entre valores del mismo criterio y AND entre criterios. Preguntas omitidas no restringen. El helper `lemoon-style-quiz-filters.js` traduce forma/material a los valores Shopify reales y afinidades a GIDs del diccionario de la tienda. La configuración Liquid exporta tipos reconocidos desde `shop.types`, entradas de `metaobjects.lemoon_style_trait.values` y parámetros realmente expuestos por `collections['all'].filters`. Un criterio seleccionado sin referencia o filtro válido muestra el error localizado, conserva respuestas y ofrece catálogo; no se emite una búsqueda parcial.
+
+La colección conserva sus tarjetas canónicas, chips/filtros editables, ordenación, contador, paginación y vacío reales. El quiz ya no enumera candidatos, puntúa afinidad, carga tarjetas/precios ni impone los antiguos límites de 50 productos/20 variantes. `lemoon-quiz-candidate` y assets visuales anteriores se conservan como legado, sin consumidor en la sección actual. No ampliar coincidencias ni sustituir el filtrado nativo por filtrado de la página visible.
+
+El inicio conserva espacio y aspecto navy desde el primer render con JavaScript, deshabilitado hasta enlazar el controlador. El marcador síncrono oculta el bloque de respaldo durante esa carga; no hay alturas rígidas. Sin JavaScript, descarga fallida o configuración inválida, permanece la alternativa de catálogo y se oculta el inicio inoperante.
+
+El acabado local conserva fotografía editorial completa (`contain`), marco cálido de radio lg, contorno desplazado y trama tenue navy. Portada configurable o respaldo [editorial v1](docs/design/style-quiz-prototype/generated-images-v1/README.md) 700/1400px; cuatro usos 480/960px, 3:2, dimensiones explícitas, alt vacío y carga diferida. Categorías usan la [serie de estudio v1](docs/design/style-quiz-prototype/generated-category-studio-v1/README.md), una montura óptica o solar en perspectiva sobre blanco, JPEG480/960 y `contain`. Materiales y acabados conservan sus series documentadas abajo. Son referencias conceptuales, no fotografías de SKU ni evidencia de composición. Indicador circular en reposo, check/acento lemon al seleccionar, foco independiente y elevación máxima de 2px solo con puntero fino. Reduced motion retira movimiento; forced colors conserva borde/check y retira trama/sombra.
+
+La familia Forma conserva ocho outlines frontales realistas simplificados: contorno navy único de 5 unidades, remates redondeados, sin relleno, sombra, líneas interiores ni microdetalles. Cat-eye con parte superior menos curvada; geométrico de facetas rectas y esquinas miter; Aviador conserva exactamente su geometría aprobada. Gradientes/clipPaths usan IDs únicos por sección/grupo/opción. Presencia mantiene la silueta neutra y la misma base con montura escalada, sin inferencia de talla física. [Referencias visuales conservadas](docs/design/style-quiz-prototype/visual-finishing-spec.md).
+
+El comportamiento local preparado no demuestra activación CMS, filtros nativos completos, proyecciones actualizadas ni despliegue del back office. El estado administrativo y los bloqueos vigentes se registran en la [guía de catálogo](docs/catalog/style-quiz.md#estado-de-preparación-al-06-11-2026); requieren QA real antes de declarar la entrega operativa.
 
 ### Movimiento e interacción
 
@@ -178,7 +208,7 @@ En campos con icono usar el tamaño 24px de la referencia Input y reservar espac
 | Familia / fuente | Regla de implementación |
 | --- | --- |
 | [Product card](snippets/card-product.liquid), [CSS](assets/lemoon-components.css), [JS](assets/lemoon-product-card.js) | Reutilizar el snippet. Outer card transparente y radio 0; media warm con radio 12px, proporción 100/96 y max-height 280px ≥990. Imagen completa `object-fit:contain`. Mantener la frontal hasta que cargue la secundaria; sin secundaria, conservar frontal |
-| Texto de tarjeta | Base: nombre Hanken 13px/16px, precio Urbanist 600 18px/22px; precio anterior Hanken 14px/18px. PLP sobrescribe nombre a 15px ≥990, 14px entre 750–989 y 13px móvil; precio regular 17px ≥750 y 16px móvil. No aplicar H3 global al nombre |
+| Texto de tarjeta | Base: nombre Instrument Sans 13px/16px, precio Urbanist 600 18px/22px; precio anterior Instrument Sans 14px/18px. PLP sobrescribe nombre a 15px ≥990, 14px entre 750–989 y 13px móvil; precio regular 17px ≥750 y 16px móvil. No aplicar H3 global al nombre |
 | Etiquetas de producto | `.lemoon-product-card__label` usa radio full; new navy/blanco, flash-sale lemon/navy, sold-out gris/blanco, best-seller según su clase. Datos de disponibilidad, descuento y tags reales determinan su presencia |
 | Badges genéricos | Editorial `--badge-corner-radius`: 0; compacto `--lemoon-radius-sm`: 4px; chips `--lemoon-radius-lg`: 20px. No sustituir con estos radios las etiquetas de producto que ya tienen regla local |
 | Swatches | Reutilizar [swatch-input](snippets/swatch-input.liquid) o swatches del snippet de tarjeta; mantener tamaño local, círculo, nombre y estado seleccionado accesible. No imponer los 20px del frame a todas las superficies |
@@ -231,10 +261,44 @@ Para mantener la página de términos, partir de [page.terminos-y-condiciones.js
 
 1. Conservar `kind:terms` y el padding de template 64px superior/inferior. La fórmula local `×0.625` produce 40px bajo 750px.
 2. Mantener H1 Urbanist 300, 4.6rem desktop/3.4rem móvil, leading 1.15, tracking −0.5px y color brand. Es excepción local; no sustituirlo por H1 base 4/3.2rem.
-3. Mantener una columna centrada de hasta 66rem, sin breadcrumb ni índice lateral. El cuerpo usa Hanken 1.6rem/1.6, con H2 de 2.4rem y H3 de 2rem. Ninguna de estas medidas cambia el ancho global.
+3. Mantener una columna centrada de hasta 66rem, sin breadcrumb ni índice lateral. El cuerpo usa Instrument Sans 1.6rem/1.6, con H2 de 2.4rem y H3 de 2rem. Ninguna de estas medidas cambia el ancho global.
 4. Conservar enlaces del contenido y ayuda con foco navy 2px/offset 4px; preservar destinos de políticas nativas y el contenido CMS cuando `demo_data` esté desactivado.
 5. El template contiene `demo_data:true`: el ticket de contenido [LEM-119](https://linear.app/antekera/issue/LEM-119) debe resolver el texto definitivo antes de publicar. Aplicar esta guía no cambia ese setting ni convierte el texto de muestra en términos comerciales.
 6. Revisar lectura, teclado, zoom, enlaces y desbordes a 390px y desktop, incluidos ambos lados de 750px. Verificar asignación CMS en la entrega de la página.
+
+### Quiz: presentación compacta de colores
+
+El paso Color usa siete opciones: Colores, Tonos neutros, Negros, Carey, Bicolor, Transparentes y Plateados, sin Dorados. Botones horizontales de al menos72px, muestra SVG plana32×32 a la izquierda y texto HTML al lado; tres columnas desde 750px y dos en móvil. Sin esferas grandes, volumen, sombras de muestra ni reflejos que simulen una bola. Carey tiene manchas orgánicas, Bicolor dos mitades y Plateados una franja plana; Transparentes representa el armazón. La selección usa borde navy, superficie cálida y check en esquina, visible solo al seleccionar; foco de teclado permanece independiente.
+
+Se reutilizan `pattern/tortoise` y `transparency/transparent` para Carey y Transparentes; se editan únicamente en Color y cada criterio conserva su filtro independiente; Detalles conserva solo Acabados y Materiales, sin controles de patrón ni transparencia. Los códigos históricos brown/light coinciden con Tonos neutros; Plateados no se deduce de material metal. El nuevo diseño se presenta para revisión humana en local.
+
+### Quiz: imágenes de materiales
+
+El panel Materiales de Detalles sustituye las muestras SVG visibles por la [serie de estudio v1](docs/design/style-quiz-prototype/generated-material-studio-v1/README.md): seis imágenes generadas de una montura clásica en perspectiva sobre blanco, coherentes en encuadre y luz con el primer paso. Acetato, metal, titanio, TR-90, madera y mixto conservan etiquetas y códigos actuales. JPEG480/960, dimensiones960×640, contain3:2, alt vacío y carga diferida. Se conserva la retícula actual de dos columnas y el funcionamiento de selección. Los SVG anteriores siguen íntegros en el repositorio.
+
+Las imágenes son referencias visuales conceptuales de superficies y construcción, no prueba de composición, peso, resistencia o compatibilidad. No se codifica un material por su color o brillo: metal/titanio y acetato/TR-90 pueden parecerse; la etiqueta y los datos verificados del producto mantienen su función. Estas imágenes no alteran atributos Shopify ni la apariencia de Acabados.
+
+### Quiz: muestras realistas de acabados
+
+Acabados mantiene Mate y Brillante en dos tarjetas horizontales compactas como Color, con miniatura fotográfica cuadrada64×64 junto a la etiqueta. La [serie macro v1](docs/design/style-quiz-prototype/generated-finish-macro-v1/README.md) muestra el mismo tono carbón y un acercamiento al borde de un armazón: textura difusa para mate y reflejo de luz para brillante. Imágenes decorativas JPEG128/256, proporción1:1 sin recorte, alt vacío y carga diferida; altura mínima96px, foco y selección nativos. El check se muestra al seleccionar, siguiendo Color. Los SVG anteriores se conservan. Referencias generadas de acabado, no fotografía de SKU; sin inferir atributos o materiales desde la fotografía.
+
+### Quiz: tres formas por fila
+
+El paso Forma mantiene tres columnas en escritorio, tablet y móvil. En móvil las tarjetas de forma usan padding8px y etiquetas 16px de peso400, con reflujo natural para conservar los nombres legibles en la retícula de tres. Sin cambios a dibujos, selección ni las columnas de otros pasos.
+
+### Quiz: iconos de tamaño
+
+El último paso sustituye el personaje ilustrado por una silueta frontal neutra de cabeza, cuello y hombros, sin pelo, rasgos faciales ni rellenos de piel/ropa. Contorno navy3 con opacidad0.6 y montura navy4.5 de forma suavemente rectangular. Misma silueta y posición en las tres opciones; solo escala el armazón (0.78/0.95/1.13). Se conservan etiquetas, selección y el carácter visual de compacto/intermedio/oversize; no determina talla física ni introduce rangos de medidas.
+
+### Quiz: medidas de referencia editables
+
+El acordeón del último paso incluye chevron navy20px que gira al abrir, tres campos opcionales en mm (ancho del lente, puente y patilla), el ejemplo50/18/140 y feedback accesible. Tres valores enteros válidos autoseleccionan una única proporción visual mediante radios; la elección manual posterior se conserva al restaurar su snapshot o cerrar/abrir el acordeón. Editar las medidas recalcula; borrar o invalidar una medida retira la selección automática, preservando una elección manual. El último snapshot conserva campos, feedback y selección al volver desde colección. Se guardan solo en el historial de navegación, sin perfil permanente, envío al servidor ni cambios Shopify.
+
+La propuesta local usa el índice nominal `2 × ancho del lente + puente`: menor118 → compacto,118–128 → intermedio, mayor128 → oversize. Es una heurística editorial de esta exploración, pendiente de revisión/calibración con catálogo, no un estándar de talla ni el ancho total del armazón. Patilla se valida y conserva como referencia, sin afectar la proporción frontal. Rangos de entrada de la propuesta: lente30–80, puente10–35, patilla100–180mm. Una referencia incompleta/inválida no bloquea continuar sin sugerencia.
+
+### Quiz: salida a la colección nativa
+
+La decisión del 06-11-2026 sustituye el resumen y listado embebidos anteriores por la navegación filtrada a `/collections/all`. Las seis preguntas y sus snapshots permanecen en el quiz; resultados, tarjetas canónicas y edición de filtros pertenecen a la PLP. No se modifica `custom.style_quiz_demo` al retirar una presentación: las banderas y evidencias históricas conservan su significado. El [contrato vigente](#quiz-de-estilo-navegación-a-catálogo) y la [guía de catálogo](docs/catalog/style-quiz.md) definen los filtros y la verificación pendiente.
 
 ### Guía de medidas: PDP y página educativa
 

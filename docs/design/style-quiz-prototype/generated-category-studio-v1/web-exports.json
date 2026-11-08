@@ -1,0 +1,38 @@
+[
+  {
+    "path": "assets/lemoon-quiz-category-optical-studio-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 19921,
+    "sha256": "f3c706f434ea57b134bba0bdced8087b9519c785d0a7786504ef0ef1d437bcae",
+    "format": "jpeg",
+    "quality": 85
+  },
+  {
+    "path": "assets/lemoon-quiz-category-optical-studio-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 71188,
+    "sha256": "1f6e2d6e48e3848c52c46721fc26800bc803679482bdbca5215dc6781fca6cc3",
+    "format": "jpeg",
+    "quality": 85
+  },
+  {
+    "path": "assets/lemoon-quiz-category-sun-studio-v1-480.jpg",
+    "width": 480,
+    "height": 320,
+    "bytes": 23706,
+    "sha256": "52d14dcf778cf57bb6b5a8f7ac9003652c866f1a1cc80dca47963d3b4a6da3a1",
+    "format": "jpeg",
+    "quality": 85
+  },
+  {
+    "path": "assets/lemoon-quiz-category-sun-studio-v1-960.jpg",
+    "width": 960,
+    "height": 640,
+    "bytes": 79584,
+    "sha256": "8ef722bdab23c2b47941c5b451e4309bed4fe21680d8ffc13f8a8684ca33bc03",
+    "format": "jpeg",
+    "quality": 85
+  }
+]

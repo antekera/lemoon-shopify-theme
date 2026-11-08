@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "store": "lemoon.cl",
+  "type": "lemoon_style_trait",
+  "scope": "Additive dictionary update only; no product/variant writes, deletes or Shopify theme push.",
+  "appendAllowedCodes": [
+    "neutral",
+    "two_tone",
+    "silver"
+  ],
+  "newEntries": [
+    {
+      "handle": "color-neutral",
+      "fields": {
+        "group": "color",
+        "code": "neutral",
+        "label": "Tonos neutros",
+        "description": "Tonos neutros del armazón: grises, cafés, beige y crema. Negro se clasifica por separado; no inferir patrón ni transparencia."
+      }
+    },
+    {
+      "handle": "color-two-tone",
+      "fields": {
+        "group": "color",
+        "code": "two_tone",
+        "label": "Bicolor",
+        "description": "Dos tonos o colores diferenciados en el mismo armazón. No sumar colores de variantes distintas ni inferir material o patrón."
+      }
+    },
+    {
+      "handle": "color-silver",
+      "fields": {
+        "group": "color",
+        "code": "silver",
+        "label": "Plateados",
+        "description": "Apariencia plateada del armazón. No acredita plata, metal ni otra composición; confirmar el color y clasificar material por separado."
+      }
+    }
+  ],
+  "existingEntryUpdate": {
+    "handle": "color-black",
+    "observedReferences": 0,
+    "fields": {
+      "label": "Negros",
+      "description": "Familia cromática negra del armazón. Clasificar los grises como neutros. Evaluar color por separado de patrón, acabado y transparencia."
+    }
+  },
+  "uiReuse": {
+    "Carey": {
+      "group": "pattern",
+      "code": "tortoise"
+    },
+    "Transparentes": {
+      "group": "transparency",
+      "code": "transparent"
+    }
+  },
+  "legacyNeutralAliases": [
+    "brown",
+    "light"
+  ],
+  "remoteVerification": {
+    "date": "2026-11-06",
+    "beforeCount": 18,
+    "afterCount": 21,
+    "priorEntryIDsPreserved": true,
+    "productVariantWrites": 0,
+    "themePush": false,
+    "entryIDs": {
+      "color-neutral": "gid://shopify/Metaobject/660676051112",
+      "color-two-tone": "gid://shopify/Metaobject/660676083880",
+      "color-silver": "gid://shopify/Metaobject/660676116648"
+    }
+  }
+}

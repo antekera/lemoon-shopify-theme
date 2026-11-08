@@ -10,6 +10,7 @@ import { renderContractFixture } from '../helpers/consumer-contract-renderer.mjs
 
 import { renderAdoptionFixture } from '../helpers/component-adoption-renderer.mjs';
 import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
+import { renderQuizFixture } from '../helpers/style-quiz-renderer.mjs';
 import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
 import { renderSizeGuidePageFixture } from '../helpers/size-guide-page-renderer.mjs';
 
@@ -65,6 +66,15 @@ const server = createServer(async (request, response) => {
       const query = new URL(request.url, 'http://127.0.0.1').searchParams;
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(renderSizeGuideFixture(query.get('shell') || 'standard', query.get('scenario') || 'complete'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/style-quiz.html') {
+    try {
+      const scenario = new URL(request.url, 'http://127.0.0.1:4173').searchParams.get('scenario') || 'default';
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderQuizFixture(scenario));
     } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
