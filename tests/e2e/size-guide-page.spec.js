@@ -77,6 +77,8 @@ test('guide page: 320px with every rendered text and control doubled to 200%', a
   for (const selector of ['.lemoon-guide__title', '.lemoon-size-comparison', '.lemoon-measurement-diagram', '.lemoon-guide__help']) expect(await page.locator(selector).evaluate(element => element.scrollWidth <= element.clientWidth)).toBe(true);
   const links = page.locator('.lemoon-guide__nav a');
   for (let index = 0; index < 3; index++) {
+    // Finish the previous smooth anchor scroll before focusing the offscreen index.
+    await links.nth(index).scrollIntoViewIfNeeded();
     await links.nth(index).focus(); await page.keyboard.press('Enter');
     await expect(page.locator(`#Guide-measurement-page-fixture-${index + 1}`)).toBeInViewport();
   }
