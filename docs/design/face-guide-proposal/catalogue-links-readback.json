@@ -1,0 +1,117 @@
+[
+  {
+    "face": "ovalado",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=rectangular&filter.p.m.custom.frame_shape=redondo",
+    "shapes": [
+      "rectangular",
+      "redondo"
+    ],
+    "readback": {
+      "cards": 13,
+      "checked": [
+        "redondo",
+        "rectangular",
+        "redondo",
+        "rectangular"
+      ],
+      "count": "13 lentes",
+      "url": "https://miguels-mac-mini.tail51dddb.ts.net:9452/collections/all?filter.p.m.custom.frame_shape=rectangular&filter.p.m.custom.frame_shape=redondo"
+    }
+  },
+  {
+    "face": "redondo",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=rectangular&filter.p.m.custom.frame_shape=geom%C3%A9trico",
+    "shapes": [
+      "rectangular",
+      "geométrico"
+    ],
+    "readback": {
+      "cards": 9,
+      "checked": [
+        "rectangular",
+        "geométrico",
+        "rectangular",
+        "geométrico"
+      ],
+      "count": "9 lentes",
+      "url": "https://miguels-mac-mini.tail51dddb.ts.net:9452/collections/all?filter.p.m.custom.frame_shape=rectangular&filter.p.m.custom.frame_shape=geom%C3%A9trico"
+    }
+  },
+  {
+    "face": "cuadrado",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=redondo&filter.p.m.custom.frame_shape=ovalado",
+    "shapes": [
+      "redondo",
+      "ovalado"
+    ],
+    "readback": {
+      "cards": 13,
+      "checked": [
+        "redondo",
+        "ovalado",
+        "redondo",
+        "ovalado"
+      ],
+      "count": "13 lentes",
+      "url": "https://miguels-mac-mini.tail51dddb.ts.net:9452/collections/all?filter.p.m.custom.frame_shape=redondo&filter.p.m.custom.frame_shape=ovalado"
+    }
+  },
+  {
+    "face": "corazon",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=ovalado&filter.p.m.custom.frame_shape=aviador",
+    "shapes": [
+      "ovalado",
+      "aviador"
+    ],
+    "readback": {
+      "cards": 11,
+      "checked": [
+        "aviador",
+        "ovalado",
+        "aviador",
+        "ovalado"
+      ],
+      "count": "11 lentes",
+      "url": "https://miguels-mac-mini.tail51dddb.ts.net:9452/collections/all?filter.p.m.custom.frame_shape=ovalado&filter.p.m.custom.frame_shape=aviador"
+    }
+  },
+  {
+    "face": "diamante",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=ovalado&filter.p.m.custom.frame_shape=ojo+de+gato",
+    "shapes": [
+      "ovalado",
+      "ojo de gato"
+    ],
+    "readback": {
+      "cards": 11,
+      "checked": [
+        "ovalado",
+        "ojo de gato",
+        "ovalado",
+        "ojo de gato"
+      ],
+      "count": "11 lentes",
+      "url": "https://miguels-mac-mini.tail51dddb.ts.net:9452/collections/all?filter.p.m.custom.frame_shape=ovalado&filter.p.m.custom.frame_shape=ojo+de+gato"
+    }
+  },
+  {
+    "face": "alargado",
+    "relative_url": "/collections/all?filter.p.m.custom.frame_shape=aviador&filter.p.m.custom.frame_shape=redondo",
+    "shapes": [
+      "aviador",
+      "redondo"
+    ],
+    "verified_at_utc": "2026-11-08T16:56:03.309Z",
+    "readback": {
+      "cards": 12,
+      "checked": [
+        "redondo",
+        "aviador",
+        "redondo",
+        "aviador"
+      ],
+      "count": "12 lentes",
+      "url": "http://127.0.0.1:9296/collections/all?filter.p.m.custom.frame_shape=aviador&filter.p.m.custom.frame_shape=redondo"
+    }
+  }
+]

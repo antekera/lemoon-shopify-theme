@@ -1,0 +1,62 @@
+[
+  {
+    "path": "docs/design/face-guide-proposal/raster-fit-marked-v1/bridge-master.png",
+    "bytes": 2300992,
+    "sha256": "2759509f12d5a97db2c48f9833409866e0df1e80798ea5f96fb24ef4ff23373d"
+  },
+  {
+    "path": "docs/design/face-guide-proposal/raster-fit-marked-v1/cheek-master.png",
+    "bytes": 2319559,
+    "sha256": "e217b946c6a603098abc5bbd97d8a9de14c1081b29e93023c1af6b8ae4b62ba5"
+  },
+  {
+    "path": "docs/design/face-guide-proposal/raster-fit-marked-v1/temple-master.png",
+    "bytes": 2328219,
+    "sha256": "332b83ef831183b6e31e45816fdc1c7009c38976c0a0506a2f04e384fa75748a"
+  },
+  {
+    "path": "assets/lemoon-fit-bridge-editorial-v1-1400.webp",
+    "bytes": 54544,
+    "sha256": "ee03722eeca2d798d06a116008f86b2f726fa4c210c0a25fc61c4fc7e0bec71d"
+  },
+  {
+    "path": "assets/lemoon-fit-bridge-editorial-v1-350.webp",
+    "bytes": 4548,
+    "sha256": "557a4d29b0fe0763eb8e417921f62524bfa5652705e8ef458a1c6c68dfeca73b"
+  },
+  {
+    "path": "assets/lemoon-fit-bridge-editorial-v1-700.webp",
+    "bytes": 15560,
+    "sha256": "2572a5468a5aba9392d7126ba708d5d42d6698016d6e366effdd14b2531403f3"
+  },
+  {
+    "path": "assets/lemoon-fit-cheek-editorial-v1-1400.webp",
+    "bytes": 64142,
+    "sha256": "aeb3e35ac547f9ffb0cee6881bdefd201d7df09c4d324c2ae621762279db5f3b"
+  },
+  {
+    "path": "assets/lemoon-fit-cheek-editorial-v1-350.webp",
+    "bytes": 4930,
+    "sha256": "8ba176fdd9e828c7d4204d3de0d7eac3f508a8413293c5a80b236380fc5e489b"
+  },
+  {
+    "path": "assets/lemoon-fit-cheek-editorial-v1-700.webp",
+    "bytes": 17692,
+    "sha256": "1f2866279c564cd2eb3673d5c1fa3258686bff93f1eb88437d62024c7201ce05"
+  },
+  {
+    "path": "assets/lemoon-fit-temple-editorial-v1-1400.webp",
+    "bytes": 63140,
+    "sha256": "9cf02ce66df2719e363c4f0fdb0dd026269920d25843593fdf9ca37538f1e028"
+  },
+  {
+    "path": "assets/lemoon-fit-temple-editorial-v1-350.webp",
+    "bytes": 4560,
+    "sha256": "efd2916508f8ef1ff2a78a2d541ea8b7eff3bae37d33dd3d084a3a89ae38dd72"
+  },
+  {
+    "path": "assets/lemoon-fit-temple-editorial-v1-700.webp",
+    "bytes": 17064,
+    "sha256": "7f7c99a0ccedb43dce97950906e140f5b5d884b3c51b34c64aa204d452d8b1fd"
+  }
+]

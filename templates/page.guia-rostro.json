@@ -1,9 +1,66 @@
 {
   "sections": {
     "main": {
-      "type": "lemoon-guide-page",
+      "type": "lemoon-face-guide",
+      "blocks": {
+        "oval": {
+          "type": "family",
+          "settings": {
+            "kind": "oval",
+            "shape_1": "rectangular",
+            "shape_2": "redondo"
+          }
+        },
+        "round": {
+          "type": "family",
+          "settings": {
+            "kind": "round",
+            "shape_1": "rectangular",
+            "shape_2": "geométrico"
+          }
+        },
+        "square": {
+          "type": "family",
+          "settings": {
+            "kind": "square",
+            "shape_1": "redondo",
+            "shape_2": "ovalado"
+          }
+        },
+        "heart": {
+          "type": "family",
+          "settings": {
+            "kind": "heart",
+            "shape_1": "ovalado",
+            "shape_2": "aviador"
+          }
+        },
+        "diamond": {
+          "type": "family",
+          "settings": {
+            "kind": "diamond",
+            "shape_1": "ovalado",
+            "shape_2": "ojo de gato"
+          }
+        },
+        "long": {
+          "type": "family",
+          "settings": {
+            "kind": "long",
+            "shape_1": "aviador",
+            "shape_2": "redondo"
+          }
+        }
+      },
+      "block_order": [
+        "oval",
+        "round",
+        "square",
+        "heart",
+        "diamond",
+        "long"
+      ],
       "settings": {
-        "guide_kind": "face",
         "padding_top": 64,
         "padding_bottom": 64
       }

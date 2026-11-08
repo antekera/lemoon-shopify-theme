@@ -1,0 +1,101 @@
+{% doc %}
+  Original decorative fit illustrations in the face portraits' ivory/navy family.
+  HTML captions carry the complete advice; no scale or optical centring claims.
+  @param {string} kind - bridge, cheek or temple.
+  @param {string} instance_id - Parent section ID; gradients are unique by section/kind.
+{% enddoc %}
+{%- assign fit_art_id = instance_id | append: '-' | append: kind | handleize | prepend: 'FaceFitArt-' -%}
+<svg viewBox="0 0 400 250" width="400" height="250" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="{{ fit_art_id }}-skin" cx="43%" cy="35%" r="70%">
+      <stop stop-color="var(--lemoon-surface-page)"/>
+      <stop offset=".58" stop-color="var(--lemoon-surface-warm)"/>
+      <stop offset="1" stop-color="var(--lemoon-surface-warm-hover)"/>
+    </radialGradient>
+    <linearGradient id="{{ fit_art_id }}-neck" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="currentColor" stop-opacity=".13"/>
+      <stop offset=".55" stop-color="var(--lemoon-surface-warm-hover)" stop-opacity=".5"/>
+      <stop offset="1" stop-color="var(--lemoon-surface-warm)" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="{{ fit_art_id }}-shade">
+      <stop stop-color="currentColor" stop-opacity=".13"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="{{ fit_art_id }}-soft" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="currentColor" stop-opacity=".18"/>
+      <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+    </linearGradient>
+    {%- if kind == 'cheek' or kind == 'temple' -%}
+      <linearGradient id="{{ fit_art_id }}-outline" gradientUnits="userSpaceOnUse" x1="0" y1="224" x2="0" y2="244">
+        <stop stop-color="currentColor"/>
+        <stop offset=".5" stop-color="currentColor"/>
+        <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+      </linearGradient>
+    {%- endif -%}
+  </defs>
+  {%- case kind -%}
+    {%- when 'bridge' -%}
+      <!-- Frontal crop: the bridge rests at the sides of a clearly modelled nose. -->
+      <path d="M166 197C167 217 163 231 146 239L113 250H287L254 239C237 231 233 217 234 197" fill="url(#{{ fit_art_id }}-neck)" stroke-opacity=".5"/>
+      <path d="M106 89C91 77 86 91 92 111C94 124 99 134 109 137M294 89C309 77 314 91 308 111C306 124 301 134 291 137" fill="url(#{{ fit_art_id }}-skin)"/>
+      <path d="M100 94C95 88 95 101 99 111L105 122M300 94C305 88 305 101 301 111L295 122" stroke-opacity=".42"/>
+      <path d="M200-24C147-24 107 8 104 61C102 100 108 144 124 168C142 196 168 216 200 219C232 216 258 196 276 168C292 144 298 100 296 61C293 8 253-24 200-24Z" fill="url(#{{ fit_art_id }}-skin)"/>
+      <ellipse cx="124" cy="141" rx="21" ry="53" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <ellipse cx="276" cy="141" rx="21" ry="53" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <ellipse cx="185" cy="118" rx="13" ry="31" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <ellipse cx="215" cy="118" rx="13" ry="31" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <path d="M123 75C138 65 158 65 175 72C157 69 140 70 124 78Z M277 75C262 65 242 65 225 72C243 69 260 70 276 78Z" fill="currentColor" fill-opacity=".32" stroke="none"/>
+      <path d="M125 96C138 86 157 86 172 97C158 107 139 108 125 96ZM275 96C262 86 243 86 228 97C242 107 261 108 275 96Z" fill="var(--lemoon-surface-page)" stroke-opacity=".7"/>
+      <ellipse cx="150" cy="96" rx="6" ry="7" fill="currentColor" fill-opacity=".4" stroke-width=".8"/>
+      <ellipse cx="250" cy="96" rx="6" ry="7" fill="currentColor" fill-opacity=".4" stroke-width=".8"/>
+      <circle cx="150" cy="96" r="2.8" fill="currentColor" stroke="none"/><circle cx="250" cy="96" r="2.8" fill="currentColor" stroke="none"/>
+      <circle cx="148" cy="94" r="1.5" fill="var(--lemoon-surface-page)" stroke="none"/><circle cx="248" cy="94" r="1.5" fill="var(--lemoon-surface-page)" stroke="none"/>
+      <path d="M130 109C143 114 160 113 170 108M270 109C257 114 240 113 230 108" stroke-opacity=".18"/>
+      <path d="M194 100C193 114 190 125 187 132C185 137 188 142 194 142M206 100C207 114 210 125 213 132C215 137 212 142 206 142" stroke-opacity=".38"/>
+      <path d="M189 140C191 136 196 137 198 141M211 140C209 136 204 137 202 141" stroke-opacity=".72"/>
+      <path d="M195 145C198 147 202 147 205 145" stroke-opacity=".3"/>
+      <ellipse cx="200" cy="158" rx="10" ry="11" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <path d="M174 173C185 169 192 168 200 171C208 168 215 169 226 173C214 177 207 177 200 176C193 177 186 177 174 173Z" fill="currentColor" fill-opacity=".09" stroke-opacity=".36"/>
+      <path d="M178 174C191 175 209 175 222 174M184 183C194 187 207 187 216 183" stroke-opacity=".35"/>
+      <g stroke-width="2.8">
+        <path d="M112 81C130 76 157 76 178 80C184 81 187 85 186 91L182 115C181 125 174 130 161 131C142 132 128 129 120 124C115 121 112 116 111 108L108 90C107 85 108 82 112 81ZM288 81C270 76 243 76 222 80C216 81 213 85 214 91L218 115C219 125 226 130 239 131C258 132 272 129 280 124C285 121 288 116 289 108L292 90C293 85 292 82 288 81ZM186 93C194 85 206 85 214 93M108 88L99 87M292 88L301 87"/>
+      </g>
+      <path d="M188 97L186 107M212 97L214 107" stroke-width="2" stroke-opacity=".65"/>
+    {%- when 'cheek' -%}
+      <!-- Three-quarter view: one soft facial contour, with the lower rim clear of the cheek. -->
+      <path d="M224-13C176-13 139 10 129 50C124 67 128 83 127 96C126 108 120 117 114 124C110 128 111 131 116 133C121 135 127 135 130 137C133 140 132 145 131 149C129 152 128 155 131 158C133 160 136 161 136 165C136 178 147 192 165 200C173 204 183 206 189 204C191 216 182 227 169 232C162 235 154 237 147 238C190 244 250 244 296 238C278 232 261 215 256 178C266 166 275 153 281 139C296 110 305 77 300 48C294 12 264-12 224-13Z" fill="url(#{{ fit_art_id }}-skin)" stroke="url(#{{ fit_art_id }}-outline)"/>
+      <path d="M165 200C184 209 206 205 225 196C250 183 269 162 281 139" stroke-opacity=".3"/>
+      <ellipse cx="222" cy="152" rx="44" ry="37" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <ellipse cx="142" cy="126" rx="12" ry="23" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <path d="M148 74C163 65 183 66 200 73C183 71 164 71 149 77Z M121 77C126 73 133 73 139 75L138 78C132 76 127 78 122 80Z" fill="currentColor" fill-opacity=".32" stroke="none"/>
+      <path d="M151 95C163 86 180 87 193 96C180 104 164 104 151 95Z" fill="var(--lemoon-surface-page)" stroke-opacity=".7"/>
+      <ellipse cx="170" cy="95" rx="5.1" ry="6.2" fill="currentColor" fill-opacity=".42" stroke-width=".8"/><circle cx="170" cy="95" r="2.4" fill="currentColor" stroke="none"/><circle cx="168" cy="93" r="1.2" fill="var(--lemoon-surface-page)" stroke="none"/>
+      <path d="M128 95.5C131.2 91.3 138.6 91.9 142 95.9C138.7 99.7 131.6 99.1 128 95.5Z" fill="var(--lemoon-surface-page)" stroke-width=".9" stroke-opacity=".7"/>
+      <ellipse cx="135.1" cy="95.4" rx="2.5" ry="3" fill="currentColor" fill-opacity=".42" stroke-width=".55"/>
+      <circle cx="135.1" cy="95.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="134.3" cy="94.4" r=".65" fill="var(--lemoon-surface-page)" stroke="none"/>
+      <path d="M156 107C168 111 181 110 190 107" stroke-opacity=".28"/>
+      <path d="M122 133C125 130 129 131 131 134" stroke-opacity=".42"/>
+      <path d="M156 150C174 142 196 140 213 145" stroke-opacity=".16"/>
+      <path d="M133 157C140 154 147 155 154 157M140 167C146 169 152 169 158 167" stroke-opacity=".34"/>
+      <path d="M274 101C273 91 281 85 288 89C298 94 299 106 294 119C289 133 281 142 274 140C269 137 270 129 271 124" fill="url(#{{ fit_art_id }}-skin)"/>
+      <path d="M281 101C284 92 291 96 290 104C289 112 281 115 279 121M278 130C283 126 287 127 281 133" stroke-opacity=".45"/>
+      <g stroke-width="2.7">
+        <path d="M155 82C172 78 197 79 212 83C218 85 220 89 219 96L211 117C208 124 201 129 189 130C175 132 162 129 157 122C152 116 151 106 150 96L149 90C148 85 150 83 155 82ZM120 85C127 82 135 82 139 84C143 85 144 89 144 93L141 109C139 117 135 121 129 120C123 119 120 114 118 106L117 93C116 89 117 86 120 85ZM144 92C146 88 148 88 150 92M219 91L270 96C275 97 278 100 279 105"/>
+      </g>
+    {%- when 'temple' -%}
+      <!-- Side view: a smooth nose/lip silhouette and one temple curve behind the ear. -->
+      <path d="M218-16C166-21 123 7 114 48C110 65 115 82 112 96C109 109 102 119 96 127C93 131 94 135 100 138C105 140 112 140 115 143C119 146 117 150 115 153C113 155 115 158 120 160C124 162 124 165 123 168C125 181 138 196 156 202C161 204 166 205 171 204C174 218 162 230 148 234C140 237 132 239 125 240C172 245 249 245 304 240C297 238 291 237 284 235C265 228 250 211 244 169C253 153 260 133 264 112C274 83 273 49 259 20C250 1 236-12 218-16Z" fill="url(#{{ fit_art_id }}-skin)" stroke="url(#{{ fit_art_id }}-outline)"/>
+      <path d="M156 202C177 210 196 199 215 183C238 164 255 139 264 112" stroke-opacity=".3"/>
+      <ellipse cx="230" cy="147" rx="26" ry="45" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <ellipse cx="150" cy="129" rx="21" ry="27" fill="url(#{{ fit_art_id }}-shade)" stroke="none"/>
+      <path d="M120 79C128 74 138 75 146 80C137 78 128 79 121 82Z" fill="currentColor" fill-opacity=".32" stroke="none"/>
+      <path d="M120 100C124 96 131 97 136 101C131 105 125 104 120 100Z" fill="var(--lemoon-surface-page)" stroke-opacity=".65"/>
+      <ellipse cx="127" cy="100" rx="2.8" ry="4.6" fill="currentColor" fill-opacity=".5" stroke-width=".7"/>
+      <path d="M105 138C108 135 112 136 114 138M119 159C124 157 130 158 135 160M132 176C139 179 146 179 152 177" stroke-opacity=".32"/>
+      <path d="M146 94C171 92 201 93 224 94C234 94 241 91 247 97C253 103 254 117 249 130L245 139" stroke-width="2.8"/>
+      <path d="M226 104C225 95 233 89 242 92C253 96 258 109 255 123C252 137 245 147 237 149C230 149 226 141 227 131" fill="url(#{{ fit_art_id }}-skin)"/>
+      <path d="M234 104C235 96 243 98 246 106C248 115 242 123 237 129M234 112C239 108 243 113 239 118M235 135C240 131 243 136 238 141" stroke-opacity=".45"/>
+      <path d="M116 88C124 86 137 87 145 91L146 111C145 119 141 125 135 126C128 126 122 121 119 114C116 106 115 96 116 88Z" stroke-width="2.8"/>
+      <path d="M224 94C232 94 240 91 247 97" stroke-width="2.8"/>
+  {%- endcase -%}
+</svg>

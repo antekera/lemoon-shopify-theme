@@ -1095,6 +1095,77 @@
       "budget": {
         "none": "No set limit"
       }
+    },
+    "lemoon_face_guide": {
+      "title": "Choose glasses for your face",
+      "intro": "Your face can give you ideas for choosing frames. Compare the illustrations and explore the shapes you like: they are starting points, and you choose what to wear.",
+      "index_title": "Look at the outline, explore the shapes",
+      "index_body": "Look straight ahead in a mirror. Notice where your face looks widest and whether curves or angles stand out. These six families are approximate; you may recognise features from more than one.",
+      "unknown_title": "Not sure about your shape?",
+      "unknown_body": "You do not need to choose just one. Take ideas from two families or start with the frames: curves to echo other curves, angles to create contrast. Try an option beyond the suggestions too. There is room for your taste here.",
+      "fit_title": "Shape guides your style. Check fit separately",
+      "fit_body": "You may like a silhouette and still need another size or a different fit. Compare the available measurements with frames you find comfortable; two models with similar numbers can feel different.",
+      "bridge_title": "Bridge",
+      "bridge_body": "It rests without pinching or constantly sliding.",
+      "cheek_title": "Cheekbones",
+      "cheek_body": "They do not push the frame upwards when you smile.",
+      "temple_title": "Temples",
+      "temple_body": "They do not press against the sides of your head or behind your ears.",
+      "fit_detail": "Eyebrows: look at their relationship with the upper rim and the expression you like; they do not need to follow an identical line. Eyes: observe their position inside the rims. This visual reference does not confirm prescription lens centration.",
+      "fit_help": "If frames pinch, move or need adjusting, consult an optical professional. Face shape does not determine your size or the lenses you need.",
+      "measure_label": "See how to measure my glasses",
+      "catalogue_label": "Explore frames",
+      "quiz_label": "Discover your style",
+      "filtered_label": "View frames",
+      "fallback_label": "View catalogue",
+      "fallback_hint": "Explore the full catalogue and choose available shapes using its filters.",
+      "custom_label": "Explore frames",
+      "families": {
+        "oval": {
+          "name": "Oval",
+          "cue_1": "Length stands out a little more than width.",
+          "cue_2": "The outline narrows in curves towards the chin.",
+          "reason": "Straight lines add contrast; curves echo the outline. Compare both to see how much presence you want your frames to have."
+        },
+        "round": {
+          "name": "Round",
+          "cue_1": "Width and length look similar.",
+          "cue_2": "The cheeks and jaw create a curved outline.",
+          "reason": "Straight edges and corners contrast with facial curves. If you prefer to echo those curves, you can also choose round frames."
+        },
+        "square": {
+          "name": "Square",
+          "cue_1": "The forehead and jaw have a similar width.",
+          "cue_2": "The angles of the jaw stand out in the outline.",
+          "reason": "Curved frames contrast with straighter lines. Angular frames can echo them if you prefer to give them more presence."
+        },
+        "heart": {
+          "name": "Heart",
+          "cue_1": "The forehead looks wider than the jaw.",
+          "cue_2": "The outline narrows towards the chin.",
+          "reason": "Curved lower edges add a rounded line at the centre of the face. A thin rim can give the frame less presence, if that is the effect you want."
+        },
+        "diamond": {
+          "name": "Diamond",
+          "cue_1": "The cheekbones are the widest part of the outline.",
+          "cue_2": "The forehead and jaw look narrower.",
+          "reason": "Curves contrast with angles; the raised corners of cat-eye frames draw attention to the upper part of the frame."
+        },
+        "long": {
+          "name": "Long",
+          "cue_1": "Length looks noticeably greater than width.",
+          "cue_2": "The forehead, cheekbones and jaw have similar widths.",
+          "reason": "Round frames and aviators with curved lower rims are options to explore. Compare taller designs, which occupy more space across the centre of the face. Frame shape does not guarantee that height; check photos and measurements."
+        }
+      },
+      "shapes": {
+        "rectangular": "Rectangular",
+        "redondo": "Round",
+        "geométrico": "Geometric",
+        "ovalado": "Oval",
+        "aviador": "Aviator",
+        "ojo de gato": "Cat-eye"
+      }
     }
   },
   "localization": {
