@@ -1,6 +1,6 @@
 # LEM-129 / LEM-105 — implementación y QA local
 
-Revisión gráfica vigente: [lentes clásicos y planos](lem-129-105-classic-flat.md), código `b9611c8e`, según la indicación posterior de Miguel. Las capturas y resultados de este documento pertenecen a su revisión histórica; las URLs compartidas muestran el snapshot más reciente.
+Revisión gráfica vigente: [referencia Donnalyn](lem-129-105-donnalyn.md), código `49e1fde5`, según la nueva referencia elegida por Miguel. Las capturas y resultados de este documento pertenecen a su revisión histórica; las URLs compartidas muestran el snapshot más reciente.
 
 Fecha: 07-11-2026. Código validado: `1db003a42b503ea0e780fac955e8426eb82a9ebf`, integrado con `main` `5bcb463bdd655720724b1df7c5c5be728e8d7100`. Rama `feat/lem-129-size-guide-modal`; [PR64](https://github.com/antekera/lemoon-shopify-theme/pull/64), borrador. Autorización de implementación: Miguel, «Implementalo» y «Continúa la implementación». La revisión humana del entregable de cada ticket sigue pendiente.
 
