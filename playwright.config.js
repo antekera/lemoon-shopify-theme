@@ -1,5 +1,8 @@
 import { defineConfig } from '@playwright/test';
 
+const fixturePort = process.env.LEMOON_FIXTURE_PORT || '4173';
+const fixtureURL = `http://127.0.0.1:${fixturePort}`;
+
 export default defineConfig({
   testDir: './tests/e2e',
   testMatch: '**/*.spec.js',
@@ -11,13 +14,13 @@ export default defineConfig({
     ['html', { open: 'never' }],
   ],
   use: {
-    baseURL: 'http://127.0.0.1:4173',
+    baseURL: fixtureURL,
     trace: 'on-first-retry',
   },
   projects: [{ name: 'chromium', use: { browserName: 'chromium' } }],
   webServer: {
     command: 'node tests/e2e/fixture-server.mjs',
-    url: 'http://127.0.0.1:4173/tests/fixtures/mobile-search.html',
+    url: `${fixtureURL}/tests/fixtures/mobile-search.html`,
     reuseExistingServer: !process.env.CI,
     timeout: 10_000,
   },

@@ -8,8 +8,8 @@ test('each guide template chooses one guide without duplicating the page heading
   for (const [slug, kind] of Object.entries(kinds)) {
     const template = json(`templates/page.guia-${slug}.json`);
     expect(template.order).toEqual(['main']);
-    expect(template.sections.main.type).toBe('lemoon-guide-page');
-    expect(template.sections.main.settings.guide_kind).toBe(kind);
+    expect(template.sections.main.type).toBe(slug === 'rostro' ? 'lemoon-face-guide' : 'lemoon-guide-page');
+    if (slug !== 'rostro') expect(template.sections.main.settings.guide_kind).toBe(kind);
   }
   for (const guide_kind of Object.values(kinds)) expect(render('lemoon-guide-page', { settings: { guide_kind } }).match(/<h1\b/g)).toHaveLength(1);
 });

@@ -1,0 +1,602 @@
+{{ 'lemoon-face-guide.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lemoon-face-guide.js' | asset_url }}" type="module"></script>
+{%- liquid
+  assign catalogue_url = routes.all_products_collection_url
+  assign quiz_url = section.settings.quiz_url
+  if quiz_url == blank
+    assign quiz_url = routes.root_url | append: '/pages/descubre-tu-estilo' | replace: '//', '/'
+  endif
+  assign measure_url = section.settings.measure_url
+  if measure_url == blank
+    assign measure_url = routes.root_url | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
+  endif
+  assign shape_filter = collections['all'].filters | where: 'param_name', 'filter.p.m.custom.frame_shape' | first
+  assign guide_prefix = 'sections.lemoon_face_guide.'
+-%}
+{%- style -%}
+  #shopify-section-{{ section.id }} .lemoon-face-guide { padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; }
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .lemoon-face-guide { padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px; }
+  }
+{%- endstyle -%}
+<div class="lemoon-face-guide page-width" data-face-guide>
+  <header class="lemoon-face-guide__intro">
+    {%- assign title = 'sections.lemoon_face_guide.title' | t -%}
+    {%- assign title = section.settings.title | default: title -%}
+    <div class="lemoon-face-guide__heading">
+      {% render 'lemoon-ui-heading', text: title, level: 1 %}
+      <span class="lemoon-face-guide__intro-accent" aria-hidden="true">
+        {% render 'lemoon-icon', icon: 'sparkles', size: 32 %}
+      </span>
+    </div>
+    {%- assign intro = 'sections.lemoon_face_guide.intro' | t -%}
+    <p>{{ section.settings.intro | default: intro | escape }}</p>
+  </header>
+  <div class="lemoon-face-guide__index" id="FaceIndex-{{ section.id }}" tabindex="-1">
+    {%- assign index_title = 'sections.lemoon_face_guide.index_title' | t -%}
+    {%- assign index_title = section.settings.index_title | default: index_title -%}
+    {%- capture index_id -%}FaceIndexTitle-{{ section.id }}{%- endcapture -%}
+    {% render 'lemoon-ui-heading', text: index_title, level: 2, id: index_id %}
+    {%- assign index_body = 'sections.lemoon_face_guide.index_body' | t -%}
+    <p class="lemoon-face-guide__reading">{{ section.settings.index_body | default: index_body | escape }}</p>
+    <nav aria-labelledby="{{ index_id }}">
+      <ul class="lemoon-face-guide__index-grid" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign family_key = guide_prefix | append: 'families.' | append: block.settings.kind | append: '.'
+            assign name_key = family_key | append: 'name'
+            assign family_name = name_key | t
+            assign family_name = block.settings.name_label | default: family_name
+            assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-v1-'
+            assign portrait_180 = portrait_base | append: '180.webp'
+            assign portrait_360 = portrait_base | append: '360.webp'
+          -%}
+          <li data-face-guide-action="face_index" data-face-guide-position="index" data-face-guide-destination="face_family" data-face-guide-family="{{ block.settings.kind | escape }}">
+            <a href="#FaceFamily-{{ section.id }}-{{ block.id }}" class="lemoon-face-guide__index-link">
+              <span class="lemoon-face-guide__thumbnail" aria-hidden="true">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 360 | image_tag: widths: '180, 360', sizes: '(min-width: 750px) 180px, 30vw', loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  <img src="{{ portrait_180 | asset_url }}" srcset="{{ portrait_180 | asset_url }} 180w, {{ portrait_360 | asset_url }} 360w" sizes="(min-width: 750px) 180px, 30vw" width="180" height="180" loading="lazy" alt="">
+                {%- endif -%}
+              </span>
+              <span>{{ family_name | escape }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  </div>
+  <div class="lemoon-face-guide__families">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign family_key = guide_prefix | append: 'families.' | append: block.settings.kind | append: '.'
+        assign name_key = family_key | append: 'name'
+        assign family_name = name_key | t
+        assign family_name = block.settings.name_label | default: family_name
+        assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-v1-'
+        assign portrait_360 = portrait_base | append: '360.webp'
+        assign portrait_640 = portrait_base | append: '640.webp'
+        assign portrait_960 = portrait_base | append: '960.webp'
+        assign cue_1_key = family_key | append: 'cue_1'
+        assign cue_2_key = family_key | append: 'cue_2'
+        assign reason_key = family_key | append: 'reason'
+        assign cue_1 = cue_1_key | t
+        assign cue_2 = cue_2_key | t
+        assign reason = reason_key | t
+      -%}
+      <article class="lemoon-face-guide__family" id="FaceFamily-{{ section.id }}-{{ block.id }}" aria-labelledby="FaceFamilyTitle-{{ section.id }}-{{ block.id }}" tabindex="-1" data-face-guide-family="{{ block.settings.kind | escape }}" {{ block.shopify_attributes }}>
+        <div class="lemoon-face-guide__portrait">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 900 | image_tag: widths: '360, 600, 900', sizes: '(min-width: 990px) 400px, (min-width: 750px) 40vw, 90vw', loading: 'lazy', alt: block.settings.image_alt }}
+          {%- else -%}
+            <img src="{{ portrait_640 | asset_url }}" srcset="{{ portrait_360 | asset_url }} 360w, {{ portrait_640 | asset_url }} 640w, {{ portrait_960 | asset_url }} 960w" sizes="(min-width: 990px) 400px, (min-width: 750px) 40vw, (min-width: 390px) 340px, 90vw" width="640" height="640" loading="lazy" alt="{{ block.settings.image_alt | escape }}">
+          {%- endif -%}
+        </div>
+        <div class="lemoon-face-guide__family-copy">
+          {%- capture family_title_id -%}FaceFamilyTitle-{{ section.id }}-{{ block.id }}{%- endcapture -%}
+          {% render 'lemoon-ui-heading', text: family_name, level: 2, id: family_title_id %}
+          <ul class="lemoon-face-guide__cues">
+            <li>{{ block.settings.cue_1 | default: cue_1 | escape }}</li>
+            <li>{{ block.settings.cue_2 | default: cue_2 | escape }}</li>
+          </ul>
+          <p>{{ block.settings.reason | default: reason | escape }}</p>
+          {% render 'lemoon-face-guide-links', block: block, shape_filter: shape_filter, catalogue_url: catalogue_url, guide_settings: section.settings, instance_id: section.id %}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+  <div class="lemoon-face-guide__fit" aria-labelledby="FaceFit-{{ section.id }}">
+    {%- assign fit_title = 'sections.lemoon_face_guide.fit_title' | t -%}
+    {%- assign fit_title = section.settings.fit_title | default: fit_title -%}
+    {%- capture fit_id -%}FaceFit-{{ section.id }}{%- endcapture -%}
+    {% render 'lemoon-ui-heading', text: fit_title, level: 2, id: fit_id %}
+    {%- assign fit_body = 'sections.lemoon_face_guide.fit_body' | t -%}
+    <p class="lemoon-face-guide__reading">{{ section.settings.fit_body | default: fit_body | escape }}</p>
+    <div class="lemoon-face-guide__fit-grid">
+      {%- assign fit_kinds = 'bridge,cheek,temple' | split: ',' -%}
+      {%- for fit_kind in fit_kinds -%}
+        {%- liquid
+          assign fit_title_setting = fit_kind | append: '_title'
+          assign fit_body_setting = fit_kind | append: '_body'
+          assign fit_image_setting = fit_kind | append: '_image'
+          assign fit_title_key = guide_prefix | append: fit_title_setting
+          assign fit_body_key = guide_prefix | append: fit_body_setting
+          assign hint_title = fit_title_key | t
+          assign hint_title = section.settings[fit_title_setting] | default: hint_title
+          assign hint_body = fit_body_key | t
+        -%}
+        <figure class="lemoon-face-guide__fit-hint">
+          <div class="lemoon-face-guide__fit-art" aria-hidden="true">
+            {%- if section.settings[fit_image_setting] != blank -%}
+              {{ section.settings[fit_image_setting] | image_url: width: 700 | image_tag: widths: '350, 700', sizes: '(min-width: 750px) 30vw, 90vw', loading: 'lazy', alt: '' }}
+            {%- else -%}
+              {%- liquid
+                assign fit_asset_base = 'lemoon-fit-' | append: fit_kind | append: '-editorial-v1-'
+                assign fit_asset_350 = fit_asset_base | append: '350.webp'
+                assign fit_asset_700 = fit_asset_base | append: '700.webp'
+                assign fit_asset_1400 = fit_asset_base | append: '1400.webp'
+              -%}
+              <img src="{{ fit_asset_700 | asset_url }}" srcset="{{ fit_asset_350 | asset_url }} 350w, {{ fit_asset_700 | asset_url }} 700w, {{ fit_asset_1400 | asset_url }} 1400w" sizes="(min-width: 750px) 30vw, 90vw" width="700" height="438" loading="lazy" alt="">
+            {%- endif -%}
+          </div>
+          <figcaption>
+            {% render 'lemoon-ui-heading', text: hint_title, level: 3 %}
+            <p>{{ section.settings[fit_body_setting] | default: hint_body | escape }}</p>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+    {%- assign fit_detail = 'sections.lemoon_face_guide.fit_detail' | t -%}
+    <p class="lemoon-face-guide__reading">{{ section.settings.fit_detail | default: fit_detail | escape }}</p>
+    {%- assign fit_help = 'sections.lemoon_face_guide.fit_help' | t -%}
+    <p class="lemoon-face-guide__reading">{{ section.settings.fit_help | default: fit_help | escape }}</p>
+    {%- assign measure_label = 'sections.lemoon_face_guide.measure_label' | t -%}
+    {%- assign measure_label = section.settings.measure_label | default: measure_label -%}
+    <div data-face-guide-action="measure" data-face-guide-position="fit" data-face-guide-destination="{% if section.settings.measure_url != blank %}custom{% else %}measure_guide{% endif %}">
+      {% render 'lemoon-ui-action', element: 'a', href: measure_url, label: measure_label, style_family: 'local', class: 'lemoon-face-guide__text-link' %}
+    </div>
+  </div>
+  <aside class="lemoon-face-guide__help" aria-labelledby="FaceHelp-{{ section.id }}">
+    {%- assign help_title = 'sections.lemoon_face_guide.unknown_title' | t -%}
+    {%- assign help_title = section.settings.unknown_title | default: help_title -%}
+    {%- capture help_id -%}FaceHelp-{{ section.id }}{%- endcapture -%}
+    {% render 'lemoon-ui-heading', text: help_title, level: 2, id: help_id %}
+    {%- assign help_body = 'sections.lemoon_face_guide.unknown_body' | t -%}
+    <p>{{ section.settings.unknown_body | default: help_body | escape }}</p>
+    <div class="lemoon-face-guide__actions">
+      {%- assign catalogue_label = 'sections.lemoon_face_guide.catalogue_label' | t -%}
+      {%- assign catalogue_label = section.settings.catalogue_label | default: catalogue_label -%}
+      {%- assign help_catalogue_url = section.settings.catalogue_url | default: catalogue_url -%}
+      <div data-face-guide-action="catalogue" data-face-guide-position="closing" data-face-guide-destination="{% if section.settings.catalogue_url != blank %}custom{% else %}catalogue{% endif %}">
+        {% render 'lemoon-ui-action', element: 'a', href: help_catalogue_url, label: catalogue_label, style_family: 'local', class: 'lemoon-face-guide__cta' %}
+      </div>
+      {%- assign quiz_label = 'sections.lemoon_face_guide.quiz_label' | t -%}
+      {%- assign quiz_label = section.settings.quiz_label | default: quiz_label -%}
+      <div data-face-guide-action="quiz" data-face-guide-position="closing" data-face-guide-destination="{% if section.settings.quiz_url != blank %}custom{% else %}style_quiz{% endif %}">
+        {% render 'lemoon-ui-action', element: 'a', href: quiz_url, label: quiz_label, style_family: 'local', class: 'lemoon-face-guide__text-link' %}
+      </div>
+    </div>
+  </aside>
+</div>
+{% schema %}
+{
+  "name": "t:sections.lemoon_face_guide.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": [
+      "header",
+      "footer"
+    ]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.lemoon_face_guide.title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "t:sections.lemoon_face_guide.intro",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "index_title",
+      "label": "t:sections.lemoon_face_guide.index_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "index_body",
+      "label": "t:sections.lemoon_face_guide.index_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "unknown_title",
+      "label": "t:sections.lemoon_face_guide.unknown_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "unknown_body",
+      "label": "t:sections.lemoon_face_guide.unknown_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "fit_title",
+      "label": "t:sections.lemoon_face_guide.fit_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "fit_body",
+      "label": "t:sections.lemoon_face_guide.fit_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "bridge_title",
+      "label": "t:sections.lemoon_face_guide.bridge_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "bridge_body",
+      "label": "t:sections.lemoon_face_guide.bridge_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "cheek_title",
+      "label": "t:sections.lemoon_face_guide.cheek_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "cheek_body",
+      "label": "t:sections.lemoon_face_guide.cheek_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "temple_title",
+      "label": "t:sections.lemoon_face_guide.temple_title",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "temple_body",
+      "label": "t:sections.lemoon_face_guide.temple_body",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "fit_detail",
+      "label": "t:sections.lemoon_face_guide.fit_detail",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "fit_help",
+      "label": "t:sections.lemoon_face_guide.fit_help",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "measure_label",
+      "label": "t:sections.lemoon_face_guide.measure_label",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "catalogue_label",
+      "label": "t:sections.lemoon_face_guide.catalogue_label",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "text",
+      "id": "quiz_label",
+      "label": "t:sections.lemoon_face_guide.quiz_label",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "image_picker",
+      "id": "bridge_image",
+      "label": "t:sections.lemoon_face_guide.bridge_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cheek_image",
+      "label": "t:sections.lemoon_face_guide.cheek_image"
+    },
+    {
+      "type": "image_picker",
+      "id": "temple_image",
+      "label": "t:sections.lemoon_face_guide.temple_image"
+    },
+    {
+      "type": "url",
+      "id": "measure_url",
+      "label": "t:sections.lemoon_face_guide.measure_url"
+    },
+    {
+      "type": "url",
+      "id": "quiz_url",
+      "label": "t:sections.lemoon_face_guide.quiz_url"
+    },
+    {
+      "type": "url",
+      "id": "catalogue_url",
+      "label": "t:sections.lemoon_face_guide.catalogue_url"
+    },
+    {
+      "type": "text",
+      "id": "fallback_label",
+      "label": "t:sections.lemoon_face_guide.fallback_label",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_hint",
+      "label": "t:sections.lemoon_face_guide.fallback_hint",
+      "info": "t:sections.lemoon_face_guide.fallback_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "family",
+      "name": "t:sections.lemoon_face_guide.family",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "select",
+          "id": "kind",
+          "label": "t:sections.lemoon_face_guide.kind",
+          "options": [
+            {
+              "value": "oval",
+              "label": "t:sections.lemoon_face_guide.families.oval"
+            },
+            {
+              "value": "round",
+              "label": "t:sections.lemoon_face_guide.families.round"
+            },
+            {
+              "value": "square",
+              "label": "t:sections.lemoon_face_guide.families.square"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.lemoon_face_guide.families.heart"
+            },
+            {
+              "value": "diamond",
+              "label": "t:sections.lemoon_face_guide.families.diamond"
+            },
+            {
+              "value": "long",
+              "label": "t:sections.lemoon_face_guide.families.long"
+            }
+          ],
+          "default": "oval"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.lemoon_face_guide.image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "t:sections.lemoon_face_guide.image_alt",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "name_label",
+          "label": "t:sections.lemoon_face_guide.name_label",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "cue_1",
+          "label": "t:sections.lemoon_face_guide.cue_1",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "cue_2",
+          "label": "t:sections.lemoon_face_guide.cue_2",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "textarea",
+          "id": "reason",
+          "label": "t:sections.lemoon_face_guide.reason",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "select",
+          "id": "shape_1",
+          "label": "t:sections.lemoon_face_guide.shape_1",
+          "options": [
+            {
+              "value": "rectangular",
+              "label": "t:sections.lemoon_face_guide.shapes.rectangular"
+            },
+            {
+              "value": "redondo",
+              "label": "t:sections.lemoon_face_guide.shapes.redondo"
+            },
+            {
+              "value": "geométrico",
+              "label": "t:sections.lemoon_face_guide.shapes.geométrico"
+            },
+            {
+              "value": "ovalado",
+              "label": "t:sections.lemoon_face_guide.shapes.ovalado"
+            },
+            {
+              "value": "aviador",
+              "label": "t:sections.lemoon_face_guide.shapes.aviador"
+            },
+            {
+              "value": "ojo de gato",
+              "label": "t:sections.lemoon_face_guide.shapes.ojo de gato"
+            }
+          ],
+          "default": "rectangular"
+        },
+        {
+          "type": "select",
+          "id": "shape_2",
+          "label": "t:sections.lemoon_face_guide.shape_2",
+          "options": [
+            {
+              "value": "rectangular",
+              "label": "t:sections.lemoon_face_guide.shapes.rectangular"
+            },
+            {
+              "value": "redondo",
+              "label": "t:sections.lemoon_face_guide.shapes.redondo"
+            },
+            {
+              "value": "geométrico",
+              "label": "t:sections.lemoon_face_guide.shapes.geométrico"
+            },
+            {
+              "value": "ovalado",
+              "label": "t:sections.lemoon_face_guide.shapes.ovalado"
+            },
+            {
+              "value": "aviador",
+              "label": "t:sections.lemoon_face_guide.shapes.aviador"
+            },
+            {
+              "value": "ojo de gato",
+              "label": "t:sections.lemoon_face_guide.shapes.ojo de gato"
+            }
+          ],
+          "default": "redondo"
+        },
+        {
+          "type": "url",
+          "id": "destination",
+          "label": "t:sections.lemoon_face_guide.destination",
+          "info": "t:sections.lemoon_face_guide.destination_info"
+        },
+        {
+          "type": "text",
+          "id": "custom_label",
+          "label": "t:sections.lemoon_face_guide.custom_label",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "shape_1_label",
+          "label": "t:sections.lemoon_face_guide.shape_1_label",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "shape_2_label",
+          "label": "t:sections.lemoon_face_guide.shape_2_label",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        },
+        {
+          "type": "text",
+          "id": "filtered_label",
+          "label": "t:sections.lemoon_face_guide.filtered_label",
+          "info": "t:sections.lemoon_face_guide.fallback_info"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "t:sections.lemoon_face_guide.name",
+      "blocks": [
+        {
+          "type": "family",
+          "settings": {
+            "kind": "oval",
+            "shape_1": "rectangular",
+            "shape_2": "redondo"
+          }
+        },
+        {
+          "type": "family",
+          "settings": {
+            "kind": "round",
+            "shape_1": "rectangular",
+            "shape_2": "geométrico"
+          }
+        },
+        {
+          "type": "family",
+          "settings": {
+            "kind": "square",
+            "shape_1": "redondo",
+            "shape_2": "ovalado"
+          }
+        },
+        {
+          "type": "family",
+          "settings": {
+            "kind": "heart",
+            "shape_1": "ovalado",
+            "shape_2": "aviador"
+          }
+        },
+        {
+          "type": "family",
+          "settings": {
+            "kind": "diamond",
+            "shape_1": "ovalado",
+            "shape_2": "ojo de gato"
+          }
+        },
+        {
+          "type": "family",
+          "settings": {
+            "kind": "long",
+            "shape_1": "aviador",
+            "shape_2": "redondo"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
