@@ -636,17 +636,17 @@
       "contact": "Consultar al equipo",
       "measurements": {
         "title": "Cómo medir tus lentes",
-        "intro": "Parte con unos lentes que te resulten cómodos. Aprende a leer el código de la patilla y a comparar sus medidas con las del armazón que estás mirando.",
+        "intro": "Parte con unos lentes que te resulten cómodos y una regla marcada en milímetros. Revisa el código de la patilla, toma las medidas que falten y compáralas con las del armazón que estás mirando.",
         "visual_title": "Tres medidas, en milímetros.",
         "visual_copy": "Ancho del cristal · puente · largo de varilla. El dibujo es una referencia de las partes del armazón, no una escala de talla.",
-        "step_1_title": "1. Revisa la patilla",
-        "step_1_body_html": "<p>Busca los números impresos en la cara interior de una patilla, también llamada varilla. En algunos armazones aparecen tres medidas: ancho del cristal, puente y largo de patilla. Otros números o letras pueden identificar el modelo o el color.</p>",
-        "step_2_title": "2. Compara las mismas medidas",
-        "step_2_body_html": "<p>Si no encuentras el código, usa una regla en milímetros para tomar una referencia. Mira el armazón de frente para comparar su ancho y el de cada cristal. Mide el ancho total de un extremo exterior del frente al otro: no es la distancia entre las bisagras.</p><p>Para el largo de la patilla, considera el recorrido desde la bisagra hasta el extremo, incluida la parte que se curva hacia la oreja. No la dobles ni la endereces para medirla.</p><p>No calcules el ancho total sumando dos cristales y el puente: el borde y los extremos del marco también ocupan espacio.</p>",
-        "step_3_title": "3. Revisa la guía del modelo",
-        "step_3_body_html": "<p>En la ficha del armazón, abre «Guía de medidas» y compara cada dato con el de tus lentes. Usa las medidas que estén disponibles para ese modelo. Una talla escrita, como pequeño o mediano, no reemplaza las cifras en milímetros.</p><p>Dos armazones con medidas parecidas pueden sentirse distintos por la forma del puente y de las patillas. Toma la comparación como una referencia y, si te falta un dato, consulta antes de elegir.</p>",
+        "step_1_title": "1. Lee el código de la patilla",
+        "step_1_body_html": "<p>Abre las patillas y busca una serie de números en su cara interior. La patilla, también llamada varilla, es la pieza que llega hasta detrás de la oreja. En algunos armazones, tres números indican el ancho del cristal, el puente y el largo de la patilla, en ese orden y en milímetros.</p><p>También puedes encontrar letras o números de modelo y color. El ancho total del frente y el alto del cristal pueden no aparecer en esa serie. Si la inscripción está borrada o no se distingue, pasa al siguiente paso: puedes tomar una referencia directamente de tus lentes.</p>",
+        "step_2_title": "2. Mide el armazón en milímetros",
+        "step_2_body_html": "<p>Trabaja sobre tus lentes reales y anota cada medida con su nombre. Mira el frente de forma recta y mantén la regla alineada con el tramo que vas a medir; evita tomar la lectura en diagonal.</p><p>En este esquema, el ancho total va de un extremo exterior del frente al otro. No es lo mismo que medir entre bisagras. Comprueba que las cifras que compares usen los mismos extremos y no calcules el ancho total sumando los dos cristales y el puente: los bordes del armazón también ocupan espacio.</p><p>Las letras A–E te ayudan a ubicar cada parte. Los dibujos no están a escala: usa la regla sobre tus lentes, no sobre la pantalla.</p>",
+        "step_3_title": "3. Compara con la ficha del modelo",
+        "step_3_body_html": "<p>En la ficha del armazón que te interesa, abre «Guía de medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul><p>Dos armazones con números parecidos pueden sentirse distintos por la forma del puente, las patillas y el frente. Usa la comparación como punto de partida; no garantiza la misma comodidad.</p>",
         "help_title": "¿Te falta una medida?",
-        "help_body_html": "<p>Revisa la ficha del modelo. Si falta el dato que necesitas para compararlo, puedes consultarlo antes de elegir.</p>"
+        "help_body_html": "<p>Si una inscripción no se lee, falta un dato en la ficha o no tienes unos lentes para comparar, consulta antes de elegir. Indica el modelo y la medida que necesitas aclarar.</p>"
       },
       "face": {
         "title": "Tu estilo no tiene una sola forma.",
@@ -1517,11 +1517,11 @@
     "close": "Cerrar guía de medidas",
     "partial_measurements": "Se muestran las medidas disponibles de este armazón.",
     "definitions": {
-      "frame_width": "De un extremo exterior del frente del armazón al otro.",
-      "lens_width": "Ancho horizontal de un cristal en su parte más ancha.",
-      "bridge": "Distancia más corta entre los dos cristales, en la zona del puente.",
-      "lens_height": "Altura vertical de un cristal en su parte más alta.",
-      "temple": "Desde la bisagra hasta el extremo de la patilla, siguiendo su recorrido."
+      "frame_width": "Mide en línea horizontal desde un extremo exterior del frente hasta el otro, incluyendo los bordes del armazón. Esta es la referencia A del esquema; anótala como ancho total, separada del ancho de un cristal.",
+      "lens_width": "Mide un solo cristal de lado a lado, por su parte más ancha y con la regla horizontal. No incluyas el aro que lo rodea ni el espacio del puente.",
+      "bridge": "Mide el espacio más corto entre los bordes interiores de ambos cristales, en la zona del puente. No midas sobre la nariz ni confundas esa distancia con el ancho exterior de la pieza del armazón.",
+      "lens_height": "Mide un cristal de arriba abajo, en su parte más alta y con la regla vertical. Deja fuera el aro: esta medida describe el cristal, no la altura de todo el frente.",
+      "temple": "Sigue la patilla desde la bisagra hasta el extremo, incluida la curva hacia la oreja. Una cinta flexible marcada en milímetros puede ayudarte a seguir ese recorrido. No dobles ni endereces la patilla para medirla."
     }
   }
 }

@@ -624,17 +624,17 @@
       "contact": "Ask our team",
       "measurements": {
         "title": "How to measure your glasses",
-        "intro": "Start with glasses that feel comfortable. Learn to read the temple code and compare their measurements with the frame you are considering.",
+        "intro": "Start with glasses that feel comfortable and a ruler marked in millimeters. Check the temple code, take any missing measurements and compare them with the frame you are considering.",
         "visual_title": "Three measurements, in millimetres.",
         "visual_copy": "Lens width · bridge · temple length. The drawing identifies frame parts; it is not a size scale.",
-        "step_1_title": "1. Check the temple arm",
-        "step_1_body_html": "<p>Look for the numbers printed inside a temple arm. Some frames show three measurements: lens width, bridge and temple length. Other numbers or letters may identify the model or color.</p>",
-        "step_2_title": "2. Compare the same measurements",
-        "step_2_body_html": "<p>If you cannot find the code, use a ruler in millimeters as a reference. Look at the front of the frame to compare its width and the width of each lens. Measure the overall width from one outside edge of the front to the other: this is not the distance between the hinges.</p><p>For temple length, follow the path from the hinge to the end, including the part that curves behind the ear. Do not bend or straighten it to measure it.</p><p>Do not calculate overall width by adding two lens widths and the bridge: the rim and frame ends also take up space.</p>",
-        "step_3_title": "3. Check the model’s size guide",
-        "step_3_body_html": "<p>On the frame’s product page, open the size guide and compare each measurement with your glasses. Use the measurements available for that model. A written size such as small or medium does not replace measurements in millimeters.</p><p>Two frames with similar measurements may feel different because of the shape of the bridge and temple arms. Use the comparison as a reference and ask about any missing measurements before choosing.</p>",
+        "step_1_title": "1. Read the temple code",
+        "step_1_body_html": "<p>Open the temple arms and look for a series of numbers on the inside. A temple arm is the part that reaches behind your ear. On some frames, three numbers indicate lens width, bridge width and temple length, in that order and in millimeters.</p><p>You may also find model and color letters or numbers. Overall front width and lens height may not appear in that series. If the marking has worn away or is hard to read, go to the next step: you can take reference measurements directly from your glasses.</p>",
+        "step_2_title": "2. Measure the frame in millimeters",
+        "step_2_body_html": "<p>Work with your actual glasses and write down each measurement with its name. Look straight at the front and align the ruler with the part you are measuring; avoid taking the reading diagonally.</p><p>In this diagram, overall width runs from one outside edge of the front to the other. It is not the same as measuring between the hinges. Check that the measurements you compare use the same endpoints, and do not calculate overall width by adding the two lenses and the bridge: the frame edges also take up space.</p><p>Letters A–E help you locate each part. The drawings are not to scale: use the ruler on your glasses, not on the screen.</p>",
+        "step_3_title": "3. Compare with the model’s product page",
+        "step_3_body_html": "<p>Open the size guide on the product page of the frame you are considering. Keep your notes nearby and compare one measurement at a time, always in the same unit.</p><ul><li>Match the measurement names and endpoints: lens width with lens width, overall width with overall width.</li><li>Use only the measurements available for that model. If one is missing, do not infer it from the photo, drawing or size label.</li><li>A written size such as small or medium does not replace measurements in millimeters or fill in missing values.</li></ul><p>Two frames with similar numbers may feel different because of their bridge, temple arms and front shape. Use the comparison as a starting point; it does not guarantee the same comfort.</p>",
         "help_title": "Missing a measurement?",
-        "help_body_html": "<p>Check the model’s product page. If the measurement you need is missing, you can ask about it before choosing.</p>"
+        "help_body_html": "<p>If a marking is unreadable, a product measurement is missing or you do not have glasses to compare, ask before choosing. Include the model and the measurement you need clarified.</p>"
       },
       "face": {
         "title": "Your style has more than one shape.",
@@ -1505,11 +1505,11 @@
     "close": "Close size guide",
     "partial_measurements": "The available measurements for this frame are shown.",
     "definitions": {
-      "frame_width": "From one outside edge of the front of the frame to the other.",
-      "lens_width": "Horizontal width of one lens at its widest point.",
-      "bridge": "The shortest distance between the two lenses at the bridge.",
-      "lens_height": "Vertical height of one lens at its tallest point.",
-      "temple": "From the hinge to the end of the temple arm, following its shape."
+      "frame_width": "Measure horizontally from one outside edge of the front to the other, including the frame edges. This is reference A in the diagram; record it as overall width, separately from the width of one lens.",
+      "lens_width": "Measure one lens from side to side at its widest point, keeping the ruler horizontal. Do not include the surrounding rim or the bridge gap.",
+      "bridge": "Measure the shortest gap between the inner edges of the two lenses at the bridge. Do not measure on your nose or confuse this distance with the outside width of the frame’s bridge piece.",
+      "lens_height": "Measure one lens from top to bottom at its tallest point, keeping the ruler vertical. Leave out the rim: this describes the lens, not the height of the entire front.",
+      "temple": "Follow the temple arm from the hinge to the tip, including the curve behind your ear. A flexible tape marked in millimeters can help you follow that path. Do not bend or straighten the arm to measure it."
     }
   }
 }

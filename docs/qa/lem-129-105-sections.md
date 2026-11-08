@@ -1,5 +1,7 @@
 # LEM-129 / LEM-105 — diseño de secciones
 
+Contenido desarrollado después de esta revisión: [guía de medición](lem-105-measurement-content.md). Este informe conserva la evidencia del layout en `45bafbaa`; la URL compartida muestra el último snapshot.
+
 Miguel aprobó el dibujo de `8611a1f4` y pidió continuar diseñando las secciones y entregar preview. La aprobación gráfica no se extiende al nuevo layout, al PR completo ni a publicación. Base de esta revisión: `8611a1f4d1b84ad1eeccaa7240e6914771077d9e`; [manifiesto exacto de fuentes probadas](lem-129-105-sections/tested-sources.json).
 
 ## Resultado revisable
