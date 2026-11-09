@@ -24,7 +24,8 @@ describe('editable face guide rendered from actual Liquid', () => {
     const anchors = links(html).filter(({ url }) => url.hash);
     expect(anchors.length).toBeGreaterThanOrEqual(6);
     for (const { url } of anchors) expect(ids).toContain(url.hash.slice(1));
-    expect(html).not.toMatch(/role="tab|\shidden(?:\s|>)/);
+    expect(html).not.toMatch(/role="tab/);
+    for (const family of families) expect(family).not.toMatch(/^<article\b[^>]*\shidden(?:\s|>)/);
   });
 
   it('links every family to the two independent native OR values verified in the catalogue', () => {

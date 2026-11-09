@@ -23,27 +23,27 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 604,
-    "mapped_paths": 502,
-    "excluded_paths": 102,
+    "total_tracked_paths": 630,
+    "mapped_paths": 504,
+    "excluded_paths": 126,
     "by_root": {
-      "assets": 336,
+      "assets": 361,
       "config": 2,
       "layout": 2,
       "locales": 51,
       "sections": 71,
-      "snippets": 102,
+      "snippets": 103,
       "templates": 40
     },
     "mapped_by_extension": {
       ".css": 85,
-      ".js": 56,
+      ".js": 57,
       ".json": 91,
-      ".liquid": 176,
+      ".liquid": 177,
       ".svg": 94
     },
     "excluded_by_reason": {
-      "binary-image-or-font": 101,
+      "binary-image-or-font": 125,
       "private-settings": 1
     },
     "component_families": 44,
@@ -51,7 +51,7 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 604,
+    "total_source_paths": 630,
     "explicit_new_paths": 0
   },
   "components": [
@@ -1550,7 +1550,9 @@
         "assets/lemoon-fit-cheek-editorial-v1-1400.webp",
         "assets/lemoon-fit-temple-editorial-v1-350.webp",
         "assets/lemoon-fit-temple-editorial-v1-700.webp",
-        "assets/lemoon-fit-temple-editorial-v1-1400.webp"
+        "assets/lemoon-fit-temple-editorial-v1-1400.webp",
+        "snippets/lemoon-face-frame-picker.liquid",
+        "assets/lemoon-face-frame-preview.js"
       ],
       "direct_static_consumers": [
         "sections/lemoon-faq.liquid",
@@ -6558,6 +6560,167 @@
       "status": "excluded",
       "reason": "binary-image-or-font: responsive derivative of user-approved marked editorial fit illustration; source/provenance in asset inventory",
       "content_read": false
+    },
+    {
+      "path": "snippets/lemoon-face-frame-picker.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL",
+        "LM-QUIZ"
+      ],
+      "inspection_method": "LEM-103 six-family comparison; native exits, independent state and responsive behavior tested separately"
+    },
+    {
+      "path": "assets/lemoon-face-frame-preview.js",
+      "status": "mapped",
+      "component_ids": [
+        "LM-LEGAL"
+      ],
+      "inspection_method": "LEM-103 six-family comparison; native exits, independent state and responsive behavior tested separately"
+    },
+    {
+      "path": "assets/lemoon-face-oval-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: oval editorial pilot with hair; provenance in face-guide-assets.md",
+      "inspection_method": "binary file existence; visual local review separate"
+    },
+    {
+      "path": "assets/lemoon-face-oval-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: oval editorial pilot with hair; provenance in face-guide-assets.md",
+      "inspection_method": "binary file existence; visual local review separate"
+    },
+    {
+      "path": "assets/lemoon-face-oval-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: oval editorial pilot with hair; provenance in face-guide-assets.md",
+      "inspection_method": "binary file existence; visual local review separate"
+    },
+    {
+      "path": "assets/lemoon-face-oval-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: oval editorial pilot with hair; provenance in face-guide-assets.md",
+      "inspection_method": "binary file existence; visual local review separate"
+    },
+    {
+      "path": "assets/lemoon-face-round-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-round-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-round-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-round-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-square-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-square-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-square-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-square-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-heart-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-heart-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-heart-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-heart-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-diamond-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-diamond-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-diamond-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-diamond-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-long-editorial-v3-180.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-long-editorial-v3-360.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-long-editorial-v3-640.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "assets/lemoon-face-long-editorial-v3-960.webp",
+      "status": "excluded",
+      "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
+      "inspection_method": "binary existence and local rendered visual review separate"
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -6638,7 +6801,33 @@
       "assets/lemoon-fit-cheek-editorial-v1-1400.webp",
       "assets/lemoon-fit-temple-editorial-v1-350.webp",
       "assets/lemoon-fit-temple-editorial-v1-700.webp",
-      "assets/lemoon-fit-temple-editorial-v1-1400.webp"
+      "assets/lemoon-fit-temple-editorial-v1-1400.webp",
+      "snippets/lemoon-face-frame-picker.liquid",
+      "assets/lemoon-face-frame-preview.js",
+      "assets/lemoon-face-oval-editorial-v3-180.webp",
+      "assets/lemoon-face-oval-editorial-v3-360.webp",
+      "assets/lemoon-face-oval-editorial-v3-640.webp",
+      "assets/lemoon-face-oval-editorial-v3-960.webp",
+      "assets/lemoon-face-round-editorial-v3-180.webp",
+      "assets/lemoon-face-round-editorial-v3-360.webp",
+      "assets/lemoon-face-round-editorial-v3-640.webp",
+      "assets/lemoon-face-round-editorial-v3-960.webp",
+      "assets/lemoon-face-square-editorial-v3-180.webp",
+      "assets/lemoon-face-square-editorial-v3-360.webp",
+      "assets/lemoon-face-square-editorial-v3-640.webp",
+      "assets/lemoon-face-square-editorial-v3-960.webp",
+      "assets/lemoon-face-heart-editorial-v3-180.webp",
+      "assets/lemoon-face-heart-editorial-v3-360.webp",
+      "assets/lemoon-face-heart-editorial-v3-640.webp",
+      "assets/lemoon-face-heart-editorial-v3-960.webp",
+      "assets/lemoon-face-diamond-editorial-v3-180.webp",
+      "assets/lemoon-face-diamond-editorial-v3-360.webp",
+      "assets/lemoon-face-diamond-editorial-v3-640.webp",
+      "assets/lemoon-face-diamond-editorial-v3-960.webp",
+      "assets/lemoon-face-long-editorial-v3-180.webp",
+      "assets/lemoon-face-long-editorial-v3-360.webp",
+      "assets/lemoon-face-long-editorial-v3-640.webp",
+      "assets/lemoon-face-long-editorial-v3-960.webp"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. On2026-11-08 the shared mobile drawer presentation adds one declared non-indexed CSS source:559 tracked +1 addition =560 total,497 mapped and63 excluded. Analytics guide publisher adds a second declared non-indexed source on2026-11-08:561 total source paths,498 mapped,63 excluded,559 tracked and2 declared additions. Final index reconciliation on2026-11-08:561 tracked/source paths,498 mapped,63 excluded,0 explicit non-indexed additions; new_source_paths retains historical delivery additions. Cleanup reconciliation on 2026-11-08: the 44 LEM-103 delivery additions are already indexed; removing one unused duplicate stylesheet leaves 598 indexed/source paths, 496 mapped, 102 excluded and 0 non-indexed additions. Progress styles remain in base.css. Conflict reconciliation with main3d9da9ee on2026-11-08: preserves LEM-103, LEM-129/105 and merged cleanup; 604 indexed/source paths, 502 mapped, 102 excluded, 0 non-indexed additions. No binary/private content read.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
@@ -6753,20 +6942,20 @@
         "family"
       ],
       "contract": "Six visible editable families, no-JS index, two observable cues and frame examples; real native filter-value validation before pair CTA, explicit unfiltered fallback and neutral custom destination; original contained portraits and fit diagrams, full advice in HTML. No CMS assignment or publication claim.",
-      "responsive_assets": "Six1254px masters retained as provenance;24 responsive derivatives180/360/640/960px. Indexsrc180/srcset180,360; portraitsrc640/srcset360,640,960; intrinsic size and containsquare.",
+      "responsive_assets": "Historical v1 masters retained;24 active editorial-v3 responsive derivatives180/360/640/960px acrosssixfamilies. Index180/360,portrait640src360/640/960; squarecontain and intrinsicdimensions.",
       "visual_correction": "Legacy fit SVG reference only, not current fallback: Exact quiz shape SVG via canonical render, unchanged shared source. Native fit SVGs redrawn as anatomical head/nose/ear illustrations with ivory token gradients and fine navy contours; unique gradient IDs per section/kind and quiz art ID per section/block/position. No changes to filters, settings, copy, templates or portrait assets.",
       "layout_refinement": "Family CTA defaults Ver armazones/View frames, preserving native pair filters and overrides. Removed six index return links, back_index settings/locales, back_url/back_label inputs and unused row CSS. One editable green mixed-face help banner remains after fit; catalogue override preserved. Removed unused final_title/final_body settings/locales.",
       "eye_refinement": "Legacy fit SVG reference only, not current fallback: Completed only the cheek far eye: closed almond contour, iris, pupil and highlight, positioned within the face behind the far lens. Inverse replacement confirms all remaining SVG bytes unchanged, including bridge/temple/nose/ear/profile.",
       "analytics": {
         "publisher": "assets/lemoon-face-guide.js",
         "event": "lemoon:face_guide_click",
-        "payload": "guide_id,action,link_position,destination; optional controlled face_family and frame_shape or selected_shapes[2]. No arbitrary URL/labels/visitor data.",
+        "payload": "guide_id,action,link_position,destination; optional controlled face_family and frame_shape or selected_shapes[2or3distinct]. No arbitrary URL/labels/visitor data.",
         "consent": "analyticsProcessingAllowed()===true per click; loadFeatures consent-tracking-api0.2 without navigation wait; unknown/denied drops, no replay.",
         "boundary": "Theme publication attempt only; Shopify pixel receiver and GA4 activation/receipt separate. No extra Google SDK in theme.",
         "link_hit_area": "One semantic anchor wraps frame SVG and escaped name; unavailable native value remains non-link."
       },
       "neck_finish": "Legacy fit SVG reference only, not current fallback: Cheek/temple head-neck-bust now form one opaque skin-filled silhouette, with jaw as internal opacity.3 line. Navy outer neck stays visible; conditional section/kind outline gradient uses userSpaceOnUse and fades only at shoulders234–244. Curved base remains inside400x250; no separate translucent neck. Inverse replacement verifies only2exterior/neck blocks plus conditional gradient changed; bridge, eyes, frames, nose and ears unchanged.",
-      "family_cta_accent": "Family actions are navy text links; closing banner CTA remains filled navy/white/primaryhover. Yellow button trial revoked; interface lemon accent stays in the decorative canonical sparkles beside H1.",
+      "family_cta_accent": "Family actions are navy text links; closing banner CTA remains filled navy/white/primaryhover. Yellow button trial revoked; lemon stays in introductory sparkles and bothSuggestedtags, never in familyCTAbuttons.",
       "intro_accent": "lemoon-icon sparkles,size32,no label; decorative span/aria-hidden/focusablefalse. Main path lemon fill/stroke:none, crosses navy1.1 unfilled.32px desktop/28px mobile, flexgap12 and shrinkable H1 with unchanged font metrics. System colors in forced-colors.",
       "family_cta_alignment": "Family metadata wrapper uses flex center below750px and flex-start from750px. Action keeps cta base class plus cta--text modifier: underlined navy, transparent normal/hover, no border/radius, minimum44px target. Metadata/href/filter logic preserved; banner CTA unchanged.",
       "raster_fit": {
@@ -6787,7 +6976,71 @@
         "legacy_source": "snippets/lemoon-face-guide-illustration.liquid",
         "legacy_status": "Preserved intact outside default render; no removal or assertion about dynamic consumers"
       },
-      "family_fragment_focus": "Dawn base.css733–743 universal focus-visible/.focused supplies article outline and halo. Scoped family:focus/.focused uses navy10% shadow offset4px/blur20px instead, keeping tabindex-1 and native fragment focus. Link focus remains2px navy; forced-colors article uses2px Highlight outline/no shadow."
+      "family_fragment_focus": "Native article fragment focus is retained without outline, halo or shadow, including forced-colors, per09-11-2026 correction. Links/buttons retain visible focus.",
+      "frame_comparison": {
+        "status": "User requested replication of reviewed oval behavior and editorial style to all six default faces; local review of complete set pending",
+        "source_paths": [
+          "snippets/lemoon-face-frame-picker.liquid",
+          "assets/lemoon-face-frame-preview.js",
+          "assets/lemoon-face-oval-editorial-v3-180.webp",
+          "assets/lemoon-face-oval-editorial-v3-360.webp",
+          "assets/lemoon-face-oval-editorial-v3-640.webp",
+          "assets/lemoon-face-oval-editorial-v3-960.webp",
+          "assets/lemoon-face-round-editorial-v3-180.webp",
+          "assets/lemoon-face-round-editorial-v3-360.webp",
+          "assets/lemoon-face-round-editorial-v3-640.webp",
+          "assets/lemoon-face-round-editorial-v3-960.webp",
+          "assets/lemoon-face-square-editorial-v3-180.webp",
+          "assets/lemoon-face-square-editorial-v3-360.webp",
+          "assets/lemoon-face-square-editorial-v3-640.webp",
+          "assets/lemoon-face-square-editorial-v3-960.webp",
+          "assets/lemoon-face-heart-editorial-v3-180.webp",
+          "assets/lemoon-face-heart-editorial-v3-360.webp",
+          "assets/lemoon-face-heart-editorial-v3-640.webp",
+          "assets/lemoon-face-heart-editorial-v3-960.webp",
+          "assets/lemoon-face-diamond-editorial-v3-180.webp",
+          "assets/lemoon-face-diamond-editorial-v3-360.webp",
+          "assets/lemoon-face-diamond-editorial-v3-640.webp",
+          "assets/lemoon-face-diamond-editorial-v3-960.webp",
+          "assets/lemoon-face-long-editorial-v3-180.webp",
+          "assets/lemoon-face-long-editorial-v3-360.webp",
+          "assets/lemoon-face-long-editorial-v3-640.webp",
+          "assets/lemoon-face-long-editorial-v3-960.webp"
+        ],
+        "activation": "Each of six default family illustrations; custom image overrides disable only its own overlay",
+        "interaction": "Independent per-family selector/overlay/toggle/carousel with its suggested pair first; aviator additionally lowered1.4%",
+        "catalogue_exit": "Original suggested native pair plus currently tried alternative,2or3 distinct values; no accumulated alternatives, no changes to custom destinations; native noJS fallback",
+        "data_boundary": "Illustration only, no product size/fit guarantee, camera or biometrics; no runtime persistence",
+        "visual_correction": "Editorial v3 portrait series, per-family frame anchor and scale, alwayslemonSuggestedtags, transparentunselectedborder, selectednavy, navychevrons22px stroke2 with44pxtargets",
+        "calibration": {
+          "oval": {
+            "eye_y_percent": 41,
+            "width_percent": 46
+          },
+          "round": {
+            "eye_y_percent": 40.2,
+            "width_percent": 48
+          },
+          "square": {
+            "eye_y_percent": 39.8,
+            "width_percent": 47
+          },
+          "heart": {
+            "eye_y_percent": 39.4,
+            "width_percent": 47
+          },
+          "diamond": {
+            "eye_y_percent": 38.4,
+            "width_percent": 46
+          },
+          "long": {
+            "eye_y_percent": 35.8,
+            "width_percent": 44
+          },
+          "aviator_extra_y_percent": 1.4,
+          "center_x_percent": 50
+        }
+      }
     }
   }
 }

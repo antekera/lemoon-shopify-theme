@@ -19,7 +19,7 @@ for (const width of [390, 820, 1440]) {
       for (const thumbnail of await page.getByRole('navigation').locator('img').all()) {
         await thumbnail.scrollIntoViewIfNeeded();
         await expect.poll(() => thumbnail.evaluate(img => img.complete && img.naturalWidth > 0)).toBe(true);
-        expect(await thumbnail.evaluate(img => img.currentSrc)).toMatch(/-v1-(180|360)\.webp$/);
+        expect(await thumbnail.evaluate(img => img.currentSrc)).toMatch(/-editorial-v3-(180|360)\.webp$/);
         expect(await thumbnail.evaluate(img => img.naturalWidth)).toBeLessThanOrEqual(360);
       }
       for (const [index, name] of families.entries()) {
@@ -35,7 +35,7 @@ for (const width of [390, 820, 1440]) {
         const geometry = await image.evaluate(img => ({ reservedRatio: Number(img.getAttribute('width')) / Number(img.getAttribute('height')), decodedRatio: img.naturalWidth / img.naturalHeight, width: img.getBoundingClientRect().width, decodedWidth: img.naturalWidth, source: img.currentSrc, dpr: devicePixelRatio }));
         expect(geometry.reservedRatio).toBe(1);
         expect(geometry.decodedRatio).toBe(1);
-        expect(geometry.source).toMatch(/-v1-(360|640|960)\.webp$/);
+        expect(geometry.source).toMatch(/-editorial-v3-(360|640|960)\.webp$/);
         expect(geometry.decodedWidth).toBeGreaterThanOrEqual(geometry.width * geometry.dpr * 0.8);
         expect(geometry.decodedWidth).toBeLessThanOrEqual(Math.max(360, geometry.width * geometry.dpr * 2));
         const cta = article.locator('.lemoon-face-guide__cta');
@@ -115,11 +115,13 @@ test('keyboard reaches every visual index link in order and activates the family
   }
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/#FaceFamily-face-fixture-long$/);
+  const article = family(page, 5);
+  await expect(article.locator('[data-face-frame-picker]')).toBeVisible();
+  // Traverse the new preview controls using native keyboard order before its CTA.
   await page.keyboard.press(tabKey);
-  await expect(family(page, 5).getByRole('link', { name: 'Aviador', exact: true })).toBeFocused();
-  await page.keyboard.press(tabKey);
-  await page.keyboard.press(tabKey);
+  await expect(article.getByRole('button', { name: 'Ver sin armazón', exact: true })).toBeFocused();
   const cta = family(page, 5).locator('.lemoon-face-guide__cta');
+  for (let step = 0; step < 12 && !await cta.evaluate(node => node === document.activeElement); step++) await page.keyboard.press(tabKey);
   await expect(cta).toBeFocused();
   await expect(cta).toHaveCSS('outline-style', 'solid');
   await expect(cta).toHaveCSS('outline-width', '2px');
@@ -178,14 +180,13 @@ async function mockGuideAnalytics(page, allowed = true) {
   return events;
 }
 
-test('all 27 guide links publish only controlled action metadata while keeping native navigation', async ({ page }) => {
+test('all 15 enhanced guide links publish only controlled action metadata while keeping native navigation', async ({ page }) => {
   // Shopify publishing is mocked; this does not claim that GA4 receives events.
   const events = await mockGuideAnalytics(page);
   await page.route('**/collections/all**', request => request.fulfill({ contentType: 'text/html', body: '<h1>Fixture catalogue destination</h1>' }));
   await page.route('**/pages/**', request => request.fulfill({ contentType: 'text/html', body: '<h1>Fixture page destination</h1>' }));
   const groups = [
     ['.lemoon-face-guide__index-link', 6, 'face_index', 'index'],
-    ['a.lemoon-face-guide__frame', 12, 'frame_shape', 'family'],
     ['article .lemoon-face-guide__cta', 6, 'family_catalogue', 'family'],
     ['.lemoon-face-guide__fit [data-face-guide-action="measure"] a', 1, 'measure', 'fit'],
     ['.lemoon-face-guide__help .lemoon-face-guide__cta', 1, 'catalogue', 'closing'],
@@ -194,6 +195,11 @@ test('all 27 guide links publish only controlled action metadata while keeping n
   for (const [selector, count, action, position] of groups) {
     for (let index = 0; index < count; index++) {
       await page.goto(route);
+      await expect(family(page, 0).locator('[data-face-frame-picker]')).toBeVisible();
+      if (action === 'family_catalogue') {
+        await family(page, index).scrollIntoViewIfNeeded();
+        await expect(family(page, index).locator('[data-face-frame-picker]')).toBeVisible();
+      }
       const anchor = page.locator(selector).nth(index);
       const destination = await anchor.getAttribute('href');
       const expectedURL = new URL(destination, page.url()).href;
@@ -209,7 +215,7 @@ test('all 27 guide links publish only controlled action metadata while keeping n
       expect(JSON.stringify(events.at(-1).data)).not.toMatch(/https?:|@|\/collections|\/pages|Fixture|Ver armazones/);
     }
   }
-  expect(events).toHaveLength(27);
+  expect(events).toHaveLength(15);
   expect(events.filter(({ data }) => data.action === 'family_catalogue').at(-1).data).toMatchObject({ face_family: 'long', selected_shapes: ['aviator', 'round'] });
 });
 

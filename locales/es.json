@@ -1112,6 +1112,18 @@
       }
     },
     "lemoon_face_guide": {
+      "preview": {
+        "title": "Prueba distintas formas",
+        "hint": "Parte por las sugeridas o desliza para explorar otras.",
+        "suggested": "Sugerida",
+        "explore": "Otra forma",
+        "hide": "Ver sin armazón",
+        "show": "Ver con armazón",
+        "previous": "Formas anteriores",
+        "next": "Más formas",
+        "selected": "Forma sobre el rostro:",
+        "note": "Ilustración de estilo. No representa el tamaño ni el ajuste de un producto."
+      },
       "title": "Elegir lentes según tu rostro",
       "intro": "Tu rostro puede darte ideas para elegir un armazón. Compara las ilustraciones y explora las formas que te gusten: son puntos de partida, y tú eliges qué llevar.",
       "index_title": "Mira el contorno, explora las formas",

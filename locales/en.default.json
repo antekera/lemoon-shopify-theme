@@ -1100,6 +1100,18 @@
       }
     },
     "lemoon_face_guide": {
+      "preview": {
+        "title": "Try different shapes",
+        "hint": "Start with the suggested shapes or swipe to explore others.",
+        "suggested": "Suggested",
+        "explore": "Another shape",
+        "hide": "View without frames",
+        "show": "View with frames",
+        "previous": "Previous shapes",
+        "next": "More shapes",
+        "selected": "Shape on the face:",
+        "note": "Style illustration. It does not represent product size or fit."
+      },
       "title": "Choose glasses for your face",
       "intro": "Your face can give you ideas for choosing frames. Compare the illustrations and explore the shapes you like: they are starting points, and you choose what to wear.",
       "index_title": "Look at the outline, explore the shapes",

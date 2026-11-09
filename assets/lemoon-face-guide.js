@@ -1,3 +1,5 @@
+import './lemoon-face-frame-preview.js';
+
 // Theme publisher only. The separately configured Shopify pixel owns GA4 delivery.
 export const FACE_GUIDE_EVENT = 'lemoon:face_guide_click';
 const TRACKING_KEY = Symbol.for('lemoon.faceGuideTracking');
@@ -37,7 +39,7 @@ export function buildFaceGuidePayload(anchor) {
   }
   if (action === 'family_catalogue' && destination === 'filtered_catalogue') {
     const values = (metadata.dataset.faceGuideShapes || '').split('|');
-    if (values.length !== 2 || values[0] === values[1] || !values.every(value => Object.hasOwn(SHAPES, value))) return null;
+    if (![2, 3].includes(values.length) || new Set(values).size !== values.length || !values.every(value => Object.hasOwn(SHAPES, value))) return null;
     payload.selected_shapes = values.map(value => SHAPES[value]);
   }
   return payload;

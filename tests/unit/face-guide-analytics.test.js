@@ -38,6 +38,11 @@ describe('theme face-guide event publisher', () => {
     expect(buildFaceGuidePayload(anchorFixture().anchor)).toEqual(validClick());
   });
 
+  it('publishes the two suggestions and the distinct current extra shape as controlled codes', () => {
+    const { anchor } = anchorFixture({ faceGuideShapes: 'rectangular|redondo|ojo de gato' });
+    expect(buildFaceGuidePayload(anchor).selected_shapes).toEqual(['rectangular', 'round', 'cat-eye']);
+  });
+
   it.each([
     ['redondo', 'round'], ['rectangular', 'rectangular'], ['geométrico', 'geometric'], ['ovalado', 'oval'], ['aviador', 'aviator'], ['ojo de gato', 'cat-eye'],
   ])('maps native shape %s to stable analytics code %s', (native, expected) => {
@@ -48,7 +53,8 @@ describe('theme face-guide event publisher', () => {
   it.each([
     { faceGuideAction: '__proto__' }, { faceGuideAction: 'purchase' }, { faceGuidePosition: 'closing' },
     { faceGuideDestination: 'https://private.test' }, { faceGuideShapes: 'redondo|redondo' },
-    { faceGuideShapes: 'redondo' }, { faceGuideShapes: 'redondo|private@example.test' },
+    { faceGuideShapes: 'redondo' }, { faceGuideShapes: 'rectangular|redondo|redondo' },
+    { faceGuideShapes: 'rectangular|redondo|ovalado|aviador' }, { faceGuideShapes: 'redondo|private@example.test' },
   ])('rejects unknown/inconsistent metadata instead of emitting free-form values: %j', override => {
     expect(buildFaceGuidePayload(anchorFixture(override).anchor)).toBeNull();
   });
@@ -277,6 +283,12 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
     expect(JSON.stringify(commands)).not.toMatch(/private@|sensitive|Customer name|purchase/);
   });
 
+  it('forwards three distinct controlled shapes from the illustrative preview', () => {
+    const p = pixel({ analyticsProcessingAllowed: true });
+    p.fire({ ...validClick(), selected_shapes: ['rectangular', 'round', 'cat-eye'] });
+    expect(p.analyticsEvents()[0][2].selected_shapes).toBe('rectangular|round|cat-eye');
+  });
+
   it('updates consent, drops revoked clicks, never replays them and initializes the vendor only once', () => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.fire();
@@ -295,7 +307,8 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
   it.each([
     null, {}, { guide_id: 'other' }, { action: 'purchase' }, { link_position: 'private@example.test' }, { destination: 'https://private.test' },
     { face_family: 'private@example.test' }, { frame_shape: 'unknown' }, { selected_shapes: ['round'] },
-    { selected_shapes: ['round', 'round'] }, { selected_shapes: ['round', 'private@example.test'] }, { selected_shapes: 'round|aviator' },
+    { selected_shapes: ['round', 'round'] }, { selected_shapes: ['round', 'oval', 'round'] },
+    { selected_shapes: ['round', 'oval', 'aviator', 'cat-eye'] }, { selected_shapes: ['round', 'private@example.test'] }, { selected_shapes: 'round|aviator' },
   ])('ignores malformed or uncontrolled event data before loading the SDK: %j', patch => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.fire(patch === null ? null : Object.keys(patch).length ? { ...validClick(), ...patch } : {});
