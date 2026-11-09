@@ -140,12 +140,12 @@ lemoon-product-tools { display: block; }
 }
 @media (prefers-reduced-motion: reduce) { .lemoon-sticky-purchase, .lemoon-sticky-purchase.is-visible { transition: none; } }
 
-.lemoon-pdp__dialog.lemoon-size-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(480px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; padding: 72px 32px 32px; border: 0; border-radius: 0; background: #fff; transform: translateX(100%); opacity: 0; transition: transform .28s ease, opacity .28s ease, display .28s allow-discrete, overlay .28s allow-discrete; }
+.lemoon-pdp__dialog.lemoon-size-drawer { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(480px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; padding: 72px 32px 32px; border: 0; border-radius: 0; background: var(--lemoon-surface-page); overflow-y: auto; overscroll-behavior: contain; overflow-wrap: anywhere; transform: translateX(100%); opacity: 0; transition: transform .28s ease, opacity .28s ease, display .28s allow-discrete, overlay .28s allow-discrete; }
 .lemoon-size-drawer[open] { transform: translateX(0); opacity: 1; }
 .lemoon-size-drawer::backdrop { background: #0b1f3a80; opacity: 0; transition: opacity .28s ease, display .28s allow-discrete, overlay .28s allow-discrete; }
 .lemoon-size-drawer[open]::backdrop { opacity: 1; }
-.lemoon-size-drawer .lemoon-pdp__close { top: 16px; right: 16px; }
-.lemoon-size-drawer h2 { font-size: 24px; margin: 0 0 28px; }
+.lemoon-size-drawer .lemoon-pdp__close { position: sticky; top: 16px; right: auto; display: block; margin: -56px -16px 12px auto; z-index: 1; }
+.lemoon-size-drawer h2 { font-size: 24px; margin: 0 0 28px; padding-right: 56px; }
 .lemoon-size-guide-content .rte { font-size: 14px; line-height: 1.7; color: var(--lemoon-text-secondary); }
 .lemoon-size-guide-placeholder { display: grid; justify-items: center; gap: 20px; background: var(--lemoon-surface-warm); padding: 40px 32px; margin-bottom: 28px; border-radius: 8px; color: var(--lemoon-text-brand); }
 .lemoon-size-guide-placeholder span { width: 100%; height: 8px; border-radius: 4px; background: var(--lemoon-border-default); }
@@ -159,19 +159,30 @@ lemoon-product-tools { display: block; }
 .lemoon-size-guide__tabs [role="tab"][aria-selected="true"] { border-bottom-color: var(--lemoon-text-brand); border-radius: 0 !important; background: transparent; color: var(--lemoon-text-brand); font-weight: 600; }
 .lemoon-size-guide__tabs [role="tab"]:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: -3px; }
 .lemoon-size-guide__panel[hidden] { display: none; }
-.lemoon-size-guide__panel { color: var(--lemoon-text-brand); }
-.lemoon-size-guide__panel .lemoon-pdp__dimensions { margin: 0 0 20px; }
-.lemoon-size-guide__panel .lemoon-pdp__dimensions svg { max-height: 130px; }
+.lemoon-size-guide__panel { color: var(--lemoon-text-brand); overflow-wrap: anywhere; }
+.lemoon-size-guide__panel:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 2px; }
+.lemoon-size-guide__panel .lemoon-pdp__dimensions { margin: 0 0 var(--lemoon-space-5); padding: 0; border-radius: 0; background: transparent; }
+.lemoon-size-guide__panel .lemoon-pdp__dimensions dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; margin: 0; }
+.lemoon-size-guide__panel .lemoon-pdp__dimensions dl > div { display: flex; justify-content: space-between; gap: var(--lemoon-space-4); padding: var(--lemoon-space-3) 0; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-size-guide__panel .lemoon-pdp__dimensions dt { min-width: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); }
+.lemoon-size-guide__panel .lemoon-pdp__dimensions dd { flex-shrink: 0; margin: 0; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-16); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-size-guide__demo-notice { margin: 0 0 var(--lemoon-space-4); }
+.lemoon-size-guide .lemoon-pdp__unit-label select { height: var(--lemoon-size-control); min-height: var(--lemoon-size-control); padding: 0 12px; border: 1px solid var(--lemoon-border-input); border-radius: var(--lemoon-radius-sm); background: var(--lemoon-surface-page); color: var(--lemoon-text-primary); font: inherit; }
+.lemoon-size-guide .lemoon-pdp__unit-label select:focus-visible { border: 2px solid var(--lemoon-border-strong); outline: none; }
 .lemoon-size-guide__specs { display: grid; gap: 0; margin: 0; }
 .lemoon-size-guide__specs > div { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--lemoon-border-default); }
 .lemoon-size-guide__specs dt { color: var(--lemoon-text-secondary); font-size: 13px; }
-.lemoon-size-guide__specs dd { margin: 0; color: var(--lemoon-text-brand); font-size: 14px; font-weight: 500; text-align: right; }
+.lemoon-size-guide__specs dd { min-width: 0; margin: 0; color: var(--lemoon-text-brand); font-size: 14px; font-weight: 500; text-align: right; }
 .lemoon-size-guide__instructions, .lemoon-size-guide__fit-copy, .lemoon-size-guide__note, .lemoon-size-guide__empty { margin: 16px 0 0; color: var(--lemoon-text-secondary); font-size: 14px; line-height: 1.6; }
 .lemoon-size-guide__fit-copy { margin: 0 0 8px; color: var(--lemoon-text-brand); font-weight: 500; }
 .lemoon-size-guide__note { padding: 12px 14px; border-radius: 8px; background: var(--lemoon-surface-warm); }
 .lemoon-size-guide__empty { margin: 0; }
 .lemoon-frame-information { width: 100%; margin: 0 auto; padding: 40px 0 48px; color: var(--lemoon-text-brand); }
 .lemoon-frame-information__inner { width: min(100% - 48px, 1280px); margin: 0 auto; }
+.lemoon-frame-information h2 { margin: 0 0 var(--lemoon-space-6); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-type-h2-size); font-weight: var(--lemoon-type-h2-weight); line-height: var(--lemoon-type-h2-leading); }
+.lemoon-pdp__details .lemoon-frame-information { padding: 0; }
+.lemoon-pdp__details .lemoon-frame-information__inner { width: 100%; }
+.lemoon-pdp__details > div { min-width: 0; }
 .lemoon-frame-information .lemoon-size-guide__tabs { margin-left: 0; margin-right: 0; }
 .lemoon-frame-information .lemoon-size-guide__panel { min-height: 96px; padding-top: 4px; }
 .lemoon-frame-information .lemoon-size-guide__panel .lemoon-pdp__dimensions { max-width: 680px; }
@@ -186,7 +197,10 @@ html:has(.lemoon-size-drawer[open]) { overflow: hidden; }
   .lemoon-pdp__dialog.lemoon-size-drawer[open] { transform: translateX(100%); opacity: 0; }
   .lemoon-size-drawer[open]::backdrop { opacity: 0; }
 }
-@media (max-width: 749px) { .lemoon-pdp__dialog.lemoon-size-drawer { padding: 72px 24px 32px; } }
+@media (max-width: 749px) {
+  .lemoon-pdp__dialog.lemoon-size-drawer { padding: 72px 24px max(32px, env(safe-area-inset-bottom)); }
+  .lemoon-size-drawer .lemoon-pdp__close { margin-right: -8px; }
+}
 @media (prefers-reduced-motion: reduce) { .lemoon-pdp__dialog.lemoon-size-drawer, .lemoon-size-drawer::backdrop { transition: none; } }
 
 /* One primary purchase action, shared by the PDP and sticky panel. */
@@ -395,3 +409,21 @@ lemoon-thumbnail-rail { display: contents; }
 @media (prefers-reduced-motion: reduce) {
   .lemoon-pdp__thumbnails button, .lemoon-standard-pdp .thumbnail, .lemoon-thumbnail-arrow { transition: none; }
 }
+
+/* Continuous size-guide content; inline information retains its ARIA tabs. */
+.lemoon-size-drawer:has(.lemoon-size-guide--dialog) > h2 { margin-bottom: var(--lemoon-space-8); }
+.lemoon-size-guide--dialog .lemoon-size-guide__block + .lemoon-size-guide__block { margin-top: var(--lemoon-space-8); padding-top: var(--lemoon-space-8); border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-size-guide--dialog h3 { margin: 0 0 var(--lemoon-space-4); color: var(--lemoon-text-brand); font-family: var(--lemoon-font-heading); font-size: var(--lemoon-type-h3-size); font-weight: var(--lemoon-type-h3-weight); line-height: var(--lemoon-type-h3-leading); }
+.lemoon-size-guide--dialog .lemoon-size-guide__measurement-visual { padding: var(--lemoon-space-5); background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); }
+.lemoon-size-guide--dialog .lemoon-measurement-diagram__views { grid-template-columns: minmax(0, 1fr); }
+.lemoon-size-guide--dialog .lemoon-size-guide__links { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-3) var(--lemoon-space-6); margin-top: var(--lemoon-space-5); }
+.lemoon-size-guide--dialog .lemoon-size-guide__links a { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .3em; }
+.lemoon-size-guide--dialog .lemoon-size-guide__links a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 3px; }
+
+/* Measurement comparison uses the existing native disclosure behavior. */
+.lemoon-size-guide__comparison > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; color: var(--lemoon-text-brand); font: 600 18px/1.4 var(--lemoon-font-heading); list-style: none; cursor: pointer; }
+.lemoon-size-guide__comparison > summary::-webkit-details-marker { display: none; }
+.lemoon-size-guide__comparison > summary .icon { position: static; flex: 0 0 20px; width: 20px; height: 20px; transition: transform .2s ease; }
+.lemoon-size-guide__comparison[open] > summary .icon { transform: rotate(180deg); }
+.lemoon-size-guide__comparison > summary:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { .lemoon-size-guide__comparison > summary .icon { transition: none; } }

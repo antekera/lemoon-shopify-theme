@@ -11,6 +11,10 @@ import { renderContractFixture } from '../helpers/consumer-contract-renderer.mjs
 import { renderAdoptionFixture } from '../helpers/component-adoption-renderer.mjs';
 import { renderJournalScenario } from '../helpers/journal-renderer.mjs';
 import { renderQuizFixture } from '../helpers/style-quiz-renderer.mjs';
+import { renderSizeGuideFixture } from '../helpers/size-guide-renderer.mjs';
+import { renderSizeGuidePageFixture } from '../helpers/size-guide-page-renderer.mjs';
+import { renderSharedDrawerFixture } from '../helpers/shared-drawers-renderer.mjs';
+import { renderMeasurementGuideAnalyticsFixture } from '../helpers/measurement-guide-analytics-renderer.mjs';
 import { renderFaceGuideFixture } from '../helpers/face-guide-renderer.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -48,6 +52,44 @@ const server = createServer(async (request, response) => {
     pathname = decodeURIComponent(new URL(request.url, 'http://127.0.0.1:4173').pathname);
   } catch {
     response.writeHead(400).end('Bad request');
+    return;
+  }
+
+  if (['/tests/fixtures/size-guide-page.html', '/pages/como-medir-tus-lentes', '/en/pages/como-medir-tus-lentes'].includes(pathname)) {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderSizeGuidePageFixture(query.get('scenario') || 'default', pathname.startsWith('/en/') || query.get('locale') === 'en' ? '/en' : '/'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/measurement-guide-analytics.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      const html = renderMeasurementGuideAnalyticsFixture({ consent: query.get('consent') || 'granted', language: query.get('locale') || 'es', kind: query.get('kind') || 'measurements', editor: query.get('editor') === '1' });
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : html);
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/size-guide.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(renderSizeGuideFixture(query.get('shell') || 'standard', query.get('scenario') || 'complete'));
+    } catch (error) { response.writeHead(500).end(String(error)); }
+    return;
+  }
+
+  if (pathname === '/tests/fixtures/shared-drawers.html') {
+    try {
+      const query = new URL(request.url, 'http://127.0.0.1').searchParams;
+      const html = renderSharedDrawerFixture(query.get('kind') || 'generic');
+      response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      response.end(request.method === 'HEAD' ? undefined : html);
+    } catch (error) { response.writeHead(500).end(String(error)); }
     return;
   }
 
@@ -159,7 +201,7 @@ const server = createServer(async (request, response) => {
   }
 });
 
-const port = Number(process.env.LEMOON_FIXTURE_PORT || 4173);
+const port = Number(process.env.LEMOON_FIXTURE_PORT || process.env.PORT || 4173);
 server.listen(port, '127.0.0.1', () => {
   console.log(`Fixture ready at http://127.0.0.1:${port}`);
 });

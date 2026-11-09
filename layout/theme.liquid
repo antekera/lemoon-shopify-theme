@@ -316,6 +316,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'lemoon-components.css' | asset_url | stylesheet_tag }}
+    {{ 'component-lemoon-drawer.css' | asset_url | stylesheet_tag }}
     {%- if request.page_type == 'policy' -%}
       {{ 'lemoon-native-policies.css' | asset_url | stylesheet_tag }}
     {%- endif -%}

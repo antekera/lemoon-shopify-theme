@@ -6,7 +6,7 @@ Familias: LM-TYPE, LM-ACTION, LM-LEGAL; shell/editorial/hero/footer/password con
 
 Consumidor: [lemoon-guide-page](../../../sections/lemoon-guide-page.liquid). Reutiliza [heading](../../../snippets/lemoon-ui-heading.liquid) para H1, pasos H2 y ayuda H2, y [action](../../../snippets/lemoon-ui-action.liquid) para navegación. El aside, el índice, los tres pasos y las rutas pertenecen a la sección: **no existe un snippet help-panel**. El shell legal, hero, footer y password se integran desde sus propias secciones, no copiando este aside.
 
-`heading` recibe `text`, `level` (1–6, default 2), `id` y `class`; su nivel no elige tamaño visual. `action` distingue `element: 'a'` de botón (default, `type: 'button'`) y del submit input opt-in de comentarios (`element: 'input', type: 'submit'`). Sus variantes base son primary/default, secondary y tertiary. `style_family: 'local'` conserva las clases del consumidor sin `.button`; no convierte una CTA de guía en variante global.
+`heading` recibe `text`, `level` (1–6, default 2), `id` y `class`; su nivel no elige tamaño visual. `action` distingue `element: 'a'` de botón (default, `type: 'button'`) y del submit input opt-in de comentarios (`element: 'input', type: 'submit'`). Sus variantes base son primary/default, secondary, tertiary y accent. `style_family: 'local'` conserva las clases del consumidor sin `.button`; no convierte una CTA de guía en variante global.
 
 ## Ejemplo en la guía
 
@@ -21,11 +21,13 @@ Dentro de `lemoon-guide-page`, después de resolver `contact_url` desde las ruta
   {% render 'lemoon-ui-heading', text: help_title, level: 2, id: help_id %}
   <p>{{ 'sections.lemoon_guide.help_body' | t | escape }}</p>
   <div class="lemoon-guide__links">
-    {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, style_family: 'local', class: 'lemoon-guide__cta' %}
+    {% render 'lemoon-ui-action', element: 'a', href: routes.all_products_collection_url, label: catalogue_label, variant: 'accent' %}
     {% render 'lemoon-ui-action', element: 'a', href: contact_url, label: contact_label, style_family: 'local' %}
   </div>
 </aside>
 ```
+
+La variante `accent` usa la familia base: amarillo `--lemoon-action-accent`, texto `--lemoon-text-brand` y hover `--lemoon-action-accent-hover`. Se invoca con `variant: 'accent'`, sin `style_family: 'local'`. El catálogo de measurements la utiliza; las otras cuatro guías conservan su CTA local anterior. `local` sigue omitiendo clases y variantes base. Los estados disabled/loading conservan el bloqueo de destinos y la semántica nativa.
 
 Los textos pasados al snippet no llevan `escape`: se escapan en él. Los atributos y texto emitidos directamente por el consumidor se escapan allí. Este ejemplo compone piezas; no duplica sus implementaciones ni sus estilos.
 
@@ -63,6 +65,30 @@ La plantilla adicional `page.legal` es opt-in. Para los handles de privacidad, t
 ```
 
 Conservar component-list-social.css, SVG decorativos y etiquetas visually-hidden. El layout password carga dependencias propias. Las [pruebas de consumidores](../../../tests/e2e/consumer-contract.spec.js) comparan orden/semántica local; no comprueban disponibilidad de perfiles ni configuración efectiva del tema activo.
+
+## Guía educativa de medidas
+
+El modo `measurements` de `lemoon-guide-page` mantiene el índice, las anclas y la ayuda de familia, con H1 desde `page.title` (fallback localizado). Sus campos `measurements_intro`, `measurements_step_{1,2,3}_title`, `measurements_step_{1,2,3}_body` y `measurements_help_body` pertenecen al editor de la sección y se ignoran en las otras cuatro guías. Intro/cuerpos/ayuda son richtext sin wrapper `<p>` adicional; un valor vacío o compuesto solo por espacios/párrafos vacíos usa el fallback localizado. El título de página y SEO permanecen en sus campos nativos.
+
+Reutilizar los recursos compartidos, sin un SKU de ejemplo:
+
+```liquid
+{% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false, annotated_temple: true %}
+{% render 'lemoon-frame-measurement-diagram', instance_id: measurement_instance_id, label: diagram_label %}
+{% render 'lemoon-measurement-definitions', class_name: 'lemoon-guide__definitions' %}
+```
+
+`lemoon-size-guide-comparison` admite `heading_level` (2 por defecto), `show_heading` y `show_intro` (true salvo false explícito), `compact` y `annotated_temple` (false). La página activa este último para indicar la ubicación del código en la cara interior de la patilla, sin modificar los paths base: grabado, contorno y guía son decorativos dentro del SVG. En ese modo la nota educativa aparece como figcaption de 12px debajo del dibujo; el código HTML grande conserva toda la información. El modal activa explícitamente la anotación y omite las filas con `show_rows: false`; el default de la página conserva sus tres filas educativas. Muestra código educativo 52 □ 18–145, tres segmentos con énfasis semántico/subrayado, miniiconos decorativos y texto HTML. No recibe producto ni consulta catálogo. `lemoon-frame-measurement-diagram` recibe `instance_id` y descripción `label`; emite vistas con títulos accesibles únicos, referencias A–E y figcaption sin escala. Las cinco definiciones HTML se reutilizan con `lemoon-measurement-definitions` (class_name opcional). Las cifras reales se muestran en la tabla inline `lemoon-frame-dimensions` y en la leyenda compacta A–E del modal; las instrucciones largas permanecen en la página educativa.
+
+El paso ya explica dónde buscar el código, por eso pasa `show_intro: false` para omitir únicamente la instrucción repetida del componente; conserva ejemplo, nota educativa y definiciones. El ejemplo y sus filas usan dos columnas solo con ancho útil suficiente, no por un breakpoint de viewport que ignore el índice. El índice, las filas A–E y la ayuda blanca con borde superior se refinan solo en measurements.
+
+La sección carga `component-lemoon-size-guide.css` solo en measurements. No crea un diálogo ni una herramienta para medir en pantalla. La página usa los destinos de catálogo/contacto de la familia y no vuelve a un producto arbitrario. Verificar template asignado y contenido editable real en Shopify aparte de los fixtures locales; la existencia de `page.guia-medidas.json` no acredita esa asignación.
+
+La forma vigente usa Donnalyn ZJGT372549-04, referencia elegida por el usuario: aperturas cuadradas altas, esquinas suaves amplias, puente sencillo y patillas curvadas, redibujadas desde frontal y tres cuartos. Conservar IDs por instance_id para títulos/gradientes/paths y margen al 200 %. A–E y las definiciones HTML describen magnitudes del producto, no cifras del referente. No incrustar fotos, logos, estampado ni valores comerciales.
+
+En la guía `measurements`, el bloque final conserva solo «Ver catálogo»; no renderiza el enlace «Consultar una medida». Las demás guías conservan su acción de contacto.
+
+La guía de medidas incorpora hooks de analítica en los hosts de título/pasos/índice/CTA y carga su módulo solo en ese modo, fuera del editor. No ampliar los inputs de los átomos para tracking. Publica custom events Shopify con permiso nativo y datos acotados; el [receptor GA4](../../analytics/measurement-guide.md) se configura por separado y no se instala con el tema.
 
 ## Guía visual por rostro (LEM-103)
 

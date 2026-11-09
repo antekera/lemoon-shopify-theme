@@ -1,0 +1,77 @@
+/* Original measurement illustrations and educational code; shared by PDP and guide page. */
+.lemoon-measurement-diagram { min-width: 0; margin: 0; color: var(--lemoon-text-brand); }
+.lemoon-measurement-diagram__views { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-6); align-items: center; }
+.lemoon-measurement-diagram__view { min-width: 0; }
+.lemoon-measurement-diagram svg { display: block; width: 100%; height: auto; }
+.lemoon-measurement-diagram__view-name { margin: var(--lemoon-space-2) 0 0; text-align: center; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-secondary); }
+.lemoon-measurement-diagram figcaption { margin-top: var(--lemoon-space-5); font-size: var(--lemoon-fs-14); line-height: 1.5; color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison { min-width: 0; color: var(--lemoon-text-primary); overflow-wrap: anywhere; }
+.lemoon-size-comparison h2, .lemoon-size-comparison h3 { margin: 0 0 var(--lemoon-space-4); color: var(--lemoon-text-brand); }
+.lemoon-size-comparison p { font-size: var(--lemoon-fs-16); line-height: 1.6; }
+.lemoon-size-comparison__intro { margin: 0 0 var(--lemoon-space-5); color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison__example { min-width: 0; padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+.lemoon-size-comparison__example-label { margin: 0; color: var(--lemoon-text-brand); }
+.lemoon-size-comparison__code { color: var(--lemoon-text-brand); white-space: normal; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.lemoon-size-comparison__example-label .lemoon-size-comparison__code { display: block; margin-top: var(--lemoon-space-2); font-size: var(--lemoon-fs-20); font-weight: var(--lemoon-weight-medium); }
+.lemoon-size-comparison__note { margin: var(--lemoon-space-3) 0 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14) !important; }
+.lemoon-size-comparison__temple { display: block; width: 100%; max-width: 44rem; height: auto; margin: var(--lemoon-space-6) auto 0; color: var(--lemoon-text-brand); }
+.lemoon-size-comparison__example-figure { margin: 0; }
+.lemoon-size-comparison--annotated .lemoon-size-comparison__note { margin-top: var(--lemoon-space-4); font-size: var(--lemoon-fs-12) !important; line-height: 1.5; }
+.lemoon-size-comparison__rows { list-style: none; margin: var(--lemoon-space-6) 0 0; padding: 0; }
+.lemoon-size-comparison__row:last-child { border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-size-comparison__row { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-4); align-items: flex-start; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-size-comparison__icon { display: block; width: 64px; flex: 0 0 64px; height: auto; margin-top: var(--lemoon-space-2); color: var(--lemoon-text-brand); }
+.lemoon-size-comparison__detail { flex: 1 1 14rem; min-width: 0; }
+.lemoon-size-comparison__detail .lemoon-size-comparison__code { margin: 0 0 var(--lemoon-space-3); font-size: var(--lemoon-fs-20); }
+.lemoon-size-comparison__code strong { font-weight: var(--lemoon-weight-bold); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .3em; }
+.lemoon-size-comparison__definition { margin: 0; color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison__definition span { display: block; color: var(--lemoon-text-brand); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-size-comparison__footer { margin: var(--lemoon-space-5) 0 0; color: var(--lemoon-text-secondary); }
+.lemoon-size-comparison--compact p { font-size: var(--lemoon-fs-14); }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-6); align-items: flex-start; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison > h2,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison > h3,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__intro,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__footer { flex: 0 1 100%; margin: 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__example,
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__rows { flex: 1 1 32rem; min-width: 0; margin: 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__row { gap: var(--lemoon-space-3); padding: var(--lemoon-space-5) 0; }
+.lemoon-guide[data-guide-kind="measurements"] .lemoon-size-comparison__row:first-child { border-top: 0; padding-top: 0; }
+
+@media screen and (min-width: 750px) {
+  .lemoon-guide[data-guide-kind="measurements"] .lemoon-measurement-diagram__views { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (forced-colors: active) {
+  .lemoon-size-comparison__code strong { text-decoration-color: CanvasText; }
+}
+
+/* Product-independent A–E definitions shared by the drawer and educational page. */
+.lemoon-measurement-definitions { display: grid; gap: 0; margin: var(--lemoon-space-6) 0 0; }
+.lemoon-measurement-definitions > div { min-width: 0; padding: var(--lemoon-space-5) 0; border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-measurement-definitions dt { margin: 0 0 var(--lemoon-space-2); color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-definitions dd { min-width: 0; margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+
+/* PDP values stay in HTML so long numbers and enlarged text cannot distort SVGs. */
+.lemoon-measurement-diagram__values { display: grid; gap: 0; margin: var(--lemoon-space-5) 0 0; color: var(--lemoon-text-brand); }
+.lemoon-measurement-diagram__values > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: var(--lemoon-space-2) var(--lemoon-space-4); min-width: 0; padding: var(--lemoon-space-3) 0; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-measurement-diagram__values dt, .lemoon-measurement-diagram__values dd { margin: 0; font-size: var(--lemoon-fs-14); line-height: 1.6; }
+.lemoon-measurement-diagram__values dt { font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-diagram__values dd { overflow-wrap: anywhere; }
+.lemoon-measurement-definitions__value { display: block; margin-bottom: var(--lemoon-space-2); font-size: var(--lemoon-fs-16); font-weight: var(--lemoon-weight-semibold); }
+.lemoon-measurement-definitions__label { display: block; }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__links p { flex-basis: 100%; margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison { margin-top: var(--lemoon-space-6); }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison[open] { min-height: var(--lemoon-size-guide-comparison-height, 0px); }
+
+/* Keep the close control above the full-width comparison heading. */
+.lemoon-pdp__dialog.lemoon-size-drawer:has(.lemoon-size-guide--dialog) {
+  --lemoon-size-guide-padding-top: 72px;
+  --lemoon-size-guide-reading-top: calc(var(--lemoon-space-4) + var(--lemoon-size-touch) + var(--lemoon-space-3));
+  padding-top: var(--lemoon-size-guide-padding-top);
+  scroll-padding-top: var(--lemoon-size-guide-reading-top);
+}
+.lemoon-size-drawer:has(.lemoon-size-guide--dialog) .lemoon-pdp__close { top: calc(var(--lemoon-space-4) - var(--lemoon-size-guide-padding-top)); }
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison > summary { padding-right: 0; }

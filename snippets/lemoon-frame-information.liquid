@@ -3,8 +3,9 @@
   @param {product} product - Current Shopify product.
   @param {string} instance_id - Unique ID prefix for the inline tab panel.
 {% enddoc %}
-<section class="lemoon-frame-information" aria-label="{{ 'lemoon_pdp.size_guide_tabs' | t }}">
+<section class="lemoon-frame-information" aria-labelledby="FrameInformation-{{ instance_id | escape }}">
   <div class="lemoon-frame-information__inner">
+    <h2 id="FrameInformation-{{ instance_id | escape }}">{{ 'lemoon_size_guide.product_details_heading' | t }}</h2>
     {% render 'lemoon-size-guide-content', product: product, instance_id: instance_id %}
   </div>
 </section>

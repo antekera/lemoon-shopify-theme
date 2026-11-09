@@ -1,3 +1,54 @@
+const closingDrawers = new WeakMap();
+
+function needsDrawerExit(dialog) {
+  return dialog.matches('dialog.lemoon-size-drawer, dialog.lemoon-drawer')
+    && window.matchMedia('(max-width: 749px)').matches
+    && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    && !window.CSS?.supports('overlay', 'auto');
+}
+
+function closeDrawerDialog(dialog) {
+  if (closingDrawers.has(dialog)) return;
+  dialog.scrollTo({ top: dialog.scrollTop, behavior: 'instant' });
+  if (!dialog.open || !needsDrawerExit(dialog)) { dialog.close(); return; }
+
+  // Keep WebKit's native modal/focus boundary until the sheet leaves the viewport.
+  const style = getComputedStyle(dialog);
+  const milliseconds = (value) => parseFloat(value) * (value.trim().endsWith('ms') ? 1 : 1000);
+  const durations = style.transitionDuration.split(',').map(milliseconds);
+  const delays = style.transitionDelay.split(',').map(milliseconds);
+  const duration = Math.max(0, ...style.transitionProperty.split(',').map((property, index) =>
+    ['transform', 'all'].includes(property.trim()) ? durations[index % durations.length] + delays[index % delays.length] : 0));
+  if (!duration) { dialog.close(); return; }
+
+  let timer;
+  const cleanup = () => {
+    clearTimeout(timer);
+    dialog.removeEventListener('transitionend', onTransitionEnd);
+    dialog.removeEventListener('close', cleanup);
+    observer.disconnect();
+    dialog.removeAttribute('data-drawer-closing');
+    closingDrawers.delete(dialog);
+  };
+  const finish = () => {
+    cleanup();
+    if (dialog.open) dialog.close();
+  };
+  const onTransitionEnd = (event) => {
+    if (event.target === dialog && event.propertyName === 'transform') finish();
+  };
+  // An external native close/reopen must never leave a pending exit on the new dialog.
+  const observer = new MutationObserver((records) => {
+    if (!dialog.open || records.some((record) => record.oldValue === null)) cleanup();
+  });
+  closingDrawers.set(dialog, cleanup);
+  dialog.addEventListener('transitionend', onTransitionEnd);
+  dialog.addEventListener('close', cleanup);
+  observer.observe(dialog, { attributes: true, attributeFilter: ['open'], attributeOldValue: true });
+  dialog.setAttribute('data-drawer-closing', '');
+  timer = setTimeout(finish, duration + 50);
+}
+
 export function whiteCanvasBounds(data, width, height) {
   const white = (index) => data[index + 3] < 16 || (Math.min(data[index], data[index + 1], data[index + 2]) > 239 && Math.max(data[index], data[index + 1], data[index + 2]) - Math.min(data[index], data[index + 1], data[index + 2]) < 12);
   const corners = [0, (width - 1) * 4, (height - 1) * width * 4, (width * height - 1) * 4];
@@ -47,6 +98,69 @@ if (typeof window !== 'undefined') {
       if (this.ready) return;
       this.ready = true;
       this.tabs = [...this.querySelectorAll('[data-size-tab]')];
+      const dialog = this.closest('dialog');
+      this.requestClose = () => closeDrawerDialog(dialog);
+      const comparison = this.querySelector('.lemoon-size-guide__comparison');
+      if (dialog && comparison) {
+        let closeVersion = 0;
+        this.prepareOpen = () => {
+          closeVersion++;
+          closingDrawers.get(dialog)?.();
+          dialog.scrollTo({ top: 0, behavior: 'instant' });
+          comparison.open = false;
+          comparison.style.removeProperty('--lemoon-size-guide-comparison-height');
+        };
+        comparison.addEventListener('toggle', () => {
+          if (!comparison.open || !dialog.open || closingDrawers.has(dialog)) return;
+          const summary = comparison.querySelector('summary');
+          const style = getComputedStyle(dialog);
+          const readingTop = parseFloat(style.scrollPaddingTop) || 0;
+          const paddingBottom = parseFloat(style.paddingBottom) || 0;
+          // A short disclosure still needs enough room to reach the panel's reading area.
+          comparison.style.setProperty('--lemoon-size-guide-comparison-height', `${Math.max(0, dialog.clientHeight - readingTop - paddingBottom)}px`);
+          const top = dialog.scrollTop + summary.getBoundingClientRect().top - dialog.getBoundingClientRect().top - dialog.clientTop - readingTop;
+          dialog.scrollTo({ top, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+        });
+        dialog.addEventListener('close', () => {
+          if (dialog.open) return;
+          const version = ++closeVersion;
+          dialog.scrollTo({ top: dialog.scrollTop, behavior: 'instant' });
+          const collapse = () => {
+            if (dialog.open || version !== closeVersion) return;
+            comparison.open = false;
+            comparison.style.removeProperty('--lemoon-size-guide-comparison-height');
+          };
+          // Native close can precede a discrete CSS exit; keep its content steady until hidden.
+          const exitAnimations = dialog.getAnimations();
+          if (exitAnimations.length) Promise.allSettled(exitAnimations.map((animation) => animation.finished)).then(collapse);
+          else collapse();
+        });
+      }
+      dialog?.addEventListener('cancel', (event) => {
+        if (!needsDrawerExit(dialog)) return;
+        event.preventDefault();
+        closeDrawerDialog(dialog);
+      });
+      // Recompute after tab/disclosure changes: hidden content must not define the focus boundary.
+      dialog?.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && closingDrawers.has(dialog)) {
+          event.preventDefault();
+          return;
+        }
+        if (event.key !== 'Tab') return;
+        const items = [...dialog.querySelectorAll('button, a[href], input, select, textarea, summary, [tabindex]')]
+          .filter((item) => item.tabIndex >= 0 && !item.disabled && item.getClientRects().length
+            && !item.closest('details:not([open]) > :not(summary)'));
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && event.target === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && event.target === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
       this.selectTab = (tab, focus = false) => {
         this.tabs.forEach((item) => {
           const selected = item === tab;
@@ -94,15 +208,20 @@ if (typeof window !== 'undefined') {
             localStorage.setItem('lemoon-saved-products', JSON.stringify(next)); restore();
           } catch { favourite.hidden = true; }
         }
-        if (event.target.closest('[data-size-open]')) this.querySelector('dialog').showModal();
-        if (event.target.closest('[data-size-close]')) this.querySelector('dialog').close();
+        if (event.target.closest('[data-size-open]')) {
+          const dialog = this.querySelector('dialog');
+          dialog.querySelector('lemoon-size-guide')?.prepareOpen?.();
+          dialog.showModal();
+          dialog.scrollTop = 0;
+        }
+        if (event.target.closest('[data-size-close]')) closeDrawerDialog(this.querySelector('dialog'));
       });
       const dialog = this.querySelector('dialog');
       dialog?.addEventListener('close', () => this.querySelector('[data-size-open]').focus());
-      dialog?.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close(); });
+      dialog?.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) closeDrawerDialog(dialog); });
       dialog?.addEventListener('change', (event) => {
         if (!event.target.matches('[data-units]')) return;
-        dialog.querySelectorAll('[data-mm]').forEach((label) => { label.textContent = event.target.value === 'in' ? `${(Number(label.dataset.mm) / 25.4).toFixed(2)} in` : `${label.dataset.mm} mm`; });
+        event.target.closest('.lemoon-pdp__dimensions').querySelectorAll('[data-mm]').forEach((label) => { label.textContent = event.target.value === 'in' ? `${(Number(label.dataset.mm) / 25.4).toFixed(2)} in` : `${label.dataset.mm} mm`; });
       });
     }
   });

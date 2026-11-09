@@ -30,22 +30,25 @@ class CartDrawer extends HTMLElement {
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
     if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
-    // here the animation doesn't seem to always get triggered. A timeout seem to help
+    const focusDrawer = () => {
+      if (!this.classList.contains('active')) return;
+      const containerToTrapFocusOn = this.classList.contains('is-empty')
+        ? this.querySelector('.drawer__inner-empty')
+        : document.getElementById('CartDrawer');
+      const focusElement = this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
+      trapFocus(containerToTrapFocusOn, focusElement);
+    };
+    this.addEventListener('transitionend', focusDrawer, { once: true });
+
+    // Retain the existing activation frame; reduced motion has no transitionend.
     setTimeout(() => {
       this.classList.add('animate', 'active');
+      const panel = this.querySelector('.drawer__inner');
+      if (getComputedStyle(panel).transitionDuration.split(',').every(duration => parseFloat(duration) === 0)) {
+        this.removeEventListener('transitionend', focusDrawer);
+        focusDrawer();
+      }
     });
-
-    this.addEventListener(
-      'transitionend',
-      () => {
-        const containerToTrapFocusOn = this.classList.contains('is-empty')
-          ? this.querySelector('.drawer__inner-empty')
-          : document.getElementById('CartDrawer');
-        const focusElement = this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
-        trapFocus(containerToTrapFocusOn, focusElement);
-      },
-      { once: true },
-    );
 
     document.body.classList.add('overflow-hidden');
 

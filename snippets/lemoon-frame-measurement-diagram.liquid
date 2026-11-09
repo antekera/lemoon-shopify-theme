@@ -1,0 +1,96 @@
+{% doc %}
+  Original frame illustration informed by real eyewear, not a product rendering.
+  @param {string} instance_id - Unique prefix for accessible SVG titles and paint IDs.
+  @param {boolean} [product_measurements] - Show compact named HTML references only when explicitly true.
+  @param {object} [dimensions] - Native positive numeric product measurements in millimeters.
+  @param {string} label - Localized description of both views.
+{% enddoc %}
+<figure class="lemoon-measurement-diagram">
+  <div class="lemoon-measurement-diagram__views">
+    <div class="lemoon-measurement-diagram__view">
+      <svg viewBox="-12 -12 448 270" role="img" aria-labelledby="FrameFront-{{ instance_id | escape }}" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <title id="FrameFront-{{ instance_id | escape }}">{{ 'lemoon_size_guide.front_view' | t | escape }}</title>
+        <defs>
+          <linearGradient id="FrameFrontRim-{{ instance_id | escape }}" x1="0" y1="0" x2="0.12" y2="1">
+            <stop stop-color="currentColor" stop-opacity=".64"/>
+            <stop offset=".25" stop-color="currentColor" stop-opacity=".22"/>
+            <stop offset=".58" stop-color="currentColor" stop-opacity=".12"/>
+            <stop offset="1" stop-color="currentColor" stop-opacity=".56"/>
+          </linearGradient>
+          <linearGradient id="FrameFrontLens-{{ instance_id | escape }}" x1="0" y1="0" x2="1" y2="1">
+            <stop style="stop-color:var(--lemoon-surface-page)" stop-opacity=".99"/>
+            <stop offset=".55" style="stop-color:var(--lemoon-surface-page)" stop-opacity=".96"/>
+            <stop offset="1" style="stop-color:var(--lemoon-surface-page)" stop-opacity=".84"/>
+          </linearGradient>
+          <path id="FrameFrontOutline-{{ instance_id | escape }}" d="M17.51 63.4C48.31 57.8 86.74 53.47 124.41 56.27C151.9 57.29 164.11 60.6 172.26 67.73C180.66 74.09 181.93 80.96 188.8 82.74C194.91 84.78 209.42 84.78 215.78 82.49C221.63 80.71 223.16 74.09 231.31 67.73C240.21 60.09 252.94 57.04 279.41 56.02C317.59 53.73 355 58.05 381.47 63.14Q383.25 63.65 383 81.72Q383 85.54 377.66 87.32Q371.55 89.11 369.26 95.21C366.97 106.16 366.71 119.9 361.11 144.85C356.53 163.93 350.68 174.12 341.77 179.21C328.28 187.1 285.01 189.64 264.9 184.81C244.03 182.01 235.38 177.17 229.52 168.01C220.87 154.52 215.02 133.14 210.94 111.5C209.67 103.87 207.64 101.32 202.04 100.56L198.22 100.56C192.36 100.81 189.56 103.87 188.29 109.72C183.46 133.14 177.09 155.28 167.68 168.26C161.31 177.93 153.68 181.75 134.08 185.06C110.66 189.9 72.49 186.33 59.5 181.75C49.58 178.44 43.72 171.06 38.89 159.61C31.51 141.03 29.98 115.58 29.47 98.52C29.22 92.92 27.44 89.11 21.58 86.82Q16.75 84.52 16.49 81.22L17 67.47Q17 64.67 17.51 63.4Z"/>
+          <path id="FrameFrontOpening-{{ instance_id | escape }}" d="M101.25 64.67C126.7 63.91 149.61 65.18 161.31 72.82C170.22 78.92 175.06 88.09 175.06 100.56C175.06 113.03 169.97 132.88 163.6 150.95C159.02 164.19 154.44 171.32 144.77 174.62C128.23 180.22 83.18 182.26 64.6 174.88C52.12 170.3 47.54 159.35 44.74 145.61C40.67 131.1 39.4 113.03 39.91 100.3C40.42 86.31 44.74 78.16 52.38 72.82C63.58 66.45 82.16 64.67 101.25 64.67Z"/>
+        </defs>
+        <use href="#FrameFrontOutline-{{ instance_id | escape }}" transform="translate(0 3)" fill="currentColor" fill-opacity=".24" stroke-opacity=".5" stroke-width="1.2"/>
+        <use href="#FrameFrontOutline-{{ instance_id | escape }}" fill="url(#FrameFrontRim-{{ instance_id | escape }})" stroke-width="1.6"/>
+        <use href="#FrameFrontOpening-{{ instance_id | escape }}" fill="url(#FrameFrontLens-{{ instance_id | escape }})" stroke-width="1.3"/>
+        <use href="#FrameFrontOpening-{{ instance_id | escape }}" transform="translate(400 0) scale(-1 1)" fill="url(#FrameFrontLens-{{ instance_id | escape }})" stroke-width="1.3"/>
+        <g stroke-width="1.1">
+          <path d="M19.55 65.44C49.07 60.09 86.74 55.76 124.15 58.56C150.37 59.58 162.84 62.89 170.48 69.51C178.87 76.13 182.18 83.51 188.29 85.29C195.93 87.07 209.42 87.07 216.54 85.03C223.16 83 224.94 75.87 233.34 69.76C242.5 62.13 255.49 59.33 279.92 58.31C317.84 56.02 354.75 60.34 379.44 65.44" style="stroke:var(--lemoon-surface-page)" stroke-opacity=".65"/>
+          <path d="M45.76 163.68C50.34 173.86 58.49 178.95 70.96 181.5C88.52 185.06 117.28 185.82 133.82 182.77Q156.99 179.46 164.11 168.77M233.09 168.77Q240.21 179.46 264.9 182.51C283.99 186.84 321.92 184.3 339.73 177.17Q350.17 172.33 355.26 160.12" stroke-opacity=".48"/>
+          <path d="M190.07 105.39Q200 95.47 210.18 105.39M188.8 85.29L191.09 98.27M215.78 85.03L213.24 98.27" stroke-opacity=".4"/>
+        </g>
+        <g style="fill:var(--lemoon-surface-page)" fill-opacity=".65" stroke-width=".8">
+          <circle cx="26.93" cy="70.53" r="1.8"/><circle cx="26.93" cy="78.68" r="1.8"/>
+          <circle cx="373.07" cy="70.53" r="1.8"/><circle cx="373.07" cy="78.68" r="1.8"/>
+        </g>
+        <g stroke-width="1.1">
+          <path d="M17 40H383M17 34V46M383 34V46M39.8 215H175.06M39.8 209V221M175.06 209V221M175.06 138H224.94M175.06 132V144M224.94 132V144M405 64.48V179.66M399 64.48H411M399 179.66H411"/>
+          <path d="M17 52V59M383 52V59M39.8 192V208M175.06 192V208M363 64.48H397M363 179.66H397M175.06 103V131M224.94 103V131" stroke-opacity=".28"/>
+        </g>
+        <g fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">
+          <text x="200" y="27">A</text><text x="107.43" y="240">B</text><text x="200" y="164">C</text><text x="388" y="129">D</text>
+        </g>
+      </svg>
+      <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.front_view' | t }}</p>
+    </div>
+    <div class="lemoon-measurement-diagram__view">
+      <svg viewBox="-12 -18 424 200" role="img" aria-labelledby="FrameSide-{{ instance_id | escape }}" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <title id="FrameSide-{{ instance_id | escape }}">{{ 'lemoon_size_guide.side_view' | t | escape }}</title>
+        <defs>
+          <linearGradient id="FrameSideRim-{{ instance_id | escape }}" x1="0" y1="0" x2="0.2" y2="1">
+            <stop stop-color="currentColor" stop-opacity=".62"/>
+            <stop offset=".35" stop-color="currentColor" stop-opacity=".17"/>
+            <stop offset=".74" stop-color="currentColor" stop-opacity=".28"/>
+            <stop offset="1" stop-color="currentColor" stop-opacity=".62"/>
+          </linearGradient>
+        </defs>
+        <path d="M25 74Q21 91 32 143L40 142Q34 113 35 78Z" fill="currentColor" fill-opacity=".3" stroke-width="1.4"/>
+        <path d="M40 78C115 75 193 68 254 59C280 55 298 60 313 76C329 95 338 115 349 132C353 140 351 147 345 150C339 153 332 148 329 142L304 100C294 84 280 79 259 80L40 94Z" transform="translate(0 2)" fill="currentColor" fill-opacity=".2" stroke-opacity=".45" stroke-width="1"/>
+        <path d="M40 78C115 75 193 68 254 59C280 55 298 60 313 76C329 95 338 115 349 132C353 140 351 147 345 150C339 153 332 148 329 142L304 100C294 84 280 79 259 80L40 94Z" fill="url(#FrameSideRim-{{ instance_id | escape }})" stroke-width="1.5"/>
+        <path d="M44 80C117 77 190 69 255 62C279 59 296 64 309 79" style="stroke:var(--lemoon-surface-page)" stroke-opacity=".8" stroke-width="1.1"/>
+        <path d="M49 90L258 77C280 76 294 82 307 100L337 144" stroke-opacity=".5" stroke-width="1.1"/>
+        <path d="M33 79L43 78L44 93L35 95Z" fill="currentColor" fill-opacity=".36" stroke-width="1"/>
+        <circle cx="48" cy="85" r="2.5" fill="currentColor" fill-opacity=".32" stroke-width=".9"/>
+        <path d="M46.5 84L49.5 86" stroke-width=".8"/>
+        <g stroke-width="1.1">
+          <path d="M40 46C111 43 188 35 251 27C292 22 318 37 336 64C350 86 360 108 374 128M35 40L45 52M368 132L380 124"/>
+          <path d="M40 80V38M342 146L380 126" stroke-opacity=".28"/>
+        </g>
+        <text x="197" y="18" fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">E</text>
+      </svg>
+      <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.side_view' | t }}</p>
+    </div>
+  </div>
+  {%- if product_measurements == true -%}
+    {%- liquid
+      assign measurement_keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
+      assign measurement_markers = 'A,B,C,D,E' | split: ','
+    -%}
+    <dl class="lemoon-measurement-diagram__values" aria-label="{{ 'lemoon_pdp.measurements_tab' | t }}">
+      {%- for key in measurement_keys -%}
+        {%- liquid
+          assign measurement = dimensions[key]
+          assign numeric_measurement = measurement | plus: 0
+          assign label_key = 'lemoon_pdp.' | append: key
+        -%}
+        <div><dt>{{ label_key | t }}</dt><dd><span class="lemoon-measurement-diagram__marker">{{ measurement_markers[forloop.index0] }}:</span> {% if measurement == numeric_measurement and numeric_measurement > 0 %}{{ measurement | escape }} mm{% else %}—{% endif %}</dd></div>
+      {%- endfor -%}
+    </dl>
+  {%- endif -%}
+  <figcaption>{{ label | escape }}</figcaption>
+</figure>

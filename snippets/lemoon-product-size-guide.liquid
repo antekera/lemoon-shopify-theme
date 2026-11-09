@@ -10,8 +10,8 @@
     <button type="button" class="lemoon-pdp__text-button" data-size-open>{{ 'lemoon_pdp.size_guide' | t }}</button>
   </div>
   <dialog class="lemoon-pdp__dialog lemoon-size-drawer" aria-labelledby="FrameSize-{{ section_id }}">
-    <button type="button" data-size-close class="lemoon-pdp__close" aria-label="{{ 'accessibility.close' | t }}">×</button>
+    <button type="button" data-size-close class="lemoon-pdp__close" aria-label="{{ 'lemoon_size_guide.close' | t }}">×</button>
     <h2 id="FrameSize-{{ section_id }}">{{ 'lemoon_pdp.size_guide' | t }}</h2>
-    {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id %}
+    {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
   </dialog>
 </lemoon-product-tools>

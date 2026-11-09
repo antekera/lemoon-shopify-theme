@@ -1,0 +1,28 @@
+{% doc %}
+  Explains the five A–E frame measurements, optionally with product values for the PDP modal.
+  @param {boolean} [product_measurements] - Show validated product values only when explicitly true.
+  @param {object} [dimensions] - Native positive numeric product measurements in millimeters.
+  @param {string} [class_name] - Additional class for the consuming guide layout.
+{% enddoc %}
+{%- liquid
+  assign keys = 'frame_width,lens_width,bridge,lens_height,temple' | split: ','
+  assign markers = 'A,B,C,D,E' | split: ','
+-%}
+<dl class="lemoon-measurement-definitions{% if class_name != blank %} {{ class_name | escape }}{% endif %}">
+  {%- for key in keys -%}
+    {%- assign label_key = 'lemoon_pdp.' | append: key -%}
+    {%- assign definition_key = 'lemoon_size_guide.definitions.' | append: key -%}
+    {%- if product_measurements == true -%}
+      {%- liquid
+        assign measurement = dimensions[key]
+        assign numeric_measurement = measurement | plus: 0
+        if key == 'frame_width'
+          assign definition_key = 'lemoon_size_guide.modal_frame_width_definition'
+        endif
+      -%}
+      <div><dt><span class="lemoon-measurement-definitions__value">{{ markers[forloop.index0] }}: {% if measurement == numeric_measurement and numeric_measurement > 0 %}{{ measurement | escape }} mm{% else %}—{% endif %}</span><span class="lemoon-measurement-definitions__label">{{ label_key | t }}</span></dt><dd>{{ definition_key | t }}</dd></div>
+    {%- else -%}
+      <div><dt><span aria-hidden="true">{{ markers[forloop.index0] }} · </span>{{ label_key | t }}</dt><dd>{{ definition_key | t }}</dd></div>
+    {%- endif -%}
+  {%- endfor -%}
+</dl>

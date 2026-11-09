@@ -98,3 +98,22 @@ En tarjetas con `recommended_variant`, cada swatch sin media propia debe publica
 Un `data-secondary-src` explícitamente vacío indica que el color no tiene segunda vista: retirar el estado de hover y las fuentes anteriores, e invalidar cualquier decodificación pendiente. Recuperar `data-lazy-src` solo si el swatch no declara el atributo; los valores secundarios explícitos no heredan el srcset de otro color. Los selectores de espera en `lemoon-components.css` deben prevalecer sobre el hover de `component-card.css`, aunque este se cargue después, para mantener visible la imagen principal.
 
 La vista secundaria inicial se renderiza solo si `card_secondary_media != blank`: Shopify puede representar la ausencia como cadena vacía, distinta de `null`. No pasar ese valor vacío a `image_url`; las pruebas LiquidJS no reproducen necesariamente esta diferencia del render nativo.
+
+## Guía de medidas de PDP
+
+`lemoon-size-guide-content` recibe `product`, `instance_id` y `presentation` opcional. El default conserva las tres pestañas inline de características; ambos shells pasan `presentation: 'dialog'` para la guía continua bajo el H2 nativo. No crear otro motor de diálogo ni repetir características o cuerpo CMS en el modal.
+
+```liquid
+{% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
+{% render 'lemoon-frame-dimensions', dimensions: dimensions, demo_dimensions: demo_dimensions %}
+```
+
+`custom.frame_dimensions.value` es el dueño de los cinco números JSON positivos `frame_width`, `lens_width`, `bridge`, `lens_height` y `temple`, en mm. La tabla inline omite cifras inválidas y mantiene avisos parciales/vacíos. El modal conserva una única lista A–E con nombres/valores y — para ausencias debajo del frontal/lateral. Nunca derivar cifras de `custom.frame_width` textual, talla, estilo o el ejemplo educativo. La etiqueta exacta `lemoon-measurements-demo` activa el aviso solo cuando hay datos válidos. En óptica la única sección inline ocupa la columna de detalles junto a los acordeones, conservando SKU.
+
+Los hosts cargan `component-lemoon-size-guide.css` una vez y mantienen su CSS/JS PDP. Dibujo frontal/lateral con `product_measurements: true` solo en el modal; la página conserva referencias genéricas e instrucciones de `lemoon-measurement-definitions`. `lemoon-size-guide-comparison` acepta `annotated_temple: true` para el grabado/indicador y nota bajo la perspectiva; `show_rows: false` omite las tres filas educativas solo en el acordeón del modal. Los defaults mantienen la página aprobada. Conservar paths originales, IDs por instancia y texto HTML legible; el ejemplo52 □18–145 no rellena medidas de producto.
+
+El `details` cerrado con chevron contiene la comparación y la ayuda final. El enlace usa la página seleccionada solo con URL, `published_at` y template `guia-medidas`; en otro caso usa `/pages/como-medir-tus-lentes` con raíz localizada. La ayuda queda oculta y fuera del límite de foco mientras el acordeón esté cerrado. El margen superior usa `--lemoon-space-6`; al desplegarse, el summary llega al área bajo la X (`--lemoon-space-4` + `--lemoon-size-touch` + `--lemoon-space-3`,72px base), con chevron al extremo derecho. La altura mínima calculada permite esa alineación incluso en paneles altos.
+
+Los dos handlers existentes llaman `prepareOpen()` antes de `showModal()` y reinician `scrollTop` a0. La preparación invalida cierres pendientes; el cierre nativo espera su salida CSS para plegar sin saltos. Reabrir durante la salida también inicia cerrado. `toggle` solo desplaza el drawer, respeta movimiento reducido y no reenfoca summary si el usuario ya avanzó con Tab. Mantener cierre animado, Escape, foco restaurado y otros diálogos sin cambios. En móvil≤749px rige la hoja inferior compartida; escritorio conserva480px a la derecha.
+
+Verificar valores completos/parciales/ausentes/inválidos/demo, IDs únicos, foco/teclado, cierre/reapertura rápida, scroll interno y reflow320px/texto200%. [La receta educativa](guide-help.md) y [la validación final](../../qa/lem-129-105-validation.md) completan el contrato. Fixtures locales no sustituyen QA ni asignaciones nativas Shopify.

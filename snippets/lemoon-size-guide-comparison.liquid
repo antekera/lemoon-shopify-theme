@@ -1,0 +1,105 @@
+{% doc %}
+  Educational temple inscription, independent of product measurements.
+  @param {string} instance_id - Unique prefix for the comparison heading.
+  @param {number} [heading_level] - Semantic heading level, default 2.
+  @param {boolean} [show_heading] - Show the heading unless false.
+  @param {boolean} [show_intro] - Show the instruction unless the host already provides it.
+  @param {boolean} [compact] - Use the compact drawer composition.
+  @param {boolean} [show_rows] - Show the educational code explanation rows unless false.
+  @param {boolean} [annotated_temple] - Inscription marker and caption below the illustration.
+{% enddoc %}
+{%- liquid
+  assign comparison_level = heading_level | default: 2
+  assign comparison_title = 'lemoon_size_guide.comparison_title' | t
+  assign comparison_heading_id = 'SizeComparison-' | append: instance_id
+  assign comparison_keys = 'lens_width,bridge,temple' | split: ','
+-%}
+<div class="lemoon-size-comparison{% if compact %} lemoon-size-comparison--compact{% endif %}{% if annotated_temple %} lemoon-size-comparison--annotated{% endif %}">
+  {%- unless show_heading == false -%}
+    {% render 'lemoon-ui-heading', text: comparison_title, level: comparison_level, id: comparison_heading_id %}
+  {%- endunless -%}
+  {%- unless show_intro == false -%}
+  <p class="lemoon-size-comparison__intro">{{ 'lemoon_size_guide.comparison_intro' | t }}</p>
+  {%- endunless -%}
+  <div class="lemoon-size-comparison__example">
+  <p class="lemoon-size-comparison__example-label">{{ 'lemoon_size_guide.example' | t }} <span class="lemoon-size-comparison__code">52 □ 18–145</span></p>
+  {%- if annotated_temple -%}
+  <figure class="lemoon-size-comparison__example-figure">
+  {%- else -%}
+  <p class="lemoon-size-comparison__note">{{ 'lemoon_size_guide.educational_note' | t }}</p>
+  {%- endif -%}
+  <svg class="lemoon-size-comparison__temple" viewBox="8 6 404 230" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <defs>
+      <linearGradient id="SizeCodeRim-{{ instance_id | escape }}" x1="0" y1="0" x2=".25" y2="1">
+        <stop stop-color="currentColor" stop-opacity=".64"/>
+        <stop offset=".32" stop-color="currentColor" stop-opacity=".2"/>
+        <stop offset=".62" stop-color="currentColor" stop-opacity=".12"/>
+        <stop offset="1" stop-color="currentColor" stop-opacity=".6"/>
+      </linearGradient>
+      <linearGradient id="SizeCodeLens-{{ instance_id | escape }}" x1="0" y1="0" x2="1" y2="1">
+        <stop style="stop-color:var(--lemoon-surface-page)" stop-opacity=".99"/>
+        <stop offset=".6" style="stop-color:var(--lemoon-surface-page)" stop-opacity=".96"/>
+        <stop offset="1" style="stop-color:var(--lemoon-surface-page)" stop-opacity=".85"/>
+      </linearGradient>
+    </defs>
+    <path d="M29.5 62.2C64.15 47.15 105.4 30.1 139.78 24.33C151.88 22.12 162.6 23.5 170.85 27.9C181.58 33.95 196.98 45.23 210.18 53.48C214.03 56.23 215.13 60.08 212.38 63.65C209.63 67.5 205.5 66.68 201.1 64.2C191.48 57.6 180.2 46.33 168.65 36.98C162.05 31.48 155.73 29.28 148.85 30.38C124.1 34.5 76.25 52.38 40.5 72.45L29.5 73Z" fill="url(#SizeCodeRim-{{ instance_id | escape }})" fill-opacity=".65" stroke-opacity=".65" stroke-width="1.3"/>
+    <path d="M33.35 62.2C71.03 46.33 113.65 28.73 142.25 25.7C154.62 23.77 161.23 25.43 168.38 29" style="stroke:var(--lemoon-surface-page)" stroke-opacity=".65" stroke-width="1"/>
+    <path d="M298.45 116.18L383.7 74.65C387.55 72.72 391.4 71.35 392.78 73.55C395.25 78.23 396.35 91.15 394.43 101.33C393.88 104.35 392.23 105.18 390.3 103.8C388.1 102.43 387.83 98.58 387.83 94.73L386.45 83.45Q385.9 82.08 384.53 83.18L304.23 135.15L299.28 137.9Z" fill="url(#SizeCodeRim-{{ instance_id | escape }})" stroke-width="1.5"/>
+    <path d="M303.4 118.65L384.8 78.23Q388.93 76.03 390.03 78.5L390.3 82.35Q387.83 80.7 385.63 83.73L304.78 132.4Z" style="fill:var(--lemoon-surface-page)" fill-opacity=".78" stroke-width=".8" stroke-opacity=".5"/>
+    <path d="M321.83 114.53L380.4 84" stroke-width="1.3" stroke-dasharray="2 3" stroke-opacity=".65"/>
+    <path d="M28.5 62.5L41 64.5C67.65 68.9 97.43 74.65 118.88 86.48C127.4 91.98 133.18 98.3 137.3 102.7C143.62 107.1 154.35 108.75 162.05 107.38C166.18 102.7 170.3 98.58 176.62 97.2C198.9 91.7 261.33 107.65 299.28 117L299.55 132.68C296.8 136.25 291.85 136.8 288.55 140.93C285.53 149.45 283.88 166.5 280.58 179.43C277.83 192.08 274.53 200.05 267.65 204.18C257.2 210.78 240.43 209.68 225.3 206.93C210.73 204.18 197.53 199.23 189.55 193.73C181.3 188.23 176.9 178.05 172.5 163.2C168.38 148.9 166.73 135.43 162.05 126.63Q159.03 122.5 154.62 122.23L138.4 120.03C135.93 136.25 131.8 154.68 126.03 164.03C121.63 171.73 116.13 173.93 109.25 173.1C92.75 171.18 71.85 163.2 59.48 153.85C48.2 145.05 41.6 132.95 35.28 113.7C29.78 95.28 25.5 84.55 25.5 76.5L25.5 65.5Q25.5 62 28.5 62.5Z" transform="translate(0 1.4)" fill="currentColor" fill-opacity=".18" stroke-width="1" stroke-opacity=".45"/>
+    <path d="M28.5 62.5L41 64.5C67.65 68.9 97.43 74.65 118.88 86.48C127.4 91.98 133.18 98.3 137.3 102.7C143.62 107.1 154.35 108.75 162.05 107.38C166.18 102.7 170.3 98.58 176.62 97.2C198.9 91.7 261.33 107.65 299.28 117L299.55 132.68C296.8 136.25 291.85 136.8 288.55 140.93C285.53 149.45 283.88 166.5 280.58 179.43C277.83 192.08 274.53 200.05 267.65 204.18C257.2 210.78 240.43 209.68 225.3 206.93C210.73 204.18 197.53 199.23 189.55 193.73C181.3 188.23 176.9 178.05 172.5 163.2C168.38 148.9 166.73 135.43 162.05 126.63Q159.03 122.5 154.62 122.23L138.4 120.03C135.93 136.25 131.8 154.68 126.03 164.03C121.63 171.73 116.13 173.93 109.25 173.1C92.75 171.18 71.85 163.2 59.48 153.85C48.2 145.05 41.6 132.95 35.28 113.7C29.78 95.28 25.5 84.55 25.5 76.5L25.5 65.5Q25.5 62 28.5 62.5Z" fill="url(#SizeCodeRim-{{ instance_id | escape }})" stroke-width="1.6"/>
+    <path d="M51.23 71.9C71.3 73.55 105.68 80.98 118.6 95C126.03 102.98 129.33 110.95 129.05 119.75C129.05 133.5 125.75 147.8 119.98 157.7C117.23 163.2 114.75 165.95 108.98 166.5C97.15 167.88 78.73 161.83 68.83 154.95C57.55 146.7 51.78 136.25 47.38 121.4C44.35 110.95 41.05 98.3 41.33 88.4C41.33 80.15 42.43 74.65 45.73 73Q47.65 71.62 51.23 71.9Z M185.43 106.28C204.68 105.18 253.08 113.43 274.8 123.88C282.23 127.45 284.98 134.32 282.5 145.88C279.48 162.1 276.45 185.75 271.23 193.73C267.1 201.7 259.95 203.08 249.78 201.7C226.68 200.6 204.95 192.9 195.6 185.75C187.63 179.15 183.78 165.95 180.75 153.03C178.55 143.4 177.73 136.8 174.15 131.03C170.58 125.8 168.93 121.4 169.2 117C170.03 109.85 174.98 106.83 185.43 106.28Z" fill="url(#SizeCodeLens-{{ instance_id | escape }})" stroke-width="1.15"/>
+    <path d="M166.45 124.7C170.03 134.88 172.5 148.08 174.98 156.33C173.05 147.25 171.4 138.18 169.48 131.58Q167.83 127.18 166.45 124.7Z" fill="currentColor" fill-opacity=".27" stroke="none"/>
+    <path d="M29.5 64.5L41.05 66.68C68.75 71.08 97.15 76.3 117.78 88.68C126.3 94.45 131.53 100.23 135.93 104.63C143.35 109.58 154.9 110.95 163.15 109.03C168.38 103.25 171.4 100.78 177.45 99.4C200 94.73 261.33 110.13 297.62 118.93" style="stroke:var(--lemoon-surface-page)" stroke-opacity=".68" stroke-width="1.05"/>
+    <path d="M43.53 135.43C49.58 147.25 55.9 153.58 64.98 158.8C79.55 166.78 97.43 172 109.25 171.73Q118.33 172.83 123.83 163.75 M182.13 179.43C187.08 188.78 194.78 193.73 205.5 197.85C224.75 205.83 250.33 210.78 262.98 205Q271.23 202.25 275.08 192.63" stroke-width="1.1" stroke-opacity=".5"/>
+    <g style="fill:var(--lemoon-surface-page)" fill-opacity=".65" stroke-width=".8">
+      <circle cx="31.5" cy="69" r="1.8"/><circle cx="31.5" cy="76" r="1.8"/>
+      <circle cx="288.55" cy="124.7" r="2.1"/><circle cx="288.28" cy="131.3" r="2.1"/>
+    </g>
+    {%- if annotated_temple -%}
+    <g class="lemoon-size-comparison__inscription" stroke-width="1">
+      <ellipse cx="105" cy="41" rx="28" ry="7" transform="rotate(-19 105 41)" stroke-opacity=".8"/>
+      <path d="M100 8V24L103 34" stroke-width="1.1"/>
+      <circle cx="103" cy="34" r="1.8" fill="currentColor" stroke="none"/>
+      <text x="82" y="49" transform="rotate(-19 82 49)" fill="currentColor" stroke="none" font-size="5.5" font-weight="600" textLength="46" lengthAdjust="spacingAndGlyphs">52 □ 18–145</text>
+    </g>
+    {%- endif -%}
+  </svg>
+  {%- if annotated_temple -%}
+    <figcaption class="lemoon-size-comparison__note">{{ 'lemoon_size_guide.educational_note' | t }}</figcaption>
+  </figure>
+  {%- endif -%}
+  </div>
+  {%- unless show_rows == false -%}
+  <ol class="lemoon-size-comparison__rows">
+    {%- for key in comparison_keys -%}
+      {%- liquid
+        assign label_key = 'lemoon_pdp.' | append: key
+        assign explanation_key = 'lemoon_size_guide.code_' | append: key
+      -%}
+      <li class="lemoon-size-comparison__row">
+        <svg class="lemoon-size-comparison__icon" viewBox="0 0 64 40" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          {%- case key -%}
+            {%- when 'lens_width', 'bridge' -%}
+              <g transform="translate(0 3) scale(.16)">
+                <path d="M17.51 63.4C48.31 57.8 86.74 53.47 124.41 56.27C151.9 57.29 164.11 60.6 172.26 67.73C180.66 74.09 181.93 80.96 188.8 82.74C194.91 84.78 209.42 84.78 215.78 82.49C221.63 80.71 223.16 74.09 231.31 67.73C240.21 60.09 252.94 57.04 279.41 56.02C317.59 53.73 355 58.05 381.47 63.14Q383.25 63.65 383 81.72Q383 85.54 377.66 87.32Q371.55 89.11 369.26 95.21C366.97 106.16 366.71 119.9 361.11 144.85C356.53 163.93 350.68 174.12 341.77 179.21C328.28 187.1 285.01 189.64 264.9 184.81C244.03 182.01 235.38 177.17 229.52 168.01C220.87 154.52 215.02 133.14 210.94 111.5C209.67 103.87 207.64 101.32 202.04 100.56L198.22 100.56C192.36 100.81 189.56 103.87 188.29 109.72C183.46 133.14 177.09 155.28 167.68 168.26C161.31 177.93 153.68 181.75 134.08 185.06C110.66 189.9 72.49 186.33 59.5 181.75C49.58 178.44 43.72 171.06 38.89 159.61C31.51 141.03 29.98 115.58 29.47 98.52C29.22 92.92 27.44 89.11 21.58 86.82Q16.75 84.52 16.49 81.22L17 67.47Q17 64.67 17.51 63.4Z M101.25 64.67C126.7 63.91 149.61 65.18 161.31 72.82C170.22 78.92 175.06 88.09 175.06 100.56C175.06 113.03 169.97 132.88 163.6 150.95C159.02 164.19 154.44 171.32 144.77 174.62C128.23 180.22 83.18 182.26 64.6 174.88C52.12 170.3 47.54 159.35 44.74 145.61C40.67 131.1 39.4 113.03 39.91 100.3C40.42 86.31 44.74 78.16 52.38 72.82C63.58 66.45 82.16 64.67 101.25 64.67Z" fill="currentColor" fill-opacity=".18" fill-rule="evenodd" stroke-width="8"/>
+                <path d="M101.25 64.67C126.7 63.91 149.61 65.18 161.31 72.82C170.22 78.92 175.06 88.09 175.06 100.56C175.06 113.03 169.97 132.88 163.6 150.95C159.02 164.19 154.44 171.32 144.77 174.62C128.23 180.22 83.18 182.26 64.6 174.88C52.12 170.3 47.54 159.35 44.74 145.61C40.67 131.1 39.4 113.03 39.91 100.3C40.42 86.31 44.74 78.16 52.38 72.82C63.58 66.45 82.16 64.67 101.25 64.67Z" transform="translate(400 0) scale(-1 1)" style="fill:var(--lemoon-surface-page)" fill-opacity=".9" stroke-width="8"/>
+              </g>
+              {%- if key == 'lens_width' -%}<path d="M6.35 5H28.02M6.35 2V8M28.02 2V8" stroke-width="1.2"/>{%- else -%}<path d="M28.02 5H35.98M28.02 2V8M35.98 2V8" stroke-width="1.2"/>{%- endif -%}
+            {%- when 'temple' -%}
+              <path d="M4 17L40 12Q49 10 54 19L60 31Q61 34 58 35Q56 36 54 33L48 23Q45 18 40 19L4 23Z" fill="currentColor" fill-opacity=".2" stroke-width="1.3"/>
+              <path d="M7 19L40 15Q47 14 51 21" style="stroke:var(--lemoon-surface-page)" stroke-width="1"/>
+              <path d="M7 8L39 3Q49 1 56 12L63 26M5 5L9 11" stroke-width="1.1"/>
+          {%- endcase -%}
+        </svg>
+        <div class="lemoon-size-comparison__detail">
+          <p class="lemoon-size-comparison__code">{% if key == 'lens_width' %}<strong>52</strong>{% else %}52{% endif %} □ {% if key == 'bridge' %}<strong>18</strong>{% else %}18{% endif %}–{% if key == 'temple' %}<strong>145</strong>{% else %}145{% endif %}</p>
+          <p class="lemoon-size-comparison__definition"><span>{{ label_key | t }}</span>{{ explanation_key | t }}</p>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ol>
+  {%- endunless -%}
+  <p class="lemoon-size-comparison__footer">{{ 'lemoon_size_guide.no_code' | t }}</p>
+</div>

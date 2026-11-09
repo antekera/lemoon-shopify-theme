@@ -1,3 +1,9 @@
+function closeProductDialog(dialog) {
+  const guide = dialog.querySelector('lemoon-size-guide');
+  if (guide?.requestClose) guide.requestClose();
+  else dialog.close();
+}
+
 export function findEyewearVariant(variants, options) {
   return variants.find((variant) => variant.options.every((value, index) => value === options[index]));
 }
@@ -59,7 +65,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         if (event.target.matches('[data-option]')) this.updateVariant();
         if (event.target.matches('[data-recipe-mode]')) this.updatePrescription();
         if (event.target.matches('[data-rx]')) event.target.removeAttribute('aria-invalid');
-        if (event.target.matches('[data-units]')) this.updateUnits(event.target.value);
+        if (event.target.matches('[data-units]')) this.updateUnits(event.target.value, event.target.closest('.lemoon-pdp__dimensions'));
       });
       this.addEventListener('click', (event) => {
         const thumb = event.target.closest('[data-media-target]');
@@ -67,10 +73,13 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         const opener = event.target.closest('[data-open-dialog]');
         if (opener) {
           this.dialogOpener = opener;
-          this.querySelector(`[data-dialog="${opener.dataset.openDialog}"]`).showModal();
+          const dialog = this.querySelector(`[data-dialog="${opener.dataset.openDialog}"]`);
+          if (dialog.classList.contains('lemoon-size-drawer')) dialog.querySelector('lemoon-size-guide')?.prepareOpen?.();
+          dialog.showModal();
+          if (dialog.classList.contains('lemoon-size-drawer')) dialog.scrollTop = 0;
         }
         const close = event.target.closest('[data-close-dialog]');
-        if (close) close.closest('dialog').close();
+        if (close) closeProductDialog(close.closest('dialog'));
         if (event.target.closest('[data-back-to-frame]')) {
           this.inLensFlow = false;
           this.chooseFrameOnly();
@@ -100,7 +109,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       });
       this.querySelectorAll('dialog').forEach((dialog) => {
         dialog.addEventListener('close', () => this.dialogOpener?.focus());
-        dialog.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close(); });
+        dialog.addEventListener('click', (event) => { const rect = dialog.getBoundingClientRect(); if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) closeProductDialog(dialog); });
       });
       this.form.addEventListener('submit', (event) => this.addToCart(event));
       this.stage = this.querySelector('.lemoon-pdp__stage');
@@ -252,8 +261,8 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       }
     }
 
-    updateUnits(unit) {
-      this.querySelectorAll('[data-mm]').forEach((value) => {
+    updateUnits(unit, dimensions) {
+      dimensions.querySelectorAll('[data-mm]').forEach((value) => {
         value.textContent = unit === 'in' ? `${(Number(value.dataset.mm) / 25.4).toFixed(2)} in` : `${value.dataset.mm} mm`;
       });
     }

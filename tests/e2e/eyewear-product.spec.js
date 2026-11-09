@@ -113,28 +113,21 @@ test('submits the chosen variant and recipe to Shopify and recovers from a rejec
   expect(bodies[1]).not.toContain('properties[OD Esfera]');
 });
 
-test('opens the product size guide with measurements, frame details and fit tabs', async ({ page }) => {
-  const opener = page.getByRole('button', { name: 'Guía de medidas' });
+test('opens a generic size reference while keeping current-product measurements in the PDP', async ({ page }) => {
+  await page.goto('/tests/fixtures/size-guide.html?shell=eyewear');
+  const opener = page.getByRole('button', { name: 'Guía de medidas', exact: true });
   await opener.click();
   const dialog = page.getByRole('dialog', { name: 'Guía de medidas' });
   await expect(dialog).toHaveClass(/lemoon-size-drawer/);
-  await expect.poll(() => dialog.evaluate((element) => Math.round(element.getBoundingClientRect().right))).toBe(page.viewportSize().width);
-  const measurements = dialog.getByRole('tabpanel', { name: 'Medidas' });
-  await expect(measurements).toContainText('140 mm');
-  await expect(measurements).toContainText('145 mm');
-  await measurements.getByLabel('Unidad').selectOption('in');
-  await expect(measurements).toContainText('5.51 in');
-  const tabs = dialog.getByRole('tab');
-  await tabs.nth(0).press('ArrowRight');
-  await expect(tabs.nth(1)).toBeFocused();
-  await expect(tabs.nth(1)).toHaveAttribute('aria-selected', 'true');
-  await expect(dialog.getByRole('tabpanel', { name: 'Características' })).toContainText('Acetato');
-  await tabs.nth(1).press('ArrowRight');
-  await expect(tabs.nth(2)).toBeFocused();
-  await expect(dialog.getByRole('tabpanel', { name: 'Talla y rostro' })).toContainText('Ovalado, corazón');
-  await dialog.getByRole('button', { name: 'Cerrar' }).click();
-  await expect(dialog).toBeHidden();
-  await expect(opener).toBeFocused();
+  await expect.poll(() => dialog.evaluate(element => Math.round(element.getBoundingClientRect().right))).toBe(page.viewportSize().width);
+  await expect(dialog.getByRole('tab')).toHaveCount(0);
+  await expect(dialog.locator('[data-mm], [data-units], .lemoon-size-guide__specs')).toHaveCount(0);
+  await expect(page.locator('[data-inline-measurements] [data-mm="140"]')).toHaveText('140 mm');
+  await expect(page.locator('[data-inline-measurements] [data-mm="145"]')).toHaveText('145 mm');
+  await expect(dialog.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo.');
+  await expect(dialog).not.toContainText('Acetato'); await expect(dialog).not.toContainText('Ovalado, corazón');
+  await dialog.getByRole('button', { name: 'Cerrar guía de medidas', exact: true }).click();
+  await expect(dialog).toBeHidden(); await expect(opener).toBeFocused();
 });
 
 test('uploads a recipe through the native product form and requires an attachment', async ({ page }) => {
