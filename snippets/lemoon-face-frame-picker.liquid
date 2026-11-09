@@ -1,0 +1,71 @@
+{% doc %}
+  Progressive frame comparison for the six calibrated default face illustrations. Native catalogue links remain without JS.
+  @param {object} block - Family with two suggested native frame-shape values.
+  @param {object} shape_filter - Actual collection filter; only exposed values can be tried.
+  @param {string} instance_id - Section ID, combined with block ID for accessible controls.
+{% enddoc %}
+{%- liquid
+  assign all_shapes = 'rectangular|redondo|geométrico|ovalado|aviador|ojo de gato' | split: '|'
+  assign ordered_shapes = block.settings.shape_1 | append: '|' | append: block.settings.shape_2 | split: '|'
+  assign ordered_shapes = ordered_shapes | concat: all_shapes | uniq
+  assign picker_id = 'FaceFrames-' | append: instance_id | append: '-' | append: block.id
+-%}
+<div class="lemoon-face-guide__picker" data-face-frame-picker hidden>
+  <div class="lemoon-face-guide__picker-heading">
+    <h3 id="{{ picker_id }}-title">{{ 'sections.lemoon_face_guide.preview.title' | t }}</h3>
+    <div class="lemoon-face-guide__carousel-actions">
+      <button type="button" data-face-frame-scroll="-1" aria-controls="{{ picker_id }}" aria-label="{{ 'sections.lemoon_face_guide.preview.previous' | t | escape }}">{% render 'lemoon-icon', icon: 'chevron-left', size: 20 %}</button>
+      <button type="button" data-face-frame-scroll="1" aria-controls="{{ picker_id }}" aria-label="{{ 'sections.lemoon_face_guide.preview.next' | t | escape }}">{% render 'lemoon-icon', icon: 'chevron-right', size: 20 %}</button>
+    </div>
+  </div>
+  <p class="lemoon-face-guide__picker-hint">{{ 'sections.lemoon_face_guide.preview.hint' | t }}</p>
+  <div class="lemoon-face-guide__carousel" id="{{ picker_id }}" role="group" aria-labelledby="{{ picker_id }}-title" data-face-frame-carousel>
+    {%- for frame_value in ordered_shapes -%}
+      {%- liquid
+        assign available = false
+        for filter_value in shape_filter.values
+          if filter_value.value == frame_value
+            assign available = true
+          endif
+        endfor
+        assign suggested = false
+        if frame_value == block.settings.shape_1 or frame_value == block.settings.shape_2
+          assign suggested = true
+        endif
+        assign frame_icon = ''
+        case frame_value
+          when 'rectangular'
+            assign frame_icon = 'rectangular'
+          when 'redondo'
+            assign frame_icon = 'round'
+          when 'geométrico'
+            assign frame_icon = 'geometric'
+          when 'ovalado'
+            assign frame_icon = 'oval'
+          when 'aviador'
+            assign frame_icon = 'aviator'
+          when 'ojo de gato'
+            assign frame_icon = 'cat-eye'
+        endcase
+        assign shape_key = frame_value | replace: 'é', 'e' | replace: ' ', '_'
+        assign shape_key = 'sections.lemoon_face_guide.shapes.' | append: shape_key
+        assign shape_label = shape_key | t
+        if frame_value == block.settings.shape_1
+          assign shape_label = block.settings.shape_1_label | default: shape_label
+        elsif frame_value == block.settings.shape_2
+          assign shape_label = block.settings.shape_2_label | default: shape_label
+        endif
+        assign visual_id = picker_id | append: '-' | append: forloop.index
+      -%}
+      {%- if available and frame_icon != blank -%}
+        <button class="lemoon-face-guide__choice" type="button" data-face-frame-value="{{ frame_value | escape }}" data-face-frame-label="{{ shape_label | escape }}" aria-pressed="false">
+          <span class="lemoon-face-guide__choice-tag{% if suggested %} lemoon-face-guide__choice-tag--suggested{% endif %}">{% if suggested %}{{ 'sections.lemoon_face_guide.preview.suggested' | t }}{% else %}{{ 'sections.lemoon_face_guide.preview.explore' | t }}{% endif %}</span>
+          <span class="lemoon-face-guide__frame-art" aria-hidden="true">{% render 'lemoon-quiz-visual', group: 'shape', value: frame_icon, visual_id: visual_id %}</span>
+          <span>{{ shape_label | escape }}</span>
+        </button>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+  <p class="lemoon-face-guide__preview-status" role="status" aria-live="polite" aria-atomic="true">{{ 'sections.lemoon_face_guide.preview.selected' | t }} <strong data-face-frame-current></strong></p>
+  <p class="lemoon-face-guide__preview-note">{{ 'sections.lemoon_face_guide.preview.note' | t }}</p>
+</div>

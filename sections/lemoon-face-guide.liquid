@@ -47,7 +47,7 @@
             assign name_key = family_key | append: 'name'
             assign family_name = name_key | t
             assign family_name = block.settings.name_label | default: family_name
-            assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-v1-'
+            assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-editorial-v3-'
             assign portrait_180 = portrait_base | append: '180.webp'
             assign portrait_360 = portrait_base | append: '360.webp'
           -%}
@@ -74,7 +74,11 @@
         assign name_key = family_key | append: 'name'
         assign family_name = name_key | t
         assign family_name = block.settings.name_label | default: family_name
-        assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-v1-'
+        assign portrait_base = 'lemoon-face-' | append: block.settings.kind | append: '-editorial-v3-'
+        assign frame_preview = false
+        if block.settings.image == blank
+          assign frame_preview = true
+        endif
         assign portrait_360 = portrait_base | append: '360.webp'
         assign portrait_640 = portrait_base | append: '640.webp'
         assign portrait_960 = portrait_base | append: '960.webp'
@@ -85,15 +89,24 @@
         assign cue_2 = cue_2_key | t
         assign reason = reason_key | t
       -%}
-      <article class="lemoon-face-guide__family" id="FaceFamily-{{ section.id }}-{{ block.id }}" aria-labelledby="FaceFamilyTitle-{{ section.id }}-{{ block.id }}" tabindex="-1" data-face-guide-family="{{ block.settings.kind | escape }}" {{ block.shopify_attributes }}>
+      <article class="lemoon-face-guide__family" id="FaceFamily-{{ section.id }}-{{ block.id }}" aria-labelledby="FaceFamilyTitle-{{ section.id }}-{{ block.id }}" tabindex="-1" data-face-guide-family="{{ block.settings.kind | escape }}"{% if frame_preview %} data-face-frame-preview{% endif %} {{ block.shopify_attributes }}>
+        <div class="lemoon-face-guide__portrait-column">
         <div class="lemoon-face-guide__portrait">
           {%- if block.settings.image != blank -%}
             {{ block.settings.image | image_url: width: 900 | image_tag: widths: '360, 600, 900', sizes: '(min-width: 990px) 400px, (min-width: 750px) 40vw, 90vw', loading: 'lazy', alt: block.settings.image_alt }}
           {%- else -%}
             <img src="{{ portrait_640 | asset_url }}" srcset="{{ portrait_360 | asset_url }} 360w, {{ portrait_640 | asset_url }} 640w, {{ portrait_960 | asset_url }} 960w" sizes="(min-width: 990px) 400px, (min-width: 750px) 40vw, (min-width: 390px) 340px, 90vw" width="640" height="640" loading="lazy" alt="{{ block.settings.image_alt | escape }}">
           {%- endif -%}
+          {%- if frame_preview -%}
+            <span id="FaceOverlay-{{ section.id }}-{{ block.id }}" class="lemoon-face-guide__overlay" data-face-frame-overlay aria-hidden="true" hidden></span>
+          {%- endif -%}
+        </div>
+        {%- if frame_preview -%}
+          <button class="lemoon-face-guide__preview-toggle" type="button" data-face-frame-toggle aria-controls="FaceOverlay-{{ section.id }}-{{ block.id }}" data-visible-label="{{ 'sections.lemoon_face_guide.preview.hide' | t | escape }}" data-hidden-label="{{ 'sections.lemoon_face_guide.preview.show' | t | escape }}" hidden>{{ 'sections.lemoon_face_guide.preview.hide' | t }}</button>
+        {%- endif -%}
         </div>
         <div class="lemoon-face-guide__family-copy">
+          <div class="lemoon-face-guide__family-description">
           {%- capture family_title_id -%}FaceFamilyTitle-{{ section.id }}-{{ block.id }}{%- endcapture -%}
           {% render 'lemoon-ui-heading', text: family_name, level: 2, id: family_title_id %}
           <ul class="lemoon-face-guide__cues">
@@ -101,7 +114,11 @@
             <li>{{ block.settings.cue_2 | default: cue_2 | escape }}</li>
           </ul>
           <p>{{ block.settings.reason | default: reason | escape }}</p>
-          {% render 'lemoon-face-guide-links', block: block, shape_filter: shape_filter, catalogue_url: catalogue_url, guide_settings: section.settings, instance_id: section.id %}
+          </div>
+          {%- if frame_preview -%}
+            {% render 'lemoon-face-frame-picker', block: block, shape_filter: shape_filter, instance_id: section.id %}
+          {%- endif -%}
+          {% render 'lemoon-face-guide-links', frame_preview: frame_preview, block: block, shape_filter: shape_filter, catalogue_url: catalogue_url, guide_settings: section.settings, instance_id: section.id %}
         </div>
       </article>
     {%- endfor -%}

@@ -42,8 +42,8 @@
 .lemoon-face-guide__fit-hint { margin: 0; min-width: 0; }
 .lemoon-face-guide__fit-art { aspect-ratio: 8 / 5; background: var(--lemoon-surface-warm); border-radius: var(--lemoon-radius-modal); color: var(--lemoon-text-brand); overflow: hidden; margin-bottom: var(--lemoon-space-4); }
 .lemoon-face-guide__fit-art svg { display: block; width: 100%; height: 100%; }
-.lemoon-face-guide a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; box-shadow: none; }
-.lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 0; box-shadow: 0 var(--lemoon-space-1) var(--lemoon-space-5) color-mix(in srgb, var(--lemoon-text-brand) 10%, transparent); }
+.lemoon-face-guide a:focus-visible, .lemoon-face-guide button:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 4px; box-shadow: none; }
+.lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 0; box-shadow: none; }
 @media screen and (min-width: 750px) {
   .lemoon-face-guide__family-actions { justify-content: flex-start; }
 }
@@ -65,7 +65,50 @@
   .lemoon-face-guide__intro-accent svg { stroke: CanvasText; }
   .lemoon-face-guide__intro-accent svg > path:first-child { fill: Highlight; }
   .lemoon-face-guide__cta, .lemoon-face-guide__cta:hover { border-color: LinkText; background: Canvas; color: LinkText; }
-  .lemoon-face-guide a:focus-visible { outline-color: Highlight; }
-  .lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 2px solid Highlight; outline-offset: 4px; box-shadow: none; }
+  .lemoon-face-guide a:focus-visible, .lemoon-face-guide button:focus-visible { outline-color: Highlight; }
+  .lemoon-face-guide__family:focus, .lemoon-face-guide__family.focused { outline: 0; box-shadow: none; }
   .lemoon-face-guide__frame, .lemoon-face-guide__portrait, .lemoon-face-guide__fit-art { border: 1px solid CanvasText; }
+}
+
+/* Face-shape comparison. The static pair remains the no-JavaScript experience. */
+.lemoon-face-guide [hidden] { display: none !important; }
+.lemoon-face-guide__portrait-column { min-width: 0; width: 100%; justify-self: center; }
+.lemoon-face-guide__portrait-column .lemoon-face-guide__portrait { margin-inline: auto; position: relative; }
+.lemoon-face-guide__overlay { position: absolute; width: var(--face-frame-width, 46%); left: var(--face-center-x, 50%); top: calc(var(--face-eye-y, 41%) + var(--face-frame-offset, 0%)); transform: translate(-50%, -50%); color: var(--lemoon-text-brand); pointer-events: none; }
+[data-face-frame-preview][data-face-guide-family="round"] { --face-eye-y: 40.2%; --face-frame-width: 48%; }
+[data-face-frame-preview][data-face-guide-family="square"] { --face-eye-y: 39.8%; --face-frame-width: 47%; }
+[data-face-frame-preview][data-face-guide-family="heart"] { --face-eye-y: 39.4%; --face-frame-width: 47%; }
+[data-face-frame-preview][data-face-guide-family="diamond"] { --face-eye-y: 38.4%; --face-frame-width: 46%; }
+[data-face-frame-preview][data-face-guide-family="long"] { --face-eye-y: 35.8%; --face-frame-width: 44%; }
+.lemoon-face-guide__overlay[data-face-frame-shape="aviador"] { --face-frame-offset: 1.4%; }
+.lemoon-face-guide__overlay svg { display: block; width: 100%; height: auto; }
+.lemoon-face-guide button { font: inherit; color: var(--lemoon-text-brand); cursor: pointer; }
+.lemoon-face-guide__preview-toggle { display: block; min-height: 4.4rem; margin: var(--lemoon-space-2) auto 0; padding: var(--lemoon-space-2) var(--lemoon-space-4); border: 0; background: transparent; text-decoration: underline; text-underline-offset: .4rem; }
+.lemoon-face-guide__picker { margin: var(--lemoon-space-6) 0 var(--lemoon-space-4); }
+.lemoon-face-guide__picker-heading { display: flex; align-items: center; justify-content: space-between; gap: var(--lemoon-space-3); }
+.lemoon-face-guide__carousel-actions { display: flex; flex-shrink: 0; gap: var(--lemoon-space-2); }
+.lemoon-face-guide__carousel-actions button { display: grid; place-items: center; width: 4.4rem; min-height: 4.4rem; padding: var(--lemoon-space-2); border: 0; border-radius: 50%; background: var(--lemoon-action-primary); color: var(--lemoon-text-inverse); }
+.lemoon-face-guide__carousel-actions button svg { display: block; width: 2.2rem; height: 2.2rem; stroke-width: 2; }
+.lemoon-face-guide__carousel-actions button:not(:disabled):hover { background: var(--lemoon-action-primary-hover); }
+.lemoon-face-guide__carousel-actions button:disabled { background: var(--lemoon-surface-warm); color: var(--lemoon-text-secondary); opacity: .5; cursor: default; }
+.lemoon-face-guide .lemoon-face-guide__picker-hint { margin: var(--lemoon-space-2) 0 var(--lemoon-space-4); }
+.lemoon-face-guide__carousel { display: flex; gap: var(--lemoon-space-3); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: var(--lemoon-space-2); padding: var(--lemoon-space-2) var(--lemoon-space-2) var(--lemoon-space-4); scrollbar-width: thin; }
+.lemoon-face-guide__choice { flex: 0 0 clamp(13rem, 42%, 18rem); display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: var(--lemoon-space-3); min-height: 15rem; padding: var(--lemoon-space-3); border: 1px solid transparent; border-radius: var(--lemoon-radius-modal) !important; background: var(--lemoon-surface-warm); scroll-snap-align: start; }
+.lemoon-face-guide__choice[aria-pressed="true"] { border: 2px solid var(--lemoon-border-strong); padding: calc(var(--lemoon-space-3) - 1px); background: var(--lemoon-surface-page); }
+.lemoon-face-guide__choice-tag { min-height: 2.2rem; font-size: var(--lemoon-fs-14); line-height: 1.5; }
+.lemoon-face-guide__choice-tag--suggested { background: var(--lemoon-action-accent); padding-inline: var(--lemoon-space-2); border-radius: var(--lemoon-radius-modal); }
+.lemoon-face-guide .lemoon-face-guide__preview-status { margin: var(--lemoon-space-2) 0; }
+.lemoon-face-guide .lemoon-face-guide__preview-note { margin: var(--lemoon-space-2) 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); }
+@media (forced-colors: active) {
+  .lemoon-face-guide__choice[aria-pressed="true"] { border-color: Highlight; }
+  .lemoon-face-guide__choice-tag--suggested { background: Highlight; color: HighlightText; }
+  .lemoon-face-guide__carousel-actions button { background: ButtonFace; color: ButtonText; border: 1px solid ButtonText; }
+  .lemoon-face-guide button:focus-visible { outline-color: Highlight; }
+}
+
+@media screen and (max-width: 749px) {
+  [data-face-frame-preview] .lemoon-face-guide__family-copy { display: contents; }
+  [data-face-frame-preview] .lemoon-face-guide__family-description { order: -1; }
+  [data-face-frame-preview] .lemoon-face-guide__portrait { max-width: 28rem; }
+  [data-face-frame-preview] .lemoon-face-guide__picker { margin-top: 0; }
 }
