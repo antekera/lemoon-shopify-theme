@@ -1,12 +1,3 @@
-Push local changes to the Lemoon production (published) theme on Shopify.
+Verify the automatic Shopify production deployment for the current main revision.
 
-Before doing anything:
-
-1. Run `shopify theme list` to identify which theme is currently published (marked as `[live]`)
-2. Show the user the published theme name and ID
-3. Ask the user to explicitly confirm: "Are you sure you want to push to production? (yes/no)"
-4. Only proceed if they confirm with "yes"
-
-If confirmed, run: `shopify theme push --theme=<published-theme-id>`
-
-Warn the user that this affects the live store immediately.
+Follow `.claude/rules/theme-workflow.md` and `.agents/skills/push-theme-production/SKILL.md`. Standing authorization permits the main CI deployment without another confirmation. Inspect the CI/deploy run, current SHA, published theme ID and readback. Fix/retry an actual failed current-main run; preserve merchant settings and never publish an arbitrary local checkout. Manual workflow dispatch only runs a read-only preflight.

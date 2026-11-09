@@ -9,7 +9,7 @@ Follow all conventions defined in `.claude/rules/git-conventions.md`.
 Run in parallel:
 
 - `git status` — collect modified and untracked files
-- `git branch --show-current` — if on `main`, stop and tell the user to run `/lemoon-start-feature` first
+- `git branch --show-current` — if on `main` or `develop`, stop and tell the user to run `/lemoon-start-feature` first
 - `shopify theme check 2>&1` — validate Liquid files
 
 If `shopify theme check` reports any **errors** (not warnings), stop and show them. Do not commit until resolved.

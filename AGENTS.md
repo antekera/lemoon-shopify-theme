@@ -4,7 +4,7 @@ This repository is a Shopify Liquid theme based on Dawn. It uses Liquid sections
 
 ## Before changing files
 
-- Check the current branch and working tree. Never commit or push directly to `main`; do not discard or overwrite existing local changes.
+- Check the current branch and working tree. Never commit or push directly to `main` or `develop`; do not discard or overwrite existing local changes.
 - Read the applicable project rules in `.claude/rules/`: `liquid-conventions.md`, `section-schema.md`, `git-conventions.md`, and `theme-workflow.md`. These are shared repository conventions; preserve the Claude workflows themselves.
 - Before creating or changing layouts, components, or styling, read root `DESIGN.md` for the visual contract, `docs/design/brand-guidelines.md` for brand usage, and the relevant design plan or section inventory. Keep `DESIGN.md` as the single source of visual decisions; update it when an authorized design change alters that contract.
 - Before creating or modifying section or snippet markup, read `docs/components/README.md` and its matching recipe; reuse the canonical implementation with its CSS/JS. Document new, modified or removed components in `docs/design/component-inventory.md` and `.json` in the same PR, following the inventory maintenance rule.
@@ -25,10 +25,10 @@ For library, framework, SDK, API, CLI, or cloud-service syntax, configuration, m
 
 ## Git and Shopify safety
 
-- Use the repository's branch prefixes and commit format. Route changes through a pull request to `main`.
+- Use the repository's branch prefixes and commit format. Route feature PRs to `develop` and release PRs from `develop` to `main`. Standing authorization permits the coordinator to merge technically reviewed changes with current checks passing; no per-merge user confirmation is required. See `.claude/rules/git-conventions.md`.
 - After every confirmed PR merge, close its Orca sessions and remove its worktrees and merged local/remote branches as part of delivery. Follow [post-merge cleanup](.claude/rules/git-conventions.md#post-merge-cleanup); preserve work added after the reviewed revision and report any cleanup blocker.
-- Do not push to Shopify as part of a code change unless the user requests it.
-- The development theme is `189557964968`. The production theme is the currently published theme; inspect it with `shopify theme list`, show its ID, and get explicit user confirmation immediately before any production push. A request to inspect or prepare a push is not confirmation.
+- Production deployment is automatic after successful CI on `main`, using `.github/workflows/deploy-production.yml`. This standing authorization replaces individual production-push confirmations. Development-theme pushes retain their scoped request requirements.
+- The development theme is `189557964968`. CI verifies the currently published production theme against `SHOPIFY_PRODUCTION_THEME_ID`, deploys only the checked current `main` SHA, preserves `config/settings_data.json` and serializes uploads. A mismatched target, failed check or missing credential stops deployment; report the concrete blocker instead of requesting routine confirmation.
 - Never pull from Shopify over uncommitted work.
 
 ## Codex skills
@@ -56,7 +56,7 @@ Back-office roles belong to `antekera/lemoon-next-backoffice`, under its `.codex
 
 ## Ticket delivery and testing
 
-For an authorized autonomous MVP queue, the coordinator must read `docs/agents/mvp-queue-policy.md`: select a frozen pilot batch of up to three ready tickets, keep at most two tickets active, and resume from recorded ownership/evidence rather than duplicating work. Use `docs/agents/orca-mvp-pilot-goal.md` as the Orca goal template. These files configure behavior; they start no ticket execution or background service. Delivery pauses for human review at the handoff; the designated human reviewer's explicit approval of each ticket authorizes its required merges and completion under the lifecycle below.
+For an authorized autonomous MVP queue, the coordinator must read `docs/agents/mvp-queue-policy.md`: select a frozen pilot batch of up to three ready tickets, keep at most two tickets active, and resume from recorded ownership/evidence rather than duplicating work. Use `docs/agents/orca-mvp-pilot-goal.md` as the Orca goal template. These files configure behavior; they start no ticket execution or background service. Technical delivery may merge autonomously through `develop` and release to `main` under the standing authorization. Human review remains required for ticket acceptance and unresolved business/design/legal decisions, independently of Git merge permission.
 
 ### Linear ticket lifecycle
 
@@ -64,11 +64,11 @@ Any authorized contributor may work on tickets. The designated human reviewer is
 
 1. Move authorized work to **In Progress** when execution starts.
 2. Move the ticket to **Review** when the scoped deliverable, required checks and independent reviews are ready. Add PR/artifact links, tested SHA, preview/evidence and remaining limitations.
-3. **Every ticket requires human review**, including documentation and tickets without a PR. Record the designated human reviewer's explicit approval of that ticket and delivered revision. Agent/automated approval, passing checks, silence or another ticket's approval cannot substitute for it.
-4. After approval, merge necessary PRs once current checks, required approvals and blocking feedback are resolved. Confirm the merges and acceptance, then move the ticket to **Complete**. If no merge is needed, complete it after approval and acceptance verification. Blocked required merges or acceptance conditions keep the ticket in Review.
-5. Changes requested return the ticket to In Progress; hand the corrected result back to Review. Material changes require renewed approval. Respect narrower instructions such as no merge and preserve unrelated ticket states. Publication and deployment retain their separate authorization requirements.
+3. **Every ticket requires human acceptance review**, including documentation and tickets without a PR. Record the designated human reviewer's explicit approval of that ticket and delivered revision before Complete. This acceptance gate does not require another authorization for a technically ready Git merge. Business/design/legal decisions remain with their owner.
+4. Merge technically ready PRs into `develop` and promote reviewed deliveries through a `develop` → `main` PR without a per-merge permission request. Current checks and independent technical review must pass, and blocking feedback must be resolved. After human acceptance approval, confirm required integration, deployment and acceptance evidence before **Complete**; unresolved acceptance conditions keep the ticket in Review.
+5. Changes requested return the ticket to In Progress; hand the corrected result back to Review. Material changes require renewed acceptance review. Respect narrower instructions such as no merge and preserve unrelated ticket states. `main` theme publication is already authorized through CI; app installs, catalog/content writes and other production actions retain their specific authorization requirements.
 
-When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and, after the designated human reviewer explicitly approves the ticket, merges its required changes to `main` once current checks and required approvals pass. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
+When asked to coordinate Linear tickets through delivery, use `linear-delivery-coordinator` in `.codex/agents/linear-delivery-coordinator.toml`. It routes scoped tickets to developer or writer agents, waits for implementation, delegates testing and independent reviews, opens PRs, addresses review comments, and merges technically reviewed feature PRs into `develop` and release PRs into `main` under the standing authorization once current checks pass. Human ticket acceptance remains separate from Git merge permission; `main` deploys automatically after CI. The coordinator owns external ticket/PR updates; reviewers remain read-only. Agent definitions do not start background monitoring or authorize processing unspecified tickets.
 
 For unit and end-to-end test work, use `theme-test-engineer` in `.codex/agents/theme-test-engineer.toml`. It creates and runs relevant Vitest and Playwright tests, distinguishes local fixtures from Shopify storefront coverage, and reports evidence and environment gaps. If a role is unavailable, read its definition and use a general agent with that scope; disclose any unavailable delegation or independent review.
 
