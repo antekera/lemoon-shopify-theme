@@ -32,7 +32,7 @@ We recommend using Lemoon as a starting point for theme development. [Learn more
 
 > If you're building a theme for the Shopify Theme Store, then you can use Lemoon as a starting point. However, the theme that you submit needs to be [substantively different from Lemoon](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Lemoon](https://shopify.dev/themes/tools/lemoon#ways-to-use-lemoon).
 
-Please note that the main branch may include code for features not yet released. The "stable" version of Lemoon is available in the theme store.
+`develop` contains integration work. Releases enter `main` through a PR and successful main CI deploys the checked revision to the published Lemoon theme.
 
 ## Staying up to date with Lemoon changes
 
@@ -100,19 +100,19 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 #### Git flow commands
 
-No direct pushes to `main` — every change goes through a feature branch and a PR.
+Feature PRs target `develop`; release PRs go from `develop` to `main`. Both branches require passing CI. Standing authorization permits technically reviewed merges and automatic main production deployment without a per-merge or per-deploy confirmation. Human ticket acceptance remains separate. See [Git conventions](.claude/rules/git-conventions.md) and [deployment configuration](.claude/rules/theme-workflow.md).
 
 | Command                        | Description                                 |
 | ------------------------------ | ------------------------------------------- |
-| `/lemoon-start-feature <name>` | Create a feature branch from latest main    |
-| `/lemoon-open-pr`              | Push branch and open a PR to main on GitHub |
+| `/lemoon-start-feature <name>` | Create a feature branch from origin/develop    |
+| `/lemoon-open-pr`              | Push branch and open a PR to develop on GitHub |
 
 #### Workflow commands
 
 | Command                         | Description                                            |
 | ------------------------------- | ------------------------------------------------------ |
 | `/lemoon-push-dev`              | Push current branch changes to the dev (staging) theme |
-| `/lemoon-push-prod`             | Push to production — asks for confirmation first       |
+| `/lemoon-push-prod`             | Verify/recover the automatic main production deploy       |
 | `/lemoon-theme-status`          | Show all Shopify themes + local git state              |
 | `/lemoon-new-section <name>`    | Scaffold a new section with schema boilerplate         |
 | `/lemoon-scaffold-block <name>` | Scaffold a new snippet with parameter docs             |
@@ -138,7 +138,7 @@ These commands spawn isolated sub-agents for specialized tasks. Each agent reads
     →  /lemoon-section-builder     →  /lemoon-theme-reviewer
     →  /lemoon-push-dev            →  verify in preview
     →  /lemoon-code-reviewer       →  /lemoon-open-pr
-    →  merge PR on GitHub          →  publish from Shopify admin
+    →  PR to develop  →  release PR to main  →  CI deploys production
 ```
 
 ### Rules

@@ -63,9 +63,11 @@ class ScopeTests(unittest.TestCase):
             "docs/design/test.md", ".codex/agents/test.toml", ".agents/skills/a/SKILL.md",
             ".claude/rules/test.md", "AGENTS.md", "README.MD",
             ".github/workflows/ci.yml", ".github/workflows/lighthouse-commercial.yml",
+            ".github/workflows/deploy-production.yml",
             ".github/actions/lighthouse/action.yml", "scripts/lighthouse/run.cjs",
             "scripts/lighthouse/fixtures/products.csv", "scripts/ci_scope.py", "scripts/test_ci_scope.py",
             "scripts/test_codex_workflows.py", "scripts/test_codex_workflow_validator.py",
+            "scripts/deploy_shopify.py", "scripts/test_deploy_shopify.py",
         ):
             self.write(path)
         self.commit()
@@ -78,6 +80,7 @@ class ScopeTests(unittest.TestCase):
             "templates/test.json", "package.json", "package-lock.json", "yarn.lock",
             "pnpm-lock.yaml", ".nvmrc", ".shopifyignore", "unknown", "scripts/fix-store.ts",
             "scripts/unknown.py", ".github/actions/test/action.yml", ".github/workflows/other.yml",
+            "scripts/deploy_shopify_unreviewed.py", ".github/workflows/deploy-production-other.yml",
             "nested/readme.md", "assets/$(touch injected)\nreason=false.css",
         ):
             with self.subTest(path=path):

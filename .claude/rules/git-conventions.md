@@ -1,40 +1,32 @@
 ---
-description: Git commit and branch conventions for the Lemoon theme repo
+description: Git integration, release authorization and post-merge cleanup for Lemoon
 ---
 
-# Git Conventions
+# Git conventions
 
-## Branch workflow — REQUIRED
+## Branches and authorization
 
-**Never commit or push directly to `main`.** All changes go through a feature branch and a PR.
-
-```
-main  ←  PR  ←  feat/section-name
-                  fix/description
-                  style/description
-                  chore/description
+```text
+feature/fix/style/chore branch → PR → develop → release PR → main → CI → production
 ```
 
-### Standard flow
+`develop` is the default integration branch; start new work from `origin/develop`. `main` is the production release branch. Both accept PRs with five required checks; direct pushes, force pushes and deletion are protected. Develop requires an up-to-date head (`strict=true`). Main uses `strict=false` so recurring merge-commit releases do not require rewriting develop; the coordinator still refreshes the release head/base and checks before merging.
 
-```bash
-# 1. Create a feature branch
-git checkout -b feat/trust-bar
+**Standing authorization:** Miguel authorized autonomous merges and automatic production deployments on 08-11-2026. The coordinator may integrate technically reviewed work and release a coherent tested batch without asking permission for each merge or deploy. Passing CI, independent technical review and resolution of blocking feedback remain required. A draft PR, unresolved business/design/legal decision or explicit no-merge instruction is not ready for automatic integration.
 
-# 2. Make changes, commit as you go
-git add sections/trust-bar.liquid locales/en.json locales/es.json
-git commit -m "feat: add trust-bar section with 4 configurable signals"
+- Feature PRs target `develop`, normally with squash merge. Use `gh pr merge --auto --squash --match-head-commit <reviewed-sha>` after the review handoff is complete; verify actual MERGED state before reporting integration.
+- Releases are PRs with head `develop` and base `main`, using a **merge commit** to preserve ancestry. The coordinator can create and merge a release when the batch is ready, without a permission question. Do not automatically release every individual feature merge or merge unrelated draft work.
+- `main` pushes run CI and automatically call the production deployment workflow after every required job succeeds. A failed check or deployment is a blocker to report/fix, not a new authorization prompt.
+- Keep `develop` after release. Main contains only release merge commits, so the next release retains develop ancestry without resets or force pushes. If an exceptional main-only change exists, reconcile it through a PR before subsequent feature work.
+- Git merge permission and human ticket acceptance are separate. Keep a ticket in Review until its owner accepts the delivered result and its real acceptance evidence is satisfied. Merging code alone does not prove deployment, CMS activation or business acceptance.
 
-# 3. Push branch and open PR
-git push -u origin feat/trust-bar
-gh pr create --title "feat: trust-bar section" --body "..."
+## Branch and commit naming
 
-# 4. Merge PR on GitHub after review
-# 5. Publish theme from Shopify admin
-```
+Use `feat/`, `fix/`, `style/`, `refactor/` or `chore/` for scoped branches and `<type>: <short description>` for commits. Never commit or push feature work directly to `main` or `develop`. Stage explicit task paths; keep `.env`, credentials and `config/settings_data.json` out of Git. Protect concurrent dirty work.
 
-Use `/lemoon-start-feature <name>` to create a branch automatically.
-Use `/lemoon-open-pr` to push the branch and open the PR.
+## Delivery commands
+
+Start from fetched `origin/develop`; commit the authorized scope, push its feature branch and create the PR with `gh pr create --base develop`. A release PR uses `gh pr create --base main --head develop`. Do not use an admin bypass to evade a failed check or branch protection.
 
 ## Post-merge cleanup
 
@@ -44,7 +36,7 @@ A confirmed PR merge authorizes cleanup of that PR's sessions, worktrees, and br
 2. Inspect each workspace's tracked and untracked changes, local/remote heads, open PRs, and active ownership. Remove only heads covered by the merged PR. Preserve reused branches, later commits, dirty workspaces, and other tasks' sessions; report what remains and why. Preserve the main checkout and active development services.
 3. Save the handoff, validation and cleanup evidence in Git's common directory before removing task workspaces. Settle supervised Dispatches through Orca; unresolved liveness requires recovery, not forced termination.
 4. From a surviving checkout, close the merged task's Orca sessions with the installed CLI, then remove its worktrees through `orca worktree rm` using exact selectors. Use `git worktree remove` only for a checkout confirmed absent from Orca. Never force-remove a dirty workspace.
-5. Remove any remaining covered local branches and the merged remote branch. Recheck the exact ref before deletion; pin remote deletion to its observed SHA so concurrent work is preserved. A closed but unmerged PR does not authorize deletion under this rule.
+5. Keep the persistent `main` and `develop` branches. Remove any remaining covered feature/release local branches and their merged remote branches. Recheck the exact ref before deletion; pin remote deletion to its observed SHA so concurrent work is preserved. A closed but unmerged PR does not authorize deletion under this rule.
 6. Verify the sessions, workspace registrations, directories, and branches are gone. Fetch/prune stale tracking refs and fast-forward a clean `main` from `origin/main`. Record removed resources and preserved exceptions in the checkpoint and final report. A removal error remains pending cleanup, not success.
 
 This is a required delivery step, not a background monitor. If the coordinator is running inside a workspace to remove, hand control to a surviving checkout before closing it.

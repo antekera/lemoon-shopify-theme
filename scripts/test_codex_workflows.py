@@ -114,7 +114,7 @@ def validate_group(group: str) -> None:
         path = ROOT / "AGENTS.md"
         require(path.is_file(), "missing root AGENTS.md")
         content = path.read_text(encoding="utf-8").lower()
-        for required in ("shopify liquid", "main", ".env", "config/settings_data.json", "theme check", "production", "confirmation"):
+        for required in ("shopify liquid", "develop", "main", ".env", "config/settings_data.json", "theme check", "production", "standing authorization"):
             require(required in content, f"AGENTS.md is missing required guidance: {required}")
         for reference in (".claude/rules/liquid-conventions.md", ".claude/rules/section-schema.md", ".claude/rules/git-conventions.md", ".claude/rules/theme-workflow.md"):
             require((ROOT / reference).is_file(), f"AGENTS.md references missing file: {reference}")
@@ -131,11 +131,16 @@ def validate_group(group: str) -> None:
         dev = (ROOT / ".agents/skills/push-theme-dev/SKILL.md").read_text(encoding="utf-8")
         prod = (ROOT / ".agents/skills/push-theme-production/SKILL.md").read_text(encoding="utf-8").lower()
         require("189557964968" in dev, "dev publishing skill must target theme 189557964968")
-        require("shopify theme list" in prod and "confirm" in prod, "production publishing must inspect the live theme and require confirmation")
-        confirmation_index = prod.find("only after confirmation")
-        allow_live_index = prod.find("--allow-live")
-        require(confirmation_index >= 0 and allow_live_index >= 0 and confirmation_index < allow_live_index, "production publishing must add --allow-live only after confirmation")
-        require("git status --short" in prod and "working tree" in prod and "commit" in prod, "production publishing must stop when the working tree has uncommitted changes")
+        require("standing authorization" in prod, "production publishing must document standing authorization")
+        require(".github/workflows/deploy-production.yml" in prod and "main" in prod,
+                "production publishing must use the main CI deployment workflow")
+        require("only after confirmation" not in prod,
+                "production publishing must not restore individual confirmation gates")
+        deployment = ROOT / ".github/workflows/deploy-production.yml"
+        require(deployment.is_file(), "missing production deployment workflow")
+        require("scripts/deploy_shopify.py" in deployment.read_text(encoding="utf-8"),
+                "production workflow must use the validated deployment helper")
+        require((ROOT / "scripts/deploy_shopify.py").is_file(), "missing production deployment helper")
 
     if group in {"git", "all"}:
         commit = (ROOT / ".agents/skills/theme-commit/SKILL.md").read_text(encoding="utf-8")
@@ -143,7 +148,12 @@ def validate_group(group: str) -> None:
             require(path in commit, f"commit workflow must allow selected Codex files: {path}")
         spec = (ROOT / "docs/superpowers/specs/2026-10-10-codex-workflow-port-design.md").read_text(encoding="utf-8")
         require(".agents/skills/**" in spec and ".codex/agents/**" in spec and "AGENTS.md" in spec, "design spec must document the Codex commit allowlist")
-        require("--allow-live" in spec and "only after confirmation" in spec, "design spec must require --allow-live only after production confirmation")
+        # The dated port specification remains historical; current Gitflow and
+        # standing deployment authority live in the operational skills/rules.
+        pr = (ROOT / ".agents/skills/open-theme-pr/SKILL.md").read_text(encoding="utf-8")
+        start = (ROOT / ".agents/skills/start-theme-feature/SKILL.md").read_text(encoding="utf-8")
+        require("--base develop" in pr, "feature PR workflow must target develop by default")
+        require("origin develop" in start, "feature branches must start from current develop")
 
     if group in {"builder", "all"}:
         builder = (ROOT / ".agents/skills/build-theme-section/SKILL.md").read_text(encoding="utf-8")

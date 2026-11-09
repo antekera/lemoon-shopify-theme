@@ -2,6 +2,7 @@
 """Regression tests for workflow validation using disposable repository fixtures."""
 
 import shutil
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -20,6 +21,9 @@ class WorkflowValidatorTests(unittest.TestCase):
         sources.extend((validator.ROOT / ".agents/skills").glob("*/SKILL.md"))
         sources.extend((validator.ROOT / ".claude/rules").glob("*.md"))
         sources.append(validator.ROOT / "docs/superpowers/specs/2026-10-10-codex-workflow-port-design.md")
+        sources.extend((validator.ROOT / path) for path in (
+            ".github/workflows/deploy-production.yml", "scripts/deploy_shopify.py",
+        ))
         for source in sources:
             target = self.root / source.relative_to(validator.ROOT)
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -110,6 +114,48 @@ class WorkflowValidatorTests(unittest.TestCase):
             "AGENTS.md", "role-level `sandbox_mode` does not enforce read-only access",
             "REMOVED", "delivery", "lacks review permission guidance",
         )
+
+    def test_standing_authorization_replaces_per_release_confirmation(self):
+        for relative, group, message in (
+            ("AGENTS.md", "core", "missing required guidance: standing authorization"),
+            (".agents/skills/push-theme-production/SKILL.md", "shopify", "must document standing authorization"),
+        ):
+            path = self.root / relative
+            original = path.read_text()
+            self.assertRegex(original.lower(), "standing authorization")
+            path.write_text(re.sub("standing authorization", "REMOVED", original, flags=re.IGNORECASE))
+            try:
+                with self.assertRaisesRegex(AssertionError, message):
+                    validator.validate_group(group)
+            finally:
+                path.write_text(original)
+        path = self.root / ".agents/skills/push-theme-production/SKILL.md"
+        path.write_text(path.read_text() + "\nOnly after confirmation, deploy manually.\n")
+        with self.assertRaisesRegex(AssertionError, "must not restore individual confirmation"):
+            validator.validate_group("shopify")
+
+    def test_feature_workflows_keep_develop_as_the_default_base(self):
+        self.assert_rejected_edit(
+            ".agents/skills/open-theme-pr/SKILL.md", "--base develop", "--base main",
+            "git", "must target develop by default",
+        )
+        self.assert_rejected_edit(
+            ".agents/skills/start-theme-feature/SKILL.md", "origin develop", "origin main",
+            "git", "must start from current develop",
+        )
+
+    def test_production_skill_cannot_bypass_the_checked_workflow_or_helper(self):
+        self.assert_rejected_edit(
+            ".agents/skills/push-theme-production/SKILL.md", ".github/workflows/deploy-production.yml", "missing.yml",
+            "shopify", "must use the main CI deployment workflow",
+        )
+        self.assert_rejected_edit(
+            ".github/workflows/deploy-production.yml", "scripts/deploy_shopify.py", "scripts/unvalidated.py",
+            "shopify", "must use the validated deployment helper",
+        )
+        (self.root / "scripts/deploy_shopify.py").unlink()
+        with self.assertRaisesRegex(AssertionError, "missing production deployment helper"):
+            validator.validate_group("shopify")
 
     def test_token_auditor_uses_documented_typography_and_resolution(self):
         for clause in ("heading/body families and weights", "Trace variable/settings resolution"):
