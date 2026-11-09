@@ -32,7 +32,7 @@ We recommend using Lemoon as a starting point for theme development. [Learn more
 
 > If you're building a theme for the Shopify Theme Store, then you can use Lemoon as a starting point. However, the theme that you submit needs to be [substantively different from Lemoon](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Lemoon](https://shopify.dev/themes/tools/lemoon#ways-to-use-lemoon).
 
-`develop` contains integration work. Releases enter `main` through a PR and successful main CI deploys the checked revision to the published Lemoon theme.
+`develop` accumulates reviewed integration work. Only on an explicit user release request, prepare a PR to `main` that may group multiple commits; successful main CI deploys the checked revision to the published Lemoon theme.
 
 ## Staying up to date with Lemoon changes
 
@@ -100,7 +100,7 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 #### Git flow commands
 
-Feature PRs target `develop`; release PRs go from `develop` to `main`. Both branches require passing CI. Before merging to `develop` or enabling auto-merge, share the completed preview/artifact and obtain explicit human validation of the reviewed revision under [human review before develop](.claude/rules/git-conventions.md#human-review-before-develop). After approved integration, standing authorization covers reviewed releases to `main` and automatic production deployment without another routine confirmation. Human ticket acceptance remains separate. See [deployment configuration](.claude/rules/theme-workflow.md).
+Feature PRs target `develop`; release PRs go from `develop` to `main`. Both branches require passing CI. Before merging to `develop` or enabling auto-merge, share the completed preview/artifact and obtain explicit human validation of the reviewed revision under [human review before develop](.claude/rules/git-conventions.md#human-review-before-develop). After approved integration, accumulate changes in `develop`; prepare/open a `develop` → `main` release PR only on an explicit user release request, potentially grouping multiple approved commits. Reviewed merging within that requested scope retains standing authorization; successful main CI deploys automatically. Human ticket acceptance remains separate. See [deployment configuration](.claude/rules/theme-workflow.md).
 
 | Command                        | Description                                 |
 | ------------------------------ | ------------------------------------------- |
@@ -138,7 +138,8 @@ These commands spawn isolated sub-agents for specialized tasks. Each agent reads
     →  /lemoon-section-builder     →  /lemoon-theme-reviewer
     →  /lemoon-push-dev            →  verify in preview
     →  /lemoon-code-reviewer       →  /lemoon-open-pr
-    →  PR to develop  →  release PR to main  →  CI deploys production
+    →  preview + human approval  →  PR merge to develop
+    →  accumulate commits  →  explicit release request  →  release PR to main  →  CI deploys production
 ```
 
 ### Rules
