@@ -3754,7 +3754,7 @@
       "shapes": {
         "rectangular": "Rectangular",
         "redondo": "Round",
-        "geométrico": "Geometric",
+        "geometrico": "Geometric",
         "ovalado": "Oval",
         "aviador": "Aviator",
         "ojo_de_gato": "Cat-eye"

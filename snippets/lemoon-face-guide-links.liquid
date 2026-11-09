@@ -20,8 +20,8 @@
       assign second_available = true
     endif
   endfor
-  assign first_shape_key = first_value | replace: ' ', '_'
-  assign second_shape_key = second_value | replace: ' ', '_'
+  assign first_shape_key = first_value | replace: 'é', 'e' | replace: ' ', '_'
+  assign second_shape_key = second_value | replace: 'é', 'e' | replace: ' ', '_'
   assign first_key = 'sections.lemoon_face_guide.shapes.' | append: first_shape_key
   assign second_key = 'sections.lemoon_face_guide.shapes.' | append: second_shape_key
   assign first_label = first_key | t
