@@ -16,11 +16,12 @@ on:
 jobs:
   lighthouse-harness:
     name: Lighthouse Harness Validation
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
       contents: read
-    # Credential-free container validation also runs for draft PRs.
+    # Run container validation when the PR is ready, or on push/manual events.
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Build pinned Linux amd64 harness

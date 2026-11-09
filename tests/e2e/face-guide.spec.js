@@ -108,7 +108,7 @@ for (const [index, evidence] of readback.entries()) {
 test('keyboard reaches every visual index link in order and activates the family CTA with visible focus', async ({ page, browserName }) => {
   const tabKey = browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab';
   await page.goto(route);
-  const index = page.getByRole('navigation', { name: 'Mira el contorno, explora las formas' });
+  const index = page.getByRole('navigation', { name: 'Explora las formas y selecciona tu tipo de rostro' });
   for (const name of families) {
     await page.keyboard.press(tabKey);
     await expect(index.getByRole('link', { name, exact: true })).toBeFocused();

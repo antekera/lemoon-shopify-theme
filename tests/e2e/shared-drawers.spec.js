@@ -24,7 +24,16 @@ async function expectClosed(page, kind, panel) {
   else await expect(panel).not.toHaveAttribute('open');
 }
 async function geometry(panel, width, height, kind) {
-  if (width <= 749) {
+  if (kind === 'nav') {
+    await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().x))).toBe(0);
+    const box = await panel.boundingBox();
+    const top = await panel.evaluate(element => parseFloat(element.style.getPropertyValue('--lemoon-nav-top')));
+    expect(box.y).toBeCloseTo(top, 0);
+    expect(box.width).toBeCloseTo(Math.min(width * .9, 380), 0);
+    expect(Math.round(box.y + box.height)).toBe(height);
+    await expect(panel).toHaveCSS('border-top-left-radius', '0px');
+    await expect(panel).toHaveCSS('border-top-right-radius', '0px');
+  } else if (width <= 749) {
     await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().bottom))).toBe(height);
     const box = await panel.boundingBox();
     expect(Math.round(box.x)).toBe(0); expect(Math.round(box.width)).toBe(width); expect(box.y).toBeGreaterThanOrEqual(32);
@@ -82,8 +91,53 @@ for (const width of [390, 749]) {
     await expect(panel.locator('.is-leaving')).toHaveCount(0);
     await page.screenshot({ path: testInfo.outputPath(`nav-${width}.png`) });
     await close.click(); await expectClosed(page, 'nav', panel); await expect(opener).toBeFocused();
-    await opener.click(); await page.mouse.click(width / 2, 16); await expectClosed(page, 'nav', panel); await expect(opener).toBeFocused();
+    await opener.click(); await page.mouse.click(width - 8, (await panel.boundingBox()).y + 20); await expectClosed(page, 'nav', panel); await expect(opener).toBeFocused();
     await opener.click(); await page.keyboard.press('Escape'); await expectClosed(page, 'nav', panel); await expect(opener).toBeFocused();
+  });
+}
+for (const width of [390, 749]) {
+  test(`nav: ${width}px opening and every close slide horizontally from the left`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width, height: 844 });
+    const { panel, opener } = await openSurface(page, 'nav');
+    await geometry(panel, width, 844, 'nav');
+    const top = (await panel.boundingBox()).y;
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    async function record(action) {
+      await panel.evaluate(element => {
+        window.navMotionFrames = new Promise(resolve => {
+          const start = performance.now(), frames = [];
+          function tick() {
+            const box = element.getBoundingClientRect(), style = getComputedStyle(element);
+            frames.push({ elapsed: performance.now() - start, x: box.x, y: box.y, width: box.width, visibility: style.visibility });
+            if (performance.now() - start < 500) requestAnimationFrame(tick);
+            else resolve(frames);
+          }
+          requestAnimationFrame(tick);
+        });
+      });
+      await action();
+      return page.evaluate(() => window.navMotionFrames);
+    }
+    for (const action of ['button', 'Escape', 'backdrop']) {
+      const opening = await record(() => opener.click());
+      await geometry(panel, width, 844, 'nav');
+      const closing = await record(() => action === 'button' ? closeControl(page, 'nav', panel).click() :
+        action === 'Escape' ? page.keyboard.press('Escape') : page.mouse.click(width - 8, top + 20));
+      await testInfo.attach(`${action}-frames.json`, { body: JSON.stringify({ opening, closing }), contentType: 'application/json' });
+      for (const [frames, direction] of [[opening, 1], [closing, -1]]) {
+        const moving = frames.filter(frame => frame.visibility === 'visible' && frame.x < -2 && frame.x > -frame.width + 2);
+        expect(moving.length).toBeGreaterThanOrEqual(3);
+        for (let index = 0; index < moving.length; index++) {
+          expect(moving[index].y).toBeCloseTo(top, 0);
+          if (index) expect((moving[index].x - moving[index - 1].x) * direction).toBeGreaterThan(0);
+        }
+      }
+      expect(opening.at(-1).x).toBeCloseTo(0, 0);
+      expect(closing.at(-1).x).toBeLessThanOrEqual(-closing.at(-1).width);
+      await expect(panel).toBeHidden();
+      await expect(opener).toBeFocused();
+    }
   });
 }
 test('nav: actual mobile-only opener closes safely when resizing to desktop', async ({ page }) => {
