@@ -2,11 +2,11 @@ const FILTER = 'filter.p.m.custom.frame_shape';
 const SHAPES = new Set(['rectangular', 'redondo', 'geométrico', 'ovalado', 'aviador', 'ojo de gato']);
 const INITIALIZED = new WeakSet();
 
-// Retain the native suggested pair; a different currently previewed shape adds one OR value.
+// Suggested shapes stay selected; additional choices use native OR values.
 export function facePreviewDestination(href, suggested, selected, baseURL) {
   if (!Array.isArray(suggested)) return null;
   const values = [...new Set(suggested)];
-  if (values.length !== 2 || !values.every(value => SHAPES.has(value)) || !SHAPES.has(selected)) return null;
+  if (values.length !== 2 || !values.every(value => SHAPES.has(value)) || !Array.isArray(selected) || !selected.every(value => SHAPES.has(value))) return null;
   let url;
   try {
     url = new URL(href, baseURL);
@@ -14,7 +14,7 @@ export function facePreviewDestination(href, suggested, selected, baseURL) {
   } catch { return null; }
   const existing = url.searchParams.getAll(FILTER);
   if (existing.length !== 2 || !values.every(value => existing.includes(value))) return null;
-  const shapes = [...new Set([...values, selected])];
+  const shapes = [...new Set([...values, ...selected])];
   url.searchParams.delete(FILTER);
   for (const shape of shapes) url.searchParams.append(FILTER, shape);
   return { href: `${url.pathname}${url.search}${url.hash}`, shapes };
@@ -35,17 +35,18 @@ export function initializeFaceFramePreviews(doc = document) {
     const exit = family.querySelector('[data-face-guide-action="family_catalogue"]');
     const anchor = exit?.querySelector('a[href]');
     const originalHref = anchor?.getAttribute('href');
-    const suggested = (exit?.dataset.faceGuideShapes || '').split('|');
+    const suggested = choices.filter(choice => choice.hasAttribute('data-face-frame-suggested')).map(choice => choice.dataset.faceFrameValue);
     const status = picker.querySelector('[data-face-frame-current]');
     const arrows = [...picker.querySelectorAll('[data-face-frame-scroll]')];
     let active = false;
+    const selected = new Set(suggested);
     const reducedMotion = () => doc.defaultView.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const updateArrows = () => {
       arrows[0].disabled = carousel.scrollLeft <= 2;
       arrows[1].disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2;
     };
     const select = choice => {
-      for (const button of choices) button.setAttribute('aria-pressed', String(button === choice));
+      for (const button of choices) button.setAttribute('aria-pressed', String(selected.has(button.dataset.faceFrameValue)));
       const artwork = choice.querySelector('svg')?.cloneNode(true);
       if (artwork) overlay.replaceChildren(artwork);
       overlay.dataset.faceFrameShape = choice.dataset.faceFrameValue;
@@ -54,7 +55,7 @@ export function initializeFaceFramePreviews(doc = document) {
       status.textContent = choice.dataset.faceFrameLabel;
       // Custom destinations and incomplete native pairs retain their server-rendered exit.
       if (exit?.dataset.faceGuideDestination !== 'filtered_catalogue' || !anchor) return;
-      const next = facePreviewDestination(originalHref, suggested, choice.dataset.faceFrameValue, doc.location.href);
+      const next = facePreviewDestination(originalHref, suggested, [...selected], doc.location.href);
       if (!next) return;
       anchor.setAttribute('href', next.href);
       exit.dataset.faceGuideShapes = next.shapes.join('|');
@@ -65,7 +66,7 @@ export function initializeFaceFramePreviews(doc = document) {
       picker.hidden = false;
       toggle.hidden = false;
       fallback.hidden = true;
-      select(choices[0]);
+      select(choices.find(choice => selected.has(choice.dataset.faceFrameValue)) || choices[0]);
       updateArrows();
     };
     const restore = () => {
@@ -77,12 +78,28 @@ export function initializeFaceFramePreviews(doc = document) {
       if (anchor) anchor.setAttribute('href', originalHref);
       if (exit?.dataset.faceGuideDestination === 'filtered_catalogue') exit.dataset.faceGuideShapes = suggested.join('|');
     };
-    for (const choice of choices) choice.addEventListener('click', () => select(choice));
+    for (const choice of choices) choice.addEventListener('click', () => {
+      const value = choice.dataset.faceFrameValue;
+      if (selected.has(value) && !suggested.includes(value)) selected.delete(value);
+      else selected.add(value);
+      const preview = selected.has(value) ? choice : choices.findLast(button => selected.has(button.dataset.faceFrameValue));
+      select(preview || choice);
+    });
     toggle.addEventListener('click', () => {
       overlay.hidden = !overlay.hidden;
       toggle.textContent = overlay.hidden ? toggle.dataset.hiddenLabel : toggle.dataset.visibleLabel;
     });
-    for (const arrow of arrows) arrow.addEventListener('click', () => carousel.scrollBy({ left: Number(arrow.dataset.faceFrameScroll) * carousel.clientWidth * .8, behavior: reducedMotion() ? 'instant' : 'smooth' }));
+    for (const arrow of arrows) arrow.addEventListener('click', () => {
+      const max = carousel.scrollWidth - carousel.clientWidth;
+      const start = carousel.getBoundingClientRect().left;
+      const padding = parseFloat(getComputedStyle(carousel).paddingLeft);
+      const stops = choices.map(choice => Math.min(max, Math.max(0,
+        choice.getBoundingClientRect().left - start + carousel.scrollLeft - padding)));
+      const forward = Number(arrow.dataset.faceFrameScroll) > 0;
+      const left = forward ? stops.find(stop => stop > carousel.scrollLeft + 2) ?? max
+        : stops.findLast(stop => stop < carousel.scrollLeft - 2) ?? 0;
+      carousel.scrollTo({ left, behavior: reducedMotion() ? 'instant' : 'smooth' });
+    });
     carousel.addEventListener('scroll', updateArrows, { passive: true });
     if (doc.defaultView.ResizeObserver) new doc.defaultView.ResizeObserver(updateArrows).observe(carousel);
     portrait.addEventListener('load', show);

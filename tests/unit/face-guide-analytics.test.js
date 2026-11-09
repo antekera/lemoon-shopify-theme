@@ -44,6 +44,13 @@ describe('theme face-guide event publisher', () => {
   });
 
   it.each([
+    [['redondo'], ['round']],
+    [['rectangular', 'redondo', 'geométrico', 'ovalado', 'aviador', 'ojo de gato'], ['rectangular', 'round', 'geometric', 'oval', 'aviator', 'cat-eye']],
+  ])('publishes one through six controlled selected shapes: %j', (native, codes) => {
+    expect(buildFaceGuidePayload(anchorFixture({ faceGuideShapes: native.join('|') }).anchor).selected_shapes).toEqual(codes);
+  });
+
+  it.each([
     ['redondo', 'round'], ['rectangular', 'rectangular'], ['geométrico', 'geometric'], ['ovalado', 'oval'], ['aviador', 'aviator'], ['ojo de gato', 'cat-eye'],
   ])('maps native shape %s to stable analytics code %s', (native, expected) => {
     const { anchor } = anchorFixture({ faceGuideAction: 'frame_shape', faceGuideFrame: native });
@@ -53,8 +60,8 @@ describe('theme face-guide event publisher', () => {
   it.each([
     { faceGuideAction: '__proto__' }, { faceGuideAction: 'purchase' }, { faceGuidePosition: 'closing' },
     { faceGuideDestination: 'https://private.test' }, { faceGuideShapes: 'redondo|redondo' },
-    { faceGuideShapes: 'redondo' }, { faceGuideShapes: 'rectangular|redondo|redondo' },
-    { faceGuideShapes: 'rectangular|redondo|ovalado|aviador' }, { faceGuideShapes: 'redondo|private@example.test' },
+    { faceGuideShapes: '' }, { faceGuideShapes: 'rectangular|redondo|redondo' },
+    { faceGuideShapes: 'redondo|private@example.test' },
   ])('rejects unknown/inconsistent metadata instead of emitting free-form values: %j', override => {
     expect(buildFaceGuidePayload(anchorFixture(override).anchor)).toBeNull();
   });
@@ -172,6 +179,12 @@ function pixel(initialPermission, { privacyMode = 'available' } = {}) {
 }
 
 describe('GA4 custom-pixel receiver for face-guide clicks', () => {
+  it.each([[['round']], [['rectangular', 'round', 'geometric', 'oval', 'aviator', 'cat-eye']]])('forwards the complete one-to-six selection: %j', selected_shapes => {
+    const p = pixel({ analyticsProcessingAllowed: true });
+    p.fire({ ...validClick(), selected_shapes });
+    expect(p.analyticsEvents()[0][2].selected_shapes).toBe(selected_shapes.join('|'));
+  });
+
   it('uses the Custom Pixel api.customerPrivacy observer without requiring an App Pixel global', () => {
     const p = pixel({ analyticsProcessingAllowed: true });
     expect(p.environment).not.toHaveProperty('customerPrivacy');
@@ -306,9 +319,9 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
 
   it.each([
     null, {}, { guide_id: 'other' }, { action: 'purchase' }, { link_position: 'private@example.test' }, { destination: 'https://private.test' },
-    { face_family: 'private@example.test' }, { frame_shape: 'unknown' }, { selected_shapes: ['round'] },
+    { face_family: 'private@example.test' }, { frame_shape: 'unknown' }, { selected_shapes: [] },
     { selected_shapes: ['round', 'round'] }, { selected_shapes: ['round', 'oval', 'round'] },
-    { selected_shapes: ['round', 'oval', 'aviator', 'cat-eye'] }, { selected_shapes: ['round', 'private@example.test'] }, { selected_shapes: 'round|aviator' },
+    { selected_shapes: ['round', 'private@example.test'] }, { selected_shapes: 'round|aviator' },
   ])('ignores malformed or uncontrolled event data before loading the SDK: %j', patch => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.fire(patch === null ? null : Object.keys(patch).length ? { ...validClick(), ...patch } : {});
