@@ -22,6 +22,7 @@ You can find a more detailed version of our theme code principles in the [contri
 
 ## Documentación operativa de Lemoon
 
+- [Estrategia SKU y estado de LEM-50](docs/catalog/sku-strategy.md): formato numérico, diccionario propuesto, referencia manual en Product Studio y pendientes de asignación por variante.
 - [Guía de catálogo del quiz de estilo](docs/catalog/style-quiz.md): características de producto y variante, vocabulario, herencia, medidas físicas, filtros nativos y alta de productos finales desde Shopify o la precarga del back office.
 - [Configuración administrativa de atributos](scripts/style-quiz-admin-config.json): registro del contrato de metacampos y del diccionario compartido, sin credenciales ni ejecución automática.
 - La carga inicial de fotos, títulos, textos y metadatos se integra en Product Studio del [back office](https://github.com/antekera/lemoon-next-backoffice/pull/9). Shopify conserva la edición final; los reintentos deben preservar sus cambios posteriores.
