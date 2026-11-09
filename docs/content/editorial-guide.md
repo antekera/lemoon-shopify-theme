@@ -131,17 +131,6 @@ Usar este mensaje únicamente si la recepción está registrada y la revisión s
 
 **Evitar:** «Respondemos al instante», «tu receta está aprobada» o «tus lentes llegan mañana» sin una operación y un estado que lo respalden.
 
-## Validación de la entrega
-
-Para aprobar esta versión:
-
-1. Revisar misión, visión y propuesta de valor.
-2. Validar los ejemplos con una persona que use la guía.
-3. Confirmar términos y estados con sus responsables.
-4. Registrar aprobación del contenido y la versión en [LEM-55](https://linear.app/antekera/issue/LEM-55).
-
-Cuando se aprueben cambios, actualizar este archivo, incorporar las referencias afectadas en las guías de marca y agentes y registrar la entrega a LEM-79. La copia de Drive debe reflejar las definiciones aprobadas; su existencia no supone sincronización automática ni aprobación.
-
 ## Fuentes locales
 
 - [Brief estratégico aprobado — LEM-82](../design/brand-strategy.md).
