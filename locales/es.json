@@ -926,7 +926,7 @@
       "loading_error": "No pudimos preparar tu selección. Puedes volver a intentarlo o explorar el catálogo.",
       "few_intro": "Encontramos pocas coincidencias. Puedes cambiar una preferencia para seguir explorando.",
       "details_note": "Puedes combinar tus preferencias de acabado y material.",
-      "presence_note": "Oversize es una proporción visual, no una talla física. Revisa las medidas al comparar.",
+      "presence_note": "El tamaño describe cómo se ven los lentes. Revisa sus medidas para comparar el ajuste.",
       "use_note": "El uso orienta el estilo. Los cristales y tratamientos compatibles se eligen después.",
       "price_note": "Precio del marco. Los cristales y tratamientos compatibles se eligen y se suman aparte.",
       "collection_label": "Colección para la guía de estilo",
@@ -980,8 +980,8 @@
           "hint": "Piensa en tu día a día. Puedes elegir más de un plan."
         },
         "presence": {
-          "title": "¿Qué presencia te gusta que tengan?",
-          "hint": "Compactos o protagonistas: comparemos proporciones."
+          "title": "¿Qué tamaño te gusta?",
+          "hint": "Elige el tamaño que prefieres."
         }
       },
       "tabs": {
@@ -1043,9 +1043,9 @@
           "outdoors": "Paseos al aire libre"
         },
         "presence": {
-          "compact": "Compactos",
-          "medium": "Intermedios",
-          "oversize": "Oversize"
+          "compact": "Pequeños",
+          "medium": "Estándar",
+          "oversize": "Grandes o maxi"
         }
       },
       "reasons": {
