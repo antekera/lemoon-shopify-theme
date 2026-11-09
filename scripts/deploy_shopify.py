@@ -12,6 +12,10 @@ import tempfile
 
 
 STORE = "lemoon-8277.myshopify.com"
+MARKER = "assets/lemoon-deployment.json"
+BOOTSTRAP_SHA = "3264927f5e4129cca605469acbe7007e95747208"
+THEME_DIRECTORIES = {"assets", "config", "layout", "locales", "sections", "snippets", "templates", "blocks"}
+SETTINGS = "config/settings_data.json"
 
 
 def normalize_store(value):
@@ -46,12 +50,26 @@ def select_live_theme(payload, expected_id):
     return theme
 
 
-def push_command(store, theme_id):
+def theme_path(filename):
+    parts = filename.split("/")
+    return (len(parts) >= 2 and parts[0] in THEME_DIRECTORIES
+            and all(re.fullmatch(r"[A-Za-z0-9_.-]+", part) and part not in {".", ".."} for part in parts)
+            and filename != SETTINGS)
+
+
+def push_command(store, theme_id, files, directory=None):
     if not re.fullmatch(r"[1-9][0-9]*", str(theme_id)):
         raise ValueError("Theme ID must be a positive numeric ID")
-    return ["shopify", "theme", "push", "--store", normalize_store(store),
-            "--theme", str(theme_id), "--allow-live", "--nodelete",
-            "--ignore", "config/settings_data.json", "--json"]
+    if not files or not all(theme_path(filename) for filename in files):
+        raise ValueError("Upload requires an explicit safe theme-file allowlist")
+    command = ["shopify", "theme", "push", "--store", normalize_store(store),
+               "--theme", str(theme_id), "--allow-live", "--nodelete",
+               "--ignore", SETTINGS, "--json"]
+    if directory:
+        command.extend(["--path", str(directory)])
+    for filename in sorted(set(files)):
+        command.extend(["--only", filename])
+    return command
 
 
 def select_push_result(payload, expected_id):
@@ -107,6 +125,147 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def canonical_json(content):
+    def unique_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("Duplicate JSON key")
+            result[key] = value
+        return result
+
+    def invalid_constant(_value):
+        raise ValueError("Invalid JSON constant")
+
+    text = content.decode("utf-8")
+    # Shopify may prepend its generated-file notice and reindent JSON.
+    text = re.sub(r"^\s*/\*.*?\*/\s*", "", text, count=1, flags=re.DOTALL)
+    return json.dumps(json.loads(text, object_pairs_hook=unique_pairs, parse_constant=invalid_constant),
+                      ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+def same_content(filename, left, right):
+    if left == right:
+        return True
+    if left is None or right is None or not filename.endswith(".json"):
+        return False
+    try:
+        return canonical_json(left) == canonical_json(right)
+    except (ValueError, UnicodeError):
+        return False
+
+
+def parse_state(content):
+    try:
+        marker = json.loads(canonical_json(content))
+    except (ValueError, UnicodeError) as error:
+        raise ValueError("Deployment marker is invalid") from error
+    if not isinstance(marker, dict) or type(marker.get("schema")) is not int:
+        raise ValueError("Deployment marker is invalid")
+    if marker["schema"] == 1 and set(marker) == {"schema", "sha"}:
+        marker = {"schema": 2, "sha": marker["sha"], "pending_shas": []}
+    if (set(marker) != {"schema", "sha", "pending_shas"} or marker["schema"] != 2
+            or not isinstance(marker["sha"], str) or not re.fullmatch(r"[0-9a-f]{40}", marker["sha"])
+            or not isinstance(marker["pending_shas"], list) or len(marker["pending_shas"]) > 50
+            or not all(isinstance(sha, str) and re.fullmatch(r"[0-9a-f]{40}", sha) for sha in marker["pending_shas"])
+            or len(set(marker["pending_shas"])) != len(marker["pending_shas"])):
+        raise ValueError("Deployment marker is invalid")
+    return marker
+
+
+def parse_marker(content):
+    return parse_state(content)["sha"]
+
+
+def git_bytes(arguments):
+    result = subprocess.run(["git", *arguments], capture_output=True)
+    if result.returncode:
+        raise ValueError("Git deployment history is unavailable")
+    return result.stdout
+
+
+def snapshot(revision):
+    entries = {}
+    for entry in git_bytes(["ls-tree", "-r", "-z", revision]).split(b"\0"):
+        if not entry:
+            continue
+        metadata, raw_name = entry.split(b"\t", 1)
+        filename = raw_name.decode("utf-8")
+        if filename == SETTINGS or filename.split("/", 1)[0] not in THEME_DIRECTORIES:
+            continue
+        if not theme_path(filename):
+            raise ValueError("Theme source contains an unsupported filename")
+        mode, kind, blob = metadata.split()
+        if kind != b"blob" or mode not in {b"100644", b"100755"}:
+            raise ValueError("Theme source includes a non-regular file")
+        if filename == MARKER:
+            raise ValueError("Deployment marker must not be committed as theme source")
+        entries[filename] = blob.decode("ascii")
+    return entries
+
+
+def deployment_baseline(marker_content, target):
+    if marker_content is None:
+        # A missing marker is permitted once, immediately after the verified rollout.
+        parent = git_bytes(["rev-parse", target + "^1"]).decode().strip()
+        if parent != BOOTSTRAP_SHA:
+            raise ValueError("Deployment marker missing outside the reviewed bootstrap release")
+        baseline = BOOTSTRAP_SHA
+    else:
+        baseline = parse_marker(marker_content)
+    git_bytes(["merge-base", "--is-ancestor", BOOTSTRAP_SHA, baseline])
+    git_bytes(["merge-base", "--is-ancestor", baseline, target])
+    return baseline
+
+
+def read_optional(directory, filename):
+    path = directory / filename
+    return path.read_bytes() if path.is_file() else None
+
+
+def verify_remote(filename, baseline, target, remote, attempted=()):
+    if not any(same_content(filename, remote, known) for known in (baseline, target, *attempted)):
+        raise ValueError(f"Production conflict in {filename}; reconcile the deployed change before release")
+
+
+def verify_candidates(directory, files, old, desired, attempts):
+    for filename in files:
+        baseline = git_bytes(["cat-file", "blob", old[filename]]) if filename in old else None
+        target = git_bytes(["cat-file", "blob", desired[filename]])
+        attempted = [git_bytes(["cat-file", "blob", tree[filename]]) for tree in attempts if filename in tree]
+        verify_remote(filename, baseline, target, read_optional(directory, filename), attempted)
+
+
+def release_plan(old, new, attempts):
+    files = {filename for filename in new if new[filename] != old.get(filename)}
+    for tree in attempts:
+        files.update(filename for filename in tree if old.get(filename) != tree[filename])
+    desired = dict(new)
+    for filename in files - set(new):
+        if filename not in old:
+            raise ValueError(f"Pending added file {filename} is absent from the target; explicit reconciliation required (remote deletion is disabled)")
+        # A source deletion preserves the last verified remote file, not a failed attempt.
+        desired[filename] = old[filename]
+    return sorted(files), desired
+
+
+def stage_directory(directory):
+    for folder in ("assets", "config", "layout", "templates"):
+        (directory / folder).mkdir(parents=True, exist_ok=True)
+
+
+def write_marker(store, theme_id, directory, state):
+    stage_directory(directory)
+    (directory / MARKER).write_text(json.dumps(state) + "\n")
+    select_push_result(json.loads(run(push_command(store, theme_id, [MARKER], directory))), theme_id)
+
+
+def verify_readback(directory, files, new):
+    for filename in files:
+        if not same_content(filename, read_optional(directory, filename), git_bytes(["cat-file", "blob", new[filename]])):
+            raise ValueError(f"Published file readback differs from checked revision: {filename}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--preflight", action="store_true", help="Read published theme; never upload")
@@ -123,24 +282,77 @@ def main():
         if args.preflight:
             print("Read-only preflight passed; no upload performed")
             return 0
-        root = Path.cwd()
+        target = os.environ.get("GITHUB_SHA", "")
+        assert_current_main()
         with tempfile.TemporaryDirectory(prefix="lemoon-production-") as tmp:
-            before, after = Path(tmp) / "before", Path(tmp) / "after"
-            before.mkdir()
-            after.mkdir()
-            pull(store, theme["id"], before, ["config/settings_data.json"])
-            settings = digest(before / "config/settings_data.json")
+            before, recheck, after, receipt = [Path(tmp) / name for name in ("before", "recheck", "after", "receipt")]
+            for directory in (before, recheck, after, receipt):
+                directory.mkdir()
+            pull(store, theme["id"], before, [SETTINGS, MARKER])
+            settings = digest(before / SETTINGS)
+            marker_content = read_optional(before, MARKER)
+            baseline = deployment_baseline(marker_content, target)
+            pending = parse_state(marker_content)["pending_shas"] if marker_content is not None else []
+            for revision in pending:
+                git_bytes(["merge-base", "--is-ancestor", baseline, revision])
+                git_bytes(["merge-base", "--is-ancestor", revision, target])
+            old, new = snapshot(baseline), snapshot(target)
+            attempts = [snapshot(revision) for revision in pending]
+            files, desired = release_plan(old, new, attempts)
+            deleted = sorted(set(old) - set(new))
+            if deleted:
+                print(f"Preserving {len(deleted)} removed source files remotely; no deletions performed")
+            if files:
+                pull(store, theme["id"], before, files)
+                verify_candidates(before, files, old, desired, attempts)
+            # Fresh directories ensure missing remote files cannot be masked by an older pull.
+            pull(store, theme["id"], recheck, [SETTINGS, MARKER, *files])
+            if digest(recheck / SETTINGS) != settings or read_optional(recheck, MARKER) != marker_content:
+                raise ValueError("Production configuration or release marker changed during preflight")
+            verify_candidates(recheck, files, old, desired, attempts)
             assert_current_main()
-            # Recheck role immediately before writing; a changed live theme is a failure.
             select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
-            select_push_result(json.loads(run(push_command(store, theme["id"]))), expected_id)
-            pull(store, theme["id"], after, ["config/settings_data.json", "layout/theme.liquid"])
-            if digest(after / "config/settings_data.json") != settings:
+            if files:
+                journal = list(dict.fromkeys([*pending, target]))
+                if len(journal) > 50:
+                    raise ValueError("Pending deployment journal is full; explicit reconciliation required")
+                intent_state = {"schema": 2, "sha": baseline, "pending_shas": journal}
+                # Persist and verify intent BEFORE any payload write, including recovery attempts.
+                write_marker(store, theme["id"], receipt, intent_state)
+                intent = Path(tmp) / "intent"
+                intent.mkdir()
+                pull(store, theme["id"], intent, [SETTINGS, MARKER, *files])
+                marker_content = read_optional(intent, MARKER)
+                if marker_content is None or parse_state(marker_content) != intent_state or digest(intent / SETTINGS) != settings:
+                    raise ValueError("Deployment intent or preserved settings failed readback; no payload uploaded")
+                verify_candidates(intent, files, old, desired, attempts)
+                assert_current_main()
+                select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
+                payload = Path(tmp) / "payload"
+                stage_directory(payload)
+                for filename in files:
+                    path = payload / filename
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_bytes(git_bytes(["cat-file", "blob", desired[filename]]))
+                select_push_result(json.loads(run(push_command(store, theme["id"], files, payload))), expected_id)
+            pull(store, theme["id"], after, [SETTINGS, MARKER, *files])
+            if digest(after / SETTINGS) != settings:
                 raise ValueError("Merchant settings changed during deployment; inspect concurrent editor activity")
-            if digest(after / "layout/theme.liquid") != digest(root / "layout/theme.liquid"):
-                raise ValueError("Published layout readback differs from the checked revision")
+            if read_optional(after, MARKER) != marker_content:
+                raise ValueError("Deployment marker changed concurrently")
+            verify_readback(after, files, desired)
             select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
-        print(f"Deployed {os.environ['GITHUB_SHA']} to live theme {theme['id']}; settings preserved and layout read back")
+            assert_current_main()
+            # Clear every pending attempt only after the complete reconciled payload passed.
+            complete_state = {"schema": 2, "sha": target, "pending_shas": []}
+            write_marker(store, theme["id"], receipt, complete_state)
+            final = Path(tmp) / "final"
+            final.mkdir()
+            pull(store, theme["id"], final, [SETTINGS, MARKER])
+            if digest(final / SETTINGS) != settings or parse_state((final / MARKER).read_bytes()) != complete_state:
+                raise ValueError("Deployment receipt or preserved settings failed final readback")
+            select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
+        print(f"Deployed {target} to live theme {theme['id']}; {len(files)} changed files verified, settings preserved")
         return 0
     except (ValueError, OSError, json.JSONDecodeError) as error:
         print(f"Deployment stopped: {error}")
