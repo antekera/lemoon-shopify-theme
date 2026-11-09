@@ -912,6 +912,8 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 La guía `measurements` añade H1 desde page.title o fallback, ocho campos de intro/pasos/ayuda text/richtext usados solo en ese modo y fallback para espacios/párrafos vacíos. Retira únicamente su figura genérica de hero y usa los gráficos compartidos en sus tres pasos educativos, sin producto ni selector de medidas. Conserva anclas/índice/ayuda. Las otras cuatro guías ignoran los overrides. Asignación CMS, SEO y editor real requieren comprobación de integración separada.
 
+El texto completo aprobado del paso 3 se conserva en dos traducciones HTML de bloques completos, cada una bajo el límite nativo de 1000 caracteres. Su campo richtext no declara default de schema; vacío usa ambos bloques y un override conserva únicamente el contenido del editor, sin añadir la continuación predeterminada.
+
 La guía educativa de medidas conserva únicamente «Ver catálogo» en su bloque final de ayuda; el botón «Consultar una medida» fue retirado por petición del usuario el08-11-2026. Las otras cuatro guías mantienen su enlace de contacto.
 
 Analítica exclusiva de measurements: cuatro custom events, permiso nativo de Analytics reutilizado desde LM-PRIVACY y documento visible, sin datos personales en payload. El receptor GA4 vive fuera de assets y no está activado; [contrato y publicación](../analytics/measurement-guide.md). No hay alteración visual.

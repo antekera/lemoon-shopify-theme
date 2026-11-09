@@ -170,7 +170,12 @@
             {% render 'lemoon-ui-heading', text: ui_heading_text, level: 2 %}
             {%- if guide_kind == 'measurements' -%}
               <div class="lemoon-guide__measurement-body rte">
-                {%- if body_override_text != blank -%}{{ section.settings[body_setting] }}{%- else -%}{{ step_body_key | t }}{%- endif -%}
+                {%- if body_override_text != blank -%}
+                  {{ section.settings[body_setting] }}
+                {%- else -%}
+                  {{ step_body_key | t }}
+                  {%- if step == 3 -%}{{ 'sections.lemoon_guide.measurements.step_3_note_html' | t }}{%- endif -%}
+                {%- endif -%}
               </div>
               {%- if step == 1 -%}
                 {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, show_intro: false, annotated_temple: true %}
@@ -301,8 +306,7 @@
     {
       "type": "richtext",
       "id": "measurements_step_3_body",
-      "label": "t:sections.lemoon_guide.measurements_step_3_body_label",
-      "default": "t:sections.lemoon_guide.measurements_step_3_body_default"
+      "label": "t:sections.lemoon_guide.measurements_step_3_body_label"
     },
     {
       "type": "richtext",
