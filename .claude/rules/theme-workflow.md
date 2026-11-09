@@ -6,7 +6,7 @@ description: Shopify development and automatic production deployment workflow
 
 - Store: `lemoon-8277.myshopify.com`; public domain `lemoon.cl`.
 - Development theme: `189557964968`. Run `shopify theme dev` for scoped local work; explicit dev pushes still use the dev theme.
-- Git integration: feature PRs → `develop`; release PRs `develop` → `main`. Follow [git conventions](git-conventions.md).
+- Git integration: feature PRs → human validation → `develop`; release PRs `develop` → `main`. Before any feature merge or auto-merge, follow [human review before develop](git-conventions.md#human-review-before-develop).
 
 ## Production
 
