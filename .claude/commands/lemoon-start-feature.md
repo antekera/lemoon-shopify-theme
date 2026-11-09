@@ -5,7 +5,7 @@ The user will provide a description like "trust-bar section" or "fix mobile padd
 Steps:
 
 1. Run `git status` to confirm the working tree is clean. If there are uncommitted changes, stop and tell the user to commit or stash them first.
-2. Run `git checkout main && git pull origin main` to start from the latest main.
+2. Run `git fetch origin develop` then branch from `origin/develop` for integration work.
 3. Infer the correct branch prefix from the description:
    - New section, block, or feature → `feat/`
    - Bug fix → `fix/`

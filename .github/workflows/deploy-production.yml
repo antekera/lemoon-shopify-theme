@@ -1,0 +1,44 @@
+name: Deploy Shopify production
+
+on:
+  workflow_call:
+  # Manual dispatch is a read-only credential/target preflight, never a deploy.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shopify-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Shopify production
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: ${{ github.event_name == 'workflow_dispatch' && 'shopify-preflight' || 'production' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+      - name: Install pinned Shopify CLI
+        run: npm install --global @shopify/cli@4.8.5
+      - name: Verify credentials or deploy the checked main revision
+        env:
+          SHOPIFY_FLAG_NO_INPUT: '1'
+          SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN || secrets.SHOPIFY_ACCESS_TOKEN }}
+          SHOPIFY_PRODUCTION_STORE: ${{ vars.SHOPIFY_PRODUCTION_STORE }}
+          SHOPIFY_PRODUCTION_THEME_ID: ${{ vars.SHOPIFY_PRODUCTION_THEME_ID }}
+          PREFLIGHT_ONLY: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          if [ "$PREFLIGHT_ONLY" = true ]; then
+            python3 -B scripts/deploy_shopify.py --preflight
+          else
+            python3 -B scripts/deploy_shopify.py
+          fi

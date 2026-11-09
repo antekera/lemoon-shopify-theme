@@ -11,11 +11,14 @@ import sys
 NON_RUNTIME_PREFIXES = ("docs/", ".codex/", ".agents/", ".claude/", "scripts/lighthouse/", ".github/actions/lighthouse/")
 NON_RUNTIME_FILES = frozenset({
     ".github/workflows/ci.yml",
+    ".github/workflows/deploy-production.yml",
     ".github/workflows/lighthouse-commercial.yml",
     "scripts/test_codex_workflows.py",
     "scripts/test_codex_workflow_validator.py",
     "scripts/ci_scope.py",
     "scripts/test_ci_scope.py",
+    "scripts/deploy_shopify.py",
+    "scripts/test_deploy_shopify.py",
 })
 SHA = re.compile(r"[0-9a-fA-F]{40}")
 

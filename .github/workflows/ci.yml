@@ -8,10 +8,10 @@ on:
         required: true
         type: string
   push:
-    branches: [main]
+    branches: [main, develop]
   pull_request:
-    branches: [main]
-    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main, develop]
+    types: [opened, synchronize, reopened, ready_for_review, edited]
 
 jobs:
   lighthouse-harness:
@@ -42,12 +42,26 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+      - name: Validate PR branch routing
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE: ${{ github.event.pull_request.base.ref }}
+          PR_HEAD: ${{ github.event.pull_request.head.ref }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$PR_BASE" = main ]; then
+            test "$PR_HEAD" = develop && test "$PR_HEAD_REPO" = "$GITHUB_REPOSITORY"
+          else
+            test "$PR_BASE" = develop && test "$PR_HEAD" != main && test "$PR_HEAD" != develop
+          fi
       - name: Validate Codex workflows
         run: python3 -B scripts/test_codex_workflows.py all
       - name: Test workflow validator regressions
         run: python3 -B scripts/test_codex_workflow_validator.py -v
       - name: Test CI scope regressions
         run: python3 -B scripts/test_ci_scope.py -v
+      - name: Test production deployment guards
+        run: python3 -B scripts/test_deploy_shopify.py -v
       - name: Set up pinned Node for harness tests
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -146,3 +160,10 @@ jobs:
           LIGHTHOUSE_STORE_PASSWORD: ${{ secrets.LIGHTHOUSE_STORE_PASSWORD }}
           LIGHTHOUSE_PRODUCT_HANDLE: ${{ vars.LIGHTHOUSE_PRODUCT_HANDLE }}
           LIGHTHOUSE_COLLECTION_HANDLE: ${{ vars.LIGHTHOUSE_COLLECTION_HANDLE }}
+
+  deploy-production:
+    name: Deploy production after CI
+    needs: [lighthouse-harness, workflow-tests, mobile-search-tests, theme-check, lighthouse]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    uses: ./.github/workflows/deploy-production.yml
+    secrets: inherit
