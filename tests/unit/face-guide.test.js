@@ -85,6 +85,18 @@ describe('editable face guide rendered from actual Liquid', () => {
     expect(catalogueLinks(first)[0].url.searchParams.getAll(shapeParam)).toHaveLength(2);
   });
 
+  it.each([['es', 'Ojo de gato'], ['en', 'Cat-eye']])('resolves spaced native shapes through upload-safe translation IDs (%s)', (language, label) => {
+    const html = renderFaceGuide({ language });
+    expect(html).toContain(label);
+    expect(html).not.toMatch(/translation missing|sections\.lemoon_face_guide\.shapes/i);
+    expect(catalogueLinks(articles(html)[4])[0].url.searchParams.getAll(shapeParam)).toContain('ojo de gato');
+    const family = faceGuideSchema().blocks.find(({ type }) => type === 'family');
+    for (const id of ['shape_1', 'shape_2']) {
+      expect(family.settings.find(setting => setting.id === id).options.find(({ value }) => value === 'ojo de gato').label)
+        .toBe('t:sections.lemoon_face_guide.shapes.ojo_de_gato');
+    }
+  });
+
   it('keeps family content, images and destinations editable in the editor', () => {
     const schema = faceGuideSchema();
     const family = schema.blocks.find(({ type }) => type === 'family');
