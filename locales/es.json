@@ -1045,7 +1045,7 @@
         "presence": {
           "compact": "Pequeños",
           "medium": "Estándar",
-          "oversize": "Grandes o maxi"
+          "oversize": "Grandes"
         }
       },
       "reasons": {

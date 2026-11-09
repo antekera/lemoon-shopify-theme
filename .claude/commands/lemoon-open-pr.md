@@ -12,6 +12,6 @@ Steps:
    - **Sections affected:** list of `.liquid` files modified
    - **Test plan:** checklist — verify on dev theme preview, check mobile, check theme editor
    - Footer: `🤖 Generated with Claude Code`
-7. Run `gh pr create --base develop --title "<title>" --body "<body>"` and return the PR URL to the user.
+7. Run `gh pr create --base develop --draft --title "<title>" --body "<body>"` while human validation is pending. Return the PR URL, concrete preview/artifact, reviewed revision and validation results.
 
-Remind the user: after the PR is merged, main CI deploys production automatically; develop merges are integration only. The coordinator may merge after technical review and current checks under standing authorization.
+Wait for explicit human validation under [human review before develop](../rules/git-conventions.md#human-review-before-develop) before enabling auto-merge or merging to `develop`. After that approved integration, reviewed releases to `main` and successful main CI deployment retain standing authorization.

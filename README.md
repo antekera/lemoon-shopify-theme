@@ -100,7 +100,7 @@ This repo includes a Claude Code configuration (`.claude/`) for AI-assisted them
 
 #### Git flow commands
 
-Feature PRs target `develop`; release PRs go from `develop` to `main`. Both branches require passing CI. Standing authorization permits technically reviewed merges and automatic main production deployment without a per-merge or per-deploy confirmation. Human ticket acceptance remains separate. See [Git conventions](.claude/rules/git-conventions.md) and [deployment configuration](.claude/rules/theme-workflow.md).
+Feature PRs target `develop`; release PRs go from `develop` to `main`. Both branches require passing CI. Before merging to `develop` or enabling auto-merge, share the completed preview/artifact and obtain explicit human validation of the reviewed revision under [human review before develop](.claude/rules/git-conventions.md#human-review-before-develop). After approved integration, standing authorization covers reviewed releases to `main` and automatic production deployment without another routine confirmation. Human ticket acceptance remains separate. See [deployment configuration](.claude/rules/theme-workflow.md).
 
 | Command                        | Description                                 |
 | ------------------------------ | ------------------------------------------- |
