@@ -33,6 +33,7 @@ Fixes #0.
 - [Editor](url)
 
 ### Checklist
+- [ ] For releases to `main`: recorded the explicit user release request and reviewed the full cumulative diff and included commits/PRs.
 - [ ] For PRs to `develop`: shared the preview/artifact and recorded explicit human validation of the reviewed revision before merge ([review gate](https://github.com/antekera/lemoon-shopify-theme/blob/develop/.claude/rules/git-conventions.md#human-review-before-develop)).
 - [ ] Added PR summary for [release notes](https://themes.shopify.com/themes/lemoon/styles/default#ReleaseNotes)
 - [ ] Requested review from UX (Only for changes that are affecting the experience or perceivable visual details)
