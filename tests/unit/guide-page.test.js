@@ -145,3 +145,18 @@ for (const language of ['es', 'en.default']) {
     expect(help).toMatch(/<div class="rte">\s*<p\b/);
   });
 }
+
+for (const language of ['es', 'en.default']) {
+  test(`step3 keeps the approved HTML complete within locale upload limits (${language})`, () => {
+    const approved = json('tests/fixtures/measurement-step-three-approved.json')[language];
+    const bodies = html => [...html.matchAll(/<div class="lemoon-guide__measurement-body rte">([\s\S]*?)<\/div>/g)].map(match => match[1].trim());
+    const html = render('lemoon-guide-page', { language, settings: { guide_kind: 'measurements' } });
+    expect(bodies(html)[2]).toBe(approved);
+    const override = '<p>Contenido propio del editor.</p>';
+    const changed = render('lemoon-guide-page', { language, settings: { guide_kind: 'measurements', measurements_step_3_body: override } });
+    expect(bodies(changed)[2]).toBe(override);
+    const schema = JSON.parse(file('sections/lemoon-guide-page.liquid').match(/{% schema %}([\s\S]*?){% endschema %}/)[1]);
+    expect(schema.settings.find(({ id }) => id === 'measurements_step_3_body').type).toBe('richtext');
+    expect(schema.settings.find(({ id }) => id === 'measurements_step_3_body')).not.toHaveProperty('default');
+  });
+}
