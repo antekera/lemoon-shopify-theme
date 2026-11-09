@@ -1112,6 +1112,18 @@
       }
     },
     "lemoon_face_guide": {
+      "preview": {
+        "title": "Prueba distintas formas",
+        "hint": "Parte por las sugeridas o desliza para explorar otras.",
+        "suggested": "Sugerida",
+        "explore": "Otra forma",
+        "hide": "Ver sin armazón",
+        "show": "Ver con armazón",
+        "previous": "Formas anteriores",
+        "next": "Más formas",
+        "selected": "Forma sobre el rostro:",
+        "note": "Ilustración de estilo. No representa el tamaño ni el ajuste de un producto."
+      },
       "title": "Elegir lentes según tu rostro",
       "intro": "Tu rostro puede darte ideas para elegir un armazón. Compara las ilustraciones y explora las formas que te gusten: son puntos de partida, y tú eliges qué llevar.",
       "index_title": "Mira el contorno, explora las formas",
@@ -1594,7 +1606,7 @@
     "partial_measurements": "Se muestran las medidas disponibles de este armazón.",
     "definitions": {
       "frame_width": "Mide en línea horizontal desde un extremo exterior del frente hasta el otro, incluyendo los bordes del armazón. Esta es la referencia A del esquema; anótala como ancho total, separada del ancho de un cristal.",
-      "lens_width": "Mide un solo cristal de lado a lado, por su parte más ancha y con la regla horizontal. No incluyas el aro que lo rodea ni el espacio del puente.",
+      "lens_width": "Mide un solo cristal de lado a lado, por su parte interna más ancha y con la regla horizontal. No incluyas el aro que lo rodea ni el espacio del puente.",
       "bridge": "Mide el espacio más corto entre los bordes interiores de ambos cristales, en la zona del puente. No midas sobre la nariz ni confundas esa distancia con el ancho exterior de la pieza del armazón.",
       "lens_height": "Mide un cristal de arriba abajo, en su parte más alta y con la regla vertical. Deja fuera el aro: esta medida describe el cristal, no la altura de todo el frente.",
       "temple": "Sigue la patilla desde la bisagra hasta el extremo, incluida la curva hacia la oreja. Una cinta flexible marcada en milímetros puede ayudarte a seguir ese recorrido. No dobles ni endereces la patilla para medirla."

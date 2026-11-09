@@ -32,7 +32,7 @@
       parameters.frame_shape = data.frame_shape;
     }
     if (data.selected_shapes !== undefined) {
-      if (!Array.isArray(data.selected_shapes) || data.selected_shapes.length !== 2 || data.selected_shapes.some(shape => !shapes.has(shape)) || data.selected_shapes[0] === data.selected_shapes[1]) return null;
+      if (!Array.isArray(data.selected_shapes) || ![2, 3].includes(data.selected_shapes.length) || data.selected_shapes.some(shape => !shapes.has(shape)) || new Set(data.selected_shapes).size !== data.selected_shapes.length) return null;
       parameters.selected_shapes = data.selected_shapes.join('|');
     }
     return parameters;

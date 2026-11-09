@@ -1,6 +1,7 @@
 {% doc %}
   Face guide's decorative frame pair and honest native collection exit.
   Both configured values must be exposed by the live frame-shape filter.
+  @param {boolean} [frame_preview] - Pilot selector replaces the static pair after JS initializes.
   @param {object} block - Family block with two native shape values and optional destination.
   @param {object} shape_filter - Live collections.all frame_shape filter, or nil.
   @param {object} guide_settings - Editable guide labels and fallback hint.
@@ -49,7 +50,7 @@
     assign label = block.settings.custom_label | default: label
   endif
 -%}
-<div class="lemoon-face-guide__frames">
+<div class="lemoon-face-guide__frames"{% if frame_preview %} data-face-frame-fallback{% endif %}>
   {%- for position in (1..2) -%}
     {%- liquid
       assign frame_value = first_value
