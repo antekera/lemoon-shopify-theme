@@ -358,13 +358,17 @@ El cierre de los drawers nativos de medidas en móvil mantiene el panel opaco du
 
 La PDP estándar conserva su espaciado superior configurado y su animación de entrada del panel de información. La PDP óptica aplica el mismo espaciado de 24px en escritorio y la misma animación al panel; las galerías conservan sus reglas de posición respectivas.
 
+La barra superior puede mostrar el monto de envío gratis mediante `[MONTO_ENVIO_GRATIS]` y el metacampo de tienda `custom.free_shipping_threshold` en pesos chilenos. El aviso se omite si el monto no está configurado. Este campo no sincroniza por sí solo la tarifa de Shopify ni el texto de la política nativa: ambos deben mantenerse coherentes por separado.
+
 Los botones que abren Guía de medidas conservan el foco y su retorno al cerrar el modal. El foco visible usa el contorno gris compartido del sitio.
 
 La solicitud de Miguel se implementa sobre las familias actuales: galería protagonista y panel de selección en escritorio, identidad/precio antes de la foto en móvil y descripción completa debajo. Los detalles comparten el ancho y los márgenes de página. Dos pestañas separan Características (forma, material, peso, público, talla, ajuste y rostros disponibles) de Medidas (valores mm y esquema A–E solo aquí). Se omiten campos ausentes y párrafos genéricos. El acceso junto a la talla abre el modal de medidas y restaura el foco al cerrar.
 
 El valor de la talla junto a la guía se presenta como una etiqueta redondeada con fondo gris claro `#f1f2f3`.
 
-La información cercana a compra se concilia con políticas nativas: garantía legal y cambios/devoluciones con enlace a reembolso, plazo configurado con sus condiciones y enlace a envío, medios de pago habilitados por Shopify. No reutilizar365/30días de defaults ni claims de competidores como hechos Lemoon. No generar cifras desde talla textual, convertir referencias de compatibilidad en booleanos, ni asumir sincronización de campos cortos/medidas desde Studio. El [inventario y cruce de datos PDP](docs/design/2026-11-09-pdp-refinement.md) registra fuentes, límites y diferencias; revisión humana del resultado pendiente.
+La información cercana a compra se concilia con las políticas y los medios de pago habilitados por Shopify. No generar cifras desde talla textual, convertir referencias de compatibilidad en booleanos, ni asumir sincronización de campos cortos/medidas desde Studio. El [inventario y cruce de datos PDP](docs/design/2026-11-09-pdp-refinement.md) registra fuentes, límites y diferencias; revisión humana del resultado pendiente.
+
+Por indicación posterior del 11-11-2026, la información de compra muestra enlaces breves «Cambios y devoluciones gratis antes de los 30 días» y «Envíos a todo Chile», con destino a reembolso y envío respectivamente. Para productos identificados como armazones, añade «365 días de garantía para tus lentes», con destino a Garantías. La actualización de condiciones y su verificación en Shopify son requisitos separados antes de publicar estas promesas.
 
 La descripción aparece dentro de la pestaña Características, cuyos atributos se distribuyen en dos columnas en desktop y una en móvil, sin título visual adicional ni acceso inferior duplicado a la guía. Las pestañas usan escritura normal y 16px.
 

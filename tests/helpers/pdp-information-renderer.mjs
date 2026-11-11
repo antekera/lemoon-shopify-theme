@@ -12,6 +12,11 @@ export function pdpInformationContext(scenario = 'complete') {
     metafields: { custom: { plazo_entrega_receta: { value: '5 a 13 días hábiles' } } },
     enabled_payment_types: [],
   };
+  context.warranty_page = { url: '/pages/garantias' };
+  if (scenario === 'accessory') {
+    context.product.type = 'Accesorio';
+    context.product.tags = ['armazón'];
+  }
   return context;
 }
 

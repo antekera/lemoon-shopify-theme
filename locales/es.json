@@ -1452,9 +1452,9 @@
     },
     "confidence": {
       "heading": "Compra con información clara",
-      "guarantee": "Garantía legal de 6 meses",
+      "guarantee": "365 días de garantía para tus lentes",
       "guarantee_detail": "Si tu producto presenta una falla cubierta por la ley, tienes 6 meses desde que lo recibes para elegir reparación gratuita, cambio o devolución de lo pagado.",
-      "returns": "Derecho a retracto",
+      "returns": "Cambios y devoluciones gratis antes de los 30 días",
       "returns_detail": "En compras por internet puedes retractarte dentro de 10 días corridos desde la recepción, salvo las excepciones legales. Si no recibes la confirmación escrita del contrato con su contenido íntegro, claro y legible, el plazo se extiende a 90 días. Consulta las condiciones y posibles excepciones para productos personalizados en nuestra política.",
       "shipping": "Envíos a todo Chile",
       "delivery_estimate": "Entrega estimada: {{ estimate }}.",

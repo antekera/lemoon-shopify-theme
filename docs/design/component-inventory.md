@@ -583,6 +583,8 @@ El acceso y el diálogo se muestran solo cuando el tipo, una etiqueta explícita
 
 **Contrato actual.** Header Lemoon usa settings.menu, bloques drawer_primary/drawer_utility/drawer_subitem y @app; logo oficial inline. Menús Dawn conservados reciben menu/section/settings según las fuentes enlazadas; localization snippets localPosition y localization countries/languages, formulario nativo.
 
+La barra de anuncios sustituye el marcador editable `[MONTO_ENVIO_GRATIS]` por el valor positivo de `shop.metafields.custom.free_shipping_threshold` en pesos chilenos, formateado como precio. Si el dato falta o no es positivo, omite ese anuncio y conserva los demás con índices correctos. El metacampo no configura tarifas ni actualiza el texto de políticas nativas por sí solo.
+
 **Variantes existentes.** Header claro desktop/móvil; nav dropdown local; menús Dawn legacy dropdown/mega/drawer existen sin llamada directa desde header actual; localización condicional del layout.
 
 **CSS y excepciones.** Máximo local2200, logo120×28, alturas72/56 desde tokens/CSS; --lemoon-* header. No son límites globales.
@@ -1189,9 +1191,9 @@ Las pruebas de snippets/consumidores y navegador local usan archivos reales con 
 
 La PDP estándar conserva el espaciado configurado y la animación de entrada. La PDP óptica utiliza 24px de separación desktop y el mismo reveal del panel; sus galerías mantienen los offsets apropiados para cada composición.
 
-LM-PDP incorpora [lemoon-product-intro](../../snippets/lemoon-product-intro.liquid) (producto explícito, primer párrafo de descripción escapado) y [lemoon-pdp-purchase-confidence](../../snippets/lemoon-pdp-purchase-confidence.liquid) (shop explícito, políticas nativas, plazo configurado y medios de pago realmente habilitados). Son presentación compartida en ambos consumidores, sin formulario comercial propio.
+LM-PDP incorpora [lemoon-product-intro](../../snippets/lemoon-product-intro.liquid) (producto explícito, primer párrafo de descripción escapado) y [lemoon-pdp-purchase-confidence](../../snippets/lemoon-pdp-purchase-confidence.liquid) (shop, producto y página de garantía explícitos, enlaces a las políticas y medios de pago realmente habilitados). Son presentación compartida en ambos consumidores, sin formulario comercial propio.
 
-El resumen de compra distingue garantía por fallas, retracto y entrega. Envío incluye cobertura nacional, inicio y variación del plazo, costo antes de finalizar y seguimiento al despacho, contrastados con políticas Shopify vigentes; no sustituye avisos específicos de una configuración personalizada ni modifica la política.
+El resumen de compra presenta enlaces de cambios y devoluciones gratis antes de 30 días y envíos a todo Chile; añade garantía comercial de 365 días solo para armazones identificados por el clasificador de catálogo compartido. Se omite cada enlace si no existe su destino; las condiciones completas permanecen en las páginas correspondientes. Su publicación depende de la actualización y verificación de las políticas y de la operación comercial en Shopify.
 
 El acordeón Envíos y devoluciones sustituye ambos cuerpos íntegros por cuatro puntos breves (entrega, envío, retracto y garantía) y enlaces nativos a condiciones completas. El plazo continúa dinámico; sin políticas o estimación no fabrica enlaces ni cifras. La información de confianza cercana a compra permanece aparte.
 

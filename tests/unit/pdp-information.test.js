@@ -44,28 +44,38 @@ describe('PDP merchant information and policy-backed confidence', () => {
     expect(html).not.toMatch(/<script|<img|onerror=/);
   });
 
-  it('links actual policies, preserves the delivery start conditions and excludes sample benefits', () => {
+  it('links each commercial benefit to its relevant policy', () => {
     const context = pdpInformationContext();
     const html = pdpInformationEngine().renderFileSync('lemoon-pdp-purchase-confidence', context);
-    expect(html).toContain('href="/policies/refund-policy"');
-    expect(html).toContain('href="/policies/shipping-policy"');
-    expect(html).toMatch(/6 meses/);
-    expect(html).toContain('5 a 13 días hábiles');
-    expect(html).toMatch(/pago/);
-    expect(html).toMatch(/receta/);
-    expect(html).not.toMatch(/365|30 días|gratis|Webpay/);
+    expect(html).toMatch(/href="\/pages\/garantias"[^>]*>\s*365 días de garantía para tus lentes\s*<\/a>/);
+    expect(html).toMatch(/href="\/policies\/refund-policy"[^>]*>\s*Cambios y devoluciones gratis antes de los 30 días\s*<\/a>/);
+    expect(html).toMatch(/href="\/policies\/shipping-policy"[^>]*>\s*Envíos a todo Chile\s*<\/a>/);
+    expect(html).not.toContain('5 a 13 días hábiles');
+  });
+
+  it('does not promise lens warranty on accessories, even with mistaken frame tags or metafields', () => {
+    const context = pdpInformationContext('accessory');
+    const html = pdpInformationEngine().renderFileSync('lemoon-pdp-purchase-confidence', context);
+    expect(html).not.toContain('365 días de garantía para tus lentes');
+    expect(html).not.toContain('/pages/garantias');
+    expect(html).toContain('Cambios y devoluciones gratis antes de los 30 días');
+    expect(html).toContain('/policies/refund-policy');
+    expect(html).toContain('Envíos a todo Chile');
+    expect(html).toContain('/policies/shipping-policy');
   });
 
   it('does not fabricate links, deadlines or payment methods when configuration is missing', () => {
     const context = pdpInformationContext();
     context.shop = {};
+    context.warranty_page = null;
     const html = pdpInformationEngine().renderFileSync('lemoon-pdp-purchase-confidence', context);
-    expect(html).not.toMatch(/href=|5 a 13|data-payment-type|6 meses/);
+    expect(html).not.toMatch(/href=|data-payment-type/);
     const configured = pdpInformationContext();
-    configured.shop.metafields.custom.plazo_entrega_receta.value = '';
-    const withoutEstimate = pdpInformationEngine().renderFileSync('lemoon-pdp-purchase-confidence', configured);
-    expect(withoutEstimate).not.toContain('5 a 13');
-    expect(withoutEstimate).toContain('/policies/shipping-policy');
+    configured.shop.shipping_policy = {};
+    const withoutShipping = pdpInformationEngine().renderFileSync('lemoon-pdp-purchase-confidence', configured);
+    expect(withoutShipping).not.toContain('Envíos a todo Chile');
+    expect(withoutShipping).toContain('/policies/refund-policy');
+    expect(withoutShipping).toContain('/pages/garantias');
   });
 
   it('renders only the payment methods actually supplied by the shop', () => {

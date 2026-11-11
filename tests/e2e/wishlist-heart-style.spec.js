@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const navy = 'rgb(11, 31, 58)';
-const white = 'rgb(255, 255, 255)';
+const transparent = 'none';
 const yellow = 'rgb(247, 230, 0)';
 
 for (const [surface, wrapper] of [
@@ -20,14 +20,14 @@ for (const [surface, wrapper] of [
     const button = page.getByRole('button', { name: 'Añadir a la lista de deseos' });
     const svg = button.locator('svg');
     const heart = svg.locator('path').last();
-    await expect(heart).toHaveCSS('fill', white);
+    await expect(heart).toHaveCSS('fill', transparent);
     await expect(heart).toHaveCSS('stroke', navy);
     await expect(heart).toHaveCSS('opacity', '1');
     await expect(svg).toHaveCSS('overflow', 'visible');
     await expect(heart).toHaveCSS('stroke-width', '40px');
     await expect(heart).toHaveCSS('paint-order', 'fill');
     await button.hover();
-    await expect(heart).toHaveCSS('fill', white);
+    await expect(heart).toHaveCSS('fill', transparent);
     await expect(heart).toHaveCSS('stroke', yellow);
     // Simulate only Vitals' DOM update; no click or app data mutation.
     await svg.evaluate(el => { el.style.setProperty('--vtl-heart-outline', '0'); el.style.setProperty('--vtl-heart-solid', '1'); });
@@ -37,7 +37,7 @@ for (const [surface, wrapper] of [
     await expect(heart).toHaveCSS('fill', yellow);
     await expect(heart).toHaveCSS('stroke', yellow);
     await svg.evaluate(el => { el.style.removeProperty('--vtl-heart-solid'); el.style.setProperty('--vtl-heart-outline', '1'); });
-    await expect(heart).toHaveCSS('fill', white);
+    await expect(heart).toHaveCSS('fill', transparent);
     await expect(heart).toHaveCSS('stroke', navy);
     await expect(button).toHaveAttribute('aria-label', 'Añadir a la lista de deseos');
   });

@@ -969,7 +969,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/header.liquid",
-        "scope": "Grupo header, navegación/localización y JS existentes; no header ficticio en galería.",
+        "scope": "Grupo header, navegación/localización y JS existentes; la barra sustituye [MONTO_ENVIO_GRATIS] por shop.metafields.custom.free_shipping_threshold cuando es positivo y omite ese anuncio si falta. Las tarifas y políticas nativas no se sincronizan automáticamente.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -7090,7 +7090,7 @@
       "frame_only_location": "With prescription options, hide the direct PDP purchase action and offer the matching available frame-only variant in the configurator.",
       "size_row": "Below colour options, show the available size as compact text on the left and the existing ruler icon with the size-guide opener on the right.",
       "pdp_2026_11_10": "Mobile gallery keeps page gutter and a 10px next-image preview; sticky purchase mirrors the primary action for accessories and frames. Diagrams annotate validated measurements; related cards match known shape or material. Card favourites use the app control in the top-right with optional audio feedback.",
-      "scope": "Source mapping is documented; Standard PDP retains its configured desktop spacing and reveal animation; optical PDP uses 24px desktop information padding and the same conditional panel reveal. Purchase confidence separates fault guarantee, withdrawal and delivery, including national coverage, delivery start/variation, pre-purchase costs and dispatch tracking from current Shopify policies. The shipping/returns accordion presents four concise points and native policy links instead of entire policy bodies, retaining dynamic delivery estimates and truthful missing-data behavior. The generic outbound help link is removed from the optical PDP; the contextual guide button shares its label with the existing in-page dialog title and has no outbound arrow. Size-guide opener focus uses a stronger keyboard underline without outline or shadow, retaining native focus and return. Prototype data and current fixture/preview evidence do not prove backend synchronization or real purchase/recipe receipt."
+      "scope": "Source mapping is documented; Standard PDP retains its configured desktop spacing and reveal animation; optical PDP uses 24px desktop information padding and the same conditional panel reveal. Purchase confidence links free exchanges and returns before 30 days and nationwide delivery, and adds the 365-day warranty only for frames identified by the shared catalog classifier. Each link requires its destination; policy and operational verification remains separate from theme implementation. The shipping/returns accordion presents four concise points and native policy links instead of entire policy bodies, retaining dynamic delivery estimates and truthful missing-data behavior. The generic outbound help link is removed from the optical PDP; the contextual guide button shares its label with the existing in-page dialog title and has no outbound arrow. Size-guide opener focus uses a stronger keyboard underline without outline or shadow, retaining native focus and return. Prototype data and current fixture/preview evidence do not prove backend synchronization or real purchase/recipe receipt."
     }
   }
 }

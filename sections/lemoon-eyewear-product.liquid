@@ -149,7 +149,7 @@
         {% render 'lemoon-frame-only-button', context: 'eyewear', disabled: frame_button_disabled, initially_hidden: hide_frame_action %}
       {%- endform -%}
       {% render 'lemoon-product-sku', product: product %}
-      {% render 'lemoon-pdp-purchase-confidence', shop: shop %}
+      {% render 'lemoon-pdp-purchase-confidence', shop: shop, product: product, warranty_page: pages.garantias %}
     </div>
   </div>
 

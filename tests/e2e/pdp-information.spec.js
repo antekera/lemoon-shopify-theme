@@ -158,8 +158,10 @@ for (const shell of ['standard', 'eyewear']) {
       }
       await expect(information.locator('.lemoon-frame-information__description')).toContainText('incluye un segundo párrafo');
       await expect(page.locator('.lemoon-pdp-intro')).toContainText('Un marco de acetato para cada día.');
-      await expect(page.locator('.lemoon-pdp-confidence')).toContainText('5 a 13 días hábiles');
-      await expect(page.locator('.lemoon-pdp-confidence a[href="/policies/refund-policy"]').first()).toBeVisible();
+      const confidence = page.locator('.lemoon-pdp-confidence');
+      await expect(confidence.getByRole('link', { name: '365 días de garantía para tus lentes' })).toHaveAttribute('href', '/pages/garantias');
+      await expect(confidence.getByRole('link', { name: 'Cambios y devoluciones gratis antes de los 30 días' })).toHaveAttribute('href', '/policies/refund-policy');
+      await expect(confidence.getByRole('link', { name: 'Envíos a todo Chile' })).toHaveAttribute('href', '/policies/shipping-policy');
       const dimensions = information.locator('[data-mm]');
       await expect(information.getByRole('tab', { name: 'Características', exact: true })).toHaveAttribute('aria-selected', 'true');
       await information.getByRole('tab', { name: 'Características', exact: true }).focus();
@@ -203,6 +205,18 @@ for (const shell of ['standard', 'eyewear']) {
 }
 
 for (const width of [390, 1440]) {
+  test(`accessory hides lens warranty and retains shipping and returns at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.route('**/tests/fixtures/pdp-information.html', route => route.fulfill({
+      status: 200, contentType: 'text/html', body: renderFixture('standard', 'accessory'),
+    }));
+    await page.goto('/tests/fixtures/pdp-information.html');
+    const confidence = page.locator('.lemoon-pdp-confidence');
+    await expect(confidence.getByRole('link', { name: '365 días de garantía para tus lentes' })).toHaveCount(0);
+    await expect(confidence.getByRole('link', { name: 'Cambios y devoluciones gratis antes de los 30 días' })).toHaveAttribute('href', '/policies/refund-policy');
+    await expect(confidence.getByRole('link', { name: 'Envíos a todo Chile' })).toHaveAttribute('href', '/policies/shipping-policy');
+  });
+
   test(`product without description keeps its specifications visible and full width at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.route('**/tests/fixtures/pdp-information.html', route => route.fulfill({

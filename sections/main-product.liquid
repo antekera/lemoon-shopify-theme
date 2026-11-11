@@ -423,7 +423,7 @@
                     hide_direct_purchase: hide_direct_purchase,
                     show_pickup_availability: true
                   -%}
-                  {% render 'lemoon-pdp-purchase-confidence', shop: shop %}
+                  {% render 'lemoon-pdp-purchase-confidence', shop: shop, product: product, warranty_page: pages.garantias %}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">

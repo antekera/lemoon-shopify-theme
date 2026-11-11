@@ -473,7 +473,7 @@ lemoon-thumbnail-rail { display: contents; }
 .lemoon-frame-information .lemoon-pdp__dimensions dt, .lemoon-frame-information .lemoon-pdp__dimensions dd { margin: 0; font-size: var(--lemoon-fs-14); line-height: 1.6; }
 .lemoon-frame-information .lemoon-pdp__dimensions dd { text-align: right; overflow-wrap: anywhere; }
 .lemoon-pdp-confidence { padding-top: var(--lemoon-space-6); margin-top: var(--lemoon-space-6); border-top: 1px solid var(--lemoon-border-default); }
-.lemoon-pdp-confidence__items { display: grid; gap: var(--lemoon-space-5); padding: 0; margin: 0; list-style: none; }
+.lemoon-pdp-confidence__items { display: grid; gap: var(--lemoon-space-2); padding: 0; margin: 0; list-style: none; }
 .lemoon-pdp-confidence__items > li { display: flex; align-items: start; gap: var(--lemoon-space-3); }
 .lemoon-pdp-confidence__items > li > svg { width: 22px; height: 22px; flex: 0 0 22px; color: var(--lemoon-text-brand); }
 .lemoon-pdp-confidence__items a { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); margin-top: -10px; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-brand); text-underline-offset: .3em; }
