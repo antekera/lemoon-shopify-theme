@@ -54,7 +54,8 @@ test('optical variant changes update the single server-rendered price and preser
   const price = page.locator('.lemoon-product-summary [data-price]');
   await expect(price).toHaveText('$39.900');
   const azul = page.getByLabel('Azul', { exact: true });
-  await azul.check();
+  await azul.focus();
+  await page.keyboard.press('Space');
   await expect(page.locator('[name="id"]').first()).toHaveValue('67616399720616');
   await expect(price).toHaveCount(1);
   await expect(price).toHaveText('$45.000');

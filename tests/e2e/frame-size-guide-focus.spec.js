@@ -31,7 +31,8 @@ test('optical shell remains interactive when a non-frame product has no size gui
   await expect(page.locator('[data-frame-size], [data-dialog="size"]')).toHaveCount(0);
   await expect(page.locator('lemoon-eyewear')).toHaveJSProperty('ready', true);
   await expect(page.locator('[data-add]')).toBeEnabled();
-  await page.getByLabel('Azul', { exact: true }).check();
+  await page.getByLabel('Azul', { exact: true }).focus();
+  await page.keyboard.press('Space');
   await expect(page.locator('[name="id"]').first()).toHaveValue('67616399720616');
   expect(errors).toEqual([]);
 });
