@@ -11,9 +11,10 @@ lemoon-product-tools { display: block; }
 .lemoon-product-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .lemoon-product-heading__actions { display: flex; flex: 0 0 auto; align-items: flex-start; }
 .lemoon-product-heading__share[hidden] { display: none !important; }
-.lemoon-product-heading .lemoon-product-heading__share { margin-top: 0; }
+.lemoon-product-heading .lemoon-product-heading__share { margin-top: 0; transition: color var(--lemoon-motion-fast); }
 .lemoon-product-heading__share .icon-share { width: 20px; height: 20px; transform: translateX(6px); }
 .lemoon-product-heading .lemoon-product-heading__share:hover { color: var(--lemoon-action-accent); }
+@media (prefers-reduced-motion: reduce) { .lemoon-product-heading .lemoon-product-heading__share { transition: none; } }
 .lemoon-product-share-feedback { color: var(--lemoon-text-brand); font-size: 13px; }
 .lemoon-product-share-feedback input { max-width: 100%; width: 100%; }
 @media (max-width: 749px) { .lemoon-product-heading__share { display: none !important; } .lemoon-product-share-feedback { display: none; } }
