@@ -246,19 +246,17 @@ class IncrementalDeploymentTests(unittest.TestCase):
             deploy_shopify.verify_remote("assets/changed.js", b"old", b"new", None)
         deploy_shopify.verify_remote("assets/new.js", None, b"new", None)
 
-    def test_reviewed_reconciliation_requires_all_three_exact_versions(self):
-        baseline, target, remote = b'{"v":0}', b'{"v":2}', b'{"v":1}'
-        digest = lambda value: deploy_shopify.hashlib.sha256(
-            deploy_shopify.canonical_json(value).encode()).hexdigest()
-        entry = ("sections/header-group.json", *(digest(v) for v in (baseline, target, remote)))
-        with patch.object(deploy_shopify, "REVIEWED_RECONCILIATIONS", {entry}):
-            deploy_shopify.verify_remote(entry[0], baseline, target, remote)
-            for args in (("sections/other.json", baseline, target, remote),
-                         (entry[0], b'{"v":3}', target, remote),
-                         (entry[0], baseline, b'{"v":3}', remote),
-                         (entry[0], baseline, target, b'{"v":3}')):
-                with self.assertRaisesRegex(ValueError, "conflict"):
-                    deploy_shopify.verify_remote(*args)
+    def test_partial_json_update_rejects_unreviewed_changes(self):
+        old = b'{"a":0,"nested":{"x":1},"array":[1,2],"deleted":true}'
+        new = b'{"a":1,"nested":{"x":2,"added":true},"array":[2,1]}'
+        partial = b'{"a":1,"nested":{"x":1,"added":true},"array":[1,2],"deleted":true}'
+        deploy_shopify.verify_remote("sections/header.json", old, new, partial)
+        for remote in (b'{"a":9,"nested":{"x":1},"array":[1,2],"deleted":true}',
+                       b'{"a":1,"nested":{"x":1,"unknown":3},"array":[1,2]}',
+                       b'{"a":1,"nested":{"x":1},"array":[1,3]}',
+                       b'{"a":true,"nested":{"x":1},"array":[1,2]}'):
+            with self.assertRaisesRegex(ValueError, "conflict"):
+                deploy_shopify.verify_remote("sections/header.json", old, new, remote)
 
     def test_source_deletion_in_a_pending_attempt_cannot_authorize_a_missing_live_file(self):
         filename = "assets/changed.js"

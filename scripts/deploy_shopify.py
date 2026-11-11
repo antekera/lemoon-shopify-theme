@@ -16,14 +16,6 @@ MARKER = "assets/lemoon-deployment.json"
 BOOTSTRAP_SHA = "3264927f5e4129cca605469acbe7007e95747208"
 THEME_DIRECTORIES = {"assets", "config", "layout", "locales", "sections", "snippets", "templates", "blocks"}
 SETTINGS = "config/settings_data.json"
-# Reviewed three-way reconciliation for the 2026-11-11 partial header update.
-# These are canonical JSON hashes of the last verified, target, and live files.
-REVIEWED_RECONCILIATIONS = {
-    ("sections/header-group.json",
-     "a2138c16ee6c339fcab7b018103324d19c4525dc239ca26cad0b54c243ab5ac7",
-     "dcaf6a72aca989d43bf559b5e780fd1e5c13b0bd105eb6ca732789dfbe0ed672",
-     "ca96a8b45bb985b197230ae7ef6be9893504d8c1d32a080456761fd82fa6b177"),
-}
 
 
 def normalize_store(value):
@@ -231,16 +223,32 @@ def read_optional(directory, filename):
     return path.read_bytes() if path.is_file() else None
 
 
+def is_partial_json_update(baseline, target, remote):
+    """Accept only unchanged or already-applied target values; arrays stay atomic."""
+    missing = object()
+
+    def matches(old, new, actual):
+        if old is missing or new is missing or actual is missing:
+            return actual is old or actual is new
+        if isinstance(old, dict) and isinstance(new, dict) and isinstance(actual, dict):
+            return all(matches(old.get(k, missing), new.get(k, missing), actual.get(k, missing))
+                       for k in old.keys() | new.keys() | actual.keys())
+        # JSON canonicalization distinguishes booleans from numbers.
+        return (json.dumps(actual, sort_keys=True, separators=(',', ':')) in
+                (json.dumps(old, sort_keys=True, separators=(',', ':')),
+                 json.dumps(new, sort_keys=True, separators=(',', ':'))))
+
+    try:
+        return matches(*(json.loads(canonical_json(value)) for value in (baseline, target, remote)))
+    except (ValueError, UnicodeError, TypeError):
+        return False
+
+
 def verify_remote(filename, baseline, target, remote, attempted=()):
     if not any(same_content(filename, remote, known) for known in (baseline, target, *attempted)):
-        if filename.endswith(".json") and all(value is not None for value in (baseline, target, remote)):
-            try:
-                hashes = tuple(hashlib.sha256(canonical_json(value).encode()).hexdigest()
-                               for value in (baseline, target, remote))
-                if (filename, *hashes) in REVIEWED_RECONCILIATIONS:
-                    return
-            except (ValueError, UnicodeError):
-                pass
+        if (filename.endswith('.json') and all(v is not None for v in (baseline, target, remote))
+                and is_partial_json_update(baseline, target, remote)):
+            return
         raise ValueError(f"Production conflict in {filename}; reconcile the deployed change before release")
 
 
