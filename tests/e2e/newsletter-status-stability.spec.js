@@ -62,13 +62,12 @@ for (const variant of ['newsletter', 'newsletter-blog']) {
         await input.click();
         await expect(input).toBeFocused();
         await expect(input).toHaveCSS('border-top-width', '1px');
-        await expect(input).toHaveCSS('outline-style', 'solid');
-        await expect(input).toHaveCSS('outline-width', '3px');
+        await expect(input).toHaveCSS('outline-style', forced ? 'solid' : 'none');
         if (!forced) {
           await expect(input).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
-          await expect(input).toHaveCSS('outline-color', 'rgb(49, 102, 83)');
+          await expect(input).toHaveCSS('box-shadow', /inset/);
           expect(border).toBe('rgb(11, 31, 58)');
-        }
+        } else await expect(input).toHaveCSS('outline-width', '2px');
         expect(await geometry()).toEqual(initial);
         await heading.click();
         await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');

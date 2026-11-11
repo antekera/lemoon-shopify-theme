@@ -185,6 +185,12 @@ function initialize(scope = document) {
     if (event.shiftKey && index <= 0) {
       event.preventDefault();
       items[items.length - 1].focus();
+    } else if (event.shiftKey && index === 1) {
+      event.preventDefault();
+      items[0].focus();
+    } else if (!event.shiftKey && (index === 0 || index < 0)) {
+      event.preventDefault();
+      (items[1] || items[0]).focus();
     } else if (!event.shiftKey && index === items.length - 1) {
       event.preventDefault();
       items[0].focus();

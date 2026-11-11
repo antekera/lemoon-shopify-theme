@@ -80,7 +80,6 @@
   unless frame_weight == numeric_weight and numeric_weight > 0
     assign frame_weight = nil
   endunless
-  assign recipe_admission = product.metafields.custom.prescription_type.value
   assign gender = product.metafields.custom.gender.value
   assign face_shapes = product.metafields.custom.face_shapes_compatible.value
   if product.metafields.custom.face_shapes_compatible.type == 'list.single_line_text_field'
@@ -92,15 +91,12 @@
   endif
 -%}
 {%- capture frame_content -%}
-    {%- if frame_shape != blank or frame_material != blank or frame_weight != blank or gender != blank or recipe_admission != blank or frame_size != blank or frame_width != blank or face_shapes != blank -%}
+    {%- if frame_shape != blank or frame_material != blank or frame_weight != blank or gender != blank or frame_size != blank or frame_width != blank or face_shapes != blank -%}
     <dl class="lemoon-size-guide__specs">
       {%- if frame_shape != blank -%}<div><dt>{{ 'lemoon_pdp.shape' | t }}</dt><dd>{{ frame_shape | capitalize | escape }}</dd></div>{%- endif -%}
       {%- if frame_material != blank -%}<div><dt>{{ 'lemoon_pdp.material' | t }}</dt><dd>{{ frame_material | capitalize | escape }}</dd></div>{%- endif -%}
       {%- if frame_weight != blank -%}<div><dt>{{ 'lemoon_pdp.weight' | t }}</dt><dd>{{ frame_weight | escape }} g</dd></div>{%- endif -%}
       {%- if gender != blank -%}<div><dt>{{ 'lemoon_pdp.gender' | t }}</dt><dd>{{ gender | capitalize | escape }}</dd></div>{%- endif -%}
-      {%- if recipe_admission != blank -%}
-        <div><dt>{{ 'lemoon_pdp.confidence.prescription_admission' | t }}</dt><dd>{{ 'lemoon_pdp.confidence.prescription_yes' | t }}</dd></div>
-      {%- endif -%}
       {%- if frame_size != blank -%}<div><dt>{{ 'lemoon_pdp.size_label' | t }}</dt><dd>{{ frame_size | capitalize | escape }}</dd></div>{%- endif -%}
       {%- if frame_width != blank -%}<div><dt>{{ 'lemoon_pdp.fit' | t }}</dt><dd>{{ frame_width | capitalize | escape }}</dd></div>{%- endif -%}
       {%- if face_shapes != blank -%}<div><dt>{{ 'lemoon_pdp.suggested_face_shapes' | t }}</dt><dd>{{ face_shapes | capitalize | escape }}</dd></div>{%- endif -%}

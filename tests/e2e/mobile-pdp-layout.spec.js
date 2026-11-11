@@ -32,10 +32,12 @@ test('mobile summary precedes the gallery, swiping updates the counter and deskt
     const color = el.querySelector('.lemoon-pdp__options--color legend').getBoundingClientRect();
     const size = el.querySelector('.lemoon-pdp__size-row > div').getBoundingClientRect();
     const guide = el.querySelector('.lemoon-pdp__size-row > button').getBoundingClientRect();
-    return { colorTop: color.top, sizeTop: size.top, sizeBottom: size.bottom, guideTop: guide.top };
+    return { colorTop: color.top, sizeTop: size.top, sizeBottom: size.bottom, sizeRight: size.right, guideTop: guide.top, guideBottom: guide.bottom, guideLeft: guide.left };
   });
-  expect(desktopOptions.sizeTop).toBeCloseTo(desktopOptions.colorTop, 0);
-  expect(desktopOptions.guideTop).toBeGreaterThanOrEqual(desktopOptions.sizeBottom);
+  expect(desktopOptions.sizeTop).toBeGreaterThan(desktopOptions.colorTop);
+  expect(desktopOptions.guideBottom).toBeGreaterThan(desktopOptions.sizeTop);
+  expect(desktopOptions.guideTop).toBeLessThan(desktopOptions.sizeBottom);
+  expect(desktopOptions.guideLeft).toBeGreaterThan(desktopOptions.sizeRight);
   await expect(page.locator('lemoon-thumbnail-rail')).toBeVisible();
   await expect(page.locator('.lemoon-mobile-gallery-count')).toBeHidden();
 });

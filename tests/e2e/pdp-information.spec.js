@@ -124,12 +124,13 @@ for (const shell of ['standard', 'eyewear']) {
       const tabs = information.locator('.lemoon-size-guide__tabs');
       const descriptionBox = await description.boundingBox();
       const tabsBox = await tabs.boundingBox();
-      if (width >= 990) {
-        expect(descriptionBox.x + descriptionBox.width).toBeLessThanOrEqual(tabsBox.x + 1);
-        expect(Math.abs(descriptionBox.y - tabsBox.y)).toBeLessThanOrEqual(2);
-      } else if (width < 750) {
-        expect(tabsBox.y).toBeGreaterThanOrEqual(descriptionBox.y + descriptionBox.height);
-      }
+      await expect(information.getByRole('tabpanel', { name: 'Características' }).locator('.lemoon-frame-information__description')).toHaveCount(1);
+      expect(descriptionBox.y).toBeGreaterThanOrEqual(tabsBox.y + tabsBox.height);
+      const rows = information.locator('.lemoon-size-guide__specs > div');
+      const firstSpec = await rows.nth(0).boundingBox();
+      const secondSpec = await rows.nth(1).boundingBox();
+      if (width >= 750) expect(secondSpec.x).toBeGreaterThan(firstSpec.x);
+      else expect(secondSpec.y).toBeGreaterThan(firstSpec.y);
       for (const tab of await information.getByRole('tab').all()) {
         await expect(tab).toHaveCSS('text-transform', 'none');
         expect(parseFloat(await tab.evaluate(element => getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(15);
@@ -190,10 +191,14 @@ for (const width of [390, 1440]) {
     const information = page.locator('.lemoon-frame-information');
     await expect(information.locator('.lemoon-frame-information__description')).toHaveCount(0);
     await expect(information.getByRole('tabpanel', { name: 'Características' })).toContainText('Acetato');
-    const row = await information.locator('.lemoon-frame-information__columns').boundingBox();
-    const details = await information.locator('.lemoon-frame-information__details').boundingBox();
-    expect(details.x).toBeCloseTo(row.x, 0);
-    expect(details.width).toBeCloseTo(row.width, 0);
+    const layout = await information.locator('.lemoon-frame-information__inner').evaluate(element => {
+      const box = element.getBoundingClientRect();
+      const details = element.querySelector('.lemoon-frame-information__details').getBoundingClientRect();
+      const styles = getComputedStyle(element);
+      return { left: box.left + parseFloat(styles.paddingLeft), right: box.right - parseFloat(styles.paddingRight), detailsLeft: details.left, detailsRight: details.right };
+    });
+    expect(layout.detailsLeft).toBeCloseTo(layout.left, 0);
+    expect(layout.detailsRight).toBeCloseTo(layout.right, 0);
     await information.getByRole('tab', { name: 'Medidas' }).click();
     await expect(information.locator('[data-mm]').first()).toBeVisible();
   });

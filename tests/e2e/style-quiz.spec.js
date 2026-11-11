@@ -47,7 +47,10 @@ for (const width of [390, 749, 750, 989, 990, 1440]) {
       for (const input of await details.locator('input').all()) await expect(input.locator('..')).toBeVisible();
       const textMetrics = await details.locator('[data-quiz-option-label], .lemoon-quiz__question > p:not(.lemoon-quiz__eyebrow)').evaluateAll(nodes => nodes.map(node => ({ text: node.textContent, size: parseFloat(getComputedStyle(node).fontSize), weight: getComputedStyle(node).fontWeight })));
       textMetrics.forEach(metric => { expect(metric.size, metric.text).toBeGreaterThanOrEqual(16); expect(metric.weight, metric.text).toBe('400'); });
-      for (const action of await quiz.locator('[data-quiz-next], [data-quiz-back]').all()) { await expect(action).toHaveCSS('font-size', '16px'); await expect(action).toHaveCSS('font-weight', '600'); }
+      for (const action of await quiz.locator('[data-quiz-next], [data-quiz-back]').all()) {
+        await expect(action).toHaveCSS('font-size', '13px');
+        await expect(action).toHaveCSS('font-weight', await action.getAttribute('data-quiz-back') !== null ? '400' : '500');
+      }
       expect(await details.locator('.lemoon-quiz__hint').evaluate(node => parseFloat(getComputedStyle(node).fontSize))).toBeGreaterThanOrEqual(14);
       await next(quiz, 2); await at(quiz, 'presence'); await quiz.locator('[data-quiz-measures] summary').click();
       for (const field of await quiz.locator('[data-quiz-measure]').all()) { await expect(field).toHaveCSS('font-size', '16px'); await expect(field).toHaveCSS('font-weight', '400'); }

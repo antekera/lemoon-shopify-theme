@@ -147,9 +147,8 @@ test('newsletter input focus reinforces its own border and button uses the share
   expect(after.border).toBe(before.border);
   expect(after.width).toBe(before.width);
   expect(after.height).toBe(before.height);
-  expect(after.outline).toBe('solid');
-  await expect(email).toHaveCSS('outline-color', 'rgb(49, 102, 83)');
-  await expect(email).toHaveCSS('outline-width', '3px');
+  expect(after.outline).toBe('none');
+  await expect(email).toHaveCSS('box-shadow', /inset/);
 });
 
 

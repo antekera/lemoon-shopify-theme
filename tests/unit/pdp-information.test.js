@@ -78,19 +78,22 @@ describe('PDP merchant information and policy-backed confidence', () => {
     expect(html).not.toContain('paypal');
   });
 
-  it('shows prescription admission only when the prescription list has a value', () => {
+  it('does not infer prescription compatibility from configurator choices', () => {
     const context = pdpInformationContext();
     const engine = pdpInformationEngine();
     context.product.metafields.custom.prescription_type = { value: ['Monofocal'] };
-    const admitted = engine.renderFileSync('lemoon-frame-information', { ...context, instance_id: 'verified-prescription' });
+    const withPrescription = engine.renderFileSync('lemoon-frame-information', { ...context, instance_id: 'verified-prescription' });
+    context.product.metafields.custom.prescription_type.value = ['Sin receta'];
+    const withoutPrescription = engine.renderFileSync('lemoon-frame-information', { ...context, instance_id: 'without-prescription' });
     context.product.metafields.custom.prescription_type.value = [];
     const empty = engine.renderFileSync('lemoon-frame-information', { ...context, instance_id: 'no-prescription' });
     delete context.product.metafields.custom.prescription_type;
     const missing = engine.renderFileSync('lemoon-frame-information', { ...context, instance_id: 'missing-prescription' });
-    expect(admitted).toContain('Admite receta');
-    expect(empty).not.toContain('Compatibilidad con receta');
-    expect(missing).not.toContain('Compatibilidad con receta');
-    expect(admitted).not.toMatch(/Filtro azul|Fotocromático|Progresivo/);
+    for (const html of [withPrescription, withoutPrescription, empty, missing]) {
+      expect(html).not.toContain('Compatibilidad con receta');
+      expect(html).not.toContain('Admite receta');
+    }
+    expect(withPrescription).not.toMatch(/Filtro azul|Fotocromático|Progresivo/);
   });
 
   it('omits invalid weight and renders a list of face shapes as readable text', () => {

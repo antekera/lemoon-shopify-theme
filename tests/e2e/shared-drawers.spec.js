@@ -50,7 +50,7 @@ async function geometry(panel, width, height, kind) {
 }
 function closeControl(page, kind, panel) {
   if (kind === 'generic') return page.locator('#CloseGeneric');
-  if (kind === 'nav') return panel.locator('[data-lemoon-nav-close]');
+  if (kind === 'nav') return page.locator('[data-lemoon-nav-open]:visible');
   if (kind.startsWith('cart')) return panel.locator('.drawer__close:visible');
   if (kind === 'facets') return page.locator('.mobile-facets__close');
   if (kind === 'pickup') return panel.locator('.pickup-availability-drawer-button');
@@ -83,11 +83,16 @@ for (const width of [390, 749]) {
   test(`nav: ${width}px native header toolbar, back, close, overlay and focus`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 844 }); const { panel, opener } = await openSurface(page, 'nav');
     await geometry(panel, width, 844, 'nav'); const close = closeControl(page, 'nav', panel);
-    await expect(close).toBeFocused(); await expect(close).toBeInViewport();
-    await panel.locator('[data-lemoon-nav-target]').first().click(); const back = panel.locator('[data-lemoon-nav-back]');
-    await expect(back).toBeVisible(); await expect(back).toBeFocused();
-    for (const key of ['Tab', 'Shift+Tab']) for (let step = 0; step < 18; step++) { await page.keyboard.press(key); expect(await panel.evaluate(element => element.contains(document.activeElement))).toBe(true); }
-    await back.click(); await expect(panel.locator('[data-lemoon-nav-root]')).toBeVisible();
+    await expect(close).toBeInViewport();
+    await expect(panel.locator('[data-lemoon-nav-close], [data-lemoon-nav-back]')).toHaveCount(0);
+    const firstCategory = panel.locator('[data-lemoon-nav-target]').first();
+    await expect(firstCategory).toBeFocused();
+    await firstCategory.click();
+    await expect(close).toHaveAttribute('data-nav-state', 'sub');
+    await expect(panel.locator('[data-lemoon-nav-panel]:visible a').first()).toBeFocused();
+    for (const key of ['Tab', 'Shift+Tab']) for (let step = 0; step < 18; step++) { await page.keyboard.press(key); expect(await panel.evaluate(element => element.contains(document.activeElement) || document.activeElement.matches('[data-lemoon-nav-open]'))).toBe(true); }
+    await close.click(); await expect(panel.locator('[data-lemoon-nav-root]')).toBeVisible();
+    await expect(close).toHaveAttribute('data-nav-state', 'root');
     await expect(panel.locator('.is-leaving')).toHaveCount(0);
     await page.screenshot({ path: testInfo.outputPath(`nav-${width}.png`) });
     await close.click(); await expectClosed(page, 'nav', panel); await expect(opener).toBeFocused();
@@ -170,7 +175,7 @@ for (const kind of mobileKinds) test(`${kind}: 320px doubled text stays readable
 for (const kind of [...mobileKinds, 'cart-empty']) test(`${kind}: reduced-motion keeps native keyboard and close behavior`, async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 }); await page.emulateMedia({ reducedMotion: 'reduce' }); const { panel, opener } = await openSurface(page, kind);
   await geometry(panel, 390, 844, kind); await expect(panel).toHaveCSS('transition-duration', '0s');
-  if (kind !== 'facets') for (const key of ['Tab', 'Shift+Tab']) for (let step = 0; step < 6; step++) { await page.keyboard.press(key); expect(await panel.evaluate(element => element === document.activeElement || element.contains(document.activeElement))).toBe(true); }
+  if (kind !== 'facets') for (const key of ['Tab', 'Shift+Tab']) for (let step = 0; step < 6; step++) { await page.keyboard.press(key); expect(await panel.evaluate((element, nav) => element === document.activeElement || element.contains(document.activeElement) || (nav && document.activeElement.matches('[data-lemoon-nav-open]')), kind === 'nav')).toBe(true); }
   if (kind.startsWith('cart')) {
     const first = closeControl(page, kind, panel);
     const last = kind === 'cart-empty' ? panel.getByRole('link', { name: 'Seguir comprando' }) : panel.locator('#CartDrawer-Checkout');
