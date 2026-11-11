@@ -89,8 +89,17 @@ test('mobile gallery responds to a touch swipe', async ({ browser, baseURL }) =>
     await Promise.all(animations.map(animation => animation.finished.catch(() => {})));
   });
   const box = await list.boundingBox();
+  const start = { x: box.x + box.width * .8, y: box.y + box.height * .5 };
+  expect(await page.evaluate(({ x, y }) => {
+    const list = document.querySelector('.lemoon-standard-pdp .product__media-list');
+    return list.contains(document.elementFromPoint(x, y));
+  }, start)).toBe(true);
   const cdp = await context.newCDPSession(page);
-  await cdp.send('Input.synthesizeScrollGesture', { x: box.x + box.width * .8, y: box.y + box.height * .5, xDistance: -box.width * .7, yDistance: 0, gestureSourceType: 'touch', speed: 700 });
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...start, id: 1 }] });
+  for (let step = 1; step <= 8; step++) {
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: start.x - box.width * .7 * step / 8, y: start.y, id: 1 }] });
+  }
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   await expect.poll(() => list.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   await context.close();
