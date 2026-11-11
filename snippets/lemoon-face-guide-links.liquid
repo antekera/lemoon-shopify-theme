@@ -96,7 +96,7 @@
   {%- endfor -%}
 </div>
 <div class="lemoon-face-guide__family-actions" data-face-guide-action="family_catalogue" data-face-guide-position="family" data-face-guide-destination="{% if block.settings.destination != blank %}custom{% elsif filtered %}filtered_catalogue{% else %}catalogue{% endif %}"{% if filtered and block.settings.destination == blank %} data-face-guide-shapes="{{ first_value | escape }}|{{ second_value | escape }}"{% endif %}>
-  {% render 'lemoon-ui-action', element: 'a', href: destination, label: label, style_family: 'local', class: 'lemoon-face-guide__cta lemoon-face-guide__cta--text' %}
+  {% render 'lemoon-ui-action', element: 'a', href: destination, label: label, style_family: 'local', class: 'lemoon-face-guide__cta' %}
 </div>
 {%- unless filtered or block.settings.destination != blank -%}
   {%- assign hint = 'sections.lemoon_face_guide.fallback_hint' | t -%}

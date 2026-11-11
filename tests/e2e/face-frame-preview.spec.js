@@ -41,75 +41,55 @@ async function renderScenario(page, options) {
 }
 
 for (const width of [390, 1440]) {
-  test(`oval previews suggested and alternative shapes, retains only the current extra filter and navigates at ${width}px`, async ({ page }, testInfo) => {
+  test(`oval retains suggestions while toggling alternatives and navigates at ${width}px`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 900 });
-    const errors = [];
-    page.on('pageerror', error => errors.push(error.message));
+    const errors = []; page.on('pageerror', error => errors.push(error.message));
     await ready(page);
-    const article = oval(page);
+    const article = oval(page), overlay = article.locator('[data-face-frame-overlay]');
     await expect(page.locator('[data-face-frame-preview]')).toHaveCount(6);
     await expect(article.locator('[data-face-frame-fallback]')).toBeHidden();
     await expect(article.locator('[data-face-frame-value]')).toHaveCount(6);
-    expect(await article.locator('[data-face-frame-value]').evaluateAll(nodes => nodes.map(node => node.dataset.faceFrameValue))).toEqual(faceGuideShapes);
-    await expect(choice(page, 'rectangular')).toHaveAttribute('aria-pressed', 'true');
-    expect(await selectedShapes(page)).toEqual(['rectangular', 'redondo']);
-    const assertChoicePresentation = async selected => {
-      for (const suggested of ['rectangular', 'redondo']) {
-        await expect(choice(page, suggested).locator('.lemoon-face-guide__choice-tag')).toHaveCSS('background-color', 'rgb(247, 230, 0)');
+    await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+    expect(await selectedShapes(page)).toEqual(nativePairs[0]);
+    let selected = [...nativePairs[0]];
+    const toggleShape = async value => {
+      const wasSelected = selected.includes(value);
+      if (!nativePairs[0].includes(value)) selected = wasSelected ? selected.filter(item => item !== value) : [...selected, value];
+      await choice(page, value).click();
+      for (const shape of faceGuideShapes) {
+        await expect(choice(page, shape)).toHaveAttribute('aria-pressed', String(selected.includes(shape)));
+        await expect(choice(page, shape)).toHaveCSS('border-top-color', selected.includes(shape) ? 'rgb(11, 31, 58)' : 'rgba(0, 0, 0, 0)');
       }
-      for (const value of faceGuideShapes) {
-        const item = choice(page, value);
-        await expect(item).toHaveCSS('border-top-color', value === selected ? 'rgb(11, 31, 58)' : 'rgba(0, 0, 0, 0)');
-        if (value !== 'rectangular' && value !== 'redondo') {
-          await expect(item.locator('.lemoon-face-guide__choice-tag')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
-        }
-      }
+      expect(await selectedShapes(page)).toEqual(selected);
+      const preview = await overlay.getAttribute('data-face-frame-shape');
+      expect(selected).toContain(preview);
+      if (!wasSelected || nativePairs[0].includes(value)) expect(preview).toBe(value);
+      expect(await overlay.locator('svg').innerHTML()).toBe(await choice(page, preview).locator('svg').innerHTML());
     };
-    await assertChoicePresentation('rectangular');
-    const overlay = article.locator('[data-face-frame-overlay]');
-    await expect(overlay).toBeVisible();
-    const toggle = article.getByRole('button', { name: 'Ver sin armazón', exact: true });
-    expect(await toggle.getAttribute('aria-controls')).toBe(await overlay.getAttribute('id'));
-    await expect(toggle).not.toHaveAttribute('aria-pressed');
-    for (const value of faceGuideShapes) {
-      const button = choice(page, value);
-      await button.click();
-      await expect(button).toHaveAttribute('aria-pressed', 'true');
-      await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(1);
-      await assertChoicePresentation(value);
-      const selectedSVG = await button.locator('svg').innerHTML();
-      expect(await overlay.locator('svg').innerHTML()).toBe(selectedSVG);
-      await expect(article.getByRole('status')).toContainText(await button.getAttribute('data-face-frame-label'));
-      expect(await selectedShapes(page)).toEqual(value === 'rectangular' || value === 'redondo' ? ['rectangular', 'redondo'] : ['rectangular', 'redondo', value]);
-    }
+    // Suggested choices preview on every click, retaining both catalogue filters.
+    for (const shape of ['redondo', 'rectangular', 'rectangular', 'redondo']) await toggleShape(shape);
+    expect(await selectedShapes(page)).toEqual(nativePairs[0]);
+    for (const value of faceGuideShapes.filter(value => !nativePairs[0].includes(value))) await toggleShape(value);
+    await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(6);
+    await toggleShape('ovalado');
+    await expect(choice(page, 'ovalado')).toHaveAttribute('aria-pressed', 'false');
+    await toggleShape('ovalado');
+    for (const shape of nativePairs[0]) await expect(choice(page, shape).locator('.lemoon-face-guide__choice-tag')).toHaveCSS('background-color', 'rgb(247, 230, 0)');
     await page.setViewportSize({ width: width === 390 ? 430 : 1280, height: 900 });
-    await expect(choice(page, 'ojo de gato')).toHaveAttribute('aria-pressed', 'true');
-    expect(await selectedShapes(page)).toEqual(['rectangular', 'redondo', 'ojo de gato']);
+    expect(await selectedShapes(page)).toEqual(selected);
     await page.setViewportSize({ width, height: 900 });
-    // A toggle only removes the illustrative overlay; it preserves the chosen exit.
-    const shapesBeforeToggle = await selectedShapes(page);
     await article.getByRole('button', { name: 'Ver sin armazón', exact: true }).click();
     await expect(overlay).toBeHidden();
-    expect(await selectedShapes(page)).toEqual(shapesBeforeToggle);
+    expect(await selectedShapes(page)).toEqual(selected);
     await article.getByRole('button', { name: 'Ver con armazón', exact: true }).click();
     await expect(overlay).toBeVisible();
-    await choice(page, 'redondo').click();
-    expect(await selectedShapes(page)).toEqual(['rectangular', 'redondo']);
-    await choice(page, 'ojo de gato').click();
-    const computed = await overlay.evaluate(node => {
-      const rect = node.getBoundingClientRect();
-      const portrait = node.parentElement.getBoundingClientRect();
-      return { x: rect.x >= portrait.x, y: rect.y >= portrait.y, right: rect.right <= portrait.right, bottom: rect.bottom <= portrait.bottom, centerOffset: Math.abs(rect.x + rect.width / 2 - portrait.x - portrait.width / 2) };
-    });
-    expect(computed).toMatchObject({ x: true, y: true, right: true, bottom: true });
-    // Bounding-box centering is a layout check, not proof of alignment with the drawn eyes.
-    expect(computed.centerOffset).toBeLessThan(0.75);
+    await expect(exit(page)).toHaveCSS('background-color', 'rgb(11, 31, 58)');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await article.screenshot({ path: testInfo.outputPath(`oval-alternative-${width}.png`) });
-    await page.route('**/collections/all?*', request => request.fulfill({ contentType: 'text/html; charset=utf-8', body: '<!doctype html><html lang="es"><meta charset="utf-8"><title>Destino local</title><h1>Catálogo local</h1></html>' }));
+    await article.screenshot({ path: testInfo.outputPath(`oval-multi-${width}.png`) });
+    await page.route('**/collections/all?*', request => request.fulfill({ contentType: 'text/html; charset=utf-8', body: '<!doctype html><html lang="es"><meta charset="utf-8"><h1>Catálogo local</h1></html>' }));
     await exit(page).click();
     await expect(page.getByRole('heading', { name: 'Catálogo local' })).toBeVisible();
-    expect(new URL(page.url()).searchParams.getAll(param)).toEqual(['rectangular', 'redondo', 'ojo de gato']);
+    expect(new URL(page.url()).searchParams.getAll(param)).toEqual(selected);
     expect(errors).toEqual([]);
   });
 }
@@ -129,6 +109,31 @@ test('carousel arrows expose additional choices, keyboard selection retains focu
   await expect(previous).toBeEnabled();
   await previous.click();
   await expect.poll(() => carousel.evaluate(node => node.scrollLeft)).toBe(0);
+  for (const arrow of [previous, next]) {
+    await expect(arrow).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    await arrow.hover();
+    await expect(arrow).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  }
+  const padding = await carousel.evaluate(node => parseFloat(getComputedStyle(node).paddingLeft));
+  const initialGap = await carousel.evaluate(node => node.firstElementChild.getBoundingClientRect().left - node.getBoundingClientRect().left);
+  expect(initialGap).toBeCloseTo(padding, 0);
+  let steps = 0;
+  while (await carousel.evaluate(node => node.scrollLeft < node.scrollWidth - node.clientWidth - 2)) {
+    const before = await carousel.evaluate(node => node.scrollLeft);
+    await next.click();
+    await expect.poll(() => carousel.evaluate(node => node.scrollLeft)).toBeGreaterThan(before);
+    expect(++steps).toBeLessThanOrEqual(6);
+  }
+  await expect(next).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  const end = await carousel.evaluate(node => ({ gap: node.getBoundingClientRect().right - node.lastElementChild.getBoundingClientRect().right, max: node.scrollWidth - node.clientWidth, scroll: node.scrollLeft }));
+  expect(end.scroll).toBeCloseTo(end.max, 0);
+  expect(end.gap).toBeCloseTo(padding, 0);
+  for (let step = 0; step < 6 && await carousel.evaluate(node => node.scrollLeft > 2); step++) {
+    const before = await carousel.evaluate(node => node.scrollLeft);
+    await previous.click();
+    await expect.poll(() => carousel.evaluate(node => node.scrollLeft)).toBeLessThan(before);
+  }
+  await expect.poll(() => carousel.evaluate(node => node.scrollLeft)).toBe(0);
   await choice(page, 'rectangular').focus();
   await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
   await expect(choice(page, 'redondo')).toBeFocused();
@@ -136,6 +141,8 @@ test('carousel arrows expose additional choices, keyboard selection retains focu
   await expect(choice(page, 'redondo')).toHaveCSS('outline-width', '2px');
   await page.keyboard.press('Enter');
   await expect(choice(page, 'redondo')).toHaveAttribute('aria-pressed', 'true');
+  await expect(article.locator('[data-face-frame-overlay]')).toHaveAttribute('data-face-frame-shape', 'redondo');
+  expect(await selectedShapes(page)).toEqual(nativePairs[0]);
   await expect(choice(page, 'redondo')).toBeFocused();
   const index = page.getByRole('navigation').getByRole('link', { name: 'Ovalado', exact: true });
   await index.click();
@@ -206,6 +213,12 @@ test('custom merchant exit and localized native routes retain their contracts af
   await ready(page);
   const custom = oval(page).locator('.lemoon-face-guide__cta');
   const before = await custom.getAttribute('href');
+  await expect(oval(page).locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+  for (const shape of nativePairs[0]) await expect(choice(page, shape)).toHaveAttribute('aria-pressed', 'true');
+  await choice(page, 'redondo').click();
+  await choice(page, 'rectangular').click();
+  await expect(oval(page).locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+  for (const shape of nativePairs[0]) await expect(choice(page, shape)).toHaveAttribute('aria-pressed', 'true');
   await choice(page, 'aviador').click();
   await expect(custom).toHaveAttribute('href', before);
   expect(new URL(before, page.url()).searchParams.has(param)).toBe(false);
@@ -250,68 +263,75 @@ test('the native catalogue exit publishes the three controlled shapes only with 
   expect(events).toHaveLength(before);
 });
 
+for (const count of [2, 6]) test(`catalogue analytics sends exactly ${count} selected shapes`, async ({ page }) => {
+  const events = [];
+  await page.exposeFunction('recordSelection', (name, data) => events.push({ name, data }));
+  await page.addInitScript(() => { window.Shopify = { customerPrivacy: { analyticsProcessingAllowed: () => true }, analytics: { publish: (name, data) => window.recordSelection(name, data) } }; });
+  await ready(page);
+  let selected;
+  if (count === 2) { await choice(page, 'rectangular').click(); selected = ['rectangular', 'round']; }
+  else {
+    for (const shape of faceGuideShapes.filter(shape => !nativePairs[0].includes(shape))) await choice(page, shape).click();
+    selected = ['rectangular', 'round', 'geometric', 'oval', 'aviator', 'cat-eye'];
+  }
+  await page.route('**/collections/all?*', request => request.fulfill({ contentType: 'text/html; charset=utf-8', body: '<!doctype html><h1>Catálogo local</h1>' }));
+  await exit(page).click();
+  await expect.poll(() => events.filter(event => event.data.action === 'family_catalogue').length).toBe(1);
+  expect(events.find(event => event.data.action === 'family_catalogue').data.selected_shapes).toEqual(selected);
+});
+
 for (const width of [390, 1440]) {
   for (const [familyIndex, name] of familyNames.entries()) {
-    test(`${name} independently previews all six shapes and its native exit at ${width}px`, async ({ page }, testInfo) => {
+    test(`${name} independently selects all six shapes with exact native exit at ${width}px`, async ({ page }, testInfo) => {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(route);
       const articles = familyNames.map(familyName => page.getByRole('article', { name: familyName, exact: true }));
-      // Load every lazy portrait so selection isolation is checked against six active controls.
-      for (const article of articles) {
-        await article.scrollIntoViewIfNeeded();
-        await expect(article.locator('[data-face-frame-picker]')).toBeVisible();
-      }
-      const article = articles[familyIndex];
-      const pair = nativePairs[familyIndex];
-      const buttons = article.locator('[data-face-frame-value]');
+      for (const article of articles) { await article.scrollIntoViewIfNeeded(); await expect(article.locator('[data-face-frame-picker]')).toBeVisible(); }
+      const article = articles[familyIndex], pair = nativePairs[familyIndex];
       const buttonFor = value => article.locator(`[data-face-frame-value="${value}"]`);
-      const overlay = article.locator('[data-face-frame-overlay]');
-      const cta = article.getByRole('link', { name: 'Ver armazones', exact: true });
-      expect(await buttons.evaluateAll(nodes => nodes.map(node => node.dataset.faceFrameValue))).toEqual([...pair, ...faceGuideShapes.filter(value => !pair.includes(value))]);
-      await expect(buttonFor(pair[0])).toHaveAttribute('aria-pressed', 'true');
-      for (const value of faceGuideShapes) {
-        const button = buttonFor(value);
-        await expect(button.locator('.lemoon-face-guide__choice-tag')).toHaveText(pair.includes(value) ? 'Sugerida' : 'Otra forma');
-        await expect(button).toContainText(shapeLabels[value]);
-        await button.click();
-        await expect(button).toHaveAttribute('aria-pressed', 'true');
-        await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(1);
-        await expect(overlay).toBeVisible();
-        expect(await overlay.locator('svg').innerHTML()).toBe(await button.locator('svg').innerHTML());
-        const destination = new URL(await cta.getAttribute('href'), page.url());
-        expect(destination.pathname).toBe('/collections/all');
-        expect(destination.searchParams.getAll(param)).toEqual(pair.includes(value) ? pair : [...pair, value]);
-        for (const suggested of pair) await expect(buttonFor(suggested).locator('.lemoon-face-guide__choice-tag')).toHaveCSS('background-color', 'rgb(247, 230, 0)');
-        for (const [otherIndex, other] of articles.entries()) {
-          if (otherIndex === familyIndex) continue;
-          await expect(other.locator(`[data-face-frame-value="${nativePairs[otherIndex][0]}"]`)).toHaveAttribute('aria-pressed', 'true');
-          const untouched = new URL(await other.locator('.lemoon-face-guide__cta').getAttribute('href'), page.url());
-          expect(untouched.searchParams.getAll(param)).toEqual(nativePairs[otherIndex]);
+      const overlay = article.locator('[data-face-frame-overlay]'), cta = article.getByRole('link', { name: 'Ver armazones', exact: true });
+      await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+      for (const value of pair) await expect(buttonFor(value)).toHaveAttribute('aria-pressed', 'true');
+      let selected = [...pair];
+      for (const value of faceGuideShapes.filter(value => !pair.includes(value))) {
+        await buttonFor(value).click(); selected.push(value);
+        await expect(buttonFor(value)).toHaveAttribute('aria-pressed', 'true');
+        await expect(overlay).toHaveAttribute('data-face-frame-shape', value);
+        expect(await overlay.locator('svg').innerHTML()).toBe(await buttonFor(value).locator('svg').innerHTML());
+        expect(new URL(await cta.getAttribute('href'), page.url()).searchParams.getAll(param)).toEqual(selected);
+        for (const [otherIndex, other] of articles.entries()) if (otherIndex !== familyIndex) {
+          await expect(other.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+          expect(new URL(await other.locator('.lemoon-face-guide__cta').getAttribute('href'), page.url()).searchParams.getAll(param)).toEqual(nativePairs[otherIndex]);
         }
       }
-      const relativeCenter = () => overlay.evaluate(node => {
-        const frame = node.getBoundingClientRect();
-        const portrait = node.parentElement.getBoundingClientRect();
-        return { x: (frame.x + frame.width / 2 - portrait.x) / portrait.width, y: (frame.y + frame.height / 2 - portrait.y) / portrait.height };
-      });
-      await buttonFor('rectangular').click();
-      const regular = await relativeCenter();
-      await buttonFor('aviador').click();
-      const aviator = await relativeCenter();
+      await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(6);
+      // Re-select each shape to make it the latest preview while preserving all six.
+      const preview = async value => { await buttonFor(value).click(); await buttonFor(value).click(); await expect(overlay).toHaveAttribute('data-face-frame-shape', value); };
+      const geometry = () => overlay.evaluate(node => { const box = node.getBoundingClientRect(), portrait = node.parentElement.getBoundingClientRect(); return { width: box.width, x: (box.x + box.width / 2 - portrait.x) / portrait.width, y: (box.y + box.height / 2 - portrait.y) / portrait.height }; });
+      await preview('rectangular'); const regular = await geometry();
+      await preview('aviador'); const aviator = await geometry();
+      expect(aviator.width / regular.width).toBeCloseTo(.9, 2);
       expect(Math.abs(aviator.x - .5)).toBeLessThan(.002);
       expect(aviator.y - regular.y).toBeGreaterThan(.005);
       expect(aviator.y - regular.y).toBeLessThan(.03);
-      await buttonFor('redondo').click();
-      const round = await relativeCenter();
+      await article.screenshot({ path: testInfo.outputPath(`${familyKinds[familyIndex]}-aviator-${width}.png`) });
+      await preview('redondo'); const round = await geometry();
       expect(Math.abs(round.y - regular.y)).toBeLessThan(.002);
-      const alternative = faceGuideShapes.find(value => !pair.includes(value));
-      await buttonFor(alternative).click();
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      await article.screenshot({ path: testInfo.outputPath(`${familyKinds[familyIndex]}-selected-${width}.png`) });
+      // Alternatives toggle off; suggested choices remain selected and always preview.
+      for (const value of faceGuideShapes.filter(value => !pair.includes(value))) await buttonFor(value).click();
+      for (const value of [...pair, ...pair]) {
+        await buttonFor(value).click();
+        await expect(buttonFor(value)).toHaveAttribute('aria-pressed', 'true');
+        await expect(overlay).toHaveAttribute('data-face-frame-shape', value);
+        expect(await overlay.locator('svg').innerHTML()).toBe(await buttonFor(value).locator('svg').innerHTML());
+        await expect(article.locator('[data-face-frame-value][aria-pressed="true"]')).toHaveCount(2);
+        expect(new URL(await cta.getAttribute('href'), page.url()).searchParams.getAll(param)).toEqual(pair);
+      }
+      expect(new URL(await cta.getAttribute('href'), page.url()).searchParams.getAll(param)).toEqual(pair);
       await page.route('**/collections/all?*', request => request.fulfill({ contentType: 'text/html; charset=utf-8', body: '<!doctype html><html lang="es"><meta charset="utf-8"><h1>Catálogo local</h1></html>' }));
       await cta.click();
       await expect(page.getByRole('heading', { name: 'Catálogo local' })).toBeVisible();
-      expect(new URL(page.url()).searchParams.getAll(param)).toEqual([...pair, alternative]);
+      expect(new URL(page.url()).searchParams.getAll(param)).toEqual(pair);
     });
   }
 }

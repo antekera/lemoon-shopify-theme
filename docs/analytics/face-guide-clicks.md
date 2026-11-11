@@ -15,7 +15,7 @@ La sección publica `lemoon:face_guide_click` mediante Shopify Customer Events. 
 | Botón de catálogo del banner | `catalogue` | `closing` | Catálogo |
 | Enlace al quiz del banner | `quiz` | `closing` | Quiz |
 
-El payload solo admite identificadores controlados: `guide_id`, `action`, `link_position`, `destination`, `face_family`, `frame_shape`, `selected_shapes`. Las familias son `oval`, `round`, `square`, `heart`, `diamond`, `long`; las formas son `round`, `rectangular`, `geometric`, `oval`, `aviator`, `cat-eye`. El receptor convierte el array de dos o tres formas distintas a una cadena, por ejemplo `aviator|round`, para utilizarlo como dimensión GA4. Un fallback no afirma haber aplicado formas; un destino del editor se identifica como `custom`.
+El payload solo admite identificadores controlados: `guide_id`, `action`, `link_position`, `destination`, `face_family`, `frame_shape`, `selected_shapes`. Las familias son `oval`, `round`, `square`, `heart`, `diamond`, `long`; las formas son `round`, `rectangular`, `geometric`, `oval`, `aviator`, `cat-eye`. El receptor convierte el array de una a seis formas distintas a una cadena, por ejemplo `aviator|round`, para utilizarlo como dimensión GA4. Un fallback no afirma haber aplicado formas; un destino del editor se identifica como `custom`.
 
 No se copian textos arbitrarios, URLs, querystrings, correos, identificadores de clientes, fotografías ni datos de receta. La familia representa el módulo pulsado, sin inferir un diagnóstico o medir el rostro de la persona.
 
@@ -50,4 +50,4 @@ Para analizarlo: crear una exploración filtrada por `event_name = face_guide_cl
 
 Context7 devolvió documentación oficial de GA4. La consulta de Shopify Themes no cubrió Customer Events/Privacy; se consultaron directamente las páginas oficiales anteriores.
 
-Prueba local09-11-2026: cada enlace de salida de familia actualiza `selected_shapes` con la misma selección2/3 que su URL. El receptor de referencia admite tres valores distintos; su actualización en Customer Events y la recepción GA4 requieren validación operativa separada. Los controles locales de comparación no añaden eventos de salida ni instalan un pixel.
+Prueba local09-11-2026: cada enlace de salida de familia actualiza `selected_shapes` con la misma selección2–6 que su URL; las dos sugeridas permanecen seleccionadas. El receptor de referencia admite entre uno y seis valores distintos; su actualización en Customer Events y la recepción GA4 requieren validación operativa separada. Los controles locales de comparación no añaden eventos de salida ni instalan un pixel.

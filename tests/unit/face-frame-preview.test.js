@@ -6,23 +6,28 @@ const origin = 'https://fixture.test/pages/elegir-lentes-segun-tu-rostro';
 const suggested = ['rectangular', 'redondo'];
 const href = `/collections/all?${shapeParam}=rectangular&${shapeParam}=redondo`;
 
-describe('native collection exit from the current illustrative frame preview', () => {
-  it.each(['geométrico', 'ovalado', 'aviador', 'ojo de gato'])('adds the current alternative %s as one OR value', shape => {
-    const result = facePreviewDestination(href, suggested, shape, origin);
-    expect(result.shapes).toEqual([...suggested, shape]);
-    const url = new URL(result.href, origin);
-    expect(url.pathname).toBe('/collections/all');
-    expect(url.searchParams.getAll(shapeParam)).toEqual([...suggested, shape]);
+describe('native collection exit from selected illustrative frames', () => {
+  it.each([[['ovalado']], [['redondo', 'aviador']], [faceGuideShapes]])('preserves suggestions alongside selected alternatives %j', selected => {
+    const result = facePreviewDestination(href, suggested, selected, origin);
+    const expected = [...new Set([...suggested, ...selected])];
+    expect(result.shapes).toEqual(expected);
+    expect(new URL(result.href, origin).searchParams.getAll(shapeParam)).toEqual(expected);
   });
 
-  it.each(suggested)('does not duplicate the suggested value %s', shape => {
-    const result = facePreviewDestination(href, suggested, shape, origin);
+  it('deduplicates repeated suggestions and alternatives', () => {
+    const result = facePreviewDestination(href, suggested, ['redondo', 'ovalado', 'ovalado', 'rectangular'], origin);
+    expect(result.shapes).toEqual([...suggested, 'ovalado']);
+    expect(new URL(result.href, origin).searchParams.getAll(shapeParam)).toEqual([...suggested, 'ovalado']);
+  });
+
+  it('restores the suggested pair when the selection is empty', () => {
+    const result = facePreviewDestination(href, suggested, [], origin);
     expect(result.shapes).toEqual(suggested);
     expect(new URL(result.href, origin).searchParams.getAll(shapeParam)).toEqual(suggested);
   });
 
   it('keeps the language route, unrelated parameters and hash intact', () => {
-    const result = facePreviewDestination(`/en${href}&sort_by=title-ascending&filter.v.availability=1#products`, suggested, 'ojo de gato', origin);
+    const result = facePreviewDestination(`/en${href}&sort_by=title-ascending&filter.v.availability=1#products`, suggested, ['ojo de gato'], origin);
     const url = new URL(result.href, origin);
     expect(url.pathname).toBe('/en/collections/all');
     expect(url.searchParams.get('sort_by')).toBe('title-ascending');
@@ -32,13 +37,14 @@ describe('native collection exit from the current illustrative frame preview', (
   });
 
   it.each([
-    { href: '/collections/all', pair: suggested, selected: 'ovalado' },
-    { href: `/collections/all?${shapeParam}=rectangular`, pair: suggested, selected: 'ovalado' },
-    { href: `${href}&${shapeParam}=aviador`, pair: suggested, selected: 'ovalado' },
-    { href: `https://another.test${href}`, pair: suggested, selected: 'ovalado' },
-    { href, pair: ['rectangular', 'rectangular'], selected: 'ovalado' },
-    { href, pair: ['rectangular', 'unknown'], selected: 'ovalado' },
-    { href, pair: suggested, selected: 'not-a-native-shape' },
+    { href: '/collections/all', pair: suggested, selected: ['ovalado'] },
+    { href: `/collections/all?${shapeParam}=rectangular`, pair: suggested, selected: ['ovalado'] },
+    { href: `${href}&${shapeParam}=aviador`, pair: suggested, selected: ['ovalado'] },
+    { href: `https://another.test${href}`, pair: suggested, selected: ['ovalado'] },
+    { href, pair: ['rectangular', 'rectangular'], selected: ['ovalado'] },
+    { href, pair: ['rectangular', 'unknown'], selected: ['ovalado'] },
+    { href, pair: suggested, selected: ['not-a-native-shape'] },
+    { href, pair: suggested, selected: 'ovalado' },
   ])('declines incomplete, unknown or foreign destinations: %j', ({ href: destination, pair, selected }) => {
     expect(facePreviewDestination(destination, pair, selected, origin)).toBeNull();
   });
