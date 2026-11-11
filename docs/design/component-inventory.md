@@ -757,7 +757,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Estados observados / aplicabilidad:** Normal: Variante seleccionada y datos; Hover: Controles/media; Foco: Selección/diálogos/acciones; Seleccionado: Radio/selected variante, favorito aria-pressed; Loading: Cambio variante/cart, media diferida; Error: Error local y stock real; Disabled: Variantes/compra según available y guards.
 
-**Responsive.** Layout desktop/móvil; mobile summary cambia DOM y gallery bleed mediante pdp-tools; no afirmar orden final desde Liquid solo. **Accesibilidad.** Conservar product-info ID, section/product IDs, JSON variant, form association, title/SKU/status hooks, editor attrs y foco.
+**Responsive.** Layout desktop/móvil; mobile summary cambia DOM y gallery bleed mediante pdp-tools; no afirmar orden final desde Liquid solo. Compartir aparece junto al favorito en desktop; usa la hoja de compartir del dispositivo o copia el enlace, con campo de respaldo si no se puede copiar. **Accesibilidad.** Conservar product-info ID, section/product IDs, JSON variant, form association, title/SKU/status hooks, editor attrs y foco; compartir anuncia el resultado de copia.
 
 **JS.** product-info/global variants y módulos Dawn; lemoon-eyewear-product.js con validatePrescription; pdp-tools para sticky/medidas/media. **Reutilización actual.** Snippets parciales ya compartidos; dos orquestadores comerciales siguen separados. No migrar toda PDP en un paso.
 

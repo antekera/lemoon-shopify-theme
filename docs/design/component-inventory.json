@@ -1293,7 +1293,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-eyewear-product.liquid",
-        "scope": "PDP hero with short intro from first description paragraph, full description below, two inline tabs grouping available characteristics/size/fit/faces and measurements with a contextual diagram only when valid dimensions exist, contextual opener reusing its size drawer and exact focus return, policy-backed purchase confidence and actual payment methods; commerce controllers unchanged.",
+        "scope": "PDP hero with short intro from first description paragraph, full description below, two inline tabs grouping available characteristics/size/fit/faces and measurements with a contextual diagram only when valid dimensions exist, contextual opener reusing its size drawer and exact focus return, policy-backed purchase confidence and actual payment methods. Desktop heading offers native product sharing with clipboard and manual-copy fallbacks; commerce controllers unchanged.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },

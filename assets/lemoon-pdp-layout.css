@@ -9,6 +9,12 @@ lemoon-product-tools { display: block; }
 .lemoon-product-status__badge--sale { background: var(--lemoon-primitive-lemon-citrico); color: var(--lemoon-text-brand); }
 .lemoon-product-status__badge--sold-out { background: #f1f2f3; color: var(--lemoon-text-secondary); }
 .lemoon-product-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.lemoon-product-heading__actions { display: flex; flex: 0 0 auto; align-items: flex-start; }
+.lemoon-product-heading__share[hidden] { display: none !important; }
+.lemoon-product-heading__share .icon-share { width: 20px; height: 20px; }
+.lemoon-product-share-feedback { color: var(--lemoon-text-brand); font-size: 13px; }
+.lemoon-product-share-feedback input { max-width: 100%; width: 100%; }
+@media (max-width: 749px) { .lemoon-product-heading__share { display: none !important; } .lemoon-product-share-feedback { display: none; } }
 .lemoon-product-sku { margin: 4px 0 12px; color: var(--lemoon-text-brand); font-size: 12px; line-height: 1.5; opacity: .7; overflow-wrap: anywhere; }
 .lemoon-product-sku[hidden] { display: none; }
 .lemoon-product-heading h1 { margin: 0; color: var(--lemoon-text-brand); font-size: 2.4rem; line-height: 1.2; font-weight: 500; }

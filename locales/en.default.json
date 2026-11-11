@@ -56,6 +56,7 @@
     "share": {
       "close": "Close share",
       "copy_to_clipboard": "Copy link",
+      "copy_error": "We couldn't copy the link. Select it to copy it.",
       "share_url": "Link",
       "success_message": "Link copied to clipboard"
     },

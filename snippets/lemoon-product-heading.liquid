@@ -6,7 +6,14 @@
   {% render 'lemoon-product-status', product: product %}
   <div class="lemoon-product-heading">
     <h1>{{ product.title | escape }}</h1>
-    <span class="lemoon-product-heading__wishlist" data-product-favourite-slot data-product-id="{{ product.id }}"></span>
+    <div class="lemoon-product-heading__actions">
+      <button type="button" class="lemoon-product-heading__share" data-product-share data-product-url="{{ product.url | prepend: request.origin | escape }}" aria-label="{{ 'products.product.share' | t | escape }}" hidden>{{ 'icon-share.svg' | inline_asset_content }}</button>
+      <span class="lemoon-product-heading__wishlist" data-product-favourite-slot data-product-id="{{ product.id }}"></span>
+    </div>
+  </div>
+  <div class="lemoon-product-share-feedback" data-product-share-feedback>
+    <span role="status" aria-live="polite" data-product-share-status data-copied="{{ 'general.share.success_message' | t | escape }}" data-copy-error="{{ 'general.share.copy_error' | t | escape }}"></span>
+    <input type="url" data-product-share-fallback aria-label="{{ 'general.share.share_url' | t | escape }}" readonly hidden>
   </div>
   {% render 'lemoon-product-promotions', product: product %}
 </lemoon-product-tools>

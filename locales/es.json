@@ -55,6 +55,7 @@
     },
     "share": {
       "copy_to_clipboard": "Copiar enlace",
+      "copy_error": "No pudimos copiar el enlace. Selecciónalo para copiarlo.",
       "share_url": "Enlace",
       "success_message": "Enlace copiado al portapapeles",
       "close": "Cerrar compartición"

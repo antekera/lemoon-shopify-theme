@@ -23,6 +23,9 @@ for (const [surface, wrapper] of [
     await expect(heart).toHaveCSS('fill', white);
     await expect(heart).toHaveCSS('stroke', navy);
     await expect(heart).toHaveCSS('opacity', '1');
+    await expect(svg).toHaveCSS('overflow', 'visible');
+    await expect(heart).toHaveCSS('stroke-width', '40px');
+    await expect(heart).toHaveCSS('paint-order', 'fill');
     await button.hover();
     await expect(heart).toHaveCSS('fill', white);
     await expect(heart).toHaveCSS('stroke', yellow);

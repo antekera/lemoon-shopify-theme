@@ -207,6 +207,37 @@ if (typeof window !== 'undefined') {
     connectedCallback() {
       if (this.ready) return;
       this.ready = true;
+      const shareButton = this.querySelector('[data-product-share]');
+      const shareStatus = this.querySelector('[data-product-share-status]');
+      const shareFallback = this.querySelector('[data-product-share-fallback]');
+      if (shareButton && shareStatus && shareFallback) {
+        shareButton.hidden = false;
+        shareButton.addEventListener('click', async () => {
+          const url = new URL(shareButton.dataset.productUrl, window.location.origin);
+          const variant = new URL(window.location.href).searchParams.get('variant');
+          if (variant) url.searchParams.set('variant', variant);
+          shareStatus.textContent = '';
+          shareFallback.hidden = true;
+          if (navigator.share) {
+            try {
+              await navigator.share({ title: this.querySelector('h1')?.textContent.trim() || document.title, url: url.href });
+              return;
+            } catch (error) {
+              if (error?.name === 'AbortError') return;
+            }
+          }
+          try {
+            await navigator.clipboard.writeText(url.href);
+            shareStatus.textContent = shareStatus.dataset.copied;
+          } catch {
+            shareFallback.value = url.href;
+            shareFallback.hidden = false;
+            shareStatus.textContent = shareStatus.dataset.copyError;
+            shareFallback.focus();
+            shareFallback.select();
+          }
+        });
+      }
       this.addEventListener('click', (event) => {
         if (event.target.closest('[data-size-open]')) {
           const dialog = this.querySelector('dialog');

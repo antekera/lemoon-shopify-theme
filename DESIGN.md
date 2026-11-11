@@ -369,3 +369,5 @@ La descripción aparece dentro de la pestaña Características, cuyos atributos 
 Las acciones de texto y los enlaces de navegación del encabezado usan `--lemoon-font-body` con peso regular (400); los enlaces de navegación en desktop usan peso medium (500).
 
 En PDP y tarjetas, el corazón de favoritos muestra borde navy y relleno blanco; al pasar el cursor cambia el borde a amarillo y, cuando está guardado, tanto el borde como el relleno son amarillos. El estado sigue siendo gestionado por Vitals.
+
+En desktop, el título de la PDP incluye una acción de compartir a la izquierda del favorito. Abre las opciones del dispositivo cuando están disponibles; de lo contrario copia el enlace del producto o permite copiarlo manualmente.
