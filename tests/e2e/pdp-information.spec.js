@@ -78,6 +78,16 @@ test('mobile gallery responds to a touch swipe', async ({ browser, baseURL }) =>
   const page = await context.newPage();
   await openHeroFixture(page, 390);
   const list = page.locator('.lemoon-standard-pdp .product__media-list');
+  await expect(list).toBeVisible();
+  await expect(list.locator('.product__media-item')).toHaveCount(2);
+  await list.scrollIntoViewIfNeeded();
+  await expect.poll(() => list.evaluate(el => el.scrollWidth - el.clientWidth)).toBeGreaterThan(0);
+  // The real gallery fades in on load. Start the touch only when those finite
+  // entry animations have completed, so the gesture targets the settled slide.
+  await list.evaluate(async el => {
+    const animations = el.getAnimations({ subtree: true }).filter(animation => animation.effect?.getComputedTiming().iterations !== Infinity);
+    await Promise.all(animations.map(animation => animation.finished.catch(() => {})));
+  });
   const box = await list.boundingBox();
   const cdp = await context.newCDPSession(page);
   await cdp.send('Input.synthesizeScrollGesture', { x: box.x + box.width * .8, y: box.y + box.height * .5, xDistance: -box.width * .7, yDistance: 0, gestureSourceType: 'touch', speed: 700 });
