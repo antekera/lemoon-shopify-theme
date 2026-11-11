@@ -195,7 +195,8 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       this.error.hidden = true;
       this.querySelector('[data-flow-heading]').hidden = !this.inLensFlow;
       this.querySelector('[data-flow-summary]').hidden = !this.inLensFlow;
-      this.querySelector('[data-frame-size]').hidden = this.inLensFlow;
+      const frameSize = this.querySelector('[data-frame-size]');
+      if (frameSize) frameSize.hidden = this.inLensFlow;
       const configure = this.querySelector('[data-configure]');
       if (configure) {
         configure.hidden = this.inLensFlow;

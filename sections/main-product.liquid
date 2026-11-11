@@ -83,20 +83,19 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
-    <div class="page-width">
-      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
-        <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
-        </div>
-        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          <section
-            id="ProductInfo-{{ section.id }}"
-            class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
-          >
-            {% render 'lemoon-breadcrumb', collection: collection, product: product %}
-            {%- assign product_form_id = 'product-form-' | append: section.id -%}
-
+  {%- liquid
+    assign product_form_id = 'product-form-' | append: section.id
+    assign summary_end_index = 0
+    assign title_blocks = section.blocks | where: 'type', 'title'
+    assign summary_boundary = '<!--lemoon-product-summary-boundary-' | append: section.id | append: '-->'
+    for block in section.blocks
+      if block.type == 'title' or block.type == 'price'
+        assign summary_end_index = forloop.index
+      endif
+    endfor
+  -%}
+  {%- capture product_blocks -%}
+    {%- if summary_end_index == 0 -%}{{- summary_boundary -}}{%- endif -%}
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when '@app' -%}
@@ -110,16 +109,17 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    {% render 'lemoon-product-heading', product: product %}
+                    {% render 'lemoon-product-heading', product: product, show_promotions: false %}
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div class="lemoon-mobile-price-row"><div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
                       show_badges: false,
                       price_class: 'price--large'
                     -%}
+                  </div>
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -615,7 +615,39 @@
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
+              {%- if forloop.index == summary_end_index -%}
+                {%- if title_blocks.size > 0 -%}{% render 'lemoon-product-promotions', product: product %}{%- endif -%}
+                {{- summary_boundary -}}
+              {%- endif -%}
             {%- endfor -%}
+    <!--lemoon-product-blocks-end-->
+  {%- endcapture -%}
+  {%- liquid
+    if summary_end_index == 0
+      assign summary_markup = ''
+      assign details_markup = product_blocks | remove_first: summary_boundary | remove: '<!--lemoon-product-blocks-end-->'
+    else
+      assign product_block_parts = product_blocks | split: summary_boundary
+      assign summary_markup = product_block_parts | first
+      assign details_markup = product_block_parts | last | remove: '<!--lemoon-product-blocks-end-->'
+    endif
+  -%}
+  <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
+    <div class="page-width">
+      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
+        <div class="lemoon-mobile-summary lemoon-product-summary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {% render 'lemoon-breadcrumb', collection: collection, product: product %}
+          {{ summary_markup }}
+        </div>
+        <div class="grid__item product__media-wrapper">
+          {% render 'product-media-gallery', variant_images: variant_images %}
+        </div>
+        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <section
+            id="ProductInfo-{{ section.id }}"
+            class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+          >
+            {{ details_markup }}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}

@@ -1,6 +1,7 @@
 {% doc %}
   Renders the product heading, Shopify promotions, SKU and favourite action.
   @param {product} product - Current Shopify product.
+  @param {boolean} [show_promotions] - Set false when the parent renders promotions after price.
 {% enddoc %}
 <lemoon-product-tools data-product-id="{{ product.id }}">
   {% render 'lemoon-product-status', product: product %}
@@ -15,5 +16,5 @@
     <span role="status" aria-live="polite" data-product-share-status data-copied="{{ 'general.share.success_message' | t | escape }}" data-copy-error="{{ 'general.share.copy_error' | t | escape }}"></span>
     <input type="url" data-product-share-fallback aria-label="{{ 'general.share.share_url' | t | escape }}" readonly hidden>
   </div>
-  {% render 'lemoon-product-promotions', product: product %}
+  {%- unless show_promotions == false -%}{% render 'lemoon-product-promotions', product: product %}{%- endunless -%}
 </lemoon-product-tools>

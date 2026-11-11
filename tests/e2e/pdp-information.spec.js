@@ -16,7 +16,7 @@ const heroGeometry = page => page.evaluate(() => {
   const top = selector => document.querySelector(selector).getBoundingClientRect().top;
   return {
     root: top('.lemoon-standard-pdp'), row: top('.lemoon-standard-pdp .product'),
-    gallery: top('media-gallery'), information: top('.product__info-wrapper'),
+    gallery: top('media-gallery'), summary: top('.lemoon-product-summary'), information: top('.product__info-wrapper'),
   };
 });
 
@@ -34,10 +34,12 @@ test('standard desktop retains its configured spacing and right-panel reveal', a
   await expect(information).toHaveClass(/animate--slide-in/);
   await expect(information).toHaveCSS('animation-name', 'slideIn');
   await information.evaluate(el => el.classList.remove('scroll-trigger', 'animate--slide-in', 'scroll-trigger--offscreen'));
+  await page.locator('.lemoon-product-summary').evaluate(el => el.classList.remove('scroll-trigger', 'animate--slide-in', 'scroll-trigger--offscreen'));
   const geometry = await heroGeometry(page);
   expect(geometry.row - geometry.root).toBeCloseTo(24, 0);
   expect(geometry.gallery - geometry.root).toBeCloseTo(0, 0);
-  expect(geometry.information - geometry.root).toBeCloseTo(24, 0);
+  expect(geometry.summary - geometry.root).toBeCloseTo(24, 0);
+  expect(geometry.information).toBeGreaterThanOrEqual(geometry.summary);
 });
 
 for (const width of [320, 390]) test(`mobile gallery at ${width}px fills the viewport and previews 10px of the next image`, async ({ page }) => {

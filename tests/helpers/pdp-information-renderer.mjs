@@ -43,20 +43,30 @@ export function renderStandardDescriptionBlock(context) {
 function heroFixtureContext(mediaCount = 2) {
   const context = pdpInformationContext();
   const raw = readFileSync(new URL('../../templates/product.json', import.meta.url), 'utf8');
-  const settings = JSON.parse(raw.slice(raw.indexOf('{'))).sections.main.settings;
-  context.section = { id: 'hero-fixture', settings: { ...settings, padding_top: 24, enable_sticky_info: true } };
+  const main = JSON.parse(raw.slice(raw.indexOf('{'))).sections.main;
+  const settings = main.settings;
+  context.section = { id: 'hero-fixture', blocks: main.block_order.map(id => ({ ...main.blocks[id], id, shopify_attributes: '' })), settings: { ...settings, padding_top: 24, enable_sticky_info: true } };
   context.settings = { page_width: 1280, animations_reveal_on_scroll: true };
   context.template = { name: 'product' };
   context.product.media = ['amber', 'side'].slice(0, mediaCount).map((view, index) => ({
     id: index + 1, media_type: 'image', aspect_ratio: 1,
     preview_image: { src: `/assets/lemoon-product-demo-${view}.png`, aspect_ratio: 1, alt: 'Synthetic frame' },
   }));
-  context.product.selected_or_first_available_variant = { featured_media: context.product.media[0] };
+  context.product.url = '/products/synthetic-model';
+  context.product.price_min = 39900;
+  context.product.price_max = 39900;
+  context.product.selected_or_first_available_variant = { id: 101, featured_media: context.product.media[0], price: 39900, available: true };
+  context.request = { page_type: 'product', origin: 'https://lemoon.cl' };
   const engine = pdpInformationEngine({ globals: {
     product: context.product, section: context.section, settings: context.settings, template: context.template,
   } });
+  // The full section loop contains Shopify-only filters in branches not used
+  // by this title/price/text fixture; those branches are never rendered here.
+  engine.options.strictFilters = false;
   const escapeAttribute = value => String(value ?? '').replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
   engine.registerFilter('image_url', image => image.src);
+  engine.registerFilter('money', amount => `$${Number(amount).toLocaleString('es-CL')}`);
+  engine.registerFilter('money_with_currency', amount => `$${Number(amount).toLocaleString('es-CL')} CLP`);
   engine.registerFilter('image_tag', (src, ...attributes) => `<img src="${escapeAttribute(src)}" width="1024" height="1024" ${attributes
     .filter(attribute => Array.isArray(attribute) && ['class', 'id', 'alt', 'loading', 'fetchpriority'].includes(attribute[0]))
     .map(([name, value]) => `${name}="${escapeAttribute(value)}"`).join(' ')}>`);
@@ -73,15 +83,24 @@ function heroFixtureDocument(content, inlineStyle = '') {
     </head><body><header aria-label="Synthetic header"></header>${content}</body></html>`;
 }
 
-export function renderStandardPdpHeroFixture(mediaCount = 2) {
+export function renderStandardPdpHeroFixture(mediaCount = 2, blocks = null) {
   const { context, engine } = heroFixtureContext(mediaCount);
+  context.section.blocks = blocks || context.section.blocks.filter(block => ['title', 'price'].includes(block.type));
   const source = readFileSync(new URL('../../sections/main-product.liquid', import.meta.url), 'utf8');
   const root = source.match(/^<product-info\b[\s\S]*?\n>/)?.[0];
   const style = source.match(/\{%- style -%\}([\s\S]*?)\{%- endstyle -%\}/)?.[1];
-  const wrappers = source.match(/<div class="page-width">[\s\S]*?(?=\{% render 'lemoon-breadcrumb')/)?.[0];
-  if (!root || !style || !wrappers) throw new Error('Main PDP hero boundaries changed; update its fixture extraction');
-  const html = engine.parseAndRenderSync(root + wrappers, context) +
-    '<nav class="lemoon-breadcrumb">Inicio / Synthetic model</nav><h1>Synthetic model</h1><p>A short product description.</p></section></div></div></div></product-info>';
+  const blocksCapture = source.match(/\{%- liquid\s+assign product_form_id[\s\S]*?(?=<product-component)/)?.[0];
+  const summaryAndWrappers = source.match(/<div class="page-width">[\s\S]*?(?=<div class="grid__item product__media-wrapper">)/)?.[0];
+  const infoOpening = source.match(/<div class="product__info-wrapper[\s\S]*?<section[\s\S]*?>/)?.[0];
+  if (!root || !style || !blocksCapture || !summaryAndWrappers || !infoOpening) throw new Error('Main PDP hero boundaries changed; update its fixture extraction');
+  // Shopify app blocks and installment forms are represented by deterministic
+  // placeholders; their position is still decided by the real section loop.
+  const blocksSource = blocksCapture
+    .replace(/\{%-?\s*form 'product'[\s\S]*?\{%-?\s*endform\s*-?%\}/g, '<form class="installment"></form>')
+    .replace(/\{%\s*render block\s*%\}/g, '<aside data-test-app="{{ block.id }}">{{ block.settings.test_content }}</aside>');
+  const media = '<div class="grid__item product__media-wrapper">{% render "product-media-gallery", variant_images: variant_images %}</div>';
+  const html = engine.parseAndRenderSync(root + blocksSource + summaryAndWrappers + media + infoOpening + '{{ details_markup }}', context) +
+    '<p>A short product description.</p></section></div></div></div></product-info>';
   return heroFixtureDocument(html, `<style>${engine.parseAndRenderSync(style, context)}</style>`);
 }
 
@@ -89,6 +108,29 @@ export function renderDefaultGalleryRevealFixture() {
   const { context, engine } = heroFixtureContext();
   // No opt-out: other shared-gallery consumers retain the merchant's reveal setting.
   return heroFixtureDocument(engine.renderFileSync('product-media-gallery', { ...context, variant_images: [] }));
+}
+
+// Render the optical section's actual server-side summary over its existing
+// deterministic interaction fixture; the controller and variant data stay real.
+export function renderEyewearSsrFixture(scenario = 'complete', originalFixture = null) {
+  const context = pdpInformationContext(scenario);
+  context.product.url = '/products/synthetic-model';
+  context.product.selected_or_first_available_variant = { id: 67616399392936, price: 39900, available: true };
+  context.request = { page_type: 'product', origin: 'https://lemoon.cl' };
+  const engine = pdpInformationEngine();
+  engine.registerFilter('money', amount => `$${Number(amount).toLocaleString('es-CL')}`);
+  const source = readFileSync(new URL('../../sections/lemoon-eyewear-product.liquid', import.meta.url), 'utf8');
+  const start = source.indexOf('<div class="lemoon-mobile-summary lemoon-product-summary');
+  const end = source.indexOf('<div class="lemoon-pdp__gallery">', start);
+  if (start < 0 || end < 0) throw new Error('Optical SSR summary boundaries changed');
+  const summary = engine.parseAndRenderSync('{% assign current_variant = product.selected_or_first_available_variant %}' + source.slice(start, end), context);
+  let fixture = originalFixture || readFileSync(new URL('../fixtures/eyewear-product.html', import.meta.url), 'utf8');
+  const oldSummary = /(<div class="lemoon-pdp__info">\s*)<nav class="lemoon-breadcrumb"[\s\S]*?<\/lemoon-product-tools>/;
+  const oldPrice = /<div class="lemoon-pdp__price"[\s\S]*?<\/div>\s*<p class="lemoon-pdp__tax">[\s\S]*?<\/p>/;
+  if (!oldSummary.test(fixture) || !oldPrice.test(fixture)) throw new Error('Optical interaction fixture boundaries changed');
+  fixture = fixture.replace(/(<lemoon-eyewear\b[^>]*>)\s*<nav class="lemoon-breadcrumb"[\s\S]*?<\/nav>/, '$1');
+  fixture = fixture.replace(oldSummary, '$1').replace(oldPrice, '');
+  return fixture.replace('<div class="lemoon-pdp__grid">', `<div class="lemoon-pdp__grid">${summary}`);
 }
 
 export function renderPdpInformationFixture(shell = 'standard', scenario = 'complete') {
@@ -100,6 +142,7 @@ export function renderPdpInformationFixture(shell = 'standard', scenario = 'comp
   let html = renderSizeGuideFixture(shell, scenario)
     .replace(/<aside data-inline-measurements>[\s\S]*?<\/aside>/, `<aside data-inline-measurements>${information}</aside>`);
   if (shell === 'eyewear') {
+    html = renderEyewearSsrFixture(scenario, html);
     html = html.replace(/<div class="product__description rte">[\s\S]*?<\/div>/, '')
       .replace('<form method="post"', `${introduction}<form method="post"`)
       .replace(/<div class="lemoon-pdp__benefits">[\s\S]*?<\/div>/, confidence)

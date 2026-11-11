@@ -268,42 +268,6 @@ if (typeof window !== 'undefined') {
     else url.searchParams.delete('variant');
     link.href = url.toString();
   });
-  const mobileSummaries = new WeakSet();
-  const setupMobileSummaries = () => document.querySelectorAll('.lemoon-standard-pdp, lemoon-eyewear').forEach((host) => {
-    if (mobileSummaries.has(host)) return;
-    const grid = host.querySelector('.product, .lemoon-pdp__grid');
-    const info = host.querySelector('.product__info-container, .lemoon-pdp__info');
-    if (!grid || !info) return;
-    mobileSummaries.add(host);
-    const summary = document.createElement('div');
-    summary.className = 'lemoon-mobile-summary';
-    summary.hidden = true;
-    const nodes = [...info.children].filter((node) => node.matches('.lemoon-breadcrumb, .product__title, lemoon-product-tools:has(.lemoon-product-heading), [id^="price-"], .product__tax, .lemoon-pdp__price, .lemoon-pdp__tax'));
-    const homes = nodes.map((node) => {
-      const marker = document.createComment('');
-      node.before(marker);
-      return { node, marker };
-    });
-    const heading = info.querySelector('.lemoon-product-heading');
-    const priceNodes = nodes.filter((node) => node.matches('[id^="price-"], .product__tax, .lemoon-pdp__price, .lemoon-pdp__tax'));
-    const priceRow = document.createElement('div');
-    priceRow.className = 'lemoon-mobile-price-row';
-    grid.prepend(summary);
-    const mobile = window.matchMedia('(max-width: 749px)');
-    const update = () => {
-      summary.hidden = !mobile.matches;
-      homes.forEach(({ node, marker }) => {
-        if (mobile.matches) summary.append(node);
-        else marker.after(node);
-      });
-      if (heading && priceNodes.length) {
-        heading.after(priceRow);
-        priceNodes.forEach((node) => priceRow.append(node));
-      } else priceRow.remove();
-    };
-    mobile.addEventListener('change', update);
-    update();
-  });
   const draggableGalleries = new WeakSet();
   const setupGalleryDrag = () => document.querySelectorAll('.lemoon-pdp__stage, .lemoon-standard-pdp .product__media-list').forEach((stage) => {
     if (draggableGalleries.has(stage)) return;
@@ -375,7 +339,6 @@ if (typeof window !== 'undefined') {
   const bleedGalleries = () => document.querySelectorAll('.lemoon-standard-pdp media-gallery, .lemoon-pdp__gallery').forEach((gallery) => gallery.style.setProperty('--lemoon-gallery-bleed', `${Math.max(0, gallery.getBoundingClientRect().left)}px`));
   window.addEventListener('resize', bleedGalleries);
   const scan = () => {
-    setupMobileSummaries();
     setupGalleryDrag();
     bleedGalleries();
     document.querySelectorAll('.lemoon-pdp__image-button > img, .lemoon-standard-pdp .media-type-image .product__media > img').forEach((img) => {

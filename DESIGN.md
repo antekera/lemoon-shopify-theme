@@ -371,3 +371,5 @@ Las acciones de texto y los enlaces de navegación del encabezado usan `--lemoon
 En PDP y tarjetas, el corazón de favoritos muestra borde navy y relleno blanco; al pasar el cursor cambia el borde a amarillo y, cuando está guardado, tanto el borde como el relleno son amarillos. El estado sigue siendo gestionado por Vitals.
 
 En desktop, el título de la PDP incluye una acción de compartir a la izquierda del favorito. Abre las opciones del dispositivo cuando están disponibles; de lo contrario copia el enlace del producto o permite copiarlo manualmente.
+
+El resumen de la PDP se entrega en el HTML inicial, antes de la galería en móvil; conserva una sola instancia de título, precio y acciones y el orden de bloques configurado en el editor. La guía de medidas aparece solo para productos identificados como armazones y usa un subrayado de foco sin contorno exterior.

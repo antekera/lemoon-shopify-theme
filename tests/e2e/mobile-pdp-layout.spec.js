@@ -1,18 +1,22 @@
 import { test, expect } from '@playwright/test';
+import { execFileSync } from 'node:child_process';
+
+const renderEyewear = () => execFileSync(process.execPath, ['--input-type=module', '-e', "import { renderEyewearSsrFixture } from './tests/helpers/pdp-information-renderer.mjs'; process.stdout.write(renderEyewearSsrFixture());"], { encoding: 'utf8' });
 
 test('mobile summary precedes the gallery, swiping updates the counter and desktop restores the layout', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('**/tests/fixtures/eyewear-product.html', route => route.fulfill({ contentType: 'text/html; charset=utf-8', body: renderEyewear() }));
   await page.goto('/tests/fixtures/eyewear-product.html');
   const summary = page.locator('.lemoon-mobile-summary');
   await expect(summary).toBeVisible();
   await expect(summary.locator('h1')).toHaveCount(1);
-  await expect(summary.locator('[data-favourite]')).toBeVisible();
+  await expect(summary.locator('[data-product-favourite-slot]')).toHaveCount(1);
   await expect(summary.locator('[data-heading-sku]')).toHaveCount(0);
   await expect(page.locator('.lemoon-pdp__info [data-heading-sku]')).toBeVisible();
   await expect(summary.locator('[data-price]')).toBeVisible();
-  await expect(summary.locator('.lemoon-pdp__tax')).toHaveText('IVA incluido.');
-  const order = await summary.locator('lemoon-product-tools').evaluate(el => [...el.children].map(node => node.className));
-  expect(order).toEqual(['lemoon-product-status', 'lemoon-product-heading', 'lemoon-mobile-price-row', 'lemoon-pdp__promotions']);
+  await expect(summary.locator('.lemoon-pdp__tax')).toHaveCount(0);
+  const order = await summary.evaluate(el => Boolean(el.querySelector('h1').compareDocumentPosition(el.querySelector('[data-price]')) & Node.DOCUMENT_POSITION_FOLLOWING));
+  expect(order).toBe(true);
   const stage = page.locator('.lemoon-pdp__stage');
   expect(await summary.evaluate(el => el.getBoundingClientRect().bottom)).toBeLessThanOrEqual(await stage.evaluate(el => el.getBoundingClientRect().top));
   await expect(page.locator('lemoon-thumbnail-rail')).toBeHidden();
@@ -22,12 +26,10 @@ test('mobile summary precedes the gallery, swiping updates the counter and deskt
   await stage.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
   await expect(page.locator('[data-gallery-current]')).toHaveText('1');
   await page.setViewportSize({ width: 1280, height: 844 });
-  await expect(summary).toBeHidden();
-  await expect(page.locator('.lemoon-pdp__info h1')).toBeVisible();
-  await expect(page.locator('.lemoon-pdp__info .lemoon-mobile-price-row > .lemoon-pdp__price')).toBeVisible();
-  await expect(page.locator('.lemoon-pdp__info .lemoon-mobile-price-row > .lemoon-pdp__tax')).toBeVisible();
-  const desktopOrder = await page.locator('.lemoon-pdp__info lemoon-product-tools').evaluate(el => [...el.children].map(node => node.className));
-  expect(desktopOrder).toEqual(order);
+  await expect(summary).toBeVisible();
+  await expect(summary.locator('h1')).toBeVisible();
+  await expect(summary.locator('.lemoon-mobile-price-row > .lemoon-pdp__price')).toBeVisible();
+  await expect(page.locator('.lemoon-pdp__info h1')).toHaveCount(0);
   const desktopOptions = await page.locator('.lemoon-pdp__frame-options').evaluate(el => {
     const color = el.querySelector('.lemoon-pdp__options--color legend').getBoundingClientRect();
     const size = el.querySelector('.lemoon-pdp__size-row > div').getBoundingClientRect();

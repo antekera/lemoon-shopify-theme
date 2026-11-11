@@ -3,6 +3,9 @@
   @param {product} product - Current Shopify product.
   @param {string} section_id - Unique section identifier.
 {% enddoc %}
+{%- capture frame_product -%}{% render 'lemoon-frame-classification', product: product %}{%- endcapture -%}
+{%- assign frame_product = frame_product | strip -%}
+{%- if frame_product == 'true' -%}
 {%- assign drawer_instance_id = section_id | append: '-drawer' -%}
 <lemoon-product-tools>
   <div class="lemoon-pdp__size-row">
@@ -15,3 +18,4 @@
     {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}
   </dialog>
 </lemoon-product-tools>
+{%- endif -%}
