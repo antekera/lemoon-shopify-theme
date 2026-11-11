@@ -217,6 +217,7 @@ if (typeof window !== 'undefined') {
           const variant = new URL(window.location.href).searchParams.get('variant');
           if (variant) url.searchParams.set('variant', variant);
           shareStatus.textContent = '';
+          shareStatus.classList.remove('visually-hidden');
           shareFallback.hidden = true;
           if (navigator.share) {
             try {
@@ -228,6 +229,7 @@ if (typeof window !== 'undefined') {
           }
           try {
             await navigator.clipboard.writeText(url.href);
+            shareStatus.classList.add('visually-hidden');
             shareStatus.textContent = shareStatus.dataset.copied;
           } catch {
             shareFallback.value = url.href;

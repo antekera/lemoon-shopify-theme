@@ -11,7 +11,9 @@ lemoon-product-tools { display: block; }
 .lemoon-product-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .lemoon-product-heading__actions { display: flex; flex: 0 0 auto; align-items: flex-start; }
 .lemoon-product-heading__share[hidden] { display: none !important; }
-.lemoon-product-heading__share .icon-share { width: 20px; height: 20px; }
+.lemoon-product-heading .lemoon-product-heading__share { margin-top: 0; }
+.lemoon-product-heading__share .icon-share { width: 20px; height: 20px; transform: translateX(6px); }
+.lemoon-product-heading .lemoon-product-heading__share:hover { color: var(--lemoon-action-accent); }
 .lemoon-product-share-feedback { color: var(--lemoon-text-brand); font-size: 13px; }
 .lemoon-product-share-feedback input { max-width: 100%; width: 100%; }
 @media (max-width: 749px) { .lemoon-product-heading__share { display: none !important; } .lemoon-product-share-feedback { display: none; } }
@@ -593,6 +595,7 @@ lemoon-thumbnail-rail { display: contents; }
 .lemoon-product-heading__wishlist:empty { display: none; }
 .lemoon-product-heading__wishlist .Vtl-WishlistIcon__ProductPageWrapper { display: block !important; position: static !important; inset: auto !important; width: 44px; height: 44px; }
 .lemoon-product-heading__wishlist .Vtl-WishlistButton__WishlistIconButton { display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; }
+.lemoon-product-heading__wishlist .Vtl-WishlistButton__IconWrapper { display: grid; place-items: center; }
 
 @media (min-width: 750px) {
   .lemoon-sticky-purchase .lemoon-select-lenses-button { padding-inline: 32px; }
