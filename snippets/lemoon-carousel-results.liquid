@@ -8,7 +8,7 @@
 <ul class="lemoon-featured-products__results" data-next-page="{{ next_url | escape }}">
   {%- for card_product in products -%}
     {%- if card_product.price > 0 and card_product.available -%}
-      <li class="lemoon-featured-products__item" data-product-id="{{ card_product.id }}" data-product-tags="{{ card_product.tags | json | escape }}">
+      <li class="lemoon-featured-products__item" data-product-id="{{ card_product.id }}" data-product-tags="{{ card_product.tags | json | escape }}" data-product-shape="{{ card_product.metafields.custom.frame_shape.value | escape }}" data-product-material="{{ card_product.metafields.custom.frame_material.value | escape }}">
         {% render 'card-product', card_product: card_product, media_aspect_ratio: 'square', show_secondary_image: true, show_vendor: false, show_rating: false, lazy_load: true, skip_styles: true, section_id: section_id, show_quick_add: show_quick_add %}
       </li>
     {%- endif -%}

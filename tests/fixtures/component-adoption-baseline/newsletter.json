@@ -41,6 +41,7 @@
                 "data-shopify-form-fixture": "",
                 "id": "LemoonNewsletter-component-fixture",
                 "method": "post",
+                "target": "LemoonNewsletter-component-fixture-response",
                 "class": "lemoon-newsletter__form"
               },
               "children": [
@@ -108,6 +109,16 @@
                   "children": [
                     "Suscribirme"
                   ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "aria-live": "polite",
+                    "data-fallback-message": "No pudimos confirmar tu suscripción. Inténtalo nuevamente.",
+                    "data-pending-message": "La confirmación está tardando. Si continúa la espera, intenta nuevamente.",
+                    "class": "lemoon-newsletter__status"
+                  },
+                  "children": []
                 }
               ]
             }

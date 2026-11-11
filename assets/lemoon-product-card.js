@@ -239,6 +239,7 @@
 
     gestureTarget.addEventListener('pointerdown', (event) => {
       if (galleryTransitionFinishes.has(card)) return;
+      if (event.target.closest('button, [role="button"]')) return;
       const bounds = media.getBoundingClientRect();
       if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) return;
       if (event.button !== 0 && event.pointerType === 'mouse') return;
@@ -289,7 +290,7 @@
       return;
     }
 
-    if (!card || event.target.closest('a, button, .lemoon-product-card__try-on')) return;
+    if (!card || event.target.closest('a, button, [role="button"], .lemoon-product-card__try-on')) return;
     const productLink = card.querySelector('.lemoon-product-card__image-link');
     if (productLink?.href) window.location.assign(productLink.href);
   });

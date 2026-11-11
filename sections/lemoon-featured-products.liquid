@@ -1,8 +1,12 @@
 {%- liquid
   assign featured_collection = section.settings.collection
   assign match_product_tags = false
+  assign carousel_heading = section.settings.heading
 
   if section.settings.collection_source == 'product_category' and product != blank
+    if request.page_type == 'product'
+      assign carousel_heading = 'lemoon_pdp.similar_products_heading' | t: product_title: product.title
+    endif
     assign featured_collection = blank
     assign optical_collection = section.settings.optical_collection
     assign sun_collection = section.settings.sun_collection
@@ -37,19 +41,19 @@
     {{ 'component-card.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'lemoon-product-card.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
-  <section class="lemoon-featured-products page-width{% if section.settings.show_quick_add %} lemoon-featured-products--quick-add{% endif %}"{% if section.settings.randomize %} data-randomize data-visible-count="{{ section.settings.products_to_show }}"{% endif %}{% if defer_products %} data-deferred data-collection-url="{{ featured_collection.url }}" data-carousel-view="{% if section.settings.show_quick_add %}carousel-accessories{% else %}carousel{% endif %}" data-collection-count="{{ featured_collection.products_count }}" data-current-product-id="{{ product.id }}" data-product-tags="{{ product.tags | json | escape }}" data-initial-items="{{ section.settings.initial_products }}" data-max-items="{{ section.settings.max_products_to_load }}"{% endif %}>
+  <section class="lemoon-featured-products page-width{% if section.settings.show_quick_add %} lemoon-featured-products--quick-add{% endif %}"{% if section.settings.randomize %} data-randomize data-visible-count="{{ section.settings.products_to_show }}"{% endif %}{% if defer_products %} data-deferred data-collection-url="{{ featured_collection.url }}" data-carousel-view="{% if section.settings.show_quick_add %}carousel-accessories{% else %}carousel{% endif %}" data-collection-count="{{ featured_collection.products_count }}" data-current-product-id="{{ product.id }}" data-product-tags="{{ product.tags | json | escape }}"{% if match_product_tags %} data-match-characteristics data-product-shape="{{ product.metafields.custom.frame_shape.value | escape }}" data-product-material="{{ product.metafields.custom.frame_material.value | escape }}"{% endif %} data-initial-items="{{ section.settings.initial_products }}" data-max-items="{{ section.settings.max_products_to_load }}"{% endif %}>
     {%- capture carousel_id -%}LemoonFeaturedProducts-{{ section.id }}{%- endcapture -%}
     <div class="lemoon-featured-products__heading{% if section.settings.link_label == blank %} lemoon-featured-products__heading--centered{% endif %}">
       <div>
         {%- if section.settings.eyebrow != blank -%}<p class="lemoon-featured-products__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
-        <h2>{{ section.settings.heading | escape }}</h2>
+        <h2>{{ carousel_heading | escape }}</h2>
       </div>
       <div class="lemoon-featured-products__actions">
         {%- if section.settings.link_label != blank -%}<a href="{{ featured_collection.url }}" class="lemoon-featured-products__link lemoon-text-link">{{ section.settings.link_label | escape }}</a>{%- endif -%}
         {% render 'lemoon-carousel-controls', carousel_id: carousel_id %}
       </div>
     </div>
-    <ul id="{{ carousel_id }}" class="lemoon-featured-products__track" role="list" aria-label="{{ section.settings.heading | escape }}"{% if defer_products %} aria-busy="true"{% endif %}>
+    <ul id="{{ carousel_id }}" class="lemoon-featured-products__track" role="list" aria-label="{{ carousel_heading | escape }}"{% if defer_products %} aria-busy="true"{% endif %}>
       {%- unless defer_products -%}
       {%- assign displayed_count = 0 -%}
       {%- for card_product in featured_collection.products -%}

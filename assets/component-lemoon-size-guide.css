@@ -68,10 +68,12 @@
 
 /* Keep the close control above the full-width comparison heading. */
 .lemoon-pdp__dialog.lemoon-size-drawer:has(.lemoon-size-guide--dialog) {
-  --lemoon-size-guide-padding-top: 72px;
-  --lemoon-size-guide-reading-top: calc(var(--lemoon-space-4) + var(--lemoon-size-touch) + var(--lemoon-space-3));
+  --lemoon-size-guide-padding-top: 24px;
+  --lemoon-size-guide-reading-top: calc(8px + var(--lemoon-size-touch) + var(--lemoon-space-3));
   padding-top: var(--lemoon-size-guide-padding-top);
   scroll-padding-top: var(--lemoon-size-guide-reading-top);
 }
-.lemoon-size-drawer:has(.lemoon-size-guide--dialog) .lemoon-pdp__close { top: calc(var(--lemoon-space-4) - var(--lemoon-size-guide-padding-top)); }
+.lemoon-size-drawer:has(.lemoon-size-guide--dialog) .lemoon-pdp__close { top: calc(8px - var(--lemoon-size-guide-padding-top)); }
 .lemoon-size-guide--dialog .lemoon-size-guide__comparison > summary { padding-right: 0; }
+
+.lemoon-size-guide--dialog .lemoon-size-guide__comparison > summary { font-size: 16px; }

@@ -37,12 +37,15 @@
   <div class="lemoon-mobile-search__overlay" data-lemoon-search-overlay aria-hidden="true"></div>
   <div id="{{ panel_id }}" class="lemoon-mobile-search__panel" data-lemoon-search-panel role="dialog" aria-modal="false" aria-label="{{ 'sections.mobile_search.title' | t | escape }}" tabindex="-1">
     <div class="lemoon-mobile-search__sticky-header">
-      <form action="{{ routes.search_url }}" method="get" role="search" class="lemoon-mobile-search__form" data-lemoon-search-form>
+      <form action="{{ routes.search_url }}" method="get" role="search" class="lemoon-mobile-search__form lemoon-ui-field" data-lemoon-search-form>
         <button type="button" class="lemoon-mobile-search__close" data-lemoon-search-close aria-label="{{ 'sections.mobile_search.close' | t }}">
           {% render 'lemoon-icon', icon: 'chevron-right', size: 24 %}
         </button>
-        <label class="visually-hidden" for="{{ panel_id }}-Input">{{ 'sections.mobile_search.search_label' | t }}</label>
-        <input id="{{ panel_id }}-Input" class="lemoon-mobile-search__input" data-lemoon-search-input type="search" name="q" placeholder="{{ 'sections.mobile_search.placeholder' | t }}" autocomplete="off" aria-controls="{{ panel_id }}-Results">
+        {%- assign search_input_id = panel_id | append: '-Input' -%}
+        {%- assign search_results_id = panel_id | append: '-Results' -%}
+        {%- assign search_label = 'sections.mobile_search.search_label' | t -%}
+        {%- assign search_placeholder = 'sections.mobile_search.placeholder' | t -%}
+        {% render 'lemoon-ui-field', id: search_input_id, name: 'q', type: 'search', label: search_label, placeholder: search_placeholder, control_class: 'lemoon-mobile-search__input', label_class: 'visually-hidden', autocomplete: 'off', aria_controls: search_results_id, unwrapped: true, label_before: true, mobile_search: true %}
         <input type="hidden" name="type" value="product">
         <button type="submit" class="lemoon-mobile-search__submit" aria-label="{{ 'sections.mobile_search.submit' | t }}">{% render 'lemoon-icon', icon: 'search', size: 24 %}</button>
       </form>
@@ -59,9 +62,6 @@
       <div class="lemoon-mobile-search__right-column">
         <section class="lemoon-mobile-search__information" aria-label="{{ 'sections.mobile_search.information' | t }}">
       <ul class="lemoon-mobile-search__information-links" role="list">
-        {%- if section.settings.mobile_search_show_wishlist -%}
-          <li><a href="/apps/page/wishlist">{% render 'lemoon-icon', icon: 'heart', size: 22 %}<span>{{ 'sections.mobile_search.wishlist' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
-        {%- endif -%}
         <li><a href="{{ shipping_url | escape }}">{% render 'lemoon-icon', icon: 'truck', size: 22 %}<span>{{ 'sections.mobile_search.shipping_returns' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ faq_url | escape }}">{% render 'lemoon-icon', icon: 'circle-help', size: 22 %}<span>{{ 'sections.mobile_search.faq' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>
         <li><a href="{{ style_url | escape }}">{% render 'lemoon-icon', icon: 'sparkles', size: 22 %}<span>{{ 'sections.mobile_search.find_style' | t }}</span>{% render 'lemoon-icon', icon: 'chevron-right', size: 18 %}</a></li>

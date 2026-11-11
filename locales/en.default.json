@@ -56,6 +56,7 @@
     "share": {
       "close": "Close share",
       "copy_to_clipboard": "Copy link",
+      "copy_error": "We couldn't copy the link. Select it to copy it.",
       "share_url": "Link",
       "success_message": "Link copied to clipboard"
     },
@@ -67,6 +68,8 @@
     }
   },
   "newsletter": {
+    "pending": "Confirmation is taking longer than expected. If the wait continues, please try again.",
+    "retry": "We could not confirm your subscription. Please try again.",
     "label": "Email",
     "success": "Thanks for subscribing",
     "button_label": "Subscribe"
@@ -123,6 +126,8 @@
       "card_label_new": "New",
       "card_label_best_seller": "Best seller",
       "card_label_bestseller": "Bestseller",
+      "favourite_added": "Added to wishlist",
+      "favourite_list": "Wishlist",
       "add_to_favorites": "Save {{ product_name }} to favorites",
       "remove_from_favorites": "Remove {{ product_name }} from favorites",
       "configure_lenses": "Select lenses and buy",
@@ -428,6 +433,7 @@
       "announcement_bar": "Announcement bar"
     },
     "header": {
+      "my_account": "My account",
       "announcement": "Announcement",
       "menu": "Menu",
       "close_menu": "Close menu",
@@ -632,7 +638,7 @@
         "step_2_title": "2. Measure the frame in millimeters",
         "step_2_body_html": "<p>Work with your actual glasses and write down each measurement with its name. Look straight at the front and align the ruler with the part you are measuring; avoid taking the reading diagonally.</p><p>In this diagram, overall width runs from one outside edge of the front to the other. It is not the same as measuring between the hinges. Check that the measurements you compare use the same endpoints, and do not calculate overall width by adding the two lenses and the bridge: the frame edges also take up space.</p>",
         "step_3_title": "3. Compare measurements on the product page",
-        "step_3_body_html": "<p>On the product page of the frame you are considering, find “Product details” and open the “Measurements” tab. Keep your notes nearby and compare one measurement at a time, always in the same unit.</p><ul><li>Match the measurement names and endpoints: lens width with lens width, overall width with overall width.</li><li>Use only the measurements available for that model. If one is missing, do not infer it from the photo, drawing or size label.</li><li>A written size such as small or medium does not replace measurements in millimeters or fill in missing values.</li></ul>",
+        "step_3_body_html": "<p>On the product page of the frame you are considering, open the “Measurements” tab. Keep your notes nearby and compare one measurement at a time, always in the same unit.</p><ul><li>Match the measurement names and endpoints: lens width with lens width, overall width with overall width.</li><li>Use only the measurements available for that model. If one is missing, do not infer it from the photo, drawing or size label.</li><li>A written size such as small or medium does not replace measurements in millimeters or fill in missing values.</li></ul>",
         "step_3_note_html": "<p>If the measurements do not exactly match your favorite glasses, check which part differs and by how many millimeters. A wider front takes up more space across your face; a taller lens changes the vertical proportions. The measurements and shape of the bridge and temple arms influence how the frame rests and stays in place. A small difference does not, on its own, rule out a frame: compare each measurement and look at the shapes in the product photos.</p>",
         "help_title": "Missing a measurement?",
         "help_body_html": "<p>If a marking is unreadable, a product measurement is missing or you do not have glasses to compare, ask before choosing. Include the model and the measurement you need clarified.</p>"
@@ -1114,8 +1120,8 @@
       },
       "title": "Choose glasses for your face",
       "intro": "Your face can give you ideas for choosing frames. Compare the illustrations and explore the shapes you like: they are starting points, and you choose what to wear.",
-      "index_title": "Look at the outline, explore the shapes",
-      "index_body": "Look straight ahead in a mirror. Notice where your face looks widest and whether curves or angles stand out. These six families are approximate; you may recognise features from more than one.",
+      "index_title": "Explore the shapes and select your face type",
+      "index_body": "Look straight ahead in a mirror. Notice where your face looks widest and whether curves or angles stand out. These six families are approximate.",
       "unknown_title": "Not sure about your shape?",
       "unknown_body": "You do not need to choose just one. Take ideas from two families or start with the frames: curves to echo other curves, angles to create contrast. Try an option beyond the suggestions too. There is room for your taste here.",
       "fit_title": "Shape guides your style. Check fit separately",
@@ -1422,6 +1428,32 @@
     }
   },
   "lemoon_pdp": {
+    "wishlist_view_product": "View product",
+    "similar_products_heading": "Similar to {{ product_title }}",
+    "shipping_summary": {
+      "delivery_detail": "From confirmed payment and receipt of your complete prescription, if required. If corrections are needed, from receipt and acceptance of the correction. Timing may vary by product, destination and carrier.",
+      "shipping_detail": "Check the cost before paying. We send a tracking code when your order ships.",
+      "returns_detail": "10 calendar days from receipt; 90 if you do not receive written confirmation containing the full, clear and legible contract. Conditions and possible exceptions for personalized products apply.",
+      "guarantee_detail": "From receipt, for faults covered by law you can choose free repair, replacement or a refund.",
+      "shipping_link": "Shipping policy",
+      "returns_link": "Returns and guarantee policy"
+    },
+    "confidence": {
+      "heading": "Know before you buy",
+      "guarantee": "365-day warranty for your glasses",
+      "guarantee_detail": "If your product has a fault covered by law, you have 6 months from receipt to choose free repair, replacement or a refund.",
+      "returns": "Free exchanges and returns within 30 days",
+      "returns_detail": "For online purchases, you can withdraw within 10 calendar days of receipt, subject to legal exceptions. This extends to 90 days if you do not receive written confirmation with the full, clear and legible contract terms. Read our policy for the terms and possible exceptions for personalized products.",
+      "shipping": "Shipping throughout Chile",
+      "delivery_estimate": "Estimated delivery: {{ estimate }}.",
+      "delivery_condition": "The delivery period starts when we confirm payment and receive your complete prescription, if required. If the prescription needs a correction, it starts when we receive and accept that correction.",
+      "shipping_detail": "Delivery times may vary by product, destination and carrier. Check shipping costs and terms before completing your purchase. We send you a tracking code when your order is dispatched.",
+      "payment_methods": "Available payment methods",
+      "prescription_admission": "Prescription compatibility",
+      "prescription_yes": "Accepts a prescription",
+      "prescription_no": "Does not accept a prescription",
+      "prescription_pending": "To be confirmed"
+    },
     "previous_photos": "View previous photos",
     "next_photos": "View more photos",
     "size_label": "Size",
@@ -1434,6 +1466,7 @@
     "review_count": "{{ count }} reviews",
     "configuration": "Configuration",
     "size_guide": "Size guide",
+    "how_choose_size": "How to choose your size",
     "prescription": "Your prescription",
     "prescription_note": "Copy your prescription values or send it after purchase.",
     "recipe_mode": "How you will provide your prescription",
@@ -1452,7 +1485,7 @@
     "description": "Description",
     "lens_details": "Lens guide",
     "shipping_returns": "Shipping and returns",
-    "shipping_note": "Shipping costs and options are calculated at checkout.",
+    "shipping_note": "Check shipping costs and terms before completing your purchase.",
     "care": "Caring for your glasses",
     "care_note": "Clean with a microfiber cloth and water. Avoid abrasive products and keep your glasses in a case when not in use.",
     "reviews": "Frame reviews",
@@ -1478,7 +1511,7 @@
     "frame_specs_unavailable": "Details for this frame are not available yet.",
     "fit_unavailable": "Size and face-shape guidance is not available for this frame yet.",
     "fit_recommendation": "Use these details as a guide to the fit of this frame:",
-    "fit_note": "Fit guidance is approximate. If possible, compare these details with a frame that feels comfortable.",
+    "fit_note": "Style guidance; does not determine fit.",
     "suggested_face_shapes": "Suggested face shapes",
     "gender": "Audience",
     "units": "Measurement unit",

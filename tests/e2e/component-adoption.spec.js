@@ -65,19 +65,18 @@ test('legacy FAQ preserves first-open/editor attributes, keyboard toggles and ri
 });
 
 for (const scenario of ['newsletter','article']) {
-  test(`${scenario}: migrated controls use the approved boundary and inset keyboard focus`, async ({ page }) => {
+  test(`${scenario}: migrated controls reinforce their boundary on focus`, async ({ page }) => {
     await page.goto(fixture(scenario));
     const control = page.locator('form [type=email]');
     for (const edge of ['top','right','bottom','left']) {
       await expect(control).toHaveCSS(`border-${edge}-width`, '1px');
-      await expect(control).toHaveCSS(`border-${edge}-color`, 'rgb(102, 133, 173)');
+      await expect(control).toHaveCSS(`border-${edge}-color`, scenario === 'newsletter' ? 'rgb(11, 31, 58)' : 'rgb(102, 133, 173)');
     }
     await control.focus();
-    await expect(control).toHaveCSS('outline-color','rgb(11, 31, 58)');
-    await expect(control).toHaveCSS('outline-width','2px');
-    await expect(control).toHaveCSS('outline-offset', '-2px');
-    await expect(control).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
-    await expect(control).toHaveCSS('box-shadow', 'none');
+    await expect(control).toHaveCSS('outline-style', 'none');
+    await expect(control).toHaveCSS('border-top-width', scenario === 'newsletter' ? '1px' : '2px');
+    if (scenario === 'newsletter') await expect(control).toHaveCSS('box-shadow', /inset/);
+    else await expect(control).toHaveCSS('box-shadow', 'none');
     await page.emulateMedia({ forcedColors: 'active' });
     await expect(control).toHaveCSS('border-top-style','solid');
     await expect(control).toHaveCSS('outline-style','solid');
@@ -118,7 +117,7 @@ test('comment response autofocus and error destinations retain their native focu
 });
 
 for (const scenario of ['controls', 'contact', 'contact-error']) {
-  test(`${scenario}: fields and selects keep a continuous inset focus ring without a second shadow`, async ({ page }) => {
+  test(`${scenario}: fields and selects reinforce their border without a second outline`, async ({ page }) => {
     await page.goto(`/tests/fixtures/component-library.html?scenario=${scenario}`);
     const controls = scenario === 'controls'
       ? page.locator('#fixture-email, #fixture-select, #invalid-field')
@@ -128,7 +127,7 @@ for (const scenario of ['controls', 'contact', 'contact-error']) {
       await control.blur();
       const isInvalid = await control.getAttribute('aria-invalid') === 'true';
       const restingColor = isInvalid && scenario.startsWith('contact') ? 'rgb(192, 57, 43)' : 'rgb(102, 133, 173)';
-      const focusedColor = isInvalid ? 'rgb(192, 57, 43)' : 'rgb(11, 31, 58)';
+      const focusedColor = isInvalid ? 'rgb(192, 57, 43)' : restingColor;
       for (const edge of ['top', 'right', 'bottom', 'left']) {
         await expect(control).toHaveCSS(`border-${edge}-style`, 'solid');
         await expect(control).toHaveCSS(`border-${edge}-color`, restingColor);
@@ -138,10 +137,8 @@ for (const scenario of ['controls', 'contact', 'contact-error']) {
       for (const edge of ['top', 'right', 'bottom', 'left']) {
         await expect(control).toHaveCSS(`border-${edge}-color`, focusedColor);
       }
-      await expect(control).toHaveCSS('outline-color', focusedColor);
-      await expect(control).toHaveCSS('outline-style', 'solid');
-      await expect(control).toHaveCSS('outline-width', '2px');
-      await expect(control).toHaveCSS('outline-offset', '-2px');
+      await expect(control).toHaveCSS('border-top-width', '2px');
+      await expect(control).toHaveCSS('outline-style', 'none');
       await expect(control).toHaveCSS('box-shadow', 'none');
     }
     const invalid = page.locator('[aria-invalid="true"]');
@@ -152,7 +149,6 @@ for (const scenario of ['controls', 'contact', 'contact-error']) {
     await expect(focused).toHaveCSS('border-top-style', 'solid');
     await expect(focused).toHaveCSS('outline-style', 'solid');
     await expect(focused).toHaveCSS('outline-width', '2px');
-    await expect(focused).toHaveCSS('outline-offset', '-2px');
     if (await invalid.count()) {
       const invalidControl = invalid.first();
       await invalidControl.focus();

@@ -1,0 +1,23 @@
+{% doc %}
+  Outputs true for products identified as frames by catalog type, explicit tags or frame data.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+{%- liquid
+  assign product_type = product.type | strip | replace: 'Ó', 'O' | downcase | replace: 'ó', 'o'
+  assign is_frame = false
+  case product_type
+    when 'optico', 'opticos', 'optical', 'armazon optico', 'armazon', 'solar', 'solares', 'lentes de sol', 'sunglasses', 'muestra solar'
+      assign is_frame = true
+  endcase
+  if product_type != 'accesorio' and product_type != 'accesorios'
+    if product.tags contains 'armazón' or product.tags contains 'armazon' or product.tags contains 'lemoon-menu-sol' or product.tags contains 'lemoon-menu-opticos'
+      assign is_frame = true
+    endif
+    if product.metafields.custom.frame_shape.value != blank or product.metafields.custom.frame_size.value != blank or product.metafields.custom.frame_dimensions.value != blank
+      assign is_frame = true
+    endif
+  endif
+  if is_frame
+    echo 'true'
+  endif
+-%}

@@ -1,11 +1,16 @@
 {% doc %}
-  Renders product-specific frame measurements, characteristics, and fit tabs inline on a product page.
+  Renders product description, characteristics and measurements in tabs.
   @param {product} product - Current Shopify product.
   @param {string} instance_id - Unique ID prefix for the inline tab panel.
+  @param {boolean} [include_description] - Show the complete Shopify product description.
+  @param {string} [description_attributes] - Shopify editor attributes from the description block.
+  @param {boolean} [show_sku] - Show the selected variant SKU with the product details.
 {% enddoc %}
-<section class="lemoon-frame-information" aria-labelledby="FrameInformation-{{ instance_id | escape }}">
+<section class="lemoon-frame-information quick-add-hidden" aria-label="{{ 'lemoon_size_guide.product_details_heading' | t | escape }}">
   <div class="lemoon-frame-information__inner">
-    <h2 id="FrameInformation-{{ instance_id | escape }}">{{ 'lemoon_size_guide.product_details_heading' | t }}</h2>
-    {% render 'lemoon-size-guide-content', product: product, instance_id: instance_id %}
+    <div class="lemoon-frame-information__details">
+      {% render 'lemoon-size-guide-content', product: product, instance_id: instance_id, initial_tab: 'frame', include_description: include_description, description_attributes: description_attributes %}
+      {%- if show_sku -%}{% render 'lemoon-product-sku', product: product %}{%- endif -%}
+    </div>
   </div>
 </section>

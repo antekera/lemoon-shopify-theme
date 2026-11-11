@@ -20,8 +20,37 @@ test('a missing native service fails within a bounded wait', async () => {
   const pending=expect(loadCustomerPrivacy({},200)).rejects.toThrow('privacy_service_unavailable');
   await vi.advanceTimersByTimeAsync(200); await pending;
 });
-test('unknown and denied choices stay unchecked and data sale remains outside these purposes', () => {
-  expect(privacyChoices({analytics:'yes',marketing:'no',preferences:'',sale_of_data:'yes'})).toEqual({analytics:true,marketing:false,preferences:false});
+test('unrecorded choices reflect Shopify effective permissions without recording consent', () => {
+  const native = {
+    analyticsProcessingAllowed: vi.fn(() => true),
+    marketingAllowed: vi.fn(() => false),
+    preferencesProcessingAllowed: vi.fn(() => true),
+    setTrackingConsent: vi.fn(),
+  };
+  native.currentVisitorConsent = vi.fn(() => ({analytics:'', marketing:'', preferences:''}));
+  expect(privacyChoices(native)).toEqual({analytics:true, marketing:false, preferences:true});
+  expect(native.analyticsProcessingAllowed).toHaveBeenCalledOnce();
+  expect(native.marketingAllowed).toHaveBeenCalledOnce();
+  expect(native.preferencesProcessingAllowed).toHaveBeenCalledOnce();
+  expect(native.setTrackingConsent).not.toHaveBeenCalled();
+});
+test('effective permissions govern the displayed choices even when recorded consent differs', () => {
+  const native = {
+    currentVisitorConsent: vi.fn(() => ({analytics:'yes', marketing:'no', preferences:'yes', sale_of_data:'yes'})),
+    analyticsProcessingAllowed: vi.fn(() => false),
+    marketingAllowed: vi.fn(() => true),
+    preferencesProcessingAllowed: vi.fn(() => false),
+  };
+  expect(privacyChoices(native)).toEqual({analytics:false, marketing:true, preferences:false});
+});
+test('unavailable, throwing, or nonboolean permission methods report unavailable instead of inventing a state', () => {
+  const allAllowed = { analyticsProcessingAllowed: () => true, marketingAllowed: () => true, preferencesProcessingAllowed: () => true };
+  for (const override of [
+    {analyticsProcessingAllowed: undefined},
+    {marketingAllowed: () => 'yes'},
+  ]) expect(() => privacyChoices({...allAllowed, ...override})).toThrow('privacy_service_unavailable');
+  expect(() => privacyChoices({...allAllowed, preferencesProcessingAllowed: () => { throw new Error('native failure'); }})).toThrow();
+  expect(() => privacyChoices({})).toThrow('privacy_service_unavailable');
 });
 test('saves only explicit boolean choices and preserves the independent data-sale setting', async () => {
   const native=api(); native.currentVisitorConsent.mockReturnValue({analytics:'yes',marketing:'no',preferences:'no',sale_of_data:'no'});

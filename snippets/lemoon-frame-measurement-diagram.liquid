@@ -3,8 +3,20 @@
   @param {string} instance_id - Unique prefix for accessible SVG titles and paint IDs.
   @param {boolean} [product_measurements] - Show compact named HTML references only when explicitly true.
   @param {object} [dimensions] - Native positive numeric product measurements in millimeters.
+  @param {boolean} [show_measurement_values] - Annotate diagram markers without adding a second list.
   @param {string} label - Localized description of both views.
 {% enddoc %}
+{%- liquid
+  assign show_values = false
+  if product_measurements == true or show_measurement_values == true
+    assign show_values = true
+  endif
+  assign frame_number = dimensions.frame_width | plus: 0
+  assign lens_number = dimensions.lens_width | plus: 0
+  assign bridge_number = dimensions.bridge | plus: 0
+  assign height_number = dimensions.lens_height | plus: 0
+  assign temple_number = dimensions.temple | plus: 0
+-%}
 <figure class="lemoon-measurement-diagram">
   <div class="lemoon-measurement-diagram__views">
     <div class="lemoon-measurement-diagram__view">
@@ -43,7 +55,7 @@
           <path d="M17 52V59M383 52V59M39.8 192V208M175.06 192V208M363 64.48H397M363 179.66H397M175.06 103V131M224.94 103V131" stroke-opacity=".28"/>
         </g>
         <g fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">
-          <text x="200" y="27">A</text><text x="107.43" y="240">B</text><text x="200" y="164">C</text><text x="388" y="129">D</text>
+          <text x="200" y="27">A{% if show_values and dimensions.frame_width == frame_number and frame_number > 0 %}<tspan font-size="12"> · {{ frame_number }} mm</tspan>{% endif %}</text><text x="107.43" y="240">B{% if show_values and dimensions.lens_width == lens_number and lens_number > 0 %}<tspan font-size="12"> · {{ lens_number }} mm</tspan>{% endif %}</text><text x="200" y="164">C{% if show_values and dimensions.bridge == bridge_number and bridge_number > 0 %}<tspan font-size="12"> · {{ bridge_number }} mm</tspan>{% endif %}</text><text x="398" y="129" text-anchor="end">D{% if show_values and dimensions.lens_height == height_number and height_number > 0 %}<tspan font-size="12"> · {{ height_number }} mm</tspan>{% endif %}</text>
         </g>
       </svg>
       <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.front_view' | t }}</p>
@@ -71,7 +83,7 @@
           <path d="M40 46C111 43 188 35 251 27C292 22 318 37 336 64C350 86 360 108 374 128M35 40L45 52M368 132L380 124"/>
           <path d="M40 80V38M342 146L380 126" stroke-opacity=".28"/>
         </g>
-        <text x="197" y="18" fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">E</text>
+        <text x="197" y="18" fill="currentColor" stroke="none" font-family="inherit" font-size="16" text-anchor="middle" aria-hidden="true">E{% if show_values and dimensions.temple == temple_number and temple_number > 0 %}<tspan font-size="12"> · {{ temple_number }} mm</tspan>{% endif %}</text>
       </svg>
       <p class="lemoon-measurement-diagram__view-name">{{ 'lemoon_size_guide.side_view' | t }}</p>
     </div>

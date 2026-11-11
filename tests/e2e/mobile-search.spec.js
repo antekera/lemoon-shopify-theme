@@ -1,16 +1,21 @@
+import { execFileSync } from 'node:child_process';
 import { expect, test } from '@playwright/test';
 
 test.use({ viewport: { width: 390, height: 844 }, hasTouch: true });
 const fixture = '/tests/fixtures/mobile-search.html';
+const renderedFixture = execFileSync(process.execPath, ['tests/helpers/search-renderer.mjs'], { encoding: 'utf8' });
 const s = (name) => `[data-lemoon-search-${name}]`;
 const products = (title = 'Producto predictivo') => Array.from({ length: 6 }, (_, i) => ({ id: 100 + i, title: `${title} ${i}`, url: `/products/predictive-${i}`, image: '/assets/lemoon-logo-refined-navy.svg', featured_image: { url: '/assets/lemoon-logo-refined-navy.svg', alt: title } }));
 const payload = (items) => ({ resources: { results: { products: items, collections: [], pages: [], articles: [], queries: [] } } });
 const openTrigger = (page) => page.locator(s('open')).filter({ visible: true });
 const open = async (page) => { await openTrigger(page).click(); await expect(page.locator(s('input'))).toBeFocused(); };
 
-test.beforeEach(async ({ page }) => { await page.goto(fixture); });
+test.beforeEach(async ({ page }) => {
+  await page.route('**/tests/fixtures/mobile-search.html', route => route.fulfill({ contentType: 'text/html', body: renderedFixture }));
+  await page.goto(fixture);
+});
 
-// These tests exercise responsive search behavior against representative fixture markup. Liquid rendering and the navigation drawer are not under test here.
+// Search form and shipping link are rendered from the theme's Liquid snippets; the surrounding shell is a local fixture.
 test('opens from mobile search below the header with focus and internal scroll', async ({ page }) => {
   await page.evaluate(() => window.scrollTo(0, 180));
   await open(page);
@@ -18,8 +23,8 @@ test('opens from mobile search below the header with focus and internal scroll',
   await expect(page.getByRole('dialog', { name: 'Buscar productos' })).toBeVisible();
   await expect(page.locator(s('panel'))).toHaveAttribute('aria-modal', 'false');
   await expect(openTrigger(page)).toHaveAttribute('aria-expanded', 'true');
-  await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
-  await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '1px');
+  await expect(page.locator(s('input'))).toHaveCSS('border-top-color', 'rgb(102, 133, 173)');
+  await expect(page.locator(s('input'))).toHaveCSS('border-top-width', '2px');
   await expect(page.locator(s('input'))).toHaveCSS('font-size', '18px');
   await expect(page.locator(s('input'))).toHaveCSS('outline-style', 'none');
   await expect(page.locator(s('input'))).toHaveCSS('box-shadow', 'none');

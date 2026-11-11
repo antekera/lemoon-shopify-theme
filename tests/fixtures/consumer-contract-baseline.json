@@ -5707,6 +5707,8 @@
             "attrs": {
               "data-product-id": "1",
               "data-product-tags": "[\"A <&\\\"\"]",
+              "data-product-shape": "",
+              "data-product-material": "",
               "class": "lemoon-featured-products__item"
             },
             "children": [
@@ -5732,6 +5734,8 @@
             "attrs": {
               "data-product-id": "4",
               "data-product-tags": "[]",
+              "data-product-shape": "",
+              "data-product-material": "",
               "class": "lemoon-featured-products__item"
             },
             "children": [
@@ -5768,6 +5772,8 @@
             "attrs": {
               "data-product-id": "1",
               "data-product-tags": "[\"A <&\\\"\"]",
+              "data-product-shape": "",
+              "data-product-material": "",
               "class": "lemoon-featured-products__item"
             },
             "children": [
@@ -5793,6 +5799,8 @@
             "attrs": {
               "data-product-id": "4",
               "data-product-tags": "[]",
+              "data-product-shape": "",
+              "data-product-material": "",
               "class": "lemoon-featured-products__item"
             },
             "children": [

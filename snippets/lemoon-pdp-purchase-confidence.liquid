@@ -1,0 +1,39 @@
+{% doc %}
+  Purchase benefits linked to the corresponding policy pages.
+  @param {object} shop - Current Shopify shop, policies and enabled payment methods.
+  @param {product} product - Product to classify for the eyewear warranty.
+  @param {object} warranty_page - Published store page containing warranty terms.
+{% enddoc %}
+{%- capture frame_classification -%}{%- render 'lemoon-frame-classification', product: product -%}{%- endcapture -%}
+{%- assign frame_classification = frame_classification | strip -%}
+{%- assign show_warranty = false -%}
+{%- if frame_classification == 'true' and warranty_page.url != blank -%}{%- assign show_warranty = true -%}{%- endif -%}
+{%- if show_warranty or shop.refund_policy.url != blank or shop.shipping_policy.url != blank or shop.enabled_payment_types.size > 0 -%}
+<aside class="lemoon-pdp-confidence" aria-label="{{ 'lemoon_pdp.confidence.heading' | t }}">
+  <ul class="lemoon-pdp-confidence__items" role="list">
+    {%- if show_warranty -%}
+      <li>
+        {% render 'lemoon-icon', icon: 'shield-check' %}
+        <div><a href="{{ warranty_page.url | escape }}">{{ 'lemoon_pdp.confidence.guarantee' | t }}</a></div>
+      </li>
+    {%- endif -%}
+    {%- if shop.refund_policy.url != blank -%}
+      <li>
+        {% render 'lemoon-icon', icon: 'rotate-ccw' %}
+        <div><a href="{{ shop.refund_policy.url | escape }}">{{ 'lemoon_pdp.confidence.returns' | t }}</a></div>
+      </li>
+    {%- endif -%}
+    {%- if shop.shipping_policy.url != blank -%}
+      <li>
+        {% render 'lemoon-icon', icon: 'truck' %}
+        <div><a href="{{ shop.shipping_policy.url | escape }}">{{ 'lemoon_pdp.confidence.shipping' | t }}</a></div>
+      </li>
+    {%- endif -%}
+  </ul>
+  {%- if shop.enabled_payment_types.size > 0 -%}
+    <div class="lemoon-pdp-confidence__payments"><p>{{ 'lemoon_pdp.confidence.payment_methods' | t }}</p>
+      <ul role="list">{%- for payment_type in shop.enabled_payment_types -%}<li>{{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>
+    </div>
+  {%- endif -%}
+</aside>
+{%- endif -%}

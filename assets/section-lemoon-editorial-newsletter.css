@@ -61,7 +61,7 @@
 .lemoon-newsletter--editorial .lemoon-ui-field .lemoon-newsletter__input {
   background: var(--lemoon-surface-page);
   color: var(--lemoon-text-primary);
-  border: 2px solid transparent;
+  border: 1px solid var(--lemoon-border-strong);
 }
 
 .lemoon-newsletter--editorial .lemoon-newsletter__button {
@@ -92,13 +92,6 @@
 .lemoon-newsletter--editorial :focus-visible {
   outline: 2px solid var(--lemoon-action-accent);
   outline-offset: 4px;
-}
-
-.lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus,
-.lemoon-newsletter--editorial .lemoon-ui-field .lemoon-ui-control:focus-visible {
-  border-color: var(--lemoon-action-accent);
-  outline: none;
-  box-shadow: none;
 }
 
 @media screen and (min-width: 750px) {

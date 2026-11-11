@@ -1,13 +1,13 @@
 /* Shared mobile drawer presentation. Each surface keeps its native controller.
    .lemoon-drawer is the visual panel; the remaining selectors adapt existing owners.
-   Nested navigation/filter panels and centered modals are deliberately excluded. */
+   Navigation, nested filter panels and centered modals are deliberately excluded. */
 @media (max-width: 749px) {
   :root {
     --lemoon-drawer-mobile-gap: max(32px, env(safe-area-inset-top));
     --lemoon-drawer-mobile-height: calc(100dvh - var(--lemoon-drawer-mobile-gap));
   }
 
-  html :is(.lemoon-drawer, dialog.lemoon-size-drawer, cart-drawer.drawer .drawer__inner, div.lemoon-mobile-nav, .mobile-facets__inner, pickup-availability-drawer) {
+  html :is(.lemoon-drawer, dialog.lemoon-size-drawer, cart-drawer.drawer .drawer__inner, .mobile-facets__inner, pickup-availability-drawer) {
     box-sizing: border-box;
     position: fixed;
     inset: auto 0 0;
@@ -34,7 +34,7 @@
   /* Keep the sheet solid until its downward exit finishes. */
   html dialog.lemoon-drawer,
   html .lemoon-pdp__dialog.lemoon-size-drawer { opacity: 1; }
-  html :is(dialog.lemoon-drawer[open], dialog.lemoon-size-drawer[open], .lemoon-drawer.is-open, .lemoon-mobile-nav.is-open, pickup-availability-drawer[open]),
+  html :is(dialog.lemoon-drawer[open], dialog.lemoon-size-drawer[open], .lemoon-drawer.is-open, pickup-availability-drawer[open]),
   html cart-drawer.drawer.active .drawer__inner { transform: translateY(0); }
 
   /* Preserve the native modal until its exit finishes when overlay transitions
@@ -50,8 +50,6 @@
   html .mobile-facets__close { top: calc(var(--lemoon-drawer-mobile-gap) + 8px); right: 16px; }
   html .mobile-facets__header { padding-right: 64px; }
 
-  html div.lemoon-mobile-nav__overlay { inset: 0; }
-  html div.lemoon-mobile-nav { padding-bottom: env(safe-area-inset-bottom); }
   html pickup-availability-drawer { border-left: 0; z-index: 1000; }
 
   @starting-style {

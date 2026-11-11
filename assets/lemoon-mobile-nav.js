@@ -29,8 +29,6 @@ function initialize(scope = document) {
   const triggers = [...header.querySelectorAll('[data-lemoon-nav-open]')];
   const root = drawer.querySelector('[data-lemoon-nav-root]');
   const panels = [...drawer.querySelectorAll('[data-lemoon-nav-panel]')];
-  const controls = drawer.querySelector('[data-lemoon-nav-controls]');
-  const backButton = drawer.querySelector('[data-lemoon-nav-back]');
   if (!root || !triggers.length) return;
 
   document.body.append(overlay, drawer);
@@ -52,9 +50,7 @@ function initialize(scope = document) {
     !element.closest('[hidden], [inert], [aria-hidden="true"]');
 
   function focusItems() {
-    const items = isMobile()
-      ? [...(controls?.querySelectorAll(focusable) || []), ...activePanel.querySelectorAll(focusable)]
-      : [triggers.find(isVisibleControl), ...activePanel.querySelectorAll(focusable)];
+    const items = [triggers.find(isVisibleControl), ...activePanel.querySelectorAll(focusable)];
     return items.filter(isVisibleControl);
   }
 
@@ -68,8 +64,6 @@ function initialize(scope = document) {
   }
 
   function updateTriggers() {
-    if (backButton) backButton.hidden = level !== 'sub';
-    drawer.style.setProperty('--lemoon-nav-controls-height', `${controls?.offsetHeight || 0}px`);
     triggers.forEach((trigger) => {
       trigger.setAttribute('aria-expanded', String(level !== 'closed'));
       trigger.setAttribute('aria-label', level === 'sub' ? trigger.dataset.navBackLabel : level === 'root' ? trigger.dataset.navCloseLabel : trigger.dataset.navOpenLabel);
@@ -116,7 +110,7 @@ function initialize(scope = document) {
     level = 'root';
     switchPanel(root, 'back', animate);
     updateTriggers();
-    if (focus) (isMobile() ? focusItems()[0] : root.querySelector(focusable))?.focus({ preventScroll: true });
+    if (focus) root.querySelector(focusable)?.focus({ preventScroll: true });
   }
 
   function showPanel(slot) {
@@ -125,7 +119,7 @@ function initialize(scope = document) {
     level = 'sub';
     switchPanel(panel, 'forward', true);
     updateTriggers();
-    (isMobile() ? focusItems()[0] || panel : panel.querySelector(focusable) || panel).focus({ preventScroll: true });
+    (panel.querySelector(focusable) || panel).focus({ preventScroll: true });
   }
 
   function open(trigger) {
@@ -165,8 +159,6 @@ function initialize(scope = document) {
     }, { signal });
   });
   drawer.addEventListener('click', (event) => {
-    if (event.target.closest('[data-lemoon-nav-close]')) { close(); return; }
-    if (event.target.closest('[data-lemoon-nav-back]')) { showRoot(); return; }
     const target = event.target.closest('[data-lemoon-nav-target]');
     if (target) showPanel(target.dataset.lemoonNavTarget);
   }, { signal });
@@ -178,7 +170,7 @@ function initialize(scope = document) {
     measure();
     updateTriggers();
     // Crossing the mobile breakpoint can hide the focused header/toolbar control.
-    if (!isVisibleControl(document.activeElement) || (isMobile() && !drawer.contains(document.activeElement))) {
+    if (!isVisibleControl(document.activeElement) || (isMobile() && !drawer.contains(document.activeElement) && !triggers.includes(document.activeElement))) {
       (focusItems()[0] || drawer).focus({ preventScroll: true });
     }
   }, { signal });
@@ -193,6 +185,12 @@ function initialize(scope = document) {
     if (event.shiftKey && index <= 0) {
       event.preventDefault();
       items[items.length - 1].focus();
+    } else if (event.shiftKey && index === 1) {
+      event.preventDefault();
+      items[0].focus();
+    } else if (!event.shiftKey && (index === 0 || index < 0)) {
+      event.preventDefault();
+      (items[1] || items[0]).focus();
     } else if (!event.shiftKey && index === items.length - 1) {
       event.preventDefault();
       items[0].focus();

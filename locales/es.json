@@ -55,6 +55,7 @@
     },
     "share": {
       "copy_to_clipboard": "Copiar enlace",
+      "copy_error": "No pudimos copiar el enlace. Selecciónalo para copiarlo.",
       "share_url": "Enlace",
       "success_message": "Enlace copiado al portapapeles",
       "close": "Cerrar compartición"
@@ -67,6 +68,8 @@
     }
   },
   "newsletter": {
+    "pending": "La confirmación está tardando. Si continúa la espera, intenta nuevamente.",
+    "retry": "No pudimos confirmar tu suscripción. Inténtalo nuevamente.",
     "label": "Correo electrónico",
     "success": "Gracias por suscribirte",
     "button_label": "Suscribirse"
@@ -124,6 +127,8 @@
       "card_label_new": "Nuevo",
       "card_label_best_seller": "Más vendido",
       "card_label_bestseller": "Bestseller",
+      "favourite_added": "Agregado a la lista de favoritos",
+      "favourite_list": "Lista de favoritos",
       "add_to_favorites": "Guardar {{ product_name }} en favoritos",
       "remove_from_favorites": "Quitar {{ product_name }} de favoritos",
       "configure_lenses": "Seleccionar lentes y comprar",
@@ -420,7 +425,7 @@
       "results_count": "Productos encontrados: {{ count }}",
       "information": "Información",
       "wishlist": "Mis favoritos",
-      "shipping_returns": "Envíos y retornos",
+      "shipping_returns": "Envíos y entregas",
       "faq": "Preguntas frecuentes",
       "find_style": "Descubre tu estilo",
       "trends": "Tendencias",
@@ -430,6 +435,7 @@
       "slide_label": "Ver producto {{ index }} de {{ total }}"
     },
     "header": {
+      "my_account": "Mi cuenta",
       "announcement": "Anuncio",
       "menu": "Menú",
       "close_menu": "Cerrar menú",
@@ -644,7 +650,7 @@
         "step_2_title": "2. Mide el armazón en milímetros",
         "step_2_body_html": "<p>Trabaja sobre tus lentes reales y anota cada medida con su nombre. Mira el frente de forma recta y mantén la regla alineada con el tramo que vas a medir; evita tomar la lectura en diagonal.</p><p>En este esquema, el ancho total va de un extremo exterior del frente al otro. No es lo mismo que medir entre bisagras. Comprueba que las cifras que compares usen los mismos extremos y no calcules el ancho total sumando los dos cristales y el puente: los bordes del armazón también ocupan espacio.</p>",
         "step_3_title": "3. Compara las medidas en la página del producto",
-        "step_3_body_html": "<p>En la ficha del armazón que te interesa, busca «Características del producto» y abre la pestaña «Medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul>",
+        "step_3_body_html": "<p>En la ficha del armazón que te interesa, abre la pestaña «Medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul>",
         "step_3_note_html": "<p>Si las medidas no coinciden exactamente con las de tus lentes favoritos, revisa qué parte cambia y cuántos milímetros de diferencia hay. Un frente más ancho ocupa más espacio de lado a lado en tu rostro; un cristal más alto cambia la proporción vertical. Las medidas y la forma del puente y las patillas influyen en cómo se apoya y se sostiene el armazón. Una diferencia pequeña no descarta por sí sola un modelo: compara cada medida y observa las formas en las fotos del producto.</p>",
         "help_title": "¿Te falta una medida?",
         "help_body_html": "<p>Si una inscripción no se lee, falta un dato en la ficha o no tienes unos lentes para comparar, consulta antes de elegir. Indica el modelo y la medida que necesitas aclarar.</p>"
@@ -1126,8 +1132,8 @@
       },
       "title": "Elegir lentes según tu rostro",
       "intro": "Tu rostro puede darte ideas para elegir un armazón. Compara las ilustraciones y explora las formas que te gusten: son puntos de partida, y tú eliges qué llevar.",
-      "index_title": "Mira el contorno, explora las formas",
-      "index_body": "Mírate de frente en un espejo. Observa dónde se ve más ancho tu rostro y si predominan las curvas o los ángulos. Estas seis familias son aproximadas; puedes reconocer rasgos de más de una.",
+      "index_title": "Explora las formas y selecciona tu tipo de rostro",
+      "index_body": "Mírate de frente en un espejo. Observa dónde se ve más ancho tu rostro y si predominan las curvas o los ángulos. Estas seis familias son aproximadas.",
       "unknown_title": "¿No reconoces tu forma?",
       "unknown_body": "No necesitas elegir una sola. Puedes tomar ideas de dos familias o empezar directamente por los armazones: curvas para acompañar otras curvas, ángulos para crear contraste. Mira también una opción distinta de la sugerida. Tu gusto tiene espacio aquí.",
       "fit_title": "La forma orienta el estilo. El ajuste se revisa aparte",
@@ -1434,6 +1440,32 @@
     }
   },
   "lemoon_pdp": {
+    "wishlist_view_product": "Ver producto",
+    "similar_products_heading": "Similares a {{ product_title }}",
+    "shipping_summary": {
+      "delivery_detail": "Desde el pago confirmado y la receta completa, si corresponde. Si la receta requiere correcciones, desde que recibimos y aceptamos la corrección. Puede variar por producto, destino y transporte.",
+      "shipping_detail": "Consulta el costo antes de pagar. Te enviamos un código de seguimiento al despachar.",
+      "returns_detail": "10 días corridos desde la recepción; 90 si falta la confirmación escrita íntegra, clara y legible del contrato. Aplican condiciones y posibles excepciones para productos personalizados.",
+      "guarantee_detail": "Desde que recibes el producto, ante fallas cubiertas por la ley puedes elegir reparación gratuita, cambio o devolución de lo pagado.",
+      "shipping_link": "Ver envíos",
+      "returns_link": "Ver devoluciones y garantía"
+    },
+    "confidence": {
+      "heading": "Compra con información clara",
+      "guarantee": "365 días de garantía para tus lentes",
+      "guarantee_detail": "Si tu producto presenta una falla cubierta por la ley, tienes 6 meses desde que lo recibes para elegir reparación gratuita, cambio o devolución de lo pagado.",
+      "returns": "Cambios y devoluciones gratis antes de los 30 días",
+      "returns_detail": "En compras por internet puedes retractarte dentro de 10 días corridos desde la recepción, salvo las excepciones legales. Si no recibes la confirmación escrita del contrato con su contenido íntegro, claro y legible, el plazo se extiende a 90 días. Consulta las condiciones y posibles excepciones para productos personalizados en nuestra política.",
+      "shipping": "Envíos a todo Chile",
+      "delivery_estimate": "Entrega estimada: {{ estimate }}.",
+      "delivery_condition": "El plazo comienza cuando confirmamos el pago y recibimos tu receta completa, si corresponde. Si la receta necesita correcciones, se cuenta desde que recibimos y aceptamos la corrección.",
+      "shipping_detail": "El plazo puede variar según el producto, el destino y la empresa de transporte. Consulta el costo y las condiciones de envío antes de finalizar tu compra. Al despachar, te enviamos un código de seguimiento.",
+      "payment_methods": "Medios de pago disponibles",
+      "prescription_admission": "Compatibilidad con receta",
+      "prescription_yes": "Admite receta",
+      "prescription_no": "No admite receta",
+      "prescription_pending": "Por confirmar"
+    },
     "previous_photos": "Ver fotos anteriores",
     "next_photos": "Ver más fotos",
     "size_label": "Talla",
@@ -1446,6 +1478,7 @@
     "review_count": "{{ count }} reseñas",
     "configuration": "Configuración",
     "size_guide": "Guía de medidas",
+    "how_choose_size": "Cómo elegir tu talla",
     "prescription": "Tu receta",
     "prescription_note": "Copia los valores de tu receta o envíala después de comprar.",
     "recipe_mode": "Cómo entregarás tu receta",
@@ -1464,7 +1497,7 @@
     "description": "Descripción",
     "lens_details": "Guía de cristales",
     "shipping_returns": "Envíos y devoluciones",
-    "shipping_note": "El costo y las opciones de envío se calculan al finalizar tu compra.",
+    "shipping_note": "Consulta el costo y las condiciones de envío antes de finalizar tu compra.",
     "care": "Cuidado de tus lentes",
     "care_note": "Limpia con un paño de microfibra y agua. Evita productos abrasivos y guarda tus lentes en un estuche cuando no los uses.",
     "reviews": "Opiniones de este armazón",
@@ -1490,7 +1523,7 @@
     "frame_specs_unavailable": "Las características de este armazón aún no están disponibles.",
     "fit_unavailable": "La recomendación de talla y rostro aún no está disponible para este armazón.",
     "fit_recommendation": "Referencias para orientarte sobre el calce de este armazón:",
-    "fit_note": "El calce es orientativo. Si puedes, compara estas referencias con un armazón que te quede cómodo.",
+    "fit_note": "Orientación de estilo; no determina el calce.",
     "suggested_face_shapes": "Tipos de rostro sugeridos",
     "gender": "Público",
     "units": "Unidad de medida",

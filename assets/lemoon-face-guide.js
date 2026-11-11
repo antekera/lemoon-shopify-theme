@@ -39,7 +39,7 @@ export function buildFaceGuidePayload(anchor) {
   }
   if (action === 'family_catalogue' && destination === 'filtered_catalogue') {
     const values = (metadata.dataset.faceGuideShapes || '').split('|');
-    if (![2, 3].includes(values.length) || new Set(values).size !== values.length || !values.every(value => Object.hasOwn(SHAPES, value))) return null;
+    if ((values.length < 1 || values.length > 6) || new Set(values).size !== values.length || !values.every(value => Object.hasOwn(SHAPES, value))) return null;
     payload.selected_shapes = values.map(value => SHAPES[value]);
   }
   return payload;

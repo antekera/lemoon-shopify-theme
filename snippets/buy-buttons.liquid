@@ -6,6 +6,7 @@
   - product_form_id: {String} product form id.
   - section_id: {String} id of section to which this snippet belongs.
   - show_pickup_availability: {Boolean} for the pickup availability. If true the pickup availability is rendered, false - not rendered (optional).
+  - hide_direct_purchase: {Boolean} hide direct purchase on a PDP with prescription options.
 
   Usage:
   {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true %}
@@ -31,16 +32,10 @@
 
     <product-form
       class="product-form"
+      {% if hide_direct_purchase %}hidden{% endif %}
       data-hide-errors="{{ gift_card_recipient_feature_active }}"
       data-section-id="{{ section.id }}"
     >
-      <div class="product-form__error-message-wrapper" role="alert" hidden>
-        <span class="svg-wrapper">
-          {{- 'icon-error.svg' | inline_asset_content -}}
-        </span>
-        <span class="product-form__error-message"></span>
-      </div>
-
       {%- form 'product',
         product,
         id: product_form_id,
@@ -92,6 +87,12 @@
           {%- endif -%}
         </div>
       {%- endform -%}
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        <span class="product-form__error-message"></span>
+      </div>
     </product-form>
     {%- assign configure_button_disabled = false -%}
     {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null -%}
