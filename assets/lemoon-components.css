@@ -593,7 +593,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
    while retaining the app's own saved-state marker and click handling. */
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:first-child { opacity: 0 !important; }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg { overflow: visible; }
-:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:last-child { opacity: 1 !important; fill: var(--lemoon-surface-page) !important; stroke: var(--lemoon-text-brand); stroke-width: 40px; stroke-linejoin: round; paint-order: fill stroke; transition: stroke var(--lemoon-motion-fast); }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:last-child { opacity: 1 !important; fill: none !important; stroke: var(--lemoon-text-brand); stroke-width: 40px; stroke-linejoin: round; paint-order: fill stroke; transition: stroke var(--lemoon-motion-fast); }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton:hover svg > path:last-child { stroke: var(--lemoon-action-accent); }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg[style*='--vtl-heart-solid:'] > path:last-child { fill: var(--lemoon-action-accent) !important; stroke: var(--lemoon-action-accent); }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating { position: relative; }
