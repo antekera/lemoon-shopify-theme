@@ -133,6 +133,39 @@ for (const shell of ['standard', 'eyewear']) for (const width of [390, 1440]) {
   });
 }
 
+for (const shell of ['standard', 'eyewear']) for (const width of [390, 1440]) {
+  test(`${shell} heading actions and price stay in place while Vitals loads at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const html = fixture(shell).replace('<script type="module" src="/assets/lemoon-pdp-tools.js"></script>', '');
+    await page.route('**/tests/fixtures/ssr-probe.html', route => route.fulfill({ contentType: 'text/html; charset=utf-8', body: html }));
+    await page.goto('/tests/fixtures/ssr-probe.html');
+    const summary = page.locator('.lemoon-product-summary');
+    const price = summary.locator(shell === 'standard' ? '[id^="price-"] .price__container' : '[data-price]');
+    const slot = summary.locator('[data-product-favourite-slot]');
+    const share = summary.locator('[data-product-share]');
+    await expect(price).toBeVisible();
+    await summary.evaluate(async el => Promise.all(el.getAnimations({ subtree: true }).map(animation => animation.finished.catch(() => {}))));
+    const firstPrice = await price.boundingBox();
+    const initialSlot = await slot.boundingBox();
+    expect(initialSlot).not.toBeNull();
+    expect(initialSlot.width).toBeGreaterThanOrEqual(44);
+    expect(initialSlot.height).toBeGreaterThanOrEqual(44);
+    await page.evaluate(() => import('/assets/lemoon-pdp-tools.js'));
+    const shareBefore = width >= 750 ? await share.boundingBox() : null;
+    await slot.evaluate(node => {
+      node.innerHTML = '<div class="Vtl-WishlistIcon__ProductPageWrapper"><div class="Vtl-WishlistButton__WishlistIconButton" role="button" aria-label="Añadir a favoritos"></div></div>';
+    });
+    const finalPrice = await price.boundingBox();
+    expect(finalPrice.y).toBeCloseTo(firstPrice.y, 0);
+    if (width >= 750) {
+      expect(shareBefore).not.toBeNull();
+      const shareAfter = await share.boundingBox();
+      expect(shareAfter.x).toBeCloseTo(shareBefore.x, 0);
+      expect(shareAfter.y).toBeCloseTo(shareBefore.y, 0);
+    }
+  });
+}
+
 test('editor blocks before, between and after title/price render once in their configured order', async ({ page }) => {
   const blocks = [
     { type: 'text', id: 'before', settings: { text: 'Texto anterior' } },

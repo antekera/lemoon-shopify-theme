@@ -9,8 +9,13 @@ lemoon-product-tools { display: block; }
 .lemoon-product-status__badge--sale { background: var(--lemoon-primitive-lemon-citrico); color: var(--lemoon-text-brand); }
 .lemoon-product-status__badge--sold-out { background: #f1f2f3; color: var(--lemoon-text-secondary); }
 .lemoon-product-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.lemoon-product-heading__actions { display: flex; flex: 0 0 auto; align-items: flex-start; min-width: 44px; min-height: 44px; }
-@media (min-width: 750px) { .lemoon-product-heading__actions { min-width: 88px; } }
+.lemoon-product-heading__actions { display: grid; grid-template-columns: 44px; flex: 0 0 auto; align-items: start; min-height: 44px; }
+.lemoon-product-heading__wishlist { display: block; width: 44px; height: 44px; }
+@media (min-width: 750px) {
+  .lemoon-product-heading__actions { grid-template-columns: 44px 44px; }
+  .lemoon-product-heading__share { grid-column: 1; grid-row: 1; }
+  .lemoon-product-heading__wishlist { grid-column: 2; grid-row: 1; }
+}
 .lemoon-product-heading__share[hidden] { display: none !important; }
 .lemoon-product-heading .lemoon-product-heading__share { margin-top: 0; transition: color var(--lemoon-motion-fast); }
 .lemoon-product-heading__share .icon-share { width: 20px; height: 20px; transform: translateX(6px); }
@@ -609,7 +614,6 @@ lemoon-thumbnail-rail { display: contents; }
 }
 
 /* Show the provider-owned PDP control in the heading once it has loaded. */
-.lemoon-product-heading__wishlist:empty { display: none; }
 .lemoon-product-heading__wishlist .Vtl-WishlistIcon__ProductPageWrapper { display: block !important; position: static !important; inset: auto !important; width: 44px; height: 44px; }
 .lemoon-product-heading__wishlist .Vtl-WishlistButton__WishlistIconButton { display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; }
 .lemoon-product-heading__wishlist .Vtl-WishlistButton__IconWrapper { display: grid; place-items: center; }
