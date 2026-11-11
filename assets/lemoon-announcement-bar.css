@@ -15,11 +15,6 @@
 .lemoon-announcement-bar .announcement-bar-slider {
   width: 100%;
 }
-.lemoon-announcement-bar .announcement-bar-slider .slider {
-  flex: 1 1 0;
-  min-width: 0;
-  width: 0;
-}
 
 @media screen and (min-width: 990px) {
   .lemoon-announcement-bar .announcement-bar-slider {
