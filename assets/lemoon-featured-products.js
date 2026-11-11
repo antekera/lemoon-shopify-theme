@@ -60,6 +60,10 @@
     section.dataset.initialized = 'true';
 
     const currentTags = new Set(parseTags(section.dataset.productTags));
+    const normalize = (value) => (value || '').trim().toLocaleLowerCase('es');
+    const currentShape = normalize(section.dataset.productShape);
+    const currentMaterial = normalize(section.dataset.productMaterial);
+    const matchCharacteristics = section.hasAttribute('data-match-characteristics');
     const currentProductId = section.dataset.currentProductId;
     const randomized = section.hasAttribute('data-randomize');
     const maximum = Number(section.dataset.maxItems) || 15;
@@ -77,25 +81,34 @@
     let nextUrl = randomized ? randomizedUrl() : `${collectionUrl}?view=${encodeURIComponent(carouselView)}`;
     let loading = false;
     let loaded = 0;
+    let pagesFetched = 0;
+    const maxPages = 5;
 
     const fetchPage = async () => {
       const url = new URL(nextUrl, window.location.origin);
       const response = await fetch(`${window.location.origin}${url.pathname}${url.search}`, {
         headers: { Accept: 'text/html' },
       });
+      pagesFetched += 1;
       if (!response.ok) throw new Error(`Carousel request failed: ${response.status}`);
 
       const documentFragment = new DOMParser().parseFromString(await response.text(), 'text/html');
       const results = documentFragment.querySelector('.lemoon-featured-products__results');
       if (!results) throw new Error('Carousel results missing');
-      nextUrl = randomized ? randomizedUrl() : results.dataset.nextPage || null;
+      nextUrl = pagesFetched < maxPages ? (randomized ? randomizedUrl() : results.dataset.nextPage || null) : null;
 
       const items = [...results.children].filter((item) => {
         const id = item.dataset.productId;
         if (!id || seen.has(id)) return false;
         seen.add(id);
         const tags = parseTags(item.dataset.productTags);
-        item.dataset.relatedScore = String(tags.filter((tag) => currentTags.has(tag)).length);
+        const tagScore = tags.filter((tag) => currentTags.has(tag)).length;
+        const characteristicScore = (currentShape && currentShape === normalize(item.dataset.productShape) ? 3 : 0) +
+          (currentMaterial && currentMaterial === normalize(item.dataset.productMaterial) ? 2 : 0);
+        const score = tagScore + characteristicScore;
+        item.dataset.relatedScore = String(score);
+        if (matchCharacteristics && (currentShape || currentMaterial) && !characteristicScore) return false;
+        if (matchCharacteristics && !currentShape && !currentMaterial && currentTags.size && !tagScore) return false;
         return true;
       });
 

@@ -51,18 +51,6 @@
     },
     {
       "namespace": "custom",
-      "key": "style_quiz_ready",
-      "ownerType": "PRODUCT",
-      "description": "Incluir en la guía de estilo después de revisar atributos, variantes e imágenes y añadirlo a la colección del quiz. Con datos sintéticos, mantener activada la marca de demostración."
-    },
-    {
-      "namespace": "custom",
-      "key": "style_quiz_demo",
-      "ownerType": "PRODUCT",
-      "description": "Activar para atributos sintéticos de prueba; desactivar solo tras verificar las características del producto final. La marca se conserva aunque el quiz no muestre un aviso visible."
-    },
-    {
-      "namespace": "custom",
       "key": "style_traits",
       "ownerType": "PRODUCTVARIANT",
       "description": "Características propias de esta variante. Cada criterio indicado reemplaza ese mismo criterio del producto; los demás se heredan. Una lista vacía hereda todo. No combinar atributos de otras variantes."

@@ -4,6 +4,8 @@ Familias: LM-PRODUCT-CARD, LM-PRICE, LM-SWATCH, LM-LABEL, LM-PRODUCT-LIST y cont
 
 ## Reutilizar el código canónico
 
+El favorito de la aplicación se presenta en la esquina superior derecha de la tarjeta; el tema añade feedback visual y una nota breve al guardar, sin reemplazar el almacenamiento de la aplicación. El texto del quick-add usa 13px y peso 500. En recomendaciones de PDP, la categoría y los valores conocidos de forma/material acotan las sugerencias; no se infiere compatibilidad desde la imagen.
+
 [card-product](../../../snippets/card-product.liquid) ya es reutilizable; **no existe ni hace falta un wrapper `lemoon-ui-card`**. Consumidores: [lemoon-featured-products](../../../sections/lemoon-featured-products.liquid), [main-collection-product-grid](../../../sections/main-collection-product-grid.liquid), [main-search-results](../../../snippets/main-search-results.liquid). El grid, paginación y vacío pertenecen a esas superficies, no a la tarjeta. La tarjeta comercial de la galería independiente no es este snippet.
 
 | API existente | Uso |
@@ -99,9 +101,13 @@ Un `data-secondary-src` explícitamente vacío indica que el color no tiene segu
 
 La vista secundaria inicial se renderiza solo si `card_secondary_media != blank`: Shopify puede representar la ausencia como cadena vacía, distinta de `null`. No pasar ese valor vacío a `image_url`; las pruebas LiquidJS no reproducen necesariamente esta diferencia del render nativo.
 
+## Alineación y entrada del hero PDP
+
+Las composiciones estándar y óptica conservan sus galerías y muestran la información con reveal cuando el ajuste global está activo. La información óptica incorpora 24px de separación superior en escritorio para corresponder al espaciado estándar actual.
+
 ## Guía de medidas de PDP
 
-`lemoon-size-guide-content` recibe `product`, `instance_id` y `presentation` opcional. El default conserva las tres pestañas inline de características; ambos shells pasan `presentation: 'dialog'` para la guía continua bajo el H2 nativo. No crear otro motor de diálogo ni repetir características o cuerpo CMS en el modal.
+`lemoon-size-guide-content` recibe `product`, `instance_id` y `presentation` opcional. El default presenta dos pestañas inline: Características reúne los atributos disponibles, talla, ajuste y rostros sugeridos; Medidas muestra una sola lista de valores mm y el esquema A–E solo cuando existe alguna medida válida. Las instrucciones para comparar siguen en la guía; ambos shells pasan `presentation: 'dialog'` para la guía continua bajo el H2 nativo. No crear otro motor de diálogo ni repetir características o cuerpo CMS en el modal.
 
 ```liquid
 {% render 'lemoon-size-guide-content', product: product, instance_id: drawer_instance_id, presentation: 'dialog' %}

@@ -123,6 +123,12 @@
           <div class="lemoon-lens-flow__actions" data-flow-actions hidden><button class="lemoon-lens-flow__button lemoon-lens-flow__button--back" type="button" data-configurator-back hidden>{{ 'lemoon_lens_flow.back' | t }}</button><button class="lemoon-lens-flow__button" type="button" data-configurator-next disabled>{{ 'lemoon_lens_flow.continue' | t }}</button></div>
           <noscript><p>{{ 'lemoon_lens_flow.javascript_hint' | t }}</p><a href="{{ product.url }}">{{ 'lemoon_lens_flow.back_product' | t }}</a></noscript>
         {%- endform -%}
+        <form method="post" action="{{ routes.cart_add_url }}" data-configurator-frame-only hidden>
+          <input type="hidden" name="id" disabled>
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+          <button type="submit" class="lemoon-lens-flow__button">{{ 'lemoon_lens_flow.buy_frame' | t }}</button>
+        </form>
       </div>
     </div>
     {%- capture flow_data -%}{"selectedId":{{ selected_variant.id | json }},"options":{{ product.options | json }},"variants":[{% for variant in product.variants %}{"id":{{ variant.id | json }},"options":{{ variant.options | json }},"available":{{ variant.available | json }},"price":{{ variant.price | json }},"priceLabel":{{ variant.price | money | json }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}{%- endcapture -%}

@@ -155,6 +155,22 @@ test('selecting a color updates the gallery, selected state, price and product v
   await expect(page.locator('.card__heading a')).toHaveAttribute('href', '/products/demo?variant=202');
 });
 
+test('external favourite control does not navigate to the product when clicked', async ({ page }) => {
+  await openCard(page);
+  await page.locator('.product-card-wrapper').evaluate(card => {
+    const favourite = document.createElement('div');
+    favourite.setAttribute('role', 'button');
+    favourite.setAttribute('tabindex', '0');
+    favourite.setAttribute('aria-label', 'Guardar favorito');
+    favourite.innerHTML = '<span>♡</span>';
+    favourite.addEventListener('click', () => favourite.setAttribute('aria-pressed', 'true'));
+    card.append(favourite);
+  });
+  await page.getByRole('button', { name: 'Guardar favorito' }).locator('span').tap();
+  await expect(page.getByRole('button', { name: 'Guardar favorito' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page).toHaveURL(/mobile-search\.html$/);
+});
+
 test('clicking non-control content in the card opens its product page', async ({ page }) => {
   await page.route('**/products/demo**', (route) => route.fulfill({ status: 200, contentType: 'text/html', body: 'Product page' }));
   await openCard(page);

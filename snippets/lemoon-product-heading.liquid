@@ -6,7 +6,7 @@
   {% render 'lemoon-product-status', product: product %}
   <div class="lemoon-product-heading">
     <h1>{{ product.title | escape }}</h1>
-    <button type="button" data-favourite aria-pressed="false" aria-label="{{ 'lemoon_pdp.save' | t }}">{% render 'lemoon-icon', icon: 'heart' %}</button>
+    <span class="lemoon-product-heading__wishlist" data-product-favourite-slot data-product-id="{{ product.id }}"></span>
   </div>
   {% render 'lemoon-product-promotions', product: product %}
 </lemoon-product-tools>

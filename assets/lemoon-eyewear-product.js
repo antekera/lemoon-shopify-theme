@@ -83,7 +83,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
         if (event.target.closest('[data-back-to-frame]')) {
           this.inLensFlow = false;
           this.chooseFrameOnly();
-          this.querySelector('[data-configure]').focus();
+          this.querySelector('[data-configure]')?.focus();
         }
         if (event.target.closest('[data-configure]')) {
           if (this.dataset.configuratorUrl && this.variant?.available) {
@@ -196,13 +196,16 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-eyewear')) {
       this.querySelector('[data-flow-heading]').hidden = !this.inLensFlow;
       this.querySelector('[data-flow-summary]').hidden = !this.inLensFlow;
       this.querySelector('[data-frame-size]').hidden = this.inLensFlow;
-      this.querySelector('[data-configure]').hidden = this.inLensFlow;
-      this.querySelector('[data-configure]').disabled = !this.variant?.available;
-      this.querySelector('[data-configure]').textContent = this.variant?.available ? this.copy.configure : this.copy.soldOut;
+      const configure = this.querySelector('[data-configure]');
+      if (configure) {
+        configure.hidden = this.inLensFlow;
+        configure.disabled = !this.variant?.available;
+        configure.textContent = this.variant?.available ? this.copy.configure : this.copy.soldOut;
+      }
       this.submit.hidden = !this.inLensFlow;
       const frameOnlyButton = this.querySelector('[data-frame-only-add]');
       const frameOnlySelection = this.getFrameOnlySelection();
-      frameOnlyButton.hidden = this.inLensFlow || !frameOnlySelection?.input;
+      frameOnlyButton.hidden = this.hasAttribute('data-hide-frame-only') || this.inLensFlow || !frameOnlySelection?.input;
       frameOnlyButton.disabled = !frameOnlySelection?.variant?.available;
       this.updatePrescription();
     }

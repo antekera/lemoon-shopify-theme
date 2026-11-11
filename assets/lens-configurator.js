@@ -17,12 +17,16 @@ export function createLensCatalogue(variants, optionNames, selectedId) {
   const lensIndex = optionNames.findIndex((name) => normal(name) === 'lentes');
   const indexIndex = optionNames.findIndex((name) => normal(name) === 'indice');
   const selected = variants.find(({ id }) => String(id) === String(selectedId)) || variants.find(({ available }) => available) || variants[0];
-  if (!selected || lensIndex < 0 || indexIndex < 0) return { rows: [], selected, variants, lensIndex };
+  const frameOnly = selected && (lensIndex < 0 ? selected : variants.find((variant) =>
+    normal(variant.options[lensIndex]) === 'solo armazon' &&
+    variant.options.every((value, index) => index === lensIndex || index === indexIndex || value === selected.options[index])
+  ));
+  if (!selected || lensIndex < 0 || indexIndex < 0) return { rows: [], selected, variants, lensIndex, frameOnly };
   const rows = variants.filter((variant) => variant.available && variant.options.every((value, index) => index === lensIndex || index === indexIndex || value === selected.options[index])).flatMap((variant) => {
     const parsed = parseLensPackage(variant.options[lensIndex]);
     return parsed ? [{ ...parsed, index: variant.options[indexIndex], variant }] : [];
   });
-  return { rows, selected, variants, lensIndex, indexIndex };
+  return { rows, selected, variants, lensIndex, indexIndex, frameOnly };
 }
 
 export function lensChoices(catalogue, state, key) {
@@ -76,14 +80,21 @@ export class LemoonLensFlow {
     this.id = root.querySelector('[name="id"]');
     this.fields = [...root.querySelectorAll('[data-rx]')];
     this.file = root.querySelector('[data-recipe-file]');
+    const frameForm = root.querySelector('[data-configurator-frame-only]');
+    if (frameForm && this.catalogue.rows.length && this.catalogue.frameOnly?.available) {
+      const frameId = frameForm.querySelector('[name="id"]');
+      frameId.value = this.catalogue.frameOnly.id;
+      frameId.disabled = false;
+      frameForm.hidden = false;
+    }
     if (!this.catalogue.rows.length) {
       root.querySelector('[data-flow-unavailable]').hidden = false;
       root.querySelector('[data-flow-panels]').hidden = true;
       root.querySelector('[data-flow-actions]').hidden = true;
       const frameOnly = root.querySelector('[data-frame-only-add]');
-      if (this.catalogue.lensIndex < 0 && this.catalogue.selected?.available) {
+      if (this.catalogue.frameOnly?.available) {
         this.id.disabled = false;
-        this.id.value = this.catalogue.selected.id;
+        this.id.value = this.catalogue.frameOnly.id;
         frameOnly.hidden = false;
       }
       return;

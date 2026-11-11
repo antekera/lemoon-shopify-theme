@@ -108,6 +108,7 @@
         "vendidos": {
           "type": "drawer_primary",
           "settings": {
+            "show_in_mobile_menu": false,
             "slot": "vendidos",
             "title": "Más vendidos",
             "link": "/collections/mejor-vendidos",
@@ -118,6 +119,7 @@
         "nueva": {
           "type": "drawer_primary",
           "settings": {
+            "show_in_mobile_menu": false,
             "slot": "nueva",
             "title": "Nueva colección",
             "link": "/collections/lo-nuevo",
@@ -138,6 +140,7 @@
         "envios": {
           "type": "drawer_utility",
           "settings": {
+            "show_in_mobile_menu": false,
             "title": "Envíos y retornos",
             "link": "/pages/envios-y-entregas",
             "icon": "truck"
@@ -162,6 +165,7 @@
         "cuenta": {
           "type": "drawer_utility",
           "settings": {
+            "show_in_mobile_menu": false,
             "title": "Mi cuenta",
             "link": "/account",
             "icon": "user-round"
@@ -188,6 +192,7 @@
         "mas_vendidos": {
           "type": "drawer_subitem",
           "settings": {
+            "show_in_mobile_menu": false,
             "parent": "opticos",
             "group": "featured",
             "title": "Más vendidos",
@@ -197,6 +202,7 @@
         "nueva_coleccion": {
           "type": "drawer_subitem",
           "settings": {
+            "show_in_mobile_menu": false,
             "parent": "opticos",
             "group": "featured",
             "title": "Nueva colección",
@@ -338,6 +344,7 @@
         "sol_mas_vendidos": {
           "type": "drawer_subitem",
           "settings": {
+            "show_in_mobile_menu": false,
             "parent": "sol",
             "group": "featured",
             "title": "Más vendidos",
@@ -349,6 +356,7 @@
         "sol_nueva_coleccion": {
           "type": "drawer_subitem",
           "settings": {
+            "show_in_mobile_menu": false,
             "parent": "sol",
             "group": "featured",
             "title": "Nueva colección",
@@ -599,10 +607,10 @@
         "opticos",
         "sol",
         "cristales",
-        "guia",
+        "accesorios",
         "vendidos",
         "nueva",
-        "accesorios",
+        "guia",
         "envios",
         "faq",
         "nosotros",

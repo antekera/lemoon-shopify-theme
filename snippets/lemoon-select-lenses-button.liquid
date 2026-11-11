@@ -1,9 +1,10 @@
 {% doc %}
   Renders the shared configure-lenses action in the product and sticky purchase areas.
   @param {string} context - Button context: link, eyewear, or sticky.
-  @param {product} [product] - Product used to build the lens configurator URL.
+  @param {product} product - Product and its prescription options.
   @param {boolean} [disabled] - Whether the action is unavailable.
 {% enddoc %}
+{%- if product.metafields.custom.prescription_type.value != blank -%}
 {%- assign configure_label = 'products.product.configure_lenses' | t -%}
 {%- if disabled -%}{%- assign configure_label = 'products.product.sold_out' | t -%}{%- endif -%}
 {%- case context -%}
@@ -21,3 +22,4 @@
       {% endif %}
     >{{ configure_label }}</a>
 {%- endcase -%}
+{%- endif -%}

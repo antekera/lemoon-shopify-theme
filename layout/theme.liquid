@@ -316,6 +316,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'lemoon-components.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'lemoon-favourite-feedback.js' | asset_url }}" data-wishlist-view-product="{{ 'lemoon_pdp.wishlist_view_product' | t | escape }}" defer></script>
     {{ 'component-lemoon-drawer.css' | asset_url | stylesheet_tag }}
     {%- if request.page_type == 'policy' -%}
       {{ 'lemoon-native-policies.css' | asset_url | stylesheet_tag }}
@@ -479,5 +480,6 @@
     {%- elsif settings.cart_type == 'notification' -%}
       <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    {% render 'lemoon-favourite-toast' %}
   </body>
 </html>

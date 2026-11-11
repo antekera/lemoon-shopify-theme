@@ -14,7 +14,7 @@
     endif
   endif
 -%}
-{%- if show_link and block.settings.title != blank and block.settings.link != blank -%}
+{%- if show_link and block.settings.show_in_mobile_menu != false and block.settings.title != blank and block.settings.link != blank -%}
   <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">
     {%- if block.settings.group == 'shape' and block.settings.shape != 'none' -%}
       {% render 'lemoon-frame-shape', shape: block.settings.shape %}

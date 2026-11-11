@@ -1,0 +1,36 @@
+{% doc %}
+  Policy-backed purchase information without unverified store benefit settings.
+  @param {object} shop - Current Shopify shop, policies and configured delivery estimate.
+{% enddoc %}
+{%- assign delivery_estimate = shop.metafields.custom.plazo_entrega_receta.value | strip -%}
+{%- if shop.refund_policy.url != blank or shop.shipping_policy.url != blank or shop.enabled_payment_types.size > 0 -%}
+<aside class="lemoon-pdp-confidence" aria-label="{{ 'lemoon_pdp.confidence.heading' | t }}">
+  <ul class="lemoon-pdp-confidence__items" role="list">
+    {%- if shop.refund_policy.url != blank -%}
+      <li>
+        {% render 'lemoon-icon', icon: 'shield-check' %}
+        <div><a href="{{ shop.refund_policy.url }}">{{ 'lemoon_pdp.confidence.guarantee' | t }}</a><p>{{ 'lemoon_pdp.confidence.guarantee_detail' | t }}</p></div>
+      </li>
+      <li>
+        {% render 'lemoon-icon', icon: 'rotate-ccw' %}
+        <div><a href="{{ shop.refund_policy.url }}">{{ 'lemoon_pdp.confidence.returns' | t }}</a><p>{{ 'lemoon_pdp.confidence.returns_detail' | t }}</p></div>
+      </li>
+    {%- endif -%}
+    {%- if shop.shipping_policy.url != blank -%}
+      <li>
+        {% render 'lemoon-icon', icon: 'truck' %}
+        <div><a href="{{ shop.shipping_policy.url }}">{{ 'lemoon_pdp.confidence.shipping' | t }}</a>
+          {%- if delivery_estimate != blank -%}<p>{{ 'lemoon_pdp.confidence.delivery_estimate' | t: estimate: delivery_estimate | escape }}</p>{%- endif -%}
+          <p>{{ 'lemoon_pdp.confidence.delivery_condition' | t }}</p>
+          <p>{{ 'lemoon_pdp.confidence.shipping_detail' | t }}</p>
+        </div>
+      </li>
+    {%- endif -%}
+  </ul>
+  {%- if shop.enabled_payment_types.size > 0 -%}
+    <div class="lemoon-pdp-confidence__payments"><p>{{ 'lemoon_pdp.confidence.payment_methods' | t }}</p>
+      <ul role="list">{%- for payment_type in shop.enabled_payment_types -%}<li>{{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}</ul>
+    </div>
+  {%- endif -%}
+</aside>
+{%- endif -%}

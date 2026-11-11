@@ -13,6 +13,12 @@ const variants = [
 ];
 const catalogue = () => createLensCatalogue(variants, ['Color','Lentes','Índice'], 1);
 
+test('frame-only purchase keeps the selected colour and never falls back to a different colour', () => {
+ expect(createLensCatalogue(variants, ['Color', 'Lentes', 'Índice'], 3).frameOnly.id).toBe(1);
+ expect(createLensCatalogue(variants, ['Color', 'Lentes', 'Índice'], 8).frameOnly).toBeUndefined();
+ expect(createLensCatalogue([{ id: 9, options: ['Azul'], available: true }], ['Color'], 9).frameOnly.id).toBe(9);
+});
+
 test('catalogue offers only available native packages for the selected frame colour', () => {
  expect(catalogue().rows.map(({variant}) => variant.id)).toEqual([2,3,4,5,7]);
  expect(parseLensPackage('Lectura + antirreflejo')).toBeNull();

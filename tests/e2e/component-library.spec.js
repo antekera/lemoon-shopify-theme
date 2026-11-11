@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import { test, expect } from '@playwright/test';
 import { writeFile } from 'node:fs/promises';
 
@@ -205,7 +206,7 @@ test('vertical search preserves native SortBy selection, query context and form 
 });
 
 for (const scenario of ['controls', 'contact', 'search']) {
-  test(`${scenario} controls retain a continuous boundary, inset focus and native states`, async ({ page }) => {
+  test(`${scenario} controls retain a continuous boundary, reinforced focus and native states`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(fixture(scenario));
     const control = page.locator(scenario === 'search' ? '#SortBy' : scenario === 'contact' ? 'input[name="contact[email]"]' : '#fixture-email');
@@ -216,11 +217,9 @@ for (const scenario of ['controls', 'contact', 'search']) {
       await expect(control).toHaveCSS(`border-${edge}-width`, '1px');
     }
     await control.focus();
-    await expect(control).toHaveCSS('outline-width', '2px');
-    await expect(control).toHaveCSS('outline-style', 'solid');
-    await expect(control).toHaveCSS('outline-color', 'rgb(11, 31, 58)');
-    await expect(control).toHaveCSS('outline-offset', '-2px');
-    await expect(control).toHaveCSS('border-top-color', 'rgb(11, 31, 58)');
+    await expect(control).toHaveCSS('outline-style', 'none');
+    await expect(control).toHaveCSS('border-top-width', '2px');
+    await expect(control).toHaveCSS('border-top-color', 'rgb(102, 133, 173)');
     await expect(control).toHaveCSS('box-shadow', 'none');
     // Dawn pseudo-elements must not duplicate or conceal the actual boundary.
     expect(await control.evaluate(node => getComputedStyle(node.parentElement, '::after').content)).toMatch(/none|normal/);
@@ -240,7 +239,7 @@ test('forced colors keeps actual control boundaries and keyboard focus visible',
   const input = page.locator('#fixture-email');
   await input.focus();
   await expect(input).toHaveCSS('border-top-style', 'solid');
-  await expect(input).toHaveCSS('border-top-width', '1px');
+  await expect(input).toHaveCSS('border-top-width', '2px');
   await expect(input).toHaveCSS('outline-style', 'solid');
   await expect(input).toHaveCSS('outline-width', '2px');
   expect(await input.evaluate(node => getComputedStyle(node).outlineColor)).not.toBe('rgba(0, 0, 0, 0)');
@@ -288,11 +287,12 @@ test('contact error keeps semantic error token and focus ring clear of clipping'
   await expect(input).toHaveCSS('background-color', 'rgb(255, 255, 255)');
   await expect(page.locator('.lemoon-contact__panel')).toHaveCSS('background-color', 'rgb(247, 244, 238)');
   await input.focus();
-  await expect(input).toHaveCSS('outline-width', '2px');
+  await expect(input).toHaveCSS('outline-style', 'none');
+  await expect(input).toHaveCSS('border-top-width', '2px');
+  await expect(input).toHaveCSS('border-top-color', 'rgb(192, 57, 43)');
   expect(await input.evaluate(node => {
     const rect = node.getBoundingClientRect();
-    const style = getComputedStyle(node);
-    const ring = Number.parseFloat(style.outlineOffset) + Number.parseFloat(style.outlineWidth);
+    const ring = 0;
     for (let parent = node.parentElement; parent; parent = parent.parentElement) {
       const css = getComputedStyle(parent), bounds = parent.getBoundingClientRect();
       if (/(hidden|clip|scroll|auto)/.test(css.overflowX) && (rect.left - ring < bounds.left || rect.right + ring > bounds.right)) return false;
@@ -321,4 +321,25 @@ test('gallery loading state paints a visible shared spinner and retains accessib
   expect(painted.stroke).not.toBe('none');
   expect(painted.stroke).not.toBe(painted.buttonBackground);
   await expect(svg).toBeVisible();
+});
+
+test('main search field reinforces its border without changing color or geometry', async ({ page }) => {
+  const html = execFileSync(process.execPath, ['tests/helpers/main-search-renderer.mjs'], { encoding: 'utf8' });
+  await page.route('**/tests/fixtures/component-library.html?scenario=search', route => route.fulfill({ contentType: 'text/html', body: html }));
+  await page.goto(fixture('search'));
+  const input = page.locator('#Search-In-Template-component-fixture');
+  const initial = await input.evaluate(element => {
+    const css = getComputedStyle(element); const rect = element.getBoundingClientRect();
+    return { width: rect.width, height: rect.height, border: parseFloat(css.borderTopWidth), color: css.borderTopColor };
+  });
+  await input.focus();
+  const focused = await input.evaluate(element => {
+    const css = getComputedStyle(element); const rect = element.getBoundingClientRect();
+    return { width: rect.width, height: rect.height, border: parseFloat(css.borderTopWidth), color: css.borderTopColor, outline: css.outlineStyle };
+  });
+  expect(focused.border).toBe(initial.border + 1);
+  expect(focused.color).toBe(initial.color);
+  expect(focused.width).toBe(initial.width);
+  expect(focused.height).toBe(initial.height);
+  expect(focused.outline).toBe('none');
 });

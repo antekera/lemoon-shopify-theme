@@ -12,8 +12,13 @@ lemoon-product-tools { display: block; }
 .lemoon-product-sku { margin: 4px 0 12px; color: var(--lemoon-text-brand); font-size: 12px; line-height: 1.5; opacity: .7; overflow-wrap: anywhere; }
 .lemoon-product-sku[hidden] { display: none; }
 .lemoon-product-heading h1 { margin: 0; color: var(--lemoon-text-brand); font-size: 2.4rem; line-height: 1.2; font-weight: 500; }
-.lemoon-product-heading button { display: grid; place-items: center; border: 0; background: transparent; color: var(--lemoon-text-brand); min-width: 44px; min-height: 44px; margin-top: -6px; cursor: pointer; }
-.lemoon-product-heading button[aria-pressed=true] svg { fill: var(--lemoon-primitive-lemon-citrico); stroke: none; }
+.lemoon-product-heading button { position: relative; display: grid; place-items: center; border: 0; background: transparent; color: var(--lemoon-text-brand); min-width: 44px; min-height: 44px; margin-top: -6px; cursor: pointer; }
+.lemoon-product-heading button[aria-pressed=true] svg { fill: var(--lemoon-text-brand); stroke: var(--lemoon-text-brand); }
+.lemoon-product-heading button.is-favourite-animating svg { animation: lemoon-favourite-pop 480ms ease-out; }
+.lemoon-product-heading button.is-favourite-animating::after { content: ''; position: absolute; width: 22px; height: 22px; border: 2px solid var(--lemoon-text-brand); border-radius: 50%; pointer-events: none; animation: lemoon-favourite-burst 560ms ease-out both; }
+@keyframes lemoon-favourite-pop { 0% { transform: scale(.7); } 55% { transform: scale(1.24); } 100% { transform: scale(1); } }
+@keyframes lemoon-favourite-burst { 0% { transform: scale(.4); opacity: .8; } 100% { transform: scale(2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lemoon-product-heading button.is-favourite-animating svg { animation: none; } .lemoon-product-heading button.is-favourite-animating::after { display: none; } }
 .lemoon-product-heading button:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 2px; }
 .lemoon-product-vendor { margin: 8px 0 0; font-size: 12px; letter-spacing: 1px; }
 .lemoon-pdp__promotions { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
@@ -55,9 +60,10 @@ lemoon-product-tools { display: block; }
 .lemoon-standard-pdp .product-form__input { max-width: none; }
 .lemoon-standard-pdp .product-form__input legend { font-size: 13px; }
 .lemoon-standard-pdp .product-form__input--pill input[type=radio] + label { font-size: 12px; min-height: 40px; }
-.lemoon-standard-pdp .product-form__submit, .lemoon-standard-pdp .lemoon-lens-config-cta { font-size: 13px; min-height: 48px; letter-spacing: .04em; text-transform: uppercase; }
-.lemoon-standard-pdp .product-form__buttons:has(.lemoon-frame-only-add) { display: block; margin: 10px 0 0; }
+.lemoon-standard-pdp .product-form__submit, .lemoon-standard-pdp .lemoon-lens-config-cta { font-size: 13px; min-height: 48px; letter-spacing: .02em; text-transform: uppercase; }
+.lemoon-standard-pdp .product-form__buttons:has(.lemoon-frame-only-add) { display: block; max-width: none; margin: 10px 0 0; }
 .lemoon-standard-pdp .lemoon-pdp-buy-buttons { display: flex; flex-direction: column; }
+.lemoon-standard-pdp .lemoon-pdp-buy-buttons > product-form[hidden] { display: none !important; }
 .lemoon-standard-pdp .lemoon-pdp-buy-buttons > .lemoon-lens-config-cta { order: 1; margin-top: 0; }
 .lemoon-standard-pdp .lemoon-pdp-buy-buttons > product-form { order: 2; margin: 10px 0 0; }
 .lemoon-standard-pdp .lemoon-frame-only-add { background: transparent; color: var(--lemoon-text-brand); border: 1px solid var(--lemoon-border-strong); }
@@ -66,8 +72,11 @@ lemoon-product-tools { display: block; }
 .lemoon-standard-pdp .product__media-list { margin: 0; }
 .lemoon-standard-pdp .product-media-container.media-type-image { width: 100%; max-width: none; background: var(--lemoon-surface-warm); border: 0; border-radius: 0; --media-radius: 0px; }
 .lemoon-standard-pdp .product-media-container.media-type-image .product__media { padding-top: 0 !important; height: var(--lemoon-stage-height); display: flex; align-items: center; justify-content: center; }
+.lemoon-standard-pdp .product-media-container.media-type-image .product__media { background: var(--lemoon-surface-warm); }
 .lemoon-standard-pdp .product__media.media > img { position: static; display: block; width: 100%; max-width: 100%; height: 100%; object-fit: contain; object-position: center center; mix-blend-mode: multiply; }
 .lemoon-standard-pdp .product__media-icon { display: none; }
+/* The product heading supplies the PDP favourite action; suppress the app's duplicate over the photo. */
+.lemoon-standard-pdp .Vtl-WishlistIcon__ProductPageWrapper { display: none !important; }
 .lemoon-standard-pdp .thumbnail { border-radius: 6px; background: var(--lemoon-surface-warm); }
 .lemoon-standard-pdp .thumbnail img { object-fit: cover; object-position: center; mix-blend-mode: multiply; }
 @media (min-width: 990px) {
@@ -82,7 +91,7 @@ lemoon-product-tools { display: block; }
 }
 @media (max-width: 989px) {
   .lemoon-pdp__grid, .lemoon-standard-pdp .product { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; }
-  .lemoon-pdp__gallery { display: block; position: relative; }
+  .lemoon-pdp__gallery { display: block; position: relative; top: auto; }
   .lemoon-pdp__stage, .lemoon-standard-pdp { --lemoon-stage-height: 420px; }
 }
 @media (max-width: 749px) {
@@ -144,8 +153,8 @@ lemoon-product-tools { display: block; }
 .lemoon-size-drawer[open] { transform: translateX(0); opacity: 1; }
 .lemoon-size-drawer::backdrop { background: #0b1f3a80; opacity: 0; transition: opacity .28s ease, display .28s allow-discrete, overlay .28s allow-discrete; }
 .lemoon-size-drawer[open]::backdrop { opacity: 1; }
-.lemoon-size-drawer .lemoon-pdp__close { position: sticky; top: 16px; right: auto; display: block; margin: -56px -16px 12px auto; z-index: 1; }
-.lemoon-size-drawer h2 { font-size: 24px; margin: 0 0 28px; padding-right: 56px; }
+.lemoon-size-drawer .lemoon-pdp__close { position: sticky; top: 8px; right: auto; display: block; float: right; margin: -8px -16px 0 0; z-index: 1; font-size: 32px !important; line-height: 1; }
+.lemoon-size-drawer h2 { font-size: 20px; margin: 0 0 24px; padding-right: 56px; }
 .lemoon-size-guide-content .rte { font-size: 14px; line-height: 1.7; color: var(--lemoon-text-secondary); }
 .lemoon-size-guide-placeholder { display: grid; justify-items: center; gap: 20px; background: var(--lemoon-surface-warm); padding: 40px 32px; margin-bottom: 28px; border-radius: 8px; color: var(--lemoon-text-brand); }
 .lemoon-size-guide-placeholder span { width: 100%; height: 8px; border-radius: 4px; background: var(--lemoon-border-default); }
@@ -214,7 +223,7 @@ html:has(.lemoon-size-drawer[open]) { overflow: hidden; }
   box-shadow: none;
   font-size: 16px;
   font-weight: 500;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
   text-transform: none;
 }
 .lemoon-standard-pdp .lemoon-select-lenses-button,
@@ -262,18 +271,6 @@ html:has(.lemoon-size-drawer[open]) { overflow: hidden; }
 .lemoon-pdp-color-swatch input:checked + .lemoon-pdp-color-swatch__icon { border-color: var(--lemoon-text-brand); }
 .lemoon-pdp-color-swatch:focus-within,
 .lemoon-pdp-color-options input:focus-visible + .lemoon-pdp-color-swatch { outline: 2px solid var(--lemoon-text-brand); outline-offset: 1px; }
-.lemoon-standard-pdp .product-form__input input[type=radio] + .lemoon-pdp-color-swatch::after,
-.lemoon-pdp-color-swatch::after {
-  content: attr(data-color-name); position: absolute; bottom: calc(100% + 4px); left: 50%;
-  transform: translateX(-50%); padding: 6px 10px; border-radius: 4px;
-  background: var(--lemoon-text-brand); color: var(--lemoon-text-inverse);
-  font-size: 12px; line-height: 1.3; white-space: nowrap; pointer-events: none;
-  opacity: 0; visibility: hidden; z-index: 2; text-decoration: none;
-}
-.lemoon-standard-pdp .product-form__input input[type=radio] + .lemoon-pdp-color-swatch:hover::after,
-.lemoon-standard-pdp .product-form__input input[type=radio]:focus-visible + .lemoon-pdp-color-swatch::after,
-.lemoon-pdp-color-swatch:hover::after,
-.lemoon-pdp-color-swatch:focus-within::after { opacity: 1; visibility: visible; }
 
 lemoon-thumbnail-rail { display: contents; }
 .lemoon-thumbnail-arrow { display: none; }
@@ -281,7 +278,8 @@ lemoon-thumbnail-rail { display: contents; }
   .lemoon-standard-pdp media-gallery,
   .lemoon-pdp__gallery { display: block; position: relative; }
   .lemoon-standard-pdp [id^=GalleryViewer] > .slider-buttons { display: none; }
-  .lemoon-pdp__gallery { --lemoon-stage-height: clamp(480px, 43vw, 680px); }
+  .lemoon-pdp__gallery { top: auto; --lemoon-stage-height: clamp(480px, 43vw, 680px); }
+  .lemoon-pdp__info { padding-top: 24px; }
   .lemoon-standard-pdp media-gallery > slider-component:first-of-type,
   .lemoon-pdp__stage {
     width: calc(100% + var(--lemoon-gallery-bleed, 0px));
@@ -397,6 +395,8 @@ lemoon-thumbnail-rail { display: contents; }
 @media (min-width: 990px) {
   .lemoon-pdp, .lemoon-standard-pdp { padding-top: 0; }
   .lemoon-standard-pdp .product, .lemoon-pdp__grid { align-items: start; }
+  .lemoon-standard-pdp .product__media-wrapper { align-self: stretch; }
+  .lemoon-standard-pdp .product__media-wrapper media-gallery { position: sticky; top: var(--header-height, 72px); }
   .lemoon-standard-pdp .thumbnail-list > :last-child, .lemoon-pdp__thumbnails > :last-child { scroll-snap-align: end; }
 }
 .lemoon-pdp .product__description { font-size: 14px; line-height: 1.7; margin-top: 24px; }
@@ -418,6 +418,50 @@ lemoon-thumbnail-rail { display: contents; }
 .lemoon-size-guide--dialog .lemoon-measurement-diagram__views { grid-template-columns: minmax(0, 1fr); }
 .lemoon-size-guide--dialog .lemoon-size-guide__links { display: flex; flex-wrap: wrap; gap: var(--lemoon-space-3) var(--lemoon-space-6); margin-top: var(--lemoon-space-5); }
 .lemoon-size-guide--dialog .lemoon-size-guide__links a { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-underline-offset: .3em; }
+
+/* Product information: selection stays beside the photo; detail has room below. */
+.lemoon-pdp-intro { margin: var(--lemoon-space-5) 0 var(--lemoon-space-6); color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-16); line-height: 1.65; overflow-wrap: anywhere; }
+.lemoon-pdp__details { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-8); }
+.lemoon-frame-information__heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--lemoon-space-3) var(--lemoon-space-6); margin-bottom: var(--lemoon-space-6); }
+.lemoon-frame-information__heading h2 { margin: 0; }
+.lemoon-frame-information__heading button { min-height: var(--lemoon-size-touch); padding: var(--lemoon-space-2) 0; border: 0; background: transparent; color: var(--lemoon-text-brand); font-size: var(--lemoon-fs-14); text-decoration: underline; text-underline-offset: .3em; cursor: pointer; }
+.lemoon-pdp__text-button[data-pdp-size-open]:focus,
+.lemoon-pdp__text-button[data-size-open]:focus,
+.lemoon-pdp__text-button[data-open-dialog="size"]:focus { outline: none; box-shadow: none; }
+.lemoon-pdp__text-button[data-pdp-size-open]:focus-visible,
+.lemoon-pdp__text-button[data-size-open]:focus-visible,
+.lemoon-pdp__text-button[data-open-dialog="size"]:focus-visible { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: .4em; }
+.lemoon-frame-information__description { max-width: 76ch; margin-bottom: var(--lemoon-space-8); color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-16); line-height: 1.75; overflow-wrap: anywhere; }
+.lemoon-frame-information__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: var(--lemoon-space-10); }
+.lemoon-frame-information__grid > * { min-width: 0; }
+.lemoon-frame-information__diagram { padding: var(--lemoon-space-6); border-radius: var(--lemoon-radius-modal); background: var(--lemoon-surface-warm); }
+.lemoon-frame-information__diagram .lemoon-measurement-diagram__views { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.lemoon-frame-information .lemoon-size-guide__fit-note { margin: var(--lemoon-space-4) 0 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+.lemoon-frame-information .lemoon-size-guide__open { min-height: 44px; padding: 0; margin-top: var(--lemoon-space-4); font-size: var(--lemoon-fs-14); }
+.lemoon-frame-information .lemoon-size-guide__panel .lemoon-pdp__dimensions { max-width: none; padding: 0; margin: 0; }
+.lemoon-frame-information .lemoon-pdp__dimensions dl { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+.lemoon-frame-information .lemoon-pdp__dimensions dl > div { display: flex; align-items: baseline; justify-content: space-between; gap: var(--lemoon-space-4); padding: var(--lemoon-space-3) 0; border-bottom: 1px solid var(--lemoon-border-default); }
+.lemoon-frame-information .lemoon-pdp__dimensions dt, .lemoon-frame-information .lemoon-pdp__dimensions dd { margin: 0; font-size: var(--lemoon-fs-14); line-height: 1.6; }
+.lemoon-frame-information .lemoon-pdp__dimensions dd { text-align: right; overflow-wrap: anywhere; }
+.lemoon-pdp-confidence { padding-top: var(--lemoon-space-6); margin-top: var(--lemoon-space-6); border-top: 1px solid var(--lemoon-border-default); }
+.lemoon-pdp-confidence__items { display: grid; gap: var(--lemoon-space-5); padding: 0; margin: 0; list-style: none; }
+.lemoon-pdp-confidence__items > li { display: flex; align-items: start; gap: var(--lemoon-space-3); }
+.lemoon-pdp-confidence__items > li > svg { width: 22px; height: 22px; flex: 0 0 22px; color: var(--lemoon-text-brand); }
+.lemoon-pdp-confidence__items a { display: inline-flex; align-items: center; min-height: var(--lemoon-size-touch); margin-top: -10px; font-size: var(--lemoon-fs-14); color: var(--lemoon-text-brand); text-underline-offset: .3em; }
+.lemoon-pdp-confidence__items p { margin: 0; color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); line-height: 1.6; }
+.lemoon-pdp-confidence__payments { margin-top: var(--lemoon-space-6); }
+.lemoon-pdp-confidence__payments p { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-14); }
+.lemoon-pdp-confidence__payments ul { display: flex; flex-wrap: wrap; align-items: center; gap: var(--lemoon-space-2); list-style: none; margin: 0; padding: 0; }
+.lemoon-pdp-confidence__payments li { display: flex; }
+@media (min-width: 990px) {
+  .lemoon-standard-pdp .product, .lemoon-pdp__grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--lemoon-space-10); }
+}
+@media (max-width: 749px) {
+  .lemoon-frame-information__grid { grid-template-columns: minmax(0, 1fr); gap: var(--lemoon-space-6); }
+  .lemoon-frame-information__heading { align-items: start; flex-direction: column; }
+  .lemoon-frame-information__diagram { padding: var(--lemoon-space-4); }
+  .lemoon-frame-information__diagram .lemoon-measurement-diagram__views { grid-template-columns: minmax(0, 1fr); }
+}
 .lemoon-size-guide--dialog .lemoon-size-guide__links a:focus-visible { outline: 2px solid var(--lemoon-border-strong); outline-offset: 3px; }
 
 /* Measurement comparison uses the existing native disclosure behavior. */
@@ -427,3 +471,123 @@ lemoon-thumbnail-rail { display: contents; }
 .lemoon-size-guide__comparison[open] > summary .icon { transform: rotate(180deg); }
 .lemoon-size-guide__comparison > summary:focus-visible { outline: 2px solid var(--lemoon-text-brand); outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { .lemoon-size-guide__comparison > summary .icon { transition: none; } }
+
+/* Size and guide sit on one row below the product colour choices. */
+.lemoon-pdp__frame-options { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+.lemoon-pdp__frame-options > variant-selects,
+.lemoon-pdp__frame-options > .lemoon-pdp__options--color { grid-column: 1; grid-row: auto; }
+.lemoon-pdp__frame-options > lemoon-product-tools { display: contents; }
+.lemoon-pdp__frame-options .lemoon-pdp__size-row,
+.lemoon-pdp__size-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 16px; width: 100%; border-top: 0; }
+.lemoon-pdp__frame-options .lemoon-pdp__size-row > div,
+.lemoon-pdp__size-row > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px; text-align: left; font-size: 13px; }
+.lemoon-pdp__frame-options .lemoon-pdp__size-row strong,
+.lemoon-pdp__size-row strong { padding: 4px 10px; border: 0; border-radius: 999px; background: var(--lemoon-surface-warm); font-size: 12px; font-weight: 500; line-height: 1.5; }
+.lemoon-pdp__frame-options .lemoon-pdp__size-row > button,
+.lemoon-pdp__size-row > button { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; min-height: 44px; padding: 0; font-size: 12px; text-align: right; text-transform: none !important; }
+.lemoon-pdp__size-icon { display: inline-flex; flex: 0 0 16px; width: 16px; height: 16px; }
+.lemoon-pdp__size-icon svg { position: static; width: 100%; height: 100%; fill: currentColor; }
+
+/* PDP purchase actions share the same size and type across frames and accessories. */
+.lemoon-standard-pdp .product-form__buttons { max-width: none; }
+.lemoon-standard-pdp .product-form__submit,
+.lemoon-standard-pdp .lemoon-select-lenses-button,
+.lemoon-pdp .lemoon-select-lenses-button,
+.lemoon-pdp .lemoon-pdp__frame-only-add,
+.lemoon-sticky-purchase .lemoon-select-lenses-button {
+  min-height: 48px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.lemoon-standard-pdp .product-form__submit::before,
+.lemoon-standard-pdp .product-form__submit::after,
+.lemoon-standard-pdp .lemoon-select-lenses-button::before,
+.lemoon-standard-pdp .lemoon-select-lenses-button::after,
+.lemoon-pdp .lemoon-select-lenses-button::before,
+.lemoon-pdp .lemoon-select-lenses-button::after,
+.lemoon-pdp .lemoon-pdp__frame-only-add::before,
+.lemoon-pdp .lemoon-pdp__frame-only-add::after,
+.lemoon-sticky-purchase .lemoon-select-lenses-button::before,
+.lemoon-sticky-purchase .lemoon-select-lenses-button::after { display: none; }
+.lemoon-standard-pdp .product-form__submit:not(:disabled):not([aria-disabled='true']),
+.lemoon-pdp .lemoon-pdp__frame-only-add:not(:disabled) {
+  background: var(--lemoon-action-accent);
+  color: var(--lemoon-text-brand);
+  border: 0;
+}
+.lemoon-standard-pdp .product-form__submit:not(:disabled):not([aria-disabled='true']):hover,
+.lemoon-pdp .lemoon-pdp__frame-only-add:not(:disabled):hover {
+  background: var(--lemoon-action-accent-hover);
+  color: var(--lemoon-text-brand);
+}
+.lemoon-standard-pdp .lemoon-select-lenses-button:not([aria-disabled='true']),
+.lemoon-pdp .lemoon-select-lenses-button:not(:disabled),
+.lemoon-sticky-purchase .lemoon-select-lenses-button:not(:disabled) {
+  background: var(--lemoon-action-accent);
+  color: var(--lemoon-text-brand);
+}
+.lemoon-standard-pdp .lemoon-select-lenses-button:not([aria-disabled='true']):hover,
+.lemoon-pdp .lemoon-select-lenses-button:not(:disabled):hover,
+.lemoon-sticky-purchase .lemoon-select-lenses-button:not(:disabled):hover {
+  background: var(--lemoon-action-accent-hover);
+  color: var(--lemoon-text-brand);
+}
+.lemoon-standard-pdp .product-form__submit.loading > .loading__spinner .path { stroke: var(--lemoon-text-brand); }
+
+/* Keep the purchase label and accent visible while a cart request is pending. */
+.lemoon-standard-pdp .product-form__submit.loading[aria-disabled='true'] {
+  background: var(--lemoon-action-accent);
+  color: var(--lemoon-text-brand);
+  opacity: 1;
+  cursor: wait;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.lemoon-standard-pdp .product-form__submit.loading > span { grid-column: 2; }
+.lemoon-standard-pdp .product-form__submit.loading > .loading__spinner {
+  position: static;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  transform: none;
+  flex: 0 0 16px;
+  grid-column: 3;
+  justify-self: start;
+}
+.lemoon-standard-pdp .product-form__submit.loading > .loading__spinner .spinner { width: 16px; height: 16px; }
+
+.lemoon-frame-information__inner { width: 100%; max-width: var(--lemoon-max-width); padding-inline: var(--lemoon-gutter-mobile); }
+#MainContent[data-template='product'] .lemoon-standard-pdp { padding-bottom: var(--lemoon-space-4) !important; }
+#MainContent[data-template='product'] .lemoon-frame-information { padding-bottom: var(--lemoon-space-6); }
+@media (min-width: 750px) { .lemoon-frame-information__inner { padding-inline: var(--lemoon-gutter-desktop); } }
+@media (max-width: 749px) {
+  .lemoon-standard-pdp .product > .product__media-wrapper,
+  .lemoon-pdp__gallery {
+    width: calc(100% + var(--lemoon-gutter-mobile) + var(--lemoon-gutter-mobile));
+    max-width: none;
+    margin-inline: calc(-1 * var(--lemoon-gutter-mobile));
+  }
+  .lemoon-standard-pdp .product__media-list.slider--mobile::after { content: none; }
+  .lemoon-standard-pdp .product__media-wrapper slider-component:not(.thumbnail-slider--no-slide) { margin-left: 0; margin-right: 0; }
+  .lemoon-standard-pdp .product__media-list:has(.product__media-item:nth-child(2)) .product__media-item,
+  .lemoon-standard-pdp .product--thumbnail_slider .product__media-list:has(.product__media-item:nth-child(2)) .product__media-item:not(.is-active) { flex-basis: calc(100% - 10px); width: calc(100% - 10px); }
+}
+
+/* PDP characteristics use the available width and stack on smaller screens. */
+.lemoon-frame-information .lemoon-size-guide__specs { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--lemoon-space-10); }
+.lemoon-frame-information .lemoon-size-guide__tabs [role="tab"] { font-size: 16px !important; text-transform: none !important; }
+@media (max-width: 749px) {
+  .lemoon-frame-information .lemoon-size-guide__specs { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Show the provider-owned PDP control in the heading once it has loaded. */
+.lemoon-product-heading__wishlist:empty { display: none; }
+.lemoon-product-heading__wishlist .Vtl-WishlistIcon__ProductPageWrapper { display: block !important; position: static !important; inset: auto !important; width: 44px; height: 44px; }
+.lemoon-product-heading__wishlist .Vtl-WishlistButton__WishlistIconButton { display: grid; place-items: center; width: 44px; height: 44px; cursor: pointer; }
+
+@media (min-width: 750px) {
+  .lemoon-sticky-purchase .lemoon-select-lenses-button { padding-inline: 32px; }
+}

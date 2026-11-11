@@ -87,6 +87,16 @@ Los roles semánticos gobiernan los controles Lemoon; un color scheme del editor
 
 Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body: `--lemoon-font-body`, **Instrument Sans**, sans-serif. El [layout](layout/theme.liquid) carga Urbanist 300/400/500/600/700 y Instrument Sans 400/500/600/700. Aplicar los roles de [tokens](assets/lemoon-tokens.css) mediante las clases de [componentes](assets/lemoon-components.css):
 
+El foco de teclado usa en todo el sitio un contorno gris `--lemoon-focus-ring` de 2px con separación de 2px, adaptado al contorno de cada control. Los campos de texto, textarea y select conservan el color de su borde y aumentan su grosor en 1px al enfocar; en colores forzados usan Highlight. Excepción solicitada para newsletter: borde navy reforzado hacia dentro al enfocar, sin contorno exterior ni cambio de geometría; reserva espacio para dos líneas de feedback de 12px. Los selectores visuales de radio trasladan el foco a su etiqueta y el zoom de imagen a su superficie; el estado de selección sigue siendo independiente. En colores forzados se usa el color de texto del sistema. Esta decisión del 10-11-2026 sustituye los colores de foco particulares descritos anteriormente.
+
+En la PDP, el corazón de favorito guardado se rellena con el azul de marca. Al activarlo muestra una breve expansión del icono y un aro que desaparece; no se anima al restaurar el estado ni al quitarlo, y respeta movimiento reducido.
+
+Los botones de acción usan mayúsculas e Instrument Sans medium de 13px. Las acciones de compra de la PDP usan este tratamiento y forma de píldora: amarillo con texto azul de marca para seleccionar lentes y agregar al carrito, tanto en armazones como en accesorios. Los estados deshabilitados conservan su diferenciación.
+
+Debajo de las opciones de color, la PDP presenta «Talla:» y el valor disponible a la izquierda; el valor usa 12px y peso medium. A la derecha permanece el acceso a la guía de medidas con el icono de regla existente. Si no hay talla, solo se muestra el acceso a la guía.
+
+En móvil la galería ocupa el ancho completo del viewport y deja ver 10px de la siguiente imagen cuando existe. El menú móvil abre desde la izquierda, sin fila de cierre duplicada; el control del encabezado permite volver y cerrar. El primer nivel conserva mayúsculas y minúsculas naturales y la zona inferior cambia según la sesión del cliente. El corazón de la tarjeta aparece en la esquina superior derecha y comparte la animación breve del favorito; al guardar se reproduce una nota corta. El texto de compra permanece centrado durante la carga y el indicador aparece a su derecha. Las medidas conocidas pueden acompañar sus letras en el diagrama, sin completar valores ausentes.
+
 | Rol | Familia / peso | Tamaño ≥750 → <750 | Interlínea | Tracking |
 | --- | --- | --- | --- | --- |
 | Display `.h0` | Urbanist 300 | 5.6rem → 4rem | 1.142857 | −0.5px |
@@ -97,7 +107,7 @@ Familia heading: `--lemoon-font-heading`, **Urbanist**, sans-serif. Familia body
 | Body small | Instrument Sans 400 | 1.4rem | 1.428571 | 0 |
 | Caption | Instrument Sans 400 | 1.2rem | 1.333333 | 0 |
 | Label | Instrument Sans 400 | 1.3rem | 1.4 | 0 |
-| CTA | Urbanist 600 | 1.4rem | 1.428571 | 0.3px, uppercase |
+| CTA / texto de botones | Instrument Sans 600 | 1.4rem | 1.428571 | 0.3px, uppercase |
 
 Los rem equivalen nominalmente a 10px en la escala base del tema; el root depende de `body_scale`. Preservar rem y escalado del usuario. Elegir H1–H3 por jerarquía semántica y `.h0` por presentación. No aplicar tracking global `−0.03em`. Las excepciones de tarjeta, PLP y shell legal se mantienen en sus selectores, sin alterar estos roles.
 
@@ -253,7 +263,7 @@ Los radios se eligen por familia. La regla final de `lemoon-components.css` apli
 
 Usar el [activo oficial lemoon-logo-refined-navy.svg](assets/lemoon-logo-refined-navy.svg) sin redibujar letras ni recolorear. Su fill es `#0E1A28` y su viewBox 824.267×193.523. El header lo declara 120×28; conservar la proporción del activo. Ese tamaño es de header, no mínimo oficial. La definición de variantes, mínimos y clearspace corresponde a identidad extendida en LEM-80; LEM-132 mantiene su aplicación en biblioteca. No reconstruir una segunda “o” amarilla sobre el SVG.
 
-Fotografía de producto: blanco/gris muy claro, frontal/lateral/perspectiva y armazón completo. Lifestyle: luz natural, entornos limpios, personas diversas y composición editorial. Diagramas: medidas legibles en mm. Conservar el tratamiento contain de producto y el crop/punto focal editorial de cada sección. Usar imágenes responsive con dimensiones que eviten saltos y lazy loading bajo el primer pliegue. Texto esencial en HTML y alt según función. Los placeholders no son fotografía final ni autorización de publicación.
+Fotografía de producto: blanco/gris muy claro, frontal/lateral/perspectiva y armazón completo. Lifestyle: luz natural, entornos limpios, personas diversas y composición editorial. Diagramas: medidas legibles en mm. Conservar el tratamiento contain de producto y el crop/punto focal editorial de cada sección. En la PDP estándar, la imagen se integra al fondo cálido con multiply; en escritorio, la galería permanece bajo el encabezado durante el desplazamiento. Usar imágenes responsive con dimensiones que eviten saltos y lazy loading bajo el primer pliegue. Texto esencial en HTML y alt según función. Los placeholders no son fotografía final ni autorización de publicación.
 
 Contenido: es-CL, frases claras, CTAs que describen la acción y moneda CLP. Reutilizar locales existentes. La voz final pertenece a [LEM-55](https://linear.app/antekera/issue/LEM-55). No convertir slogans, precios, reseñas, garantías o plazos de muestra en hechos del negocio.
 
@@ -317,13 +327,13 @@ La propuesta local usa el índice nominal `2 × ancho del lente + puente`: menor
 
 ### Quiz: salida a la colección nativa
 
-La decisión del 06-11-2026 sustituye el resumen y listado embebidos anteriores por la navegación filtrada a `/collections/all`. Las seis preguntas y sus snapshots permanecen en el quiz; resultados, tarjetas canónicas y edición de filtros pertenecen a la PLP. No se modifica `custom.style_quiz_demo` al retirar una presentación: las banderas y evidencias históricas conservan su significado. El [contrato vigente](#quiz-de-estilo-navegación-a-catálogo) y la [guía de catálogo](docs/catalog/style-quiz.md) definen los filtros y la verificación pendiente.
+La decisión del 06-11-2026 sustituye el resumen y listado embebidos anteriores por la navegación filtrada a `/collections/all`. Las seis preguntas y sus snapshots permanecen en el quiz; resultados, tarjetas canónicas y edición de filtros pertenecen a la PLP. Los metacampos heredados de revisión y demostración se eliminaron el 10-11-2026; las evidencias históricas conservan su significado. El [contrato vigente](#quiz-de-estilo-navegación-a-catálogo) y la [guía de catálogo](docs/catalog/style-quiz.md) definen los filtros y la verificación pendiente.
 
 ### Guía de medidas: PDP y página educativa
 
 PDP y página reutilizan los SVG originales de [frontal/lateral](snippets/lemoon-frame-measurement-diagram.liquid) y [patilla en perspectiva](snippets/lemoon-size-guide-comparison.liquid), con navy, superficie cálida e IDs únicos por instancia. La forma se inspira en [Donnalyn ZJGT372549-04](https://www.zeelool.com/goods-detail/ZJGT372549-04), referencia elegida por Miguel; no incorpora su estampado, marca ni cifras. Se conserva la abertura izquierda cuadrada y redondeada junto a los remaches, el puente continuo y la construcción aprobada. Los dibujos no están a escala ni representan un SKU Lemoon.
 
-El modal muestra primero frontal/lateral apilados y una única lista compacta A–E con nombre y cifras reales de `custom.frame_dimensions`. Solo acepta números JSON positivos conocidos; las ausencias usan — con aviso parcial/vacío, sin completar desde talla o estilo. Los datos sintéticos etiquetados `lemoon-measurements-demo` mantienen su aviso. Material, talla, ajuste y demás características quedan en las tres pestañas inline de la PDP; no se añade entrada desde Home ni se incrusta el cuerpo CMS de la guía.
+El modal muestra primero frontal/lateral apilados y una única lista compacta A–E con nombre y cifras reales de `custom.frame_dimensions`. Solo acepta números JSON positivos conocidos; las ausencias usan — con aviso parcial/vacío, sin completar desde talla o estilo. Los datos sintéticos etiquetados `lemoon-measurements-demo` mantienen su aviso. Material, talla, ajuste y demás características quedan en la ficha inline de Características de la PDP; no se añade entrada desde Home ni se incrusta el cuerpo CMS de la guía.
 
 «Compara con tus lentes» es un acordeón nativo inicialmente cerrado, separado24px del dibujo. Reutiliza la imagen con inscripción e indicador de patilla, el ejemplo educativo52 □18–145 y su nota de12px, sin repetir las tres filas de explicación de la página. La ayuda «¿Tienes más dudas?» y el enlace «Cómo medir tus lentes» quedan dentro. Al abrirlo, solo el panel desplaza su título al inicio del área de lectura bajo la X:16px de inset,44px de control y12px de separación. Chevron al extremo derecho y X a16px del borde superior, sin colisiones. Movimiento reducido usa desplazamiento inmediato; el scroll no cambia el foco nativo ni el documento. Cerrar el drawer pliega el acordeón después de su salida visual; toda reapertura vuelve arriba y cerrada, incluso durante una salida pendiente. Mantener foco contenido/restaurado, Escape, cierre sticky y controles táctiles.
 
@@ -343,3 +353,17 @@ Navegación añade Cerrar y Volver dentro del panel móvil, con foco contenido e
 El carrito conserva su controlador y la activación existente: cuando la transición del panel dura0 (incluido movimiento reducido), activa el foco contenido inmediatamente al abrir; con animación conserva el evento de finalización. La accesibilidad no depende de que se emita un `transitionend` cuando no hay movimiento.
 
 El cierre de los drawers nativos de medidas en móvil mantiene el panel opaco durante la salida hacia abajo. Si el motor no permite conservar la capa modal con la transición CSS de overlay, el controlador existente mantiene el diálogo abierto hasta el fin de transform y después ejecuta su cierre nativo. Escape repetido no interrumpe la salida; movimiento reducido evita la espera. La implementación estándar y óptica comparten la instancia de la guía, sin importar el módulo una segunda vez.
+
+### PDP: jerarquía de información y confianza · refinamiento 09-11-2026
+
+La PDP estándar conserva su espaciado superior configurado y su animación de entrada del panel de información. La PDP óptica aplica el mismo espaciado de 24px en escritorio y la misma animación al panel; las galerías conservan sus reglas de posición respectivas.
+
+Los botones que abren Guía de medidas conservan el foco y su retorno al cerrar el modal. El foco visible usa el contorno gris compartido del sitio.
+
+La solicitud de Miguel se implementa sobre las familias actuales: galería protagonista y panel de selección en escritorio, identidad/precio antes de la foto en móvil y descripción completa debajo. Los detalles comparten el ancho y los márgenes de página. Dos pestañas separan Características (forma, material, peso, público, receta, talla, ajuste y rostros disponibles) de Medidas (valores mm y esquema A–E solo aquí). Se omiten campos ausentes y párrafos genéricos. El acceso junto a la talla abre el modal de medidas y restaura el foco al cerrar.
+
+La información cercana a compra se concilia con políticas nativas: garantía legal y cambios/devoluciones con enlace a reembolso, plazo configurado con sus condiciones y enlace a envío, medios de pago habilitados por Shopify. No reutilizar365/30días de defaults ni claims de competidores como hechos Lemoon. No generar cifras desde talla textual, convertir referencias de compatibilidad en booleanos, ni asumir sincronización de campos cortos/medidas desde Studio. El [inventario y cruce de datos PDP](docs/design/2026-11-09-pdp-refinement.md) registra fuentes, límites y diferencias; revisión humana del resultado pendiente.
+
+La descripción aparece dentro de la pestaña Características, cuyos atributos se distribuyen en dos columnas en desktop y una en móvil, sin título visual adicional ni acceso inferior duplicado a la guía. Las pestañas usan escritura normal y 16px.
+
+Las acciones de texto y los enlaces de navegación del encabezado usan `--lemoon-font-body` con peso regular (400); los enlaces de navegación en desktop usan peso medium (500).

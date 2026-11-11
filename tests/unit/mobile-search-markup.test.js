@@ -3,13 +3,15 @@ import { expect, test } from 'vitest';
 
 const themeFile = (path) => new URL(`../../${path}`, import.meta.url);
 
-test('removes the visible information heading and conditionally adds the Square wishlist link', async () => {
+test('keeps the Square wishlist option in the mobile menu rather than search', async () => {
   const snippet = await readFile(themeFile('snippets/lemoon-mobile-search.liquid'), 'utf8');
+  const nav = await readFile(themeFile('snippets/lemoon-mobile-nav.liquid'), 'utf8');
   const header = await readFile(themeFile('sections/header.liquid'), 'utf8');
   const group = await readFile(themeFile('sections/header-group.json'), 'utf8');
 
   expect(snippet).not.toMatch(/<h3[^>]*>\{\{ 'sections\.mobile_search\.information' \| t \}\}<\/h3>/);
-  expect(snippet).toMatch(/if section\.settings\.mobile_search_show_wishlist[\s\S]*?href="\/apps\/page\/wishlist"[\s\S]*?'sections\.mobile_search\.wishlist' \| t[\s\S]*?endif/);
+  expect(snippet).not.toContain('/apps/page/wishlist');
+  expect(nav).toMatch(/if section\.settings\.mobile_search_show_wishlist[\s\S]*?href="\/apps\/page\/wishlist"[\s\S]*?'sections\.mobile_search\.wishlist' \| t[\s\S]*?endif/);
   expect(header).toMatch(/"id": "mobile_search_show_wishlist"[\s\S]*?"default": true/);
   expect(group).toMatch(/"mobile_search_show_wishlist": true/);
 });

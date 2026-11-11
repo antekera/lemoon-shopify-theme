@@ -1,0 +1,10 @@
+{% doc %}
+  Shows a concise introduction from the first paragraph of the Shopify description.
+  @param {product} product - Current Shopify product; full description remains below.
+{% enddoc %}
+{%- liquid
+  assign introduction = product.description | split: '</p>' | first | strip_html | strip
+-%}
+{%- if introduction != blank -%}
+  <p class="lemoon-pdp-intro">{{ introduction | escape_once }}</p>
+{%- endif -%}

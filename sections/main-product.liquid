@@ -44,7 +44,7 @@
 
     @media screen and (min-width: 990px) {
       .section-{{ section.id }}-padding .product__media-wrapper {
-        margin-top: calc(-1 * ({{ section.settings.padding_top }}px + 3rem));
+        margin-top: calc(-1 * {{ section.settings.padding_top }}px);
       }
     }
   {%- endstyle -%}
@@ -126,20 +126,6 @@
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
                     </div>
                   {%- endif -%}
-                  {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                    <div class="product__tax caption rte">
-                      {%- if cart.duties_included and cart.taxes_included -%}
-                        {{ 'products.product.duties_and_taxes_included' | t }}
-                      {%- elsif cart.taxes_included -%}
-                        {{ 'products.product.taxes_included' | t }}
-                      {%- elsif cart.duties_included -%}
-                        {{ 'products.product.duties_included' | t }}
-                      {%- endif -%}
-                      {%- if shop.shipping_policy.body != blank -%}
-                        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                      {%- endif -%}
-                    </div>
-                  {%- endif -%}
                   <div {{ block.shopify_attributes }}>
                     {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                     {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
@@ -199,13 +185,7 @@
                     {%- endif -%}
                   </p>
                 {%- when 'description' -%}
-                  {%- assign purchase_blocks = section.blocks | where: 'type', 'buy_buttons' -%}
-                  {%- if purchase_blocks.size == 0 and product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                      {{ product.description }}
-                    </div>
-                    {% render 'lemoon-product-sku', product: product %}
-                  {%- endif -%}
+                  {%- comment -%}The full description is grouped with the product characteristics below.{%- endcomment -%}
                 {%- when 'sku' -%}
                   <p
                     class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -430,6 +410,8 @@
                   </div>
                 {%- when 'buy_buttons' -%}
                   {% assign variant_picker_blocks = section.blocks | where: 'type', 'variant_picker' %}
+                  {% assign hide_direct_purchase = false %}
+                  {% if product.metafields.custom.prescription_type.value != blank %}{% assign hide_direct_purchase = true %}{% endif %}
                   {% if variant_picker_blocks.size == 0 %}
                     {% render 'lemoon-product-size-guide', product: product, section_id: section.id %}
                   {% endif %}
@@ -438,16 +420,10 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
+                    hide_direct_purchase: hide_direct_purchase,
                     show_pickup_availability: true
                   -%}
-                  {%- assign description_block = section.blocks | where: 'type', 'description' | first -%}
-                  {%- if description_block and product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ description_block.shopify_attributes }}>
-                      {{ product.description }}
-                    </div>
-                  {%- endif -%}
-                  {% render 'lemoon-product-sku', product: product %}
-                  {% render 'lemoon-shared-benefits', context: 'product' %}
+                  {% render 'lemoon-pdp-purchase-confidence', shop: shop %}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -694,7 +670,11 @@
     </div>
   </product-component>
   {% assign frame_information_id = section.id | append: '-inline' %}
-  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
+  {%- assign description_blocks = section.blocks | where: 'type', 'description' -%}
+  {%- assign include_description = false -%}
+  {%- if description_blocks.size > 0 -%}{%- assign include_description = true -%}{%- endif -%}
+  {%- assign description_block = description_blocks | first -%}
+  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id, include_description: include_description, description_attributes: description_block.shopify_attributes, show_sku: true %}
   {% render 'lemoon-sticky-purchase', product: product %}
 </product-info>
 
