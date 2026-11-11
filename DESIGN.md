@@ -367,3 +367,5 @@ La información cercana a compra se concilia con políticas nativas: garantía l
 La descripción aparece dentro de la pestaña Características, cuyos atributos se distribuyen en dos columnas en desktop y una en móvil, sin título visual adicional ni acceso inferior duplicado a la guía. Las pestañas usan escritura normal y 16px.
 
 Las acciones de texto y los enlaces de navegación del encabezado usan `--lemoon-font-body` con peso regular (400); los enlaces de navegación en desktop usan peso medium (500).
+
+En PDP y tarjetas, el corazón de favoritos muestra borde navy y relleno blanco; al pasar el cursor cambia el borde a amarillo y, cuando está guardado, tanto el borde como el relleno son amarillos. El estado sigue siendo gestionado por Vitals.

@@ -589,6 +589,12 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   inset: 8px 8px auto auto !important;
   z-index: 4 !important;
 }
+/* Vitals supplies separate outline and solid paths; style its solid silhouette
+   while retaining the app's own saved-state marker and click handling. */
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:first-child { opacity: 0 !important; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:last-child { opacity: 1 !important; fill: var(--lemoon-surface-page) !important; stroke: var(--lemoon-text-brand); stroke-width: 32px; stroke-linejoin: round; paint-order: stroke fill; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton:hover svg > path:last-child { stroke: var(--lemoon-action-accent); }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg[style*='--vtl-heart-solid:'] > path:last-child { fill: var(--lemoon-action-accent) !important; stroke: var(--lemoon-action-accent); }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating { position: relative; }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating svg { animation: lemoon-card-favourite-pop 480ms ease-out; }
 :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating::after { content: ''; position: absolute; inset: 25%; border: 2px solid var(--lemoon-text-brand); border-radius: 50%; pointer-events: none; animation: lemoon-card-favourite-burst 560ms ease-out both; }
