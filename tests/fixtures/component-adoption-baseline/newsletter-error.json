@@ -41,6 +41,7 @@
                 "data-shopify-form-fixture": "",
                 "id": "LemoonNewsletter-component-fixture",
                 "method": "post",
+                "target": "LemoonNewsletter-component-fixture-response",
                 "class": "lemoon-newsletter__form"
               },
               "children": [
@@ -112,14 +113,25 @@
                   ]
                 },
                 {
-                  "tag": "p",
+                  "tag": "div",
                   "attrs": {
-                    "id": "LemoonNewsletterError-component-fixture",
-                    "role": "alert",
-                    "class": "lemoon-newsletter__message"
+                    "aria-live": "polite",
+                    "data-fallback-message": "No pudimos confirmar tu suscripción. Inténtalo nuevamente.",
+                    "data-pending-message": "La confirmación está tardando. Si continúa la espera, intenta nuevamente.",
+                    "class": "lemoon-newsletter__status"
                   },
                   "children": [
-                    "Correo revisa el correo"
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "id": "LemoonNewsletterError-component-fixture",
+                        "role": "alert",
+                        "class": "lemoon-newsletter__message"
+                      },
+                      "children": [
+                        "Correo revisa el correo"
+                      ]
+                    }
                   ]
                 }
               ]

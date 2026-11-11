@@ -1,12 +1,20 @@
 {% doc %}
   Renders the product heading, Shopify promotions, SKU and favourite action.
   @param {product} product - Current Shopify product.
+  @param {boolean} [show_promotions] - Set false when the parent renders promotions after price.
 {% enddoc %}
 <lemoon-product-tools data-product-id="{{ product.id }}">
   {% render 'lemoon-product-status', product: product %}
   <div class="lemoon-product-heading">
     <h1>{{ product.title | escape }}</h1>
-    <button type="button" data-favourite aria-pressed="false" aria-label="{{ 'lemoon_pdp.save' | t }}">{% render 'lemoon-icon', icon: 'heart' %}</button>
+    <div class="lemoon-product-heading__actions">
+      <button type="button" class="lemoon-product-heading__share" data-product-share data-product-url="{{ product.url | prepend: request.origin | escape }}" aria-label="{{ 'products.product.share' | t | escape }}" hidden>{{ 'icon-share.svg' | inline_asset_content }}</button>
+      <span class="lemoon-product-heading__wishlist" data-product-favourite-slot data-product-id="{{ product.id }}"></span>
+    </div>
   </div>
-  {% render 'lemoon-product-promotions', product: product %}
+  <div class="lemoon-product-share-feedback" data-product-share-feedback>
+    <span role="status" aria-live="polite" data-product-share-status data-copied="{{ 'general.share.success_message' | t | escape }}" data-copy-error="{{ 'general.share.copy_error' | t | escape }}"></span>
+    <input type="url" data-product-share-fallback aria-label="{{ 'general.share.share_url' | t | escape }}" readonly hidden>
+  </div>
+  {%- unless show_promotions == false -%}{% render 'lemoon-product-promotions', product: product %}{%- endunless -%}
 </lemoon-product-tools>

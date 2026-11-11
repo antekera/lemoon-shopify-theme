@@ -12,20 +12,11 @@
 <script type="module" src="{{ 'lemoon-mobile-nav.js' | asset_url }}"></script>
 <div class="lemoon-mobile-nav__overlay" data-lemoon-nav-overlay aria-hidden="true"></div>
 <div class="lemoon-mobile-nav" id="lemoon-mobile-nav" data-lemoon-nav data-lemoon-nav-section="{{ section.id }}" role="dialog" aria-label="{{ 'sections.header.menu' | t }}" aria-hidden="true" tabindex="-1" inert>
-  <div class="lemoon-mobile-nav__controls" data-lemoon-nav-controls>
-    <button type="button" class="lemoon-mobile-nav__back" data-lemoon-nav-back hidden>
-      {% render 'lemoon-icon', icon: 'arrow-left', size: 20 %}
-      <span>{{ 'sections.header.back_to_menu' | t }}</span>
-    </button>
-    <button type="button" class="lemoon-mobile-nav__close" data-lemoon-nav-close aria-label="{{ 'accessibility.close' | t }}">
-      {% render 'lemoon-icon', icon: 'x', size: 20 %}
-    </button>
-  </div>
   <div class="lemoon-mobile-nav__panel" data-lemoon-nav-root>
     <nav aria-label="{{ 'sections.header.menu' | t }}">
       <ul class="lemoon-mobile-nav__primary" role="list">
         {%- for block in section.blocks -%}
-          {%- if block.type == 'drawer_primary' and block.settings.title != blank -%}
+          {%- if block.type == 'drawer_primary' and block.settings.show_in_mobile_menu != false and block.settings.title != blank -%}
             <li {{ block.shopify_attributes }}>
               {%- if block.settings.has_submenu == false and block.settings.link != blank -%}
                 <a class="lemoon-mobile-nav__primary-button" href="{{ block.settings.link }}">
@@ -46,8 +37,11 @@
     </nav>
     <nav class="lemoon-mobile-nav__utility" aria-label="{{ section.settings.utility_heading | escape }}">
       <ul role="list">
+        {%- if section.settings.mobile_search_show_wishlist -%}
+          <li><a href="/apps/page/wishlist">{% render 'lemoon-icon', icon: 'heart', size: 20 %}<span>{{ 'sections.mobile_search.wishlist' | t }}</span></a></li>
+        {%- endif -%}
         {%- for block in section.blocks -%}
-          {%- if block.type == 'drawer_utility' and block.settings.title != blank and block.settings.link != blank -%}
+          {%- if block.type == 'drawer_utility' and block.settings.show_in_mobile_menu != false and block.settings.title != blank and block.settings.link != blank -%}
             <li {{ block.shopify_attributes }}><a href="{{ block.settings.link }}">
               {%- if block.settings.icon != 'none' -%}{% render 'lemoon-icon', icon: block.settings.icon, size: 20 %}{%- endif -%}
               <span>{{ block.settings.title | escape }}</span>
@@ -58,16 +52,20 @@
     </nav>
     {%- if shop.customer_accounts_enabled -%}
       <div class="lemoon-mobile-nav__account">
-        <p>{{ section.settings.account_message | escape }}</p>
+        {%- unless customer -%}<p>{{ section.settings.account_message | escape }}</p>{%- endunless -%}
         <div class="lemoon-mobile-nav__account-actions">
-          <a class="lemoon-mobile-nav__account-login" href="{{ routes.account_login_url }}">{{ section.settings.login_label | escape }}</a>
-          <a class="lemoon-mobile-nav__account-register" href="{{ routes.account_register_url }}">{{ section.settings.register_label | escape }}</a>
+          {%- if customer -%}
+            <a class="lemoon-mobile-nav__account-login" href="{{ routes.account_url }}">{{ 'sections.header.my_account' | t | escape }}</a>
+          {%- else -%}
+            <a class="lemoon-mobile-nav__account-login" href="{{ routes.account_login_url }}">{{ section.settings.login_label | escape }}</a>
+            <a class="lemoon-mobile-nav__account-register" href="{{ routes.account_register_url }}">{{ section.settings.register_label | escape }}</a>
+          {%- endif -%}
         </div>
       </div>
     {%- endif -%}
   </div>
   {%- for primary in section.blocks -%}
-    {%- if primary.type == 'drawer_primary' and primary.settings.title != blank and primary.settings.has_submenu -%}
+    {%- if primary.type == 'drawer_primary' and primary.settings.show_in_mobile_menu != false and primary.settings.title != blank and primary.settings.has_submenu -%}
       <div class="lemoon-mobile-nav__panel" data-lemoon-nav-panel="{{ primary.settings.slot | escape }}" aria-hidden="true" tabindex="-1" hidden>
         <h2 class="lemoon-mobile-nav__subheading">{{ primary.settings.title | escape }}</h2>
         <nav aria-label="{{ primary.settings.title | escape }}">

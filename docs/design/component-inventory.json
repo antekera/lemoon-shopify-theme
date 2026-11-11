@@ -24,7 +24,7 @@
   },
   "counts": {
     "total_tracked_paths": 630,
-    "mapped_paths": 504,
+    "mapped_paths": 507,
     "excluded_paths": 126,
     "by_root": {
       "assets": 361,
@@ -32,14 +32,14 @@
       "layout": 2,
       "locales": 51,
       "sections": 71,
-      "snippets": 103,
+      "snippets": 105,
       "templates": 40
     },
     "mapped_by_extension": {
       ".css": 85,
       ".js": 57,
       ".json": 91,
-      ".liquid": 177,
+      ".liquid": 180,
       ".svg": 94
     },
     "excluded_by_reason": {
@@ -51,8 +51,8 @@
     "section_groups": 2,
     "section_schema_blocks": 81,
     "theme_block_files": 0,
-    "total_source_paths": 630,
-    "explicit_new_paths": 0
+    "total_source_paths": 633,
+    "explicit_new_paths": 3
   },
   "components": [
     {
@@ -275,7 +275,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-field.liquid",
-        "scope": "Input/textarea; lemoon-ui-select para select. Labels, IDs y error explícitos. Controles UI migrados usan borde azul claro en reposo y borde navy continuo al enfocar, o rojo si aria-invalid; forced-colors usa Highlight.",
+        "scope": "Input/textarea; lemoon-ui-select para select. Labels, IDs y error explícitos. Los campos de texto conservan el color del borde y aumentan su grosor 1px al enfocar; forced-colors usa Highlight.",
         "recipe_path": "docs/components/recipes/contact-form.md"
       }
     },
@@ -581,6 +581,7 @@
       "behavior": "presentational",
       "source_paths": [
         "snippets/loading-spinner.liquid",
+        "snippets/lemoon-favourite-toast.liquid",
         "assets/loading-spinner.svg",
         "sections/cart-live-region-text.liquid",
         "snippets/lemoon-ui-message.liquid"
@@ -616,7 +617,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-ui-message.liquid",
-        "scope": "Mensaje explícito sin anuncio automático; loading-spinner conserva su implementación.",
+        "scope": "Toast de favoritos observa el widget Vitals en tarjetas y PDP y muestra la confirmación como único enlace a la lista; el control PDP aloja el widget inyectado sin migrar los favoritos locales históricos. Mensaje explícito sin anuncio automático; loading-spinner conserva su implementación.",
         "recipe_path": "docs/components/recipes/contact-form.md"
       }
     },
@@ -711,6 +712,7 @@
         "snippets/lemoon-frame-dimensions.liquid",
         "snippets/lemoon-frame-information.liquid",
         "snippets/lemoon-product-size-guide.liquid",
+        "snippets/lemoon-frame-classification.liquid",
         "assets/lemoon-pdp-tools.js",
         "snippets/lemoon-frame-measurement-diagram.liquid",
         "snippets/lemoon-size-guide-comparison.liquid",
@@ -734,7 +736,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-size-guide-content.liquid",
-        "scope": "Continuous dialog receives product: approved front/side A–E diagram followed by one compact named HTML reference list with positive native JSON mm values, em dash for missing data and partial/empty/demo notices. Long measurement instructions are omitted from the modal only. Educational comparison is a closed native disclosure with canonical chevron and annotated_temple:true, show_rows:false, reusing the page inner-temple inscription/outline/leader and educational caption. Final localized help inside the comparison disclosure links to a configured published guia-medidas page or the canonical localized guide handle; both help and link stay hidden while collapsed and its body is excluded from the drawer focus boundary. Inline product details retain three ARIA tabs, positive mm values and partial/empty/demo notices, without inline diagrams or CMS body. Existing standard/optical guide open handlers reset dialog scrollTop to zero after showModal, without affecting other dialogs. The modal comparison has --lemoon-space-6 top margin. Closing the size drawer collapses its comparison; expanding it aligns its full-width summary below the sticky close row (72px base), with its chevron at the content right edge and the close control at the 16px top inset, using drawer-local scrolling with reduced-motion support and sufficient minimum content height. Existing native controllers, drawer motion, sticky close, unique SVG IDs and approved Donnalyn paths remain. Educational page defaults, explanatory rows and long definitions remain unchanged.",
+        "scope": "La descripción aparece dentro de Características, con atributos en dos columnas en desktop y una en móvil; no hay título visual ni acceso inferior duplicado a la guía. Continuous dialog receives product: approved front/side A–E diagram followed by one compact named HTML reference list with positive native JSON mm values, em dash for missing data and partial/empty/demo notices. Long measurement instructions are omitted from the modal only. Educational comparison is a closed native disclosure with canonical chevron and annotated_temple:true, show_rows:false, reusing the page inner-temple inscription/outline/leader and educational caption. Final localized help inside the comparison disclosure links to a configured published guia-medidas page or the canonical localized guide handle; both help and link stay hidden while collapsed and its body is excluded from the drawer focus boundary. Inline product details retain three ARIA tabs, positive mm values and partial/empty/demo notices, without inline diagrams or CMS body. Existing standard/optical guide open handlers reset dialog scrollTop to zero after showModal, without affecting other dialogs. The modal comparison has --lemoon-space-6 top margin. Closing the size drawer collapses its comparison; expanding it aligns its full-width summary below the sticky close row (64px base), with its chevron at the content right edge and the close control at the 8px top inset, using drawer-local scrolling with reduced-motion support and sufficient minimum content height. Existing native controllers, drawer motion, sticky close, unique SVG IDs and approved Donnalyn paths remain. Educational page defaults, explanatory rows and long definitions remain unchanged. PDP inline information may select Características initially via initial_tab=frame; default measurements and continuous size-dialog presentation remain unchanged. Characteristics omit invalid weight, read face-shape text/list and avoid inferring prescription compatibility from a list that may contain only non-prescription options.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -918,6 +920,7 @@
         "snippets/lemoon-mobile-search.liquid"
       ],
       "depends_on": [
+        "LM-FIELD",
         "LM-SEARCH",
         "LM-OVERLAY",
         "LM-PRODUCT-CARD"
@@ -926,7 +929,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-mobile-search.liquid",
-        "scope": "Overlay y controlador móvil propios; no reemplazarlo por el select de sorting.",
+        "scope": "Overlay y controlador móvil propios; input usa lemoon-ui-field con aria-controls y hook de búsqueda, compartiendo borde y foco. No reemplazarlo por el select de sorting.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       }
     },
@@ -966,7 +969,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/header.liquid",
-        "scope": "Grupo header, navegación/localización y JS existentes; no header ficticio en galería.",
+        "scope": "Grupo header, navegación/localización y JS existentes; la barra sustituye [MONTO_ENVIO_GRATIS] por shop.metafields.custom.free_shipping_threshold cuando es positivo y omite ese anuncio si falta. Las tarifas y políticas nativas no se sincronizan automáticamente.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -998,7 +1001,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/lemoon-mobile-nav.liquid",
-        "scope": "Menús por nivel y controlador propios; panel lateral bajo el header, ancho min(90vw, 38rem), entrada y salida por la izquierda. Excluido de la hoja inferior compartida; preservar IDs, foco y estados.",
+        "scope": "Menús por nivel y controlador propios; panel lateral bajo el header, ancho min(90vw, 38rem), entrada y salida por la izquierda. Excluido de la hoja inferior compartida; preservar IDs, foco y estados. `show_in_mobile_menu` permite ocultar cada bloque sin eliminarlo; la configuración actual oculta envíos y los enlaces más vendidos/nueva colección. El enlace de favoritos está en el menú móvil y conserva el control mobile_search_show_wishlist. El control del encabezado abre, vuelve y cierra; la zona inferior distingue cliente autenticado de visitante y evita duplicar Mi cuenta.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       }
     },
@@ -1037,7 +1040,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en páginas y políticas; en blog/article el formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado. El control de cookies permanece en el footer, no en la ayuda de políticas nativas.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en páginas y políticas; en blog/article el formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado. Newsletter refuerza el borde navy hacia dentro al enfocar, sin contorno exterior; reserva dos líneas para feedback de 12px. Con JavaScript el POST nativo usa un iframe y muestra únicamente el resultado confirmado por el formulario; sin JavaScript conserva la navegación nativa. El control de cookies permanece en el footer, no en la ayuda de políticas nativas.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1209,7 +1212,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-featured-products.liquid",
-        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño. page.nosotros reutiliza el carrusel con colección all, ocho productos aleatorizados y quick-add desactivado. Los templates de artículo incorporan el carrusel con colección fija editable; no se infiere relación automática entre producto y contenido editorial.",
+        "scope": "Listas/recomendaciones conservan colección, carga y vacío en su dueño. El carrusel por categoría en PDP usa un título localizado con el producto actual y lo comparte con la etiqueta de la lista. page.nosotros reutiliza el carrusel con colección all, ocho productos aleatorizados y quick-add desactivado. Los templates de artículo incorporan el carrusel con colección fija editable; no se infiere relación automática entre producto y contenido editorial.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -1267,7 +1270,9 @@
         "assets/lemoon-eyewear-product.js",
         "assets/lemoon-pdp-layout.css",
         "assets/lemoon-eyewear-product.css",
-        "assets/section-main-product.css"
+        "assets/section-main-product.css",
+        "snippets/lemoon-product-intro.liquid",
+        "snippets/lemoon-pdp-purchase-confidence.liquid"
       ],
       "direct_static_consumers": [
         "assets/lens-configurator.js",
@@ -1289,7 +1294,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-eyewear-product.liquid",
-        "scope": "Preservar variantes, sticky purchase y herramientas; heading genérico no reemplaza product-heading.",
+        "scope": "PDP summary is rendered in initial HTML before the gallery, preserving configured block order and a single instance of each control; desktop grid places it beside the gallery. Full description and two inline tabs group available characteristics and measurements; contextual opener reuses its size drawer. Desktop heading offers native product sharing with clipboard and manual-copy fallbacks; commerce controllers unchanged.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -1323,7 +1328,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/buy-buttons.liquid",
-        "scope": "Producto, block y product_form_id; checkout/destinatario nunca pasan al átomo action.",
+        "scope": "Producto, block y product_form_id; checkout/destinatario nunca pasan al átomo action. El aviso de error del carrito aparece después del formulario para no desplazar el botón.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -1664,7 +1669,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-style-quiz.liquid",
-        "scope": "Seis preguntas opcionales y snapshots versionados por entrada de historial; la intro permite salir, avanzar añade entrada, inputs reemplazan y Atrás/Adelante o recarga restauran el estado exacto con medidas y modo manual. Detalles apila Acabados y después Materiales sin pestañas; retira los números decorativos grandes 01–06 en todos los anchos, conservando círculos y anuncio accesible de progreso; cuerpo/opciones/campos de 16px y peso 400, acciones 16px semibold y ayudas>=14px, conservando H1/H2, tokens y fotografías. Ruta pública prevista /pages/descubre-tu-estilo y anterior 404 sin redirección; template interno conservado. CTA final a /collections/all nativa con OR en un criterio y AND entre criterios; tipos reales, valores de forma/material con tildes/TR-90 y GIDs por grupo del diccionario existente; convierte system.id numérico de Liquid a gid://shopify/Metaobject/ antes del JSON, con fixture numérica y regresión de URL. Helper puro valida referencias y availableFilters desde collection.filters, sin emitir URL parcial; error conserva respuestas y catálogo. Quiz sin ranking, candidatos, tarjetas/precios ni límite 50/20; PLP conserva filtros, chips, ordenación, contador, paginación y vacío nativos. Inicio estable y alternativa de catálogo sin JS o ante error. Assets legacy preservados y candidato inactivo. Fuente/fixtures no acreditan CMS, seis filtros activos, catálogo completo ni sync/despliegue del back office.",
+        "scope": "La intro comienza directamente con el H1, sin eyebrow. Seis preguntas opcionales y snapshots versionados por entrada de historial; la intro permite salir, avanzar añade entrada, inputs reemplazan y Atrás/Adelante o recarga restauran el estado exacto con medidas y modo manual. Detalles apila Acabados y después Materiales sin pestañas; retira los números decorativos grandes 01–06 en todos los anchos, conservando círculos y anuncio accesible de progreso; cuerpo/opciones/campos de 16px y peso 400, acciones 16px semibold y ayudas>=14px, conservando H1/H2, tokens y fotografías. Ruta pública prevista /pages/descubre-tu-estilo y anterior 404 sin redirección; template interno conservado. CTA final a /collections/all nativa con OR en un criterio y AND entre criterios; tipos reales, valores de forma/material con tildes/TR-90 y GIDs por grupo del diccionario existente; convierte system.id numérico de Liquid a gid://shopify/Metaobject/ antes del JSON, con fixture numérica y regresión de URL. Helper puro valida referencias y availableFilters desde collection.filters, sin emitir URL parcial; error conserva respuestas y catálogo. Quiz sin ranking, candidatos, tarjetas/precios ni límite 50/20; PLP conserva filtros, chips, ordenación, contador, paginación y vacío nativos. Inicio estable y alternativa de catálogo sin JS o ante error. Assets legacy preservados y candidato inactivo. Fuente/fixtures no acreditan CMS, seis filtros activos, catálogo completo ni sync/despliegue del back office.",
         "recipe_path": "docs/components/recipes/catalogue-states.md"
       },
       "legacy_source_paths": [
@@ -6721,6 +6726,30 @@
       "status": "excluded",
       "reason": "binary-image-or-font: editorial face comparison illustration; provenance in face-guide-assets.md",
       "inspection_method": "binary existence and local rendered visual review separate"
+    },
+    {
+      "path": "snippets/lemoon-product-intro.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "manual scoped PDP refinement 2026-11-09"
+    },
+    {
+      "path": "snippets/lemoon-pdp-purchase-confidence.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PDP"
+      ],
+      "inspection_method": "manual scoped PDP refinement 2026-11-09"
+    },
+    {
+      "path": "snippets/lemoon-frame-classification.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-TABS"
+      ],
+      "inspection_method": "manual scoped size-guide visibility review"
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -6827,7 +6856,10 @@
       "assets/lemoon-face-long-editorial-v3-180.webp",
       "assets/lemoon-face-long-editorial-v3-360.webp",
       "assets/lemoon-face-long-editorial-v3-640.webp",
-      "assets/lemoon-face-long-editorial-v3-960.webp"
+      "assets/lemoon-face-long-editorial-v3-960.webp",
+      "snippets/lemoon-product-intro.liquid",
+      "snippets/lemoon-pdp-purchase-confidence.liquid",
+      "snippets/lemoon-frame-classification.liquid"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. On2026-11-08 the shared mobile drawer presentation adds one declared non-indexed CSS source:559 tracked +1 addition =560 total,497 mapped and63 excluded. Analytics guide publisher adds a second declared non-indexed source on2026-11-08:561 total source paths,498 mapped,63 excluded,559 tracked and2 declared additions. Final index reconciliation on2026-11-08:561 tracked/source paths,498 mapped,63 excluded,0 explicit non-indexed additions; new_source_paths retains historical delivery additions. Cleanup reconciliation on 2026-11-08: the 44 LEM-103 delivery additions are already indexed; removing one unused duplicate stylesheet leaves 598 indexed/source paths, 496 mapped, 102 excluded and 0 non-indexed additions. Progress styles remain in base.css. Conflict reconciliation with main3d9da9ee on2026-11-08: preserves LEM-103, LEM-129/105 and merged cleanup; 604 indexed/source paths, 502 mapped, 102 excluded, 0 non-indexed additions. No binary/private content read.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
@@ -7042,6 +7074,23 @@
           "center_x_percent": 50
         }
       }
+    },
+    "pdp_information_refinement": {
+      "date": "2026-11-09",
+      "source_paths": [
+        "snippets/lemoon-product-intro.liquid",
+        "snippets/lemoon-pdp-purchase-confidence.liquid",
+        "snippets/lemoon-frame-information.liquid",
+        "assets/lemoon-pdp-tools.js",
+        "assets/lemoon-pdp-layout.css"
+      ],
+      "reference": "docs/design/2026-11-09-pdp-refinement.md",
+      "standard_pdp_update_2026_11_10": "Desktop gallery sticks below the header; product imagery uses multiply on the warm surface. The description and selected SKU appear in details, the frame action spans the available width, and the app's duplicate gallery favourite is hidden.",
+      "prescription_action_visibility": "Show the lens-selection action and its sticky bar only when custom.prescription_type has a nonempty value; keep direct purchase available otherwise.",
+      "frame_only_location": "With prescription options, hide the direct PDP purchase action and offer the matching available frame-only variant in the configurator.",
+      "size_row": "Below colour options, show the available size as compact text on the left and the existing ruler icon with the size-guide opener on the right.",
+      "pdp_2026_11_10": "Mobile gallery keeps page gutter and a 10px next-image preview; sticky purchase mirrors the primary action for accessories and frames. Diagrams annotate validated measurements; related cards match known shape or material. Card favourites use the app control in the top-right with optional audio feedback.",
+      "scope": "Source mapping is documented; Standard PDP retains its configured desktop spacing and reveal animation; optical PDP uses 24px desktop information padding and the same conditional panel reveal. Purchase confidence links free exchanges and returns before 30 days and nationwide delivery, and adds the 365-day warranty only for frames identified by the shared catalog classifier. Each link requires its destination; policy and operational verification remains separate from theme implementation. The shipping/returns accordion presents four concise points and native policy links instead of entire policy bodies, retaining dynamic delivery estimates and truthful missing-data behavior. The generic outbound help link is removed from the optical PDP; the contextual guide button shares its label with the existing in-page dialog title and has no outbound arrow. Size-guide opener focus uses a stronger keyboard underline without outline or shadow, retaining native focus and return. Prototype data and current fixture/preview evidence do not prove backend synchronization or real purchase/recipe receipt."
     }
   }
 }

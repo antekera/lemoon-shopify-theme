@@ -1,5 +1,18 @@
 const closingDrawers = new WeakMap();
 
+// Both PDP shells keep their original drawer, preparation and closing controllers.
+if (typeof document !== 'undefined') document.addEventListener('click', (event) => {
+  const opener = event.target.closest('[data-pdp-size-open]');
+  if (!opener) return;
+  const product = opener.closest('lemoon-eyewear, product-info');
+  const originalOpener = product?.querySelector('[data-open-dialog="size"], [data-size-open]');
+  if (!originalOpener) return;
+  const dialog = product.querySelector('dialog.lemoon-size-drawer');
+  if (!dialog || dialog.open) return;
+  originalOpener.click();
+  dialog.addEventListener('close', () => opener.focus(), { once: true });
+});
+
 function needsDrawerExit(dialog) {
   return dialog.matches('dialog.lemoon-size-drawer, dialog.lemoon-drawer')
     && window.matchMedia('(max-width: 749px)').matches
@@ -194,20 +207,40 @@ if (typeof window !== 'undefined') {
     connectedCallback() {
       if (this.ready) return;
       this.ready = true;
-      const favourite = this.querySelector('[data-favourite]');
-      const restore = () => {
-        try { favourite?.setAttribute('aria-pressed', String(JSON.parse(localStorage.getItem('lemoon-saved-products') || '[]').includes(this.dataset.productId))); }
-        catch { if (favourite) favourite.hidden = true; }
-      };
-      restore();
-      this.addEventListener('click', (event) => {
-        if (event.target.closest('[data-favourite]')) {
+      const shareButton = this.querySelector('[data-product-share]');
+      const shareStatus = this.querySelector('[data-product-share-status]');
+      const shareFallback = this.querySelector('[data-product-share-fallback]');
+      if (shareButton && shareStatus && shareFallback) {
+        shareButton.hidden = false;
+        shareButton.addEventListener('click', async () => {
+          const url = new URL(shareButton.dataset.productUrl, window.location.origin);
+          const variant = new URL(window.location.href).searchParams.get('variant');
+          if (variant) url.searchParams.set('variant', variant);
+          shareStatus.textContent = '';
+          shareStatus.classList.remove('visually-hidden');
+          shareFallback.hidden = true;
+          if (navigator.share) {
+            try {
+              await navigator.share({ title: this.querySelector('h1')?.textContent.trim() || document.title, url: url.href });
+              return;
+            } catch (error) {
+              if (error?.name === 'AbortError') return;
+            }
+          }
           try {
-            const saved = JSON.parse(localStorage.getItem('lemoon-saved-products') || '[]');
-            const next = saved.includes(this.dataset.productId) ? saved.filter((id) => id !== this.dataset.productId) : [...saved, this.dataset.productId];
-            localStorage.setItem('lemoon-saved-products', JSON.stringify(next)); restore();
-          } catch { favourite.hidden = true; }
-        }
+            await navigator.clipboard.writeText(url.href);
+            shareStatus.classList.add('visually-hidden');
+            shareStatus.textContent = shareStatus.dataset.copied;
+          } catch {
+            shareFallback.value = url.href;
+            shareFallback.hidden = false;
+            shareStatus.textContent = shareStatus.dataset.copyError;
+            shareFallback.focus();
+            shareFallback.select();
+          }
+        });
+      }
+      this.addEventListener('click', (event) => {
         if (event.target.closest('[data-size-open]')) {
           const dialog = this.querySelector('dialog');
           dialog.querySelector('lemoon-size-guide')?.prepareOpen?.();
@@ -234,42 +267,6 @@ if (typeof window !== 'undefined') {
     if (event.target.value) url.searchParams.set('variant', event.target.value);
     else url.searchParams.delete('variant');
     link.href = url.toString();
-  });
-  const mobileSummaries = new WeakSet();
-  const setupMobileSummaries = () => document.querySelectorAll('.lemoon-standard-pdp, lemoon-eyewear').forEach((host) => {
-    if (mobileSummaries.has(host)) return;
-    const grid = host.querySelector('.product, .lemoon-pdp__grid');
-    const info = host.querySelector('.product__info-container, .lemoon-pdp__info');
-    if (!grid || !info) return;
-    mobileSummaries.add(host);
-    const summary = document.createElement('div');
-    summary.className = 'lemoon-mobile-summary';
-    summary.hidden = true;
-    const nodes = [...info.children].filter((node) => node.matches('.lemoon-breadcrumb, .product__title, lemoon-product-tools:has(.lemoon-product-heading), [id^="price-"], .product__tax, .lemoon-pdp__price, .lemoon-pdp__tax'));
-    const homes = nodes.map((node) => {
-      const marker = document.createComment('');
-      node.before(marker);
-      return { node, marker };
-    });
-    const heading = info.querySelector('.lemoon-product-heading');
-    const priceNodes = nodes.filter((node) => node.matches('[id^="price-"], .product__tax, .lemoon-pdp__price, .lemoon-pdp__tax'));
-    const priceRow = document.createElement('div');
-    priceRow.className = 'lemoon-mobile-price-row';
-    grid.prepend(summary);
-    const mobile = window.matchMedia('(max-width: 749px)');
-    const update = () => {
-      summary.hidden = !mobile.matches;
-      homes.forEach(({ node, marker }) => {
-        if (mobile.matches) summary.append(node);
-        else marker.after(node);
-      });
-      if (heading && priceNodes.length) {
-        heading.after(priceRow);
-        priceNodes.forEach((node) => priceRow.append(node));
-      } else priceRow.remove();
-    };
-    mobile.addEventListener('change', update);
-    update();
   });
   const draggableGalleries = new WeakSet();
   const setupGalleryDrag = () => document.querySelectorAll('.lemoon-pdp__stage, .lemoon-standard-pdp .product__media-list').forEach((stage) => {
@@ -342,7 +339,6 @@ if (typeof window !== 'undefined') {
   const bleedGalleries = () => document.querySelectorAll('.lemoon-standard-pdp media-gallery, .lemoon-pdp__gallery').forEach((gallery) => gallery.style.setProperty('--lemoon-gallery-bleed', `${Math.max(0, gallery.getBoundingClientRect().left)}px`));
   window.addEventListener('resize', bleedGalleries);
   const scan = () => {
-    setupMobileSummaries();
     setupGalleryDrag();
     bleedGalleries();
     document.querySelectorAll('.lemoon-pdp__image-button > img, .lemoon-standard-pdp .media-type-image .product__media > img').forEach((img) => {
@@ -360,6 +356,7 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-sticky-purchase
       this.host = this.closest('product-info, lemoon-eyewear');
       if (!this.host) return;
       this.configure = this.querySelector('[data-sticky-configure]');
+      this.add = this.querySelector('[data-sticky-add]');
       this.price = this.querySelector('[data-sticky-price]');
       this.image = this.querySelector('img');
       this.hidden = false;
@@ -379,21 +376,27 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-sticky-purchase
       this.update = () => {
         const submit = this.host.querySelector('[data-add], .product-form__submit');
         const frameOnly = this.host.querySelector('[data-frame-only-add], .lemoon-frame-only-add');
-        const framePurchase = frameOnly || submit;
+        const framePurchase = [frameOnly, submit].find((action) => action && !action.hidden && action.getClientRects().length) || frameOnly || submit;
         const configure = this.host.querySelector('[data-configure], .lemoon-lens-config-cta');
         if (!framePurchase) { this.setVisible(false); return; }
         const header = document.querySelector('sticky-header');
         const top = Math.max(0, header?.getBoundingClientRect().bottom || 0);
-        const rect = submit.getBoundingClientRect();
+        const rect = framePurchase.getBoundingClientRect();
         const configVisible = configure && !configure.hidden && configure.getClientRects().length > 0;
         const actionsBottom = Math.max(rect.bottom, configVisible ? configure.getBoundingClientRect().bottom : 0);
         const shouldHide = (!rect.height && !configVisible) || actionsBottom > top;
         this.setVisible(!shouldHide);
         const configureLabel = configure?.textContent.trim();
-        if (configureLabel && this.configure.textContent.trim() !== configureLabel) this.configure.textContent = configureLabel;
-        if (this.configure.hidden !== !configure) this.configure.hidden = !configure;
-        const configDisabled = !configure || Boolean(configure.disabled) || configure.getAttribute('aria-disabled') === 'true';
-        if (this.configure.disabled !== configDisabled) this.configure.disabled = configDisabled;
+        if (this.configure) {
+          if (configureLabel && this.configure.textContent.trim() !== configureLabel) this.configure.textContent = configureLabel;
+          if (this.configure.hidden !== !configure) this.configure.hidden = !configure;
+          const configDisabled = !configure || Boolean(configure.disabled) || configure.getAttribute('aria-disabled') === 'true';
+          if (this.configure.disabled !== configDisabled) this.configure.disabled = configDisabled;
+        }
+        if (this.add) {
+          const addDisabled = Boolean(framePurchase.disabled) || framePurchase.getAttribute('aria-disabled') === 'true';
+          if (this.add.disabled !== addDisabled) this.add.disabled = addDisabled;
+        }
         const nativePrice = this.host.querySelector('[data-price]') || this.host.querySelector('.price:not(.price--on-sale) .price__regular .price-item--regular, .price.price--on-sale .price-item--sale');
         if (nativePrice && this.price.textContent !== nativePrice.textContent.trim()) this.price.textContent = nativePrice.textContent.trim();
         const photo = this.host.querySelector('[data-media-panel]:not([hidden]) img, .product__media-item.is-active img');
@@ -408,6 +411,9 @@ if (typeof window !== 'undefined' && !customElements.get('lemoon-sticky-purchase
       };
       this.onClick = (event) => {
         const configure = this.host.querySelector('[data-configure], .lemoon-lens-config-cta');
+        if (event.target.closest('[data-sticky-add]') && this.add && !this.add.disabled) {
+          this.host.querySelector('[data-frame-only-add], .product-form__submit')?.click();
+        }
         if (event.target.closest('[data-sticky-configure]') && !this.configure.disabled) {
           configure.click();
           if (configure.tagName !== 'A') {

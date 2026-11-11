@@ -32,6 +32,7 @@
 }
 
 .lemoon-newsletter__copy h2 {
+  text-wrap: balance;
   max-width: 62rem;
   margin: 0 0 1.2rem;
   color: #0b1f3a;
@@ -68,6 +69,7 @@
   width: 100%;
   min-width: 0;
   min-height: 5.2rem;
+  height: 5.2rem;
   padding: 1.4rem 1.6rem;
   border: 1px solid #e0ddd8;
   border-radius: 0.8rem;
@@ -76,12 +78,28 @@
   font: inherit;
 }
 
+.lemoon-newsletter .lemoon-ui-field .lemoon-newsletter__input {
+  border: 1px solid var(--lemoon-border-strong);
+}
+
+.lemoon-newsletter .lemoon-ui-field .lemoon-newsletter__input:focus {
+  border-width: 1px !important;
+  outline: none !important;
+  box-shadow: inset 0 0 0 1px var(--lemoon-border-strong) !important;
+}
+
+@media (forced-colors: active) {
+  .lemoon-newsletter .lemoon-ui-field .lemoon-newsletter__input:focus {
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+}
+
 .lemoon-newsletter__input::placeholder {
   color: #6b6b6b;
   opacity: 1;
 }
 
-.lemoon-newsletter__input:focus-visible,
 .lemoon-newsletter__button:focus-visible,
 .lemoon-footer a:focus-visible,
 .lemoon-footer summary:focus-visible {
@@ -101,9 +119,10 @@
   background: #0b1f3a;
   color: #fff;
   cursor: pointer;
-  font-family: var(--font-heading-family);
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-family: var(--lemoon-font-body);
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -112,11 +131,24 @@
   background: #1a3560;
 }
 
+.lemoon-newsletter__status {
+  grid-column: 1 / -1;
+  min-height: 3.6rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.lemoon-newsletter__status:empty {
+  display: block;
+}
+
 .lemoon-newsletter__message {
   grid-column: 1 / -1;
   margin: 0;
   color: #0b1f3a;
-  font-size: 1.4rem;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .lemoon-footer {

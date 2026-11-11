@@ -18,6 +18,8 @@
   @param {string} [form_id] - Explicit native attribute.
   @param {boolean} [spellcheck] - Explicit enumerated attribute; false preserved.
   @param {string} [describedby] - Additional ID tokens, composed with nonempty hint/error IDs.
+  @param {string} [aria_controls] - ID of the element controlled by this input.
+  @param {boolean} [mobile_search] - Attach the existing mobile-search controller hook.
   @param {string} [hint] - Plain feedback and caller-generated association IDs.
   @param {string} [hint_id] - Unique ID for nonempty hint; appended to aria-describedby.
   @param {string} [error] - Plain feedback and caller-generated association IDs.
@@ -52,7 +54,7 @@
   assign field_description = field_description | strip
 -%}
 {%- capture control_attributes_html -%}
-  class="lemoon-ui-control {% if control_class != nil %}{{ control_class | escape }}{% elsif style_family != 'contact' %}field__input{% if field_kind == 'textarea' %} text-area{% endif %}{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if autocomplete != blank %} autocomplete="{{ autocomplete | escape }}"{% endif %}{% if autocorrect != blank %} autocorrect="{{ autocorrect | escape }}"{% endif %}{% if aria_required != nil %} aria-required="{{ aria_required | escape }}"{% endif %}{% if autocapitalize != blank %} autocapitalize="{{ autocapitalize | escape }}"{% endif %}{% if placeholder != nil %} placeholder="{{ placeholder | escape }}"{% endif %}{% if inputmode != blank %} inputmode="{{ inputmode | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if spellcheck != nil %} spellcheck="{{ spellcheck | escape }}"{% endif %}{% if invalid != nil %} aria-invalid="{{ invalid | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if readonly == true %} readonly{% endif %}{% if field_description != blank %} aria-describedby="{{ field_description | escape }}"{% endif %}
+  class="lemoon-ui-control {% if control_class != nil %}{{ control_class | escape }}{% elsif style_family != 'contact' %}field__input{% if field_kind == 'textarea' %} text-area{% endif %}{% endif %}"{% if id != blank %} id="{{ id | escape }}"{% endif %}{% if name != blank %} name="{{ name | escape }}"{% endif %}{% if autocomplete != blank %} autocomplete="{{ autocomplete | escape }}"{% endif %}{% if autocorrect != blank %} autocorrect="{{ autocorrect | escape }}"{% endif %}{% if aria_required != nil %} aria-required="{{ aria_required | escape }}"{% endif %}{% if aria_controls != blank %} aria-controls="{{ aria_controls | escape }}"{% endif %}{% if mobile_search == true %} data-lemoon-search-input{% endif %}{% if autocapitalize != blank %} autocapitalize="{{ autocapitalize | escape }}"{% endif %}{% if placeholder != nil %} placeholder="{{ placeholder | escape }}"{% endif %}{% if inputmode != blank %} inputmode="{{ inputmode | escape }}"{% endif %}{% if form_id != blank %} form="{{ form_id | escape }}"{% endif %}{% if spellcheck != nil %} spellcheck="{{ spellcheck | escape }}"{% endif %}{% if invalid != nil %} aria-invalid="{{ invalid | escape }}"{% endif %}{% if required == true %} required{% endif %}{% if disabled == true %} disabled{% endif %}{% if readonly == true %} readonly{% endif %}{% if field_description != blank %} aria-describedby="{{ field_description | escape }}"{% endif %}
 {%- endcapture -%}
 {%- capture control_html -%}
   {%- if field_kind == 'textarea' -%}

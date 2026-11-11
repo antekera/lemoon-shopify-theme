@@ -1013,6 +1013,8 @@
     "header": {
       "name": "Encabezado",
       "settings": {
+        "lemoon_mobile_wishlist": { "label": "Mostrar favoritos en el menú móvil", "info": "Actívalo cuando la lista de favoritos esté activa." },
+        "lemoon_show_in_mobile_menu": { "label": "Mostrar en el menú móvil" },
         "logo_position": {
           "label": "Posición del logo",
           "options__1": {

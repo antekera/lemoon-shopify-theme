@@ -76,6 +76,21 @@ for (const shell of ['standard', 'eyewear']) {
       await expect(dialog.getByRole('tab')).toHaveCount(0);
       await expect(dialog.getByRole('tabpanel')).toHaveCount(0);
       await expect(dialog.getByRole('heading', { level: 2 })).toHaveCount(1);
+      await expect(dialog.getByRole('heading', { level: 2 })).toHaveCSS('font-size', '20px');
+      await expect(closeFor(dialog)).toHaveCSS('font-size', '32px');
+      const titleBox = await dialog.getByRole('heading', { level: 2 }).boundingBox();
+      const dialogBox = await dialog.boundingBox();
+      expect(titleBox.y - dialogBox.y).toBeLessThan(40);
+      const values = dialog.locator('.lemoon-measurement-diagram text tspan');
+      await expect(values).toHaveCount(5);
+      for (const value of await values.all()) {
+        await expect(value).toHaveCSS('font-size', '12px');
+        expect(await value.evaluate(node => parseFloat(getComputedStyle(node.parentElement).fontSize))).toBeGreaterThan(12);
+      }
+      await expect(dialog.locator('details.lemoon-size-guide__comparison > summary')).toHaveCSS('font-size', '16px');
+      const badge = page.locator('.lemoon-pdp__size-row strong').first();
+      await expect(badge).toHaveCSS('border-top-width', '0px');
+      expect(parseFloat(await badge.evaluate(node => getComputedStyle(node).borderRadius))).toBeGreaterThanOrEqual(100);
       await expect(dialog.locator('h3').first()).toContainText('Medidas');
       await expect(dialog.locator('[data-mm], [data-units], .lemoon-size-guide__specs')).toHaveCount(0);
       for (const productText of ['Armazón sintético', 'Acetato', 'Ovalado, corazón']) await expect(dialog).not.toContainText(productText);
@@ -100,8 +115,8 @@ for (const shell of ['standard', 'eyewear']) {
       await pressKey(page, 'Enter'); await expect(comparison).toHaveAttribute('open');
       await expect.poll(async () => Math.abs((await comparisonPosition(dialog)).offset)).toBeLessThanOrEqual(1);
       const normalPosition = await comparisonPosition(dialog);
-      expect(normalPosition.readingTop).toBe(72);
-      expect(normalPosition.closeTop).toBeCloseTo(16, 0);
+      expect(normalPosition.readingTop).toBe(64);
+      expect(normalPosition.closeTop).toBeCloseTo(8, 0);
       expect(normalPosition.focused).toBe(true);
       expect(normalPosition.documentTop).toBe(documentTop);
       expect(normalPosition.titleOverlapsClose).toBe(false);
@@ -133,8 +148,8 @@ for (const shell of ['standard', 'eyewear']) {
       await page.evaluate(() => window.reducedComparisonOpened);
       const reducedPosition = await comparisonPosition(dialog, true);
       expect(Math.abs(reducedPosition.offset)).toBeLessThanOrEqual(1);
-      expect(reducedPosition.readingTop).toBe(72);
-      expect(reducedPosition.closeTop).toBeCloseTo(16, 0);
+      expect(reducedPosition.readingTop).toBe(64);
+      expect(reducedPosition.closeTop).toBeCloseTo(8, 0);
       expect(reducedPosition.focused).toBe(true);
       expect(reducedPosition.documentTop).toBe(documentTop);
       expect(reducedPosition.titleOverlapsClose).toBe(false);
@@ -237,10 +252,16 @@ for (const shell of ['standard', 'eyewear']) {
     for (const scenario of ['complete', 'demo']) {
       await page.goto(`/tests/fixtures/size-guide.html?shell=${shell}&scenario=${scenario}`);
       const inline = page.locator('[data-inline-measurements]');
-      await expect(inline.getByRole('tab')).toHaveCount(3);
+      await expect(inline.getByRole('tab')).toHaveCount(2);
+      await inline.getByRole('tab', { name: 'Medidas', exact: true }).click();
       await expect(inline.locator('[data-mm]')).toHaveCount(5);
       for (const value of [140, 52, 18, 42, 145]) await expect(inline.locator(`[data-mm="${value}"]`)).toHaveText(`${value} mm`);
-      await expect(inline.locator('svg, figure, [data-units]')).toHaveCount(0);
+      await expect(inline.locator('[data-units]')).toHaveCount(0);
+      const overview = inline.locator('.lemoon-frame-information__diagram');
+      await expect(overview.locator('figure')).toHaveCount(1);
+      await expect(overview.locator('svg')).toHaveCount(2);
+      await expect(overview).toContainText('Esquema de referencia, sin escala.');
+      await expect(overview.locator('[data-mm], .lemoon-measurement-diagram__values')).toHaveCount(0);
       const notice = inline.locator('.lemoon-size-guide__demo-notice');
       await expect(notice).toHaveCount(scenario === 'demo' ? 1 : 0);
       if (scenario === 'demo') await expect(notice).toContainText('Medidas de prueba para revisar esta página.');
@@ -294,14 +315,18 @@ for (const shell of ['standard', 'eyewear']) {
   test(`${shell}: inline tabs retain arrows, Home, End and visible panel focus`, async ({ page }) => {
     await page.goto(`/tests/fixtures/size-guide.html?shell=${shell}`);
     const inline = page.locator('[data-inline-measurements]');
-    const tabs = inline.getByRole('tab'); await expect(tabs).toHaveCount(3);
-    await tabs.nth(0).press('ArrowRight'); await expect(tabs.nth(1)).toBeFocused();
+    const tabs = inline.getByRole('tab'); await expect(tabs).toHaveCount(2);
+    await expect(tabs.nth(0)).toHaveText('Características');
     await expect(inline.getByRole('tabpanel', { name: 'Características' })).toContainText('Acetato');
-    await tabs.nth(1).press('End'); await expect(tabs.nth(2)).toBeFocused();
-    await expect(inline.getByRole('tabpanel', { name: 'Talla y rostro' })).toContainText('Ovalado, corazón');
-    await tabs.nth(2).press('ArrowRight'); await expect(tabs.nth(0)).toBeFocused();
-    await tabs.nth(0).press('End'); await tabs.nth(2).press('Home'); await expect(tabs.nth(0)).toBeFocused();
-    await tabs.nth(0).press('Tab'); await expect(inline.getByRole('tabpanel', { name: 'Medidas' })).toBeFocused();
+    await expect(inline.getByRole('tabpanel', { name: 'Características' })).toContainText('Ovalado, corazón');
+    await expect(inline.locator('.lemoon-frame-information__diagram')).toBeHidden();
+    await tabs.nth(0).press('ArrowRight'); await expect(tabs.nth(1)).toBeFocused();
+    await expect(inline.getByRole('tabpanel', { name: 'Medidas' })).toBeVisible();
+    await expect(inline.locator('.lemoon-frame-information__diagram')).toBeVisible();
+    await tabs.nth(1).press('ArrowRight'); await expect(tabs.nth(0)).toBeFocused();
+    await tabs.nth(0).press('End'); await expect(tabs.nth(1)).toBeFocused();
+    await tabs.nth(1).press('Home'); await expect(tabs.nth(0)).toBeFocused();
+    await tabs.nth(0).press('Tab'); await expect(inline.getByRole('tabpanel', { name: 'Características' })).toBeFocused();
   });
 
   test(`${shell}: 320px with every rendered text and control doubled to 200%`, async ({ page }, testInfo) => {
@@ -313,7 +338,7 @@ for (const shell of ['standard', 'eyewear']) {
     const sizes = await doubleRenderedText(dialog);
     expect(sizes.length).toBeGreaterThan(20);
     for (const size of sizes) expect(size.after, `${size.tag} ${size.className}: ${size.text}`).toBeCloseTo(size.before * 2, 3);
-    expect(sizes.find(size => size.tag === 'H2').after).toBe(48);
+    expect(sizes.find(size => size.tag === 'H2').after).toBe(40);
     expect(sizes.filter(size => size.className === 'lemoon-measurement-diagram__marker')).toHaveLength(5);
     expect(sizes.filter(size => size.tag === 'DD')).toHaveLength(5);
     await expectReferenceValues(dialog, completeValues);

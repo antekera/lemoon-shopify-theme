@@ -9,6 +9,21 @@ const referenceValues = html => {
 const completeValues = ['A: 140 mm', 'B: 52 mm', 'C: 18 mm', 'D: 42 mm', 'E: 145 mm'];
 const unavailableValues = ['A: —', 'B: —', 'C: —', 'D: —', 'E: —'];
 describe('product measurements Liquid rendering', () => {
+  it('annotates diagram markers with only validated available dimensions in both presentations', () => {
+    for (const presentation of ['dialog', 'inline']) {
+      const mode = presentation === 'dialog' ? { presentation: 'dialog' } : {};
+      const full = renderSizeContent('complete', { ...options, ...mode }).replace(/<[^>]*>/g, '');
+      for (const label of ['A · 140 mm', 'B · 52 mm', 'C · 18 mm', 'D · 42 mm', 'E · 145 mm']) expect(full).toContain(label);
+      const partial = renderSizeContent('partial', { ...options, ...mode }).replace(/<[^>]*>/g, '');
+      expect(partial).toContain('B · 52 mm');
+      expect(partial).toContain('E · 145 mm');
+      expect(partial).not.toContain('A · 140 mm');
+      expect(partial).not.toContain('C · 18 mm');
+      expect(partial).not.toContain('D · 42 mm');
+      const absent = renderSizeContent('missing', { ...options, ...mode }).replace(/<[^>]*>/g, '');
+      expect(absent).not.toMatch(/[A-E] · \d+ mm/);
+    }
+  });
   it('renders all supplied mm measurements without substitutions', () => {
     const html = renderSizeContent('complete', options);
     for (const value of [140, 52, 18, 42, 145]) expect(html).toContain(`data-mm="${value}"`);
@@ -23,6 +38,7 @@ describe('product measurements Liquid rendering', () => {
     it(`shows a truthful fallback for ${scenario} measurements`, () => {
       const html = renderSizeContent(scenario, options);
       expect(html).not.toContain('data-mm=');
+      expect(html).not.toContain('lemoon-frame-information__diagram');
       expect(html).toContain('Las medidas de este armazón aún no están disponibles.');
       expect(html).not.toContain('data-units');
       expect(html).not.toMatch(/<dl[^>]*>\s*<p/);
@@ -37,7 +53,7 @@ describe('product guide and inline information boundaries', () => {
     expect(dialog).toContain('Ejemplo educativo.');
     expect(dialog).not.toMatch(/data-mm=|data-units/);
     const inline = renderSizeContent('complete', options);
-    expect(inline.match(/role="tab"/g)).toHaveLength(3);
+    expect(inline.match(/role="tab"/g)).toHaveLength(2);
     expect(inline.match(/data-mm=/g)).toHaveLength(5);
     for (const text of ['Acetato', 'Rectangular', '22 g', 'Unisex', 'Ovalado, corazón']) {
       expect(inline).toContain(text);
@@ -72,10 +88,15 @@ describe('product guide and inline information boundaries', () => {
     expect(referenceValues(html)).toEqual(['A: 152 mm', 'B: 56 mm', 'C: 19 mm', 'D: 43 mm', 'E: 150 mm']);
     expect(html).toContain('52 □ 18–145');
   });
-  it('keeps inline measurements in mm without the educational diagrams or CMS guide body', () => {
+  it('keeps inline values in mm with one contextual diagram and no educational instructions', () => {
     const html = renderSizeContent('complete', options);
     for (const value of [140, 52, 18, 42, 145]) expect(html).toContain(`>${value} mm</dd>`);
-    expect(html).not.toMatch(/<svg|<figure|data-units|Ejemplo educativo/);
+    expect(html.match(/<figure/g)).toHaveLength(1);
+    expect(html).not.toMatch(/data-units|Ejemplo educativo|Mide en línea horizontal/);
+    const characteristics = html.match(/data-size-panel="frame"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+    expect(characteristics).toBeTruthy();
+    expect(characteristics).not.toMatch(/<svg|<figure|data-mm=/);
+    expect(html).not.toContain('data-size-panel="fit"');
     expect(renderSizeContent('long', options)).not.toContain('Contenido sintético extenso');
   });
 });

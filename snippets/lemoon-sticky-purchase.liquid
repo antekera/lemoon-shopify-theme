@@ -15,7 +15,11 @@
       </div>
       <strong class="lemoon-sticky-purchase__price" data-sticky-price>{{ sticky_variant.price | money }}</strong>
       <div class="lemoon-sticky-purchase__actions">
-        {% render 'lemoon-select-lenses-button', context: 'sticky', disabled: sticky_button_disabled %}
+        {% if product.metafields.custom.prescription_type.value != blank %}
+          {% render 'lemoon-select-lenses-button', context: 'sticky', product: product, disabled: sticky_button_disabled %}
+        {% else %}
+          <button type="button" data-sticky-add class="button lemoon-sticky-purchase__configure lemoon-select-lenses-button"{% if sticky_button_disabled %} disabled{% endif %}>{{ 'products.product.add_to_cart' | t }}</button>
+        {% endif %}
       </div>
     </div>
   </lemoon-sticky-purchase>

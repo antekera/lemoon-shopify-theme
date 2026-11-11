@@ -44,7 +44,7 @@
 
     @media screen and (min-width: 990px) {
       .section-{{ section.id }}-padding .product__media-wrapper {
-        margin-top: calc(-1 * ({{ section.settings.padding_top }}px + 3rem));
+        margin-top: calc(-1 * {{ section.settings.padding_top }}px);
       }
     }
   {%- endstyle -%}
@@ -83,20 +83,19 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
-    <div class="page-width">
-      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
-        <div class="grid__item product__media-wrapper">
-          {% render 'product-media-gallery', variant_images: variant_images %}
-        </div>
-        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-          <section
-            id="ProductInfo-{{ section.id }}"
-            class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
-          >
-            {% render 'lemoon-breadcrumb', collection: collection, product: product %}
-            {%- assign product_form_id = 'product-form-' | append: section.id -%}
-
+  {%- liquid
+    assign product_form_id = 'product-form-' | append: section.id
+    assign summary_end_index = 0
+    assign title_blocks = section.blocks | where: 'type', 'title'
+    assign summary_boundary = '<!--lemoon-product-summary-boundary-' | append: section.id | append: '-->'
+    for block in section.blocks
+      if block.type == 'title' or block.type == 'price'
+        assign summary_end_index = forloop.index
+      endif
+    endfor
+  -%}
+  {%- capture product_blocks -%}
+    {%- if summary_end_index == 0 -%}{{- summary_boundary -}}{%- endif -%}
             {%- for block in section.blocks -%}
               {%- case block.type -%}
                 {%- when '@app' -%}
@@ -110,10 +109,10 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    {% render 'lemoon-product-heading', product: product %}
+                    {% render 'lemoon-product-heading', product: product, show_promotions: false %}
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div class="lemoon-mobile-price-row"><div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
@@ -121,23 +120,10 @@
                       price_class: 'price--large'
                     -%}
                   </div>
+                  </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                       <span>{{ 'products.product.volume_pricing.note' | t }}</span>
-                    </div>
-                  {%- endif -%}
-                  {%- if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank -%}
-                    <div class="product__tax caption rte">
-                      {%- if cart.duties_included and cart.taxes_included -%}
-                        {{ 'products.product.duties_and_taxes_included' | t }}
-                      {%- elsif cart.taxes_included -%}
-                        {{ 'products.product.taxes_included' | t }}
-                      {%- elsif cart.duties_included -%}
-                        {{ 'products.product.duties_included' | t }}
-                      {%- endif -%}
-                      {%- if shop.shipping_policy.body != blank -%}
-                        {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                      {%- endif -%}
                     </div>
                   {%- endif -%}
                   <div {{ block.shopify_attributes }}>
@@ -199,13 +185,7 @@
                     {%- endif -%}
                   </p>
                 {%- when 'description' -%}
-                  {%- assign purchase_blocks = section.blocks | where: 'type', 'buy_buttons' -%}
-                  {%- if purchase_blocks.size == 0 and product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                      {{ product.description }}
-                    </div>
-                    {% render 'lemoon-product-sku', product: product %}
-                  {%- endif -%}
+                  {%- comment -%}The full description is grouped with the product characteristics below.{%- endcomment -%}
                 {%- when 'sku' -%}
                   <p
                     class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -430,6 +410,8 @@
                   </div>
                 {%- when 'buy_buttons' -%}
                   {% assign variant_picker_blocks = section.blocks | where: 'type', 'variant_picker' %}
+                  {% assign hide_direct_purchase = false %}
+                  {% if product.metafields.custom.prescription_type.value != blank %}{% assign hide_direct_purchase = true %}{% endif %}
                   {% if variant_picker_blocks.size == 0 %}
                     {% render 'lemoon-product-size-guide', product: product, section_id: section.id %}
                   {% endif %}
@@ -438,16 +420,10 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
+                    hide_direct_purchase: hide_direct_purchase,
                     show_pickup_availability: true
                   -%}
-                  {%- assign description_block = section.blocks | where: 'type', 'description' | first -%}
-                  {%- if description_block and product.description != blank -%}
-                    <div class="product__description rte quick-add-hidden" {{ description_block.shopify_attributes }}>
-                      {{ product.description }}
-                    </div>
-                  {%- endif -%}
-                  {% render 'lemoon-product-sku', product: product %}
-                  {% render 'lemoon-shared-benefits', context: 'product' %}
+                  {% render 'lemoon-pdp-purchase-confidence', shop: shop, product: product, warranty_page: pages.garantias %}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -639,7 +615,39 @@
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
+              {%- if forloop.index == summary_end_index -%}
+                {%- if title_blocks.size > 0 -%}{% render 'lemoon-product-promotions', product: product %}{%- endif -%}
+                {{- summary_boundary -}}
+              {%- endif -%}
             {%- endfor -%}
+    <!--lemoon-product-blocks-end-->
+  {%- endcapture -%}
+  {%- liquid
+    if summary_end_index == 0
+      assign summary_markup = ''
+      assign details_markup = product_blocks | remove_first: summary_boundary | remove: '<!--lemoon-product-blocks-end-->'
+    else
+      assign product_block_parts = product_blocks | split: summary_boundary
+      assign summary_markup = product_block_parts | first
+      assign details_markup = product_block_parts | last | remove: '<!--lemoon-product-blocks-end-->'
+    endif
+  -%}
+  <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
+    <div class="page-width">
+      <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col grid--2-col-tablet">
+        <div class="lemoon-mobile-summary lemoon-product-summary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          {% render 'lemoon-breadcrumb', collection: collection, product: product %}
+          {{ summary_markup }}
+        </div>
+        <div class="grid__item product__media-wrapper">
+          {% render 'product-media-gallery', variant_images: variant_images %}
+        </div>
+        <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+          <section
+            id="ProductInfo-{{ section.id }}"
+            class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+          >
+            {{ details_markup }}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
@@ -694,7 +702,11 @@
     </div>
   </product-component>
   {% assign frame_information_id = section.id | append: '-inline' %}
-  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id %}
+  {%- assign description_blocks = section.blocks | where: 'type', 'description' -%}
+  {%- assign include_description = false -%}
+  {%- if description_blocks.size > 0 -%}{%- assign include_description = true -%}{%- endif -%}
+  {%- assign description_block = description_blocks | first -%}
+  {% render 'lemoon-frame-information', product: product, instance_id: frame_information_id, include_description: include_description, description_attributes: description_block.shopify_attributes, show_sku: true %}
   {% render 'lemoon-sticky-purchase', product: product %}
 </product-info>
 

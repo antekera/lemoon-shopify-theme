@@ -97,7 +97,7 @@ button.shopify-payment-button__button--unbranded {
   border-radius: var(--lemoon-radius-button);
   background: var(--lemoon-action-primary);
   color: var(--lemoon-text-inverse);
-  font-family: var(--lemoon-font-heading);
+  font-family: var(--lemoon-font-body);
   font-size: var(--lemoon-type-cta-size);
   font-weight: var(--lemoon-type-cta-weight);
   letter-spacing: var(--lemoon-type-cta-tracking);
@@ -571,10 +571,37 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   padding: .8rem 1.2rem;
   background: transparent;
   color: var(--lemoon-text-brand);
-  font-size: var(--lemoon-type-cta-size);
+  font-size: 13px;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
   text-transform: uppercase;
   transition: background-color var(--lemoon-motion-fast), color var(--lemoon-motion-fast);
 }
+
+/* Keep card controls in their own layer below sticky site navigation. */
+.product-card-wrapper { isolation: isolate; }
+
+/* Keep the wishlist app control at the same corner on every product card. */
+.product-card-wrapper > .Vtl-CollectionCardWidget {
+  position: absolute !important;
+  inset: 8px 8px auto auto !important;
+  z-index: 4 !important;
+}
+/* Vitals supplies separate outline and solid paths; style its solid silhouette
+   while retaining the app's own saved-state marker and click handling. */
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:first-child { opacity: 0 !important; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg { overflow: visible; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:last-child { opacity: 1 !important; fill: none !important; stroke: var(--lemoon-text-brand); stroke-width: 40px; stroke-linejoin: round; paint-order: fill stroke; transition: stroke var(--lemoon-motion-fast); }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton:hover svg > path:last-child { stroke: var(--lemoon-action-accent); }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg[style*='--vtl-heart-solid:'] > path:last-child { fill: var(--lemoon-action-accent) !important; stroke: var(--lemoon-action-accent); }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating { position: relative; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating svg { animation: lemoon-card-favourite-pop 480ms ease-out; }
+:is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating::after { content: ''; position: absolute; inset: 25%; border: 2px solid var(--lemoon-text-brand); border-radius: 50%; pointer-events: none; animation: lemoon-card-favourite-burst 560ms ease-out both; }
+@keyframes lemoon-card-favourite-pop { 0% { transform: scale(.7); } 55% { transform: scale(1.24); } 100% { transform: scale(1); } }
+@keyframes lemoon-card-favourite-burst { 0% { transform: scale(.4); opacity: .8; } 100% { transform: scale(2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .Vtl-WishlistButton__WishlistIconButton svg > path:last-child { transition: none; } :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating svg { animation: none; } :is(.Vtl-CollectionCardWidget, .lemoon-product-heading__wishlist) .lemoon-favourite-animating::after { display: none; } }
 .lemoon-product-card__quick-add .button:not([disabled]):hover {
   background: var(--lemoon-surface-warm);
   color: var(--lemoon-text-brand);
@@ -705,6 +732,7 @@ button.shopify-payment-button__button--unbranded:not([disabled]):hover {
   padding-top: var(--lemoon-section-padding);
   padding-bottom: var(--lemoon-space-6);
 }
+#MainContent[data-template='product'] .lemoon-featured-products { padding-top: var(--lemoon-space-6); }
 
 .lemoon-featured-products__heading {
   display: flex;
@@ -1697,9 +1725,8 @@ a.link:not(.button):not(.pagination__item) {
 .lemoon-ui-field .lemoon-ui-control:focus-visible,
 .lemoon-ui-select .lemoon-ui-control:focus,
 .lemoon-ui-select .lemoon-ui-control:focus-visible {
-  border-color: var(--lemoon-border-strong);
-  outline: 2px solid var(--lemoon-border-strong);
-  outline-offset: -2px;
+  border-width: 2px;
+  outline: none;
   box-shadow: none;
 }
 
@@ -1732,4 +1759,94 @@ a.link:not(.button):not(.pagination__item) {
 .lemoon-ui-action.button.loading > .loading__spinner .spinner {
   width: 1.8rem;
   height: 1.8rem;
+}
+/* Button labels use the brand's body face across theme components. */
+button,
+.button,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+  font-family: var(--lemoon-font-body) !important;
+}
+
+/* One visible keyboard focus treatment across theme controls. */
+:focus-visible,
+:is(input[type="checkbox"], input[type="radio"]):focus-visible + label,
+label:has(> :is(input[type="checkbox"], input[type="radio"]):focus-visible) {
+  outline: 2px solid var(--lemoon-focus-ring) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+/* Dawn's image zoom button has no box: its overlay carries the visible ring. */
+.product__media-toggle:focus-visible::after {
+  outline: 2px solid var(--lemoon-focus-ring) !important;
+  outline-offset: -2px !important;
+  box-shadow: none !important;
+}
+
+.field:has(:focus-visible)::after,
+.select:has(:focus-visible)::after,
+.button:focus-visible::after {
+  box-shadow: none !important;
+}
+
+@media (forced-colors: active) {
+  :focus-visible,
+  :is(input[type="checkbox"], input[type="radio"]):focus-visible + label,
+  label:has(> :is(input[type="checkbox"], input[type="radio"]):focus-visible),
+  .product__media-toggle:focus-visible::after {
+    outline-color: CanvasText !important;
+  }
+}
+
+/* Text controls reinforce their existing boundary without a second focus ring. */
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="hidden"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]), textarea, select):focus {
+  border-width: 2px !important;
+  border-style: solid !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media (forced-colors: active) {
+  :where(input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="hidden"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]):not([type="image"]), textarea, select):focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 1px !important;
+  }
+}
+
+/* Button labels share the same typography across the theme. */
+button,
+.button,
+.shopify-challenge__button,
+.customer button,
+button[type="submit"],
+input[type="submit"],
+input[type="button"] {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+}
+
+/* Wishlist confirmation is independent of cart notifications. */
+.vtl-proxy-page-wishlist .Vtl-WishlistProduct__Options,
+.vtl-proxy-page-wishlist [class*='AddAllToCart'] { display: none !important; }
+.vtl-proxy-page-wishlist .lemoon-wishlist-product-link { width: 100%; margin-top: 12px; text-decoration: none; }
+.lemoon-favourite-toast { position: fixed; z-index: var(--lemoon-z-toast); top: calc(var(--header-height, 72px) + 12px); right: 16px; width: min(36rem, calc(100vw - 32px)); display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--lemoon-border-default); border-radius: var(--lemoon-radius-md); background: var(--lemoon-surface-page); color: var(--lemoon-text-brand); box-shadow: 0 8px 24px rgba(11,31,58,.16); font-size: 13px; line-height: 1.4; }
+.lemoon-favourite-toast[hidden] { display: none; }
+.lemoon-favourite-toast__title { flex: 1; font-weight: 600; }
+.lemoon-favourite-toast a { color: inherit; text-decoration: underline; text-underline-offset: .2em; }
+.lemoon-favourite-toast button { display: grid; flex: 0 0 44px; width: 44px; height: 44px; place-items: center; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; }
+
+/* Text actions and navigation links use the body typeface at regular weight. */
+.lemoon-text-link,
+.underlined-link,
+a.link:not(.button):not(.pagination__item),
+.button--tertiary,
+.lemoon-pdp__text-button,
+.lemoon-quiz__text-link,
+.lemoon-face-guide__text-link,
+.lemoon-header__quick-link {
+  font-family: var(--lemoon-font-body) !important;
+  font-weight: var(--lemoon-weight-regular) !important;
 }

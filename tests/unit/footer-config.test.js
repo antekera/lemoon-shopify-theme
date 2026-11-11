@@ -124,6 +124,22 @@ test('footer menus hide the two unavailable service links while preserving other
   expect(html).toContain('lemoon-footer__menu--mobile-only');
 });
 
+test('footer hides the virtual try-on entry while preserving unrelated links', () => {
+  const links = [
+    { title: 'Usar el probador virtual', type: 'page_link', object: { handle: 'como-usar-probador-virtual' }, url: '/pages/como-usar-probador-virtual' },
+    { title: 'Probador externo', url: 'https://ejemplo.cl/pages/como-usar-probador-virtual' },
+    { title: 'Contacto', url: '/pages/contact' },
+  ];
+  const blocks = [
+    { id: 'desktop', type: 'navigation_column', settings: { heading: 'Escritorio', menu: { links }, desktop_only: true } },
+    { id: 'mobile', type: 'navigation_column', settings: { heading: 'Móvil', menu: { links }, mobile_only: true } },
+  ];
+  const html = renderComponentSection('footer', { blocks, context: { request: { page_type: 'page' }, page: { handle: 'contact' }, shop: { url: 'https://lemoon.cl' } } });
+  expect(html).not.toContain('Usar el probador virtual');
+  expect(html.match(/>Contacto<\/a>/g)).toHaveLength(2);
+  expect(html.match(/>Probador externo<\/a>/g)).toHaveLength(2);
+});
+
 test('footer omits empty service accordions from storefront while keeping blocks selectable in theme editor', () => {
   const hiddenLinks = [
     { title: 'Operativos', type: 'page_link', object: { handle: 'operativos-oftalmologicos' }, url: '/pages/operativos-oftalmologicos' },

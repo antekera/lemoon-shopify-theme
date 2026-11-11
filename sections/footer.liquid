@@ -76,6 +76,7 @@
               <span>{{ 'sections.lemoon_journal.consent' | t }}</span>
             </label>
           {%- endif -%}
+          <div class="lemoon-newsletter__status" aria-live="polite" data-fallback-message="{{ 'newsletter.retry' | t | escape }}" data-pending-message="{{ 'newsletter.pending' | t | escape }}">
           {%- if form.errors -%}
             {%- capture newsletter_error -%}{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}{%- endcapture -%}
             {% render 'lemoon-ui-message', id: newsletter_error_id, class: 'lemoon-newsletter__message', role: 'alert', text: newsletter_error %}
@@ -83,6 +84,7 @@
           {%- if form.posted_successfully? -%}
             {% render 'lemoon-ui-message', id: newsletter_success_id, class: 'lemoon-newsletter__message', tabindex: '-1', text: newsletter_success %}
           {%- endif -%}
+          </div>
         {%- endform -%}
       </div>
     </div>
@@ -112,12 +114,12 @@
                     {%- assign footer_page_handle = footer_link_path | last | split: '/' | first -%}
                     {%- assign hide_footer_link = false -%}
                     {%- if link.type == 'page_link' -%}
-                      {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' -%}
+                      {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' or link.object.handle == 'como-usar-probador-virtual' -%}
                         {%- assign hide_footer_link = true -%}
                       {%- endif -%}
                     {%- endif -%}
                     {%- if footer_link_path.size > 1 and footer_url_local -%}
-                      {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' -%}
+                      {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' or footer_page_handle == 'como-usar-probador-virtual' -%}
                         {%- assign hide_footer_link = true -%}
                       {%- endif -%}
                     {%- endif -%}
@@ -170,12 +172,12 @@
                     {%- assign footer_page_handle = footer_link_path | last | split: '/' | first -%}
                     {%- assign hide_footer_link = false -%}
                     {%- if link.type == 'page_link' -%}
-                      {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' -%}
+              {%- if link.object.handle == 'operativos-oftalmologicos' or link.object.handle == 'isapres-y-fonasa' or link.object.handle == 'como-usar-probador-virtual' -%}
                         {%- assign hide_footer_link = true -%}
                       {%- endif -%}
                     {%- endif -%}
                     {%- if footer_link_path.size > 1 and footer_url_local -%}
-                      {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' -%}
+              {%- if footer_page_handle == 'operativos-oftalmologicos' or footer_page_handle == 'isapres-y-fonasa' or footer_page_handle == 'como-usar-probador-virtual' -%}
                         {%- assign hide_footer_link = true -%}
                       {%- endif -%}
                     {%- endif -%}

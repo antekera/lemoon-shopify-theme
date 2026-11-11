@@ -1168,6 +1168,8 @@
     "header": {
       "name": "Header",
       "settings": {
+        "lemoon_mobile_wishlist": { "label": "Show wishlist in mobile menu", "info": "Enable when the wishlist is active." },
+        "lemoon_show_in_mobile_menu": { "label": "Show in mobile menu" },
         "logo_help": {
           "content": "Edit your logo in [theme settings](/editor?context=theme&category=logo)"
         },

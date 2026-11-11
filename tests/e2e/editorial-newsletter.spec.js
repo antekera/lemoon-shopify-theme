@@ -18,14 +18,17 @@ async function newsletterGeometry(form) {
   });
 }
 
-async function expectSingleBorder(email, color) {
+async function expectSingleBorder(email, color, width = '1px', focused = false) {
   for (const edge of ['top', 'right', 'bottom', 'left']) {
-    await expect(email).toHaveCSS(`border-${edge}-width`, '2px');
+    await expect(email).toHaveCSS(`border-${edge}-width`, width);
     await expect(email).toHaveCSS(`border-${edge}-style`, 'solid');
     await expect(email).toHaveCSS(`border-${edge}-color`, color);
   }
-  await expect(email).toHaveCSS('outline-style', 'none');
-  await expect(email).toHaveCSS('box-shadow', 'none');
+  const forcedColors = await email.evaluate(node => node.ownerDocument.defaultView.matchMedia('(forced-colors: active)').matches);
+  await expect(email).toHaveCSS('outline-style', focused && forcedColors ? 'solid' : 'none');
+  if (focused && !forcedColors) await expect(email).toHaveCSS('box-shadow', /inset/);
+  else if (focused && forcedColors) await expect(email).toHaveCSS('box-shadow', /^(none|.*inset)$/);
+  else await expect(email).toHaveCSS('box-shadow', 'none');
 }
 
 async function systemColor(page, name) {
@@ -74,19 +77,20 @@ for (const pageType of ['blog', 'article']) {
       await expect(page.locator('body')).not.toHaveAttribute('data-fixture-submit');
       await consent.check();
       const beforeClick = await newsletterGeometry(form);
-      await expectSingleBorder(email, 'rgba(0, 0, 0, 0)');
+      const borderColor = await email.evaluate(node => getComputedStyle(node).borderTopColor);
+      await expectSingleBorder(email, borderColor);
       await email.click();
       await expect(email).toBeFocused();
-      await expectSingleBorder(email, 'rgb(247, 230, 0)');
+      await expectSingleBorder(email, borderColor, '1px', true);
       const afterClick = await newsletterGeometry(form);
       expect(afterClick).toEqual(beforeClick);
       await newsletter.getByRole('heading', { name: 'Una idea útil cada tanto.' }).click();
       await expect(email).not.toBeFocused();
-      await expectSingleBorder(email, 'rgba(0, 0, 0, 0)');
+      await expectSingleBorder(email, borderColor);
       const beforeTab = await newsletterGeometry(form);
       await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
       await expect(email).toBeFocused();
-      await expectSingleBorder(email, 'rgb(247, 230, 0)');
+      await expectSingleBorder(email, borderColor, '1px', true);
       const afterTab = await newsletterGeometry(form);
       expect(afterTab).toEqual(beforeTab);
       expect(afterTab).toEqual(beforeClick);
@@ -187,7 +191,8 @@ for (const width of [390, 1280]) {
     await expectSingleBorder(email, canvasText);
     await email.click();
     await expect(email).toBeFocused();
-    await expectSingleBorder(email, highlight);
+    await expectSingleBorder(email, highlight, '1px', true);
+    await expect(email).toHaveCSS('outline-color', highlight);
     const afterClick = await newsletterGeometry(form);
     expect(afterClick).toEqual(beforeClick);
     await newsletter.getByRole('heading', { name: 'Una idea útil cada tanto.' }).click();
@@ -196,7 +201,8 @@ for (const width of [390, 1280]) {
     const beforeTab = await newsletterGeometry(form);
     await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
     await expect(email).toBeFocused();
-    await expectSingleBorder(email, highlight);
+    await expectSingleBorder(email, highlight, '1px', true);
+    await expect(email).toHaveCSS('outline-color', highlight);
     const afterTab = await newsletterGeometry(form);
     expect(afterTab).toEqual(beforeTab);
     expect(afterTab).toEqual(beforeClick);
@@ -228,14 +234,15 @@ for (const width of [390, 1280]) {
         }, { once: true });
       });
       const before = await newsletterGeometry(form);
-      await expectSingleBorder(email, 'rgba(0, 0, 0, 0)');
+      const borderColor = await email.evaluate(node => getComputedStyle(node).borderTopColor);
+      await expectSingleBorder(email, borderColor);
       if (trigger === 'click') await email.click();
       else await page.keyboard.press(browserName === 'webkit' && process.platform === 'darwin' ? 'Alt+Tab' : 'Tab');
       await expect(email).toBeFocused();
       const captcha = form.locator(':scope > .h-captcha');
       await expect(captcha).toHaveCount(1);
       await expect(captcha).toHaveCSS('position', 'absolute');
-      await expectSingleBorder(email, 'rgb(247, 230, 0)');
+      await expectSingleBorder(email, borderColor, '1px', true);
       const after = await newsletterGeometry(form);
       expect(after).toEqual(before);
       // Negative control: putting only the simulated child back into grid flow

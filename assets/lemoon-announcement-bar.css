@@ -15,6 +15,11 @@
 .lemoon-announcement-bar .announcement-bar-slider {
   width: 100%;
 }
+.lemoon-announcement-bar .announcement-bar-slider .slider {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 0;
+}
 
 @media screen and (min-width: 990px) {
   .lemoon-announcement-bar .announcement-bar-slider {
@@ -64,6 +69,8 @@
 }
 
 @media screen and (max-width: 749px) {
+  .lemoon-announcement-bar .slider-button--prev { margin-left: 0; }
+  .lemoon-announcement-bar .slider-button--next { margin-right: 0; }
   .lemoon-announcement-bar .announcement-bar__message {
     font-size: 11px;
     line-height: 1.2;

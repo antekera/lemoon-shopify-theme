@@ -1,4 +1,5 @@
 const purposes = ['analytics', 'marketing', 'preferences'];
+const permissionMethods = { analytics: 'analyticsProcessingAllowed', marketing: 'marketingAllowed', preferences: 'preferencesProcessingAllowed' };
 
 export async function loadCustomerPrivacy(environment = window, timeoutMs = 4000) {
   const started = Date.now();
@@ -20,8 +21,14 @@ export async function loadCustomerPrivacy(environment = window, timeoutMs = 4000
   return api;
 }
 
-export function privacyChoices(consent) {
-  return Object.fromEntries(purposes.map(purpose => [purpose, consent[purpose] === 'yes']));
+export function privacyChoices(api) {
+  return Object.fromEntries(purposes.map(purpose => {
+    const method = api?.[permissionMethods[purpose]];
+    if (typeof method !== 'function') throw new Error('privacy_service_unavailable');
+    const allowed = method.call(api);
+    if (typeof allowed !== 'boolean') throw new Error('privacy_service_unavailable');
+    return [purpose, allowed];
+  }));
 }
 
 export function savePrivacyChoices(api, choices, timeoutMs = 4000) {
@@ -73,7 +80,7 @@ if (typeof document !== 'undefined' && !document.documentElement.dataset.lemoonC
         const dialog = document.getElementById(opener.getAttribute('aria-controls'));
         if (!dialog) throw new Error('privacy_service_unavailable');
         if (dialog.getAttribute('aria-busy') === 'true') return;
-        const selection = privacyChoices(api.currentVisitorConsent());
+        const selection = privacyChoices(api);
         dialog.querySelectorAll('[data-cookie-purpose]').forEach(input => { input.checked = selection[input.dataset.cookiePurpose]; });
         dialog.querySelector('[data-cookie-error]').textContent = '';
         openers.set(dialog, opener);

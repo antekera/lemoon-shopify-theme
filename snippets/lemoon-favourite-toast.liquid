@@ -1,0 +1,7 @@
+{% doc %}
+  Confirmation for an item added to the app wishlist.
+{% enddoc %}
+<div class="lemoon-favourite-toast" data-favourite-toast role="status" aria-live="polite" aria-atomic="true" hidden>
+  <a class="lemoon-favourite-toast__title" href="/apps/page/wishlist">{{ 'products.product.favourite_added' | t }}</a>
+  <button type="button" data-favourite-toast-close aria-label="{{ 'accessibility.close' | t | escape }}">{% render 'lemoon-icon', icon: 'x', size: 18 %}</button>
+</div>

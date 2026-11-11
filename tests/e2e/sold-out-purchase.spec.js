@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { execFileSync } from 'node:child_process';
 
 test('disables the lens action for an unavailable variant and restores it for an available colour', async ({ page }) => {
   await page.route('**/tests/fixtures/eyewear-product.html', async route => {
@@ -25,9 +26,9 @@ test('disables the lens action for an unavailable variant and restores it for an
 
 test('shows a sale tag above the title for a discounted variant', async ({ page }) => {
   await page.route('**/tests/fixtures/eyewear-product.html', async route => {
-    const response = await route.fetch();
-    const html = (await response.text()).replace('"formattedCompare":null', '"formattedCompare":"$49.900"');
-    await route.fulfill({ response, body: html });
+    const html = execFileSync(process.execPath, ['--input-type=module', '-e', "import { renderEyewearSsrFixture } from './tests/helpers/pdp-information-renderer.mjs'; process.stdout.write(renderEyewearSsrFixture());"], { encoding: 'utf8' })
+      .replace('"formattedCompare":null', '"formattedCompare":"$49.900"');
+    await route.fulfill({ contentType: 'text/html; charset=utf-8', body: html });
   });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/tests/fixtures/eyewear-product.html');
