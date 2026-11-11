@@ -512,7 +512,7 @@ lemoon-thumbnail-rail { display: contents; }
 .lemoon-pdp__frame-options .lemoon-pdp__size-row > div,
 .lemoon-pdp__size-row > div { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-start; gap: 4px; text-align: left; font-size: 13px; }
 .lemoon-pdp__frame-options .lemoon-pdp__size-row strong,
-.lemoon-pdp__size-row strong { padding: 4px 10px; border: 0; border-radius: 999px; background: var(--lemoon-surface-warm); font-size: 12px; font-weight: 500; line-height: 1.5; }
+.lemoon-pdp__size-row strong { padding: 4px 10px; border: 0; border-radius: 999px; background: #f1f2f3; font-size: 12px; font-weight: 500; line-height: 1.5; }
 .lemoon-pdp__frame-options .lemoon-pdp__size-row > button,
 .lemoon-pdp__size-row > button { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; min-height: 44px; padding: 0; font-size: 12px; text-align: right; text-transform: none !important; }
 .lemoon-pdp__size-icon { display: inline-flex; flex: 0 0 16px; width: 16px; height: 16px; }

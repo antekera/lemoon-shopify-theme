@@ -362,6 +362,8 @@ Los botones que abren Guía de medidas conservan el foco y su retorno al cerrar 
 
 La solicitud de Miguel se implementa sobre las familias actuales: galería protagonista y panel de selección en escritorio, identidad/precio antes de la foto en móvil y descripción completa debajo. Los detalles comparten el ancho y los márgenes de página. Dos pestañas separan Características (forma, material, peso, público, talla, ajuste y rostros disponibles) de Medidas (valores mm y esquema A–E solo aquí). Se omiten campos ausentes y párrafos genéricos. El acceso junto a la talla abre el modal de medidas y restaura el foco al cerrar.
 
+El valor de la talla junto a la guía se presenta como una etiqueta redondeada con fondo gris claro `#f1f2f3`.
+
 La información cercana a compra se concilia con políticas nativas: garantía legal y cambios/devoluciones con enlace a reembolso, plazo configurado con sus condiciones y enlace a envío, medios de pago habilitados por Shopify. No reutilizar365/30días de defaults ni claims de competidores como hechos Lemoon. No generar cifras desde talla textual, convertir referencias de compatibilidad en booleanos, ni asumir sincronización de campos cortos/medidas desde Studio. El [inventario y cruce de datos PDP](docs/design/2026-11-09-pdp-refinement.md) registra fuentes, límites y diferencias; revisión humana del resultado pendiente.
 
 La descripción aparece dentro de la pestaña Características, cuyos atributos se distribuyen en dos columnas en desktop y una en móvil, sin título visual adicional ni acceso inferior duplicado a la guía. Las pestañas usan escritura normal y 16px.
