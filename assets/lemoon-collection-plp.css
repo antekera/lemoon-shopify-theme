@@ -539,6 +539,7 @@
 .lemoon-plp-intro__description p { margin: 0; }
 .lemoon-plp-toolbar__leading { display: flex; align-items: center; gap: 20px; }
 .lemoon-plp-filter-toggle { display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; padding: 0; min-height: 44px; cursor: pointer; color: var(--lemoon-text-brand); font: inherit; font-size: 14px; }
+.lemoon-plp button[data-filter-toggle] { text-transform: none !important; }
 .lemoon-plp-filter-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .lemoon-plp--filters-hidden .lemoon-plp-filter-toggle svg { transform: scaleX(-1); }
 .lemoon-plp .active-facets-desktop > facet-remove,

@@ -132,6 +132,52 @@ test('collection sort options display their normal Spanish capitalization', asyn
   for (const option of await options.all()) await expect(option).toHaveCSS('text-transform', 'none');
 });
 
+test('PLP filter toggle keeps sentence case and reset reopens the desktop sidebar', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const unfiltered = await page.request.get(fixture('collection-preferred'));
+  const unfilteredHtml = await unfiltered.body();
+  let releaseReset;
+  const resetResponse = new Promise((resolve) => { releaseReset = resolve; });
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    await resetResponse;
+    await route.fulfill({ status: 200, contentType: 'text/html', body: unfilteredHtml });
+  });
+  await page.goto(fixture('collection-filtered'));
+  const toggle = page.locator('[data-filter-toggle]');
+  const sidebar = page.locator('#main-collection-filters');
+  await expect(toggle).toHaveText('Ocultar filtros');
+  await expect(toggle).toHaveCSS('text-transform', 'none');
+  await toggle.click();
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveCSS('text-transform', 'none');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(sidebar).toHaveJSProperty('inert', true);
+
+  await page.locator('.lemoon-filter-reset a').click();
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(sidebar).toHaveJSProperty('inert', true);
+  releaseReset();
+  await expect(toggle).toHaveText('Ocultar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(sidebar).toHaveJSProperty('inert', false);
+  await expect(page.locator('.lemoon-plp')).not.toHaveClass(/lemoon-plp--filters-hidden/);
+  await expect(page.locator('.lemoon-filter-reset')).toHaveCount(0);
+});
+
+test('PLP keeps the desktop sidebar closed when reset fails', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.route((url) => url.searchParams.has('section_id'), (route) => route.fulfill({ status: 503, body: 'Unavailable' }));
+  await page.goto(fixture('collection-filtered'));
+  const toggle = page.locator('[data-filter-toggle]');
+  await toggle.click();
+  await page.locator('.lemoon-filter-reset a').click();
+  await expect(page.locator('#ProductGridContainer .collection')).not.toHaveClass(/loading/);
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#main-collection-filters')).toHaveJSProperty('inert', true);
+});
+
 test('PLP reset is usable only while a filter is applied', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(fixture('collection-relevance'));

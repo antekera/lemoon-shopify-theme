@@ -5,6 +5,7 @@
   const storageKey = 'lemoon-plp-mobile-columns';
   const initialized = new WeakSet();
   const pageLayouts = new WeakMap();
+  let resetToReopen = null;
 
   window.lemoonSelectProductPage = (container, mobileHtml) => {
     const current = container.querySelector('[data-plp-page-size]');
@@ -84,6 +85,17 @@
     }
   };
 
+  const setFilterVisibility = (root, visible) => {
+    root.classList.toggle('lemoon-plp--filters-hidden', !visible);
+    const toggle = root.querySelector('[data-filter-toggle]');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', String(visible));
+      toggle.querySelector('span').textContent = visible ? toggle.dataset.labelHide : toggle.dataset.labelShow;
+    }
+    const sidebar = root.querySelector('#main-collection-filters');
+    if (sidebar && window.matchMedia('(min-width: 750px)').matches) sidebar.inert = !visible;
+  };
+
   const sync = (root) => {
     syncSidebar(root);
     syncSort(root);
@@ -144,6 +156,11 @@
           event.preventDefault();
           event.stopImmediatePropagation();
         }
+        if (event.target.closest('.lemoon-filter-reset a')
+          && window.matchMedia('(min-width: 750px)').matches
+          && root.classList.contains('lemoon-plp--filters-hidden')) {
+          resetToReopen = { root, requestId: null };
+        }
       }, true);
       const mobilePage = root.closest('collection-component').querySelector('[data-plp-mobile-grid]');
       if (mobilePage) window.lemoonSelectProductPage(root.querySelector('#ProductGridContainer'), mobilePage.innerHTML);
@@ -164,11 +181,7 @@
     const filterToggle = event.target.closest('[data-filter-toggle]');
     if (filterToggle) {
       const root = filterToggle.closest('.lemoon-plp');
-      const hidden = root.classList.toggle('lemoon-plp--filters-hidden');
-      const sidebar = root.querySelector('#main-collection-filters');
-      filterToggle.setAttribute('aria-expanded', String(!hidden));
-      filterToggle.querySelector('span').textContent = hidden ? filterToggle.dataset.labelShow : filterToggle.dataset.labelHide;
-      if (sidebar && window.matchMedia('(min-width: 750px)').matches) sidebar.inert = hidden;
+      setFilterVisibility(root, root.classList.contains('lemoon-plp--filters-hidden'));
       return;
     }
     const sortOption = event.target.closest('[data-sort-value]');
@@ -205,8 +218,23 @@
     const root = event.target.closest('.lemoon-plp');
     if (root) sync(root);
   });
-  document.addEventListener('lemoon:facets-updated', () => document.querySelectorAll('.lemoon-plp').forEach(sync));
-  document.addEventListener('lemoon:facets-failed', () => document.querySelectorAll('.lemoon-plp').forEach(sync));
+  document.addEventListener('lemoon:facets-start', (event) => {
+    if (resetToReopen?.requestId === null) resetToReopen.requestId = event.detail?.requestId;
+    else resetToReopen = null;
+  });
+  document.addEventListener('lemoon:facets-updated', (event) => {
+    document.querySelectorAll('.lemoon-plp').forEach(sync);
+    if (resetToReopen?.requestId !== event.detail?.requestId) return;
+    const { root } = resetToReopen;
+    resetToReopen = null;
+    if (root.isConnected && root.querySelector('#ProductGridContainer [data-plp-has-active-filters]')?.dataset.plpHasActiveFilters === 'false') {
+      setFilterVisibility(root, true);
+    }
+  });
+  document.addEventListener('lemoon:facets-failed', (event) => {
+    if (resetToReopen?.requestId === event.detail?.requestId) resetToReopen = null;
+    document.querySelectorAll('.lemoon-plp').forEach(sync);
+  });
   document.addEventListener('keydown', (event) => {
     const menu = event.target.closest('[data-sort-menu]');
     if (!menu) return;

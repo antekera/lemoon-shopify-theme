@@ -141,6 +141,7 @@ Cuando una sección exponga `padding_top/bottom`, usar su fórmula responsive y 
 El alias Dawn `--page-width:128rem` existe, pero `.page-width` usa el máximo Lemoon de 2000px. No imponer un grid global de 12/4 columnas ni convertir el máximo de header, sidebar o lectura en máximo global.
 
 Las opciones del menú de ordenamiento de la PLP conservan la capitalización natural de sus etiquetas, sin convertirlas a mayúsculas.
+«Ocultar filtros» y «Mostrar filtros» conservan la capitalización natural. Al completar «Eliminar filtros» desde los resultados en desktop, el sidebar se abre si estaba cerrado; permanece cerrado mientras se actualizan los resultados o si la actualización falla.
 En el drawer móvil de filtros PLP, todos los grupos de acordeón se abren al entrar, también después de cerrar y volver a abrir el drawer. Cada grupo sigue pudiendo cerrarse durante esa sesión.
 
 Mantener orden de lectura al apilar, títulos largos y mensajes de error completos. Evitar overflow horizontal de página; la media y las columnas deben poder contraerse. Verificar los dos lados de 750/990 y de 1280 cuando cambien gutters; usar móvil 390px y el ancho desktop de la referencia para revisar composición. No fijar la página a las dimensiones de un frame.
