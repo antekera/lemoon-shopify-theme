@@ -113,7 +113,7 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** Layout consume request.page_type, settings, content_for_header/layout y grupos header/footer; settings_schema declara opciones, no valores efectivos. Meta tags usa page_title, page_description, canonical_url y media. standard-actions-override redefine openCart/updateCart de Shopify.actions y refresca secciones con deduplicación/pubsub; conservar ese acoplamiento comercial.
 
-El catálogo virtual `/collections/all` recibe título y descripción SEO localizados en el layout; las colecciones con ficha en Shopify conservan sus metadatos administrables. Una colección base con cero productos genera `noindex, follow`; el canonical permanece en la URL de Shopify. El sufijo de página usa la traducción existente.
+El catálogo virtual `/collections/all` recibe título y descripción SEO localizados en el layout; las colecciones con ficha en Shopify conservan sus metadatos administrables. Una colección base con menos de ocho productos genera `noindex, follow` según LEM-47; el canonical permanece en la URL de Shopify. El sufijo de página usa la traducción existente.
 
 **Variantes existentes.** Storefront normal; policy con shell de ayuda; cart con CSS local; password con cadena CSS distinta.
 

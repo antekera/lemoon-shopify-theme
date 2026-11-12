@@ -88,7 +88,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "layout/theme.liquid",
-        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección. SEO de colecciones: metadatos Shopify, fallback localizado para /collections/all, noindex de colección vacía y paginación localizada.",
+        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección. SEO de colecciones: metadatos Shopify, fallback localizado para /collections/all, noindex con menos de ocho productos y paginación localizada.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },

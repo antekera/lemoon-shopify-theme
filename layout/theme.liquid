@@ -39,7 +39,7 @@
     {%- endif -%}
     {%- if request.page_type == 'search' -%}
       <meta name="robots" content="noindex, follow">
-    {%- elsif request.page_type == 'collection' and collection.all_products_count == 0 -%}
+    {%- elsif request.page_type == 'collection' and collection.all_products_count < 8 -%}
       <meta name="robots" content="noindex, follow">
     {%- endif -%}
 

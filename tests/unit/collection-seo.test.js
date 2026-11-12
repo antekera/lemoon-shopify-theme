@@ -46,3 +46,10 @@ test('an empty collection signals noindex without changing its canonical URL', (
   expect(html).toContain('<meta name="robots" content="noindex, follow">');
   expect(html).toContain('<link rel="canonical" href="https://lemoon.cl/collections/para-pantallas">');
 });
+
+test('collections below the catalogue threshold stay out of the index', () => {
+  const thin = renderHead({ handle: 'opticos-ninos', count: 7, title: 'Niños', description: '' });
+  const ready = renderHead({ handle: 'opticos-hombre', count: 8, title: 'Hombre', description: '' });
+  expect(thin).toContain('<meta name="robots" content="noindex, follow">');
+  expect(ready).not.toContain('<meta name="robots"');
+});
