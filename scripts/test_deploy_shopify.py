@@ -246,6 +246,18 @@ class IncrementalDeploymentTests(unittest.TestCase):
             deploy_shopify.verify_remote("assets/changed.js", b"old", b"new", None)
         deploy_shopify.verify_remote("assets/new.js", None, b"new", None)
 
+    def test_partial_json_update_rejects_unreviewed_changes(self):
+        old = b'{"a":0,"nested":{"x":1},"array":[1,2],"deleted":true}'
+        new = b'{"a":1,"nested":{"x":2,"added":true},"array":[2,1]}'
+        partial = b'{"a":1,"nested":{"x":1,"added":true},"array":[1,2],"deleted":true}'
+        deploy_shopify.verify_remote("sections/header.json", old, new, partial)
+        for remote in (b'{"a":9,"nested":{"x":1},"array":[1,2],"deleted":true}',
+                       b'{"a":1,"nested":{"x":1,"unknown":3},"array":[1,2]}',
+                       b'{"a":1,"nested":{"x":1},"array":[1,3]}',
+                       b'{"a":true,"nested":{"x":1},"array":[1,2]}'):
+            with self.assertRaisesRegex(ValueError, "conflict"):
+                deploy_shopify.verify_remote("sections/header.json", old, new, remote)
+
     def test_source_deletion_in_a_pending_attempt_cannot_authorize_a_missing_live_file(self):
         filename = "assets/changed.js"
         blobs = {"old":b"old", "new":b"new"}

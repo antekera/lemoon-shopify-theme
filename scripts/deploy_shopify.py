@@ -223,8 +223,32 @@ def read_optional(directory, filename):
     return path.read_bytes() if path.is_file() else None
 
 
+def is_partial_json_update(baseline, target, remote):
+    """Accept only unchanged or already-applied target values; arrays stay atomic."""
+    missing = object()
+
+    def matches(old, new, actual):
+        if old is missing or new is missing or actual is missing:
+            return actual is old or actual is new
+        if isinstance(old, dict) and isinstance(new, dict) and isinstance(actual, dict):
+            return all(matches(old.get(k, missing), new.get(k, missing), actual.get(k, missing))
+                       for k in old.keys() | new.keys() | actual.keys())
+        # JSON canonicalization distinguishes booleans from numbers.
+        return (json.dumps(actual, sort_keys=True, separators=(',', ':')) in
+                (json.dumps(old, sort_keys=True, separators=(',', ':')),
+                 json.dumps(new, sort_keys=True, separators=(',', ':'))))
+
+    try:
+        return matches(*(json.loads(canonical_json(value)) for value in (baseline, target, remote)))
+    except (ValueError, UnicodeError, TypeError):
+        return False
+
+
 def verify_remote(filename, baseline, target, remote, attempted=()):
     if not any(same_content(filename, remote, known) for known in (baseline, target, *attempted)):
+        if (filename.endswith('.json') and all(v is not None for v in (baseline, target, remote))
+                and is_partial_json_update(baseline, target, remote)):
+            return
         raise ValueError(f"Production conflict in {filename}; reconcile the deployed change before release")
 
 
