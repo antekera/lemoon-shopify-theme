@@ -258,6 +258,17 @@ class IncrementalDeploymentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "conflict"):
                 deploy_shopify.verify_remote("sections/header.json", old, new, remote)
 
+    def test_partial_json_update_accepts_matching_added_and_removed_values(self):
+        old = b'{"a":0,"removed":{"label":"Old block"}}'
+        new = b'{"a":1,"added":{"label":"Added block"}}'
+        partial = b'{"a":0,"removed":{"label":"Old block"},"added":{"label":"Added block"}}'
+        deploy_shopify.verify_remote("sections/header.json", old, new, partial)
+        for remote in (b'{"a":0,"removed":{"label":"Other"},"added":{"label":"Added block"}}',
+                       b'{"a":0,"removed":{"label":"Old block"},"added":{"label":"Other"}}',
+                       b'{"a":0,"removed":{"label":"Old block"},"added":{"label":"Added block"},"extra":1}'):
+            with self.assertRaisesRegex(ValueError, "conflict"):
+                deploy_shopify.verify_remote("sections/header.json", old, new, remote)
+
     def test_reviewed_history_contains_only_versions_on_the_release_path(self):
         baseline, target = "a" * 40, "c" * 40
         intermediate = "b" * 40

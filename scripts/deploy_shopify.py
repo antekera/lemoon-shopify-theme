@@ -227,16 +227,22 @@ def is_partial_json_update(baseline, target, remote):
     """Accept only unchanged or already-applied target values; arrays stay atomic."""
     missing = object()
 
+    def same_value(left, right):
+        return json.dumps(left, sort_keys=True, separators=(',', ':')) == json.dumps(
+            right, sort_keys=True, separators=(',', ':'))
+
     def matches(old, new, actual):
-        if old is missing or new is missing or actual is missing:
-            return actual is old or actual is new
+        if actual is missing:
+            return old is missing or new is missing
+        if old is missing:
+            return same_value(actual, new)
+        if new is missing:
+            return same_value(actual, old)
         if isinstance(old, dict) and isinstance(new, dict) and isinstance(actual, dict):
             return all(matches(old.get(k, missing), new.get(k, missing), actual.get(k, missing))
                        for k in old.keys() | new.keys() | actual.keys())
         # JSON canonicalization distinguishes booleans from numbers.
-        return (json.dumps(actual, sort_keys=True, separators=(',', ':')) in
-                (json.dumps(old, sort_keys=True, separators=(',', ':')),
-                 json.dumps(new, sort_keys=True, separators=(',', ':'))))
+        return same_value(actual, old) or same_value(actual, new)
 
     try:
         return matches(*(json.loads(canonical_json(value)) for value in (baseline, target, remote)))
