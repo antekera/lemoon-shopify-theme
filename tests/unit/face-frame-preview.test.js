@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { facePreviewDestination } from '../../assets/lemoon-face-frame-preview.js';
 import { faceGuideSection, faceGuideShapes, renderFaceGuide, shapeParam } from '../helpers/face-guide-renderer.mjs';
 
-const origin = 'https://fixture.test/pages/elegir-lentes-segun-tu-rostro';
+const origin = 'https://fixture.test/pages/elegir-anteojos-segun-tu-rostro';
 const suggested = ['rectangular', 'redondo'];
 const href = `/collections/all?${shapeParam}=rectangular&${shapeParam}=redondo`;
 

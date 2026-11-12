@@ -79,6 +79,161 @@ for (const kind of ['generic', 'cart', 'facets', 'pickup', 'pdp']) for (const [w
     expect(errors).toEqual([]); expect(mutations).toEqual([]);
   });
 }
+test('PLP hides seven facet groups, retains URL filters and aligns the mobile close control', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp&filter.v.m.custom.style_filter_presence=compact');
+  const drawer = page.locator('menu-drawer');
+  await expect(drawer.locator('[data-facet-accordion]')).toHaveCount(7);
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  for (const group of await drawer.locator('[data-facet-accordion]').all()) await expect(group).toHaveJSProperty('open', true);
+  const panel = drawer.locator('.mobile-facets__inner');
+  await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().top))).toBe(32);
+  const heading = await panel.locator('.mobile-facets__heading:visible').boundingBox();
+  const close = await drawer.locator('.mobile-facets__close').boundingBox();
+  expect(Math.abs((heading.y + heading.height / 2) - (close.y + close.height / 2))).toBeLessThanOrEqual(2);
+  await expect(drawer.locator('.mobile-facets__close')).toBeInViewport();
+  const params = await page.locator('#FacetFiltersFormMobile').evaluate(form => new URLSearchParams(form.closest('facet-filters-form').createSearchParams(form)).getAll('filter.v.m.custom.style_filter_presence'));
+  expect(params).toEqual(['compact']);
+  await drawer.locator('[data-facet-accordion] > summary').first().click();
+  await expect(drawer.locator('[data-facet-accordion]').first()).toHaveJSProperty('open', false);
+  await drawer.locator('.mobile-facets__close').click();
+  await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  for (const group of await drawer.locator('[data-facet-accordion]').all()) {
+    await expect(group).toHaveJSProperty('open', true);
+    await expect(group.locator('summary')).toHaveAttribute('aria-expanded', 'true');
+  }
+});
+test('PLP mobile reset is enabled when the server renders an active filter', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const reset = page.locator('[data-clear-filters]');
+  await expect(reset).toHaveAttribute('href', /sort_by=manual/);
+  await expect(reset).not.toHaveAttribute('aria-disabled');
+});
+test('PLP keeps mobile filter options when an AJAX response is the password page', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let sectionRequests = 0;
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    sectionRequests++;
+    await route.fulfill({ status: 200, contentType: 'text/html', body: '<html><body><form action="/password"><input type="password"></form></body></html>' });
+  });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  await page.locator('details.mobile-facets__disclosure > summary').click();
+  const groups = page.locator('#FacetFiltersFormMobile [data-facet-accordion]');
+  await expect(groups).toHaveCount(7);
+  const option = page.locator('#FacetFiltersFormMobile input[type="checkbox"]').nth(1);
+  await option.check();
+  await expect.poll(() => sectionRequests).toBe(1);
+  await expect(page.locator('#ProductGridContainer .collection')).not.toHaveClass(/loading/);
+  await expect(groups).toHaveCount(7);
+  await expect(groups.first().locator('input[type="checkbox"]')).toHaveCount(3);
+  await expect(option).not.toBeChecked();
+  await expect(page).toHaveURL(/kind=facets-plp$/);
+});
+test('PLP sample filter updates the drawer without losing options', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  await page.locator('details.mobile-facets__disclosure > summary').click();
+  const groups = page.locator('#FacetFiltersFormMobile [data-facet-accordion]');
+  await expect(groups).toHaveCount(7);
+  const option = groups.first().locator('input[type="checkbox"]').nth(1);
+  await option.check();
+  await expect(page).toHaveURL(/filter\.p\.m\.custom\.frame_shape=/);
+  await expect(page.locator('#ProductGridContainer .collection')).not.toHaveClass(/loading/);
+  await expect(groups).toHaveCount(7);
+  await expect(option).toBeChecked();
+  await expect(page.locator('#ProductCount')).toHaveAttribute('data-product-count', '8');
+});
+test('PLP sample reset returns to the unfiltered fixture', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  await page.locator('details.mobile-facets__disclosure > summary').click();
+  await page.locator('[data-clear-filters]').click();
+  await expect(page).toHaveURL(/shared-drawers\.html\?sort_by=manual$/);
+  await expect(page.locator('[data-facet-accordion]')).toHaveCount(7);
+  await expect(page.locator('#FacetFiltersFormMobile input[type="checkbox"]:checked')).toHaveCount(0);
+});
+test('PLP retains option groups omitted by a filtered section response', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    const html = await page.evaluate(() => {
+      const copy = document.documentElement.cloneNode(true);
+      copy.querySelectorAll('#FacetFiltersFormMobile [data-facet-accordion]').forEach((group, index) => {
+        if (index > 0) group.remove();
+      });
+      return copy.outerHTML;
+    });
+    await route.fulfill({ status: 200, contentType: 'text/html', body: html });
+  });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  await page.locator('details.mobile-facets__disclosure > summary').click();
+  const groups = page.locator('#FacetFiltersFormMobile [data-facet-accordion]');
+  await expect(groups).toHaveCount(7);
+  await groups.first().locator('input[type="checkbox"]').nth(1).check();
+  await expect(page.locator('#ProductGridContainer .collection')).not.toHaveClass(/loading/);
+  await expect(groups).toHaveCount(7);
+  for (const group of await groups.all()) await expect(group).toHaveJSProperty('open', true);
+});
+test('PLP clears a preserved price group after the price parameter is removed', async ({ page }) => {
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp&filter.v.price.gte=1000');
+  await page.evaluate(() => {
+    const group = document.createElement('details');
+    group.id = 'Details-Mobile-filter.v.price-shared-facets';
+    group.className = 'mobile-facets__details js-filter';
+    group.dataset.facetAccordion = '';
+    group.innerHTML = '<summary>Precio</summary><div class="lemoon-plp-accordion-content"><price-range data-price-slider data-currency="CLP"><output data-price-output="min"></output><output data-price-output="max"></output><div class="lemoon-price-slider__track"><input data-price-handle="min" type="range" min="0" max="5000" value="1000"><input data-price-handle="max" type="range" min="0" max="5000" value="5000"></div><input data-price-param="min" name="filter.v.price.gte" value="1000"><input data-price-param="max" name="filter.v.price.lte" value=""></price-range></div>';
+    document.querySelector('#FacetFiltersFormMobile .mobile-facets__main').append(group);
+  });
+  await page.evaluate(() => new Promise((resolve) => {
+    document.addEventListener('lemoon:facets-updated', resolve, { once: true });
+    FacetFiltersForm.renderPage('sort_by=manual', null, false);
+  }));
+  const price = page.locator('#Details-Mobile-filter\\.v\\.price-shared-facets');
+  await expect(price.locator('[data-price-param="min"]')).toHaveValue('');
+  await expect(price.locator('[data-price-handle="min"]')).toHaveValue('0');
+});
+test('PLP close control travels with the mobile filter sheet while it closes', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const drawer = page.locator('menu-drawer');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  const panel = drawer.locator('.mobile-facets__inner');
+  await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().top))).toBe(32);
+
+  const samples = await drawer.evaluate(async element => {
+    const close = element.querySelector('.mobile-facets__close');
+    const sheet = element.querySelector('.mobile-facets__inner');
+    const offset = close.getBoundingClientRect().top - sheet.getBoundingClientRect().top;
+    close.click();
+    const readings = [];
+    for (const delay of [80, 80, 80]) {
+      await new Promise(resolve => setTimeout(resolve, delay));
+      readings.push({
+        sheetTop: sheet.getBoundingClientRect().top,
+        closeTop: close.getBoundingClientRect().top,
+        visible: getComputedStyle(close).display !== 'none',
+      });
+    }
+    return { offset, readings };
+  });
+
+  expect(samples.readings.at(-1).sheetTop).toBeGreaterThan(samples.readings[0].sheetTop + 150);
+  for (const reading of samples.readings) {
+    expect(reading.visible).toBe(true);
+    expect(Math.abs(reading.closeTop - reading.sheetTop - samples.offset)).toBeLessThanOrEqual(2);
+  }
+  await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
+});
+test('PLP close control respects reduced motion with the filter sheet', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const drawer = page.locator('menu-drawer');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  await expect(drawer.locator('.mobile-facets__close')).toHaveCSS('transition-duration', '0s');
+  await expect(drawer.locator('.mobile-facets__inner')).toHaveCSS('transition-duration', '0s');
+});
 for (const width of [390, 749]) {
   test(`nav: ${width}px native header toolbar, back, close, overlay and focus`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 844 }); const { panel, opener } = await openSurface(page, 'nav');

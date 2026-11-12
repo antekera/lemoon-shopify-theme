@@ -198,7 +198,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
   it.each(['missing', 'empty', 'throw', 'reject'])('fails closed if the Custom Pixel privacy observer is %s', async privacyMode => {
     const p = pixel({ analyticsProcessingAllowed: true }, { privacyMode });
     await Promise.resolve();
-    p.subscriptions.get('page_viewed')?.({ context: { document: { location: { pathname: '/pages/elegir-lentes-segun-tu-rostro' } } } });
+    p.subscriptions.get('page_viewed')?.({ context: { document: { location: { pathname: '/pages/elegir-anteojos-segun-tu-rostro' } } } });
     p.subscriptions.get('lemoon:face_guide_click')?.({ customData: validClick() });
     expect(p.analyticsEvents()).toEqual([]);
     expect(p.document.head.appendChild).not.toHaveBeenCalled();
@@ -206,10 +206,10 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
   });
 
   it.each([
-    '/pages/elegir-lentes-segun-tu-rostro',
-    '/pages/elegir-lentes-segun-tu-rostro/',
-    '/en/pages/elegir-lentes-segun-tu-rostro',
-    '/es-cl/pages/elegir-lentes-segun-tu-rostro/',
+    '/pages/elegir-anteojos-segun-tu-rostro',
+    '/pages/elegir-anteojos-segun-tu-rostro/',
+    '/en/pages/elegir-anteojos-segun-tu-rostro',
+    '/es-cl/pages/elegir-anteojos-segun-tu-rostro/',
   ])('prepares the SDK on the permitted guide page before an outbound click, without forwarding page_viewed: %s', pathname => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.page({ pathname });
@@ -222,7 +222,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
     expect(p.document.head.appendChild).toHaveBeenCalledTimes(1);
   });
 
-  it.each([undefined, '/', '/collections/all', '/pages/nosotros', '/pages/elegir-lentes-segun-tu-rostro/extra'])('does not initialize a vendor or forward standard events outside the guide: %s', pathname => {
+  it.each([undefined, '/', '/collections/all', '/pages/nosotros', '/pages/elegir-anteojos-segun-tu-rostro/extra'])('does not initialize a vendor or forward standard events outside the guide: %s', pathname => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.page({ pathname });
     p.consent({ analyticsProcessingAllowed: true });
@@ -232,7 +232,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
 
   it('waits for effective consent on the guide, warms up on a later grant and never turns page or denied-click events into GA4 events', () => {
     const p = pixel({ analyticsProcessingAllowed: false });
-    p.page({ pathname: '/pages/elegir-lentes-segun-tu-rostro' });
+    p.page({ pathname: '/pages/elegir-anteojos-segun-tu-rostro' });
     p.fire();
     expect(p.commands()).toEqual([]);
     p.consent({ analyticsProcessingAllowed: true });
@@ -250,7 +250,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
 
   it('does not warm up after leaving the guide while consent was unknown', () => {
     const p = pixel(undefined);
-    p.page({ pathname: '/pages/elegir-lentes-segun-tu-rostro' });
+    p.page({ pathname: '/pages/elegir-anteojos-segun-tu-rostro' });
     p.page({ pathname: '/collections/all' });
     p.consent({ analyticsProcessingAllowed: true });
     expect(p.commands()).toEqual([]);
@@ -260,11 +260,11 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
   it('reads only pathname for page scoping and uses a fixed public page URL in the GA4 config', () => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.page({
-      pathname: '/pages/elegir-lentes-segun-tu-rostro',
+      pathname: '/pages/elegir-anteojos-segun-tu-rostro',
       get href() { throw new Error('Do not read personal query values'); },
       get search() { throw new Error('Do not read personal query values'); },
     });
-    expect(p.commands().find(([command]) => command === 'config')[2]).toMatchObject({ page_location: 'https://lemoon.cl/pages/elegir-lentes-segun-tu-rostro', page_referrer: '' });
+    expect(p.commands().find(([command]) => command === 'config')[2]).toMatchObject({ page_location: 'https://lemoon.cl/pages/elegir-anteojos-segun-tu-rostro', page_referrer: '' });
     expect(p.analyticsEvents()).toEqual([]);
   });
 
@@ -288,7 +288,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
     expect(commands[0]).toEqual(['consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' }]);
     expect(commands.find(([command]) => command === 'config')).toEqual(['config', 'G-QD3MYEBH5F', {
       send_page_view: false, allow_google_signals: false, allow_ad_personalization_signals: false,
-      page_location: 'https://lemoon.cl/pages/elegir-lentes-segun-tu-rostro', page_referrer: '',
+      page_location: 'https://lemoon.cl/pages/elegir-anteojos-segun-tu-rostro', page_referrer: '',
     }]);
     expect(p.analyticsEvents()).toEqual([['event', 'face_guide_click', {
       guide_id: 'face_shape', action: 'family_catalogue', link_position: 'family', destination: 'filtered_catalogue', face_family: 'long', selected_shapes: 'aviator|round', send_to: 'G-QD3MYEBH5F',
@@ -342,7 +342,7 @@ describe('GA4 custom-pixel receiver for face-guide clicks', () => {
   it('contains a blocked vendor SDK failure without throwing into the event publisher', () => {
     const p = pixel({ analyticsProcessingAllowed: true });
     p.document.createElement.mockImplementation(() => { throw new Error('blocked SDK'); });
-    expect(() => p.page({ pathname: '/pages/elegir-lentes-segun-tu-rostro' })).not.toThrow();
+    expect(() => p.page({ pathname: '/pages/elegir-anteojos-segun-tu-rostro' })).not.toThrow();
     expect(() => p.fire()).not.toThrow();
     expect(p.analyticsEvents()).toHaveLength(0);
   });

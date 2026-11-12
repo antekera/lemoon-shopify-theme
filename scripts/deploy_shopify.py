@@ -223,8 +223,38 @@ def read_optional(directory, filename):
     return path.read_bytes() if path.is_file() else None
 
 
+def is_partial_json_update(baseline, target, remote):
+    """Accept only unchanged or already-applied target values; arrays stay atomic."""
+    missing = object()
+
+    def same_value(left, right):
+        return json.dumps(left, sort_keys=True, separators=(',', ':')) == json.dumps(
+            right, sort_keys=True, separators=(',', ':'))
+
+    def matches(old, new, actual):
+        if actual is missing:
+            return old is missing or new is missing
+        if old is missing:
+            return same_value(actual, new)
+        if new is missing:
+            return same_value(actual, old)
+        if isinstance(old, dict) and isinstance(new, dict) and isinstance(actual, dict):
+            return all(matches(old.get(k, missing), new.get(k, missing), actual.get(k, missing))
+                       for k in old.keys() | new.keys() | actual.keys())
+        # JSON canonicalization distinguishes booleans from numbers.
+        return same_value(actual, old) or same_value(actual, new)
+
+    try:
+        return matches(*(json.loads(canonical_json(value)) for value in (baseline, target, remote)))
+    except (ValueError, UnicodeError, TypeError):
+        return False
+
+
 def verify_remote(filename, baseline, target, remote, attempted=()):
     if not any(same_content(filename, remote, known) for known in (baseline, target, *attempted)):
+        if (filename.endswith('.json') and all(v is not None for v in (baseline, target, remote))
+                and is_partial_json_update(baseline, target, remote)):
+            return
         raise ValueError(f"Production conflict in {filename}; reconcile the deployed change before release")
 
 
@@ -234,6 +264,14 @@ def verify_candidates(directory, files, old, desired, attempts):
         target = git_bytes(["cat-file", "blob", desired[filename]])
         attempted = [git_bytes(["cat-file", "blob", tree[filename]]) for tree in attempts if filename in tree]
         verify_remote(filename, baseline, target, read_optional(directory, filename), attempted)
+
+
+def reviewed_history(baseline, target):
+    """Read exact theme-file versions from commits between verified releases."""
+    revisions = git_bytes(["rev-list", "--ancestry-path", f"{baseline}..{target}"]).decode().splitlines()
+    if not all(re.fullmatch(r"[0-9a-f]{40}", revision) for revision in revisions):
+        raise ValueError("Reviewed release history is invalid")
+    return [snapshot(revision) for revision in revisions if revision != target]
 
 
 def release_plan(old, new, attempts):
@@ -298,18 +336,19 @@ def main():
                 git_bytes(["merge-base", "--is-ancestor", revision, target])
             old, new = snapshot(baseline), snapshot(target)
             attempts = [snapshot(revision) for revision in pending]
+            reviewed = reviewed_history(baseline, target)
             files, desired = release_plan(old, new, attempts)
             deleted = sorted(set(old) - set(new))
             if deleted:
                 print(f"Preserving {len(deleted)} removed source files remotely; no deletions performed")
             if files:
                 pull(store, theme["id"], before, files)
-                verify_candidates(before, files, old, desired, attempts)
+                verify_candidates(before, files, old, desired, [*attempts, *reviewed])
             # Fresh directories ensure missing remote files cannot be masked by an older pull.
             pull(store, theme["id"], recheck, [SETTINGS, MARKER, *files])
             if digest(recheck / SETTINGS) != settings or read_optional(recheck, MARKER) != marker_content:
                 raise ValueError("Production configuration or release marker changed during preflight")
-            verify_candidates(recheck, files, old, desired, attempts)
+            verify_candidates(recheck, files, old, desired, [*attempts, *reviewed])
             assert_current_main()
             select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
             if files:
@@ -325,7 +364,7 @@ def main():
                 marker_content = read_optional(intent, MARKER)
                 if marker_content is None or parse_state(marker_content) != intent_state or digest(intent / SETTINGS) != settings:
                     raise ValueError("Deployment intent or preserved settings failed readback; no payload uploaded")
-                verify_candidates(intent, files, old, desired, attempts)
+                verify_candidates(intent, files, old, desired, [*attempts, *reviewed])
                 assert_current_main()
                 select_live_theme(json.loads(run(["shopify", "theme", "list", "--store", store, "--json"])), expected_id)
                 payload = Path(tmp) / "payload"

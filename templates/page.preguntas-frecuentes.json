@@ -21,7 +21,7 @@
           "settings": {
             "group": "choosing",
             "question": "¿Cómo elijo unos anteojos que me queden bien?",
-            "answer": "<p>Revisa las medidas, la forma y las características de cada modelo. Si tienes unos anteojos cómodos, puedes comparar sus medidas con las de la ficha. Nuestra <a href=\"/pages/elegir-lentes-segun-tu-rostro\">guía para elegir según tu rostro</a> puede ayudarte a empezar.</p>"
+            "answer": "<p>Revisa las medidas, la forma y las características de cada modelo. Si tienes unos anteojos cómodos, puedes comparar sus medidas con las de la ficha. Nuestra <a href=\"/pages/elegir-anteojos-segun-tu-rostro\">guía para elegir según tu rostro</a> puede ayudarte a empezar.</p>"
           }
         },
         "faq_02": {
@@ -29,7 +29,7 @@
           "settings": {
             "group": "choosing",
             "question": "¿Cómo puedo comparar las medidas de un armazón?",
-            "answer": "<p>Puedes usar un par que ya tengas como referencia y revisar el ancho de los cristales, el puente y las patillas. En <a href=\"/pages/como-medir-tus-lentes\">Cómo medir tus lentes</a> encontrarás una orientación para identificar esas medidas.</p>"
+            "answer": "<p>Puedes usar un par que ya tengas como referencia y revisar el ancho de los cristales, el puente y las patillas. En <a href=\"/pages/como-medir-tus-anteojos\">Cómo medir tus anteojos</a> encontrarás una orientación para identificar esas medidas.</p>"
           }
         },
         "faq_03": {

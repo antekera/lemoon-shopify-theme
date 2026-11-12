@@ -8,7 +8,7 @@ test('private draft renders its real article, reading time, guide and catalogue 
   await expect(page.locator('#MainContent')).toContainText('Por Lemoon');
   await expect(page.locator('#MainContent')).toContainText('min de lectura');
   await expect(page.locator('#MainContent h2')).toHaveCount(7);
-  await expect(page.locator('#MainContent a[href="/pages/como-medir-tus-lentes"]')).toBeVisible();
+  await expect(page.locator('#MainContent a[href="/pages/como-medir-tus-anteojos"]')).toBeVisible();
   await expect(page.locator('#MainContent a[href="/collections/all"]').last()).toBeVisible();
   await expect(page.locator('#MainContent a[href="/blogs/news"]').last()).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

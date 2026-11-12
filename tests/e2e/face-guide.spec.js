@@ -13,7 +13,7 @@ for (const width of [390, 820, 1440]) {
     const page = await context.newPage();
     try {
       await page.goto(new URL(route, baseURL).href);
-      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Elegir lentes según tu rostro');
+      await expect(page.getByRole('heading', { level: 1 })).toHaveText('Elegir anteojos según tu rostro');
       await expect(page.getByRole('article')).toHaveCount(6);
       await expect(page.getByRole('tab')).toHaveCount(0);
       for (const thumbnail of await page.getByRole('navigation').locator('img').all()) {
@@ -163,7 +163,7 @@ test('merchant overrides render as inert text and a replaceable image without hi
 test('localized links retain the language prefix for catalogue, measurements and quiz', async ({ page }) => {
   await page.goto(`${route}?scenario=localized`);
   for (const article of await page.getByRole('article').all()) await expect(article.locator('.lemoon-face-guide__cta')).toHaveAttribute('href', /^\/en\/collections\/all\?/);
-  await expect(page.getByRole('link', { name: 'See how to measure my glasses' })).toHaveAttribute('href', '/en/pages/como-medir-tus-lentes');
+  await expect(page.getByRole('link', { name: 'See how to measure my glasses' })).toHaveAttribute('href', '/en/pages/como-medir-tus-anteojos');
   await expect(page.getByRole('link', { name: 'Discover your style' }).first()).toHaveAttribute('href', '/en/pages/descubre-tu-estilo');
 });
 

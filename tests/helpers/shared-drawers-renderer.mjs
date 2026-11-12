@@ -19,7 +19,10 @@ function engine() {
   return liquid;
 }
 function shell(kind, body, ownerStyles = [], ownerScripts = [], setup = '') {
-  return `<!doctype html><html class="js" lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shared drawers · local fixture</title>${themeFontLinks}${styles(baseFiles)}${styles(ownerStyles)}<style>:root{--font-body-family:var(--lemoon-font-body);--font-heading-family:var(--lemoon-font-heading);--font-body-scale:1;--font-heading-scale:1;--font-body-weight:400;--font-heading-weight:600;--color-background:255,255,255;--color-foreground:11,31,58;--color-shadow:11,31,58;--color-button:11,31,58;--color-button-text:255,255,255;--duration-default:300ms;--duration-short:150ms;--duration-long:500ms;--drawer-border-width:0px;--drawer-border-opacity:0;--drawer-shadow-opacity:0}html{box-sizing:border-box;font-size:62.5%}*,*::before,*::after{box-sizing:inherit}body{margin:0;font-size:1.6rem}main{padding:24px;min-height:180vh}#UnderlayAction{position:fixed;top:0;left:0;width:100%;height:32px;z-index:0;padding:0}.fixture-notice{padding:40px 24px 0}.fixture-controls{display:flex;gap:16px;flex-wrap:wrap}.fixture-long-copy p{margin:16px 0}dialog.lemoon-drawer h2{padding-right:56px}.fixture-generic-close{position:sticky;top:0;float:right;min-width:44px;min-height:44px}</style></head><body data-drawer-fixture="${kind}"><button id="UnderlayAction" type="button">Control subyacente</button><p class="fixture-notice">Fixture local con contenido sintético. Solo apertura/cierre; sin compras ni datos Shopify.</p>${body}${scripts(['constants.js', 'pubsub.js', 'global.js'])}${setup}${scripts(ownerScripts, true)}<script>window.fixtureUnderlayClicks=0;document.getElementById('UnderlayAction').addEventListener('click',()=>window.fixtureUnderlayClicks++);document.addEventListener('submit',event=>event.preventDefault());</script></body></html>`;
+  const notice = kind === 'facets-plp'
+    ? 'Demo local con filtros y resultados de muestra; no usa el catálogo Shopify.'
+    : 'Fixture local con contenido sintético. Solo apertura/cierre; sin compras ni datos Shopify.';
+  return `<!doctype html><html class="js" lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shared drawers · local fixture</title>${themeFontLinks}${styles(baseFiles)}${styles(ownerStyles)}<style>:root{--font-body-family:var(--lemoon-font-body);--font-heading-family:var(--lemoon-font-heading);--font-body-scale:1;--font-heading-scale:1;--font-body-weight:400;--font-heading-weight:600;--color-background:255,255,255;--color-foreground:11,31,58;--color-shadow:11,31,58;--color-button:11,31,58;--color-button-text:255,255,255;--duration-default:300ms;--duration-short:150ms;--duration-long:500ms;--drawer-border-width:0px;--drawer-border-opacity:0;--drawer-shadow-opacity:0}html{box-sizing:border-box;font-size:62.5%}*,*::before,*::after{box-sizing:inherit}body{margin:0;font-size:1.6rem}main{padding:24px;min-height:180vh}#UnderlayAction{position:fixed;top:0;left:0;width:100%;height:32px;z-index:0;padding:0}.fixture-notice{padding:40px 24px 0}.fixture-controls{display:flex;gap:16px;flex-wrap:wrap}.fixture-long-copy p{margin:16px 0}dialog.lemoon-drawer h2{padding-right:56px}.fixture-generic-close{position:sticky;top:0;float:right;min-width:44px;min-height:44px}</style></head><body data-drawer-fixture="${kind}"><button id="UnderlayAction" type="button">Control subyacente</button><p class="fixture-notice">${notice}</p>${body}${scripts(['constants.js', 'pubsub.js', 'global.js'])}${setup}${scripts(ownerScripts, true)}<script>window.fixtureUnderlayClicks=0;document.getElementById('UnderlayAction').addEventListener('click',()=>window.fixtureUnderlayClicks++);document.addEventListener('submit',event=>event.preventDefault());</script></body></html>`;
 }
 function genericFixture() {
   const body = `<main><button id="OpenGeneric" type="button">Abrir drawer genérico</button><dialog class="lemoon-drawer" aria-labelledby="GenericTitle"><button class="fixture-generic-close" type="button" id="CloseGeneric" aria-label="Cerrar drawer genérico">×</button><h2 id="GenericTitle">Drawer genérico</h2><div class="fixture-long-copy">${Array.from({ length: 18 }, (_, index) => `<p>Contenido de referencia ${index + 1} para comprobar lectura, reflow y scroll interno.</p>`).join('')}</div><a href="#generic-end">Ayuda del drawer</a></dialog></main>`;
@@ -29,7 +32,7 @@ function genericFixture() {
 function navFixture() {
   const liquid = engine();
   const blocks = [
-    { type: 'drawer_primary', settings: { title: 'Lentes ópticos', link: '/collections/opticos', slot: 'opticos', has_submenu: true, icon: 'none' } },
+    { type: 'drawer_primary', settings: { title: 'Anteojos ópticos', link: '/collections/opticos', slot: 'opticos', has_submenu: true, icon: 'none' } },
     { type: 'drawer_primary', settings: { title: 'Catálogo', link: '/collections/all', slot: 'catalogue', has_submenu: false, icon: 'none' } },
     ...Array.from({ length: 12 }, (_, index) => ({ type: 'drawer_subitem', settings: { title: `Opción de referencia ${index + 1}`, link: `/collections/opticos?fixture=${index + 1}`, parent: 'opticos', group: 'featured', icon: 'none' } })),
     { type: 'drawer_utility', settings: { title: 'Ayuda', link: '/pages/contact', icon: 'none' } },
@@ -49,17 +52,35 @@ function cartFixture(empty) {
   const setup = `<script>window.StandardEvents={createViewEventElement:(Base=HTMLElement)=>class extends Base{connectedCallback(){}dispatchViewEvent(){}}};window.routes={cart_url:'/cart',cart_change_url:'/cart/change',cart_update_url:'/cart/update'};window.cartStrings={};window.quickOrderListStrings={};</script>`;
   return shell(empty ? 'cart-empty' : 'cart', body, ['component-cart.css', 'component-cart-items.css', 'component-cart-drawer.css'], ['cart-drawer.js'], setup);
 }
-function facetsFixture() {
+function facetsFixture(plp = false, query = new URLSearchParams()) {
   const liquid = engine();
-  const filters = Array.from({ length: 7 }, (_, index) => {
-    const param_name = index ? `filter.p.m.custom.fixture_${index}` : 'filter.p.m.custom.frame_shape';
-    const values = ['Rectangular', 'Redondo', 'Ovalado'].map((label, value) => ({ label: `${label} ${index + 1}`, value: label.toLowerCase(), param_name, active: value === 0 && index === 0, count: 5, url_to_remove: '/collections/all', url_to_add: '/collections/all' }));
-    return { type: 'list', label: index ? `Filtro de referencia ${index + 1}` : 'Forma', param_name, operator: 'OR', values, active_values: values.filter(value => value.active), url_to_remove: '/collections/all' };
+  const fixtureURL = (paramName, value) => {
+    if (!plp) return '/collections/all';
+    const params = new URLSearchParams(query);
+    params.delete('kind');
+    params.delete('section_id');
+    params.set('sort_by', 'manual');
+    if (paramName) {
+      const remaining = params.getAll(paramName).filter((item) => value && item !== value);
+      params.delete(paramName);
+      remaining.forEach((item) => params.append(paramName, item));
+    }
+    return `/tests/fixtures/shared-drawers.html?${params}`;
+  };
+  const hiddenParams = ['filter.v.m.custom.style_filter_presence', 'filter.v.m.custom.style_filter_use', 'filter.v.m.custom.style_filter_transparency', 'filter.v.m.custom.style_filter_pattern', 'filter.v.m.custom.style_filter_color', 'filter.p.product_type', 'filter.p.m.custom.prescription_type'];
+  const filterParams = ['filter.p.m.custom.frame_shape', ...Array.from({ length: 6 }, (_, index) => `filter.p.m.custom.fixture_${index + 1}`), ...(plp ? hiddenParams : [])];
+  const filters = filterParams.map((param_name, index) => {
+    const selected = query.getAll(param_name);
+    const values = ['Rectangular', 'Redondo', 'Ovalado'].map((label, value) => ({ label: `${label} ${index + 1}`, value: label.toLowerCase(), param_name, active: selected.includes(label.toLowerCase()) || (query.get('kind') === 'facets-plp' && !selected.length && value === 0 && index === 0), count: 5, url_to_remove: fixtureURL(param_name, label.toLowerCase()), url_to_add: '/collections/all' }));
+    return { type: 'list', label: index ? `Filtro de referencia ${index + 1}` : 'Forma', param_name, operator: 'OR', values, active_values: values.filter(value => value.active), url_to_remove: fixtureURL(param_name) };
   });
-  const results = { id: 1, handle: 'fixture', url: '/collections/all', filters, products_count: 10, all_products_count: 10, sort_by: 'manual', sort_options: [{ value: 'manual', name: 'Destacados' }, { value: 'title-ascending', name: 'Nombre' }] };
+  const selectedCount = filters.reduce((count, filter) => count + filter.active_values.length, 0);
+  const productsCount = Math.max(1, 10 - Math.max(0, selectedCount - 1) * 2);
+  const results = { id: 1, handle: 'fixture', url: plp ? '/tests/fixtures/shared-drawers.html' : '/collections/all', filters, products_count: productsCount, all_products_count: 10, sort_by: 'manual', sort_options: [{ value: 'manual', name: 'Destacados' }, { value: 'title-ascending', name: 'Nombre' }] };
   const content = liquid.renderFileSync('facets', { ...context, results, enable_filtering: true, enable_sorting: false, filter_type: 'drawer', lemoon_plp: true, section: { id: 'shared-facets' }, template: { name: 'collection' } });
-  // MenuDrawer drives this fixture. Facets AJAX/search is intentionally outside the open/close and preserved FormData coverage.
-  return shell('facets', `<main>${content}</main>`, ['component-facets.css', 'lemoon-collection-plp.css']);
+  const activeFilters = plp ? liquid.renderFileSync('lemoon-active-filters', { ...context, collection: { filters, url: results.url }, sort_by: 'manual' }) : '';
+  const sampleGrid = plp ? `<div hidden id="ProductGridContainer"><div class="collection">${activeFilters}<div id="product-grid" data-id="shared-facets"></div></div></div><span hidden id="ProductCount" data-product-count="${productsCount}">${productsCount}</span>` : '';
+  return shell(plp ? 'facets-plp' : 'facets', `<main${plp ? ' class="lemoon-plp"' : ''}>${content}${sampleGrid}</main>`, ['component-facets.css', 'lemoon-collection-plp.css'], plp ? ['facets.js'] : []);
 }
 function pickupFixture() {
   const liquid = engine();
@@ -69,11 +90,12 @@ function pickupFixture() {
   const body = `<main><button id="ShowPickupAvailabilityDrawer" type="button">Abrir retiro</button></main>${drawer}`;
   return shell('pickup', body, ['component-pickup-availability.css'], ['pickup-availability.js'], '<script>document.getElementById("ShowPickupAvailabilityDrawer").addEventListener("click",event=>document.querySelector("pickup-availability-drawer").show(event.currentTarget));</script>');
 }
-export function renderSharedDrawerFixture(kind = 'generic') {
+export function renderSharedDrawerFixture(kind = 'generic', query = new URLSearchParams()) {
   if (kind === 'generic') return genericFixture();
   if (kind === 'nav') return navFixture();
   if (kind === 'cart' || kind === 'cart-empty') return cartFixture(kind === 'cart-empty');
   if (kind === 'facets') return facetsFixture();
+  if (kind === 'facets-plp') return facetsFixture(true, query);
   if (kind === 'pickup') return pickupFixture();
   throw new Error(`Unknown shared drawer kind: ${kind}`);
 }

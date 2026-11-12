@@ -44,7 +44,7 @@
     <summary><span>{{ 'lemoon_size_guide.comparison_title' | t }}</span>{{ 'icon-caret.svg' | inline_asset_content | replace: '<svg ', '<svg aria-hidden="true" focusable="false" ' }}</summary>
     {% render 'lemoon-size-guide-comparison', instance_id: comparison_instance_id, show_heading: false, compact: true, annotated_temple: true, show_rows: false %}
     {%- liquid
-      assign guide_url = routes.root_url | default: '/' | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
+      assign guide_url = routes.root_url | default: '/' | append: '/pages/como-medir-tus-anteojos' | replace: '//', '/'
       if guide_page.url != blank and guide_page.template_suffix == 'guia-medidas' and guide_page.published_at != blank
         assign guide_url = guide_page.url
       endif

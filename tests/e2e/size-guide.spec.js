@@ -101,8 +101,8 @@ for (const shell of ['standard', 'eyewear']) {
       const comparison = dialog.locator('details.lemoon-size-guide__comparison');
       const guideLink = comparison.locator('a');
       const helpText = comparison.getByText('¿Tienes más dudas?', { exact: true });
-      await expect(guideLink).toHaveAttribute('href', '/pages/como-medir-tus-lentes');
-      await expect(guideLink).toHaveText('Cómo medir tus lentes');
+      await expect(guideLink).toHaveAttribute('href', '/pages/como-medir-tus-anteojos');
+      await expect(guideLink).toHaveText('Cómo medir tus anteojos');
       const summary = comparison.locator('summary');
       await expect(comparison).not.toHaveAttribute('open');
       await expect(comparison.locator('.lemoon-size-comparison')).toBeHidden();
@@ -306,7 +306,7 @@ for (const shell of ['standard', 'eyewear']) {
     expect(await page.evaluate(() => window.scrollY)).toBe(documentTop);
     await dialog.locator('summary').press('Enter');
     await expect(dialog.locator('details')).toHaveAttribute('open');
-    const guide = dialog.getByRole('link', { name: 'Cómo medir tus lentes', exact: true });
+    const guide = dialog.getByRole('link', { name: 'Cómo medir tus anteojos', exact: true });
     await guide.focus(); await pressKey(page, 'Tab'); await expect(closeFor(dialog)).toBeFocused();
     await pressKey(page, 'Shift+Tab'); await expect(guide).toBeFocused();
     await closeFor(dialog).click(); await expect(dialog).toBeHidden();
@@ -383,18 +383,18 @@ test('the selected full-guide link navigates from the modal to the canonical loc
   const dialog = await openGuide(page, 'standard', 'long');
   await dialog.locator('summary').press('Enter');
   await expect(dialog.locator('details')).toHaveAttribute('open');
-  const guide = dialog.getByRole('link', { name: 'Cómo medir tus lentes', exact: true });
-  await expect(guide).toHaveAttribute('href', '/pages/como-medir-tus-lentes');
+  const guide = dialog.getByRole('link', { name: 'Cómo medir tus anteojos', exact: true });
+  await expect(guide).toHaveAttribute('href', '/pages/como-medir-tus-anteojos');
   const [response] = await Promise.all([
-    page.waitForResponse(response => new URL(response.url()).pathname === '/pages/como-medir-tus-lentes'),
+    page.waitForResponse(response => new URL(response.url()).pathname === '/pages/como-medir-tus-anteojos'),
     guide.click(),
   ]);
   expect(response.status()).toBe(200);
-  await expect(page).toHaveURL(/\/pages\/como-medir-tus-lentes$/);
-  await expect(page.getByRole('heading', { name: 'Cómo medir tus lentes', level: 1, exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/\/pages\/como-medir-tus-anteojos$/);
+  await expect(page.getByRole('heading', { name: 'Cómo medir tus anteojos', level: 1, exact: true })).toBeVisible();
   await expect(page.locator('.lemoon-guide__steps > li')).toHaveCount(3);
   await expect(page.locator('dialog')).toHaveCount(0);
-  const localized = await request.get('/en/pages/como-medir-tus-lentes');
+  const localized = await request.get('/en/pages/como-medir-tus-anteojos');
   expect(localized.status()).toBe(200);
   expect(await localized.text()).toContain('href="/en/collections/all"');
 });

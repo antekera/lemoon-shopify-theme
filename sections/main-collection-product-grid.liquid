@@ -5,6 +5,7 @@
 {{ 'lemoon-collection-plp.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'lemoon-collection-plp.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'lemoon-plp-analytics.js' | asset_url }}" type="module"></script>
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -48,7 +49,7 @@
     {%- paginate collection.products by section.settings.products_per_page -%}
       {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
       {% assign initial_product_count = collection.products_count | default: 0 %}
-      <div class="lemoon-plp page-width" data-collection-url="{{ collection.url }}"{% if legacy_shape != blank %} data-legacy-shape="{{ legacy_shape | escape }}"{% endif %} data-sort-prefix="{{ 'lemoon.collection.sort_prefix' | t | escape }}" data-default-columns="{{ section.settings.columns_mobile }}" style="--plp-desktop-columns: {{ desktop_columns }}; --plp-mobile-columns: {{ section.settings.columns_mobile }};">
+      <div class="lemoon-plp page-width" data-collection-url="{{ collection.url }}" data-collection-handle="{{ collection.handle | escape }}"{% if legacy_shape != blank %} data-legacy-shape="{{ legacy_shape | escape }}"{% endif %} data-sort-prefix="{{ 'lemoon.collection.sort_prefix' | t | escape }}" data-default-columns="{{ section.settings.columns_mobile }}" style="--plp-desktop-columns: {{ desktop_columns }}; --plp-mobile-columns: {{ section.settings.columns_mobile }};">
         <div class="lemoon-plp-layout facets-vertical{% unless section.settings.enable_filtering and collection.filters != empty %} lemoon-plp-layout--no-filters{% endunless %}">
           {%- if section.settings.enable_filtering -%}
             <aside aria-labelledby="verticalTitle" class="facets-wrapper" id="main-collection-filters" data-id="{{ section.id }}">

@@ -48,7 +48,7 @@
       send_page_view: false,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
-      page_location: 'https://lemoon.cl/pages/elegir-lentes-segun-tu-rostro',
+      page_location: 'https://lemoon.cl/pages/elegir-anteojos-segun-tu-rostro',
       page_referrer: '',
     });
     const script = document.createElement('script');
@@ -78,7 +78,7 @@
   // Prepare the SDK before an outbound click can unload this page. This does
   // not forward page_viewed or emit a GA4 page_view; other pages stay untouched.
   const pageSubscription = analytics.subscribe('page_viewed', event => {
-    onGuidePage = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?pages\/elegir-lentes-segun-tu-rostro\/?$/i.test(event.context?.document?.location?.pathname || '');
+    onGuidePage = /^\/(?:[a-z]{2}(?:-[a-z]{2})?\/)?pages\/elegir-anteojos-segun-tu-rostro\/?$/i.test(event.context?.document?.location?.pathname || '');
     if (!onGuidePage || !allowed()) return;
     try { initializeTag(); } catch { /* Blocked SDK: leave native navigation alone. */ }
   });
