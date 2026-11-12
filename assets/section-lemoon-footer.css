@@ -468,8 +468,15 @@
 }
 
 .lemoon-footer .lemoon-footer__cookie-preferences {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 400 !important;
+  line-height: 1.4;
   text-transform: none !important;
   text-decoration: none !important;
+}
+
+.lemoon-footer .lemoon-footer__cookie-preferences:hover {
+  color: #f7e600 !important;
 }
 
 .lemoon-footer__copyright {

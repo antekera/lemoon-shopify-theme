@@ -1042,7 +1042,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/footer.liquid",
-        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en páginas y políticas; en blog/article el formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado. Newsletter refuerza el borde navy hacia dentro al enfocar, sin contorno exterior; reserva dos líneas para feedback de 12px. Con JavaScript el POST nativo usa un iframe y muestra únicamente el resultado confirmado por el formulario; sin JavaScript conserva la navegación nativa. El control de cookies permanece en el footer con capitalización normal y sin subrayado, no en la ayuda de políticas nativas.",
+        "scope": "Grupo footer y newsletter nativa; contenido real de settings, sin garantías de demo. WhatsApp se muestra como enlace wa.me solo cuando existe un número configurado; sin número se omite. Newsletter omitida en páginas y políticas; en blog/article el formulario usa tarjeta editorial navy, copy localizado y consentimiento requerido desmarcado. Newsletter refuerza el borde navy hacia dentro al enfocar, sin contorno exterior; reserva dos líneas para feedback de 12px. Con JavaScript el POST nativo usa un iframe y muestra únicamente el resultado confirmado por el formulario; sin JavaScript conserva la navegación nativa. El control de cookies permanece en el footer con el color y peso de los enlaces adyacentes, capitalización normal y sin subrayado, no en la ayuda de políticas nativas.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
