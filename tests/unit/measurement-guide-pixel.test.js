@@ -17,7 +17,7 @@ function harness(allowed = true, options = {}) {
   const run = () => runInNewContext(source(), environment);
   run();
   const send = (name = 'view', changes = {}) => {
-    const event = { id: `fixture-${name}`, name: `lemoon:size_guide_${name}`, customData: { guide_type: 'measurements', guide_language: 'es', ...(['step_view', 'step_click'].includes(name) ? { step_number: 2 } : {}), ...(name === 'catalog_click' ? { link_destination: 'catalogue' } : {}) }, context: { document: { location: { href: 'https://lemoon.cl/pages/como-medir-tus-lentes?private=discard#step' }, referrer: 'https://private.invalid/sensitive' } }, ...changes };
+    const event = { id: `fixture-${name}`, name: `lemoon:size_guide_${name}`, customData: { guide_type: 'measurements', guide_language: 'es', ...(['step_view', 'step_click'].includes(name) ? { step_number: 2 } : {}), ...(name === 'catalog_click' ? { link_destination: 'catalogue' } : {}) }, context: { document: { location: { href: 'https://lemoon.cl/pages/como-medir-tus-anteojos?private=discard#step' }, referrer: 'https://private.invalid/sensitive' } }, ...changes };
     subscriptions.get(`lemoon:size_guide_${name}`)?.(event);
     return event;
   };
@@ -51,10 +51,10 @@ test('pixel denies unknown consent, updates consent, drops earlier interactions 
   }
 });
 test('pixel restricts destination to both canonical hosts and guide paths, including trailing slash', () => {
-  for (const host of ['lemoon.cl', 'www.lemoon.cl']) for (const path of ['/pages/como-medir-tus-lentes', '/en/pages/como-medir-tus-lentes/']) {
+  for (const host of ['lemoon.cl', 'www.lemoon.cl']) for (const path of ['/pages/como-medir-tus-anteojos', '/en/pages/como-medir-tus-anteojos/']) {
     const h = harness(); h.send('view', { customData: { guide_type: 'measurements', guide_language: path.startsWith('/en/') ? 'en' : 'es' }, context: { document: { location: { href: `https://${host}${path}` } } } }); expect(h.events()).toHaveLength(1);
   }
-  for (const href of ['http://lemoon.cl/pages/como-medir-tus-lentes', 'https://evil.lemoon.cl/pages/como-medir-tus-lentes', 'https://lemoon-8277.myshopify.com/pages/como-medir-tus-lentes', 'https://localhost/pages/como-medir-tus-lentes', 'https://lemoon.cl/products/any', 'https://lemoon.cl/pages/como-medir-tus-lentes?preview_theme_id=1', 'https://lemoon.cl/admin/themes/current/editor']) {
+  for (const href of ['http://lemoon.cl/pages/como-medir-tus-anteojos', 'https://evil.lemoon.cl/pages/como-medir-tus-anteojos', 'https://lemoon-8277.myshopify.com/pages/como-medir-tus-anteojos', 'https://localhost/pages/como-medir-tus-anteojos', 'https://lemoon.cl/products/any', 'https://lemoon.cl/pages/como-medir-tus-anteojos?preview_theme_id=1', 'https://lemoon.cl/admin/themes/current/editor']) {
     const h = harness(); h.send('view', { context: { document: { location: { href } } } }); expect(h.scripts, href).toHaveLength(0); expect(h.events(), href).toHaveLength(0);
   }
 });
@@ -73,7 +73,7 @@ test('pixel rejects malformed events before any Google initialization', () => {
 });
 test('pixel emits only whitelisted payload and preserves valid English steps and catalogue classification', () => {
   const h = harness();
-  h.send('step_click', { context: { document: { location: { href: 'https://lemoon.cl/en/pages/como-medir-tus-lentes' } } }, customData: { guide_type: 'measurements', guide_language: 'en', step_number: 3, email: 'private@example.invalid', page_location: 'https://private.invalid', link_destination: 'untrusted' } });
+  h.send('step_click', { context: { document: { location: { href: 'https://lemoon.cl/en/pages/como-medir-tus-anteojos' } } }, customData: { guide_type: 'measurements', guide_language: 'en', step_number: 3, email: 'private@example.invalid', page_location: 'https://private.invalid', link_destination: 'untrusted' } });
   const payload = h.events()[0][2];
   expect(payload).toEqual(expect.objectContaining({ guide_language: 'en', step_number: 3 }));
   expect(payload).not.toHaveProperty('email'); expect(payload).not.toHaveProperty('link_destination');

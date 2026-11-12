@@ -25,8 +25,8 @@ Las rutas proceden del inventario de Admin y la implementación local. Los templ
 | Perfil/direcciones · datos | `https://cuenta.lemoon.cl/profile`; direcciones dentro de cuenta | Cuenta nueva nativa | [LEM-123](https://linear.app/antekera/issue/LEM-123) |
 | Mis pedidos · historial | `https://cuenta.lemoon.cl/orders` | Cuenta nueva nativa | [LEM-124](https://linear.app/antekera/issue/LEM-124) |
 | Detalle de pedido · líneas/estado | Destino nativo desde pedidos | Cuenta/estado nativo | [LEM-125](https://linear.app/antekera/issue/LEM-125) |
-| Rostro · elegir | `/pages/elegir-lentes-segun-tu-rostro` | `page.guia-rostro.json` | [LEM-103](https://linear.app/antekera/issue/LEM-103) |
-| Medidas · medir | `/pages/como-medir-tus-lentes` | `page.guia-medidas.json` | [LEM-105](https://linear.app/antekera/issue/LEM-105) |
+| Rostro · elegir | `/pages/elegir-anteojos-segun-tu-rostro` | `page.guia-rostro.json` | [LEM-103](https://linear.app/antekera/issue/LEM-103) |
+| Medidas · medir | `/pages/como-medir-tus-anteojos` | `page.guia-medidas.json` | [LEM-105](https://linear.app/antekera/issue/LEM-105) |
 | Probador · explicación | `/pages/como-usar-probador-virtual` | `page.guia-probador.json` | [LEM-104](https://linear.app/antekera/issue/LEM-104) |
 | Enviar receta · texto/video | `/pages/como-enviar-prescripcion` | `page.guia-prescripcion.json` | [LEM-106](https://linear.app/antekera/issue/LEM-106) |
 | Hacer pedido · explicación | `/pages/como-hacer-tu-pedido` | `page.guia-pedido.json` | [LEM-107](https://linear.app/antekera/issue/LEM-107) |

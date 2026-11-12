@@ -60,7 +60,7 @@ test('primary links and buttons use natural case and requested order', async ({ 
   const primary = page.locator('.lemoon-mobile-nav__primary');
   const labels = primary.locator('.lemoon-mobile-nav__primary-button');
   await expect(labels).toHaveCount(5);
-  await expect(labels).toHaveText(['Lentes ópticos', 'Lentes de sol', 'Cristales', 'Accesorios', 'Descubre tu estilo']);
+  await expect(labels).toHaveText(['Anteojos ópticos', 'Anteojos de sol', 'Cristales', 'Accesorios', 'Descubre tu estilo']);
   for (const item of await labels.all()) await expect(item).toHaveCSS('text-transform', 'none');
 });
 

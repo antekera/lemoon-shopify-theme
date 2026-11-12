@@ -1,6 +1,6 @@
 # Analítica de la guía de medidas
 
-Implementación local del08-11-2026 para `/pages/como-medir-tus-lentes` y su versión `/en/`. El usuario pidió eventos Google para esta página. No se instrumentan la PDP ni las otras cuatro guías.
+Implementación local del08-11-2026 para `/pages/como-medir-tus-anteojos` y su versión `/en/`. El usuario pidió eventos Google para esta página. No se instrumentan la PDP ni las otras cuatro guías.
 
 ## Recorrido de datos
 

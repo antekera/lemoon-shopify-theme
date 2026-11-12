@@ -641,19 +641,19 @@
       "catalogue": "Explorar armazones",
       "contact": "Consultar al equipo",
       "measurements": {
-        "title": "Cómo medir tus lentes",
-        "intro": "Parte con unos lentes que te resulten cómodos y una regla marcada en milímetros. Revisa el código de la patilla, toma las medidas que falten y compáralas con las del armazón que estás mirando.",
+        "title": "Cómo medir tus anteojos",
+        "intro": "Parte con unos anteojos que te resulten cómodos y una regla marcada en milímetros. Revisa el código de la patilla, toma las medidas que falten y compáralas con las del armazón que estás mirando.",
         "visual_title": "Tres medidas, en milímetros.",
         "visual_copy": "Ancho del cristal · puente · largo de varilla. El dibujo es una referencia de las partes del armazón, no una escala de talla.",
         "step_1_title": "1. Lee el código de la patilla",
         "step_1_body_html": "<p>Abre las patillas y busca una serie de números en su cara interior. La patilla, también llamada varilla, es la pieza que llega hasta detrás de la oreja. En algunos armazones, tres números indican el ancho del cristal, el puente y el largo de la patilla, en ese orden y en milímetros.</p>",
         "step_2_title": "2. Mide el armazón en milímetros",
-        "step_2_body_html": "<p>Trabaja sobre tus lentes reales y anota cada medida con su nombre. Mira el frente de forma recta y mantén la regla alineada con el tramo que vas a medir; evita tomar la lectura en diagonal.</p><p>En este esquema, el ancho total va de un extremo exterior del frente al otro. No es lo mismo que medir entre bisagras. Comprueba que las cifras que compares usen los mismos extremos y no calcules el ancho total sumando los dos cristales y el puente: los bordes del armazón también ocupan espacio.</p>",
+        "step_2_body_html": "<p>Trabaja sobre tus anteojos reales y anota cada medida con su nombre. Mira el frente de forma recta y mantén la regla alineada con el tramo que vas a medir; evita tomar la lectura en diagonal.</p><p>En este esquema, el ancho total va de un extremo exterior del frente al otro. No es lo mismo que medir entre bisagras. Comprueba que las cifras que compares usen los mismos extremos y no calcules el ancho total sumando los dos cristales y el puente: los bordes del armazón también ocupan espacio.</p>",
         "step_3_title": "3. Compara las medidas en la página del producto",
         "step_3_body_html": "<p>En la ficha del armazón que te interesa, abre la pestaña «Medidas». Ten a mano lo que anotaste y compara una medida a la vez, siempre en la misma unidad.</p><ul><li>Revisa el mismo nombre y los mismos extremos de medición: ancho del cristal con ancho del cristal, ancho total con ancho total.</li><li>Usa solo las cifras disponibles del modelo. Si falta una, no la deduzcas desde la foto, el dibujo o una etiqueta de talla.</li><li>Una talla escrita, como pequeño o mediano, no reemplaza las medidas en milímetros ni permite completar las que faltan.</li></ul>",
-        "step_3_note_html": "<p>Si las medidas no coinciden exactamente con las de tus lentes favoritos, revisa qué parte cambia y cuántos milímetros de diferencia hay. Un frente más ancho ocupa más espacio de lado a lado en tu rostro; un cristal más alto cambia la proporción vertical. Las medidas y la forma del puente y las patillas influyen en cómo se apoya y se sostiene el armazón. Una diferencia pequeña no descarta por sí sola un modelo: compara cada medida y observa las formas en las fotos del producto.</p>",
+        "step_3_note_html": "<p>Si las medidas no coinciden exactamente con las de tus anteojos favoritos, revisa qué parte cambia y cuántos milímetros de diferencia hay. Un frente más ancho ocupa más espacio de lado a lado en tu rostro; un cristal más alto cambia la proporción vertical. Las medidas y la forma del puente y las patillas influyen en cómo se apoya y se sostiene el armazón. Una diferencia pequeña no descarta por sí sola un modelo: compara cada medida y observa las formas en las fotos del producto.</p>",
         "help_title": "¿Te falta una medida?",
-        "help_body_html": "<p>Si una inscripción no se lee, falta un dato en la ficha o no tienes unos lentes para comparar, consulta antes de elegir. Indica el modelo y la medida que necesitas aclarar.</p>"
+        "help_body_html": "<p>Si una inscripción no se lee, falta un dato en la ficha o no tienes unos anteojos para comparar, consulta antes de elegir. Indica el modelo y la medida que necesitas aclarar.</p>"
       },
       "face": {
         "title": "Tu estilo no tiene una sola forma.",
@@ -932,7 +932,7 @@
       "loading_error": "No pudimos preparar tu selección. Puedes volver a intentarlo o explorar el catálogo.",
       "few_intro": "Encontramos pocas coincidencias. Puedes cambiar una preferencia para seguir explorando.",
       "details_note": "Puedes combinar tus preferencias de acabado y material.",
-      "presence_note": "El tamaño describe cómo se ven los lentes. Revisa sus medidas para comparar el ajuste.",
+      "presence_note": "El tamaño describe cómo se ven los anteojos. Revisa sus medidas para comparar el ajuste.",
       "use_note": "El uso orienta el estilo. Los cristales y tratamientos compatibles se eligen después.",
       "price_note": "Precio del marco. Los cristales y tratamientos compatibles se eligen y se suman aparte.",
       "collection_label": "Colección para la guía de estilo",
@@ -940,7 +940,7 @@
       "image_label": "Imagen editorial de entrada",
       "measures": {
         "title": "¿Ya tienes unos que te acomodan?",
-        "intro": "Busca los números en la patilla de tus lentes y completa las tres medidas. Te sugeriremos una proporción que puedes cambiar.",
+        "intro": "Busca los números en la patilla de tus anteojos y completa las tres medidas. Te sugeriremos una proporción que puedes cambiar.",
         "numbers": "50 □ 18 — 140",
         "labels": "Ancho de lente · puente · patilla (mm)",
         "note": "Es una referencia de proporción, no una talla exacta ni una garantía de calce. La patilla sirve para comparar el largo, pero no cambia la sugerencia de tamaño.",
@@ -954,7 +954,7 @@
       "sun_outdoors": "Paseos y viajes",
       "sun_use_note": "Estos planes orientan el estilo. Revisa las características de cada producto en su ficha.",
       "axes": {
-        "category": "Tipo de lentes",
+        "category": "Tipo de anteojos",
         "shape": "Forma",
         "color": "Color",
         "finish": "Acabado",
@@ -997,8 +997,8 @@
       },
       "options": {
         "category": {
-          "optical": "Lentes ópticos",
-          "sun": "Lentes de sol"
+          "optical": "Anteojos ópticos",
+          "sun": "Anteojos de sol"
         },
         "shape": {
           "round": "Redondos",
@@ -1130,7 +1130,7 @@
         "selected": "Forma sobre el rostro:",
         "note": "Ilustración de estilo. No representa el tamaño ni el ajuste de un producto."
       },
-      "title": "Elegir lentes según tu rostro",
+      "title": "Elegir anteojos según tu rostro",
       "intro": "Tu rostro puede darte ideas para elegir un armazón. Compara las ilustraciones y explora las formas que te gusten: son puntos de partida, y tú eliges qué llevar.",
       "index_title": "Explora las formas y selecciona tu tipo de rostro",
       "index_body": "Mírate de frente en un espejo. Observa dónde se ve más ancho tu rostro y si predominan las curvas o los ángulos. Estas seis familias son aproximadas.",
@@ -1146,7 +1146,7 @@
       "temple_body": "No presionan los costados de la cabeza ni detrás de las orejas.",
       "fit_detail": "Cejas: mira cómo se relacionan con el borde superior y qué expresión te gusta; no tienen que seguir una línea idéntica. Ojos: observa su posición dentro de los aros. Esta referencia visual no confirma el centrado de los cristales con receta.",
       "fit_help": "Si el armazón aprieta, se mueve o necesitas ajustarlo, consulta a un profesional de la óptica. La forma del rostro no determina tu talla ni qué cristales necesitas.",
-      "measure_label": "Ver cómo medir mis lentes",
+      "measure_label": "Ver cómo medir mis anteojos",
       "catalogue_label": "Explorar armazones",
       "quiz_label": "Descubre tu estilo",
       "filtered_label": "Ver armazones",
@@ -1378,8 +1378,8 @@
       "reset": "Eliminar filtros",
       "apply_filters": "Aplicar filtros",
       "view_results": {
-        "one": "Ver {{ count }} lente",
-        "other": "Ver {{ count }} lentes"
+        "one": "Ver {{ count }} par de anteojos",
+        "other": "Ver {{ count }} anteojos"
       },
       "filters": "Filtros",
       "showing_results": "Mostrando {{ count }} resultados",
@@ -1395,8 +1395,8 @@
       "seo_description": "Descripción de la categoría",
       "filter_trigger": "Filtrar",
       "products_count": {
-        "one": "{{ count }} lente",
-        "other": "{{ count }} lentes"
+        "one": "{{ count }} par de anteojos",
+        "other": "{{ count }} anteojos"
       },
       "about_category": "Descubre {{ title }}",
       "copy": {
@@ -1622,7 +1622,7 @@
     "front_view": "Vista frontal",
     "side_view": "Vista lateral",
     "diagram_note": "Esquema de referencia, sin escala.",
-    "page_diagram_note": "Los dibujos no están a escala: usa la regla sobre tus lentes, no sobre la pantalla.",
+    "page_diagram_note": "Los dibujos no están a escala: usa la regla sobre tus anteojos, no sobre la pantalla.",
     "product_measurements": "Medidas de este armazón",
     "product_intro": "Compáralas con unos lentes que te resulten cómodos. Revisa la misma medida en ambos armazones.",
     "comparison_title": "Compara con tus lentes",
@@ -1634,7 +1634,7 @@
     "code_temple": "145 mm desde la bisagra hasta el extremo de la patilla.",
     "no_code": "¿No ves el código? Usa una regla en milímetros para comparar tu armazón. El ancho de un cristal y el ancho total son medidas distintas.",
     "comparison_limit": "Las medidas ayudan a comparar. La forma del puente y de las patillas también influye en cómo se sienten dos armazones.",
-    "full_guide": "Cómo medir tus lentes",
+    "full_guide": "Cómo medir tus anteojos",
     "help_link": "Consultar una medida",
     "catalogue": "Ver catálogo",
     "close": "Cerrar guía de medidas",

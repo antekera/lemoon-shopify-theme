@@ -69,7 +69,7 @@
           "type": "drawer_primary",
           "settings": {
             "slot": "opticos",
-            "title": "Lentes ópticos",
+            "title": "Anteojos ópticos",
             "link": "/collections/opticos",
             "icon": "glasses",
             "has_submenu": true
@@ -79,7 +79,7 @@
           "type": "drawer_primary",
           "settings": {
             "slot": "sol",
-            "title": "Lentes de sol",
+            "title": "Anteojos de sol",
             "link": "/collections/lentes-de-sol",
             "icon": "sunglasses",
             "has_submenu": true

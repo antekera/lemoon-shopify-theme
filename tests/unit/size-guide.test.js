@@ -157,7 +157,7 @@ describe('modal measurement validation and page boundaries', () => {
     expect(comparison).toContain('<figcaption class="lemoon-size-comparison__note">');
     expect(comparison).not.toContain('lemoon-size-comparison__rows');
     expect(comparison).toContain('¿Tienes más dudas?');
-    expect(comparison).toContain('href="/pages/como-medir-tus-lentes"');
+    expect(comparison).toContain('href="/pages/como-medir-tus-anteojos"');
     expect(comparison.indexOf('lemoon-size-guide__links')).toBeGreaterThan(comparison.indexOf('lemoon-size-comparison__footer'));
     expect(html.slice(html.indexOf('</details>'))).not.toContain('lemoon-size-guide__links');
   });
@@ -169,12 +169,12 @@ describe('modal measurement validation and page boundaries', () => {
     expect(html).not.toContain('href="/en/pages/contact"');
     expect(html).not.toContain('NEVER EMBED THIS BODY');
     for (const selected of [null, { ...page, url: '' }, { ...page, template_suffix: null }, { ...page, template_suffix: 'contact' }, { ...page, published_at: null }]) {
-      expect(renderPage(selected)).toContain('href="/en/pages/como-medir-tus-lentes"');
+      expect(renderPage(selected)).toContain('href="/en/pages/como-medir-tus-anteojos"');
       expect(renderPage(selected)).not.toContain(`href="${page.url}"`);
     }
-    for (const [root, href] of [['/', '/pages/como-medir-tus-lentes'], ['/en', '/en/pages/como-medir-tus-lentes'], ['/en/', '/en/pages/como-medir-tus-lentes']]) expect(renderPage(null, root)).toContain(`href="${href}"`);
+    for (const [root, href] of [['/', '/pages/como-medir-tus-anteojos'], ['/en', '/en/pages/como-medir-tus-anteojos'], ['/en/', '/en/pages/como-medir-tus-anteojos']]) expect(renderPage(null, root)).toContain(`href="${href}"`);
     const english = renderSizeContent('complete', { ...options, language: 'en', presentation: 'dialog', context: { routes: { root_url: '/en' } } });
-    expect(english).toContain('href="/en/pages/como-medir-tus-lentes"');
+    expect(english).toContain('href="/en/pages/como-medir-tus-anteojos"');
     expect(english).not.toContain('¿Tienes más dudas?');
   });
 });

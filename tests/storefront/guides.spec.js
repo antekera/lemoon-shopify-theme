@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { openStorefrontPage } from '../helpers/storefront-page.mjs';
 const guides = [
-  ['como-medir-tus-lentes','guia-medidas','measurements'],
-  ['elegir-lentes-segun-tu-rostro','guia-rostro','face'],
+  ['como-medir-tus-anteojos','guia-medidas','measurements'],
+  ['elegir-anteojos-segun-tu-rostro','guia-rostro','face'],
   ['como-hacer-tu-pedido','guia-pedido','order'],
   ['como-usar-probador-virtual','guia-probador','try_on'],
   ['como-enviar-prescripcion','guia-prescripcion','prescription'],

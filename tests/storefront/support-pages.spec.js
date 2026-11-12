@@ -14,10 +14,10 @@ test('FAQ groups open and close by keyboard and link to existing guides and poli
   const first = faq.locator('details').first();
   await first.locator('summary').focus(); await first.locator('summary').press('Enter');
   await expect(first).toHaveAttribute('open', '');
-  await expect(first.locator('a')).toHaveAttribute('href','/pages/como-medir-tus-lentes');
+  await expect(first.locator('a')).toHaveAttribute('href','/pages/como-medir-tus-anteojos');
   await first.locator('summary').press('Enter');
   await expect(first).not.toHaveAttribute('open','');
-  for (const href of ['/pages/como-medir-tus-lentes','/pages/como-hacer-tu-pedido','/pages/como-usar-probador-virtual','/pages/como-enviar-prescripcion','/pages/envios-y-entregas','/pages/politicas','/pages/garantias']) {
+  for (const href of ['/pages/como-medir-tus-anteojos','/pages/como-hacer-tu-pedido','/pages/como-usar-probador-virtual','/pages/como-enviar-prescripcion','/pages/envios-y-entregas','/pages/politicas','/pages/garantias']) {
     await expect(faq.locator(`a[href="${href}"]`).first()).toHaveCount(1);
     expect((await storefrontRequest(page).get(href)).status()).toBe(200);
   }

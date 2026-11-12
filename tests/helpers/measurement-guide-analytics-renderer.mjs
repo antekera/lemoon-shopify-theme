@@ -8,7 +8,7 @@ export function renderMeasurementGuideAnalyticsFixture({ consent = 'granted', la
     id: 'measurement-analytics-fixture', language: locale,
     settings: { guide_kind: kind, padding_top: 64, padding_bottom: 64 },
     routes: { root_url: root || '/', all_products_collection_url: `${root}/collections/all` },
-    context: { page: { title: locale === 'en' ? 'How to measure your glasses' : 'Cómo medir tus lentes' }, request: { design_mode: editor, locale: { iso_code: locale } }, localization: { language: { iso_code: locale } } },
+    context: { page: { title: locale === 'en' ? 'How to measure your glasses' : 'Cómo medir tus anteojos' }, request: { design_mode: editor, locale: { iso_code: locale } }, localization: { language: { iso_code: locale } } },
   });
   const mode = JSON.stringify(consent);
   const setup = `<script>

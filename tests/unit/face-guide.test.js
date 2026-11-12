@@ -70,7 +70,7 @@ describe('editable face guide rendered from actual Liquid', () => {
     const html = renderFaceGuide({ root });
     for (const { url } of catalogueLinks(html)) expect(url.pathname).toBe(`${prefix}/collections/all`);
     const pageLinks = links(html).filter(({ url }) => url.pathname.includes('/pages/'));
-    expect(pageLinks.map(({ url }) => url.pathname)).toEqual(expect.arrayContaining([`${prefix}/pages/como-medir-tus-lentes`, `${prefix}/pages/descubre-tu-estilo`]));
+    expect(pageLinks.map(({ url }) => url.pathname)).toEqual(expect.arrayContaining([`${prefix}/pages/como-medir-tus-anteojos`, `${prefix}/pages/descubre-tu-estilo`]));
     for (const { url } of pageLinks) expect(url.pathname).not.toContain('//');
   });
 

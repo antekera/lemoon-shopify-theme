@@ -32,7 +32,7 @@ function genericFixture() {
 function navFixture() {
   const liquid = engine();
   const blocks = [
-    { type: 'drawer_primary', settings: { title: 'Lentes ópticos', link: '/collections/opticos', slot: 'opticos', has_submenu: true, icon: 'none' } },
+    { type: 'drawer_primary', settings: { title: 'Anteojos ópticos', link: '/collections/opticos', slot: 'opticos', has_submenu: true, icon: 'none' } },
     { type: 'drawer_primary', settings: { title: 'Catálogo', link: '/collections/all', slot: 'catalogue', has_submenu: false, icon: 'none' } },
     ...Array.from({ length: 12 }, (_, index) => ({ type: 'drawer_subitem', settings: { title: `Opción de referencia ${index + 1}`, link: `/collections/opticos?fixture=${index + 1}`, parent: 'opticos', group: 'featured', icon: 'none' } })),
     { type: 'drawer_utility', settings: { title: 'Ayuda', link: '/pages/contact', icon: 'none' } },

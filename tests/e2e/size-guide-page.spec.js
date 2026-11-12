@@ -6,7 +6,7 @@ for (const [width, height] of [[390, 844], [820, 1180], [1440, 900]]) {
     const errors = []; page.on('pageerror', error => errors.push(error.message));
     await page.setViewportSize({ width, height });
     await page.goto('/tests/fixtures/size-guide-page.html');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cómo medir tus lentes');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Cómo medir tus anteojos');
     await expect(page.locator('.lemoon-guide__steps > li')).toHaveCount(3);
     await expect(page.locator('.lemoon-guide__hero figure')).toHaveCount(0);
     await expect(page.locator('.lemoon-size-comparison')).toContainText('Ejemplo educativo. No representa las medidas de un producto específico.');
