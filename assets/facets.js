@@ -31,6 +31,10 @@ class FacetFiltersForm extends HTMLElement {
 
   static renderPage(searchParams, event, updateURLHash = true) {
     FacetFiltersForm.searchParamsPrev = searchParams;
+    const requestId = ++FacetFiltersForm.renderRequestId;
+    document.dispatchEvent(new CustomEvent('lemoon:facets-start', {
+      detail: { requestId, userInitiated: updateURLHash },
+    }));
     const sections = FacetFiltersForm.getSections();
     const updateEvent = FacetFiltersForm.startUpdateEvent(searchParams);
     const countContainer = document.getElementById('ProductCount');
@@ -52,8 +56,8 @@ class FacetFiltersForm extends HTMLElement {
       const filterDataUrl = (element) => element.url === url;
 
       FacetFiltersForm.filterData.some(filterDataUrl)
-        ? FacetFiltersForm.renderSectionFromCache(filterDataUrl, event, updateEvent)
-        : FacetFiltersForm.renderSectionFromFetch(url, event, updateEvent);
+        ? FacetFiltersForm.renderSectionFromCache(filterDataUrl, event, updateEvent, requestId)
+        : FacetFiltersForm.renderSectionFromFetch(url, event, updateEvent, requestId);
     });
 
     if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
@@ -111,12 +115,12 @@ class FacetFiltersForm extends HTMLElement {
     };
   }
 
-  static renderSectionFromFetch(url, event, updateEvent) {
+  static renderSectionFromFetch(url, event, updateEvent, requestId) {
     fetch(url)
       .then((response) => response.text())
       .then((html) => {
         FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }];
-        FacetFiltersForm.renderSection(html, event, updateEvent);
+        FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
       })
       .catch((error) => {
         console.error(error);
@@ -124,16 +128,20 @@ class FacetFiltersForm extends HTMLElement {
       });
   }
 
-  static renderSectionFromCache(filterDataUrl, event, updateEvent) {
+  static renderSectionFromCache(filterDataUrl, event, updateEvent, requestId) {
     const html = FacetFiltersForm.filterData.find(filterDataUrl).html;
-    FacetFiltersForm.renderSection(html, event, updateEvent);
+    FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
   }
 
-  static renderSection(html, event, updateEvent) {
+  static renderSection(html, event, updateEvent, requestId) {
+    if (requestId !== FacetFiltersForm.renderRequestId) {
+      updateEvent?.reject(new Error('stale_facets_response'));
+      return;
+    }
     const section = new DOMParser().parseFromString(html, 'text/html');
     FacetFiltersForm.renderFilters(section, event);
     FacetFiltersForm.renderProductGridContainer(section);
-    FacetFiltersForm.renderProductCount(section, updateEvent);
+    FacetFiltersForm.renderProductCount(section, updateEvent, requestId);
     if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(section.documentElement.innerHTML);
   }
 
@@ -151,7 +159,7 @@ class FacetFiltersForm extends HTMLElement {
       });
   }
 
-  static renderProductCount(parsedHtml, updateEvent) {
+  static renderProductCount(parsedHtml, updateEvent, requestId) {
     const sourceCount = parsedHtml.getElementById('ProductCount');
     const count = sourceCount.innerHTML;
     const container = document.getElementById('ProductCount');
@@ -170,7 +178,7 @@ class FacetFiltersForm extends HTMLElement {
     loadingSpinners.forEach((spinner) => spinner.classList.add('hidden'));
 
     updateEvent?.resolve(parseInt(sourceCount.dataset.productCount) || 0);
-    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated', { detail: { requestId } }));
   }
 
   static renderFilters(parsedHTML, event) {
@@ -383,6 +391,7 @@ class FacetFiltersForm extends HTMLElement {
 }
 
 FacetFiltersForm.filterData = [];
+FacetFiltersForm.renderRequestId = 0;
 FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
 customElements.define('facet-filters-form', FacetFiltersForm);

@@ -17,6 +17,19 @@
   {%- endfor -%}
 {%- endcapture -%}
 <span hidden data-plp-has-active-filters="{{ has_active_filters }}"></span>
+{%- for filter in collection.filters -%}
+  {%- for value in filter.active_values -%}
+    <span hidden data-plp-active-option data-filter-param="{{ filter.param_name | escape }}" data-filter-value="{{ value.value | escape }}"></span>
+  {%- endfor -%}
+  {%- if filter.type == 'price_range' -%}
+    {%- if filter.min_value.value != blank -%}
+      <span hidden data-plp-active-option data-filter-param="{{ filter.min_value.param_name | escape }}" data-filter-value="{{ filter.min_value.value | escape }}"></span>
+    {%- endif -%}
+    {%- if filter.max_value.value != blank -%}
+      <span hidden data-plp-active-option data-filter-param="{{ filter.max_value.param_name | escape }}" data-filter-value="{{ filter.max_value.value | escape }}"></span>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
 {% if pills != blank %}
   <div class="lemoon-applied-filters" aria-label="{{ 'lemoon.collection.applied_filters' | t }}">
     {{ pills }}
