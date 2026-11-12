@@ -332,6 +332,15 @@ class FacetFiltersForm extends HTMLElement {
 
   createSearchParams(form) {
     const formData = new FormData(form);
+    if (form.id === 'FacetFiltersForm' || form.id === 'FacetFiltersFormMobile') {
+      const hiddenParams = form.closest('.lemoon-plp')?.querySelector('.facets-container[data-hidden-filter-params]')?.dataset.hiddenFilterParams;
+      if (hiddenParams) {
+        const currentParams = new URLSearchParams(window.location.search);
+        hiddenParams.split(',').forEach((name) => {
+          currentParams.getAll(name).forEach((value) => formData.append(name, value));
+        });
+      }
+    }
     return new URLSearchParams(formData).toString();
   }
 

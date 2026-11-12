@@ -49,17 +49,18 @@ function cartFixture(empty) {
   const setup = `<script>window.StandardEvents={createViewEventElement:(Base=HTMLElement)=>class extends Base{connectedCallback(){}dispatchViewEvent(){}}};window.routes={cart_url:'/cart',cart_change_url:'/cart/change',cart_update_url:'/cart/update'};window.cartStrings={};window.quickOrderListStrings={};</script>`;
   return shell(empty ? 'cart-empty' : 'cart', body, ['component-cart.css', 'component-cart-items.css', 'component-cart-drawer.css'], ['cart-drawer.js'], setup);
 }
-function facetsFixture() {
+function facetsFixture(plp = false) {
   const liquid = engine();
-  const filters = Array.from({ length: 7 }, (_, index) => {
-    const param_name = index ? `filter.p.m.custom.fixture_${index}` : 'filter.p.m.custom.frame_shape';
+  const hiddenParams = ['filter.v.m.custom.style_filter_presence', 'filter.v.m.custom.style_filter_use', 'filter.v.m.custom.style_filter_transparency', 'filter.v.m.custom.style_filter_pattern', 'filter.v.m.custom.style_filter_color', 'filter.p.product_type', 'filter.p.m.custom.prescription_type'];
+  const filterParams = ['filter.p.m.custom.frame_shape', ...Array.from({ length: 6 }, (_, index) => `filter.p.m.custom.fixture_${index + 1}`), ...(plp ? hiddenParams : [])];
+  const filters = filterParams.map((param_name, index) => {
     const values = ['Rectangular', 'Redondo', 'Ovalado'].map((label, value) => ({ label: `${label} ${index + 1}`, value: label.toLowerCase(), param_name, active: value === 0 && index === 0, count: 5, url_to_remove: '/collections/all', url_to_add: '/collections/all' }));
     return { type: 'list', label: index ? `Filtro de referencia ${index + 1}` : 'Forma', param_name, operator: 'OR', values, active_values: values.filter(value => value.active), url_to_remove: '/collections/all' };
   });
   const results = { id: 1, handle: 'fixture', url: '/collections/all', filters, products_count: 10, all_products_count: 10, sort_by: 'manual', sort_options: [{ value: 'manual', name: 'Destacados' }, { value: 'title-ascending', name: 'Nombre' }] };
   const content = liquid.renderFileSync('facets', { ...context, results, enable_filtering: true, enable_sorting: false, filter_type: 'drawer', lemoon_plp: true, section: { id: 'shared-facets' }, template: { name: 'collection' } });
   // MenuDrawer drives this fixture. Facets AJAX/search is intentionally outside the open/close and preserved FormData coverage.
-  return shell('facets', `<main>${content}</main>`, ['component-facets.css', 'lemoon-collection-plp.css']);
+  return shell(plp ? 'facets-plp' : 'facets', `<main${plp ? ' class="lemoon-plp"' : ''}>${content}</main>`, ['component-facets.css', 'lemoon-collection-plp.css'], plp ? ['facets.js'] : []);
 }
 function pickupFixture() {
   const liquid = engine();
@@ -74,6 +75,7 @@ export function renderSharedDrawerFixture(kind = 'generic') {
   if (kind === 'nav') return navFixture();
   if (kind === 'cart' || kind === 'cart-empty') return cartFixture(kind === 'cart-empty');
   if (kind === 'facets') return facetsFixture();
+  if (kind === 'facets-plp') return facetsFixture(true);
   if (kind === 'pickup') return pickupFixture();
   throw new Error(`Unknown shared drawer kind: ${kind}`);
 }

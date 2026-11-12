@@ -520,6 +520,8 @@ El acceso y el diálogo se muestran solo cuando el tipo, una etiqueta explícita
 
 **Contrato actual.** facets: results,enable_filtering,enable_sorting,filter_type,paginate,lemoon_plp. Grupos filter/filter_label/filter_type/lemoon_plp/presentation/visual_layout_class/filter_index (+show_more_number desktop). Chips filters/lemoon_plp; visual filter,value. Param names/URLs Shopify son fuente de verdad.
 
+En la PLP, los controles de presencia visual, uso, transparencia, patrón, familia de color, tipo de lentes y receta se omiten del sidebar y drawer; Search & Discovery conserva esos filtros. Los valores aplicados desde otras entradas siguen en la URL y en los chips removibles al cambiar un filtro visible. Búsqueda mantiene su lista nativa completa.
+
 **Variantes existentes.** Horizontal/vertical/drawer; desktop/mobile; visual color/forma, checkbox y precio; sort select/custom PLP; chip facet-remove; show-more.
 
 **CSS y excepciones.** component-facets y overrides PLP; chip border/radio local; no fijar apariencia de todos los chips como badge.
@@ -527,6 +529,8 @@ El acceso y el diálogo se muestran solo cuando el tipo, una etiqueta explícita
 **Estados observados / aplicabilidad:** Normal: Disponible/contador; Hover: Summary/chip/checkbox; Foco: Retorno tras AJAX al input equivalente o fallback; Seleccionado: checked y active; remove usa url_to_remove; Loading: collection.loading y spinner; Error: Catch fetch sin recuperación visible garantizada: deuda funcional conservada; Disabled: count0 inactivo disabled; activo removible aunque count0.
 
 **Responsive.** Sidebar PLP 264+28 ≥990, 220+24 intermedio; drawer máximo320 bajo990 según CSS local. **Accesibilidad.** Preservar details IDs, legend/labels, URLs, history, aria-controls y foco; no deshabilitar única salida del vacío.
+
+La hoja de filtros PLP bajo 750px alinea la X con el centro del título desde el borde superior real del drawer compartido.
 
 **JS.** facets.js, MenuDrawer global, show-more.js; lemoon-collection-plp.js añade vista/sort. **Reutilización actual.** Snippets grupos/chips reutilizados; lemoon-active-filters es otra composición. No reimplementar motor de filtros.
 

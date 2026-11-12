@@ -24,16 +24,17 @@
   assign default_presentation = 'text'
   assign render_filters = results.filters
   if lemoon_plp
+    assign hidden_filter_params = 'filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type' | split: ','
     assign gender_filters = results.filters | where: 'param_name', 'filter.p.m.custom.gender'
     assign price_filters = results.filters | where: 'type', 'price_range'
     assign render_filters = gender_filters | concat: price_filters
-    assign ordered_params = 'filter.p.m.custom.frame_shape,filter.v.option.color,filter.p.m.custom.prescription_type,filter.p.m.custom.frame_material,filter.p.m.custom.frame_size' | split: ','
+    assign ordered_params = 'filter.p.m.custom.frame_shape,filter.v.option.color,filter.p.m.custom.frame_material,filter.p.m.custom.frame_size' | split: ','
     for filter_param in ordered_params
       assign matching_filters = results.filters | where: 'param_name', filter_param
       assign render_filters = render_filters | concat: matching_filters
     endfor
     for remaining_filter in results.filters
-      unless remaining_filter.param_name == 'filter.p.m.custom.gender' or remaining_filter.type == 'price_range' or remaining_filter.param_name == 'filter.v.availability' or ordered_params contains remaining_filter.param_name
+      unless remaining_filter.param_name == 'filter.p.m.custom.gender' or remaining_filter.type == 'price_range' or remaining_filter.param_name == 'filter.v.availability' or ordered_params contains remaining_filter.param_name or hidden_filter_params contains remaining_filter.param_name
         assign remaining_filters = results.filters | where: 'param_name', remaining_filter.param_name
         assign render_filters = render_filters | concat: remaining_filters
       endunless
@@ -55,6 +56,7 @@
   data-collection-id="{{ results.id }}"
   data-collection-handle="{{ results.handle }}"
   data-template="{{ template.name }}"
+  {% if lemoon_plp %}data-hidden-filter-params="{{ hidden_filter_params | join: ',' }}"{% endif %}
 >
   {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
     <facet-filters-form class="facets small-hide">

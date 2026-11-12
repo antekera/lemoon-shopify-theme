@@ -739,6 +739,7 @@
 .lemoon-plp-mobile-results { display: none; }
 .lemoon-filter-count[hidden] { display: none; }
 @media (max-width: 749px) {
+  .lemoon-plp .mobile-facets__close { top: calc(var(--lemoon-drawer-mobile-gap) + 14px); }
   .lemoon-plp-toolbar { grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; padding: 6px 12px; }
   .lemoon-plp-toolbar__leading { display: none; }
   .lemoon-plp-toolbar .lemoon-plp-sort { grid-column: 1; grid-row: 1; justify-self: start; min-width: 0; }
