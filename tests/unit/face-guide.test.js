@@ -8,6 +8,19 @@ const links = html => [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)
 const catalogueLinks = html => links(html).filter(({ url, markup }) => url.pathname.endsWith('/collections/all') && /class="[^"]*lemoon-face-guide__cta/.test(markup));
 
 describe('editable face guide rendered from actual Liquid', () => {
+  it('labels only the two suggested shapes in each family', () => {
+    for (const article of articles(renderFaceGuide())) {
+      const choices = [...article.matchAll(/<button\b[^>]*class="lemoon-face-guide__choice"[^>]*>[\s\S]*?<\/button>/g)].map(([choice]) => choice);
+      expect(choices.length).toBeGreaterThanOrEqual(2);
+      expect(choices.filter(choice => choice.includes('data-face-frame-suggested'))).toHaveLength(2);
+      for (const choice of choices) {
+        const badge = choice.match(/<span class="lemoon-face-guide__choice-tag[^>]*>([^<]*)<\/span>/);
+        expect(badge).not.toBeNull();
+        expect(badge[1].trim()).toBe(choice.includes('data-face-frame-suggested') ? 'Sugerida' : '');
+      }
+    }
+  });
+
   it('renders six complete families, unique navigable anchors and one page heading', () => {
     const html = renderFaceGuide();
     expect(html.match(/<h1\b/g)).toHaveLength(1);

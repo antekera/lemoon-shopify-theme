@@ -467,6 +467,11 @@
   text-decoration: none;
 }
 
+.lemoon-footer .lemoon-footer__cookie-preferences {
+  text-transform: none !important;
+  text-decoration: none !important;
+}
+
 .lemoon-footer__copyright {
   flex: 0 0 auto;
   order: 0;

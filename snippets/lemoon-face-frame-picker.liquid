@@ -59,7 +59,7 @@
       -%}
       {%- if available and frame_icon != blank -%}
         <button class="lemoon-face-guide__choice" type="button" data-face-frame-value="{{ frame_value | escape }}"{% if suggested %} data-face-frame-suggested{% endif %} data-face-frame-label="{{ shape_label | escape }}" aria-pressed="false">
-          <span class="lemoon-face-guide__choice-tag{% if suggested %} lemoon-face-guide__choice-tag--suggested{% endif %}">{% if suggested %}{{ 'sections.lemoon_face_guide.preview.suggested' | t }}{% else %}{{ 'sections.lemoon_face_guide.preview.explore' | t }}{% endif %}</span>
+          <span class="lemoon-face-guide__choice-tag{% if suggested %} lemoon-face-guide__choice-tag--suggested{% endif %}"{% unless suggested %} aria-hidden="true"{% endunless %}>{% if suggested %}{{ 'sections.lemoon_face_guide.preview.suggested' | t }}{% endif %}</span>
           <span class="lemoon-face-guide__frame-art" aria-hidden="true">{% render 'lemoon-quiz-visual', group: 'shape', value: frame_icon, visual_id: visual_id %}</span>
           <span>{{ shape_label | escape }}</span>
         </button>
