@@ -81,7 +81,7 @@ export function initializePlpAnalytics(root, {
     if (event.detail?.requestId === pendingRequestId) pendingRequestId = null;
   };
   root.addEventListener('input', onInput);
-  root.addEventListener('click', onClick);
+  root.addEventListener('click', onClick, true);
   doc.addEventListener('lemoon:facets-start', onFacetsStart);
   doc.addEventListener('lemoon:facets-updated', onFacetsUpdated);
   doc.addEventListener('lemoon:facets-failed', onFacetsFailed);
@@ -94,7 +94,7 @@ export function initializePlpAnalytics(root, {
       if (destroyed) return;
       destroyed = true;
       root.removeEventListener('input', onInput);
-      root.removeEventListener('click', onClick);
+      root.removeEventListener('click', onClick, true);
       doc.removeEventListener('lemoon:facets-start', onFacetsStart);
       doc.removeEventListener('lemoon:facets-updated', onFacetsUpdated);
       doc.removeEventListener('lemoon:facets-failed', onFacetsFailed);

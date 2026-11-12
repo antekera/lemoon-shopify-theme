@@ -78,7 +78,8 @@ function facetsFixture(plp = false, query = new URLSearchParams()) {
   const productsCount = Math.max(1, 10 - Math.max(0, selectedCount - 1) * 2);
   const results = { id: 1, handle: 'fixture', url: plp ? '/tests/fixtures/shared-drawers.html' : '/collections/all', filters, products_count: productsCount, all_products_count: 10, sort_by: 'manual', sort_options: [{ value: 'manual', name: 'Destacados' }, { value: 'title-ascending', name: 'Nombre' }] };
   const content = liquid.renderFileSync('facets', { ...context, results, enable_filtering: true, enable_sorting: false, filter_type: 'drawer', lemoon_plp: true, section: { id: 'shared-facets' }, template: { name: 'collection' } });
-  const sampleGrid = plp ? `<div hidden id="ProductGridContainer"><div class="collection"><div id="product-grid" data-id="shared-facets"></div></div></div><span hidden id="ProductCount" data-product-count="${productsCount}">${productsCount}</span>` : '';
+  const activeFilters = plp ? liquid.renderFileSync('lemoon-active-filters', { ...context, collection: { filters, url: results.url }, sort_by: 'manual' }) : '';
+  const sampleGrid = plp ? `<div hidden id="ProductGridContainer"><div class="collection">${activeFilters}<div id="product-grid" data-id="shared-facets"></div></div></div><span hidden id="ProductCount" data-product-count="${productsCount}">${productsCount}</span>` : '';
   return shell(plp ? 'facets-plp' : 'facets', `<main${plp ? ' class="lemoon-plp"' : ''}>${content}${sampleGrid}</main>`, ['component-facets.css', 'lemoon-collection-plp.css'], plp ? ['facets.js'] : []);
 }
 function pickupFixture() {
