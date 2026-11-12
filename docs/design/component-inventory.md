@@ -740,7 +740,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Contrato actual.** Collection/banner copy consume collection y metacampos/settings; grid products_per_page/mobile,columns,filtering/sorting y show_demo_content; paginate collection.products y render plp-product-page. La plantilla compartida desactiva el texto de muestra: intro usa la descripción administrada en Shopify y el bloque SEO inferior aparece solo con `custom.plp_seo_copy` real. Carousel templates Liquid son endpoints de composición; no render de theme block.
 
-**Variantes existentes.** Banner/intro/promo, sidebar/drawer filtros, grid mobile toggle, sort menu, vacío, paginación y endpoints carousel.
+**Variantes existentes.** Banner/intro/promo, sidebar/drawer filtros, grid mobile toggle, sort menu, vacío, paginación y endpoints carousel. En móvil, la X de filtros permanece alineada con el título y acompaña el deslizamiento de entrada y salida del panel.
 
 **CSS y excepciones.** Overrides .lemoon-plp*; columnas fallback3 desktop/2 intermedio/móvil configurable; nombre15/14/13 y precio17/16 locales; no parámetros globales nuevos.
 

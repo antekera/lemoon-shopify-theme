@@ -96,6 +96,47 @@ test('PLP hides seven facet groups, retains URL filters and aligns the mobile cl
   await drawer.locator('.mobile-facets__close').click();
   await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
 });
+test('PLP close control travels with the mobile filter sheet while it closes', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const drawer = page.locator('menu-drawer');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  const panel = drawer.locator('.mobile-facets__inner');
+  await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().top))).toBe(32);
+
+  const samples = await drawer.evaluate(async element => {
+    const close = element.querySelector('.mobile-facets__close');
+    const sheet = element.querySelector('.mobile-facets__inner');
+    const offset = close.getBoundingClientRect().top - sheet.getBoundingClientRect().top;
+    close.click();
+    const readings = [];
+    for (const delay of [80, 80, 80]) {
+      await new Promise(resolve => setTimeout(resolve, delay));
+      readings.push({
+        sheetTop: sheet.getBoundingClientRect().top,
+        closeTop: close.getBoundingClientRect().top,
+        visible: getComputedStyle(close).display !== 'none',
+      });
+    }
+    return { offset, readings };
+  });
+
+  expect(samples.readings.at(-1).sheetTop).toBeGreaterThan(samples.readings[0].sheetTop + 150);
+  for (const reading of samples.readings) {
+    expect(reading.visible).toBe(true);
+    expect(Math.abs(reading.closeTop - reading.sheetTop - samples.offset)).toBeLessThanOrEqual(2);
+  }
+  await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
+});
+test('PLP close control respects reduced motion with the filter sheet', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const drawer = page.locator('menu-drawer');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  await expect(drawer.locator('.mobile-facets__close')).toHaveCSS('transition-duration', '0s');
+  await expect(drawer.locator('.mobile-facets__inner')).toHaveCSS('transition-duration', '0s');
+});
 for (const width of [390, 749]) {
   test(`nav: ${width}px native header toolbar, back, close, overlay and focus`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 844 }); const { panel, opener } = await openSurface(page, 'nav');
