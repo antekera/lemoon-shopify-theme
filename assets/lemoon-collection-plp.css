@@ -251,6 +251,7 @@
 /* Editorial hierarchy for the collection header and product navigation. */
 .lemoon-plp-toolbar { min-height: 5.6rem; color: var(--lemoon-text-brand); }
 .lemoon-plp-toolbar__count { margin: 0; opacity: 1; font-size: 1.4rem; }
+.lemoon-plp #ProductCount.loading { visibility: visible; }
 .lemoon-plp-sort__form .select__select { font-family: var(--lemoon-font-body); color: var(--lemoon-text-brand); }
 .lemoon-plp .facets__heading--vertical { font-family: var(--lemoon-font-heading); font-size: 1.6rem; font-weight: 600; }
 .lemoon-plp .facets__summary { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-body); }

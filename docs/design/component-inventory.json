@@ -1253,7 +1253,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-collection-product-grid.liquid",
-        "scope": "Grid y sidebar locales; toggle de filtros con capitalización natural y reset desktop que reabre el sidebar después de actualizar resultados; drawer móvil con X alineada y sincronizada con el deslizamiento del panel; plantilla compartida sin texto demo, con intro Shopify y bloque SEO inferior solo desde custom.plp_seo_copy. No migrar sort de colección al piloto de búsqueda.",
+        "scope": "Grid y sidebar locales; contador PLP conserva el valor anterior visible durante AJAX y muestra el nuevo al completar; toggle de filtros con capitalización natural y reset desktop que reabre el sidebar después de actualizar resultados; drawer móvil con X alineada y sincronizada con el deslizamiento del panel; plantilla compartida sin texto demo, con intro Shopify y bloque SEO inferior solo desde custom.plp_seo_copy. No migrar sort de colección al piloto de búsqueda.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },

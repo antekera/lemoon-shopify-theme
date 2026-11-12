@@ -748,7 +748,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **CSS y excepciones.** Overrides .lemoon-plp*; columnas fallback3 desktop/2 intermedio/móvil configurable; nombre15/14/13 y precio17/16 locales; no parámetros globales nuevos.
 
-**Estados observados / aplicabilidad:** Normal: Colección/cards/count; Hover: Sort/filter/grid toggles; Foco: Controles y retorno AJAX; Seleccionado: Grid mode y filtros; Loading: facets/loading; Error: Vacío conserva salida; error de red no recuperación garantizada; Disabled: Facets sin count; controls de carrusel por límite.
+**Estados observados / aplicabilidad:** Normal: Colección/cards/count; Hover: Sort/filter/grid toggles; Foco: Controles y retorno AJAX; Seleccionado: Grid mode y filtros; Loading: facets/loading con contador PLP visible hasta recibir el nuevo valor; Error: Vacío conserva salida; error de red no recuperación garantizada; Disabled: Facets sin count; controls de carrusel por límite.
 
 **Responsive.** 750/990 layout y1280 gutters; sidebar264/220 y drawer320 como DESIGN. **Accesibilidad.** Preservar forms/param names, ProductGridContainer/FacetFiltersForm, live counts e historial.
 

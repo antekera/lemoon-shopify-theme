@@ -3726,13 +3726,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -3882,7 +3882,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]
@@ -4480,13 +4480,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -4636,7 +4636,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]
@@ -5243,13 +5243,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -5399,7 +5399,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]

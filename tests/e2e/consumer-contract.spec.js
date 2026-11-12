@@ -124,6 +124,31 @@ test('enhanced collection sorting hides the native select and retains focus on i
   expect(await summary.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
 });
 
+test('PLP keeps the previous result count visible until the new count arrives', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const response = await page.request.get(fixture('collection-relevance'));
+  const responseHtml = await response.body();
+  let releaseResponse;
+  const pendingResponse = new Promise((resolve) => { releaseResponse = resolve; });
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    await pendingResponse;
+    await route.fulfill({ status: 200, contentType: 'text/html', body: responseHtml });
+  });
+  await page.goto(fixture('collection-relevance'));
+  const count = page.locator('.lemoon-plp-toolbar__count #ProductCount');
+  await count.evaluate((node) => {
+    node.textContent = '37 anteojos';
+    node.dataset.productCount = '37';
+  });
+  await page.locator('#SortBy').selectOption('price-ascending', { force: true });
+  await expect(count).toHaveClass(/loading/);
+  await expect(count).toHaveCSS('visibility', 'visible');
+  await expect(count).toHaveText('37 anteojos');
+  releaseResponse();
+  await expect(count).not.toHaveClass(/loading/);
+  await expect(count).toHaveText('0 anteojos');
+});
+
 test('collection sort options display their normal Spanish capitalization', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(fixture('collection-relevance'));
