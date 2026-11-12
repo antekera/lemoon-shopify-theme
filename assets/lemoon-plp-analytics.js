@@ -77,10 +77,14 @@ export function initializePlpAnalytics(root, {
     state = next;
     pendingRequestId = null;
   };
+  const onFacetsFailed = (event) => {
+    if (event.detail?.requestId === pendingRequestId) pendingRequestId = null;
+  };
   root.addEventListener('input', onInput);
   root.addEventListener('click', onClick);
   doc.addEventListener('lemoon:facets-start', onFacetsStart);
   doc.addEventListener('lemoon:facets-updated', onFacetsUpdated);
+  doc.addEventListener('lemoon:facets-failed', onFacetsFailed);
   const ready = Promise.resolve().then(() => privacyLoader(environment)).then((api) => {
     if (!destroyed) privacy = api;
   }).catch(() => {});
@@ -93,6 +97,7 @@ export function initializePlpAnalytics(root, {
       root.removeEventListener('click', onClick);
       doc.removeEventListener('lemoon:facets-start', onFacetsStart);
       doc.removeEventListener('lemoon:facets-updated', onFacetsUpdated);
+      doc.removeEventListener('lemoon:facets-failed', onFacetsFailed);
       controllers.delete(root);
     },
   };

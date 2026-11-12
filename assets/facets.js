@@ -117,32 +117,80 @@ class FacetFiltersForm extends HTMLElement {
 
   static renderSectionFromFetch(url, event, updateEvent, requestId) {
     fetch(url)
-      .then((response) => response.text())
-      .then((html) => {
-        FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }];
-        FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
+      .then((response) => {
+        if (!response.ok) throw new Error('facets_request_failed');
+        return response.text();
       })
-      .catch((error) => {
-        console.error(error);
-        updateEvent?.reject(error);
-      });
+      .then((html) => {
+        FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
+        FacetFiltersForm.filterData = [...FacetFiltersForm.filterData, { html, url }];
+      })
+      .catch((error) => FacetFiltersForm.handleRenderError(error, updateEvent, requestId));
   }
 
   static renderSectionFromCache(filterDataUrl, event, updateEvent, requestId) {
     const html = FacetFiltersForm.filterData.find(filterDataUrl).html;
-    FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
+    try {
+      FacetFiltersForm.renderSection(html, event, updateEvent, requestId);
+    } catch (error) {
+      FacetFiltersForm.handleRenderError(error, updateEvent, requestId);
+    }
   }
 
   static renderSection(html, event, updateEvent, requestId) {
+    const section = new DOMParser().parseFromString(html, 'text/html');
+    if (!section.getElementById('ProductGridContainer') || !section.getElementById('ProductCount')
+      || (document.querySelector('.lemoon-plp #FacetFiltersFormMobile') && !section.getElementById('FacetFiltersFormMobile'))) {
+      throw new Error('invalid_facets_response');
+    }
     if (requestId !== FacetFiltersForm.renderRequestId) {
       updateEvent?.reject(new Error('stale_facets_response'));
       return;
     }
-    const section = new DOMParser().parseFromString(html, 'text/html');
     FacetFiltersForm.renderFilters(section, event);
     FacetFiltersForm.renderProductGridContainer(section);
+    FacetFiltersForm.searchParamsConfirmed = FacetFiltersForm.searchParamsPrev;
     FacetFiltersForm.renderProductCount(section, updateEvent, requestId);
     if (typeof initializeScrollAnimationTrigger === 'function') initializeScrollAnimationTrigger(section.documentElement.innerHTML);
+  }
+
+  static handleRenderError(error, updateEvent, requestId) {
+    console.error(error);
+    updateEvent?.reject(error);
+    if (requestId !== FacetFiltersForm.renderRequestId) return;
+    if (document.querySelector('.lemoon-plp')) {
+      const confirmed = FacetFiltersForm.searchParamsConfirmed;
+      FacetFiltersForm.searchParamsPrev = confirmed;
+      history.replaceState({ searchParams: confirmed }, '', `${window.location.pathname}${confirmed ? `?${confirmed}` : ''}`);
+      document.querySelectorAll('.lemoon-plp .js-filter').forEach((filter) => FacetFiltersForm.syncPreservedFilter(filter, confirmed));
+      const sort = new URLSearchParams(confirmed).get('sort_by') || FacetFiltersForm.sortInitial;
+      const sortSelect = document.querySelector('.lemoon-plp #SortBy');
+      if (sortSelect && [...sortSelect.options].some((option) => option.value === sort)) sortSelect.value = sort;
+      const mobileSort = document.querySelector('.lemoon-plp #FacetFiltersFormMobile input[name="sort_by"]');
+      if (mobileSort) mobileSort.value = sort;
+    }
+    document.getElementById('ProductGridContainer')?.querySelector('.collection')?.classList.remove('loading');
+    document.querySelectorAll('#ProductCount, #ProductCountDesktop').forEach((count) => count.classList.remove('loading'));
+    document.querySelectorAll('.facets-container .loading__spinner, facet-filters-form .loading__spinner')
+      .forEach((spinner) => spinner.classList.add('hidden'));
+    FacetFiltersForm.toggleActiveFacets(false);
+    document.dispatchEvent(new CustomEvent('lemoon:facets-failed', { detail: { requestId } }));
+  }
+
+  static syncPreservedFilter(filter, searchParams) {
+    const selected = new URLSearchParams(searchParams);
+    filter.querySelectorAll('input[type="checkbox"][name]').forEach((input) => {
+      input.checked = selected.getAll(input.name).includes(input.value);
+    });
+    filter.querySelectorAll('input[name^="filter.v.price."]').forEach((input) => {
+      input.value = selected.get(input.name) || '';
+    });
+    const slider = filter.querySelector('price-range[data-price-slider]');
+    slider?.querySelectorAll('[data-price-handle]').forEach((handle) => {
+      const value = slider.querySelector(`[data-price-param="${handle.dataset.priceHandle}"]`)?.value;
+      handle.value = value || (handle.dataset.priceHandle === 'min' ? handle.min : handle.max);
+    });
+    slider?.updateSlider();
   }
 
   static renderProductGridContainer(parsedHtml) {
@@ -192,6 +240,10 @@ class FacetFiltersForm extends HTMLElement {
     // Remove facets that are no longer returned from the server
     Array.from(facetDetailsElementsFromDom).forEach((currentElement) => {
       if (!Array.from(facetDetailsElementsFromFetch).some(({ id }) => currentElement.id === id)) {
+        if (currentElement.closest('.lemoon-plp')) {
+          FacetFiltersForm.syncPreservedFilter(currentElement, FacetFiltersForm.searchParamsPrev);
+          return;
+        }
         currentElement.remove();
       }
     });
@@ -394,6 +446,8 @@ FacetFiltersForm.filterData = [];
 FacetFiltersForm.renderRequestId = 0;
 FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
+FacetFiltersForm.searchParamsConfirmed = window.location.search.slice(1);
+FacetFiltersForm.sortInitial = document.getElementById('SortBy')?.value || '';
 customElements.define('facet-filters-form', FacetFiltersForm);
 FacetFiltersForm.setListeners();
 

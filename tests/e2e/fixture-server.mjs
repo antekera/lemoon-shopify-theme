@@ -86,7 +86,8 @@ const server = createServer(async (request, response) => {
   if (pathname === '/tests/fixtures/shared-drawers.html') {
     try {
       const query = new URL(request.url, 'http://127.0.0.1').searchParams;
-      const html = renderSharedDrawerFixture(query.get('kind') || 'generic');
+      const kind = query.get('kind') || (query.get('section_id') === 'shared-facets' || query.has('sort_by') ? 'facets-plp' : 'generic');
+      const html = renderSharedDrawerFixture(kind, query);
       response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
       response.end(request.method === 'HEAD' ? undefined : html);
     } catch (error) { response.writeHead(500).end(String(error)); }

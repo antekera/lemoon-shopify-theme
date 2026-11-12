@@ -863,7 +863,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/facets.liquid",
-        "scope": "results, filtros y formularios nativos; la PLP omite siete grupos del sidebar y drawer, preserva sus valores aplicados, abre todos los acordeones móviles al entrar, deshabilita Eliminar filtros sin filtros activos y muestra las opciones de sort con capitalización natural; publica cambios de opción y ordenación confirmados por AJAX con consentimiento de analítica; el átomo select no decide políticas de ordenación.",
+        "scope": "results, filtros y formularios nativos; la PLP omite siete grupos del sidebar y drawer, preserva sus valores aplicados, abre todos los acordeones móviles al entrar, conserva grupos omitidos o respuestas AJAX inválidas, deshabilita Eliminar filtros sin filtros activos y muestra las opciones de sort con capitalización natural; publica cambios de opción y ordenación confirmados por AJAX con consentimiento de analítica; el átomo select no decide políticas de ordenación.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       }
     },

@@ -206,6 +206,7 @@
     if (root) sync(root);
   });
   document.addEventListener('lemoon:facets-updated', () => document.querySelectorAll('.lemoon-plp').forEach(sync));
+  document.addEventListener('lemoon:facets-failed', () => document.querySelectorAll('.lemoon-plp').forEach(sync));
   document.addEventListener('keydown', (event) => {
     const menu = event.target.closest('[data-sort-menu]');
     if (!menu) return;
