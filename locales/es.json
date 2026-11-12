@@ -1441,6 +1441,7 @@
     }
   },
   "lemoon_pdp": {
+    "frame_base_price_note": "Precio base del marco. Cristales y tratamiento se suman aparte.",
     "wishlist_view_product": "Ver producto",
     "similar_products_heading": "Similares a {{ product_title }}",
     "shipping_summary": {

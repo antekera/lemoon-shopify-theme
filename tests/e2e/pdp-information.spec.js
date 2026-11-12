@@ -28,6 +28,19 @@ async function openHeroFixture(page, width, sharedGallery = false, mediaCount = 
   await page.goto('/tests/fixtures/pdp-hero.html');
 }
 
+for (const width of [390, 1440]) {
+  test(`frame price clarification stays below the price at ${width}px`, async ({ page }) => {
+    await openHeroFixture(page, width);
+    const price = page.locator('.lemoon-mobile-price-row');
+    const note = page.locator('.lemoon-pdp__price-note');
+    await expect(note).toHaveText('Precio base del marco. Cristales y tratamiento se suman aparte.');
+    await expect(note).toHaveCSS('font-size', '12px');
+    const priceBox = await price.boundingBox();
+    const noteBox = await note.boundingBox();
+    expect(noteBox.y).toBeGreaterThanOrEqual(priceBox.y + priceBox.height);
+  });
+}
+
 test('standard desktop retains its configured spacing and right-panel reveal', async ({ page }) => {
   await openHeroFixture(page, 1440);
   const information = page.locator('.product__info-wrapper');

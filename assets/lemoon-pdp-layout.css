@@ -385,6 +385,7 @@ lemoon-thumbnail-rail { display: contents; }
 }
 .lemoon-mobile-summary[hidden], .lemoon-mobile-gallery-count { display: none; }
 .lemoon-mobile-price-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 8px; }
+.lemoon-pdp__price-note { margin: 0 0 var(--lemoon-space-3); color: var(--lemoon-text-secondary); font-size: var(--lemoon-fs-12); line-height: 1.4; }
 .lemoon-mobile-price-row > [id^="price-"], .lemoon-mobile-price-row .price { display: contents; }
 .lemoon-mobile-price-row .price__container, .lemoon-mobile-price-row > .lemoon-pdp__price { order: 1; margin: 0; white-space: nowrap; letter-spacing: 0; }
 .lemoon-mobile-price-row > .product__tax, .lemoon-mobile-price-row > .lemoon-pdp__tax { order: 2; margin: 0; white-space: nowrap; font-size: 11px; }

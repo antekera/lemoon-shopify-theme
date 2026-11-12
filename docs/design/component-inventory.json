@@ -1267,6 +1267,7 @@
         "sections/lemoon-eyewear-product.liquid",
         "snippets/lemoon-product-heading.liquid",
         "snippets/lemoon-product-sku.liquid",
+        "snippets/lemoon-frame-price-note.liquid",
         "snippets/lemoon-sticky-purchase.liquid",
         "snippets/product-variant-picker.liquid",
         "assets/product-info.js",
@@ -1297,7 +1298,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/lemoon-eyewear-product.liquid",
-        "scope": "PDP summary is rendered in initial HTML before the gallery, preserving configured block order and a single instance of each control; desktop grid places it beside the gallery. Full description and two inline tabs group available characteristics and measurements; contextual opener reuses its size drawer. Desktop heading offers native product sharing with clipboard and manual-copy fallbacks; commerce controllers unchanged.",
+        "scope": "PDP summary is rendered in initial HTML before the gallery, preserving configured block order and a single instance of each control; desktop grid places it beside the gallery. Full description and two inline tabs group available characteristics and measurements; contextual opener reuses its size drawer. Desktop heading offers native product sharing with clipboard and manual-copy fallbacks; commerce controllers unchanged. A localized 12px note below the frame price explains that lenses and treatment are charged separately; shared frame classification omits it for accessories.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
