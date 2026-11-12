@@ -258,6 +258,15 @@ class IncrementalDeploymentTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "conflict"):
                 deploy_shopify.verify_remote("sections/header.json", old, new, remote)
 
+    def test_reviewed_history_contains_only_versions_on_the_release_path(self):
+        baseline, target = "a" * 40, "c" * 40
+        intermediate = "b" * 40
+        with patch.object(deploy_shopify, "git_bytes", return_value=f"{target}\n{intermediate}\n".encode()) as git_bytes, \
+                patch.object(deploy_shopify, "snapshot", return_value={"assets/changed.js": "mid"}) as snapshot:
+            self.assertEqual(deploy_shopify.reviewed_history(baseline, target), [{"assets/changed.js": "mid"}])
+        git_bytes.assert_called_once_with(["rev-list", "--ancestry-path", f"{baseline}..{target}"])
+        snapshot.assert_called_once_with(intermediate)
+
     def test_source_deletion_in_a_pending_attempt_cannot_authorize_a_missing_live_file(self):
         filename = "assets/changed.js"
         blobs = {"old":b"old", "new":b"new"}
@@ -283,7 +292,8 @@ class IncrementalDeploymentTests(unittest.TestCase):
 
 
 class IncrementalMainTests(unittest.TestCase):
-    def invoke(self, fault=None, response=None, remote_state=None, theme_changes=True, added_file=True, target="a"*40):
+    def invoke(self, fault=None, response=None, remote_state=None, theme_changes=True, added_file=True, target="a"*40,
+               history_versions=None):
         previous = "b" * 40
         old = {"assets/changed.js": "old", "sections/untouched.liquid": "same", "assets/deleted.js": "deleted"}
         new = {"assets/changed.js": "new", "sections/untouched.liquid": "same", "assets/new.js": "added"}
@@ -293,7 +303,7 @@ class IncrementalMainTests(unittest.TestCase):
         if not theme_changes:
             new = dict(old)
         trees = {previous: old, "a"*40: attempted_tree, "c"*40: old, "d"*40: old, target: new}
-        blobs = {"old": b"old", "new": b"new", "same": b"source", "deleted": b"deleted", "added": b"added"}
+        blobs = {"old": b"old", "new": b"new", "mid": b"mid", "same": b"source", "deleted": b"deleted", "added": b"added"}
         original_marker = json.dumps({"schema":1,"sha":previous}).encode()
         remote = {deploy_shopify.SETTINGS: b'{"merchant":"live"}', deploy_shopify.MARKER: original_marker,
                   "assets/changed.js": b"old", "sections/untouched.liquid": b"editor content",
@@ -304,6 +314,8 @@ class IncrementalMainTests(unittest.TestCase):
             remote["assets/changed.js"] = b"editor"
         if fault == "retry":
             remote["assets/changed.js"] = b"new"
+        if fault == "reviewed-mid":
+            remote["assets/changed.js"] = b"mid"
         pulls, uploads = [], []
 
         def pull(_store, _theme, directory, files):
@@ -355,6 +367,7 @@ class IncrementalMainTests(unittest.TestCase):
                 patch.object(deploy_shopify, "assert_current_main"), \
                 patch.object(deploy_shopify, "deployment_baseline", return_value=previous), \
                 patch.object(deploy_shopify, "snapshot", side_effect=lambda revision: trees[revision]), \
+                patch.object(deploy_shopify, "reviewed_history", return_value=history_versions or []), \
                 patch.object(deploy_shopify, "git_bytes", side_effect=lambda args: b"" if args[0] == "merge-base" else blobs[args[-1]]), \
                 contextlib.redirect_stdout(output):
             status = deploy_shopify.main()
@@ -369,6 +382,13 @@ class IncrementalMainTests(unittest.TestCase):
         self.assertEqual(remote["assets/deleted.js"], b"deleted")
         self.assertEqual(deploy_shopify.parse_marker(remote[deploy_shopify.MARKER]), "a"*40)
         self.assertEqual([phase for phase, _ in pulls], ["before", "before", "recheck", "intent", "after", "final"])
+
+    def test_exact_reviewed_intermediate_version_can_be_replaced_by_target(self):
+        history = [{"assets/changed.js": "mid"}]
+        status, remote, uploads, _, output, _ = self.invoke(fault="reviewed-mid", history_versions=history)
+        self.assertEqual(status, 0, output)
+        self.assertEqual(remote["assets/changed.js"], b"new")
+        self.assertEqual(uploads[1], ["assets/changed.js", "assets/new.js"])
 
     def test_marker_only_release_never_issues_a_broad_or_empty_payload_upload(self):
         status, remote, uploads, pulls, output, _ = self.invoke(theme_changes=False)
