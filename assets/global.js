@@ -522,6 +522,15 @@ class MenuDrawer extends HTMLElement {
   }
 
   openMenuDrawer(summaryElement) {
+    if (this.closest('.lemoon-plp')) {
+      this.querySelectorAll('[data-facet-accordion]').forEach((details) => {
+        details.lemoonAccordionAnimation?.cancel();
+        details.lemoonAccordionAnimation = null;
+        details.open = true;
+        details.querySelector('summary')?.setAttribute('aria-expanded', 'true');
+        details.querySelector('.lemoon-plp-accordion-content')?.style.removeProperty('overflow');
+      });
+    }
     setTimeout(() => {
       this.mainDetailsToggle.classList.add('menu-opening');
     });

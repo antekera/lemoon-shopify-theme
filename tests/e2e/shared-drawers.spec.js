@@ -85,6 +85,7 @@ test('PLP hides seven facet groups, retains URL filters and aligns the mobile cl
   const drawer = page.locator('menu-drawer');
   await expect(drawer.locator('[data-facet-accordion]')).toHaveCount(7);
   await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  for (const group of await drawer.locator('[data-facet-accordion]').all()) await expect(group).toHaveJSProperty('open', true);
   const panel = drawer.locator('.mobile-facets__inner');
   await expect.poll(() => panel.evaluate(element => Math.round(element.getBoundingClientRect().top))).toBe(32);
   const heading = await panel.locator('.mobile-facets__heading:visible').boundingBox();
@@ -93,8 +94,15 @@ test('PLP hides seven facet groups, retains URL filters and aligns the mobile cl
   await expect(drawer.locator('.mobile-facets__close')).toBeInViewport();
   const params = await page.locator('#FacetFiltersFormMobile').evaluate(form => new URLSearchParams(form.closest('facet-filters-form').createSearchParams(form)).getAll('filter.v.m.custom.style_filter_presence'));
   expect(params).toEqual(['compact']);
+  await drawer.locator('[data-facet-accordion] > summary').first().click();
+  await expect(drawer.locator('[data-facet-accordion]').first()).toHaveJSProperty('open', false);
   await drawer.locator('.mobile-facets__close').click();
   await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
+  await drawer.locator('details.mobile-facets__disclosure > summary').click();
+  for (const group of await drawer.locator('[data-facet-accordion]').all()) {
+    await expect(group).toHaveJSProperty('open', true);
+    await expect(group.locator('summary')).toHaveAttribute('aria-expanded', 'true');
+  }
 });
 test('PLP mobile reset is enabled when the server renders an active filter', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
