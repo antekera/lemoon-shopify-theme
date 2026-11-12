@@ -1,0 +1,45 @@
+{
+  "dateUTC": "2026-11-06",
+  "ci": {
+    "repository": "antekera/lemoon-next-backoffice",
+    "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+    "run": 42082295959,
+    "job": 127438214725,
+    "conclusion": "SUCCESS",
+    "pass": 185,
+    "fail": 0,
+    "files": 49,
+    "rerun": false,
+    "commandsObserved": [
+      "bun run validate",
+      "bun run --filter @lemoon/web build",
+      "bun run --filter @lemoon/infra synth"
+    ],
+    "limit": "Existing isolated CI, not Shopify write/deployment proof"
+  },
+  "ui": {
+    "method": "cua_repl",
+    "attempts": [
+      "createBrowserTab chrome admin.shopify.com/store/lemoon-8277",
+      "getTab existing Admin tab browser 1"
+    ],
+    "error": "Cannot read properties of undefined (reading 'timeoutMs')",
+    "SourcesStatusRead": false
+  },
+  "queries": {
+    "products": "first50 then after endCursor; 60 total",
+    "inventory": "first50 query rejected cost1248>1000; recovered with first10 products, first50 variants, first5 levels, six pages",
+    "definitions": "first50 PRODUCT and PRODUCTVARIANT, metaobjectDefinitions first50",
+    "dictionary": "metaobjects type lemoon_style_trait first50",
+    "publications": "first50 publications and channels; four total"
+  },
+  "notExecuted": [
+    "runtime tests repeated",
+    "theme check",
+    "Shopify mutations",
+    "app token queries",
+    "deployments",
+    "channel enabling",
+    "configure-development-catalog-webhooks.ts"
+  ]
+}
