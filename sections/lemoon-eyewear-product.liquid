@@ -20,6 +20,7 @@
       {% render 'lemoon-breadcrumb', collection: collection, product: product %}
       {% render 'lemoon-product-heading', product: product, show_promotions: false %}
       <div class="lemoon-mobile-price-row"><div class="lemoon-pdp__price" aria-live="polite"><strong data-price>{{ current_variant.price | money }}</strong><s data-compare{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>{% if current_variant.compare_at_price > current_variant.price %}{{ current_variant.compare_at_price | money }}{% endif %}</s></div></div>
+      {% render 'lemoon-frame-price-note', product: product %}
       {% render 'lemoon-product-promotions', product: product %}
     </div>
     <div class="lemoon-pdp__gallery">

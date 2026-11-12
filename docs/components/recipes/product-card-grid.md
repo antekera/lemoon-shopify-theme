@@ -6,7 +6,7 @@ Familias: LM-PRODUCT-CARD, LM-PRICE, LM-SWATCH, LM-LABEL, LM-PRODUCT-LIST y cont
 
 El favorito de la aplicación se presenta en la esquina superior derecha de la tarjeta; el tema añade feedback visual y una nota breve al guardar, sin reemplazar el almacenamiento de la aplicación. El texto del quick-add usa 13px y peso 500. En recomendaciones de PDP, la categoría y los valores conocidos de forma/material acotan las sugerencias; no se infiere compatibilidad desde la imagen.
 
-[card-product](../../../snippets/card-product.liquid) ya es reutilizable; **no existe ni hace falta un wrapper `lemoon-ui-card`**. Consumidores: [lemoon-featured-products](../../../sections/lemoon-featured-products.liquid), [main-collection-product-grid](../../../sections/main-collection-product-grid.liquid), [main-search-results](../../../snippets/main-search-results.liquid). El grid, paginación y vacío pertenecen a esas superficies, no a la tarjeta. La tarjeta comercial de la galería independiente no es este snippet.
+[card-product](../../../snippets/card-product.liquid) ya es reutilizable; **no existe ni hace falta un wrapper `lemoon-ui-card`**. Consumidores: [lemoon-featured-products](../../../sections/lemoon-featured-products.liquid), [main-collection-product-grid](../../../sections/main-collection-product-grid.liquid), [main-search-results](../../../snippets/main-search-results.liquid). El grid, paginación y vacío pertenecen a esas superficies, no a la tarjeta. En la PDP, `lemoon-frame-price-note` recibe `product`, reutiliza `lemoon-frame-classification` y sitúa la aclaración bajo el importe de los marcos en ambos consumidores; omite accesorios. La tarjeta comercial de la galería independiente no es este snippet.
 
 | API existente | Uso |
 | --- | --- |
