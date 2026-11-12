@@ -93,6 +93,22 @@
       badge.textContent = appliedCount;
       badge.hidden = appliedCount === 0;
     }
+    const reset = root.querySelector('[data-clear-filters]');
+    if (reset) {
+      const hasFilters = root.querySelector('#ProductGridContainer [data-plp-has-active-filters]')?.dataset.plpHasActiveFilters === 'true';
+      if (hasFilters) {
+        const url = new URL(root.dataset.collectionUrl, window.location.origin);
+        const sort = root.querySelector('#SortBy')?.value;
+        if (sort) url.searchParams.set('sort_by', sort);
+        reset.href = url.href;
+        reset.removeAttribute('aria-disabled');
+        reset.removeAttribute('tabindex');
+      } else {
+        reset.removeAttribute('href');
+        reset.setAttribute('aria-disabled', 'true');
+        reset.setAttribute('tabindex', '-1');
+      }
+    }
     const results = root.querySelector('[data-mobile-results]');
     if (results) results.textContent = results.dataset.label.replace('__COUNT__', root.querySelector('#ProductCount')?.dataset.productCount || '0');
     const viewResults = root.querySelector('[data-view-results]');
@@ -122,6 +138,13 @@
       }
       if (initialized.has(root)) return;
       initialized.add(root);
+      root.addEventListener('click', (event) => {
+        const reset = event.target.closest('[data-clear-filters]');
+        if (reset?.getAttribute('aria-disabled') === 'true') {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
       const mobilePage = root.closest('collection-component').querySelector('[data-plp-mobile-grid]');
       if (mobilePage) window.lemoonSelectProductPage(root.querySelector('#ProductGridContainer'), mobilePage.innerHTML);
       let columns = root.dataset.defaultColumns === '1' ? '1' : '2';

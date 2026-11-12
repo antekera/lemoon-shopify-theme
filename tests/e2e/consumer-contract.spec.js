@@ -132,6 +132,50 @@ test('collection sort options display their normal Spanish capitalization', asyn
   for (const option of await options.all()) await expect(option).toHaveCSS('text-transform', 'none');
 });
 
+test('PLP reset is usable only while a filter is applied', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(fixture('collection-relevance'));
+  await page.addScriptTag({ url: '/assets/lemoon-collection-plp.js' });
+  const reset = page.locator('[data-clear-filters]');
+  const applied = page.locator('[data-plp-has-active-filters]');
+  await expect(applied).toHaveAttribute('data-plp-has-active-filters', 'false');
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+  const initialURL = page.url();
+  await reset.evaluate((element) => element.click());
+  await expect(page).toHaveURL(initialURL);
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=&sort_by=most-relevant');
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=no-existe&sort_by=most-relevant');
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=redondo&sort_by=most-relevant');
+    document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'true';
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).not.toHaveAttribute('aria-disabled');
+  await expect(reset).toHaveAttribute('href', /\/collections\/fixture\?sort_by=most-relevant$/);
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?sort_by=most-relevant');
+    document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'false';
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+});
+
 test('facet sort selectors retain approved boundaries and focus in the production stylesheet order', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(fixture('facets-horizontal'));

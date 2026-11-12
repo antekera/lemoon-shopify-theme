@@ -96,6 +96,13 @@ test('PLP hides seven facet groups, retains URL filters and aligns the mobile cl
   await drawer.locator('.mobile-facets__close').click();
   await expect(drawer.locator('details.mobile-facets__disclosure')).not.toHaveAttribute('open');
 });
+test('PLP mobile reset is enabled when the server renders an active filter', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');
+  const reset = page.locator('[data-clear-filters]');
+  await expect(reset).toHaveAttribute('href', /sort_by=manual/);
+  await expect(reset).not.toHaveAttribute('aria-disabled');
+});
 test('PLP close control travels with the mobile filter sheet while it closes', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/tests/fixtures/shared-drawers.html?kind=facets-plp');

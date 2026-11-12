@@ -3502,6 +3502,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -3708,7 +3709,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=price-descending",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -4130,6 +4133,14 @@
                             },
                             "children": [
                               {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
+                              {
                                 "tag": "div",
                                 "attrs": {
                                   "data-plp-page-size": "15",
@@ -4244,6 +4255,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -4450,7 +4462,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=title-descending",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -4881,6 +4895,14 @@
                             },
                             "children": [
                               {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
+                              {
                                 "tag": "div",
                                 "attrs": {
                                   "data-plp-page-size": "15",
@@ -4995,6 +5017,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -5201,7 +5224,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=most-relevant",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -5622,6 +5647,14 @@
                               "class": "product-grid-container"
                             },
                             "children": [
+                              {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
                               {
                                 "tag": "div",
                                 "attrs": {

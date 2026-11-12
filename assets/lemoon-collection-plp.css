@@ -220,6 +220,7 @@
   .lemoon-plp-drawer-slot .mobile-facets__open svg { width: 1.8rem; height: 1.8rem; }
   .lemoon-plp-drawer-slot .mobile-facets__footer { padding: 1.4rem 1.6rem calc(1.4rem + env(safe-area-inset-bottom)); }
   .lemoon-plp-drawer-slot .mobile-facets__footer .button { min-height: 4.8rem; padding: 0 1.2rem; }
+  .lemoon-plp [data-clear-filters][aria-disabled='true'] { opacity: .45; cursor: not-allowed; pointer-events: none; }
   .lemoon-plp .active-facets-mobile { padding: .8rem 1.6rem; margin: 0; }
   .lemoon-plp .active-facets-mobile:empty { display: none; }
   .js .lemoon-plp-view-toggle { display: flex; grid-column: 3; grid-row: 2; align-items: center; }

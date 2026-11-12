@@ -524,6 +524,8 @@ El acceso y el diálogo se muestran solo cuando el tipo, una etiqueta explícita
 
 En la PLP, los controles de presencia visual, uso, transparencia, patrón, familia de color, tipo de lentes y receta se omiten del sidebar y drawer; Search & Discovery conserva esos filtros. Los valores aplicados desde otras entradas siguen en la URL y en los chips removibles al cambiar un filtro visible. Búsqueda mantiene su lista nativa completa.
 
+El enlace «Eliminar filtros» del drawer móvil de PLP queda visible pero deshabilitado, sin destino ni foco, cuando no hay filtros aplicados. Se habilita al aplicar cualquier parámetro de filtro y se deshabilita de nuevo al quitarlos; conserva la ordenación actual al limpiar. Los controles de búsqueda mantienen su comportamiento propio.
+
 **Variantes existentes.** Horizontal/vertical/drawer; desktop/mobile; visual color/forma, checkbox y precio; sort select/custom PLP; chip facet-remove; show-more.
 
 **CSS y excepciones.** component-facets y overrides PLP; chip border/radio local; no fijar apariencia de todos los chips como badge. Las opciones del sort de PLP muestran la capitalización nativa de sus etiquetas aunque los botones globales usen mayúsculas.
