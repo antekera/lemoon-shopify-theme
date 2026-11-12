@@ -10,7 +10,7 @@ export function renderSizeGuidePageFixture(scenario = 'default', localeRoot = '/
     measurements_help_body: '<p>Ayuda editorial de prueba.</p>',
   });
   if (scenario === 'blank') Object.assign(settings, { measurements_intro: '<p></p>', measurements_step_1_body: '<p>&nbsp;</p>', measurements_help_body: '<p> </p>' });
-  const title = scenario === 'long' ? 'Cómo medir un armazón con un título editorial extenso '.repeat(9) : 'Cómo medir tus lentes';
+  const title = scenario === 'long' ? 'Cómo medir un armazón con un título editorial extenso '.repeat(9) : 'Cómo medir tus anteojos';
   const content = renderComponentSection('lemoon-guide-page', {
     id: 'measurement-page-fixture', settings,
     routes: { root_url: localeRoot, all_products_collection_url: `${localeRoot === '/' ? '' : localeRoot}/collections/all` },

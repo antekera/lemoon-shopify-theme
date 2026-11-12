@@ -21,19 +21,26 @@
   assign sort_by = results.sort_by | default: results.default_sort_by
   assign escaped_search_terms = results.terms | escape
   assign total_active_values = 0
+  assign has_active_filters = false
   assign default_presentation = 'text'
   assign render_filters = results.filters
   if lemoon_plp
+    for filter in results.filters
+      if filter.active_values.size > 0 or filter.min_value.value != blank or filter.max_value.value != blank
+        assign has_active_filters = true
+      endif
+    endfor
+    assign hidden_filter_params = 'filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type' | split: ','
     assign gender_filters = results.filters | where: 'param_name', 'filter.p.m.custom.gender'
     assign price_filters = results.filters | where: 'type', 'price_range'
     assign render_filters = gender_filters | concat: price_filters
-    assign ordered_params = 'filter.p.m.custom.frame_shape,filter.v.option.color,filter.p.m.custom.prescription_type,filter.p.m.custom.frame_material,filter.p.m.custom.frame_size' | split: ','
+    assign ordered_params = 'filter.p.m.custom.frame_shape,filter.v.option.color,filter.p.m.custom.frame_material,filter.p.m.custom.frame_size' | split: ','
     for filter_param in ordered_params
       assign matching_filters = results.filters | where: 'param_name', filter_param
       assign render_filters = render_filters | concat: matching_filters
     endfor
     for remaining_filter in results.filters
-      unless remaining_filter.param_name == 'filter.p.m.custom.gender' or remaining_filter.type == 'price_range' or remaining_filter.param_name == 'filter.v.availability' or ordered_params contains remaining_filter.param_name
+      unless remaining_filter.param_name == 'filter.p.m.custom.gender' or remaining_filter.type == 'price_range' or remaining_filter.param_name == 'filter.v.availability' or ordered_params contains remaining_filter.param_name or hidden_filter_params contains remaining_filter.param_name
         assign remaining_filters = results.filters | where: 'param_name', remaining_filter.param_name
         assign render_filters = render_filters | concat: remaining_filters
       endunless
@@ -55,6 +62,7 @@
   data-collection-id="{{ results.id }}"
   data-collection-handle="{{ results.handle }}"
   data-template="{{ template.name }}"
+  {% if lemoon_plp %}data-hidden-filter-params="{{ hidden_filter_params | join: ',' }}"{% endif %}
 >
   {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
     <facet-filters-form class="facets small-hide">
@@ -348,7 +356,7 @@
 
               <div class="mobile-facets__footer">
                 <facet-remove class="mobile-facets__clear-wrapper">
-                  <a href="{{ results_url }}" class="{% if lemoon_plp %}button button--secondary{% else %}mobile-facets__clear underlined-link{% endif %}">
+                  <a{% unless lemoon_plp and has_active_filters == false %} href="{{ results_url | escape }}"{% endunless %} class="{% if lemoon_plp %}button button--secondary{% else %}mobile-facets__clear underlined-link{% endif %}"{% if lemoon_plp %} data-clear-filters{% unless has_active_filters %} aria-disabled="true" tabindex="-1"{% endunless %}{% endif %}>
                     {% if lemoon_plp %}{{ 'lemoon.collection.reset' | t }}{% else %}{{ 'products.facets.clear_all' | t }}{% endif %}
                   </a>
                 </facet-remove>

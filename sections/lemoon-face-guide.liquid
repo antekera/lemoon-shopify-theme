@@ -8,7 +8,7 @@
   endif
   assign measure_url = section.settings.measure_url
   if measure_url == blank
-    assign measure_url = routes.root_url | append: '/pages/como-medir-tus-lentes' | replace: '//', '/'
+    assign measure_url = routes.root_url | append: '/pages/como-medir-tus-anteojos' | replace: '//', '/'
   endif
   assign shape_filter = collections['all'].filters | where: 'param_name', 'filter.p.m.custom.frame_shape' | first
   assign guide_prefix = 'sections.lemoon_face_guide.'

@@ -220,6 +220,7 @@
   .lemoon-plp-drawer-slot .mobile-facets__open svg { width: 1.8rem; height: 1.8rem; }
   .lemoon-plp-drawer-slot .mobile-facets__footer { padding: 1.4rem 1.6rem calc(1.4rem + env(safe-area-inset-bottom)); }
   .lemoon-plp-drawer-slot .mobile-facets__footer .button { min-height: 4.8rem; padding: 0 1.2rem; }
+  .lemoon-plp [data-clear-filters][aria-disabled='true'] { opacity: .45; cursor: not-allowed; pointer-events: none; }
   .lemoon-plp .active-facets-mobile { padding: .8rem 1.6rem; margin: 0; }
   .lemoon-plp .active-facets-mobile:empty { display: none; }
   .js .lemoon-plp-view-toggle { display: flex; grid-column: 3; grid-row: 2; align-items: center; }
@@ -250,6 +251,7 @@
 /* Editorial hierarchy for the collection header and product navigation. */
 .lemoon-plp-toolbar { min-height: 5.6rem; color: var(--lemoon-text-brand); }
 .lemoon-plp-toolbar__count { margin: 0; opacity: 1; font-size: 1.4rem; }
+.lemoon-plp #ProductCount.loading { visibility: visible; }
 .lemoon-plp-sort__form .select__select { font-family: var(--lemoon-font-body); color: var(--lemoon-text-brand); }
 .lemoon-plp .facets__heading--vertical { font-family: var(--lemoon-font-heading); font-size: 1.6rem; font-weight: 600; }
 .lemoon-plp .facets__summary { color: var(--lemoon-text-brand); font-family: var(--lemoon-font-body); }
@@ -538,6 +540,7 @@
 .lemoon-plp-intro__description p { margin: 0; }
 .lemoon-plp-toolbar__leading { display: flex; align-items: center; gap: 20px; }
 .lemoon-plp-filter-toggle { display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; padding: 0; min-height: 44px; cursor: pointer; color: var(--lemoon-text-brand); font: inherit; font-size: 14px; }
+.lemoon-plp button[data-filter-toggle] { text-transform: none !important; }
 .lemoon-plp-filter-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .lemoon-plp--filters-hidden .lemoon-plp-filter-toggle svg { transform: scaleX(-1); }
 .lemoon-plp .active-facets-desktop > facet-remove,
@@ -564,6 +567,7 @@
 .lemoon-sort-menu[open] summary .svg-wrapper { transform: rotate(180deg); }
 .lemoon-sort-menu__options { display: grid; gap: 4px; position: absolute; top: calc(100% + 6px); right: 0; width: 250px; z-index: 6; padding: 6px; border: 1px solid #d5d9dd; border-radius: 8px; background: white; box-shadow: 0 8px 24px rgb(11 31 58 / 10%); }
 .lemoon-sort-menu__options button { display: block; width: 100%; padding: 8px 10px; min-height: 36px; border: 0; border-radius: 4px; background: white; color: #0b1f3a; text-align: left; font: inherit; line-height: 1.4; cursor: pointer; }
+.lemoon-plp .lemoon-sort-menu__options button { text-transform: none !important; }
 .lemoon-sort-menu__options button:hover,
 .lemoon-sort-menu__options button:focus-visible { background: #e8edf3; }
 .lemoon-sort-menu__options button[aria-selected='true'] { background: #e8edf3; font-weight: 600; }
@@ -739,6 +743,16 @@
 .lemoon-plp-mobile-results { display: none; }
 .lemoon-filter-count[hidden] { display: none; }
 @media (max-width: 749px) {
+  .lemoon-plp .mobile-facets__close { top: calc(var(--lemoon-drawer-mobile-gap) + 14px); }
+  .lemoon-plp .mobile-facets__disclosure[open] .mobile-facets__close {
+    display: flex;
+    opacity: 1;
+    transform: translateY(var(--lemoon-drawer-mobile-height));
+    transition: transform 320ms ease;
+  }
+  .lemoon-plp .mobile-facets__disclosure.menu-opening .mobile-facets__close {
+    transform: translateY(0);
+  }
   .lemoon-plp-toolbar { grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; padding: 6px 12px; }
   .lemoon-plp-toolbar__leading { display: none; }
   .lemoon-plp-toolbar .lemoon-plp-sort { grid-column: 1; grid-row: 1; justify-self: start; min-width: 0; }
@@ -754,4 +768,7 @@
   .lemoon-plp-view-toggle__button { width: 28px; height: 40px; padding: 0; }
   .lemoon-plp-view-toggle__button svg { width: 22px; height: 22px; stroke-width: 1; }
   .lemoon-plp-mobile-results { display: block; margin: 12px 12px 0; font-size: 12px; color: var(--lemoon-text-secondary); }
+}
+@media (max-width: 749px) and (prefers-reduced-motion: reduce) {
+  .lemoon-plp .mobile-facets__disclosure[open] .mobile-facets__close { transition: none; }
 }

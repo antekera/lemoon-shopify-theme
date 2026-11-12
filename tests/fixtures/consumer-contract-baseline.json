@@ -3476,6 +3476,7 @@
               {
                 "tag": "div",
                 "attrs": {
+                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
@@ -3502,6 +3503,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -3708,7 +3710,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=price-descending",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -3722,13 +3726,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -3878,7 +3882,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]
@@ -4130,6 +4134,14 @@
                             },
                             "children": [
                               {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
+                              {
                                 "tag": "div",
                                 "attrs": {
                                   "data-plp-page-size": "15",
@@ -4218,6 +4230,7 @@
               {
                 "tag": "div",
                 "attrs": {
+                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
@@ -4244,6 +4257,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -4450,7 +4464,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=title-descending",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -4464,13 +4480,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -4620,7 +4636,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]
@@ -4881,6 +4897,14 @@
                             },
                             "children": [
                               {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
+                              {
                                 "tag": "div",
                                 "attrs": {
                                   "data-plp-page-size": "15",
@@ -4969,6 +4993,7 @@
               {
                 "tag": "div",
                 "attrs": {
+                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
@@ -4995,6 +5020,7 @@
                               "data-collection-id": "5",
                               "data-collection-handle": "fixture",
                               "data-template": "",
+                              "data-hidden-filter-params": "filter.v.m.custom.style_filter_presence,filter.v.m.custom.style_filter_use,filter.v.m.custom.style_filter_transparency,filter.v.m.custom.style_filter_pattern,filter.v.m.custom.style_filter_color,filter.p.product_type,filter.p.m.custom.prescription_type",
                               "class": "facets-container"
                             },
                             "children": [
@@ -5201,7 +5227,9 @@
                                                               {
                                                                 "tag": "a",
                                                                 "attrs": {
-                                                                  "href": "/collections/fixture?sort_by=most-relevant",
+                                                                  "data-clear-filters": "",
+                                                                  "aria-disabled": "true",
+                                                                  "tabindex": "-1",
                                                                   "class": "button button--secondary"
                                                                 },
                                                                 "children": [
@@ -5215,13 +5243,13 @@
                                                             "attrs": {
                                                               "type": "button",
                                                               "data-view-results": "",
-                                                              "data-label": "Ver __COUNT__ lentes",
-                                                              "data-label-one": "Ver 1 lente",
+                                                              "data-label": "Ver __COUNT__ anteojos",
+                                                              "data-label-one": "Ver 1 par de anteojos",
                                                               "onclick": "this.closest('.mobile-facets__wrapper').querySelector('summary').click()",
                                                               "class": "button button--primary"
                                                             },
                                                             "children": [
-                                                              "Ver 0 lentes"
+                                                              "Ver 0 anteojos"
                                                             ]
                                                           }
                                                         ]
@@ -5371,7 +5399,7 @@
                                           "data-total-count": "0"
                                         },
                                         "children": [
-                                          "0 lentes"
+                                          "0 anteojos"
                                         ]
                                       }
                                     ]
@@ -5622,6 +5650,14 @@
                               "class": "product-grid-container"
                             },
                             "children": [
+                              {
+                                "tag": "span",
+                                "attrs": {
+                                  "hidden": "",
+                                  "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
                               {
                                 "tag": "div",
                                 "attrs": {

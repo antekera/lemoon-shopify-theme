@@ -81,8 +81,8 @@ Se conservan las 42 superficies de LEM-86; cada fila indica sus piezas propias a
 | 15 Perfil/direcciones | `cuenta.lemoon.cl/profile` | Sin asset propio; branding nativo compartido |
 | 16 Mis pedidos | `cuenta.lemoon.cl/orders` | Media de producto nativa, sin imagen propia |
 | 17 Detalle pedido | Destino nativo desde pedidos | Media de producto nativa, sin imagen propia |
-| 18 Rostro | `/pages/elegir-lentes-segun-tu-rostro` | A06: seis ilustraciones originales de rostro y tres diagramas de ajuste; bloques editables. Integración LEM-103 pendiente de asignación/QA Shopify |
-| 19 Medidas | `/pages/como-medir-tus-lentes` | A03 para guía; P02 en PDP/modal, no confundir con foto de talla |
+| 18 Rostro | `/pages/elegir-anteojos-segun-tu-rostro` | A06: seis ilustraciones originales de rostro y tres diagramas de ajuste; bloques editables. Integración LEM-103 pendiente de asignación/QA Shopify |
+| 19 Medidas | `/pages/como-medir-tus-anteojos` | A03 para guía; P02 en PDP/modal, no confundir con foto de talla |
 | 20 Probador | `/pages/como-usar-probador-virtual` | A03; sin captura de un probador no verificado |
 | 21 Enviar receta | `/pages/como-enviar-prescripcion` | A03; material instructivo adicional solo en LEM-106 y sin datos personales reales |
 | 22 Hacer pedido | `/pages/como-hacer-tu-pedido` | A03; no video obligatorio ni picker local |

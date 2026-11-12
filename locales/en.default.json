@@ -1110,7 +1110,6 @@
         "title": "Try different shapes",
         "hint": "Start with the suggested shapes or swipe to explore others.",
         "suggested": "Suggested",
-        "explore": "Another shape",
         "hide": "View without frames",
         "show": "View with frames",
         "previous": "Previous shapes",
@@ -1356,6 +1355,8 @@
       "label": "Breadcrumb"
     },
     "collection": {
+      "all_seo_title": "Eyewear and accessories catalogue",
+      "all_seo_description": "Explore the Lemoon catalogue. Browse categories and product pages to check each model's details and availability.",
       "filters_title": "Filters",
       "hide_filters": "Hide filters",
       "show_filters": "Show filters",

@@ -17,7 +17,7 @@
     'lemoon:size_guide_step_click': 'size_guide_step_click',
     'lemoon:size_guide_catalog_click': 'size_guide_catalog_click',
   };
-  const paths = new Set(['/pages/como-medir-tus-lentes', '/en/pages/como-medir-tus-lentes']);
+  const paths = new Set(['/pages/como-medir-tus-anteojos', '/en/pages/como-medir-tus-anteojos']);
   const seen = new Set();
   let privacy = init.customerPrivacy;
   let started = false;

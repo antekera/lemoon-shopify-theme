@@ -124,6 +124,129 @@ test('enhanced collection sorting hides the native select and retains focus on i
   expect(await summary.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
 });
 
+test('PLP keeps the previous result count visible until the new count arrives', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const response = await page.request.get(fixture('collection-relevance'));
+  const responseHtml = await response.body();
+  let releaseResponse;
+  const pendingResponse = new Promise((resolve) => { releaseResponse = resolve; });
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    await pendingResponse;
+    await route.fulfill({ status: 200, contentType: 'text/html', body: responseHtml });
+  });
+  await page.goto(fixture('collection-relevance'));
+  const count = page.locator('.lemoon-plp-toolbar__count #ProductCount');
+  await count.evaluate((node) => {
+    node.textContent = '37 anteojos';
+    node.dataset.productCount = '37';
+  });
+  await page.locator('#SortBy').selectOption('price-ascending', { force: true });
+  await expect(count).toHaveClass(/loading/);
+  await expect(count).toHaveCSS('visibility', 'visible');
+  await expect(count).toHaveText('37 anteojos');
+  releaseResponse();
+  await expect(count).not.toHaveClass(/loading/);
+  await expect(count).toHaveText('0 anteojos');
+});
+
+test('collection sort options display their normal Spanish capitalization', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(fixture('collection-relevance'));
+  const options = page.locator('.lemoon-sort-menu__options button');
+  await expect(options.first()).toHaveText('Relevancia');
+  for (const option of await options.all()) await expect(option).toHaveCSS('text-transform', 'none');
+});
+
+test('PLP filter toggle keeps sentence case and reset reopens the desktop sidebar', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  const unfiltered = await page.request.get(fixture('collection-preferred'));
+  const unfilteredHtml = await unfiltered.body();
+  let releaseReset;
+  const resetResponse = new Promise((resolve) => { releaseReset = resolve; });
+  await page.route((url) => url.searchParams.has('section_id'), async (route) => {
+    await resetResponse;
+    await route.fulfill({ status: 200, contentType: 'text/html', body: unfilteredHtml });
+  });
+  await page.goto(fixture('collection-filtered'));
+  const toggle = page.locator('[data-filter-toggle]');
+  const sidebar = page.locator('#main-collection-filters');
+  await expect(toggle).toHaveText('Ocultar filtros');
+  await expect(toggle).toHaveCSS('text-transform', 'none');
+  await toggle.click();
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveCSS('text-transform', 'none');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(sidebar).toHaveJSProperty('inert', true);
+
+  await page.locator('.lemoon-filter-reset a').click();
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(sidebar).toHaveJSProperty('inert', true);
+  releaseReset();
+  await expect(toggle).toHaveText('Ocultar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(sidebar).toHaveJSProperty('inert', false);
+  await expect(page.locator('.lemoon-plp')).not.toHaveClass(/lemoon-plp--filters-hidden/);
+  await expect(page.locator('.lemoon-filter-reset')).toHaveCount(0);
+});
+
+test('PLP keeps the desktop sidebar closed when reset fails', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.route((url) => url.searchParams.has('section_id'), (route) => route.fulfill({ status: 503, body: 'Unavailable' }));
+  await page.goto(fixture('collection-filtered'));
+  const toggle = page.locator('[data-filter-toggle]');
+  await toggle.click();
+  await page.locator('.lemoon-filter-reset a').click();
+  await expect(page.locator('#ProductGridContainer .collection')).not.toHaveClass(/loading/);
+  await expect(toggle).toHaveText('Mostrar filtros');
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.locator('#main-collection-filters')).toHaveJSProperty('inert', true);
+});
+
+test('PLP reset is usable only while a filter is applied', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(fixture('collection-relevance'));
+  await page.addScriptTag({ url: '/assets/lemoon-collection-plp.js' });
+  const reset = page.locator('[data-clear-filters]');
+  const applied = page.locator('[data-plp-has-active-filters]');
+  await expect(applied).toHaveAttribute('data-plp-has-active-filters', 'false');
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+  const initialURL = page.url();
+  await reset.evaluate((element) => element.click());
+  await expect(page).toHaveURL(initialURL);
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=&sort_by=most-relevant');
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=no-existe&sort_by=most-relevant');
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?filter.p.m.custom.frame_shape=redondo&sort_by=most-relevant');
+    document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'true';
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).not.toHaveAttribute('aria-disabled');
+  await expect(reset).toHaveAttribute('href', /\/collections\/fixture\?sort_by=most-relevant$/);
+
+  await page.evaluate(() => {
+    history.pushState({}, '', '?sort_by=most-relevant');
+    document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'false';
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
+  });
+  await expect(reset).toHaveAttribute('aria-disabled', 'true');
+  await expect(reset).not.toHaveAttribute('href');
+});
+
 test('facet sort selectors retain approved boundaries and focus in the production stylesheet order', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(fixture('facets-horizontal'));

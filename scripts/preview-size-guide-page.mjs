@@ -28,7 +28,7 @@ export const previewAssets = new Map([
 ]);
 
 export function isSizeGuidePage(pathname) {
-  return /^\/(?:en\/)?pages\/como-medir-tus-lentes\/?$/.test(pathname);
+  return /^\/(?:en\/)?pages\/como-medir-tus-anteojos\/?$/.test(pathname);
 }
 
 function pageSection(html) {
