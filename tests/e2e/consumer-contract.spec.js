@@ -124,6 +124,14 @@ test('enhanced collection sorting hides the native select and retains focus on i
   expect(await summary.evaluate(node => parseFloat(getComputedStyle(node).outlineOffset))).toBeGreaterThanOrEqual(2);
 });
 
+test('collection sort options display their normal Spanish capitalization', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(fixture('collection-relevance'));
+  const options = page.locator('.lemoon-sort-menu__options button');
+  await expect(options.first()).toHaveText('Relevancia');
+  for (const option of await options.all()) await expect(option).toHaveCSS('text-transform', 'none');
+});
+
 test('facet sort selectors retain approved boundaries and focus in the production stylesheet order', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(fixture('facets-horizontal'));

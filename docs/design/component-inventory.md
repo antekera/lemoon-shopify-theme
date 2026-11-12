@@ -526,7 +526,7 @@ En la PLP, los controles de presencia visual, uso, transparencia, patrón, famil
 
 **Variantes existentes.** Horizontal/vertical/drawer; desktop/mobile; visual color/forma, checkbox y precio; sort select/custom PLP; chip facet-remove; show-more.
 
-**CSS y excepciones.** component-facets y overrides PLP; chip border/radio local; no fijar apariencia de todos los chips como badge.
+**CSS y excepciones.** component-facets y overrides PLP; chip border/radio local; no fijar apariencia de todos los chips como badge. Las opciones del sort de PLP muestran la capitalización nativa de sus etiquetas aunque los botones globales usen mayúsculas.
 
 **Estados observados / aplicabilidad:** Normal: Disponible/contador; Hover: Summary/chip/checkbox; Foco: Retorno tras AJAX al input equivalente o fallback; Seleccionado: checked y active; remove usa url_to_remove; Loading: collection.loading y spinner; Error: Catch fetch sin recuperación visible garantizada: deuda funcional conservada; Disabled: count0 inactivo disabled; activo removible aunque count0.
 

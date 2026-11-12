@@ -564,6 +564,7 @@
 .lemoon-sort-menu[open] summary .svg-wrapper { transform: rotate(180deg); }
 .lemoon-sort-menu__options { display: grid; gap: 4px; position: absolute; top: calc(100% + 6px); right: 0; width: 250px; z-index: 6; padding: 6px; border: 1px solid #d5d9dd; border-radius: 8px; background: white; box-shadow: 0 8px 24px rgb(11 31 58 / 10%); }
 .lemoon-sort-menu__options button { display: block; width: 100%; padding: 8px 10px; min-height: 36px; border: 0; border-radius: 4px; background: white; color: #0b1f3a; text-align: left; font: inherit; line-height: 1.4; cursor: pointer; }
+.lemoon-plp .lemoon-sort-menu__options button { text-transform: none !important; }
 .lemoon-sort-menu__options button:hover,
 .lemoon-sort-menu__options button:focus-visible { background: #e8edf3; }
 .lemoon-sort-menu__options button[aria-selected='true'] { background: #e8edf3; font-weight: 600; }
