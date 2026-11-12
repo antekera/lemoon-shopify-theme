@@ -88,7 +88,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "layout/theme.liquid",
-        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección.",
+        "scope": "Preservar el orden de assets y los grupos; no renderizar un layout dentro de otra sección. SEO de colecciones: metadatos Shopify, fallback localizado para /collections/all, noindex de colección vacía y paginación localizada.",
         "recipe_path": "docs/components/recipes/guide-help.md"
       }
     },
@@ -1250,7 +1250,7 @@
       "availability": {
         "status": "section-composition",
         "entry_path": "sections/main-collection-product-grid.liquid",
-        "scope": "Grid y sidebar locales; no migrar sort de colección al piloto de búsqueda.",
+        "scope": "Grid y sidebar locales; plantilla compartida sin texto demo, con intro Shopify y bloque SEO inferior solo desde custom.plp_seo_copy. No migrar sort de colección al piloto de búsqueda.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },

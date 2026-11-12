@@ -113,6 +113,8 @@ Las fichas conservan la lectura dirigida de superficies en la base histórica, c
 
 **Contrato actual.** Layout consume request.page_type, settings, content_for_header/layout y grupos header/footer; settings_schema declara opciones, no valores efectivos. Meta tags usa page_title, page_description, canonical_url y media. standard-actions-override redefine openCart/updateCart de Shopify.actions y refresca secciones con deduplicación/pubsub; conservar ese acoplamiento comercial.
 
+El catálogo virtual `/collections/all` recibe título y descripción SEO localizados en el layout; las colecciones con ficha en Shopify conservan sus metadatos administrables. Una colección base con cero productos genera `noindex, follow`; el canonical permanece en la URL de Shopify. El sufijo de página usa la traducción existente.
+
 **Variantes existentes.** Storefront normal; policy con shell de ayuda; cart con CSS local; password con cadena CSS distinta.
 
 **CSS y excepciones.** Orden normal: tokens, base Dawn, componentes Lemoon, estilos por superficie. Password carga tokens y lemoon-password, NO lemoon-components. .page-width, .grid, .rte, .visually-hidden y helpers de foco no son snippets. DESIGN gobierna tipografía, gutter y motion; no duplicar paleta.
@@ -736,7 +738,7 @@ El newsletter del footer se omite en envíos y entregas por handle o sufijo de p
 
 **Fuentes:** [sections/main-collection-banner.liquid](../../sections/main-collection-banner.liquid), [sections/main-collection-product-grid.liquid](../../sections/main-collection-product-grid.liquid), [snippets/lemoon-collection-copy.liquid](../../snippets/lemoon-collection-copy.liquid), [snippets/lemoon-collection-intro.liquid](../../snippets/lemoon-collection-intro.liquid), [snippets/lemoon-collection-promo.liquid](../../snippets/lemoon-collection-promo.liquid), [snippets/lemoon-plp-product-page.liquid](../../snippets/lemoon-plp-product-page.liquid), [assets/lemoon-collection-plp.css](../../assets/lemoon-collection-plp.css), [assets/lemoon-collection-plp.js](../../assets/lemoon-collection-plp.js), [assets/component-collection-hero.css](../../assets/component-collection-hero.css), [templates/collection.carousel.liquid](../../templates/collection.carousel.liquid), [templates/collection.carousel-accessories.liquid](../../templates/collection.carousel-accessories.liquid).
 
-**Contrato actual.** Collection/banner copy consume collection y metacampos/settings; grid products_per_page/mobile,columns,filtering/sorting y show_demo_content; paginate collection.products y render plp-product-page. Carousel templates Liquid son endpoints de composición; no render de theme block.
+**Contrato actual.** Collection/banner copy consume collection y metacampos/settings; grid products_per_page/mobile,columns,filtering/sorting y show_demo_content; paginate collection.products y render plp-product-page. La plantilla compartida desactiva el texto de muestra: intro usa la descripción administrada en Shopify y el bloque SEO inferior aparece solo con `custom.plp_seo_copy` real. Carousel templates Liquid son endpoints de composición; no render de theme block.
 
 **Variantes existentes.** Banner/intro/promo, sidebar/drawer filtros, grid mobile toggle, sort menu, vacío, paginación y endpoints carousel.
 

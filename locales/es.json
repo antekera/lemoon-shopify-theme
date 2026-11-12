@@ -1368,6 +1368,8 @@
       "label": "Ruta de navegación"
     },
     "collection": {
+      "all_seo_title": "Catálogo de lentes y accesorios",
+      "all_seo_description": "Explora el catálogo de Lemoon. Revisa las categorías y las fichas de cada modelo para conocer sus características y disponibilidad.",
       "filters_title": "Filtros",
       "hide_filters": "Ocultar filtros",
       "show_filters": "Mostrar filtros",

@@ -7,6 +7,12 @@
     <meta name="theme-color" content="">
     {%- liquid
       assign lemoon_canonical_url = canonical_url
+      assign lemoon_page_title = page_title
+      assign lemoon_page_description = page_description
+      if request.page_type == 'collection' and collection.handle == 'all'
+        assign lemoon_page_title = 'lemoon.collection.all_seo_title' | t
+        assign lemoon_page_description = 'lemoon.collection.all_seo_description' | t
+      endif
       assign lemoon_privacy_redirect_url = ''
       assign lemoon_privacy_page = pages['politica-de-privacidad']
       assign lemoon_privacy_template_valid = false
@@ -33,6 +39,8 @@
     {%- endif -%}
     {%- if request.page_type == 'search' -%}
       <meta name="robots" content="noindex, follow">
+    {%- elsif request.page_type == 'collection' and collection.all_products_count == 0 -%}
+      <meta name="robots" content="noindex, follow">
     {%- endif -%}
 
     {%- if settings.favicon != blank -%}
@@ -46,17 +54,17 @@
     {%- endunless -%}
 
     <title>
-      {{ page_title }}
+      {{ lemoon_page_title | escape }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.pagination.page' | t: number: current_page }}{% endif -%}
+      {%- unless lemoon_page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {% if lemoon_page_description %}
+      <meta name="description" content="{{ lemoon_page_description | escape }}">
     {% endif %}
 
-    {% render 'meta-tags', canonical_url: lemoon_canonical_url %}
+    {% render 'meta-tags', canonical_url: lemoon_canonical_url, page_title: lemoon_page_title, page_description: lemoon_page_description %}
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
