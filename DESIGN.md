@@ -362,7 +362,7 @@ La barra superior puede mostrar el monto de envío gratis mediante `[MONTO_ENVIO
 
 Los botones que abren Guía de medidas conservan el foco y su retorno al cerrar el modal. El foco visible usa el contorno gris compartido del sitio.
 
-La solicitud de Miguel se implementa sobre las familias actuales: galería protagonista y panel de selección en escritorio, identidad/precio antes de la foto en móvil y descripción completa debajo. Los detalles comparten el ancho y los márgenes de página. Dos pestañas separan Características (forma, material, peso, público, talla, ajuste y rostros disponibles) de Medidas (valores mm y esquema A–E solo aquí). Se omiten campos ausentes y párrafos genéricos. El acceso junto a la talla abre el modal de medidas y restaura el foco al cerrar.
+La solicitud de Miguel se implementa sobre las familias actuales: galería protagonista y panel de selección en escritorio, identidad/precio antes de la foto en móvil y descripción completa debajo. Bajo el precio de las PDP de marcos, una nota de 12px en color secundario aclara «Precio base del marco. Cristales y tratamiento se suman aparte.»; accesorios no reciben esta nota. Los detalles comparten el ancho y los márgenes de página. Dos pestañas separan Características (forma, material, peso, público, talla, ajuste y rostros disponibles) de Medidas (valores mm y esquema A–E solo aquí). Se omiten campos ausentes y párrafos genéricos. El acceso junto a la talla abre el modal de medidas y restaura el foco al cerrar.
 
 El valor de la talla junto a la guía se presenta como una etiqueta redondeada con fondo gris claro `#f1f2f3`.
 

@@ -1,0 +1,9 @@
+{% doc %}
+  Clarifies the displayed price for products identified as frames.
+  @param {product} product - Current Shopify product.
+{% enddoc %}
+{%- capture frame_product -%}{% render 'lemoon-frame-classification', product: product %}{%- endcapture -%}
+{%- assign frame_product = frame_product | strip -%}
+{%- if frame_product == 'true' -%}
+  <p class="lemoon-pdp__price-note">{{ 'lemoon_pdp.frame_base_price_note' | t }}</p>
+{%- endif -%}

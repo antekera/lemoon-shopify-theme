@@ -1428,6 +1428,7 @@
     }
   },
   "lemoon_pdp": {
+    "frame_base_price_note": "Frame base price. Lenses and treatments are added separately.",
     "wishlist_view_product": "View product",
     "similar_products_heading": "Similar to {{ product_title }}",
     "shipping_summary": {
