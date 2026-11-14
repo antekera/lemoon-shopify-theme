@@ -1,0 +1,124 @@
+{% doc %}
+  Product-card color swatches sharing one selected variant's media, options and price.
+  @param {product} card_product - Product owning the swatches.
+  @param {product_option} color_option - Product's color option, if present.
+  @param {variant} card_variant - Currently displayed variant.
+  @param {boolean} has_card_variant - Whether a recommended or native filtered variant is selected.
+  @param {number} card_color_index - Zero-based color option position.
+  @param {string} card_color_name - Currently displayed color name.
+{% enddoc %}
+{%- if color_option != blank -%}
+  <div class="lemoon-product-card__swatches" aria-label="{{ color_option.name | escape }}">
+    {%- for value in color_option.values -%}
+      {%- liquid
+        assign swatch_variant = value.variant
+        assign swatch_selected = value.selected
+        assign swatch_selection_unavailable = false
+        if has_card_variant
+          assign swatch_selected = false
+          assign swatch_selection_unavailable = true
+          for option_variant in card_product.variants
+            if option_variant.options[card_color_index] == value.name
+              assign matching_options = true
+              for chosen_option in card_variant.options
+                assign chosen_index = forloop.index0
+                if chosen_index != card_color_index and chosen_option != option_variant.options[chosen_index]
+                  assign matching_options = false
+                endif
+              endfor
+              if matching_options
+                assign swatch_variant = option_variant
+                assign swatch_selection_unavailable = false
+                break
+              endif
+            endif
+          endfor
+          if value.name == card_color_name
+            assign swatch_selected = true
+            assign swatch_variant = card_variant
+          endif
+        endif
+        assign swatch_primary = swatch_variant.featured_media | default: card_product.featured_media
+        assign swatch_image_alt = card_product.title | append: ' — ' | append: value.name | append: ' — vista frontal'
+        assign swatch_primary_src = blank
+        assign swatch_primary_alt = swatch_image_alt
+        if has_card_variant
+          assign swatch_primary = swatch_variant.featured_media
+          assign swatch_primary_src = 'lemoon-product-fallback.png' | asset_url
+          assign swatch_primary_alt = blank
+        endif
+        assign swatch_primary_image = swatch_primary.preview_image | default: swatch_primary
+        if swatch_primary_image
+          assign swatch_primary_src = swatch_primary_image | image_url: width: 720
+          assign swatch_primary_alt = swatch_image_alt
+        endif
+        assign swatch_secondary = blank
+        assign secondary_marker = 'card-diagonal:' | append: value.name | downcase
+        for media in card_product.media
+          assign media_alt = media.alt | downcase
+          if media_alt contains secondary_marker
+            assign swatch_secondary = media
+            break
+          endif
+        endfor
+        if swatch_secondary == blank and has_card_variant == false
+          assign secondary_marker = 'card-view:diagonal'
+          for media in card_product.media
+            assign media_alt = media.alt | downcase
+            if media_alt contains secondary_marker
+              assign swatch_secondary = media
+              break
+            endif
+          endfor
+        endif
+        assign swatch_product_url = value.product_url | default: card_product.url
+        assign variant_separator = '?'
+        if swatch_product_url contains '?'
+          assign swatch_query = swatch_product_url | split: '?' | last | split: '&'
+          assign swatch_product_url = swatch_product_url | split: '?' | first
+          for parameter in swatch_query
+            assign parameter_key = parameter | split: '=' | first
+            unless parameter_key == 'variant' or parameter == blank
+              assign swatch_product_url = swatch_product_url | append: variant_separator | append: parameter
+              assign variant_separator = '&'
+            endunless
+          endfor
+        endif
+        if swatch_secondary == blank
+          assign secondary_marker = 'card-model:' | append: value.name | downcase
+          for media in card_product.media
+            assign media_alt = media.alt | downcase
+            if media_alt contains secondary_marker
+              assign swatch_secondary = media
+              break
+            endif
+          endfor
+        endif
+        assign swatch_secondary_image = swatch_secondary.preview_image | default: swatch_secondary
+      -%}
+      {%- capture swatch_price -%}{%- render 'lemoon-money', amount: swatch_variant.price, show_currency_code: settings.currency_code_enabled -%}{%- endcapture -%}
+      {%- capture swatch_compare_price -%}{%- render 'lemoon-money', amount: swatch_variant.compare_at_price, show_currency_code: settings.currency_code_enabled -%}{%- endcapture -%}
+      {%- assign swatch_price = swatch_price | strip -%}
+      {%- assign swatch_compare_price = swatch_compare_price | strip -%}
+      <button
+        class="lemoon-product-card__swatch{% if swatch_selected %} is-selected{% endif %}"
+        type="button"
+        {% if swatch_selection_unavailable %}disabled{% endif %}
+        aria-label="{{ value.name | escape }}"
+        aria-pressed="{% if swatch_selected %}true{% else %}false{% endif %}"
+        data-primary-src="{{ swatch_primary_src | escape }}"
+        data-primary-alt="{{ swatch_primary_alt | escape }}"
+        data-secondary-src="{% if swatch_secondary_image %}{{ swatch_secondary_image | image_url: width: 720 }}{% endif %}"
+        data-secondary-srcset="{% if swatch_secondary_image %}{% if swatch_secondary_image.width >= 360 %}{{ swatch_secondary_image | image_url: width: 360 }} 360w,{% endif %}{% if swatch_secondary_image.width >= 533 %}{{ swatch_secondary_image | image_url: width: 533 }} 533w,{% endif %}{{ swatch_secondary_image | image_url: width: 720 }} 720w{% endif %}"
+        data-secondary-alt="{{ card_product.title | escape }} — vista diagonal"
+        data-color-key="{{ value.name | downcase | escape }}"
+        data-variant-url="{{ swatch_product_url | escape }}{{ variant_separator }}variant={{ swatch_variant.id }}"
+        data-variant-available="{{ swatch_variant.available }}"
+        data-price="{{ swatch_price | escape }}"
+        data-compare-price="{% if swatch_variant.compare_at_price > swatch_variant.price %}{{ swatch_compare_price | escape }}{% endif %}"
+      >
+        {% render 'lemoon-color-swatch', value: value %}
+      </button>
+    {%- endfor -%}
+  </div>
+{%- endif -%}

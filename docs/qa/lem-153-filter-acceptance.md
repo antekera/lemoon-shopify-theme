@@ -20,6 +20,8 @@ Neutros + brillante + Carey + diario + oversize devuelve Génova/Jade (2). Neutr
 
 Las tarjetas con filtro único repetían el parámetro `variant`. Con protagonistas OR neutros, Shopify emitía enlaces de producto sin deep link y media genérica; después JavaScript seleccionaba Azul y añadía el enlace de variante, conservando la foto genérica. El JSON público de esos cinco productos identifica una fotografía de variante diferente. Los precios dentro de cada producto demo son iguales: la diferencia de precios se prueba con fixtures explícitas.
 
+La suite ampliada de42 pruebas terminó contra ese tema anterior: **12 pases,30 fallos,0 omitidas**, con4 pases/10 fallos en cada ancho (390/820/1440). Los fallos se distribuyen en15 casos de chips ausentes,9 enlaces de variante no canónicos (8 duplicados y1 ausente) y6 fotografías incorrectas. Es evidencia del defecto publicado previo, no aceptación del candidato.
+
 ## Correcciones del candidato
 
 - Conserva chips removibles para cada referencia seleccionada reconocida por el diccionario, aunque Shopify la omita de `active_values` por falta de asignaciones. No cambia el filtrado ni inventa coincidencias.
@@ -32,7 +34,7 @@ Las tarjetas con filtro único repetían el parámetro `variant`. Con protagonis
 
 - 785/785 pruebas unitarias: incluye las siete opciones, las127 selecciones no vacías de colores por render numérico→GID→URL y regresiones de tarjetas con precios distintos, deep link ajeno, OR sin deep link y render de la PLP real.
 - 46/46 pruebas Chromium de quiz, tarjetas y chips: incluye siete opciones individuales, alias neutrales, teclado/remoción nativa, historial, fallback sin JavaScript y seguridad de etiquetas.
-- Theme Check nativo:328 archivos, cero infracciones.
+- Theme Check local inicial:328 archivos, cero infracciones. CI con `@shopify/cli@4.8.5 --fail-level warning` detectó LiquidComplexity136>120; se extrajo el bloque de swatches a un snippet con inputs explícitos, conservando su comportamiento. La validación final con esa versión exacta de CI inspeccionó329 archivos sin infracciones.
 - Back office sin modificaciones, revisión `49cf760`:16/16 pruebas de vocabulario, derivación y proyección. Herencia por criterio, reemplazo de grupo y separación de variantes conservados.
 - Revisión independiente de código: Approved tras corregir el caso OR sin deep link. Convenciones: Ready to push. Ambas fueron revisiones conductuales de solo lectura con permisos heredados, sin aislamiento técnico impuesto.
 

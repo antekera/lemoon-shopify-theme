@@ -19,6 +19,8 @@ El favorito de la aplicación se presenta en la esquina superior derecha de la t
 | `skip_styles` | En un loop, sólo después de que la primera tarjeta haya cargado dependencias; false en primer render |
 | `show_quick_add`, `placeholder_image` | Quick add requiere contexto y JS propios; placeholder es demostración, no producto real |
 
+`card-product` compone el bloque de colores mediante `lemoon-product-card-swatches`, con producto, opción de color, variante, indicador de selección explícita y nombre/índice de color pasados por `render`. La extracción conserva el comportamiento y mantiene ambos snippets bajo el límite LiquidComplexity de CI.
+
 Consultar siempre el encabezado y uso real del snippet: también lee settings/request globales y compone precio, labels y swatches. No es una API pura ni prueba de un Product Drop que un objeto de fixture local tenga campos parecidos.
 
 ## Ejemplo dentro de una sección con colección real

@@ -45,7 +45,7 @@ test('keeps sale prices single, shows unit prices, and outlines selected dark sw
 });
 
 test('uses color-specific gallery images first and preserves query params in variant links', async () => {
-  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+  const template = await readFile(themeFile('snippets/lemoon-product-card-swatches.liquid'), 'utf8');
   const colorSpecificMarker = template.indexOf("assign secondary_marker = 'card-diagonal:' | append: value.name");
   const genericMarker = template.indexOf("assign secondary_marker = 'card-view:diagonal'");
 
@@ -58,7 +58,7 @@ test('uses color-specific gallery images first and preserves query params in var
 });
 
 test('renders each variant media preview as a valid Shopify image URL', async () => {
-  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+  const template = await readFile(themeFile('snippets/lemoon-product-card-swatches.liquid'), 'utf8');
 
   expect(template).toMatch(/assign swatch_secondary_image = swatch_secondary\.preview_image \| default: swatch_secondary/);
   expect(template).toMatch(/data-secondary-src="\{% if swatch_secondary_image %\}\{\{ swatch_secondary_image \| image_url: width: 720 \}\}/);

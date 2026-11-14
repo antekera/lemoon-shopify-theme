@@ -23,8 +23,8 @@
     "inspection_levels": "Mapped paths were automatically parsed/scanned; family source_paths identify targeted reading, not line-by-line manual review. Detailed scan evidence is delivered separately; source files remain canonical for schemas, DOM and hooks."
   },
   "counts": {
-    "total_tracked_paths": 630,
-    "mapped_paths": 507,
+    "total_tracked_paths": 631,
+    "mapped_paths": 508,
     "excluded_paths": 126,
     "by_root": {
       "assets": 361,
@@ -32,14 +32,14 @@
       "layout": 2,
       "locales": 51,
       "sections": 71,
-      "snippets": 105,
+      "snippets": 106,
       "templates": 40
     },
     "mapped_by_extension": {
       ".css": 85,
       ".js": 57,
       ".json": 91,
-      ".liquid": 180,
+      ".liquid": 181,
       ".svg": 94
     },
     "excluded_by_reason": {
@@ -326,7 +326,7 @@
         "sections/featured-product.liquid",
         "sections/lemoon-eyewear-product.liquid",
         "sections/main-product.liquid",
-        "snippets/card-product.liquid",
+        "snippets/lemoon-product-card-swatches.liquid",
         "snippets/facets-filter-desktop.liquid",
         "snippets/facets-filter-mobile.liquid",
         "snippets/facets.liquid",
@@ -465,6 +465,7 @@
       "behavior": "interactive",
       "source_paths": [
         "snippets/card-product.liquid",
+        "snippets/lemoon-product-card-swatches.liquid",
         "assets/component-card.css",
         "assets/lemoon-product-card.js",
         "assets/quick-add.css",
@@ -503,7 +504,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/card-product.liquid",
-        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; swatches sin media propia usan fallback neutro con alt vacío al cambiar de variante, sin conservar otra foto ni vista secundaria de otro color; secundaria vacía no emite imagen ni URLs; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada. LEM-153: variante nativa de product.url validada por pertenencia al producto para imagen/precio/swatch/compra coherentes incluso con OR; enlaces swatch conservan parámetros ajenos y reemplazan variant sin duplicarlo. El consumidor PLP transmite native_variant_filtering cuando hay filtros de variante activos: usa la variante relevante nativa aun si Shopify omite el deep link en una selección OR.",
+        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; swatches sin media propia usan fallback neutro con alt vacío al cambiar de variante, sin conservar otra foto ni vista secundaria de otro color; secundaria vacía no emite imagen ni URLs; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada. LEM-153: variante nativa de product.url validada por pertenencia al producto para imagen/precio/swatch/compra coherentes incluso con OR; enlaces swatch conservan parámetros ajenos y reemplazan variant sin duplicarlo. El consumidor PLP transmite native_variant_filtering cuando hay filtros de variante activos: usa la variante relevante nativa aun si Shopify omite el deep link en una selección OR. Swatches en lemoon-product-card-swatches con inputs explícitos, extraídos sin cambiar comportamiento para cumplir LiquidComplexity de CI.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -6754,6 +6755,14 @@
         "LM-TABS"
       ],
       "inspection_method": "manual scoped size-guide visibility review"
+    },
+    {
+      "path": "snippets/lemoon-product-card-swatches.liquid",
+      "status": "mapped",
+      "component_ids": [
+        "LM-PRODUCT-CARD"
+      ],
+      "inspection_method": "LEM-153 behavior-preserving extraction; independent source comparison and rendered regression tests"
     }
   ],
   "historical_base_sha": "93f80a257924520020f0d960f89488c86f104a35",
@@ -6863,7 +6872,8 @@
       "assets/lemoon-face-long-editorial-v3-960.webp",
       "snippets/lemoon-product-intro.liquid",
       "snippets/lemoon-pdp-purchase-confidence.liquid",
-      "snippets/lemoon-frame-classification.liquid"
+      "snippets/lemoon-frame-classification.liquid",
+      "snippets/lemoon-product-card-swatches.liquid"
     ],
     "historical_note": "Original 501-path/470-mapped inventory at historical_base_sha remains historical; base_sha and implementation_base_sha identify the original pre-implementation base. Current counts were recomputed from the Git index plus declared source additions on 2026-11-06, including thirty existing quiz JPG assets previously absent from coverage and the new native-filter helper. Binary/private content was not read. new_source_paths retains earlier delivery additions even when now tracked; explicit_new_paths counts only current non-indexed additions. On 2026-11-07 the 404 decorative WebP was added and visually inspected; counts include that tracked asset. LEM-129/105 integration on2026-11-07 retains all current main entries and adds two shared size-guide snippets plus one CSS; Git-index metadata verifies558 tracked paths/495 mapped/63 excluded. The three additions are already indexed, so explicit_new_paths remains0. No binary/private content was opened for this reconciliation. On2026-11-08 the shared mobile drawer presentation adds one declared non-indexed CSS source:559 tracked +1 addition =560 total,497 mapped and63 excluded. Analytics guide publisher adds a second declared non-indexed source on2026-11-08:561 total source paths,498 mapped,63 excluded,559 tracked and2 declared additions. Final index reconciliation on2026-11-08:561 tracked/source paths,498 mapped,63 excluded,0 explicit non-indexed additions; new_source_paths retains historical delivery additions. Cleanup reconciliation on 2026-11-08: the 44 LEM-103 delivery additions are already indexed; removing one unused duplicate stylesheet leaves 598 indexed/source paths, 496 mapped, 102 excluded and 0 non-indexed additions. Progress styles remain in base.css. Conflict reconciliation with main3d9da9ee on2026-11-08: preserves LEM-103, LEM-129/105 and merged cleanup; 604 indexed/source paths, 502 mapped, 102 excluded, 0 non-indexed additions. No binary/private content read.",
     "validation_boundary": "Source/LiquidDoc/consumer inspection; fixture tests and Shopify runtime results require separate delivery evidence.",
