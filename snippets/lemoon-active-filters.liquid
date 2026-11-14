@@ -6,11 +6,11 @@
     {%- endif -%}
     {%- unless filter.param_name == 'filter.v.availability' -%}
       {%- for value in filter.active_values -%}
-        <facet-remove><a href="{{ value.url_to_remove }}" class="lemoon-filter-pill"><span>{{ filter.label | escape }}: {{ value.label | escape }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
+        <facet-remove><a href="{{ value.url_to_remove }}" class="lemoon-filter-pill" data-filter-param="{{ filter.param_name | escape }}" data-filter-value="{{ value.value | escape }}"><span>{{ filter.label | escape }}: {{ value.label | escape }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
       {%- endfor -%}
       {%- if filter.type == 'price_range' -%}
         {%- if filter.min_value.value != blank or filter.max_value.value != blank -%}
-          <facet-remove><a href="{{ filter.url_to_remove }}" class="lemoon-filter-pill"><span>{{ filter.label | escape }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
+          <facet-remove><a href="{{ filter.url_to_remove }}" class="lemoon-filter-pill" data-filter-param="{{ filter.min_value.param_name | escape }}" data-filter-secondary-param="{{ filter.max_value.param_name | escape }}" data-filter-remove-all><span>{{ filter.label | escape }}: {{ filter.min_value.value | default: 0 | money }} – {{ filter.max_value.value | default: filter.range_max | money }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
         {%- endif -%}
       {%- endif -%}
     {%- endunless -%}
@@ -30,9 +30,21 @@
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
-{% if pills != blank %}
-  <div class="lemoon-applied-filters" aria-label="{{ 'lemoon.collection.applied_filters' | t }}">
+  <div class="lemoon-applied-filters" aria-label="{{ 'lemoon.collection.applied_filters' | t }}"{% if pills == blank %} hidden style="display: none"{% endif %}>
     {{ pills }}
     <facet-remove class="lemoon-filter-reset"><a href="{{ collection.url }}?sort_by={{ sort_by | url_encode }}">{{ 'lemoon.collection.reset' | t }}</a></facet-remove>
   </div>
-{% endif %}
+{% comment %} Shopify omits unassigned references from active_values, even on a filtered zero-result page. {% endcomment %}
+{%- assign style_dictionary_count = metaobjects.lemoon_style_trait.values_count -%}
+  <template data-plp-style-options data-dictionary-complete="{% if style_dictionary_count != blank and style_dictionary_count <= 50 %}true{% else %}false{% endif %}">
+    {%- assign style_groups = 'color,finish,pattern,transparency,use,presence' | split: ',' -%}
+    {%- for trait in metaobjects.lemoon_style_trait.values limit: 50 -%}
+      {%- if style_groups contains trait.group.value -%}
+        {%- assign style_param = 'filter.v.m.custom.style_filter_' | append: trait.group.value -%}
+        {%- assign style_filter = collection.filters | where: 'param_name', style_param | first -%}
+        {%- if style_filter != blank and trait.label.value != blank -%}
+          <facet-remove data-plp-supplemental><a class="lemoon-filter-pill" data-filter-param="{{ style_param | escape }}" data-filter-value="gid://shopify/Metaobject/{{ trait.system.id }}"><span>{{ style_filter.label | escape }}: {{ trait.label.value | escape }}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8"/></svg><span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span></a></facet-remove>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </template>

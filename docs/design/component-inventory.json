@@ -503,7 +503,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/card-product.liquid",
-        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; swatches sin media propia usan fallback neutro con alt vacío al cambiar de variante, sin conservar otra foto ni vista secundaria de otro color; secundaria vacía no emite imagen ni URLs; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada.",
+        "scope": "card_product y section_id reales; recommended_variant opcional validada para media/precio/URL/swatch y quick-add coherentes; swatches sin media propia usan fallback neutro con alt vacío al cambiar de variante, sin conservar otra foto ni vista secundaria de otro color; secundaria vacía no emite imagen ni URLs; sin parámetro conserva contrato. Quick-add reutiliza card_variant validada. LEM-153: variante nativa de product.url validada por pertenencia al producto para imagen/precio/swatch/compra coherentes incluso con OR; enlaces swatch conservan parámetros ajenos y reemplazan variant sin duplicarlo. El consumidor PLP transmite native_variant_filtering cuando hay filtros de variante activos: usa la variante relevante nativa aun si Shopify omite el deep link en una selección OR.",
         "recipe_path": "docs/components/recipes/product-card-grid.md"
       }
     },
@@ -863,7 +863,7 @@
       "availability": {
         "status": "canonical-reusable",
         "entry_path": "snippets/facets.liquid",
-        "scope": "results, filtros y formularios nativos; la PLP omite siete grupos del sidebar y drawer, preserva sus valores aplicados, abre todos los acordeones móviles al entrar, conserva grupos omitidos o respuestas AJAX inválidas, deshabilita Eliminar filtros sin filtros activos y muestra las opciones de sort con capitalización natural; publica cambios de opción y ordenación confirmados por AJAX con consentimiento de analítica; el átomo select no decide políticas de ordenación.",
+        "scope": "results, filtros y formularios nativos; la PLP omite siete grupos del sidebar y drawer, preserva sus valores aplicados, abre todos los acordeones móviles al entrar, conserva grupos omitidos o respuestas AJAX inválidas, deshabilita Eliminar filtros sin filtros activos y muestra las opciones de sort con capitalización natural; publica cambios de opción y ordenación confirmados por AJAX con consentimiento de analítica; el átomo select no decide políticas de ordenación. LEM-153: selecciones de afinidad reconocidas por diccionario conservan chips removibles con JavaScript aunque Shopify omita referencias sin asignaciones de active_values; no modifica resultados ni inventa atributos, y eliminar un chip conserva las demás referencias y ordenación. Sin JavaScript permanece el estado nativo y la salida para quitar todos los filtros. Diccionario complementario limitado a50 entradas completas, sin paginación anidada ni interferencia con la página de productos.",
         "recipe_path": "docs/components/recipes/search-sort.md"
       }
     },

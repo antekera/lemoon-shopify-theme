@@ -52,7 +52,7 @@ test('uses color-specific gallery images first and preserves query params in var
   expect(colorSpecificMarker).toBeGreaterThanOrEqual(0);
   expect(genericMarker).toBeGreaterThan(colorSpecificMarker);
   expect(template).toMatch(/assign swatch_product_url = value\.product_url \| default: card_product\.url[\s\S]*?if swatch_product_url contains '\?'[\s\S]*?assign variant_separator = '&'/);
-  expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
+  expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \| escape \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
   expect(template).toMatch(/if swatch_secondary == blank\s+assign secondary_marker = 'card-model:' \| append: value\.name/);
   expect(template).not.toMatch(/if swatch_secondary == blank and swatch_primary\.id == card_product\.featured_media\.id/);
 });
