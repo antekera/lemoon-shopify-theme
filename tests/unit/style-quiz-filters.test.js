@@ -37,6 +37,11 @@ describe('native collection filter URL contract', () => {
     settings.traits = settings.traits.filter(row => row.group !== 'color' || row.code !== missingCode);
     expect(() => buildQuizCollectionURL({ shape: ['round'], color: ['neutral'], finish: ['matte'] }, settings)).toThrow();
   });
+  it.each([['color', 'bold'], ['color', 'neutral'], ['color', 'black'], ['pattern', 'tortoise'], ['color', 'two_tone'], ['transparency', 'transparent'], ['color', 'silver']])('rejects the complete selection when UI %s/%s has no dictionary reference', (group, code) => {
+    const settings = config();
+    settings.traits = settings.traits.filter(trait => trait.group !== group || trait.code !== code);
+    expect(() => buildQuizCollectionURL({ shape: ['round'], [group]: [code] }, settings)).toThrow(`Invalid quiz filter configuration: ${group}/${code}`);
+  });
   it('uses the current environment dictionary IDs, deduplicates and does not mutate input', () => {
     const answers = { shape: ['round', 'round'], finish: ['matte', 'matte'] };
     const settings = config(); settings.traits.find(row => row.group === 'finish' && row.code === 'matte').id = 'gid://shopify/Metaobject/987654321';

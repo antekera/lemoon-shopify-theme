@@ -15,6 +15,65 @@ const regularPrice = html => html.match(/<span class="price-item price-item--reg
 const primaryImage = html => html.match(/<img\b[^>]*>/)?.[0];
 
 describe('canonical card recommended variant', () => {
+  it('initializes variant media for active OR filters even when Shopify omits the deep link', () => {
+    const product = quizProduct(1);
+    product.featured_media = { ...product.featured_media, url: '/generic-product.jpg' };
+    product.variants[0].featured_media.url = '/native-matching-blue.jpg';
+    const html = card(product, undefined, { native_variant_filtering: true, show_quick_add: true });
+    expect(links(html)).toEqual(['/products/lente-1?variant=11', '/products/lente-1?variant=11', '/products/lente-1?variant=11']);
+    expect(primaryImage(html)).toContain('/native-matching-blue.jpg');
+    expect(regularPrice(html)).toBe('$100.01');
+    expect(html).toContain('name="id" value="11"');
+  });
+
+  it('passes native variant filtering from the collection to every rendered card', () => {
+    const product = quizProduct(1);
+    product.featured_media = { ...product.featured_media, url: '/generic-product.jpg' };
+    product.variants[0].featured_media.url = '/native-matching-blue.jpg';
+    const engine = createQuizEngine();
+    const html = engine.renderFileSync('lemoon-plp-product-page', {
+      collection: { products: [product], filters: [{ param_name: 'filter.v.m.custom.style_filter_color', active_values: [{ value: 'bold' }, { value: 'brown' }] }] },
+      section: { id: 'native-plp', settings: { columns_mobile: 2 } }, paginate: { pages: 1 }, page_size: 15,
+    });
+    expect(primaryImage(html)).toContain('/native-matching-blue.jpg');
+  });
+
+  it('uses the native deep-linked variant for image, price, swatch and purchase when OR filters leave generic product media', () => {
+    const product = quizProduct(1);
+    const matching = product.variants[1];
+    matching.featured_media.url = '/filtered-carey.jpg';
+    product.url = matching.url;
+    // Shopify can retain generic product media and option selections for OR filters.
+    const html = card(product, undefined, { show_quick_add: true });
+    expect(links(html)).toEqual([matching.url, matching.url, matching.url]);
+    expect(primaryImage(html)).toContain('/filtered-carey.jpg');
+    expect(regularPrice(html)).toBe('$140.01');
+    expect(html.match(/<button\b[^>]*aria-label="Carey"[^>]*>/)?.[0]).toContain('aria-pressed="true"');
+    expect(html).toContain('name="id" value="12"');
+  });
+
+  it('replaces a preexisting variant parameter in swatch links while retaining unrelated query parameters', () => {
+    const product = quizProduct(1);
+    product.url = '/products/lente-1?tracking=quiz&variant=12&source=collection';
+    const html = card(product);
+    for (const [name, expected] of [['Azul', '11'], ['Carey', '12']]) {
+      const tag = html.match(new RegExp(`<button\\b[^>]*aria-label="${name}"[^>]*>`))?.[0];
+      const href = tag.match(/data-variant-url="([^"]+)"/)[1].replaceAll('&amp;', '&');
+      const url = new URL(href, 'https://example.test');
+      expect(url.searchParams.getAll('variant')).toEqual([expected]);
+      expect(url.searchParams.get('tracking')).toBe('quiz');
+      expect(url.searchParams.get('source')).toBe('collection');
+    }
+  });
+
+  it('does not select a foreign variant from a deep link', () => {
+    const product = quizProduct(1);
+    product.url = '/products/lente-1?variant=22';
+    const html = card(product, undefined, { show_quick_add: true });
+    expect(regularPrice(html)).toBe('$100.01');
+    expect(html).toContain('name="id" value="11"');
+  });
+
   it('keeps a native filtered ProductDrop contract coherent without an explicit recommended variant', () => {
     // Shopify documents selected_or_first_available_variant as the most relevant
     // variant in filtered collections. This models that input, not its index.
