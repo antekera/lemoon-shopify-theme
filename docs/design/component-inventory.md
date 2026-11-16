@@ -538,7 +538,7 @@ Al abrir el drawer móvil PLP, todos sus grupos comienzan expandidos, incluso si
 
 La hoja de filtros PLP bajo 750px alinea la X con el centro del título desde el borde superior real del drawer compartido.
 
-**JS.** facets.js, MenuDrawer global, show-more.js; lemoon-collection-plp.js añade vista/sort. La PLP publica eventos custom de opción y ordenación después de una respuesta AJAX, con consentimiento de analítica; el estado aplicado proviene de Shopify. [Contrato de analítica](../analytics/plp-filters-sort.md). **Reutilización actual.** Snippets grupos/chips reutilizados; lemoon-active-filters es otra composición. No reimplementar motor de filtros.
+**JS.** facets.js, MenuDrawer global, show-more.js; lemoon-collection-plp.js añade vista/sort. La PLP publica eventos custom de opción y ordenación después de una respuesta AJAX, con consentimiento de analítica; el estado aplicado proviene de Shopify. [Contrato de analítica](../analytics/plp-filters-sort.md). **Reutilización actual.** Snippets grupos/chips reutilizados; lemoon-active-filters es otra composición. No reimplementar motor de filtros. Los chips consumen `searchParams` confirmados de `lemoon:facets-updated` para no leer la URL anterior durante un render síncrono de caché.
 
 **Dependencias de composición:** [LM-CHOICE](#lm-choice), [LM-RANGE](#lm-range), [LM-OVERLAY](#lm-overlay), [LM-FEEDBACK](#lm-feedback). Consumidores estáticos en el JSON.
 

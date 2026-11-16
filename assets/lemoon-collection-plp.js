@@ -96,12 +96,14 @@
     if (sidebar && window.matchMedia('(min-width: 750px)').matches) sidebar.inert = !visible;
   };
 
-  const syncStyleSelections = (root) => {
+  const syncStyleSelections = (root, searchParams) => {
     const grid = root.querySelector('#ProductGridContainer');
     const applied = grid?.querySelector('.lemoon-applied-filters');
     if (!applied) return;
     grid.querySelectorAll('[data-plp-supplemental]').forEach((node) => node.remove());
     const current = new URL(window.location.href);
+    // Cached sections finish rendering before their history update.
+    current.search = searchParams;
     const native = [...applied.querySelectorAll('.lemoon-filter-pill[data-filter-param]')];
     const hasNative = (name, value) => native.some((chip) => chip.dataset.filterParam === name && chip.dataset.filterValue === value);
     const dictionary = grid.querySelector('template[data-plp-style-options]');
@@ -142,8 +144,8 @@
     if (state) state.dataset.plpHasActiveFilters = String(hasPills || Boolean(grid.querySelector('[data-plp-active-option]:not([data-plp-supplemental])')));
   };
 
-  const sync = (root) => {
-    syncStyleSelections(root);
+  const sync = (root, searchParams = window.location.search) => {
+    syncStyleSelections(root, searchParams);
     syncSidebar(root);
     syncSort(root);
     const appliedCount = root.querySelectorAll('#ProductGridContainer .lemoon-filter-pill').length;
@@ -270,7 +272,7 @@
     else resetToReopen = null;
   });
   document.addEventListener('lemoon:facets-updated', (event) => {
-    document.querySelectorAll('.lemoon-plp').forEach(sync);
+    document.querySelectorAll('.lemoon-plp').forEach((root) => sync(root, event.detail?.searchParams));
     if (resetToReopen?.requestId !== event.detail?.requestId) return;
     const { root } = resetToReopen;
     resetToReopen = null;
@@ -280,7 +282,7 @@
   });
   document.addEventListener('lemoon:facets-failed', (event) => {
     if (resetToReopen?.requestId === event.detail?.requestId) resetToReopen = null;
-    document.querySelectorAll('.lemoon-plp').forEach(sync);
+    document.querySelectorAll('.lemoon-plp').forEach((root) => sync(root));
   });
   document.addEventListener('keydown', (event) => {
     const menu = event.target.closest('[data-sort-menu]');

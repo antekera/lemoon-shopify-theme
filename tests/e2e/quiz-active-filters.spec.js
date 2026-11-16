@@ -82,6 +82,57 @@ test('new facet responses and history never retain stale supplemental chips or c
   await expect(page.locator('[data-plp-active-option]')).toHaveCount(0);
 });
 
+for (const [label, selected] of [['changed colors', [104, 108]], ['cleared colors', []]]) {
+  test(`cached facet rendering uses its rendered selections for ${label}`, async ({ page }) => {
+    const initial = [[color, ref(101)], [color, ref(104)], ['sort_by', 'price-ascending']];
+    const target = [...selected.map(id => [color, ref(id)]), ['sort_by', 'price-ascending']];
+    const initialParams = new URLSearchParams(initial).toString();
+    const targetParams = new URLSearchParams(target).toString();
+    const responses = {
+      [initialParams]: fixture({ pipeline: true, brown: true }),
+      [targetParams]: fixture({ pipeline: true }),
+    };
+    let requests = 0;
+    await page.route(url => url.searchParams.has('section_id'), async route => {
+      requests++;
+      const params = new URL(route.request().url()).searchParams;
+      params.delete('section_id');
+      await route.fulfill({ status: 200, contentType: 'text/html', body: responses[params.toString()] });
+    });
+    await open(page, initial, { pipeline: true, brown: true });
+    await page.evaluate(() => {
+      window.debounce = fn => fn;
+      customElements.define('menu-drawer', class extends HTMLElement { bindEvents() {} });
+    });
+    await page.addScriptTag({ url: '/assets/facets.js' });
+    const render = params => page.evaluate(search => new Promise(resolve => {
+      document.addEventListener('lemoon:facets-updated', resolve, { once: true });
+      FacetFiltersForm.renderPage(search);
+    }), params);
+    await render(targetParams);
+    await render(initialParams);
+    expect(requests).toBe(2);
+    await render(targetParams);
+    expect(requests).toBe(2);
+    await expect(pills(page)).toHaveCount(selected.length);
+    expect(await pills(page).evaluateAll(nodes => nodes.map(node => node.dataset.filterValue).sort())).toEqual(selected.map(ref).sort());
+    for (const id of selected) {
+      const chip = page.locator(`.lemoon-filter-pill[data-filter-value="${ref(id)}"]`);
+      const destination = new URL(await chip.getAttribute('href'), 'https://fixture.test');
+      expect(destination.searchParams.getAll(color)).toEqual(selected.filter(value => value !== id).map(ref));
+      expect(destination.searchParams.get('sort_by')).toBe('price-ascending');
+    }
+    await expect(page.locator('[data-applied-filter-count]')).toHaveText(String(selected.length));
+    await expect(page.locator('[data-plp-has-active-filters]')).toHaveAttribute('data-plp-has-active-filters', String(selected.length > 0));
+    expect(await page.locator('[data-clear-filters]').getAttribute('aria-disabled')).toBe(selected.length ? null : 'true');
+    await page.goBack();
+    await expect.poll(() => pills(page).evaluateAll(nodes => nodes.map(node => node.dataset.filterValue).sort())).toEqual([ref(101), ref(104)]);
+    await page.goForward();
+    await expect.poll(() => pills(page).evaluateAll(nodes => nodes.map(node => node.dataset.filterValue).sort())).toEqual(selected.map(ref).sort());
+    expect(requests).toBe(2);
+  });
+}
+
 test('an incomplete dictionary never invents a partial set of active chips', async ({ page }) => {
   await open(page, [[color, ref(101)], [color, ref(104)]], { brown: true, incomplete: true });
   await expect(pills(page)).toHaveCount(1);

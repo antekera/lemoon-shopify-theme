@@ -19,4 +19,5 @@ const html = engine.renderFileSync('lemoon-active-filters', {
   metaobjects: { lemoon_style_trait: { values: dictionary, values_count: selection.incomplete ? 51 : dictionary.length } },
   sort_by: 'price-ascending',
 });
-process.stdout.write(`<collection-component><div class="lemoon-plp" data-collection-url="/collections/all"><select id="SortBy"><option value="price-ascending">Price</option></select><span data-applied-filter-count></span><a data-clear-filters>Reset</a><div id="ProductGridContainer">${html}<span id="ProductCount" data-product-count="0">0</span><div class="collection collection--empty">No products</div></div></div></collection-component>`);
+const pipeline = selection.pipeline ? '<menu-drawer><facet-filters-form><form id="FacetFiltersFormMobile"></form></facet-filters-form></menu-drawer>' : '';
+process.stdout.write(`<collection-component><div class="lemoon-plp" data-collection-url="/collections/all">${pipeline}<select id="SortBy"><option value="price-ascending">Price</option></select><span data-applied-filter-count></span><a data-clear-filters>Reset</a><div id="ProductGridContainer">${html}<span id="ProductCount" data-product-count="0">0</span><div id="product-grid" data-id="quiz-active" class="collection collection--empty">No products</div></div></div></collection-component>`);
