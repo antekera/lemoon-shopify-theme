@@ -265,7 +265,11 @@
   document.addEventListener('input', (event) => {
     if (event.target.id !== 'SortBy') return;
     const root = event.target.closest('.lemoon-plp');
-    if (root) sync(root);
+    if (root) {
+      const selected = new URLSearchParams(window.location.search);
+      selected.set('sort_by', event.target.value);
+      sync(root, selected.toString());
+    }
   });
   document.addEventListener('lemoon:facets-start', (event) => {
     if (resetToReopen?.requestId === null) resetToReopen.requestId = event.detail?.requestId;

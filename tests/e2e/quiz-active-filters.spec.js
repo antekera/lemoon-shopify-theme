@@ -133,6 +133,61 @@ for (const [label, selected] of [['changed colors', [104, 108]], ['cleared color
   });
 }
 
+for (const [phase, visible] of [['queued', false], ['in-flight', false], ['queued', true]]) {
+  test(`removing a ${visible ? 'visible' : 'hidden'} chip during a ${phase} sort keeps the price order and final filters`, async ({ page }) => {
+    const removedField = visible ? 'filter.p.m.custom.frame_shape' : color;
+    const removedValue = visible ? 'redondo' : ref(104);
+    const requests = [];
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    let releaseFirst;
+    const firstResponse = new Promise(resolve => { releaseFirst = resolve; });
+    const response = fixture({ pipeline: true, sorting: true, brown: true, sortBy: 'price-ascending' });
+    await page.route(url => url.searchParams.has('section_id'), async route => {
+      requests.push(new URL(route.request().url()).searchParams);
+      if (requests.length === 1) await firstResponse;
+      await route.fulfill({ status: 200, contentType: 'text/html', body: response });
+    });
+    await open(page, [[color, ref(101)], [removedField, removedValue], [transparency, ref(105)], ['sort_by', 'manual']], { pipeline: true, sorting: true, brown: true, shape: visible });
+    // Use the real trailing debounce and custom elements, not a synchronous input adapter.
+    await page.addScriptTag({ url: '/assets/global.js' });
+    await page.addScriptTag({ url: '/assets/facets.js' });
+    await page.locator('[data-sort-menu] summary').click();
+    await page.locator('[data-sort-value="price-ascending"]').click();
+    if (phase === 'in-flight') await expect.poll(() => requests.length).toBe(1);
+    const removalRequest = page.waitForRequest(request => new URL(request.url()).searchParams.has('section_id') && !new URL(request.url()).searchParams.getAll(removedField).includes(removedValue));
+    await page.locator(`.lemoon-filter-pill[data-filter-param="${removedField}"][data-filter-value="${removedValue}"]`).click();
+    const removed = new URL((await removalRequest).url()).searchParams;
+    expect(removed.get('sort_by')).toBe('price-ascending');
+    expect(removed.getAll(color)).toEqual([ref(101)]);
+    expect(removed.getAll(transparency)).toEqual([ref(105)]);
+    // Cross the production 800ms debounce deadline while the removal response is held.
+    await page.evaluate(() => new Promise(resolve => setTimeout(resolve, 850)));
+    const last = requests.at(-1);
+    expect(last.get('sort_by')).toBe('price-ascending');
+    expect(last.getAll(removedField)).not.toContain(removedValue);
+    expect(last.getAll(color)).toEqual([ref(101)]);
+    expect(last.getAll(transparency)).toEqual([ref(105)]);
+    const releasedResponse = page.waitForResponse(response => new URL(response.url()).searchParams.has('section_id'));
+    releaseFirst();
+    await (await releasedResponse).finished();
+    await expect(page).toHaveURL(/sort_by=price-ascending/);
+    expect(new URL(page.url()).searchParams.getAll(removedField)).not.toContain(removedValue);
+    await expect(pills(page)).toHaveCount(2);
+    expect(await pills(page).evaluateAll(nodes => nodes.map(node => node.dataset.filterValue).sort())).toEqual([ref(101), ref(105)]);
+    if (visible) {
+      await page.evaluate(() => {
+        window.afterRemovalSubmission = new Promise(resolve => document.addEventListener('lemoon:facets-updated', event => resolve(event.detail.searchParams), { once: true }));
+      });
+      await page.locator('#FacetFiltersForm input[name="filter.p.m.custom.frame_shape"]').uncheck();
+      const next = new URLSearchParams(await page.evaluate(() => window.afterRemovalSubmission));
+      expect(next.has(removedField)).toBe(false);
+      expect(next.get('sort_by')).toBe('price-ascending');
+    }
+    expect(errors).toEqual([]);
+  });
+}
+
 test('an incomplete dictionary never invents a partial set of active chips', async ({ page }) => {
   await open(page, [[color, ref(101)], [color, ref(104)]], { brown: true, incomplete: true });
   await expect(pills(page)).toHaveCount(1);

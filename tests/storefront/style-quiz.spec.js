@@ -20,6 +20,7 @@ async function next(quiz, count = 1) { for (let i = 0; i < count; i++) await qui
 const filterPairs = url => [...new URL(url).searchParams].filter(([field, value]) => field.startsWith('filter.') && !(value === '' && ['filter.v.price.gte', 'filter.v.price.lte'].includes(field))).map(pair => JSON.stringify(pair)).sort();
 async function expectAppliedSelections(page, expected = filterPairs(page.url())) {
   await expect(page.locator('#ProductCount')).toBeAttached();
+  await expect(page.locator('.collection.loading')).toHaveCount(0);
   await expect.poll(async () => filterPairs(page.url())).toEqual(expected);
   const chips = page.locator('.lemoon-applied-filters .lemoon-filter-pill');
   await expect(chips, 'one removable applied chip per selected value').toHaveCount(expected.length);
@@ -55,8 +56,15 @@ async function expectCardVariantInformation(page) {
     expect(Number(visiblePrice.replace(/[^0-9]/g, '')), `${target.pathname} variant price`).toBe(Math.round(variant.price / 100));
     const primary = card.locator('.card__media img').first();
     if (variant.featured_image?.src) {
-      const imagePath = source => new URL(source, page.url()).pathname;
-      expect(imagePath(await primary.getAttribute('src')), `${target.pathname} variant photograph`).toBe(imagePath(variant.featured_image.src));
+      // Shopify serves the same file through its store-domain and CDN aliases.
+      const imageIdentity = source => {
+        const url = new URL(source, page.url());
+        return { file: url.pathname.split('/').at(-1), version: url.searchParams.get('v') };
+      };
+      const displayedImage = imageIdentity(await primary.getAttribute('src'));
+      const variantImage = imageIdentity(variant.featured_image.src);
+      expect(displayedImage.file, `${target.pathname} variant photograph`).toBe(variantImage.file);
+      if (displayedImage.version && variantImage.version) expect(displayedImage.version).toBe(variantImage.version);
     } else {
       expect(await primary.getAttribute('src'), `${target.pathname} missing media uses honest fallback`).toContain('lemoon-product-fallback.png');
     }
@@ -189,6 +197,8 @@ test('an unrestricted quiz hands the complete catalogue count and pagination to 
     const nextPage = page.locator('.pagination__item--prev[href*="page="]');
     await expect(nextPage).toBeVisible(); const firstIDs = await cards.evaluateAll(nodes => nodes.map(node => node.querySelector('[id]')?.id));
     await nextPage.click(); await expect(page).toHaveURL(/[?&]page=2/);
+    await expect(page.locator('.collection.loading')).toHaveCount(0);
+    await expect(cards.first()).toBeVisible();
     const secondIDs = await cards.evaluateAll(nodes => nodes.map(node => node.querySelector('[id]')?.id));
     expect(secondIDs.length).toBeGreaterThan(0); expect(secondIDs.some(id => firstIDs.includes(id))).toBe(false);
   }
