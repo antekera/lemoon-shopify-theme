@@ -187,7 +187,7 @@ test('PLP filter toggle keeps sentence case and reset reopens the desktop sideba
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await expect(sidebar).toHaveJSProperty('inert', false);
   await expect(page.locator('.lemoon-plp')).not.toHaveClass(/lemoon-plp--filters-hidden/);
-  await expect(page.locator('.lemoon-filter-reset')).toHaveCount(0);
+  await expect(page.locator('.lemoon-filter-reset')).toBeHidden();
 });
 
 test('PLP keeps the desktop sidebar closed when reset fails', async ({ page }) => {
@@ -233,6 +233,12 @@ test('PLP reset is usable only while a filter is applied', async ({ page }) => {
   await page.evaluate(() => {
     history.pushState({}, '', '?filter.p.m.custom.frame_shape=redondo&sort_by=most-relevant');
     document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'true';
+    const selected = document.createElement('span');
+    selected.hidden = true;
+    selected.dataset.plpActiveOption = '';
+    selected.dataset.filterParam = 'filter.p.m.custom.frame_shape';
+    selected.dataset.filterValue = 'redondo';
+    document.querySelector('#ProductGridContainer').append(selected);
     document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
   });
   await expect(reset).not.toHaveAttribute('aria-disabled');
@@ -241,6 +247,7 @@ test('PLP reset is usable only while a filter is applied', async ({ page }) => {
   await page.evaluate(() => {
     history.pushState({}, '', '?sort_by=most-relevant');
     document.querySelector('[data-plp-has-active-filters]').dataset.plpHasActiveFilters = 'false';
+    document.querySelectorAll('[data-plp-active-option]').forEach(node => node.remove());
     document.dispatchEvent(new CustomEvent('lemoon:facets-updated'));
   });
   await expect(reset).toHaveAttribute('aria-disabled', 'true');

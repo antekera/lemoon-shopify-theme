@@ -1,4 +1,16 @@
 <div data-plp-page-size="{{ page_size }}" data-plp-page-count="{{ paginate.pages }}">
+            {%- liquid
+              assign native_variant_filtering = false
+              for native_filter in collection.filters
+                assign filter_scope = native_filter.param_name | slice: 0, 9
+                if filter_scope == 'filter.v.'
+                  if native_filter.active_values.size > 0 or native_filter.min_value.value != blank or native_filter.max_value.value != blank
+                    assign native_variant_filtering = true
+                    break
+                  endif
+                endif
+              endfor
+            -%}
             {%- assign available_products = collection.products | where: 'available' -%}
             {%- if available_products.size == 0 -%}
               <div class="collection collection--empty" id="product-grid" data-id="{{ section.id }}">
@@ -18,7 +30,7 @@
                     {% assign lazy_load = false %}
                     {%- if forloop.index > 2 -%}{%- assign lazy_load = true -%}{%- endif -%}
                     <li class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
-                      {% render 'card-product', card_product: product, media_aspect_ratio: section.settings.image_ratio, image_shape: section.settings.image_shape, show_secondary_image: true, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, lazy_load: lazy_load, skip_styles: skip_card_product_styles, section_id: section.id, product_view_context: 'collection', enable_gallery_swipe: true %}
+                      {% render 'card-product', card_product: product, native_variant_filtering: native_variant_filtering, media_aspect_ratio: section.settings.image_ratio, image_shape: section.settings.image_shape, show_secondary_image: true, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, lazy_load: lazy_load, skip_styles: skip_card_product_styles, section_id: section.id, product_view_context: 'collection', enable_gallery_swipe: true %}
                     </li>
                     {%- assign skip_card_product_styles = true -%}
                   {%- endfor -%}

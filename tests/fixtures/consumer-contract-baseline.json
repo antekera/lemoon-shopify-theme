@@ -3476,8 +3476,8 @@
               {
                 "tag": "div",
                 "attrs": {
-                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
+                  "data-collection-handle": "fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
                   "data-default-columns": "2",
@@ -3917,8 +3917,8 @@
                                               {
                                                 "tag": "select",
                                                 "attrs": {
-                                                  "name": "sort_by",
                                                   "id": "SortBy",
+                                                  "name": "sort_by",
                                                   "aria-label": "Ordenar por:",
                                                   "aria-describedby": "a11y-refresh-page-message",
                                                   "class": "select__select"
@@ -4144,6 +4144,42 @@
                               {
                                 "tag": "div",
                                 "attrs": {
+                                  "aria-label": "Filtros aplicados",
+                                  "hidden": "",
+                                  "style": "display: none",
+                                  "class": "lemoon-applied-filters"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "facet-remove",
+                                    "attrs": {
+                                      "class": "lemoon-filter-reset"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "a",
+                                        "attrs": {
+                                          "href": "/collections/fixture?sort_by=price-descending"
+                                        },
+                                        "children": [
+                                          "Eliminar filtros"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "template",
+                                "attrs": {
+                                  "data-plp-style-options": "",
+                                  "data-dictionary-complete": "false"
+                                },
+                                "children": []
+                              },
+                              {
+                                "tag": "div",
+                                "attrs": {
                                   "data-plp-page-size": "15",
                                   "data-plp-page-count": "1"
                                 },
@@ -4230,8 +4266,8 @@
               {
                 "tag": "div",
                 "attrs": {
-                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
+                  "data-collection-handle": "fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
                   "data-default-columns": "2",
@@ -4671,8 +4707,8 @@
                                               {
                                                 "tag": "select",
                                                 "attrs": {
-                                                  "name": "sort_by",
                                                   "id": "SortBy",
+                                                  "name": "sort_by",
                                                   "aria-label": "Ordenar por:",
                                                   "aria-describedby": "a11y-refresh-page-message",
                                                   "class": "select__select"
@@ -4907,6 +4943,42 @@
                               {
                                 "tag": "div",
                                 "attrs": {
+                                  "aria-label": "Filtros aplicados",
+                                  "hidden": "",
+                                  "style": "display: none",
+                                  "class": "lemoon-applied-filters"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "facet-remove",
+                                    "attrs": {
+                                      "class": "lemoon-filter-reset"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "a",
+                                        "attrs": {
+                                          "href": "/collections/fixture?sort_by=title-descending"
+                                        },
+                                        "children": [
+                                          "Eliminar filtros"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "template",
+                                "attrs": {
+                                  "data-plp-style-options": "",
+                                  "data-dictionary-complete": "false"
+                                },
+                                "children": []
+                              },
+                              {
+                                "tag": "div",
+                                "attrs": {
                                   "data-plp-page-size": "15",
                                   "data-plp-page-count": "1"
                                 },
@@ -4993,8 +5065,8 @@
               {
                 "tag": "div",
                 "attrs": {
-                  "data-collection-handle": "fixture",
                   "data-collection-url": "/collections/fixture",
+                  "data-collection-handle": "fixture",
                   "data-legacy-shape": "",
                   "data-sort-prefix": "Ordenar por",
                   "data-default-columns": "2",
@@ -5434,8 +5506,8 @@
                                               {
                                                 "tag": "select",
                                                 "attrs": {
-                                                  "name": "sort_by",
                                                   "id": "SortBy",
+                                                  "name": "sort_by",
                                                   "aria-label": "Ordenar por:",
                                                   "aria-describedby": "a11y-refresh-page-message",
                                                   "class": "select__select"
@@ -5655,6 +5727,42 @@
                                 "attrs": {
                                   "hidden": "",
                                   "data-plp-has-active-filters": "false"
+                                },
+                                "children": []
+                              },
+                              {
+                                "tag": "div",
+                                "attrs": {
+                                  "aria-label": "Filtros aplicados",
+                                  "hidden": "",
+                                  "style": "display: none",
+                                  "class": "lemoon-applied-filters"
+                                },
+                                "children": [
+                                  {
+                                    "tag": "facet-remove",
+                                    "attrs": {
+                                      "class": "lemoon-filter-reset"
+                                    },
+                                    "children": [
+                                      {
+                                        "tag": "a",
+                                        "attrs": {
+                                          "href": "/collections/fixture?sort_by=most-relevant"
+                                        },
+                                        "children": [
+                                          "Eliminar filtros"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tag": "template",
+                                "attrs": {
+                                  "data-plp-style-options": "",
+                                  "data-dictionary-complete": "false"
                                 },
                                 "children": []
                               },
@@ -6246,5 +6354,14 @@
       "service-operations": 1440,
       "crystal": 1440
     }
+  },
+  "lem153_selection_shell": {
+    "revision": "5faffdff0ae140db924af72a077aef6f3eef416c",
+    "scenarios": [
+      "collection-preferred",
+      "collection-fallback",
+      "collection-relevance"
+    ],
+    "boundary": "Only inert hidden selection shell and template added; all prior semantic nodes verified unchanged."
   }
 }

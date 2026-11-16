@@ -96,7 +96,56 @@
     if (sidebar && window.matchMedia('(min-width: 750px)').matches) sidebar.inert = !visible;
   };
 
-  const sync = (root) => {
+  const syncStyleSelections = (root, searchParams) => {
+    const grid = root.querySelector('#ProductGridContainer');
+    const applied = grid?.querySelector('.lemoon-applied-filters');
+    if (!applied) return;
+    grid.querySelectorAll('[data-plp-supplemental]').forEach((node) => node.remove());
+    const current = new URL(window.location.href);
+    // Cached sections finish rendering before their history update.
+    current.search = searchParams;
+    const native = [...applied.querySelectorAll('.lemoon-filter-pill[data-filter-param]')];
+    const hasNative = (name, value) => native.some((chip) => chip.dataset.filterParam === name && chip.dataset.filterValue === value);
+    const dictionary = grid.querySelector('template[data-plp-style-options]');
+    if (dictionary?.dataset.dictionaryComplete === 'true') {
+      const seen = new Set();
+      dictionary.content.querySelectorAll('.lemoon-filter-pill[data-filter-param][data-filter-value]').forEach((option) => {
+        const { filterParam: name, filterValue: value } = option.dataset;
+        const key = `${name}\0${value}`;
+        if (!/^filter\.v\.m\.custom\.style_filter_(color|finish|pattern|transparency|use|presence)$/.test(name)
+          || !/^gid:\/\/shopify\/Metaobject\/[1-9]\d*$/.test(value)
+          || !current.searchParams.getAll(name).includes(value) || hasNative(name, value) || seen.has(key)) return;
+        seen.add(key);
+        const chip = option.parentElement.cloneNode(true);
+        applied.insertBefore(chip, applied.querySelector('.lemoon-filter-reset'));
+        const marker = document.createElement('span');
+        marker.hidden = true;
+        marker.dataset.plpSupplemental = '';
+        marker.dataset.plpActiveOption = '';
+        marker.dataset.filterParam = name;
+        marker.dataset.filterValue = value;
+        grid.append(marker);
+      });
+    }
+    applied.querySelectorAll('.lemoon-filter-pill[data-filter-param]').forEach((chip) => {
+      const { filterParam: name, filterValue: value, filterSecondaryParam: secondary } = chip.dataset;
+      const destination = new URL(current.href);
+      const remaining = destination.searchParams.getAll(name).filter((item) => item !== value);
+      destination.searchParams.delete(name);
+      if (!chip.hasAttribute('data-filter-remove-all')) remaining.forEach((item) => destination.searchParams.append(name, item));
+      if (secondary) destination.searchParams.delete(secondary);
+      destination.searchParams.delete('page');
+      chip.href = `${destination.pathname}${destination.search}`;
+    });
+    const hasPills = Boolean(applied.querySelector('.lemoon-filter-pill'));
+    applied.hidden = !hasPills;
+    applied.style.display = hasPills ? '' : 'none';
+    const state = grid.querySelector('[data-plp-has-active-filters]');
+    if (state) state.dataset.plpHasActiveFilters = String(hasPills || Boolean(grid.querySelector('[data-plp-active-option]:not([data-plp-supplemental])')));
+  };
+
+  const sync = (root, searchParams = window.location.search) => {
+    syncStyleSelections(root, searchParams);
     syncSidebar(root);
     syncSort(root);
     const appliedCount = root.querySelectorAll('#ProductGridContainer .lemoon-filter-pill').length;
@@ -223,7 +272,7 @@
     else resetToReopen = null;
   });
   document.addEventListener('lemoon:facets-updated', (event) => {
-    document.querySelectorAll('.lemoon-plp').forEach(sync);
+    document.querySelectorAll('.lemoon-plp').forEach((root) => sync(root, event.detail?.searchParams));
     if (resetToReopen?.requestId !== event.detail?.requestId) return;
     const { root } = resetToReopen;
     resetToReopen = null;
@@ -233,7 +282,7 @@
   });
   document.addEventListener('lemoon:facets-failed', (event) => {
     if (resetToReopen?.requestId === event.detail?.requestId) resetToReopen = null;
-    document.querySelectorAll('.lemoon-plp').forEach(sync);
+    document.querySelectorAll('.lemoon-plp').forEach((root) => sync(root));
   });
   document.addEventListener('keydown', (event) => {
     const menu = event.target.closest('[data-sort-menu]');

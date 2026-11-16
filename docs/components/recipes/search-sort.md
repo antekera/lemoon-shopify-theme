@@ -49,3 +49,13 @@ Las opciones se capturan completas en sus dueños y se pasan como options_html; 
 ## Dependencias de la página de búsqueda
 
 `sections/main-search.liquid` pasa explícitamente `search` y `all_collection: collections.all` a `main-search-results` en las dos ramas paginadas. El snippet conserva el fallback a collections.all para consumidores anteriores. Publicar juntos la sección, snippets/main-search-results.liquid, snippets/main-search-result-card.liquid y sus dependencias de facets/cards/paginación; una publicación parcial puede producir el error de asset faltante aunque el archivo exista en Git. La existencia de un archivo remoto no acredita el render público.
+
+## Afinidades seleccionadas sin asignaciones — LEM-153
+
+Shopify puede aplicar una referencia de afinidad y devolver cero resultados sin incluirla en `active_values`. `lemoon-active-filters` ofrece las entradas del diccionario real mediante templates inertes y escapados. El diccionario complementario se admite únicamente si `values_count` confirma hasta50 entradas; no usa paginación para evitar interferencias con `collection.products`. `lemoon-collection-plp.js` complementa solamente las selecciones reconocidas que faltan; conserva el filtrado y los conteos nativos. No convierte valores de URL desconocidos en atributos del catálogo. Cada chip retira únicamente su propia pareja campo/valor y preserva las demás referencias, otros filtros y la ordenación; elimina la página de paginación al cambiar criterios. La sincronización se repite después de AJAX e historial.
+
+Esto requiere JavaScript para las referencias omitidas por Shopify; sin JavaScript siguen disponibles el estado vacío real y la salida nativa para quitar todos los filtros. Una opción sin productos clasificados no se rellena con inferencias ni se presenta como una coincidencia. La cobertura de catálogo y la publicación se verifican aparte.
+
+### Respuestas de caché y estado confirmado
+
+`lemoon:facets-updated` incluye `requestId` y `searchParams` de la respuesta aceptada. La PLP sincroniza los chips con esos parámetros: una respuesta desde caché puede terminar antes de actualizarse la URL del navegador. Los renders iniciales y la recuperación de error conservan el fallback a la URL vigente; no se cambia el orden de historial ni la protección de respuestas obsoletas.

@@ -68,3 +68,30 @@ it('places finishes before materials in two visible detail groups with no tabs',
   expect([...details.matchAll(/<h3>([^<]+)<\/h3>/g)].map(match => match[1])).toEqual(['Acabados', 'Materiales']);
   expect([...details.matchAll(/<input\b[^>]*name="([^"]+)"/g)].map(match => match[1])).toEqual(['finish', 'finish', 'material', 'material', 'material', 'material', 'material', 'material']);
 });
+
+const colorSelections = [
+  ['color', 'bold', ['bold']], ['color', 'neutral', ['neutral', 'brown', 'light']],
+  ['color', 'black', ['black']], ['pattern', 'tortoise', ['tortoise']],
+  ['color', 'two_tone', ['two_tone']], ['transparency', 'transparent', ['transparent']],
+  ['color', 'silver', ['silver']],
+];
+it.each(colorSelections)('renders numeric dictionary references for UI %s/%s without crossing criteria', (group, code, expectedCodes) => {
+  const config = configuration(renderQuizSection());
+  const query = new URL(buildQuizCollectionURL({ [group]: [code] }, config), 'https://example.test').searchParams;
+  expect([...new Set(query.keys())]).toEqual([`filter.v.m.custom.style_filter_${group}`]);
+  expect(query.getAll(`filter.v.m.custom.style_filter_${group}`).sort()).toEqual(expectedCodes.map(expectedCode => config.traits.find(trait => trait.group === group && trait.code === expectedCode).id).sort());
+});
+it('preserves every value in all 127 nonempty subsets of the seven UI color choices', () => {
+  const config = configuration(renderQuizSection());
+  for (let mask = 1; mask < 128; mask++) {
+    const answers = {};
+    const expected = [];
+    colorSelections.forEach(([group, code, expectedCodes], index) => {
+      if (!(mask & (1 << index))) return;
+      (answers[group] ??= []).push(code);
+      for (const expectedCode of expectedCodes) expected.push([`filter.v.m.custom.style_filter_${group}`, config.traits.find(trait => trait.group === group && trait.code === expectedCode).id]);
+    });
+    const query = new URL(buildQuizCollectionURL(answers, config), 'https://example.test').searchParams;
+    expect([...query].map(pair => JSON.stringify(pair)).sort(), `color selection subset ${mask}`).toEqual(expected.map(pair => JSON.stringify(pair)).sort());
+  }
+});

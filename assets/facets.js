@@ -226,7 +226,9 @@ class FacetFiltersForm extends HTMLElement {
     loadingSpinners.forEach((spinner) => spinner.classList.add('hidden'));
 
     updateEvent?.resolve(parseInt(sourceCount.dataset.productCount) || 0);
-    document.dispatchEvent(new CustomEvent('lemoon:facets-updated', { detail: { requestId } }));
+    document.dispatchEvent(new CustomEvent('lemoon:facets-updated', {
+      detail: { requestId, searchParams: FacetFiltersForm.searchParamsConfirmed },
+    }));
   }
 
   static renderFilters(parsedHTML, event) {

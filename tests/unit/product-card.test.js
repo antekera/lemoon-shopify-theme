@@ -45,20 +45,20 @@ test('keeps sale prices single, shows unit prices, and outlines selected dark sw
 });
 
 test('uses color-specific gallery images first and preserves query params in variant links', async () => {
-  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+  const template = await readFile(themeFile('snippets/lemoon-product-card-swatches.liquid'), 'utf8');
   const colorSpecificMarker = template.indexOf("assign secondary_marker = 'card-diagonal:' | append: value.name");
   const genericMarker = template.indexOf("assign secondary_marker = 'card-view:diagonal'");
 
   expect(colorSpecificMarker).toBeGreaterThanOrEqual(0);
   expect(genericMarker).toBeGreaterThan(colorSpecificMarker);
   expect(template).toMatch(/assign swatch_product_url = value\.product_url \| default: card_product\.url[\s\S]*?if swatch_product_url contains '\?'[\s\S]*?assign variant_separator = '&'/);
-  expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
+  expect(template).toMatch(/data-variant-url="\{\{ swatch_product_url \| escape \}\}\{\{ variant_separator \}\}variant=\{\{ swatch_variant\.id \}\}"/);
   expect(template).toMatch(/if swatch_secondary == blank\s+assign secondary_marker = 'card-model:' \| append: value\.name/);
   expect(template).not.toMatch(/if swatch_secondary == blank and swatch_primary\.id == card_product\.featured_media\.id/);
 });
 
 test('renders each variant media preview as a valid Shopify image URL', async () => {
-  const template = await readFile(themeFile('snippets/card-product.liquid'), 'utf8');
+  const template = await readFile(themeFile('snippets/lemoon-product-card-swatches.liquid'), 'utf8');
 
   expect(template).toMatch(/assign swatch_secondary_image = swatch_secondary\.preview_image \| default: swatch_secondary/);
   expect(template).toMatch(/data-secondary-src="\{% if swatch_secondary_image %\}\{\{ swatch_secondary_image \| image_url: width: 720 \}\}/);
