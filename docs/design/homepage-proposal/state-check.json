@@ -1,0 +1,51 @@
+[
+  {
+    "page": "states",
+    "width": 390,
+    "scrollWidth": 390,
+    "media": {
+      "width": 220,
+      "height": 211.1875,
+      "borderRadius": "12px",
+      "aspectRatio": "100 / 96",
+      "maxHeight": "none"
+    }
+  },
+  {
+    "page": "states",
+    "width": 820,
+    "scrollWidth": 820,
+    "media": {
+      "width": 220,
+      "height": 211.1875,
+      "borderRadius": "12px",
+      "aspectRatio": "100 / 96",
+      "maxHeight": "none"
+    }
+  },
+  {
+    "page": "states",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "media": {
+      "width": 220,
+      "height": 211.1875,
+      "borderRadius": "12px",
+      "aspectRatio": "100 / 96",
+      "maxHeight": "280px"
+    }
+  },
+  {
+    "page": "default",
+    "conditionalBlocks": 0,
+    "heroSource": "lemoon-hero-slide-2-desktop.jpg"
+  },
+  {
+    "keyboardFirstFocus": "Ver ausencia de datos",
+    "focusOutline": "solid"
+  },
+  {
+    "reducedMotion": true,
+    "animations": "none"
+  }
+]

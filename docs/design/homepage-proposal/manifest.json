@@ -1,0 +1,248 @@
+{
+  "base": "0cada135da9534cd91b29b50cf0db9a64184e962",
+  "date": "2026-11-06",
+  "branch": "chore/lem-133-homepage-design",
+  "figmaFile": "9EgE1vntKfwoQIQTzBUBNg",
+  "figmaVersion": "not returned; snapshot hashes only",
+  "files": [
+    {
+      "path": "docs/design/homepage-proposal/empty-1440.png",
+      "sha256": "e2d0a18e7cfbe9464167786bb1f2056f6be088fe2c79469582cba94206fe7c0b",
+      "bytes": 1722814,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/empty-390.png",
+      "sha256": "75590f9f2393b6fdfbe423dd8c4d3e5e122e1084e7aa484f48a40f5b7677f4f4",
+      "bytes": 820229,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/empty-820.png",
+      "sha256": "3e74c8f10903938789ca9e5e47b746ec1645b49dfa30c6e0e586afed0960220d",
+      "bytes": 1043350,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/home-1440.png",
+      "sha256": "76c27eaff32a3aa4ca12472f40ef108f891e02c80a4a8fe5fd3cafcf0e29ebc8",
+      "bytes": 1855143,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/home-390.png",
+      "sha256": "32c06dec740d6d3361942faa3908eeb30dc2e464b83f7341dc884ffa780c21f9",
+      "bytes": 944726,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/home-820.png",
+      "sha256": "866113c33439d990dfc036d0c249c848fb16bc8380a2cf1360e7f1376a2bfbab",
+      "bytes": 1162485,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/index.html",
+      "sha256": "ed192c2b8bdfb43a3445a463a83e192724650cf9a53139d1032a047cb3337766",
+      "bytes": 11381,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-0.ttf",
+      "sha256": "451376abefae9121f5dd0372d26865e7654b1041b9fdacdf57c6bd5cbf691da0",
+      "bytes": 57248,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-1.ttf",
+      "sha256": "366c9f60de8654362826a500399e568e6198696b8fbd999ba7d0c03c9ba742b6",
+      "bytes": 57240,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-2.ttf",
+      "sha256": "b7a672834374ef3a96e81abd2fd9bb61b282d3e75711fd4d9097e7e2e8c3b823",
+      "bytes": 57212,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-3.ttf",
+      "sha256": "e9d18189973e32e2614842ca777412639245271ee5016cbbc5024b9081d686dc",
+      "bytes": 57144,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-4.ttf",
+      "sha256": "c6b87c6459b61470cb7b2f46c85fd8ee6933257224cef908128d54e7ab0a55cc",
+      "bytes": 41128,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-5.ttf",
+      "sha256": "599ec73b0a0388ba35a861b6f40bb77f9874b77c13f6499b15ad734f5715505c",
+      "bytes": 41060,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-6.ttf",
+      "sha256": "7b9e538738641d4243175732167b2a9fe440f139fc783547846673988d87c95c",
+      "bytes": 41116,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-7.ttf",
+      "sha256": "beb886f39281fdb7f0927346b8d7ff5141a2866a43f21c5251fa73eed783224f",
+      "bytes": 41108,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/font-8.ttf",
+      "sha256": "e166b470f65b6c2a7bc8ac8718273ac63882e215caa76e1de7dc25c8875d243d",
+      "bytes": 40984,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/fonts.css",
+      "sha256": "c36e7716c0a3a258b7dd82c333e01d425faecb9f3c72a9ad455d73268cf8c9a0",
+      "bytes": 1365,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/hankengrotesk-OFL.txt",
+      "sha256": "e02ccb89a86839b22feff7872ff5cc355cc0f58318d29eee20e2cf83a612f16d",
+      "bytes": 4402,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-category-accesorios-generic-v1.jpg",
+      "sha256": "482a883d5dc00c0de7dfe9aa3b7618c8cfe0557871f3c193fec43b77417259c3",
+      "bytes": 457469,
+      "source": "assets/lemoon-category-accesorios-generic-v1.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-category-opticos-generic-v1.jpg",
+      "sha256": "f221a872811fd3416e5dbf59705a56241017be917f982e8c5e5887f7f89c1e9b",
+      "bytes": 341604,
+      "source": "assets/lemoon-category-opticos-generic-v1.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-category-sol-generic-v1.jpg",
+      "sha256": "06d56593ceb871d81fa2c388d1645706d94fafdacca8124ec76191cdd003445d",
+      "bytes": 312799,
+      "source": "assets/lemoon-category-sol-generic-v1.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-hero-slide-2-desktop.jpg",
+      "sha256": "af0bc25564798a5a2693da90849d259c98e819e6cc878adf568d1c2997f46577",
+      "bytes": 374463,
+      "source": "assets/lemoon-hero-slide-2-desktop.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-hero-slide-2-mobile.jpg",
+      "sha256": "be34f3a5c79b234b33427bd896a45b2e5ffa3cc7e9f52fb476858555136ac5b0",
+      "bytes": 350564,
+      "source": "assets/lemoon-hero-slide-2-mobile.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-hero-youth-desktop.jpg",
+      "sha256": "25815d69c153fd93975b3199d7be1892c7165cf2a900f2a9f1d12bf4ddabe39a",
+      "bytes": 370686,
+      "source": "assets/lemoon-hero-youth-desktop.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-hero-youth-mobile.jpg",
+      "sha256": "353e16f9fc464be59e76f51f3a3bdc572a5c69df772442a2b76f9dc1d80cf6c4",
+      "bytes": 348145,
+      "source": "assets/lemoon-hero-youth-mobile.jpg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-logo-refined-navy.svg",
+      "sha256": "3a74fbcf348989f5ff55b66b0da552cb05fc8d16712797b5909b57c0168f0d83",
+      "bytes": 6733,
+      "source": "assets/lemoon-logo-refined-navy.svg"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/lemoon-tokens.css",
+      "sha256": "1018350f97ad06e8f33506602ac6d99dc5d8c9184947bc8011d2fe3014c80b28",
+      "bytes": 9651,
+      "source": "assets/lemoon-tokens.css"
+    },
+    {
+      "path": "docs/design/homepage-proposal/media/urbanist-OFL.txt",
+      "sha256": "ee1221b1c2d08920e5f9ca764eb228dafa5c8090df9cf665373c2287b9cb8f49",
+      "bytes": 4385,
+      "source": "Google Fonts API (fonts.css) / google/fonts OFL license; families from layout/theme.liquid"
+    },
+    {
+      "path": "docs/design/homepage-proposal/proposal.css",
+      "sha256": "85db24e04d26c896b95448ae49b216ddbafb1cce544277fb0045df0366a265b9",
+      "bytes": 6544,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/references/figma-direction02-desktop.png",
+      "sha256": "97408a0d4ba85770a21c6ccfe4aeaa531bac3a774cee9a23ca76a2cdb287a85e",
+      "bytes": 50454,
+      "source": "Figma 269:583; MCP get_screenshot 2026-11-06; exported PNG scaled by tool"
+    },
+    {
+      "path": "docs/design/homepage-proposal/references/figma-direction02-mobile.png",
+      "sha256": "856109be5fa5791e887c1d0c9954ed3398ec87ca3b0f64e3adf98d789a7a7dde",
+      "bytes": 30094,
+      "source": "Figma 270:583; MCP get_screenshot 2026-11-06; exported PNG scaled by tool"
+    },
+    {
+      "path": "docs/design/homepage-proposal/references/figma-home-desktop.png",
+      "sha256": "1249047e0952d9c75229b5bfb58465c706d849ff15f4402498355e618be8750e",
+      "bytes": 35401,
+      "source": "Figma 60:2; MCP get_screenshot 2026-11-06; exported PNG scaled by tool"
+    },
+    {
+      "path": "docs/design/homepage-proposal/references/figma-home-mobile.png",
+      "sha256": "14441d1446c0d80bbf7a4ab632b2fad23a1f20e1c3239ec404c1d7af217323bd",
+      "bytes": 23340,
+      "source": "Figma 63:362; MCP get_screenshot 2026-11-06; exported PNG scaled by tool"
+    },
+    {
+      "path": "docs/design/homepage-proposal/render-check.json",
+      "sha256": "ebc7c6f68a4812268ac4041edc89ff1a40f477685c2f197f689d58bdb4a3d73c",
+      "bytes": 56745,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/state-check.json",
+      "sha256": "fb0e02a7511e308abdf445b89c9183791ed8f1cde4dc3345d3cdb56b6d39362d",
+      "bytes": 953,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/states-1440.png",
+      "sha256": "fb8d91dbd16abe57e2f31fb430a10357edda8005b0dd770d815879248d2d0930",
+      "bytes": 131719,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/states-390.png",
+      "sha256": "474b3f25a0c1360c4bfd5642cc468062b270d1aee998ce49cea0bf0194c725c6",
+      "bytes": 117759,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/states-820.png",
+      "sha256": "1762ae45780dec53aa227e104883ae3292306555e0d417d03118c8f97a83e8f2",
+      "bytes": 130592,
+      "source": "LEM-133 local review artifact"
+    },
+    {
+      "path": "docs/design/homepage-proposal/states.html",
+      "sha256": "1778776978e15f1ae49b80f33c2c664bbc29838b0f82f41c207f29c9e629b577",
+      "bytes": 3073,
+      "source": "LEM-133 local review artifact"
+    }
+  ],
+  "fontSource": "https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Urbanist:wght@300;400;500;600;700&display=swap",
+  "fontLicenses": [
+    "https://github.com/google/fonts/blob/main/ofl/urbanist/OFL.txt",
+    "https://github.com/google/fonts/blob/main/ofl/hankengrotesk/OFL.txt"
+  ]
+}
