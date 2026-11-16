@@ -1,0 +1,487 @@
+{
+  "accessDate": "2026-11-06 UTC / 2026-11-05 America/Santiago",
+  "products": 60,
+  "status": {
+    "ACTIVE": 58,
+    "UNLISTED": 1,
+    "DRAFT": 1
+  },
+  "variants": 116,
+  "categoryMissing": 59,
+  "noMedia": [
+    "muestra-de-catalogo-cristal-de-lectura",
+    "muestra-de-catalogo-cristal-para-pantallas",
+    "muestra-de-catalogo-cristal-monofocal",
+    "tarjeta-de-regalo-lemoon"
+  ],
+  "skuMissing": [
+    "gid://shopify/ProductVariant/67638654927016",
+    "gid://shopify/ProductVariant/67638654959784",
+    "gid://shopify/ProductVariant/67638654992552"
+  ],
+  "zeroOrNegativeStockVariants": 24,
+  "compareAtPresent": 44,
+  "compareAtInvalid": 0,
+  "dictionaryPairs": [
+    [
+      "color",
+      "black"
+    ],
+    [
+      "color",
+      "bold"
+    ],
+    [
+      "color",
+      "brown"
+    ],
+    [
+      "color",
+      "light"
+    ],
+    [
+      "finish",
+      "glossy"
+    ],
+    [
+      "finish",
+      "matte"
+    ],
+    [
+      "pattern",
+      "plain"
+    ],
+    [
+      "pattern",
+      "tortoise"
+    ],
+    [
+      "presence",
+      "compact"
+    ],
+    [
+      "presence",
+      "medium"
+    ],
+    [
+      "presence",
+      "oversize"
+    ],
+    [
+      "transparency",
+      "opaque"
+    ],
+    [
+      "transparency",
+      "translucent"
+    ],
+    [
+      "transparency",
+      "transparent"
+    ],
+    [
+      "use",
+      "everyday"
+    ],
+    [
+      "use",
+      "going_out"
+    ],
+    [
+      "use",
+      "outdoors"
+    ],
+    [
+      "use",
+      "work"
+    ]
+  ],
+  "demoCoverage": [
+    {
+      "product": "lemoon-artico",
+      "variantId": "gid://shopify/ProductVariant/55898368049320",
+      "demo": "true",
+      "shape": "cuadrado",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "bold"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "plain"
+        ],
+        [
+          "presence",
+          "medium"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-artico",
+      "variantId": "gid://shopify/ProductVariant/67608895619240",
+      "demo": "true",
+      "shape": "cuadrado",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "brown"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "tortoise"
+        ],
+        [
+          "presence",
+          "medium"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-estero",
+      "variantId": "gid://shopify/ProductVariant/55898368213160",
+      "demo": "true",
+      "shape": "pantóstico",
+      "material": "metal",
+      "effectivePairs": [
+        [
+          "color",
+          "bold"
+        ],
+        [
+          "finish",
+          "matte"
+        ],
+        [
+          "pattern",
+          "plain"
+        ],
+        [
+          "presence",
+          "compact"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-estero",
+      "variantId": "gid://shopify/ProductVariant/67608897683624",
+      "demo": "true",
+      "shape": "pantóstico",
+      "material": "metal",
+      "effectivePairs": [
+        [
+          "color",
+          "brown"
+        ],
+        [
+          "finish",
+          "matte"
+        ],
+        [
+          "pattern",
+          "tortoise"
+        ],
+        [
+          "presence",
+          "compact"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-faro",
+      "variantId": "gid://shopify/ProductVariant/55898368245928",
+      "demo": "true",
+      "shape": "ovalado",
+      "material": "titanio",
+      "effectivePairs": [
+        [
+          "color",
+          "bold"
+        ],
+        [
+          "finish",
+          "matte"
+        ],
+        [
+          "pattern",
+          "plain"
+        ],
+        [
+          "presence",
+          "compact"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "outdoors"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-faro",
+      "variantId": "gid://shopify/ProductVariant/67608897650856",
+      "demo": "true",
+      "shape": "ovalado",
+      "material": "titanio",
+      "effectivePairs": [
+        [
+          "color",
+          "brown"
+        ],
+        [
+          "finish",
+          "matte"
+        ],
+        [
+          "pattern",
+          "tortoise"
+        ],
+        [
+          "presence",
+          "compact"
+        ],
+        [
+          "transparency",
+          "opaque"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "outdoors"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-genova",
+      "variantId": "gid://shopify/ProductVariant/55898368311464",
+      "demo": "true",
+      "shape": "rectangular",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "bold"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "plain"
+        ],
+        [
+          "presence",
+          "oversize"
+        ],
+        [
+          "transparency",
+          "translucent"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-genova",
+      "variantId": "gid://shopify/ProductVariant/67608897749160",
+      "demo": "true",
+      "shape": "rectangular",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "brown"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "tortoise"
+        ],
+        [
+          "presence",
+          "oversize"
+        ],
+        [
+          "transparency",
+          "translucent"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "work"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-jade",
+      "variantId": "gid://shopify/ProductVariant/55898368409768",
+      "demo": "true",
+      "shape": "ojo de gato",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "bold"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "plain"
+        ],
+        [
+          "presence",
+          "oversize"
+        ],
+        [
+          "transparency",
+          "translucent"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "going_out"
+        ]
+      ],
+      "sixGroups": true
+    },
+    {
+      "product": "lemoon-jade",
+      "variantId": "gid://shopify/ProductVariant/67608897913000",
+      "demo": "true",
+      "shape": "ojo de gato",
+      "material": "acetato",
+      "effectivePairs": [
+        [
+          "color",
+          "brown"
+        ],
+        [
+          "finish",
+          "glossy"
+        ],
+        [
+          "pattern",
+          "tortoise"
+        ],
+        [
+          "presence",
+          "oversize"
+        ],
+        [
+          "transparency",
+          "translucent"
+        ],
+        [
+          "use",
+          "everyday"
+        ],
+        [
+          "use",
+          "going_out"
+        ]
+      ],
+      "sixGroups": true
+    }
+  ],
+  "limitations": [
+    "Category null is not Shopify Catalog internal classification.",
+    "Commercial correctness of prices/stock/attributes not certified.",
+    "unitCost null is not cost zero.",
+    "No mutation was executed."
+  ]
+}

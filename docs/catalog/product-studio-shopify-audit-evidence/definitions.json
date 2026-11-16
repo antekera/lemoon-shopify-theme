@@ -1,0 +1,435 @@
+{
+  "accessedAt": "2026-11-06T02:48:43.547Z",
+  "actor": "Shopify agent connector; not app token",
+  "sanitization": "Only catalog resources; third-party review/widget metadata omitted",
+  "result": {
+    "data": {
+      "p": {
+        "nodes": [
+          {
+            "id": "gid://shopify/MetafieldDefinition/209721655464",
+            "namespace": "custom",
+            "key": "frame_shape",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"redondo\",\"cuadrado\",\"rectangular\",\"aviador\",\"geométrico\",\"ovalado\",\"browline\",\"pantóstico\",\"ojo de gato\",\"mariposa\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209722048680",
+            "namespace": "custom",
+            "key": "frame_material",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"acetato\",\"metal\",\"titanio\",\"TR-90\",\"madera\",\"mixto\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209723195560",
+            "namespace": "custom",
+            "key": "frame_width",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"estrecho\",\"estándar\",\"ancho\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209723621544",
+            "namespace": "custom",
+            "key": "frame_size",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"pequeño (49-16-142)\",\"mediano (54-17-145)\",\"grande (58-18-145)\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209724866728",
+            "namespace": "custom",
+            "key": "face_shapes_compatible",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"ovalado\",\"redondo\",\"cuadrado\",\"corazón\",\"triángulo\",\"diamante\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209737285800",
+            "namespace": "custom",
+            "key": "lens_compatible",
+            "type": {
+              "name": "list.metaobject_reference"
+            },
+            "validations": [
+              {
+                "name": "metaobject_definition_id",
+                "value": "gid://shopify/MetaobjectDefinition/18370035880"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209754718376",
+            "namespace": "custom",
+            "key": "gender",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"hombre\",\"mujer\",\"unisex\",\"niños\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938809000",
+            "namespace": "mm-google-shopping",
+            "key": "custom_product",
+            "type": {
+              "name": "boolean"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209940381864",
+            "namespace": "shopify--discovery--product_search_boost",
+            "key": "queries",
+            "type": {
+              "name": "list.single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "max",
+                "value": "100"
+              },
+              {
+                "name": "list.max",
+                "value": "10"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209940414632",
+            "namespace": "shopify--discovery--product_recommendation",
+            "key": "related_products",
+            "type": {
+              "name": "list.product_reference"
+            },
+            "validations": [
+              {
+                "name": "list.max",
+                "value": "10"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209940447400",
+            "namespace": "shopify--discovery--product_recommendation",
+            "key": "related_products_display",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"ahead\",\"only manual\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209940480168",
+            "namespace": "shopify--discovery--product_recommendation",
+            "key": "complementary_products",
+            "type": {
+              "name": "list.product_reference"
+            },
+            "validations": [
+              {
+                "name": "list.max",
+                "value": "10"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/297848832168",
+            "namespace": "custom",
+            "key": "prescription_type",
+            "type": {
+              "name": "list.single_line_text_field"
+            },
+            "validations": [
+              {
+                "name": "choices",
+                "value": "[\"Monofocal\",\"Bifocal\",\"Progresiva\",\"Ocupacional\",\"Sin receta\",\"Lentes de lectura\",\"Lentes de sol con receta\",\"Lentes de sol sin receta\"]"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/298013458600",
+            "namespace": "custom",
+            "key": "frame_dimensions",
+            "type": {
+              "name": "json"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/298013491368",
+            "namespace": "custom",
+            "key": "frame_weight",
+            "type": {
+              "name": "number_decimal"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/298013524136",
+            "namespace": "custom",
+            "key": "try_on_url",
+            "type": {
+              "name": "url"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/519487520936",
+            "namespace": "custom",
+            "key": "style_traits",
+            "type": {
+              "name": "list.metaobject_reference"
+            },
+            "validations": [
+              {
+                "name": "metaobject_definition_id",
+                "value": "gid://shopify/MetaobjectDefinition/37833048232"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/519487586472",
+            "namespace": "custom",
+            "key": "style_quiz_ready",
+            "type": {
+              "name": "boolean"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/519487619240",
+            "namespace": "custom",
+            "key": "style_quiz_demo",
+            "type": {
+              "name": "boolean"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo1MTk0ODc2MTkyNDAsImxhc3RfdmFsdWUiOiI1MTk0ODc2MTkyNDAifQ=="
+        }
+      },
+      "v": {
+        "nodes": [
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938841768",
+            "namespace": "mm-google-shopping",
+            "key": "custom_label_4",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938874536",
+            "namespace": "mm-google-shopping",
+            "key": "custom_label_3",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938907304",
+            "namespace": "mm-google-shopping",
+            "key": "custom_label_2",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938940072",
+            "namespace": "mm-google-shopping",
+            "key": "custom_label_1",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209938972840",
+            "namespace": "mm-google-shopping",
+            "key": "custom_label_0",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939005608",
+            "namespace": "mm-google-shopping",
+            "key": "size_system",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939038376",
+            "namespace": "mm-google-shopping",
+            "key": "size_type",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939071144",
+            "namespace": "mm-google-shopping",
+            "key": "mpn",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939103912",
+            "namespace": "mm-google-shopping",
+            "key": "gender",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939136680",
+            "namespace": "mm-google-shopping",
+            "key": "condition",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/209939169448",
+            "namespace": "mm-google-shopping",
+            "key": "age_group",
+            "type": {
+              "name": "single_line_text_field"
+            },
+            "validations": [],
+            "validationStatus": "ALL_VALID"
+          },
+          {
+            "id": "gid://shopify/MetafieldDefinition/519487553704",
+            "namespace": "custom",
+            "key": "style_traits",
+            "type": {
+              "name": "list.metaobject_reference"
+            },
+            "validations": [
+              {
+                "name": "metaobject_definition_id",
+                "value": "gid://shopify/MetaobjectDefinition/37833048232"
+              }
+            ],
+            "validationStatus": "ALL_VALID"
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo1MTk0ODc1NTM3MDQsImxhc3RfdmFsdWUiOiI1MTk0ODc1NTM3MDQifQ=="
+        }
+      },
+      "metaobjectDefinitions": {
+        "nodes": [
+          {
+            "id": "gid://shopify/MetaobjectDefinition/18370035880",
+            "type": "tipo_de_lente",
+            "name": "Tipo de lente",
+            "metaobjectsCount": 8
+          },
+          {
+            "id": "gid://shopify/MetaobjectDefinition/34444116136",
+            "type": "shopify--knowledge-base-fact",
+            "name": "Knowledge Base Facts",
+            "metaobjectsCount": 7
+          },
+          {
+            "id": "gid://shopify/MetaobjectDefinition/37833048232",
+            "type": "lemoon_style_trait",
+            "name": "Afinidad de estilo Lemoon",
+            "metaobjectsCount": 18
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjozNzgzMzA0ODIzMiwibGFzdF92YWx1ZSI6IjM3ODMzMDQ4MjMyIn0="
+        }
+      }
+    }
+  }
+}

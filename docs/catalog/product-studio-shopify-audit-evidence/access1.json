@@ -1,0 +1,435 @@
+{
+  "accessedAt": "2026-11-06T02:49:16.906Z",
+  "actor": "agent connector, not app",
+  "query": "query {shop{myshopifyDomain plan{publicDisplayName partnerDevelopment shopifyPlus}} p:metafieldDefinitions(ownerType:PRODUCT,first:50){nodes{key namespace access{admin storefront}} pageInfo{hasNextPage endCursor}} metaobjectDefinitions(first:50){nodes{id type access{admin storefront} fieldDefinitions{key required type{name} validations{name value}}} pageInfo{hasNextPage endCursor}}}",
+  "variables": {
+    "after": null
+  },
+  "result": {
+    "data": {
+      "shop": {
+        "myshopifyDomain": "pzsrt4-1u.myshopify.com",
+        "plan": {
+          "publicDisplayName": "Basic",
+          "partnerDevelopment": false,
+          "shopifyPlus": false
+        }
+      },
+      "p": {
+        "nodes": [
+          {
+            "key": "frame_shape",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "frame_material",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "frame_width",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "frame_size",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "face_shapes_compatible",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "lens_compatible",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "gender",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "NONE"
+            }
+          },
+          {
+            "key": "custom_product",
+            "namespace": "mm-google-shopping",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "NONE"
+            }
+          },
+          {
+            "key": "queries",
+            "namespace": "shopify--discovery--product_search_boost",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "related_products",
+            "namespace": "shopify--discovery--product_recommendation",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "related_products_display",
+            "namespace": "shopify--discovery--product_recommendation",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "complementary_products",
+            "namespace": "shopify--discovery--product_recommendation",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "prescription_type",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "NONE"
+            }
+          },
+          {
+            "key": "frame_dimensions",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "frame_weight",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "try_on_url",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "style_traits",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "style_quiz_ready",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          },
+          {
+            "key": "style_quiz_demo",
+            "namespace": "custom",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            }
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo1MTk0ODc2MTkyNDAsImxhc3RfdmFsdWUiOiI1MTk0ODc2MTkyNDAifQ=="
+        }
+      },
+      "metaobjectDefinitions": {
+        "nodes": [
+          {
+            "id": "gid://shopify/MetaobjectDefinition/18370035880",
+            "type": "tipo_de_lente",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            },
+            "fieldDefinitions": [
+              {
+                "key": "nombre",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MetaobjectDefinition/34444116136",
+            "type": "shopify--knowledge-base-fact",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "NONE"
+            },
+            "fieldDefinitions": [
+              {
+                "key": "external_id",
+                "required": false,
+                "type": {
+                  "name": "id"
+                },
+                "validations": []
+              },
+              {
+                "key": "published",
+                "required": true,
+                "type": {
+                  "name": "boolean"
+                },
+                "validations": []
+              },
+              {
+                "key": "category",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": [
+                  {
+                    "name": "choices",
+                    "value": "[\"basic_info\",\"brand_info\",\"second_hand_info\",\"business_info\",\"shipping_info\",\"payment_info\",\"customer_service_info\",\"gift_services_info\",\"return_warranty_info\",\"company_policies_info\",\"business_dna\"]"
+                  }
+                ]
+              },
+              {
+                "key": "source",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": [
+                  {
+                    "name": "choices",
+                    "value": "[\"storefront\",\"manual\",\"admin\"]"
+                  }
+                ]
+              },
+              {
+                "key": "title",
+                "required": true,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "value_string",
+                "required": false,
+                "type": {
+                  "name": "multi_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "value_string_list",
+                "required": false,
+                "type": {
+                  "name": "list.single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "value_boolean",
+                "required": false,
+                "type": {
+                  "name": "boolean"
+                },
+                "validations": []
+              },
+              {
+                "key": "value_number",
+                "required": false,
+                "type": {
+                  "name": "number_decimal"
+                },
+                "validations": []
+              },
+              {
+                "key": "value_reference",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "references",
+                "required": false,
+                "type": {
+                  "name": "list.single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_value_string",
+                "required": false,
+                "type": {
+                  "name": "multi_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_value_string_list",
+                "required": false,
+                "type": {
+                  "name": "list.single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_value_boolean",
+                "required": false,
+                "type": {
+                  "name": "boolean"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_value_number",
+                "required": false,
+                "type": {
+                  "name": "number_decimal"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_value_reference",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggested_references",
+                "required": false,
+                "type": {
+                  "name": "list.single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "suggestion_state",
+                "required": false,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/MetaobjectDefinition/37833048232",
+            "type": "lemoon_style_trait",
+            "access": {
+              "admin": "PUBLIC_READ_WRITE",
+              "storefront": "PUBLIC_READ"
+            },
+            "fieldDefinitions": [
+              {
+                "key": "group",
+                "required": true,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": [
+                  {
+                    "name": "choices",
+                    "value": "[\"color\",\"finish\",\"pattern\",\"transparency\",\"use\",\"presence\"]"
+                  }
+                ]
+              },
+              {
+                "key": "code",
+                "required": true,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": [
+                  {
+                    "name": "choices",
+                    "value": "[\"black\",\"brown\",\"light\",\"bold\",\"matte\",\"glossy\",\"plain\",\"tortoise\",\"opaque\",\"translucent\",\"transparent\",\"work\",\"everyday\",\"going_out\",\"outdoors\",\"compact\",\"medium\",\"oversize\"]"
+                  }
+                ]
+              },
+              {
+                "key": "label",
+                "required": true,
+                "type": {
+                  "name": "single_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "description",
+                "required": false,
+                "type": {
+                  "name": "multi_line_text_field"
+                },
+                "validations": []
+              },
+              {
+                "key": "image",
+                "required": false,
+                "type": {
+                  "name": "file_reference"
+                },
+                "validations": [
+                  {
+                    "name": "file_type_options",
+                    "value": "[\"Image\"]"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjozNzgzMzA0ODIzMiwibGFzdF92YWx1ZSI6IjM3ODMzMDQ4MjMyIn0="
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,819 @@
+{
+  "accessedAt": "2026-11-06T02:48:43.651Z",
+  "actor": "Shopify agent connector; not app token",
+  "sanitization": "Only catalog resources; third-party review/widget metadata omitted",
+  "query": "query($after:String) {shop{myshopifyDomain currencyCode} products(first:50,after:$after){nodes{id title handle status publishedAt onlineStoreUrl productType category{id fullName} options{name values} metafields(first:50){nodes{namespace key type value} pageInfo{hasNextPage endCursor}} media(first:50){nodes{id mediaContentType status alt} pageInfo{hasNextPage endCursor}} variants(first:50){nodes{id title sku price compareAtPrice inventoryQuantity inventoryPolicy selectedOptions{name value} metafields(first:50){nodes{namespace key type value} pageInfo{hasNextPage endCursor}}} pageInfo{hasNextPage endCursor}}} pageInfo{hasNextPage endCursor}}}",
+  "variables": {
+    "after": "eyJsYXN0X2lkIjoxNTQwOTEwNzc2MzM2OCwibGFzdF92YWx1ZSI6IjE1NDA5MTA3NzYzMzY4In0="
+  },
+  "result": {
+    "data": {
+      "shop": {
+        "myshopifyDomain": "pzsrt4-1u.myshopify.com",
+        "currencyCode": "CLP"
+      },
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/15410822643880",
+            "title": "Muestra · Niños Redondo",
+            "handle": "muestra-ninos-redondo",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-07T17:33:49Z",
+            "onlineStoreUrl": null,
+            "productType": "Óptico",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [
+                {
+                  "namespace": "custom",
+                  "key": "gender",
+                  "type": "single_line_text_field",
+                  "value": "niños"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "frame_shape",
+                  "type": "single_line_text_field",
+                  "value": "redondo"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "frame_material",
+                  "type": "single_line_text_field",
+                  "value": "TR-90"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "prescription_type",
+                  "type": "list.single_line_text_field",
+                  "value": "[\"Monofocal\"]"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA3MjQwMjkwNTUxNDQsImxhc3RfdmFsdWUiOiIxOTA3MjQwMjkwNTUxNDQifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46309320687784",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Lente óptico de prueba"
+                },
+                {
+                  "id": "gid://shopify/MediaImage/46289074487464",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Muestra de catálogo para niños"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI4OTA3NDQ4NzQ2NCwibGFzdF92YWx1ZSI6IjIifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67621922701480",
+                  "title": "Default Title",
+                  "sku": "MUESTRA-NINOS-1",
+                  "price": "19900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYyMTkyMjcwMTQ4MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15410822709416",
+            "title": "Muestra · Niños Cuadrado",
+            "handle": "muestra-ninos-cuadrado",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-07T17:33:49Z",
+            "onlineStoreUrl": null,
+            "productType": "Óptico",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [
+                {
+                  "namespace": "custom",
+                  "key": "gender",
+                  "type": "single_line_text_field",
+                  "value": "niños"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "frame_shape",
+                  "type": "single_line_text_field",
+                  "value": "cuadrado"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "frame_material",
+                  "type": "single_line_text_field",
+                  "value": "TR-90"
+                },
+                {
+                  "namespace": "custom",
+                  "key": "prescription_type",
+                  "type": "list.single_line_text_field",
+                  "value": "[\"Monofocal\"]"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA3MjM5ODk3MDA3NzYsImxhc3RfdmFsdWUiOiIxOTA3MjM5ODk3MDA3NzYifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46309320687784",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Lente óptico de prueba"
+                },
+                {
+                  "id": "gid://shopify/MediaImage/46289074520232",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Muestra de catálogo para niños"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI4OTA3NDUyMDIzMiwibGFzdF92YWx1ZSI6IjIifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67621922767016",
+                  "title": "Default Title",
+                  "sku": "MUESTRA-NINOS-2",
+                  "price": "19900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 0,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYyMTkyMjc2NzAxNiwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233590952",
+            "title": "Muestra · Estuche rígido para lentes",
+            "handle": "muestra-estuche-rigido-para-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:56Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NTQ3MzczMjAsImxhc3RfdmFsdWUiOiIxOTA4MDA3NTQ3MzczMjAifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654380200",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-02",
+                  "price": "9900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDM4MDIwMCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233820328",
+            "title": "Muestra · Paño de microfibra",
+            "handle": "muestra-pano-de-microfibra",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:57Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDE4NTk0OTYsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDE4NTk0OTYifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654544040",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-03",
+                  "price": "4900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDU0NDA0MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233853096",
+            "title": "Muestra · Cadena para lentes",
+            "handle": "muestra-cadena-para-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:57Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDIyNTI3MTIsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDIyNTI3MTIifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654576808",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-04",
+                  "price": "7900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDU3NjgwOCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233951400",
+            "title": "Muestra · Cordón textil para lentes",
+            "handle": "muestra-cordon-textil-para-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:57Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDUzMzI5MDQsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDUzMzI5MDQifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654642344",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-05",
+                  "price": "6900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDY0MjM0NCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233984168",
+            "title": "Muestra · Spray limpiador para lentes",
+            "handle": "muestra-spray-limpiador-para-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:58Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDY1NzgwODgsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDY1NzgwODgifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654707880",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-06",
+                  "price": "5900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDcwNzg4MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416234049704",
+            "title": "Muestra · Funda acolchada para lentes",
+            "handle": "muestra-funda-acolchada-para-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:58Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDczMzE3NTIsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDczMzE3NTIifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654740648",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-07",
+                  "price": "8900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDc0MDY0OCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416234082472",
+            "title": "Muestra · Organizador de lentes",
+            "handle": "muestra-organizador-de-lentes",
+            "status": "ACTIVE",
+            "publishedAt": "2026-10-09T22:34:58Z",
+            "onlineStoreUrl": null,
+            "productType": "Accesorio",
+            "category": null,
+            "options": [
+              {
+                "name": "Title",
+                "values": [
+                  "Default Title"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MDA3NDg0MTMwOTYsImxhc3RfdmFsdWUiOiIxOTA4MDA3NDg0MTMwOTYifQ=="
+              }
+            },
+            "media": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/MediaImage/46251946442920",
+                  "mediaContentType": "IMAGE",
+                  "status": "READY",
+                  "alt": "Accesorios para lentes Lemoon, imagen de muestra"
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo0NjI1MTk0NjQ0MjkyMCwibGFzdF92YWx1ZSI6IjEifQ=="
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654773416",
+                  "title": "Default Title",
+                  "sku": "LM-ACC-DEMO-08",
+                  "price": "14900",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 10,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Title",
+                      "value": "Default Title"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDc3MzQxNiwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15417003245736",
+            "title": "Tarjeta de regalo Lemoon",
+            "handle": "tarjeta-de-regalo-lemoon",
+            "status": "DRAFT",
+            "publishedAt": null,
+            "onlineStoreUrl": null,
+            "productType": "",
+            "category": {
+              "id": "gid://shopify/TaxonomyCategory/gc",
+              "fullName": "Tarjetas de regalo"
+            },
+            "options": [
+              {
+                "name": "Denominaciones",
+                "values": [
+                  "$30.000",
+                  "$60.000",
+                  "$100.000"
+                ]
+              }
+            ],
+            "metafields": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjoxOTA4MTkyMjk3NjE3MDQsImxhc3RfdmFsdWUiOiIxOTA4MTkyMjk3NjE3MDQifQ=="
+              }
+            },
+            "media": {
+              "nodes": [],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": null
+              }
+            },
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67638654927016",
+                  "title": "$30.000",
+                  "sku": null,
+                  "price": "30000",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 0,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Denominaciones",
+                      "value": "$30.000"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                },
+                {
+                  "id": "gid://shopify/ProductVariant/67638654959784",
+                  "title": "$60.000",
+                  "sku": null,
+                  "price": "60000",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 0,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Denominaciones",
+                      "value": "$60.000"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                },
+                {
+                  "id": "gid://shopify/ProductVariant/67638654992552",
+                  "title": "$100.000",
+                  "sku": null,
+                  "price": "100000",
+                  "compareAtPrice": null,
+                  "inventoryQuantity": 0,
+                  "inventoryPolicy": "DENY",
+                  "selectedOptions": [
+                    {
+                      "name": "Denominaciones",
+                      "value": "$100.000"
+                    }
+                  ],
+                  "metafields": {
+                    "nodes": [],
+                    "pageInfo": {
+                      "hasNextPage": false,
+                      "endCursor": null
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzODY1NDk5MjU1MiwibGFzdF92YWx1ZSI6M30="
+              }
+            }
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoxNTQxNzAwMzI0NTczNiwibGFzdF92YWx1ZSI6IjE1NDE3MDAzMjQ1NzM2In0="
+        }
+      }
+    }
+  }
+}

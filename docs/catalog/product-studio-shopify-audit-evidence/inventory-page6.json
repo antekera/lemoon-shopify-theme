@@ -1,0 +1,598 @@
+{
+  "accessedAt": "2026-11-06T02:52:07.052Z",
+  "actor": "agent connector, not app",
+  "query": "query($after:String){products(first:10,after:$after){nodes{id variants(first:50){nodes{id inventoryItem{id tracked unitCost{amount currencyCode} duplicateSkuCount inventoryLevels(first:5){nodes{id location{id isActive fulfillsOnlineOrders} quantities(names:[\"available\",\"on_hand\",\"committed\"]){name quantity}} pageInfo{hasNextPage endCursor}}}} pageInfo{hasNextPage endCursor}}} pageInfo{hasNextPage endCursor}}}",
+  "variables": {
+    "after": "eyJsYXN0X2lkIjoxNTQwOTEwNzc2MzM2OCwibGFzdF92YWx1ZSI6IjE1NDA5MTA3NzYzMzY4In0="
+  },
+  "result": {
+    "data": {
+      "products": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Product/15410822643880",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67621922701480",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69606617612456",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69606617612456",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY1NjI5ODUwODQ1NiwibGFzdF92YWx1ZSI6OTY2NTYyOTg1MDg0NTZ9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYyMTkyMjcwMTQ4MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15410822709416",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67621922767016",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69606617677992",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69606617677992",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY1NjI5ODU3Mzk5MiwibGFzdF92YWx1ZSI6OTY2NTYyOTg1NzM5OTJ9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYyMTkyMjc2NzAxNiwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233590952",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654380200",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619406799016",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619406799016",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDA2MTYwOCwibGFzdF92YWx1ZSI6OTY2Njk3NjAwNjE2MDh9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDM4MDIwMCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233820328",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654544040",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619406962856",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619406962856",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDIyNTQ0OCwibGFzdF92YWx1ZSI6OTY2Njk3NjAyMjU0NDh9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDU0NDA0MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233853096",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654576808",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619406995624",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619406995624",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDI1ODIxNiwibGFzdF92YWx1ZSI6OTY2Njk3NjAyNTgyMTZ9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDU3NjgwOCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233951400",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654642344",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619407061160",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619407061160",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDMyMzc1MiwibGFzdF92YWx1ZSI6OTY2Njk3NjAzMjM3NTJ9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDY0MjM0NCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416233984168",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654707880",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619407126696",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619407126696",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDM4OTI4OCwibGFzdF92YWx1ZSI6OTY2Njk3NjAzODkyODh9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDcwNzg4MCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416234049704",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654740648",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619407159464",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619407159464",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDQyMjA1NiwibGFzdF92YWx1ZSI6OTY2Njk3NjA0MjIwNTZ9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDc0MDY0OCwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15416234082472",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67634654773416",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69619407192232",
+                    "tracked": true,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69619407192232",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 10
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY2OTc2MDQ1NDgyNCwibGFzdF92YWx1ZSI6OTY2Njk3NjA0NTQ4MjR9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzNDY1NDc3MzQxNiwibGFzdF92YWx1ZSI6MX0="
+              }
+            }
+          },
+          {
+            "id": "gid://shopify/Product/15417003245736",
+            "variants": {
+              "nodes": [
+                {
+                  "id": "gid://shopify/ProductVariant/67638654927016",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69623420453032",
+                    "tracked": false,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69623420453032",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY3MzgyMDAxNjgwOCwibGFzdF92YWx1ZSI6OTY2NzM4MjAwMTY4MDh9"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "gid://shopify/ProductVariant/67638654959784",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69623420485800",
+                    "tracked": false,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69623420485800",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY3MzgyMDA0OTU3NiwibGFzdF92YWx1ZSI6OTY2NzM4MjAwNDk1NzZ9"
+                      }
+                    }
+                  }
+                },
+                {
+                  "id": "gid://shopify/ProductVariant/67638654992552",
+                  "inventoryItem": {
+                    "id": "gid://shopify/InventoryItem/69623420518568",
+                    "tracked": false,
+                    "unitCost": null,
+                    "duplicateSkuCount": 0,
+                    "inventoryLevels": {
+                      "nodes": [
+                        {
+                          "id": "gid://shopify/InventoryLevel/122175226024?inventory_item_id=69623420518568",
+                          "location": {
+                            "id": "gid://shopify/Location/85337833640",
+                            "isActive": true,
+                            "fulfillsOnlineOrders": true
+                          },
+                          "quantities": [
+                            {
+                              "name": "available",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "on_hand",
+                              "quantity": 0
+                            },
+                            {
+                              "name": "committed",
+                              "quantity": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "pageInfo": {
+                        "hasNextPage": false,
+                        "endCursor": "eyJsYXN0X2lkIjo5NjY3MzgyMDA4MjM0NCwibGFzdF92YWx1ZSI6OTY2NzM4MjAwODIzNDR9"
+                      }
+                    }
+                  }
+                }
+              ],
+              "pageInfo": {
+                "hasNextPage": false,
+                "endCursor": "eyJsYXN0X2lkIjo2NzYzODY1NDk5MjU1MiwibGFzdF92YWx1ZSI6M30="
+              }
+            }
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjoxNTQxNzAwMzI0NTczNiwibGFzdF92YWx1ZSI6IjE1NDE3MDAzMjQ1NzM2In0="
+        }
+      }
+    }
+  }
+}

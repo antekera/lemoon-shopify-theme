@@ -1,0 +1,647 @@
+{
+  "accessedAt": "2026-11-06T02:48:43.577Z",
+  "actor": "Shopify agent connector; not app token",
+  "sanitization": "Only catalog resources; third-party review/widget metadata omitted",
+  "result": {
+    "data": {
+      "metaobjects": {
+        "nodes": [
+          {
+            "id": "gid://shopify/Metaobject/660341424296",
+            "type": "lemoon_style_trait",
+            "handle": "color-black",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "color",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "black",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Negros y grises",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Familia cromática negra y gris del armazón. Evaluar el color por separado de patrón, acabado y transparencia.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341457064",
+            "type": "lemoon_style_trait",
+            "handle": "color-brown",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "color",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "brown",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Cafés y miel",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Familia cromática café y miel del armazón. Un patrón carey no basta por sí solo para asignar esta familia.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341489832",
+            "type": "lemoon_style_trait",
+            "handle": "color-light",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "color",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "light",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Tonos claros",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Tonos claros del armazón. Un color claro no implica que el material sea transparente o translúcido.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341522600",
+            "type": "lemoon_style_trait",
+            "handle": "color-bold",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "color",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "bold",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Colores protagonistas",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Colores protagonistas del armazón, según criterio editorial de la colección. Clasificar por separado patrón y transparencia.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341555368",
+            "type": "lemoon_style_trait",
+            "handle": "finish-matte",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "finish",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "matte",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Mate",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Acabado visual mate o de bajo brillo. Confirmar en la ficha o imágenes; no deducir el material.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341588136",
+            "type": "lemoon_style_trait",
+            "handle": "finish-glossy",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "finish",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "glossy",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Brillante",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Acabado visual brillante. Confirmar en la ficha o imágenes; no implica un material o patrón específico.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341620904",
+            "type": "lemoon_style_trait",
+            "handle": "pattern-plain",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "pattern",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "plain",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Liso",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Superficie visual lisa, sin vetas ni estampado. Se clasifica independientemente del color y material.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341653672",
+            "type": "lemoon_style_trait",
+            "handle": "pattern-tortoise",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "pattern",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "tortoise",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Carey / vetas",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Patrón carey o de vetas. Asignar la familia de color por separado; el patrón no prueba que el armazón sea café.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341686440",
+            "type": "lemoon_style_trait",
+            "handle": "transparency-opaque",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "transparency",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "opaque",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Opaco",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Material visualmente opaco. Clasificar por separado color, brillo y material del armazón.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341719208",
+            "type": "lemoon_style_trait",
+            "handle": "transparency-translucent",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "transparency",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "translucent",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Translúcido",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Material que deja pasar luz con transparencia parcial. Confirmar con ficha o imágenes; no inferirlo de un tono claro.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341751976",
+            "type": "lemoon_style_trait",
+            "handle": "transparency-transparent",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "transparency",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "transparent",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Transparente",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Material visualmente transparente. Confirmar con ficha o imágenes; no inferirlo de un tono claro.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341784744",
+            "type": "lemoon_style_trait",
+            "handle": "use-work",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "use",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "work",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Trabajo o estudio",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Afinidad editorial para trabajo o estudio. No atribuye filtro azul, graduación ni un tipo de cristal.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341817512",
+            "type": "lemoon_style_trait",
+            "handle": "use-everyday",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "use",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "everyday",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Todos los días",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Afinidad editorial para uso cotidiano. No certifica comodidad, resistencia ni prestaciones técnicas.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341850280",
+            "type": "lemoon_style_trait",
+            "handle": "use-going-out",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "use",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "going_out",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Salir y cambiar de look",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Afinidad editorial para salir o cambiar de look. Puede combinarse con otros contextos de uso.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341883048",
+            "type": "lemoon_style_trait",
+            "handle": "use-outdoors",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "use",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "outdoors",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Paseos al aire libre",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Afinidad editorial para paseos al aire libre. No acredita protección UV ni que incluya cristales solares.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341915816",
+            "type": "lemoon_style_trait",
+            "handle": "presence-compact",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "presence",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "compact",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Compactos",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Presencia visual compacta. No equivale automáticamente a talla pequeña, ajuste estrecho o una medida física.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341948584",
+            "type": "lemoon_style_trait",
+            "handle": "presence-medium",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "presence",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "medium",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Intermedios",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Presencia visual intermedia. Revisar las medidas físicas por separado al comparar ajuste.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          },
+          {
+            "id": "gid://shopify/Metaobject/660341981352",
+            "type": "lemoon_style_trait",
+            "handle": "presence-oversize",
+            "definition": {
+              "id": "gid://shopify/MetaobjectDefinition/37833048232"
+            },
+            "fields": [
+              {
+                "key": "group",
+                "value": "presence",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "code",
+                "value": "oversize",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "label",
+                "value": "Oversize",
+                "type": "single_line_text_field"
+              },
+              {
+                "key": "description",
+                "value": "Presencia visual oversize o protagonista. No equivale automáticamente a talla grande ni confirma el ajuste físico.",
+                "type": "multi_line_text_field"
+              },
+              {
+                "key": "image",
+                "value": null,
+                "type": "file_reference"
+              }
+            ]
+          }
+        ],
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "eyJsYXN0X2lkIjo2NjAzNDE5ODEzNTIsImxhc3RfdmFsdWUiOiI2NjAzNDE5ODEzNTIiLCJiYWNrZW5kIjoiZWxhc3RpY3NlYXJjaCJ9"
+        }
+      }
+    }
+  }
+}

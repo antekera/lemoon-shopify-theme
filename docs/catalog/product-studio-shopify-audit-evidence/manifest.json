@@ -1,0 +1,227 @@
+{
+  "createdAt": "2026-11-06T02:58:04.170361+00:00",
+  "themeBase": "0cada135da9534cd91b29b50cf0db9a64184e962",
+  "sources": [
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "packages/domain/src/product-studio.ts",
+      "sha256": "2bb94c5c2b6040348038125e360b11f24ad0a8cd81fb09e07dc0c7f084252cb8",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "packages/domain/src/style-metadata.ts",
+      "sha256": "f015ed63d7542da5403e71fd8dd893937abc39b0b85c2732318c6c8d65373e65",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/services/studio-shopify-sync.ts",
+      "sha256": "6841ca9003b637c14bb4b06c43bee6f368fd39f1dc72dbdf53f80d1c0d5b9a2f",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/shopify/studio-style-metadata.ts",
+      "sha256": "d904db27aa571e19ffe42ebb44daac46cfc916a3ec404017117de23b89ffce0b",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/shopify/studio-writer.ts",
+      "sha256": "69ff91afe6fbcbaf7123f8d4dbcd15781ede37fcc3590c1df02883d550d8a338",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/shopify/studio-metafields.ts",
+      "sha256": "4dc44be01e19fb67899cfeeccb683a3d24b57dce21b8cfac3430668d3cf437f5",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/shopify/catalog-products.ts",
+      "sha256": "253cda9e7dfca37fc1b151d96452cca009c763ba511362ff158e150c972256d1",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "services/api/src/shopify/verify-app-access.ts",
+      "sha256": "a74dfac09419368dc827bcb441980a0b5f2c9b89707d37193405b4b6427e6b76",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "infra/cdk.json",
+      "sha256": "9e2bfe19d27a03b37549d06c81a10d4f387772ec4de426a7c22f40c7bea1887d",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/admin/admin-consolidated-base",
+      "sha": "48ca70e15faa9c6c249e8805fc598b460c50f0f2",
+      "path": "docs/product-studio/STYLE_METADATA.md",
+      "sha256": "85b2a77a0dbfd71d48fc548982df5f34a7952f1363403d817f172e9cc370218b",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/lemoon-theme/lem-11-style-quiz-research",
+      "sha": "208fe3f61efb40e3855e88ac1be9cdf50bb7fa22",
+      "path": "docs/catalog/style-quiz.md",
+      "sha256": "72838711d4abaa36b4512b24bfec627e2d80eeba3d1db3389f03b18152f8399a",
+      "worktreeMatchesPinnedSource": true
+    },
+    {
+      "repo": "/Users/miguel/orca/workspaces/lemoon-theme/lem-11-style-quiz-research",
+      "sha": "208fe3f61efb40e3855e88ac1be9cdf50bb7fa22",
+      "path": "snippets/card-product.liquid",
+      "sha256": "a080191a9365040a80f93190bdb5062a6c374e5d95d0883278a325c2e1f38eb6",
+      "worktreeMatchesPinnedSource": true
+    }
+  ],
+  "officialReferences": [
+    {
+      "url": "https://shopify.dev/docs/api/admin-graphql/2026-01/mutations/metafieldsSet",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://shopify.dev/docs/api/usage/limits",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://shopify.dev/docs/api/web-mcp",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://help.shopify.com/en/manual/shopify-catalog/requirements",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://help.shopify.com/en/manual/online-sales-channels/agentic-storefronts/products",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://apps.shopify.com/search-and-discovery",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://support.google.com/merchants/answer/13709443?hl=en-GB",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://www.shopify.com/legal/terms-agentic-storefronts",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://shopify.dev/docs/api/hydrogen/latest",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    },
+    {
+      "url": "https://www.shopify.com/news/fall-26-edition-developer",
+      "accessDateUTC": "2026-11-06",
+      "method": "web search/open current official page"
+    }
+  ],
+  "context7": {
+    "library": "/websites/shopify_dev_api_admin",
+    "query": "metafieldsSet compareDigest null seed-only writes, metaobject definition access scopes and product publication ownership",
+    "result": "CAS null protects absent creation; max25/10MB atomic per request",
+    "limits": "API-specific verification uses writer pinned2026-01 and current official pinned-version docs; not source of app token evidence"
+  },
+  "evidence": [
+    {
+      "path": "access1.json",
+      "sha256": "0a2ace030cb2349ed616fbe4bba2277e554afd8c8190cbed45935d87fcb4ca08"
+    },
+    {
+      "path": "catalog-summary.json",
+      "sha256": "fbb117a95d3618283f65c9537b22a19d8d774c0ea45df328bff5d0c9366ddd73"
+    },
+    {
+      "path": "definitions.json",
+      "sha256": "d04f8bce756e4a5e4e2f8d6f7fb97b68d3eef16062a47f984cf7b6944b48069d"
+    },
+    {
+      "path": "dictionary.json",
+      "sha256": "29575a43b4876988571fe4349fd718d2a598ddb5f77a114b5d4c8e70fd87dd37"
+    },
+    {
+      "path": "inventory-page1.json",
+      "sha256": "b9c9d8cfed295134b56594205edb88506d1d89fe0fd3de3dbf55609bc7d68154"
+    },
+    {
+      "path": "inventory-page2.json",
+      "sha256": "a57b3585f9fdd6a9670c7a7ab6804fcbff4be04c5b668967e8a4374d46dc1a8a"
+    },
+    {
+      "path": "inventory-page3.json",
+      "sha256": "ab8a1a7228a37c135a863097218ca5b99b4e3c98603ff0db9f6601231cdfedfe"
+    },
+    {
+      "path": "inventory-page4.json",
+      "sha256": "21e650c2163a1c2f266450a599a0f19f17d87fb38a2ebd8da85cefda2e624039"
+    },
+    {
+      "path": "inventory-page5.json",
+      "sha256": "dd4ef57d3dfb0c867ba00780d925e7bbbe2406ce30392145ed02c5107a3fb644"
+    },
+    {
+      "path": "inventory-page6.json",
+      "sha256": "77ef7b76f98fd17654295a88b5c34733eebbe427144e27f0df1a7d264dbede50"
+    },
+    {
+      "path": "inventory1.json",
+      "sha256": "7ad5bd711f70b225a42a88eff7db5ec36b61a0bdb3b950944b9e8db6be6fbd22"
+    },
+    {
+      "path": "lem145.json",
+      "sha256": "f49b4837f8789b1e32f0aae3f81787bca346df4262ec6b89fd4948cc620b6483"
+    },
+    {
+      "path": "lem93.json",
+      "sha256": "77b6247e9d9549eb00ee9d2bda6dd980c614a288cdadabbc6fee82ec225f650f"
+    },
+    {
+      "path": "pr9-ci.json",
+      "sha256": "b8788312c571faf06d3c606f3616ce75b2616bfb15d700c72cd9033c61bbce4f"
+    },
+    {
+      "path": "products.json",
+      "sha256": "fe08c20b470e33ea0974af6548f3fe43c8fc811b87533edc8645321fd6a0895c"
+    },
+    {
+      "path": "products2.json",
+      "sha256": "775eb2049089cc4fd1bd56add94ebff84d95503704f3e25d1c1486c54a53af84"
+    },
+    {
+      "path": "publications.json",
+      "sha256": "81093f9cd20ed591156f7eb722c8e9e5556da6b05464e6d04c5d64c2caf722bf"
+    },
+    {
+      "path": "shop-identity.json",
+      "sha256": "fb03f62239ab320c1f1451af00ec497136966b8ca952de2481c5a925a067250e"
+    },
+    {
+      "path": "validation.json",
+      "sha256": "082605542dd01a78b8fbdf3d024078b327a211bd8153490d867d0e83a02c8da8"
+    }
+  ],
+  "scope": "Read-only audit; no app identity/access or effective deployed flags proved; no writes"
+}
