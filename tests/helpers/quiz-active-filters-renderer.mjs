@@ -12,6 +12,7 @@ const dictionary = [
 const engine = createQuizEngine();
 const html = engine.renderFileSync('lemoon-active-filters', {
   collection: { url: '/collections/all', filters: [
+    { param_name: 'filter.p.m.custom.frame_shape', label: 'Forma', type: 'list', active_values: selection.shape ? [{ value: 'redondo', label: 'redondo', url_to_remove: '/collections/all?sort_by=manual' }] : [] },
     { param_name: 'filter.v.m.custom.style_filter_color', label: 'Color', type: 'list', active_values: selection.brown ? [{ value: 'gid://shopify/Metaobject/101', label: 'Cafés', url_to_remove: '/collections/all?sort_by=price-ascending' }] : [] },
     { param_name: 'filter.v.m.custom.style_filter_transparency', label: 'Transparencia', type: 'list', active_values: [] },
     { param_name: 'filter.v.m.custom.style_filter_pattern', label: 'Patrón', type: 'list', active_values: [] },
@@ -20,4 +21,6 @@ const html = engine.renderFileSync('lemoon-active-filters', {
   sort_by: 'price-ascending',
 });
 const pipeline = selection.pipeline ? '<menu-drawer><facet-filters-form><form id="FacetFiltersFormMobile"></form></facet-filters-form></menu-drawer>' : '';
-process.stdout.write(`<collection-component><div class="lemoon-plp" data-collection-url="/collections/all">${pipeline}<select id="SortBy"><option value="price-ascending">Price</option></select><span data-applied-filter-count></span><a data-clear-filters>Reset</a><div id="ProductGridContainer">${html}<span id="ProductCount" data-product-count="0">0</span><div id="product-grid" data-id="quiz-active" class="collection collection--empty">No products</div></div></div></collection-component>`);
+const shapeInput = selection.shape ? '<input type="checkbox" name="filter.p.m.custom.frame_shape" value="redondo" checked>' : '';
+const sorting = selection.sorting ? `<div class="facets-container" data-hidden-filter-params="filter.v.m.custom.style_filter_color,filter.v.m.custom.style_filter_transparency"><facet-filters-form><form id="FacetFiltersForm">${shapeInput}</form></facet-filters-form></div><div class="sorting"><facet-filters-form><form id="FacetSortForm"><select id="SortBy" name="sort_by"><option value="manual"${selection.sortBy === 'price-ascending' ? '' : ' selected'}>Manual</option><option value="price-ascending"${selection.sortBy === 'price-ascending' ? ' selected' : ''}>Price</option></select><details data-sort-menu><summary><span data-sort-label></span></summary><div data-sort-options></div></details></form></facet-filters-form></div>` : '<select id="SortBy"><option value="price-ascending">Price</option></select>';
+process.stdout.write(`<collection-component><div class="lemoon-plp" data-collection-url="/collections/all">${pipeline}${sorting}<span data-applied-filter-count></span><a data-clear-filters>Reset</a><div id="ProductGridContainer">${html}<span id="ProductCount" data-product-count="0">0</span><div id="product-grid" data-id="quiz-active" class="collection collection--empty">No products</div></div></div></collection-component>`);

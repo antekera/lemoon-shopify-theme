@@ -3,12 +3,12 @@ class FacetFiltersForm extends HTMLElement {
     super();
     this.onActiveFilterClick = this.onActiveFilterClick.bind(this);
 
-    this.debouncedOnSubmit = debounce((event) => {
-      this.onSubmitHandler(event);
+    this.debouncedOnSubmit = debounce((event, submitVersion) => {
+      if (submitVersion === FacetFiltersForm.submitVersion) this.onSubmitHandler(event);
     }, 800);
 
     const facetForm = this.querySelector('form');
-    facetForm.addEventListener('input', this.debouncedOnSubmit.bind(this));
+    facetForm.addEventListener('input', (event) => this.debouncedOnSubmit(event, FacetFiltersForm.submitVersion));
 
     const facetWrapper = this.querySelector('#FacetsWrapperDesktop');
     if (facetWrapper) facetWrapper.addEventListener('keyup', onKeyUpEscape);
@@ -435,6 +435,8 @@ class FacetFiltersForm extends HTMLElement {
 
   onActiveFilterClick(event) {
     event.preventDefault();
+    // Removal supersedes queued submissions whose form controls still show the removed value.
+    FacetFiltersForm.submitVersion++;
     FacetFiltersForm.toggleActiveFacets();
     const url =
       event.currentTarget.href.indexOf('?') == -1
@@ -445,6 +447,7 @@ class FacetFiltersForm extends HTMLElement {
 }
 
 FacetFiltersForm.filterData = [];
+FacetFiltersForm.submitVersion = 0;
 FacetFiltersForm.renderRequestId = 0;
 FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
